@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="admin/tool/uckkintegrity/db" VERSION="2026051200" COMMENT="XMLDB file for UCKK integrity tool" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="tool_uckkintegrity_case" COMMENT="UCKK integrity cases">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="casetype" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="subjectcomponent" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="subjectid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="openedby" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="assignedto" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="severity" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="normal" SEQUENCE="false"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="opened" SEQUENCE="false"/>
+        <FIELD NAME="summary" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="decision" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="correction" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="appealpath" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="archivesummary" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="archiveitemid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="restricted" SEQUENCE="false"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="metadata" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timeclosed" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="contextid" UNIQUE="false" FIELDS="contextid"/>
+        <INDEX NAME="openedby" UNIQUE="false" FIELDS="openedby"/>
+        <INDEX NAME="assignedto" UNIQUE="false" FIELDS="assignedto"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="casetype" UNIQUE="false" FIELDS="casetype"/>
+        <INDEX NAME="subject" UNIQUE="false" FIELDS="subjectcomponent, subjectid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="tool_uckkintegrity_note" COMMENT="UCKK integrity case notes">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="caseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="notetype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="observation" SEQUENCE="false"/>
+        <FIELD NAME="body" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="restricted" SEQUENCE="false"/>
+        <FIELD NAME="metadata" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="casefk" TYPE="foreign" FIELDS="caseid" REFTABLE="tool_uckkintegrity_case" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="caseid" UNIQUE="false" FIELDS="caseid"/>
+        <INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>
+        <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="tool_uckkintegrity_appeal" COMMENT="UCKK integrity appeals and contestations">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="caseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="body" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="submitted" SEQUENCE="false"/>
+        <FIELD NAME="decision" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="decidedby" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="casefk" TYPE="foreign" FIELDS="caseid" REFTABLE="tool_uckkintegrity_case" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="caseid" UNIQUE="false" FIELDS="caseid"/>
+        <INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

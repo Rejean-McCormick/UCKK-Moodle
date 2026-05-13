@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="128"
+    height="128"
+    viewBox="0 0 128 128"
+    role="img"
+    aria-labelledby="archiveTitle archiveDesc"
+>
+    <title id="archiveTitle">Archive UCKK</title>
+    <desc id="archiveDesc">
+        Icône des Archives UCKK : mémoire, preuves, décisions, versions et Kristals pédagogiques.
+    </desc>
+
+    <defs>
+        <linearGradient id="uckkArchiveGold" x1="26" y1="14" x2="104" y2="114" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#fef3c7"/>
+            <stop offset="1" stop-color="#b7791f"/>
+        </linearGradient>
+
+        <linearGradient id="uckkArchiveBlue" x1="20" y1="22" x2="110" y2="112" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#dbeafe"/>
+            <stop offset="1" stop-color="#1d4ed8"/>
+        </linearGradient>
+
+        <filter id="uckkArchiveShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#111827" flood-opacity="0.16"/>
+        </filter>
+    </defs>
+
+    <!-- Outer memory seal. -->
+    <circle
+        cx="64"
+        cy="64"
+        r="54"
+        fill="#f9fafb"
+        stroke="#d1d5db"
+        stroke-width="3"
+    />
+
+    <!-- Archive body. -->
+    <g filter="url(#uckkArchiveShadow)">
+        <path
+            d="M32 42
+               C32 38.686 34.686 36 38 36
+               H90
+               C93.314 36 96 38.686 96 42
+               V92
+               C96 95.314 93.314 98 90 98
+               H38
+               C34.686 98 32 95.314 32 92
+               Z"
+            fill="#ffffff"
+            stroke="#1f2937"
+            stroke-width="4"
+            stroke-linejoin="round"
+        />
+
+        <!-- Archive lid. -->
+        <path
+            d="M38 30
+               H90
+               C93.314 30 96 32.686 96 36
+               V48
+               H32
+               V36
+               C32 32.686 34.686 30 38 30
+               Z"
+            fill="url(#uckkArchiveBlue)"
+            stroke="#1f2937"
+            stroke-width="4"
+            stroke-linejoin="round"
+        />
+
+        <!-- Golden memory tab. -->
+        <path
+            d="M48 30
+               H70
+               L76 42
+               H42
+               Z"
+            fill="url(#uckkArchiveGold)"
+            stroke="#1f2937"
+            stroke-width="3"
+            stroke-linejoin="round"
+        />
+
+        <!-- Stored records. -->
+        <rect
+            x="43"
+            y="58"
+            width="42"
+            height="7"
+            rx="3.5"
+            fill="#e5e7eb"
+        />
+        <rect
+            x="43"
+            y="71"
+            width="34"
+            height="7"
+            rx="3.5"
+            fill="#e5e7eb"
+        />
+        <rect
+            x="43"
+            y="84"
+            width="46"
+            height="7"
+            rx="3.5"
+            fill="#e5e7eb"
+        />
+
+        <!-- Provenance line. -->
+        <path
+            d="M42 52 H86"
+            fill="none"
+            stroke="#b7791f"
+            stroke-width="3"
+            stroke-linecap="round"
+        />
+    </g>
+
+    <!-- Memory constellation. -->
+    <g fill="none" stroke="#6d28d9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M88 22 L103 31 L99 49"/>
+        <path d="M26 78 L18 94 L35 104"/>
+        <path d="M102 78 L111 93 L96 104"/>
+    </g>
+
+    <g>
+        <circle cx="88" cy="22" r="4" fill="#6d28d9"/>
+        <circle cx="103" cy="31" r="3.5" fill="#6d28d9"/>
+        <circle cx="99" cy="49" r="4" fill="#6d28d9"/>
+
+        <circle cx="26" cy="78" r="4" fill="#047857"/>
+        <circle cx="18" cy="94" r="3.5" fill="#047857"/>
+        <circle cx="35" cy="104" r="4" fill="#047857"/>
+
+        <circle cx="102" cy="78" r="4" fill="#b7791f"/>
+        <circle cx="111" cy="93" r="3.5" fill="#b7791f"/>
+        <circle cx="96" cy="104" r="4" fill="#b7791f"/>
+    </g>
+
+    <!-- Validation mark: memory is structured, checked, and reusable. -->
+    <path
+        d="M53 20
+           L61 12
+           L75 26"
+        fill="none"
+        stroke="#047857"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    />
+</svg>

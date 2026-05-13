@@ -1,0 +1,87 @@
+{
+  "schema": "uckk.presets.roles.v1",
+  "idempotency": "role.shortname",
+  "roles": [
+    {
+      "shortname": "gestionnaire_uckk",
+      "name": "Gestionnaire UCKK",
+      "archetype": "manager",
+      "description": "Manage UCKK configuration, programs, seed outputs, reports, and campus workflows.",
+      "assignable_contexts": [
+        "system",
+        "category"
+      ]
+    },
+    {
+      "shortname": "mentor_uckk",
+      "name": "Mentor UCKK",
+      "archetype": "editingteacher",
+      "description": "Teach, evaluate, guide challenges and assemblies.",
+      "assignable_contexts": [
+        "course",
+        "module"
+      ]
+    },
+    {
+      "shortname": "joueur",
+      "name": "Joueur",
+      "archetype": "student",
+      "description": "Learn, submit proof, join assemblies, complete challenges.",
+      "assignable_contexts": [
+        "course",
+        "module"
+      ]
+    },
+    {
+      "shortname": "archiviste_uckk",
+      "name": "Archiviste UCKK",
+      "archetype": "teacher",
+      "description": "Validate, version, and manage archive items.",
+      "assignable_contexts": [
+        "course",
+        "module",
+        "user"
+      ]
+    },
+    {
+      "shortname": "inquisiteur_uckk",
+      "name": "Inquisiteur UCKK",
+      "archetype": "teacher",
+      "description": "Review integrity cases and issue corrections without unrestricted administration.",
+      "assignable_contexts": [
+        "system",
+        "course",
+        "module"
+      ]
+    },
+    {
+      "shortname": "observateur_uckk",
+      "name": "Observateur UCKK",
+      "archetype": "guest",
+      "description": "Restricted read-only participant.",
+      "assignable_contexts": [
+        "course",
+        "module"
+      ]
+    },
+    {
+      "shortname": "invite_public_limite",
+      "name": "Invité public limité",
+      "archetype": "guest",
+      "description": "Public-facing read-only access where allowed.",
+      "assignable_contexts": [
+        "course",
+        "module"
+      ]
+    }
+  ],
+  "symbolic_titles_not_roles": [
+    "Bâtisseur",
+    "Joueur lucide",
+    "Cartographe de systèmes",
+    "Architecte du sens",
+    "Architecte d’opportunités",
+    "Gardien des systèmes vivants",
+    "Gardien de la preuve"
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "schema": "uckk.presets.courses.v1",
+  "idempotency": "course.shortname",
+  "defaults": {
+    "format": "uckk",
+    "visible": true,
+    "completion_enabled": true,
+    "activity_completion_enabled": true,
+    "language": "fr",
+    "summaryformat": "html",
+    "template": "uckk_standard_course"
+  },
+  "courses": [
+    {
+      "shortname": "UCKK-000",
+      "fullname": "Entrer dans l’Univers-Cité King Klown",
+      "category": "UCKK-00",
+      "format": "uckk",
+      "template": "uckk_orientation_course",
+      "summary": "Cours d’orientation au campus UCKK-Moodle : domaines, règles, rôles, preuves, archives, assemblées, intégrité et usage non souverain de l’IA.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "cohorts": [
+        "UCKK-COHORT-JOUEURS"
+      ],
+      "roles": {
+        "student": "joueur",
+        "editingteacher": "mentor_uckk",
+        "manager": "gestionnaire_uckk"
+      },
+      "competencies": [
+        "UCKK-COMP-014",
+        "UCKK-COMP-010"
+      ],
+      "badges": [
+        "BADGE-JOUEUR-INITIE"
+      ],
+      "completion": {
+        "requires": [
+          "viewed_orientation",
+          "accepted_rules",
+          "created_player_profile",
+          "submitted_orientation_reflection",
+          "created_first_archive_entry"
+        ]
+      },
+      "default_archive_template": "archive_portfolio_entry",
+      "default_integrity_policy": "standard"
+    },
+    {
+      "shortname": "UCKK-TC101",
+      "fullname": "Cartographie des idées avec l’IA",
+      "category": "UCKK-01",
+      "format": "uckk",
+      "template": "uckk_standard_course",
+      "summary": "Utiliser l’IA comme outil non souverain pour cartographier des idées, distinguer les niveaux de vérité, documenter les sources et produire une preuve vérifiable.",
+      "visible": true,
+      "cohorts": [
+        "UCKK-COHORT-TRONC-COMMUN"
+      ],
+      "competencies": [
+        "UCKK-COMP-002",
+        "UCKK-COMP-003",
+        "UCKK-COMP-004",
+        "UCKK-COMP-005"
+      ],
+      "badges": [
+        "BADGE-CARTOGRAPHE-SYSTEMES"
+      ],
+      "default_challenge": "challenge_system_mapping",
+      "default_assembly": "assembly_savoirs_course",
+      "default_archive_template": "archive_course_memory",
+      "completion": {
+        "requires": [
+          "completed_concept_checks",
+          "submitted_system_map",
+          "submitted_ai_collaboration_journal",
+          "submitted_evidence",
+          "archive_item_created"
+        ]
+      }
+    },
+    {
+      "shortname": "UCKK-TC102",
+      "fullname": "Intelligence collective, expertise située et décision légitime",
+      "category": "UCKK-01",
+      "format": "uckk",
+      "template": "uckk_standard_course",
+      "summary": "Apprendre à participer à une Assemblée structurée, produire une décision documentée et maintenir la contestabilité des choix collectifs.",
+      "visible": true,
+      "cohorts": [
+        "UCKK-COHORT-TRONC-COMMUN"
+      ],
+      "competencies": [
+        "UCKK-COMP-006",
+        "UCKK-COMP-008",
+        "UCKK-COMP-013"
+      ],
+      "badges": [
+        "BADGE-PARTICIPANT-ASSEMBLEE"
+      ],
+      "default_assembly": "assembly_savoirs_course",
+      "default_archive_template": "archive_assembly_minutes",
+      "completion": {
+        "requires": [
+          "submitted_motion_or_argument",
+          "participated_in_deliberation",
+          "reviewed_decision_record",
+          "archive_item_created"
+        ]
+      }
+    },
+    {
+      "shortname": "UCKK-TC103",
+      "fullname": "Agitation institutionnelle et mesure de l’utilité réelle",
+      "category": "UCKK-01",
+      "format": "uckk",
+      "template": "uckk_challenge_course",
+      "summary": "Observer une institution, mesurer son utilité réelle, détecter l’autorité cachée et produire un artefact ou prototype utile.",
+      "visible": true,
+      "cohorts": [
+        "UCKK-COHORT-TRONC-COMMUN"
+      ],
+      "competencies": [
+        "UCKK-COMP-001",
+        "UCKK-COMP-005",
+        "UCKK-COMP-011",
+        "UCKK-COMP-012"
+      ],
+      "badges": [
+        "BADGE-BATISSEUR-PROTOTYPE"
+      ],
+      "default_challenge": "challenge_institutional_audit",
+      "default_assembly": "assembly_defis_validation",
+      "default_archive_template": "archive_challenge_result",
+      "completion": {
+        "requires": [
+          "submitted_utility_audit",
+          "submitted_prototype_or_reform_artifact",
+          "mentor_review_completed",
+          "archive_item_created"
+        ]
+      }
+    },
+    {
+      "shortname": "UCKK-TC104",
+      "fullname": "Société des flux : argent, information et pouvoir",
+      "category": "UCKK-01",
+      "format": "uckk",
+      "template": "uckk_standard_course",
+      "summary": "Lire les flux d’argent, d’information et de pouvoir pour comprendre le Grand Jeu social et ses architectures d’influence.",
+      "visible": true,
+      "cohorts": [
+        "UCKK-COHORT-TRONC-COMMUN"
+      ],
+      "competencies": [
+        "UCKK-COMP-001",
+        "UCKK-COMP-002",
+        "UCKK-COMP-011"
+      ],
+      "badges": [
+        "BADGE-JOUEUR-LUCIDE"
+      ],
+      "default_challenge": "challenge_system_mapping",
+      "default_archive_template": "archive_course_memory",
+      "completion": {
+        "requires": [
+          "submitted_flow_analysis",
+          "submitted_system_map",
+          "submitted_authority_detection_note",
+          "archive_item_created"
+        ]
+      }
+    },
+    {
+      "shortname": "UCKK-TC105",
+      "fullname": "Fiction fondatrice, vérité morale et récits symboliques",
+      "category": "UCKK-01",
+      "format": "uckk",
+      "template": "uckk_standard_course",
+      "summary": "Distinguer fait, hypothèse, interprétation et récit symbolique afin d’utiliser la fiction fondatrice sans confusion avec les faits.",
+      "visible": true,
+      "cohorts": [
+        "UCKK-COHORT-TRONC-COMMUN"
+      ],
+      "competencies": [
+        "UCKK-COMP-003",
+        "UCKK-COMP-010",
+        "UCKK-COMP-013"
+      ],
+      "badges": [
+        "BADGE-JOUEUR-LUCIDE"
+      ],
+      "default_archive_template": "archive_course_memory",
+      "completion": {
+        "requires": [
+          "submitted_symbolic_narrative_analysis",
+          "submitted_ethics_reflection",
+          "completed_fact_fiction_distinction",
+          "archive_item_created"
+        ]
+      }
+    },
+    {
+      "shortname": "UCKK-TC106",
+      "fullname": "Mobilisation multi-corridor et coopération pratique",
+      "category": "UCKK-01",
+      "format": "uckk",
+      "template": "uckk_challenge_course",
+      "summary": "Concevoir une mobilisation responsable, coopérer dans plusieurs corridors d’action et documenter les risques, preuves et décisions.",
+      "visible": true,
+      "cohorts": [
+        "UCKK-COHORT-TRONC-COMMUN"
+      ],
+      "competencies": [
+        "UCKK-COMP-006",
+        "UCKK-COMP-007",
+        "UCKK-COMP-010"
+      ],
+      "badges": [
+        "BADGE-DEFI-KING-KLOWN-VALIDE"
+      ],
+      "default_challenge": "challenge_mobilisation",
+      "default_assembly": "assembly_defis_validation",
+      "default_archive_template": "archive_challenge_result",
+      "completion": {
+        "requires": [
+          "submitted_mobilisation_strategy",
+          "submitted_risk_assessment",
+          "participated_in_assembly",
+          "challenge_validated",
+          "archive_item_created"
+        ]
+      }
+    },
+    {
+      "shortname": "UCKK-TC107",
+      "fullname": "Introduction à kOA : connaissance, décision, action, mémoire",
+      "category": "UCKK-01",
+      "format": "uckk",
+      "template": "uckk_standard_course",
+      "summary": "Relier connaître, choisir, agir et se souvenir dans le cycle kOA, avec attention à la décision documentée et à l’archive.",
+      "visible": true,
+      "cohorts": [
+        "UCKK-COHORT-TRONC-COMMUN"
+      ],
+      "competencies": [
+        "UCKK-COMP-014",
+        "UCKK-COMP-001",
+        "UCKK-COMP-008"
+      ],
+      "badges": [
+        "BADGE-ARCHIVISTE-DECISION"
+      ],
+      "default_assembly": "assembly_savoirs_course",
+      "default_archive_template": "archive_assembly_minutes",
+      "completion": {
+        "requires": [
+          "submitted_koa_cycle_map",
+          "documented_decision",
+          "created_archive_entry",
+          "reviewed_provenance"
+        ]
+      }
+    },
+    {
+      "shortname": "UCKK-TC108",
+      "fullname": "Éthique, intégrité et Inquisiteur méthodologique",
+      "category": "UCKK-01",
+      "format": "uckk",
+      "template": "uckk_standard_course",
+      "summary": "Comprendre l’Inquisiteur comme garde-fou éthique et méthodologique : preuves, contestabilité, dignité, vie privée, correction et mémoire.",
+      "visible": true,
+      "cohorts": [
+        "UCKK-COHORT-TRONC-COMMUN"
+      ],
+      "competencies": [
+        "UCKK-COMP-010",
+        "UCKK-COMP-013",
+        "UCKK-COMP-005"
+      ],
+      "badges": [
+        "BADGE-INQUISITION-METHODOLOGIQUE-REUSSIE"
+      ],
+      "default_integrity_policy": "standard",
+      "default_archive_template": "archive_integrity_summary",
+      "completion": {
+        "requires": [
+          "completed_integrity_case_simulation",
+          "submitted_evidence_quality_review",
+          "submitted_redaction_or_privacy_reflection",
+          "archive_item_created"
+        ]
+      }
+    }
+  ]
+}

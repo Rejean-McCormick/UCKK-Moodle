@@ -1,0 +1,533 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_uckk_dashboard/dashboard_block
+
+    Main dashboard block template for UCKK-Moodle.
+
+    This template renders the UCKK dashboard cockpit. All data must already be:
+    - permission-filtered;
+    - context-aware;
+    - formatted for display;
+    - safe for the current viewer.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * data-region="block-uckk-dashboard"
+    * data-action="block-uckk-dashboard-refresh"
+    * data-region="block-uckk-dashboard-content"
+    * data-region="block-uckk-dashboard-status"
+
+    Context variables required for this template:
+    {
+        "uniqid": "block-uckk-dashboard-123",
+        "userid": 42,
+        "title": "My UCKK dashboard",
+        "subtitle": "Progress, evidence, assemblies, archives, integrity feedback, and portfolio links.",
+        "viewertype": "joueur",
+        "viewerlabel": "Joueur view",
+        "hasdashboard": true,
+        "haserrors": false,
+        "errormessage": "",
+        "hasnotices": true,
+        "notices": [
+            {
+                "type": "info",
+                "message": "This dashboard summarizes UCKK records. Source records remain authoritative."
+            }
+        ],
+        "canconfigure": true,
+        "configureurl": "https://example.test/blocks/uckk_dashboard/config.php",
+        "canrefresh": true,
+        "refreshurl": "https://example.test/lib/ajax/service.php",
+        "lastupdated": "12 May 2026, 10:30",
+        "haslastupdated": true,
+
+        "showpathway": true,
+        "pathway": {},
+
+        "showprogress": true,
+        "progresssummary": {},
+
+        "showchallenges": true,
+        "challengesummary": {},
+
+        "showassemblies": true,
+        "assemblysummary": {},
+
+        "showbadges": true,
+        "badgesummary": {},
+
+        "showarchive": true,
+        "archiveitems": [],
+        "hasarchiveitems": false,
+        "archiveurl": "",
+
+        "showintegrity": true,
+        "integrityitems": [],
+        "hasintegrityitems": false,
+        "integrityurl": "",
+
+        "showdeadlines": true,
+        "deadlines": [],
+        "hasdeadlines": false,
+
+        "showportfolio": true,
+        "portfolioitems": [],
+        "hasportfolioitems": false,
+        "portfoliourl": "",
+
+        "showstaff": false,
+        "staffitems": [],
+        "hasstaffitems": false
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="block-uckk-dashboard block-uckk-dashboard--{{viewertype}}"
+    data-region="block-uckk-dashboard"
+    data-user-id="{{userid}}"
+    data-viewer-type="{{viewertype}}"
+    aria-label="{{#str}} aria:dashboard, block_uckk_dashboard {{/str}}"
+>
+    <header class="block-uckk-dashboard__header">
+        <div class="block-uckk-dashboard__identity">
+            <p class="block-uckk-dashboard__eyebrow">
+                {{viewerlabel}}
+            </p>
+
+            <h3 class="block-uckk-dashboard__title">
+                {{title}}
+            </h3>
+
+            {{#subtitle}}
+                <p class="block-uckk-dashboard__subtitle">
+                    {{subtitle}}
+                </p>
+            {{/subtitle}}
+        </div>
+
+        <div class="block-uckk-dashboard__tools">
+            {{#haslastupdated}}
+                <span class="block-uckk-dashboard__updated">
+                    {{#str}} lastupdated, block_uckk_dashboard {{/str}}:
+                    <time>{{lastupdated}}</time>
+                </span>
+            {{/haslastupdated}}
+
+            {{#canrefresh}}
+                <button
+                    type="button"
+                    class="btn btn-secondary btn-sm block-uckk-dashboard__refresh"
+                    data-action="block-uckk-dashboard-refresh"
+                >
+                    {{#str}} action:refresh, block_uckk_dashboard {{/str}}
+                </button>
+            {{/canrefresh}}
+
+            {{#canconfigure}}
+                <a
+                    href="{{configureurl}}"
+                    class="btn btn-secondary btn-sm block-uckk-dashboard__configure"
+                >
+                    {{#str}} action:configure, block_uckk_dashboard {{/str}}
+                </a>
+            {{/canconfigure}}
+        </div>
+    </header>
+
+    <div
+        class="block-uckk-dashboard__status sr-only"
+        data-region="block-uckk-dashboard-status"
+        aria-live="polite"
+        aria-atomic="true"
+    ></div>
+
+    {{#haserrors}}
+        <div class="alert alert-danger block-uckk-dashboard__error" role="alert">
+            {{errormessage}}
+        </div>
+    {{/haserrors}}
+
+    {{#hasnotices}}
+        <div class="block-uckk-dashboard__notices">
+            {{#notices}}
+                <div class="alert alert-{{type}} block-uckk-dashboard__notice" role="status">
+                    {{message}}
+                </div>
+            {{/notices}}
+        </div>
+    {{/hasnotices}}
+
+    {{#hasdashboard}}
+        <div
+            class="block-uckk-dashboard__content"
+            data-region="block-uckk-dashboard-content"
+        >
+            <div class="block-uckk-dashboard__grid">
+                {{#showpathway}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--pathway">
+                        <h4 class="block-uckk-dashboard__card-title">
+                            {{#str}} card:mypathway, block_uckk_dashboard {{/str}}
+                        </h4>
+
+                        {{#pathway}}
+                            {{> local_uckk/pathway_card }}
+                        {{/pathway}}
+
+                        {{^pathway}}
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} empty:pathway, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/pathway}}
+                    </section>
+                {{/showpathway}}
+
+                {{#showprogress}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--progress">
+                        {{#progresssummary}}
+                            {{> block_uckk_dashboard/progress_summary }}
+                        {{/progresssummary}}
+
+                        {{^progresssummary}}
+                            <h4 class="block-uckk-dashboard__card-title">
+                                {{#str}} progresssummary, block_uckk_dashboard {{/str}}
+                            </h4>
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} empty:progress, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/progresssummary}}
+                    </section>
+                {{/showprogress}}
+
+                {{#showchallenges}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--challenges">
+                        {{#challengesummary}}
+                            {{> block_uckk_dashboard/challenge_summary }}
+                        {{/challengesummary}}
+
+                        {{^challengesummary}}
+                            <h4 class="block-uckk-dashboard__card-title">
+                                {{#str}} challengesummary, block_uckk_dashboard {{/str}}
+                            </h4>
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} challenge:none, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/challengesummary}}
+                    </section>
+                {{/showchallenges}}
+
+                {{#showassemblies}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--assemblies">
+                        {{#assemblysummary}}
+                            {{> block_uckk_dashboard/assembly_summary }}
+                        {{/assemblysummary}}
+
+                        {{^assemblysummary}}
+                            <h4 class="block-uckk-dashboard__card-title">
+                                {{#str}} assemblysummary, block_uckk_dashboard {{/str}}
+                            </h4>
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} assembly:none, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/assemblysummary}}
+                    </section>
+                {{/showassemblies}}
+
+                {{#showbadges}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--badges">
+                        {{#badgesummary}}
+                            {{> block_uckk_dashboard/badge_summary }}
+                        {{/badgesummary}}
+
+                        {{^badgesummary}}
+                            <h4 class="block-uckk-dashboard__card-title">
+                                {{#str}} badgesummary, block_uckk_dashboard {{/str}}
+                            </h4>
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} badge:noneearned, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/badgesummary}}
+                    </section>
+                {{/showbadges}}
+
+                {{#showarchive}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--archive">
+                        <header class="block-uckk-dashboard__card-header">
+                            <h4 class="block-uckk-dashboard__card-title">
+                                {{#str}} archivesummary, block_uckk_dashboard {{/str}}
+                            </h4>
+
+                            {{#archiveurl}}
+                                <a href="{{archiveurl}}" class="block-uckk-dashboard__card-link">
+                                    {{#str}} archive:viewall, block_uckk_dashboard {{/str}}
+                                </a>
+                            {{/archiveurl}}
+                        </header>
+
+                        {{#hasarchiveitems}}
+                            <ul class="block-uckk-dashboard__list block-uckk-dashboard__list--archive">
+                                {{#archiveitems}}
+                                    <li class="block-uckk-dashboard__list-item">
+                                        {{#url}}
+                                            <a href="{{url}}" class="block-uckk-dashboard__item-title">
+                                                {{title}}
+                                            </a>
+                                        {{/url}}
+                                        {{^url}}
+                                            <span class="block-uckk-dashboard__item-title">
+                                                {{title}}
+                                            </span>
+                                        {{/url}}
+
+                                        {{#statuslabel}}
+                                            <span class="block-uckk-dashboard__item-status block-uckk-dashboard__item-status--{{status}}">
+                                                {{statuslabel}}
+                                            </span>
+                                        {{/statuslabel}}
+
+                                        {{#summary}}
+                                            <p class="block-uckk-dashboard__item-summary">
+                                                {{summary}}
+                                            </p>
+                                        {{/summary}}
+                                    </li>
+                                {{/archiveitems}}
+                            </ul>
+                        {{/hasarchiveitems}}
+
+                        {{^hasarchiveitems}}
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} archive:none, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/hasarchiveitems}}
+                    </section>
+                {{/showarchive}}
+
+                {{#showintegrity}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--integrity">
+                        <header class="block-uckk-dashboard__card-header">
+                            <h4 class="block-uckk-dashboard__card-title">
+                                {{#str}} integritysummary, block_uckk_dashboard {{/str}}
+                            </h4>
+
+                            {{#integrityurl}}
+                                <a href="{{integrityurl}}" class="block-uckk-dashboard__card-link">
+                                    {{#str}} integrity:view, block_uckk_dashboard {{/str}}
+                                </a>
+                            {{/integrityurl}}
+                        </header>
+
+                        {{#hasintegrityitems}}
+                            <ul class="block-uckk-dashboard__list block-uckk-dashboard__list--integrity">
+                                {{#integrityitems}}
+                                    <li class="block-uckk-dashboard__list-item block-uckk-dashboard__list-item--{{severity}}">
+                                        <span class="block-uckk-dashboard__item-title">
+                                            {{title}}
+                                        </span>
+
+                                        {{#statuslabel}}
+                                            <span class="block-uckk-dashboard__item-status block-uckk-dashboard__item-status--{{status}}">
+                                                {{statuslabel}}
+                                            </span>
+                                        {{/statuslabel}}
+
+                                        {{#summary}}
+                                            <p class="block-uckk-dashboard__item-summary">
+                                                {{summary}}
+                                            </p>
+                                        {{/summary}}
+
+                                        {{#url}}
+                                            <a href="{{url}}" class="block-uckk-dashboard__item-action">
+                                                {{#str}} action:viewdetails, block_uckk_dashboard {{/str}}
+                                            </a>
+                                        {{/url}}
+                                    </li>
+                                {{/integrityitems}}
+                            </ul>
+                        {{/hasintegrityitems}}
+
+                        {{^hasintegrityitems}}
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} integrity:clear, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/hasintegrityitems}}
+                    </section>
+                {{/showintegrity}}
+
+                {{#showdeadlines}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--deadlines">
+                        <h4 class="block-uckk-dashboard__card-title">
+                            {{#str}} deadlinessummary, block_uckk_dashboard {{/str}}
+                        </h4>
+
+                        {{#hasdeadlines}}
+                            <ul class="block-uckk-dashboard__list block-uckk-dashboard__list--deadlines">
+                                {{#deadlines}}
+                                    <li class="block-uckk-dashboard__list-item {{#isoverdue}}is-overdue{{/isoverdue}}{{#istoday}} is-today{{/istoday}}">
+                                        {{#url}}
+                                            <a href="{{url}}" class="block-uckk-dashboard__item-title">
+                                                {{title}}
+                                            </a>
+                                        {{/url}}
+                                        {{^url}}
+                                            <span class="block-uckk-dashboard__item-title">
+                                                {{title}}
+                                            </span>
+                                        {{/url}}
+
+                                        {{#datelabel}}
+                                            <time class="block-uckk-dashboard__item-date">
+                                                {{datelabel}}
+                                            </time>
+                                        {{/datelabel}}
+
+                                        {{#typelabel}}
+                                            <span class="block-uckk-dashboard__item-type">
+                                                {{typelabel}}
+                                            </span>
+                                        {{/typelabel}}
+                                    </li>
+                                {{/deadlines}}
+                            </ul>
+                        {{/hasdeadlines}}
+
+                        {{^hasdeadlines}}
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} deadline:none, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/hasdeadlines}}
+                    </section>
+                {{/showdeadlines}}
+
+                {{#showportfolio}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--portfolio">
+                        <header class="block-uckk-dashboard__card-header">
+                            <h4 class="block-uckk-dashboard__card-title">
+                                {{#str}} portfoliosummary, block_uckk_dashboard {{/str}}
+                            </h4>
+
+                            {{#portfoliourl}}
+                                <a href="{{portfoliourl}}" class="block-uckk-dashboard__card-link">
+                                    {{#str}} portfolio:view, block_uckk_dashboard {{/str}}
+                                </a>
+                            {{/portfoliourl}}
+                        </header>
+
+                        {{#hasportfolioitems}}
+                            <ul class="block-uckk-dashboard__list block-uckk-dashboard__list--portfolio">
+                                {{#portfolioitems}}
+                                    <li class="block-uckk-dashboard__list-item">
+                                        {{#url}}
+                                            <a href="{{url}}" class="block-uckk-dashboard__item-title">
+                                                {{title}}
+                                            </a>
+                                        {{/url}}
+                                        {{^url}}
+                                            <span class="block-uckk-dashboard__item-title">
+                                                {{title}}
+                                            </span>
+                                        {{/url}}
+
+                                        {{#summary}}
+                                            <p class="block-uckk-dashboard__item-summary">
+                                                {{summary}}
+                                            </p>
+                                        {{/summary}}
+                                    </li>
+                                {{/portfolioitems}}
+                            </ul>
+                        {{/hasportfolioitems}}
+
+                        {{^hasportfolioitems}}
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} portfolio:none, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/hasportfolioitems}}
+                    </section>
+                {{/showportfolio}}
+
+                {{#showstaff}}
+                    <section class="block-uckk-dashboard__card block-uckk-dashboard__card--staff">
+                        <h4 class="block-uckk-dashboard__card-title">
+                            {{#str}} section:staff, block_uckk_dashboard {{/str}}
+                        </h4>
+
+                        {{#hasstaffitems}}
+                            <ul class="block-uckk-dashboard__list block-uckk-dashboard__list--staff">
+                                {{#staffitems}}
+                                    <li class="block-uckk-dashboard__list-item">
+                                        {{#url}}
+                                            <a href="{{url}}" class="block-uckk-dashboard__item-title">
+                                                {{title}}
+                                            </a>
+                                        {{/url}}
+                                        {{^url}}
+                                            <span class="block-uckk-dashboard__item-title">
+                                                {{title}}
+                                            </span>
+                                        {{/url}}
+
+                                        {{#count}}
+                                            <span class="badge badge-secondary block-uckk-dashboard__item-count">
+                                                {{count}}
+                                            </span>
+                                        {{/count}}
+
+                                        {{#summary}}
+                                            <p class="block-uckk-dashboard__item-summary">
+                                                {{summary}}
+                                            </p>
+                                        {{/summary}}
+                                    </li>
+                                {{/staffitems}}
+                            </ul>
+                        {{/hasstaffitems}}
+
+                        {{^hasstaffitems}}
+                            <p class="block-uckk-dashboard__empty">
+                                {{#str}} empty:staff, block_uckk_dashboard {{/str}}
+                            </p>
+                        {{/hasstaffitems}}
+                    </section>
+                {{/showstaff}}
+            </div>
+        </div>
+    {{/hasdashboard}}
+
+    {{^hasdashboard}}
+        <div class="block-uckk-dashboard__empty-state">
+            <p>{{#str}} empty:dashboard, block_uckk_dashboard {{/str}}</p>
+        </div>
+    {{/hasdashboard}}
+
+    <footer class="block-uckk-dashboard__footer">
+        <p class="block-uckk-dashboard__source-note">
+            {{#str}} notice:dashboardderived, block_uckk_dashboard {{/str}}
+        </p>
+    </footer>
+</section>
+
+{{#js}}
+require(['block_uckk_dashboard/dashboard'], function(Dashboard) {
+    Dashboard.init('{{uniqid}}');
+});
+{{/js}}

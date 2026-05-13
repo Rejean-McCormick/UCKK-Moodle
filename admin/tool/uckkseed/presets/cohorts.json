@@ -1,0 +1,542 @@
+{
+  "schema": "uckkseed.preset.v1",
+  "component": "tool_uckkseed",
+  "preset": "cohorts",
+  "version": 2026051200,
+  "items": [
+    {
+      "key": "uckk_all",
+      "name": "UCKK — Communauté complète",
+      "idnumber": "UCKK-COHORT-ALL",
+      "context": "system",
+      "description": "Cohorte globale pour les personnes rattachées au campus UCKK-Moodle.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "institutional",
+        "scope": "campus",
+        "language": "fr",
+        "public_accreditation_claim": false
+      }
+    },
+    {
+      "key": "uckk_players",
+      "name": "UCKK — Joueurs",
+      "idnumber": "UCKK-COHORT-PLAYERS",
+      "context": "system",
+      "description": "Cohorte principale des Joueurs UCKK inscrits dans les parcours, cours, défis, assemblées et archives.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "technical_population",
+        "technical_role": "uckkplayer",
+        "symbolic_role": "joueur",
+        "dashboard_default": true
+      }
+    },
+    {
+      "key": "uckk_managers",
+      "name": "UCKK — Gestionnaires",
+      "idnumber": "UCKK-COHORT-MANAGERS",
+      "context": "system",
+      "description": "Cohorte administrative pour les personnes responsables de la configuration UCKK, des programmes, des rapports et des opérations de génération.",
+      "visible": false,
+      "status": "active",
+      "visibility": "restricted",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "technical_staff",
+        "technical_role": "uckkmanager",
+        "restricted": true
+      }
+    },
+    {
+      "key": "uckk_mentors",
+      "name": "UCKK — Mentors",
+      "idnumber": "UCKK-COHORT-MENTORS",
+      "context": "system",
+      "description": "Cohorte des Mentors UCKK responsables de guider, commenter et évaluer les apprentissages selon les permissions Moodle.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "technical_staff",
+        "technical_role": "uckkmentor"
+      }
+    },
+    {
+      "key": "uckk_archivists",
+      "name": "UCKK — Archivistes",
+      "idnumber": "UCKK-COHORT-ARCHIVISTS",
+      "context": "system",
+      "description": "Cohorte des personnes responsables de la validation, de la révision, de la provenance et de la mémoire archivistique.",
+      "visible": false,
+      "status": "active",
+      "visibility": "restricted",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "technical_staff",
+        "technical_role": "uckkarchivist",
+        "restricted": true,
+        "related_component": "mod_uckkarchive"
+      }
+    },
+    {
+      "key": "uckk_inquisitors",
+      "name": "UCKK — Inquisiteurs méthodologiques",
+      "idnumber": "UCKK-COHORT-INQUISITORS",
+      "context": "system",
+      "description": "Cohorte restreinte pour les réviseurs d’intégrité chargés de protéger les faits, la dignité, la méthode et la contestabilité.",
+      "visible": false,
+      "status": "active",
+      "visibility": "restricted_integrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "technical_staff",
+        "technical_role": "uckkinquisitor",
+        "restricted": true,
+        "related_component": "tool_uckkintegrity"
+      }
+    },
+    {
+      "key": "uckk_observers",
+      "name": "UCKK — Observateurs",
+      "idnumber": "UCKK-COHORT-OBSERVERS",
+      "context": "system",
+      "description": "Cohorte de lecture limitée pour observation pédagogique, institutionnelle ou partenariale selon les permissions.",
+      "visible": false,
+      "status": "active",
+      "visibility": "restricted",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "technical_population",
+        "technical_role": "uckkobserver"
+      }
+    },
+    {
+      "key": "uckk_public_guests",
+      "name": "UCKK — Invités publics limités",
+      "idnumber": "UCKK-COHORT-PUBLIC-GUESTS",
+      "context": "system",
+      "description": "Cohorte d’accès public limité pour les espaces explicitement rendus visibles.",
+      "visible": false,
+      "status": "active",
+      "visibility": "restricted",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "public_limited",
+        "technical_role": "uckkpublicguest"
+      }
+    },
+    {
+      "key": "program_tronc_commun",
+      "name": "Programme — Tronc commun obligatoire",
+      "idnumber": "UCKK-COHORT-PROGRAM-TC",
+      "context": "system",
+      "description": "Cohorte des Joueurs engagés dans le tronc commun UCKK.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "tronc_commun",
+        "program_type": "tronc_commun",
+        "required_courses": [
+          "UCKK-TC101",
+          "UCKK-TC102",
+          "UCKK-TC103",
+          "UCKK-TC104",
+          "UCKK-TC105",
+          "UCKK-TC106",
+          "UCKK-TC107",
+          "UCKK-TC108"
+        ]
+      }
+    },
+    {
+      "key": "program_grand_jeu_social",
+      "name": "Programme — Grand Jeu social",
+      "idnumber": "UCKK-COHORT-PROGRAM-GJS",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Grand Jeu social.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "grand_jeu_social",
+        "program_type": "baccalaureat"
+      }
+    },
+    {
+      "key": "program_koa_digital",
+      "name": "Programme — Architecture écosystème digital kOA",
+      "idnumber": "UCKK-COHORT-PROGRAM-KOA-DIGITAL",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Architecture écosystème digital kOA.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "architecture_ecosysteme_digital_koa",
+        "program_type": "baccalaureat"
+      }
+    },
+    {
+      "key": "program_sociotech",
+      "name": "Programme — Architecture sociotechnique",
+      "idnumber": "UCKK-COHORT-PROGRAM-SOCIOTECH",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Architecture sociotechnique.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "architecture_sociotechnique",
+        "program_type": "baccalaureat"
+      }
+    },
+    {
+      "key": "program_politics",
+      "name": "Programme — Sciences politiques",
+      "idnumber": "UCKK-COHORT-PROGRAM-POLITICS",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Sciences politiques.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "sciences_politiques",
+        "program_type": "baccalaureat"
+      }
+    },
+    {
+      "key": "program_economy",
+      "name": "Programme — Économie",
+      "idnumber": "UCKK-COHORT-PROGRAM-ECONOMY",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Économie.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "economie",
+        "program_type": "baccalaureat"
+      }
+    },
+    {
+      "key": "program_ecology",
+      "name": "Programme — Écologie",
+      "idnumber": "UCKK-COHORT-PROGRAM-ECOLOGY",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Écologie.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "ecologie",
+        "program_type": "baccalaureat"
+      }
+    },
+    {
+      "key": "program_metaphysics",
+      "name": "Programme — Métaphysique",
+      "idnumber": "UCKK-COHORT-PROGRAM-METAPHYSICS",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Métaphysique.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "metaphysique",
+        "program_type": "baccalaureat"
+      }
+    },
+    {
+      "key": "program_ai",
+      "name": "Programme — Intelligence artificielle gouvernable",
+      "idnumber": "UCKK-COHORT-PROGRAM-AI",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Intelligence artificielle gouvernable.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "intelligence_artificielle_gouvernable",
+        "program_type": "baccalaureat",
+        "ai_policy": {
+          "non_sovereign": true,
+          "human_validation_required": true
+        }
+      }
+    },
+    {
+      "key": "program_linguistics",
+      "name": "Programme — Linguistique et architecture du sens",
+      "idnumber": "UCKK-COHORT-PROGRAM-LINGUISTICS",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Linguistique et architecture du sens.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "linguistique_architecture_du_sens",
+        "program_type": "baccalaureat"
+      }
+    },
+    {
+      "key": "program_social_intervention",
+      "name": "Programme — Intervention sociale",
+      "idnumber": "UCKK-COHORT-PROGRAM-SOCIAL-INTERVENTION",
+      "context": "system",
+      "description": "Cohorte du baccalauréat interne Intervention sociale.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "intervention_sociale",
+        "program_type": "baccalaureat"
+      }
+    },
+    {
+      "key": "program_living_media",
+      "name": "Programme — Médias vivants et théâtre public",
+      "idnumber": "UCKK-COHORT-PROGRAM-LIVING-MEDIA",
+      "context": "system",
+      "description": "Cohorte de la mineure interne Médias vivants et théâtre public.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "medias_vivants_theatre_public",
+        "program_type": "mineure"
+      }
+    },
+    {
+      "key": "program_advanced_labs",
+      "name": "Programme — Séminaires avancés et laboratoires",
+      "idnumber": "UCKK-COHORT-PROGRAM-ADVANCED-LABS",
+      "context": "system",
+      "description": "Cohorte des séminaires avancés et laboratoires UCKK.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "program",
+        "program": "seminaires_avances_laboratoires",
+        "program_type": "seminaire"
+      }
+    },
+    {
+      "key": "symbolic_joueur_lucide",
+      "name": "Distinction — Joueurs lucides",
+      "idnumber": "UCKK-COHORT-SYMBOLIC-JOUEUR-LUCIDE",
+      "context": "system",
+      "description": "Cohorte de distinction pour les Joueurs lucides. Cette cohorte ne crée pas de rôle technique Moodle.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "symbolic_distinction",
+        "symbolic_role": "joueur_lucide",
+        "not_moodle_role": true,
+        "related_badge": "joueur_lucide"
+      }
+    },
+    {
+      "key": "symbolic_batisseurs",
+      "name": "Distinction — Bâtisseurs",
+      "idnumber": "UCKK-COHORT-SYMBOLIC-BATISSEURS",
+      "context": "system",
+      "description": "Cohorte de distinction pour les Bâtisseurs. Cette cohorte ne crée pas de rôle technique Moodle.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "symbolic_distinction",
+        "symbolic_role": "batisseur",
+        "not_moodle_role": true,
+        "related_badge": "batisseur_prototype"
+      }
+    },
+    {
+      "key": "symbolic_cartographes",
+      "name": "Distinction — Cartographes de systèmes",
+      "idnumber": "UCKK-COHORT-SYMBOLIC-CARTOGRAPHES",
+      "context": "system",
+      "description": "Cohorte de distinction pour les Cartographes de systèmes. Cette cohorte ne crée pas de rôle technique Moodle.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "symbolic_distinction",
+        "symbolic_role": "cartographe",
+        "not_moodle_role": true,
+        "related_badge": "cartographe_systemes"
+      }
+    },
+    {
+      "key": "symbolic_architectes_sens",
+      "name": "Distinction — Architectes du sens",
+      "idnumber": "UCKK-COHORT-SYMBOLIC-ARCHITECTES-SENS",
+      "context": "system",
+      "description": "Cohorte de distinction pour les Architectes du sens. Cette cohorte ne crée pas de rôle technique Moodle.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "symbolic_distinction",
+        "symbolic_role": "architecte_sens",
+        "not_moodle_role": true,
+        "related_badge": "architecte_sens"
+      }
+    },
+    {
+      "key": "symbolic_architectes_opportunites",
+      "name": "Distinction — Architectes d’opportunités",
+      "idnumber": "UCKK-COHORT-SYMBOLIC-ARCHITECTES-OPPORTUNITES",
+      "context": "system",
+      "description": "Cohorte de distinction pour les Architectes d’opportunités. Cette cohorte ne crée pas de rôle technique Moodle.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "symbolic_distinction",
+        "symbolic_role": "architecte_opportunites",
+        "not_moodle_role": true,
+        "related_badge": "architecte_opportunites"
+      }
+    },
+    {
+      "key": "symbolic_gardiens_systemes_vivants",
+      "name": "Distinction — Gardiens des systèmes vivants",
+      "idnumber": "UCKK-COHORT-SYMBOLIC-GARDIENS-SYSTEMES-VIVANTS",
+      "context": "system",
+      "description": "Cohorte de distinction pour les Gardiens des systèmes vivants. Cette cohorte ne crée pas de rôle technique Moodle.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "symbolic_distinction",
+        "symbolic_role": "gardien_systemes_vivants",
+        "not_moodle_role": true,
+        "related_badge": "gardien_systemes_vivants"
+      }
+    },
+    {
+      "key": "archive_portfolios",
+      "name": "Archives — Portfolios UCKK",
+      "idnumber": "UCKK-COHORT-ARCHIVE-PORTFOLIOS",
+      "context": "system",
+      "description": "Cohorte des personnes disposant d’un portfolio UCKK archivable.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "archive_population",
+        "related_component": "mod_uckkarchive",
+        "portfolio": true
+      }
+    },
+    {
+      "key": "assembly_participants",
+      "name": "Assemblées — Participants",
+      "idnumber": "UCKK-COHORT-ASSEMBLY-PARTICIPANTS",
+      "context": "system",
+      "description": "Cohorte des personnes pouvant participer aux Assemblées UCKK selon les permissions de cours et d’activité.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "workflow_population",
+        "related_component": "mod_uckkassembly",
+        "assembly_types": [
+          "savoirs",
+          "defis",
+          "joueurs",
+          "batisseurs",
+          "inquisiteurs",
+          "grand_jeu"
+        ]
+      }
+    },
+    {
+      "key": "challenge_participants",
+      "name": "Défis — Participants",
+      "idnumber": "UCKK-COHORT-CHALLENGE-PARTICIPANTS",
+      "context": "system",
+      "description": "Cohorte des personnes pouvant participer aux Défis King Klown selon les permissions de cours et d’activité.",
+      "visible": true,
+      "status": "active",
+      "visibility": "institution",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "workflow_population",
+        "related_component": "mod_uckkchallenge",
+        "challenge_types": [
+          "internal_learning",
+          "public_pedagogical",
+          "institutional_audit",
+          "system_mapping",
+          "prototype",
+          "mobilisation",
+          "capstone",
+          "king_klown_public"
+        ]
+      }
+    },
+    {
+      "key": "integrity_restricted_review",
+      "name": "Intégrité — Revue restreinte",
+      "idnumber": "UCKK-COHORT-INTEGRITY-RESTRICTED-REVIEW",
+      "context": "system",
+      "description": "Cohorte restreinte pour les revues d’intégrité, les preuves sensibles et les dossiers contestés.",
+      "visible": false,
+      "status": "active",
+      "visibility": "restricted_integrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "type": "restricted_integrity",
+        "related_component": "tool_uckkintegrity",
+        "restricted": true
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,275 @@
+{
+  "schema": "uckk.presets.badges.v1",
+  "idempotency": "badge.name + issuer",
+  "issuer": {
+    "name": "Univers-Cité King Klown",
+    "url": "https://uckk.local"
+  },
+  "rules": {
+    "all_badges_require": [
+      "course_or_activity_completion",
+      "evidence_submission",
+      "human_validation",
+      "competency_threshold",
+      "archive_item_or_portfolio_entry",
+      "no_unresolved_integrity_block"
+    ],
+    "never_award_for_view_only": true
+  },
+  "badges": [
+    {
+      "key": "BADGE-JOUEUR-INITIE",
+      "name": "Badge — Joueur initié",
+      "type": "foundational",
+      "criteria": {
+        "courses": [
+          "UCKK-000"
+        ],
+        "competencies": [
+          {
+            "idnumber": "UCKK-COMP-014",
+            "minimum": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "BADGE-JOUEUR-LUCIDE",
+      "name": "Badge — Joueur lucide",
+      "type": "foundational",
+      "criteria": {
+        "courses": [
+          "UCKK-TC104",
+          "UCKK-TC105"
+        ],
+        "competencies": [
+          {
+            "idnumber": "UCKK-COMP-001",
+            "minimum": 3
+          },
+          {
+            "idnumber": "UCKK-COMP-013",
+            "minimum": 3
+          }
+        ],
+        "portfolio_sections": [
+          "System map",
+          "Flow analysis",
+          "Ethics reflection",
+          "Archive links"
+        ]
+      }
+    },
+    {
+      "key": "BADGE-CARTOGRAPHE-SYSTEMES",
+      "name": "Badge — Cartographe de systèmes",
+      "type": "foundational",
+      "criteria": {
+        "competencies": [
+          {
+            "idnumber": "UCKK-COMP-002",
+            "minimum": 3
+          }
+        ],
+        "archive_item_types": [
+          "kristal",
+          "proof"
+        ]
+      }
+    },
+    {
+      "key": "BADGE-GARDIEN-PREUVE",
+      "name": "Badge — Gardien de la preuve",
+      "type": "foundational",
+      "criteria": {
+        "competencies": [
+          {
+            "idnumber": "UCKK-COMP-005",
+            "minimum": 4
+          }
+        ],
+        "archive_item_types": [
+          "proof",
+          "version_record"
+        ]
+      }
+    },
+    {
+      "key": "BADGE-PARTICIPANT-ASSEMBLEE",
+      "name": "Badge — Participant d’Assemblée",
+      "type": "foundational",
+      "criteria": {
+        "competencies": [
+          {
+            "idnumber": "UCKK-COMP-006",
+            "minimum": 3
+          }
+        ],
+        "assembly_participation": true
+      }
+    },
+    {
+      "key": "BADGE-BATISSEUR-PROTOTYPE",
+      "name": "Badge — Bâtisseur de prototype",
+      "type": "foundational",
+      "criteria": {
+        "competencies": [
+          {
+            "idnumber": "UCKK-COMP-012",
+            "minimum": 3
+          }
+        ],
+        "challenge_status": "validated"
+      }
+    },
+    {
+      "key": "BADGE-ARCHIVISTE-DECISION",
+      "name": "Badge — Archiviste de décision",
+      "type": "foundational",
+      "criteria": {
+        "competencies": [
+          {
+            "idnumber": "UCKK-COMP-008",
+            "minimum": 3
+          },
+          {
+            "idnumber": "UCKK-COMP-009",
+            "minimum": 3
+          }
+        ],
+        "archive_item_types": [
+          "decision",
+          "assembly_minutes"
+        ]
+      }
+    },
+    {
+      "key": "BADGE-DEFI-KING-KLOWN-VALIDE",
+      "name": "Badge — Défi King Klown validé",
+      "type": "foundational",
+      "criteria": {
+        "challenge_status": "validated",
+        "archive_item_types": [
+          "challenge_result"
+        ]
+      }
+    },
+    {
+      "key": "BADGE-INQUISITION-METHODOLOGIQUE-REUSSIE",
+      "name": "Badge — Inquisition méthodologique réussie",
+      "type": "foundational",
+      "criteria": {
+        "competencies": [
+          {
+            "idnumber": "UCKK-COMP-010",
+            "minimum": 4
+          },
+          {
+            "idnumber": "UCKK-COMP-013",
+            "minimum": 4
+          }
+        ],
+        "integrity_case_status": "resolved"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-GRAND-JEU-SOCIAL",
+      "name": "Badge — Grand Jeu social",
+      "type": "program",
+      "category": "UCKK-02",
+      "criteria": {
+        "program_completion": "grand_jeu_social"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-ARCHITECTURE-ECOSYSTEME-DIGITAL-KOA",
+      "name": "Badge — Architecture écosystème digital kOA",
+      "type": "program",
+      "category": "UCKK-03",
+      "criteria": {
+        "program_completion": "architecture_ecosysteme_digital_koa"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-ARCHITECTURE-SOCIOTECHNIQUE",
+      "name": "Badge — Architecture sociotechnique",
+      "type": "program",
+      "category": "UCKK-04",
+      "criteria": {
+        "program_completion": "architecture_sociotechnique"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-SCIENCES-POLITIQUES",
+      "name": "Badge — Sciences politiques",
+      "type": "program",
+      "category": "UCKK-05",
+      "criteria": {
+        "program_completion": "sciences_politiques"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-ECONOMIE",
+      "name": "Badge — Économie",
+      "type": "program",
+      "category": "UCKK-06",
+      "criteria": {
+        "program_completion": "economie"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-ECOLOGIE",
+      "name": "Badge — Écologie",
+      "type": "program",
+      "category": "UCKK-07",
+      "criteria": {
+        "program_completion": "ecologie"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-METAPHYSIQUE",
+      "name": "Badge — Métaphysique",
+      "type": "program",
+      "category": "UCKK-08",
+      "criteria": {
+        "program_completion": "metaphysique"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-IA-GOUVERNABLE",
+      "name": "Badge — IA gouvernable",
+      "type": "program",
+      "category": "UCKK-09",
+      "criteria": {
+        "program_completion": "ia_gouvernable"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-LINGUISTIQUE-ARCHITECTURE-SENS",
+      "name": "Badge — Linguistique et architecture du sens",
+      "type": "program",
+      "category": "UCKK-10",
+      "criteria": {
+        "program_completion": "linguistique_architecture_du_sens"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-INTERVENTION-SOCIALE",
+      "name": "Badge — Intervention sociale",
+      "type": "program",
+      "category": "UCKK-11",
+      "criteria": {
+        "program_completion": "intervention_sociale"
+      }
+    },
+    {
+      "key": "BADGE-PROGRAM-MEDIAS-VIVANTS",
+      "name": "Badge — Médias vivants et théâtre public responsable",
+      "type": "program",
+      "category": "UCKK-12",
+      "criteria": {
+        "program_completion": "medias_vivants_theatre_public_responsable"
+      }
+    }
+  ]
+}

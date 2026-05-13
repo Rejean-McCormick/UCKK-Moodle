@@ -1,0 +1,189 @@
+{{!
+    This file is part of UCKK-Moodle - https://moodle.org/
+
+    UCKK-Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCKK-Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCKK-Moodle. If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_uckk/dashboard_header
+
+    Dashboard header for the UCKK theme.
+
+    This template renders the top identity and orientation area of the
+    UCKK dashboard. It is intentionally presentational. It must not decide
+    programme status, badge status, challenge state, assembly outcome,
+    archive validation, integrity outcome, or AI authority.
+
+    Expected context:
+    {
+        "title": "Mon parcours UCKK",
+        "subtitle": "Comprendre le jeu. Jouer avec lucidité. Changer les règles.",
+        "campuslabel": "Univers-Cité King Klown",
+        "userfullname": "Ada Lovelace",
+        "programname": "Tronc commun obligatoire",
+        "programurl": "https://example.test/course/index.php?categoryid=2",
+        "showprogram": true,
+        "progresspercent": 42,
+        "progresslabel": "Progression globale",
+        "progressassistivetext": "42 pour cent du parcours complété",
+        "hasalerts": true,
+        "alertcount": 1,
+        "alertsurl": "https://example.test/admin/tool/uckkintegrity/index.php",
+        "quicklinks": [
+            {
+                "label": "Cours",
+                "url": "https://example.test/my/courses.php",
+                "icon": "fa-graduation-cap",
+                "count": 8,
+                "showcount": true
+            }
+        ]
+    }
+}}
+
+<header class="theme-uckk-dashboard-header mb-4" data-region="uckk-dashboard-header">
+    <div class="theme-uckk-dashboard-header-main rounded p-4">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
+            <div class="theme-uckk-dashboard-identity">
+                <div class="theme-uckk-campus-label text-uppercase small mb-2">
+                    {{#campuslabel}}
+                        {{campuslabel}}
+                    {{/campuslabel}}
+                    {{^campuslabel}}
+                        {{#str}} campuslabel, theme_uckk {{/str}}
+                    {{/campuslabel}}
+                </div>
+
+                <h1 class="theme-uckk-dashboard-title h2 mb-2">
+                    {{#title}}
+                        {{title}}
+                    {{/title}}
+                    {{^title}}
+                        {{#str}} dashboardtitle, theme_uckk {{/str}}
+                    {{/title}}
+                </h1>
+
+                <p class="theme-uckk-dashboard-subtitle mb-0">
+                    {{#subtitle}}
+                        {{subtitle}}
+                    {{/subtitle}}
+                    {{^subtitle}}
+                        {{#str}} dashboardsubtitle, theme_uckk {{/str}}
+                    {{/subtitle}}
+                </p>
+
+                {{#userfullname}}
+                    <p class="theme-uckk-dashboard-user mt-2 mb-0">
+                        <span class="theme-uckk-dashboard-user-label">
+                            {{#str}} player, theme_uckk {{/str}}
+                        </span>
+                        <span class="theme-uckk-dashboard-user-name">
+                            {{userfullname}}
+                        </span>
+                    </p>
+                {{/userfullname}}
+            </div>
+
+            <div class="theme-uckk-dashboard-status d-flex flex-column align-items-start align-items-lg-end">
+                {{#showprogram}}
+                    <div class="theme-uckk-current-program mb-2">
+                        <span class="theme-uckk-current-program-label small">
+                            {{#str}} currentprogram, theme_uckk {{/str}}
+                        </span>
+
+                        {{#programurl}}
+                            <a class="theme-uckk-current-program-name d-block" href="{{programurl}}">
+                                {{programname}}
+                            </a>
+                        {{/programurl}}
+
+                        {{^programurl}}
+                            <span class="theme-uckk-current-program-name d-block">
+                                {{programname}}
+                            </span>
+                        {{/programurl}}
+                    </div>
+                {{/showprogram}}
+
+                {{#progresslabel}}
+                    <div class="theme-uckk-dashboard-progress" data-region="uckk-dashboard-progress">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="theme-uckk-dashboard-progress-label small">
+                                {{progresslabel}}
+                            </span>
+                            <span class="theme-uckk-dashboard-progress-value small">
+                                {{progresspercent}}%
+                            </span>
+                        </div>
+
+                        <div class="progress theme-uckk-progressbar" role="progressbar"
+                            aria-label="{{progresslabel}}"
+                            aria-valuenow="{{progresspercent}}"
+                            aria-valuemin="0"
+                            aria-valuemax="100">
+                            <div class="progress-bar" style="width: {{progresspercent}}%;"></div>
+                        </div>
+
+                        {{#progressassistivetext}}
+                            <span class="sr-only visually-hidden">
+                                {{progressassistivetext}}
+                            </span>
+                        {{/progressassistivetext}}
+                    </div>
+                {{/progresslabel}}
+
+                {{#hasalerts}}
+                    <div class="theme-uckk-dashboard-alert mt-3">
+                        <a class="btn btn-outline-secondary btn-sm" href="{{alertsurl}}">
+                            <i class="fa fa-shield-halved" aria-hidden="true"></i>
+                            <span>
+                                {{#str}} integrityalerts, theme_uckk {{/str}}
+                            </span>
+                            {{#alertcount}}
+                                <span class="badge rounded-pill text-bg-secondary ms-1">
+                                    {{alertcount}}
+                                </span>
+                            {{/alertcount}}
+                        </a>
+                    </div>
+                {{/hasalerts}}
+            </div>
+        </div>
+
+        {{#quicklinks.0}}
+            <nav class="theme-uckk-dashboard-quicklinks mt-4" aria-label="{{#str}} dashboardquicklinks, theme_uckk {{/str}}">
+                <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
+                    {{#quicklinks}}
+                        <li class="theme-uckk-dashboard-quicklink-item">
+                            <a class="theme-uckk-dashboard-quicklink btn btn-light" href="{{url}}">
+                                {{#icon}}
+                                    <i class="fa {{icon}}" aria-hidden="true"></i>
+                                {{/icon}}
+
+                                <span class="theme-uckk-dashboard-quicklink-label">
+                                    {{label}}
+                                </span>
+
+                                {{#showcount}}
+                                    <span class="theme-uckk-dashboard-quicklink-count badge rounded-pill text-bg-secondary ms-1">
+                                        {{count}}
+                                    </span>
+                                {{/showcount}}
+                            </a>
+                        </li>
+                    {{/quicklinks}}
+                </ul>
+            </nav>
+        {{/quicklinks.0}}
+    </div>
+</header>

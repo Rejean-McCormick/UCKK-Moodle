@@ -1,0 +1,388 @@
+{
+  "schema": "uckk.presets.reports.v1",
+  "idempotency": "report.shortname",
+  "component": "report_uckk",
+  "exports": [
+    "csv",
+    "html_print",
+    "json_internal_audit"
+  ],
+  "export_log_fields": [
+    "userid",
+    "timecreated",
+    "report",
+    "filters",
+    "context"
+  ],
+  "filters": [
+    {
+      "key": "user",
+      "param": "userid",
+      "type": "int"
+    },
+    {
+      "key": "cohort",
+      "param": "cohortid",
+      "type": "int"
+    },
+    {
+      "key": "program",
+      "param": "programid",
+      "type": "int"
+    },
+    {
+      "key": "course",
+      "param": "courseid",
+      "type": "int"
+    },
+    {
+      "key": "category",
+      "param": "categoryid",
+      "type": "int"
+    },
+    {
+      "key": "date_range",
+      "params": [
+        "from",
+        "to"
+      ],
+      "type": "timestamp_range"
+    },
+    {
+      "key": "status",
+      "param": "status",
+      "type": "string"
+    },
+    {
+      "key": "visibility",
+      "param": "visibility",
+      "type": "string"
+    },
+    {
+      "key": "competency",
+      "param": "competencyid",
+      "type": "int"
+    },
+    {
+      "key": "badge",
+      "param": "badgeid",
+      "type": "int"
+    },
+    {
+      "key": "challenge_type",
+      "param": "challengetype",
+      "type": "string"
+    },
+    {
+      "key": "assembly_type",
+      "param": "assemblytype",
+      "type": "string"
+    },
+    {
+      "key": "integrity_type",
+      "param": "integritytype",
+      "type": "string"
+    }
+  ],
+  "reports": [
+    {
+      "shortname": "player_progress",
+      "name": "Joueur progress",
+      "component": "report_uckk",
+      "sourceclass": "report_uckk\\report\\player_progress",
+      "capability": "report/uckk:view",
+      "context": "system_category_course",
+      "enabled_default": true,
+      "implemented": true,
+      "description": "Pathway, portfolio, profile visibility, and integrity indicators for Joueurs.",
+      "filters": [
+        "user",
+        "cohort",
+        "program",
+        "course",
+        "date_range",
+        "status",
+        "visibility"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "cohort_progress",
+      "name": "Cohort progress",
+      "component": "report_uckk",
+      "sourceclass": "report_uckk\\report\\cohort_progress",
+      "capability": "report/uckk:view",
+      "context": "system_category_course",
+      "enabled_default": true,
+      "implemented": true,
+      "description": "Cohort membership counts and progress context.",
+      "filters": [
+        "cohort",
+        "program",
+        "course",
+        "date_range"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "program_progress",
+      "name": "Program progress",
+      "component": "report_uckk",
+      "sourceclass": "report_uckk\\report\\program_progress",
+      "capability": "report/uckk:view",
+      "context": "system_category_course",
+      "enabled_default": true,
+      "implemented": true,
+      "description": "UCKK programs, categories, pathways, and status.",
+      "filters": [
+        "program",
+        "category",
+        "course",
+        "date_range",
+        "status"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "competency_matrix",
+      "name": "Competency matrix",
+      "component": "report_uckk",
+      "sourceclass": "report_uckk\\report\\competency_report",
+      "capability": "report/uckk:view",
+      "context": "system_category_course",
+      "enabled_default": true,
+      "implemented": true,
+      "description": "Competency evidence and ratings across the UCKK framework.",
+      "filters": [
+        "user",
+        "cohort",
+        "course",
+        "competency",
+        "date_range"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "badge_awards",
+      "name": "Badge awards",
+      "component": "report_uckk",
+      "sourceclass": "report_uckk\\report\\badge_report",
+      "capability": "report/uckk:view",
+      "context": "system_category_course",
+      "enabled_default": true,
+      "implemented": true,
+      "description": "Badge issue counts, award dates, and evidence-linked recognition.",
+      "filters": [
+        "user",
+        "cohort",
+        "badge",
+        "date_range",
+        "status"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "challenge_status",
+      "name": "Challenge status",
+      "component": "report_uckk",
+      "sourceclass": "report_uckk\\report\\challenge_report",
+      "capability": "report/uckk:view",
+      "context": "system_category_course",
+      "enabled_default": true,
+      "implemented": true,
+      "description": "Défi status, submissions, validation, contestation, integrity review, and archive output.",
+      "filters": [
+        "user",
+        "course",
+        "challenge_type",
+        "date_range",
+        "status",
+        "visibility"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "assembly_decisions",
+      "name": "Assembly decisions",
+      "component": "report_uckk",
+      "sourceclass": "report_uckk\\report\\assembly_report",
+      "capability": "report/uckk:view",
+      "context": "system_category_course",
+      "enabled_default": true,
+      "implemented": true,
+      "description": "Assemblée motions, decisions, contestability, archive links, and unresolved objections.",
+      "filters": [
+        "course",
+        "assembly_type",
+        "date_range",
+        "status",
+        "visibility"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "archive_production",
+      "name": "Archive production",
+      "component": "report_uckk",
+      "sourceclass": "report_uckk\\report\\archive_report",
+      "capability": "report/uckk:view",
+      "context": "system_category_course",
+      "enabled_default": true,
+      "implemented": true,
+      "description": "Archive items by type, validation state, visibility, provenance source, and production context.",
+      "filters": [
+        "user",
+        "course",
+        "date_range",
+        "status",
+        "visibility"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "integrity_cases",
+      "name": "Integrity cases",
+      "component": "report_uckk",
+      "sourceclass": "report_uckk\\report\\integrity_report",
+      "capability": "report/uckk:viewall",
+      "context": "system",
+      "enabled_default": true,
+      "implemented": true,
+      "description": "Inquisiteur cases by type, severity, status, assignment, archive summary, and closure state.",
+      "filters": [
+        "user",
+        "course",
+        "date_range",
+        "status",
+        "integrity_type"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "challenge_evidence",
+      "name": "Challenge evidence",
+      "component": "report_uckk",
+      "sourceclass": "",
+      "capability": "report/uckk:viewall",
+      "context": "system_category_course",
+      "enabled_default": false,
+      "implemented": false,
+      "description": "Detailed challenge proof packages, evidence visibility, mentor feedback, archive links, and integrity flags.",
+      "filters": [
+        "user",
+        "course",
+        "challenge_type",
+        "date_range",
+        "status",
+        "visibility"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "ai_usage",
+      "name": "AI usage",
+      "component": "report_uckk",
+      "sourceclass": "",
+      "capability": "aiprovider/uckk:viewlogs",
+      "context": "system",
+      "enabled_default": false,
+      "implemented": false,
+      "description": "Governed AI requests, prompt/response logging status, restricted-context usage, and human validation indicators.",
+      "filters": [
+        "user",
+        "course",
+        "date_range",
+        "status",
+        "visibility"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "privacy_exports",
+      "name": "Privacy exports",
+      "component": "report_uckk",
+      "sourceclass": "",
+      "capability": "report/uckk:viewall",
+      "context": "system",
+      "enabled_default": false,
+      "implemented": false,
+      "description": "Privacy export, deletion, anonymization, and redaction actions related to UCKK records.",
+      "filters": [
+        "user",
+        "date_range",
+        "status",
+        "visibility"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    },
+    {
+      "shortname": "seed_execution",
+      "name": "Seed execution",
+      "component": "report_uckk",
+      "sourceclass": "",
+      "capability": "tool/uckkseed:run",
+      "context": "system",
+      "enabled_default": false,
+      "implemented": false,
+      "description": "Seed dry-runs, apply runs, repairs, rollbacks, created objects, updated objects, skipped objects, warnings, and errors.",
+      "filters": [
+        "user",
+        "date_range",
+        "status"
+      ],
+      "exports": [
+        "csv",
+        "html_print",
+        "json_internal_audit"
+      ]
+    }
+  ]
+}

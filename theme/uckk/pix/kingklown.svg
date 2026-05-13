@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    King Klown symbolic mark for theme_uckk.
+
+    This SVG is a visual identity asset only. It represents King Klown as the
+    narrative figure who reveals the game. It must not be used to imply
+    institutional authority over the Inquisiteur, Assemblées, Archives, Mentors,
+    or UCKK governance processes.
+
+    @package    theme_uckk
+    @copyright  2026 Momus et Bouche Cousue
+    @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+-->
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    width="256"
+    height="256"
+    role="img"
+    aria-labelledby="kingklown-title kingklown-desc">
+    <title id="kingklown-title">King Klown</title>
+    <desc id="kingklown-desc">
+        Symbolic King Klown mark: a crowned jester mask with an observing eye,
+        representing narrative revelation without institutional authority.
+    </desc>
+
+    <defs>
+        <linearGradient id="uckk-kingklown-bg" x1="28" y1="24" x2="228" y2="232" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#2b0f54"/>
+            <stop offset="0.55" stop-color="#6f42c1"/>
+            <stop offset="1" stop-color="#e83f6f"/>
+        </linearGradient>
+
+        <linearGradient id="uckk-kingklown-gold" x1="64" y1="28" x2="198" y2="150" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffe58a"/>
+            <stop offset="0.48" stop-color="#f2b705"/>
+            <stop offset="1" stop-color="#c47f00"/>
+        </linearGradient>
+
+        <linearGradient id="uckk-kingklown-face" x1="64" y1="74" x2="194" y2="214" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="0.58" stop-color="#f7f4ef"/>
+            <stop offset="1" stop-color="#ded2c2"/>
+        </linearGradient>
+
+        <filter id="uckk-kingklown-shadow" x="-20%" y="-20%" width="140%" height="145%">
+            <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#171321" flood-opacity="0.24"/>
+        </filter>
+
+        <clipPath id="uckk-kingklown-circle">
+            <circle cx="128" cy="128" r="118"/>
+        </clipPath>
+    </defs>
+
+    <g clip-path="url(#uckk-kingklown-circle)">
+        <rect width="256" height="256" fill="url(#uckk-kingklown-bg)"/>
+
+        <path
+            d="M0 196 C42 160 70 210 110 176 C148 144 174 186 256 130 L256 256 L0 256 Z"
+            fill="#171321"
+            opacity="0.18"/>
+
+        <path
+            d="M16 42 C62 76 78 20 126 58 C168 90 184 36 240 68"
+            fill="none"
+            stroke="#f2b705"
+            stroke-width="6"
+            stroke-linecap="round"
+            opacity="0.42"/>
+    </g>
+
+    <circle
+        cx="128"
+        cy="128"
+        r="118"
+        fill="none"
+        stroke="#ffffff"
+        stroke-opacity="0.24"
+        stroke-width="8"/>
+
+    <g filter="url(#uckk-kingklown-shadow)">
+        <!-- Crown / jester crown. -->
+        <path
+            d="M65 85
+               L79 43
+               L105 78
+               L128 34
+               L151 78
+               L177 43
+               L191 85
+               C154 75 102 75 65 85 Z"
+            fill="url(#uckk-kingklown-gold)"
+            stroke="#171321"
+            stroke-width="6"
+            stroke-linejoin="round"/>
+
+        <circle cx="79" cy="43" r="9" fill="#e83f6f" stroke="#171321" stroke-width="5"/>
+        <circle cx="128" cy="34" r="10" fill="#f2b705" stroke="#171321" stroke-width="5"/>
+        <circle cx="177" cy="43" r="9" fill="#0b7285" stroke="#171321" stroke-width="5"/>
+
+        <!-- Mask body. -->
+        <path
+            d="M60 104
+               C60 82 80 70 102 76
+               C114 79 120 86 128 86
+               C136 86 142 79 154 76
+               C176 70 196 82 196 104
+               C196 143 175 201 128 214
+               C81 201 60 143 60 104 Z"
+            fill="url(#uckk-kingklown-face)"
+            stroke="#171321"
+            stroke-width="7"
+            stroke-linejoin="round"/>
+
+        <!-- Split jester colour panels. -->
+        <path
+            d="M68 105
+               C73 88 88 82 104 87
+               C116 91 122 99 128 99
+               L128 204
+               C92 192 68 144 68 105 Z"
+            fill="#f7f4ef"
+            opacity="0.96"/>
+
+        <path
+            d="M128 99
+               C134 99 140 91 152 87
+               C168 82 183 88 188 105
+               C188 144 164 192 128 204 Z"
+            fill="#fff6db"
+            opacity="0.96"/>
+
+        <!-- Eyes. -->
+        <path
+            d="M84 121
+               C93 110 108 110 118 121
+               C108 132 93 132 84 121 Z"
+            fill="#171321"/>
+
+        <path
+            d="M138 121
+               C148 110 163 110 172 121
+               C163 132 148 132 138 121 Z"
+            fill="#171321"/>
+
+        <circle cx="103" cy="119" r="4" fill="#f2b705"/>
+        <circle cx="153" cy="119" r="4" fill="#f2b705"/>
+
+        <!-- Central observing eye / game revealed. -->
+        <path
+            d="M104 154
+               C115 141 141 141 152 154
+               C141 167 115 167 104 154 Z"
+            fill="#ffffff"
+            stroke="#171321"
+            stroke-width="5"
+            stroke-linejoin="round"/>
+
+        <circle cx="128" cy="154" r="10" fill="#0b7285"/>
+        <circle cx="128" cy="154" r="4" fill="#171321"/>
+        <circle cx="124" cy="150" r="2.5" fill="#ffffff"/>
+
+        <!-- Smile: theatrical, not cruel. -->
+        <path
+            d="M98 177
+               C112 191 144 191 158 177"
+            fill="none"
+            stroke="#171321"
+            stroke-width="7"
+            stroke-linecap="round"/>
+
+        <path
+            d="M93 164
+               C83 173 78 183 75 195"
+            fill="none"
+            stroke="#e83f6f"
+            stroke-width="6"
+            stroke-linecap="round"/>
+
+        <path
+            d="M163 164
+               C173 173 178 183 181 195"
+            fill="none"
+            stroke="#6f42c1"
+            stroke-width="6"
+            stroke-linecap="round"/>
+
+        <!-- Collar / theatre signal. -->
+        <path
+            d="M75 203
+               L101 184
+               L128 216
+               L155 184
+               L181 203
+               C164 227 92 227 75 203 Z"
+            fill="#2b0f54"
+            stroke="#171321"
+            stroke-width="6"
+            stroke-linejoin="round"/>
+
+        <circle cx="101" cy="198" r="6" fill="#f2b705"/>
+        <circle cx="128" cy="206" r="7" fill="#e83f6f"/>
+        <circle cx="155" cy="198" r="6" fill="#0b7285"/>
+    </g>
+
+    <!-- Outer institutional ring: reminds that the symbol is held by the campus frame. -->
+    <circle
+        cx="128"
+        cy="128"
+        r="116"
+        fill="none"
+        stroke="#f2b705"
+        stroke-opacity="0.72"
+        stroke-width="4"/>
+
+    <path
+        d="M42 216
+           C64 236 96 248 128 248
+           C160 248 192 236 214 216"
+        fill="none"
+        stroke="#ffffff"
+        stroke-opacity="0.32"
+        stroke-width="5"
+        stroke-linecap="round"/>
+</svg>

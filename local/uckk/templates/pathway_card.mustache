@@ -1,0 +1,205 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template local_uckk/pathway_card
+
+    UCKK pathway card.
+
+    This template is render-only. It expects permission-filtered and
+    preformatted data from local_uckk output classes or services.
+
+    Example context:
+    {
+        "id": 12,
+        "shortname": "grand_jeu_social",
+        "fullname": "Baccalauréat UCKK — Grand Jeu social",
+        "programname": "Grand Jeu social",
+        "status": "active",
+        "statuslabel": "Active",
+        "statusclass": "status-active",
+        "progresspercent": 42,
+        "progresslabel": "42 %",
+        "coursescompleted": 3,
+        "coursestotal": 8,
+        "competenciesachieved": 5,
+        "competenciestotal": 14,
+        "badgesearned": 2,
+        "badgestotal": 6,
+        "url": "https://example.test/local/uckk/pathway.php?id=12",
+        "hasdescription": true,
+        "description": "Internal UCKK pathway description.",
+        "hasnextaction": true,
+        "nextactionlabel": "Continue pathway",
+        "nextactionurl": "https://example.test/course/view.php?id=10",
+        "hasintegritynotice": false,
+        "integritynotice": "",
+        "hasrequirements": true,
+        "requirements": [
+            {
+                "label": "Required courses",
+                "value": "3 / 8",
+                "complete": false
+            }
+        ],
+        "statusbadge": {
+            "status": "active",
+            "label": "Active"
+        }
+    }
+}}
+
+<article
+    class="local-uckk-pathway-card {{statusclass}}"
+    data-region="local-uckk-pathway-card"
+    data-pathway-id="{{id}}"
+    data-pathway-shortname="{{shortname}}"
+>
+    <header class="local-uckk-pathway-card__header">
+        <div class="local-uckk-pathway-card__identity">
+            <p class="local-uckk-pathway-card__eyebrow">
+                {{#str}} pathway, local_uckk {{/str}}
+            </p>
+
+            <h3 class="local-uckk-pathway-card__title">
+                {{#url}}
+                    <a href="{{url}}" class="local-uckk-pathway-card__link">
+                        {{fullname}}
+                    </a>
+                {{/url}}
+                {{^url}}
+                    {{fullname}}
+                {{/url}}
+            </h3>
+
+            {{#programname}}
+                <p class="local-uckk-pathway-card__program">
+                    <span class="local-uckk-pathway-card__program-label">
+                        {{#str}} program, local_uckk {{/str}}
+                    </span>
+                    <span class="local-uckk-pathway-card__program-name">
+                        {{programname}}
+                    </span>
+                </p>
+            {{/programname}}
+        </div>
+
+        <div class="local-uckk-pathway-card__status">
+            {{#statusbadge}}
+                {{> local_uckk/status_badge }}
+            {{/statusbadge}}
+
+            {{^statusbadge}}
+                <span class="local-uckk-status-badge local-uckk-status-badge--{{status}}">
+                    {{statuslabel}}
+                </span>
+            {{/statusbadge}}
+        </div>
+    </header>
+
+    {{#hasdescription}}
+        <div class="local-uckk-pathway-card__description">
+            {{{description}}}
+        </div>
+    {{/hasdescription}}
+
+    <section
+        class="local-uckk-pathway-card__progress"
+        aria-label="{{#str}} pathwayprogress, local_uckk {{/str}}"
+    >
+        <div class="local-uckk-pathway-card__progress-header">
+            <span class="local-uckk-pathway-card__progress-title">
+                {{#str}} progress, local_uckk {{/str}}
+            </span>
+
+            <strong class="local-uckk-pathway-card__progress-value">
+                {{progresslabel}}
+            </strong>
+        </div>
+
+        <div
+            class="progress local-uckk-pathway-card__progressbar"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="{{progresspercent}}"
+            aria-label="{{progresslabel}}"
+        >
+            <div
+                class="progress-bar"
+                style="width: {{progresspercent}}%;"
+            ></div>
+        </div>
+    </section>
+
+    <dl class="local-uckk-pathway-card__metrics">
+        <div class="local-uckk-pathway-card__metric">
+            <dt>{{#str}} courses, local_uckk {{/str}}</dt>
+            <dd>{{coursescompleted}} / {{coursestotal}}</dd>
+        </div>
+
+        <div class="local-uckk-pathway-card__metric">
+            <dt>{{#str}} competencies, local_uckk {{/str}}</dt>
+            <dd>{{competenciesachieved}} / {{competenciestotal}}</dd>
+        </div>
+
+        <div class="local-uckk-pathway-card__metric">
+            <dt>{{#str}} badges, local_uckk {{/str}}</dt>
+            <dd>{{badgesearned}} / {{badgestotal}}</dd>
+        </div>
+    </dl>
+
+    {{#hasrequirements}}
+        <section class="local-uckk-pathway-card__requirements">
+            <h4 class="local-uckk-pathway-card__section-title">
+                {{#str}} pathwayrequirements, local_uckk {{/str}}
+            </h4>
+
+            <ul class="local-uckk-pathway-card__requirement-list">
+                {{#requirements}}
+                    <li class="local-uckk-pathway-card__requirement {{#complete}}is-complete{{/complete}}{{^complete}}is-incomplete{{/complete}}">
+                        <span class="local-uckk-pathway-card__requirement-label">
+                            {{label}}
+                        </span>
+
+                        <span class="local-uckk-pathway-card__requirement-value">
+                            {{value}}
+                        </span>
+                    </li>
+                {{/requirements}}
+            </ul>
+        </section>
+    {{/hasrequirements}}
+
+    {{#hasintegritynotice}}
+        <div class="alert alert-warning local-uckk-pathway-card__integrity" role="status">
+            <strong>{{#str}} integritynotice, local_uckk {{/str}}</strong>
+            <span>{{integritynotice}}</span>
+        </div>
+    {{/hasintegritynotice}}
+
+    <footer class="local-uckk-pathway-card__footer">
+        {{#hasnextaction}}
+            <a
+                href="{{nextactionurl}}"
+                class="btn btn-primary local-uckk-pathway-card__action"
+            >
+                {{nextactionlabel}}
+            </a>
+        {{/hasnextaction}}
+
+        {{#url}}
+            <a
+                href="{{url}}"
+                class="btn btn-secondary local-uckk-pathway-card__details"
+            >
+                {{#str}} viewpathwaydetails, local_uckk {{/str}}
+            </a>
+        {{/url}}
+    </footer>
+</article>

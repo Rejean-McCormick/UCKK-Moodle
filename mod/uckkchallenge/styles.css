@@ -1,0 +1,602 @@
+/*
+ * Styles for mod_uckkchallenge.
+ *
+ * This CSS supports UCKK challenge pages, proof submission, evaluation,
+ * integrity review, archive confirmation, and challenge status panels.
+ *
+ * It must not encode workflow rules or permission logic. Visibility,
+ * capabilities, validation, archive decisions, and integrity actions remain
+ * controlled by Moodle PHP services/controllers.
+ */
+
+/* Root containers. */
+
+.path-mod-uckkchallenge .uckkchallenge,
+.path-mod-uckkchallenge .uckkchallenge-view,
+.path-mod-uckkchallenge .uckkchallenge-submit,
+.path-mod-uckkchallenge .uckkchallenge-integrity,
+.path-mod-uckkchallenge .uckkchallenge-archive-confirmation {
+    max-width: 100%;
+}
+
+.path-mod-uckkchallenge .uckkchallenge__header,
+.path-mod-uckkchallenge .uckkchallenge-view__header {
+    margin-bottom: 1.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge__eyebrow,
+.path-mod-uckkchallenge .uckkchallenge-view__eyebrow {
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.path-mod-uckkchallenge .uckkchallenge__title,
+.path-mod-uckkchallenge .uckkchallenge-view__title {
+    margin-bottom: 0.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge__summary,
+.path-mod-uckkchallenge .uckkchallenge-view__summary {
+    max-width: 64rem;
+}
+
+/* Shared cards. */
+
+.path-mod-uckkchallenge .uckkchallenge-card {
+    margin-bottom: 1rem;
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 0.5rem;
+    background: var(--bs-body-bg, #fff);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1rem 0;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-card__title {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-card__body {
+    padding: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-card__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0 1rem 1rem;
+}
+
+/* Status badges. */
+
+.path-mod-uckkchallenge .uckkchallenge-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.75rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.2;
+    background: var(--bs-secondary-bg, #e9ecef);
+    color: var(--bs-body-color, #212529);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-status--draft,
+.path-mod-uckkchallenge .status-draft {
+    background: var(--bs-secondary-bg, #e9ecef);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-status--published,
+.path-mod-uckkchallenge .status-published,
+.path-mod-uckkchallenge .uckkchallenge-status--open,
+.path-mod-uckkchallenge .status-open {
+    background: var(--bs-info-bg-subtle, #cff4fc);
+    color: var(--bs-info-text-emphasis, #055160);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-status--submitted,
+.path-mod-uckkchallenge .status-submitted,
+.path-mod-uckkchallenge .uckkchallenge-status--under-review,
+.path-mod-uckkchallenge .status-under-review {
+    background: var(--bs-warning-bg-subtle, #fff3cd);
+    color: var(--bs-warning-text-emphasis, #664d03);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-status--integrity-review,
+.path-mod-uckkchallenge .status-integrity-review,
+.path-mod-uckkchallenge .uckkchallenge-status--contested,
+.path-mod-uckkchallenge .status-contested {
+    background: var(--bs-danger-bg-subtle, #f8d7da);
+    color: var(--bs-danger-text-emphasis, #58151c);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-status--revision-required,
+.path-mod-uckkchallenge .status-revision-required,
+.path-mod-uckkchallenge .uckkchallenge-status--correction-required,
+.path-mod-uckkchallenge .status-correction-required {
+    background: var(--bs-warning-bg-subtle, #fff3cd);
+    color: var(--bs-warning-text-emphasis, #664d03);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-status--validated,
+.path-mod-uckkchallenge .status-validated {
+    background: var(--bs-success-bg-subtle, #d1e7dd);
+    color: var(--bs-success-text-emphasis, #0a3622);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-status--archived,
+.path-mod-uckkchallenge .status-archived,
+.path-mod-uckkchallenge .uckkchallenge-status--closed,
+.path-mod-uckkchallenge .status-closed {
+    background: var(--bs-dark-bg-subtle, #ced4da);
+    color: var(--bs-dark-text-emphasis, #1a1d20);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-status--invalidated,
+.path-mod-uckkchallenge .status-invalidated,
+.path-mod-uckkchallenge .uckkchallenge-status--rejected,
+.path-mod-uckkchallenge .status-rejected {
+    background: var(--bs-danger-bg-subtle, #f8d7da);
+    color: var(--bs-danger-text-emphasis, #58151c);
+}
+
+/* Challenge structure panels. */
+
+.path-mod-uckkchallenge .uckkchallenge-structure {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .path-mod-uckkchallenge .uckkchallenge-structure {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.path-mod-uckkchallenge .uckkchallenge-structure__item {
+    padding: 1rem;
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 0.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-structure__item h3,
+.path-mod-uckkchallenge .uckkchallenge-structure__item h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+/* Rules, corridors, evidence, criteria. */
+
+.path-mod-uckkchallenge .uckkchallenge-rules,
+.path-mod-uckkchallenge .uckkchallenge-corridors,
+.path-mod-uckkchallenge .uckkchallenge-evidence,
+.path-mod-uckkchallenge .uckkchallenge-criteria {
+    margin-bottom: 1.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-rules ul,
+.path-mod-uckkchallenge .uckkchallenge-corridors ul,
+.path-mod-uckkchallenge .uckkchallenge-evidence ul,
+.path-mod-uckkchallenge .uckkchallenge-criteria ul {
+    margin-bottom: 0;
+}
+
+/* Proof submission UI. */
+
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-form"] {
+    position: relative;
+}
+
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-form"] .has-warning label,
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-form"] .has-warning .form-label {
+    font-weight: 700;
+}
+
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-form"] .has-warning textarea,
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-form"] .has-warning input,
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-form"] .has-warning select {
+    border-color: var(--bs-warning, #ffc107);
+}
+
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-form"] .has-error textarea,
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-form"] .has-error input,
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-form"] .has-error select {
+    border-color: var(--bs-danger, #dc3545);
+}
+
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-status"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-ai"],
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-ai-log"],
+.path-mod-uckkchallenge [data-region="uckkchallenge-proof-provenance"] {
+    margin-top: 1rem;
+}
+
+/* Submission notice/policy. */
+
+.path-mod-uckkchallenge .uckkchallenge-submit__notice {
+    margin-bottom: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-submit__policy {
+    margin-bottom: 1rem;
+}
+
+/* Evaluation panel. */
+
+.path-mod-uckkchallenge .uckkchallenge-evaluation-panel {
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 0.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-evaluation-panel__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-evaluation-panel__title {
+    margin: 0;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-evaluation-panel__body {
+    padding: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-evaluation-panel__score {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-evaluation-panel__feedback {
+    margin-top: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-evaluation-panel__private-feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-left: 0.25rem solid var(--bs-warning, #ffc107);
+    background: var(--bs-warning-bg-subtle, #fff3cd);
+}
+
+/* Evaluation criteria. */
+
+.path-mod-uckkchallenge .uckkchallenge-criteria-list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-criterion {
+    padding: 0.75rem;
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 0.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-criterion.is-achieved {
+    border-left: 0.25rem solid var(--bs-success, #198754);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-criterion.needs-work {
+    border-left: 0.25rem solid var(--bs-warning, #ffc107);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-criterion.is-pending {
+    border-left: 0.25rem solid var(--bs-secondary, #6c757d);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-criterion__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-criterion__name {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-criterion__score {
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+/* Competencies and badges. */
+
+.path-mod-uckkchallenge .uckkchallenge-linked-list {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-linked-list__item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 0.375rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-linked-list__name {
+    font-weight: 700;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-linked-list__meta {
+    font-size: 0.875rem;
+}
+
+/* Integrity review page. */
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__summary {
+    margin-bottom: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__facts {
+    display: grid;
+    grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr);
+    gap: 0.5rem 1rem;
+    margin-bottom: 0;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__facts dt {
+    font-weight: 700;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__facts dd {
+    margin-bottom: 0;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__cases {
+    margin-bottom: 1.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__actions {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__action,
+.path-mod-uckkchallenge .uckkchallenge-integrity__privileged-actions {
+    margin-bottom: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__privileged-action {
+    padding: 1rem 0;
+    border-top: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__privileged-action:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity__notice {
+    margin-top: 1rem;
+}
+
+/* Integrity form. */
+
+.path-mod-uckkchallenge .mform .fitem.containsrestricteddata,
+.path-mod-uckkchallenge .mform .fitem.aiassistedreview {
+    margin-top: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity-form__restricted {
+    border-left: 0.25rem solid var(--bs-warning, #ffc107);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-integrity-form__danger {
+    border-left: 0.25rem solid var(--bs-danger, #dc3545);
+}
+
+/* Archive confirmation. */
+
+.path-mod-uckkchallenge .uckkchallenge-archive-confirmation {
+    margin-bottom: 1.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-archive-confirmation__intro {
+    max-width: 64rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-archive-confirmation__summary {
+    display: grid;
+    grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr);
+    gap: 0.5rem 1rem;
+    padding: 1rem;
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 0.5rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-archive-confirmation__summary dt {
+    font-weight: 700;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-archive-confirmation__summary dd {
+    margin-bottom: 0;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-archive-confirmation__warnings {
+    margin-bottom: 1rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-archive-confirmation__form {
+    max-width: 48rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-archive-confirmation__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Tables. */
+
+.path-mod-uckkchallenge .generaltable td,
+.path-mod-uckkchallenge .generaltable th {
+    vertical-align: top;
+}
+
+/* Action bars. */
+
+.path-mod-uckkchallenge .uckkchallenge-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-actions .btn {
+    white-space: normal;
+}
+
+/* Timeline/deadline flags. */
+
+.path-mod-uckkchallenge .uckkchallenge-deadline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-deadline.is-overdue {
+    font-weight: 700;
+    color: var(--bs-danger, #dc3545);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-deadline.is-today {
+    font-weight: 700;
+    color: var(--bs-warning-text-emphasis, #664d03);
+}
+
+/* AI / non-authority notices. */
+
+.path-mod-uckkchallenge .uckkchallenge-ai-notice,
+.path-mod-uckkchallenge .uckkchallenge-nonsovereign-notice {
+    margin: 1rem 0;
+}
+
+.path-mod-uckkchallenge .uckkchallenge-ai-notice {
+    border-left: 0.25rem solid var(--bs-info, #0dcaf0);
+}
+
+.path-mod-uckkchallenge .uckkchallenge-nonsovereign-notice {
+    border-left: 0.25rem solid var(--bs-secondary, #6c757d);
+}
+
+/* Empty states. */
+
+.path-mod-uckkchallenge .uckkchallenge-empty {
+    padding: 1rem;
+    border: 1px dashed var(--bs-border-color, #dee2e6);
+    border-radius: 0.5rem;
+    color: var(--bs-secondary-color, #6c757d);
+}
+
+/* Utility states used by AMD modules. */
+
+.path-mod-uckkchallenge .is-active {
+    display: block;
+}
+
+.path-mod-uckkchallenge .is-inactive,
+.path-mod-uckkchallenge .d-none {
+    display: none !important;
+}
+
+.path-mod-uckkchallenge .is-loading {
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+.path-mod-uckkchallenge .has-warning {
+    position: relative;
+}
+
+.path-mod-uckkchallenge .has-error {
+    position: relative;
+}
+
+/* Responsive refinements. */
+
+@media (max-width: 767.98px) {
+    .path-mod-uckkchallenge .uckkchallenge-card__header,
+    .path-mod-uckkchallenge .uckkchallenge-evaluation-panel__header,
+    .path-mod-uckkchallenge .uckkchallenge-criterion__header,
+    .path-mod-uckkchallenge .uckkchallenge-linked-list__item {
+        display: block;
+    }
+
+    .path-mod-uckkchallenge .uckkchallenge-integrity__facts,
+    .path-mod-uckkchallenge .uckkchallenge-archive-confirmation__summary {
+        grid-template-columns: 1fr;
+    }
+
+    .path-mod-uckkchallenge .uckkchallenge-integrity__facts dt,
+    .path-mod-uckkchallenge .uckkchallenge-archive-confirmation__summary dt {
+        margin-top: 0.5rem;
+    }
+
+    .path-mod-uckkchallenge .uckkchallenge-actions,
+    .path-mod-uckkchallenge .uckkchallenge-archive-confirmation__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* Print output for archive/evaluation review. */
+
+@media print {
+    .path-mod-uckkchallenge .btn,
+    .path-mod-uckkchallenge .uckkchallenge-actions,
+    .path-mod-uckkchallenge .uckkchallenge-archive-confirmation__actions,
+    .path-mod-uckkchallenge .uckkchallenge-integrity__actions {
+        display: none !important;
+    }
+
+    .path-mod-uckkchallenge .uckkchallenge-card,
+    .path-mod-uckkchallenge .uckkchallenge-evaluation-panel,
+    .path-mod-uckkchallenge .uckkchallenge-archive-confirmation__summary {
+        border-color: #000;
+        break-inside: avoid;
+    }
+
+    .path-mod-uckkchallenge a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.85em;
+    }
+}

@@ -1,0 +1,246 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_uckk/uckk_navigation
+
+    UCKK institutional navigation template.
+
+    This template renders the UCKK navigation layer used by theme_uckk.
+    It is intentionally presentational. It does not grant permissions and
+    it does not replace capability checks in local_uckk, mod_uckkchallenge,
+    mod_uckkassembly, mod_uckkarchive, tool_uckkintegrity, or report_uckk.
+
+    Classes required for JS:
+    * uckk-navigation
+    * uckk-navigation__toggle
+    * uckk-navigation__panel
+
+    Data attributes required for JS:
+    * data-region="uckk-navigation"
+    * data-action="toggle-uckk-navigation"
+    * data-region="uckk-navigation-panel"
+
+    Context variables required for this template:
+    * brandname string - Full UCKK brand name.
+    * shortbrandname string - Short UCKK brand name.
+    * tagline string - UCKK tagline.
+    * homeurl string - URL for UCKK home.
+    * myurl string - URL for the user's dashboard/pathway.
+    * coursesurl string - URL for courses.
+    * challengesurl string - URL for challenges.
+    * assembliesurl string - URL for assemblies.
+    * archivesurl string - URL for archives.
+    * integrityurl string - URL for integrity/Inquisiteur.
+    * showcanonicalboundary bool - Whether to render the canonical boundary panel.
+    * canonicalboundary string - Canonical UCKK/kOA boundary text.
+    * showquicklinks bool - Whether to render quicklinks.
+    * quicklinks array - Optional custom quicklinks.
+    * quicklinks[].label string - Link label.
+    * quicklinks[].url string - Link URL.
+    * quicklinks[].active bool - Whether the link is active.
+    * showfeatures bool - Whether to render the feature navigation group.
+    * showchallengecards bool - Whether to show challenge link.
+    * showassemblycards bool - Whether to show assembly link.
+    * showarchivecards bool - Whether to show archive link.
+    * showintegritynotices bool - Whether to show integrity link.
+    * showpublictheatrenotice bool - Whether to show public theatre notice.
+    * ethicalmaxim string - Short ethical maxim.
+    * methodologicalmaxim string - Short methodological maxim.
+
+    Example context (json):
+    {
+        "brandname": "Univers-Cité King Klown",
+        "shortbrandname": "UCKK",
+        "tagline": "Comprendre le jeu. Jouer avec lucidité. Changer les règles.",
+        "homeurl": "/",
+        "myurl": "/my/",
+        "coursesurl": "/course/",
+        "challengesurl": "/course/index.php?categoryid=90",
+        "assembliesurl": "/course/index.php?categoryid=91",
+        "archivesurl": "/course/index.php?categoryid=92",
+        "integrityurl": "/admin/tool/uckkintegrity/index.php",
+        "showcanonicalboundary": true,
+        "canonicalboundary": "kOA = mouvement\nUCKK = école\nkOA Digital Ecosystem = infrastructure\nKing Klown = figure narrative",
+        "showquicklinks": true,
+        "quicklinks": [
+            {
+                "label": "Mon parcours",
+                "url": "/my/",
+                "active": true
+            },
+            {
+                "label": "Cours",
+                "url": "/course/",
+                "active": false
+            }
+        ],
+        "showfeatures": true,
+        "showchallengecards": true,
+        "showassemblycards": true,
+        "showarchivecards": true,
+        "showintegritynotices": true,
+        "showpublictheatrenotice": true,
+        "ethicalmaxim": "Le spectacle est permis. L’abus ne l’est pas.",
+        "methodologicalmaxim": "La foi peut inspirer. Les faits doivent convaincre. La méthode doit pouvoir être vérifiée."
+    }
+}}
+
+<nav class="uckk-navigation navbar navbar-expand-lg navbar-light bg-white border-bottom"
+     aria-label="{{#str}} uckknavigation, theme_uckk {{/str}}"
+     data-region="uckk-navigation">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand d-flex align-items-center uckk-navigation__brand" href="{{homeurl}}">
+            <span class="uckk-navigation__brand-mark mr-2" aria-hidden="true">
+                {{#pix}} icon, theme_uckk, {{#str}} uckk, theme_uckk {{/str}} {{/pix}}
+            </span>
+
+            <span class="uckk-navigation__brand-text">
+                <span class="d-block font-weight-bold">{{shortbrandname}}</span>
+                {{#tagline}}
+                    <small class="d-none d-md-block text-muted">{{tagline}}</small>
+                {{/tagline}}
+            </span>
+        </a>
+
+        <button class="navbar-toggler uckk-navigation__toggle"
+                type="button"
+                data-action="toggle-uckk-navigation"
+                aria-controls="uckk-navigation-panel"
+                aria-expanded="false"
+                aria-label="{{#str}} togglenavigation, theme_uckk {{/str}}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse uckk-navigation__panel"
+             id="uckk-navigation-panel"
+             data-region="uckk-navigation-panel">
+
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{myurl}}">
+                        <span aria-hidden="true" class="mr-1">{{#pix}} i/user, core {{/pix}}</span>
+                        <span>{{#str}} mypathway, theme_uckk {{/str}}</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{coursesurl}}">
+                        <span aria-hidden="true" class="mr-1">{{#pix}} i/course, core {{/pix}}</span>
+                        <span>{{#str}} courses, theme_uckk {{/str}}</span>
+                    </a>
+                </li>
+
+                {{#showfeatures}}
+                    {{#showchallengecards}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{challengesurl}}">
+                                <span aria-hidden="true" class="mr-1">{{#pix}} challenge, theme_uckk {{/pix}}</span>
+                                <span>{{#str}} challenges, theme_uckk {{/str}}</span>
+                            </a>
+                        </li>
+                    {{/showchallengecards}}
+
+                    {{#showassemblycards}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{assembliesurl}}">
+                                <span aria-hidden="true" class="mr-1">{{#pix}} assembly, theme_uckk {{/pix}}</span>
+                                <span>{{#str}} assemblies, theme_uckk {{/str}}</span>
+                            </a>
+                        </li>
+                    {{/showassemblycards}}
+
+                    {{#showarchivecards}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{archivesurl}}">
+                                <span aria-hidden="true" class="mr-1">{{#pix}} archive, theme_uckk {{/pix}}</span>
+                                <span>{{#str}} archives, theme_uckk {{/str}}</span>
+                            </a>
+                        </li>
+                    {{/showarchivecards}}
+
+                    {{#showintegritynotices}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{integrityurl}}">
+                                <span aria-hidden="true" class="mr-1">{{#pix}} inquisiteur, theme_uckk {{/pix}}</span>
+                                <span>{{#str}} integrity, theme_uckk {{/str}}</span>
+                            </a>
+                        </li>
+                    {{/showintegritynotices}}
+                {{/showfeatures}}
+
+            </ul>
+
+            {{#showquicklinks}}
+                {{#quicklinks.0}}
+                    <ul class="navbar-nav uckk-navigation__quicklinks">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="uckk-quicklinks-menu"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                {{#str}} quicklinks, theme_uckk {{/str}}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right"
+                                 aria-labelledby="uckk-quicklinks-menu">
+                                {{#quicklinks}}
+                                    <a class="dropdown-item {{#active}}active{{/active}}" href="{{url}}">
+                                        {{label}}
+                                    </a>
+                                {{/quicklinks}}
+                            </div>
+                        </li>
+                    </ul>
+                {{/quicklinks.0}}
+            {{/showquicklinks}}
+
+        </div>
+    </div>
+</nav>
+
+{{#showcanonicalboundary}}
+    <section class="uckk-navigation-boundary bg-light border-bottom"
+             aria-label="{{#str}} canonicalboundary, theme_uckk }}">
+        <div class="container-fluid py-2">
+            <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between">
+                <div class="small text-muted mb-2 mb-lg-0">
+                    <strong>{{#str}} canonicalboundary, theme_uckk {{/str}}</strong>
+                    {{#canonicalboundary}}
+                        <span class="ml-lg-2">{{canonicalboundary}}</span>
+                    {{/canonicalboundary}}
+                </div>
+
+                {{#showpublictheatrenotice}}
+                    <div class="small text-muted">
+                        {{#ethicalmaxim}}
+                            <span class="mr-2">{{ethicalmaxim}}</span>
+                        {{/ethicalmaxim}}
+                        {{#methodologicalmaxim}}
+                            <span>{{methodologicalmaxim}}</span>
+                        {{/methodologicalmaxim}}
+                    </div>
+                {{/showpublictheatrenotice}}
+            </div>
+        </div>
+    </section>
+{{/showcanonicalboundary}}

@@ -1,0 +1,1109 @@
+// This file is part of UCKK-Moodle.
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// any later version.
+//
+// UCKK-Moodle adapts Moodle as the pedagogical campus of the
+// Univers-Cité King Klown.
+
+/**
+ * Shared visual components for the UCKK theme.
+ *
+ * This file must remain presentation-only.
+ * Business rules, permission checks, URLs, states and workflow decisions
+ * must be prepared by PHP renderers, exporters, output classes or plugins.
+ *
+ * @package    theme_uckk
+ * @copyright  2026 Univers-Cité King Klown
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+// -----------------------------------------------------------------------------
+// Local design tokens.
+// -----------------------------------------------------------------------------
+
+$uckk-black: #111827 !default;
+$uckk-ink: #1f2937 !default;
+$uckk-muted: #6b7280 !default;
+$uckk-border: #e5e7eb !default;
+$uckk-border-strong: #d1d5db !default;
+$uckk-surface: #ffffff !default;
+$uckk-surface-soft: #f9fafb !default;
+$uckk-surface-warm: #fffaf0 !default;
+
+$uckk-gold: #b7791f !default;
+$uckk-gold-soft: #fef3c7 !default;
+$uckk-red: #b91c1c !default;
+$uckk-red-soft: #fee2e2 !default;
+$uckk-blue: #1d4ed8 !default;
+$uckk-blue-soft: #dbeafe !default;
+$uckk-green: #047857 !default;
+$uckk-green-soft: #d1fae5 !default;
+$uckk-purple: #6d28d9 !default;
+$uckk-purple-soft: #ede9fe !default;
+$uckk-slate: #475569 !default;
+$uckk-slate-soft: #f1f5f9 !default;
+
+$uckk-radius-sm: .375rem !default;
+$uckk-radius-md: .75rem !default;
+$uckk-radius-lg: 1rem !default;
+
+$uckk-shadow-sm: 0 .125rem .25rem rgba(17, 24, 39, .06) !default;
+$uckk-shadow-md: 0 .5rem 1.25rem rgba(17, 24, 39, .10) !default;
+$uckk-shadow-focus: 0 0 0 .2rem rgba(183, 121, 31, .25) !default;
+
+$uckk-transition-fast: 120ms ease-in-out !default;
+$uckk-transition-default: 180ms ease-in-out !default;
+
+// -----------------------------------------------------------------------------
+// Root variables for runtime theming.
+// -----------------------------------------------------------------------------
+
+:root {
+    --uckk-black: #{$uckk-black};
+    --uckk-ink: #{$uckk-ink};
+    --uckk-muted: #{$uckk-muted};
+    --uckk-border: #{$uckk-border};
+    --uckk-border-strong: #{$uckk-border-strong};
+    --uckk-surface: #{$uckk-surface};
+    --uckk-surface-soft: #{$uckk-surface-soft};
+    --uckk-surface-warm: #{$uckk-surface-warm};
+    --uckk-gold: #{$uckk-gold};
+    --uckk-gold-soft: #{$uckk-gold-soft};
+    --uckk-red: #{$uckk-red};
+    --uckk-red-soft: #{$uckk-red-soft};
+    --uckk-blue: #{$uckk-blue};
+    --uckk-blue-soft: #{$uckk-blue-soft};
+    --uckk-green: #{$uckk-green};
+    --uckk-green-soft: #{$uckk-green-soft};
+    --uckk-purple: #{$uckk-purple};
+    --uckk-purple-soft: #{$uckk-purple-soft};
+    --uckk-slate: #{$uckk-slate};
+    --uckk-slate-soft: #{$uckk-slate-soft};
+    --uckk-radius-sm: #{$uckk-radius-sm};
+    --uckk-radius-md: #{$uckk-radius-md};
+    --uckk-radius-lg: #{$uckk-radius-lg};
+}
+
+// -----------------------------------------------------------------------------
+// Accessibility.
+// -----------------------------------------------------------------------------
+
+.uckk-skip-link {
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    z-index: 1050;
+    padding: .5rem .75rem;
+    border-radius: $uckk-radius-sm;
+    background: $uckk-black;
+    color: #fff;
+    transform: translateY(-150%);
+    transition: transform $uckk-transition-fast;
+
+    &:focus {
+        color: #fff;
+        transform: translateY(0);
+        outline: 0;
+        box-shadow: $uckk-shadow-focus;
+    }
+}
+
+.uckk-focusable {
+    &:focus,
+    &:focus-visible {
+        outline: 0;
+        box-shadow: $uckk-shadow-focus;
+    }
+}
+
+.uckk-muted {
+    color: $uckk-muted;
+}
+
+.uckk-visually-separated {
+    border-top: 1px solid $uckk-border;
+}
+
+// -----------------------------------------------------------------------------
+// Generic cards and panels.
+// -----------------------------------------------------------------------------
+
+.uckk-card,
+.uckk-panel {
+    border: 1px solid $uckk-border;
+    border-radius: $uckk-radius-lg;
+    background: $uckk-surface;
+    box-shadow: $uckk-shadow-sm;
+}
+
+.uckk-card {
+    transition:
+        border-color $uckk-transition-default,
+        box-shadow $uckk-transition-default,
+        transform $uckk-transition-default;
+
+    &:hover {
+        border-color: $uckk-border-strong;
+        box-shadow: $uckk-shadow-md;
+        transform: translateY(-1px);
+    }
+}
+
+.uckk-panel {
+    padding: 1rem;
+}
+
+.uckk-panel-soft {
+    background: $uckk-surface-soft;
+}
+
+.uckk-panel-warm {
+    background: $uckk-surface-warm;
+    border-color: rgba(183, 121, 31, .28);
+}
+
+.uckk-card-title,
+.uckk-panel-title {
+    margin-bottom: .25rem;
+    color: $uckk-black;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.uckk-card-subtitle,
+.uckk-panel-subtitle {
+    color: $uckk-muted;
+    font-size: .875rem;
+}
+
+.uckk-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem .75rem;
+    color: $uckk-muted;
+    font-size: .875rem;
+}
+
+// -----------------------------------------------------------------------------
+// Canonical statement blocks.
+// -----------------------------------------------------------------------------
+
+.uckk-canonical-statement {
+    position: relative;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(183, 121, 31, .35);
+    border-left: .35rem solid $uckk-gold;
+    border-radius: $uckk-radius-md;
+    background: linear-gradient(135deg, $uckk-gold-soft 0%, #fff 100%);
+    color: $uckk-ink;
+
+    strong {
+        color: $uckk-black;
+    }
+}
+
+.uckk-canonical-statement-sm {
+    padding: .75rem 1rem;
+    font-size: .875rem;
+}
+
+.uckk-warning-statement {
+    border-color: rgba(185, 28, 28, .25);
+    border-left-color: $uckk-red;
+    background: linear-gradient(135deg, $uckk-red-soft 0%, #fff 100%);
+}
+
+.uckk-method-statement {
+    border-color: rgba(29, 78, 216, .25);
+    border-left-color: $uckk-blue;
+    background: linear-gradient(135deg, $uckk-blue-soft 0%, #fff 100%);
+}
+
+// -----------------------------------------------------------------------------
+// Badges, statuses and visibility.
+// -----------------------------------------------------------------------------
+
+.uckk-status-badge,
+.uckk-visibility-badge,
+.uckk-symbolic-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    min-height: 1.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.uckk-status-badge {
+    padding: .35rem .65rem;
+}
+
+.uckk-visibility-badge,
+.uckk-symbolic-badge {
+    padding: .3rem .55rem;
+    border: 1px solid $uckk-border;
+    background: $uckk-surface-soft;
+    color: $uckk-slate;
+    font-size: .75rem;
+}
+
+.uckk-status-draft,
+.uckk-status-pending,
+.uckk-status-pending_review {
+    border-color: rgba(71, 85, 105, .25);
+    background: $uckk-slate-soft;
+    color: $uckk-slate;
+}
+
+.uckk-status-active,
+.uckk-status-open,
+.uckk-status-validated,
+.uckk-status-verified {
+    border-color: rgba(4, 120, 87, .25);
+    background: $uckk-green-soft;
+    color: $uckk-green;
+}
+
+.uckk-status-correction_required,
+.uckk-status-contested,
+.uckk-status-warning {
+    border-color: rgba(183, 121, 31, .30);
+    background: $uckk-gold-soft;
+    color: $uckk-gold;
+}
+
+.uckk-status-invalidated,
+.uckk-status-rejected,
+.uckk-status-danger {
+    border-color: rgba(185, 28, 28, .25);
+    background: $uckk-red-soft;
+    color: $uckk-red;
+}
+
+.uckk-status-archived,
+.uckk-status-closed {
+    border-color: rgba(29, 78, 216, .22);
+    background: $uckk-blue-soft;
+    color: $uckk-blue;
+}
+
+// Compatibility with Bootstrap 4 and Bootstrap 5 badge naming.
+.badge.uckk-status-badge,
+.uckk-status-badge.badge-success,
+.uckk-status-badge.bg-success {
+    background-color: $uckk-green !important;
+    color: #fff !important;
+}
+
+.uckk-status-badge.badge-warning,
+.uckk-status-badge.bg-warning {
+    background-color: $uckk-gold !important;
+    color: #111 !important;
+}
+
+.uckk-status-badge.badge-danger,
+.uckk-status-badge.bg-danger {
+    background-color: $uckk-red !important;
+    color: #fff !important;
+}
+
+.uckk-status-badge.badge-info,
+.uckk-status-badge.bg-info {
+    background-color: $uckk-blue !important;
+    color: #fff !important;
+}
+
+.uckk-status-badge.badge-secondary,
+.uckk-status-badge.bg-secondary {
+    background-color: $uckk-slate !important;
+    color: #fff !important;
+}
+
+// -----------------------------------------------------------------------------
+// Buttons and links.
+// -----------------------------------------------------------------------------
+
+.uckk-action-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+}
+
+.uckk-link {
+    color: $uckk-blue;
+    font-weight: 600;
+    text-decoration-thickness: .08em;
+    text-underline-offset: .18em;
+
+    &:hover,
+    &:focus {
+        color: $uckk-black;
+    }
+}
+
+.uckk-btn-soft {
+    border: 1px solid $uckk-border;
+    border-radius: $uckk-radius-sm;
+    background: $uckk-surface-soft;
+    color: $uckk-ink;
+    font-weight: 600;
+
+    &:hover,
+    &:focus {
+        border-color: $uckk-border-strong;
+        background: #fff;
+        color: $uckk-black;
+    }
+}
+
+.uckk-btn-gold {
+    border-color: $uckk-gold;
+    background: $uckk-gold;
+    color: #111;
+    font-weight: 700;
+
+    &:hover,
+    &:focus {
+        border-color: $uckk-black;
+        background: $uckk-black;
+        color: #fff;
+    }
+}
+
+.uckk-btn-outline-gold {
+    border-color: rgba(183, 121, 31, .55);
+    background: transparent;
+    color: $uckk-gold;
+    font-weight: 700;
+
+    &:hover,
+    &:focus {
+        background: $uckk-gold-soft;
+        color: $uckk-black;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Navigation components.
+// -----------------------------------------------------------------------------
+
+.uckk-navigation,
+.uckk-card-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.uckk-nav-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .45rem .75rem;
+    border: 1px solid $uckk-border;
+    border-radius: 999px;
+    background: $uckk-surface;
+    color: $uckk-ink;
+    font-size: .875rem;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        border-color: rgba(183, 121, 31, .45);
+        background: $uckk-gold-soft;
+        color: $uckk-black;
+        text-decoration: none;
+    }
+
+    &.active,
+    &[aria-current="page"] {
+        border-color: $uckk-gold;
+        background: $uckk-gold;
+        color: #111;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Dashboard components.
+// -----------------------------------------------------------------------------
+
+.uckk-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1rem;
+}
+
+.uckk-dashboard-card {
+    @extend .uckk-card;
+    padding: 1rem;
+
+    .uckk-dashboard-card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: .75rem;
+    }
+
+    .uckk-dashboard-card-title {
+        margin: 0;
+        color: $uckk-black;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .uckk-dashboard-card-value {
+        color: $uckk-black;
+        font-size: 1.75rem;
+        font-weight: 800;
+        line-height: 1;
+    }
+
+    .uckk-dashboard-card-caption {
+        margin-top: .25rem;
+        color: $uckk-muted;
+        font-size: .875rem;
+    }
+}
+
+.uckk-progress-summary {
+    .progress {
+        height: .55rem;
+        border-radius: 999px;
+        background: $uckk-slate-soft;
+    }
+
+    .progress-bar {
+        border-radius: 999px;
+        background: linear-gradient(90deg, $uckk-gold 0%, $uckk-green 100%);
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Course section components.
+// -----------------------------------------------------------------------------
+
+.uckk-section-card {
+    border: 1px solid $uckk-border;
+    border-radius: $uckk-radius-lg;
+    background: $uckk-surface;
+    overflow: hidden;
+}
+
+.uckk-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .85rem 1rem;
+    border-bottom: 1px solid $uckk-border;
+    background: $uckk-surface-soft;
+}
+
+.uckk-section-title {
+    margin: 0;
+    color: $uckk-black;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.uckk-section-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 999px;
+    background: $uckk-black;
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+.uckk-section-body {
+    padding: 1rem;
+}
+
+.uckk-section-orientation .uckk-section-index {
+    background: $uckk-blue;
+}
+
+.uckk-section-proofs .uckk-section-index,
+.uckk-section-preuves .uckk-section-index {
+    background: $uckk-green;
+}
+
+.uckk-section-deliberation .uckk-section-index {
+    background: $uckk-purple;
+}
+
+.uckk-section-archive .uckk-section-index {
+    background: $uckk-slate;
+}
+
+// -----------------------------------------------------------------------------
+// Challenge teaser.
+// -----------------------------------------------------------------------------
+
+.uckk-challenge-teaser {
+    border: 1px solid $uckk-border;
+    border-radius: $uckk-radius-lg;
+    background: $uckk-surface;
+    box-shadow: $uckk-shadow-sm;
+    overflow: hidden;
+    transition:
+        border-color $uckk-transition-default,
+        box-shadow $uckk-transition-default,
+        transform $uckk-transition-default;
+
+    &:hover {
+        border-color: rgba(183, 121, 31, .45);
+        box-shadow: $uckk-shadow-md;
+        transform: translateY(-1px);
+    }
+
+    .card-body {
+        position: relative;
+    }
+
+    .card-footer {
+        border-top: 1px solid $uckk-border;
+    }
+
+    .uckk-challenge-title {
+        color: $uckk-black;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            color: $uckk-gold;
+            text-decoration: underline;
+            text-underline-offset: .16em;
+        }
+    }
+}
+
+.uckk-challenge-teaser-image {
+    position: relative;
+    background: $uckk-slate-soft;
+
+    img {
+        display: block;
+        width: 100%;
+        max-height: 12rem;
+        object-fit: cover;
+    }
+
+    &::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        pointer-events: none;
+        background: linear-gradient(180deg, rgba(17, 24, 39, 0) 50%, rgba(17, 24, 39, .18) 100%);
+    }
+}
+
+.uckk-challenge-code {
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+}
+
+.uckk-challenge-type {
+    font-weight: 600;
+}
+
+.uckk-challenge-summary {
+    color: $uckk-ink;
+}
+
+.uckk-challenge-warning {
+    border-left: .25rem solid $uckk-gold !important;
+    background: $uckk-surface-warm;
+}
+
+.uckk-challenge-meta {
+    dt {
+        font-weight: 700;
+    }
+
+    dd {
+        color: $uckk-ink;
+    }
+}
+
+.uckk-challenge-progress {
+    .progress {
+        height: .6rem;
+        border-radius: 999px;
+        background-color: $uckk-slate-soft;
+    }
+
+    .progress-bar {
+        border-radius: 999px;
+        background: linear-gradient(90deg, $uckk-gold 0%, $uckk-blue 100%);
+    }
+}
+
+.uckk-challenge-tags {
+    position: relative;
+    z-index: 2;
+
+    .badge {
+        border-color: rgba(71, 85, 105, .18) !important;
+        background: $uckk-surface-soft;
+        color: $uckk-slate;
+        font-weight: 700;
+    }
+}
+
+.uckk-challenge-contested {
+    border-left: .25rem solid $uckk-gold;
+}
+
+.uckk-challenge-invalidated {
+    border-left: .25rem solid $uckk-red;
+}
+
+.uckk-challenge-archived {
+    border-left: .25rem solid $uckk-blue;
+}
+
+.uckk-challenge-status-open {
+    border-top: .25rem solid $uckk-green;
+}
+
+.uckk-challenge-status-under_review,
+.uckk-challenge-status-integrity_review,
+.uckk-challenge-status-contested {
+    border-top: .25rem solid $uckk-gold;
+}
+
+.uckk-challenge-status-validated {
+    border-top: .25rem solid $uckk-green;
+}
+
+.uckk-challenge-status-invalidated {
+    border-top: .25rem solid $uckk-red;
+}
+
+.uckk-challenge-status-archived,
+.uckk-challenge-status-closed {
+    border-top: .25rem solid $uckk-blue;
+}
+
+// -----------------------------------------------------------------------------
+// Assembly teaser and deliberation components.
+// -----------------------------------------------------------------------------
+
+.uckk-assembly-teaser,
+.uckk-assembly-card {
+    @extend .uckk-card;
+    border-left: .3rem solid $uckk-purple;
+}
+
+.uckk-assembly-title {
+    color: $uckk-black;
+    font-weight: 800;
+}
+
+.uckk-assembly-meta {
+    color: $uckk-muted;
+    font-size: .875rem;
+}
+
+.uckk-motion-card,
+.uckk-decision-card,
+.uckk-objection-card {
+    padding: 1rem;
+    border: 1px solid $uckk-border;
+    border-radius: $uckk-radius-md;
+    background: $uckk-surface;
+}
+
+.uckk-motion-card {
+    border-left: .25rem solid $uckk-purple;
+}
+
+.uckk-decision-card {
+    border-left: .25rem solid $uckk-green;
+}
+
+.uckk-objection-card {
+    border-left: .25rem solid $uckk-gold;
+}
+
+.uckk-minority-report {
+    border-left: .25rem solid $uckk-slate;
+    background: $uckk-slate-soft;
+}
+
+// -----------------------------------------------------------------------------
+// Archive, proof and provenance components.
+// -----------------------------------------------------------------------------
+
+.uckk-archive-card,
+.uckk-proof-card,
+.uckk-kristal-card {
+    @extend .uckk-card;
+}
+
+.uckk-archive-card {
+    border-left: .3rem solid $uckk-slate;
+}
+
+.uckk-proof-card {
+    border-left: .3rem solid $uckk-green;
+}
+
+.uckk-kristal-card {
+    border-left: .3rem solid $uckk-gold;
+    background: linear-gradient(135deg, #fff 0%, $uckk-surface-warm 100%);
+}
+
+.uckk-provenance-panel {
+    padding: .75rem 1rem;
+    border: 1px dashed $uckk-border-strong;
+    border-radius: $uckk-radius-md;
+    background: $uckk-surface-soft;
+    color: $uckk-ink;
+    font-size: .875rem;
+}
+
+.uckk-proof-state {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-weight: 700;
+}
+
+.uckk-proof-state-verified {
+    color: $uckk-green;
+}
+
+.uckk-proof-state-contested {
+    color: $uckk-gold;
+}
+
+.uckk-proof-state-invalidated {
+    color: $uckk-red;
+}
+
+// -----------------------------------------------------------------------------
+// Integrity and Inquisiteur components.
+// -----------------------------------------------------------------------------
+
+.uckk-integrity-notice,
+.uckk-integrity-panel {
+    border: 1px solid rgba(185, 28, 28, .24);
+    border-left: .35rem solid $uckk-red;
+    border-radius: $uckk-radius-md;
+    background: linear-gradient(135deg, $uckk-red-soft 0%, #fff 100%);
+}
+
+.uckk-integrity-notice {
+    padding: .75rem 1rem;
+    color: $uckk-ink;
+    font-size: .875rem;
+}
+
+.uckk-integrity-panel {
+    padding: 1rem;
+}
+
+.uckk-integrity-title {
+    color: $uckk-red;
+    font-weight: 800;
+}
+
+.uckk-integrity-restricted {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .3rem .55rem;
+    border-radius: 999px;
+    background: $uckk-red-soft;
+    color: $uckk-red;
+    font-size: .75rem;
+    font-weight: 800;
+}
+
+// -----------------------------------------------------------------------------
+// AI governance components.
+// -----------------------------------------------------------------------------
+
+.uckk-ai-notice {
+    padding: .75rem 1rem;
+    border: 1px solid rgba(29, 78, 216, .25);
+    border-left: .35rem solid $uckk-blue;
+    border-radius: $uckk-radius-md;
+    background: linear-gradient(135deg, $uckk-blue-soft 0%, #fff 100%);
+    color: $uckk-ink;
+    font-size: .875rem;
+}
+
+.uckk-ai-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .3rem .55rem;
+    border-radius: 999px;
+    background: $uckk-blue-soft;
+    color: $uckk-blue;
+    font-size: .75rem;
+    font-weight: 800;
+}
+
+.uckk-ai-uncertainty {
+    border-left: .25rem solid $uckk-gold;
+    background: $uckk-gold-soft;
+}
+
+// -----------------------------------------------------------------------------
+// Portfolio and badges.
+// -----------------------------------------------------------------------------
+
+.uckk-portfolio-card {
+    @extend .uckk-card;
+    border-left: .3rem solid $uckk-blue;
+}
+
+.uckk-badge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: .75rem;
+}
+
+.uckk-badge-card {
+    padding: .85rem;
+    border: 1px solid $uckk-border;
+    border-radius: $uckk-radius-md;
+    background: $uckk-surface;
+    text-align: center;
+    box-shadow: $uckk-shadow-sm;
+
+    .uckk-badge-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .5rem;
+        border-radius: 999px;
+        background: $uckk-gold-soft;
+        color: $uckk-gold;
+        font-weight: 800;
+    }
+
+    .uckk-badge-name {
+        color: $uckk-black;
+        font-size: .875rem;
+        font-weight: 800;
+    }
+}
+
+.uckk-competency-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .6rem;
+    border: 1px solid $uckk-border;
+    border-radius: 999px;
+    background: $uckk-surface-soft;
+    color: $uckk-ink;
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+// -----------------------------------------------------------------------------
+// Empty, loading and error states.
+// -----------------------------------------------------------------------------
+
+.uckk-empty-state,
+.uckk-loading-state,
+.uckk-error-state {
+    padding: 2rem 1rem;
+    border: 1px dashed $uckk-border-strong;
+    border-radius: $uckk-radius-lg;
+    background: $uckk-surface-soft;
+    text-align: center;
+}
+
+.uckk-empty-state-title,
+.uckk-loading-state-title,
+.uckk-error-state-title {
+    margin-bottom: .25rem;
+    color: $uckk-black;
+    font-weight: 800;
+}
+
+.uckk-empty-state-text,
+.uckk-loading-state-text,
+.uckk-error-state-text {
+    margin-bottom: 0;
+    color: $uckk-muted;
+}
+
+.uckk-error-state {
+    border-color: rgba(185, 28, 28, .35);
+    background: $uckk-red-soft;
+}
+
+// -----------------------------------------------------------------------------
+// Tables and reports.
+// -----------------------------------------------------------------------------
+
+.uckk-report-table {
+    th {
+        border-top: 0;
+        color: $uckk-slate;
+        font-size: .8rem;
+        letter-spacing: .03em;
+        text-transform: uppercase;
+    }
+
+    td {
+        vertical-align: middle;
+    }
+}
+
+.uckk-report-card {
+    @extend .uckk-card;
+    padding: 1rem;
+}
+
+.uckk-report-value {
+    color: $uckk-black;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.uckk-report-label {
+    color: $uckk-muted;
+    font-size: .875rem;
+    font-weight: 700;
+}
+
+// -----------------------------------------------------------------------------
+// Footer and canonical boundary notices.
+// -----------------------------------------------------------------------------
+
+.uckk-footer-note {
+    color: $uckk-muted;
+    font-size: .875rem;
+
+    a {
+        color: inherit;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: .16em;
+
+        &:hover,
+        &:focus {
+            color: $uckk-black;
+        }
+    }
+}
+
+.uckk-boundary-notice {
+    padding: .75rem 1rem;
+    border-top: 1px solid $uckk-border;
+    background: $uckk-surface-soft;
+    color: $uckk-muted;
+    font-size: .8rem;
+}
+
+// -----------------------------------------------------------------------------
+// Responsive behavior.
+// -----------------------------------------------------------------------------
+
+@media (max-width: 767.98px) {
+    .uckk-dashboard-grid,
+    .uckk-badge-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .uckk-section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .uckk-challenge-teaser {
+        .btn-group {
+            width: 100%;
+            margin-bottom: .5rem;
+
+            .btn {
+                flex: 1 1 auto;
+            }
+        }
+
+        .card-footer .d-flex {
+            align-items: stretch !important;
+            flex-direction: column;
+        }
+    }
+
+    .uckk-action-row {
+        align-items: stretch;
+        flex-direction: column;
+
+        .btn,
+        a.btn {
+            width: 100%;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Reduced motion.
+// -----------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+    .uckk-card,
+    .uckk-challenge-teaser,
+    .uckk-nav-chip,
+    .uckk-btn-soft,
+    .uckk-btn-gold,
+    .uckk-btn-outline-gold {
+        transition: none;
+    }
+
+    .uckk-card:hover,
+    .uckk-challenge-teaser:hover {
+        transform: none;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// High contrast / forced colors.
+// -----------------------------------------------------------------------------
+
+@media (forced-colors: active) {
+    .uckk-card,
+    .uckk-panel,
+    .uckk-challenge-teaser,
+    .uckk-assembly-card,
+    .uckk-archive-card,
+    .uckk-proof-card,
+    .uckk-integrity-panel,
+    .uckk-ai-notice {
+        border: 1px solid CanvasText;
+        box-shadow: none;
+    }
+
+    .uckk-status-badge,
+    .uckk-visibility-badge,
+    .uckk-symbolic-badge,
+    .uckk-nav-chip {
+        border: 1px solid CanvasText;
+    }
+}
+

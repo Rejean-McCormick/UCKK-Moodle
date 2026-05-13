@@ -1,0 +1,257 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkchallenge/integrity_panel
+
+    Integrity panel for a UCKK challenge.
+
+    This template is render-only. It expects permission-filtered data from
+    mod_uckkchallenge output classes or service-layer controllers.
+
+    Context example:
+    {
+        "uniqid": "uckkchallenge-integrity-12",
+        "challengeid": 4,
+        "cmid": 22,
+        "integritystate": "human_reviewed",
+        "integritystatelabel": "Human reviewed",
+        "integritystateclass": "integrity-human-reviewed",
+        "hasrestricteddata": true,
+        "restrictedlabel": "Some integrity information is restricted.",
+        "canviewrestricted": false,
+        "opencasecount": 1,
+        "hasopencases": true,
+        "haswarnings": true,
+        "warnings": [
+            {
+                "message": "Evidence provenance is incomplete."
+            }
+        ],
+        "hasnotices": true,
+        "notices": [
+            {
+                "message": "Integrity actions remain subject to human review."
+            }
+        ],
+        "hascases": true,
+        "cases": [
+            {
+                "id": 7,
+                "casetype": "challenge_dispute",
+                "casetypelabel": "Challenge dispute",
+                "status": "under_review",
+                "statuslabel": "Under review",
+                "statusclass": "status-under-review",
+                "summary": "Evidence quality contested.",
+                "timemodifiedlabel": "12 May 2026",
+                "hasurl": true,
+                "url": "https://example.test/mod/uckkchallenge/integrity.php?id=22&caseid=7"
+            }
+        ],
+        "hasactions": true,
+        "actions": {
+            "canopen": true,
+            "openurl": "https://example.test/mod/uckkchallenge/integrity.php?id=22",
+            "cancontest": true,
+            "contesturl": "https://example.test/mod/uckkchallenge/integrity.php?id=22",
+            "canreview": true,
+            "reviewurl": "https://example.test/mod/uckkchallenge/integrity.php?id=22"
+        }
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckkchallenge-integrity-panel {{integritystateclass}}"
+    data-region="uckkchallenge-integrity-panel"
+    data-challenge-id="{{challengeid}}"
+    data-cm-id="{{cmid}}"
+    aria-labelledby="{{uniqid}}-title"
+>
+    <header class="uckkchallenge-integrity-panel__header">
+        <div class="uckkchallenge-integrity-panel__identity">
+            <h3 id="{{uniqid}}-title" class="uckkchallenge-integrity-panel__title">
+                {{#str}} integrityreview, uckkchallenge {{/str}}
+            </h3>
+
+            <p class="uckkchallenge-integrity-panel__description">
+                {{#str}} integritypaneldescription, uckkchallenge {{/str}}
+            </p>
+        </div>
+
+        <div class="uckkchallenge-integrity-panel__state">
+            <span class="uckkchallenge-integrity-panel__state-label">
+                {{#str}} integritystate, uckkchallenge {{/str}}
+            </span>
+
+            <span class="badge badge-secondary uckkchallenge-integrity-panel__state-badge uckkchallenge-integrity-panel__state-badge--{{integritystate}}">
+                {{integritystatelabel}}
+            </span>
+        </div>
+    </header>
+
+    <dl class="uckkchallenge-integrity-panel__facts">
+        <div class="uckkchallenge-integrity-panel__fact">
+            <dt>{{#str}} openintegritycases, uckkchallenge {{/str}}</dt>
+            <dd>{{opencasecount}}</dd>
+        </div>
+
+        <div class="uckkchallenge-integrity-panel__fact">
+            <dt>{{#str}} restrictedvisibility, uckkchallenge {{/str}}</dt>
+            <dd>
+                {{#hasrestricteddata}}
+                    {{#canviewrestricted}}
+                        {{#str}} yes {{/str}}
+                    {{/canviewrestricted}}
+
+                    {{^canviewrestricted}}
+                        {{restrictedlabel}}
+                    {{/canviewrestricted}}
+                {{/hasrestricteddata}}
+
+                {{^hasrestricteddata}}
+                    {{#str}} no {{/str}}
+                {{/hasrestricteddata}}
+            </dd>
+        </div>
+    </dl>
+
+    {{#haswarnings}}
+        <div class="alert alert-warning uckkchallenge-integrity-panel__warnings" role="status">
+            <strong>{{#str}} integritywarnings, uckkchallenge {{/str}}</strong>
+
+            <ul class="uckkchallenge-integrity-panel__message-list">
+                {{#warnings}}
+                    <li>{{message}}</li>
+                {{/warnings}}
+            </ul>
+        </div>
+    {{/haswarnings}}
+
+    {{#hasnotices}}
+        <div class="uckkchallenge-integrity-panel__notices">
+            {{#notices}}
+                <div class="alert alert-info uckkchallenge-integrity-panel__notice" role="status">
+                    {{message}}
+                </div>
+            {{/notices}}
+        </div>
+    {{/hasnotices}}
+
+    {{#hascases}}
+        <section class="uckkchallenge-integrity-panel__cases" aria-labelledby="{{uniqid}}-cases-title">
+            <h4 id="{{uniqid}}-cases-title" class="uckkchallenge-integrity-panel__section-title">
+                {{#str}} integritycases, uckkchallenge {{/str}}
+            </h4>
+
+            <div class="table-responsive">
+                <table class="generaltable uckkchallenge-integrity-panel__case-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{#str}} caseid, uckkchallenge {{/str}}</th>
+                            <th scope="col">{{#str}} casetype, uckkchallenge {{/str}}</th>
+                            <th scope="col">{{#str}} status {{/str}}</th>
+                            <th scope="col">{{#str}} summary, uckkchallenge {{/str}}</th>
+                            <th scope="col">{{#str}} timemodified, moodle {{/str}}</th>
+                            <th scope="col">{{#str}} actions {{/str}}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {{#cases}}
+                            <tr class="uckkchallenge-integrity-panel__case {{statusclass}}">
+                                <td>{{id}}</td>
+
+                                <td>
+                                    <span class="uckkchallenge-integrity-panel__case-type">
+                                        {{casetypelabel}}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="badge badge-secondary uckkchallenge-integrity-panel__case-status uckkchallenge-integrity-panel__case-status--{{status}}">
+                                        {{statuslabel}}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    {{#summary}}
+                                        {{summary}}
+                                    {{/summary}}
+
+                                    {{^summary}}
+                                        <span class="text-muted">
+                                            {{#str}} nosummary, uckkchallenge {{/str}}
+                                        </span>
+                                    {{/summary}}
+                                </td>
+
+                                <td>
+                                    {{#timemodifiedlabel}}
+                                        <time>{{timemodifiedlabel}}</time>
+                                    {{/timemodifiedlabel}}
+
+                                    {{^timemodifiedlabel}}
+                                        <span class="text-muted">-</span>
+                                    {{/timemodifiedlabel}}
+                                </td>
+
+                                <td>
+                                    {{#hasurl}}
+                                        <a href="{{url}}" class="btn btn-secondary btn-sm">
+                                            {{#str}} view {{/str}}
+                                        </a>
+                                    {{/hasurl}}
+
+                                    {{^hasurl}}
+                                        <span class="text-muted">
+                                            {{#str}} unavailable, uckkchallenge {{/str}}
+                                        </span>
+                                    {{/hasurl}}
+                                </td>
+                            </tr>
+                        {{/cases}}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    {{/hascases}}
+
+    {{^hascases}}
+        <div class="uckkchallenge-integrity-panel__empty">
+            <p>{{#str}} nointegritycases, uckkchallenge {{/str}}</p>
+        </div>
+    {{/hascases}}
+
+    {{#hasactions}}
+        <footer class="uckkchallenge-integrity-panel__actions">
+            {{#actions.canopen}}
+                <a href="{{actions.openurl}}" class="btn btn-primary">
+                    {{#str}} openintegritycase, uckkchallenge {{/str}}
+                </a>
+            {{/actions.canopen}}
+
+            {{#actions.cancontest}}
+                <a href="{{actions.contesturl}}" class="btn btn-secondary">
+                    {{#str}} contestchallenge, uckkchallenge {{/str}}
+                </a>
+            {{/actions.cancontest}}
+
+            {{#actions.canreview}}
+                <a href="{{actions.reviewurl}}" class="btn btn-secondary">
+                    {{#str}} reviewintegrity, uckkchallenge {{/str}}
+                </a>
+            {{/actions.canreview}}
+        </footer>
+    {{/hasactions}}
+
+    <div class="alert alert-info uckkchallenge-integrity-panel__authority-notice" role="status">
+        {{#str}} integritynonsovereignnotice, uckkchallenge {{/str}}
+    </div>
+</section>

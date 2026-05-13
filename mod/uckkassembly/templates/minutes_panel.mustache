@@ -1,0 +1,397 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkassembly/minutes_panel
+
+    Minutes panel for a UCKK assembly.
+
+    This template is render-only. It must receive permission-filtered,
+    context-aware data from mod_uckkassembly output/service classes.
+
+    Example context:
+    {
+        "assemblyid": 12,
+        "cmid": 45,
+        "contextid": 120,
+        "minutesid": 7,
+        "title": "Assembly minutes",
+        "assemblytitle": "Assemblée des savoirs",
+        "status": "published",
+        "statuslabel": "Published",
+        "statusclass": "status-published",
+        "visibility": "course",
+        "visibilitylabel": "Course",
+        "timecreatedlabel": "12 May 2026",
+        "timemodifiedlabel": "12 May 2026",
+        "hascontent": true,
+        "contenthtml": "<p>Minutes content.</p>",
+        "sections": [],
+        "hassections": false,
+        "motions": [],
+        "hasmotions": false,
+        "decisions": [],
+        "hasdecisions": false,
+        "minorityreports": [],
+        "hasminorityreports": false,
+        "warnings": [],
+        "haswarnings": false,
+        "actions": [],
+        "hasactions": true,
+        "notice": "Assembly minutes are institutional memory."
+    }
+}}
+
+<section
+    class="uckkassembly-minutes-panel {{statusclass}}"
+    data-region="uckkassembly-minutes-panel"
+    data-assembly-id="{{assemblyid}}"
+    data-cmid="{{cmid}}"
+    data-context-id="{{contextid}}"
+    {{#minutesid}}data-minutes-id="{{minutesid}}"{{/minutesid}}
+>
+    <header class="uckkassembly-minutes-panel__header">
+        <div class="uckkassembly-minutes-panel__identity">
+            <p class="uckkassembly-minutes-panel__eyebrow">
+                {{#str}} assemblyminutes, uckkassembly {{/str}}
+            </p>
+
+            <h3 class="uckkassembly-minutes-panel__title">
+                {{title}}
+            </h3>
+
+            {{#assemblytitle}}
+                <p class="uckkassembly-minutes-panel__assembly">
+                    {{assemblytitle}}
+                </p>
+            {{/assemblytitle}}
+        </div>
+
+        <div class="uckkassembly-minutes-panel__status">
+            {{#statuslabel}}
+                <span class="uckkassembly-minutes-panel__status-badge {{statusclass}}">
+                    {{statuslabel}}
+                </span>
+            {{/statuslabel}}
+
+            {{#visibilitylabel}}
+                <span class="uckkassembly-minutes-panel__visibility">
+                    {{visibilitylabel}}
+                </span>
+            {{/visibilitylabel}}
+        </div>
+    </header>
+
+    <dl class="uckkassembly-minutes-panel__meta">
+        {{#timecreatedlabel}}
+            <div class="uckkassembly-minutes-panel__meta-item">
+                <dt>{{#str}} timecreated, uckkassembly {{/str}}</dt>
+                <dd>{{timecreatedlabel}}</dd>
+            </div>
+        {{/timecreatedlabel}}
+
+        {{#timemodifiedlabel}}
+            <div class="uckkassembly-minutes-panel__meta-item">
+                <dt>{{#str}} timemodified, moodle {{/str}}</dt>
+                <dd>{{timemodifiedlabel}}</dd>
+            </div>
+        {{/timemodifiedlabel}}
+
+        {{#versionlabel}}
+            <div class="uckkassembly-minutes-panel__meta-item">
+                <dt>{{#str}} version, uckkassembly {{/str}}</dt>
+                <dd>{{versionlabel}}</dd>
+            </div>
+        {{/versionlabel}}
+    </dl>
+
+    {{#haswarnings}}
+        <div class="uckkassembly-minutes-panel__warnings" role="status">
+            {{#warnings}}
+                <div class="alert {{class}} uckkassembly-minutes-panel__warning">
+                    {{message}}
+                </div>
+            {{/warnings}}
+        </div>
+    {{/haswarnings}}
+
+    {{#hascontent}}
+        <section class="uckkassembly-minutes-panel__content">
+            <h4 class="uckkassembly-minutes-panel__section-title">
+                {{#str}} minutescontent, uckkassembly {{/str}}
+            </h4>
+
+            <div class="uckkassembly-minutes-panel__body">
+                {{{contenthtml}}}
+            </div>
+        </section>
+    {{/hascontent}}
+
+    {{^hascontent}}
+        <div class="alert alert-info uckkassembly-minutes-panel__empty" role="status">
+            {{#str}} minutesnotgenerated, uckkassembly {{/str}}
+        </div>
+    {{/hascontent}}
+
+    {{#hassections}}
+        <section class="uckkassembly-minutes-panel__sections">
+            <h4 class="uckkassembly-minutes-panel__section-title">
+                {{#str}} minutessections, uckkassembly {{/str}}
+            </h4>
+
+            {{#sections}}
+                <article class="uckkassembly-minutes-panel__section">
+                    <h5 class="uckkassembly-minutes-panel__subsection-title">
+                        {{title}}
+                    </h5>
+
+                    {{#contenthtml}}
+                        <div class="uckkassembly-minutes-panel__section-content">
+                            {{{contenthtml}}}
+                        </div>
+                    {{/contenthtml}}
+
+                    {{^contenthtml}}
+                        {{#content}}
+                            <p class="uckkassembly-minutes-panel__section-content">
+                                {{content}}
+                            </p>
+                        {{/content}}
+                    {{/contenthtml}}
+                </article>
+            {{/sections}}
+        </section>
+    {{/hassections}}
+
+    {{#hasmotions}}
+        <section class="uckkassembly-minutes-panel__motions">
+            <h4 class="uckkassembly-minutes-panel__section-title">
+                {{#str}} motions, uckkassembly {{/str}}
+            </h4>
+
+            <ul class="uckkassembly-minutes-panel__list uckkassembly-minutes-panel__list--motions">
+                {{#motions}}
+                    <li class="uckkassembly-minutes-panel__item uckkassembly-minutes-panel__motion">
+                        <div class="uckkassembly-minutes-panel__item-header">
+                            {{#url}}
+                                <a href="{{url}}" class="uckkassembly-minutes-panel__item-title">
+                                    {{title}}
+                                </a>
+                            {{/url}}
+
+                            {{^url}}
+                                <span class="uckkassembly-minutes-panel__item-title">
+                                    {{title}}
+                                </span>
+                            {{/url}}
+
+                            {{#statuslabel}}
+                                <span class="uckkassembly-minutes-panel__item-status status-{{status}}">
+                                    {{statuslabel}}
+                                </span>
+                            {{/statuslabel}}
+                        </div>
+
+                        {{#summary}}
+                            <p class="uckkassembly-minutes-panel__item-summary">
+                                {{summary}}
+                            </p>
+                        {{/summary}}
+
+                        {{#hasamendments}}
+                            <ul class="uckkassembly-minutes-panel__nested-list">
+                                {{#amendments}}
+                                    <li>
+                                        {{#str}} amendment, uckkassembly {{/str}}:
+                                        {{title}}
+                                        {{#statuslabel}}
+                                            <span class="uckkassembly-minutes-panel__item-status status-{{status}}">
+                                                {{statuslabel}}
+                                            </span>
+                                        {{/statuslabel}}
+                                    </li>
+                                {{/amendments}}
+                            </ul>
+                        {{/hasamendments}}
+                    </li>
+                {{/motions}}
+            </ul>
+        </section>
+    {{/hasmotions}}
+
+    {{#hasdecisions}}
+        <section class="uckkassembly-minutes-panel__decisions">
+            <h4 class="uckkassembly-minutes-panel__section-title">
+                {{#str}} decisions, uckkassembly {{/str}}
+            </h4>
+
+            <ul class="uckkassembly-minutes-panel__list uckkassembly-minutes-panel__list--decisions">
+                {{#decisions}}
+                    <li class="uckkassembly-minutes-panel__item uckkassembly-minutes-panel__decision">
+                        <div class="uckkassembly-minutes-panel__item-header">
+                            {{#url}}
+                                <a href="{{url}}" class="uckkassembly-minutes-panel__item-title">
+                                    {{title}}
+                                </a>
+                            {{/url}}
+
+                            {{^url}}
+                                <span class="uckkassembly-minutes-panel__item-title">
+                                    {{title}}
+                                </span>
+                            {{/url}}
+
+                            {{#decisiontypelabel}}
+                                <span class="uckkassembly-minutes-panel__item-type">
+                                    {{decisiontypelabel}}
+                                </span>
+                            {{/decisiontypelabel}}
+
+                            {{#statuslabel}}
+                                <span class="uckkassembly-minutes-panel__item-status status-{{status}}">
+                                    {{statuslabel}}
+                                </span>
+                            {{/statuslabel}}
+                        </div>
+
+                        {{#summary}}
+                            <p class="uckkassembly-minutes-panel__item-summary">
+                                {{summary}}
+                            </p>
+                        {{/summary}}
+
+                        {{#resultlabel}}
+                            <p class="uckkassembly-minutes-panel__decision-result">
+                                <strong>{{#str}} result, uckkassembly {{/str}}:</strong>
+                                {{resultlabel}}
+                            </p>
+                        {{/resultlabel}}
+                    </li>
+                {{/decisions}}
+            </ul>
+        </section>
+    {{/hasdecisions}}
+
+    {{#hasminorityreports}}
+        <section class="uckkassembly-minutes-panel__minority-reports">
+            <h4 class="uckkassembly-minutes-panel__section-title">
+                {{#str}} minorityreports, uckkassembly {{/str}}
+            </h4>
+
+            <ul class="uckkassembly-minutes-panel__list uckkassembly-minutes-panel__list--minority-reports">
+                {{#minorityreports}}
+                    <li class="uckkassembly-minutes-panel__item uckkassembly-minutes-panel__minority-report">
+                        <strong class="uckkassembly-minutes-panel__item-title">
+                            {{title}}
+                        </strong>
+
+                        {{#summary}}
+                            <p class="uckkassembly-minutes-panel__item-summary">
+                                {{summary}}
+                            </p>
+                        {{/summary}}
+
+                        {{#authorlabel}}
+                            <p class="uckkassembly-minutes-panel__item-author">
+                                {{#str}} submittedby, uckkassembly {{/str}}:
+                                {{authorlabel}}
+                            </p>
+                        {{/authorlabel}}
+                    </li>
+                {{/minorityreports}}
+            </ul>
+        </section>
+    {{/hasminorityreports}}
+
+    {{#hasarchive}}
+        <section class="uckkassembly-minutes-panel__archive">
+            <h4 class="uckkassembly-minutes-panel__section-title">
+                {{#str}} archive, uckkassembly {{/str}}
+            </h4>
+
+            {{#archive.statuslabel}}
+                <p class="uckkassembly-minutes-panel__archive-status">
+                    <strong>{{#str}} status, moodle {{/str}}:</strong>
+                    {{archive.statuslabel}}
+                </p>
+            {{/archive.statuslabel}}
+
+            {{#archive.url}}
+                <a href="{{archive.url}}" class="btn btn-secondary btn-sm">
+                    {{#str}} viewarchiveitem, uckkassembly {{/str}}
+                </a>
+            {{/archive.url}}
+        </section>
+    {{/hasarchive}}
+
+    {{#hasactions}}
+        <footer class="uckkassembly-minutes-panel__actions">
+            {{#actions}}
+                {{#ispost}}
+                    <form
+                        method="post"
+                        action="{{url}}"
+                        class="uckkassembly-minutes-panel__action-form"
+                    >
+                        <input type="hidden" name="sesskey" value="{{sesskey}}">
+                        <input type="hidden" name="action" value="{{key}}">
+                        {{#minutesid}}
+                            <input type="hidden" name="minutesid" value="{{minutesid}}">
+                        {{/minutesid}}
+
+                        {{#requiresummary}}
+                            <div class="form-group">
+                                <label for="{{summaryfieldid}}">
+                                    {{#str}} summary, uckkassembly {{/str}}
+                                </label>
+                                <textarea
+                                    id="{{summaryfieldid}}"
+                                    name="summary"
+                                    class="form-control"
+                                    rows="3"
+                                    maxlength="4000"
+                                    required
+                                ></textarea>
+                            </div>
+                        {{/requiresummary}}
+
+                        <button
+                            type="submit"
+                            class="btn {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                            {{#disabled}}disabled{{/disabled}}
+                        >
+                            {{label}}
+                        </button>
+
+                        {{#hasdisabledreason}}
+                            <span class="uckkassembly-minutes-panel__disabled-reason">
+                                {{disabledreason}}
+                            </span>
+                        {{/hasdisabledreason}}
+                    </form>
+                {{/ispost}}
+
+                {{#isget}}
+                    <a
+                        href="{{url}}"
+                        class="btn {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                        {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                    >
+                        {{label}}
+                    </a>
+                {{/isget}}
+            {{/actions}}
+        </footer>
+    {{/hasactions}}
+
+    {{#notice}}
+        <div class="alert alert-info uckkassembly-minutes-panel__notice" role="status">
+            {{notice}}
+        </div>
+    {{/notice}}
+</section>

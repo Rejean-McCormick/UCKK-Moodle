@@ -1,0 +1,185 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkassembly/motion_card
+
+    Motion card for UCKK Assembly.
+
+    This template is render-only. All data must already be permission-filtered,
+    formatted, and safe for the current viewer.
+
+    Example context:
+    {
+        "id": 12,
+        "assemblyid": 4,
+        "title": "Adopt the archive rule",
+        "summary": "Short motion summary.",
+        "motiontext": "<p>Motion body.</p>",
+        "hasmotiontext": true,
+        "status": "active",
+        "statuslabel": "Active",
+        "statusclass": "status-active",
+        "motiontype": "recommendation",
+        "motiontypelabel": "Recommendation",
+        "proposername": "Ada",
+        "hasproposer": true,
+        "timecreatedlabel": "12 May 2026",
+        "hastimecreated": true,
+        "timemodifiedlabel": "12 May 2026",
+        "hastimemodified": true,
+        "visibility": "course",
+        "visibilitylabel": "Course",
+        "hasamendments": true,
+        "amendmentcount": 2,
+        "hasobjections": true,
+        "objectioncount": 1,
+        "hasvotes": true,
+        "votecount": 14,
+        "hasdecision": false,
+        "decisionlabel": "",
+        "url": "https://example.test/mod/uckkassembly/motion.php?id=7&motionid=12",
+        "hasurl": true,
+        "actions": []
+    }
+}}
+
+<article
+    class="uckkassembly-motion-card {{statusclass}}"
+    data-region="uckkassembly-motion-card"
+    data-motion-id="{{id}}"
+    data-assembly-id="{{assemblyid}}"
+>
+    <header class="uckkassembly-motion-card__header">
+        <div class="uckkassembly-motion-card__identity">
+            {{#motiontypelabel}}
+                <p class="uckkassembly-motion-card__eyebrow">
+                    {{motiontypelabel}}
+                </p>
+            {{/motiontypelabel}}
+
+            <h3 class="uckkassembly-motion-card__title">
+                {{#hasurl}}
+                    <a href="{{url}}" class="uckkassembly-motion-card__link">
+                        {{title}}
+                    </a>
+                {{/hasurl}}
+                {{^hasurl}}
+                    {{title}}
+                {{/hasurl}}
+            </h3>
+
+            {{#summary}}
+                <p class="uckkassembly-motion-card__summary">
+                    {{summary}}
+                </p>
+            {{/summary}}
+        </div>
+
+        <div class="uckkassembly-motion-card__status">
+            <span class="uckkassembly-status-badge uckkassembly-status-badge--{{status}}">
+                {{statuslabel}}
+            </span>
+        </div>
+    </header>
+
+    <dl class="uckkassembly-motion-card__meta">
+        {{#hasproposer}}
+            <div class="uckkassembly-motion-card__meta-item">
+                <dt>{{#str}} proposer, uckkassembly {{/str}}</dt>
+                <dd>{{proposername}}</dd>
+            </div>
+        {{/hasproposer}}
+
+        {{#hastimecreated}}
+            <div class="uckkassembly-motion-card__meta-item">
+                <dt>{{#str}} timecreated, uckkassembly {{/str}}</dt>
+                <dd>{{timecreatedlabel}}</dd>
+            </div>
+        {{/hastimecreated}}
+
+        {{#hastimemodified}}
+            <div class="uckkassembly-motion-card__meta-item">
+                <dt>{{#str}} timemodified, moodle {{/str}}</dt>
+                <dd>{{timemodifiedlabel}}</dd>
+            </div>
+        {{/hastimemodified}}
+
+        {{#visibilitylabel}}
+            <div class="uckkassembly-motion-card__meta-item">
+                <dt>{{#str}} visibility, uckkassembly {{/str}}</dt>
+                <dd>{{visibilitylabel}}</dd>
+            </div>
+        {{/visibilitylabel}}
+    </dl>
+
+    {{#hasmotiontext}}
+        <div class="uckkassembly-motion-card__body">
+            {{{motiontext}}}
+        </div>
+    {{/hasmotiontext}}
+
+    <div class="uckkassembly-motion-card__indicators">
+        <span class="uckkassembly-motion-card__indicator">
+            <span class="uckkassembly-motion-card__indicator-label">
+                {{#str}} amendments, uckkassembly {{/str}}
+            </span>
+            <strong class="uckkassembly-motion-card__indicator-value">
+                {{amendmentcount}}
+            </strong>
+        </span>
+
+        <span class="uckkassembly-motion-card__indicator">
+            <span class="uckkassembly-motion-card__indicator-label">
+                {{#str}} objections, uckkassembly {{/str}}
+            </span>
+            <strong class="uckkassembly-motion-card__indicator-value">
+                {{objectioncount}}
+            </strong>
+        </span>
+
+        <span class="uckkassembly-motion-card__indicator">
+            <span class="uckkassembly-motion-card__indicator-label">
+                {{#str}} votes, uckkassembly {{/str}}
+            </span>
+            <strong class="uckkassembly-motion-card__indicator-value">
+                {{votecount}}
+            </strong>
+        </span>
+    </div>
+
+    {{#hasdecision}}
+        <div class="uckkassembly-motion-card__decision alert alert-info" role="status">
+            <strong>{{#str}} decision, uckkassembly {{/str}}</strong>
+            <span>{{decisionlabel}}</span>
+        </div>
+    {{/hasdecision}}
+
+    {{#hasintegritynotice}}
+        <div class="uckkassembly-motion-card__integrity alert alert-warning" role="status">
+            <strong>{{#str}} integritynotice, uckkassembly {{/str}}</strong>
+            <span>{{integritynotice}}</span>
+        </div>
+    {{/hasintegritynotice}}
+
+    {{#hasactions}}
+        <footer class="uckkassembly-motion-card__actions">
+            {{#actions}}
+                {{#url}}
+                    <a
+                        href="{{url}}"
+                        class="btn {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}} uckkassembly-motion-card__action"
+                        {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                    >
+                        {{label}}
+                    </a>
+                {{/url}}
+            {{/actions}}
+        </footer>
+    {{/hasactions}}
+</article>

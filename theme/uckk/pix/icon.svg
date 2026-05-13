@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="128"
+    height="128"
+    viewBox="0 0 128 128"
+    role="img"
+    aria-labelledby="title desc">
+
+    <title id="title">UCKK Moodle Theme Icon</title>
+    <desc id="desc">
+        Icon for the Univers-Cité King Klown Moodle theme: a crowned learning mark
+        combining theatre, method, assembly and archive.
+    </desc>
+
+    <defs>
+        <linearGradient id="uckk-crown-gradient" x1="20" y1="18" x2="108" y2="110" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffc857"/>
+            <stop offset="0.55" stop-color="#ff8a3d"/>
+            <stop offset="1" stop-color="#d83f31"/>
+        </linearGradient>
+
+        <linearGradient id="uckk-shield-gradient" x1="18" y1="18" x2="110" y2="112" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#1f2a44"/>
+            <stop offset="1" stop-color="#101827"/>
+        </linearGradient>
+
+        <linearGradient id="uckk-page-gradient" x1="42" y1="42" x2="90" y2="98" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="1" stop-color="#dce4f2"/>
+        </linearGradient>
+    </defs>
+
+    <rect
+        x="8"
+        y="8"
+        width="112"
+        height="112"
+        rx="24"
+        fill="url(#uckk-shield-gradient)"/>
+
+    <path
+        d="M28 50L40 28L56 48L64 24L72 48L88 28L100 50V66H28V50Z"
+        fill="url(#uckk-crown-gradient)"/>
+
+    <circle cx="40" cy="29" r="5" fill="#ffe9a8"/>
+    <circle cx="64" cy="23" r="5" fill="#ffe9a8"/>
+    <circle cx="88" cy="29" r="5" fill="#ffe9a8"/>
+
+    <path
+        d="M36 62H92V98C92 103.5 87.5 108 82 108H46C40.5 108 36 103.5 36 98V62Z"
+        fill="url(#uckk-page-gradient)"/>
+
+    <path
+        d="M44 70H84"
+        stroke="#1f2a44"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+    <path
+        d="M44 82H78"
+        stroke="#1f2a44"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+    <path
+        d="M44 94H68"
+        stroke="#1f2a44"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+    <path
+        d="M76 92L86 102L104 78"
+        fill="none"
+        stroke="#2fb344"
+        stroke-width="7"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+    <circle
+        cx="64"
+        cy="64"
+        r="56"
+        fill="none"
+        stroke="#ffffff"
+        stroke-opacity="0.18"
+        stroke-width="4"/>
+
+    <path
+        d="M28 50H100"
+        stroke="#101827"
+        stroke-opacity="0.35"
+        stroke-width="4"
+        stroke-linecap="round"/>
+</svg>

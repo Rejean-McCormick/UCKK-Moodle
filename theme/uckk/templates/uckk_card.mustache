@@ -1,0 +1,263 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_uckk/uckk_card
+
+    Reusable visual card for UCKK-Moodle.
+
+    This template is presentation-only. It must not contain grading logic,
+    permission logic, workflow logic, integrity decisions, archive validation,
+    or AI authority decisions.
+
+    Typical uses:
+    - UCKK campus entry points.
+    - Course cards.
+    - Challenge cards.
+    - Assembly cards.
+    - Archive/Kristal cards.
+    - Integrity notices.
+    - Dashboard cards.
+
+    Classes required for JS:
+    - none.
+
+    Data attributes required for JS:
+    - data-region="theme_uckk/card"
+    - data-uckk-card-type
+    - data-uckk-card-id
+
+    Context variables required for this template:
+    {
+        "type": "Card type. Example: course, challenge, assembly, archive, integrity, program.",
+        "id": "Stable card identifier, if available.",
+        "title": "Card title.",
+        "subtitle": "Optional subtitle.",
+        "bodyhtml": "Optional trusted HTML body, already formatted by PHP.",
+        "url": "Optional primary URL.",
+        "urltext": "Optional primary URL label.",
+        "icon": "Optional pix icon name.",
+        "iconcomponent": "Optional pix icon component. Defaults should be prepared by PHP.",
+        "iconalt": "Optional icon alt text.",
+        "statuslabel": "Optional status label.",
+        "statusclass": "Optional Bootstrap-compatible status class.",
+        "level": "Optional UCKK level label. Example: UCKK, kOA, Défi, Assemblée, Archive.",
+        "showboundarynote": "Optional boolean. Displays a boundary clarification note.",
+        "boundarynote": "Optional boundary note text.",
+        "progress": "Optional progress number, 0 to 100.",
+        "hasprogress": "Optional boolean.",
+        "metadata": [
+            {
+                "label": "Metadata label.",
+                "value": "Metadata value."
+            }
+        ],
+        "actions": [
+            {
+                "url": "Action URL.",
+                "label": "Action label.",
+                "classes": "Optional button classes.",
+                "disabled": "Optional boolean."
+            }
+        ],
+        "footerhtml": "Optional trusted footer HTML, already formatted by PHP.",
+        "extraclasses": "Optional extra CSS classes."
+    }
+
+    Example context (JSON):
+    {
+        "type": "challenge",
+        "id": "uckkchallenge-12",
+        "title": "Défi King Klown — Cartographier un système réel",
+        "subtitle": "Preuves, règles visibles et archive finale",
+        "bodyhtml": "<p>Produire une carte vérifiable d’un système social réel.</p>",
+        "url": "https://example.test/mod/uckkchallenge/view.php?id=12",
+        "urltext": "Ouvrir le défi",
+        "icon": "challenge",
+        "iconcomponent": "theme_uckk",
+        "iconalt": "Défi",
+        "statuslabel": "Ouvert",
+        "statusclass": "badge-success",
+        "level": "Défi",
+        "showboundarynote": true,
+        "boundarynote": "King Klown attire; l’Inquisiteur protège; l’Archive conserve.",
+        "hasprogress": true,
+        "progress": 40,
+        "metadata": [
+            {
+                "label": "Type",
+                "value": "Défi évalué"
+            },
+            {
+                "label": "Visibilité",
+                "value": "Cours"
+            }
+        ],
+        "actions": [
+            {
+                "url": "https://example.test/mod/uckkchallenge/view.php?id=12",
+                "label": "Participer",
+                "classes": "btn btn-primary"
+            },
+            {
+                "url": "https://example.test/mod/uckkarchive/view.php?id=8",
+                "label": "Voir l’archive",
+                "classes": "btn btn-outline-secondary"
+            }
+        ],
+        "footerhtml": "<small>Les preuves déposées doivent rester vérifiables.</small>",
+        "extraclasses": "uckk-card--challenge"
+    }
+}}
+
+<div class="card uckk-card {{#type}}uckk-card--{{type}}{{/type}} {{extraclasses}}"
+     data-region="theme_uckk/card"
+     {{#type}}data-uckk-card-type="{{type}}"{{/type}}
+     {{#id}}data-uckk-card-id="{{id}}"{{/id}}>
+
+    {{#url}}
+        <a class="stretched-link sr-only" href="{{url}}">
+            {{#urltext}}{{urltext}}{{/urltext}}
+            {{^urltext}}{{title}}{{/urltext}}
+        </a>
+    {{/url}}
+
+    <div class="card-body">
+
+        <div class="d-flex align-items-start justify-content-between mb-2">
+            <div class="d-flex align-items-start min-w-0">
+
+                {{#icon}}
+                    <div class="uckk-card-icon mr-3" aria-hidden="true">
+                        {{#pix}} {{icon}}, {{iconcomponent}}, {{iconalt}} {{/pix}}
+                    </div>
+                {{/icon}}
+
+                <div class="min-w-0">
+                    {{#level}}
+                        <div class="small text-muted text-uppercase mb-1">
+                            {{level}}
+                        </div>
+                    {{/level}}
+
+                    <h3 class="h5 card-title mb-1">
+                        {{#url}}
+                            <a href="{{url}}" class="text-reset">
+                                {{title}}
+                            </a>
+                        {{/url}}
+                        {{^url}}
+                            {{title}}
+                        {{/url}}
+                    </h3>
+
+                    {{#subtitle}}
+                        <p class="card-subtitle text-muted mb-0">
+                            {{subtitle}}
+                        </p>
+                    {{/subtitle}}
+                </div>
+            </div>
+
+            {{#statuslabel}}
+                <span class="badge {{#statusclass}}{{statusclass}}{{/statusclass}}{{^statusclass}}badge-secondary{{/statusclass}} ml-2">
+                    {{statuslabel}}
+                </span>
+            {{/statuslabel}}
+        </div>
+
+        {{#bodyhtml}}
+            <div class="card-text uckk-card-body">
+                {{{bodyhtml}}}
+            </div>
+        {{/bodyhtml}}
+
+        {{#hasprogress}}
+            <div class="uckk-card-progress mt-3">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="small text-muted">
+                        {{#str}} progress, core {{/str}}
+                    </span>
+                    <span class="small text-muted">
+                        {{progress}}%
+                    </span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar"
+                         role="progressbar"
+                         style="width: {{progress}}%;"
+                         aria-valuenow="{{progress}}"
+                         aria-valuemin="0"
+                         aria-valuemax="100">
+                        <span class="sr-only">{{progress}}%</span>
+                    </div>
+                </div>
+            </div>
+        {{/hasprogress}}
+
+        {{#metadata}}
+            <dl class="uckk-card-metadata row mt-3 mb-0">
+                {{#metadata}}
+                    <dt class="col-5 col-md-4 small text-muted">
+                        {{label}}
+                    </dt>
+                    <dd class="col-7 col-md-8 small mb-1">
+                        {{value}}
+                    </dd>
+                {{/metadata}}
+            </dl>
+        {{/metadata}}
+
+        {{#showboundarynote}}
+            <div class="alert alert-light border mt-3 mb-0 uckk-card-boundarynote">
+                <small>
+                    {{#boundarynote}}
+                        {{boundarynote}}
+                    {{/boundarynote}}
+                    {{^boundarynote}}
+                        {{#str}} boundarynote, theme_uckk {{/str}}
+                    {{/boundarynote}}
+                </small>
+            </div>
+        {{/showboundarynote}}
+
+        {{#actions}}
+            <div class="uckk-card-actions mt-3 d-flex flex-wrap">
+                {{#actions}}
+                    {{#disabled}}
+                        <span class="{{#classes}}{{classes}}{{/classes}}{{^classes}}btn btn-secondary{{/classes}} disabled mr-2 mb-2"
+                              aria-disabled="true">
+                            {{label}}
+                        </span>
+                    {{/disabled}}
+                    {{^disabled}}
+                        <a href="{{url}}"
+                           class="{{#classes}}{{classes}}{{/classes}}{{^classes}}btn btn-secondary{{/classes}} mr-2 mb-2">
+                            {{label}}
+                        </a>
+                    {{/disabled}}
+                {{/actions}}
+            </div>
+        {{/actions}}
+
+    </div>
+
+    {{#footerhtml}}
+        <div class="card-footer uckk-card-footer">
+            {{{footerhtml}}}
+        </div>
+    {{/footerhtml}}
+</div>

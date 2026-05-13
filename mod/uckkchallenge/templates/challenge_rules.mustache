@@ -1,0 +1,384 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkchallenge/challenge_rules
+
+    Rules panel for a UCKK Challenge activity.
+
+    This template is render-only. All data must already be permission-filtered,
+    context-aware, and formatted by PHP output classes or services.
+
+    Context example:
+    {
+        "id": 10,
+        "cmid": 42,
+        "name": "Map a hidden rule",
+        "challengecode": "UCKK-DEF-001",
+        "challengetype": "system_mapping",
+        "challengetypelabel": "System mapping",
+        "status": "open",
+        "statuslabel": "Open",
+        "visibility": "course",
+        "visibilitylabel": "Course",
+        "statementhtml": "<p>Challenge statement.</p>",
+        "contexthtml": "<p>Challenge context.</p>",
+        "rules": [
+            {
+                "title": "Respect dignity",
+                "description": "No harassment, humiliation, doxxing, or intimidation."
+            }
+        ],
+        "hasrules": true,
+        "corridors": [
+            {
+                "name": "Course corridor",
+                "description": "Produce evidence inside the Moodle course.",
+                "audience": "Course participants",
+                "risklabel": "Medium",
+                "required": true
+            }
+        ],
+        "hascorridors": true,
+        "evidencerequirements": [
+            {
+                "type": "Text",
+                "description": "Explain the system mapped and the source of the evidence."
+            }
+        ],
+        "hasevidencerequirements": true,
+        "evaluationcriteria": [
+            {
+                "name": "Provenance",
+                "description": "Evidence must identify source, author, date, visibility, and relation to criteria."
+            }
+        ],
+        "hasevaluationcriteria": true,
+        "ethicalconstraints": [
+            {
+                "description": "Do not confuse fiction and fact."
+            }
+        ],
+        "hasethicalconstraints": true,
+        "hasdates": true,
+        "timeopenlabel": "12 May 2026",
+        "timecloselabel": "19 May 2026",
+        "timereviewbylabel": "22 May 2026",
+        "integrityrequired": true,
+        "archivepolicylabel": "Summary archive",
+        "aipolicyhtml": "<p>AI may assist. It cannot decide.</p>",
+        "hasaipolicy": true
+    }
+}}
+
+<section
+    class="mod-uckkchallenge-rules"
+    data-region="uckkchallenge-rules"
+    data-challenge-id="{{id}}"
+    data-cm-id="{{cmid}}"
+>
+    <header class="mod-uckkchallenge-rules__header">
+        <div class="mod-uckkchallenge-rules__identity">
+            <p class="mod-uckkchallenge-rules__eyebrow">
+                {{#str}} challengerulespanel, uckkchallenge {{/str}}
+            </p>
+
+            <h3 class="mod-uckkchallenge-rules__title">
+                {{name}}
+            </h3>
+
+            <dl class="mod-uckkchallenge-rules__meta">
+                {{#challengecode}}
+                    <div class="mod-uckkchallenge-rules__meta-item">
+                        <dt>{{#str}} challengecode, uckkchallenge {{/str}}</dt>
+                        <dd>{{challengecode}}</dd>
+                    </div>
+                {{/challengecode}}
+
+                {{#challengetypelabel}}
+                    <div class="mod-uckkchallenge-rules__meta-item">
+                        <dt>{{#str}} challengetype, uckkchallenge {{/str}}</dt>
+                        <dd>{{challengetypelabel}}</dd>
+                    </div>
+                {{/challengetypelabel}}
+
+                {{#statuslabel}}
+                    <div class="mod-uckkchallenge-rules__meta-item">
+                        <dt>{{#str}} challengestatus, uckkchallenge {{/str}}</dt>
+                        <dd>
+                            <span class="badge badge-secondary mod-uckkchallenge-rules__status mod-uckkchallenge-rules__status--{{status}}">
+                                {{statuslabel}}
+                            </span>
+                        </dd>
+                    </div>
+                {{/statuslabel}}
+
+                {{#visibilitylabel}}
+                    <div class="mod-uckkchallenge-rules__meta-item">
+                        <dt>{{#str}} visibility, uckkchallenge {{/str}}</dt>
+                        <dd>
+                            <span class="mod-uckkchallenge-rules__visibility mod-uckkchallenge-rules__visibility--{{visibility}}">
+                                {{visibilitylabel}}
+                            </span>
+                        </dd>
+                    </div>
+                {{/visibilitylabel}}
+            </dl>
+        </div>
+    </header>
+
+    {{#statementhtml}}
+        <section class="mod-uckkchallenge-rules__section mod-uckkchallenge-rules__section--statement">
+            <h4 class="mod-uckkchallenge-rules__section-title">
+                {{#str}} challengestatement, uckkchallenge {{/str}}
+            </h4>
+
+            <div class="mod-uckkchallenge-rules__text">
+                {{{statementhtml}}}
+            </div>
+        </section>
+    {{/statementhtml}}
+
+    {{#contexthtml}}
+        <section class="mod-uckkchallenge-rules__section mod-uckkchallenge-rules__section--context">
+            <h4 class="mod-uckkchallenge-rules__section-title">
+                {{#str}} challengecontext, uckkchallenge {{/str}}
+            </h4>
+
+            <div class="mod-uckkchallenge-rules__text">
+                {{{contexthtml}}}
+            </div>
+        </section>
+    {{/contexthtml}}
+
+    {{#hasrules}}
+        <section class="mod-uckkchallenge-rules__section mod-uckkchallenge-rules__section--rules">
+            <h4 class="mod-uckkchallenge-rules__section-title">
+                {{#str}} rules, uckkchallenge {{/str}}
+            </h4>
+
+            <ol class="mod-uckkchallenge-rules__list mod-uckkchallenge-rules__list--rules">
+                {{#rules}}
+                    <li class="mod-uckkchallenge-rules__item">
+                        {{#title}}
+                            <strong class="mod-uckkchallenge-rules__item-title">
+                                {{title}}
+                            </strong>
+                        {{/title}}
+
+                        {{#description}}
+                            <p class="mod-uckkchallenge-rules__item-description">
+                                {{description}}
+                            </p>
+                        {{/description}}
+                    </li>
+                {{/rules}}
+            </ol>
+        </section>
+    {{/hasrules}}
+
+    {{^hasrules}}
+        <div class="alert alert-warning mod-uckkchallenge-rules__missing" role="status">
+            {{#str}} norulesdefined, uckkchallenge {{/str}}
+        </div>
+    {{/hasrules}}
+
+    {{#hascorridors}}
+        <section class="mod-uckkchallenge-rules__section mod-uckkchallenge-rules__section--corridors">
+            <h4 class="mod-uckkchallenge-rules__section-title">
+                {{#str}} corridors, uckkchallenge {{/str}}
+            </h4>
+
+            <div class="mod-uckkchallenge-rules__corridors">
+                {{#corridors}}
+                    <article class="mod-uckkchallenge-rules__corridor">
+                        <header class="mod-uckkchallenge-rules__corridor-header">
+                            <h5 class="mod-uckkchallenge-rules__corridor-title">
+                                {{name}}
+                            </h5>
+
+                            <div class="mod-uckkchallenge-rules__corridor-badges">
+                                {{#required}}
+                                    <span class="badge badge-primary">
+                                        {{#str}} required, uckkchallenge {{/str}}
+                                    </span>
+                                {{/required}}
+
+                                {{#risklabel}}
+                                    <span class="badge badge-secondary">
+                                        {{risklabel}}
+                                    </span>
+                                {{/risklabel}}
+                            </div>
+                        </header>
+
+                        {{#description}}
+                            <p class="mod-uckkchallenge-rules__corridor-description">
+                                {{description}}
+                            </p>
+                        {{/description}}
+
+                        <dl class="mod-uckkchallenge-rules__corridor-meta">
+                            {{#audience}}
+                                <div>
+                                    <dt>{{#str}} audience, uckkchallenge {{/str}}</dt>
+                                    <dd>{{audience}}</dd>
+                                </div>
+                            {{/audience}}
+
+                            {{#entrypoint}}
+                                <div>
+                                    <dt>{{#str}} entrypoint, uckkchallenge {{/str}}</dt>
+                                    <dd>{{entrypoint}}</dd>
+                                </div>
+                            {{/entrypoint}}
+
+                            {{#actionmode}}
+                                <div>
+                                    <dt>{{#str}} actionmode, uckkchallenge {{/str}}</dt>
+                                    <dd>{{actionmode}}</dd>
+                                </div>
+                            {{/actionmode}}
+                        </dl>
+                    </article>
+                {{/corridors}}
+            </div>
+        </section>
+    {{/hascorridors}}
+
+    {{#hasevidencerequirements}}
+        <section class="mod-uckkchallenge-rules__section mod-uckkchallenge-rules__section--evidence">
+            <h4 class="mod-uckkchallenge-rules__section-title">
+                {{#str}} evidencepolicy, uckkchallenge {{/str}}
+            </h4>
+
+            <ul class="mod-uckkchallenge-rules__list mod-uckkchallenge-rules__list--evidence">
+                {{#evidencerequirements}}
+                    <li class="mod-uckkchallenge-rules__item">
+                        {{#type}}
+                            <strong class="mod-uckkchallenge-rules__item-title">
+                                {{type}}
+                            </strong>
+                        {{/type}}
+
+                        {{#description}}
+                            <p class="mod-uckkchallenge-rules__item-description">
+                                {{description}}
+                            </p>
+                        {{/description}}
+                    </li>
+                {{/evidencerequirements}}
+            </ul>
+        </section>
+    {{/hasevidencerequirements}}
+
+    {{#hasevaluationcriteria}}
+        <section class="mod-uckkchallenge-rules__section mod-uckkchallenge-rules__section--criteria">
+            <h4 class="mod-uckkchallenge-rules__section-title">
+                {{#str}} evaluationcriteria, uckkchallenge {{/str}}
+            </h4>
+
+            <ul class="mod-uckkchallenge-rules__list mod-uckkchallenge-rules__list--criteria">
+                {{#evaluationcriteria}}
+                    <li class="mod-uckkchallenge-rules__item">
+                        {{#name}}
+                            <strong class="mod-uckkchallenge-rules__item-title">
+                                {{name}}
+                            </strong>
+                        {{/name}}
+
+                        {{#description}}
+                            <p class="mod-uckkchallenge-rules__item-description">
+                                {{description}}
+                            </p>
+                        {{/description}}
+                    </li>
+                {{/evaluationcriteria}}
+            </ul>
+        </section>
+    {{/hasevaluationcriteria}}
+
+    {{#hasethicalconstraints}}
+        <section class="mod-uckkchallenge-rules__section mod-uckkchallenge-rules__section--ethics">
+            <h4 class="mod-uckkchallenge-rules__section-title">
+                {{#str}} ethicalconstraints, uckkchallenge {{/str}}
+            </h4>
+
+            <ul class="mod-uckkchallenge-rules__list mod-uckkchallenge-rules__list--ethics">
+                {{#ethicalconstraints}}
+                    <li class="mod-uckkchallenge-rules__item">
+                        {{description}}
+                    </li>
+                {{/ethicalconstraints}}
+            </ul>
+        </section>
+    {{/hasethicalconstraints}}
+
+    {{#hasdates}}
+        <section class="mod-uckkchallenge-rules__section mod-uckkchallenge-rules__section--timeline">
+            <h4 class="mod-uckkchallenge-rules__section-title">
+                {{#str}} timeline, uckkchallenge {{/str}}
+            </h4>
+
+            <dl class="mod-uckkchallenge-rules__timeline">
+                {{#timeopenlabel}}
+                    <div class="mod-uckkchallenge-rules__timeline-item">
+                        <dt>{{#str}} timeopen, uckkchallenge {{/str}}</dt>
+                        <dd>{{timeopenlabel}}</dd>
+                    </div>
+                {{/timeopenlabel}}
+
+                {{#timecloselabel}}
+                    <div class="mod-uckkchallenge-rules__timeline-item">
+                        <dt>{{#str}} timeclose, uckkchallenge {{/str}}</dt>
+                        <dd>{{timecloselabel}}</dd>
+                    </div>
+                {{/timecloselabel}}
+
+                {{#timereviewbylabel}}
+                    <div class="mod-uckkchallenge-rules__timeline-item">
+                        <dt>{{#str}} timereviewby, uckkchallenge {{/str}}</dt>
+                        <dd>{{timereviewbylabel}}</dd>
+                    </div>
+                {{/timereviewbylabel}}
+            </dl>
+        </section>
+    {{/hasdates}}
+
+    {{#hasaipolicy}}
+        <section class="mod-uckkchallenge-rules__section mod-uckkchallenge-rules__section--ai">
+            <h4 class="mod-uckkchallenge-rules__section-title">
+                {{#str}} aipolicy, uckkchallenge {{/str}}
+            </h4>
+
+            <div class="alert alert-info mod-uckkchallenge-rules__ai-notice" role="status">
+                {{#str}} ainonsovereignnotice, uckkchallenge {{/str}}
+            </div>
+
+            <div class="mod-uckkchallenge-rules__text">
+                {{{aipolicyhtml}}}
+            </div>
+        </section>
+    {{/hasaipolicy}}
+
+    <footer class="mod-uckkchallenge-rules__footer">
+        {{#integrityrequired}}
+            <div class="alert alert-warning mod-uckkchallenge-rules__integrity" role="status">
+                <strong>{{#str}} integrityrequired, uckkchallenge {{/str}}</strong>
+                <span>{{#str}} integrityrequirednotice, uckkchallenge {{/str}}</span>
+            </div>
+        {{/integrityrequired}}
+
+        {{#archivepolicylabel}}
+            <p class="mod-uckkchallenge-rules__archive-policy">
+                <strong>{{#str}} archivepolicy, uckkchallenge {{/str}}:</strong>
+                <span>{{archivepolicylabel}}</span>
+            </p>
+        {{/archivepolicylabel}}
+    </footer>
+</section>

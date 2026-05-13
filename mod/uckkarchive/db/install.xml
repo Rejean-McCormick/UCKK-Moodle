@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/uckkarchive/db" VERSION="2026051200" COMMENT="XMLDB file for UCKK Archive activity module"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <TABLE NAME="uckkarchive" COMMENT="UCKK archive activity instances.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Moodle course id for the activity instance."/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="Archive activity name."/>
+                <FIELD NAME="intro" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Archive introduction."/>
+                <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the archive introduction."/>
+                <FIELD NAME="archivecode" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="Stable internal archive code."/>
+                <FIELD NAME="archivetype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Archive scope type."/>
+                <FIELD NAME="archivepolicy" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="validated" SEQUENCE="false" COMMENT="Policy controlling item publication and export."/>
+                <FIELD NAME="defaultvisibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Default visibility for new archive items."/>
+                <FIELD NAME="requirevalidation" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Whether items require validation before publication."/>
+                <FIELD NAME="allowpublicitems" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Whether public archive items are allowed in this instance."/>
+                <FIELD NAME="allowexports" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Whether exports may be requested from this archive."/>
+                <FIELD NAME="completionrequireitem" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Completion requires at least one archive item."/>
+                <FIELD NAME="completionrequirevalidation" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Completion requires a validated archive item."/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="active" SEQUENCE="false" COMMENT="Archive activity status."/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Archive activity visibility."/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Archive configuration version."/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="User who created the archive instance."/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="User who last modified the archive instance."/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creation time."/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Last modification time."/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON metadata for variable archive settings."/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="course" TYPE="foreign" FIELDS="course" REFTABLE="course" REFFIELDS="id"/>
+                <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="archivecode" UNIQUE="false" FIELDS="archivecode"/>
+                <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+                <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+                <INDEX NAME="timemodified" UNIQUE="false" FIELDS="timemodified"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkarchive_item" COMMENT="Archive items: proof, decisions, minutes, challenge results, course works, portfolio entries, Kristals, integrity summaries, and public summaries.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="archiveid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parent archive instance."/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related Moodle course id."/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course module id."/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Moodle context id."/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Owner or principal user when applicable."/>
+                <FIELD NAME="parentitemid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Optional parent archive item."/>
+                <FIELD NAME="itemtype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="proof" SEQUENCE="false" COMMENT="Archive item type."/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="Archive item title."/>
+                <FIELD NAME="summary" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Internal item summary."/>
+                <FIELD NAME="content" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Main item content."/>
+                <FIELD NAME="contentformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Content format."/>
+                <FIELD NAME="publicsummary" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Public-safe summary."/>
+                <FIELD NAME="sourcecomponent" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="Source Moodle component."/>
+                <FIELD NAME="sourceobjectid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Source object id."/>
+                <FIELD NAME="origincomponent" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="Origin component for provenance."/>
+                <FIELD NAME="originobjectid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Origin object id for provenance."/>
+                <FIELD NAME="license" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="Optional license key or label."/>
+                <FIELD NAME="tags" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON or comma-separated tags prepared by services."/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft" SEQUENCE="false" COMMENT="Archive item workflow status."/>
+                <FIELD NAME="validationstate" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="unverified" SEQUENCE="false" COMMENT="Validation state."/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Archive item visibility."/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human" SEQUENCE="false" COMMENT="Primary provenance source."/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="Optional provenance hash."/>
+                <FIELD NAME="integritycaseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Linked integrity case id when applicable."/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Archive item version number."/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="User who created this item."/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="User who last modified this item."/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creation time."/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Modification time."/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON metadata for variable archive item properties."/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="archiveid" TYPE="foreign" FIELDS="archiveid" REFTABLE="uckkarchive" REFFIELDS="id"/>
+                <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+                <KEY NAME="cmid" TYPE="foreign" FIELDS="cmid" REFTABLE="course_modules" REFFIELDS="id"/>
+                <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+                <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="parentitemid" TYPE="foreign" FIELDS="parentitemid" REFTABLE="uckkarchive_item" REFFIELDS="id"/>
+                <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="archive-status" UNIQUE="false" FIELDS="archiveid, status"/>
+                <INDEX NAME="archive-type" UNIQUE="false" FIELDS="archiveid, itemtype"/>
+                <INDEX NAME="archive-validation" UNIQUE="false" FIELDS="archiveid, validationstate"/>
+                <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+                <INDEX NAME="source" UNIQUE="false" FIELDS="sourcecomponent, sourceobjectid"/>
+                <INDEX NAME="origin" UNIQUE="false" FIELDS="origincomponent, originobjectid"/>
+                <INDEX NAME="integritycaseid" UNIQUE="false" FIELDS="integritycaseid"/>
+                <INDEX NAME="provenancehash" UNIQUE="false" FIELDS="provenancehash"/>
+                <INDEX NAME="timemodified" UNIQUE="false" FIELDS="timemodified"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkarchive_kristal" COMMENT="Kristal records extracted or curated from archive memory.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="archiveid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parent archive instance."/>
+                <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related archive item."/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related Moodle course id."/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course module id."/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Moodle context id."/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Owner or author user id."/>
+                <FIELD NAME="kristaltype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="insight" SEQUENCE="false" COMMENT="Kristal type."/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="Kristal title."/>
+                <FIELD NAME="claim" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Main claim or crystallised learning."/>
+                <FIELD NAME="body" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Kristal body."/>
+                <FIELD NAME="bodyformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Body format."/>
+                <FIELD NAME="evidence" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Evidence summary."/>
+                <FIELD NAME="sourceitemid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Source archive item when different from itemid."/>
+                <FIELD NAME="confidence" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Human confidence or review score from 0 to 100."/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft" SEQUENCE="false" COMMENT="Kristal status."/>
+                <FIELD NAME="validationstate" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="unverified" SEQUENCE="false" COMMENT="Validation state."/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Kristal visibility."/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human" SEQUENCE="false" COMMENT="Primary provenance source."/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="Optional provenance hash."/>
+                <FIELD NAME="integritycaseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Linked integrity case id."/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Version number."/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creator user id."/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Last modifier user id."/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creation time."/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Modification time."/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON metadata."/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="archiveid" TYPE="foreign" FIELDS="archiveid" REFTABLE="uckkarchive" REFFIELDS="id"/>
+                <KEY NAME="itemid" TYPE="foreign" FIELDS="itemid" REFTABLE="uckkarchive_item" REFFIELDS="id"/>
+                <KEY NAME="sourceitemid" TYPE="foreign" FIELDS="sourceitemid" REFTABLE="uckkarchive_item" REFFIELDS="id"/>
+                <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+                <KEY NAME="cmid" TYPE="foreign" FIELDS="cmid" REFTABLE="course_modules" REFFIELDS="id"/>
+                <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+                <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="archive-type" UNIQUE="false" FIELDS="archiveid, kristaltype"/>
+                <INDEX NAME="archive-status" UNIQUE="false" FIELDS="archiveid, status"/>
+                <INDEX NAME="validationstate" UNIQUE="false" FIELDS="validationstate"/>
+                <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+                <INDEX NAME="integritycaseid" UNIQUE="false" FIELDS="integritycaseid"/>
+                <INDEX NAME="provenancehash" UNIQUE="false" FIELDS="provenancehash"/>
+                <INDEX NAME="timemodified" UNIQUE="false" FIELDS="timemodified"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkarchive_proof" COMMENT="Proof records linked to archive items.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="archiveid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parent archive instance."/>
+                <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parent archive item."/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course id."/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course module id."/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Moodle context id."/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Owner or contributor user id."/>
+                <FIELD NAME="prooftype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="text" SEQUENCE="false" COMMENT="Proof type."/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="Proof title."/>
+                <FIELD NAME="description" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Proof description."/>
+                <FIELD NAME="descriptionformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Description format."/>
+                <FIELD NAME="sourceurl" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Optional external source URL."/>
+                <FIELD NAME="fileitemid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="File API item id or logical file bundle id."/>
+                <FIELD NAME="sourcecomponent" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="Source component."/>
+                <FIELD NAME="sourceobjectid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Source object id."/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft" SEQUENCE="false" COMMENT="Proof status."/>
+                <FIELD NAME="validationstate" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="unverified" SEQUENCE="false" COMMENT="Validation state."/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Proof visibility."/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human" SEQUENCE="false" COMMENT="Primary provenance source."/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="Optional provenance hash."/>
+                <FIELD NAME="integritycaseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Linked integrity case id."/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Version number."/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creator user id."/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Modifier user id."/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creation time."/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Modification time."/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON metadata."/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="archiveid" TYPE="foreign" FIELDS="archiveid" REFTABLE="uckkarchive" REFFIELDS="id"/>
+                <KEY NAME="itemid" TYPE="foreign" FIELDS="itemid" REFTABLE="uckkarchive_item" REFFIELDS="id"/>
+                <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+                <KEY NAME="cmid" TYPE="foreign" FIELDS="cmid" REFTABLE="course_modules" REFFIELDS="id"/>
+                <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+                <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="item-type" UNIQUE="false" FIELDS="itemid, prooftype"/>
+                <INDEX NAME="archive-status" UNIQUE="false" FIELDS="archiveid, status"/>
+                <INDEX NAME="validationstate" UNIQUE="false" FIELDS="validationstate"/>
+                <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+                <INDEX NAME="source" UNIQUE="false" FIELDS="sourcecomponent, sourceobjectid"/>
+                <INDEX NAME="integritycaseid" UNIQUE="false" FIELDS="integritycaseid"/>
+                <INDEX NAME="provenancehash" UNIQUE="false" FIELDS="provenancehash"/>
+                <INDEX NAME="timemodified" UNIQUE="false" FIELDS="timemodified"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkarchive_prov" COMMENT="Provenance records for archive items and proofs.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="archiveid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parent archive instance."/>
+                <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Related archive item."/>
+                <FIELD NAME="proofid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related proof record when applicable."/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course id."/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course module id."/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Moodle context id."/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Principal user or author id."/>
+                <FIELD NAME="authorid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Source author user id if known."/>
+                <FIELD NAME="origincomponent" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="Origin Moodle component."/>
+                <FIELD NAME="originobjectid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Origin object id."/>
+                <FIELD NAME="source" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Human-readable source description."/>
+                <FIELD NAME="sourcedate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Source date when known."/>
+                <FIELD NAME="evidence" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Supporting evidence summary or references."/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human" SEQUENCE="false" COMMENT="Provenance source."/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="validated" SEQUENCE="false" COMMENT="Provenance record status."/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Provenance visibility."/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Version number."/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="Provenance hash."/>
+                <FIELD NAME="integritycaseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Linked integrity case id."/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creator user id."/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Modifier user id."/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creation time."/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Modification time."/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON metadata."/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="archiveid" TYPE="foreign" FIELDS="archiveid" REFTABLE="uckkarchive" REFFIELDS="id"/>
+                <KEY NAME="itemid" TYPE="foreign" FIELDS="itemid" REFTABLE="uckkarchive_item" REFFIELDS="id"/>
+                <KEY NAME="proofid" TYPE="foreign" FIELDS="proofid" REFTABLE="uckkarchive_proof" REFFIELDS="id"/>
+                <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+                <KEY NAME="cmid" TYPE="foreign" FIELDS="cmid" REFTABLE="course_modules" REFFIELDS="id"/>
+                <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+                <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="authorid" TYPE="foreign" FIELDS="authorid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="origin" UNIQUE="false" FIELDS="origincomponent, originobjectid"/>
+                <INDEX NAME="provenance" UNIQUE="false" FIELDS="provenance"/>
+                <INDEX NAME="integritycaseid" UNIQUE="false" FIELDS="integritycaseid"/>
+                <INDEX NAME="provenancehash" UNIQUE="false" FIELDS="provenancehash"/>
+                <INDEX NAME="timemodified" UNIQUE="false" FIELDS="timemodified"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkarchive_rev" COMMENT="Version and revision records for archive items.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="archiveid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parent archive instance."/>
+                <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Related archive item."/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course id."/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course module id."/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Moodle context id."/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Owner or affected user id."/>
+                <FIELD NAME="previousstate" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON previous item state."/>
+                <FIELD NAME="newstate" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON new item state."/>
+                <FIELD NAME="changereason" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Reason for the revision."/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="validated" SEQUENCE="false" COMMENT="Revision status."/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Revision visibility."/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Item version after this revision."/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="Revision provenance hash."/>
+                <FIELD NAME="integritycaseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Linked integrity case id."/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="User who created the revision record."/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="User who last modified the revision record."/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creation time."/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Modification time."/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON metadata."/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="archiveid" TYPE="foreign" FIELDS="archiveid" REFTABLE="uckkarchive" REFFIELDS="id"/>
+                <KEY NAME="itemid" TYPE="foreign" FIELDS="itemid" REFTABLE="uckkarchive_item" REFFIELDS="id"/>
+                <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+                <KEY NAME="cmid" TYPE="foreign" FIELDS="cmid" REFTABLE="course_modules" REFFIELDS="id"/>
+                <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+                <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="item-version" UNIQUE="false" FIELDS="itemid, versionno"/>
+                <INDEX NAME="integritycaseid" UNIQUE="false" FIELDS="integritycaseid"/>
+                <INDEX NAME="provenancehash" UNIQUE="false" FIELDS="provenancehash"/>
+                <INDEX NAME="timecreated" UNIQUE="false" FIELDS="timecreated"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkarchive_export" COMMENT="Archive export package requests and generated package records.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="archiveid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parent archive instance."/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course id."/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Related course module id."/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Moodle context id."/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="User requesting the export."/>
+                <FIELD NAME="exportscope" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="validated_items" SEQUENCE="false" COMMENT="Export scope."/>
+                <FIELD NAME="exportformat" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="zip" SEQUENCE="false" COMMENT="Export format."/>
+                <FIELD NAME="packagename" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Export package name."/>
+                <FIELD NAME="description" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Export description."/>
+                <FIELD NAME="itemids" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON selected item ids."/>
+                <FIELD NAME="reason" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Export reason."/>
+                <FIELD NAME="auditnote" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Export audit note."/>
+                <FIELD NAME="redactionlevel" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="hide_identity" SEQUENCE="false" COMMENT="Applied redaction level."/>
+                <FIELD NAME="redacted" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Whether restricted or personal data was redacted."/>
+                <FIELD NAME="includefiles" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Whether files are included."/>
+                <FIELD NAME="includeproofs" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Whether proof records are included."/>
+                <FIELD NAME="includeprovenance" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Whether provenance records are included."/>
+                <FIELD NAME="includeversions" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Whether revision history is included."/>
+                <FIELD NAME="fileitemid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="File API item id for generated package."/>
+                <FIELD NAME="downloadcount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Download count."/>
+                <FIELD NAME="lastdownloaded" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Last download time."/>
+                <FIELD NAME="timequeued" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Queue time."/>
+                <FIELD NAME="timestarted" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Generation start time."/>
+                <FIELD NAME="timecompleted" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Generation completion time."/>
+                <FIELD NAME="error" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Generation error message."/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="pending" SEQUENCE="false" COMMENT="Export status."/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Export visibility."/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Export version."/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="Export provenance hash."/>
+                <FIELD NAME="integritycaseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Linked integrity case id."/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creator user id."/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Modifier user id."/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Creation time."/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Modification time."/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON metadata."/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="archiveid" TYPE="foreign" FIELDS="archiveid" REFTABLE="uckkarchive" REFFIELDS="id"/>
+                <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+                <KEY NAME="cmid" TYPE="foreign" FIELDS="cmid" REFTABLE="course_modules" REFFIELDS="id"/>
+                <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+                <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="archive-status" UNIQUE="false" FIELDS="archiveid, status"/>
+                <INDEX NAME="scope-format" UNIQUE="false" FIELDS="exportscope, exportformat"/>
+                <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+                <INDEX NAME="integritycaseid" UNIQUE="false" FIELDS="integritycaseid"/>
+                <INDEX NAME="provenancehash" UNIQUE="false" FIELDS="provenancehash"/>
+                <INDEX NAME="timecreated" UNIQUE="false" FIELDS="timecreated"/>
+                <INDEX NAME="timecompleted" UNIQUE="false" FIELDS="timecompleted"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
+

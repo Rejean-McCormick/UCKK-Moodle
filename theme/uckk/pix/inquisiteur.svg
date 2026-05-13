@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="256"
+    height="256"
+    viewBox="0 0 256 256"
+    role="img"
+    aria-labelledby="title desc"
+>
+    <title id="title">UCKK Inquisiteur icon</title>
+    <desc id="desc">
+        A shield, eye, scales and archive mark representing ethical inquiry,
+        evidence, procedural justice and protection against abuse in UCKK.
+    </desc>
+
+    <defs>
+        <linearGradient id="uckk-inq-bg" x1="32" y1="24" x2="224" y2="232" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#15151c"/>
+            <stop offset="0.45" stop-color="#121a3a"/>
+            <stop offset="1" stop-color="#0b0b0f"/>
+        </linearGradient>
+
+        <linearGradient id="uckk-inq-gold" x1="64" y1="48" x2="196" y2="220" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#d2b574"/>
+            <stop offset="0.55" stop-color="#b9934b"/>
+            <stop offset="1" stop-color="#7a5a24"/>
+        </linearGradient>
+
+        <linearGradient id="uckk-inq-red" x1="88" y1="70" x2="170" y2="180" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#d94a42"/>
+            <stop offset="1" stop-color="#b32222"/>
+        </linearGradient>
+
+        <filter id="uckk-inq-shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000000" flood-opacity="0.32"/>
+        </filter>
+
+        <clipPath id="uckk-inq-shield-clip">
+            <path d="M128 22 206 50v60c0 54.5-31.9 101.3-78 124-46.1-22.7-78-69.5-78-124V50l78-28Z"/>
+        </clipPath>
+    </defs>
+
+    <!-- Outer field. -->
+    <circle cx="128" cy="128" r="120" fill="url(#uckk-inq-bg)"/>
+    <circle cx="128" cy="128" r="116" fill="none" stroke="#b9934b" stroke-width="4" opacity="0.9"/>
+    <circle cx="128" cy="128" r="102" fill="none" stroke="#f7f1df" stroke-width="1.5" opacity="0.16"/>
+
+    <!-- Shield: protection of integrity. -->
+    <g filter="url(#uckk-inq-shadow)">
+        <path
+            d="M128 22 206 50v60c0 54.5-31.9 101.3-78 124-46.1-22.7-78-69.5-78-124V50l78-28Z"
+            fill="#121a3a"
+            stroke="url(#uckk-inq-gold)"
+            stroke-width="6"
+            stroke-linejoin="round"
+        />
+        <g clip-path="url(#uckk-inq-shield-clip)" opacity="0.22">
+            <path d="M34 78h188" stroke="#f7f1df" stroke-width="1"/>
+            <path d="M34 112h188" stroke="#f7f1df" stroke-width="1"/>
+            <path d="M34 146h188" stroke="#f7f1df" stroke-width="1"/>
+            <path d="M34 180h188" stroke="#f7f1df" stroke-width="1"/>
+            <path d="M84 28v198" stroke="#f7f1df" stroke-width="1"/>
+            <path d="M128 20v220" stroke="#f7f1df" stroke-width="1"/>
+            <path d="M172 28v198" stroke="#f7f1df" stroke-width="1"/>
+        </g>
+    </g>
+
+    <!-- Eye: inquiry and verification. -->
+    <g>
+        <path
+            d="M55 117c19.5-29 44-43.5 73-43.5S181.5 88 201 117c-19.5 29-44 43.5-73 43.5S74.5 146 55 117Z"
+            fill="#f7f1df"
+            opacity="0.96"
+        />
+        <path
+            d="M68 117c16.1-20.6 36.1-30.9 60-30.9s43.9 10.3 60 30.9c-16.1 20.6-36.1 30.9-60 30.9S84.1 137.6 68 117Z"
+            fill="#0b0b0f"
+            opacity="0.92"
+        />
+        <circle cx="128" cy="117" r="29" fill="url(#uckk-inq-gold)"/>
+        <circle cx="128" cy="117" r="15" fill="#0b0b0f"/>
+        <circle cx="120" cy="108" r="5" fill="#f7f1df"/>
+        <circle cx="128" cy="117" r="38" fill="none" stroke="#b9934b" stroke-width="3"/>
+    </g>
+
+    <!-- Scales: procedural justice. -->
+    <g fill="none" stroke="#f7f1df" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M128 153v42" stroke-width="6"/>
+        <path d="M97 195h62" stroke-width="6"/>
+        <path d="M112 170h32" stroke-width="5"/>
+        <path d="M128 164 87 178" stroke-width="4"/>
+        <path d="M128 164 169 178" stroke-width="4"/>
+        <path d="M87 178 73 202h28l-14-24Z" fill="#15151c" stroke-width="4"/>
+        <path d="M169 178 155 202h28l-14-24Z" fill="#15151c" stroke-width="4"/>
+    </g>
+
+    <!-- Red seal: correction / contestability mark. -->
+    <g>
+        <circle cx="184" cy="68" r="22" fill="url(#uckk-inq-red)" stroke="#f7f1df" stroke-width="3"/>
+        <path
+            d="M174 68h20M184 58v20"
+            stroke="#f7f1df"
+            stroke-width="5"
+            stroke-linecap="round"
+        />
+    </g>
+
+    <!-- Archive mark: decision must be traceable. -->
+    <g>
+        <rect
+            x="54"
+            y="171"
+            width="38"
+            height="44"
+            rx="5"
+            fill="#f7f1df"
+            stroke="#b9934b"
+            stroke-width="3"
+        />
+        <path d="M62 184h22M62 194h22M62 204h14" stroke="#121a3a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M54 181h38" stroke="#b9934b" stroke-width="3"/>
+    </g>
+
+    <!-- Outer motto ring accents. -->
+    <g fill="none" stroke="#b9934b" stroke-linecap="round">
+        <path d="M48 54a104 104 0 0 1 42-24" stroke-width="5"/>
+        <path d="M166 30a104 104 0 0 1 42 24" stroke-width="5"/>
+        <path d="M208 202a104 104 0 0 1-42 24" stroke-width="5"/>
+        <path d="M90 226a104 104 0 0 1-42-24" stroke-width="5"/>
+    </g>
+</svg>

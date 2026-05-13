@@ -1,0 +1,299 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+}}
+{{!
+    @template local_uckk/player_profile
+
+    Renders a UCKK Joueur profile summary.
+
+    This template is intentionally presentation-only. Capability checks,
+    restricted visibility decisions, symbolic role normalization, pathway
+    progress, integrity flag filtering, and portfolio access decisions must
+    be completed before data reaches this template.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * data-region="uckk-player-profile"
+    * data-userid
+    * data-profileid
+
+    Context variables required for this template:
+    * uniqid string
+    * userid int
+    * profileid int
+    * fullname string
+    * displaytitle string
+    * hasprofileimage bool
+    * profileimageurl string
+    * profileimagealt string
+    * visibility object
+    * status object
+    * symbolicroles array
+    * activepathways array
+    * hasportfolio bool
+    * portfolio object
+    * hasintegrityflags bool
+    * integrityflags array
+    * hasactions bool
+    * canmanage bool
+    * editurl string
+    * lastupdated string
+
+    Example context (json):
+    {
+        "uniqid": "local-uckk-player-profile-42",
+        "userid": 42,
+        "profileid": 7,
+        "fullname": "Marie Exemple",
+        "displaytitle": "Joueuse lucide",
+        "hasprofileimage": true,
+        "profileimageurl": "https://example.test/pluginfile.php/...",
+        "profileimagealt": "Marie Exemple",
+        "visibility": {
+            "key": "user",
+            "label": "User",
+            "classes": "badge bg-secondary"
+        },
+        "status": {
+            "key": "active",
+            "label": "Active",
+            "classes": "badge bg-success"
+        },
+        "symbolicroles": [
+            {
+                "key": "joueur_lucide",
+                "label": "Joueur lucide",
+                "description": "Badge/status earned through evidence"
+            }
+        ],
+        "activepathways": [
+            {
+                "id": 3,
+                "shortname": "tronc_commun",
+                "fullname": "Tronc commun",
+                "progress": 62,
+                "progresslabel": "62%",
+                "url": "https://example.test/local/uckk/pathway.php?id=3"
+            }
+        ],
+        "hasportfolio": true,
+        "portfolio": {
+            "url": "https://example.test/mod/uckkarchive/view.php?id=12",
+            "title": "Portfolio UCKK",
+            "summary": "Evidence map attached to the Joueur"
+        },
+        "hasintegrityflags": false,
+        "integrityflags": [],
+        "hasactions": true,
+        "canmanage": true,
+        "editurl": "https://example.test/local/uckk/profile/edit.php?id=7",
+        "lastupdated": "12 May 2026"
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="local-uckk-player-profile card"
+    data-region="uckk-player-profile"
+    data-userid="{{userid}}"
+    data-profileid="{{profileid}}"
+>
+    <div class="card-body">
+        <header class="local-uckk-player-profile__header d-flex flex-column flex-md-row align-items-start gap-3">
+            {{#hasprofileimage}}
+                <img
+                    class="local-uckk-player-profile__image rounded-circle"
+                    src="{{profileimageurl}}"
+                    alt="{{profileimagealt}}"
+                    width="96"
+                    height="96"
+                >
+            {{/hasprofileimage}}
+
+            <div class="local-uckk-player-profile__identity flex-fill">
+                <div class="d-flex flex-column flex-lg-row align-items-start justify-content-between gap-2">
+                    <div>
+                        <h3 class="local-uckk-player-profile__name h4 mb-1">
+                            {{fullname}}
+                        </h3>
+
+                        {{#displaytitle}}
+                            <p class="local-uckk-player-profile__title text-muted mb-2">
+                                {{displaytitle}}
+                            </p>
+                        {{/displaytitle}}
+                    </div>
+
+                    <div class="local-uckk-player-profile__badges d-flex flex-wrap gap-1" aria-label="{{#str}}profilebadges, local_uckk{{/str}}">
+                        {{#status}}
+                            {{> local_uckk/status_badge}}
+                        {{/status}}
+
+                        {{#visibility}}
+                            <span class="{{classes}}" data-visibility="{{key}}">
+                                {{label}}
+                            </span>
+                        {{/visibility}}
+                    </div>
+                </div>
+
+                {{#lastupdated}}
+                    <div class="local-uckk-player-profile__updated small text-muted">
+                        {{#str}}lastupdated, local_uckk{{/str}}: {{lastupdated}}
+                    </div>
+                {{/lastupdated}}
+            </div>
+        </header>
+
+        <div class="local-uckk-player-profile__content mt-4">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <section class="local-uckk-player-profile__section mb-4" aria-labelledby="{{uniqid}}-roles-heading">
+                        <h4 id="{{uniqid}}-roles-heading" class="h5">
+                            {{#str}}symbolicroles, local_uckk{{/str}}
+                        </h4>
+
+                        {{#symbolicroles.0}}
+                            <ul class="local-uckk-player-profile__roles list-unstyled mb-0">
+                                {{#symbolicroles}}
+                                    <li class="local-uckk-player-profile__role mb-2">
+                                        <span class="badge bg-light text-dark border" data-symbolic-role="{{key}}">
+                                            {{label}}
+                                        </span>
+
+                                        {{#description}}
+                                            <div class="small text-muted mt-1">
+                                                {{description}}
+                                            </div>
+                                        {{/description}}
+                                    </li>
+                                {{/symbolicroles}}
+                            </ul>
+                        {{/symbolicroles.0}}
+
+                        {{^symbolicroles.0}}
+                            <p class="text-muted mb-0">
+                                {{#str}}nosymbolicroles, local_uckk{{/str}}
+                            </p>
+                        {{/symbolicroles.0}}
+                    </section>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <section class="local-uckk-player-profile__section mb-4" aria-labelledby="{{uniqid}}-portfolio-heading">
+                        <h4 id="{{uniqid}}-portfolio-heading" class="h5">
+                            {{#str}}portfolio, local_uckk{{/str}}
+                        </h4>
+
+                        {{#hasportfolio}}
+                            <div class="local-uckk-player-profile__portfolio border rounded p-3">
+                                <a class="fw-bold" href="{{portfolio.url}}">
+                                    {{portfolio.title}}
+                                </a>
+
+                                {{#portfolio.summary}}
+                                    <p class="small text-muted mb-0 mt-1">
+                                        {{portfolio.summary}}
+                                    </p>
+                                {{/portfolio.summary}}
+                            </div>
+                        {{/hasportfolio}}
+
+                        {{^hasportfolio}}
+                            <p class="text-muted mb-0">
+                                {{#str}}noportfolio, local_uckk{{/str}}
+                            </p>
+                        {{/hasportfolio}}
+                    </section>
+                </div>
+            </div>
+
+            <section class="local-uckk-player-profile__section mb-4" aria-labelledby="{{uniqid}}-pathways-heading">
+                <h4 id="{{uniqid}}-pathways-heading" class="h5">
+                    {{#str}}activepathways, local_uckk{{/str}}
+                </h4>
+
+                {{#activepathways.0}}
+                    <div class="local-uckk-player-profile__pathways list-group">
+                        {{#activepathways}}
+                            <a
+                                class="list-group-item list-group-item-action"
+                                href="{{url}}"
+                                data-pathway-id="{{id}}"
+                                data-pathway-shortname="{{shortname}}"
+                            >
+                                <div class="d-flex w-100 justify-content-between gap-3">
+                                    <span class="fw-bold">
+                                        {{fullname}}
+                                    </span>
+
+                                    {{#progresslabel}}
+                                        <span class="small text-muted">
+                                            {{progresslabel}}
+                                        </span>
+                                    {{/progresslabel}}
+                                </div>
+
+                                {{#progresslabel}}
+                                    <div class="progress mt-2" role="progressbar" aria-label="{{fullname}}" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: {{progress}}%;"></div>
+                                    </div>
+                                {{/progresslabel}}
+                            </a>
+                        {{/activepathways}}
+                    </div>
+                {{/activepathways.0}}
+
+                {{^activepathways.0}}
+                    <p class="text-muted mb-0">
+                        {{#str}}noactivepathways, local_uckk{{/str}}
+                    </p>
+                {{/activepathways.0}}
+            </section>
+
+            {{#hasintegrityflags}}
+                <section class="local-uckk-player-profile__section local-uckk-player-profile__integrity mb-4" aria-labelledby="{{uniqid}}-integrity-heading">
+                    <h4 id="{{uniqid}}-integrity-heading" class="h5">
+                        {{#str}}integritymarkers, local_uckk{{/str}}
+                    </h4>
+
+                    <div class="alert alert-warning mb-0">
+                        <ul class="mb-0">
+                            {{#integrityflags}}
+                                <li data-integrity-flag="{{key}}">
+                                    <strong>{{label}}</strong>
+
+                                    {{#summary}}
+                                        <span>{{summary}}</span>
+                                    {{/summary}}
+                                </li>
+                            {{/integrityflags}}
+                        </ul>
+                    </div>
+                </section>
+            {{/hasintegrityflags}}
+        </div>
+
+        {{#hasactions}}
+            <footer class="local-uckk-player-profile__actions d-flex flex-wrap gap-2 mt-4">
+                {{#canmanage}}
+                    <a class="btn btn-secondary" href="{{editurl}}">
+                        {{#str}}editprofile, local_uckk{{/str}}
+                    </a>
+                {{/canmanage}}
+            </footer>
+        {{/hasactions}}
+    </div>
+</section>

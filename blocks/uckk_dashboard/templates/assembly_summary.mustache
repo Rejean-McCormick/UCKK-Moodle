@@ -1,0 +1,190 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    UCKK-Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+}}
+{{!
+    @template block_uckk_dashboard/assembly_summary
+
+    Renders the Assemblées summary card for the UCKK dashboard block.
+
+    This template is display-only. It must not decide permissions, assemble
+    workflow state, calculate vote state, expose restricted integrity details,
+    or publish decisions. Those responsibilities belong to PHP services,
+    renderables, and the relevant UCKK plugins.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * data-region="uckk-assembly-summary"
+
+    Context variables required for this template:
+    * title - Localised card title.
+    * description - Localised card description.
+    * hasassemblies - Whether there are assembly items to show.
+    * assemblies - List of assembly summary items.
+
+    Context variables optional for this template:
+    * upcomingcount - Number of upcoming assemblies.
+    * openmotionscount - Number of open motions.
+    * recentdecisionscount - Number of recent decisions.
+    * viewallurl - URL for the full assemblies view.
+    * updatedlabel - Localised last-updated label.
+    * restrictednotice - Localised notice for restricted assembly/integrity data.
+
+    Assembly item variables:
+    * title - Localised assembly title.
+    * url - Optional URL.
+    * subtitle - Optional contextual subtitle.
+    * time - Optional localised time/date label.
+    * location - Optional location label.
+    * summary - Optional short summary.
+    * statusbadge - Optional context for local_uckk/status_badge.
+    * typebadge - Optional localised type label.
+    * actionurl - Optional action URL.
+    * actionlabel - Optional localised action label.
+    * isrestricted - Whether item has restricted details.
+}}
+
+<section
+    class="uckk-dashboard-card uckk-dashboard-card--assemblies"
+    data-region="uckk-assembly-summary"
+    aria-labelledby="uckk-assembly-summary-title"
+>
+    <header class="uckk-dashboard-card__header">
+        <div class="uckk-dashboard-card__heading">
+            <h3 id="uckk-assembly-summary-title" class="uckk-dashboard-card__title">
+                {{#title}}{{title}}{{/title}}
+                {{^title}}{{#str}} assemblysummary, block_uckk_dashboard {{/str}}{{/title}}
+            </h3>
+
+            <p class="uckk-dashboard-card__description">
+                {{#description}}{{description}}{{/description}}
+                {{^description}}{{#str}} assemblysummary_desc, block_uckk_dashboard {{/str}}{{/description}}
+            </p>
+        </div>
+
+        {{#viewallurl}}
+            <a class="uckk-dashboard-card__link" href="{{viewallurl}}">
+                {{#str}} viewall, block_uckk_dashboard {{/str}}
+            </a>
+        {{/viewallurl}}
+    </header>
+
+    <div class="uckk-dashboard-card__metrics" aria-label="{{#str}} assemblysummary, block_uckk_dashboard {{/str}}">
+        <div class="uckk-dashboard-metric">
+            <span class="uckk-dashboard-metric__value">{{upcomingcount}}</span>
+            <span class="uckk-dashboard-metric__label">
+                {{#str}} upcomingassemblies, block_uckk_dashboard {{/str}}
+            </span>
+        </div>
+
+        <div class="uckk-dashboard-metric">
+            <span class="uckk-dashboard-metric__value">{{openmotionscount}}</span>
+            <span class="uckk-dashboard-metric__label">
+                {{#str}} openmotions, block_uckk_dashboard {{/str}}
+            </span>
+        </div>
+
+        <div class="uckk-dashboard-metric">
+            <span class="uckk-dashboard-metric__value">{{recentdecisionscount}}</span>
+            <span class="uckk-dashboard-metric__label">
+                {{#str}} recentdecisions, block_uckk_dashboard {{/str}}
+            </span>
+        </div>
+    </div>
+
+    {{#restrictednotice}}
+        <div class="uckk-dashboard-card__notice uckk-dashboard-card__notice--restricted" role="note">
+            {{restrictednotice}}
+        </div>
+    {{/restrictednotice}}
+
+    {{#hasassemblies}}
+        <ul class="uckk-dashboard-list uckk-dashboard-list--assemblies">
+            {{#assemblies}}
+                <li class="uckk-dashboard-list__item uckk-assembly-summary-item{{#isrestricted}} uckk-assembly-summary-item--restricted{{/isrestricted}}">
+                    <div class="uckk-assembly-summary-item__main">
+                        <div class="uckk-assembly-summary-item__title-row">
+                            <h4 class="uckk-assembly-summary-item__title">
+                                {{#url}}
+                                    <a href="{{url}}">{{title}}</a>
+                                {{/url}}
+                                {{^url}}
+                                    {{title}}
+                                {{/url}}
+                            </h4>
+
+                            {{#statusbadge}}
+                                {{> local_uckk/status_badge }}
+                            {{/statusbadge}}
+                        </div>
+
+                        {{#subtitle}}
+                            <div class="uckk-assembly-summary-item__subtitle">
+                                {{subtitle}}
+                            </div>
+                        {{/subtitle}}
+
+                        <div class="uckk-assembly-summary-item__meta">
+                            {{#typebadge}}
+                                <span class="uckk-assembly-summary-item__type">
+                                    {{typebadge}}
+                                </span>
+                            {{/typebadge}}
+
+                            {{#time}}
+                                <span class="uckk-assembly-summary-item__time">
+                                    {{time}}
+                                </span>
+                            {{/time}}
+
+                            {{#location}}
+                                <span class="uckk-assembly-summary-item__location">
+                                    {{location}}
+                                </span>
+                            {{/location}}
+                        </div>
+
+                        {{#summary}}
+                            <p class="uckk-assembly-summary-item__summary">
+                                {{summary}}
+                            </p>
+                        {{/summary}}
+
+                        {{#isrestricted}}
+                            <div class="uckk-assembly-summary-item__restricted">
+                                {{#str}} restricted, block_uckk_dashboard {{/str}}
+                            </div>
+                        {{/isrestricted}}
+                    </div>
+
+                    {{#actionurl}}
+                        <div class="uckk-assembly-summary-item__actions">
+                            <a class="btn btn-sm btn-secondary" href="{{actionurl}}">
+                                {{#actionlabel}}{{actionlabel}}{{/actionlabel}}
+                                {{^actionlabel}}{{#str}} viewdetails, block_uckk_dashboard {{/str}}{{/actionlabel}}
+                            </a>
+                        </div>
+                    {{/actionurl}}
+                </li>
+            {{/assemblies}}
+        </ul>
+    {{/hasassemblies}}
+
+    {{^hasassemblies}}
+        <div class="uckk-dashboard-empty">
+            <p>{{#str}} noassemblies, block_uckk_dashboard {{/str}}</p>
+        </div>
+    {{/hasassemblies}}
+
+    {{#updatedlabel}}
+        <footer class="uckk-dashboard-card__footer">
+            <small class="text-muted">{{updatedlabel}}</small>
+        </footer>
+    {{/updatedlabel}}
+</section>

@@ -1,0 +1,739 @@
+/**
+ * Course format styles for format_uckk.
+ *
+ * This file is intentionally scoped to the UCKK course format.
+ * It must not replace the global theme styling and must not encode
+ * business rules, permissions, completion logic, integrity decisions,
+ * archive validation or grading behavior.
+ *
+ * @package    format_uckk
+ * @copyright  2026 Univers-Cité King Klown
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/* -------------------------------------------------------------------------
+   Local visual tokens.
+   ------------------------------------------------------------------------- */
+
+.format-uckk,
+.format-uckk.path-course-view {
+    --uckk-format-ink: #1f2937;
+    --uckk-format-muted: #6b7280;
+    --uckk-format-border: #e5e7eb;
+    --uckk-format-border-strong: #d1d5db;
+    --uckk-format-surface: #ffffff;
+    --uckk-format-surface-soft: #f9fafb;
+    --uckk-format-surface-warm: #fffaf0;
+    --uckk-format-black: #111827;
+    --uckk-format-gold: #b7791f;
+    --uckk-format-gold-soft: #fef3c7;
+    --uckk-format-blue: #1d4ed8;
+    --uckk-format-blue-soft: #dbeafe;
+    --uckk-format-green: #047857;
+    --uckk-format-green-soft: #d1fae5;
+    --uckk-format-purple: #6d28d9;
+    --uckk-format-purple-soft: #ede9fe;
+    --uckk-format-red: #b91c1c;
+    --uckk-format-red-soft: #fee2e2;
+    --uckk-format-slate: #475569;
+    --uckk-format-slate-soft: #f1f5f9;
+    --uckk-format-radius-sm: .375rem;
+    --uckk-format-radius-md: .75rem;
+    --uckk-format-radius-lg: 1rem;
+    --uckk-format-shadow-sm: 0 .125rem .25rem rgba(17, 24, 39, .06);
+    --uckk-format-shadow-md: 0 .5rem 1.25rem rgba(17, 24, 39, .10);
+    --uckk-format-focus: 0 0 0 .2rem rgba(183, 121, 31, .25);
+}
+
+/* -------------------------------------------------------------------------
+   Course wrapper.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .course-content {
+    position: relative;
+}
+
+.format-uckk .uckk-course-format {
+    color: var(--uckk-format-ink);
+}
+
+.format-uckk .uckk-course-map {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--uckk-format-border);
+    border-radius: var(--uckk-format-radius-lg);
+    background: var(--uckk-format-surface);
+    box-shadow: var(--uckk-format-shadow-sm);
+}
+
+.format-uckk .uckk-course-map-title {
+    margin: 0 0 .25rem;
+    color: var(--uckk-format-black);
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.format-uckk .uckk-course-map-summary {
+    margin: 0;
+    color: var(--uckk-format-muted);
+    font-size: .875rem;
+}
+
+.format-uckk .uckk-course-map-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: .75rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.format-uckk .uckk-course-map-item {
+    margin: 0;
+}
+
+.format-uckk .uckk-course-map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .4rem .65rem;
+    border: 1px solid var(--uckk-format-border);
+    border-radius: 999px;
+    background: var(--uckk-format-surface-soft);
+    color: var(--uckk-format-ink);
+    font-size: .8125rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.format-uckk .uckk-course-map-link:hover,
+.format-uckk .uckk-course-map-link:focus {
+    border-color: rgba(183, 121, 31, .45);
+    background: var(--uckk-format-gold-soft);
+    color: var(--uckk-format-black);
+    text-decoration: none;
+}
+
+/* -------------------------------------------------------------------------
+   Section container.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-section {
+    position: relative;
+    margin-bottom: 1rem;
+    border: 1px solid var(--uckk-format-border);
+    border-radius: var(--uckk-format-radius-lg);
+    background: var(--uckk-format-surface);
+    box-shadow: var(--uckk-format-shadow-sm);
+    overflow: hidden;
+}
+
+.format-uckk .uckk-section:hover {
+    border-color: var(--uckk-format-border-strong);
+}
+
+.format-uckk .uckk-section-hidden {
+    opacity: .72;
+}
+
+.format-uckk .uckk-section-hidden .uckk-section-header {
+    background: repeating-linear-gradient(
+        45deg,
+        var(--uckk-format-surface-soft),
+        var(--uckk-format-surface-soft) 8px,
+        #ffffff 8px,
+        #ffffff 16px
+    );
+}
+
+.format-uckk .uckk-section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .9rem 1rem;
+    border-bottom: 1px solid var(--uckk-format-border);
+    background: var(--uckk-format-surface-soft);
+}
+
+.format-uckk .uckk-section-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    min-width: 0;
+}
+
+.format-uckk .uckk-section-index {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: var(--uckk-format-black);
+    color: #ffffff;
+    font-size: .875rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.format-uckk .uckk-section-title-wrap {
+    min-width: 0;
+}
+
+.format-uckk .uckk-section-title {
+    margin: 0;
+    color: var(--uckk-format-black);
+    font-size: 1.125rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.format-uckk .uckk-section-canonical-title {
+    margin-top: .15rem;
+    color: var(--uckk-format-muted);
+    font-size: .8125rem;
+    font-weight: 600;
+}
+
+.format-uckk .uckk-section-purpose,
+.format-uckk .uckk-section-description {
+    margin-top: .4rem;
+    color: var(--uckk-format-muted);
+    font-size: .875rem;
+}
+
+.format-uckk .uckk-section-actions {
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: .35rem;
+}
+
+.format-uckk .uckk-section-body {
+    padding: 1rem;
+}
+
+.format-uckk .uckk-section-summary {
+    margin-bottom: 1rem;
+    padding: .75rem 1rem;
+    border: 1px solid var(--uckk-format-border);
+    border-radius: var(--uckk-format-radius-md);
+    background: var(--uckk-format-surface-soft);
+}
+
+.format-uckk .uckk-section-summary > :last-child {
+    margin-bottom: 0;
+}
+
+.format-uckk .uckk-section-availability {
+    margin-bottom: 1rem;
+}
+
+/* -------------------------------------------------------------------------
+   Canonical section colours.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-section-orientation {
+    border-top: .25rem solid var(--uckk-format-blue);
+}
+
+.format-uckk .uckk-section-orientation .uckk-section-index {
+    background: var(--uckk-format-blue);
+}
+
+.format-uckk .uckk-section-concepts {
+    border-top: .25rem solid var(--uckk-format-purple);
+}
+
+.format-uckk .uckk-section-concepts .uckk-section-index {
+    background: var(--uckk-format-purple);
+}
+
+.format-uckk .uckk-section-canon {
+    border-top: .25rem solid var(--uckk-format-gold);
+}
+
+.format-uckk .uckk-section-canon .uckk-section-index {
+    background: var(--uckk-format-gold);
+    color: #111111;
+}
+
+.format-uckk .uckk-section-workshop {
+    border-top: .25rem solid var(--uckk-format-slate);
+}
+
+.format-uckk .uckk-section-workshop .uckk-section-index {
+    background: var(--uckk-format-slate);
+}
+
+.format-uckk .uckk-section-proofs,
+.format-uckk .uckk-section-preuves {
+    border-top: .25rem solid var(--uckk-format-green);
+}
+
+.format-uckk .uckk-section-proofs .uckk-section-index,
+.format-uckk .uckk-section-preuves .uckk-section-index {
+    background: var(--uckk-format-green);
+}
+
+.format-uckk .uckk-section-deliberation {
+    border-top: .25rem solid var(--uckk-format-purple);
+}
+
+.format-uckk .uckk-section-deliberation .uckk-section-index {
+    background: var(--uckk-format-purple);
+}
+
+.format-uckk .uckk-section-deliverable,
+.format-uckk .uckk-section-livrable {
+    border-top: .25rem solid var(--uckk-format-blue);
+}
+
+.format-uckk .uckk-section-deliverable .uckk-section-index,
+.format-uckk .uckk-section-livrable .uckk-section-index {
+    background: var(--uckk-format-blue);
+}
+
+.format-uckk .uckk-section-evaluation {
+    border-top: .25rem solid var(--uckk-format-red);
+}
+
+.format-uckk .uckk-section-evaluation .uckk-section-index {
+    background: var(--uckk-format-red);
+}
+
+.format-uckk .uckk-section-archive {
+    border-top: .25rem solid var(--uckk-format-slate);
+}
+
+.format-uckk .uckk-section-archive .uckk-section-index {
+    background: var(--uckk-format-slate);
+}
+
+.format-uckk .uckk-section-custom {
+    border-top: .25rem solid var(--uckk-format-border-strong);
+}
+
+/* -------------------------------------------------------------------------
+   Section semantic indicators.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-section-indicators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin-top: .5rem;
+}
+
+.format-uckk .uckk-section-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    min-height: 1.45rem;
+    padding: .25rem .5rem;
+    border: 1px solid var(--uckk-format-border);
+    border-radius: 999px;
+    background: var(--uckk-format-surface);
+    color: var(--uckk-format-muted);
+    font-size: .75rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.format-uckk .uckk-section-indicator-evidence {
+    border-color: rgba(4, 120, 87, .24);
+    background: var(--uckk-format-green-soft);
+    color: var(--uckk-format-green);
+}
+
+.format-uckk .uckk-section-indicator-deliberation {
+    border-color: rgba(109, 40, 217, .24);
+    background: var(--uckk-format-purple-soft);
+    color: var(--uckk-format-purple);
+}
+
+.format-uckk .uckk-section-indicator-archive {
+    border-color: rgba(71, 85, 105, .24);
+    background: var(--uckk-format-slate-soft);
+    color: var(--uckk-format-slate);
+}
+
+.format-uckk .uckk-section-indicator-integrity {
+    border-color: rgba(185, 28, 28, .24);
+    background: var(--uckk-format-red-soft);
+    color: var(--uckk-format-red);
+}
+
+/* -------------------------------------------------------------------------
+   Moodle course module compatibility.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-section .course-section {
+    border: 0;
+}
+
+.format-uckk .uckk-section .section {
+    margin: 0;
+    padding: 0;
+}
+
+.format-uckk .uckk-section .course-section-header {
+    margin-bottom: 0;
+}
+
+.format-uckk .uckk-section .activity {
+    border-radius: var(--uckk-format-radius-md);
+}
+
+.format-uckk .uckk-section .activity-item {
+    border-color: var(--uckk-format-border);
+    border-radius: var(--uckk-format-radius-md);
+}
+
+.format-uckk .uckk-section .activity-item:hover {
+    border-color: var(--uckk-format-border-strong);
+}
+
+.format-uckk .uckk-section .activityname {
+    font-weight: 700;
+}
+
+.format-uckk .uckk-section .availabilityinfo,
+.format-uckk .uckk-section .contentafterlink,
+.format-uckk .uckk-section .activity-altcontent {
+    color: var(--uckk-format-muted);
+}
+
+/* -------------------------------------------------------------------------
+   Section metadata panels.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-section-meta-panel {
+    margin-bottom: 1rem;
+    padding: .75rem 1rem;
+    border: 1px solid var(--uckk-format-border);
+    border-radius: var(--uckk-format-radius-md);
+    background: var(--uckk-format-surface-soft);
+}
+
+.format-uckk .uckk-section-meta-title {
+    margin: 0 0 .35rem;
+    color: var(--uckk-format-black);
+    font-size: .875rem;
+    font-weight: 800;
+}
+
+.format-uckk .uckk-section-meta-text {
+    margin: 0;
+    color: var(--uckk-format-muted);
+    font-size: .875rem;
+}
+
+.format-uckk .uckk-section-meta-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin: .5rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.format-uckk .uckk-section-meta-list li {
+    margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Evidence, deliberation and archive visual zones.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-evidence-zone,
+.format-uckk .uckk-deliberation-zone,
+.format-uckk .uckk-archive-zone,
+.format-uckk .uckk-integrity-zone {
+    margin: 1rem 0;
+    padding: .85rem 1rem;
+    border: 1px solid var(--uckk-format-border);
+    border-left-width: .35rem;
+    border-radius: var(--uckk-format-radius-md);
+    background: var(--uckk-format-surface);
+}
+
+.format-uckk .uckk-evidence-zone {
+    border-left-color: var(--uckk-format-green);
+    background: linear-gradient(135deg, var(--uckk-format-green-soft) 0%, #ffffff 100%);
+}
+
+.format-uckk .uckk-deliberation-zone {
+    border-left-color: var(--uckk-format-purple);
+    background: linear-gradient(135deg, var(--uckk-format-purple-soft) 0%, #ffffff 100%);
+}
+
+.format-uckk .uckk-archive-zone {
+    border-left-color: var(--uckk-format-slate);
+    background: linear-gradient(135deg, var(--uckk-format-slate-soft) 0%, #ffffff 100%);
+}
+
+.format-uckk .uckk-integrity-zone {
+    border-left-color: var(--uckk-format-red);
+    background: linear-gradient(135deg, var(--uckk-format-red-soft) 0%, #ffffff 100%);
+}
+
+.format-uckk .uckk-zone-title {
+    margin: 0 0 .25rem;
+    color: var(--uckk-format-black);
+    font-size: .9rem;
+    font-weight: 800;
+}
+
+.format-uckk .uckk-zone-text {
+    margin: 0;
+    color: var(--uckk-format-ink);
+    font-size: .875rem;
+}
+
+/* -------------------------------------------------------------------------
+   Completion and progress.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-completion-summary {
+    margin-bottom: 1rem;
+    padding: .75rem 1rem;
+    border: 1px solid var(--uckk-format-border);
+    border-radius: var(--uckk-format-radius-md);
+    background: var(--uckk-format-surface);
+}
+
+.format-uckk .uckk-completion-summary-title {
+    margin: 0 0 .5rem;
+    color: var(--uckk-format-black);
+    font-size: .875rem;
+    font-weight: 800;
+}
+
+.format-uckk .uckk-completion-progress {
+    height: .6rem;
+    border-radius: 999px;
+    background-color: var(--uckk-format-slate-soft);
+    overflow: hidden;
+}
+
+.format-uckk .uckk-completion-progress-bar {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(
+        90deg,
+        var(--uckk-format-gold) 0%,
+        var(--uckk-format-green) 100%
+    );
+}
+
+.format-uckk .uckk-completion-caption {
+    margin-top: .4rem;
+    color: var(--uckk-format-muted);
+    font-size: .8125rem;
+}
+
+/* -------------------------------------------------------------------------
+   Course index support.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .courseindex .uckk-courseindex-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    margin-right: .35rem;
+    border-radius: 999px;
+    background: var(--uckk-format-slate-soft);
+    color: var(--uckk-format-slate);
+    font-size: .7rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.format-uckk .courseindex .uckk-courseindex-badge-evidence {
+    background: var(--uckk-format-green-soft);
+    color: var(--uckk-format-green);
+}
+
+.format-uckk .courseindex .uckk-courseindex-badge-deliberation {
+    background: var(--uckk-format-purple-soft);
+    color: var(--uckk-format-purple);
+}
+
+.format-uckk .courseindex .uckk-courseindex-badge-archive {
+    background: var(--uckk-format-slate-soft);
+    color: var(--uckk-format-slate);
+}
+
+.format-uckk .courseindex .uckk-courseindex-badge-integrity {
+    background: var(--uckk-format-red-soft);
+    color: var(--uckk-format-red);
+}
+
+/* -------------------------------------------------------------------------
+   Editing mode support.
+   ------------------------------------------------------------------------- */
+
+.format-uckk.editing .uckk-section {
+    border-style: dashed;
+}
+
+.format-uckk.editing .uckk-section-header {
+    background: #ffffff;
+}
+
+.format-uckk.editing .uckk-section-actions {
+    position: relative;
+    z-index: 2;
+}
+
+.format-uckk.editing .uckk-section-editing-note {
+    margin-top: .5rem;
+    color: var(--uckk-format-muted);
+    font-size: .8125rem;
+}
+
+/* -------------------------------------------------------------------------
+   Diagnostics.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-format-diagnostics {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px dashed var(--uckk-format-border-strong);
+    border-radius: var(--uckk-format-radius-md);
+    background: var(--uckk-format-surface-soft);
+    color: var(--uckk-format-ink);
+    font-size: .875rem;
+}
+
+.format-uckk .uckk-format-diagnostics-title {
+    margin: 0 0 .5rem;
+    color: var(--uckk-format-black);
+    font-weight: 800;
+}
+
+.format-uckk .uckk-format-diagnostics code {
+    color: var(--uckk-format-red);
+}
+
+/* -------------------------------------------------------------------------
+   Empty states.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-section-empty {
+    padding: 1.25rem;
+    border: 1px dashed var(--uckk-format-border-strong);
+    border-radius: var(--uckk-format-radius-md);
+    background: var(--uckk-format-surface-soft);
+    color: var(--uckk-format-muted);
+    text-align: center;
+}
+
+.format-uckk .uckk-section-empty-title {
+    margin: 0 0 .25rem;
+    color: var(--uckk-format-black);
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.format-uckk .uckk-section-empty-text {
+    margin: 0;
+    font-size: .875rem;
+}
+
+/* -------------------------------------------------------------------------
+   Links and focus.
+   ------------------------------------------------------------------------- */
+
+.format-uckk .uckk-section a {
+    text-underline-offset: .16em;
+}
+
+.format-uckk .uckk-course-map-link:focus,
+.format-uckk .uckk-section a:focus,
+.format-uckk .uckk-section button:focus {
+    outline: 0;
+    box-shadow: var(--uckk-format-focus);
+}
+
+/* -------------------------------------------------------------------------
+   Responsive behavior.
+   ------------------------------------------------------------------------- */
+
+@media (max-width: 767.98px) {
+    .format-uckk .uckk-course-map-list {
+        flex-direction: column;
+    }
+
+    .format-uckk .uckk-course-map-link {
+        width: 100%;
+    }
+
+    .format-uckk .uckk-section-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .format-uckk .uckk-section-heading {
+        width: 100%;
+    }
+
+    .format-uckk .uckk-section-actions {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .format-uckk .uckk-section-title {
+        font-size: 1rem;
+    }
+
+    .format-uckk .uckk-section-body {
+        padding: .85rem;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Reduced motion.
+   ------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .format-uckk .uckk-course-map-link,
+    .format-uckk .uckk-section,
+    .format-uckk .uckk-section .activity-item {
+        transition: none;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Forced colors / high contrast.
+   ------------------------------------------------------------------------- */
+
+@media (forced-colors: active) {
+    .format-uckk .uckk-course-map,
+    .format-uckk .uckk-section,
+    .format-uckk .uckk-section-meta-panel,
+    .format-uckk .uckk-evidence-zone,
+    .format-uckk .uckk-deliberation-zone,
+    .format-uckk .uckk-archive-zone,
+    .format-uckk .uckk-integrity-zone,
+    .format-uckk .uckk-completion-summary,
+    .format-uckk .uckk-format-diagnostics,
+    .format-uckk .uckk-section-empty {
+        border: 1px solid CanvasText;
+        box-shadow: none;
+    }
+
+    .format-uckk .uckk-section-index,
+    .format-uckk .uckk-section-indicator,
+    .format-uckk .uckk-course-map-link {
+        border: 1px solid CanvasText;
+    }
+}

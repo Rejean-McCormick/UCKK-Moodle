@@ -1,0 +1,322 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template tool_uckkseed/validation_report
+
+    Validation report for the UCKK seed tool.
+
+    This template is render-only. It displays already prepared validation
+    results from tool_uckkseed output classes.
+
+    Expected context:
+    {
+        "uniqid": "tool-uckkseed-validation-report-1",
+        "component": "tool_uckkseed",
+        "heading": "Validation report",
+        "status": "completed",
+        "statuslabel": "Completed",
+        "statusclass": "status-completed",
+        "ok": true,
+        "haserrors": false,
+        "haswarnings": true,
+        "summary": "Validated presets.",
+        "counts": [],
+        "hascounts": true,
+        "messages": [],
+        "hasmessages": true,
+        "groups": [],
+        "hasgroups": true,
+        "actions": [],
+        "hasactions": true
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="tool-uckkseed-validation-report {{statusclass}}"
+    data-region="tool-uckkseed-validation-report"
+    data-component="{{component}}"
+    data-status="{{status}}"
+>
+    <header class="tool-uckkseed-validation-report__header">
+        <div class="tool-uckkseed-validation-report__identity">
+            <p class="tool-uckkseed-validation-report__eyebrow">
+                {{#str}} validatedistribution, tool_uckkseed {{/str}}
+            </p>
+
+            <h3 class="tool-uckkseed-validation-report__title">
+                {{heading}}
+            </h3>
+
+            {{#summary}}
+                <p class="tool-uckkseed-validation-report__summary">
+                    {{summary}}
+                </p>
+            {{/summary}}
+        </div>
+
+        <div class="tool-uckkseed-validation-report__status">
+            <span class="tool-uckkseed-validation-report__status-badge {{statusclass}}">
+                {{statuslabel}}
+            </span>
+
+            {{#ok}}
+                <span class="tool-uckkseed-validation-report__health tool-uckkseed-validation-report__health--ok">
+                    {{#str}} validation_ok, tool_uckkseed {{/str}}
+                </span>
+            {{/ok}}
+
+            {{#haserrors}}
+                <span class="tool-uckkseed-validation-report__health tool-uckkseed-validation-report__health--errors">
+                    {{#str}} validation_has_errors, tool_uckkseed {{/str}}
+                </span>
+            {{/haserrors}}
+
+            {{#haswarnings}}
+                <span class="tool-uckkseed-validation-report__health tool-uckkseed-validation-report__health--warnings">
+                    {{#str}} validation_has_warnings, tool_uckkseed {{/str}}
+                </span>
+            {{/haswarnings}}
+        </div>
+    </header>
+
+    {{#hasdryrunnotice}}
+        <div class="alert alert-info tool-uckkseed-validation-report__notice" role="status">
+            {{dryrunnotice}}
+        </div>
+    {{/hasdryrunnotice}}
+
+    {{#hasrollbackplannotice}}
+        <div class="alert alert-info tool-uckkseed-validation-report__notice" role="status">
+            {{rollbackplannotice}}
+        </div>
+    {{/hasrollbackplannotice}}
+
+    {{#hascounts}}
+        <section class="tool-uckkseed-validation-report__counts" aria-label="{{#str}} counts, tool_uckkseed {{/str}}">
+            <h4 class="tool-uckkseed-validation-report__section-title">
+                {{#str}} counts, tool_uckkseed {{/str}}
+            </h4>
+
+            <dl class="tool-uckkseed-validation-report__count-list">
+                {{#counts}}
+                    <div class="tool-uckkseed-validation-report__count {{class}}">
+                        <dt class="tool-uckkseed-validation-report__count-label">
+                            {{label}}
+                        </dt>
+                        <dd class="tool-uckkseed-validation-report__count-value">
+                            {{value}}
+                        </dd>
+                    </div>
+                {{/counts}}
+            </dl>
+        </section>
+    {{/hascounts}}
+
+    {{#hasgroups}}
+        <section class="tool-uckkseed-validation-report__groups">
+            <h4 class="tool-uckkseed-validation-report__section-title">
+                {{#str}} validationgroups, tool_uckkseed {{/str}}
+            </h4>
+
+            <div class="tool-uckkseed-validation-report__group-list">
+                {{#groups}}
+                    <article
+                        class="tool-uckkseed-validation-report__group {{severityclass}}"
+                        data-region="tool-uckkseed-validation-group"
+                        data-group-key="{{key}}"
+                    >
+                        <header class="tool-uckkseed-validation-report__group-header">
+                            <h5 class="tool-uckkseed-validation-report__group-title">
+                                {{label}}
+                            </h5>
+
+                            <span class="tool-uckkseed-validation-report__group-count">
+                                {{count}}
+                            </span>
+                        </header>
+
+                        {{#hasmessages}}
+                            <ul class="tool-uckkseed-validation-report__group-messages">
+                                {{#messages}}
+                                    <li class="tool-uckkseed-validation-report__message {{severityclass}}">
+                                        <div class="alert {{alertclass}} mb-2">
+                                            <div class="tool-uckkseed-validation-report__message-header">
+                                                <strong class="tool-uckkseed-validation-report__message-severity">
+                                                    {{severitylabel}}
+                                                </strong>
+
+                                                {{#haspreset}}
+                                                    <span class="tool-uckkseed-validation-report__message-preset">
+                                                        {{preset}}
+                                                    </span>
+                                                {{/haspreset}}
+
+                                                {{#hastarget}}
+                                                    <span class="tool-uckkseed-validation-report__message-target">
+                                                        {{targetkey}}
+                                                    </span>
+                                                {{/hastarget}}
+                                            </div>
+
+                                            <div class="tool-uckkseed-validation-report__message-body">
+                                                {{message}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/messages}}
+                            </ul>
+                        {{/hasmessages}}
+
+                        {{^hasmessages}}
+                            <p class="text-muted tool-uckkseed-validation-report__empty-group">
+                                {{#str}} validationgroup_empty, tool_uckkseed {{/str}}
+                            </p>
+                        {{/hasmessages}}
+                    </article>
+                {{/groups}}
+            </div>
+        </section>
+    {{/hasgroups}}
+
+    {{#hasmessages}}
+        <section class="tool-uckkseed-validation-report__messages">
+            <h4 class="tool-uckkseed-validation-report__section-title">
+                {{#str}} validationmessages, tool_uckkseed {{/str}}
+            </h4>
+
+            <ol class="tool-uckkseed-validation-report__message-list">
+                {{#messages}}
+                    <li
+                        class="tool-uckkseed-validation-report__message {{severityclass}}"
+                        data-severity="{{severity}}"
+                        data-component="{{component}}"
+                        data-preset="{{preset}}"
+                        data-target-type="{{targettype}}"
+                        data-target-key="{{targetkey}}"
+                    >
+                        <div class="alert {{alertclass}}">
+                            <div class="tool-uckkseed-validation-report__message-header">
+                                <strong class="tool-uckkseed-validation-report__message-severity">
+                                    {{severitylabel}}
+                                </strong>
+
+                                {{#haspreset}}
+                                    <span class="tool-uckkseed-validation-report__message-preset">
+                                        {{preset}}
+                                    </span>
+                                {{/haspreset}}
+
+                                {{#hastarget}}
+                                    <span class="tool-uckkseed-validation-report__message-target">
+                                        {{targetkey}}
+                                    </span>
+                                {{/hastarget}}
+                            </div>
+
+                            <div class="tool-uckkseed-validation-report__message-body">
+                                {{message}}
+                            </div>
+                        </div>
+                    </li>
+                {{/messages}}
+            </ol>
+        </section>
+    {{/hasmessages}}
+
+    {{^hasmessages}}
+        <div class="alert alert-success tool-uckkseed-validation-report__empty" role="status">
+            {{#str}} validation_no_messages, tool_uckkseed {{/str}}
+        </div>
+    {{/hasmessages}}
+
+    {{#hasactions}}
+        <footer class="tool-uckkseed-validation-report__actions">
+            {{#actions}}
+                {{#ispost}}
+                    <form
+                        method="post"
+                        action="{{url}}"
+                        class="tool-uckkseed-validation-report__action-form"
+                    >
+                        <input type="hidden" name="sesskey" value="{{sesskey}}">
+                        <input type="hidden" name="action" value="{{key}}">
+
+                        {{#hasparams}}
+                            {{#params}}
+                                <input type="hidden" name="{{name}}" value="{{value}}">
+                            {{/params}}
+                        {{/hasparams}}
+
+                        <button
+                            type="submit"
+                            class="btn {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                            {{#disabled}}disabled{{/disabled}}
+                            {{#requiresconfirmation}}data-action="tool-uckkseed-confirm"{{/requiresconfirmation}}
+                            {{#hasconfirmmessage}}data-confirm-message="{{confirmmessage}}"{{/hasconfirmmessage}}
+                        >
+                            {{label}}
+                        </button>
+
+                        {{#hasdisabledreason}}
+                            <span class="tool-uckkseed-validation-report__disabled-reason">
+                                {{disabledreason}}
+                            </span>
+                        {{/hasdisabledreason}}
+                    </form>
+                {{/ispost}}
+
+                {{#isget}}
+                    <a
+                        href="{{url}}"
+                        class="btn {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                        {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                        {{#requiresconfirmation}}data-action="tool-uckkseed-confirm"{{/requiresconfirmation}}
+                        {{#hasconfirmmessage}}data-confirm-message="{{confirmmessage}}"{{/hasconfirmmessage}}
+                    >
+                        {{label}}
+                    </a>
+
+                    {{#hasdisabledreason}}
+                        <span class="tool-uckkseed-validation-report__disabled-reason">
+                            {{disabledreason}}
+                        </span>
+                    {{/hasdisabledreason}}
+                {{/isget}}
+            {{/actions}}
+        </footer>
+    {{/hasactions}}
+</section>
+```
+
+Add these strings to `admin/tool/uckkseed/lang/en/tool_uckkseed.php` if missing:
+
+```php
+$string['counts'] = 'Counts';
+$string['validation_has_errors'] = 'Errors found';
+$string['validation_has_warnings'] = 'Warnings found';
+$string['validation_no_messages'] = 'No validation messages were reported.';
+$string['validation_ok'] = 'Validation passed';
+$string['validationgroup_empty'] = 'No messages in this group.';
+$string['validationgroups'] = 'Validation groups';
+$string['validationmessages'] = 'Validation messages';
+```
+
+Add these strings to `admin/tool/uckkseed/lang/fr/tool_uckkseed.php` if missing:
+
+```php
+$string['counts'] = 'Décomptes';
+$string['validation_has_errors'] = 'Erreurs détectées';
+$string['validation_has_warnings'] = 'Avertissements détectés';
+$string['validation_no_messages'] = 'Aucun message de validation n’a été signalé.';
+$string['validation_ok'] = 'Validation réussie';
+$string['validationgroup_empty'] = 'Aucun message dans ce groupe.';
+$string['validationgroups'] = 'Groupes de validation';
+$string['validationmessages'] = 'Messages de validation';
+

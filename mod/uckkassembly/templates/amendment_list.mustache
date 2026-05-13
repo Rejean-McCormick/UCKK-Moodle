@@ -1,0 +1,250 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkassembly/amendment_list
+
+    Amendment list for a UCKK Assembly motion.
+
+    This template is render-only. All amendments, actions, visibility rules,
+    integrity restrictions, and user permissions must be prepared by PHP before
+    rendering.
+
+    Example context:
+    {
+        "uniqid": "uckkassembly-amendments-42",
+        "assemblyid": 12,
+        "motionid": 34,
+        "heading": "Amendments",
+        "hasamendments": true,
+        "amendments": [
+            {
+                "id": 5,
+                "title": "Clarify article 2",
+                "bodyhtml": "<p>Replace the second paragraph...</p>",
+                "reasonhtml": "<p>This improves precision.</p>",
+                "hasreason": true,
+                "status": "pending",
+                "statuslabel": "Pending",
+                "statusclass": "status-pending",
+                "visibility": "course",
+                "visibilitylabel": "Course",
+                "hasvisibilitylabel": true,
+                "proposedbyname": "Ada Lovelace",
+                "hasproposedbyname": true,
+                "timecreatedlabel": "12 May 2026",
+                "hastimecreated": true,
+                "timemodifiedlabel": "12 May 2026",
+                "hastimemodified": true,
+                "restricted": false,
+                "integrityflag": false,
+                "url": "https://example.test/mod/uckkassembly/amendment.php?id=45&amendmentid=5",
+                "hasurl": true,
+                "editurl": "https://example.test/mod/uckkassembly/amendment.php?id=45&amendmentid=5&edit=1",
+                "hasediturl": true,
+                "actions": [
+                    {
+                        "label": "View",
+                        "url": "https://example.test/mod/uckkassembly/amendment.php?id=45&amendmentid=5",
+                        "primary": false,
+                        "secondary": true,
+                        "danger": false
+                    }
+                ],
+                "hasactions": true
+            }
+        ],
+        "hasactions": true,
+        "actions": [
+            {
+                "label": "Propose amendment",
+                "url": "https://example.test/mod/uckkassembly/amendment.php?id=45&motionid=34",
+                "primary": true,
+                "secondary": false,
+                "danger": false
+            }
+        ],
+        "emptylabel": "No amendments have been proposed yet.",
+        "notice": "Amendments are deliberation records and remain subject to review, contestation, and archive rules."
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckkassembly-amendment-list"
+    data-region="uckkassembly-amendment-list"
+    data-assembly-id="{{assemblyid}}"
+    data-motion-id="{{motionid}}"
+>
+    <header class="uckkassembly-amendment-list__header">
+        <div class="uckkassembly-amendment-list__identity">
+            <h3 class="uckkassembly-amendment-list__title">
+                {{#heading}}
+                    {{heading}}
+                {{/heading}}
+                {{^heading}}
+                    {{#str}} amendments, uckkassembly {{/str}}
+                {{/heading}}
+            </h3>
+
+            {{#notice}}
+                <p class="uckkassembly-amendment-list__notice">
+                    {{notice}}
+                </p>
+            {{/notice}}
+        </div>
+
+        {{#hasactions}}
+            <nav
+                class="uckkassembly-amendment-list__actions"
+                aria-label="{{#str}} amendmentactions, uckkassembly {{/str}}"
+            >
+                {{#actions}}
+                    {{#url}}
+                        <a
+                            href="{{url}}"
+                            class="btn {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}} uckkassembly-amendment-list__action"
+                            {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                        >
+                            {{label}}
+                        </a>
+                    {{/url}}
+                {{/actions}}
+            </nav>
+        {{/hasactions}}
+    </header>
+
+    {{#hasamendments}}
+        <ol class="uckkassembly-amendment-list__items">
+            {{#amendments}}
+                <li
+                    class="uckkassembly-amendment-list__item {{statusclass}} {{#restricted}}is-restricted{{/restricted}}{{#integrityflag}} has-integrity-flag{{/integrityflag}}"
+                    data-amendment-id="{{id}}"
+                >
+                    <article class="uckkassembly-amendment-card">
+                        <header class="uckkassembly-amendment-card__header">
+                            <div class="uckkassembly-amendment-card__identity">
+                                <h4 class="uckkassembly-amendment-card__title">
+                                    {{#hasurl}}
+                                        <a href="{{url}}">
+                                            {{title}}
+                                        </a>
+                                    {{/hasurl}}
+                                    {{^hasurl}}
+                                        {{title}}
+                                    {{/hasurl}}
+                                </h4>
+
+                                <div class="uckkassembly-amendment-card__meta">
+                                    {{#statuslabel}}
+                                        <span class="uckkassembly-amendment-card__status {{statusclass}}">
+                                            {{statuslabel}}
+                                        </span>
+                                    {{/statuslabel}}
+
+                                    {{#hasvisibilitylabel}}
+                                        <span class="uckkassembly-amendment-card__visibility">
+                                            {{visibilitylabel}}
+                                        </span>
+                                    {{/hasvisibilitylabel}}
+
+                                    {{#restricted}}
+                                        <span class="badge badge-warning uckkassembly-amendment-card__restricted">
+                                            {{#str}} restrictedvisibility, uckkassembly {{/str}}
+                                        </span>
+                                    {{/restricted}}
+
+                                    {{#integrityflag}}
+                                        <span class="badge badge-danger uckkassembly-amendment-card__integrity">
+                                            {{#str}} integritynotice, uckkassembly {{/str}}
+                                        </span>
+                                    {{/integrityflag}}
+                                </div>
+                            </div>
+
+                            {{#hasactions}}
+                                <div class="uckkassembly-amendment-card__actions">
+                                    {{#actions}}
+                                        {{#url}}
+                                            <a
+                                                href="{{url}}"
+                                                class="btn btn-sm {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                                                {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                                            >
+                                                {{label}}
+                                            </a>
+                                        {{/url}}
+                                    {{/actions}}
+
+                                    {{#hasediturl}}
+                                        <a href="{{editurl}}" class="btn btn-sm btn-secondary">
+                                            {{#str}} edit, uckkassembly {{/str}}
+                                        </a>
+                                    {{/hasediturl}}
+                                </div>
+                            {{/hasactions}}
+                        </header>
+
+                        <div class="uckkassembly-amendment-card__body">
+                            {{{bodyhtml}}}
+                        </div>
+
+                        {{#hasreason}}
+                            <section class="uckkassembly-amendment-card__reason">
+                                <h5 class="uckkassembly-amendment-card__section-title">
+                                    {{#str}} amendmentreason, uckkassembly {{/str}}
+                                </h5>
+                                <div class="uckkassembly-amendment-card__reason-content">
+                                    {{{reasonhtml}}}
+                                </div>
+                            </section>
+                        {{/hasreason}}
+
+                        <footer class="uckkassembly-amendment-card__footer">
+                            <dl class="uckkassembly-amendment-card__details">
+                                {{#hasproposedbyname}}
+                                    <div class="uckkassembly-amendment-card__detail">
+                                        <dt>{{#str}} motionproposedby, uckkassembly {{/str}}</dt>
+                                        <dd>{{proposedbyname}}</dd>
+                                    </div>
+                                {{/hasproposedbyname}}
+
+                                {{#hastimecreated}}
+                                    <div class="uckkassembly-amendment-card__detail">
+                                        <dt>{{#str}} timecreated, uckkassembly {{/str}}</dt>
+                                        <dd>{{timecreatedlabel}}</dd>
+                                    </div>
+                                {{/hastimecreated}}
+
+                                {{#hastimemodified}}
+                                    <div class="uckkassembly-amendment-card__detail">
+                                        <dt>{{#str}} timemodified, uckkassembly {{/str}}</dt>
+                                        <dd>{{timemodifiedlabel}}</dd>
+                                    </div>
+                                {{/hastimemodified}}
+                            </dl>
+                        </footer>
+                    </article>
+                </li>
+            {{/amendments}}
+        </ol>
+    {{/hasamendments}}
+
+    {{^hasamendments}}
+        <div class="uckkassembly-amendment-list__empty">
+            <p>
+                {{#emptylabel}}
+                    {{emptylabel}}
+                {{/emptylabel}}
+                {{^emptylabel}}
+                    {{#str}} noamendments, uckkassembly {{/str}}
+                {{/emptylabel}}
+            </p>
+        </div>
+    {{/hasamendments}}
+</section>

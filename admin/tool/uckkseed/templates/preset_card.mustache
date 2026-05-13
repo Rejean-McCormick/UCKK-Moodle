@@ -1,0 +1,188 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template tool_uckkseed/preset_card
+
+    Preset card partial for the UCKK seed tool.
+
+    This template is render-only. It must receive already prepared data from
+    tool_uckkseed output/service classes.
+
+    Expected context:
+    {
+        "preset": "courses",
+        "presetlabel": "Courses",
+        "filename": "courses.json",
+        "description": "Canonical UCKK course seed preset.",
+        "itemcount": 8,
+        "status": "completed",
+        "statuslabel": "Completed",
+        "statusclass": "status-completed",
+        "enabled": true,
+        "required": true,
+        "component": "tool_uckkseed",
+        "messages": [],
+        "hasmessages": false,
+        "actions": [],
+        "hasactions": true
+    }
+}}
+
+<article
+    class="tool-uckkseed-preset-card {{statusclass}}"
+    data-region="tool-uckkseed-preset-card"
+    data-component="{{component}}"
+    data-preset="{{preset}}"
+    data-status="{{status}}"
+    data-enabled="{{enabled}}"
+    data-required="{{required}}"
+>
+    <header class="tool-uckkseed-preset-card__header">
+        <div class="tool-uckkseed-preset-card__identity">
+            <p class="tool-uckkseed-preset-card__eyebrow">
+                {{#str}} preset, tool_uckkseed {{/str}}
+            </p>
+
+            <h5 class="tool-uckkseed-preset-card__title">
+                {{presetlabel}}
+            </h5>
+
+            {{#filename}}
+                <p class="tool-uckkseed-preset-card__filename">
+                    <code>{{filename}}</code>
+                </p>
+            {{/filename}}
+        </div>
+
+        <div class="tool-uckkseed-preset-card__badges">
+            {{#statuslabel}}
+                <span class="tool-uckkseed-preset-card__badge tool-uckkseed-preset-card__badge--status {{statusclass}}">
+                    {{statuslabel}}
+                </span>
+            {{/statuslabel}}
+
+            {{#required}}
+                <span class="tool-uckkseed-preset-card__badge tool-uckkseed-preset-card__badge--required">
+                    {{#str}} required, moodle {{/str}}
+                </span>
+            {{/required}}
+
+            {{^enabled}}
+                <span class="tool-uckkseed-preset-card__badge tool-uckkseed-preset-card__badge--disabled">
+                    {{#str}} disabled, tool_uckkseed {{/str}}
+                </span>
+            {{/enabled}}
+        </div>
+    </header>
+
+    {{#description}}
+        <p class="tool-uckkseed-preset-card__description">
+            {{description}}
+        </p>
+    {{/description}}
+
+    <dl class="tool-uckkseed-preset-card__meta">
+        {{#preset}}
+            <div class="tool-uckkseed-preset-card__meta-item">
+                <dt>{{#str}} presetkey, tool_uckkseed {{/str}}</dt>
+                <dd><code>{{preset}}</code></dd>
+            </div>
+        {{/preset}}
+
+        {{#component}}
+            <div class="tool-uckkseed-preset-card__meta-item">
+                <dt>{{#str}} component, moodle {{/str}}</dt>
+                <dd><code>{{component}}</code></dd>
+            </div>
+        {{/component}}
+
+        <div class="tool-uckkseed-preset-card__meta-item">
+            <dt>{{#str}} itemcount, tool_uckkseed {{/str}}</dt>
+            <dd>{{itemcount}}</dd>
+        </div>
+    </dl>
+
+    {{#hasmessages}}
+        <div class="tool-uckkseed-preset-card__messages">
+            <h6 class="tool-uckkseed-preset-card__messages-title">
+                {{#str}} messages, tool_uckkseed {{/str}}
+            </h6>
+
+            <ul class="tool-uckkseed-preset-card__message-list">
+                {{#messages}}
+                    <li class="tool-uckkseed-preset-card__message {{class}} severity-{{severity}}">
+                        {{#severitylabel}}
+                            <strong class="tool-uckkseed-preset-card__message-severity">
+                                {{severitylabel}}
+                            </strong>
+                        {{/severitylabel}}
+
+                        <span class="tool-uckkseed-preset-card__message-text">
+                            {{message}}
+                        </span>
+
+                        {{#targetkey}}
+                            <code class="tool-uckkseed-preset-card__message-target">
+                                {{targetkey}}
+                            </code>
+                        {{/targetkey}}
+                    </li>
+                {{/messages}}
+            </ul>
+        </div>
+    {{/hasmessages}}
+
+    {{#hasactions}}
+        <footer class="tool-uckkseed-preset-card__actions">
+            {{#actions}}
+                {{#ispost}}
+                    <form
+                        method="post"
+                        action="{{url}}"
+                        class="tool-uckkseed-preset-card__action-form"
+                    >
+                        <input type="hidden" name="sesskey" value="{{sesskey}}">
+                        <input type="hidden" name="action" value="{{key}}">
+                        <input type="hidden" name="preset" value="{{preset}}">
+
+                        <button
+                            type="submit"
+                            class="btn btn-sm {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                            {{#disabled}}disabled{{/disabled}}
+                        >
+                            {{label}}
+                        </button>
+
+                        {{#hasdisabledreason}}
+                            <span class="tool-uckkseed-preset-card__disabled-reason">
+                                {{disabledreason}}
+                            </span>
+                        {{/hasdisabledreason}}
+                    </form>
+                {{/ispost}}
+
+                {{#isget}}
+                    <a
+                        href="{{url}}"
+                        class="btn btn-sm {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                        {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                    >
+                        {{label}}
+                    </a>
+
+                    {{#hasdisabledreason}}
+                        <span class="tool-uckkseed-preset-card__disabled-reason">
+                            {{disabledreason}}
+                        </span>
+                    {{/hasdisabledreason}}
+                {{/isget}}
+            {{/actions}}
+        </footer>
+    {{/hasactions}}
+</article>

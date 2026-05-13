@@ -1,0 +1,206 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_uckk/integrity_notice
+
+    Visual integrity notice for UCKK-Moodle.
+
+    This template displays a theme-level integrity message. It does not decide
+    integrity status, open cases, validate evidence, apply permissions, archive
+    records, or modify workflow state. Those responsibilities belong to
+    tool_uckkintegrity, mod_uckkarchive, mod_uckkchallenge, mod_uckkassembly,
+    local_uckk and report_uckk.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * data-region="uckk-integrity-notice"
+
+    Context variables required for this template:
+    * status - short machine-readable notice status.
+    * severity - short machine-readable notice severity.
+    * title - notice title.
+    * message - notice message.
+    * arialive - aria-live value, usually "polite" or "assertive".
+
+    Optional context variables:
+    * summary - shorter supporting text.
+    * reference - visible reference string.
+    * hasreference - whether a reference is available.
+    * hasactions - whether actions should be rendered.
+    * primaryactionurl - primary action URL.
+    * primaryactionlabel - primary action label.
+    * secondaryactionurl - secondary action URL.
+    * secondaryactionlabel - secondary action label.
+    * hasprimaryaction - whether the primary action exists.
+    * hassecondaryaction - whether the secondary action exists.
+    * isinfo - applies info styling.
+    * iswarning - applies warning styling.
+    * iscritical - applies critical styling.
+    * issuccess - applies success styling.
+    * isrestricted - displays restricted notice label.
+    * iscontestable - displays contestability label.
+    * isarchived - displays archive label.
+    * hasdetails - whether details are available.
+    * details - list of detail rows.
+    * details[].label - detail label.
+    * details[].value - detail value.
+
+    Example context (json):
+    {
+        "status": "pending_review",
+        "severity": "warning",
+        "title": "Vérification d’intégrité requise",
+        "message": "Cette activité contient une preuve ou une décision qui doit être revue avant validation.",
+        "summary": "L’Inquisiteur protège la méthode, la dignité et la qualité des preuves.",
+        "arialive": "polite",
+        "hasreference": true,
+        "reference": "UCKK-INTEGRITY-00042",
+        "hasactions": true,
+        "hasprimaryaction": true,
+        "primaryactionurl": "https://example.test/admin/tool/uckkintegrity/case.php?id=42",
+        "primaryactionlabel": "Ouvrir le dossier",
+        "hassecondaryaction": true,
+        "secondaryactionurl": "https://example.test/mod/uckkarchive/item.php?id=9",
+        "secondaryactionlabel": "Voir l’archive",
+        "iswarning": true,
+        "iscontestable": true,
+        "hasdetails": true,
+        "details": [
+            {
+                "label": "Statut",
+                "value": "En révision"
+            },
+            {
+                "label": "Visibilité",
+                "value": "Restreinte"
+            }
+        ]
+    }
+}}
+
+<div
+    class="uckk-integrity-notice
+        {{#isinfo}}uckk-integrity-notice--info{{/isinfo}}
+        {{#iswarning}}uckk-integrity-notice--warning{{/iswarning}}
+        {{#iscritical}}uckk-integrity-notice--critical{{/iscritical}}
+        {{#issuccess}}uckk-integrity-notice--success{{/issuccess}}
+        {{#isrestricted}}uckk-integrity-notice--restricted{{/isrestricted}}
+        {{#iscontestable}}uckk-integrity-notice--contestable{{/iscontestable}}
+        {{#isarchived}}uckk-integrity-notice--archived{{/isarchived}}"
+    data-region="uckk-integrity-notice"
+    data-status="{{status}}"
+    data-severity="{{severity}}"
+    role="note"
+    aria-live="{{arialive}}"
+>
+    <div class="uckk-integrity-notice__marker" aria-hidden="true"></div>
+
+    <div class="uckk-integrity-notice__body">
+        <div class="uckk-integrity-notice__header">
+            <div class="uckk-integrity-notice__kicker">
+                {{#str}} integritynoticekicker, theme_uckk {{/str}}
+            </div>
+
+            <h3 class="uckk-integrity-notice__title">
+                {{#title}}
+                    {{title}}
+                {{/title}}
+                {{^title}}
+                    {{#str}} integritynotice, theme_uckk {{/str}}
+                {{/title}}
+            </h3>
+        </div>
+
+        <div class="uckk-integrity-notice__message">
+            {{#message}}
+                <p>{{message}}</p>
+            {{/message}}
+            {{^message}}
+                <p>{{#str}} integritynoticedefaultmessage, theme_uckk {{/str}}</p>
+            {{/message}}
+
+            {{#summary}}
+                <p class="uckk-integrity-notice__summary">{{summary}}</p>
+            {{/summary}}
+        </div>
+
+        <ul class="uckk-integrity-notice__principles" aria-label="{{#str}} integrityprinciples, theme_uckk {{/str}}">
+            <li>{{#str}} integrityprinciplefacts, theme_uckk {{/str}}</li>
+            <li>{{#str}} integrityprincipledignity, theme_uckk {{/str}}</li>
+            <li>{{#str}} integrityprincipleproof, theme_uckk {{/str}}</li>
+            <li>{{#str}} integrityprinciplecontestability, theme_uckk {{/str}}</li>
+        </ul>
+
+        {{#hasdetails}}
+            <dl class="uckk-integrity-notice__details">
+                {{#details}}
+                    <div class="uckk-integrity-notice__detail">
+                        <dt>{{label}}</dt>
+                        <dd>{{value}}</dd>
+                    </div>
+                {{/details}}
+            </dl>
+        {{/hasdetails}}
+
+        <div class="uckk-integrity-notice__badges" aria-label="{{#str}} integritynoticestates, theme_uckk {{/str}}">
+            {{#isrestricted}}
+                <span class="uckk-integrity-notice__badge uckk-integrity-notice__badge--restricted">
+                    {{#str}} integrityrestricted, theme_uckk {{/str}}
+                </span>
+            {{/isrestricted}}
+
+            {{#iscontestable}}
+                <span class="uckk-integrity-notice__badge uckk-integrity-notice__badge--contestable">
+                    {{#str}} integritycontestable, theme_uckk {{/str}}
+                </span>
+            {{/iscontestable}}
+
+            {{#isarchived}}
+                <span class="uckk-integrity-notice__badge uckk-integrity-notice__badge--archived">
+                    {{#str}} integrityarchived, theme_uckk {{/str}}
+                </span>
+            {{/isarchived}}
+
+            {{#hasreference}}
+                <span class="uckk-integrity-notice__reference">
+                    <span class="uckk-integrity-notice__reference-label">
+                        {{#str}} integrityreference, theme_uckk {{/str}}
+                    </span>
+                    <span class="uckk-integrity-notice__reference-value">{{reference}}</span>
+                </span>
+            {{/hasreference}}
+        </div>
+
+        {{#hasactions}}
+            <div class="uckk-integrity-notice__actions">
+                {{#hasprimaryaction}}
+                    <a class="btn btn-primary uckk-integrity-notice__action uckk-integrity-notice__action--primary" href="{{primaryactionurl}}">
+                        {{primaryactionlabel}}
+                    </a>
+                {{/hasprimaryaction}}
+
+                {{#hassecondaryaction}}
+                    <a class="btn btn-secondary uckk-integrity-notice__action uckk-integrity-notice__action--secondary" href="{{secondaryactionurl}}">
+                        {{secondaryactionlabel}}
+                    </a>
+                {{/hassecondaryaction}}
+            </div>
+        {{/hasactions}}
+    </div>
+</div>

@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/uckk/db" VERSION="2026051200" COMMENT="XMLDB file for local_uckk"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+
+    <TABLE NAME="local_uckk_program" COMMENT="UCKK programme registry">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="shortname" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="fullname" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="programtype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT=""/>
+        <FIELD NAME="categoryid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="description" TYPE="text"/>
+        <FIELD NAME="descriptionformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="modifiedby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="institution"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="metadata" TYPE="text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="categoryid" TYPE="foreign" FIELDS="categoryid" REFTABLE="course_categories" REFFIELDS="id"/>
+        <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+        <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="uniq_shortname" TYPE="unique" FIELDS="shortname"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="programtype" UNIQUE="false" FIELDS="programtype"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+        <INDEX NAME="sortorder" UNIQUE="false" FIELDS="sortorder"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_uckk_pathway" COMMENT="UCKK pathway registry">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="programid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="shortname" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="fullname" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="pathwaytype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT=""/>
+        <FIELD NAME="requiredcourseids" TYPE="text"/>
+        <FIELD NAME="requiredbadges" TYPE="text"/>
+        <FIELD NAME="requiredcompetencies" TYPE="text"/>
+        <FIELD NAME="description" TYPE="text"/>
+        <FIELD NAME="descriptionformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="modifiedby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="institution"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="metadata" TYPE="text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="programid" TYPE="foreign" FIELDS="programid" REFTABLE="local_uckk_program" REFFIELDS="id"/>
+        <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+        <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="uniq_prog_short" TYPE="unique" FIELDS="programid, shortname"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="shortname" UNIQUE="false" FIELDS="shortname"/>
+        <INDEX NAME="pathwaytype" UNIQUE="false" FIELDS="pathwaytype"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+        <INDEX NAME="sortorder" UNIQUE="false" FIELDS="sortorder"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_uckk_player" COMMENT="UCKK player profile records">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="displaytitle" TYPE="char" LENGTH="255"/>
+        <FIELD NAME="symbolicroles" TYPE="text"/>
+        <FIELD NAME="activepathwayids" TYPE="text"/>
+        <FIELD NAME="primarypathwayid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="portfolioarchiveid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="integrityflags" TYPE="text"/>
+        <FIELD NAME="preferredlang" TYPE="char" LENGTH="30"/>
+        <FIELD NAME="timezone" TYPE="char" LENGTH="100"/>
+
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="modifiedby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="active"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="private"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="metadata" TYPE="text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="primarypathwayid" TYPE="foreign" FIELDS="primarypathwayid" REFTABLE="local_uckk_pathway" REFFIELDS="id"/>
+        <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+        <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="uniq_userid" TYPE="unique" FIELDS="userid"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_uckk_role" COMMENT="UCKK symbolic role registry">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="rolekey" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="description" TYPE="text"/>
+        <FIELD NAME="descriptionformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="roletype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="symbolic"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="modifiedby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="active"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="institution"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="metadata" TYPE="text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+        <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="uniq_rolekey" TYPE="unique" FIELDS="rolekey"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="roletype" UNIQUE="false" FIELDS="roletype"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="sortorder" UNIQUE="false" FIELDS="sortorder"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_uckk_canon" COMMENT="UCKK canonical statements and panels">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="canonkey" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="canonarea" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="general"/>
+        <FIELD NAME="body" TYPE="text"/>
+        <FIELD NAME="bodyformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="fr"/>
+        <FIELD NAME="source" TYPE="char" LENGTH="255"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="modifiedby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="active"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="institution"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="metadata" TYPE="text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+        <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="uniq_canon_lang" TYPE="unique" FIELDS="canonkey, language"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="canonarea" UNIQUE="false" FIELDS="canonarea"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+        <INDEX NAME="sortorder" UNIQUE="false" FIELDS="sortorder"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_uckk_prov" COMMENT="UCKK shared provenance records">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="component" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="itemtype" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="sourcecomponent" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="sourceid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sourcetext" TYPE="text"/>
+        <FIELD NAME="supportingevidence" TYPE="text"/>
+        <FIELD NAME="hash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="validationstate" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="unverified"/>
+        <FIELD NAME="linktype" TYPE="char" LENGTH="64"/>
+
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="modifiedby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="restricted"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="metadata" TYPE="text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="component_item" UNIQUE="false" FIELDS="component, itemtype, itemid"/>
+        <INDEX NAME="source_item" UNIQUE="false" FIELDS="sourcecomponent, sourceid"/>
+        <INDEX NAME="validationstate" UNIQUE="false" FIELDS="validationstate"/>
+        <INDEX NAME="hash" UNIQUE="false" FIELDS="hash"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_uckk_reflect" COMMENT="UCKK player reflection records">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="programid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="pathwayid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="reflectiontype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="reflection"/>
+        <FIELD NAME="body" TYPE="text"/>
+        <FIELD NAME="bodyformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="aiassisted" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="aiprompthash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="validationstate" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="unverified"/>
+
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="modifiedby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="private"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="metadata" TYPE="text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="programid" TYPE="foreign" FIELDS="programid" REFTABLE="local_uckk_program" REFFIELDS="id"/>
+        <KEY NAME="pathwayid" TYPE="foreign" FIELDS="pathwayid" REFTABLE="local_uckk_pathway" REFFIELDS="id"/>
+        <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="user_status" UNIQUE="false" FIELDS="userid, status"/>
+        <INDEX NAME="reflectiontype" UNIQUE="false" FIELDS="reflectiontype"/>
+        <INDEX NAME="validationstate" UNIQUE="false" FIELDS="validationstate"/>
+        <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+        <INDEX NAME="aiassisted" UNIQUE="false" FIELDS="aiassisted"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_uckk_map" COMMENT="UCKK relationship and navigation map">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="mapkey" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="maptype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="relation"/>
+        <FIELD NAME="sourcecomponent" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="sourceid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="targetcomponent" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="targetid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="relationtype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="related"/>
+        <FIELD NAME="weight" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="description" TYPE="text"/>
+        <FIELD NAME="descriptionformat" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="1"/>
+
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="modifiedby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="active"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="institution"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="metadata" TYPE="text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+        <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="uniq_mapkey" TYPE="unique" FIELDS="mapkey"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="source" UNIQUE="false" FIELDS="sourcecomponent, sourceid"/>
+        <INDEX NAME="target" UNIQUE="false" FIELDS="targetcomponent, targetid"/>
+        <INDEX NAME="relationtype" UNIQUE="false" FIELDS="relationtype"/>
+        <INDEX NAME="maptype" UNIQUE="false" FIELDS="maptype"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_uckk_pathway_stat" COMMENT="UCKK pathway progress statistics">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="programid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="pathwayid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="totalcourses" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="completedcourses" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="totalbadges" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="earnedbadges" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="totalcompetencies" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="completedcompetencies" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="progresspercent" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="lastcalculated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="statdata" TYPE="text"/>
+
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="modifiedby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="active"/>
+        <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="private"/>
+        <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+        <FIELD NAME="metadata" TYPE="text"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="programid" TYPE="foreign" FIELDS="programid" REFTABLE="local_uckk_program" REFFIELDS="id"/>
+        <KEY NAME="pathwayid" TYPE="foreign" FIELDS="pathwayid" REFTABLE="local_uckk_pathway" REFFIELDS="id"/>
+        <KEY NAME="contextid" TYPE="foreign" FIELDS="contextid" REFTABLE="context" REFFIELDS="id"/>
+        <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="createdby" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="modifiedby" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="pathway_user" UNIQUE="false" FIELDS="pathwayid, userid"/>
+        <INDEX NAME="program_user" UNIQUE="false" FIELDS="programid, userid"/>
+        <INDEX NAME="lastcalculated" UNIQUE="false" FIELDS="lastcalculated"/>
+        <INDEX NAME="status" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="visibility" UNIQUE="false" FIELDS="visibility"/>
+      </INDEXES>
+    </TABLE>
+
+  </TABLES>
+</XMLDB>

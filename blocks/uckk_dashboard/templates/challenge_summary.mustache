@@ -1,0 +1,258 @@
+{{!
+    @template block_uckk_dashboard/challenge_summary
+
+    Challenge summary card for the UCKK dashboard block.
+
+    This template is render-only. It does not:
+    - decide permissions;
+    - calculate challenge progress;
+    - validate evidence;
+    - award badges;
+    - expose restricted integrity data.
+
+    Expected context:
+    {
+        "title": "My challenges",
+        "subtitle": "Current Défis King Klown",
+        "summaryurl": "https://example.test/local/uckk/dashboard.php#challenges",
+        "haschallenges": true,
+        "totalcount": 4,
+        "opencount": 2,
+        "submittedcount": 1,
+        "reviewcount": 1,
+        "completedcount": 0,
+        "blockedcount": 0,
+        "progresspercent": 50,
+        "progresslabel": "2 of 4 active challenges in progress",
+        "cancreate": false,
+        "createurl": "",
+        "canviewall": true,
+        "viewallurl": "https://example.test/mod/uckkchallenge/index.php",
+        "challenges": [
+            {
+                "name": "Cartographier un système social",
+                "url": "https://example.test/mod/uckkchallenge/view.php?id=12",
+                "course": "UCKK-TC101",
+                "courseurl": "https://example.test/course/view.php?id=3",
+                "status": "in_progress",
+                "statuslabel": "In progress",
+                "statusvariant": "info",
+                "type": "system_mapping",
+                "typelabel": "System mapping",
+                "progresspercent": 40,
+                "progresslabel": "Evidence in preparation",
+                "hasduedate": true,
+                "duedate": "15 June 2026",
+                "duewarning": false,
+                "overdue": false,
+                "needsattention": true,
+                "attentionmessage": "Evidence required",
+                "hasintegrityflag": false,
+                "integritylabel": "",
+                "evidencecount": 1,
+                "requiredevidencecount": 3,
+                "hasactions": true,
+                "actions": [
+                    {
+                        "label": "Open challenge",
+                        "url": "https://example.test/mod/uckkchallenge/view.php?id=12",
+                        "primary": true
+                    }
+                ]
+            }
+        ]
+    }
+}}
+
+<section class="uckk-dashboard-card uckk-challenge-summary" data-region="uckk-challenge-summary">
+    <header class="uckk-dashboard-card__header">
+        <div class="uckk-dashboard-card__heading">
+            <h3 class="uckk-dashboard-card__title">
+                {{#title}}{{title}}{{/title}}
+                {{^title}}{{#str}} mychallenges, block_uckk_dashboard {{/str}}{{/title}}
+            </h3>
+
+            {{#subtitle}}
+                <p class="uckk-dashboard-card__subtitle">{{subtitle}}</p>
+            {{/subtitle}}
+        </div>
+
+        <div class="uckk-dashboard-card__actions">
+            {{#cancreate}}
+                {{#createurl}}
+                    <a class="btn btn-sm btn-outline-primary" href="{{createurl}}">
+                        {{#str}} createchallenge, block_uckk_dashboard {{/str}}
+                    </a>
+                {{/createurl}}
+            {{/cancreate}}
+
+            {{#canviewall}}
+                {{#viewallurl}}
+                    <a class="btn btn-sm btn-link" href="{{viewallurl}}">
+                        {{#str}} viewallchallenges, block_uckk_dashboard {{/str}}
+                    </a>
+                {{/viewallurl}}
+            {{/canviewall}}
+        </div>
+    </header>
+
+    <div class="uckk-challenge-summary__metrics" aria-label="{{#str}} challengesummarymetrics, block_uckk_dashboard {{/str}}">
+        <div class="uckk-challenge-summary__metric">
+            <span class="uckk-challenge-summary__metric-value">{{totalcount}}</span>
+            <span class="uckk-challenge-summary__metric-label">
+                {{#str}} challenges_total, block_uckk_dashboard {{/str}}
+            </span>
+        </div>
+
+        <div class="uckk-challenge-summary__metric">
+            <span class="uckk-challenge-summary__metric-value">{{opencount}}</span>
+            <span class="uckk-challenge-summary__metric-label">
+                {{#str}} challenges_open, block_uckk_dashboard {{/str}}
+            </span>
+        </div>
+
+        <div class="uckk-challenge-summary__metric">
+            <span class="uckk-challenge-summary__metric-value">{{submittedcount}}</span>
+            <span class="uckk-challenge-summary__metric-label">
+                {{#str}} challenges_submitted, block_uckk_dashboard {{/str}}
+            </span>
+        </div>
+
+        <div class="uckk-challenge-summary__metric">
+            <span class="uckk-challenge-summary__metric-value">{{reviewcount}}</span>
+            <span class="uckk-challenge-summary__metric-label">
+                {{#str}} challenges_review, block_uckk_dashboard {{/str}}
+            </span>
+        </div>
+    </div>
+
+    {{#progresslabel}}
+        <div class="uckk-challenge-summary__progress">
+            <div class="progress" role="progressbar" aria-valuenow="{{progresspercent}}" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: {{progresspercent}}%;"></div>
+            </div>
+            <p class="uckk-challenge-summary__progress-label">{{progresslabel}}</p>
+        </div>
+    {{/progresslabel}}
+
+    {{#haschallenges}}
+        <ol class="uckk-challenge-summary__list">
+            {{#challenges}}
+                <li class="uckk-challenge-summary__item {{#needsattention}}uckk-challenge-summary__item--attention{{/needsattention}} {{#hasintegrityflag}}uckk-challenge-summary__item--integrity{{/hasintegrityflag}}">
+                    <article class="uckk-challenge-card">
+                        <header class="uckk-challenge-card__header">
+                            <div class="uckk-challenge-card__identity">
+                                <h4 class="uckk-challenge-card__title">
+                                    {{#url}}
+                                        <a href="{{url}}">{{name}}</a>
+                                    {{/url}}
+                                    {{^url}}
+                                        {{name}}
+                                    {{/url}}
+                                </h4>
+
+                                <div class="uckk-challenge-card__meta">
+                                    {{#course}}
+                                        <span class="uckk-challenge-card__course">
+                                            {{#courseurl}}
+                                                <a href="{{courseurl}}">{{course}}</a>
+                                            {{/courseurl}}
+                                            {{^courseurl}}
+                                                {{course}}
+                                            {{/courseurl}}
+                                        </span>
+                                    {{/course}}
+
+                                    {{#typelabel}}
+                                        <span class="uckk-challenge-card__type">{{typelabel}}</span>
+                                    {{/typelabel}}
+                                </div>
+                            </div>
+
+                            <div class="uckk-challenge-card__status">
+                                {{> local_uckk/status_badge}}
+                            </div>
+                        </header>
+
+                        {{#progresslabel}}
+                            <div class="uckk-challenge-card__progress">
+                                <div class="progress" role="progressbar" aria-valuenow="{{progresspercent}}" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: {{progresspercent}}%;"></div>
+                                </div>
+                                <span class="uckk-challenge-card__progress-label">{{progresslabel}}</span>
+                            </div>
+                        {{/progresslabel}}
+
+                        <dl class="uckk-challenge-card__details">
+                            {{#hasduedate}}
+                                <div class="uckk-challenge-card__detail {{#duewarning}}uckk-challenge-card__detail--warning{{/duewarning}} {{#overdue}}uckk-challenge-card__detail--danger{{/overdue}}">
+                                    <dt>{{#str}} duedate, block_uckk_dashboard {{/str}}</dt>
+                                    <dd>{{duedate}}</dd>
+                                </div>
+                            {{/hasduedate}}
+
+                            <div class="uckk-challenge-card__detail">
+                                <dt>{{#str}} evidence, block_uckk_dashboard {{/str}}</dt>
+                                <dd>
+                                    {{evidencecount}} / {{requiredevidencecount}}
+                                </dd>
+                            </div>
+                        </dl>
+
+                        {{#needsattention}}
+                            <div class="uckk-challenge-card__notice uckk-challenge-card__notice--attention">
+                                <span class="uckk-challenge-card__notice-label">
+                                    {{#str}} attentionrequired, block_uckk_dashboard {{/str}}
+                                </span>
+
+                                {{#attentionmessage}}
+                                    <span class="uckk-challenge-card__notice-message">{{attentionmessage}}</span>
+                                {{/attentionmessage}}
+                            </div>
+                        {{/needsattention}}
+
+                        {{#hasintegrityflag}}
+                            <div class="uckk-challenge-card__notice uckk-challenge-card__notice--integrity">
+                                <span class="uckk-challenge-card__notice-label">
+                                    {{#str}} integrityreview, block_uckk_dashboard {{/str}}
+                                </span>
+
+                                {{#integritylabel}}
+                                    <span class="uckk-challenge-card__notice-message">{{integritylabel}}</span>
+                                {{/integritylabel}}
+                            </div>
+                        {{/hasintegrityflag}}
+
+                        {{#hasactions}}
+                            <footer class="uckk-challenge-card__actions">
+                                {{#actions}}
+                                    <a class="btn btn-sm {{#primary}}btn-primary{{/primary}}{{^primary}}btn-outline-secondary{{/primary}}" href="{{url}}">
+                                        {{label}}
+                                    </a>
+                                {{/actions}}
+                            </footer>
+                        {{/hasactions}}
+                    </article>
+                </li>
+            {{/challenges}}
+        </ol>
+    {{/haschallenges}}
+
+    {{^haschallenges}}
+        <div class="uckk-dashboard-card__empty">
+            <p class="uckk-dashboard-card__empty-title">
+                {{#str}} nochallenges, block_uckk_dashboard {{/str}}
+            </p>
+
+            <p class="uckk-dashboard-card__empty-text">
+                {{#str}} nochallenges_desc, block_uckk_dashboard {{/str}}
+            </p>
+
+            {{#summaryurl}}
+                <a class="btn btn-sm btn-outline-primary" href="{{summaryurl}}">
+                    {{#str}} explorechallenges, block_uckk_dashboard {{/str}}
+                </a>
+            {{/summaryurl}}
+        </div>
+    {{/haschallenges}}
+</section>

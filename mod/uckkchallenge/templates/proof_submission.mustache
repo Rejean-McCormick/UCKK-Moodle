@@ -1,0 +1,311 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkchallenge/proof_submission
+
+    Render one UCKK challenge proof submission.
+
+    This template expects permission-filtered and preformatted data.
+
+    Example context:
+    {
+        "id": 12,
+        "challengeid": 4,
+        "submissionid": 12,
+        "userid": 42,
+        "userfullname": "Ada Joueuse",
+        "userprofileurl": "https://example.test/user/view.php?id=42",
+        "title": "System map proof",
+        "status": "submitted",
+        "statuslabel": "Submitted",
+        "statusclass": "status-submitted",
+        "prooftype": "text",
+        "prooftypelabel": "Text",
+        "visibility": "course",
+        "visibilitylabel": "Course",
+        "integritystate": "unverified",
+        "integritylabel": "Unverified",
+        "integrityclass": "integrity-state-unverified",
+        "timecreatedlabel": "12 May 2026",
+        "timemodifiedlabel": "12 May 2026",
+        "hastext": true,
+        "submissionhtml": "<p>Prepared and cleaned HTML.</p>",
+        "hasurl": true,
+        "submissionurl": "https://example.test/proof",
+        "hasfiles": true,
+        "files": [
+            {
+                "filename": "proof.pdf",
+                "url": "https://example.test/pluginfile.php/...",
+                "filesize": "250 KB",
+                "mimetype": "application/pdf"
+            }
+        ],
+        "hasrelationtocriteria": true,
+        "relationtocriteria": "Criterion mapping.",
+        "hasprovenance": true,
+        "provenancestatement": "Human-authored with cited sources.",
+        "hassourceauthor": true,
+        "sourceauthor": "Ada Joueuse",
+        "hassourcedate": true,
+        "sourcedatelabel": "10 May 2026",
+        "aiassisted": true,
+        "hasailog": true,
+        "ailog": "AI used for summarisation; human validated.",
+        "hasuncertaintynotes": true,
+        "uncertaintynotes": "One source remains contested.",
+        "hasfeedback": true,
+        "feedbackhtml": "<p>Prepared feedback HTML.</p>",
+        "actions": {
+            "canedit": true,
+            "editurl": "https://example.test/mod/uckkchallenge/submit.php?id=7&submissionid=12",
+            "cansubmit": true,
+            "submiturl": "https://example.test/mod/uckkchallenge/submit.php?id=7&submissionid=12",
+            "canreview": true,
+            "reviewurl": "https://example.test/mod/uckkchallenge/review.php?id=7&submissionid=12",
+            "canarchive": false,
+            "archiveurl": ""
+        }
+    }
+}}
+
+<article
+    class="uckkchallenge-proof-submission {{statusclass}} {{integrityclass}}"
+    data-region="uckkchallenge-proof-submission"
+    data-submission-id="{{submissionid}}"
+    data-challenge-id="{{challengeid}}"
+    data-user-id="{{userid}}"
+>
+    <header class="uckkchallenge-proof-submission__header">
+        <div class="uckkchallenge-proof-submission__identity">
+            <p class="uckkchallenge-proof-submission__eyebrow">
+                {{#str}} proofsubmission, uckkchallenge {{/str}}
+            </p>
+
+            <h3 class="uckkchallenge-proof-submission__title">
+                {{#title}}
+                    {{title}}
+                {{/title}}
+                {{^title}}
+                    {{#str}} proofsubmission, uckkchallenge {{/str}}
+                {{/title}}
+            </h3>
+
+            <p class="uckkchallenge-proof-submission__author">
+                {{#str}} submittedby, uckkchallenge {{/str}}
+
+                {{#userprofileurl}}
+                    <a href="{{userprofileurl}}">
+                        {{userfullname}}
+                    </a>
+                {{/userprofileurl}}
+
+                {{^userprofileurl}}
+                    <span>{{userfullname}}</span>
+                {{/userprofileurl}}
+            </p>
+        </div>
+
+        <div class="uckkchallenge-proof-submission__badges">
+            <span class="badge badge-secondary uckkchallenge-proof-submission__badge uckkchallenge-proof-submission__badge--{{status}}">
+                {{statuslabel}}
+            </span>
+
+            <span class="badge badge-info uckkchallenge-proof-submission__badge uckkchallenge-proof-submission__badge--{{prooftype}}">
+                {{prooftypelabel}}
+            </span>
+
+            <span class="badge badge-light uckkchallenge-proof-submission__badge uckkchallenge-proof-submission__badge--{{visibility}}">
+                {{visibilitylabel}}
+            </span>
+
+            <span class="badge badge-warning uckkchallenge-proof-submission__badge uckkchallenge-proof-submission__badge--{{integritystate}}">
+                {{integritylabel}}
+            </span>
+        </div>
+    </header>
+
+    <dl class="uckkchallenge-proof-submission__meta">
+        {{#timecreatedlabel}}
+            <div class="uckkchallenge-proof-submission__meta-item">
+                <dt>{{#str}} timecreated, uckkchallenge {{/str}}</dt>
+                <dd>{{timecreatedlabel}}</dd>
+            </div>
+        {{/timecreatedlabel}}
+
+        {{#timemodifiedlabel}}
+            <div class="uckkchallenge-proof-submission__meta-item">
+                <dt>{{#str}} timemodified, moodle {{/str}}</dt>
+                <dd>{{timemodifiedlabel}}</dd>
+            </div>
+        {{/timemodifiedlabel}}
+
+        {{#hassourceauthor}}
+            <div class="uckkchallenge-proof-submission__meta-item">
+                <dt>{{#str}} sourceauthor, uckkchallenge {{/str}}</dt>
+                <dd>{{sourceauthor}}</dd>
+            </div>
+        {{/hassourceauthor}}
+
+        {{#hassourcedate}}
+            <div class="uckkchallenge-proof-submission__meta-item">
+                <dt>{{#str}} sourcedate, uckkchallenge {{/str}}</dt>
+                <dd>{{sourcedatelabel}}</dd>
+            </div>
+        {{/hassourcedate}}
+    </dl>
+
+    {{#hastext}}
+        <section class="uckkchallenge-proof-submission__section uckkchallenge-proof-submission__section--text">
+            <h4 class="uckkchallenge-proof-submission__section-title">
+                {{#str}} submissiontext, uckkchallenge {{/str}}
+            </h4>
+
+            <div class="uckkchallenge-proof-submission__html">
+                {{{submissionhtml}}}
+            </div>
+        </section>
+    {{/hastext}}
+
+    {{#hasurl}}
+        <section class="uckkchallenge-proof-submission__section uckkchallenge-proof-submission__section--url">
+            <h4 class="uckkchallenge-proof-submission__section-title">
+                {{#str}} submissionurl, uckkchallenge {{/str}}
+            </h4>
+
+            <p>
+                <a href="{{submissionurl}}" rel="noopener noreferrer">
+                    {{submissionurl}}
+                </a>
+            </p>
+        </section>
+    {{/hasurl}}
+
+    {{#hasfiles}}
+        <section class="uckkchallenge-proof-submission__section uckkchallenge-proof-submission__section--files">
+            <h4 class="uckkchallenge-proof-submission__section-title">
+                {{#str}} prooffiles, uckkchallenge {{/str}}
+            </h4>
+
+            <ul class="uckkchallenge-proof-submission__files">
+                {{#files}}
+                    <li class="uckkchallenge-proof-submission__file">
+                        <a href="{{url}}" class="uckkchallenge-proof-submission__file-link">
+                            {{filename}}
+                        </a>
+
+                        {{#filesize}}
+                            <span class="uckkchallenge-proof-submission__file-size">
+                                {{filesize}}
+                            </span>
+                        {{/filesize}}
+
+                        {{#mimetype}}
+                            <span class="uckkchallenge-proof-submission__file-type">
+                                {{mimetype}}
+                            </span>
+                        {{/mimetype}}
+                    </li>
+                {{/files}}
+            </ul>
+        </section>
+    {{/hasfiles}}
+
+    {{#hasrelationtocriteria}}
+        <section class="uckkchallenge-proof-submission__section uckkchallenge-proof-submission__section--criteria">
+            <h4 class="uckkchallenge-proof-submission__section-title">
+                {{#str}} relationtocriteria, uckkchallenge {{/str}}
+            </h4>
+
+            <p>{{relationtocriteria}}</p>
+        </section>
+    {{/hasrelationtocriteria}}
+
+    {{#hasprovenance}}
+        <section class="uckkchallenge-proof-submission__section uckkchallenge-proof-submission__section--provenance">
+            <h4 class="uckkchallenge-proof-submission__section-title">
+                {{#str}} provenancestatement, uckkchallenge {{/str}}
+            </h4>
+
+            <p>{{provenancestatement}}</p>
+        </section>
+    {{/hasprovenance}}
+
+    {{#aiassisted}}
+        <section class="uckkchallenge-proof-submission__section uckkchallenge-proof-submission__section--ai">
+            <h4 class="uckkchallenge-proof-submission__section-title">
+                {{#str}} aiassisted, uckkchallenge {{/str}}
+            </h4>
+
+            <div class="alert alert-info" role="status">
+                {{#str}} ainonauthoritynotice, uckkchallenge {{/str}}
+            </div>
+
+            {{#hasailog}}
+                <p>{{ailog}}</p>
+            {{/hasailog}}
+
+            {{^hasailog}}
+                <p class="uckkchallenge-proof-submission__missing">
+                    {{#str}} noailogprovided, uckkchallenge {{/str}}
+                </p>
+            {{/hasailog}}
+        </section>
+    {{/aiassisted}}
+
+    {{#hasuncertaintynotes}}
+        <section class="uckkchallenge-proof-submission__section uckkchallenge-proof-submission__section--uncertainty">
+            <h4 class="uckkchallenge-proof-submission__section-title">
+                {{#str}} uncertaintynotes, uckkchallenge {{/str}}
+            </h4>
+
+            <p>{{uncertaintynotes}}</p>
+        </section>
+    {{/hasuncertaintynotes}}
+
+    {{#hasfeedback}}
+        <section class="uckkchallenge-proof-submission__section uckkchallenge-proof-submission__section--feedback">
+            <h4 class="uckkchallenge-proof-submission__section-title">
+                {{#str}} mentorfeedback, uckkchallenge {{/str}}
+            </h4>
+
+            <div class="uckkchallenge-proof-submission__html">
+                {{{feedbackhtml}}}
+            </div>
+        </section>
+    {{/hasfeedback}}
+
+    {{#actions}}
+        <footer class="uckkchallenge-proof-submission__actions">
+            {{#canedit}}
+                <a href="{{editurl}}" class="btn btn-secondary">
+                    {{#str}} editproof, uckkchallenge {{/str}}
+                </a>
+            {{/canedit}}
+
+            {{#cansubmit}}
+                <a href="{{submiturl}}" class="btn btn-primary">
+                    {{#str}} submitproof, uckkchallenge {{/str}}
+                </a>
+            {{/cansubmit}}
+
+            {{#canreview}}
+                <a href="{{reviewurl}}" class="btn btn-primary">
+                    {{#str}} reviewproof, uckkchallenge {{/str}}
+                </a>
+            {{/canreview}}
+
+            {{#canarchive}}
+                <a href="{{archiveurl}}" class="btn btn-secondary">
+                    {{#str}} archiveproof, uckkchallenge {{/str}}
+                </a>
+            {{/canarchive}}
+        </footer>
+    {{/actions}}
+</article>

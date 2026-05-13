@@ -1,0 +1,325 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    @template theme_uckk/frontpage
+
+    UCKK front page hero and entry template.
+
+    Expected context:
+    {
+        "uniqid": "abc123",
+        "hasdashboardurl": true,
+        "dashboardurl": "https://example.test/my/",
+        "hascoursesurl": true,
+        "coursesurl": "https://example.test/course/",
+        "hastronccommunurl": true,
+        "tronccommunurl": "https://example.test/course/index.php?categoryid=1",
+        "haschallengesurl": true,
+        "challengesurl": "https://example.test/mod/uckkchallenge/index.php",
+        "hasassembliesurl": true,
+        "assembliesurl": "https://example.test/mod/uckkassembly/index.php",
+        "hasarchivesurl": true,
+        "archivesurl": "https://example.test/mod/uckkarchive/index.php",
+        "hasintegrityurl": true,
+        "integrityurl": "https://example.test/admin/tool/uckkintegrity/",
+        "hasloginurl": true,
+        "loginurl": "https://example.test/login/index.php",
+        "isloggedin": true,
+        "showboundaries": true,
+        "showintegritynotice": true,
+        "showaiwarning": true,
+        "showseal": true
+    }
+}}
+
+<section
+    id="theme-uckk-frontpage-{{uniqid}}"
+    class="theme-uckk-frontpage"
+    data-region="theme-uckk-frontpage"
+>
+    <div class="theme-uckk-frontpage__hero">
+        <div class="container">
+            <div class="theme-uckk-frontpage__hero-grid">
+                <div class="theme-uckk-frontpage__hero-content">
+                    {{#showseal}}
+                        <div class="theme-uckk-frontpage__seal" data-region="uckk-seal">
+                            <span class="theme-uckk-frontpage__seal-mark" aria-hidden="true">
+                                {{#pix}} kingklown, theme_uckk, {{#str}} kingklown, theme_uckk {{/str}} {{/pix}}
+                            </span>
+                            <span class="theme-uckk-frontpage__seal-text">
+                                {{#str}} sealtext, theme_uckk {{/str}}
+                            </span>
+                        </div>
+                    {{/showseal}}
+
+                    <p class="theme-uckk-frontpage__eyebrow">
+                        {{#str}} uckkcampus, theme_uckk {{/str}}
+                    </p>
+
+                    <h1 class="theme-uckk-frontpage__title">
+                        {{#str}} frontpage:title, theme_uckk {{/str}}
+                    </h1>
+
+                    <p class="theme-uckk-frontpage__subtitle">
+                        {{#str}} frontpage:subtitle, theme_uckk {{/str}}
+                    </p>
+
+                    <p class="theme-uckk-frontpage__slogan">
+                        {{#str}} slogan, theme_uckk {{/str}}
+                    </p>
+
+                    <div class="theme-uckk-frontpage__actions" data-region="frontpage-actions">
+                        {{#isloggedin}}
+                            {{#hasdashboardurl}}
+                                <a class="btn btn-primary btn-lg theme-uckk-frontpage__primary-action" href="{{dashboardurl}}">
+                                    {{#str}} navmycampus, theme_uckk {{/str}}
+                                </a>
+                            {{/hasdashboardurl}}
+
+                            {{#hastronccommunurl}}
+                                <a class="btn btn-outline-primary btn-lg theme-uckk-frontpage__secondary-action" href="{{tronccommunurl}}">
+                                    {{#str}} frontpage:commoncore, theme_uckk {{/str}}
+                                </a>
+                            {{/hastronccommunurl}}
+                        {{/isloggedin}}
+
+                        {{^isloggedin}}
+                            {{#hasloginurl}}
+                                <a class="btn btn-primary btn-lg theme-uckk-frontpage__primary-action" href="{{loginurl}}">
+                                    {{#str}} frontpage:cta, theme_uckk {{/str}}
+                                </a>
+                            {{/hasloginurl}}
+
+                            {{#hascoursesurl}}
+                                <a class="btn btn-outline-primary btn-lg theme-uckk-frontpage__secondary-action" href="{{coursesurl}}">
+                                    {{#str}} navcourses, theme_uckk {{/str}}
+                                </a>
+                            {{/hascoursesurl}}
+                        {{/isloggedin}}
+                    </div>
+                </div>
+
+                <aside class="theme-uckk-frontpage__hero-panel" aria-label="{{#str}} boundarytitle, theme_uckk {{/str}}">
+                    <div class="theme-uckk-frontpage__formula-card">
+                        <h2 class="theme-uckk-frontpage__formula-title">
+                            {{#str}} grandjeusocial, theme_uckk {{/str}}
+                        </h2>
+
+                        <ul class="theme-uckk-frontpage__formula-list">
+                            <li>{{#str}} finalformula1, theme_uckk {{/str}}</li>
+                            <li>{{#str}} finalformula2, theme_uckk {{/str}}</li>
+                            <li>{{#str}} finalformula3, theme_uckk {{/str}}</li>
+                            <li>{{#str}} finalformula4, theme_uckk {{/str}}</li>
+                        </ul>
+
+                        <p class="theme-uckk-frontpage__formula-footer">
+                            {{#str}} publicmessageshort, theme_uckk {{/str}}
+                        </p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-uckk-frontpage__main">
+        <div class="container">
+            <div class="theme-uckk-frontpage__section-intro">
+                <p class="theme-uckk-frontpage__section-label">
+                    {{#str}} grandjeu, theme_uckk {{/str}}
+                </p>
+
+                <h2 class="theme-uckk-frontpage__section-title">
+                    {{#str}} publicmessage, theme_uckk {{/str}}
+                </h2>
+            </div>
+
+            <div class="theme-uckk-frontpage__cards" data-region="uckk-entry-cards">
+                <article class="theme-uckk-frontpage__card">
+                    <div class="theme-uckk-frontpage__card-icon" aria-hidden="true">
+                        {{#pix}} icon, theme_uckk, {{#str}} uckk, theme_uckk {{/str}} {{/pix}}
+                    </div>
+
+                    <h3 class="theme-uckk-frontpage__card-title">
+                        {{#str}} frontpage:learn, theme_uckk {{/str}}
+                    </h3>
+
+                    <p class="theme-uckk-frontpage__card-text">
+                        {{#str}} courseevidencebased, theme_uckk {{/str}}
+                    </p>
+
+                    {{#hastronccommunurl}}
+                        <a class="theme-uckk-frontpage__card-link" href="{{tronccommunurl}}">
+                            {{#str}} frontpage:commoncore, theme_uckk {{/str}}
+                        </a>
+                    {{/hastronccommunurl}}
+                </article>
+
+                <article class="theme-uckk-frontpage__card">
+                    <div class="theme-uckk-frontpage__card-icon" aria-hidden="true">
+                        {{#pix}} challenge, theme_uckk, {{#str}} challenge, theme_uckk {{/str}} {{/pix}}
+                    </div>
+
+                    <h3 class="theme-uckk-frontpage__card-title">
+                        {{#str}} frontpage:play, theme_uckk {{/str}}
+                    </h3>
+
+                    <p class="theme-uckk-frontpage__card-text">
+                        {{#str}} challengeresponsibility, theme_uckk {{/str}}
+                    </p>
+
+                    {{#haschallengesurl}}
+                        <a class="theme-uckk-frontpage__card-link" href="{{challengesurl}}">
+                            {{#str}} frontpage:challenges, theme_uckk {{/str}}
+                        </a>
+                    {{/haschallengesurl}}
+                </article>
+
+                <article class="theme-uckk-frontpage__card">
+                    <div class="theme-uckk-frontpage__card-icon" aria-hidden="true">
+                        {{#pix}} assembly, theme_uckk, {{#str}} assembly, theme_uckk {{/str}} {{/pix}}
+                    </div>
+
+                    <h3 class="theme-uckk-frontpage__card-title">
+                        {{#str}} assemblees, theme_uckk {{/str}}
+                    </h3>
+
+                    <p class="theme-uckk-frontpage__card-text">
+                        {{#str}} assemblypurpose, theme_uckk {{/str}}
+                    </p>
+
+                    {{#hasassembliesurl}}
+                        <a class="theme-uckk-frontpage__card-link" href="{{assembliesurl}}">
+                            {{#str}} frontpage:assemblies, theme_uckk {{/str}}
+                        </a>
+                    {{/hasassembliesurl}}
+                </article>
+
+                <article class="theme-uckk-frontpage__card">
+                    <div class="theme-uckk-frontpage__card-icon" aria-hidden="true">
+                        {{#pix}} archive, theme_uckk, {{#str}} archive, theme_uckk {{/str}} {{/pix}}
+                    </div>
+
+                    <h3 class="theme-uckk-frontpage__card-title">
+                        {{#str}} archives, theme_uckk {{/str}}
+                    </h3>
+
+                    <p class="theme-uckk-frontpage__card-text">
+                        {{#str}} archivememory, theme_uckk {{/str}}
+                    </p>
+
+                    {{#hasarchivesurl}}
+                        <a class="theme-uckk-frontpage__card-link" href="{{archivesurl}}">
+                            {{#str}} frontpage:archives, theme_uckk {{/str}}
+                        </a>
+                    {{/hasarchivesurl}}
+                </article>
+            </div>
+
+            {{#showboundaries}}
+                <section class="theme-uckk-frontpage__boundary" data-region="uckk-boundary">
+                    <h2 class="theme-uckk-frontpage__boundary-title">
+                        {{#str}} boundarytitle, theme_uckk {{/str}}
+                    </h2>
+
+                    <div class="theme-uckk-frontpage__boundary-grid">
+                        <article class="theme-uckk-frontpage__boundary-item">
+                            <strong>{{#str}} koa, theme_uckk {{/str}}</strong>
+                            <span>{{#str}} boundarykoa, theme_uckk {{/str}}</span>
+                        </article>
+
+                        <article class="theme-uckk-frontpage__boundary-item">
+                            <strong>{{#str}} uckk, theme_uckk {{/str}}</strong>
+                            <span>{{#str}} boundaryuckk, theme_uckk {{/str}}</span>
+                        </article>
+
+                        <article class="theme-uckk-frontpage__boundary-item">
+                            <strong>{{#str}} koadigitalecosystem, theme_uckk {{/str}}</strong>
+                            <span>{{#str}} boundaryecosystem, theme_uckk {{/str}}</span>
+                        </article>
+
+                        <article class="theme-uckk-frontpage__boundary-item">
+                            <strong>{{#str}} kingklown, theme_uckk {{/str}}</strong>
+                            <span>{{#str}} boundarykingklown, theme_uckk {{/str}}</span>
+                        </article>
+
+                        <article class="theme-uckk-frontpage__boundary-item">
+                            <strong>{{#str}} inquisiteur, theme_uckk {{/str}}</strong>
+                            <span>{{#str}} boundaryinquisiteur, theme_uckk {{/str}}</span>
+                        </article>
+
+                        <article class="theme-uckk-frontpage__boundary-item">
+                            <strong>{{#str}} archives, theme_uckk {{/str}}</strong>
+                            <span>{{#str}} boundaryarchives, theme_uckk {{/str}}</span>
+                        </article>
+                    </div>
+                </section>
+            {{/showboundaries}}
+
+            <div class="theme-uckk-frontpage__notices">
+                {{#showintegritynotice}}
+                    <section class="theme-uckk-frontpage__notice theme-uckk-frontpage__notice--integrity" data-region="uckk-integrity-notice">
+                        <div class="theme-uckk-frontpage__notice-icon" aria-hidden="true">
+                            {{#pix}} inquisiteur, theme_uckk, {{#str}} inquisiteur, theme_uckk {{/str}} {{/pix}}
+                        </div>
+
+                        <div class="theme-uckk-frontpage__notice-content">
+                            <h2 class="theme-uckk-frontpage__notice-title">
+                                {{#str}} integrity, theme_uckk {{/str}}
+                            </h2>
+
+                            <p>
+                                {{#str}} inquisiteurpurpose, theme_uckk {{/str}}
+                            </p>
+
+                            <p>
+                                {{#str}} inquisiteurwarning, theme_uckk {{/str}}
+                            </p>
+
+                            {{#hasintegrityurl}}
+                                <a class="btn btn-outline-secondary" href="{{integrityurl}}">
+                                    {{#str}} frontpage:integrity, theme_uckk {{/str}}
+                                </a>
+                            {{/hasintegrityurl}}
+                        </div>
+                    </section>
+                {{/showintegritynotice}}
+
+                {{#showaiwarning}}
+                    <section class="theme-uckk-frontpage__notice theme-uckk-frontpage__notice--ai" data-region="uckk-ai-notice">
+                        <div class="theme-uckk-frontpage__notice-content">
+                            <h2 class="theme-uckk-frontpage__notice-title">
+                                {{#str}} aigovernable, theme_uckk {{/str}}
+                            </h2>
+
+                            <p>
+                                {{#str}} aiwarning, theme_uckk {{/str}}
+                            </p>
+
+                            <p class="theme-uckk-frontpage__notice-emphasis">
+                                {{#str}} ainonsovereign, theme_uckk {{/str}} — {{#str}} airequireshumanvalidation, theme_uckk {{/str}}
+                            </p>
+                        </div>
+                    </section>
+                {{/showaiwarning}}
+
+                <section class="theme-uckk-frontpage__notice theme-uckk-frontpage__notice--recognition" data-region="uckk-recognition-notice">
+                    <div class="theme-uckk-frontpage__notice-content">
+                        <h2 class="theme-uckk-frontpage__notice-title">
+                            {{#str}} notaccreditedtitle, theme_uckk {{/str}}
+                        </h2>
+
+                        <p>
+                            {{#str}} notaccredited, theme_uckk {{/str}}
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{#js}}
+require(['theme_uckk/frontpage'], function(Frontpage) {
+    Frontpage.init('theme-uckk-frontpage-{{uniqid}}');
+});
+{{/js}}

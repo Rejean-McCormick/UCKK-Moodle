@@ -1,0 +1,122 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Template for the UCKK integrity case list.
+
+    Context variables expected:
+    {
+        "hascases": true,
+        "cases": [
+            {
+                "id": 1,
+                "casetype": "Proof quality",
+                "subjectcomponent": "mod_uckkchallenge",
+                "subjectid": 12,
+                "severity": "Normal",
+                "status": "Opened",
+                "summary": "Short case summary",
+                "timemodified": "Tuesday, 12 May 2026, 10:30 AM",
+                "url": "https://example.test/admin/tool/uckkintegrity/case.php?id=1"
+            }
+        ],
+        "total": 1
+    }
+}}
+
+<div class="tool-uckkintegrity-case-list" data-region="uckkintegrity-case-list">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">{{#str}}cases, tool_uckkintegrity{{/str}}</h3>
+
+        <div class="tool-uckkintegrity-case-list__summary">
+            <span class="badge badge-secondary">
+                {{total}}
+            </span>
+        </div>
+    </div>
+
+    {{#hascases}}
+        <div class="table-responsive">
+            <table class="generaltable table table-striped table-hover">
+                <caption class="accesshide">
+                    {{#str}}cases, tool_uckkintegrity{{/str}}
+                </caption>
+
+                <thead>
+                    <tr>
+                        <th scope="col">{{#str}}case, tool_uckkintegrity{{/str}}</th>
+                        <th scope="col">{{#str}}casetype, tool_uckkintegrity{{/str}}</th>
+                        <th scope="col">{{#str}}subjectcomponent, tool_uckkintegrity{{/str}}</th>
+                        <th scope="col">{{#str}}severity, tool_uckkintegrity{{/str}}</th>
+                        <th scope="col">{{#str}}status, tool_uckkintegrity{{/str}}</th>
+                        <th scope="col">{{#str}}summary, tool_uckkintegrity{{/str}}</th>
+                        <th scope="col">{{#str}}modified, tool_uckkintegrity{{/str}}</th>
+                        <th scope="col">{{#str}}actions, tool_uckkintegrity{{/str}}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {{#cases}}
+                        <tr data-caseid="{{id}}" data-region="uckkintegrity-case-row">
+                            <th scope="row">
+                                <a href="{{url}}">
+                                    #{{id}}
+                                </a>
+                            </th>
+
+                            <td>
+                                {{casetype}}
+                            </td>
+
+                            <td>
+                                <span class="text-monospace">{{subjectcomponent}}</span>
+                                {{#subjectid}}
+                                    <span class="text-muted">#{{subjectid}}</span>
+                                {{/subjectid}}
+                            </td>
+
+                            <td>
+                                <span class="badge badge-light">
+                                    {{severity}}
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="badge badge-info">
+                                    {{status}}
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="tool-uckkintegrity-case-list__summary-text">
+                                    {{{summary}}}
+                                </div>
+                            </td>
+
+                            <td>
+                                {{timemodified}}
+                            </td>
+
+                            <td>
+                                <a class="btn btn-sm btn-secondary" href="{{url}}">
+                                    {{#str}}viewcase, tool_uckkintegrity{{/str}}
+                                </a>
+                            </td>
+                        </tr>
+                    {{/cases}}
+                </tbody>
+            </table>
+        </div>
+    {{/hascases}}
+
+    {{^hascases}}
+        <div class="alert alert-info" role="status">
+            {{#str}}noresults, tool_uckkintegrity{{/str}}
+        </div>
+    {{/hascases}}
+</div>
+
+{{#js}}
+require(['tool_uckkintegrity/integrity'], function(Integrity) {
+    Integrity.init('[data-region="uckkintegrity-case-list"]');
+});
+{{/js}}

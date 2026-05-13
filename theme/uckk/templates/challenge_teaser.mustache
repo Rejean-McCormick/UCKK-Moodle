@@ -1,0 +1,249 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+{{!
+    @template theme_uckk/challenge_teaser
+
+    Challenge teaser card for the UCKK theme.
+
+    This template displays a compact, reusable preview of a UCKK challenge.
+    It is presentation-only: permissions, URLs, status labels, progress values,
+    and visibility decisions must be prepared by the PHP exporter or renderer.
+
+    Required context:
+    {
+        "id": 42,
+        "title": "Cartographier une règle invisible",
+        "summary": "Défi public visant à rendre visible un mécanisme social caché.",
+        "viewurl": "https://example.test/mod/uckkchallenge/view.php?id=42",
+        "status": "open",
+        "statuslabel": "Défi ouvert",
+        "statustype": "success"
+    }
+
+    Optional context:
+    {
+        "challengecode": "UCKK-DEFIS-001",
+        "typelabel": "Défi public",
+        "imageurl": "https://example.test/pluginfile.php/...",
+        "hasimage": true,
+        "duedate": "22 mai 2026",
+        "hasduedate": true,
+        "participantscount": 18,
+        "hasparticipants": true,
+        "proofscount": 7,
+        "hasproofs": true,
+        "completionpercent": 45,
+        "hasprogress": true,
+        "submiturl": "https://example.test/mod/uckkchallenge/submit.php?id=42",
+        "hassubmiturl": true,
+        "archiveurl": "https://example.test/mod/uckkarchive/item.php?id=91",
+        "hasarchiveurl": true,
+        "integrityurl": "https://example.test/admin/tool/uckkintegrity/case.php?subjectid=42",
+        "hasintegrityurl": true,
+        "integrityrequired": true,
+        "iscontested": false,
+        "isinvalidated": false,
+        "isarchived": false,
+        "canview": true,
+        "cansubmit": true,
+        "canreviewintegrity": false,
+        "showpublicwarning": true,
+        "tags": [
+            { "label": "Preuves" },
+            { "label": "Assemblée" }
+        ],
+        "hastags": true
+    }
+}}
+
+<article
+    class="uckk-challenge-teaser card mb-3 uckk-challenge-status-{{status}}"
+    data-region="uckk-challenge-teaser"
+    data-challenge-id="{{id}}"
+>
+    {{#hasimage}}
+        <div class="uckk-challenge-teaser-image">
+            <a href="{{{viewurl}}}" class="d-block" aria-label="{{title}}">
+                <img
+                    src="{{{imageurl}}}"
+                    class="card-img-top"
+                    alt="{{title}}"
+                    loading="lazy"
+                >
+            </a>
+        </div>
+    {{/hasimage}}
+
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-between mb-2">
+            <div class="uckk-challenge-heading">
+                {{#challengecode}}
+                    <div class="small text-muted uckk-challenge-code">
+                        {{challengecode}}
+                    </div>
+                {{/challengecode}}
+
+                <h3 class="h5 card-title mb-1">
+                    <a href="{{{viewurl}}}" class="stretched-link uckk-challenge-title">
+                        {{title}}
+                    </a>
+                </h3>
+
+                {{#typelabel}}
+                    <div class="small text-muted uckk-challenge-type">
+                        {{typelabel}}
+                    </div>
+                {{/typelabel}}
+            </div>
+
+            <span class="badge badge-{{statustype}} uckk-status-badge">
+                {{statuslabel}}
+            </span>
+        </div>
+
+        {{#summary}}
+            <p class="card-text uckk-challenge-summary">
+                {{summary}}
+            </p>
+        {{/summary}}
+
+        {{#showpublicwarning}}
+            <div class="alert alert-light border small uckk-challenge-warning mb-3" role="note">
+                <strong>{{#str}} formula_warning, theme_uckk {{/str}}</strong>
+                <span>{{#str}} challenge_publicwarning, theme_uckk {{/str}}</span>
+            </div>
+        {{/showpublicwarning}}
+
+        <dl class="row small mb-3 uckk-challenge-meta">
+            {{#hasduedate}}
+                <dt class="col-5 col-md-4 text-muted">
+                    {{#str}} dashboard_deadlines, theme_uckk {{/str}}
+                </dt>
+                <dd class="col-7 col-md-8 mb-1">
+                    {{duedate}}
+                </dd>
+            {{/hasduedate}}
+
+            {{#hasparticipants}}
+                <dt class="col-5 col-md-4 text-muted">
+                    {{#str}} joueurs, theme_uckk {{/str}}
+                </dt>
+                <dd class="col-7 col-md-8 mb-1">
+                    {{participantscount}}
+                </dd>
+            {{/hasparticipants}}
+
+            {{#hasproofs}}
+                <dt class="col-5 col-md-4 text-muted">
+                    {{#str}} proofs, theme_uckk {{/str}}
+                </dt>
+                <dd class="col-7 col-md-8 mb-1">
+                    {{proofscount}}
+                </dd>
+            {{/hasproofs}}
+
+            {{#integrityrequired}}
+                <dt class="col-5 col-md-4 text-muted">
+                    {{#str}} integrity, theme_uckk {{/str}}
+                </dt>
+                <dd class="col-7 col-md-8 mb-1">
+                    {{#str}} challenge_integritycheck, theme_uckk {{/str}}
+                </dd>
+            {{/integrityrequired}}
+        </dl>
+
+        {{#hasprogress}}
+            <div class="uckk-challenge-progress mb-3">
+                <div class="d-flex justify-content-between small mb-1">
+                    <span>{{#str}} dashboard_progress, theme_uckk {{/str}}</span>
+                    <span>{{completionpercent}}%</span>
+                </div>
+                <div class="progress">
+                    <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: {{completionpercent}}%;"
+                        aria-valuenow="{{completionpercent}}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                    >
+                        <span class="sr-only">{{completionpercent}}%</span>
+                    </div>
+                </div>
+            </div>
+        {{/hasprogress}}
+
+        {{#hastags}}
+            <ul class="list-inline small mb-3 uckk-challenge-tags" aria-label="{{#str}} status, theme_uckk {{/str}}">
+                {{#tags}}
+                    <li class="list-inline-item">
+                        <span class="badge badge-light border">{{label}}</span>
+                    </li>
+                {{/tags}}
+            </ul>
+        {{/hastags}}
+
+        {{#iscontested}}
+            <div class="alert alert-warning small mb-3 uckk-challenge-contested" role="status">
+                {{#str}} challenge_contested, theme_uckk {{/str}}
+            </div>
+        {{/iscontested}}
+
+        {{#isinvalidated}}
+            <div class="alert alert-danger small mb-3 uckk-challenge-invalidated" role="status">
+                {{#str}} challenge_invalidated, theme_uckk {{/str}}
+            </div>
+        {{/isinvalidated}}
+
+        {{#isarchived}}
+            <div class="alert alert-info small mb-3 uckk-challenge-archived" role="status">
+                {{#str}} status_archived, theme_uckk {{/str}}
+            </div>
+        {{/isarchived}}
+    </div>
+
+    <div class="card-footer bg-white">
+        <div class="d-flex flex-wrap align-items-center justify-content-between">
+            <div class="btn-group mb-1" role="group" aria-label="{{#str}} challenges, theme_uckk {{/str}}">
+                {{#canview}}
+                    <a href="{{{viewurl}}}" class="btn btn-primary btn-sm">
+                        {{#str}} template_viewdetails, theme_uckk {{/str}}
+                    </a>
+                {{/canview}}
+
+                {{#cansubmit}}
+                    {{#hassubmiturl}}
+                        <a href="{{{submiturl}}}" class="btn btn-outline-primary btn-sm">
+                            {{#str}} challenge_submitproof, theme_uckk {{/str}}
+                        </a>
+                    {{/hassubmiturl}}
+                {{/cansubmit}}
+            </div>
+
+            <div class="btn-group mb-1" role="group" aria-label="{{#str}} integrity, theme_uckk {{/str}}">
+                {{#hasarchiveurl}}
+                    <a href="{{{archiveurl}}}" class="btn btn-outline-secondary btn-sm">
+                        {{#str}} archive, theme_uckk {{/str}}
+                    </a>
+                {{/hasarchiveurl}}
+
+                {{#canreviewintegrity}}
+                    {{#hasintegrityurl}}
+                        <a href="{{{integrityurl}}}" class="btn btn-outline-secondary btn-sm">
+                            {{#str}} integrity_review, theme_uckk {{/str}}
+                        </a>
+                    {{/hasintegrityurl}}
+                {{/canreviewintegrity}}
+            </div>
+        </div>
+    </div>
+</article>

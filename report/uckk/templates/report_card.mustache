@@ -1,0 +1,50 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    @template report_uckk/report_card
+
+    Report card for one UCKK institutional report source.
+
+    Context variables required:
+    * key string - Canonical report key.
+    * title string - Localized report title.
+    * description string - Localized report description.
+    * total int - Matching row count.
+    * url string - URL to open the report.
+    * active bool - Whether this card is the currently selected report.
+
+    Example context:
+    {
+        "key": "badge_awards",
+        "title": "Badge awards",
+        "description": "Badge issue counts and award dates.",
+        "total": 12,
+        "url": "/report/uckk/index.php?report=badge_awards",
+        "active": true
+    }
+}}
+
+<div class="card report-uckk-card {{#active}}border-primary{{/active}}" data-report-key="{{key}}">
+    <div class="card-body">
+        <h3 class="h5 card-title">
+            {{title}}
+        </h3>
+
+        <p class="card-text">
+            {{description}}
+        </p>
+
+        <p class="card-text report-uckk-card-total">
+            <strong>{{total}}</strong>
+            <span class="sr-only">{{#str}}records, report_uckk{{/str}}</span>
+        </p>
+
+        <a
+            class="btn {{#active}}btn-primary{{/active}}{{^active}}btn-secondary{{/active}}"
+            href="{{url}}"
+            {{#active}}aria-current="page"{{/active}}
+        >
+            {{#str}}viewreport, report_uckk{{/str}}
+        </a>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+{
+  "schema": "uckk.presets.categories.v1",
+  "idempotency": "category.idnumber",
+  "root": {
+    "idnumber": "UCKK",
+    "name": "UCKK",
+    "description": "Univers-Cité King Klown — Moodle Campus"
+  },
+  "categories": [
+    {
+      "idnumber": "UCKK-00",
+      "name": "00_Accueil_et_orientation",
+      "parent": "UCKK",
+      "sortorder": 0
+    },
+    {
+      "idnumber": "UCKK-01",
+      "name": "01_Tronc_commun_obligatoire",
+      "parent": "UCKK",
+      "sortorder": 1
+    },
+    {
+      "idnumber": "UCKK-02",
+      "name": "02_Baccalaureat_Grand_Jeu_social",
+      "parent": "UCKK",
+      "sortorder": 2
+    },
+    {
+      "idnumber": "UCKK-03",
+      "name": "03_Baccalaureat_Architecture_ecosysteme_digital_kOA",
+      "parent": "UCKK",
+      "sortorder": 3
+    },
+    {
+      "idnumber": "UCKK-04",
+      "name": "04_Baccalaureat_Architecture_sociotechnique",
+      "parent": "UCKK",
+      "sortorder": 4
+    },
+    {
+      "idnumber": "UCKK-05",
+      "name": "05_Baccalaureat_Sciences_politiques",
+      "parent": "UCKK",
+      "sortorder": 5
+    },
+    {
+      "idnumber": "UCKK-06",
+      "name": "06_Baccalaureat_Economie",
+      "parent": "UCKK",
+      "sortorder": 6
+    },
+    {
+      "idnumber": "UCKK-07",
+      "name": "07_Baccalaureat_Ecologie",
+      "parent": "UCKK",
+      "sortorder": 7
+    },
+    {
+      "idnumber": "UCKK-08",
+      "name": "08_Baccalaureat_Metaphysique",
+      "parent": "UCKK",
+      "sortorder": 8
+    },
+    {
+      "idnumber": "UCKK-09",
+      "name": "09_Baccalaureat_IA_gouvernable",
+      "parent": "UCKK",
+      "sortorder": 9
+    },
+    {
+      "idnumber": "UCKK-10",
+      "name": "10_Baccalaureat_Linguistique_architecture_du_sens",
+      "parent": "UCKK",
+      "sortorder": 10
+    },
+    {
+      "idnumber": "UCKK-11",
+      "name": "11_Baccalaureat_Intervention_sociale",
+      "parent": "UCKK",
+      "sortorder": 11
+    },
+    {
+      "idnumber": "UCKK-12",
+      "name": "12_Mineure_Medias_vivants_theatre_public",
+      "parent": "UCKK",
+      "sortorder": 12
+    },
+    {
+      "idnumber": "UCKK-13",
+      "name": "13_Seminaires_avances_laboratoires",
+      "parent": "UCKK",
+      "sortorder": 13
+    },
+    {
+      "idnumber": "UCKK-90",
+      "name": "90_Defis_King_Klown",
+      "parent": "UCKK",
+      "sortorder": 90
+    },
+    {
+      "idnumber": "UCKK-91",
+      "name": "91_Assemblees",
+      "parent": "UCKK",
+      "sortorder": 91
+    },
+    {
+      "idnumber": "UCKK-92",
+      "name": "92_Archives_et_Portfolios",
+      "parent": "UCKK",
+      "sortorder": 92
+    },
+    {
+      "idnumber": "UCKK-99",
+      "name": "99_Integrite_Inquisiteur",
+      "parent": "UCKK",
+      "sortorder": 99
+    }
+  ]
+}

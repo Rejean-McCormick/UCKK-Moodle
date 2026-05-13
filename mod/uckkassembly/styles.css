@@ -1,0 +1,497 @@
+/**
+ * Styles for the UCKK Assembly activity module.
+ *
+ * @package    mod_uckkassembly
+ * @copyright  2026 Univers-Cité King Klown
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/* Root layout. */
+
+.uckkassembly {
+    display: block;
+}
+
+.uckkassembly-view,
+.uckkassembly-motion-card,
+.uckkassembly-contest,
+.uckkassembly-decision,
+.uckkassembly-vote-panel,
+.uckkassembly-minutes,
+.uckkassembly-archive-panel {
+    box-sizing: border-box;
+}
+
+.uckkassembly-view__header,
+.uckkassembly-section__header,
+.uckkassembly-panel__header,
+.uckkassembly-motion-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.uckkassembly-view__title,
+.uckkassembly-section__title,
+.uckkassembly-panel__title,
+.uckkassembly-motion-card__title {
+    margin: 0;
+}
+
+.uckkassembly-view__subtitle,
+.uckkassembly-motion-card__summary,
+.uckkassembly-panel__summary {
+    margin-top: 0.35rem;
+    margin-bottom: 0;
+}
+
+.uckkassembly-view__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.uckkassembly-view__main,
+.uckkassembly-view__side {
+    min-width: 0;
+}
+
+.uckkassembly-view__side {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Cards and panels. */
+
+.uckkassembly-section,
+.uckkassembly-panel,
+.uckkassembly-motion-card,
+.uckkassembly-decision-card,
+.uckkassembly-vote-panel,
+.uckkassembly-contest__decision {
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 0.5rem;
+    background: var(--bs-body-bg, #fff);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.uckkassembly-panel--compact {
+    padding: 0.75rem;
+}
+
+.uckkassembly-section__content > :last-child,
+.uckkassembly-panel__content > :last-child,
+.uckkassembly-motion-card__body > :last-child {
+    margin-bottom: 0;
+}
+
+/* Motion card. */
+
+.uckkassembly-motion-card {
+    position: relative;
+}
+
+.uckkassembly-motion-card__eyebrow {
+    margin: 0 0 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.uckkassembly-motion-card__link {
+    text-decoration: none;
+}
+
+.uckkassembly-motion-card__link:hover,
+.uckkassembly-motion-card__link:focus {
+    text-decoration: underline;
+}
+
+.uckkassembly-motion-card__meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 0.75rem;
+    margin: 0 0 1rem;
+}
+
+.uckkassembly-motion-card__meta-item {
+    min-width: 0;
+}
+
+.uckkassembly-motion-card__meta dt {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.uckkassembly-motion-card__meta dd {
+    margin-bottom: 0;
+}
+
+.uckkassembly-motion-card__body {
+    margin-bottom: 1rem;
+}
+
+.uckkassembly-motion-card__indicators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.uckkassembly-motion-card__indicator {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 999px;
+    padding: 0.25rem 0.65rem;
+    background: var(--bs-light, #f8f9fa);
+}
+
+.uckkassembly-motion-card__indicator-label {
+    font-size: 0.75rem;
+}
+
+.uckkassembly-motion-card__indicator-value {
+    font-size: 0.95rem;
+}
+
+.uckkassembly-motion-card__decision,
+.uckkassembly-motion-card__integrity {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.uckkassembly-motion-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Status badges. */
+
+.uckkassembly-status-badge,
+.uckkassembly-motion-card__rule-status,
+.uckkassembly-motion-card__item-status {
+    display: inline-flex wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Status badges. */
+
+.uckkassembly-status-badge;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.4;
+    background: var(--bs-secondary-bg, #e9ecef);
+    color: var(--bs-body-color, #212529);
+}
+
+.uckkassembly-status-badge--draft,
+.status-draft {
+    border-color: var(--bs-secondary, #6c757d);
+}
+
+.uckkassembly-status-badge--active,
+.status-active,
+.uckkassembly-status-badge--validated,
+.status-validated {
+    border-color: var(--bs-success, #198754);
+}
+
+.uckkassembly-status-badge--pending,
+.uckkassembly-status-badge--pending_review,
+.status-pending,
+.status-pending-review {
+    border-color: var(--bs-warning, #ffc107);
+}
+
+.uckkassembly-status-badge--contested,
+.status-contested {
+    border-color: var(--bs-danger, #dc3545);
+}
+
+.uckkassembly-status-badge--archived,
+.status-archived {
+    border-color: var(--bs-dark, #212529);
+}
+
+.uckkassembly-status-badge--hidden,
+.status-hidden {
+    opacity: 0.7;
+}
+
+/* Assembly lists. */
+
+.uckkassembly-list {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.uckkassembly-list__item {
+    min-width: 0;
+}
+
+.uckkassembly-empty {
+    margin: 0;
+    color: var(--bs-secondary-color, #6c757d);
+}
+
+/* Vote panel. */
+
+.uckkassembly-vote-panel__choices {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.uckkassembly-vote-panel__choice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+}
+
+.uckkassembly-vote-panel__choice input {
+    margin-top: 0.2rem;
+}
+
+.uckkassembly-vote-panel__choice-label {
+    font-weight: 700;
+}
+
+.uckkassembly-vote-panel__choice-description {
+    margin: 0.15rem 0 0;
+    font-size: 0.875rem;
+}
+
+.uckkassembly-vote-panel__results {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.uckkassembly-vote-panel__result-row {
+    display: grid;
+    gap: 0.25rem;
+}
+
+.uckkassembly-vote-panel__result-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.uckkassembly-vote-panel__bar {
+    overflow: hidden;
+    height: 0.75rem;
+    border-radius: 999px;
+    background: var(--bs-secondary-bg, #e9ecef);
+}
+
+.uckkassembly-vote-panel__bar-fill {
+    height: 100%;
+    background: currentColor;
+}
+
+/* Decision view. */
+
+.uckkassembly-decision__meta,
+.uckkassembly-contest__facts,
+.uckkassembly-minutes__meta {
+    display: grid;
+    grid-template-columns: minmax(8rem, 14rem) minmax(0, 1fr);
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.uckkassembly-decision__meta dt,
+.uckkassembly-contest__facts dt,
+.uckkassembly-minutes__meta dt {
+    font-weight: 700;
+}
+
+.uckkassembly-decision__meta dd,
+.uckkassembly-contest__facts dd,
+.uckkassembly-minutes__meta dd {
+    margin-bottom: 0;
+}
+
+.uckkassembly-decision__actions,
+.uckkassembly-contest__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Contestation page. */
+
+.uckkassembly-contest__intro {
+    margin-bottom: 1rem;
+}
+
+.uckkassembly-contest__warnings ul {
+    margin-bottom: 0;
+}
+
+.uckkassembly-contest .form-group {
+    max-width: 60rem;
+}
+
+/* Integrity and archive notices. */
+
+.uckkassembly-integrity-notice,
+.uckkassembly-archive-notice,
+.uckkassembly-contestation-notice {
+    margin: 1rem 0;
+}
+
+.uckkassembly-integrity-state,
+.uckkassembly-archive-state {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: var(--bs-secondary-bg, #e9ecef);
+}
+
+.uckkassembly-integrity-state--verified {
+    background: var(--bs-success-bg-subtle, #d1e7dd);
+}
+
+.uckkassembly-integrity-state--contested,
+.uckkassembly-integrity-state--invalidated {
+    background: var(--bs-danger-bg-subtle, #f8d7da);
+}
+
+.uckkassembly-integrity-state--unverified,
+.uckkassembly-integrity-state--human_reviewed {
+    background: var(--bs-warning-bg-subtle, #fff3cd);
+}
+
+/* Minutes. */
+
+.uckkassembly-minutes__section {
+    margin-bottom: 1.25rem;
+}
+
+.uckkassembly-minutes__section-title {
+    margin-bottom: 0.5rem;
+}
+
+.uckkassembly-minutes__entry {
+    border-left: 3px solid var(--bs-border-color, #dee2e6);
+    padding-left: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Tables. */
+
+.uckkassembly-table {
+    width: 100%;
+}
+
+.uckkassembly-table th,
+.uckkassembly-table td {
+    vertical-align: top;
+}
+
+.uckkassembly-table__actions {
+    white-space: nowrap;
+}
+
+/* Forms. */
+
+.uckkassembly-form-hint {
+    margin-top: 0.25rem;
+    color: var(--bs-secondary-color, #6c757d);
+    font-size: 0.875rem;
+}
+
+.uckkassembly-form-warning {
+    margin-top: 0.5rem;
+}
+
+/* Responsive layout. */
+
+@media (max-width: 992px) {
+    .uckkassembly-view__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .uckkassembly-view__side {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .uckkassembly-view__header,
+    .uckkassembly-section__header,
+    .uckkassembly-panel__header,
+    .uckkassembly-motion-card__header {
+        flex-direction: column;
+    }
+
+    .uckkassembly-motion-card__meta,
+    .uckkassembly-decision__meta,
+    .uckkassembly-contest__facts,
+    .uckkassembly-minutes__meta {
+        grid-template-columns: 1fr;
+    }
+
+    .uckkassembly-motion-card__actions,
+    .uckkassembly-decision__actions,
+    .uckkassembly-contest__actions {
+        flex-direction: column;
+    }
+
+    .uckkassembly-motion-card__actions .btn,
+    .uckkassembly-decision__actions .btn,
+    .uckkassembly-contest__actions .btn {
+        width: 100%;
+    }
+}
+
+/* Print-friendly Assembly records. */
+
+@media print {
+    .uckkassembly-view__actions,
+    .uckkassembly-motion-card__actions,
+    .uckkassembly-decision__actions,
+    .uckkassembly-contest__actions,
+    .uckkassembly-vote-panel__form {
+        display: none;
+    }
+
+    .uckkassembly-section,
+    .uckkassembly-panel,
+    .uckkassembly-motion-card,
+    .uckkassembly-decision-card,
+    .uckkassembly-vote-panel,
+    .uckkassembly-contest__decision {
+        border: 1px solid #000;
+        break-inside: avoid;
+    }
+
+    .uckkassembly-view__layout {
+        display: block;
+    }
+}

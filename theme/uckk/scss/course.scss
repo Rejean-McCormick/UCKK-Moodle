@@ -1,0 +1,875 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Course styling for the UCKK theme.
+ *
+ * This file is presentation-only.
+ *
+ * It styles Moodle course pages and the future format_uckk output while
+ * preserving Moodle course editing, completion, activity rendering,
+ * availability information and accessibility conventions.
+ *
+ * It must not contain:
+ * - grading logic;
+ * - permission logic;
+ * - completion logic;
+ * - challenge workflow logic;
+ * - assembly workflow logic;
+ * - archive validation logic;
+ * - integrity decision logic;
+ * - AI authority logic.
+ *
+ * @package theme_uckk
+ */
+
+/* stylelint-disable max-line-length */
+
+$uckk-course-bg: #f8f9fa !default;
+$uckk-course-surface: #ffffff !default;
+$uckk-course-border: rgba(15, 23, 42, .12) !default;
+$uckk-course-muted: #6b7280 !default;
+$uckk-course-text: #1f2937 !default;
+$uckk-course-shadow: 0 .125rem .75rem rgba(15, 23, 42, .06) !default;
+$uckk-course-radius: .875rem !default;
+$uckk-course-radius-sm: .5rem !default;
+$uckk-course-transition: 160ms ease-in-out !default;
+
+$uckk-course-accent: #5b3cc4 !default;
+$uckk-course-accent-soft: rgba(91, 60, 196, .12) !default;
+$uckk-course-accent-strong: #3f2a8c !default;
+
+$uckk-course-orientation: #5b3cc4 !default;
+$uckk-course-concepts: #2563eb !default;
+$uckk-course-canon: #0f766e !default;
+$uckk-course-workshop: #7c3aed !default;
+$uckk-course-proof: #b45309 !default;
+$uckk-course-deliberation: #1d4ed8 !default;
+$uckk-course-deliverable: #9333ea !default;
+$uckk-course-evaluation: #047857 !default;
+$uckk-course-archive: #0f766e !default;
+$uckk-course-integrity: #b42318 !default;
+
+$uckk-course-orientation-soft: rgba(91, 60, 196, .12) !default;
+$uckk-course-concepts-soft: rgba(37, 99, 235, .12) !default;
+$uckk-course-canon-soft: rgba(15, 118, 110, .12) !default;
+$uckk-course-workshop-soft: rgba(124, 58, 237, .12) !default;
+$uckk-course-proof-soft: rgba(180, 83, 9, .12) !default;
+$uckk-course-deliberation-soft: rgba(29, 78, 216, .12) !default;
+$uckk-course-deliverable-soft: rgba(147, 51, 234, .12) !default;
+$uckk-course-evaluation-soft: rgba(4, 120, 87, .12) !default;
+$uckk-course-archive-soft: rgba(15, 118, 110, .12) !default;
+$uckk-course-integrity-soft: rgba(180, 35, 24, .12) !default;
+
+/**
+ * Course page shell.
+ */
+.theme-uckk {
+    &.path-course-view,
+    &.pagelayout-course,
+    &.pagelayout-incourse {
+        background-color: $uckk-course-bg;
+
+        #page {
+            background-color: transparent;
+        }
+
+        #page-header {
+            margin-bottom: 1rem;
+        }
+
+        #page-content {
+            padding-top: 1rem;
+        }
+
+        #region-main {
+            background-color: transparent;
+            border: 0;
+        }
+    }
+}
+
+/**
+ * Moodle full header and course identity.
+ */
+.theme-uckk {
+    &.path-course-view,
+    &.pagelayout-course {
+        .page-context-header,
+        .page-header-headings,
+        .course-header,
+        .uckk-course-header {
+            color: $uckk-course-text;
+        }
+
+        .page-header-headings h1,
+        .course-header h1,
+        .uckk-course-title {
+            font-weight: 800;
+            letter-spacing: -.02em;
+        }
+
+        .page-context-header {
+            padding: 1.25rem;
+            background-color: $uckk-course-surface;
+            border: 1px solid $uckk-course-border;
+            border-radius: $uckk-course-radius;
+            box-shadow: $uckk-course-shadow;
+        }
+
+        .page-header-image,
+        .courseimage,
+        .course-summaryimage {
+            overflow: hidden;
+            border-radius: $uckk-course-radius-sm;
+        }
+
+        .course-summary,
+        .uckk-course-summary {
+            color: $uckk-course-muted;
+            line-height: 1.55;
+        }
+    }
+}
+
+/**
+ * UCKK course format wrapper.
+ *
+ * format_uckk should add .format-uckk and, when possible:
+ * - data-uckk-section="orientation|concepts|canon|atelier|preuves|deliberation|livrable|evaluation|archive"
+ * - .uckk-section--orientation
+ * - .uckk-section--concepts
+ * - .uckk-section--canon
+ * - .uckk-section--atelier
+ * - .uckk-section--preuves
+ * - .uckk-section--deliberation
+ * - .uckk-section--livrable
+ * - .uckk-section--evaluation
+ * - .uckk-section--archive
+ */
+.theme-uckk {
+    .format-uckk {
+        .course-content {
+            background-color: transparent;
+        }
+
+        .course-section,
+        .section,
+        .uckk-course-section {
+            position: relative;
+            margin-bottom: 1rem;
+            background-color: $uckk-course-surface;
+            border: 1px solid $uckk-course-border;
+            border-radius: $uckk-course-radius;
+            box-shadow: $uckk-course-shadow;
+            transition:
+                border-color $uckk-course-transition,
+                box-shadow $uckk-course-transition,
+                background-color $uckk-course-transition;
+
+            &:hover {
+                border-color: rgba(91, 60, 196, .22);
+                box-shadow: 0 .25rem 1rem rgba(15, 23, 42, .08);
+            }
+        }
+
+        .course-section-header,
+        .sectionname,
+        .uckk-section-header {
+            color: $uckk-course-text;
+        }
+
+        .course-section-header,
+        .uckk-section-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid $uckk-course-border;
+            border-radius: $uckk-course-radius $uckk-course-radius 0 0;
+        }
+
+        .sectionname {
+            margin-bottom: 0;
+            font-weight: 800;
+            line-height: 1.25;
+
+            a {
+                color: inherit;
+
+                &:hover,
+                &:focus {
+                    color: $uckk-course-accent-strong;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .summary,
+        .section-summary,
+        .uckk-section-summary {
+            color: $uckk-course-muted;
+            line-height: 1.55;
+        }
+
+        .content,
+        .uckk-section-content {
+            padding: 1rem 1.25rem;
+        }
+    }
+}
+
+/**
+ * Domain color tokens for canonical UCKK course sections.
+ */
+.theme-uckk {
+    .format-uckk {
+        [data-uckk-section="orientation"],
+        .uckk-section--orientation {
+            --uckk-course-section-color: #{$uckk-course-orientation};
+            --uckk-course-section-soft: #{$uckk-course-orientation-soft};
+        }
+
+        [data-uckk-section="concepts"],
+        .uckk-section--concepts {
+            --uckk-course-section-color: #{$uckk-course-concepts};
+            --uckk-course-section-soft: #{$uckk-course-concepts-soft};
+        }
+
+        [data-uckk-section="canon"],
+        .uckk-section--canon {
+            --uckk-course-section-color: #{$uckk-course-canon};
+            --uckk-course-section-soft: #{$uckk-course-canon-soft};
+        }
+
+        [data-uckk-section="atelier"],
+        .uckk-section--atelier {
+            --uckk-course-section-color: #{$uckk-course-workshop};
+            --uckk-course-section-soft: #{$uckk-course-workshop-soft};
+        }
+
+        [data-uckk-section="preuves"],
+        .uckk-section--preuves {
+            --uckk-course-section-color: #{$uckk-course-proof};
+            --uckk-course-section-soft: #{$uckk-course-proof-soft};
+        }
+
+        [data-uckk-section="deliberation"],
+        .uckk-section--deliberation {
+            --uckk-course-section-color: #{$uckk-course-deliberation};
+            --uckk-course-section-soft: #{$uckk-course-deliberation-soft};
+        }
+
+        [data-uckk-section="livrable"],
+        .uckk-section--livrable {
+            --uckk-course-section-color: #{$uckk-course-deliverable};
+            --uckk-course-section-soft: #{$uckk-course-deliverable-soft};
+        }
+
+        [data-uckk-section="evaluation"],
+        .uckk-section--evaluation {
+            --uckk-course-section-color: #{$uckk-course-evaluation};
+            --uckk-course-section-soft: #{$uckk-course-evaluation-soft};
+        }
+
+        [data-uckk-section="archive"],
+        .uckk-section--archive {
+            --uckk-course-section-color: #{$uckk-course-archive};
+            --uckk-course-section-soft: #{$uckk-course-archive-soft};
+        }
+
+        [data-uckk-section],
+        .uckk-course-section {
+            border-left: .375rem solid var(--uckk-course-section-color, #{$uckk-course-accent});
+
+            .course-section-header,
+            .uckk-section-header {
+                background-color: var(--uckk-course-section-soft, #{$uckk-course-accent-soft});
+            }
+        }
+
+        .uckk-section-label {
+            display: inline-flex;
+            align-items: center;
+            min-height: 1.5rem;
+            padding: .125rem .5rem;
+            margin-bottom: .5rem;
+            color: var(--uckk-course-section-color, #{$uckk-course-accent});
+            background-color: var(--uckk-course-section-soft, #{$uckk-course-accent-soft});
+            border-radius: 999px;
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .06em;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+    }
+}
+
+/**
+ * Standard Moodle activity cards/items.
+ */
+.theme-uckk {
+    .format-uckk {
+        .activity,
+        .activity-item,
+        .modtype_label,
+        .uckk-activity-item {
+            border-radius: $uckk-course-radius-sm;
+        }
+
+        .activity-item {
+            border-color: $uckk-course-border;
+            transition:
+                border-color $uckk-course-transition,
+                box-shadow $uckk-course-transition,
+                background-color $uckk-course-transition;
+
+            &:hover,
+            &:focus-within {
+                border-color: rgba(91, 60, 196, .28);
+                box-shadow: 0 .125rem .5rem rgba(15, 23, 42, .08);
+            }
+        }
+
+        .activityname,
+        .activity-name {
+            font-weight: 700;
+
+            a {
+                color: $uckk-course-text;
+
+                &:hover,
+                &:focus {
+                    color: $uckk-course-accent-strong;
+                }
+            }
+        }
+
+        .activityiconcontainer {
+            border-radius: $uckk-course-radius-sm;
+        }
+
+        .activity-information,
+        .activity-altcontent,
+        .description,
+        .availabilityinfo,
+        .contentafterlink {
+            color: $uckk-course-muted;
+        }
+
+        .activity-basis,
+        .activity-dates,
+        .activity-completion,
+        .completion-info {
+            font-size: .875rem;
+        }
+    }
+}
+
+/**
+ * Activity completion and progress indicators.
+ *
+ * This only styles Moodle completion output. It does not calculate completion.
+ */
+.theme-uckk {
+    .format-uckk,
+    &.path-course-view {
+        .completion-info,
+        .automatic-completion-conditions,
+        .activity-completion {
+            color: $uckk-course-muted;
+        }
+
+        .completion-info .badge,
+        .automatic-completion-conditions .badge {
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        .completioninfo,
+        .completiondetails,
+        .coursecompletion {
+            border-radius: $uckk-course-radius-sm;
+        }
+
+        .progress,
+        .uckk-course-progress {
+            height: .65rem;
+            background-color: rgba(15, 23, 42, .08);
+            border-radius: 999px;
+        }
+
+        .progress-bar,
+        .uckk-course-progress-bar {
+            background-color: $uckk-course-accent;
+            border-radius: 999px;
+        }
+    }
+}
+
+/**
+ * UCKK evidence, archive and integrity visual markers.
+ *
+ * These are visual states only. Actual state must be provided by Moodle plugins.
+ */
+.theme-uckk {
+    .uckk-course-marker,
+    .uckk-evidence-marker,
+    .uckk-archive-marker,
+    .uckk-integrity-marker {
+        display: inline-flex;
+        align-items: center;
+        min-height: 1.5rem;
+        padding: .125rem .5rem;
+        border-radius: 999px;
+        font-size: .75rem;
+        font-weight: 800;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+    .uckk-evidence-marker,
+    .uckk-marker--proof,
+    .uckk-marker--preuve {
+        color: $uckk-course-proof;
+        background-color: $uckk-course-proof-soft;
+    }
+
+    .uckk-archive-marker,
+    .uckk-marker--archive {
+        color: $uckk-course-archive;
+        background-color: $uckk-course-archive-soft;
+    }
+
+    .uckk-integrity-marker,
+    .uckk-marker--integrity,
+    .uckk-marker--inquisiteur {
+        color: $uckk-course-integrity;
+        background-color: $uckk-course-integrity-soft;
+    }
+
+    .uckk-course-marker + .uckk-course-marker,
+    .uckk-evidence-marker + .uckk-archive-marker,
+    .uckk-archive-marker + .uckk-integrity-marker {
+        margin-left: .25rem;
+    }
+}
+
+/**
+ * Course cards and course overview.
+ */
+.theme-uckk {
+    .coursebox,
+    .course-card,
+    .dashboard-card,
+    .uckk-course-card {
+        border: 1px solid $uckk-course-border;
+        border-radius: $uckk-course-radius;
+        box-shadow: $uckk-course-shadow;
+        overflow: hidden;
+        transition:
+            border-color $uckk-course-transition,
+            box-shadow $uckk-course-transition,
+            transform $uckk-course-transition;
+
+        &:hover,
+        &:focus-within {
+            border-color: rgba(91, 60, 196, .28);
+            box-shadow: 0 .25rem 1rem rgba(15, 23, 42, .1);
+            transform: translateY(-1px);
+        }
+    }
+
+    .coursebox .coursename,
+    .course-card .coursename,
+    .uckk-course-card-title {
+        font-weight: 800;
+    }
+
+    .coursebox .summary,
+    .course-card .summary,
+    .uckk-course-card-summary {
+        color: $uckk-course-muted;
+        line-height: 1.55;
+    }
+
+    .coursecat,
+    .course-category,
+    .uckk-course-category {
+        .categoryname {
+            font-weight: 800;
+        }
+    }
+}
+
+/**
+ * Course management and editing controls.
+ *
+ * Keep controls visible and usable. UCKK styling must not hide Moodle editing.
+ */
+.theme-uckk {
+    &.editing,
+    .editing {
+        .format-uckk {
+            .course-section,
+            .activity-item {
+                outline-offset: .15rem;
+            }
+
+            .editing_move,
+            .actions,
+            .section_action_menu,
+            .activity-actions {
+                opacity: 1;
+            }
+        }
+    }
+
+    .format-uckk {
+        .section_action_menu,
+        .activity-actions,
+        .dropdown.action-menu {
+            .dropdown-toggle,
+            .btn {
+                border-radius: $uckk-course-radius-sm;
+            }
+        }
+
+        .sectionbadges .badge,
+        .activity-badges .badge {
+            border-radius: 999px;
+            font-weight: 700;
+        }
+    }
+}
+
+/**
+ * UCKK course overview panels.
+ */
+.theme-uckk {
+    .uckk-course-overview,
+    .uckk-course-boundary,
+    .uckk-course-competency-panel,
+    .uckk-course-portfolio-panel {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background-color: $uckk-course-surface;
+        border: 1px solid $uckk-course-border;
+        border-radius: $uckk-course-radius;
+        box-shadow: $uckk-course-shadow;
+    }
+
+    .uckk-course-boundary {
+        border-left: .375rem solid $uckk-course-accent;
+
+        strong,
+        .uckk-course-boundary-title {
+            color: $uckk-course-accent-strong;
+        }
+    }
+
+    .uckk-course-competency-panel {
+        border-left: .375rem solid $uckk-course-evaluation;
+    }
+
+    .uckk-course-portfolio-panel {
+        border-left: .375rem solid $uckk-course-archive;
+    }
+}
+
+/**
+ * Competency and badge presentation.
+ *
+ * Actual competency states and badge awards must come from Moodle data.
+ */
+.theme-uckk {
+    .uckk-competency-list,
+    .uckk-badge-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    .uckk-competency,
+    .uckk-badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2rem;
+        padding: .25rem .75rem;
+        color: $uckk-course-text;
+        background-color: $uckk-course-surface;
+        border: 1px solid $uckk-course-border;
+        border-radius: 999px;
+        font-size: .875rem;
+        font-weight: 700;
+    }
+
+    .uckk-competency--complete,
+    .uckk-badge--awarded {
+        color: $uckk-course-evaluation;
+        background-color: $uckk-course-evaluation-soft;
+        border-color: rgba(4, 120, 87, .35);
+    }
+
+    .uckk-competency--pending,
+    .uckk-badge--pending {
+        color: $uckk-course-proof;
+        background-color: $uckk-course-proof-soft;
+        border-color: rgba(180, 83, 9, .35);
+    }
+
+    .uckk-competency--contested,
+    .uckk-badge--blocked {
+        color: $uckk-course-integrity;
+        background-color: $uckk-course-integrity-soft;
+        border-color: rgba(180, 35, 24, .35);
+    }
+}
+
+/**
+ * UCKK learning cycle.
+ */
+.theme-uckk {
+    .uckk-cycle {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .75rem;
+        margin: 1rem 0;
+    }
+
+    .uckk-cycle-step {
+        padding: .75rem;
+        text-align: center;
+        background-color: $uckk-course-surface;
+        border: 1px solid $uckk-course-border;
+        border-radius: $uckk-course-radius-sm;
+    }
+
+    .uckk-cycle-step-label {
+        display: block;
+        color: $uckk-course-accent-strong;
+        font-weight: 800;
+    }
+
+    .uckk-cycle-step-description {
+        display: block;
+        margin-top: .25rem;
+        color: $uckk-course-muted;
+        font-size: .875rem;
+    }
+}
+
+/**
+ * Course alerts.
+ */
+.theme-uckk {
+    .uckk-course-alert {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid $uckk-course-border;
+        border-left-width: .375rem;
+        border-radius: $uckk-course-radius-sm;
+        background-color: $uckk-course-surface;
+    }
+
+    .uckk-course-alert--proof {
+        border-left-color: $uckk-course-proof;
+        background-color: $uckk-course-proof-soft;
+    }
+
+    .uckk-course-alert--archive {
+        border-left-color: $uckk-course-archive;
+        background-color: $uckk-course-archive-soft;
+    }
+
+    .uckk-course-alert--integrity {
+        border-left-color: $uckk-course-integrity;
+        background-color: $uckk-course-integrity-soft;
+    }
+
+    .uckk-course-alert--assembly {
+        border-left-color: $uckk-course-deliberation;
+        background-color: $uckk-course-deliberation-soft;
+    }
+}
+
+/**
+ * Moodle content readability inside courses.
+ */
+.theme-uckk {
+    &.path-course-view,
+    &.pagelayout-incourse {
+        .no-overflow {
+            line-height: 1.55;
+        }
+
+        .generalbox,
+        .box,
+        .activity-description,
+        .course-description-item {
+            border-radius: $uckk-course-radius-sm;
+        }
+
+        table.generaltable,
+        .table {
+            background-color: $uckk-course-surface;
+            border-radius: $uckk-course-radius-sm;
+            overflow: hidden;
+        }
+
+        blockquote {
+            padding: .75rem 1rem;
+            color: $uckk-course-text;
+            background-color: $uckk-course-accent-soft;
+            border-left: .25rem solid $uckk-course-accent;
+            border-radius: $uckk-course-radius-sm;
+        }
+
+        code,
+        pre {
+            border-radius: $uckk-course-radius-sm;
+        }
+    }
+}
+
+/**
+ * Availability, restrictions and hidden items.
+ */
+.theme-uckk {
+    .format-uckk {
+        .availabilityinfo {
+            padding: .5rem .75rem;
+            margin-top: .5rem;
+            background-color: rgba(15, 23, 42, .04);
+            border: 1px dashed $uckk-course-border;
+            border-radius: $uckk-course-radius-sm;
+        }
+
+        .dimmed,
+        .dimmed_text,
+        .activity-hidden,
+        .section-hidden {
+            opacity: .72;
+        }
+
+        .section-hidden,
+        .activity-hidden {
+            background-image: repeating-linear-gradient(
+                -45deg,
+                rgba(15, 23, 42, .02),
+                rgba(15, 23, 42, .02) .5rem,
+                transparent .5rem,
+                transparent 1rem
+            );
+        }
+    }
+}
+
+/**
+ * Secure or assessment contexts.
+ *
+ * Reduce theatrical styling in sensitive contexts.
+ */
+.theme-uckk {
+    &.pagelayout-secure {
+        .page-context-header,
+        .course-section,
+        .activity-item,
+        .uckk-course-overview,
+        .uckk-course-boundary {
+            box-shadow: none;
+        }
+
+        .uckk-course-boundary,
+        .uckk-cycle,
+        .uckk-card-boundarynote {
+            display: none;
+        }
+    }
+}
+
+/**
+ * Small screens.
+ */
+@media (max-width: 767.98px) {
+    .theme-uckk {
+        &.path-course-view,
+        &.pagelayout-course,
+        &.pagelayout-incourse {
+            #page-content {
+                padding-top: .5rem;
+            }
+
+            .page-context-header {
+                padding: 1rem;
+            }
+        }
+
+        .format-uckk {
+            .course-section-header,
+            .uckk-section-header,
+            .content,
+            .uckk-section-content {
+                padding-right: 1rem;
+                padding-left: 1rem;
+            }
+
+            .activity-item {
+                padding: .75rem;
+            }
+        }
+
+        .uckk-cycle {
+            grid-template-columns: 1fr;
+        }
+
+        .uckk-course-marker,
+        .uckk-evidence-marker,
+        .uckk-archive-marker,
+        .uckk-integrity-marker {
+            margin-bottom: .25rem;
+        }
+    }
+}
+
+/**
+ * Reduced motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+    .theme-uckk {
+        .format-uckk {
+            .course-section,
+            .section,
+            .activity-item {
+                transition: none;
+            }
+        }
+
+        .coursebox,
+        .course-card,
+        .dashboard-card,
+        .uckk-course-card {
+            transition: none;
+
+            &:hover,
+            &:focus-within {
+                transform: none;
+            }
+        }
+    }
+}
+
+/* stylelint-enable max-line-length */

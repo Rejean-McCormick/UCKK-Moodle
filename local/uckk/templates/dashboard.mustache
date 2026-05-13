@@ -1,0 +1,364 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_uckk/dashboard
+
+    Main UCKK campus dashboard template.
+
+    This template is render-only. It does not check permissions, compute
+    progression, infer visibility, or decide workflow state. All values are
+    prepared by local_uckk output classes and services.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * data-region="local-uckk-dashboard"
+    * data-region="local-uckk-dashboard-refresh"
+    * data-region="local-uckk-dashboard-section"
+
+    Context variables required for this template:
+    * uniqid string
+    * title string
+    * subtitle string
+    * hasintro bool
+    * introhtml string
+    * profile object
+    * hasalerts bool
+    * alerts array
+    * hasquickactions bool
+    * quickactions array
+    * hasactivepathways bool
+    * activepathways array
+    * hasprograms bool
+    * programs array
+    * hassummarycards bool
+    * summarycards array
+    * hascanon bool
+    * canon object
+    * hasempty bool
+    * emptytitle string
+    * emptymessage string
+
+    Example context (json):
+    {
+        "uniqid": "local-uckk-dashboard-1",
+        "title": "UCKK-Moodle",
+        "subtitle": "Connaître → Choisir → Agir → Se souvenir",
+        "hasintro": true,
+        "introhtml": "<p>Bienvenue dans le campus UCKK.</p>",
+        "profile": {
+            "fullname": "Joueur UCKK",
+            "displaytitle": "Joueur",
+            "symbolicroles": []
+        },
+        "hasalerts": true,
+        "alerts": [
+            {
+                "label": "Validation requise",
+                "message": "Une preuve attend une validation humaine.",
+                "status": "pending_review",
+                "statuslabel": "En révision",
+                "statusclass": "badge badge-warning",
+                "hasurl": true,
+                "url": "https://example.invalid"
+            }
+        ],
+        "hasquickactions": true,
+        "quickactions": [
+            {
+                "label": "Voir mon parcours",
+                "url": "https://example.invalid",
+                "classes": "btn btn-primary"
+            }
+        ],
+        "hasactivepathways": true,
+        "activepathways": [],
+        "hasprograms": true,
+        "programs": [],
+        "hassummarycards": true,
+        "summarycards": [],
+        "hascanon": true,
+        "canon": {},
+        "hasempty": false,
+        "emptytitle": "",
+        "emptymessage": ""
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="local-uckk-dashboard"
+    data-region="local-uckk-dashboard"
+    aria-labelledby="{{uniqid}}-title"
+>
+    <header class="local-uckk-dashboard__header mb-4">
+        <div class="d-flex flex-column flex-md-row align-items-md-start justify-content-between gap-3">
+            <div class="local-uckk-dashboard__identity">
+                <h2 id="{{uniqid}}-title" class="h3 mb-1">
+                    {{title}}
+                </h2>
+
+                {{#subtitle}}
+                    <p class="text-muted mb-0">
+                        {{subtitle}}
+                    </p>
+                {{/subtitle}}
+            </div>
+
+            {{#hasquickactions}}
+                <nav
+                    class="local-uckk-dashboard__actions"
+                    aria-label="{{#str}} dashboardactions, local_uckk {{/str}}"
+                >
+                    <div class="btn-group flex-wrap" role="group">
+                        {{#quickactions}}
+                            <a
+                                class="{{classes}}"
+                                href="{{url}}"
+                            >
+                                {{label}}
+                            </a>
+                        {{/quickactions}}
+                    </div>
+                </nav>
+            {{/hasquickactions}}
+        </div>
+
+        {{#hasintro}}
+            <div class="local-uckk-dashboard__intro mt-3">
+                {{{introhtml}}}
+            </div>
+        {{/hasintro}}
+    </header>
+
+    {{#hasalerts}}
+        <section
+            class="local-uckk-dashboard__alerts mb-4"
+            data-region="local-uckk-dashboard-section"
+            aria-labelledby="{{uniqid}}-alerts-title"
+        >
+            <h3 id="{{uniqid}}-alerts-title" class="h5">
+                {{#str}} dashboardalerts, local_uckk {{/str}}
+            </h3>
+
+            <div class="list-group">
+                {{#alerts}}
+                    <div class="list-group-item">
+                        <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+                            <div>
+                                <div class="font-weight-bold">
+                                    {{label}}
+                                </div>
+
+                                <div class="text-muted">
+                                    {{message}}
+                                </div>
+                            </div>
+
+                            <div class="local-uckk-dashboard__alert-meta text-md-right">
+                                {{> local_uckk/status_badge }}
+
+                                {{#hasurl}}
+                                    <div class="mt-2">
+                                        <a href="{{url}}">
+                                            {{#str}} viewdetails, local_uckk {{/str}}
+                                        </a>
+                                    </div>
+                                {{/hasurl}}
+                            </div>
+                        </div>
+                    </div>
+                {{/alerts}}
+            </div>
+        </section>
+    {{/hasalerts}}
+
+    {{#profile}}
+        <section
+            class="local-uckk-dashboard__profile mb-4"
+            data-region="local-uckk-dashboard-section"
+            aria-labelledby="{{uniqid}}-profile-title"
+        >
+            <h3 id="{{uniqid}}-profile-title" class="h5">
+                {{#str}} playerprofile, local_uckk {{/str}}
+            </h3>
+
+            {{> local_uckk/player_profile }}
+        </section>
+    {{/profile}}
+
+    <div class="local-uckk-dashboard__grid row">
+        <div class="col-12 col-xl-8">
+            <section
+                class="local-uckk-dashboard__pathways mb-4"
+                data-region="local-uckk-dashboard-section"
+                aria-labelledby="{{uniqid}}-pathways-title"
+            >
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h3 id="{{uniqid}}-pathways-title" class="h5 mb-0">
+                        {{#str}} activepathways, local_uckk {{/str}}
+                    </h3>
+
+                    <button
+                        type="button"
+                        class="btn btn-link btn-sm"
+                        data-region="local-uckk-dashboard-refresh"
+                    >
+                        {{#str}} refresh, core {{/str}}
+                    </button>
+                </div>
+
+                {{#hasactivepathways}}
+                    <div class="row">
+                        {{#activepathways}}
+                            <div class="col-12 col-lg-6 mb-3">
+                                {{> local_uckk/pathway_card }}
+                            </div>
+                        {{/activepathways}}
+                    </div>
+                {{/hasactivepathways}}
+
+                {{^hasactivepathways}}
+                    <div class="alert alert-info mb-0">
+                        {{#str}} nopathways, local_uckk {{/str}}
+                    </div>
+                {{/hasactivepathways}}
+            </section>
+
+            <section
+                class="local-uckk-dashboard__summary mb-4"
+                data-region="local-uckk-dashboard-section"
+                aria-labelledby="{{uniqid}}-summary-title"
+            >
+                <h3 id="{{uniqid}}-summary-title" class="h5">
+                    {{#str}} dashboardsummary, local_uckk {{/str}}
+                </h3>
+
+                {{#hassummarycards}}
+                    <div class="row">
+                        {{#summarycards}}
+                            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <article class="card h-100 local-uckk-dashboard__summary-card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start gap-2">
+                                            <h4 class="h6 card-title mb-1">
+                                                {{title}}
+                                            </h4>
+
+                                            {{#status}}
+                                                {{> local_uckk/status_badge }}
+                                            {{/status}}
+                                        </div>
+
+                                        {{#value}}
+                                            <div class="display-4 h2 mb-2">
+                                                {{value}}
+                                            </div>
+                                        {{/value}}
+
+                                        {{#description}}
+                                            <p class="card-text text-muted mb-0">
+                                                {{description}}
+                                            </p>
+                                        {{/description}}
+
+                                        {{#hasurl}}
+                                            <p class="mt-3 mb-0">
+                                                <a href="{{url}}">
+                                                    {{#str}} viewdetails, local_uckk {{/str}}
+                                                </a>
+                                            </p>
+                                        {{/hasurl}}
+                                    </div>
+                                </article>
+                            </div>
+                        {{/summarycards}}
+                    </div>
+                {{/hassummarycards}}
+
+                {{^hassummarycards}}
+                    <div class="alert alert-secondary mb-0">
+                        {{#str}} nosummarydata, local_uckk {{/str}}
+                    </div>
+                {{/hassummarycards}}
+            </section>
+        </div>
+
+        <div class="col-12 col-xl-4">
+            {{#hascanon}}
+                <section
+                    class="local-uckk-dashboard__canon mb-4"
+                    data-region="local-uckk-dashboard-section"
+                    aria-labelledby="{{uniqid}}-canon-title"
+                >
+                    <h3 id="{{uniqid}}-canon-title" class="h5">
+                        {{#str}} canonpanel, local_uckk {{/str}}
+                    </h3>
+
+                    {{#canon}}
+                        {{> local_uckk/canon_panel }}
+                    {{/canon}}
+                </section>
+            {{/hascanon}}
+
+            <section
+                class="local-uckk-dashboard__programs mb-4"
+                data-region="local-uckk-dashboard-section"
+                aria-labelledby="{{uniqid}}-programs-title"
+            >
+                <h3 id="{{uniqid}}-programs-title" class="h5">
+                    {{#str}} canonicalprograms, local_uckk {{/str}}
+                </h3>
+
+                {{#hasprograms}}
+                    <div class="local-uckk-dashboard__program-list">
+                        {{#programs}}
+                            <div class="mb-3">
+                                {{> local_uckk/program_card }}
+                            </div>
+                        {{/programs}}
+                    </div>
+                {{/hasprograms}}
+
+                {{^hasprograms}}
+                    <div class="alert alert-secondary mb-0">
+                        {{#str}} noprograms, local_uckk {{/str}}
+                    </div>
+                {{/hasprograms}}
+            </section>
+        </div>
+    </div>
+
+    {{#hasempty}}
+        <section
+            class="local-uckk-dashboard__empty mt-4"
+            data-region="local-uckk-dashboard-section"
+            aria-labelledby="{{uniqid}}-empty-title"
+        >
+            <div class="alert alert-info mb-0">
+                <h3 id="{{uniqid}}-empty-title" class="h5">
+                    {{emptytitle}}
+                </h3>
+
+                <p class="mb-0">
+                    {{emptymessage}}
+                </p>
+            </div>
+        </section>
+    {{/hasempty}}
+</section>

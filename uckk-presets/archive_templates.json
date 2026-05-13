@@ -1,0 +1,139 @@
+{
+  "schema": "uckk.presets.archive_templates.v1",
+  "item_types": [
+    "proof",
+    "decision",
+    "course_work",
+    "challenge_result",
+    "assembly_minutes",
+    "integrity_case_summary",
+    "kristal",
+    "reflection",
+    "portfolio_item",
+    "version_record"
+  ],
+  "file_areas": [
+    "proof_files",
+    "decision_attachments",
+    "minutes_files",
+    "kristal_files",
+    "portfolio_files",
+    "integrity_exports"
+  ],
+  "states": [
+    "draft",
+    "submitted",
+    "under_review",
+    "validated",
+    "published",
+    "restricted",
+    "contested",
+    "invalidated",
+    "superseded",
+    "archived"
+  ],
+  "visibility": [
+    "private",
+    "course",
+    "cohort",
+    "program",
+    "institutional",
+    "public",
+    "restricted_integrity"
+  ],
+  "version_triggers": [
+    "content_changes",
+    "visibility_changes",
+    "validation_state_changes",
+    "evidence_link_changes",
+    "public_summary_changes",
+    "integrity_correction_applied"
+  ],
+  "templates": [
+    {
+      "key": "archive_course_memory",
+      "name": "Mémoire de cours",
+      "itemtype": "course_work",
+      "visibility": "course",
+      "required_provenance": [
+        "origin_component",
+        "origin_object_id",
+        "author",
+        "created_time",
+        "source_description",
+        "supporting_evidence",
+        "validation_state"
+      ]
+    },
+    {
+      "key": "archive_portfolio_entry",
+      "name": "Entrée de portfolio",
+      "itemtype": "portfolio_item",
+      "visibility": "private",
+      "required_provenance": [
+        "author",
+        "created_time",
+        "source_description",
+        "supporting_evidence",
+        "archive_links"
+      ]
+    },
+    {
+      "key": "archive_challenge_result",
+      "name": "Résultat de défi",
+      "itemtype": "challenge_result",
+      "visibility": "course",
+      "required_provenance": [
+        "origin_component",
+        "origin_object_id",
+        "author",
+        "created_time",
+        "mentor_evaluation",
+        "integrity_state",
+        "archive_policy"
+      ]
+    },
+    {
+      "key": "archive_assembly_minutes",
+      "name": "Procès-verbal d’Assemblée",
+      "itemtype": "assembly_minutes",
+      "visibility": "course",
+      "required_provenance": [
+        "motion_reference",
+        "decision_text",
+        "participants",
+        "minority_report",
+        "contestability_window"
+      ]
+    },
+    {
+      "key": "archive_integrity_summary",
+      "name": "Résumé de dossier d’intégrité",
+      "itemtype": "integrity_case_summary",
+      "visibility": "restricted_integrity",
+      "required_provenance": [
+        "case_type",
+        "subject_component",
+        "subject_id",
+        "opened_by",
+        "decision",
+        "appeal_path",
+        "redaction_level"
+      ]
+    },
+    {
+      "key": "archive_kristal",
+      "name": "Kristal pédagogique",
+      "itemtype": "kristal",
+      "visibility": "institutional",
+      "required_provenance": [
+        "origin_component",
+        "origin_object_id",
+        "author",
+        "versionno",
+        "hash",
+        "supporting_evidence"
+      ]
+    }
+  ]
+}

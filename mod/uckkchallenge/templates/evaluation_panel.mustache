@@ -1,0 +1,344 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkchallenge/evaluation_panel
+
+    Evaluation panel for a UCKK Challenge.
+
+    This template receives already permission-filtered display data from
+    mod_uckkchallenge output classes.
+
+    It must not decide:
+    - whether the user may evaluate;
+    - whether a submission is valid;
+    - whether integrity review is complete;
+    - whether a badge is awarded;
+    - whether a competency is certified;
+    - whether a challenge may be archived.
+
+    Example context:
+    {
+        "uniqid": "uckkchallenge-evaluation-12",
+        "haspanel": true,
+        "title": "Evaluation",
+        "status": "under_review",
+        "statuslabel": "Under review",
+        "statusclass": "status-under-review",
+
+        "hasevaluation": true,
+        "evaluatorname": "Mentor UCKK",
+        "timemodified": "12 May 2026, 14:30",
+
+        "hasrubric": true,
+        "rubricintro": "Rubric introduction",
+        "criteria": [
+            {
+                "name": "Evidence quality",
+                "description": "Proof is clear and verifiable.",
+                "rating": "Validated",
+                "score": "4 / 5",
+                "statusclass": "status-validated"
+            }
+        ],
+
+        "hasmentorfeedback": true,
+        "mentorfeedback": "Mentor feedback HTML",
+
+        "hasprivatefeedback": true,
+        "privatefeedback": "Private feedback HTML",
+
+        "haspublicsummary": true,
+        "publicsummary": "Public summary HTML",
+
+        "hascompetencies": true,
+        "competencies": [
+            {
+                "code": "UCKK-COMP-005",
+                "name": "Produce proof",
+                "statuslabel": "Validated",
+                "statusclass": "status-validated"
+            }
+        ],
+
+        "hasbadges": true,
+        "badges": [
+            {
+                "key": "gardien_preuve",
+                "name": "Gardien de la preuve",
+                "statuslabel": "Eligible",
+                "statusclass": "status-pending"
+            }
+        ],
+
+        "hasintegrity": true,
+        "integritystate": "human_reviewed",
+        "integritylabel": "Human reviewed",
+        "integrityclass": "status-human-reviewed",
+        "integritynotice": "Integrity review remains contestable.",
+
+        "hasarchive": true,
+        "archivestatus": "pending",
+        "archivelabel": "Pending archive",
+        "archiveurl": "https://example.test/mod/uckkchallenge/archive.php?id=12",
+
+        "hasactions": true,
+        "actions": [
+            {
+                "url": "https://example.test/mod/uckkchallenge/evaluate.php?id=12",
+                "label": "Review",
+                "primary": true
+            }
+        ]
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckkchallenge-evaluation-panel"
+    data-region="uckkchallenge-evaluation-panel"
+>
+    <header class="uckkchallenge-evaluation-panel__header">
+        <div class="uckkchallenge-evaluation-panel__identity">
+            <h3 class="uckkchallenge-evaluation-panel__title">
+                {{#title}}{{title}}{{/title}}
+                {{^title}}{{#str}} evaluation, uckkchallenge {{/str}}{{/title}}
+            </h3>
+
+            {{#hasevaluation}}
+                <p class="uckkchallenge-evaluation-panel__meta">
+                    {{#evaluatorname}}
+                        <span class="uckkchallenge-evaluation-panel__evaluator">
+                            {{#str}} evaluatedby, uckkchallenge {{/str}}:
+                            {{evaluatorname}}
+                        </span>
+                    {{/evaluatorname}}
+
+                    {{#timemodified}}
+                        <span class="uckkchallenge-evaluation-panel__date">
+                            {{#str}} lastupdated, uckkchallenge {{/str}}:
+                            <time>{{timemodified}}</time>
+                        </span>
+                    {{/timemodified}}
+                </p>
+            {{/hasevaluation}}
+        </div>
+
+        {{#statuslabel}}
+            <span class="uckkchallenge-status-badge uckkchallenge-status-badge--{{statusclass}}">
+                {{statuslabel}}
+            </span>
+        {{/statuslabel}}
+    </header>
+
+    {{#haspanel}}
+        {{#hasrubric}}
+            <section class="uckkchallenge-evaluation-panel__section uckkchallenge-evaluation-panel__rubric">
+                <h4 class="uckkchallenge-evaluation-panel__section-title">
+                    {{#str}} rubric, uckkchallenge {{/str}}
+                </h4>
+
+                {{#rubricintro}}
+                    <div class="uckkchallenge-evaluation-panel__intro">
+                        {{{rubricintro}}}
+                    </div>
+                {{/rubricintro}}
+
+                {{#criteria}}
+                    <div class="uckkchallenge-evaluation-panel__criterion">
+                        <div class="uckkchallenge-evaluation-panel__criterion-header">
+                            <h5 class="uckkchallenge-evaluation-panel__criterion-title">
+                                {{name}}
+                            </h5>
+
+                            {{#rating}}
+                                <span class="uckkchallenge-evaluation-panel__criterion-rating {{statusclass}}">
+                                    {{rating}}
+                                </span>
+                            {{/rating}}
+                        </div>
+
+                        {{#description}}
+                            <div class="uckkchallenge-evaluation-panel__criterion-description">
+                                {{{description}}}
+                            </div>
+                        {{/description}}
+
+                        {{#score}}
+                            <p class="uckkchallenge-evaluation-panel__criterion-score">
+                                {{#str}} score, uckkchallenge {{/str}}:
+                                <strong>{{score}}</strong>
+                            </p>
+                        {{/score}}
+                    </div>
+                {{/criteria}}
+            </section>
+        {{/hasrubric}}
+
+        {{#hasmentorfeedback}}
+            <section class="uckkchallenge-evaluation-panel__section uckkchallenge-evaluation-panel__mentor-feedback">
+                <h4 class="uckkchallenge-evaluation-panel__section-title">
+                    {{#str}} mentorfeedback, uckkchallenge {{/str}}
+                </h4>
+
+                <div class="uckkchallenge-evaluation-panel__formatted-text">
+                    {{{mentorfeedback}}}
+                </div>
+            </section>
+        {{/hasmentorfeedback}}
+
+        {{#hasprivatefeedback}}
+            <section class="uckkchallenge-evaluation-panel__section uckkchallenge-evaluation-panel__private-feedback">
+                <h4 class="uckkchallenge-evaluation-panel__section-title">
+                    {{#str}} privatefeedback, uckkchallenge {{/str}}
+                </h4>
+
+                <div class="alert alert-info" role="status">
+                    {{#str}} privatefeedbacknotice, uckkchallenge {{/str}}
+                </div>
+
+                <div class="uckkchallenge-evaluation-panel__formatted-text">
+                    {{{privatefeedback}}}
+                </div>
+            </section>
+        {{/hasprivatefeedback}}
+
+        {{#haspublicsummary}}
+            <section class="uckkchallenge-evaluation-panel__section uckkchallenge-evaluation-panel__public-summary">
+                <h4 class="uckkchallenge-evaluation-panel__section-title">
+                    {{#str}} publicsummary, uckkchallenge {{/str}}
+                </h4>
+
+                <div class="uckkchallenge-evaluation-panel__formatted-text">
+                    {{{publicsummary}}}
+                </div>
+            </section>
+        {{/haspublicsummary}}
+
+        {{#hascompetencies}}
+            <section class="uckkchallenge-evaluation-panel__section uckkchallenge-evaluation-panel__competencies">
+                <h4 class="uckkchallenge-evaluation-panel__section-title">
+                    {{#str}} competencies, uckkchallenge {{/str}}
+                </h4>
+
+                <ul class="uckkchallenge-evaluation-panel__list">
+                    {{#competencies}}
+                        <li class="uckkchallenge-evaluation-panel__list-item">
+                            <span class="uckkchallenge-evaluation-panel__item-code">
+                                {{code}}
+                            </span>
+
+                            <span class="uckkchallenge-evaluation-panel__item-name">
+                                {{name}}
+                            </span>
+
+                            {{#statuslabel}}
+                                <span class="uckkchallenge-evaluation-panel__item-status {{statusclass}}">
+                                    {{statuslabel}}
+                                </span>
+                            {{/statuslabel}}
+                        </li>
+                    {{/competencies}}
+                </ul>
+            </section>
+        {{/hascompetencies}}
+
+        {{#hasbadges}}
+            <section class="uckkchallenge-evaluation-panel__section uckkchallenge-evaluation-panel__badges">
+                <h4 class="uckkchallenge-evaluation-panel__section-title">
+                    {{#str}} badges, uckkchallenge {{/str}}
+                </h4>
+
+                <ul class="uckkchallenge-evaluation-panel__list">
+                    {{#badges}}
+                        <li class="uckkchallenge-evaluation-panel__list-item">
+                            <span class="uckkchallenge-evaluation-panel__item-key">
+                                {{key}}
+                            </span>
+
+                            <span class="uckkchallenge-evaluation-panel__item-name">
+                                {{name}}
+                            </span>
+
+                            {{#statuslabel}}
+                                <span class="uckkchallenge-evaluation-panel__item-status {{statusclass}}">
+                                    {{statuslabel}}
+                                </span>
+                            {{/statuslabel}}
+                        </li>
+                    {{/badges}}
+                </ul>
+            </section>
+        {{/hasbadges}}
+
+        {{#hasintegrity}}
+            <section class="uckkchallenge-evaluation-panel__section uckkchallenge-evaluation-panel__integrity">
+                <h4 class="uckkchallenge-evaluation-panel__section-title">
+                    {{#str}} integrityreview, uckkchallenge {{/str}}
+                </h4>
+
+                <p class="uckkchallenge-evaluation-panel__integrity-state">
+                    <span class="uckkchallenge-evaluation-panel__label">
+                        {{#str}} integritystate, uckkchallenge {{/str}}:
+                    </span>
+
+                    <strong class="{{integrityclass}}">
+                        {{integritylabel}}
+                    </strong>
+                </p>
+
+                {{#integritynotice}}
+                    <div class="alert alert-warning" role="status">
+                        {{integritynotice}}
+                    </div>
+                {{/integritynotice}}
+            </section>
+        {{/hasintegrity}}
+
+        {{#hasarchive}}
+            <section class="uckkchallenge-evaluation-panel__section uckkchallenge-evaluation-panel__archive">
+                <h4 class="uckkchallenge-evaluation-panel__section-title">
+                    {{#str}} archiveoutput, uckkchallenge {{/str}}
+                </h4>
+
+                <p class="uckkchallenge-evaluation-panel__archive-state">
+                    <span class="uckkchallenge-evaluation-panel__label">
+                        {{#str}} archivestatus, uckkchallenge {{/str}}:
+                    </span>
+
+                    <strong>{{archivelabel}}</strong>
+                </p>
+
+                {{#archiveurl}}
+                    <a href="{{archiveurl}}" class="btn btn-secondary">
+                        {{#str}} archivechallenge, uckkchallenge {{/str}}
+                    </a>
+                {{/archiveurl}}
+            </section>
+        {{/hasarchive}}
+
+        {{#hasactions}}
+            <footer class="uckkchallenge-evaluation-panel__actions">
+                {{#actions}}
+                    <a
+                        href="{{url}}"
+                        class="btn {{#primary}}btn-primary{{/primary}}{{^primary}}btn-secondary{{/primary}}"
+                    >
+                        {{label}}
+                    </a>
+                {{/actions}}
+            </footer>
+        {{/hasactions}}
+    {{/haspanel}}
+
+    {{^haspanel}}
+        <div class="uckkchallenge-evaluation-panel__empty">
+            <p>{{#str}} noevaluationavailable, uckkchallenge {{/str}}</p>
+        </div>
+    {{/haspanel}}
+</section>

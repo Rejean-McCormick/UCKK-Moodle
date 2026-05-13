@@ -1,0 +1,564 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkchallenge/challenge_view
+
+    Main challenge view template for Défis King Klown.
+
+    This template is render-only. All data must already be:
+    - permission-filtered;
+    - context-aware;
+    - formatted for display;
+    - safe for the current viewer.
+
+    Example context:
+    {
+        "uniqid": "uckkchallenge-view-12",
+        "id": 12,
+        "cmid": 45,
+        "courseid": 7,
+        "title": "Map a hidden rule",
+        "intro": "<p>Challenge introduction.</p>",
+        "hasintro": true,
+        "challengecode": "UCKK-DEF-001",
+        "haschallengecode": true,
+        "challengetype": "system_mapping",
+        "challengetypelabel": "System mapping",
+        "status": "open",
+        "statuslabel": "Open",
+        "statusclass": "status-open",
+        "visibility": "course",
+        "visibilitylabel": "Course",
+        "statement": "<p>Main statement.</p>",
+        "hasstatement": true,
+        "contexttext": "<p>Challenge context.</p>",
+        "hascontexttext": true,
+        "rules": [],
+        "hasrules": true,
+        "corridors": [],
+        "hascorridors": true,
+        "evidencepolicy": "<p>Evidence requirements.</p>",
+        "hasevidencepolicy": true,
+        "criteria": "<p>Evaluation criteria.</p>",
+        "hascriteria": true,
+        "ethicalconstraints": "<p>Ethical constraints.</p>",
+        "hasethicalconstraints": true,
+        "timeline": {},
+        "hastimeline": true,
+        "participant": {},
+        "hasparticipant": true,
+        "actions": [],
+        "hasactions": true,
+        "submission": {},
+        "hassubmission": true,
+        "review": {},
+        "hasreview": true,
+        "integritypanel": {},
+        "hasintegritypanel": true,
+        "archive": {},
+        "hasarchive": true,
+        "badges": [],
+        "hasbadges": true,
+        "competencies": [],
+        "hascompetencies": true,
+        "notices": [],
+        "hasnotices": true,
+        "warnings": [],
+        "haswarnings": true
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckkchallenge-view uckkchallenge-view--{{statusclass}}"
+    data-region="uckkchallenge-view"
+    data-challenge-id="{{id}}"
+    data-cmid="{{cmid}}"
+    data-course-id="{{courseid}}"
+>
+    <header class="uckkchallenge-view__header">
+        <div class="uckkchallenge-view__identity">
+            {{#haschallengecode}}
+                <p class="uckkchallenge-view__code">
+                    {{challengecode}}
+                </p>
+            {{/haschallengecode}}
+
+            <h2 class="uckkchallenge-view__title">
+                {{title}}
+            </h2>
+
+            <div class="uckkchallenge-view__meta">
+                {{#challengetypelabel}}
+                    <span class="uckkchallenge-view__meta-item uckkchallenge-view__type">
+                        {{challengetypelabel}}
+                    </span>
+                {{/challengetypelabel}}
+
+                <span class="uckkchallenge-view__meta-item uckkchallenge-view__status {{statusclass}}">
+                    {{statuslabel}}
+                </span>
+
+                {{#visibilitylabel}}
+                    <span class="uckkchallenge-view__meta-item uckkchallenge-view__visibility">
+                        {{visibilitylabel}}
+                    </span>
+                {{/visibilitylabel}}
+            </div>
+        </div>
+
+        {{#hasactions}}
+            <nav
+                class="uckkchallenge-view__actions"
+                aria-label="{{#str}} challengeactions, uckkchallenge {{/str}}"
+            >
+                {{#actions}}
+                    {{#url}}
+                        <a
+                            href="{{url}}"
+                            class="btn {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}} uckkchallenge-view__action"
+                            {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                        >
+                            {{label}}
+                        </a>
+                    {{/url}}
+                {{/actions}}
+            </nav>
+        {{/hasactions}}
+    </header>
+
+    {{#hasnotices}}
+        <div class="uckkchallenge-view__notices">
+            {{#notices}}
+                <div class="alert alert-{{type}} uckkchallenge-view__notice" role="status">
+                    {{message}}
+                </div>
+            {{/notices}}
+        </div>
+    {{/hasnotices}}
+
+    {{#haswarnings}}
+        <div class="uckkchallenge-view__warnings">
+            {{#warnings}}
+                <div class="alert alert-warning uckkchallenge-view__warning" role="status">
+                    {{message}}
+                </div>
+            {{/warnings}}
+        </div>
+    {{/haswarnings}}
+
+    {{#hasintro}}
+        <section class="uckkchallenge-view__section uckkchallenge-view__intro">
+            <h3 class="uckkchallenge-view__section-title">
+                {{#str}} challengeintro, uckkchallenge {{/str}}
+            </h3>
+            <div class="uckkchallenge-view__section-content">
+                {{{intro}}}
+            </div>
+        </section>
+    {{/hasintro}}
+
+    <div class="uckkchallenge-view__layout">
+        <main class="uckkchallenge-view__main">
+            {{#hasstatement}}
+                <section class="uckkchallenge-view__section uckkchallenge-view__statement">
+                    <h3 class="uckkchallenge-view__section-title">
+                        {{#str}} challengestatement, uckkchallenge {{/str}}
+                    </h3>
+                    <div class="uckkchallenge-view__section-content">
+                        {{{statement}}}
+                    </div>
+                </section>
+            {{/hasstatement}}
+
+            {{#hascontexttext}}
+                <section class="uckkchallenge-view__section uckkchallenge-view__context">
+                    <h3 class="uckkchallenge-view__section-title">
+                        {{#str}} challengecontext, uckkchallenge {{/str}}
+                    </h3>
+                    <div class="uckkchallenge-view__section-content">
+                        {{{contexttext}}}
+                    </div>
+                </section>
+            {{/hascontexttext}}
+
+            {{#hasrules}}
+                <section class="uckkchallenge-view__section uckkchallenge-view__rules">
+                    <h3 class="uckkchallenge-view__section-title">
+                        {{#str}} challengerules, uckkchallenge {{/str}}
+                    </h3>
+
+                    <ol class="uckkchallenge-view__rule-list">
+                        {{#rules}}
+                            <li class="uckkchallenge-view__rule uckkchallenge-view__rule--{{ruletype}} {{statusclass}}">
+                                <div class="uckkchallenge-view__rule-header">
+                                    <strong class="uckkchallenge-view__rule-title">
+                                        {{title}}
+                                    </strong>
+
+                                    {{#required}}
+                                        <span class="badge badge-info uckkchallenge-view__rule-required">
+                                            {{#str}} required, uckkchallenge {{/str}}
+                                        </span>
+                                    {{/required}}
+
+                                    {{#statuslabel}}
+                                        <span class="uckkchallenge-view__rule-status">
+                                            {{statuslabel}}
+                                        </span>
+                                    {{/statuslabel}}
+                                </div>
+
+                                <div class="uckkchallenge-view__rule-description">
+                                    {{{description}}}
+                                </div>
+                            </li>
+                        {{/rules}}
+                    </ol>
+                </section>
+            {{/hasrules}}
+
+            {{#hascorridors}}
+                <section class="uckkchallenge-view__section uckkchallenge-view__corridors">
+                    <h3 class="uckkchallenge-view__section-title">
+                        {{#str}} challengecorridors, uckkchallenge {{/str}}
+                    </h3>
+
+                    <ul class="uckkchallenge-view__corridor-list">
+                        {{#corridors}}
+                            <li class="uckkchallenge-view__corridor">
+                                <strong class="uckkchallenge-view__corridor-title">
+                                    {{title}}
+                                </strong>
+
+                                {{#description}}
+                                    <div class="uckkchallenge-view__corridor-description">
+                                        {{{description}}}
+                                    </div>
+                                {{/description}}
+                            </li>
+                        {{/corridors}}
+                    </ul>
+                </section>
+            {{/hascorridors}}
+
+            {{#hasevidencepolicy}}
+                <section class="uckkchallenge-view__section uckkchallenge-view__evidence">
+                    <h3 class="uckkchallenge-view__section-title">
+                        {{#str}} evidencepolicy, uckkchallenge {{/str}}
+                    </h3>
+                    <div class="uckkchallenge-view__section-content">
+                        {{{evidencepolicy}}}
+                    </div>
+
+                    {{#evidencetypes}}
+                        <ul class="uckkchallenge-view__evidence-types">
+                            {{#items}}
+                                <li class="uckkchallenge-view__evidence-type">
+                                    {{label}}
+                                </li>
+                            {{/items}}
+                        </ul>
+                    {{/evidencetypes}}
+                </section>
+            {{/hasevidencepolicy}}
+
+            {{#hascriteria}}
+                <section class="uckkchallenge-view__section uckkchallenge-view__criteria">
+                    <h3 class="uckkchallenge-view__section-title">
+                        {{#str}} evaluationcriteria, uckkchallenge {{/str}}
+                    </h3>
+                    <div class="uckkchallenge-view__section-content">
+                        {{{criteria}}}
+                    </div>
+                </section>
+            {{/hascriteria}}
+
+            {{#hasethicalconstraints}}
+                <section class="uckkchallenge-view__section uckkchallenge-view__ethics">
+                    <h3 class="uckkchallenge-view__section-title">
+                        {{#str}} ethicalconstraints, uckkchallenge {{/str}}
+                    </h3>
+                    <div class="uckkchallenge-view__section-content">
+                        {{{ethicalconstraints}}}
+                    </div>
+                </section>
+            {{/hasethicalconstraints}}
+
+            {{#hassubmission}}
+                <section class="uckkchallenge-view__section uckkchallenge-view__submission">
+                    <header class="uckkchallenge-view__section-header">
+                        <h3 class="uckkchallenge-view__section-title">
+                            {{#str}} mysubmission, uckkchallenge {{/str}}
+                        </h3>
+
+                        {{#submission.statuslabel}}
+                            <span class="uckkchallenge-view__submission-status uckkchallenge-view__submission-status--{{submission.status}}">
+                                {{submission.statuslabel}}
+                            </span>
+                        {{/submission.statuslabel}}
+                    </header>
+
+                    {{#submission.hascontent}}
+                        <div class="uckkchallenge-view__submission-content">
+                            {{{submission.content}}}
+                        </div>
+                    {{/submission.hascontent}}
+
+                    {{#submission.hasurl}}
+                        <p class="uckkchallenge-view__submission-url">
+                            <a href="{{submission.url}}">
+                                {{submission.url}}
+                            </a>
+                        </p>
+                    {{/submission.hasurl}}
+
+                    {{#submission.hasfiles}}
+                        <ul class="uckkchallenge-view__submission-files">
+                            {{#submission.files}}
+                                <li>
+                                    <a href="{{url}}">
+                                        {{filename}}
+                                    </a>
+                                </li>
+                            {{/submission.files}}
+                        </ul>
+                    {{/submission.hasfiles}}
+
+                    {{#submission.hasprovenance}}
+                        <section class="uckkchallenge-view__submission-provenance">
+                            <h4>{{#str}} provenancestatement, uckkchallenge {{/str}}</h4>
+                            <div>
+                                {{{submission.provenance}}}
+                            </div>
+                        </section>
+                    {{/submission.hasprovenance}}
+
+                    {{#submission.hasactions}}
+                        <div class="uckkchallenge-view__submission-actions">
+                            {{#submission.actions}}
+                                <a href="{{url}}" class="btn btn-secondary">
+                                    {{label}}
+                                </a>
+                            {{/submission.actions}}
+                        </div>
+                    {{/submission.hasactions}}
+                </section>
+            {{/hassubmission}}
+
+            {{#hasreview}}
+                <section class="uckkchallenge-view__section uckkchallenge-view__review">
+                    <h3 class="uckkchallenge-view__section-title">
+                        {{#str}} review, uckkchallenge {{/str}}
+                    </h3>
+
+                    {{#review.statuslabel}}
+                        <p class="uckkchallenge-view__review-status">
+                            <strong>{{#str}} status, moodle {{/str}}:</strong>
+                            {{review.statuslabel}}
+                        </p>
+                    {{/review.statuslabel}}
+
+                    {{#review.hasfeedback}}
+                        <div class="uckkchallenge-view__review-feedback">
+                            {{{review.feedback}}}
+                        </div>
+                    {{/review.hasfeedback}}
+
+                    {{#review.hascompetencyratings}}
+                        <ul class="uckkchallenge-view__competency-ratings">
+                            {{#review.competencyratings}}
+                                <li>
+                                    <span>{{name}}</span>
+                                    <strong>{{rating}}</strong>
+                                </li>
+                            {{/review.competencyratings}}
+                        </ul>
+                    {{/review.hascompetencyratings}}
+                </section>
+            {{/hasreview}}
+        </main>
+
+        <aside class="uckkchallenge-view__side">
+            {{#hastimeline}}
+                <section class="uckkchallenge-view__panel uckkchallenge-view__timeline">
+                    <h3 class="uckkchallenge-view__panel-title">
+                        {{#str}} timeline, uckkchallenge {{/str}}
+                    </h3>
+
+                    <dl class="uckkchallenge-view__timeline-list">
+                        {{#timeline.hasopen}}
+                            <dt>{{#str}} timeopen, uckkchallenge {{/str}}</dt>
+                            <dd>{{timeline.openlabel}}</dd>
+                        {{/timeline.hasopen}}
+
+                        {{#timeline.hasclose}}
+                            <dt>{{#str}} timeclose, uckkchallenge {{/str}}</dt>
+                            <dd>{{timeline.closelabel}}</dd>
+                        {{/timeline.hasclose}}
+
+                        {{#timeline.hasreviewby}}
+                            <dt>{{#str}} timereviewby, uckkchallenge {{/str}}</dt>
+                            <dd>{{timeline.reviewbylabel}}</dd>
+                        {{/timeline.hasreviewby}}
+                    </dl>
+
+                    {{#timeline.isclosed}}
+                        <div class="alert alert-secondary" role="status">
+                            {{#str}} challengeclosed, uckkchallenge {{/str}}
+                        </div>
+                    {{/timeline.isclosed}}
+
+                    {{#timeline.isoverdue}}
+                        <div class="alert alert-warning" role="status">
+                            {{#str}} challengeoverdue, uckkchallenge {{/str}}
+                        </div>
+                    {{/timeline.isoverdue}}
+                </section>
+            {{/hastimeline}}
+
+            {{#hasparticipant}}
+                <section class="uckkchallenge-view__panel uckkchallenge-view__participant">
+                    <h3 class="uckkchallenge-view__panel-title">
+                        {{#str}} participantstate, uckkchallenge {{/str}}
+                    </h3>
+
+                    <dl>
+                        {{#participant.progresslabel}}
+                            <dt>{{#str}} progress, uckkchallenge {{/str}}</dt>
+                            <dd>{{participant.progresslabel}}</dd>
+                        {{/participant.progresslabel}}
+
+                        {{#participant.statuslabel}}
+                            <dt>{{#str}} status, moodle {{/str}}</dt>
+                            <dd>{{participant.statuslabel}}</dd>
+                        {{/participant.statuslabel}}
+
+                        {{#participant.rolelabel}}
+                            <dt>{{#str}} role, moodle {{/str}}</dt>
+                            <dd>{{participant.rolelabel}}</dd>
+                        {{/participant.rolelabel}}
+                    </dl>
+                </section>
+            {{/hasparticipant}}
+
+            {{#hascompetencies}}
+                <section class="uckkchallenge-view__panel uckkchallenge-view__competencies">
+                    <h3 class="uckkchallenge-view__panel-title">
+                        {{#str}} linkedcompetencies, uckkchallenge {{/str}}
+                    </h3>
+
+                    <ul class="uckkchallenge-view__competency-list">
+                        {{#competencies}}
+                            <li>
+                                {{#url}}
+                                    <a href="{{url}}">{{name}}</a>
+                                {{/url}}
+                                {{^url}}
+                                    {{name}}
+                                {{/url}}
+
+                                {{#code}}
+                                    <span class="uckkchallenge-view__competency-code">
+                                        {{code}}
+                                    </span>
+                                {{/code}}
+                            </li>
+                        {{/competencies}}
+                    </ul>
+                </section>
+            {{/hascompetencies}}
+
+            {{#hasbadges}}
+                <section class="uckkchallenge-view__panel uckkchallenge-view__badges">
+                    <h3 class="uckkchallenge-view__panel-title">
+                        {{#str}} linkedbadges, uckkchallenge {{/str}}
+                    </h3>
+
+                    <ul class="uckkchallenge-view__badge-list">
+                        {{#badges}}
+                            <li>
+                                {{#imageurl}}
+                                    <img src="{{imageurl}}" alt="" class="uckkchallenge-view__badge-image">
+                                {{/imageurl}}
+
+                                {{#url}}
+                                    <a href="{{url}}">{{name}}</a>
+                                {{/url}}
+                                {{^url}}
+                                    {{name}}
+                                {{/url}}
+                            </li>
+                        {{/badges}}
+                    </ul>
+                </section>
+            {{/hasbadges}}
+
+            {{#hasintegritypanel}}
+                <section class="uckkchallenge-view__panel uckkchallenge-view__integrity">
+                    {{#integritypanel}}
+                        {{> mod_uckkchallenge/integrity_panel }}
+                    {{/integritypanel}}
+                </section>
+            {{/hasintegritypanel}}
+
+            {{#hasarchive}}
+                <section class="uckkchallenge-view__panel uckkchallenge-view__archive">
+                    <h3 class="uckkchallenge-view__panel-title">
+                        {{#str}} archive, uckkchallenge {{/str}}
+                    </h3>
+
+                    {{#archive.statuslabel}}
+                        <p>
+                            <strong>{{#str}} status, moodle {{/str}}:</strong>
+                            {{archive.statuslabel}}
+                        </p>
+                    {{/archive.statuslabel}}
+
+                    {{#archive.hasitems}}
+                        <ul class="uckkchallenge-view__archive-list">
+                            {{#archive.items}}
+                                <li>
+                                    {{#url}}
+                                        <a href="{{url}}">{{title}}</a>
+                                    {{/url}}
+                                    {{^url}}
+                                        {{title}}
+                                    {{/url}}
+
+                                    {{#statuslabel}}
+                                        <span>{{statuslabel}}</span>
+                                    {{/statuslabel}}
+                                </li>
+                            {{/archive.items}}
+                        </ul>
+                    {{/archive.hasitems}}
+
+                    {{^archive.hasitems}}
+                        <p class="uckkchallenge-view__empty">
+                            {{#str}} archiveempty, uckkchallenge {{/str}}
+                        </p>
+                    {{/archive.hasitems}}
+
+                    {{#archive.actionurl}}
+                        <a href="{{archive.actionurl}}" class="btn btn-secondary">
+                            {{archive.actionlabel}}
+                        </a>
+                    {{/archive.actionurl}}
+                </section>
+            {{/hasarchive}}
+        </aside>
+    </div>
+
+    <footer class="uckkchallenge-view__footer">
+        <p class="uckkchallenge-view__authority-note">
+            {{#str}} challengenonsovereignnotice, uckkchallenge {{/str}}
+        </p>
+    </footer>
+</section>

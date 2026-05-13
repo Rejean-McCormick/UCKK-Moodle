@@ -1,0 +1,223 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+{{!
+    @template format_uckk/local/content/section
+
+    UCKK section template for the UCKK course format.
+
+    This template extends Moodle core_courseformat section rendering and adds
+    UCKK presentation affordances around the standard section header/content.
+    It must remain presentation-only.
+
+    Business logic, permissions, completion state, proof state, archive state,
+    integrity state and visibility must be prepared by PHP output classes.
+
+    Expected core context:
+    {
+        "id": 12,
+        "num": 3,
+        "sectionname": "Workshop"
+    }
+
+    Optional UCKK context prepared by:
+    format_uckk\output\courseformat\content\section::export_for_template()
+
+    {
+        "uckksection": {
+            "type": "workshop",
+            "typeclass": "uckk-section-workshop",
+            "title": "Workshop",
+            "shorttitle": "Workshop",
+            "description": "Active work, analysis, mapping and practice.",
+            "icon": "atelier",
+            "hasdescription": true,
+            "requiresproof": false,
+            "requiresdeliberation": false,
+            "requiresarchive": false,
+            "integrityrequired": false,
+            "isarchive": false,
+            "isproofs": false,
+            "isdeliberation": false,
+            "completionlabel": "In progress",
+            "hascompletion": true,
+            "progresspercent": 40,
+            "hasprogress": true,
+            "status": "inprogress",
+            "statuslabel": "In progress",
+            "hasstatus": true,
+            "notices": [
+                {
+                    "type": "info",
+                    "message": "This section prepares evidence for later validation."
+                }
+            ],
+            "hasnotices": true
+        }
+    }
+}}
+
+{{!
+    Include the core content/section template.
+
+    The UCKK format overrides section-level blocks only to add visual structure.
+    Core Moodle still owns the section mechanics, editing affordances, availability,
+    collapse behaviour and activity rendering.
+}}
+{{< core_courseformat/local/content/section }}
+
+    {{!
+        Optional UCKK wrapper around the section header.
+        The core section header is still rendered inside this block.
+    }}
+    {{$ core_courseformat/local/content/section/header }}
+        <div
+            class="format-uckk-section-header-wrapper {{#uckksection}}{{typeclass}}{{/uckksection}}"
+            data-region="format-uckk-section-header"
+            {{#uckksection}}
+                data-uckk-section-type="{{type}}"
+                data-uckk-section-status="{{status}}"
+            {{/uckksection}}
+        >
+            {{#uckksection}}
+                <div class="format-uckk-section-kicker d-flex align-items-center justify-content-between mb-2">
+                    <div class="format-uckk-section-identity d-flex align-items-center">
+                        <span class="format-uckk-section-index mr-2" aria-hidden="true">
+                            {{num}}
+                        </span>
+
+                        <span class="format-uckk-section-type-label small text-muted">
+                            {{shorttitle}}
+                        </span>
+                    </div>
+
+                    {{#hasstatus}}
+                        <span class="badge badge-secondary format-uckk-section-status">
+                            {{statuslabel}}
+                        </span>
+                    {{/hasstatus}}
+                </div>
+            {{/uckksection}}
+
+            {{> core_courseformat/local/content/section/header }}
+        </div>
+    {{/ core_courseformat/local/content/section/header }}
+
+    {{!
+        Optional UCKK wrapper around the section content.
+        Core Moodle still renders the actual section content through its own partial.
+    }}
+    {{$ core_courseformat/local/content/section/content }}
+        <div
+            class="format-uckk-section-content-wrapper {{#uckksection}}{{typeclass}}{{/uckksection}}"
+            data-region="format-uckk-section-content"
+            {{#uckksection}}
+                data-uckk-section-type="{{type}}"
+            {{/uckksection}}
+        >
+            {{#uckksection}}
+                {{#hasdescription}}
+                    <div class="format-uckk-section-description alert alert-light border mb-3" role="note">
+                        {{description}}
+                    </div>
+                {{/hasdescription}}
+
+                {{#hasnotices}}
+                    <div class="format-uckk-section-notices mb-3" data-region="format-uckk-section-notices">
+                        {{#notices}}
+                            <div class="alert alert-{{type}} mb-2" role="note">
+                                {{message}}
+                            </div>
+                        {{/notices}}
+                    </div>
+                {{/hasnotices}}
+
+                <div class="format-uckk-section-signals d-flex flex-wrap align-items-center mb-3">
+                    {{#requiresproof}}
+                        <span class="badge badge-light border mr-2 mb-1 format-uckk-signal format-uckk-signal-proof">
+                            {{#str}} proofrequired, format_uckk {{/str}}
+                        </span>
+                    {{/requiresproof}}
+
+                    {{#requiresdeliberation}}
+                        <span class="badge badge-light border mr-2 mb-1 format-uckk-signal format-uckk-signal-deliberation">
+                            {{#str}} deliberationrequired, format_uckk {{/str}}
+                        </span>
+                    {{/requiresdeliberation}}
+
+                    {{#requiresarchive}}
+                        <span class="badge badge-light border mr-2 mb-1 format-uckk-signal format-uckk-signal-archive">
+                            {{#str}} archiverequired, format_uckk {{/str}}
+                        </span>
+                    {{/requiresarchive}}
+
+                    {{#integrityrequired}}
+                        <span class="badge badge-warning mr-2 mb-1 format-uckk-signal format-uckk-signal-integrity">
+                            {{#str}} integrityrequired, format_uckk {{/str}}
+                        </span>
+                    {{/integrityrequired}}
+                </div>
+
+                {{#hasprogress}}
+                    <div class="format-uckk-section-progress mb-3">
+                        <div class="d-flex justify-content-between small mb-1">
+                            <span>{{#str}} progress, format_uckk {{/str}}</span>
+                            <span>{{progresspercent}}%</span>
+                        </div>
+                        <div class="progress">
+                            <div
+                                class="progress-bar"
+                                role="progressbar"
+                                style="width: {{progresspercent}}%;"
+                                aria-valuenow="{{progresspercent}}"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                            >
+                                <span class="sr-only">{{progresspercent}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                {{/hasprogress}}
+            {{/uckksection}}
+
+            {{> core_courseformat/local/content/section/content }}
+
+            {{#uckksection}}
+                {{#isarchive}}
+                    <div class="format-uckk-section-footer format-uckk-section-footer-archive mt-3 small text-muted">
+                        {{#str}} notice_archive, format_uckk {{/str}}
+                    </div>
+                {{/isarchive}}
+
+                {{#isproofs}}
+                    <div class="format-uckk-section-footer format-uckk-section-footer-proof mt-3 small text-muted">
+                        {{#str}} proofsource, format_uckk {{/str}} · {{#str}} proofprovenance, format_uckk {{/str}}
+                    </div>
+                {{/isproofs}}
+
+                {{#isdeliberation}}
+                    <div class="format-uckk-section-footer format-uckk-section-footer-deliberation mt-3 small text-muted">
+                        {{#str}} decisionrecord, format_uckk {{/str}} · {{#str}} contestability, format_uckk {{/str}}
+                    </div>
+                {{/isdeliberation}}
+            {{/uckksection}}
+        </div>
+    {{/ core_courseformat/local/content/section/content }}
+
+    {{!
+        Mandatory cmitem override for course formats.
+        Activity item presentation is delegated to the UCKK cmitem template.
+    }}
+    {{$ core_courseformat/local/content/section/cmitem }}
+        {{> format_uckk/local/content/section/cmitem }}
+    {{/ core_courseformat/local/content/section/cmitem }}
+
+{{/ core_courseformat/local/content/section }}

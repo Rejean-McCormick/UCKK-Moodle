@@ -1,0 +1,109 @@
+<div class="tool-uckkintegrity-case" data-region="uckkintegrity-case" data-caseid="{{id}}">
+    <h3>{{#str}}case, tool_uckkintegrity{{/str}} #{{id}}</h3>
+
+    <dl class="row">
+        <dt class="col-sm-3">{{#str}}casetype, tool_uckkintegrity{{/str}}</dt>
+        <dd class="col-sm-9">{{casetype}}</dd>
+
+        <dt class="col-sm-3">{{#str}}subjectcomponent, tool_uckkintegrity{{/str}}</dt>
+        <dd class="col-sm-9">{{subjectcomponent}}:{{subjectid}}</dd>
+
+        <dt class="col-sm-3">{{#str}}severity, tool_uckkintegrity{{/str}}</dt>
+        <dd class="col-sm-9">{{severity}}</dd>
+
+        <dt class="col-sm-3">{{#str}}status, tool_uckkintegrity{{/str}}</dt>
+        <dd class="col-sm-9">{{status}}</dd>
+
+        <dt class="col-sm-3">{{#str}}created, tool_uckkintegrity{{/str}}</dt>
+        <dd class="col-sm-9">{{timecreated}}</dd>
+
+        <dt class="col-sm-3">{{#str}}modified, tool_uckkintegrity{{/str}}</dt>
+        <dd class="col-sm-9">{{timemodified}}</dd>
+    </dl>
+
+    <h4>{{#str}}summary, tool_uckkintegrity{{/str}}</h4>
+    <div class="card card-body mb-3">
+        {{{summary}}}
+    </div>
+
+    {{#hasdecision}}
+        <h4>{{#str}}decision, tool_uckkintegrity{{/str}}</h4>
+        <div class="card card-body mb-3">
+            {{{decision}}}
+        </div>
+    {{/hasdecision}}
+
+    {{#hascorrection}}
+        <h4>{{#str}}correction, tool_uckkintegrity{{/str}}</h4>
+        <div class="alert alert-warning mb-3">
+            {{{correction}}}
+        </div>
+    {{/hascorrection}}
+
+    {{#hasappealpath}}
+        <h4>{{#str}}appealpath, tool_uckkintegrity{{/str}}</h4>
+        <div class="alert alert-info mb-3">
+            {{{appealpath}}}
+        </div>
+    {{/hasappealpath}}
+
+    {{#hasarchivesummary}}
+        <h4>{{#str}}archivesummary, tool_uckkintegrity{{/str}}</h4>
+        <div class="card card-body mb-3">
+            {{{archivesummary}}}
+        </div>
+    {{/hasarchivesummary}}
+
+    {{#hasarchiveitem}}
+        <p>
+            <strong>{{#str}}archiveitemid, tool_uckkintegrity{{/str}}:</strong>
+            {{archiveitemid}}
+        </p>
+    {{/hasarchiveitem}}
+
+    <div class="mb-3">
+        {{#canreview}}
+            <a class="btn btn-secondary" href="{{reviewurl}}">
+                {{#str}}reviewcase, tool_uckkintegrity{{/str}}
+            </a>
+        {{/canreview}}
+
+        {{#candecide}}
+            <a class="btn btn-primary" href="{{decisionurl}}">
+                {{#str}}recorddecision, tool_uckkintegrity{{/str}}
+            </a>
+        {{/candecide}}
+
+        {{#canappeal}}
+            <a class="btn btn-outline-secondary" href="{{appealurl}}">
+                {{#str}}submitappeal, tool_uckkintegrity{{/str}}
+            </a>
+        {{/canappeal}}
+    </div>
+
+    <h4>{{#str}}notes, tool_uckkintegrity{{/str}}</h4>
+
+    {{#hasnotes}}
+        {{#notes}}
+            <div class="card mb-2" data-region="uckkintegrity-note">
+                <div class="card-header">
+                    <strong>{{notetype}}</strong>
+                    <span class="text-muted">— {{user}} — {{timecreated}} — {{visibility}}</span>
+                </div>
+                <div class="card-body">
+                    {{{body}}}
+                </div>
+            </div>
+        {{/notes}}
+    {{/hasnotes}}
+
+    {{^hasnotes}}
+        <p>{{#str}}noresults, tool_uckkintegrity{{/str}}</p>
+    {{/hasnotes}}
+</div>
+
+{{#js}}
+require(['tool_uckkintegrity/case'], function(Case) {
+    Case.init('[data-region="uckkintegrity-case"]');
+});
+{{/js}}

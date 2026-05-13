@@ -1,0 +1,237 @@
+{
+  "schema": "uckkseed.preset.v1",
+  "component": "tool_uckkseed",
+  "preset": "reports",
+  "version": 2026051200,
+  "items": [
+    {
+      "key": "joueur_progress",
+      "name": "Progression des joueurs",
+      "component": "report_uckk",
+      "capability": "report/uckk:view",
+      "source": "local_uckk",
+      "description": "Rapport synthétique de progression individuelle des joueurs UCKK, incluant parcours, complétion, preuves, badges et compétences.",
+      "enabled": true,
+      "metadata": {
+        "family": "progress",
+        "targettype": "user",
+        "context": "system",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": false,
+        "defaultvisibility": "institution",
+        "sortorder": 10,
+        "canonical": true
+      }
+    },
+    {
+      "key": "cohort_progress",
+      "name": "Progression des cohortes",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "local_uckk",
+      "description": "Rapport de progression agrégée par cohorte, utile pour suivre l’avancement collectif sans exposer inutilement les détails individuels.",
+      "enabled": true,
+      "metadata": {
+        "family": "progress",
+        "targettype": "cohort",
+        "context": "system",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": false,
+        "defaultvisibility": "institution",
+        "sortorder": 20,
+        "canonical": true
+      }
+    },
+    {
+      "key": "program_progress",
+      "name": "Progression des programmes",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "local_uckk",
+      "description": "Rapport institutionnel sur l’avancement des programmes et parcours UCKK, incluant volumes d’inscription, progression et complétion.",
+      "enabled": true,
+      "metadata": {
+        "family": "progress",
+        "targettype": "program",
+        "context": "system",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": false,
+        "defaultvisibility": "institution",
+        "sortorder": 30,
+        "canonical": true
+      }
+    },
+    {
+      "key": "competency_matrix",
+      "name": "Matrice des compétences",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "core_competency",
+      "description": "Rapport matriciel des compétences UCKK par joueur, cohorte, parcours et programme.",
+      "enabled": true,
+      "metadata": {
+        "family": "competency",
+        "targettype": "competency",
+        "context": "system",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": false,
+        "defaultvisibility": "institution",
+        "sortorder": 40,
+        "canonical": true
+      }
+    },
+    {
+      "key": "badge_awards",
+      "name": "Attribution des badges",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "core_badges",
+      "description": "Rapport des badges UCKK attribués, en attente, contestés ou liés à une validation humaine.",
+      "enabled": true,
+      "metadata": {
+        "family": "badge",
+        "targettype": "badge",
+        "context": "system",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": false,
+        "defaultvisibility": "institution",
+        "sortorder": 50,
+        "canonical": true
+      }
+    },
+    {
+      "key": "challenge_status",
+      "name": "État des défis",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "mod_uckkchallenge",
+      "description": "Rapport des Défis King Klown par statut, soumission, évaluation, correction, validation, contestation et archivage.",
+      "enabled": true,
+      "metadata": {
+        "family": "challenge",
+        "targettype": "challenge",
+        "context": "course",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": false,
+        "defaultvisibility": "institution",
+        "sortorder": 60,
+        "canonical": true
+      }
+    },
+    {
+      "key": "assembly_decisions",
+      "name": "Décisions des assemblées",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "mod_uckkassembly",
+      "description": "Rapport des assemblées, motions, votes, décisions, contestations, procès-verbaux et archives associées.",
+      "enabled": true,
+      "metadata": {
+        "family": "assembly",
+        "targettype": "assembly",
+        "context": "course",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": false,
+        "defaultvisibility": "institution",
+        "sortorder": 70,
+        "canonical": true
+      }
+    },
+    {
+      "key": "archive_production",
+      "name": "Production d’archives",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "mod_uckkarchive",
+      "description": "Rapport des éléments d’archive, preuves, Kristals, révisions, exports, états de validation, provenances et visibilités.",
+      "enabled": true,
+      "metadata": {
+        "family": "archive",
+        "targettype": "archive_item",
+        "context": "course",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": true,
+        "restrictedcapability": "mod/uckkarchive:viewrestricted",
+        "defaultvisibility": "restricted",
+        "sortorder": 80,
+        "canonical": true
+      }
+    },
+    {
+      "key": "integrity_cases",
+      "name": "Dossiers d’intégrité",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "tool_uckkintegrity",
+      "description": "Rapport des dossiers d’intégrité, corrections demandées, invalidations, appels, fermetures et liens vers les traces concernées.",
+      "enabled": true,
+      "metadata": {
+        "family": "integrity",
+        "targettype": "integrity_case",
+        "context": "system",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": true,
+        "restrictedcapability": "tool/uckkintegrity:viewrestricted",
+        "defaultvisibility": "restricted_integrity",
+        "sortorder": 90,
+        "canonical": true
+      }
+    },
+    {
+      "key": "ai_usage",
+      "name": "Usage de l’IA",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "aiprovider_uckk",
+      "description": "Rapport d’usage de l’IA gouvernable UCKK, incluant assistance, provenance, incertitude, validation humaine et absence de décision automatisée.",
+      "enabled": true,
+      "metadata": {
+        "family": "ai",
+        "targettype": "ai_log",
+        "context": "system",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": true,
+        "restrictedcapability": "aiprovider/uckk:viewlogs",
+        "defaultvisibility": "restricted",
+        "sortorder": 100,
+        "canonical": true,
+        "policy": {
+          "nonsovereign": true,
+          "requireshumanvalidation": true,
+          "allowdecisionautomation": false
+        }
+      }
+    },
+    {
+      "key": "privacy_exports",
+      "name": "Exports et confidentialité",
+      "component": "report_uckk",
+      "capability": "report/uckk:viewall",
+      "source": "core_privacy",
+      "description": "Rapport administratif sur les exports de données, demandes de confidentialité, zones restreintes et conformité des plugins UCKK.",
+      "enabled": true,
+      "metadata": {
+        "family": "privacy",
+        "targettype": "privacy_export",
+        "context": "system",
+        "exportcapability": "report/uckk:export",
+        "requiresrestrictedview": true,
+        "defaultvisibility": "restricted",
+        "sortorder": 110,
+        "canonical": true
+      }
+    }
+  ],
+  "metadata": {
+    "product": "UCKK-Moodle",
+    "productfullname": "Univers-Cité King Klown Moodle Distribution",
+    "language": "fr",
+    "fallbacklanguage": "en",
+    "moodlefamily": "5.x",
+    "moodlebase": "5.2",
+    "phpminimum": "8.3",
+    "coremodificationpolicy": "no_core_modification",
+    "deliverymode": "complete_distribution"
+  }
+}
+

@@ -1,0 +1,1005 @@
+/**
+ * UCKK archive SCSS.
+ *
+ * This file styles archive, proof, provenance, revision, Kristal, and
+ * institutional memory surfaces for UCKK-Moodle.
+ *
+ * It belongs to the theme layer. It must not contain workflow logic,
+ * permission logic, validation logic, or data logic.
+ *
+ * @package    theme_uckk
+ * @copyright  2026 UCKK
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/* ==========================================================================
+   Archive shell
+   ========================================================================== */
+
+.theme-uckk-archive {
+    --uckk-archive-accent: var(--uckk-gold);
+    --uckk-archive-accent-soft: rgba(185, 147, 75, .16);
+    --uckk-archive-danger: var(--uckk-red);
+    --uckk-archive-danger-soft: rgba(179, 34, 34, .12);
+    --uckk-archive-success: var(--uckk-green);
+    --uckk-archive-success-soft: var(--uckk-green-soft);
+    --uckk-archive-info: var(--uckk-blue);
+    --uckk-archive-info-soft: rgba(18, 26, 58, .1);
+
+    display: grid;
+    gap: 1.5rem;
+}
+
+.theme-uckk-archive__header {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: 1rem;
+    padding: 2rem;
+    color: var(--uckk-ivory);
+    background:
+        radial-gradient(circle at 8% 0%, rgba(185, 147, 75, .32), transparent 18rem),
+        radial-gradient(circle at 92% 10%, rgba(132, 184, 74, .16), transparent 18rem),
+        linear-gradient(135deg, var(--uckk-black), var(--uckk-blue));
+    border-radius: var(--uckk-radius-xl);
+    box-shadow: var(--uckk-shadow);
+}
+
+.theme-uckk-archive__header::after {
+    content: "";
+    position: absolute;
+    inset: 1rem;
+    pointer-events: none;
+    border: 1px solid rgba(185, 147, 75, .25);
+    border-radius: calc(var(--uckk-radius-xl) - .5rem);
+}
+
+.theme-uckk-archive__header-content {
+    position: relative;
+    z-index: 1;
+    max-width: 64rem;
+}
+
+.theme-uckk-archive__eyebrow {
+    margin: 0 0 .5rem;
+    color: var(--uckk-gold-soft);
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.theme-uckk-archive__title {
+    margin: 0;
+    color: var(--uckk-white);
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 850;
+    line-height: 1;
+    letter-spacing: -.05em;
+}
+
+.theme-uckk-archive__subtitle {
+    max-width: 48rem;
+    margin: .75rem 0 0;
+    color: var(--uckk-ivory-muted);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+}
+
+.theme-uckk-archive__meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+/* ==========================================================================
+   Archive navigation
+   ========================================================================== */
+
+.theme-uckk-archive__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    padding: .75rem;
+    background: var(--uckk-white);
+    border: 1px solid rgba(11, 11, 15, .1);
+    border-radius: var(--uckk-radius-lg);
+    box-shadow: var(--uckk-shadow-sm);
+}
+
+.theme-uckk-archive__nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .5rem .8rem;
+    color: var(--uckk-grey-800);
+    font-size: .875rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 999rem;
+    transition:
+        color 160ms ease-in-out,
+        background-color 160ms ease-in-out,
+        box-shadow 160ms ease-in-out;
+}
+
+.theme-uckk-archive__nav-link:hover,
+.theme-uckk-archive__nav-link:focus {
+    color: var(--uckk-red-dark);
+    background: rgba(179, 34, 34, .08);
+    text-decoration: none;
+}
+
+.theme-uckk-archive__nav-link[aria-current="page"],
+.theme-uckk-archive__nav-link.is-active {
+    color: var(--uckk-black);
+    background: var(--uckk-archive-accent-soft);
+    box-shadow: inset 0 0 0 1px rgba(185, 147, 75, .35);
+}
+
+/* ==========================================================================
+   Archive toolbar and filters
+   ========================================================================== */
+
+.theme-uckk-archive__toolbar {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--uckk-white);
+    border: 1px solid rgba(11, 11, 15, .1);
+    border-radius: var(--uckk-radius-lg);
+    box-shadow: var(--uckk-shadow-sm);
+}
+
+.theme-uckk-archive__toolbar-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.theme-uckk-archive__search {
+    flex: 1 1 20rem;
+    min-width: 0;
+}
+
+.theme-uckk-archive__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.theme-uckk-archive__filter {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .45rem .75rem;
+    color: var(--uckk-grey-800);
+    background: var(--uckk-grey-100);
+    border: 1px solid rgba(11, 11, 15, .1);
+    border-radius: 999rem;
+    font-size: .8125rem;
+    font-weight: 700;
+}
+
+.theme-uckk-archive__filter.is-active {
+    color: var(--uckk-black);
+    background: var(--uckk-archive-accent-soft);
+    border-color: rgba(185, 147, 75, .45);
+}
+
+/* ==========================================================================
+   Archive grid and item cards
+   ========================================================================== */
+
+.theme-uckk-archive__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.theme-uckk-archive-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 18rem;
+    padding: 1.25rem;
+    background: var(--uckk-white);
+    border: 1px solid rgba(11, 11, 15, .1);
+    border-radius: var(--uckk-radius-lg);
+    box-shadow: var(--uckk-shadow-sm);
+    transition:
+        transform 160ms ease-in-out,
+        border-color 160ms ease-in-out,
+        box-shadow 160ms ease-in-out;
+}
+
+.theme-uckk-archive-card:hover,
+.theme-uckk-archive-card:focus-within {
+    transform: translateY(-.2rem);
+    border-color: rgba(185, 147, 75, .5);
+    box-shadow: var(--uckk-shadow);
+}
+
+.theme-uckk-archive-card__header {
+    display: grid;
+    gap: .5rem;
+    margin-bottom: .75rem;
+}
+
+.theme-uckk-archive-card__type {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    width: fit-content;
+    padding: .25rem .55rem;
+    color: var(--uckk-blue);
+    background: var(--uckk-archive-info-soft);
+    border-radius: 999rem;
+    font-size: .75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.theme-uckk-archive-card__title {
+    margin: 0;
+    color: var(--uckk-black);
+    font-size: 1.125rem;
+    font-weight: 850;
+    line-height: 1.25;
+}
+
+.theme-uckk-archive-card__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.theme-uckk-archive-card__title a:hover,
+.theme-uckk-archive-card__title a:focus {
+    color: var(--uckk-red-dark);
+    text-decoration: underline;
+}
+
+.theme-uckk-archive-card__summary {
+    flex: 1 1 auto;
+    margin: 0 0 1rem;
+    color: var(--uckk-grey-600);
+    font-size: .9375rem;
+    line-height: 1.55;
+}
+
+.theme-uckk-archive-card__footer {
+    display: grid;
+    gap: .75rem;
+    margin-top: auto;
+    padding-top: .875rem;
+    border-top: 1px solid rgba(11, 11, 15, .08);
+}
+
+.theme-uckk-archive-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+}
+
+.theme-uckk-archive-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.theme-uckk-archive-card__action {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    color: var(--uckk-red);
+    font-size: .875rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.theme-uckk-archive-card__action:hover,
+.theme-uckk-archive-card__action:focus {
+    color: var(--uckk-red-dark);
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Archive item type variants
+   ========================================================================== */
+
+.theme-uckk-archive-card--proof {
+    border-top: .375rem solid var(--uckk-gold);
+}
+
+.theme-uckk-archive-card--decision {
+    border-top: .375rem solid var(--uckk-blue);
+}
+
+.theme-uckk-archive-card--kristal {
+    border-top: .375rem solid var(--uckk-green);
+}
+
+.theme-uckk-archive-card--integrity {
+    border-top: .375rem solid var(--uckk-red);
+}
+
+.theme-uckk-archive-card--portfolio {
+    border-top: .375rem solid var(--uckk-gold-soft);
+}
+
+.theme-uckk-archive-card--minutes {
+    border-top: .375rem solid var(--uckk-blue-soft);
+}
+
+/* ==========================================================================
+   Status and validation states
+   ========================================================================== */
+
+.theme-uckk-archive-state {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    width: fit-content;
+    padding: .25rem .55rem;
+    border-radius: 999rem;
+    font-size: .75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.theme-uckk-archive-state--draft {
+    color: var(--uckk-grey-800);
+    background: var(--uckk-grey-200);
+}
+
+.theme-uckk-archive-state--submitted,
+.theme-uckk-archive-state--pending {
+    color: #6b4d13;
+    background: rgba(185, 147, 75, .18);
+}
+
+.theme-uckk-archive-state--reviewed {
+    color: var(--uckk-blue);
+    background: rgba(18, 26, 58, .1);
+}
+
+.theme-uckk-archive-state--validated,
+.theme-uckk-archive-state--published {
+    color: #2f5b20;
+    background: var(--uckk-archive-success-soft);
+}
+
+.theme-uckk-archive-state--contested {
+    color: #6b4d13;
+    background: rgba(185, 147, 75, .22);
+}
+
+.theme-uckk-archive-state--invalidated {
+    color: var(--uckk-red-dark);
+    background: var(--uckk-archive-danger-soft);
+}
+
+.theme-uckk-archive-state--restricted {
+    color: var(--uckk-ivory);
+    background: var(--uckk-blue);
+}
+
+.theme-uckk-archive-state--superseded,
+.theme-uckk-archive-state--archived {
+    color: var(--uckk-blue);
+    background: rgba(18, 26, 58, .08);
+}
+
+/* ==========================================================================
+   Archive item detail
+   ========================================================================== */
+
+.theme-uckk-archive-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    gap: 1.5rem;
+}
+
+.theme-uckk-archive-item__main {
+    display: grid;
+    gap: 1rem;
+}
+
+.theme-uckk-archive-item__aside {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+}
+
+.theme-uckk-archive-panel {
+    padding: 1.25rem;
+    background: var(--uckk-white);
+    border: 1px solid rgba(11, 11, 15, .1);
+    border-radius: var(--uckk-radius-lg);
+    box-shadow: var(--uckk-shadow-sm);
+}
+
+.theme-uckk-archive-panel__title {
+    margin: 0 0 .75rem;
+    color: var(--uckk-black);
+    font-size: 1rem;
+    font-weight: 850;
+    line-height: 1.25;
+}
+
+.theme-uckk-archive-panel__body {
+    color: var(--uckk-grey-800);
+    font-size: .9375rem;
+    line-height: 1.55;
+}
+
+.theme-uckk-archive-panel__body p:last-child {
+    margin-bottom: 0;
+}
+
+.theme-uckk-archive-item__content {
+    padding: 1.5rem;
+    background: var(--uckk-white);
+    border: 1px solid rgba(11, 11, 15, .1);
+    border-radius: var(--uckk-radius-lg);
+    box-shadow: var(--uckk-shadow-sm);
+}
+
+.theme-uckk-archive-item__content h2,
+.theme-uckk-archive-item__content h3,
+.theme-uckk-archive-item__content h4 {
+    color: var(--uckk-black);
+    font-weight: 850;
+}
+
+.theme-uckk-archive-item__content blockquote {
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    color: var(--uckk-grey-800);
+    background: var(--uckk-grey-100);
+    border-left: .375rem solid var(--uckk-gold);
+    border-radius: 0 var(--uckk-radius) var(--uckk-radius) 0;
+}
+
+/* ==========================================================================
+   Provenance timeline
+   ========================================================================== */
+
+.theme-uckk-provenance {
+    display: grid;
+    gap: .875rem;
+}
+
+.theme-uckk-provenance__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.25rem minmax(0, 1fr);
+    gap: .75rem;
+}
+
+.theme-uckk-provenance__item::before {
+    content: "";
+    position: absolute;
+    top: 1.25rem;
+    bottom: -.875rem;
+    left: .5625rem;
+    width: 2px;
+    background: rgba(185, 147, 75, .35);
+}
+
+.theme-uckk-provenance__item:last-child::before {
+    display: none;
+}
+
+.theme-uckk-provenance__marker {
+    position: relative;
+    z-index: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: .125rem;
+    background: var(--uckk-white);
+    border: .25rem solid var(--uckk-gold);
+    border-radius: 999rem;
+}
+
+.theme-uckk-provenance__content {
+    min-width: 0;
+    padding-bottom: .75rem;
+}
+
+.theme-uckk-provenance__title {
+    margin: 0;
+    color: var(--uckk-black);
+    font-size: .9375rem;
+    font-weight: 800;
+}
+
+.theme-uckk-provenance__meta {
+    margin: .25rem 0 0;
+    color: var(--uckk-grey-600);
+    font-size: .8125rem;
+    line-height: 1.4;
+}
+
+.theme-uckk-provenance__note {
+    margin: .5rem 0 0;
+    color: var(--uckk-grey-800);
+    font-size: .875rem;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   Revision history
+   ========================================================================== */
+
+.theme-uckk-revisions {
+    display: grid;
+    gap: .75rem;
+}
+
+.theme-uckk-revision {
+    padding: .875rem;
+    background: var(--uckk-grey-100);
+    border: 1px solid rgba(11, 11, 15, .08);
+    border-radius: var(--uckk-radius);
+}
+
+.theme-uckk-revision__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+}
+
+.theme-uckk-revision__version {
+    color: var(--uckk-black);
+    font-size: .875rem;
+    font-weight: 850;
+}
+
+.theme-uckk-revision__date {
+    color: var(--uckk-grey-600);
+    font-size: .8125rem;
+}
+
+.theme-uckk-revision__reason {
+    margin: 0;
+    color: var(--uckk-grey-800);
+    font-size: .875rem;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   Evidence and proof list
+   ========================================================================== */
+
+.theme-uckk-proof-list {
+    display: grid;
+    gap: .75rem;
+}
+
+.theme-uckk-proof {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: .875rem;
+    align-items: start;
+    padding: .875rem;
+    background: var(--uckk-white);
+    border: 1px solid rgba(11, 11, 15, .1);
+    border-radius: var(--uckk-radius);
+}
+
+.theme-uckk-proof__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--uckk-blue);
+    background: rgba(18, 26, 58, .08);
+    border-radius: 999rem;
+}
+
+.theme-uckk-proof__title {
+    margin: 0;
+    color: var(--uckk-black);
+    font-size: .9375rem;
+    font-weight: 800;
+}
+
+.theme-uckk-proof__meta {
+    margin: .25rem 0 0;
+    color: var(--uckk-grey-600);
+    font-size: .8125rem;
+}
+
+.theme-uckk-proof__status {
+    justify-self: end;
+}
+
+/* ==========================================================================
+   Kristal card
+   ========================================================================== */
+
+.theme-uckk-kristal {
+    position: relative;
+    overflow: hidden;
+    padding: 1.25rem;
+    color: var(--uckk-black);
+    background:
+        linear-gradient(135deg, rgba(132, 184, 74, .16), rgba(185, 147, 75, .12)),
+        var(--uckk-white);
+    border: 1px solid rgba(132, 184, 74, .35);
+    border-radius: var(--uckk-radius-lg);
+    box-shadow: var(--uckk-shadow-sm);
+}
+
+.theme-uckk-kristal::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: .375rem;
+    background: linear-gradient(180deg, var(--uckk-green), var(--uckk-gold));
+}
+
+.theme-uckk-kristal__label {
+    margin: 0 0 .5rem;
+    color: #2f5b20;
+    font-size: .75rem;
+    font-weight: 850;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.theme-uckk-kristal__title {
+    margin: 0 0 .5rem;
+    color: var(--uckk-black);
+    font-size: 1.125rem;
+    font-weight: 850;
+    line-height: 1.25;
+}
+
+.theme-uckk-kristal__summary {
+    margin: 0;
+    color: var(--uckk-grey-800);
+    font-size: .9375rem;
+    line-height: 1.55;
+}
+
+/* ==========================================================================
+   Integrity and contestation archive markers
+   ========================================================================== */
+
+.theme-uckk-archive-integrity {
+    padding: 1rem;
+    color: var(--uckk-red-dark);
+    background: var(--uckk-archive-danger-soft);
+    border: 1px solid rgba(179, 34, 34, .25);
+    border-left-width: .375rem;
+    border-radius: var(--uckk-radius);
+}
+
+.theme-uckk-archive-integrity__title {
+    margin: 0 0 .5rem;
+    color: var(--uckk-red-dark);
+    font-size: 1rem;
+    font-weight: 850;
+}
+
+.theme-uckk-archive-integrity__text {
+    margin: 0;
+    color: var(--uckk-grey-800);
+    font-size: .9375rem;
+    line-height: 1.55;
+}
+
+.theme-uckk-archive-contestation {
+    padding: 1rem;
+    color: #6b4d13;
+    background: rgba(185, 147, 75, .14);
+    border: 1px solid rgba(185, 147, 75, .35);
+    border-left-width: .375rem;
+    border-radius: var(--uckk-radius);
+}
+
+.theme-uckk-archive-contestation__title {
+    margin: 0 0 .5rem;
+    color: #6b4d13;
+    font-size: 1rem;
+    font-weight: 850;
+}
+
+.theme-uckk-archive-contestation__text {
+    margin: 0;
+    color: var(--uckk-grey-800);
+    font-size: .9375rem;
+    line-height: 1.55;
+}
+
+/* ==========================================================================
+   Archive empty and loading states
+   ========================================================================== */
+
+.theme-uckk-archive-empty {
+    display: grid;
+    justify-items: center;
+    gap: .75rem;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    background: var(--uckk-white);
+    border: 1px dashed rgba(11, 11, 15, .24);
+    border-radius: var(--uckk-radius-lg);
+}
+
+.theme-uckk-archive-empty__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    color: var(--uckk-gold);
+    background: var(--uckk-archive-accent-soft);
+    border-radius: 999rem;
+}
+
+.theme-uckk-archive-empty__title {
+    margin: 0;
+    color: var(--uckk-black);
+    font-size: 1.25rem;
+    font-weight: 850;
+}
+
+.theme-uckk-archive-empty__text {
+    max-width: 34rem;
+    margin: 0;
+    color: var(--uckk-grey-600);
+    line-height: 1.55;
+}
+
+.theme-uckk-archive-loading {
+    display: grid;
+    gap: .75rem;
+}
+
+.theme-uckk-archive-loading__line {
+    height: 1rem;
+    overflow: hidden;
+    background: var(--uckk-grey-200);
+    border-radius: 999rem;
+}
+
+.theme-uckk-archive-loading__line::after {
+    content: "";
+    display: block;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, .7),
+        transparent
+    );
+    animation: theme-uckk-archive-loading 1.2s infinite;
+}
+
+@keyframes theme-uckk-archive-loading {
+    0% {
+        transform: translateX(-120%);
+    }
+
+    100% {
+        transform: translateX(260%);
+    }
+}
+
+/* ==========================================================================
+   Archive tables
+   ========================================================================== */
+
+.theme-uckk-archive-table {
+    width: 100%;
+    margin: 0;
+    background: var(--uckk-white);
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid rgba(11, 11, 15, .1);
+    border-radius: var(--uckk-radius-lg);
+    overflow: hidden;
+}
+
+.theme-uckk-archive-table th,
+.theme-uckk-archive-table td {
+    padding: .875rem 1rem;
+    border-bottom: 1px solid rgba(11, 11, 15, .08);
+    vertical-align: top;
+}
+
+.theme-uckk-archive-table th {
+    color: var(--uckk-black);
+    background: var(--uckk-grey-100);
+    font-size: .8125rem;
+    font-weight: 850;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+
+.theme-uckk-archive-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.theme-uckk-archive-table tbody tr:hover {
+    background: rgba(185, 147, 75, .08);
+}
+
+/* ==========================================================================
+   Integration with mod_uckkarchive pages
+   ========================================================================== */
+
+.path-mod-uckkarchive .theme-uckk-archive,
+.path-mod-uckkarchive .theme-uckk-archive-item,
+.path-mod-uckkarchive .theme-uckk-archive__toolbar {
+    margin-bottom: 1.5rem;
+}
+
+.path-mod-uckkarchive .activity-header {
+    border-bottom-color: rgba(185, 147, 75, .24);
+}
+
+.path-mod-uckkarchive .tertiary-navigation {
+    margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+.theme-uckk-archive a:focus-visible,
+.theme-uckk-archive button:focus-visible,
+.theme-uckk-archive input:focus-visible,
+.theme-uckk-archive select:focus-visible,
+.theme-uckk-archive textarea:focus-visible {
+    outline: .1875rem solid var(--uckk-gold);
+    outline-offset: .1875rem;
+}
+
+.theme-uckk-archive-card:focus-within,
+.theme-uckk-archive-panel:focus-within,
+.theme-uckk-kristal:focus-within {
+    box-shadow:
+        var(--uckk-shadow-sm),
+        0 0 0 .1875rem rgba(185, 147, 75, .28);
+}
+
+/* ==========================================================================
+   Responsive layout
+   ========================================================================== */
+
+@media (max-width: 1199.98px) {
+    .theme-uckk-archive__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .theme-uckk-archive-item {
+        grid-template-columns: minmax(0, 1fr) 18rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .theme-uckk-archive-item {
+        grid-template-columns: 1fr;
+    }
+
+    .theme-uckk-archive-item__aside {
+        order: -1;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .theme-uckk-archive__header {
+        padding: 1.5rem;
+        border-radius: var(--uckk-radius-lg);
+    }
+
+    .theme-uckk-archive__toolbar-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .theme-uckk-archive__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .theme-uckk-proof {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .theme-uckk-proof__status {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+
+    .theme-uckk-archive-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .theme-uckk-archive__nav,
+    .theme-uckk-archive__filters,
+    .theme-uckk-archive-card__actions,
+    .theme-uckk-archive-card__meta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .theme-uckk-archive__nav-link,
+    .theme-uckk-archive__filter,
+    .theme-uckk-archive-card__action {
+        justify-content: center;
+    }
+
+    .theme-uckk-archive-card,
+    .theme-uckk-archive-panel,
+    .theme-uckk-archive-item__content {
+        padding: 1rem;
+    }
+}
+
+/* ==========================================================================
+   Motion and print
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-uckk-archive *,
+    .theme-uckk-archive-card,
+    .theme-uckk-archive-loading__line::after {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    .theme-uckk-archive-card:hover,
+    .theme-uckk-archive-card:focus-within {
+        transform: none;
+    }
+}
+
+@media print {
+    .theme-uckk-archive,
+    .theme-uckk-archive__header,
+    .theme-uckk-archive-card,
+    .theme-uckk-archive-panel,
+    .theme-uckk-archive-item__content,
+    .theme-uckk-kristal,
+    .theme-uckk-archive-integrity,
+    .theme-uckk-archive-contestation {
+        color: #000 !important;
+        background: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .theme-uckk-archive__nav,
+    .theme-uckk-archive__toolbar,
+    .theme-uckk-archive-card__actions {
+        display: none !important;
+    }
+
+    .theme-uckk-archive-card,
+    .theme-uckk-archive-panel,
+    .theme-uckk-archive-item__content {
+        border: 1px solid #000 !important;
+        break-inside: avoid;
+    }
+}
+

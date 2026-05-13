@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/uckkchallenge/db" VERSION="2026051200" COMMENT="XMLDB file for UCKK Challenge activity module"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+    <TABLES>
+        <TABLE NAME="uckkchallenge" COMMENT="UCKK Challenge activity instances">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+                <FIELD NAME="intro" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0"/>
+
+                <FIELD NAME="challengecode" TYPE="char" LENGTH="100" NOTNULL="false"/>
+                <FIELD NAME="challengetype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="internal_learning"/>
+
+                <FIELD NAME="statement" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="statementformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="contexttext" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="contexttextformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="rules" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="rulesformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="corridors" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="corridorsformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="ethicalconstraints" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="ethicalconstraintsformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+
+                <FIELD NAME="evidencepolicy" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="evidencepolicyformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="criteria" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="criteriaformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+
+                <FIELD NAME="teamsubmissions" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="maxsubmissions" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="allowresubmission" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+
+                <FIELD NAME="integrityrequired" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="integritynotes" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="integritynotesformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+
+                <FIELD NAME="aipolicy" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="aipolicyformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="archivepolicy" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="summary"/>
+                <FIELD NAME="publicsummary" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="publicsummaryformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+
+                <FIELD NAME="competencylinks" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="badgelinks" TYPE="text" NOTNULL="false"/>
+
+                <FIELD NAME="completionrequiresubmission" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="completionrequirevalidation" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+                <FIELD NAME="timeopen" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timeclose" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timereviewby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false"/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="course_idx" UNIQUE="false" FIELDS="course"/>
+                <INDEX NAME="code_idx" UNIQUE="false" FIELDS="challengecode"/>
+                <INDEX NAME="type_idx" UNIQUE="false" FIELDS="challengetype"/>
+                <INDEX NAME="status_idx" UNIQUE="false" FIELDS="status"/>
+                <INDEX NAME="visibility_idx" UNIQUE="false" FIELDS="visibility"/>
+                <INDEX NAME="timeopen_idx" UNIQUE="false" FIELDS="timeopen"/>
+                <INDEX NAME="timeclose_idx" UNIQUE="false" FIELDS="timeclose"/>
+                <INDEX NAME="createdby_idx" UNIQUE="false" FIELDS="createdby"/>
+                <INDEX NAME="modifiedby_idx" UNIQUE="false" FIELDS="modifiedby"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkchallenge_rule" COMMENT="Structured rules attached to UCKK challenges">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="challengeid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="rulename" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+                <FIELD NAME="ruletype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="general"/>
+                <FIELD NAME="description" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="descriptionformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="active"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="challengeid_idx" UNIQUE="false" FIELDS="challengeid"/>
+                <INDEX NAME="type_idx" UNIQUE="false" FIELDS="ruletype"/>
+                <INDEX NAME="status_idx" UNIQUE="false" FIELDS="status"/>
+                <INDEX NAME="sortorder_idx" UNIQUE="false" FIELDS="sortorder"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkchallenge_corr" COMMENT="Corridors of action for UCKK challenges">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="challengeid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+                <FIELD NAME="corridortype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="general"/>
+                <FIELD NAME="description" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="descriptionformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="requirements" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="active"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="challengeid_idx" UNIQUE="false" FIELDS="challengeid"/>
+                <INDEX NAME="type_idx" UNIQUE="false" FIELDS="corridortype"/>
+                <INDEX NAME="status_idx" UNIQUE="false" FIELDS="status"/>
+                <INDEX NAME="sortorder_idx" UNIQUE="false" FIELDS="sortorder"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkchallenge_sub" COMMENT="Learner or team submissions for UCKK challenges">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="challengeid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="attemptno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+
+                <FIELD NAME="prooftype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="text"/>
+                <FIELD NAME="submissiontext" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="submissiontextformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="submissionurl" TYPE="char" LENGTH="1333" NOTNULL="false"/>
+                <FIELD NAME="relationtocriteria" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="provenancestatement" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="sourceauthor" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                <FIELD NAME="sourcedate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="integritystate" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="unverified"/>
+                <FIELD NAME="aiassisted" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="ailog" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="uncertaintynotes" TYPE="text" NOTNULL="false"/>
+
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="submittedtime" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="reviewedtime" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false"/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="challengeid_idx" UNIQUE="false" FIELDS="challengeid"/>
+                <INDEX NAME="courseid_idx" UNIQUE="false" FIELDS="courseid"/>
+                <INDEX NAME="cmid_idx" UNIQUE="false" FIELDS="cmid"/>
+                <INDEX NAME="contextid_idx" UNIQUE="false" FIELDS="contextid"/>
+                <INDEX NAME="userid_idx" UNIQUE="false" FIELDS="userid"/>
+                <INDEX NAME="groupid_idx" UNIQUE="false" FIELDS="groupid"/>
+                <INDEX NAME="status_idx" UNIQUE="false" FIELDS="status"/>
+                <INDEX NAME="visibility_idx" UNIQUE="false" FIELDS="visibility"/>
+                <INDEX NAME="integritystate_idx" UNIQUE="false" FIELDS="integritystate"/>
+                <INDEX NAME="challenge_user_attempt_idx" UNIQUE="false" FIELDS="challengeid, userid, attemptno"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkchallenge_proof" COMMENT="Proof records attached to UCKK challenge submissions">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="challengeid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="submissionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+                <FIELD NAME="prooftype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="text"/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+                <FIELD NAME="description" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="descriptionformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="source" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                <FIELD NAME="author" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                <FIELD NAME="sourcedate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="fileitemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="url" TYPE="char" LENGTH="1333" NOTNULL="false"/>
+                <FIELD NAME="archiveitemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+                <FIELD NAME="relationtocriteria" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="provenance" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false"/>
+                <FIELD NAME="integritystate" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="unverified"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="pending_review"/>
+
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="challengeid_idx" UNIQUE="false" FIELDS="challengeid"/>
+                <INDEX NAME="submissionid_idx" UNIQUE="false" FIELDS="submissionid"/>
+                <INDEX NAME="userid_idx" UNIQUE="false" FIELDS="userid"/>
+                <INDEX NAME="prooftype_idx" UNIQUE="false" FIELDS="prooftype"/>
+                <INDEX NAME="archiveitemid_idx" UNIQUE="false" FIELDS="archiveitemid"/>
+                <INDEX NAME="status_idx" UNIQUE="false" FIELDS="status"/>
+                <INDEX NAME="visibility_idx" UNIQUE="false" FIELDS="visibility"/>
+                <INDEX NAME="integritystate_idx" UNIQUE="false" FIELDS="integritystate"/>
+                <INDEX NAME="hash_idx" UNIQUE="false" FIELDS="provenancehash"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkchallenge_eval" COMMENT="Mentor and reviewer evaluations for UCKK challenge submissions">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="challengeid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="submissionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="evaluatorid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+                <FIELD NAME="rubricjson" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="feedback" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="feedbackformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="privatefeedback" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="privatefeedbackformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+
+                <FIELD NAME="competencyrating" TYPE="char" LENGTH="64" NOTNULL="false"/>
+                <FIELD NAME="badgetriggered" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="integritystate" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human_reviewed"/>
+                <FIELD NAME="integritycaseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="grade" TYPE="number" LENGTH="10" DECIMALS="5" NOTNULL="false"/>
+
+                <FIELD NAME="previousstatus" TYPE="char" LENGTH="64" NOTNULL="false"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="pending_review"/>
+
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="challengeid_idx" UNIQUE="false" FIELDS="challengeid"/>
+                <INDEX NAME="submissionid_idx" UNIQUE="false" FIELDS="submissionid"/>
+                <INDEX NAME="userid_idx" UNIQUE="false" FIELDS="userid"/>
+                <INDEX NAME="evaluatorid_idx" UNIQUE="false" FIELDS="evaluatorid"/>
+                <INDEX NAME="integritycaseid_idx" UNIQUE="false" FIELDS="integritycaseid"/>
+                <INDEX NAME="status_idx" UNIQUE="false" FIELDS="status"/>
+                <INDEX NAME="integritystate_idx" UNIQUE="false" FIELDS="integritystate"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkchallenge_state" COMMENT="Challenge and submission state transition history">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="challengeid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="submissionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="evaluationid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+                <FIELD NAME="fromstatus" TYPE="char" LENGTH="64" NOTNULL="false"/>
+                <FIELD NAME="tostatus" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+                <FIELD NAME="action" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="state_change"/>
+                <FIELD NAME="reason" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="reasonformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="integritystate" TYPE="char" LENGTH="64" NOTNULL="false"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128" NOTNULL="false"/>
+
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="metadata" TYPE="text" NOTNULL="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="challengeid_idx" UNIQUE="false" FIELDS="challengeid"/>
+                <INDEX NAME="submissionid_idx" UNIQUE="false" FIELDS="submissionid"/>
+                <INDEX NAME="evaluationid_idx" UNIQUE="false" FIELDS="evaluationid"/>
+                <INDEX NAME="userid_idx" UNIQUE="false" FIELDS="userid"/>
+                <INDEX NAME="fromstatus_idx" UNIQUE="false" FIELDS="fromstatus"/>
+                <INDEX NAME="tostatus_idx" UNIQUE="false" FIELDS="tostatus"/>
+                <INDEX NAME="action_idx" UNIQUE="false" FIELDS="action"/>
+                <INDEX NAME="timecreated_idx" UNIQUE="false" FIELDS="timecreated"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>

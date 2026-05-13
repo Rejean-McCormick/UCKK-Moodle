@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/uckkassembly/db" VERSION="2026051200" COMMENT="XMLDB file for UCKK Assembly activity" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <TABLE NAME="uckkassembly" COMMENT="UCKK assembly activity instances">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="intro" TYPE="text"/>
+                <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="assemblytype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="savoirs"/>
+                <FIELD NAME="purpose" TYPE="text"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="timeopen" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timeclose" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemotionclose" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timevoteopen" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timevoteclose" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="quorum" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="votingmethod" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="simple_majority"/>
+                <FIELD NAME="decisionthreshold" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="50.00"/>
+                <FIELD NAME="allowmotions" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="allowamendments" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="allowcontests" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="integrityrequired" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="archivepolicy" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="summary"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+                <FIELD NAME="metadata" TYPE="text"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="course_fk" TYPE="foreign" FIELDS="course" REFTABLE="course" REFFIELDS="id"/>
+                <KEY NAME="createdby_fk" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby_fk" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="course_status_idx" UNIQUE="false" FIELDS="course,status"/>
+                <INDEX NAME="context_idx" UNIQUE="false" FIELDS="contextid"/>
+                <INDEX NAME="assemblytype_idx" UNIQUE="false" FIELDS="assemblytype"/>
+                <INDEX NAME="visibility_idx" UNIQUE="false" FIELDS="visibility"/>
+                <INDEX NAME="timevoteclose_idx" UNIQUE="false" FIELDS="timevoteclose"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkassembly_motion" COMMENT="Motions proposed inside UCKK assemblies">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="assemblyid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="proposedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="summary" TYPE="text"/>
+                <FIELD NAME="motiontext" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="decisiontype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="recommendation"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="timeopen" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timeclose" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+                <FIELD NAME="metadata" TYPE="text"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="assembly_fk" TYPE="foreign" FIELDS="assemblyid" REFTABLE="uckkassembly" REFFIELDS="id"/>
+                <KEY NAME="proposedby_fk" TYPE="foreign" FIELDS="proposedby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby_fk" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby_fk" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="assembly_status_idx" UNIQUE="false" FIELDS="assemblyid,status"/>
+                <INDEX NAME="assembly_sort_idx" UNIQUE="false" FIELDS="assemblyid,sortorder"/>
+                <INDEX NAME="decisiontype_idx" UNIQUE="false" FIELDS="decisiontype"/>
+                <INDEX NAME="context_idx" UNIQUE="false" FIELDS="contextid"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkassembly_amend" COMMENT="Amendments proposed for UCKK assembly motions">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="assemblyid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="motionid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="parentamendid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="proposedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="amendmenttext" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="rationale" TYPE="text"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="pending_review"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+                <FIELD NAME="metadata" TYPE="text"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="assembly_fk" TYPE="foreign" FIELDS="assemblyid" REFTABLE="uckkassembly" REFFIELDS="id"/>
+                <KEY NAME="motion_fk" TYPE="foreign" FIELDS="motionid" REFTABLE="uckkassembly_motion" REFFIELDS="id"/>
+                <KEY NAME="proposedby_fk" TYPE="foreign" FIELDS="proposedby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby_fk" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby_fk" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="motion_status_idx" UNIQUE="false" FIELDS="motionid,status"/>
+                <INDEX NAME="assembly_status_idx" UNIQUE="false" FIELDS="assemblyid,status"/>
+                <INDEX NAME="parentamend_idx" UNIQUE="false" FIELDS="parentamendid"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkassembly_object" COMMENT="Objections or formal concerns linked to assembly motions and decisions">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="assemblyid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="motionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="decisionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="objecttype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="procedural"/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="rationale" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="requestedchange" TYPE="text"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="pending_review"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+                <FIELD NAME="metadata" TYPE="text"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="assembly_fk" TYPE="foreign" FIELDS="assemblyid" REFTABLE="uckkassembly" REFFIELDS="id"/>
+                <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby_fk" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby_fk" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="motion_idx" UNIQUE="false" FIELDS="motionid"/>
+                <INDEX NAME="decision_idx" UNIQUE="false" FIELDS="decisionid"/>
+                <INDEX NAME="assembly_status_idx" UNIQUE="false" FIELDS="assemblyid,status"/>
+                <INDEX NAME="objecttype_idx" UNIQUE="false" FIELDS="objecttype"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkassembly_vote" COMMENT="Votes cast on UCKK assembly motions">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="assemblyid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="motionid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="votechoice" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="abstain"/>
+                <FIELD NAME="rationale" TYPE="text"/>
+                <FIELD NAME="confidence" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="medium"/>
+                <FIELD NAME="conflictdeclared" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="conflictnotes" TYPE="text"/>
+                <FIELD NAME="aiassisted" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="ailog" TYPE="text"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="validated"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+                <FIELD NAME="metadata" TYPE="text"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="assembly_fk" TYPE="foreign" FIELDS="assemblyid" REFTABLE="uckkassembly" REFFIELDS="id"/>
+                <KEY NAME="motion_fk" TYPE="foreign" FIELDS="motionid" REFTABLE="uckkassembly_motion" REFFIELDS="id"/>
+                <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby_fk" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby_fk" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="motion_choice_idx" UNIQUE="false" FIELDS="motionid,votechoice"/>
+                <INDEX NAME="motion_user_uix" UNIQUE="true" FIELDS="motionid,userid"/>
+                <INDEX NAME="assembly_user_idx" UNIQUE="false" FIELDS="assemblyid,userid"/>
+                <INDEX NAME="status_idx" UNIQUE="false" FIELDS="status"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkassembly_decision" COMMENT="Assembly decisions generated from motions and votes">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="assemblyid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="motionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="decisiontype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="recommendation"/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="summary" TYPE="text"/>
+                <FIELD NAME="decisiontext" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="resultstatus" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="proposed"/>
+                <FIELD NAME="supportcount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="opposecount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="abstaincount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="amendmentcount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="blockcount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="totalvotes" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="quorumreached" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="thresholdreached" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="publishedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timepublished" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="archiveitemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="integritycaseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="pending_review"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="assembly"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+                <FIELD NAME="metadata" TYPE="text"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="assembly_fk" TYPE="foreign" FIELDS="assemblyid" REFTABLE="uckkassembly" REFFIELDS="id"/>
+                <KEY NAME="publishedby_fk" TYPE="foreign" FIELDS="publishedby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby_fk" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby_fk" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="motion_idx" UNIQUE="false" FIELDS="motionid"/>
+                <INDEX NAME="assembly_status_idx" UNIQUE="false" FIELDS="assemblyid,status"/>
+                <INDEX NAME="decisiontype_idx" UNIQUE="false" FIELDS="decisiontype"/>
+                <INDEX NAME="archiveitem_idx" UNIQUE="false" FIELDS="archiveitemid"/>
+                <INDEX NAME="integritycase_idx" UNIQUE="false" FIELDS="integritycaseid"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkassembly_minutes" COMMENT="Minutes and official records for UCKK assemblies">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="assemblyid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="summary" TYPE="text"/>
+                <FIELD NAME="minutestext" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="publishedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timepublished" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="archiveitemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="assembly"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+                <FIELD NAME="metadata" TYPE="text"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="assembly_fk" TYPE="foreign" FIELDS="assemblyid" REFTABLE="uckkassembly" REFFIELDS="id"/>
+                <KEY NAME="publishedby_fk" TYPE="foreign" FIELDS="publishedby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby_fk" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby_fk" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="assembly_status_idx" UNIQUE="false" FIELDS="assemblyid,status"/>
+                <INDEX NAME="archiveitem_idx" UNIQUE="false" FIELDS="archiveitemid"/>
+                <INDEX NAME="timepublished_idx" UNIQUE="false" FIELDS="timepublished"/>
+            </INDEXES>
+        </TABLE>
+
+        <TABLE NAME="uckkassembly_contest" COMMENT="Contests and appeals against assembly decisions">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="assemblyid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="decisionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="motionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="openedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="assignedto" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="contesttype" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="assembly_dispute"/>
+                <FIELD NAME="summary" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="rationale" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="evidencelinks" TYPE="text"/>
+                <FIELD NAME="resolution" TYPE="text"/>
+                <FIELD NAME="decisionnotes" TYPE="text"/>
+                <FIELD NAME="integritycaseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="archiveitemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="opened"/>
+                <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="restricted_integrity"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="modifiedby" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+                <FIELD NAME="versionno" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+                <FIELD NAME="provenance" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="human"/>
+                <FIELD NAME="provenancehash" TYPE="char" LENGTH="128"/>
+                <FIELD NAME="metadata" TYPE="text"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="assembly_fk" TYPE="foreign" FIELDS="assemblyid" REFTABLE="uckkassembly" REFFIELDS="id"/>
+                <KEY NAME="openedby_fk" TYPE="foreign" FIELDS="openedby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="assignedto_fk" TYPE="foreign" FIELDS="assignedto" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="createdby_fk" TYPE="foreign" FIELDS="createdby" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="modifiedby_fk" TYPE="foreign" FIELDS="modifiedby" REFTABLE="user" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="decision_idx" UNIQUE="false" FIELDS="decisionid"/>
+                <INDEX NAME="motion_idx" UNIQUE="false" FIELDS="motionid"/>
+                <INDEX NAME="assembly_status_idx" UNIQUE="false" FIELDS="assemblyid,status"/>
+                <INDEX NAME="contesttype_idx" UNIQUE="false" FIELDS="contesttype"/>
+                <INDEX NAME="integritycase_idx" UNIQUE="false" FIELDS="integritycaseid"/>
+                <INDEX NAME="archiveitem_idx" UNIQUE="false" FIELDS="archiveitemid"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
+

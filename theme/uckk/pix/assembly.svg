@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="uckk-assembly-title uckk-assembly-desc">
+  <title id="uckk-assembly-title">UCKK Assembly</title>
+  <desc id="uckk-assembly-desc">
+    Symbol for UCKK Assemblies: collective deliberation, documented decision, contestability and archive memory.
+  </desc>
+
+  <!--
+    File: theme/uckk/pix/assembly.svg
+
+    Visual doctrine:
+    - Assemblées = collective legitimacy.
+    - Circle = common table / shared deliberation.
+    - Three figures = plural voices.
+    - Central document = motion, decision, minutes.
+    - Red mark = contestability and integrity alert.
+    - Gold ring = institutional legitimacy.
+    - Blue base = archive memory.
+
+    This asset is visual only. It must not encode workflow, permission,
+    vote validity, archive validation or integrity decisions.
+  -->
+
+  <defs>
+    <linearGradient id="uckk-assembly-ring" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b28a3e"/>
+      <stop offset="0.52" stop-color="#9f1730"/>
+      <stop offset="1" stop-color="#111a33"/>
+    </linearGradient>
+
+    <linearGradient id="uckk-assembly-paper" x1="24" y1="22" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fffaf0"/>
+      <stop offset="1" stop-color="#f7f1df"/>
+    </linearGradient>
+
+    <filter id="uckk-assembly-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1.4" stdDeviation="1.1" flood-color="#070707" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Outer institutional ring. -->
+  <circle cx="32" cy="32" r="28" fill="#f7f1df"/>
+  <circle cx="32" cy="32" r="28" fill="none" stroke="url(#uckk-assembly-ring)" stroke-width="3"/>
+  <circle cx="32" cy="32" r="23.5" fill="none" stroke="#111a33" stroke-opacity="0.16" stroke-width="1"/>
+
+  <!-- Assembly table / deliberation circle. -->
+  <circle cx="32" cy="35" r="14.5" fill="#111a33" opacity="0.08"/>
+  <ellipse cx="32" cy="37" rx="15.5" ry="8.5" fill="#111a33" opacity="0.12"/>
+  <ellipse cx="32" cy="35.5" rx="14" ry="7.5" fill="#f7f1df" stroke="#111a33" stroke-opacity="0.42" stroke-width="1.5"/>
+
+  <!-- Participants around the table. -->
+  <g fill="#111a33">
+    <circle cx="20.5" cy="26" r="3.8"/>
+    <path d="M13.9 34.2c.8-4.1 3.2-6.3 6.6-6.3s5.8 2.2 6.6 6.3c.2 1-.5 1.8-1.5 1.8H15.4c-1 0-1.7-.8-1.5-1.8z" opacity="0.92"/>
+
+    <circle cx="43.5" cy="26" r="3.8"/>
+    <path d="M36.9 34.2c.8-4.1 3.2-6.3 6.6-6.3s5.8 2.2 6.6 6.3c.2 1-.5 1.8-1.5 1.8H38.4c-1 0-1.7-.8-1.5-1.8z" opacity="0.92"/>
+
+    <circle cx="32" cy="18.5" r="3.9"/>
+    <path d="M25.2 27c.8-4.3 3.3-6.5 6.8-6.5s6 2.2 6.8 6.5c.2 1-.5 1.8-1.5 1.8H26.7c-1 0-1.7-.8-1.5-1.8z" opacity="0.96"/>
+  </g>
+
+  <!-- Central documented motion / decision. -->
+  <g filter="url(#uckk-assembly-shadow)">
+    <path d="M26.7 30.2h11.1l3.5 3.6v12.1c0 1.2-1 2.1-2.1 2.1H26.7c-1.2 0-2.1-1-2.1-2.1V32.3c0-1.2 1-2.1 2.1-2.1z" fill="url(#uckk-assembly-paper)" stroke="#111a33" stroke-opacity="0.5" stroke-width="1.2"/>
+    <path d="M37.8 30.2v3.1c0 .6.5 1.1 1.1 1.1h2.4" fill="none" stroke="#111a33" stroke-opacity="0.45" stroke-width="1.2"/>
+    <path d="M28.2 36.2h8.6M28.2 39.6h9.9M28.2 43h6.7" fill="none" stroke="#111a33" stroke-opacity="0.52" stroke-width="1.25" stroke-linecap="round"/>
+  </g>
+
+  <!-- Contestability / integrity mark. -->
+  <g>
+    <circle cx="43.5" cy="43.5" r="6.2" fill="#9f1730"/>
+    <path d="M43.5 39.7v4.4" fill="none" stroke="#f7f1df" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="43.5" cy="47" r="1" fill="#f7f1df"/>
+  </g>
+
+  <!-- Archive memory base. -->
+  <path d="M20 52.2h24" fill="none" stroke="#111a33" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/>
+  <path d="M24 55.3h16" fill="none" stroke="#b28a3e" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Subtle King Klown theatrical spark, non-sovereign. -->
+  <path d="M48.2 14.2l1.3 2.5 2.8.4-2 2  .5 2.8-2.6-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z" fill="#b28a3e" opacity="0.82"/>
+</svg>

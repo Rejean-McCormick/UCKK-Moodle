@@ -1,0 +1,706 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Navigation styling for the UCKK theme.
+ *
+ * This file is presentation-only.
+ *
+ * It must not contain:
+ * - permission logic;
+ * - workflow logic;
+ * - grading logic;
+ * - integrity decision logic;
+ * - archive validation logic;
+ * - AI authority logic.
+ *
+ * UCKK navigation must help users distinguish:
+ * - UCKK as the Moodle campus;
+ * - kOA as the broader movement;
+ * - kOA Digital Ecosystem as infrastructure;
+ * - King Klown as narrative figure;
+ * - Inquisiteur as methodological guardrail;
+ * - Assemblées as collective legitimacy;
+ * - Archives as memory.
+ *
+ * @package theme_uckk
+ */
+
+/* stylelint-disable max-line-length */
+
+$uckk-nav-bg: #ffffff !default;
+$uckk-nav-surface: #f8f9fa !default;
+$uckk-nav-border: rgba(15, 23, 42, .12) !default;
+$uckk-nav-shadow: 0 .125rem .75rem rgba(15, 23, 42, .08) !default;
+$uckk-nav-text: #1f2937 !default;
+$uckk-nav-muted: #6b7280 !default;
+$uckk-nav-accent: #5b3cc4 !default;
+$uckk-nav-accent-soft: rgba(91, 60, 196, .12) !default;
+$uckk-nav-accent-strong: #3f2a8c !default;
+$uckk-nav-integrity: #8a4b00 !default;
+$uckk-nav-integrity-soft: rgba(138, 75, 0, .12) !default;
+$uckk-nav-archive: #0f766e !default;
+$uckk-nav-archive-soft: rgba(15, 118, 110, .12) !default;
+$uckk-nav-assembly: #1d4ed8 !default;
+$uckk-nav-assembly-soft: rgba(29, 78, 216, .12) !default;
+$uckk-nav-challenge: #b42318 !default;
+$uckk-nav-challenge-soft: rgba(180, 35, 24, .12) !default;
+$uckk-nav-radius: .75rem !default;
+$uckk-nav-radius-sm: .5rem !default;
+$uckk-nav-transition: 160ms ease-in-out !default;
+
+/**
+ * Global navigation shell.
+ *
+ * The theme intentionally styles Moodle/Boost navigation without replacing
+ * Moodle's navigation system.
+ */
+.theme-uckk {
+    .navbar,
+    .navbar.fixed-top {
+        background-color: $uckk-nav-bg;
+        border-bottom: 1px solid $uckk-nav-border;
+        box-shadow: $uckk-nav-shadow;
+    }
+
+    .navbar-brand {
+        display: inline-flex;
+        align-items: center;
+        font-weight: 700;
+        letter-spacing: .01em;
+        color: $uckk-nav-text;
+
+        &:hover,
+        &:focus {
+            color: $uckk-nav-accent-strong;
+            text-decoration: none;
+        }
+    }
+
+    .navbar-brand .logo,
+    .navbar-brand .navbar-brand-logo {
+        max-height: 2.25rem;
+        width: auto;
+    }
+
+    .navbar-brand .site-name,
+    .navbar-brand .sitename {
+        margin-left: .5rem;
+    }
+
+    .navbar .nav-link,
+    .navbar .dropdown-toggle {
+        color: $uckk-nav-text;
+        border-radius: $uckk-nav-radius-sm;
+        transition:
+            color $uckk-nav-transition,
+            background-color $uckk-nav-transition,
+            box-shadow $uckk-nav-transition;
+
+        &:hover,
+        &:focus {
+            color: $uckk-nav-accent-strong;
+            background-color: $uckk-nav-accent-soft;
+            text-decoration: none;
+        }
+    }
+
+    .navbar .nav-link.active,
+    .navbar .nav-item.active > .nav-link,
+    .navbar .nav-link[aria-current="page"] {
+        color: $uckk-nav-accent-strong;
+        background-color: $uckk-nav-accent-soft;
+        font-weight: 600;
+    }
+
+    .navbar .dropdown-menu {
+        border-color: $uckk-nav-border;
+        border-radius: $uckk-nav-radius;
+        box-shadow: $uckk-nav-shadow;
+    }
+
+    .navbar .dropdown-item {
+        border-radius: $uckk-nav-radius-sm;
+        color: $uckk-nav-text;
+
+        &:hover,
+        &:focus {
+            color: $uckk-nav-accent-strong;
+            background-color: $uckk-nav-accent-soft;
+        }
+
+        &.active,
+        &:active {
+            color: #fff;
+            background-color: $uckk-nav-accent;
+        }
+    }
+}
+
+/**
+ * Primary Moodle navigation.
+ */
+.theme-uckk {
+    .primary-navigation {
+        .navigation {
+            min-height: 100%;
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-link.active,
+        .nav-link[aria-current="page"] {
+            &::after {
+                position: absolute;
+                right: .75rem;
+                bottom: .25rem;
+                left: .75rem;
+                height: .125rem;
+                content: "";
+                background-color: $uckk-nav-accent;
+                border-radius: 999px;
+            }
+        }
+    }
+
+    .moremenu {
+        .nav-link {
+            border-radius: $uckk-nav-radius-sm;
+        }
+
+        .nav-link.active,
+        .nav-link[aria-current="true"],
+        .nav-link[aria-current="page"] {
+            color: $uckk-nav-accent-strong;
+            background-color: $uckk-nav-accent-soft;
+        }
+    }
+}
+
+/**
+ * Breadcrumb and page navigation.
+ */
+.theme-uckk {
+    #page-navbar,
+    .breadcrumb-nav {
+        font-size: .875rem;
+    }
+
+    .breadcrumb {
+        padding: .5rem .75rem;
+        margin-bottom: 0;
+        background-color: transparent;
+        border-radius: $uckk-nav-radius-sm;
+    }
+
+    .breadcrumb-item {
+        color: $uckk-nav-muted;
+
+        a {
+            color: $uckk-nav-muted;
+
+            &:hover,
+            &:focus {
+                color: $uckk-nav-accent-strong;
+            }
+        }
+
+        &.active {
+            color: $uckk-nav-text;
+            font-weight: 600;
+        }
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        color: $uckk-nav-muted;
+    }
+}
+
+/**
+ * Drawer navigation.
+ *
+ * UCKK keeps Boost drawer behaviour and only adjusts visual hierarchy.
+ */
+.theme-uckk {
+    .drawer,
+    .drawercontent,
+    .drawer-left,
+    .drawer-right {
+        background-color: $uckk-nav-bg;
+    }
+
+    .drawer {
+        border-color: $uckk-nav-border;
+        box-shadow: $uckk-nav-shadow;
+    }
+
+    .drawerheader {
+        border-bottom: 1px solid $uckk-nav-border;
+        background-color: $uckk-nav-surface;
+    }
+
+    .drawercontent {
+        .list-group-item,
+        .nav-link {
+            color: $uckk-nav-text;
+            border-radius: $uckk-nav-radius-sm;
+            transition:
+                color $uckk-nav-transition,
+                background-color $uckk-nav-transition;
+
+            &:hover,
+            &:focus {
+                color: $uckk-nav-accent-strong;
+                background-color: $uckk-nav-accent-soft;
+            }
+
+            &.active,
+            &[aria-current="page"] {
+                color: $uckk-nav-accent-strong;
+                background-color: $uckk-nav-accent-soft;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .drawer-toggles {
+        .drawer-toggler .btn {
+            border-color: $uckk-nav-border;
+            background-color: $uckk-nav-bg;
+            box-shadow: $uckk-nav-shadow;
+
+            &:hover,
+            &:focus {
+                color: $uckk-nav-accent-strong;
+                background-color: $uckk-nav-accent-soft;
+            }
+        }
+    }
+}
+
+/**
+ * Course index navigation.
+ *
+ * The course index should help a Joueur understand orientation, concepts,
+ * canon, atelier, proofs, deliberation, deliverable, evaluation and archive
+ * without replacing the format_uckk logic.
+ */
+.theme-uckk {
+    .courseindex {
+        background-color: $uckk-nav-bg;
+
+        .courseindex-section {
+            border-radius: $uckk-nav-radius-sm;
+        }
+
+        .courseindex-section-title {
+            color: $uckk-nav-text;
+            font-weight: 600;
+        }
+
+        .courseindex-item {
+            border-radius: $uckk-nav-radius-sm;
+
+            &:hover,
+            &:focus {
+                background-color: $uckk-nav-accent-soft;
+            }
+
+            &.pageitem,
+            &.active {
+                color: $uckk-nav-accent-strong;
+                background-color: $uckk-nav-accent-soft;
+                font-weight: 600;
+            }
+        }
+
+        .completioninfo,
+        .courseindex-item-content {
+            color: $uckk-nav-muted;
+        }
+    }
+
+    .courseindex .courseindex-sectioncontent .courseindex-item {
+        margin-top: .125rem;
+        margin-bottom: .125rem;
+    }
+}
+
+/**
+ * Secondary and tertiary navigation.
+ */
+.theme-uckk {
+    .secondary-navigation,
+    .tertiary-navigation {
+        .navigation,
+        .moremenu {
+            border-bottom-color: $uckk-nav-border;
+        }
+
+        .nav-tabs {
+            border-bottom-color: $uckk-nav-border;
+        }
+
+        .nav-tabs .nav-link {
+            color: $uckk-nav-muted;
+            border-radius: $uckk-nav-radius-sm $uckk-nav-radius-sm 0 0;
+
+            &:hover,
+            &:focus {
+                color: $uckk-nav-accent-strong;
+                border-color: transparent;
+                background-color: $uckk-nav-accent-soft;
+            }
+
+            &.active,
+            &[aria-current="page"] {
+                color: $uckk-nav-accent-strong;
+                border-color: $uckk-nav-border $uckk-nav-border $uckk-nav-bg;
+                background-color: $uckk-nav-bg;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+/**
+ * UCKK-specific navigation blocks.
+ *
+ * These classes are used by UCKK templates and renderers.
+ */
+.theme-uckk {
+    .uckk-navigation {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+        padding: .75rem;
+        background-color: $uckk-nav-surface;
+        border: 1px solid $uckk-nav-border;
+        border-radius: $uckk-nav-radius;
+    }
+
+    .uckk-navigation-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.25rem;
+        padding: .375rem .75rem;
+        color: $uckk-nav-text;
+        background-color: $uckk-nav-bg;
+        border: 1px solid $uckk-nav-border;
+        border-radius: 999px;
+        font-weight: 600;
+        line-height: 1.2;
+        text-decoration: none;
+        transition:
+            color $uckk-nav-transition,
+            background-color $uckk-nav-transition,
+            border-color $uckk-nav-transition,
+            box-shadow $uckk-nav-transition;
+
+        &:hover,
+        &:focus {
+            color: $uckk-nav-accent-strong;
+            background-color: $uckk-nav-accent-soft;
+            border-color: rgba(91, 60, 196, .35);
+            text-decoration: none;
+        }
+
+        &.active,
+        &[aria-current="page"] {
+            color: #fff;
+            background-color: $uckk-nav-accent;
+            border-color: $uckk-nav-accent;
+        }
+    }
+
+    .uckk-navigation-link-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-right: .4rem;
+        line-height: 1;
+    }
+
+    .uckk-navigation-link-label {
+        white-space: nowrap;
+    }
+}
+
+/**
+ * UCKK domain-aware navigation accents.
+ *
+ * These are visual cues only. They do not imply permissions.
+ */
+.theme-uckk {
+    .uckk-nav-campus,
+    .uckk-navigation-link--campus {
+        --uckk-nav-domain-color: #{$uckk-nav-accent};
+        --uckk-nav-domain-soft: #{$uckk-nav-accent-soft};
+    }
+
+    .uckk-nav-challenge,
+    .uckk-navigation-link--challenge {
+        --uckk-nav-domain-color: #{$uckk-nav-challenge};
+        --uckk-nav-domain-soft: #{$uckk-nav-challenge-soft};
+    }
+
+    .uckk-nav-assembly,
+    .uckk-navigation-link--assembly {
+        --uckk-nav-domain-color: #{$uckk-nav-assembly};
+        --uckk-nav-domain-soft: #{$uckk-nav-assembly-soft};
+    }
+
+    .uckk-nav-archive,
+    .uckk-navigation-link--archive {
+        --uckk-nav-domain-color: #{$uckk-nav-archive};
+        --uckk-nav-domain-soft: #{$uckk-nav-archive-soft};
+    }
+
+    .uckk-nav-integrity,
+    .uckk-navigation-link--integrity {
+        --uckk-nav-domain-color: #{$uckk-nav-integrity};
+        --uckk-nav-domain-soft: #{$uckk-nav-integrity-soft};
+    }
+
+    .uckk-navigation-link--campus,
+    .uckk-navigation-link--challenge,
+    .uckk-navigation-link--assembly,
+    .uckk-navigation-link--archive,
+    .uckk-navigation-link--integrity {
+        border-left: .25rem solid var(--uckk-nav-domain-color);
+
+        &:hover,
+        &:focus {
+            color: var(--uckk-nav-domain-color);
+            background-color: var(--uckk-nav-domain-soft);
+            border-color: var(--uckk-nav-domain-color);
+        }
+
+        &.active,
+        &[aria-current="page"] {
+            color: #fff;
+            background-color: var(--uckk-nav-domain-color);
+            border-color: var(--uckk-nav-domain-color);
+        }
+    }
+}
+
+/**
+ * Frontpage navigation/action area.
+ */
+.theme-uckk {
+    .uckk-frontpage-actions {
+        .btn {
+            margin-right: .5rem;
+            margin-bottom: .5rem;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+    }
+
+    .uckk-frontpage-kicker {
+        color: $uckk-nav-accent-strong;
+        font-size: .75rem;
+        font-weight: 800;
+        letter-spacing: .12em;
+    }
+
+    .uckk-frontpage-boundary-card {
+        border-color: $uckk-nav-border;
+        border-radius: $uckk-nav-radius;
+        box-shadow: $uckk-nav-shadow;
+    }
+}
+
+/**
+ * UCKK card action navigation.
+ *
+ * Used by theme_uckk/uckk_card.mustache.
+ */
+.theme-uckk {
+    .uckk-card-actions {
+        .btn {
+            border-radius: 999px;
+            font-weight: 600;
+        }
+    }
+
+    .uckk-card-boundarynote {
+        border-radius: $uckk-nav-radius-sm;
+    }
+
+    .uckk-card--challenge {
+        border-top: .25rem solid $uckk-nav-challenge;
+    }
+
+    .uckk-card--assembly {
+        border-top: .25rem solid $uckk-nav-assembly;
+    }
+
+    .uckk-card--archive {
+        border-top: .25rem solid $uckk-nav-archive;
+    }
+
+    .uckk-card--integrity {
+        border-top: .25rem solid $uckk-nav-integrity;
+    }
+
+    .uckk-card--programs,
+    .uckk-card--pathways,
+    .uckk-card--canon {
+        border-top: .25rem solid $uckk-nav-accent;
+    }
+}
+
+/**
+ * User menu and popover regions.
+ */
+.theme-uckk {
+    .usermenu {
+        .dropdown-toggle {
+            border-radius: 999px;
+        }
+    }
+
+    .popover-region {
+        .popover-region-toggle {
+            border-radius: $uckk-nav-radius-sm;
+
+            &:hover,
+            &:focus {
+                background-color: $uckk-nav-accent-soft;
+            }
+        }
+
+        .popover-region-container {
+            border-color: $uckk-nav-border;
+            border-radius: $uckk-nav-radius;
+            box-shadow: $uckk-nav-shadow;
+        }
+    }
+}
+
+/**
+ * Login and compact navigation contexts.
+ */
+.theme-uckk {
+    &.pagelayout-login,
+    &.pagelayout-embedded,
+    &.pagelayout-popup,
+    &.pagelayout-secure {
+        .navbar,
+        .navbar.fixed-top {
+            box-shadow: none;
+        }
+
+        .uckk-navigation,
+        .uckk-frontpage-actions,
+        .uckk-card-actions {
+            display: none;
+        }
+    }
+}
+
+/**
+ * Accessibility and keyboard focus.
+ */
+.theme-uckk {
+    .navbar a:focus,
+    .navbar button:focus,
+    .drawer a:focus,
+    .drawer button:focus,
+    .uckk-navigation-link:focus,
+    .breadcrumb a:focus {
+        outline: .15rem solid rgba(91, 60, 196, .35);
+        outline-offset: .15rem;
+    }
+
+    .nav-link.disabled,
+    .dropdown-item.disabled,
+    .uckk-navigation-link.disabled,
+    .uckk-navigation-link[aria-disabled="true"] {
+        color: $uckk-nav-muted;
+        pointer-events: none;
+        background-color: transparent;
+        opacity: .65;
+    }
+}
+
+/**
+ * Small screens.
+ */
+@media (max-width: 767.98px) {
+    .theme-uckk {
+        .navbar-brand .site-name,
+        .navbar-brand .sitename {
+            max-width: 12rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .uckk-navigation {
+            display: block;
+            padding: .5rem;
+        }
+
+        .uckk-navigation-link {
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            margin-bottom: .375rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .uckk-frontpage-actions {
+            .btn {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+
+        .primary-navigation .nav-link.active::after,
+        .primary-navigation .nav-link[aria-current="page"]::after {
+            right: .5rem;
+            left: .5rem;
+        }
+    }
+}
+
+/**
+ * Reduced motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+    .theme-uckk {
+        .navbar .nav-link,
+        .navbar .dropdown-toggle,
+        .dropdown-item,
+        .drawercontent .list-group-item,
+        .drawercontent .nav-link,
+        .uckk-navigation-link {
+            transition: none;
+        }
+    }
+}
+
+/* stylelint-enable max-line-length */

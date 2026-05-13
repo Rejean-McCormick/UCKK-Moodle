@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="128"
+    height="128"
+    viewBox="0 0 128 128"
+    role="img"
+    aria-labelledby="title desc">
+
+    <title id="title">UCKK Challenge Icon</title>
+    <desc id="desc">
+        Icon for UCKK King Klown challenges: a public learning challenge with
+        rules, proofs, collective evaluation, integrity verification and archive.
+    </desc>
+
+    <defs>
+        <linearGradient id="uckk-challenge-bg" x1="16" y1="12" x2="112" y2="116" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#1f2a44"/>
+            <stop offset="1" stop-color="#101827"/>
+        </linearGradient>
+
+        <linearGradient id="uckk-challenge-flag" x1="36" y1="22" x2="94" y2="78" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffc857"/>
+            <stop offset="0.55" stop-color="#ff8a3d"/>
+            <stop offset="1" stop-color="#d83f31"/>
+        </linearGradient>
+
+        <linearGradient id="uckk-challenge-proof" x1="40" y1="68" x2="88" y2="110" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="1" stop-color="#dce4f2"/>
+        </linearGradient>
+    </defs>
+
+    <rect
+        x="8"
+        y="8"
+        width="112"
+        height="112"
+        rx="24"
+        fill="url(#uckk-challenge-bg)"/>
+
+    <!-- Public challenge flag. -->
+    <path
+        d="M38 28V100"
+        fill="none"
+        stroke="#ffffff"
+        stroke-width="7"
+        stroke-linecap="round"/>
+
+    <path
+        d="M42 28H86C91 28 94 32 91 37L85 47L91 57C94 62 91 66 86 66H42V28Z"
+        fill="url(#uckk-challenge-flag)"/>
+
+    <path
+        d="M50 39H78"
+        stroke="#101827"
+        stroke-opacity="0.35"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+    <path
+        d="M50 53H72"
+        stroke="#101827"
+        stroke-opacity="0.35"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+    <!-- Proof / submission sheet. -->
+    <path
+        d="M52 66H92C95.3137 66 98 68.6863 98 72V104C98 107.314 95.3137 110 92 110H52C48.6863 110 46 107.314 46 104V72C46 68.6863 48.6863 66 52 66Z"
+        fill="url(#uckk-challenge-proof)"/>
+
+    <path
+        d="M56 78H84"
+        stroke="#1f2a44"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+    <path
+        d="M56 90H76"
+        stroke="#1f2a44"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+    <!-- Integrity verification check. -->
+    <path
+        d="M72 100L80 108L98 82"
+        fill="none"
+        stroke="#2fb344"
+        stroke-width="7"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+    <!-- Collective/public ring. -->
+    <circle
+        cx="64"
+        cy="64"
+        r="55"
+        fill="none"
+        stroke="#ffffff"
+        stroke-opacity="0.16"
+        stroke-width="4"/>
+
+    <!-- Spotlight / stage accent. -->
+    <path
+        d="M24 106C35 94 48 88 64 88C80 88 93 94 104 106"
+        fill="none"
+        stroke="#ffc857"
+        stroke-opacity="0.35"
+        stroke-width="5"
+        stroke-linecap="round"/>
+</svg>

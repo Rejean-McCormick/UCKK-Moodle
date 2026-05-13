@@ -1,0 +1,107 @@
+{
+  "schema": "uckk.presets.integrity_policies.v1",
+  "case_types": [
+    "proof_quality",
+    "fiction_fact_confusion",
+    "ai_misuse",
+    "harassment_or_humiliation",
+    "dignity_violation",
+    "authority_capture",
+    "assessment_dispute",
+    "challenge_dispute",
+    "assembly_dispute",
+    "archive_correction",
+    "privacy_concern"
+  ],
+  "state_machine": {
+    "default": [
+      "opened",
+      "triaged",
+      "assigned",
+      "under_review",
+      "waiting_for_response",
+      "correction_required",
+      "resolved",
+      "archived"
+    ],
+    "alternatives": [
+      "dismissed",
+      "escalated",
+      "paused",
+      "reopened"
+    ]
+  },
+  "record_requirements": [
+    "case_type",
+    "subject_component",
+    "subject_id",
+    "context",
+    "opened_by",
+    "assigned_inquisiteur",
+    "summary",
+    "evidence_links",
+    "parties",
+    "notes",
+    "decision",
+    "corrections",
+    "appeal_path",
+    "archive_summary"
+  ],
+  "allowed_actions": [
+    "open_case",
+    "triage_case",
+    "assign_reviewer",
+    "request_evidence",
+    "pause_challenge_validation",
+    "pause_assembly_publication",
+    "issue_correction",
+    "recommend_invalidation",
+    "record_decision",
+    "close_case",
+    "publish_public_summary",
+    "archive_case_summary"
+  ],
+  "forbidden_silent_actions": [
+    "delete_evidence_without_log",
+    "change_grades_without_trace",
+    "modify_archive_history_without_version",
+    "hide_contestation_without_record",
+    "publish_private_case_details_publicly",
+    "assign_self_admin_privileges"
+  ],
+  "severity": [
+    "low",
+    "normal",
+    "high",
+    "critical"
+  ],
+  "visibility": [
+    "restricted",
+    "parties",
+    "public_summary"
+  ],
+  "redaction_levels": [
+    "none",
+    "hide_identity",
+    "remove_private_notes",
+    "remove_files",
+    "replace_with_anonymized_placeholder",
+    "restrict_to_integrity_reviewers",
+    "delete_fully"
+  ],
+  "retention": {
+    "default_days": 3650,
+    "review_interval_days": 365,
+    "restricted_integrity_visibility": "restricted_integrity"
+  },
+  "capabilities": {
+    "view": "tool/uckkintegrity:view",
+    "open": "tool/uckkintegrity:opencase",
+    "review": "tool/uckkintegrity:reviewcase",
+    "assign": "tool/uckkintegrity:assigncase",
+    "correction": "tool/uckkintegrity:issuecorrection",
+    "invalidate": "tool/uckkintegrity:invalidate",
+    "close": "tool/uckkintegrity:closecase",
+    "restricted": "tool/uckkintegrity:viewrestricted"
+  }
+}

@@ -1,0 +1,352 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkassembly/decision_panel
+
+    Decision panel for a UCKK Assembly.
+
+    This template is render-only. It expects permission-filtered and formatted
+    data from mod_uckkassembly output classes or services.
+
+    Example context:
+    {
+        "id": 12,
+        "title": "Adopt archive policy for TC101",
+        "decisiontype": "validation",
+        "decisiontypelabel": "Validation",
+        "status": "adopted",
+        "statuslabel": "Adopted",
+        "statusclass": "decision-status-adopted",
+        "summary": "The assembly validates the archive policy.",
+        "hassummary": true,
+        "decisiontext": "<p>Decision text.</p>",
+        "hasdecisiontext": true,
+        "motion": {
+            "id": 5,
+            "title": "Archive policy motion",
+            "url": "https://example.test/mod/uckkassembly/motion.php?id=45&motionid=5",
+            "hasurl": true
+        },
+        "hasmotion": true,
+        "votesummary": {
+            "support": 10,
+            "oppose": 1,
+            "abstain": 2,
+            "requestamendment": 0,
+            "block": 0,
+            "total": 13,
+            "hasvotes": true,
+            "resultlabel": "Threshold reached",
+            "hasresultlabel": true,
+            "quorumreached": true,
+            "thresholdreached": true
+        },
+        "hasvotesummary": true,
+        "publishedby": "Mentor UCKK",
+        "haspublishedby": true,
+        "timepublishedlabel": "12 May 2026",
+        "hastimepublished": true,
+        "archiveurl": "",
+        "hasarchiveurl": false,
+        "integritycaseurl": "",
+        "hasintegritycaseurl": false,
+        "contests": [],
+        "hascontests": false,
+        "actions": [],
+        "hasactions": false
+    }
+}}
+
+<section
+    class="uckkassembly-decision-panel {{statusclass}}"
+    data-region="uckkassembly-decision-panel"
+    data-decision-id="{{id}}"
+>
+    <header class="uckkassembly-decision-panel__header">
+        <div class="uckkassembly-decision-panel__identity">
+            <p class="uckkassembly-decision-panel__eyebrow">
+                {{#str}} decision, uckkassembly {{/str}}
+            </p>
+
+            <h3 class="uckkassembly-decision-panel__title">
+                {{#url}}
+                    <a href="{{url}}" class="uckkassembly-decision-panel__title-link">
+                        {{title}}
+                    </a>
+                {{/url}}
+                {{^url}}
+                    {{title}}
+                {{/url}}
+            </h3>
+
+            <div class="uckkassembly-decision-panel__meta">
+                {{#decisiontypelabel}}
+                    <span class="uckkassembly-decision-panel__type">
+                        {{decisiontypelabel}}
+                    </span>
+                {{/decisiontypelabel}}
+
+                <span class="uckkassembly-decision-panel__status {{statusclass}}">
+                    {{statuslabel}}
+                </span>
+            </div>
+        </div>
+
+        {{#hasactions}}
+            <nav
+                class="uckkassembly-decision-panel__actions"
+                aria-label="{{#str}} decisionactions, uckkassembly {{/str}}"
+            >
+                {{#actions}}
+                    {{#url}}
+                        <a
+                            href="{{url}}"
+                            class="btn btn-sm {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                            {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                        >
+                            {{label}}
+                        </a>
+                    {{/url}}
+                {{/actions}}
+            </nav>
+        {{/hasactions}}
+    </header>
+
+    {{#hassummary}}
+        <div class="uckkassembly-decision-panel__summary">
+            {{summary}}
+        </div>
+    {{/hassummary}}
+
+    {{#hasmotion}}
+        <section class="uckkassembly-decision-panel__motion">
+            <h4 class="uckkassembly-decision-panel__section-title">
+                {{#str}} source_motion, uckkassembly {{/str}}
+            </h4>
+
+            {{#motion.hasurl}}
+                <a href="{{motion.url}}" class="uckkassembly-decision-panel__motion-link">
+                    {{motion.title}}
+                </a>
+            {{/motion.hasurl}}
+
+            {{^motion.hasurl}}
+                <span class="uckkassembly-decision-panel__motion-title">
+                    {{motion.title}}
+                </span>
+            {{/motion.hasurl}}
+        </section>
+    {{/hasmotion}}
+
+    {{#hasdecisiontext}}
+        <section class="uckkassembly-decision-panel__text">
+            <h4 class="uckkassembly-decision-panel__section-title">
+                {{#str}} decisiontext, uckkassembly {{/str}}
+            </h4>
+
+            <div class="uckkassembly-decision-panel__text-content">
+                {{{decisiontext}}}
+            </div>
+        </section>
+    {{/hasdecisiontext}}
+
+    {{#hasvotesummary}}
+        <section class="uckkassembly-decision-panel__votes">
+            <h4 class="uckkassembly-decision-panel__section-title">
+                {{#str}} votesummary, uckkassembly {{/str}}
+            </h4>
+
+            {{#votesummary.hasresultlabel}}
+                <p class="uckkassembly-decision-panel__vote-result">
+                    <strong>{{votesummary.resultlabel}}</strong>
+                </p>
+            {{/votesummary.hasresultlabel}}
+
+            <dl class="uckkassembly-decision-panel__vote-counts">
+                <div class="uckkassembly-decision-panel__vote-count">
+                    <dt>{{#str}} votechoice:support, uckkassembly {{/str}}</dt>
+                    <dd>{{votesummary.support}}</dd>
+                </div>
+
+                <div class="uckkassembly-decision-panel__vote-count">
+                    <dt>{{#str}} votechoice:oppose, uckkassembly {{/str}}</dt>
+                    <dd>{{votesummary.oppose}}</dd>
+                </div>
+
+                <div class="uckkassembly-decision-panel__vote-count">
+                    <dt>{{#str}} votechoice:abstain, uckkassembly {{/str}}</dt>
+                    <dd>{{votesummary.abstain}}</dd>
+                </div>
+
+                <div class="uckkassembly-decision-panel__vote-count">
+                    <dt>{{#str}} votechoice:requestamendment, uckkassembly {{/str}}</dt>
+                    <dd>{{votesummary.requestamendment}}</dd>
+                </div>
+
+                <div class="uckkassembly-decision-panel__vote-count">
+                    <dt>{{#str}} votechoice:block, uckkassembly {{/str}}</dt>
+                    <dd>{{votesummary.block}}</dd>
+                </div>
+
+                <div class="uckkassembly-decision-panel__vote-count">
+                    <dt>{{#str}} totalvotes, uckkassembly {{/str}}</dt>
+                    <dd>{{votesummary.total}}</dd>
+                </div>
+            </dl>
+
+            <div class="uckkassembly-decision-panel__vote-flags">
+                {{#votesummary.quorumreached}}
+                    <span class="badge badge-success">
+                        {{#str}} quorumreached, uckkassembly {{/str}}
+                    </span>
+                {{/votesummary.quorumreached}}
+
+                {{^votesummary.quorumreached}}
+                    <span class="badge badge-warning">
+                        {{#str}} quorumnotreached, uckkassembly {{/str}}
+                    </span>
+                {{/votesummary.quorumreached}}
+
+                {{#votesummary.thresholdreached}}
+                    <span class="badge badge-success">
+                        {{#str}} thresholdreached, uckkassembly {{/str}}
+                    </span>
+                {{/votesummary.thresholdreached}}
+
+                {{^votesummary.thresholdreached}}
+                    <span class="badge badge-warning">
+                        {{#str}} thresholdnotreached, uckkassembly {{/str}}
+                    </span>
+                {{/votesummary.thresholdreached}}
+            </div>
+        </section>
+    {{/hasvotesummary}}
+
+    <section class="uckkassembly-decision-panel__publication">
+        <h4 class="uckkassembly-decision-panel__section-title">
+            {{#str}} publication, uckkassembly {{/str}}
+        </h4>
+
+        <dl class="uckkassembly-decision-panel__publication-list">
+            {{#haspublishedby}}
+                <div>
+                    <dt>{{#str}} publishedby, uckkassembly {{/str}}</dt>
+                    <dd>{{publishedby}}</dd>
+                </div>
+            {{/haspublishedby}}
+
+            {{#hastimepublished}}
+                <div>
+                    <dt>{{#str}} timepublished, uckkassembly {{/str}}</dt>
+                    <dd><time>{{timepublishedlabel}}</time></dd>
+                </div>
+            {{/hastimepublished}}
+
+            {{#visibilitylabel}}
+                <div>
+                    <dt>{{#str}} visibility, uckkassembly {{/str}}</dt>
+                    <dd>{{visibilitylabel}}</dd>
+                </div>
+            {{/visibilitylabel}}
+
+            {{#provenancelabel}}
+                <div>
+                    <dt>{{#str}} provenance, uckkassembly {{/str}}</dt>
+                    <dd>{{provenancelabel}}</dd>
+                </div>
+            {{/provenancelabel}}
+        </dl>
+    </section>
+
+    {{#hascontests}}
+        <section class="uckkassembly-decision-panel__contests">
+            <h4 class="uckkassembly-decision-panel__section-title">
+                {{#str}} contests, uckkassembly {{/str}}
+            </h4>
+
+            <ul class="uckkassembly-decision-panel__contest-list">
+                {{#contests}}
+                    <li class="uckkassembly-decision-panel__contest {{statusclass}}">
+                        <div class="uckkassembly-decision-panel__contest-header">
+                            {{#url}}
+                                <a href="{{url}}" class="uckkassembly-decision-panel__contest-title">
+                                    {{title}}
+                                </a>
+                            {{/url}}
+
+                            {{^url}}
+                                <span class="uckkassembly-decision-panel__contest-title">
+                                    {{title}}
+                                </span>
+                            {{/url}}
+
+                            {{#statuslabel}}
+                                <span class="uckkassembly-decision-panel__contest-status">
+                                    {{statuslabel}}
+                                </span>
+                            {{/statuslabel}}
+                        </div>
+
+                        {{#summary}}
+                            <p class="uckkassembly-decision-panel__contest-summary">
+                                {{summary}}
+                            </p>
+                        {{/summary}}
+
+                        {{#restricted}}
+                            <span class="badge badge-warning">
+                                {{#str}} restricted_integrity, uckkassembly {{/str}}
+                            </span>
+                        {{/restricted}}
+                    </li>
+                {{/contests}}
+            </ul>
+        </section>
+    {{/hascontests}}
+
+    {{#hasarchiveurl}}
+        <section class="uckkassembly-decision-panel__archive">
+            <h4 class="uckkassembly-decision-panel__section-title">
+                {{#str}} archive, uckkassembly {{/str}}
+            </h4>
+
+            <a href="{{archiveurl}}" class="btn btn-secondary btn-sm">
+                {{#str}} viewarchiveitem, uckkassembly {{/str}}
+            </a>
+        </section>
+    {{/hasarchiveurl}}
+
+    {{#hasintegritycaseurl}}
+        <section class="uckkassembly-decision-panel__integrity">
+            <h4 class="uckkassembly-decision-panel__section-title">
+                {{#str}} integrity, uckkassembly {{/str}}
+            </h4>
+
+            <a href="{{integritycaseurl}}" class="btn btn-secondary btn-sm">
+                {{#str}} viewintegritycase, uckkassembly {{/str}}
+            </a>
+        </section>
+    {{/hasintegritycaseurl}}
+
+    {{#haswarnings}}
+        <div class="uckkassembly-decision-panel__warnings">
+            {{#warnings}}
+                <div class="alert alert-warning" role="status">
+                    {{message}}
+                </div>
+            {{/warnings}}
+        </div>
+    {{/haswarnings}}
+
+    <footer class="uckkassembly-decision-panel__footer">
+        <p class="uckkassembly-decision-panel__authority-note">
+            {{#str}} decisionnonsovereignnotice, uckkassembly {{/str}}
+        </p>
+    </footer>
+</section>

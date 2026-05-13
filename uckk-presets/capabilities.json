@@ -1,0 +1,392 @@
+{
+  "schema": "uckk.presets.capabilities.v1",
+  "idempotency": "capability.name + role.shortname",
+  "roles": [
+    "gestionnaire_uckk",
+    "mentor_uckk",
+    "joueur",
+    "archiviste_uckk",
+    "inquisiteur_uckk",
+    "observateur_uckk",
+    "invite_public_limite"
+  ],
+  "capabilities": [
+    {
+      "name": "local/uckk:viewcampus",
+      "component": "local_uckk",
+      "contexts": ["system", "category", "course"],
+      "allow": [
+        "gestionnaire_uckk",
+        "mentor_uckk",
+        "joueur",
+        "archiviste_uckk",
+        "inquisiteur_uckk",
+        "observateur_uckk"
+      ]
+    },
+    {
+      "name": "local/uckk:manageprograms",
+      "component": "local_uckk",
+      "contexts": ["system", "category"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "local/uckk:managepathways",
+      "component": "local_uckk",
+      "contexts": ["system", "category"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "local/uckk:manageprofiles",
+      "component": "local_uckk",
+      "contexts": ["system"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "local/uckk:managecanon",
+      "component": "local_uckk",
+      "contexts": ["system"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "local/uckk:viewrestrictedprofile",
+      "component": "local_uckk",
+      "contexts": ["system", "user"],
+      "allow": ["gestionnaire_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "format/uckk:configuresections",
+      "component": "format_uckk",
+      "contexts": ["course"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk"]
+    },
+    {
+      "name": "format/uckk:viewintegritymarkers",
+      "component": "format_uckk",
+      "contexts": ["course"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "block/uckk_dashboard:view",
+      "component": "block_uckk_dashboard",
+      "contexts": ["user", "course", "system"],
+      "allow": [
+        "gestionnaire_uckk",
+        "mentor_uckk",
+        "joueur",
+        "archiviste_uckk",
+        "inquisiteur_uckk",
+        "observateur_uckk"
+      ]
+    },
+    {
+      "name": "block/uckk_dashboard:viewothers",
+      "component": "block_uckk_dashboard",
+      "contexts": ["course", "system"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "block/uckk_dashboard:configure",
+      "component": "block_uckk_dashboard",
+      "contexts": ["system", "course"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "mod/uckkchallenge:addinstance",
+      "component": "mod_uckkchallenge",
+      "contexts": ["course"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkchallenge:view",
+      "component": "mod_uckkchallenge",
+      "contexts": ["module"],
+      "allow": [
+        "gestionnaire_uckk",
+        "mentor_uckk",
+        "joueur",
+        "archiviste_uckk",
+        "inquisiteur_uckk",
+        "observateur_uckk"
+      ]
+    },
+    {
+      "name": "mod/uckkchallenge:createchallenge",
+      "component": "mod_uckkchallenge",
+      "contexts": ["module"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkchallenge:submitproof",
+      "component": "mod_uckkchallenge",
+      "contexts": ["module"],
+      "allow": ["joueur"]
+    },
+    {
+      "name": "mod/uckkchallenge:evaluate",
+      "component": "mod_uckkchallenge",
+      "contexts": ["module"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkchallenge:validateintegrity",
+      "component": "mod_uckkchallenge",
+      "contexts": ["module"],
+      "allow": ["gestionnaire_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "mod/uckkchallenge:contest",
+      "component": "mod_uckkchallenge",
+      "contexts": ["module"],
+      "allow": ["joueur", "mentor_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "mod/uckkchallenge:archive",
+      "component": "mod_uckkchallenge",
+      "contexts": ["module"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk", "archiviste_uckk"]
+    },
+    {
+      "name": "mod/uckkassembly:addinstance",
+      "component": "mod_uckkassembly",
+      "contexts": ["course"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkassembly:view",
+      "component": "mod_uckkassembly",
+      "contexts": ["module"],
+      "allow": [
+        "gestionnaire_uckk",
+        "mentor_uckk",
+        "joueur",
+        "archiviste_uckk",
+        "inquisiteur_uckk",
+        "observateur_uckk"
+      ]
+    },
+    {
+      "name": "mod/uckkassembly:createassembly",
+      "component": "mod_uckkassembly",
+      "contexts": ["module"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkassembly:proposemotion",
+      "component": "mod_uckkassembly",
+      "contexts": ["module"],
+      "allow": ["joueur", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkassembly:amendmotion",
+      "component": "mod_uckkassembly",
+      "contexts": ["module"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkassembly:vote",
+      "component": "mod_uckkassembly",
+      "contexts": ["module"],
+      "allow": ["joueur", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkassembly:publishdecision",
+      "component": "mod_uckkassembly",
+      "contexts": ["module"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkassembly:contestdecision",
+      "component": "mod_uckkassembly",
+      "contexts": ["module"],
+      "allow": ["joueur", "mentor_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "mod/uckkassembly:archive",
+      "component": "mod_uckkassembly",
+      "contexts": ["module"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk", "archiviste_uckk"]
+    },
+    {
+      "name": "mod/uckkarchive:addinstance",
+      "component": "mod_uckkarchive",
+      "contexts": ["course"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk"]
+    },
+    {
+      "name": "mod/uckkarchive:view",
+      "component": "mod_uckkarchive",
+      "contexts": ["module", "course", "user"],
+      "allow": [
+        "gestionnaire_uckk",
+        "mentor_uckk",
+        "joueur",
+        "archiviste_uckk",
+        "inquisiteur_uckk",
+        "observateur_uckk"
+      ]
+    },
+    {
+      "name": "mod/uckkarchive:additem",
+      "component": "mod_uckkarchive",
+      "contexts": ["module", "course", "user"],
+      "allow": ["joueur", "mentor_uckk", "archiviste_uckk"]
+    },
+    {
+      "name": "mod/uckkarchive:validateitem",
+      "component": "mod_uckkarchive",
+      "contexts": ["module", "course"],
+      "allow": ["gestionnaire_uckk", "archiviste_uckk"]
+    },
+    {
+      "name": "mod/uckkarchive:versionitem",
+      "component": "mod_uckkarchive",
+      "contexts": ["module", "course"],
+      "allow": ["gestionnaire_uckk", "archiviste_uckk"]
+    },
+    {
+      "name": "mod/uckkarchive:viewrestricted",
+      "component": "mod_uckkarchive",
+      "contexts": ["module", "course", "user"],
+      "allow": ["gestionnaire_uckk", "archiviste_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "mod/uckkarchive:export",
+      "component": "mod_uckkarchive",
+      "contexts": ["module", "course"],
+      "allow": ["gestionnaire_uckk", "archiviste_uckk"]
+    },
+    {
+      "name": "tool/uckkseed:run",
+      "component": "tool_uckkseed",
+      "contexts": ["system"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "tool/uckkseed:dryrun",
+      "component": "tool_uckkseed",
+      "contexts": ["system"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "tool/uckkseed:rollback",
+      "component": "tool_uckkseed",
+      "contexts": ["system"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "tool/uckkintegrity:view",
+      "component": "tool_uckkintegrity",
+      "contexts": ["system", "course", "module", "user"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "tool/uckkintegrity:opencase",
+      "component": "tool_uckkintegrity",
+      "contexts": ["system", "course", "module", "user"],
+      "allow": [
+        "gestionnaire_uckk",
+        "mentor_uckk",
+        "joueur",
+        "archiviste_uckk",
+        "inquisiteur_uckk"
+      ]
+    },
+    {
+      "name": "tool/uckkintegrity:reviewcase",
+      "component": "tool_uckkintegrity",
+      "contexts": ["system", "course", "module", "user"],
+      "allow": ["inquisiteur_uckk"]
+    },
+    {
+      "name": "tool/uckkintegrity:assigncase",
+      "component": "tool_uckkintegrity",
+      "contexts": ["system", "course", "module", "user"],
+      "allow": ["inquisiteur_uckk"]
+    },
+    {
+      "name": "tool/uckkintegrity:issuecorrection",
+      "component": "tool_uckkintegrity",
+      "contexts": ["system", "course", "module", "user"],
+      "allow": ["inquisiteur_uckk"]
+    },
+    {
+      "name": "tool/uckkintegrity:invalidate",
+      "component": "tool_uckkintegrity",
+      "contexts": ["system", "course", "module", "user"],
+      "allow": ["inquisiteur_uckk"]
+    },
+    {
+      "name": "tool/uckkintegrity:closecase",
+      "component": "tool_uckkintegrity",
+      "contexts": ["system", "course", "module", "user"],
+      "allow": ["inquisiteur_uckk"]
+    },
+    {
+      "name": "tool/uckkintegrity:viewrestricted",
+      "component": "tool_uckkintegrity",
+      "contexts": ["system", "course", "module", "user"],
+      "allow": ["gestionnaire_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "report/uckk:view",
+      "component": "report_uckk",
+      "contexts": ["system", "category", "course"],
+      "allow": ["gestionnaire_uckk", "mentor_uckk", "archiviste_uckk", "inquisiteur_uckk"]
+    },
+    {
+      "name": "report/uckk:viewall",
+      "component": "report_uckk",
+      "contexts": ["system"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "report/uckk:export",
+      "component": "report_uckk",
+      "contexts": ["system", "category", "course"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "aiprovider/uckk:configure",
+      "component": "aiprovider_uckk",
+      "contexts": ["system"],
+      "allow": ["gestionnaire_uckk"]
+    },
+    {
+      "name": "aiprovider/uckk:use",
+      "component": "aiprovider_uckk",
+      "contexts": ["course", "module", "user"],
+      "allow": [
+        "gestionnaire_uckk",
+        "mentor_uckk",
+        "joueur",
+        "archiviste_uckk",
+        "inquisiteur_uckk"
+      ]
+    },
+    {
+      "name": "aiprovider/uckk:viewlogs",
+      "component": "aiprovider_uckk",
+      "contexts": ["system"],
+      "allow": ["gestionnaire_uckk", "inquisiteur_uckk"]
+    }
+  ],
+  "constraints": [
+    {
+      "rule": "symbolic_titles_are_not_roles",
+      "description": "Bâtisseur, Joueur lucide, Cartographe de systèmes, Architecte du sens, Architecte d’opportunités, Gardien des systèmes vivants and Gardien de la preuve must be represented through badges, profile fields, cohorts, competencies, portfolios or archive distinctions, not Moodle roles."
+    },
+    {
+      "rule": "inquisiteur_is_not_super_admin",
+      "description": "Inquisiteur UCKK can review, pause, correct and invalidate integrity-sensitive objects, but cannot silently delete evidence, rewrite archive history, or assign unrestricted administration rights."
+    },
+    {
+      "rule": "restricted_archive_requires_capability",
+      "description": "Archive items with restricted_integrity visibility require mod/uckkarchive:viewrestricted or an equivalent higher administrative permission."
+    },
+    {
+      "rule": "ai_is_non_sovereign",
+      "description": "AI capabilities permit assistive use and log review only. AI cannot grade, close integrity cases, publish assembly decisions, validate archive items, award badges, certify competencies or erase evidence."
+    }
+  ]
+}

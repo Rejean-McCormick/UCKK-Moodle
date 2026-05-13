@@ -1,0 +1,117 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    @template report_uckk/report_dashboard
+
+    Dashboard template for institutional UCKK reports.
+
+    Context variables required:
+    {
+        "title": "Institutional report dashboard",
+        "cards": [],
+        "currenttitle": "Challenge status",
+        "currentdescription": "Report description",
+        "columns": [],
+        "rows": [],
+        "hasrows": true,
+        "totalrows": "10 matching rows",
+        "filters": {},
+        "activefilters": [],
+        "hasactivefilters": true,
+        "csvurl": "...",
+        "jsonurl": "...",
+        "canexport": true,
+        "allowjsonexport": true,
+        "clearurl": "...",
+        "actionurl": "...",
+        "reportkey": "challenge_status"
+    }
+}}
+
+<div class="report-uckk" data-region="report-uckk-dashboard">
+    <header class="mb-4">
+        <h2>{{title}}</h2>
+    </header>
+
+    <section class="report-uckk-cards mb-4" aria-label="{{#str}}reports, report_uckk{{/str}}">
+        <div class="row">
+            {{#cards}}
+                <div class="col-md-4 mb-3">
+                    {{> report_uckk/report_card }}
+                </div>
+            {{/cards}}
+        </div>
+    </section>
+
+    <section class="report-uckk-current" aria-labelledby="report-uckk-current-title">
+        <div class="d-flex flex-wrap justify-content-between align-items-start mb-3">
+            <div>
+                <h3 id="report-uckk-current-title">{{currenttitle}}</h3>
+                <p class="text-muted mb-0">{{currentdescription}}</p>
+            </div>
+
+            {{#canexport}}
+                <div class="btn-group mt-2 mt-md-0" role="group" aria-label="{{#str}}actions, report_uckk{{/str}}">
+                    <a class="btn btn-secondary" href="{{csvurl}}">
+                        {{#str}}exportcsv, report_uckk{{/str}}
+                    </a>
+
+                    {{#allowjsonexport}}
+                        <a class="btn btn-secondary" href="{{jsonurl}}">
+                            {{#str}}exportjson, report_uckk{{/str}}
+                        </a>
+                    {{/allowjsonexport}}
+                </div>
+            {{/canexport}}
+        </div>
+
+        {{> report_uckk/report_filters }}
+
+        {{#hasactivefilters}}
+            <div class="alert alert-info report-uckk-active-filters" data-region="report-uckk-active-filters">
+                <strong>{{#str}}activefilters, report_uckk{{/str}}</strong>
+                <ul class="mb-0">
+                    {{#activefilters}}
+                        <li>{{label}}: {{value}}</li>
+                    {{/activefilters}}
+                </ul>
+            </div>
+        {{/hasactivefilters}}
+
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <p class="mb-0">{{totalrows}}</p>
+            <a href="{{clearurl}}" class="btn btn-link">
+                {{#str}}clearfilters, report_uckk{{/str}}
+            </a>
+        </div>
+
+        {{#hasrows}}
+            <div class="table-responsive">
+                <table class="generaltable table table-striped report-uckk-table" data-region="report-uckk-table">
+                    <thead>
+                        <tr>
+                            {{#columns}}
+                                <th scope="col" data-key="{{key}}">{{label}}</th>
+                            {{/columns}}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#rows}}
+                            <tr>
+                                {{#cells}}
+                                    <td data-key="{{key}}">{{value}}</td>
+                                {{/cells}}
+                            </tr>
+                        {{/rows}}
+                    </tbody>
+                </table>
+            </div>
+        {{/hasrows}}
+
+        {{^hasrows}}
+            <div class="alert alert-info" data-region="report-uckk-empty">
+                {{#str}}norows, report_uckk{{/str}}
+            </div>
+        {{/hasrows}}
+    </section>
+</div>

@@ -1,0 +1,259 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template tool_uckkseed/seed_summary
+
+    Seed execution summary for the UCKK seed tool.
+
+    This template is render-only. It must receive already prepared data from
+    tool_uckkseed\output\seed_summary.
+
+    Expected context:
+    {
+        "uniqid": "uckkseed-summary-123",
+        "component": "tool_uckkseed",
+        "heading": "Seed UCKK distribution",
+        "action": "seed",
+        "mode": "dry_run",
+        "modelabel": "Dry run",
+        "status": "completed",
+        "statuslabel": "Completed",
+        "statusclass": "status-completed",
+        "runid": 12,
+        "timecreatedlabel": "12 May 2026",
+        "timemodifiedlabel": "12 May 2026",
+        "durationlabel": "4 seconds",
+        "summary": "Seed dry run completed.",
+        "counts": [],
+        "hascounts": true,
+        "messages": [],
+        "hasmessages": true,
+        "presetcards": [],
+        "haspresetcards": true,
+        "actions": [],
+        "hasactions": true
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="tool-uckkseed-summary {{statusclass}}"
+    data-region="tool-uckkseed-seed-summary"
+    data-component="{{component}}"
+    data-action="{{action}}"
+    data-mode="{{mode}}"
+    data-status="{{status}}"
+    {{#runid}}data-run-id="{{runid}}"{{/runid}}
+>
+    <header class="tool-uckkseed-summary__header">
+        <div class="tool-uckkseed-summary__identity">
+            <p class="tool-uckkseed-summary__eyebrow">
+                {{#str}} pluginname, tool_uckkseed {{/str}}
+            </p>
+
+            <h3 class="tool-uckkseed-summary__title">
+                {{heading}}
+            </h3>
+
+            {{#summary}}
+                <p class="tool-uckkseed-summary__summary">
+                    {{summary}}
+                </p>
+            {{/summary}}
+        </div>
+
+        <div class="tool-uckkseed-summary__state">
+            {{#statuslabel}}
+                <span class="tool-uckkseed-summary__badge tool-uckkseed-summary__badge--status {{statusclass}}">
+                    {{statuslabel}}
+                </span>
+            {{/statuslabel}}
+
+            {{#modelabel}}
+                <span class="tool-uckkseed-summary__badge tool-uckkseed-summary__badge--mode mode-{{mode}}">
+                    {{modelabel}}
+                </span>
+            {{/modelabel}}
+        </div>
+    </header>
+
+    <dl class="tool-uckkseed-summary__meta">
+        {{#runid}}
+            <div class="tool-uckkseed-summary__meta-item">
+                <dt>{{#str}} runid, tool_uckkseed {{/str}}</dt>
+                <dd>{{runid}}</dd>
+            </div>
+        {{/runid}}
+
+        {{#timecreatedlabel}}
+            <div class="tool-uckkseed-summary__meta-item">
+                <dt>{{#str}} timecreated, tool_uckkseed {{/str}}</dt>
+                <dd>{{timecreatedlabel}}</dd>
+            </div>
+        {{/timecreatedlabel}}
+
+        {{#timemodifiedlabel}}
+            <div class="tool-uckkseed-summary__meta-item">
+                <dt>{{#str}} timemodified, moodle {{/str}}</dt>
+                <dd>{{timemodifiedlabel}}</dd>
+            </div>
+        {{/timemodifiedlabel}}
+
+        {{#durationlabel}}
+            <div class="tool-uckkseed-summary__meta-item">
+                <dt>{{#str}} duration, tool_uckkseed {{/str}}</dt>
+                <dd>{{durationlabel}}</dd>
+            </div>
+        {{/durationlabel}}
+    </dl>
+
+    {{#dryrunnotice}}
+        <div class="alert alert-info tool-uckkseed-summary__notice" role="status">
+            {{dryrunnotice}}
+        </div>
+    {{/dryrunnotice}}
+
+    {{#rollbackplannotice}}
+        <div class="alert alert-warning tool-uckkseed-summary__notice" role="status">
+            {{rollbackplannotice}}
+        </div>
+    {{/rollbackplannotice}}
+
+    {{#hascounts}}
+        <section class="tool-uckkseed-summary__counts" aria-labelledby="{{uniqid}}-counts-heading">
+            <h4 id="{{uniqid}}-counts-heading" class="tool-uckkseed-summary__section-title">
+                {{#str}} counts, tool_uckkseed {{/str}}
+            </h4>
+
+            <dl class="tool-uckkseed-summary__count-grid">
+                {{#counts}}
+                    <div class="tool-uckkseed-summary__count {{class}}">
+                        <dt>{{label}}</dt>
+                        <dd>{{value}}</dd>
+                    </div>
+                {{/counts}}
+            </dl>
+        </section>
+    {{/hascounts}}
+
+    {{#haspresetcards}}
+        <section class="tool-uckkseed-summary__presets" aria-labelledby="{{uniqid}}-presets-heading">
+            <h4 id="{{uniqid}}-presets-heading" class="tool-uckkseed-summary__section-title">
+                {{#str}} presets, tool_uckkseed {{/str}}
+            </h4>
+
+            <div class="tool-uckkseed-summary__preset-grid">
+                {{#presetcards}}
+                    {{> tool_uckkseed/preset_card }}
+                {{/presetcards}}
+            </div>
+        </section>
+    {{/haspresetcards}}
+
+    {{#hasmessages}}
+        <section class="tool-uckkseed-summary__messages" aria-labelledby="{{uniqid}}-messages-heading">
+            <h4 id="{{uniqid}}-messages-heading" class="tool-uckkseed-summary__section-title">
+                {{#str}} messages, tool_uckkseed {{/str}}
+            </h4>
+
+            <ol class="tool-uckkseed-summary__message-list">
+                {{#messages}}
+                    <li class="tool-uckkseed-summary__message {{class}} severity-{{severity}}">
+                        <div class="tool-uckkseed-summary__message-header">
+                            {{#severitylabel}}
+                                <span class="tool-uckkseed-summary__message-severity">
+                                    {{severitylabel}}
+                                </span>
+                            {{/severitylabel}}
+
+                            {{#preset}}
+                                <span class="tool-uckkseed-summary__message-preset">
+                                    {{preset}}
+                                </span>
+                            {{/preset}}
+
+                            {{#targettype}}
+                                <span class="tool-uckkseed-summary__message-target-type">
+                                    {{targettype}}
+                                </span>
+                            {{/targettype}}
+
+                            {{#targetkey}}
+                                <span class="tool-uckkseed-summary__message-target-key">
+                                    {{targetkey}}
+                                </span>
+                            {{/targetkey}}
+                        </div>
+
+                        <p class="tool-uckkseed-summary__message-text">
+                            {{message}}
+                        </p>
+                    </li>
+                {{/messages}}
+            </ol>
+        </section>
+    {{/hasmessages}}
+
+    {{^hasmessages}}
+        <div class="alert alert-info tool-uckkseed-summary__empty" role="status">
+            {{#str}} nomessages, tool_uckkseed {{/str}}
+        </div>
+    {{/hasmessages}}
+
+    {{#hasactions}}
+        <footer class="tool-uckkseed-summary__actions">
+            {{#actions}}
+                {{#ispost}}
+                    <form
+                        method="post"
+                        action="{{url}}"
+                        class="tool-uckkseed-summary__action-form"
+                    >
+                        <input type="hidden" name="sesskey" value="{{sesskey}}">
+                        <input type="hidden" name="action" value="{{key}}">
+
+                        {{#runid}}
+                            <input type="hidden" name="runid" value="{{runid}}">
+                        {{/runid}}
+
+                        <button
+                            type="submit"
+                            class="btn {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                            {{#disabled}}disabled{{/disabled}}
+                        >
+                            {{label}}
+                        </button>
+
+                        {{#hasdisabledreason}}
+                            <span class="tool-uckkseed-summary__disabled-reason">
+                                {{disabledreason}}
+                            </span>
+                        {{/hasdisabledreason}}
+                    </form>
+                {{/ispost}}
+
+                {{#isget}}
+                    <a
+                        href="{{url}}"
+                        class="btn {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}}"
+                        {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                    >
+                        {{label}}
+                    </a>
+
+                    {{#hasdisabledreason}}
+                        <span class="tool-uckkseed-summary__disabled-reason">
+                            {{disabledreason}}
+                        </span>
+                    {{/hasdisabledreason}}
+                {{/isget}}
+            {{/actions}}
+        </footer>
+    {{/hasactions}}
+</section>

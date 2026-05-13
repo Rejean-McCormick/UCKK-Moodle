@@ -1,0 +1,360 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+}}
+
+{{!
+    @template local_uckk/canon_panel
+
+    Canon panel for local_uckk.
+
+    This template renders canonical UCKK formulas, principles, and canon entries.
+    It does not perform permission checks, status computation, visibility filtering,
+    provenance validation, or AI authority decisions. Those responsibilities belong
+    to PHP services and output classes.
+
+    Classes required for JS:
+    * uckk-canon-panel
+    * uckk-canon-panel-toggle
+    * uckk-canon-entry
+
+    Data attributes required for JS:
+    * data-region="uckk-canon-panel"
+    * data-region="uckk-canon-body"
+    * data-action="toggle-canon-section"
+
+    Context variables:
+    * uniqid string - Unique DOM identifier.
+    * title string - Panel title.
+    * subtitle string - Optional subtitle.
+    * introduction string - Optional introduction text.
+    * emptyicon string - Optional Moodle pix icon name.
+    * hasformulas bool - Whether canonical formulas are available.
+    * formulas array - Canonical formula rows.
+    * hasentries bool - Whether canon entries are available.
+    * entries array - Canon entry rows.
+    * hasactions bool - Whether footer actions are available.
+    * actions array - Safe action links prepared by PHP.
+    * isempty bool - Whether no formula and no entry is available.
+
+    Formula variables:
+    * key string - Stable formula key.
+    * label string - Human-readable label.
+    * text string - Formula text.
+    * description string - Optional formula explanation.
+    * source string - Optional source label.
+
+    Entry variables:
+    * id int - Canon entry id.
+    * key string - Stable canon key.
+    * type string - Canon type label.
+    * title string - Canon entry title.
+    * summary string - Canon entry summary.
+    * status string - Canon status label.
+    * visibility string - Canon visibility label.
+    * provenance string - Canon provenance label.
+    * hasurl bool - Whether a URL is available.
+    * url string - Safe URL prepared by PHP.
+    * hasbadges bool - Whether visual badges are available.
+    * badges array - Badge rows.
+    * haschildren bool - Whether child canon links are available.
+    * children array - Child canon rows.
+
+    Badge variables:
+    * label string - Badge label.
+    * tone string - Safe CSS tone suffix prepared by PHP.
+
+    Child variables:
+    * title string - Child title.
+    * url string - Optional safe child URL.
+    * hasurl bool - Whether child URL is available.
+
+    Action variables:
+    * label string - Action label.
+    * url string - Safe URL prepared by PHP.
+    * primary bool - Whether this action is primary.
+
+    Example context (json):
+    {
+        "uniqid": "uckk-canon-panel-42",
+        "title": "Matière canonique",
+        "subtitle": "Connaître → Choisir → Agir → Se souvenir",
+        "introduction": "Repères canoniques du parcours UCKK.",
+        "emptyicon": "i/info",
+        "hasformulas": true,
+        "formulas": [
+            {
+                "key": "FORMULA_AI",
+                "label": "IA",
+                "text": "L’IA aide. Elle ne décide pas.",
+                "description": "Principe non souverain.",
+                "source": "Canon UCKK"
+            }
+        ],
+        "hasentries": true,
+        "entries": [
+            {
+                "id": 3,
+                "key": "FORMULA_GOVERNANCE",
+                "type": "Formule",
+                "title": "Gouvernance UCKK",
+                "summary": "King Klown attire. L’Inquisiteur vérifie...",
+                "status": "active",
+                "visibility": "institution",
+                "provenance": "human",
+                "hasurl": false,
+                "url": "",
+                "hasbadges": true,
+                "badges": [
+                    {
+                        "label": "active",
+                        "tone": "success"
+                    }
+                ],
+                "haschildren": false,
+                "children": []
+            }
+        ],
+        "hasactions": true,
+        "actions": [
+            {
+                "label": "Voir le canon",
+                "url": "https://example.invalid/local/uckk/canon.php",
+                "primary": true
+            }
+        ],
+        "isempty": false
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckk-canon-panel card"
+    data-region="uckk-canon-panel"
+    aria-labelledby="{{uniqid}}-title"
+>
+    <div class="card-header d-flex align-items-start justify-content-between gap-3">
+        <div class="uckk-canon-panel-header">
+            <h3 id="{{uniqid}}-title" class="h5 mb-1">
+                {{title}}
+            </h3>
+
+            {{#subtitle}}
+                <p class="uckk-canon-panel-subtitle text-muted mb-0">
+                    {{subtitle}}
+                </p>
+            {{/subtitle}}
+        </div>
+
+        <button
+            class="btn btn-link btn-sm uckk-canon-panel-toggle"
+            type="button"
+            data-action="toggle-canon-section"
+            data-target="#{{uniqid}}-body"
+            aria-controls="{{uniqid}}-body"
+            aria-expanded="true"
+        >
+            <span class="expanded-icon" aria-hidden="true">{{#pix}} t/expanded, core {{/pix}}</span>
+            <span class="collapsed-icon d-none" aria-hidden="true">{{#pix}} t/collapsed, core {{/pix}}</span>
+            <span class="sr-only visually-hidden">
+                {{#str}} togglecanonpanel, local_uckk {{/str}}
+            </span>
+        </button>
+    </div>
+
+    <div id="{{uniqid}}-body" class="card-body" data-region="uckk-canon-body">
+        {{#introduction}}
+            <p class="uckk-canon-panel-introduction">
+                {{introduction}}
+            </p>
+        {{/introduction}}
+
+        {{#hasformulas}}
+            <div class="uckk-canon-formulas mb-4" data-region="uckk-canon-formulas">
+                <h4 class="h6 mb-3">
+                    {{#str}} canonicalformulas, local_uckk {{/str}}
+                </h4>
+
+                <div class="list-group">
+                    {{#formulas}}
+                        <article
+                            class="uckk-canon-formula list-group-item"
+                            data-formula-key="{{key}}"
+                        >
+                            <div class="d-flex align-items-start justify-content-between gap-3">
+                                <div>
+                                    <h5 class="h6 mb-1">
+                                        {{label}}
+                                    </h5>
+
+                                    <blockquote class="uckk-canon-formula-text mb-2">
+                                        {{text}}
+                                    </blockquote>
+                                </div>
+
+                                {{#source}}
+                                    <span class="badge badge-light text-muted">
+                                        {{source}}
+                                    </span>
+                                {{/source}}
+                            </div>
+
+                            {{#description}}
+                                <p class="uckk-canon-formula-description text-muted mb-0">
+                                    {{description}}
+                                </p>
+                            {{/description}}
+                        </article>
+                    {{/formulas}}
+                </div>
+            </div>
+        {{/hasformulas}}
+
+        {{#hasentries}}
+            <div class="uckk-canon-entries" data-region="uckk-canon-entries">
+                <h4 class="h6 mb-3">
+                    {{#str}} canonentries, local_uckk {{/str}}
+                </h4>
+
+                <div class="uckk-canon-entry-list">
+                    {{#entries}}
+                        <article
+                            class="uckk-canon-entry border rounded p-3 mb-3"
+                            data-canon-id="{{id}}"
+                            data-canon-key="{{key}}"
+                        >
+                            <header class="uckk-canon-entry-header mb-2">
+                                <div class="d-flex align-items-start justify-content-between gap-3">
+                                    <div>
+                                        {{#type}}
+                                            <div class="uckk-canon-entry-type small text-muted mb-1">
+                                                {{type}}
+                                            </div>
+                                        {{/type}}
+
+                                        <h5 class="h6 mb-1">
+                                            {{#hasurl}}
+                                                <a href="{{url}}">
+                                                    {{title}}
+                                                </a>
+                                            {{/hasurl}}
+                                            {{^hasurl}}
+                                                {{title}}
+                                            {{/hasurl}}
+                                        </h5>
+                                    </div>
+
+                                    {{#hasbadges}}
+                                        <div class="uckk-canon-entry-badges d-flex flex-wrap justify-content-end gap-1">
+                                            {{#badges}}
+                                                <span class="badge uckk-badge uckk-badge-{{tone}}">
+                                                    {{label}}
+                                                </span>
+                                            {{/badges}}
+                                        </div>
+                                    {{/hasbadges}}
+                                </div>
+                            </header>
+
+                            {{#summary}}
+                                <p class="uckk-canon-entry-summary mb-3">
+                                    {{summary}}
+                                </p>
+                            {{/summary}}
+
+                            <dl class="uckk-canon-entry-meta row small text-muted mb-0">
+                                {{#status}}
+                                    <dt class="col-sm-3">
+                                        {{#str}} status, local_uckk {{/str}}
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{status}}
+                                    </dd>
+                                {{/status}}
+
+                                {{#visibility}}
+                                    <dt class="col-sm-3">
+                                        {{#str}} visibility, local_uckk {{/str}}
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{visibility}}
+                                    </dd>
+                                {{/visibility}}
+
+                                {{#provenance}}
+                                    <dt class="col-sm-3">
+                                        {{#str}} provenance, local_uckk {{/str}}
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{provenance}}
+                                    </dd>
+                                {{/provenance}}
+                            </dl>
+
+                            {{#haschildren}}
+                                <div class="uckk-canon-entry-children mt-3">
+                                    <h6 class="small text-muted mb-2">
+                                        {{#str}} relatedcanonitems, local_uckk {{/str}}
+                                    </h6>
+
+                                    <ul class="list-unstyled mb-0">
+                                        {{#children}}
+                                            <li>
+                                                {{#hasurl}}
+                                                    <a href="{{url}}">
+                                                        {{title}}
+                                                    </a>
+                                                {{/hasurl}}
+                                                {{^hasurl}}
+                                                    {{title}}
+                                                {{/hasurl}}
+                                            </li>
+                                        {{/children}}
+                                    </ul>
+                                </div>
+                            {{/haschildren}}
+                        </article>
+                    {{/entries}}
+                </div>
+            </div>
+        {{/hasentries}}
+
+        {{#isempty}}
+            <div class="uckk-canon-empty text-muted">
+                {{#emptyicon}}
+                    <span class="uckk-canon-empty-icon me-1" aria-hidden="true">
+                        {{#pix}} {{emptyicon}}, core {{/pix}}
+                    </span>
+                {{/emptyicon}}
+
+                <span>
+                    {{#str}} nocanonitems, local_uckk {{/str}}
+                </span>
+            </div>
+        {{/isempty}}
+    </div>
+
+    {{#hasactions}}
+        <div class="card-footer uckk-canon-panel-actions">
+            <div class="d-flex flex-wrap gap-2">
+                {{#actions}}
+                    <a
+                        href="{{url}}"
+                        class="btn {{#primary}}btn-primary{{/primary}}{{^primary}}btn-secondary{{/primary}}"
+                    >
+                        {{label}}
+                    </a>
+                {{/actions}}
+            </div>
+        </div>
+    {{/hasactions}}
+</section>

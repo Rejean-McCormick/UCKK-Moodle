@@ -1,0 +1,282 @@
+{{!
+    This file is part of UCKK-Moodle - https://moodle.org/
+
+    UCKK-Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCKK-Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCKK-Moodle. If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_uckk/course_header
+
+    Course header for the UCKK theme.
+
+    This template renders the visual identity, orientation and navigation
+    summary for a UCKK course. It must remain presentational. It must not
+    decide course completion, challenge validation, assembly decisions,
+    archive validation, integrity outcomes, badge attribution, competency
+    mastery, or AI authority.
+
+    Expected context:
+    {
+        "courseid": 12,
+        "courseurl": "https://example.test/course/view.php?id=12",
+        "courseshortname": "UCKK-TC101",
+        "coursefullname": "Cartographie des idées avec l’IA",
+        "coursesummary": "Apprendre à clarifier, structurer et vérifier des idées complexes avec l’aide de l’IA.",
+        "campuslabel": "Univers-Cité King Klown",
+        "programname": "Tronc commun obligatoire",
+        "programurl": "https://example.test/course/index.php?categoryid=2",
+        "showprogram": true,
+        "coursecode": "UCKK-TC101",
+        "showcoursecode": true,
+        "coursestatus": "Obligatoire",
+        "showcoursestatus": true,
+        "courselevel": "Fondation méthodologique",
+        "showcourselevel": true,
+        "courserole": "Apprendre à clarifier, structurer et vérifier des idées complexes avec l’aide de l’IA",
+        "showcourserole": true,
+        "progresspercent": 35,
+        "progresslabel": "Progression du cours",
+        "progressassistivetext": "35 pour cent du cours complété",
+        "hasprogress": true,
+        "showintegritynotice": true,
+        "integrityurl": "https://example.test/admin/tool/uckkintegrity/index.php",
+        "showarchive": true,
+        "archiveurl": "https://example.test/mod/uckkarchive/view.php?id=44",
+        "showcompetencies": true,
+        "competenciesurl": "https://example.test/report/competency/index.php?courseid=12",
+        "showbadges": true,
+        "badgesurl": "https://example.test/badges/view.php?type=2&id=12",
+        "showainotice": true,
+        "actions": [
+            {
+                "label": "Continuer le cours",
+                "url": "https://example.test/course/view.php?id=12#section-3",
+                "primary": true,
+                "icon": "fa-arrow-right"
+            }
+        ],
+        "metadata": [
+            {
+                "label": "Compétence centrale",
+                "value": "Cartographier un système social réel"
+            }
+        ]
+    }
+}}
+
+<header class="theme-uckk-course-header mb-4" data-region="uckk-course-header" data-courseid="{{courseid}}">
+    <div class="theme-uckk-course-header-main rounded p-4">
+        <div class="d-flex flex-column flex-xl-row justify-content-between gap-4">
+            <div class="theme-uckk-course-identity">
+                <div class="theme-uckk-campus-label text-uppercase small mb-2">
+                    {{#campuslabel}}
+                        {{campuslabel}}
+                    {{/campuslabel}}
+                    {{^campuslabel}}
+                        {{#str}} campuslabel, theme_uckk {{/str}}
+                    {{/campuslabel}}
+                </div>
+
+                <div class="theme-uckk-course-title-group">
+                    {{#showcoursecode}}
+                        <div class="theme-uckk-course-code mb-1">
+                            <span class="badge rounded-pill text-bg-secondary">
+                                {{coursecode}}
+                            </span>
+                        </div>
+                    {{/showcoursecode}}
+
+                    <h1 class="theme-uckk-course-title h2 mb-2">
+                        {{#coursefullname}}
+                            {{coursefullname}}
+                        {{/coursefullname}}
+                        {{^coursefullname}}
+                            {{#str}} course, core {{/str}}
+                        {{/coursefullname}}
+                    </h1>
+
+                    {{#coursesummary}}
+                        <p class="theme-uckk-course-summary mb-0">
+                            {{{coursesummary}}}
+                        </p>
+                    {{/coursesummary}}
+                </div>
+
+                {{#showprogram}}
+                    <div class="theme-uckk-course-program mt-3">
+                        <span class="theme-uckk-course-program-label small">
+                            {{#str}} program, theme_uckk {{/str}}
+                        </span>
+
+                        {{#programurl}}
+                            <a class="theme-uckk-course-program-name" href="{{programurl}}">
+                                {{programname}}
+                            </a>
+                        {{/programurl}}
+
+                        {{^programurl}}
+                            <span class="theme-uckk-course-program-name">
+                                {{programname}}
+                            </span>
+                        {{/programurl}}
+                    </div>
+                {{/showprogram}}
+
+                {{#showcourserole}}
+                    <div class="theme-uckk-course-role mt-3">
+                        <span class="theme-uckk-course-role-label small">
+                            {{#str}} courserole, theme_uckk {{/str}}
+                        </span>
+                        <p class="theme-uckk-course-role-text mb-0">
+                            {{courserole}}
+                        </p>
+                    </div>
+                {{/showcourserole}}
+            </div>
+
+            <aside class="theme-uckk-course-status" aria-label="{{#str}} coursestatussummary, theme_uckk {{/str}}">
+                <div class="theme-uckk-course-status-card rounded p-3">
+                    {{#showcoursestatus}}
+                        <div class="theme-uckk-course-status-row mb-2">
+                            <span class="theme-uckk-course-status-label small">
+                                {{#str}} status, core {{/str}}
+                            </span>
+                            <span class="theme-uckk-course-status-value">
+                                {{coursestatus}}
+                            </span>
+                        </div>
+                    {{/showcoursestatus}}
+
+                    {{#showcourselevel}}
+                        <div class="theme-uckk-course-status-row mb-2">
+                            <span class="theme-uckk-course-status-label small">
+                                {{#str}} level, theme_uckk {{/str}}
+                            </span>
+                            <span class="theme-uckk-course-status-value">
+                                {{courselevel}}
+                            </span>
+                        </div>
+                    {{/showcourselevel}}
+
+                    {{#hasprogress}}
+                        <div class="theme-uckk-course-progress mt-3" data-region="uckk-course-progress">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="theme-uckk-course-progress-label small">
+                                    {{#progresslabel}}
+                                        {{progresslabel}}
+                                    {{/progresslabel}}
+                                    {{^progresslabel}}
+                                        {{#str}} courseprogress, theme_uckk {{/str}}
+                                    {{/progresslabel}}
+                                </span>
+                                <span class="theme-uckk-course-progress-value small">
+                                    {{progresspercent}}%
+                                </span>
+                            </div>
+
+                            <div class="progress theme-uckk-progressbar"
+                                role="progressbar"
+                                aria-label="{{#progresslabel}}{{progresslabel}}{{/progresslabel}}{{^progresslabel}}{{#str}} courseprogress, theme_uckk {{/str}}{{/progresslabel}}"
+                                aria-valuenow="{{progresspercent}}"
+                                aria-valuemin="0"
+                                aria-valuemax="100">
+                                <div class="progress-bar" style="width: {{progresspercent}}%;"></div>
+                            </div>
+
+                            {{#progressassistivetext}}
+                                <span class="sr-only visually-hidden">
+                                    {{progressassistivetext}}
+                                </span>
+                            {{/progressassistivetext}}
+                        </div>
+                    {{/hasprogress}}
+                </div>
+            </aside>
+        </div>
+
+        {{#metadata.0}}
+            <div class="theme-uckk-course-metadata mt-4">
+                <dl class="row mb-0">
+                    {{#metadata}}
+                        <div class="col-12 col-md-6 col-xl-4 mb-2">
+                            <dt class="theme-uckk-course-metadata-label small">
+                                {{label}}
+                            </dt>
+                            <dd class="theme-uckk-course-metadata-value mb-0">
+                                {{value}}
+                            </dd>
+                        </div>
+                    {{/metadata}}
+                </dl>
+            </div>
+        {{/metadata.0}}
+
+        <div class="theme-uckk-course-notices mt-4">
+            {{#showainotice}}
+                <div class="theme-uckk-course-notice theme-uckk-course-notice-ai alert alert-info mb-2" role="note">
+                    <i class="fa fa-wand-magic-sparkles" aria-hidden="true"></i>
+                    <span>
+                        {{#str}} ainonsovereignnotice, theme_uckk {{/str}}
+                    </span>
+                </div>
+            {{/showainotice}}
+
+            {{#showintegritynotice}}
+                <div class="theme-uckk-course-notice theme-uckk-course-notice-integrity alert alert-secondary mb-2" role="note">
+                    <i class="fa fa-shield-halved" aria-hidden="true"></i>
+                    <span>
+                        {{#str}} integritycoursenotice, theme_uckk {{/str}}
+                    </span>
+
+                    {{#integrityurl}}
+                        <a class="alert-link ms-1" href="{{integrityurl}}">
+                            {{#str}} viewintegrityspace, theme_uckk {{/str}}
+                        </a>
+                    {{/integrityurl}}
+                </div>
+            {{/showintegritynotice}}
+        </div>
+
+        <div class="theme-uckk-course-actions d-flex flex-wrap gap-2 mt-4">
+            {{#actions}}
+                <a class="btn {{#primary}}btn-primary{{/primary}}{{^primary}}btn-outline-secondary{{/primary}}" href="{{url}}">
+                    {{#icon}}
+                        <i class="fa {{icon}}" aria-hidden="true"></i>
+                    {{/icon}}
+                    <span>{{label}}</span>
+                </a>
+            {{/actions}}
+
+            {{#showcompetencies}}
+                <a class="btn btn-outline-secondary" href="{{competenciesurl}}">
+                    <i class="fa fa-diagram-project" aria-hidden="true"></i>
+                    <span>{{#str}} competencies, core_competency {{/str}}</span>
+                </a>
+            {{/showcompetencies}}
+
+            {{#showbadges}}
+                <a class="btn btn-outline-secondary" href="{{badgesurl}}">
+                    <i class="fa fa-award" aria-hidden="true"></i>
+                    <span>{{#str}} badges, core_badges {{/str}}</span>
+                </a>
+            {{/showbadges}}
+
+            {{#showarchive}}
+                <a class="btn btn-outline-secondary" href="{{archiveurl}}">
+                    <i class="fa fa-box-archive" aria-hidden="true"></i>
+                    <span>{{#str}} archive, theme_uckk {{/str}}</span>
+                </a>
+            {{/showarchive}}
+        </div>
+    </div>
+</header>

@@ -1,0 +1,201 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+{{!
+    @template format_uckk/local/content/section/cmitem
+
+    UCKK course format cmitem template.
+
+    This template wraps the core Moodle course module item with optional
+    UCKK visual metadata. It intentionally delegates the actual activity
+    rendering to the core course format template.
+
+    The template must remain presentation-only:
+    - no permission logic;
+    - no completion logic;
+    - no integrity decision logic;
+    - no archive validation logic;
+    - no AI authority logic.
+
+    Any UCKK-specific values must be prepared by the corresponding output class,
+    renderer, exporter, or course format model.
+
+    Required Moodle/core context:
+    The standard core_courseformat/local/content/section/cmitem context.
+
+    Optional UCKK context:
+    {
+        "uckkcm": {
+            "enabled": true,
+            "type": "proof",
+            "typeclass": "proof",
+            "typelabel": "Preuve",
+            "status": "pending_review",
+            "statuslabel": "En attente de révision",
+            "visibility": "course",
+            "visibilitylabel": "Cours",
+            "hasmetadata": true,
+            "hasstatus": true,
+            "hasvisibility": true,
+            "hasproof": true,
+            "prooflabel": "Preuve requise",
+            "proofstatus": "Preuve manquante",
+            "hasarchive": true,
+            "archivelabel": "Archive requise",
+            "archivestatus": "Archive manquante",
+            "hasintegrity": true,
+            "integritylabel": "Intégrité",
+            "integritystatus": "Vérification requise",
+            "hasdeliberation": true,
+            "deliberationlabel": "Délibération",
+            "deliberationstatus": "Assemblée liée",
+            "hasai": true,
+            "ailabel": "IA non souveraine",
+            "aistatus": "Validation humaine requise",
+            "showwarning": false,
+            "warning": "Cette activité comporte un rappel d’intégrité.",
+            "classes": "uckk-cmitem-proof"
+        }
+    }
+}}
+
+{{< core_courseformat/local/content/section/cmitem }}
+
+    {{!
+        Wrap the standard Moodle course module rendering.
+
+        Moodle's course format system uses blocks rather than simple partial
+        inclusions for course format templates. This block keeps the core
+        activity rendering intact and adds UCKK-specific presentation around it.
+    }}
+    {{$ core_courseformat/local/content/cm }}
+        <div
+            class="uckk-cmitem {{#uckkcm}}{{#enabled}}uckk-cmitem-enabled {{#typeclass}}uckk-cmitem-{{typeclass}}{{/typeclass}} {{#classes}}{{classes}}{{/classes}}{{/enabled}}{{/uckkcm}}"
+            data-region="uckk-cmitem"
+            {{#uckkcm}}
+                {{#enabled}}
+                    data-uckk-cm="1"
+                    {{#type}}data-uckk-type="{{type}}"{{/type}}
+                    {{#status}}data-uckk-status="{{status}}"{{/status}}
+                    {{#visibility}}data-uckk-visibility="{{visibility}}"{{/visibility}}
+                {{/enabled}}
+            {{/uckkcm}}
+        >
+            {{#uckkcm}}
+                {{#enabled}}
+                    {{#hasmetadata}}
+                        <div class="uckk-cmitem-meta d-flex flex-wrap align-items-center mb-2" data-region="uckk-cmitem-meta">
+                            {{#typelabel}}
+                                <span class="uckk-symbolic-badge uckk-cmitem-type mr-1 mb-1">
+                                    {{typelabel}}
+                                </span>
+                            {{/typelabel}}
+
+                            {{#hasstatus}}
+                                <span class="uckk-status-badge uckk-status-{{status}} mr-1 mb-1">
+                                    {{statuslabel}}
+                                </span>
+                            {{/hasstatus}}
+
+                            {{#hasvisibility}}
+                                <span class="uckk-visibility-badge uckk-visibility-{{visibility}} mr-1 mb-1">
+                                    {{visibilitylabel}}
+                                </span>
+                            {{/hasvisibility}}
+                        </div>
+                    {{/hasmetadata}}
+
+                    {{#showwarning}}
+                        <div class="uckk-integrity-notice small mb-2" role="note" data-region="uckk-cmitem-warning">
+                            {{warning}}
+                        </div>
+                    {{/showwarning}}
+                {{/enabled}}
+            {{/uckkcm}}
+
+            <div class="uckk-cmitem-core" data-region="uckk-cmitem-core">
+                {{> core_courseformat/local/content/cm }}
+            </div>
+
+            {{#uckkcm}}
+                {{#enabled}}
+                    <div class="uckk-cmitem-signals mt-2" data-region="uckk-cmitem-signals">
+                        {{#hasproof}}
+                            <div class="uckk-cmitem-signal uckk-cmitem-proof small">
+                                <span class="uckk-cmitem-signal-label">
+                                    {{prooflabel}}
+                                </span>
+                                {{#proofstatus}}
+                                    <span class="uckk-cmitem-signal-status">
+                                        {{proofstatus}}
+                                    </span>
+                                {{/proofstatus}}
+                            </div>
+                        {{/hasproof}}
+
+                        {{#hasdeliberation}}
+                            <div class="uckk-cmitem-signal uckk-cmitem-deliberation small">
+                                <span class="uckk-cmitem-signal-label">
+                                    {{deliberationlabel}}
+                                </span>
+                                {{#deliberationstatus}}
+                                    <span class="uckk-cmitem-signal-status">
+                                        {{deliberationstatus}}
+                                    </span>
+                                {{/deliberationstatus}}
+                            </div>
+                        {{/hasdeliberation}}
+
+                        {{#hasarchive}}
+                            <div class="uckk-cmitem-signal uckk-cmitem-archive small">
+                                <span class="uckk-cmitem-signal-label">
+                                    {{archivelabel}}
+                                </span>
+                                {{#archivestatus}}
+                                    <span class="uckk-cmitem-signal-status">
+                                        {{archivestatus}}
+                                    </span>
+                                {{/archivestatus}}
+                            </div>
+                        {{/hasarchive}}
+
+                        {{#hasintegrity}}
+                            <div class="uckk-cmitem-signal uckk-cmitem-integrity small">
+                                <span class="uckk-cmitem-signal-label">
+                                    {{integritylabel}}
+                                </span>
+                                {{#integritystatus}}
+                                    <span class="uckk-cmitem-signal-status">
+                                        {{integritystatus}}
+                                    </span>
+                                {{/integritystatus}}
+                            </div>
+                        {{/hasintegrity}}
+
+                        {{#hasai}}
+                            <div class="uckk-cmitem-signal uckk-cmitem-ai small">
+                                <span class="uckk-cmitem-signal-label">
+                                    {{ailabel}}
+                                </span>
+                                {{#aistatus}}
+                                    <span class="uckk-cmitem-signal-status">
+                                        {{aistatus}}
+                                    </span>
+                                {{/aistatus}}
+                            </div>
+                        {{/hasai}}
+                    </div>
+                {{/enabled}}
+            {{/uckkcm}}
+        </div>
+    {{/ core_courseformat/local/content/cm }}
+
+{{/ core_courseformat/local/content/section/cmitem }}

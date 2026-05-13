@@ -1,0 +1,139 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+{{!
+    @template format_uckk/local/content/section/uckksectionheader
+
+    UCKK section header partial.
+
+    This partial renders the UCKK pedagogical identity of a course section:
+    section number, canonical role, section label, section tagline, and
+    pedagogical markers for proof, deliberation, archive, integrity and AI.
+
+    This template is presentation-only. Section metadata must be prepared by:
+    course/format/uckk/classes/output/courseformat/content/section.php
+
+    Expected context:
+    {
+        "id": 12,
+        "num": 4,
+        "title": "Preuves",
+        "uckksectionnum": 4,
+        "uckksectionkey": "preuves",
+        "uckksectionlabel": "Preuves",
+        "uckksectionshortlabel": "Preuves",
+        "uckksectionrole": "Production vérifiable",
+        "uckksectiontagline": "Déposer des traces, artefacts, observations et arguments pouvant être vérifiés.",
+        "uckksectioncssclass": "uckk-section-preuves",
+        "uckksectionclasses": "uckk-section uckk-section-preuves uckk-section-number-4",
+        "uckkrequiresproof": true,
+        "uckkrequiresdeliberation": false,
+        "uckkrequiresarchive": true,
+        "uckkshowintegritynotice": true,
+        "uckkshowainotice": true
+    }
+}}
+
+<header
+    class="uckk-section-header {{uckksectioncssclass}}"
+    data-for="uckk-section-header"
+    data-sectionid="{{id}}"
+    data-sectionnum="{{uckksectionnum}}"
+    data-uckk-section-key="{{uckksectionkey}}"
+>
+    <div class="uckk-section-header-main">
+        <div class="uckk-section-identity">
+            <span class="uckk-section-index" aria-hidden="true">
+                {{uckksectionnum}}
+            </span>
+
+            <div class="uckk-section-heading">
+                <div class="uckk-section-kicker">
+                    {{uckksectionrole}}
+                </div>
+
+                <h3 class="uckk-section-title mb-0">
+                    {{uckksectionlabel}}
+                </h3>
+
+                {{#uckksectiontagline}}
+                    <p class="uckk-section-tagline mb-0">
+                        {{uckksectiontagline}}
+                    </p>
+                {{/uckksectiontagline}}
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="uckk-section-markers"
+        aria-label="{{#str}} status, theme_uckk {{/str}}"
+    >
+        {{#uckkrequiresproof}}
+            <span
+                class="uckk-symbolic-badge uckk-section-marker uckk-section-marker-proof"
+                data-for="uckk-section-proof-marker"
+            >
+                {{#str}} proofs, theme_uckk {{/str}}
+            </span>
+        {{/uckkrequiresproof}}
+
+        {{#uckkrequiresdeliberation}}
+            <span
+                class="uckk-symbolic-badge uckk-section-marker uckk-section-marker-deliberation"
+                data-for="uckk-section-deliberation-marker"
+            >
+                {{#str}} course_deliberation, theme_uckk {{/str}}
+            </span>
+        {{/uckkrequiresdeliberation}}
+
+        {{#uckkrequiresarchive}}
+            <span
+                class="uckk-symbolic-badge uckk-section-marker uckk-section-marker-archive"
+                data-for="uckk-section-archive-marker"
+            >
+                {{#str}} archive, theme_uckk {{/str}}
+            </span>
+        {{/uckkrequiresarchive}}
+    </div>
+</header>
+
+{{#uckkshowintegritynotice}}
+    <div
+        class="uckk-integrity-notice uckk-section-notice"
+        data-for="uckk-section-integrity-notice"
+        data-sectionid="{{id}}"
+        role="note"
+    >
+        <strong class="d-block mb-1">
+            {{#str}} integrity_guardrail, theme_uckk {{/str}}
+        </strong>
+        <span>
+            {{#str}} integrity_notice, theme_uckk {{/str}}
+        </span>
+    </div>
+{{/uckkshowintegritynotice}}
+
+{{#uckkshowainotice}}
+    <div
+        class="uckk-ai-notice uckk-section-notice"
+        data-for="uckk-section-ai-notice"
+        data-sectionid="{{id}}"
+        role="note"
+    >
+        <span class="uckk-ai-label mr-2">
+            {{#str}} ai_nonsovereign, theme_uckk {{/str}}
+        </span>
+        <span>
+            {{#str}} ai_warning, theme_uckk {{/str}}
+        </span>
+    </div>
+{{/uckkshowainotice}}

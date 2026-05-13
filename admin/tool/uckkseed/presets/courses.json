@@ -1,0 +1,851 @@
+{
+  "schema": "uckkseed.preset.v1",
+  "component": "tool_uckkseed",
+  "preset": "courses",
+  "version": 2026051200,
+  "items": [
+    {
+      "key": "UCKK-000",
+      "fullname": "UCKK-000 — Accueil, orientation et règles du campus",
+      "shortname": "UCKK-000",
+      "idnumber": "UCKK-000",
+      "category": "00_accueil_et_orientation",
+      "format": "uckk",
+      "template": "uckk_course_orientation",
+      "summary": "Cours d’accueil du campus UCKK-Moodle. Il présente la distinction entre kOA, UCKK, kOA Digital Ecosystem et King Klown, les règles de participation, les limites de reconnaissance interne, les attentes d’intégrité, les parcours, les tableaux de bord, les archives et les assemblées.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "title": "Orientation",
+          "summary": "Entrée dans le campus, distinction entre mouvement, école, infrastructure et récit, règles de participation et limites institutionnelles."
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "title": "Concepts",
+          "summary": "Vocabulaire minimal : Joueur, Mentor, Assemblée, Archive, Défi, Inquisiteur, preuve, provenance, visibilité et validation."
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "title": "Matière canonique",
+          "summary": "Documents canoniques courts nécessaires pour comprendre UCKK-Moodle."
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "title": "Atelier",
+          "summary": "Premiers exercices de navigation, profil Joueur, tableau de bord, parcours et outils Moodle."
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "title": "Preuves",
+          "summary": "Introduction aux preuves pédagogiques, aux traces et à la provenance."
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "title": "Délibération",
+          "summary": "Introduction aux Assemblées, aux motions, objections, votes, décisions et contestations."
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "title": "Livrable",
+          "summary": "Mini-livrable d’orientation : carte personnelle du parcours UCKK."
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "title": "Évaluation",
+          "summary": "Critères de complétion du cours d’accueil et consignes de reconnaissance interne."
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "title": "Archive",
+          "summary": "Première trace d’archive personnelle et explication de la mémoire institutionnelle."
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "viewrequired": true,
+        "manual": false,
+        "requirements": [
+          "view_course",
+          "complete_orientation_activity",
+          "acknowledge_integrity_notice"
+        ]
+      },
+      "metadata": {
+        "program": "orientation",
+        "coursecode": "UCKK-000",
+        "status": "active",
+        "type": "orientation",
+        "language": "fr",
+        "recognition_scope": "internal",
+        "no_public_accreditation_claim": true,
+        "sortorder": 0,
+        "required_for_all_players": true,
+        "source": "UCKK-Moodle seed"
+      }
+    },
+    {
+      "key": "UCKK-TC101",
+      "fullname": "UCKK-TC101 — Cartographie des idées avec l’IA",
+      "shortname": "UCKK-TC101",
+      "idnumber": "UCKK-TC101",
+      "category": "01_tronc_commun_obligatoire",
+      "format": "uckk",
+      "template": "uckk_course_standard",
+      "summary": "Cours du tronc commun sur la cartographie des idées avec l’IA. L’IA y est utilisée comme aide non souveraine pour clarifier, structurer, comparer et questionner des idées sans remplacer la validation humaine.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "title": "Orientation",
+          "summary": "Objectifs, règles d’usage de l’IA, limites de l’outil et exigences de provenance."
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "title": "Concepts",
+          "summary": "Carte, concept, hypothèse, interprétation, graphe, contradiction, incertitude et aide IA."
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "title": "Matière canonique",
+          "summary": "Textes et exemples sur la lecture critique, la cartographie et l’IA non souveraine."
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "title": "Atelier",
+          "summary": "Ateliers de cartographie d’un problème, comparaison de modèles et critique d’une sortie IA."
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "title": "Preuves",
+          "summary": "Dépôt d’une carte argumentée avec journal d’usage IA."
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "title": "Délibération",
+          "summary": "Discussion des cartes produites, objections et corrections."
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "title": "Livrable",
+          "summary": "Carte finale commentée avec incertitudes, sources et limites."
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "title": "Évaluation",
+          "summary": "Évaluation de la clarté, de la traçabilité, de l’esprit critique et du respect de la politique IA."
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "title": "Archive",
+          "summary": "Archivage de la carte finale et de la provenance associée."
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "viewrequired": true,
+        "manual": false,
+        "requirements": [
+          "submit_proof",
+          "archive_learning_trace"
+        ]
+      },
+      "metadata": {
+        "program": "tronc_commun",
+        "coursecode": "UCKK-TC101",
+        "status": "active",
+        "type": "tronc_commun",
+        "language": "fr",
+        "recognition_scope": "internal",
+        "no_public_accreditation_claim": true,
+        "sortorder": 101,
+        "competencies": [
+          "UCKK-COMP-002",
+          "UCKK-COMP-003",
+          "UCKK-COMP-004"
+        ],
+        "source": "local_uckk_get_tronc_commun_courses"
+      }
+    },
+    {
+      "key": "UCKK-TC102",
+      "fullname": "UCKK-TC102 — Intelligence collective, expertise située et décision légitime",
+      "shortname": "UCKK-TC102",
+      "idnumber": "UCKK-TC102",
+      "category": "01_tronc_commun_obligatoire",
+      "format": "uckk",
+      "template": "uckk_course_standard",
+      "summary": "Cours du tronc commun sur l’intelligence collective, l’expertise située, les procédures délibératives et les conditions d’une décision légitime.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "title": "Orientation",
+          "summary": "Introduction à la décision légitime et au rôle des Assemblées."
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "title": "Concepts",
+          "summary": "Expertise située, délibération, légitimité, objection, consentement, vote et minorité."
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "title": "Matière canonique",
+          "summary": "Références sur intelligence collective, institutions, procédures et décision collective."
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "title": "Atelier",
+          "summary": "Simulation d’assemblée, formulation d’objections et analyse de décision."
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "title": "Preuves",
+          "summary": "Dépôt d’une analyse de procédure ou d’une trace de participation."
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "title": "Délibération",
+          "summary": "Débat structuré sur un cas de décision contestable."
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "title": "Livrable",
+          "summary": "Protocole court de décision légitime."
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "title": "Évaluation",
+          "summary": "Évaluation de la qualité procédurale, de l’écoute des objections et de la traçabilité."
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "title": "Archive",
+          "summary": "Archivage du protocole, des objections et des décisions."
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "viewrequired": true,
+        "manual": false,
+        "requirements": [
+          "participate_assembly",
+          "document_decision"
+        ]
+      },
+      "metadata": {
+        "program": "tronc_commun",
+        "coursecode": "UCKK-TC102",
+        "status": "active",
+        "type": "tronc_commun",
+        "language": "fr",
+        "recognition_scope": "internal",
+        "no_public_accreditation_claim": true,
+        "sortorder": 102,
+        "competencies": [
+          "UCKK-COMP-006",
+          "UCKK-COMP-008",
+          "UCKK-COMP-013"
+        ],
+        "source": "local_uckk_get_tronc_commun_courses"
+      }
+    },
+    {
+      "key": "UCKK-TC103",
+      "fullname": "UCKK-TC103 — Agitation institutionnelle et mesure de l’utilité réelle",
+      "shortname": "UCKK-TC103",
+      "idnumber": "UCKK-TC103",
+      "category": "01_tronc_commun_obligatoire",
+      "format": "uckk",
+      "template": "uckk_course_standard",
+      "summary": "Cours du tronc commun sur l’action utile, les interventions institutionnelles responsables, la mesure de l’utilité réelle et les limites éthiques de l’agitation.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "title": "Orientation",
+          "summary": "Cadre d’une agitation institutionnelle responsable."
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "title": "Concepts",
+          "summary": "Utilité réelle, intervention, métrique, effet secondaire, responsabilité et correction."
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "title": "Matière canonique",
+          "summary": "Références sur action publique, évaluation d’impact et prudence institutionnelle."
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "title": "Atelier",
+          "summary": "Conception d’une intervention limitée et mesurable."
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "title": "Preuves",
+          "summary": "Dépôt d’un plan d’action et d’un protocole de mesure."
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "title": "Délibération",
+          "summary": "Discussion des risques, objections et critères d’arrêt."
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "title": "Livrable",
+          "summary": "Plan d’intervention institutionnelle responsable."
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "title": "Évaluation",
+          "summary": "Évaluation de l’utilité, de la prudence, des preuves et de la capacité de correction."
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "title": "Archive",
+          "summary": "Archivage de l’intervention, des mesures et des corrections."
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "viewrequired": true,
+        "manual": false,
+        "requirements": [
+          "produce_proof",
+          "responsible_mobilisation"
+        ]
+      },
+      "metadata": {
+        "program": "tronc_commun",
+        "coursecode": "UCKK-TC103",
+        "status": "active",
+        "type": "tronc_commun",
+        "language": "fr",
+        "recognition_scope": "internal",
+        "no_public_accreditation_claim": true,
+        "sortorder": 103,
+        "competencies": [
+          "UCKK-COMP-005",
+          "UCKK-COMP-007",
+          "UCKK-COMP-012"
+        ],
+        "source": "local_uckk_get_tronc_commun_courses"
+      }
+    },
+    {
+      "key": "UCKK-TC104",
+      "fullname": "UCKK-TC104 — Société des flux : argent, information et pouvoir",
+      "shortname": "UCKK-TC104",
+      "idnumber": "UCKK-TC104",
+      "category": "01_tronc_commun_obligatoire",
+      "format": "uckk",
+      "template": "uckk_course_standard",
+      "summary": "Cours du tronc commun sur les flux d’argent, d’information, d’attention, d’autorité et de pouvoir dans les systèmes sociaux.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "title": "Orientation",
+          "summary": "Lecture des flux sociaux et des formes de pouvoir."
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "title": "Concepts",
+          "summary": "Flux, ressource, incitatif, réseau, asymétrie, autorité visible et autorité cachée."
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "title": "Matière canonique",
+          "summary": "Références sur économie politique, information, incitatifs et pouvoirs institutionnels."
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "title": "Atelier",
+          "summary": "Cartographie d’un système de flux."
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "title": "Preuves",
+          "summary": "Dépôt d’une carte de flux argumentée."
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "title": "Délibération",
+          "summary": "Discussion des lieux de capture, dépendance et domination."
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "title": "Livrable",
+          "summary": "Analyse structurée d’un système de flux."
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "title": "Évaluation",
+          "summary": "Évaluation de la qualité de la carte, des preuves et de l’identification des pouvoirs."
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "title": "Archive",
+          "summary": "Archivage de l’analyse et de ses sources."
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "viewrequired": true,
+        "manual": false,
+        "requirements": [
+          "map_system",
+          "detect_hidden_authority"
+        ]
+      },
+      "metadata": {
+        "program": "tronc_commun",
+        "coursecode": "UCKK-TC104",
+        "status": "active",
+        "type": "tronc_commun",
+        "language": "fr",
+        "recognition_scope": "internal",
+        "no_public_accreditation_claim": true,
+        "sortorder": 104,
+        "competencies": [
+          "UCKK-COMP-001",
+          "UCKK-COMP-002",
+          "UCKK-COMP-011"
+        ],
+        "source": "local_uckk_get_tronc_commun_courses"
+      }
+    },
+    {
+      "key": "UCKK-TC105",
+      "fullname": "UCKK-TC105 — Fiction fondatrice, vérité morale et récits symboliques",
+      "shortname": "UCKK-TC105",
+      "idnumber": "UCKK-TC105",
+      "category": "01_tronc_commun_obligatoire",
+      "format": "uckk",
+      "template": "uckk_course_standard",
+      "summary": "Cours du tronc commun sur le rôle des récits, symboles et fictions fondatrices, avec distinction stricte entre scène pédagogique, vérité morale, fait vérifiable et manipulation.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "title": "Orientation",
+          "summary": "Pourquoi les récits mobilisent et pourquoi ils doivent être bornés."
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "title": "Concepts",
+          "summary": "Fiction, fait, symbole, récit, vérité morale, théâtre public et abus."
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "title": "Matière canonique",
+          "summary": "Références sur mythes, récits, théâtre politique et limites éthiques."
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "title": "Atelier",
+          "summary": "Analyse d’un récit symbolique et de ses effets institutionnels."
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "title": "Preuves",
+          "summary": "Dépôt d’une analyse distinguant faits, récits et décisions."
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "title": "Délibération",
+          "summary": "Discussion des limites entre spectacle permis et abus."
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "title": "Livrable",
+          "summary": "Charte courte d’usage responsable d’un récit symbolique."
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "title": "Évaluation",
+          "summary": "Évaluation de la clarté conceptuelle, de l’éthique et de la distinction fiction/fait."
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "title": "Archive",
+          "summary": "Archivage de la charte et de l’analyse."
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "viewrequired": true,
+        "manual": false,
+        "requirements": [
+          "distinguish_claims",
+          "apply_ethics"
+        ]
+      },
+      "metadata": {
+        "program": "tronc_commun",
+        "coursecode": "UCKK-TC105",
+        "status": "active",
+        "type": "tronc_commun",
+        "language": "fr",
+        "recognition_scope": "internal",
+        "no_public_accreditation_claim": true,
+        "sortorder": 105,
+        "competencies": [
+          "UCKK-COMP-003",
+          "UCKK-COMP-010",
+          "UCKK-COMP-013"
+        ],
+        "source": "local_uckk_get_tronc_commun_courses"
+      }
+    },
+    {
+      "key": "UCKK-TC106",
+      "fullname": "UCKK-TC106 — Mobilisation multi-corridor et coopération pratique",
+      "shortname": "UCKK-TC106",
+      "idnumber": "UCKK-TC106",
+      "category": "01_tronc_commun_obligatoire",
+      "format": "uckk",
+      "template": "uckk_course_standard",
+      "summary": "Cours du tronc commun sur la mobilisation responsable, les corridors d’action, la coopération pratique et l’articulation entre contraintes, rôles, preuves et effets.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "title": "Orientation",
+          "summary": "Mobiliser sans manipuler et coopérer sans confusion d’autorité."
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "title": "Concepts",
+          "summary": "Corridor d’action, mobilisation, coopération, rôle, coordination, risque et responsabilité."
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "title": "Matière canonique",
+          "summary": "Références sur coopération, mobilisation, organisation et action collective."
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "title": "Atelier",
+          "summary": "Conception d’un plan de mobilisation multi-corridor."
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "title": "Preuves",
+          "summary": "Dépôt d’un plan de mobilisation avec risques et garde-fous."
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "title": "Délibération",
+          "summary": "Discussion des risques, conflits, rôles et limites."
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "title": "Livrable",
+          "summary": "Plan final de mobilisation responsable."
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "title": "Évaluation",
+          "summary": "Évaluation de la faisabilité, de la coopération, de l’éthique et de la traçabilité."
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "title": "Archive",
+          "summary": "Archivage du plan, des risques et des corrections."
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "viewrequired": true,
+        "manual": false,
+        "requirements": [
+          "responsible_mobilisation",
+          "build_useful_artefact"
+        ]
+      },
+      "metadata": {
+        "program": "tronc_commun",
+        "coursecode": "UCKK-TC106",
+        "status": "active",
+        "type": "tronc_commun",
+        "language": "fr",
+        "recognition_scope": "internal",
+        "no_public_accreditation_claim": true,
+        "sortorder": 106,
+        "competencies": [
+          "UCKK-COMP-007",
+          "UCKK-COMP-012",
+          "UCKK-COMP-014"
+        ],
+        "source": "local_uckk_get_tronc_commun_courses"
+      }
+    },
+    {
+      "key": "UCKK-TC107",
+      "fullname": "UCKK-TC107 — Introduction à kOA : connaissance, décision, action, mémoire",
+      "shortname": "UCKK-TC107",
+      "idnumber": "UCKK-TC107",
+      "category": "01_tronc_commun_obligatoire",
+      "format": "uckk",
+      "template": "uckk_course_standard",
+      "summary": "Cours du tronc commun sur la relation entre kOA, UCKK, le kOA Digital Ecosystem et King Klown, ainsi que le cycle Connaître → Choisir → Agir → Se souvenir.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "title": "Orientation",
+          "summary": "Entrée dans la relation kOA, UCKK, infrastructure numérique et figure narrative."
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "title": "Concepts",
+          "summary": "Mouvement, école, infrastructure, récit, connaissance, décision, action et mémoire."
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "title": "Matière canonique",
+          "summary": "Documents sur la hiérarchie kOA / UCKK / kOA Digital Ecosystem / King Klown."
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "title": "Atelier",
+          "summary": "Carte du cycle Connaître → Choisir → Agir → Se souvenir."
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "title": "Preuves",
+          "summary": "Dépôt d’un schéma commenté du cycle."
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "title": "Délibération",
+          "summary": "Discussion des risques de confusion entre mouvement, école, infrastructure et récit."
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "title": "Livrable",
+          "summary": "Carte finale du cycle kOA appliqué à UCKK."
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "title": "Évaluation",
+          "summary": "Évaluation de la compréhension des distinctions, du cycle opératoire et des risques de gouvernance."
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "title": "Archive",
+          "summary": "Archivage de la carte et des clarifications."
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "viewrequired": true,
+        "manual": false,
+        "requirements": [
+          "know_choose_act_remember",
+          "archive_learning"
+        ]
+      },
+      "metadata": {
+        "program": "tronc_commun",
+        "coursecode": "UCKK-TC107",
+        "status": "active",
+        "type": "tronc_commun",
+        "language": "fr",
+        "recognition_scope": "internal",
+        "no_public_accreditation_claim": true,
+        "sortorder": 107,
+        "competencies": [
+          "UCKK-COMP-009",
+          "UCKK-COMP-011",
+          "UCKK-COMP-014"
+        ],
+        "source": "local_uckk_get_tronc_commun_courses"
+      }
+    },
+    {
+      "key": "UCKK-TC108",
+      "fullname": "UCKK-TC108 — Éthique, intégrité et Inquisiteur méthodologique",
+      "shortname": "UCKK-TC108",
+      "idnumber": "UCKK-TC108",
+      "category": "01_tronc_commun_obligatoire",
+      "format": "uckk",
+      "template": "uckk_course_standard",
+      "summary": "Cours du tronc commun sur la dignité des personnes, la vérité des faits, la clarté des règles, la justice procédurale, la non-manipulation, la contestabilité et le rôle de l’Inquisiteur méthodologique.",
+      "visible": true,
+      "startdate": 0,
+      "enddate": 0,
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "title": "Orientation",
+          "summary": "Cadre éthique et limites non négociables de l’UCKK."
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "title": "Concepts",
+          "summary": "Dignité, preuve, enquête, accusation, réparation, sanction, abus, procédure et contestabilité."
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "title": "Matière canonique",
+          "summary": "Documents sur intégrité, Inquisiteur, privacy, archives, dignité et limites éthiques."
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "title": "Atelier",
+          "summary": "Analyse de cas éthique et conception d’une règle claire."
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "title": "Preuves",
+          "summary": "Dépôt d’une analyse éthique ou d’un protocole d’intégrité."
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "title": "Délibération",
+          "summary": "Discussion des abus possibles, procédures et recours."
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "title": "Livrable",
+          "summary": "Protocole court pour traiter un défi, une assemblée ou une plainte."
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "title": "Évaluation",
+          "summary": "Évaluation de la prudence, de la justice procédurale et de la capacité à protéger la dignité."
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "title": "Archive",
+          "summary": "Archivage du protocole, des corrections et des traces d’apprentissage."
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "viewrequired": true,
+        "manual": false,
+        "requirements": [
+          "apply_ethics",
+          "contestability"
+        ]
+      },
+      "metadata": {
+        "program": "tronc_commun",
+        "coursecode": "UCKK-TC108",
+        "status": "active",
+        "type": "tronc_commun",
+        "language": "fr",
+        "recognition_scope": "internal",
+        "no_public_accreditation_claim": true,
+        "sortorder": 108,
+        "competencies": [
+          "UCKK-COMP-003",
+          "UCKK-COMP-010",
+          "UCKK-COMP-013"
+        ],
+        "source": "local_uckk_get_tronc_commun_courses"
+      }
+    }
+  ]
+}

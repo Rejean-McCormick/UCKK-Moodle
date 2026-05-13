@@ -1,0 +1,1009 @@
+{
+  "schema": "uckkseed.preset.v1",
+  "component": "tool_uckkseed",
+  "preset": "capabilities",
+  "version": 2026051200,
+  "items": [
+    {
+      "role": "uckkmanager",
+      "capability": "local/uckk:viewcampus",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "local/uckk:manageprograms",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "local/uckk:managepathways",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "local/uckk:manageprofiles",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "local/uckk:managecanon",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "local/uckk:viewreports",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "local/uckk:exportdata",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "local/uckk:viewrestricted",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "local/uckk:manageintegrations",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+
+    {
+      "role": "uckkmanager",
+      "capability": "format/uckk:viewcoursemap",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "format/uckk:viewevidenceindicators",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "format/uckk:viewarchiveindicators",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "format/uckk:viewintegritymarkers",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "format/uckk:configuresections",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "format/uckk:manageblueprint",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "format/uckk:resetsectionnames",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "format/uckk:viewdiagnostics",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+
+    {
+      "role": "uckkmanager",
+      "capability": "block/uckk_dashboard:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "block_uckk_dashboard"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "block/uckk_dashboard:viewothers",
+      "permission": "allow",
+      "context": "system",
+      "component": "block_uckk_dashboard"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "block/uckk_dashboard:configure",
+      "permission": "allow",
+      "context": "system",
+      "component": "block_uckk_dashboard"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "block/uckk_dashboard:addinstance",
+      "permission": "allow",
+      "context": "system",
+      "component": "block_uckk_dashboard"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "block/uckk_dashboard:myaddinstance",
+      "permission": "allow",
+      "context": "user",
+      "component": "block_uckk_dashboard"
+    },
+
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkchallenge:addinstance",
+      "permission": "allow",
+      "context": "course",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkchallenge:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkchallenge:createchallenge",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkchallenge:submitproof",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkchallenge:evaluate",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkchallenge:validateintegrity",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkchallenge:archive",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkassembly:addinstance",
+      "permission": "allow",
+      "context": "course",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkassembly:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkassembly:createassembly",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkassembly:proposemotion",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkassembly:amendmotion",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkassembly:vote",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkassembly:publishdecision",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkassembly:contestdecision",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkassembly:archive",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkarchive:addinstance",
+      "permission": "allow",
+      "context": "course",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkarchive:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkarchive:additem",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkarchive:validateitem",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkarchive:reviseitem",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkarchive:viewrestricted",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "mod/uckkarchive:export",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+
+    {
+      "role": "uckkmanager",
+      "capability": "tool/uckkseed:seed",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkseed"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "tool/uckkseed:reset",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkseed"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "tool/uckkseed:validate",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkseed"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "tool/uckkseed:exportpresets",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkseed"
+    },
+
+    {
+      "role": "uckkmanager",
+      "capability": "tool/uckkintegrity:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "tool/uckkintegrity:opencase",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "tool/uckkintegrity:viewrestricted",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+
+    {
+      "role": "uckkmanager",
+      "capability": "report/uckk:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "report_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "report/uckk:viewall",
+      "permission": "allow",
+      "context": "system",
+      "component": "report_uckk"
+    },
+    {
+      "role": "uckkmanager",
+      "capability": "report/uckk:export",
+      "permission": "allow",
+      "context": "system",
+      "component": "report_uckk"
+    },
+
+    {
+      "role": "uckkmentor",
+      "capability": "local/uckk:viewcampus",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "local/uckk:viewreports",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "format/uckk:viewcoursemap",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "format/uckk:viewevidenceindicators",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "format/uckk:viewarchiveindicators",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "format/uckk:viewintegritymarkers",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "format/uckk:configuresections",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "block/uckk_dashboard:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "block_uckk_dashboard"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "block/uckk_dashboard:viewothers",
+      "permission": "allow",
+      "context": "system",
+      "component": "block_uckk_dashboard"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkchallenge:addinstance",
+      "permission": "allow",
+      "context": "course",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkchallenge:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkchallenge:createchallenge",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkchallenge:submitproof",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkchallenge:evaluate",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkchallenge:archive",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkassembly:addinstance",
+      "permission": "allow",
+      "context": "course",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkassembly:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkassembly:createassembly",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkassembly:proposemotion",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkassembly:amendmotion",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkassembly:vote",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkassembly:publishdecision",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkassembly:contestdecision",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkassembly:archive",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkarchive:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "mod/uckkarchive:additem",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "tool/uckkintegrity:opencase",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkmentor",
+      "capability": "report/uckk:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "report_uckk"
+    },
+
+    {
+      "role": "uckkplayer",
+      "capability": "local/uckk:viewcampus",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "format/uckk:viewcoursemap",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "format/uckk:viewevidenceindicators",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "format/uckk:viewarchiveindicators",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "block/uckk_dashboard:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "block_uckk_dashboard"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "block/uckk_dashboard:myaddinstance",
+      "permission": "allow",
+      "context": "user",
+      "component": "block_uckk_dashboard"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "mod/uckkchallenge:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "mod/uckkchallenge:submitproof",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "mod/uckkassembly:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "mod/uckkassembly:proposemotion",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "mod/uckkassembly:amendmotion",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "mod/uckkassembly:vote",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "mod/uckkassembly:contestdecision",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "mod/uckkarchive:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "mod/uckkarchive:additem",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkplayer",
+      "capability": "tool/uckkintegrity:opencase",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+
+    {
+      "role": "uckkarchivist",
+      "capability": "local/uckk:viewcampus",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "local/uckk:viewrestricted",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "format/uckk:viewcoursemap",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "format/uckk:viewarchiveindicators",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "format/uckk:viewintegritymarkers",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkchallenge:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkchallenge:archive",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkassembly:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkassembly:archive",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkarchive:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkarchive:additem",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkarchive:validateitem",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkarchive:reviseitem",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkarchive:viewrestricted",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "mod/uckkarchive:export",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "tool/uckkintegrity:opencase",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "tool/uckkintegrity:viewrestricted",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkarchivist",
+      "capability": "report/uckk:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "report_uckk"
+    },
+
+    {
+      "role": "uckkinquisitor",
+      "capability": "local/uckk:viewcampus",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "local/uckk:viewrestricted",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "format/uckk:viewintegritymarkers",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "mod/uckkchallenge:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "mod/uckkchallenge:validateintegrity",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "mod/uckkarchive:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "mod/uckkarchive:viewrestricted",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "tool/uckkintegrity:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "tool/uckkintegrity:opencase",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "tool/uckkintegrity:reviewcase",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "tool/uckkintegrity:issuecorrection",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "tool/uckkintegrity:invalidate",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "tool/uckkintegrity:closecase",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "tool/uckkintegrity:viewrestricted",
+      "permission": "allow",
+      "context": "system",
+      "component": "tool_uckkintegrity"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "report/uckk:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "report_uckk"
+    },
+    {
+      "role": "uckkinquisitor",
+      "capability": "report/uckk:viewall",
+      "permission": "allow",
+      "context": "system",
+      "component": "report_uckk"
+    },
+
+    {
+      "role": "uckkobserver",
+      "capability": "local/uckk:viewcampus",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkobserver",
+      "capability": "format/uckk:viewcoursemap",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk"
+    },
+    {
+      "role": "uckkobserver",
+      "capability": "block/uckk_dashboard:view",
+      "permission": "allow",
+      "context": "system",
+      "component": "block_uckk_dashboard"
+    },
+    {
+      "role": "uckkobserver",
+      "capability": "mod/uckkchallenge:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge"
+    },
+    {
+      "role": "uckkobserver",
+      "capability": "mod/uckkassembly:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly"
+    },
+    {
+      "role": "uckkobserver",
+      "capability": "mod/uckkarchive:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    },
+
+    {
+      "role": "uckkpublicguest",
+      "capability": "local/uckk:viewcampus",
+      "permission": "allow",
+      "context": "system",
+      "component": "local_uckk"
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkarchive"
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkchallenge/proof_list
+
+    Proof/evidence list for a UCKK challenge.
+
+    This template expects already permission-filtered proof data.
+
+    Example context:
+    {
+        "uniqid": "uckkchallenge-proof-list-12",
+        "hasproofs": true,
+        "canreview": true,
+        "cansubmit": true,
+        "submiturl": "https://example.test/mod/uckkchallenge/submit.php?id=12",
+        "proofs": [
+            {
+                "id": 44,
+                "anchor": "proof-44",
+                "title": "System map evidence",
+                "prooftype": "file",
+                "prooftypelabel": "File",
+                "status": "submitted",
+                "statuslabel": "Submitted",
+                "visibility": "course",
+                "visibilitylabel": "Course",
+                "integritystate": "unverified",
+                "integritystatelabel": "Unverified",
+                "provenance": "human",
+                "provenancelabel": "Human",
+                "authorname": "Ada Joueuse",
+                "sourcedate": "12 May 2026",
+                "timesubmitted": "12 May 2026, 14:30",
+                "hasrelationtocriteria": true,
+                "relationtocriteria": "Addresses criteria 1 and 3.",
+                "hasprovenancestatement": true,
+                "provenancestatement": "Produced by the learner from course workshop notes.",
+                "hasuncertaintynotes": true,
+                "uncertaintynotes": "Some sources require later verification.",
+                "aiassisted": false,
+                "hasurl": true,
+                "url": "https://example.test/pluginfile.php/...",
+                "hasfiles": true,
+                "files": [
+                    {
+                        "filename": "system-map.pdf",
+                        "filesize": "240 KB",
+                        "url": "https://example.test/pluginfile.php/..."
+                    }
+                ],
+                "canview": true,
+                "viewurl": "https://example.test/mod/uckkchallenge/proof.php?id=44",
+                "canreview": true,
+                "reviewurl": "https://example.test/mod/uckkchallenge/review.php?proofid=44"
+            }
+        ]
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckkchallenge-proof-list"
+    data-region="uckkchallenge-proof-list"
+    aria-label="{{#str}} prooflist, uckkchallenge {{/str}}"
+>
+    <header class="uckkchallenge-proof-list__header">
+        <div class="uckkchallenge-proof-list__identity">
+            <h3 class="uckkchallenge-proof-list__title">
+                {{#str}} submittedproofs, uckkchallenge {{/str}}
+            </h3>
+
+            {{#summary}}
+                <p class="uckkchallenge-proof-list__summary">
+                    {{summary}}
+                </p>
+            {{/summary}}
+        </div>
+
+        {{#cansubmit}}
+            <a href="{{submiturl}}" class="btn btn-primary uckkchallenge-proof-list__submit">
+                {{#str}} submitproof, uckkchallenge {{/str}}
+            </a>
+        {{/cansubmit}}
+    </header>
+
+    {{#hasproofs}}
+        <ul class="uckkchallenge-proof-list__items">
+            {{#proofs}}
+                <li
+                    id="{{anchor}}"
+                    class="uckkchallenge-proof-list__item uckkchallenge-proof-list__item--{{status}}"
+                    data-region="uckkchallenge-proof"
+                    data-proof-id="{{id}}"
+                >
+                    <article class="uckkchallenge-proof-card">
+                        <header class="uckkchallenge-proof-card__header">
+                            <div class="uckkchallenge-proof-card__main">
+                                <p class="uckkchallenge-proof-card__type">
+                                    {{prooftypelabel}}
+                                </p>
+
+                                <h4 class="uckkchallenge-proof-card__title">
+                                    {{#canview}}
+                                        <a href="{{viewurl}}">
+                                            {{title}}
+                                        </a>
+                                    {{/canview}}
+                                    {{^canview}}
+                                        {{title}}
+                                    {{/canview}}
+                                </h4>
+
+                                {{#authorname}}
+                                    <p class="uckkchallenge-proof-card__author">
+                                        {{#str}} submittedby, uckkchallenge {{/str}}:
+                                        <span>{{authorname}}</span>
+                                    </p>
+                                {{/authorname}}
+                            </div>
+
+                            <div class="uckkchallenge-proof-card__badges">
+                                <span class="badge badge-secondary uckkchallenge-proof-card__badge uckkchallenge-proof-card__badge--status-{{status}}">
+                                    {{statuslabel}}
+                                </span>
+
+                                <span class="badge badge-light uckkchallenge-proof-card__badge uckkchallenge-proof-card__badge--visibility-{{visibility}}">
+                                    {{visibilitylabel}}
+                                </span>
+
+                                <span class="badge badge-light uckkchallenge-proof-card__badge uckkchallenge-proof-card__badge--integrity-{{integritystate}}">
+                                    {{integritystatelabel}}
+                                </span>
+                            </div>
+                        </header>
+
+                        <dl class="uckkchallenge-proof-card__meta">
+                            {{#timesubmitted}}
+                                <div class="uckkchallenge-proof-card__meta-item">
+                                    <dt>{{#str}} timesubmitted, uckkchallenge {{/str}}</dt>
+                                    <dd>{{timesubmitted}}</dd>
+                                </div>
+                            {{/timesubmitted}}
+
+                            {{#sourcedate}}
+                                <div class="uckkchallenge-proof-card__meta-item">
+                                    <dt>{{#str}} sourcedate, uckkchallenge {{/str}}</dt>
+                                    <dd>{{sourcedate}}</dd>
+                                </div>
+                            {{/sourcedate}}
+
+                            {{#provenancelabel}}
+                                <div class="uckkchallenge-proof-card__meta-item">
+                                    <dt>{{#str}} provenance, uckkchallenge {{/str}}</dt>
+                                    <dd>{{provenancelabel}}</dd>
+                                </div>
+                            {{/provenancelabel}}
+                        </dl>
+
+                        {{#hasrelationtocriteria}}
+                            <section class="uckkchallenge-proof-card__section">
+                                <h5 class="uckkchallenge-proof-card__section-title">
+                                    {{#str}} relationtocriteria, uckkchallenge {{/str}}
+                                </h5>
+                                <p class="uckkchallenge-proof-card__section-text">
+                                    {{relationtocriteria}}
+                                </p>
+                            </section>
+                        {{/hasrelationtocriteria}}
+
+                        {{#hasprovenancestatement}}
+                            <section class="uckkchallenge-proof-card__section">
+                                <h5 class="uckkchallenge-proof-card__section-title">
+                                    {{#str}} provenancestatement, uckkchallenge {{/str}}
+                                </h5>
+                                <p class="uckkchallenge-proof-card__section-text">
+                                    {{provenancestatement}}
+                                </p>
+                            </section>
+                        {{/hasprovenancestatement}}
+
+                        {{#hasuncertaintynotes}}
+                            <section class="uckkchallenge-proof-card__section uckkchallenge-proof-card__section--uncertainty">
+                                <h5 class="uckkchallenge-proof-card__section-title">
+                                    {{#str}} uncertaintynotes, uckkchallenge {{/str}}
+                                </h5>
+                                <p class="uckkchallenge-proof-card__section-text">
+                                    {{uncertaintynotes}}
+                                </p>
+                            </section>
+                        {{/hasuncertaintynotes}}
+
+                        {{#aiassisted}}
+                            <div class="alert alert-info uckkchallenge-proof-card__ai" role="status">
+                                <strong>{{#str}} aiassisted, uckkchallenge {{/str}}</strong>
+                                <span>{{#str}} ainotfinalauthority, uckkchallenge {{/str}}</span>
+                            </div>
+                        {{/aiassisted}}
+
+                        {{#hasurl}}
+                            <div class="uckkchallenge-proof-card__link">
+                                <a href="{{url}}" rel="nofollow noopener noreferrer">
+                                    {{#str}} openproofurl, uckkchallenge {{/str}}
+                                </a>
+                            </div>
+                        {{/hasurl}}
+
+                        {{#hasfiles}}
+                            <section class="uckkchallenge-proof-card__files">
+                                <h5 class="uckkchallenge-proof-card__section-title">
+                                    {{#str}} prooffiles, uckkchallenge {{/str}}
+                                </h5>
+
+                                <ul class="uckkchallenge-proof-card__file-list">
+                                    {{#files}}
+                                        <li class="uckkchallenge-proof-card__file">
+                                            <a href="{{url}}" class="uckkchallenge-proof-card__file-link">
+                                                {{filename}}
+                                            </a>
+
+                                            {{#filesize}}
+                                                <span class="uckkchallenge-proof-card__file-size">
+                                                    {{filesize}}
+                                                </span>
+                                            {{/filesize}}
+                                        </li>
+                                    {{/files}}
+                                </ul>
+                            </section>
+                        {{/hasfiles}}
+
+                        <footer class="uckkchallenge-proof-card__actions">
+                            {{#canview}}
+                                <a href="{{viewurl}}" class="btn btn-secondary btn-sm">
+                                    {{#str}} viewproof, uckkchallenge {{/str}}
+                                </a>
+                            {{/canview}}
+
+                            {{#canreview}}
+                                <a href="{{reviewurl}}" class="btn btn-primary btn-sm">
+                                    {{#str}} reviewproof, uckkchallenge {{/str}}
+                                </a>
+                            {{/canreview}}
+                        </footer>
+                    </article>
+                </li>
+            {{/proofs}}
+        </ul>
+    {{/hasproofs}}
+
+    {{^hasproofs}}
+        <div class="uckkchallenge-proof-list__empty">
+            <p>{{#str}} noproofsyet, uckkchallenge {{/str}}</p>
+
+            {{#cansubmit}}
+                <a href="{{submiturl}}" class="btn btn-primary">
+                    {{#str}} submitproof, uckkchallenge {{/str}}
+                </a>
+            {{/cansubmit}}
+        </div>
+    {{/hasproofs}}
+</section>

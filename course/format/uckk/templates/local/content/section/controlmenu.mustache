@@ -1,0 +1,97 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+{{!
+    @template format_uckk/local/content/section/controlmenu
+
+    Section control menu template for the UCKK course format.
+
+    This template is intentionally conservative:
+    - it delegates Moodle's real section action menu to the core template;
+    - it does not create action links directly;
+    - it does not encode permissions, editing rules or workflow decisions;
+    - it may display optional UCKK metadata prepared by the output class.
+
+    The corresponding PHP output class should extend:
+
+        core_courseformat\output\local\content\section\controlmenu
+
+    and should provide action_menu_link objects where extra actions are needed.
+
+    Context inherited from Moodle core section control menu:
+    {
+        "menu": "..."
+    }
+
+    Optional UCKK context:
+    {
+        "uckksection": {
+            "enabled": true,
+            "key": "preuves",
+            "label": "Preuves",
+            "number": 4,
+            "showmarker": true,
+            "markerlabel": "Section UCKK",
+            "showintegrity": true,
+            "integritylabel": "Intégrité",
+            "showarchive": true,
+            "archivelabel": "Archive"
+        }
+    }
+}}
+
+<div
+    class="format-uckk-section-controlmenu"
+    data-region="format-uckk-section-controlmenu"
+    {{#uckksection}}
+        {{#key}}data-uckk-section-key="{{key}}"{{/key}}
+        {{#number}}data-uckk-section-number="{{number}}"{{/number}}
+    {{/uckksection}}
+>
+    {{!
+        Keep Moodle's native section action menu intact.
+        The core template receives the original control menu data.
+    }}
+    {{> core_courseformat/local/content/section/controlmenu }}
+
+    {{#uckksection}}
+        {{#enabled}}
+            <span class="format-uckk-section-controlmeta" aria-hidden="true">
+                {{#showmarker}}
+                    <span
+                        class="format-uckk-section-marker format-uckk-section-marker-{{key}}"
+                        title="{{markerlabel}}"
+                    >
+                        {{label}}
+                    </span>
+                {{/showmarker}}
+
+                {{#showintegrity}}
+                    <span
+                        class="format-uckk-section-integrity-marker"
+                        title="{{integritylabel}}"
+                    >
+                        {{integritylabel}}
+                    </span>
+                {{/showintegrity}}
+
+                {{#showarchive}}
+                    <span
+                        class="format-uckk-section-archive-marker"
+                        title="{{archivelabel}}"
+                    >
+                        {{archivelabel}}
+                    </span>
+                {{/showarchive}}
+            </span>
+        {{/enabled}}
+    {{/uckksection}}
+</div>

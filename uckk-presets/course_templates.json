@@ -1,0 +1,413 @@
+{
+  "schema": "uckk.presets.course_templates.v1",
+  "idempotency": "template.key",
+  "default_format": "format_uckk",
+  "defaults": {
+    "visible": true,
+    "completion_enabled": true,
+    "activity_completion_enabled": true,
+    "manual_completion_override_roles": [
+      "mentor_uckk",
+      "gestionnaire_uckk"
+    ],
+    "language_policy": {
+      "primary": "fr",
+      "secondary": "en"
+    },
+    "archive_required_on_completion": true
+  },
+  "sections": [
+    {
+      "key": "orientation",
+      "number": 0,
+      "name": "Orientation",
+      "purpose": "Course entry, rules, expectations",
+      "typical_components": [
+        "page",
+        "book",
+        "label"
+      ],
+      "completion_marker": "viewed_orientation"
+    },
+    {
+      "key": "concepts",
+      "number": 1,
+      "name": "Concepts",
+      "purpose": "Key concepts and definitions",
+      "typical_components": [
+        "page",
+        "glossary",
+        "book"
+      ],
+      "completion_marker": "completed_concept_checks"
+    },
+    {
+      "key": "matiere_canonique",
+      "number": 2,
+      "name": "Matière canonique",
+      "purpose": "Core reading and source material",
+      "typical_components": [
+        "file",
+        "page",
+        "url",
+        "book"
+      ],
+      "completion_marker": "viewed_canonical_material"
+    },
+    {
+      "key": "atelier",
+      "number": 3,
+      "name": "Atelier",
+      "purpose": "Active learning",
+      "typical_components": [
+        "forum",
+        "workshop",
+        "assign"
+      ],
+      "completion_marker": "completed_workshop_activity"
+    },
+    {
+      "key": "preuves",
+      "number": 4,
+      "name": "Preuves",
+      "purpose": "Evidence production",
+      "typical_components": [
+        "assign",
+        "database",
+        "uckkchallenge"
+      ],
+      "completion_marker": "submitted_evidence"
+    },
+    {
+      "key": "deliberation",
+      "number": 5,
+      "name": "Délibération",
+      "purpose": "Collective interpretation",
+      "typical_components": [
+        "forum",
+        "uckkassembly"
+      ],
+      "completion_marker": "participated_in_deliberation"
+    },
+    {
+      "key": "livrable",
+      "number": 6,
+      "name": "Livrable",
+      "purpose": "Final deliverable",
+      "typical_components": [
+        "assign",
+        "uckkchallenge_submission"
+      ],
+      "completion_marker": "submitted_final_deliverable"
+    },
+    {
+      "key": "evaluation",
+      "number": 7,
+      "name": "Évaluation",
+      "purpose": "Grading and feedback",
+      "typical_components": [
+        "gradebook",
+        "rubric"
+      ],
+      "completion_marker": "received_evaluation"
+    },
+    {
+      "key": "archive",
+      "number": 8,
+      "name": "Archive",
+      "purpose": "Final memory",
+      "typical_components": [
+        "uckkarchive"
+      ],
+      "completion_marker": "archived_final_artifact"
+    }
+  ],
+  "templates": [
+    {
+      "key": "uckk_standard_course",
+      "name": "UCKK standard course",
+      "description": "Default UCKK course template for ordinary tronc commun and pathway courses.",
+      "format": "uckk",
+      "completion_enabled": true,
+      "activity_completion_enabled": true,
+      "manual_completion_override_roles": [
+        "mentor_uckk",
+        "gestionnaire_uckk"
+      ],
+      "section_keys": [
+        "orientation",
+        "concepts",
+        "matiere_canonique",
+        "atelier",
+        "preuves",
+        "deliberation",
+        "livrable",
+        "evaluation",
+        "archive"
+      ],
+      "completion_categories": [
+        "viewed_orientation",
+        "completed_concept_checks",
+        "viewed_canonical_material",
+        "completed_workshop_activity",
+        "submitted_evidence",
+        "participated_in_deliberation",
+        "submitted_final_deliverable",
+        "received_evaluation",
+        "archived_final_artifact"
+      ],
+      "default_activities": [
+        {
+          "section": "orientation",
+          "module": "page",
+          "name": "Entrée dans le cours",
+          "required": true
+        },
+        {
+          "section": "concepts",
+          "module": "glossary",
+          "name": "Glossaire du cours",
+          "required": false
+        },
+        {
+          "section": "deliberation",
+          "module": "uckkassembly",
+          "template": "assembly_savoirs_course",
+          "name": "Assemblée des savoirs",
+          "required": true
+        },
+        {
+          "section": "archive",
+          "module": "uckkarchive",
+          "template": "archive_course_memory",
+          "name": "Archive du cours",
+          "required": true
+        }
+      ],
+      "evidence_policy": {
+        "requires_proof": true,
+        "requires_human_validation": true,
+        "requires_archive_link": true,
+        "allows_ai_assistance": true,
+        "ai_output_is_final_authority": false
+      }
+    },
+    {
+      "key": "uckk_orientation_course",
+      "name": "UCKK orientation course",
+      "description": "Template for UCKK-000 and onboarding courses.",
+      "format": "uckk",
+      "completion_enabled": true,
+      "activity_completion_enabled": true,
+      "section_keys": [
+        "orientation",
+        "concepts",
+        "matiere_canonique",
+        "atelier",
+        "preuves",
+        "deliberation",
+        "livrable",
+        "evaluation",
+        "archive"
+      ],
+      "completion_categories": [
+        "viewed_orientation",
+        "completed_concept_checks",
+        "submitted_evidence",
+        "archived_final_artifact"
+      ],
+      "default_activities": [
+        {
+          "section": "orientation",
+          "module": "page",
+          "name": "Bienvenue à UCKK-Moodle",
+          "required": true
+        },
+        {
+          "section": "concepts",
+          "module": "book",
+          "name": "UCKK, kOA, King Klown, Assemblées, Archives, Inquisiteur",
+          "required": true
+        },
+        {
+          "section": "preuves",
+          "module": "assign",
+          "name": "Première preuve d’entrée",
+          "required": true
+        },
+        {
+          "section": "archive",
+          "module": "uckkarchive",
+          "template": "archive_portfolio_entry",
+          "name": "Première entrée de portfolio",
+          "required": true
+        }
+      ],
+      "evidence_policy": {
+        "requires_proof": true,
+        "requires_human_validation": true,
+        "requires_archive_link": true,
+        "allows_ai_assistance": true,
+        "ai_output_is_final_authority": false
+      }
+    },
+    {
+      "key": "uckk_challenge_course",
+      "name": "UCKK challenge course",
+      "description": "Template for courses centred on Défis King Klown, evidence production, assembly validation, and archive output.",
+      "format": "uckk",
+      "completion_enabled": true,
+      "activity_completion_enabled": true,
+      "manual_completion_override_roles": [
+        "mentor_uckk",
+        "gestionnaire_uckk"
+      ],
+      "section_keys": [
+        "orientation",
+        "concepts",
+        "matiere_canonique",
+        "atelier",
+        "preuves",
+        "deliberation",
+        "livrable",
+        "evaluation",
+        "archive"
+      ],
+      "completion_categories": [
+        "viewed_orientation",
+        "submitted_evidence",
+        "participated_in_deliberation",
+        "submitted_final_deliverable",
+        "received_evaluation",
+        "archived_final_artifact"
+      ],
+      "default_activities": [
+        {
+          "section": "preuves",
+          "module": "uckkchallenge",
+          "template": "challenge_internal_learning",
+          "name": "Défi principal",
+          "required": true
+        },
+        {
+          "section": "deliberation",
+          "module": "uckkassembly",
+          "template": "assembly_defis_validation",
+          "name": "Assemblée de validation du défi",
+          "required": true
+        },
+        {
+          "section": "archive",
+          "module": "uckkarchive",
+          "template": "archive_challenge_result",
+          "name": "Archive du défi",
+          "required": true
+        }
+      ],
+      "evidence_policy": {
+        "requires_proof": true,
+        "requires_human_validation": true,
+        "requires_archive_link": true,
+        "requires_integrity_pause_when_flagged": true,
+        "allows_ai_assistance": true,
+        "ai_output_is_final_authority": false
+      }
+    },
+    {
+      "key": "uckk_assembly_course",
+      "name": "UCKK assembly course",
+      "description": "Template for courses where structured deliberation, motions, objections, decisions, contestability, and minutes are central.",
+      "format": "uckk",
+      "completion_enabled": true,
+      "activity_completion_enabled": true,
+      "section_keys": [
+        "orientation",
+        "concepts",
+        "matiere_canonique",
+        "atelier",
+        "preuves",
+        "deliberation",
+        "livrable",
+        "evaluation",
+        "archive"
+      ],
+      "completion_categories": [
+        "viewed_orientation",
+        "participated_in_deliberation",
+        "submitted_final_deliverable",
+        "archived_final_artifact"
+      ],
+      "default_activities": [
+        {
+          "section": "deliberation",
+          "module": "uckkassembly",
+          "template": "assembly_savoirs_course",
+          "name": "Assemblée principale",
+          "required": true
+        },
+        {
+          "section": "archive",
+          "module": "uckkarchive",
+          "template": "archive_assembly_minutes",
+          "name": "Procès-verbal archivé",
+          "required": true
+        }
+      ],
+      "evidence_policy": {
+        "requires_motion_or_contribution": true,
+        "requires_decision_record": true,
+        "requires_archive_link": true,
+        "allows_contestation": true,
+        "allows_ai_assistance": true,
+        "ai_output_is_final_authority": false
+      }
+    },
+    {
+      "key": "uckk_archive_course",
+      "name": "UCKK archive and portfolio course",
+      "description": "Template for archive-heavy courses focused on portfolios, Kristals, provenance, validation, and versioning.",
+      "format": "uckk",
+      "completion_enabled": true,
+      "activity_completion_enabled": true,
+      "section_keys": [
+        "orientation",
+        "concepts",
+        "matiere_canonique",
+        "atelier",
+        "preuves",
+        "deliberation",
+        "livrable",
+        "evaluation",
+        "archive"
+      ],
+      "completion_categories": [
+        "submitted_evidence",
+        "received_evaluation",
+        "archived_final_artifact"
+      ],
+      "default_activities": [
+        {
+          "section": "preuves",
+          "module": "assign",
+          "name": "Soumission de preuve",
+          "required": true
+        },
+        {
+          "section": "archive",
+          "module": "uckkarchive",
+          "template": "archive_kristal",
+          "name": "Kristal pédagogique",
+          "required": true
+        }
+      ],
+      "evidence_policy": {
+        "requires_provenance": true,
+        "requires_versioning_on_change": true,
+        "requires_human_validation": true,
+        "requires_archive_link": true,
+        "allows_ai_assistance": true,
+        "ai_output_is_final_authority": false
+      }
+    }
+  ]
+}

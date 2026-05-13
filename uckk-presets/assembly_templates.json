@@ -1,0 +1,432 @@
+{
+  "schema": "uckk.presets.assembly_templates.v1",
+  "idempotency": "template.key",
+  "types": [
+    "savoirs",
+    "defis",
+    "joueurs",
+    "batisseurs",
+    "inquisiteurs",
+    "grand_jeu"
+  ],
+  "state_machine": {
+    "assembly": [
+      "planned",
+      "open",
+      "motions_open",
+      "deliberation",
+      "voting_or_reading",
+      "decision_draft",
+      "decision_published",
+      "contestability_window",
+      "archived",
+      "closed"
+    ],
+    "assembly_alternatives": [
+      "paused_for_integrity",
+      "contested",
+      "reopened",
+      "invalidated"
+    ],
+    "motion": [
+      "submitted",
+      "accepted_for_deliberation",
+      "amended",
+      "ready_for_decision",
+      "decided",
+      "archived"
+    ],
+    "motion_alternatives": [
+      "rejected",
+      "withdrawn",
+      "merged",
+      "contested"
+    ]
+  },
+  "decision_model": {
+    "required_fields": [
+      "motion_reference",
+      "decision_text",
+      "decision_method",
+      "participants",
+      "result",
+      "reasoning",
+      "evidence_used",
+      "unresolved_objections",
+      "appeal_path",
+      "archive_link"
+    ],
+    "optional_fields": [
+      "minority_report",
+      "integrity_warning",
+      "public_summary",
+      "implementation_challenge"
+    ]
+  },
+  "reading_methods": [
+    {
+      "key": "raw_count",
+      "name": "Raw count",
+      "description": "Simple count of expressed positions. This is a reading, not automatic truth."
+    },
+    {
+      "key": "participant_count_by_role",
+      "name": "Participant count by role",
+      "description": "Count grouped by Joueur, Mentor, Archiviste, Inquisiteur or Gestionnaire roles."
+    },
+    {
+      "key": "mentor_reading",
+      "name": "Mentor reading",
+      "description": "Interpretation by authorized Mentors."
+    },
+    {
+      "key": "competency_informed_reading",
+      "name": "Competency-informed reading",
+      "description": "Reading informed by demonstrated competencies."
+    },
+    {
+      "key": "minority_objection_reading",
+      "name": "Minority objection reading",
+      "description": "Highlights unresolved objections and dissenting reasoning."
+    },
+    {
+      "key": "integrity_warning",
+      "name": "Integrity warning",
+      "description": "Flags evidence, dignity, harassment, privacy or authority-capture risks."
+    }
+  ],
+  "templates": [
+    {
+      "key": "assembly_savoirs_course",
+      "name": "Assemblée des savoirs de cours",
+      "assemblytype": "savoirs",
+      "scope": "course",
+      "decisionmethod": "consensus",
+      "contestability_days": 14,
+      "default_status": "planned",
+      "participants": {
+        "roles_allowed": [
+          "joueur",
+          "mentor_uckk",
+          "gestionnaire_uckk"
+        ],
+        "facilitator_roles": [
+          "mentor_uckk",
+          "gestionnaire_uckk"
+        ],
+        "observer_roles": [
+          "observateur_uckk",
+          "archiviste_uckk"
+        ]
+      },
+      "motions": {
+        "enabled": true,
+        "allow_amendments": true,
+        "allow_objections": true,
+        "allow_minority_report": true,
+        "requires_motion_before_decision": true
+      },
+      "readings": [
+        "raw_count",
+        "participant_count_by_role",
+        "mentor_reading",
+        "minority_objection_reading"
+      ],
+      "archive_output": [
+        "agenda",
+        "motions",
+        "arguments",
+        "objections",
+        "decision",
+        "minutes",
+        "evidence"
+      ],
+      "integrity": {
+        "pause_on_integrity_flag": true,
+        "review_capability": "tool/uckkintegrity:reviewcase"
+      }
+    },
+    {
+      "key": "assembly_defis_validation",
+      "name": "Assemblée de validation des défis",
+      "assemblytype": "defis",
+      "scope": "course",
+      "decisionmethod": "smart_reading",
+      "contestability_days": 14,
+      "default_status": "planned",
+      "participants": {
+        "roles_allowed": [
+          "joueur",
+          "mentor_uckk",
+          "archiviste_uckk",
+          "inquisiteur_uckk",
+          "gestionnaire_uckk"
+        ],
+        "facilitator_roles": [
+          "mentor_uckk",
+          "gestionnaire_uckk"
+        ],
+        "integrity_roles": [
+          "inquisiteur_uckk"
+        ]
+      },
+      "motions": {
+        "enabled": true,
+        "allow_amendments": true,
+        "allow_objections": true,
+        "allow_minority_report": true,
+        "requires_motion_before_decision": true
+      },
+      "readings": [
+        "raw_count",
+        "participant_count_by_role",
+        "mentor_reading",
+        "competency_informed_reading",
+        "minority_objection_reading",
+        "integrity_warning"
+      ],
+      "challenge_integration": {
+        "can_validate_challenge": true,
+        "can_request_revision": true,
+        "can_open_integrity_case": true,
+        "can_trigger_archive_output": true
+      },
+      "archive_output": [
+        "validated_submissions",
+        "mentor_evaluation",
+        "integrity_summary",
+        "decision",
+        "minutes",
+        "lessons_learned"
+      ],
+      "integrity": {
+        "pause_on_integrity_flag": true,
+        "review_capability": "tool/uckkintegrity:reviewcase",
+        "case_types": [
+          "proof_quality",
+          "challenge_dispute",
+          "harassment_or_humiliation",
+          "fiction_fact_confusion",
+          "ai_misuse"
+        ]
+      }
+    },
+    {
+      "key": "assembly_joueurs_pathway",
+      "name": "Assemblée des Joueurs",
+      "assemblytype": "joueurs",
+      "scope": "cohort",
+      "decisionmethod": "multiple_readings",
+      "contestability_days": 14,
+      "default_status": "planned",
+      "participants": {
+        "roles_allowed": [
+          "joueur",
+          "mentor_uckk",
+          "gestionnaire_uckk"
+        ],
+        "facilitator_roles": [
+          "mentor_uckk",
+          "gestionnaire_uckk"
+        ]
+      },
+      "motions": {
+        "enabled": true,
+        "allow_amendments": true,
+        "allow_objections": true,
+        "allow_minority_report": true,
+        "requires_motion_before_decision": true
+      },
+      "readings": [
+        "raw_count",
+        "participant_count_by_role",
+        "minority_objection_reading"
+      ],
+      "archive_output": [
+        "agenda",
+        "motions",
+        "decision",
+        "minutes",
+        "minority_reports",
+        "portfolio_links"
+      ],
+      "integrity": {
+        "pause_on_integrity_flag": true,
+        "review_capability": "tool/uckkintegrity:reviewcase"
+      }
+    },
+    {
+      "key": "assembly_batisseurs_prototype",
+      "name": "Assemblée des Bâtisseurs",
+      "assemblytype": "batisseurs",
+      "scope": "program",
+      "decisionmethod": "mentor_decision",
+      "contestability_days": 14,
+      "default_status": "planned",
+      "participants": {
+        "roles_allowed": [
+          "joueur",
+          "mentor_uckk",
+          "archiviste_uckk",
+          "gestionnaire_uckk"
+        ],
+        "facilitator_roles": [
+          "mentor_uckk",
+          "gestionnaire_uckk"
+        ]
+      },
+      "motions": {
+        "enabled": true,
+        "allow_amendments": true,
+        "allow_objections": true,
+        "allow_minority_report": true,
+        "requires_motion_before_decision": true
+      },
+      "readings": [
+        "mentor_reading",
+        "competency_informed_reading",
+        "minority_objection_reading",
+        "integrity_warning"
+      ],
+      "challenge_integration": {
+        "can_create_challenge": true,
+        "can_assign_prototype_task": true,
+        "can_trigger_archive_output": true
+      },
+      "archive_output": [
+        "prototype_brief",
+        "decision",
+        "evidence",
+        "minutes",
+        "archive_summary"
+      ],
+      "integrity": {
+        "pause_on_integrity_flag": true,
+        "review_capability": "tool/uckkintegrity:reviewcase"
+      }
+    },
+    {
+      "key": "assembly_inquisiteurs_review",
+      "name": "Assemblée des Inquisiteurs",
+      "assemblytype": "inquisiteurs",
+      "scope": "institutional",
+      "decisionmethod": "mentor_decision",
+      "contestability_days": 30,
+      "default_status": "planned",
+      "participants": {
+        "roles_allowed": [
+          "inquisiteur_uckk",
+          "gestionnaire_uckk"
+        ],
+        "facilitator_roles": [
+          "inquisiteur_uckk",
+          "gestionnaire_uckk"
+        ],
+        "observer_roles": [
+          "archiviste_uckk"
+        ]
+      },
+      "motions": {
+        "enabled": true,
+        "allow_amendments": true,
+        "allow_objections": true,
+        "allow_minority_report": true,
+        "requires_motion_before_decision": true
+      },
+      "readings": [
+        "mentor_reading",
+        "minority_objection_reading",
+        "integrity_warning"
+      ],
+      "integrity_integration": {
+        "case_required": true,
+        "can_record_decision": true,
+        "can_issue_correction": true,
+        "can_recommend_invalidation": true,
+        "cannot_delete_evidence_silently": true,
+        "cannot_grant_unrestricted_admin": true
+      },
+      "archive_output": [
+        "integrity_case_summary",
+        "decision",
+        "minority_report",
+        "appeal_path",
+        "redacted_public_summary"
+      ],
+      "visibility": {
+        "default": "restricted_integrity",
+        "public_summary_allowed": true,
+        "requires_redaction": true
+      }
+    },
+    {
+      "key": "assembly_grand_jeu_presentation",
+      "name": "Assemblée du Grand Jeu",
+      "assemblytype": "grand_jeu",
+      "scope": "public",
+      "decisionmethod": "multiple_readings",
+      "contestability_days": 30,
+      "default_status": "planned",
+      "participants": {
+        "roles_allowed": [
+          "joueur",
+          "mentor_uckk",
+          "archiviste_uckk",
+          "inquisiteur_uckk",
+          "gestionnaire_uckk",
+          "observateur_uckk"
+        ],
+        "facilitator_roles": [
+          "mentor_uckk",
+          "gestionnaire_uckk"
+        ],
+        "observer_roles": [
+          "observateur_uckk"
+        ]
+      },
+      "motions": {
+        "enabled": true,
+        "allow_amendments": true,
+        "allow_objections": true,
+        "allow_minority_report": true,
+        "requires_motion_before_decision": true
+      },
+      "readings": [
+        "raw_count",
+        "participant_count_by_role",
+        "mentor_reading",
+        "competency_informed_reading",
+        "minority_objection_reading",
+        "integrity_warning"
+      ],
+      "public_constraints": {
+        "no_targeted_harassment": true,
+        "no_doxxing": true,
+        "no_coordinated_intimidation": true,
+        "fact_fiction_labeling_required": true,
+        "public_summary_requires_validation": true
+      },
+      "archive_output": [
+        "agenda",
+        "motions",
+        "decision",
+        "minutes",
+        "minority_reports",
+        "evidence",
+        "contestations",
+        "public_summary"
+      ],
+      "integrity": {
+        "pause_on_integrity_flag": true,
+        "review_capability": "tool/uckkintegrity:reviewcase",
+        "case_types": [
+          "dignity_violation",
+          "harassment_or_humiliation",
+          "fiction_fact_confusion",
+          "authority_capture",
+          "privacy_concern"
+        ]
+      }
+    }
+  ]
+}

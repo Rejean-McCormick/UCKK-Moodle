@@ -1,0 +1,228 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_uckk/program_card
+
+    Program card for a canonical UCKK program.
+
+    This template is intentionally render-only. Permission checks, status mapping,
+    visibility filtering, URL generation, and formatted descriptions must be done
+    by the PHP output class before rendering.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * data-region="uckk-program-card"
+    * data-program-id
+    * data-program-shortname
+
+    Context variables required for this template:
+    * id int
+    * shortname string
+    * fullname string
+    * programtype string
+    * programtypelabel string
+    * status string
+    * statuslabel string
+    * statusclass string
+    * visibility string
+    * visibilitylabel string
+    * description string
+    * hasdescription bool
+    * viewurl string
+    * categoryname string
+    * categoryurl string
+    * hascategory bool
+    * pathwaycount int
+    * coursecount int
+    * competencycount int
+    * badgecount int
+    * haspathways bool
+    * pathways array
+    * showactions bool
+    * canmanage bool
+    * manageurl string
+
+    Example context (json):
+    {
+        "id": 3,
+        "shortname": "grand_jeu_social",
+        "fullname": "Grand Jeu social",
+        "programtype": "baccalaureat",
+        "programtypelabel": "Baccalauréat UCKK",
+        "status": "active",
+        "statuslabel": "Active",
+        "statusclass": "success",
+        "visibility": "program",
+        "visibilitylabel": "Programme",
+        "description": "<p>Programme consacré à la lecture et à la transformation du Grand Jeu social.</p>",
+        "hasdescription": true,
+        "viewurl": "https://example.test/local/uckk/program.php?id=3",
+        "categoryname": "02_Baccalaureat_Grand_Jeu_social",
+        "categoryurl": "https://example.test/course/index.php?categoryid=12",
+        "hascategory": true,
+        "pathwaycount": 2,
+        "coursecount": 8,
+        "competencycount": 14,
+        "badgecount": 3,
+        "haspathways": true,
+        "pathways": [
+            {
+                "fullname": "Parcours principal",
+                "shortname": "grand_jeu_social_main",
+                "statuslabel": "Active",
+                "statusclass": "success",
+                "viewurl": "https://example.test/local/uckk/pathway.php?id=9"
+            }
+        ],
+        "showactions": true,
+        "canmanage": true,
+        "manageurl": "https://example.test/local/uckk/program/edit.php?id=3"
+    }
+}}
+
+<article class="uckk-program-card card mb-3"
+        data-region="uckk-program-card"
+        data-program-id="{{id}}"
+        data-program-shortname="{{shortname}}">
+    <div class="card-body">
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+            <div class="uckk-program-card-main">
+                <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                    <span class="badge bg-secondary text-white">
+                        {{programtypelabel}}
+                    </span>
+
+                    {{> local_uckk/status_badge }}
+
+                    <span class="badge bg-light text-dark border">
+                        {{visibilitylabel}}
+                    </span>
+                </div>
+
+                <h3 class="h5 card-title mb-1">
+                    <a href="{{viewurl}}" class="stretched-link text-decoration-none">
+                        {{fullname}}
+                    </a>
+                </h3>
+
+                <div class="text-muted small mb-2">
+                    <span class="uckk-program-card-shortname">{{shortname}}</span>
+                </div>
+
+                {{#hasdescription}}
+                    <div class="uckk-program-card-description mb-3">
+                        {{{description}}}
+                    </div>
+                {{/hasdescription}}
+
+                {{#hascategory}}
+                    <div class="uckk-program-card-category small mb-3">
+                        <span class="text-muted">
+                            {{#str}} category, local_uckk {{/str}}
+                        </span>
+                        <a href="{{categoryurl}}">
+                            {{categoryname}}
+                        </a>
+                    </div>
+                {{/hascategory}}
+            </div>
+
+            <div class="uckk-program-card-summary text-md-end">
+                <dl class="row row-cols-2 row-cols-md-1 g-2 mb-0">
+                    <div class="col">
+                        <dt class="text-muted small mb-0">
+                            {{#str}} pathways, local_uckk {{/str}}
+                        </dt>
+                        <dd class="h6 mb-0">
+                            {{pathwaycount}}
+                        </dd>
+                    </div>
+
+                    <div class="col">
+                        <dt class="text-muted small mb-0">
+                            {{#str}} courses, local_uckk {{/str}}
+                        </dt>
+                        <dd class="h6 mb-0">
+                            {{coursecount}}
+                        </dd>
+                    </div>
+
+                    <div class="col">
+                        <dt class="text-muted small mb-0">
+                            {{#str}} competencies, local_uckk {{/str}}
+                        </dt>
+                        <dd class="h6 mb-0">
+                            {{competencycount}}
+                        </dd>
+                    </div>
+
+                    <div class="col">
+                        <dt class="text-muted small mb-0">
+                            {{#str}} badges, local_uckk {{/str}}
+                        </dt>
+                        <dd class="h6 mb-0">
+                            {{badgecount}}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        {{#haspathways}}
+            <div class="uckk-program-card-pathways mt-3 pt-3 border-top">
+                <h4 class="h6 mb-2">
+                    {{#str}} programpathways, local_uckk {{/str}}
+                </h4>
+
+                <ul class="list-unstyled mb-0">
+                    {{#pathways}}
+                        <li class="d-flex flex-column flex-md-row justify-content-between gap-2 py-2 border-bottom">
+                            <div>
+                                <a href="{{viewurl}}" class="fw-semibold">
+                                    {{fullname}}
+                                </a>
+                                <div class="text-muted small">
+                                    {{shortname}}
+                                </div>
+                            </div>
+
+                            <span class="badge bg-{{statusclass}} align-self-start align-self-md-center">
+                                {{statuslabel}}
+                            </span>
+                        </li>
+                    {{/pathways}}
+                </ul>
+            </div>
+        {{/haspathways}}
+
+        {{#showactions}}
+            <div class="uckk-program-card-actions mt-3 pt-3 border-top">
+                <a href="{{viewurl}}" class="btn btn-primary btn-sm">
+                    {{#str}} viewprogram, local_uckk {{/str}}
+                </a>
+
+                {{#canmanage}}
+                    <a href="{{manageurl}}" class="btn btn-secondary btn-sm">
+                        {{#str}} manageprogram, local_uckk {{/str}}
+                    </a>
+                {{/canmanage}}
+            </div>
+        {{/showactions}}
+    </div>
+</article>

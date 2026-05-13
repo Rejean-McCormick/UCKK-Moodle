@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 64 64"
+    role="img"
+    aria-label="UCKK Assembly"
+>
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="32" cy="32" r="24"/>
+
+        <circle cx="32" cy="14" r="4"/>
+        <circle cx="48" cy="24" r="4"/>
+        <circle cx="48" cy="42" r="4"/>
+        <circle cx="32" cy="50" r="4"/>
+        <circle cx="16" cy="42" r="4"/>
+        <circle cx="16" cy="24" r="4"/>
+
+        <path d="M32 18v8"/>
+        <path d="M45 27l-7 4"/>
+        <path d="M45 40l-7-4"/>
+        <path d="M32 46v-8"/>
+        <path d="M19 40l7-4"/>
+        <path d="M19 27l7 4"/>
+
+        <path d="M24 30h16"/>
+        <path d="M24 35h12"/>
+        <path d="M24 40h8"/>
+
+        <path d="M39 39l4 4 8-9"/>
+    </g>
+</svg>

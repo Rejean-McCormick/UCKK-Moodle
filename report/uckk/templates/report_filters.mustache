@@ -1,0 +1,203 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    @template report_uckk/report_filters
+
+    Template variables:
+    {
+        "actionurl": "/report/uckk/index.php",
+        "clearurl": "/report/uckk/index.php?report=player_progress",
+        "reportkey": "player_progress",
+        "filters": {
+            "userid": 0,
+            "cohortid": 0,
+            "programid": 0,
+            "courseid": 0,
+            "categoryid": 0,
+            "competencyid": 0,
+            "badgeid": 0,
+            "status": "",
+            "visibility": "",
+            "challengetype": "",
+            "assemblytype": "",
+            "integritytype": "",
+            "from": 0,
+            "to": 0,
+            "limit": 100
+        }
+    }
+}}
+
+<form method="get"
+      action="{{actionurl}}"
+      class="report-uckk-filters mb-4"
+      data-region="report-uckk-filters">
+
+    <input type="hidden" name="report" value="{{reportkey}}">
+
+    <fieldset class="border rounded p-3">
+        <legend class="h4">{{#str}}filters, report_uckk{{/str}}</legend>
+
+        <div class="row">
+            <div class="col-md-2 mb-3">
+                <label for="id_userid">{{#str}}user, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       id="id_userid"
+                       name="userid"
+                       value="{{filters.userid}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_cohortid">{{#str}}cohort, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       id="id_cohortid"
+                       name="cohortid"
+                       value="{{filters.cohortid}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_programid">{{#str}}program, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       id="id_programid"
+                       name="programid"
+                       value="{{filters.programid}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_courseid">{{#str}}course, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       id="id_courseid"
+                       name="courseid"
+                       value="{{filters.courseid}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_categoryid">{{#str}}category, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       id="id_categoryid"
+                       name="categoryid"
+                       value="{{filters.categoryid}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_limit">{{#str}}limit, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="1"
+                       max="10000"
+                       id="id_limit"
+                       name="limit"
+                       value="{{filters.limit}}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 mb-3">
+                <label for="id_competencyid">{{#str}}competency, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       id="id_competencyid"
+                       name="competencyid"
+                       value="{{filters.competencyid}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_badgeid">{{#str}}badge, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       id="id_badgeid"
+                       name="badgeid"
+                       value="{{filters.badgeid}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_status">{{#str}}status, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="text"
+                       id="id_status"
+                       name="status"
+                       value="{{filters.status}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_visibility">{{#str}}visibility, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="text"
+                       id="id_visibility"
+                       name="visibility"
+                       value="{{filters.visibility}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_from">{{#str}}from, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       id="id_from"
+                       name="from"
+                       value="{{filters.from}}">
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <label for="id_to">{{#str}}to, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       id="id_to"
+                       name="to"
+                       value="{{filters.to}}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="id_challengetype">{{#str}}challengetype, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="text"
+                       id="id_challengetype"
+                       name="challengetype"
+                       value="{{filters.challengetype}}">
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="id_assemblytype">{{#str}}assemblytype, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="text"
+                       id="id_assemblytype"
+                       name="assemblytype"
+                       value="{{filters.assemblytype}}">
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="id_integritytype">{{#str}}integritytype, report_uckk{{/str}}</label>
+                <input class="form-control"
+                       type="text"
+                       id="id_integritytype"
+                       name="integritytype"
+                       value="{{filters.integritytype}}">
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-primary" type="submit">
+                {{#str}}applyfilters, report_uckk{{/str}}
+            </button>
+
+            <a class="btn btn-secondary" href="{{clearurl}}">
+                {{#str}}clearfilters, report_uckk{{/str}}
+            </a>
+        </div>
+    </fieldset>
+</form>

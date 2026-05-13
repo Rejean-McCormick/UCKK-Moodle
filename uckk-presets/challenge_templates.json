@@ -1,0 +1,376 @@
+{
+  "schema": "uckk.presets.challenge_templates.v1",
+  "idempotency": "template.key",
+  "component": "mod_uckkchallenge",
+  "states": {
+    "default": [
+      "draft",
+      "published",
+      "open",
+      "submitted",
+      "under_review",
+      "integrity_review",
+      "revision_required",
+      "resubmitted",
+      "validated",
+      "archived",
+      "closed"
+    ],
+    "alternative": [
+      "contested",
+      "invalidated",
+      "withdrawn",
+      "expired"
+    ]
+  },
+  "challenge_types": [
+    "internal_learning",
+    "public_pedagogical",
+    "institutional_audit",
+    "system_mapping",
+    "prototype",
+    "mobilisation",
+    "capstone",
+    "king_klown_public"
+  ],
+  "evidence_types": [
+    "text_submission",
+    "file_submission",
+    "url",
+    "archive_item",
+    "portfolio_item",
+    "assembly_decision",
+    "mentor_observation",
+    "inquisiteur_note",
+    "ai_collaboration_journal",
+    "external_artifact"
+  ],
+  "required_evidence_metadata": [
+    "source",
+    "author",
+    "date",
+    "visibility",
+    "relation_to_criteria",
+    "provenance",
+    "integrity_state"
+  ],
+  "anti_abuse_constraints": [
+    "no_targeted_harassment",
+    "no_humiliation",
+    "no_fiction_fact_confusion",
+    "no_fabricated_evidence",
+    "no_coordinated_intimidation",
+    "no_doxxing",
+    "no_unbounded_public_pressure",
+    "no_ai_generated_false_evidence"
+  ],
+  "pause_capabilities": [
+    "mod/uckkchallenge:validateintegrity",
+    "tool/uckkintegrity:reviewcase"
+  ],
+  "templates": [
+    {
+      "key": "challenge_internal_learning",
+      "name": "Défi d’apprentissage interne",
+      "challengetype": "internal_learning",
+      "description": "A private or course-local learning challenge focused on evidence, reflection, and mentor feedback.",
+      "default_status": "draft",
+      "integrityrequired": false,
+      "archivepolicy": "summary",
+      "individual_or_team": "both",
+      "evidence": [
+        "text_submission",
+        "file_submission",
+        "archive_item",
+        "mentor_observation"
+      ],
+      "evaluation": {
+        "rubric": true,
+        "mentor_feedback": true,
+        "competency_rating": true,
+        "badge_trigger": false,
+        "public_summary": false,
+        "private_feedback": true,
+        "archive_export": true
+      },
+      "competencies": [
+        "UCKK-COMP-005",
+        "UCKK-COMP-009",
+        "UCKK-COMP-010"
+      ],
+      "badges": [],
+      "anti_abuse": [
+        "no_harassment",
+        "no_humiliation",
+        "no_fabricated_evidence",
+        "no_ai_generated_false_evidence"
+      ],
+      "notifications": [
+        "challenge_opened",
+        "challenge_closing_soon",
+        "submission_received",
+        "review_requested",
+        "revision_required",
+        "challenge_validated",
+        "archive_item_created"
+      ]
+    },
+    {
+      "key": "challenge_system_mapping",
+      "name": "Cartographier un système",
+      "challengetype": "system_mapping",
+      "description": "Learners map a real system, distinguish facts from interpretations, and document uncertainty.",
+      "default_status": "draft",
+      "integrityrequired": false,
+      "archivepolicy": "full",
+      "individual_or_team": "both",
+      "evidence": [
+        "system_map",
+        "source_links",
+        "ai_collaboration_journal",
+        "reflection",
+        "archive_item"
+      ],
+      "evaluation": {
+        "rubric": true,
+        "mentor_feedback": true,
+        "competency_rating": true,
+        "badge_trigger": true,
+        "public_summary": false,
+        "private_feedback": true,
+        "archive_export": true
+      },
+      "competencies": [
+        "UCKK-COMP-002",
+        "UCKK-COMP-003",
+        "UCKK-COMP-004",
+        "UCKK-COMP-005"
+      ],
+      "badges": [
+        "BADGE-CARTOGRAPHE-SYSTEMES"
+      ],
+      "anti_abuse": [
+        "no_fiction_fact_confusion",
+        "no_fabricated_evidence",
+        "no_ai_generated_false_evidence"
+      ],
+      "archive_output": [
+        "challenge_statement",
+        "validated_submission",
+        "evidence_package",
+        "mentor_evaluation",
+        "lessons_learned"
+      ]
+    },
+    {
+      "key": "challenge_institutional_audit",
+      "name": "Audit d’utilité réelle",
+      "challengetype": "institutional_audit",
+      "description": "Learners evaluate whether an institution, practice, process, or tool produces real utility.",
+      "default_status": "draft",
+      "integrityrequired": true,
+      "archivepolicy": "summary",
+      "individual_or_team": "team",
+      "evidence": [
+        "utility_measure",
+        "stakeholder_map",
+        "proof_files",
+        "source_links",
+        "public_summary",
+        "archive_item"
+      ],
+      "evaluation": {
+        "rubric": true,
+        "mentor_feedback": true,
+        "competency_rating": true,
+        "badge_trigger": true,
+        "integrity_review": true,
+        "public_summary": true,
+        "private_feedback": true,
+        "archive_export": true
+      },
+      "competencies": [
+        "UCKK-COMP-001",
+        "UCKK-COMP-005",
+        "UCKK-COMP-011",
+        "UCKK-COMP-012"
+      ],
+      "badges": [
+        "BADGE-BATISSEUR-PROTOTYPE",
+        "BADGE-GARDIEN-PREUVE"
+      ],
+      "anti_abuse": [
+        "no_targeted_harassment",
+        "no_humiliation",
+        "no_fabricated_evidence",
+        "no_unbounded_public_pressure",
+        "no_doxxing"
+      ],
+      "archive_output": [
+        "challenge_statement",
+        "evidence_package",
+        "mentor_evaluation",
+        "integrity_summary",
+        "public_summary",
+        "lessons_learned"
+      ]
+    },
+    {
+      "key": "challenge_mobilisation",
+      "name": "Mobilisation multi-corridor",
+      "challengetype": "mobilisation",
+      "description": "Learners design a responsible mobilisation strategy with ethical constraints and assembly review.",
+      "default_status": "draft",
+      "integrityrequired": true,
+      "archivepolicy": "full",
+      "individual_or_team": "team",
+      "evidence": [
+        "action_plan",
+        "risk_assessment",
+        "assembly_decision",
+        "mentor_observation",
+        "archive_item"
+      ],
+      "evaluation": {
+        "rubric": true,
+        "mentor_feedback": true,
+        "competency_rating": true,
+        "badge_trigger": true,
+        "integrity_review": true,
+        "public_summary": true,
+        "private_feedback": true,
+        "archive_export": true
+      },
+      "competencies": [
+        "UCKK-COMP-006",
+        "UCKK-COMP-007",
+        "UCKK-COMP-010",
+        "UCKK-COMP-013"
+      ],
+      "badges": [
+        "BADGE-DEFI-KING-KLOWN-VALIDE",
+        "BADGE-PARTICIPANT-ASSEMBLEE"
+      ],
+      "requires_assembly": {
+        "template": "assembly_defis_validation",
+        "trigger": "before_validation"
+      },
+      "anti_abuse": [
+        "no_targeted_harassment",
+        "no_coordinated_intimidation",
+        "no_doxxing",
+        "no_unbounded_public_pressure"
+      ],
+      "archive_output": [
+        "challenge_statement",
+        "validated_submission",
+        "assembly_decision",
+        "integrity_summary",
+        "public_summary",
+        "lessons_learned"
+      ]
+    },
+    {
+      "key": "challenge_public_king_klown",
+      "name": "Théâtre public King Klown responsable",
+      "challengetype": "king_klown_public",
+      "description": "A public-facing challenge using symbolic action while preserving dignity, evidence, and procedural safety.",
+      "default_status": "draft",
+      "integrityrequired": true,
+      "archivepolicy": "summary",
+      "individual_or_team": "team",
+      "evidence": [
+        "public_script",
+        "ethical_constraints",
+        "risk_review",
+        "source_links",
+        "public_summary",
+        "archive_item"
+      ],
+      "evaluation": {
+        "rubric": true,
+        "mentor_feedback": true,
+        "competency_rating": true,
+        "badge_trigger": true,
+        "integrity_review": true,
+        "public_summary": true,
+        "private_feedback": true,
+        "archive_export": true
+      },
+      "competencies": [
+        "UCKK-COMP-003",
+        "UCKK-COMP-007",
+        "UCKK-COMP-010",
+        "UCKK-COMP-013"
+      ],
+      "badges": [
+        "BADGE-DEFI-KING-KLOWN-VALIDE"
+      ],
+      "requires_assembly": {
+        "template": "assembly_grand_jeu_presentation",
+        "trigger": "before_publication"
+      },
+      "anti_abuse": [
+        "no_targeted_harassment",
+        "no_humiliation",
+        "no_doxxing",
+        "no_coordinated_intimidation",
+        "fact_fiction_labeling_required",
+        "no_ai_generated_false_evidence"
+      ],
+      "archive_output": [
+        "challenge_statement",
+        "public_summary",
+        "ethical_review",
+        "integrity_summary",
+        "lessons_learned"
+      ]
+    },
+    {
+      "key": "challenge_capstone_kristal",
+      "name": "Défi capstone — Kristal pédagogique",
+      "challengetype": "capstone",
+      "description": "A final synthesis challenge requiring reusable knowledge, evidence, validation, and archive publication.",
+      "default_status": "draft",
+      "integrityrequired": true,
+      "archivepolicy": "full",
+      "individual_or_team": "individual",
+      "evidence": [
+        "portfolio_item",
+        "kristal",
+        "proof_files",
+        "source_links",
+        "mentor_observation",
+        "archive_item"
+      ],
+      "evaluation": {
+        "rubric": true,
+        "mentor_feedback": true,
+        "competency_rating": true,
+        "badge_trigger": true,
+        "integrity_review": true,
+        "public_summary": true,
+        "private_feedback": true,
+        "archive_export": true
+      },
+      "competencies": [
+        "UCKK-COMP-005",
+        "UCKK-COMP-008",
+        "UCKK-COMP-009",
+        "UCKK-COMP-014"
+      ],
+      "badges": [
+        "BADGE-GARDIEN-PREUVE",
+        "BADGE-ARCHIVISTE-DECISION"
+      ],
+      "archive_output": [
+        "kristal",
+        "evidence_package",
+        "mentor_evaluation",
+        "integrity_summary",
+        "public_summary",
+        "version_record"
+      ]
+    }
+  ]
+}

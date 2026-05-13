@@ -1,0 +1,465 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+}}
+
+{{!
+    @template block_uckk_dashboard/badge_summary
+
+    Badge summary card for the UCKK dashboard block.
+
+    This template renders already-authorised badge summary data. It does not:
+    - award badges;
+    - certify competencies;
+    - validate evidence;
+    - resolve integrity blocks;
+    - decide visibility;
+    - check capabilities;
+    - expose restricted records.
+
+    Classes required for JS:
+    * uckk-dashboard-badge-summary
+    * uckk-dashboard-badge-list
+    * uckk-dashboard-badge-item
+
+    Data attributes required for JS:
+    * data-region="uckk-badge-summary"
+    * data-region="uckk-badge-list"
+    * data-badge-key
+
+    Context variables:
+    * uniqid string - Unique DOM identifier.
+    * title string - Card title.
+    * subtitle string - Optional subtitle.
+    * summary string - Optional summary text.
+    * tone string - Safe visual tone suffix.
+    * icon string - Optional Moodle pix icon.
+    * hasicon bool - Whether icon is available.
+    * progresspercent int - Overall badge progress from 0 to 100.
+    * hasprogress bool - Whether overall progress is available.
+    * progresslabel string - Human-readable progress label.
+    * earnedcount int - Number of earned badges.
+    * availablecount int - Number of available badges.
+    * inprogresscount int - Number of badges in progress.
+    * hascounts bool - Whether counts should be displayed.
+    * hasbadges bool - Whether badge rows are available.
+    * badges array - Badge rows.
+    * hasactions bool - Whether footer actions are available.
+    * actions array - Safe action links prepared by PHP.
+    * isempty bool - Whether no badge data is available.
+    * emptytext string - Empty state text.
+
+    Badge variables:
+    * key string - Stable badge key.
+    * name string - Badge name.
+    * description string - Optional badge description.
+    * imageurl string - Optional safe badge image URL.
+    * hasimage bool - Whether image URL is available.
+    * status string - Canonical badge status.
+    * statuslabel string - Human-readable badge status.
+    * tone string - Safe visual tone suffix.
+    * earned bool - Whether badge has been earned.
+    * inprogress bool - Whether badge is in progress.
+    * locked bool - Whether badge is not yet available.
+    * timeawarded string - Optional formatted award date.
+    * hastimeawarded bool - Whether award date is available.
+    * issuer string - Optional issuer label.
+    * hasissuer bool - Whether issuer is available.
+    * progresspercent int - Badge progress from 0 to 100.
+    * hasprogress bool - Whether badge progress is available.
+    * progresslabel string - Human-readable badge progress label.
+    * evidencecount int - Number of linked evidence items.
+    * hasevidence bool - Whether evidence count is available.
+    * validationlabel string - Optional validation label.
+    * hasvalidation bool - Whether validation label is available.
+    * integritylabel string - Optional integrity label.
+    * hasintegrity bool - Whether integrity label is available.
+    * url string - Optional safe URL prepared by PHP.
+    * hasurl bool - Whether URL is available.
+    * criteria array - Criteria rows prepared by PHP.
+    * hascriteria bool - Whether criteria rows are available.
+
+    Criteria variables:
+    * label string - Criterion label.
+    * complete bool - Whether criterion is complete.
+    * incomplete bool - Whether criterion is incomplete.
+    * detail string - Optional criterion detail.
+
+    Action variables:
+    * label string - Action label.
+    * url string - Safe URL prepared by PHP.
+    * primary bool - Whether this action is primary.
+
+    Example context (json):
+    {
+        "uniqid": "uckk-badge-summary-7",
+        "title": "Badges UCKK",
+        "subtitle": "Reconnaissance interne",
+        "summary": "Progression des badges du Joueur.",
+        "tone": "primary",
+        "hasicon": true,
+        "icon": "i/badge",
+        "hasprogress": true,
+        "progresspercent": 40,
+        "progresslabel": "4 / 10",
+        "hascounts": true,
+        "earnedcount": 4,
+        "availablecount": 10,
+        "inprogresscount": 3,
+        "hasbadges": true,
+        "badges": [
+            {
+                "key": "joueur_initie",
+                "name": "Joueur initié",
+                "description": "Première reconnaissance interne UCKK.",
+                "hasimage": false,
+                "imageurl": "",
+                "status": "earned",
+                "statuslabel": "Obtenu",
+                "tone": "success",
+                "earned": true,
+                "inprogress": false,
+                "locked": false,
+                "hastimeawarded": true,
+                "timeawarded": "12 mai 2026",
+                "hasissuer": true,
+                "issuer": "UCKK",
+                "hasprogress": true,
+                "progresspercent": 100,
+                "progresslabel": "Complet",
+                "hasevidence": true,
+                "evidencecount": 2,
+                "hasvalidation": true,
+                "validationlabel": "Validation humaine",
+                "hasintegrity": true,
+                "integritylabel": "Aucun blocage",
+                "hasurl": true,
+                "url": "https://example.invalid/badges/badge.php?hash=abc",
+                "hascriteria": true,
+                "criteria": [
+                    {
+                        "label": "Preuve déposée",
+                        "complete": true,
+                        "incomplete": false,
+                        "detail": "Portfolio lié"
+                    }
+                ]
+            }
+        ],
+        "hasactions": true,
+        "actions": [
+            {
+                "label": "Voir tous les badges",
+                "url": "https://example.invalid/badges/mybadges.php",
+                "primary": true
+            }
+        ],
+        "isempty": false,
+        "emptytext": "Aucun badge UCKK disponible."
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckk-dashboard-badge-summary card uckk-dashboard-card uckk-dashboard-card--badges uckk-dashboard-card--{{tone}}"
+    data-region="uckk-badge-summary"
+    aria-labelledby="{{uniqid}}-title"
+>
+    <div class="card-header d-flex align-items-start justify-content-between gap-3">
+        <div class="uckk-dashboard-badge-summary-heading">
+            <h3 id="{{uniqid}}-title" class="h5 mb-1">
+                {{#hasicon}}
+                    <span class="uckk-dashboard-card-icon me-1" aria-hidden="true">
+                        {{#pix}} {{icon}}, core {{/pix}}
+                    </span>
+                {{/hasicon}}
+                {{title}}
+            </h3>
+
+            {{#subtitle}}
+                <p class="uckk-dashboard-card-subtitle text-muted mb-0">
+                    {{subtitle}}
+                </p>
+            {{/subtitle}}
+        </div>
+
+        {{#hascounts}}
+            <div class="uckk-dashboard-badge-counts text-end">
+                <div class="uckk-dashboard-badge-count-main">
+                    <strong>{{earnedcount}}</strong>
+                    <span class="text-muted">/ {{availablecount}}</span>
+                </div>
+                <div class="small text-muted">
+                    {{#str}} badgesearned, block_uckk_dashboard {{/str}}
+                </div>
+            </div>
+        {{/hascounts}}
+    </div>
+
+    <div class="card-body">
+        {{#summary}}
+            <p class="uckk-dashboard-card-summary">
+                {{summary}}
+            </p>
+        {{/summary}}
+
+        {{#hasprogress}}
+            <div class="uckk-dashboard-badge-progress mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="small text-muted">
+                        {{#str}} badgeprogress, block_uckk_dashboard {{/str}}
+                    </span>
+                    <span class="small text-muted">
+                        {{progresslabel}}
+                    </span>
+                </div>
+
+                <div class="progress">
+                    <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: {{progresspercent}}%;"
+                        aria-valuenow="{{progresspercent}}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                    >
+                        <span class="sr-only visually-hidden">
+                            {{progresslabel}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {{/hasprogress}}
+
+        {{#hascounts}}
+            <dl class="uckk-dashboard-badge-metrics row small mb-3">
+                <dt class="col-7">
+                    {{#str}} badgesearnedcount, block_uckk_dashboard {{/str}}
+                </dt>
+                <dd class="col-5 text-end">
+                    {{earnedcount}}
+                </dd>
+
+                <dt class="col-7">
+                    {{#str}} badgesinprogresscount, block_uckk_dashboard {{/str}}
+                </dt>
+                <dd class="col-5 text-end">
+                    {{inprogresscount}}
+                </dd>
+
+                <dt class="col-7">
+                    {{#str}} badgesavailablecount, block_uckk_dashboard {{/str}}
+                </dt>
+                <dd class="col-5 text-end">
+                    {{availablecount}}
+                </dd>
+            </dl>
+        {{/hascounts}}
+
+        {{#hasbadges}}
+            <div
+                class="uckk-dashboard-badge-list"
+                data-region="uckk-badge-list"
+            >
+                {{#badges}}
+                    <article
+                        class="uckk-dashboard-badge-item border rounded p-3 mb-3 uckk-dashboard-badge-item--{{tone}}"
+                        data-badge-key="{{key}}"
+                    >
+                        <div class="d-flex align-items-start gap-3">
+                            <div class="uckk-dashboard-badge-media flex-shrink-0">
+                                {{#hasimage}}
+                                    <img
+                                        src="{{imageurl}}"
+                                        alt=""
+                                        class="uckk-dashboard-badge-image"
+                                        width="48"
+                                        height="48"
+                                        loading="lazy"
+                                    >
+                                {{/hasimage}}
+
+                                {{^hasimage}}
+                                    <span class="uckk-dashboard-badge-placeholder" aria-hidden="true">
+                                        {{#pix}} i/badge, core {{/pix}}
+                                    </span>
+                                {{/hasimage}}
+                            </div>
+
+                            <div class="uckk-dashboard-badge-content flex-grow-1">
+                                <div class="d-flex align-items-start justify-content-between gap-2">
+                                    <div>
+                                        <h4 class="h6 mb-1">
+                                            {{#hasurl}}
+                                                <a href="{{url}}">
+                                                    {{name}}
+                                                </a>
+                                            {{/hasurl}}
+                                            {{^hasurl}}
+                                                {{name}}
+                                            {{/hasurl}}
+                                        </h4>
+
+                                        {{#description}}
+                                            <p class="uckk-dashboard-badge-description text-muted mb-2">
+                                                {{description}}
+                                            </p>
+                                        {{/description}}
+                                    </div>
+
+                                    {{#statuslabel}}
+                                        <span class="badge uckk-badge uckk-badge-{{tone}}">
+                                            {{statuslabel}}
+                                        </span>
+                                    {{/statuslabel}}
+                                </div>
+
+                                {{#hasprogress}}
+                                    <div class="uckk-dashboard-badge-item-progress mb-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="small text-muted">
+                                                {{#str}} badgecriterionprogress, block_uckk_dashboard {{/str}}
+                                            </span>
+                                            <span class="small text-muted">
+                                                {{progresslabel}}
+                                            </span>
+                                        </div>
+
+                                        <div class="progress">
+                                            <div
+                                                class="progress-bar"
+                                                role="progressbar"
+                                                style="width: {{progresspercent}}%;"
+                                                aria-valuenow="{{progresspercent}}"
+                                                aria-valuemin="0"
+                                                aria-valuemax="100"
+                                            >
+                                                <span class="sr-only visually-hidden">
+                                                    {{progresslabel}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/hasprogress}}
+
+                                <dl class="uckk-dashboard-badge-meta row small text-muted mb-0">
+                                    {{#hastimeawarded}}
+                                        <dt class="col-sm-4">
+                                            {{#str}} badgeawardedon, block_uckk_dashboard {{/str}}
+                                        </dt>
+                                        <dd class="col-sm-8">
+                                            {{timeawarded}}
+                                        </dd>
+                                    {{/hastimeawarded}}
+
+                                    {{#hasissuer}}
+                                        <dt class="col-sm-4">
+                                            {{#str}} badgeissuer, block_uckk_dashboard {{/str}}
+                                        </dt>
+                                        <dd class="col-sm-8">
+                                            {{issuer}}
+                                        </dd>
+                                    {{/hasissuer}}
+
+                                    {{#hasevidence}}
+                                        <dt class="col-sm-4">
+                                            {{#str}} badgeevidence, block_uckk_dashboard {{/str}}
+                                        </dt>
+                                        <dd class="col-sm-8">
+                                            {{evidencecount}}
+                                        </dd>
+                                    {{/hasevidence}}
+
+                                    {{#hasvalidation}}
+                                        <dt class="col-sm-4">
+                                            {{#str}} badgevalidation, block_uckk_dashboard {{/str}}
+                                        </dt>
+                                        <dd class="col-sm-8">
+                                            {{validationlabel}}
+                                        </dd>
+                                    {{/hasvalidation}}
+
+                                    {{#hasintegrity}}
+                                        <dt class="col-sm-4">
+                                            {{#str}} badgeintegrity, block_uckk_dashboard {{/str}}
+                                        </dt>
+                                        <dd class="col-sm-8">
+                                            {{integritylabel}}
+                                        </dd>
+                                    {{/hasintegrity}}
+                                </dl>
+
+                                {{#hascriteria}}
+                                    <div class="uckk-dashboard-badge-criteria mt-3">
+                                        <h5 class="small text-muted mb-2">
+                                            {{#str}} badgecriteria, block_uckk_dashboard {{/str}}
+                                        </h5>
+
+                                        <ul class="list-unstyled mb-0">
+                                            {{#criteria}}
+                                                <li class="uckk-dashboard-badge-criterion d-flex gap-2 mb-1">
+                                                    <span class="uckk-dashboard-badge-criterion-icon" aria-hidden="true">
+                                                        {{#complete}}
+                                                            {{#pix}} i/checked, core {{/pix}}
+                                                        {{/complete}}
+                                                        {{#incomplete}}
+                                                            {{#pix}} i/unchecked, core {{/pix}}
+                                                        {{/incomplete}}
+                                                    </span>
+
+                                                    <span>
+                                                        {{label}}
+                                                        {{#detail}}
+                                                            <span class="text-muted">
+                                                                — {{detail}}
+                                                            </span>
+                                                        {{/detail}}
+                                                    </span>
+                                                </li>
+                                            {{/criteria}}
+                                        </ul>
+                                    </div>
+                                {{/hascriteria}}
+                            </div>
+                        </div>
+                    </article>
+                {{/badges}}
+            </div>
+        {{/hasbadges}}
+
+        {{#isempty}}
+            <div class="uckk-dashboard-badge-empty text-muted">
+                <span class="uckk-dashboard-badge-empty-icon me-1" aria-hidden="true">
+                    {{#pix}} i/badge, core {{/pix}}
+                </span>
+                <span>
+                    {{emptytext}}
+                </span>
+            </div>
+        {{/isempty}}
+    </div>
+
+    {{#hasactions}}
+        <div class="card-footer uckk-dashboard-badge-actions">
+            <div class="d-flex flex-wrap gap-2">
+                {{#actions}}
+                    <a
+                        href="{{url}}"
+                        class="btn {{#primary}}btn-primary{{/primary}}{{^primary}}btn-secondary{{/primary}}"
+                    >
+                        {{label}}
+                    </a>
+                {{/actions}}
+            </div>
+        </div>
+    {{/hasactions}}
+</section>

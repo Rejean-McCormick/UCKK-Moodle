@@ -1,0 +1,440 @@
+// This file is part of UCKK-Moodle - https://moodle.org/
+//
+// UCKK-Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// UCKK-Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with UCKK-Moodle. If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Dashboard styles for the UCKK theme.
+ *
+ * These rules style the UCKK dashboard surface, dashboard header, quick links,
+ * progress summaries, cards, and institutional status notices.
+ *
+ * They must remain visual only. They must not encode programme rules,
+ * challenge rules, assembly outcomes, archive validation, integrity decisions,
+ * badge attribution, competency mastery, or AI authority.
+ *
+ * @package    theme_uckk
+ * @copyright  2026 Momus et Bouche Cousue
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+.theme-uckk {
+    --uckk-dashboard-surface: var(--bs-body-bg, #fff);
+    --uckk-dashboard-surface-alt: var(--bs-light, #f8f9fa);
+    --uckk-dashboard-border: var(--bs-border-color, #dee2e6);
+    --uckk-dashboard-text: var(--bs-body-color, #212529);
+    --uckk-dashboard-muted: var(--bs-secondary-color, #6c757d);
+    --uckk-dashboard-primary: var(--bs-primary, #0d6efd);
+    --uckk-dashboard-secondary: var(--bs-secondary, #6c757d);
+    --uckk-dashboard-success: var(--bs-success, #198754);
+    --uckk-dashboard-warning: var(--bs-warning, #ffc107);
+    --uckk-dashboard-danger: var(--bs-danger, #dc3545);
+    --uckk-dashboard-radius: var(--bs-border-radius-lg, .5rem);
+    --uckk-dashboard-shadow: 0 .75rem 2rem rgba(0, 0, 0, .08);
+    --uckk-dashboard-shadow-sm: 0 .25rem .75rem rgba(0, 0, 0, .06);
+}
+
+.theme-uckk-dashboard {
+    color: var(--uckk-dashboard-text);
+}
+
+.theme-uckk-dashboard-header {
+    .theme-uckk-dashboard-header-main {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--uckk-dashboard-border);
+        background:
+            radial-gradient(circle at top right, rgba(13, 110, 253, .12), transparent 22rem),
+            linear-gradient(135deg, var(--uckk-dashboard-surface), var(--uckk-dashboard-surface-alt));
+        box-shadow: var(--uckk-dashboard-shadow);
+    }
+
+    .theme-uckk-campus-label {
+        color: var(--uckk-dashboard-muted);
+        font-weight: 700;
+        letter-spacing: .08em;
+    }
+
+    .theme-uckk-dashboard-title {
+        color: var(--uckk-dashboard-text);
+        font-weight: 700;
+        line-height: 1.15;
+    }
+
+    .theme-uckk-dashboard-subtitle {
+        max-width: 48rem;
+        color: var(--uckk-dashboard-muted);
+        font-size: 1.05rem;
+    }
+
+    .theme-uckk-dashboard-user {
+        color: var(--uckk-dashboard-muted);
+
+        .theme-uckk-dashboard-user-label {
+            font-weight: 700;
+        }
+
+        .theme-uckk-dashboard-user-name {
+            color: var(--uckk-dashboard-text);
+        }
+    }
+}
+
+.theme-uckk-dashboard-status {
+    min-width: min(100%, 20rem);
+
+    .theme-uckk-current-program {
+        text-align: left;
+
+        @include media-breakpoint-up(lg) {
+            text-align: right;
+        }
+    }
+
+    .theme-uckk-current-program-label {
+        display: block;
+        color: var(--uckk-dashboard-muted);
+        font-weight: 700;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+    }
+
+    .theme-uckk-current-program-name {
+        color: var(--uckk-dashboard-text);
+        font-weight: 700;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            color: var(--uckk-dashboard-primary);
+            text-decoration: underline;
+        }
+    }
+}
+
+.theme-uckk-dashboard-progress,
+.theme-uckk-course-progress {
+    width: 100%;
+    min-width: 12rem;
+
+    .theme-uckk-dashboard-progress-label,
+    .theme-uckk-course-progress-label {
+        color: var(--uckk-dashboard-muted);
+        font-weight: 700;
+    }
+
+    .theme-uckk-dashboard-progress-value,
+    .theme-uckk-course-progress-value {
+        color: var(--uckk-dashboard-text);
+        font-weight: 700;
+    }
+}
+
+.theme-uckk-progressbar {
+    height: .65rem;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, .06);
+    background-color: rgba(0, 0, 0, .06);
+    border-radius: 999rem;
+
+    .progress-bar {
+        background: linear-gradient(90deg, var(--uckk-dashboard-primary), var(--uckk-dashboard-success));
+        border-radius: inherit;
+    }
+}
+
+.theme-uckk-dashboard-alert {
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        border-radius: 999rem;
+        font-weight: 600;
+    }
+}
+
+.theme-uckk-dashboard-quicklinks {
+    .theme-uckk-dashboard-quicklink {
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        border: 1px solid var(--uckk-dashboard-border);
+        border-radius: 999rem;
+        box-shadow: var(--uckk-dashboard-shadow-sm);
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            border-color: var(--uckk-dashboard-primary);
+            color: var(--uckk-dashboard-primary);
+            text-decoration: none;
+        }
+
+        &:focus-visible {
+            outline: .2rem solid rgba(13, 110, 253, .35);
+            outline-offset: .15rem;
+        }
+    }
+
+    .theme-uckk-dashboard-quicklink-count {
+        font-weight: 700;
+    }
+}
+
+.theme-uckk-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @include media-breakpoint-up(md) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include media-breakpoint-up(xl) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.theme-uckk-dashboard-card {
+    height: 100%;
+    border: 1px solid var(--uckk-dashboard-border);
+    border-radius: var(--uckk-dashboard-radius);
+    background-color: var(--uckk-dashboard-surface);
+    box-shadow: var(--uckk-dashboard-shadow-sm);
+
+    .theme-uckk-dashboard-card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: .75rem;
+        padding: 1rem 1rem 0;
+    }
+
+    .theme-uckk-dashboard-card-title {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 700;
+    }
+
+    .theme-uckk-dashboard-card-subtitle {
+        margin: .25rem 0 0;
+        color: var(--uckk-dashboard-muted);
+        font-size: .875rem;
+    }
+
+    .theme-uckk-dashboard-card-body {
+        padding: 1rem;
+    }
+
+    .theme-uckk-dashboard-card-footer {
+        padding: 0 1rem 1rem;
+    }
+}
+
+.theme-uckk-dashboard-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+
+    .theme-uckk-dashboard-summary-item {
+        flex: 1 1 10rem;
+        min-width: 0;
+        padding: 1rem;
+        border: 1px solid var(--uckk-dashboard-border);
+        border-radius: var(--uckk-dashboard-radius);
+        background-color: var(--uckk-dashboard-surface);
+    }
+
+    .theme-uckk-dashboard-summary-value {
+        display: block;
+        color: var(--uckk-dashboard-text);
+        font-size: 1.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+    }
+
+    .theme-uckk-dashboard-summary-label {
+        display: block;
+        margin-top: .25rem;
+        color: var(--uckk-dashboard-muted);
+        font-size: .875rem;
+        font-weight: 600;
+    }
+}
+
+.theme-uckk-dashboard-pathway {
+    .theme-uckk-dashboard-pathway-step {
+        display: flex;
+        gap: .75rem;
+        padding: .75rem 0;
+        border-bottom: 1px solid var(--uckk-dashboard-border);
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    .theme-uckk-dashboard-pathway-marker {
+        display: inline-flex;
+        flex: 0 0 2rem;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border: 1px solid var(--uckk-dashboard-border);
+        border-radius: 50%;
+        background-color: var(--uckk-dashboard-surface-alt);
+        color: var(--uckk-dashboard-muted);
+        font-weight: 700;
+    }
+
+    .theme-uckk-dashboard-pathway-step.is-complete {
+        .theme-uckk-dashboard-pathway-marker {
+            border-color: var(--uckk-dashboard-success);
+            background-color: var(--uckk-dashboard-success);
+            color: #fff;
+        }
+    }
+
+    .theme-uckk-dashboard-pathway-step.is-active {
+        .theme-uckk-dashboard-pathway-marker {
+            border-color: var(--uckk-dashboard-primary);
+            color: var(--uckk-dashboard-primary);
+        }
+    }
+
+    .theme-uckk-dashboard-pathway-title {
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .theme-uckk-dashboard-pathway-meta {
+        margin: .15rem 0 0;
+        color: var(--uckk-dashboard-muted);
+        font-size: .875rem;
+    }
+}
+
+.theme-uckk-dashboard-notice {
+    display: flex;
+    gap: .75rem;
+    align-items: flex-start;
+    padding: 1rem;
+    border: 1px solid var(--uckk-dashboard-border);
+    border-left-width: .35rem;
+    border-radius: var(--uckk-dashboard-radius);
+    background-color: var(--uckk-dashboard-surface);
+
+    .theme-uckk-dashboard-notice-icon {
+        flex: 0 0 auto;
+        color: var(--uckk-dashboard-muted);
+    }
+
+    .theme-uckk-dashboard-notice-title {
+        margin: 0 0 .25rem;
+        font-weight: 700;
+    }
+
+    .theme-uckk-dashboard-notice-text {
+        margin: 0;
+        color: var(--uckk-dashboard-muted);
+    }
+
+    &.theme-uckk-dashboard-notice-integrity {
+        border-left-color: var(--uckk-dashboard-secondary);
+    }
+
+    &.theme-uckk-dashboard-notice-assembly {
+        border-left-color: var(--uckk-dashboard-primary);
+    }
+
+    &.theme-uckk-dashboard-notice-archive {
+        border-left-color: var(--uckk-dashboard-success);
+    }
+
+    &.theme-uckk-dashboard-notice-warning {
+        border-left-color: var(--uckk-dashboard-warning);
+    }
+
+    &.theme-uckk-dashboard-notice-danger {
+        border-left-color: var(--uckk-dashboard-danger);
+    }
+}
+
+.theme-uckk-dashboard-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .theme-uckk-dashboard-list-item {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: .75rem;
+        padding: .75rem 0;
+        border-bottom: 1px solid var(--uckk-dashboard-border);
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    .theme-uckk-dashboard-list-title {
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .theme-uckk-dashboard-list-meta {
+        margin: .15rem 0 0;
+        color: var(--uckk-dashboard-muted);
+        font-size: .875rem;
+    }
+
+    .theme-uckk-dashboard-list-action {
+        flex: 0 0 auto;
+    }
+}
+
+.theme-uckk-dashboard-empty {
+    padding: 2rem;
+    border: 1px dashed var(--uckk-dashboard-border);
+    border-radius: var(--uckk-dashboard-radius);
+    background-color: var(--uckk-dashboard-surface-alt);
+    text-align: center;
+
+    .theme-uckk-dashboard-empty-title {
+        margin-bottom: .35rem;
+        font-weight: 700;
+    }
+
+    .theme-uckk-dashboard-empty-text {
+        margin-bottom: 0;
+        color: var(--uckk-dashboard-muted);
+    }
+}
+
+@media print {
+    .theme-uckk-dashboard-header,
+    .theme-uckk-dashboard-card,
+    .theme-uckk-dashboard-summary-item,
+    .theme-uckk-dashboard-notice {
+        border-color: #000;
+        box-shadow: none;
+    }
+
+    .theme-uckk-dashboard-quicklinks,
+    .theme-uckk-dashboard-alert {
+        display: none;
+    }
+}

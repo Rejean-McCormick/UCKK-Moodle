@@ -1,0 +1,254 @@
+{
+  "schema": "uckk.presets.competencies.v1",
+  "idempotency": "competency.idnumber",
+  "framework": {
+    "idnumber": "UCKK-COMP-FRAMEWORK",
+    "name": "UCKK — Compétences fondamentales",
+    "scale": [
+      {
+        "value": 0,
+        "label": "Not observed"
+      },
+      {
+        "value": 1,
+        "label": "Attempted"
+      },
+      {
+        "value": 2,
+        "label": "Demonstrated with support"
+      },
+      {
+        "value": 3,
+        "label": "Demonstrated independently"
+      },
+      {
+        "value": 4,
+        "label": "Demonstrated with public-quality evidence"
+      },
+      {
+        "value": 5,
+        "label": "Demonstrated and archived as reusable Kristal"
+      }
+    ]
+  },
+  "competencies": [
+    {
+      "idnumber": "UCKK-COMP-001",
+      "shortname": "UCKK-COMP-001",
+      "fullname": "Lire le Grand Jeu social",
+      "description": "Lire les structures visibles et invisibles du Grand Jeu social, reconnaître les règles explicites, implicites et cachées, et situer une action dans un système de pouvoir, de flux et d’incitations.",
+      "required_evidence": [
+        "proof",
+        "human_validation",
+        "archive_link"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-002",
+      "shortname": "UCKK-COMP-002",
+      "fullname": "Cartographier un système",
+      "description": "Produire une carte structurée d’un système, de ses acteurs, contraintes, boucles, flux, leviers, dépendances et angles morts.",
+      "required_evidence": [
+        "system_map",
+        "source_links",
+        "reflection",
+        "archive_link"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-003",
+      "shortname": "UCKK-COMP-003",
+      "fullname": "Distinguer fait, hypothèse, interprétation, récit et décision",
+      "description": "Séparer explicitement les faits vérifiables, hypothèses, interprétations, récits symboliques et décisions pratiques afin d’éviter la confusion entre fiction et preuve.",
+      "required_evidence": [
+        "annotated_analysis",
+        "source_check",
+        "human_validation"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-004",
+      "shortname": "UCKK-COMP-004",
+      "fullname": "Utiliser l’IA comme outil non souverain",
+      "description": "Utiliser l’IA pour clarifier, résumer, comparer ou cartographier sans lui déléguer l’autorité finale, la validation de preuve, la décision ou l’évaluation.",
+      "required_evidence": [
+        "AI_collaboration_journal",
+        "human_validation",
+        "limitations_statement"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-005",
+      "shortname": "UCKK-COMP-005",
+      "fullname": "Produire une preuve vérifiable",
+      "description": "Produire une preuve traçable, contextualisée, vérifiable, reliée à des critères et suffisamment documentée pour être évaluée, contestée et archivée.",
+      "required_evidence": [
+        "proof",
+        "provenance",
+        "criteria_mapping",
+        "archive_link"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-006",
+      "shortname": "UCKK-COMP-006",
+      "fullname": "Participer à une assemblée structurée",
+      "description": "Participer à une Assemblée avec motions, arguments, objections, amendements, lectures multiples, décision documentée et respect de la contestabilité.",
+      "required_evidence": [
+        "assembly_participation",
+        "motion_or_argument",
+        "decision_record"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-007",
+      "shortname": "UCKK-COMP-007",
+      "fullname": "Concevoir une mobilisation responsable",
+      "description": "Concevoir une action collective qui tient compte des risques, de la dignité des personnes, des contraintes institutionnelles et des effets réels recherchés.",
+      "required_evidence": [
+        "action_plan",
+        "risk_assessment",
+        "ethical_constraints",
+        "review_record"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-008",
+      "shortname": "UCKK-COMP-008",
+      "fullname": "Documenter une décision",
+      "description": "Documenter une décision avec son contexte, ses motifs, les objections, les preuves mobilisées, les responsables, la fenêtre de contestation et le lien d’archive.",
+      "required_evidence": [
+        "decision_record",
+        "minority_or_objection_record",
+        "archive_link"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-009",
+      "shortname": "UCKK-COMP-009",
+      "fullname": "Archiver un apprentissage",
+      "description": "Transformer un apprentissage, une preuve ou une décision en élément d’archive avec provenance, visibilité, versionnement et état de validation.",
+      "required_evidence": [
+        "archive_item",
+        "provenance",
+        "visibility_decision",
+        "validation_state"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-010",
+      "shortname": "UCKK-COMP-010",
+      "fullname": "Appliquer l’éthique UCKK",
+      "description": "Appliquer les garde-fous UCKK : dignité, non-humiliation, distinction fiction/faits, preuve, consentement, contestabilité, responsabilité et mémoire.",
+      "required_evidence": [
+        "ethics_reflection",
+        "case_analysis",
+        "human_validation"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-011",
+      "shortname": "UCKK-COMP-011",
+      "fullname": "Détecter l’autorité cachée",
+      "description": "Identifier où se loge l’autorité réelle dans un système : règles, plateformes, flux d’argent, normes, modèles, indicateurs, algorithmes ou silences institutionnels.",
+      "required_evidence": [
+        "authority_map",
+        "system_evidence",
+        "reflection"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-012",
+      "shortname": "UCKK-COMP-012",
+      "fullname": "Construire un artefact utile",
+      "description": "Créer un prototype, document, outil, carte, rituel, modèle ou dispositif qui produit une utilité réelle et peut être testé, amélioré et archivé.",
+      "required_evidence": [
+        "artifact",
+        "utility_measure",
+        "feedback",
+        "archive_link"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-013",
+      "shortname": "UCKK-COMP-013",
+      "fullname": "Assurer la contestabilité",
+      "description": "Prévoir et documenter les mécanismes permettant de contester une preuve, une décision, une évaluation, une archive ou une interprétation.",
+      "required_evidence": [
+        "appeal_path",
+        "objection_record",
+        "revision_or_response"
+      ],
+      "minimum_demonstration": 3
+    },
+    {
+      "idnumber": "UCKK-COMP-014",
+      "shortname": "UCKK-COMP-014",
+      "fullname": "Relier connaissance, décision, action et mémoire",
+      "description": "Relier le cycle kOA — connaître, choisir, agir, se souvenir — dans un parcours d’apprentissage complet, traçable et archivable.",
+      "required_evidence": [
+        "cycle_map",
+        "decision_record",
+        "action_trace",
+        "archive_link"
+      ],
+      "minimum_demonstration": 3
+    }
+  ],
+  "course_mapping": {
+    "UCKK-TC101": [
+      "UCKK-COMP-002",
+      "UCKK-COMP-003",
+      "UCKK-COMP-004",
+      "UCKK-COMP-005"
+    ],
+    "UCKK-TC102": [
+      "UCKK-COMP-006",
+      "UCKK-COMP-008",
+      "UCKK-COMP-013"
+    ],
+    "UCKK-TC103": [
+      "UCKK-COMP-001",
+      "UCKK-COMP-005",
+      "UCKK-COMP-011",
+      "UCKK-COMP-012"
+    ],
+    "UCKK-TC104": [
+      "UCKK-COMP-001",
+      "UCKK-COMP-002",
+      "UCKK-COMP-011"
+    ],
+    "UCKK-TC105": [
+      "UCKK-COMP-003",
+      "UCKK-COMP-010",
+      "UCKK-COMP-013"
+    ],
+    "UCKK-TC106": [
+      "UCKK-COMP-006",
+      "UCKK-COMP-007",
+      "UCKK-COMP-010"
+    ],
+    "UCKK-TC107": [
+      "UCKK-COMP-014",
+      "UCKK-COMP-001",
+      "UCKK-COMP-008"
+    ],
+    "UCKK-TC108": [
+      "UCKK-COMP-010",
+      "UCKK-COMP-013",
+      "UCKK-COMP-005"
+    ]
+  }
+}

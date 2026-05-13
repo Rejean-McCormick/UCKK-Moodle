@@ -1,0 +1,492 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkassembly/assembly_view
+
+    Main Assembly view template for UCKK-Moodle.
+
+    This template is render-only. All data must already be:
+    - permission-filtered;
+    - context-aware;
+    - visibility-filtered;
+    - safe for the current viewer.
+
+    Example context:
+    {
+        "uniqid": "uckkassembly-view-12",
+        "id": 12,
+        "cmid": 45,
+        "courseid": 7,
+        "name": "Assemblée des Savoirs",
+        "intro": "<p>Assembly introduction.</p>",
+        "hasintro": true,
+        "assemblytype": "savoirs",
+        "assemblytypelabel": "Assembly of Savoirs",
+        "state": "open",
+        "statelabel": "Open",
+        "stateclass": "state-open",
+        "visibility": "course",
+        "visibilitylabel": "Course",
+        "hasnotices": true,
+        "notices": [],
+        "haswarnings": false,
+        "warnings": [],
+        "summarycounts": {
+            "motions": 3,
+            "amendments": 2,
+            "objections": 1,
+            "votes": 12,
+            "decisions": 1,
+            "contests": 0
+        },
+        "hasmotionlist": true,
+        "motionlist": {},
+        "hasdecisions": true,
+        "decisions": [],
+        "hasminutes": true,
+        "minutes": {},
+        "hascontests": false,
+        "contests": [],
+        "hasarchive": true,
+        "archive": {},
+        "canproposemotion": true,
+        "motionurl": "...",
+        "canvote": false,
+        "voteurl": "...",
+        "canpublishdecision": false,
+        "decisionurl": "...",
+        "cancontestdecision": false,
+        "contesturl": "...",
+        "canarchive": false,
+        "archiveurl": "..."
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckkassembly-view uckkassembly-view--{{stateclass}}"
+    data-region="uckkassembly-view"
+    data-assembly-id="{{id}}"
+    data-cmid="{{cmid}}"
+    data-course-id="{{courseid}}"
+>
+    <header class="uckkassembly-view__header">
+        <div class="uckkassembly-view__identity">
+            <p class="uckkassembly-view__eyebrow">
+                {{assemblytypelabel}}
+            </p>
+
+            <h2 class="uckkassembly-view__title">
+                {{name}}
+            </h2>
+
+            <div class="uckkassembly-view__meta">
+                <span class="uckkassembly-view__meta-item uckkassembly-view__state {{stateclass}}">
+                    {{statelabel}}
+                </span>
+
+                {{#visibilitylabel}}
+                    <span class="uckkassembly-view__meta-item uckkassembly-view__visibility">
+                        {{visibilitylabel}}
+                    </span>
+                {{/visibilitylabel}}
+            </div>
+        </div>
+
+        <nav
+            class="uckkassembly-view__actions"
+            aria-label="{{#str}} assemblyactions, uckkassembly {{/str}}"
+        >
+            {{#canproposemotion}}
+                <a href="{{motionurl}}" class="btn btn-primary">
+                    {{#str}} proposemotion, uckkassembly {{/str}}
+                </a>
+            {{/canproposemotion}}
+
+            {{#canvote}}
+                <a href="{{voteurl}}" class="btn btn-secondary">
+                    {{#str}} vote, uckkassembly {{/str}}
+                </a>
+            {{/canvote}}
+
+            {{#canpublishdecision}}
+                <a href="{{decisionurl}}" class="btn btn-secondary">
+                    {{#str}} publishdecision, uckkassembly {{/str}}
+                </a>
+            {{/canpublishdecision}}
+
+            {{#cancontestdecision}}
+                <a href="{{contesturl}}" class="btn btn-secondary">
+                    {{#str}} contestdecision, uckkassembly {{/str}}
+                </a>
+            {{/cancontestdecision}}
+
+            {{#canarchive}}
+                <a href="{{archiveurl}}" class="btn btn-secondary">
+                    {{#str}} archiveassembly, uckkassembly {{/str}}
+                </a>
+            {{/canarchive}}
+        </nav>
+    </header>
+
+    {{#hasnotices}}
+        <div class="uckkassembly-view__notices">
+            {{#notices}}
+                <div class="alert alert-{{type}}" role="status">
+                    {{message}}
+                </div>
+            {{/notices}}
+        </div>
+    {{/hasnotices}}
+
+    {{#haswarnings}}
+        <div class="uckkassembly-view__warnings">
+            {{#warnings}}
+                <div class="alert alert-warning" role="status">
+                    {{message}}
+                </div>
+            {{/warnings}}
+        </div>
+    {{/haswarnings}}
+
+    {{#hasintro}}
+        <section class="uckkassembly-view__section uckkassembly-view__intro">
+            <h3 class="uckkassembly-view__section-title">
+                {{#str}} introduction, uckkassembly {{/str}}
+            </h3>
+
+            <div class="uckkassembly-view__section-content">
+                {{{intro}}}
+            </div>
+        </section>
+    {{/hasintro}}
+
+    <section class="uckkassembly-view__summary" aria-label="{{#str}} assemblysummary, uckkassembly {{/str}}">
+        <dl class="uckkassembly-view__summary-grid">
+            <div class="uckkassembly-view__summary-item">
+                <dt>{{#str}} motions, uckkassembly {{/str}}</dt>
+                <dd>{{summarycounts.motions}}</dd>
+            </div>
+
+            <div class="uckkassembly-view__summary-item">
+                <dt>{{#str}} amendments, uckkassembly {{/str}}</dt>
+                <dd>{{summarycounts.amendments}}</dd>
+            </div>
+
+            <div class="uckkassembly-view__summary-item">
+                <dt>{{#str}} objections, uckkassembly {{/str}}</dt>
+                <dd>{{summarycounts.objections}}</dd>
+            </div>
+
+            <div class="uckkassembly-view__summary-item">
+                <dt>{{#str}} votes, uckkassembly {{/str}}</dt>
+                <dd>{{summarycounts.votes}}</dd>
+            </div>
+
+            <div class="uckkassembly-view__summary-item">
+                <dt>{{#str}} decisions, uckkassembly {{/str}}</dt>
+                <dd>{{summarycounts.decisions}}</dd>
+            </div>
+
+            <div class="uckkassembly-view__summary-item">
+                <dt>{{#str}} contestations, uckkassembly {{/str}}</dt>
+                <dd>{{summarycounts.contests}}</dd>
+            </div>
+        </dl>
+    </section>
+
+    <div class="uckkassembly-view__layout">
+        <main class="uckkassembly-view__main">
+            <section class="uckkassembly-view__section uckkassembly-view__motions">
+                {{#hasmotionlist}}
+                    {{#motionlist}}
+                        {{> mod_uckkassembly/motion_list }}
+                    {{/motionlist}}
+                {{/hasmotionlist}}
+
+                {{^hasmotionlist}}
+                    <h3 class="uckkassembly-view__section-title">
+                        {{#str}} motions, uckkassembly {{/str}}
+                    </h3>
+                    <p class="uckkassembly-view__empty">
+                        {{#str}} motions:none, uckkassembly {{/str}}
+                    </p>
+                {{/hasmotionlist}}
+            </section>
+
+            <section class="uckkassembly-view__section uckkassembly-view__decisions">
+                <header class="uckkassembly-view__section-header">
+                    <h3 class="uckkassembly-view__section-title">
+                        {{#str}} decisions, uckkassembly {{/str}}
+                    </h3>
+
+                    {{#canpublishdecision}}
+                        <a href="{{decisionurl}}" class="btn btn-secondary btn-sm">
+                            {{#str}} publishdecision, uckkassembly {{/str}}
+                        </a>
+                    {{/canpublishdecision}}
+                </header>
+
+                {{#hasdecisions}}
+                    <ol class="uckkassembly-view__decision-list">
+                        {{#decisions}}
+                            <li class="uckkassembly-view__decision uckkassembly-view__decision--{{status}}">
+                                <header class="uckkassembly-view__decision-header">
+                                    <strong class="uckkassembly-view__decision-title">
+                                        {{title}}
+                                    </strong>
+
+                                    {{#decisiontypelabel}}
+                                        <span class="uckkassembly-view__decision-type">
+                                            {{decisiontypelabel}}
+                                        </span>
+                                    {{/decisiontypelabel}}
+
+                                    {{#statuslabel}}
+                                        <span class="uckkassembly-view__decision-status">
+                                            {{statuslabel}}
+                                        </span>
+                                    {{/statuslabel}}
+                                </header>
+
+                                {{#summary}}
+                                    <div class="uckkassembly-view__decision-summary">
+                                        {{{summary}}}
+                                    </div>
+                                {{/summary}}
+
+                                {{#hasrationale}}
+                                    <section class="uckkassembly-view__decision-rationale">
+                                        <h4>{{#str}} rationale, uckkassembly {{/str}}</h4>
+                                        <div>{{{rationale}}}</div>
+                                    </section>
+                                {{/hasrationale}}
+
+                                {{#hasminorityreport}}
+                                    <section class="uckkassembly-view__minority-report">
+                                        <h4>{{#str}} minorityreport, uckkassembly {{/str}}</h4>
+                                        <div>{{{minorityreport}}}</div>
+                                    </section>
+                                {{/hasminorityreport}}
+
+                                {{#url}}
+                                    <a href="{{url}}" class="uckkassembly-view__item-link">
+                                        {{#str}} viewdecision, uckkassembly {{/str}}
+                                    </a>
+                                {{/url}}
+                            </li>
+                        {{/decisions}}
+                    </ol>
+                {{/hasdecisions}}
+
+                {{^hasdecisions}}
+                    <p class="uckkassembly-view__empty">
+                        {{#str}} decisions:none, uckkassembly {{/str}}
+                    </p>
+                {{/hasdecisions}}
+            </section>
+
+            <section class="uckkassembly-view__section uckkassembly-view__minutes">
+                <header class="uckkassembly-view__section-header">
+                    <h3 class="uckkassembly-view__section-title">
+                        {{#str}} minutes, uckkassembly {{/str}}
+                    </h3>
+
+                    {{#minutesurl}}
+                        <a href="{{minutesurl}}" class="btn btn-secondary btn-sm">
+                            {{#str}} viewminutes, uckkassembly {{/str}}
+                        </a>
+                    {{/minutesurl}}
+                </header>
+
+                {{#hasminutes}}
+                    {{#minutes}}
+                        {{#statuslabel}}
+                            <p class="uckkassembly-view__minutes-status">
+                                <strong>{{#str}} status, moodle {{/str}}:</strong>
+                                {{statuslabel}}
+                            </p>
+                        {{/statuslabel}}
+
+                        {{#hassummary}}
+                            <div class="uckkassembly-view__minutes-summary">
+                                {{{summary}}}
+                            </div>
+                        {{/hassummary}}
+
+                        {{#hasfiles}}
+                            <ul class="uckkassembly-view__minutes-files">
+                                {{#files}}
+                                    <li>
+                                        <a href="{{url}}">{{filename}}</a>
+                                    </li>
+                                {{/files}}
+                            </ul>
+                        {{/hasfiles}}
+                    {{/minutes}}
+                {{/hasminutes}}
+
+                {{^hasminutes}}
+                    <p class="uckkassembly-view__empty">
+                        {{#str}} minutes:none, uckkassembly {{/str}}
+                    </p>
+                {{/hasminutes}}
+            </section>
+        </main>
+
+        <aside class="uckkassembly-view__side">
+            {{#hastimeline}}
+                <section class="uckkassembly-view__panel uckkassembly-view__timeline">
+                    <h3 class="uckkassembly-view__panel-title">
+                        {{#str}} timeline, uckkassembly {{/str}}
+                    </h3>
+
+                    <dl>
+                        {{#timeline.hasscheduled}}
+                            <dt>{{#str}} scheduledtime, uckkassembly {{/str}}</dt>
+                            <dd>{{timeline.scheduledlabel}}</dd>
+                        {{/timeline.hasscheduled}}
+
+                        {{#timeline.hasopen}}
+                            <dt>{{#str}} opentime, uckkassembly {{/str}}</dt>
+                            <dd>{{timeline.openlabel}}</dd>
+                        {{/timeline.hasopen}}
+
+                        {{#timeline.hasclose}}
+                            <dt>{{#str}} closetime, uckkassembly {{/str}}</dt>
+                            <dd>{{timeline.closelabel}}</dd>
+                        {{/timeline.hasclose}}
+
+                        {{#timeline.hascontestuntil}}
+                            <dt>{{#str}} contestuntil, uckkassembly {{/str}}</dt>
+                            <dd>{{timeline.contestuntillabel}}</dd>
+                        {{/timeline.hascontestuntil}}
+                    </dl>
+                </section>
+            {{/hastimeline}}
+
+            <section class="uckkassembly-view__panel uckkassembly-view__contestations">
+                <header class="uckkassembly-view__panel-header">
+                    <h3 class="uckkassembly-view__panel-title">
+                        {{#str}} contestations, uckkassembly {{/str}}
+                    </h3>
+
+                    {{#cancontestdecision}}
+                        <a href="{{contesturl}}" class="btn btn-secondary btn-sm">
+                            {{#str}} contestdecision, uckkassembly {{/str}}
+                        </a>
+                    {{/cancontestdecision}}
+                </header>
+
+                {{#hascontests}}
+                    <ul class="uckkassembly-view__contest-list">
+                        {{#contests}}
+                            <li class="uckkassembly-view__contest uckkassembly-view__contest--{{status}}">
+                                <strong>{{title}}</strong>
+
+                                {{#statuslabel}}
+                                    <span>{{statuslabel}}</span>
+                                {{/statuslabel}}
+
+                                {{#summary}}
+                                    <p>{{summary}}</p>
+                                {{/summary}}
+
+                                {{#url}}
+                                    <a href="{{url}}">
+                                        {{#str}} viewcontest, uckkassembly {{/str}}
+                                    </a>
+                                {{/url}}
+                            </li>
+                        {{/contests}}
+                    </ul>
+                {{/hascontests}}
+
+                {{^hascontests}}
+                    <p class="uckkassembly-view__empty">
+                        {{#str}} contestations:none, uckkassembly {{/str}}
+                    </p>
+                {{/hascontests}}
+            </section>
+
+            <section class="uckkassembly-view__panel uckkassembly-view__archive">
+                <header class="uckkassembly-view__panel-header">
+                    <h3 class="uckkassembly-view__panel-title">
+                        {{#str}} archive, uckkassembly {{/str}}
+                    </h3>
+
+                    {{#canarchive}}
+                        <a href="{{archiveurl}}" class="btn btn-secondary btn-sm">
+                            {{#str}} archiveassembly, uckkassembly {{/str}}
+                        </a>
+                    {{/canarchive}}
+                </header>
+
+                {{#hasarchive}}
+                    {{#archive}}
+                        {{#statuslabel}}
+                            <p>
+                                <strong>{{#str}} status, moodle {{/str}}:</strong>
+                                {{statuslabel}}
+                            </p>
+                        {{/statuslabel}}
+
+                        {{#hasitems}}
+                            <ul class="uckkassembly-view__archive-list">
+                                {{#items}}
+                                    <li>
+                                        {{#url}}
+                                            <a href="{{url}}">{{title}}</a>
+                                        {{/url}}
+                                        {{^url}}
+                                            {{title}}
+                                        {{/url}}
+
+                                        {{#statuslabel}}
+                                            <span>{{statuslabel}}</span>
+                                        {{/statuslabel}}
+                                    </li>
+                                {{/items}}
+                            </ul>
+                        {{/hasitems}}
+
+                        {{^hasitems}}
+                            <p class="uckkassembly-view__empty">
+                                {{#str}} archive:none, uckkassembly {{/str}}
+                            </p>
+                        {{/hasitems}}
+                    {{/archive}}
+                {{/hasarchive}}
+
+                {{^hasarchive}}
+                    <p class="uckkassembly-view__empty">
+                        {{#str}} archive:none, uckkassembly {{/str}}
+                    </p>
+                {{/hasarchive}}
+            </section>
+
+            {{#canviewrestricted}}
+                <section class="uckkassembly-view__panel uckkassembly-view__restricted">
+                    <h3 class="uckkassembly-view__panel-title">
+                        {{#str}} restricteddata, uckkassembly {{/str}}
+                    </h3>
+                    <p>
+                        {{#str}} restricteddatavisible, uckkassembly {{/str}}
+                    </p>
+                </section>
+            {{/canviewrestricted}}
+        </aside>
+    </div>
+
+    <footer class="uckkassembly-view__footer">
+        <p class="uckkassembly-view__authority-note">
+            {{#str}} assemblynonsovereignnotice, uckkassembly {{/str}}
+        </p>
+    </footer>
+</section>

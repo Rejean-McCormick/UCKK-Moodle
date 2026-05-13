@@ -1,0 +1,464 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkassembly/vote_panel
+
+    Vote panel for UCKK Assemblies.
+
+    This template is render-only. All data must already be:
+    - permission-filtered;
+    - context-aware;
+    - safe for the current viewer;
+    - formatted for display.
+
+    Example context:
+    {
+        "uniqid": "uckkassembly-vote-42",
+        "assemblyid": 3,
+        "motionid": 12,
+        "voteid": 18,
+        "title": "Vote on motion",
+        "motiontitle": "Approve archive correction",
+        "motionurl": "https://example.test/mod/uckkassembly/motion.php?id=7&motionid=12",
+        "status": "open",
+        "statuslabel": "Open",
+        "statusclass": "status-open",
+        "canvote": true,
+        "hasvoted": false,
+        "canviewresults": true,
+        "showresults": true,
+        "actionurl": "https://example.test/mod/uckkassembly/vote.php?id=7",
+        "sesskey": "abc123",
+        "options": [
+            {
+                "key": "for",
+                "label": "For",
+                "description": "Support the motion.",
+                "selected": false,
+                "disabled": false
+            }
+        ],
+        "results": [
+            {
+                "key": "for",
+                "label": "For",
+                "count": 12,
+                "percent": 60,
+                "percentlabel": "60%"
+            }
+        ]
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckkassembly-vote-panel uckkassembly-vote-panel--{{statusclass}}"
+    data-region="uckkassembly-vote-panel"
+    data-assembly-id="{{assemblyid}}"
+    data-motion-id="{{motionid}}"
+    data-vote-id="{{voteid}}"
+>
+    <header class="uckkassembly-vote-panel__header">
+        <div class="uckkassembly-vote-panel__identity">
+            <p class="uckkassembly-vote-panel__eyebrow">
+                {{#str}} votepanel, uckkassembly {{/str}}
+            </p>
+
+            <h3 class="uckkassembly-vote-panel__title">
+                {{title}}
+            </h3>
+
+            {{#motiontitle}}
+                <p class="uckkassembly-vote-panel__motion">
+                    {{#motionurl}}
+                        <a href="{{motionurl}}">
+                            {{motiontitle}}
+                        </a>
+                    {{/motionurl}}
+                    {{^motionurl}}
+                        {{motiontitle}}
+                    {{/motionurl}}
+                </p>
+            {{/motiontitle}}
+        </div>
+
+        <div class="uckkassembly-vote-panel__status">
+            <span class="uckkassembly-vote-panel__status-badge {{statusclass}}">
+                {{statuslabel}}
+            </span>
+        </div>
+    </header>
+
+    {{#hasnotice}}
+        <div class="alert alert-info uckkassembly-vote-panel__notice" role="status">
+            {{notice}}
+        </div>
+    {{/hasnotice}}
+
+    {{#haswarning}}
+        <div class="alert alert-warning uckkassembly-vote-panel__warning" role="status">
+            {{warning}}
+        </div>
+    {{/haswarning}}
+
+    {{#hastimeline}}
+        <section class="uckkassembly-vote-panel__timeline">
+            <h4 class="uckkassembly-vote-panel__section-title">
+                {{#str}} votetimeline, uckkassembly {{/str}}
+            </h4>
+
+            <dl class="uckkassembly-vote-panel__timeline-list">
+                {{#hasopenedlabel}}
+                    <dt>{{#str}} voteopened, uckkassembly {{/str}}</dt>
+                    <dd>{{openedlabel}}</dd>
+                {{/hasopenedlabel}}
+
+                {{#hascloseslabel}}
+                    <dt>{{#str}} votecloses, uckkassembly {{/str}}</dt>
+                    <dd>{{closeslabel}}</dd>
+                {{/hascloseslabel}}
+
+                {{#hasclosedlabel}}
+                    <dt>{{#str}} voteclosed, uckkassembly {{/str}}</dt>
+                    <dd>{{closedlabel}}</dd>
+                {{/hasclosedlabel}}
+            </dl>
+
+            {{#isclosed}}
+                <div class="alert alert-secondary" role="status">
+                    {{#str}} voteisclosed, uckkassembly {{/str}}
+                </div>
+            {{/isclosed}}
+
+            {{#isoverdue}}
+                <div class="alert alert-warning" role="status">
+                    {{#str}} voteisoverdue, uckkassembly {{/str}}
+                </div>
+            {{/isoverdue}}
+        </section>
+    {{/hastimeline}}
+
+    {{#hasquorum}}
+        <section class="uckkassembly-vote-panel__quorum">
+            <h4 class="uckkassembly-vote-panel__section-title">
+                {{#str}} quorum, uckkassembly {{/str}}
+            </h4>
+
+            <div
+                class="progress uckkassembly-vote-panel__quorum-progress"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="{{quorumpercent}}"
+                aria-label="{{quorumlabel}}"
+            >
+                <div
+                    class="progress-bar"
+                    style="width: {{quorumpercent}}%;"
+                ></div>
+            </div>
+
+            <p class="uckkassembly-vote-panel__quorum-label">
+                {{quorumlabel}}
+            </p>
+
+            {{#quorumreached}}
+                <p class="uckkassembly-vote-panel__quorum-state uckkassembly-vote-panel__quorum-state--reached">
+                    {{#str}} quorumreached, uckkassembly {{/str}}
+                </p>
+            {{/quorumreached}}
+
+            {{^quorumreached}}
+                <p class="uckkassembly-vote-panel__quorum-state uckkassembly-vote-panel__quorum-state--missing">
+                    {{#str}} quorumnotreached, uckkassembly {{/str}}
+                </p>
+            {{/quorumreached}}
+        </section>
+    {{/hasquorum}}
+
+    {{#canvote}}
+        <form
+            method="post"
+            action="{{actionurl}}"
+            class="uckkassembly-vote-panel__form"
+            data-region="uckkassembly-vote-form"
+        >
+            <input type="hidden" name="id" value="{{cmid}}">
+            <input type="hidden" name="assemblyid" value="{{assemblyid}}">
+            <input type="hidden" name="motionid" value="{{motionid}}">
+            <input type="hidden" name="voteid" value="{{voteid}}">
+            <input type="hidden" name="sesskey" value="{{sesskey}}">
+            <input type="hidden" name="action" value="vote">
+
+            <fieldset class="uckkassembly-vote-panel__fieldset">
+                <legend class="uckkassembly-vote-panel__legend">
+                    {{#str}} castyourvote, uckkassembly {{/str}}
+                </legend>
+
+                {{#hasvoted}}
+                    <div class="alert alert-success" role="status">
+                        {{#str}} alreadyvoted, uckkassembly {{/str}}
+                    </div>
+                {{/hasvoted}}
+
+                <div class="uckkassembly-vote-panel__options">
+                    {{#options}}
+                        <div class="uckkassembly-vote-panel__option">
+                            <input
+                                type="radio"
+                                id="{{uniqid}}-option-{{key}}"
+                                name="choice"
+                                value="{{key}}"
+                                class="uckkassembly-vote-panel__option-input"
+                                {{#selected}}checked{{/selected}}
+                                {{#disabled}}disabled{{/disabled}}
+                                required
+                            >
+
+                            <label
+                                for="{{uniqid}}-option-{{key}}"
+                                class="uckkassembly-vote-panel__option-label"
+                            >
+                                <span class="uckkassembly-vote-panel__option-title">
+                                    {{label}}
+                                </span>
+
+                                {{#description}}
+                                    <span class="uckkassembly-vote-panel__option-description">
+                                        {{description}}
+                                    </span>
+                                {{/description}}
+                            </label>
+                        </div>
+                    {{/options}}
+                </div>
+            </fieldset>
+
+            {{#allowcomment}}
+                <div class="form-group uckkassembly-vote-panel__comment">
+                    <label for="{{uniqid}}-comment">
+                        {{#str}} votecomment, uckkassembly {{/str}}
+                    </label>
+
+                    <textarea
+                        id="{{uniqid}}-comment"
+                        name="comment"
+                        class="form-control"
+                        rows="4"
+                        maxlength="2000"
+                    >{{comment}}</textarea>
+
+                    <small class="form-text text-muted">
+                        {{#str}} votecomment_helptext, uckkassembly {{/str}}
+                    </small>
+                </div>
+            {{/allowcomment}}
+
+            {{#hasprovenancefield}}
+                <div class="form-group uckkassembly-vote-panel__provenance">
+                    <label for="{{uniqid}}-provenance">
+                        {{#str}} provenance, uckkassembly {{/str}}
+                    </label>
+
+                    <select
+                        id="{{uniqid}}-provenance"
+                        name="provenance"
+                        class="custom-select form-control"
+                    >
+                        {{#provenanceoptions}}
+                            <option value="{{key}}" {{#selected}}selected{{/selected}}>
+                                {{label}}
+                            </option>
+                        {{/provenanceoptions}}
+                    </select>
+                </div>
+            {{/hasprovenancefield}}
+
+            {{#requiresconfirmation}}
+                <div class="alert alert-warning uckkassembly-vote-panel__confirmation" role="status">
+                    {{confirmationmessage}}
+                </div>
+            {{/requiresconfirmation}}
+
+            <div class="uckkassembly-vote-panel__actions">
+                <button
+                    type="submit"
+                    class="btn btn-primary uckkassembly-vote-panel__submit"
+                    data-action="uckkassembly-submit-vote"
+                >
+                    {{#str}} submitvote, uckkassembly {{/str}}
+                </button>
+
+                {{#cancelurl}}
+                    <a href="{{cancelurl}}" class="btn btn-secondary">
+                        {{#str}} cancel, moodle {{/str}}
+                    </a>
+                {{/cancelurl}}
+            </div>
+        </form>
+    {{/canvote}}
+
+    {{^canvote}}
+        <div class="alert alert-secondary uckkassembly-vote-panel__cannotvote" role="status">
+            {{cannotvotemessage}}
+        </div>
+    {{/canvote}}
+
+    {{#canviewownvote}}
+        <section class="uckkassembly-vote-panel__own-vote">
+            <h4 class="uckkassembly-vote-panel__section-title">
+                {{#str}} yourvote, uckkassembly {{/str}}
+            </h4>
+
+            {{#hasownvote}}
+                <dl class="uckkassembly-vote-panel__own-vote-summary">
+                    <dt>{{#str}} choice, uckkassembly {{/str}}</dt>
+                    <dd>{{ownvote.choice_label}}</dd>
+
+                    {{#ownvote.hascomment}}
+                        <dt>{{#str}} votecomment, uckkassembly {{/str}}</dt>
+                        <dd>{{ownvote.comment}}</dd>
+                    {{/ownvote.hascomment}}
+
+                    {{#ownvote.hastimemodified}}
+                        <dt>{{#str}} timemodified, moodle {{/str}}</dt>
+                        <dd>{{ownvote.timemodifiedlabel}}</dd>
+                    {{/ownvote.hastimemodified}}
+                </dl>
+            {{/hasownvote}}
+
+            {{^hasownvote}}
+                <p class="uckkassembly-vote-panel__empty">
+                    {{#str}} novoterecorded, uckkassembly {{/str}}
+                </p>
+            {{/hasownvote}}
+        </section>
+    {{/canviewownvote}}
+
+    {{#showresults}}
+        <section class="uckkassembly-vote-panel__results">
+            <header class="uckkassembly-vote-panel__results-header">
+                <h4 class="uckkassembly-vote-panel__section-title">
+                    {{#str}} voteresults, uckkassembly {{/str}}
+                </h4>
+
+                {{#resultstatuslabel}}
+                    <span class="uckkassembly-vote-panel__result-status {{resultstatusclass}}">
+                        {{resultstatuslabel}}
+                    </span>
+                {{/resultstatuslabel}}
+            </header>
+
+            {{#hasresults}}
+                <ul class="uckkassembly-vote-panel__result-list">
+                    {{#results}}
+                        <li class="uckkassembly-vote-panel__result uckkassembly-vote-panel__result--{{key}}">
+                            <div class="uckkassembly-vote-panel__result-header">
+                                <span class="uckkassembly-vote-panel__result-label">
+                                    {{label}}
+                                </span>
+
+                                <span class="uckkassembly-vote-panel__result-count">
+                                    {{count}}
+                                </span>
+
+                                <span class="uckkassembly-vote-panel__result-percent">
+                                    {{percentlabel}}
+                                </span>
+                            </div>
+
+                            <div
+                                class="progress uckkassembly-vote-panel__result-bar"
+                                role="progressbar"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                aria-valuenow="{{percent}}"
+                                aria-label="{{label}} {{percentlabel}}"
+                            >
+                                <div
+                                    class="progress-bar"
+                                    style="width: {{percent}}%;"
+                                ></div>
+                            </div>
+                        </li>
+                    {{/results}}
+                </ul>
+
+                {{#hastotalvotes}}
+                    <p class="uckkassembly-vote-panel__total">
+                        {{#str}} totalvotes, uckkassembly, {{totalvotes}} {{/str}}
+                    </p>
+                {{/hastotalvotes}}
+            {{/hasresults}}
+
+            {{^hasresults}}
+                <p class="uckkassembly-vote-panel__empty">
+                    {{#str}} noresultsavailable, uckkassembly {{/str}}
+                </p>
+            {{/hasresults}}
+        </section>
+    {{/showresults}}
+
+    {{^showresults}}
+        {{#canviewresults}}
+            <div class="alert alert-info uckkassembly-vote-panel__results-hidden" role="status">
+                {{#str}} resultsnotpublishedyet, uckkassembly {{/str}}
+            </div>
+        {{/canviewresults}}
+    {{/showresults}}
+
+    {{#hasdecisionpreview}}
+        <section class="uckkassembly-vote-panel__decision-preview">
+            <h4 class="uckkassembly-vote-panel__section-title">
+                {{#str}} decisionpreview, uckkassembly {{/str}}
+            </h4>
+
+            {{#decisionpreview.statuslabel}}
+                <p>
+                    <strong>{{#str}} status, moodle {{/str}}:</strong>
+                    {{decisionpreview.statuslabel}}
+                </p>
+            {{/decisionpreview.statuslabel}}
+
+            {{#decisionpreview.summary}}
+                <div class="uckkassembly-vote-panel__decision-summary">
+                    {{{decisionpreview.summary}}}
+                </div>
+            {{/decisionpreview.summary}}
+
+            {{#decisionpreview.url}}
+                <a href="{{decisionpreview.url}}" class="btn btn-secondary">
+                    {{#str}} viewdecision, uckkassembly {{/str}}
+                </a>
+            {{/decisionpreview.url}}
+        </section>
+    {{/hasdecisionpreview}}
+
+    {{#hascontestability}}
+        <section class="uckkassembly-vote-panel__contestability">
+            <h4 class="uckkassembly-vote-panel__section-title">
+                {{#str}} contestability, uckkassembly {{/str}}
+            </h4>
+
+            <p>{{contestabilitylabel}}</p>
+
+            {{#contesturl}}
+                <a href="{{contesturl}}" class="btn btn-secondary">
+                    {{#str}} contestdecision, uckkassembly {{/str}}
+                </a>
+            {{/contesturl}}
+        </section>
+    {{/hascontestability}}
+
+    <footer class="uckkassembly-vote-panel__footer">
+        <p class="uckkassembly-vote-panel__authority-note">
+            {{#str}} voteauthoritynotice, uckkassembly {{/str}}
+        </p>
+    </footer>
+</section>

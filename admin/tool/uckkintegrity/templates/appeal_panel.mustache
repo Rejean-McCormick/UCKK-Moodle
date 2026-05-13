@@ -1,0 +1,37 @@
+<section class="tool-uckkintegrity-appeal-panel" data-region="uckkintegrity-appeal-panel">
+    <h3>{{#str}} appeal, tool_uckkintegrity {{/str}}</h3>
+
+    <dl>
+        <dt>{{#str}} caseid, tool_uckkintegrity {{/str}}</dt>
+        <dd>{{id}}</dd>
+
+        <dt>{{#str}} status, tool_uckkintegrity {{/str}}</dt>
+        <dd>{{status}}</dd>
+
+        <dt>{{#str}} appealpath, tool_uckkintegrity {{/str}}</dt>
+        <dd>
+            {{#appealpath}}
+                {{{appealpath}}}
+            {{/appealpath}}
+            {{^appealpath}}
+                {{#str}} noappealpath, tool_uckkintegrity {{/str}}
+            {{/appealpath}}
+        </dd>
+    </dl>
+
+    {{#canappeal}}
+        <div class="alert alert-info">
+            {{#str}} appealnotice, tool_uckkintegrity {{/str}}
+        </div>
+
+        <a class="btn btn-primary" href="{{appealurl}}">
+            {{#str}} submitappeal, tool_uckkintegrity {{/str}}
+        </a>
+    {{/canappeal}}
+
+    {{^canappeal}}
+        <div class="alert alert-secondary">
+            {{#str}} appealnotavailable, tool_uckkintegrity {{/str}}
+        </div>
+    {{/canappeal}}
+</section>

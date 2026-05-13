@@ -1,0 +1,73 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+{{!
+    @template format_uckk/local/content
+
+    Main course content template for the UCKK course format.
+
+    This is the top-level Mustache template for courses using format_uckk.
+    It intentionally delegates the main course rendering to Moodle core's
+    course format content template, then replaces only the section rendering
+    block with the UCKK section template.
+
+    The UCKK-specific course structure is handled by:
+    - format_uckk/local/content/section
+    - format_uckk/local/content/section/cmitem
+    - PHP output classes in format_uckk\output\courseformat
+
+    This file must remain presentation-only.
+    It must not contain business rules, permission checks, archive validation,
+    integrity decisions, completion logic, challenge workflows, assembly logic
+    or AI policy execution.
+
+    Expected Moodle context:
+    {
+        "initialsection": {},
+        "sections": [],
+        "hasnavigation": true,
+        "sectionnavigation": {},
+        "bulkedittools": {},
+        "numsections": 9
+    }
+
+    Optional UCKK context may be prepared by output classes, but this template
+    should stay compatible with Moodle core_courseformat/local/content.
+}}
+
+{{!
+    Include the Moodle core course format content template.
+
+    Moodle's course format subsystem uses Mustache inheritance blocks for
+    partial overriding. The required override here is the section block.
+}}
+{{< core_courseformat/local/content }}
+
+    {{!
+        Mandatory section override.
+
+        Each course section is rendered through the UCKK section template,
+        which is responsible for UCKK visual semantics such as:
+        - Orientation
+        - Concepts
+        - Matière canonique
+        - Atelier
+        - Preuves
+        - Délibération
+        - Livrable
+        - Évaluation
+        - Archive
+    }}
+    {{$ core_courseformat/local/content/section }}
+        {{> format_uckk/local/content/section }}
+    {{/ core_courseformat/local/content/section }}
+
+{{/ core_courseformat/local/content }}

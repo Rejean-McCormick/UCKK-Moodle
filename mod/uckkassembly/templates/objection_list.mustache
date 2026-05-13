@@ -1,0 +1,237 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkassembly/objection_list
+
+    Render a list of objections for a UCKK Assembly.
+
+    This template is render-only. Objections must already be:
+    - permission-filtered;
+    - visibility-filtered;
+    - formatted for display;
+    - safe for the current viewer.
+
+    Example context:
+    {
+        "uniqid": "uckkassembly-objections-12",
+        "assemblyid": 4,
+        "cmid": 55,
+        "heading": "Objections",
+        "intro": "Objections preserve contestability and procedural clarity.",
+        "hasintro": true,
+        "hasobjections": true,
+        "objections": [
+            {
+                "id": 7,
+                "title": "Evidence is incomplete",
+                "summary": "The motion lacks one required proof.",
+                "content": "<p>The archive link is missing.</p>",
+                "hascontent": true,
+                "status": "opened",
+                "statuslabel": "Opened",
+                "statusclass": "objection-status-opened",
+                "motiontitle": "Publish the decision",
+                "hasmotiontitle": true,
+                "authorname": "Ada Joueuse",
+                "hasauthorname": true,
+                "timecreatedlabel": "12 May 2026",
+                "hastimecreated": true,
+                "url": "https://example.test/mod/uckkassembly/objection.php?id=55&objectionid=7",
+                "hasurl": true,
+                "hasactions": true,
+                "actions": [
+                    {
+                        "label": "View",
+                        "url": "https://example.test/mod/uckkassembly/objection.php?id=55&objectionid=7",
+                        "primary": false,
+                        "danger": false,
+                        "secondary": true
+                    }
+                ]
+            }
+        ],
+        "canaddobjection": true,
+        "addobjectionurl": "https://example.test/mod/uckkassembly/objection.php?id=55&action=add",
+        "emptytitle": "No objections",
+        "emptymessage": "No objections have been recorded for this Assembly."
+    }
+}}
+
+<section
+    id="{{uniqid}}"
+    class="uckkassembly-objection-list"
+    data-region="uckkassembly-objection-list"
+    data-assembly-id="{{assemblyid}}"
+    data-cmid="{{cmid}}"
+>
+    <header class="uckkassembly-objection-list__header">
+        <div class="uckkassembly-objection-list__identity">
+            <h3 class="uckkassembly-objection-list__title">
+                {{#heading}}
+                    {{heading}}
+                {{/heading}}
+                {{^heading}}
+                    {{#str}} objections, uckkassembly {{/str}}
+                {{/heading}}
+            </h3>
+
+            {{#hasintro}}
+                <p class="uckkassembly-objection-list__intro">
+                    {{intro}}
+                </p>
+            {{/hasintro}}
+        </div>
+
+        {{#canaddobjection}}
+            {{#addobjectionurl}}
+                <div class="uckkassembly-objection-list__tools">
+                    <a
+                        href="{{addobjectionurl}}"
+                        class="btn btn-primary btn-sm uckkassembly-objection-list__add"
+                    >
+                        {{#str}} addobjection, uckkassembly {{/str}}
+                    </a>
+                </div>
+            {{/addobjectionurl}}
+        {{/canaddobjection}}
+    </header>
+
+    {{#hasobjections}}
+        <ol class="uckkassembly-objection-list__items">
+            {{#objections}}
+                <li
+                    class="uckkassembly-objection-list__item {{statusclass}}"
+                    data-region="uckkassembly-objection"
+                    data-objection-id="{{id}}"
+                >
+                    <article class="uckkassembly-objection-card">
+                        <header class="uckkassembly-objection-card__header">
+                            <div class="uckkassembly-objection-card__identity">
+                                <h4 class="uckkassembly-objection-card__title">
+                                    {{#hasurl}}
+                                        <a href="{{url}}" class="uckkassembly-objection-card__link">
+                                            {{title}}
+                                        </a>
+                                    {{/hasurl}}
+                                    {{^hasurl}}
+                                        {{title}}
+                                    {{/hasurl}}
+                                </h4>
+
+                                <div class="uckkassembly-objection-card__meta">
+                                    {{#statuslabel}}
+                                        <span class="uckkassembly-objection-card__status {{statusclass}}">
+                                            {{statuslabel}}
+                                        </span>
+                                    {{/statuslabel}}
+
+                                    {{#hasmotiontitle}}
+                                        <span class="uckkassembly-objection-card__motion">
+                                            {{#str}} motion, uckkassembly {{/str}}:
+                                            {{motiontitle}}
+                                        </span>
+                                    {{/hasmotiontitle}}
+
+                                    {{#hasauthorname}}
+                                        <span class="uckkassembly-objection-card__author">
+                                            {{#str}} openedby, uckkassembly {{/str}}:
+                                            {{authorname}}
+                                        </span>
+                                    {{/hasauthorname}}
+
+                                    {{#hastimecreated}}
+                                        <time class="uckkassembly-objection-card__date">
+                                            {{timecreatedlabel}}
+                                        </time>
+                                    {{/hastimecreated}}
+                                </div>
+                            </div>
+                        </header>
+
+                        {{#summary}}
+                            <p class="uckkassembly-objection-card__summary">
+                                {{summary}}
+                            </p>
+                        {{/summary}}
+
+                        {{#hascontent}}
+                            <div class="uckkassembly-objection-card__content">
+                                {{{content}}}
+                            </div>
+                        {{/hascontent}}
+
+                        {{#hasresponse}}
+                            <section class="uckkassembly-objection-card__response">
+                                <h5 class="uckkassembly-objection-card__section-title">
+                                    {{#str}} objectionresponse, uckkassembly {{/str}}
+                                </h5>
+
+                                <div class="uckkassembly-objection-card__response-content">
+                                    {{{response}}}
+                                </div>
+
+                                {{#responsestatuslabel}}
+                                    <p class="uckkassembly-objection-card__response-status">
+                                        <strong>{{#str}} status {{/str}}:</strong>
+                                        {{responsestatuslabel}}
+                                    </p>
+                                {{/responsestatuslabel}}
+                            </section>
+                        {{/hasresponse}}
+
+                        {{#hasintegritynotice}}
+                            <div class="alert alert-warning uckkassembly-objection-card__integrity" role="status">
+                                <strong>{{#str}} integritynotice, uckkassembly {{/str}}</strong>
+                                <span>{{integritynotice}}</span>
+                            </div>
+                        {{/hasintegritynotice}}
+
+                        {{#hasactions}}
+                            <footer class="uckkassembly-objection-card__actions">
+                                {{#actions}}
+                                    {{#url}}
+                                        <a
+                                            href="{{url}}"
+                                            class="btn btn-sm {{#primary}}btn-primary{{/primary}}{{#secondary}}btn-secondary{{/secondary}}{{#danger}}btn-danger{{/danger}} uckkassembly-objection-card__action"
+                                            {{#disabled}}aria-disabled="true" tabindex="-1"{{/disabled}}
+                                        >
+                                            {{label}}
+                                        </a>
+                                    {{/url}}
+                                {{/actions}}
+                            </footer>
+                        {{/hasactions}}
+                    </article>
+                </li>
+            {{/objections}}
+        </ol>
+    {{/hasobjections}}
+
+    {{^hasobjections}}
+        <div class="uckkassembly-objection-list__empty">
+            <h4 class="uckkassembly-objection-list__empty-title">
+                {{#emptytitle}}
+                    {{emptytitle}}
+                {{/emptytitle}}
+                {{^emptytitle}}
+                    {{#str}} objections:none, uckkassembly {{/str}}
+                {{/emptytitle}}
+            </h4>
+
+            <p class="uckkassembly-objection-list__empty-message">
+                {{#emptymessage}}
+                    {{emptymessage}}
+                {{/emptymessage}}
+                {{^emptymessage}}
+                    {{#str}} objections:empty, uckkassembly {{/str}}
+                {{/emptymessage}}
+            </p>
+        </div>
+    {{/hasobjections}}
+</section>

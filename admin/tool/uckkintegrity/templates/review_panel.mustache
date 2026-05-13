@@ -1,0 +1,146 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Template for the UCKK integrity review panel.
+
+    Context variables:
+    {
+        "id": 12,
+        "casetype": "Proof quality",
+        "severity": "High",
+        "status": "Under review",
+        "assignedto": 4,
+        "assignedname": "Inquisiteur UCKK",
+        "summary": "Case summary",
+        "reviewurl": "https://example.test/admin/tool/uckkintegrity/review.php?id=12",
+        "decisionurl": "https://example.test/admin/tool/uckkintegrity/decision.php?id=12",
+        "appealurl": "https://example.test/admin/tool/uckkintegrity/appeal.php?id=12",
+        "canreview": true,
+        "candecide": true,
+        "canappeal": true,
+        "hasnotes": true,
+        "notes": [
+            {
+                "notetype": "Observation",
+                "body": "Reviewed evidence.",
+                "visibility": "restricted",
+                "timecreated": "Tuesday, 12 May 2026, 10:00 AM",
+                "user": "Reviewer Name"
+            }
+        ]
+    }
+}}
+
+<div class="tool-uckkintegrity-review-panel card mb-3"
+     data-region="uckkintegrity-review-panel"
+     data-caseid="{{id}}">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">
+            {{#str}}reviewcase, tool_uckkintegrity{{/str}}
+        </h4>
+
+        <span class="badge badge-info">
+            {{status}}
+        </span>
+    </div>
+
+    <div class="card-body">
+        <dl class="row mb-3">
+            <dt class="col-sm-3">
+                {{#str}}case, tool_uckkintegrity{{/str}}
+            </dt>
+            <dd class="col-sm-9">
+                #{{id}}
+            </dd>
+
+            <dt class="col-sm-3">
+                {{#str}}casetype, tool_uckkintegrity{{/str}}
+            </dt>
+            <dd class="col-sm-9">
+                {{casetype}}
+            </dd>
+
+            <dt class="col-sm-3">
+                {{#str}}severity, tool_uckkintegrity{{/str}}
+            </dt>
+            <dd class="col-sm-9">
+                {{severity}}
+            </dd>
+
+            <dt class="col-sm-3">
+                {{#str}}assignedto, tool_uckkintegrity{{/str}}
+            </dt>
+            <dd class="col-sm-9">
+                {{#assignedname}}
+                    {{assignedname}}
+                {{/assignedname}}
+                {{^assignedname}}
+                    —
+                {{/assignedname}}
+            </dd>
+        </dl>
+
+        {{#summary}}
+            <h5>{{#str}}summary, tool_uckkintegrity{{/str}}</h5>
+            <div class="border rounded p-3 mb-3">
+                {{{summary}}}
+            </div>
+        {{/summary}}
+
+        <div class="d-flex flex-wrap gap-2 mb-3">
+            {{#canreview}}
+                <a class="btn btn-secondary mr-2 mb-2" href="{{reviewurl}}">
+                    {{#str}}reviewcase, tool_uckkintegrity{{/str}}
+                </a>
+            {{/canreview}}
+
+            {{#candecide}}
+                <a class="btn btn-primary mr-2 mb-2" href="{{decisionurl}}">
+                    {{#str}}recorddecision, tool_uckkintegrity{{/str}}
+                </a>
+            {{/candecide}}
+
+            {{#canappeal}}
+                <a class="btn btn-outline-secondary mr-2 mb-2" href="{{appealurl}}">
+                    {{#str}}submitappeal, tool_uckkintegrity{{/str}}
+                </a>
+            {{/canappeal}}
+        </div>
+
+        <h5>{{#str}}notes, tool_uckkintegrity{{/str}}</h5>
+
+        {{#hasnotes}}
+            <div class="list-group">
+                {{#notes}}
+                    <div class="list-group-item" data-region="uckkintegrity-review-note">
+                        <div class="d-flex w-100 justify-content-between">
+                            <strong>{{notetype}}</strong>
+                            <small>{{timecreated}}</small>
+                        </div>
+
+                        <div class="text-muted small mb-2">
+                            {{user}} · {{visibility}}
+                        </div>
+
+                        <div>
+                            {{{body}}}
+                        </div>
+                    </div>
+                {{/notes}}
+            </div>
+        {{/hasnotes}}
+
+        {{^hasnotes}}
+            <p class="text-muted mb-0">
+                {{#str}}noresults, tool_uckkintegrity{{/str}}
+            </p>
+        {{/hasnotes}}
+    </div>
+</div>
+
+{{#js}}
+require(['tool_uckkintegrity/review'], function(Review) {
+    Review.init('[data-region="uckkintegrity-review-panel"]');
+});
+{{/js}}

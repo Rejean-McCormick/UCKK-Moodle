@@ -1,0 +1,226 @@
+{{!
+    This file is part of UCKK-Moodle - https://moodle.org/
+
+    UCKK-Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    UCKK-Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with UCKK-Moodle. If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_uckk/assembly_teaser
+
+    Compact teaser card for a UCKK Assembly.
+
+    This template renders a visual summary of an assembly for dashboards,
+    course headers, frontpage sections, and UCKK navigation panels. It must
+    remain presentational. It must not decide assembly status, vote outcome,
+    motion validity, decision legitimacy, contestation result, archive state,
+    or integrity outcome.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * data-region="uckk-assembly-teaser"
+
+    Context variables required for this template:
+    * id string|number - Assembly identifier.
+    * title string - Assembly title.
+    * url string - URL to the assembly.
+    * type string - Assembly type label.
+    * typeshortname string - Machine-readable assembly type.
+    * description string - Short assembly summary, already formatted/safe.
+    * status string - Human-readable assembly status.
+    * statusclass string - CSS class suffix for status display.
+    * date string - Main date/time label.
+    * showdate boolean - Whether to show the date.
+    * motioncount string|number - Number of motions.
+    * showmotioncount boolean - Whether to show motion count.
+    * decisioncount string|number - Number of published decisions.
+    * showdecisioncount boolean - Whether to show decision count.
+    * participantcount string|number - Number of participants.
+    * showparticipantcount boolean - Whether to show participant count.
+    * hascontestation boolean - Whether a contestation exists.
+    * contestationlabel string - Contestation label.
+    * archived boolean - Whether the assembly is archived.
+    * archiveurl string - URL to the archive item.
+    * showarchive boolean - Whether to show the archive link.
+    * integrityurl string - URL to the integrity space or related case.
+    * showintegrity boolean - Whether to show the integrity link.
+    * primaryactionlabel string - Main action label.
+    * primaryactionurl string - Main action URL.
+    * showprimaryaction boolean - Whether to show the main action.
+
+    Example context (json):
+    {
+        "id": 42,
+        "title": "Assemblée des Savoirs — Cartographie d’un enjeu réel",
+        "url": "https://example.test/mod/uckkassembly/view.php?id=42",
+        "type": "Assemblée des Savoirs",
+        "typeshortname": "savoirs",
+        "description": "Examen collectif d’une carte du Grand Jeu, de ses preuves et de ses zones d’incertitude.",
+        "status": "Active",
+        "statusclass": "active",
+        "date": "12 mai 2026, 14:00",
+        "showdate": true,
+        "motioncount": 3,
+        "showmotioncount": true,
+        "decisioncount": 1,
+        "showdecisioncount": true,
+        "participantcount": 18,
+        "showparticipantcount": true,
+        "hascontestation": false,
+        "contestationlabel": "",
+        "archived": false,
+        "archiveurl": "https://example.test/mod/uckkarchive/view.php?id=88",
+        "showarchive": true,
+        "integrityurl": "https://example.test/admin/tool/uckkintegrity/index.php",
+        "showintegrity": true,
+        "primaryactionlabel": "Rejoindre l’assemblée",
+        "primaryactionurl": "https://example.test/mod/uckkassembly/view.php?id=42",
+        "showprimaryaction": true
+    }
+}}
+
+<article class="theme-uckk-assembly-teaser card h-100"
+    data-region="uckk-assembly-teaser"
+    data-assembly-id="{{id}}"
+    data-assembly-type="{{typeshortname}}">
+
+    <div class="card-body d-flex flex-column">
+        <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+            <div class="theme-uckk-assembly-teaser-heading">
+                <div class="theme-uckk-assembly-type small text-uppercase mb-1">
+                    {{#type}}
+                        {{type}}
+                    {{/type}}
+                    {{^type}}
+                        {{#str}} assembly, theme_uckk {{/str}}
+                    {{/type}}
+                </div>
+
+                <h3 class="theme-uckk-assembly-title h5 mb-1">
+                    {{#url}}
+                        <a href="{{url}}" class="stretched-link">
+                            {{title}}
+                        </a>
+                    {{/url}}
+                    {{^url}}
+                        {{title}}
+                    {{/url}}
+                </h3>
+            </div>
+
+            {{#status}}
+                <span class="theme-uckk-status theme-uckk-status-{{statusclass}} badge rounded-pill text-bg-secondary">
+                    {{status}}
+                </span>
+            {{/status}}
+        </div>
+
+        {{#description}}
+            <div class="theme-uckk-assembly-description mb-3">
+                {{{description}}}
+            </div>
+        {{/description}}
+
+        <dl class="theme-uckk-assembly-meta row g-2 mb-3">
+            {{#showdate}}
+                <div class="col-12">
+                    <dt class="theme-uckk-meta-label small">
+                        {{#str}} assemblydate, theme_uckk {{/str}}
+                    </dt>
+                    <dd class="theme-uckk-meta-value mb-0">
+                        <i class="fa fa-calendar-days" aria-hidden="true"></i>
+                        <span>{{date}}</span>
+                    </dd>
+                </div>
+            {{/showdate}}
+
+            {{#showmotioncount}}
+                <div class="col-4">
+                    <dt class="theme-uckk-meta-label small">
+                        {{#str}} motions, theme_uckk {{/str}}
+                    </dt>
+                    <dd class="theme-uckk-meta-value mb-0">
+                        {{motioncount}}
+                    </dd>
+                </div>
+            {{/showmotioncount}}
+
+            {{#showdecisioncount}}
+                <div class="col-4">
+                    <dt class="theme-uckk-meta-label small">
+                        {{#str}} decisions, theme_uckk {{/str}}
+                    </dt>
+                    <dd class="theme-uckk-meta-value mb-0">
+                        {{decisioncount}}
+                    </dd>
+                </div>
+            {{/showdecisioncount}}
+
+            {{#showparticipantcount}}
+                <div class="col-4">
+                    <dt class="theme-uckk-meta-label small">
+                        {{#str}} participants, theme_uckk {{/str}}
+                    </dt>
+                    <dd class="theme-uckk-meta-value mb-0">
+                        {{participantcount}}
+                    </dd>
+                </div>
+            {{/showparticipantcount}}
+        </dl>
+
+        {{#hascontestation}}
+            <div class="theme-uckk-assembly-contestation alert alert-warning py-2 mb-3" role="note">
+                <i class="fa fa-triangle-exclamation" aria-hidden="true"></i>
+                <span>
+                    {{#contestationlabel}}
+                        {{contestationlabel}}
+                    {{/contestationlabel}}
+                    {{^contestationlabel}}
+                        {{#str}} assemblycontested, theme_uckk {{/str}}
+                    {{/contestationlabel}}
+                </span>
+            </div>
+        {{/hascontestation}}
+
+        {{#archived}}
+            <div class="theme-uckk-assembly-archived alert alert-secondary py-2 mb-3" role="note">
+                <i class="fa fa-box-archive" aria-hidden="true"></i>
+                <span>{{#str}} assemblyarchived, theme_uckk {{/str}}</span>
+            </div>
+        {{/archived}}
+
+        <div class="theme-uckk-assembly-actions d-flex flex-wrap gap-2 mt-auto position-relative">
+            {{#showprimaryaction}}
+                <a class="btn btn-primary btn-sm" href="{{primaryactionurl}}">
+                    <i class="fa fa-right-to-bracket" aria-hidden="true"></i>
+                    <span>{{primaryactionlabel}}</span>
+                </a>
+            {{/showprimaryaction}}
+
+            {{#showarchive}}
+                <a class="btn btn-outline-secondary btn-sm" href="{{archiveurl}}">
+                    <i class="fa fa-box-archive" aria-hidden="true"></i>
+                    <span>{{#str}} archive, theme_uckk {{/str}}</span>
+                </a>
+            {{/showarchive}}
+
+            {{#showintegrity}}
+                <a class="btn btn-outline-secondary btn-sm" href="{{integrityurl}}">
+                    <i class="fa fa-shield-halved" aria-hidden="true"></i>
+                    <span>{{#str}} integrity, theme_uckk {{/str}}</span>
+                </a>
+            {{/showintegrity}}
+        </div>
+    </div>
+</article>

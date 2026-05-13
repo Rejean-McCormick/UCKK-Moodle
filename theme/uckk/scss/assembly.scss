@@ -1,0 +1,748 @@
+/**
+ * UCKK theme — Assembly styles.
+ *
+ * File: theme/uckk/scss/assembly.scss
+ *
+ * This file styles UCKK Assembly interfaces only.
+ *
+ * It must not implement assembly logic, voting logic, permissions,
+ * decision validity, archive validation, integrity review, or workflow state.
+ * Those responsibilities belong to mod_uckkassembly, mod_uckkarchive,
+ * tool_uckkintegrity, local_uckk and report_uckk.
+ *
+ * Visual doctrine:
+ * - Assemblies = collective legitimacy.
+ * - Motions = proposals entering deliberation.
+ * - Objections = protected contestability.
+ * - Decisions = documented collective orientation.
+ * - Archives = memory and traceability.
+ */
+
+.uckk-assembly {
+    --uckk-assembly-radius: 1rem;
+    --uckk-assembly-border-width: 1px;
+    --uckk-assembly-shadow: 0 .75rem 2rem rgba(0, 0, 0, .08);
+    --uckk-assembly-shadow-soft: 0 .35rem 1rem rgba(0, 0, 0, .06);
+    --uckk-assembly-gap: 1rem;
+
+    color: $body-color;
+}
+
+/**
+ * Assembly shell.
+ */
+
+.uckk-assembly__shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--uckk-assembly-gap);
+}
+
+.uckk-assembly__header {
+    position: relative;
+    overflow: hidden;
+    border: var(--uckk-assembly-border-width) solid rgba($uckk-colorgold, .45);
+    border-radius: var(--uckk-assembly-radius);
+    background:
+        linear-gradient(135deg, rgba($uckk-colorgold, .16), rgba($uckk-colorblue, .08)),
+        linear-gradient(0deg, rgba($uckk-colorivory, .96), rgba($uckk-colorivory, .96));
+    box-shadow: var(--uckk-assembly-shadow-soft);
+}
+
+.uckk-assembly__header::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: .45rem;
+    background: linear-gradient(
+        180deg,
+        $uckk-colorgold,
+        rgba($uckk-colorred, .85),
+        $uckk-colorblue
+    );
+}
+
+.uckk-assembly__header-inner {
+    position: relative;
+    padding: 1.5rem;
+}
+
+.uckk-assembly__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-block-end: .5rem;
+    color: $uckk-colorblue;
+    font-family: $uckk-fonttechnical;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.uckk-assembly__title {
+    margin: 0;
+    color: $uckk-colorblack;
+    font-family: $uckk-fontinstitutional;
+    font-size: clamp(1.5rem, 3vw, 2.35rem);
+    line-height: 1.1;
+}
+
+.uckk-assembly__subtitle {
+    max-width: 60rem;
+    margin-block-start: .75rem;
+    margin-block-end: 0;
+    color: rgba($uckk-colorblack, .78);
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.uckk-assembly__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-block-start: 1rem;
+}
+
+.uckk-assembly__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .65rem;
+    border: 1px solid rgba($uckk-colorblue, .16);
+    border-radius: 999px;
+    background: rgba($uckk-colorivory, .72);
+    color: rgba($uckk-colorblack, .86);
+    font-size: .8125rem;
+    line-height: 1.2;
+}
+
+/**
+ * Assembly cards and panels.
+ */
+
+.uckk-assembly-card,
+.uckk-assembly-panel {
+    border: var(--uckk-assembly-border-width) solid rgba($uckk-colorblue, .14);
+    border-radius: var(--uckk-assembly-radius);
+    background: rgba($uckk-colorivory, .96);
+    box-shadow: var(--uckk-assembly-shadow-soft);
+}
+
+.uckk-assembly-card {
+    position: relative;
+    padding: 1rem;
+}
+
+.uckk-assembly-card::before {
+    content: "";
+    position: absolute;
+    inset-block: 1rem;
+    inset-inline-start: 0;
+    width: .25rem;
+    border-radius: 999px;
+    background: rgba($uckk-colorgold, .75);
+}
+
+.uckk-assembly-card__header,
+.uckk-assembly-panel__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-block-end: .75rem;
+}
+
+.uckk-assembly-card__title,
+.uckk-assembly-panel__title {
+    margin: 0;
+    color: $uckk-colorblack;
+    font-family: $uckk-fontinstitutional;
+    font-size: 1.2rem;
+    line-height: 1.25;
+}
+
+.uckk-assembly-card__summary,
+.uckk-assembly-panel__summary {
+    color: rgba($uckk-colorblack, .78);
+    line-height: 1.55;
+}
+
+.uckk-assembly-card__footer,
+.uckk-assembly-panel__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-block-start: 1rem;
+    padding-block-start: .75rem;
+    border-block-start: 1px solid rgba($uckk-colorblue, .12);
+}
+
+/**
+ * Assembly type markers.
+ */
+
+.uckk-assembly--savoirs .uckk-assembly__header::before,
+.uckk-assembly-card--savoirs::before {
+    background: $uckk-colorblue;
+}
+
+.uckk-assembly--defis .uckk-assembly__header::before,
+.uckk-assembly-card--defis::before {
+    background: $uckk-colorred;
+}
+
+.uckk-assembly--joueurs .uckk-assembly__header::before,
+.uckk-assembly-card--joueurs::before {
+    background: $uckk-colorgold;
+}
+
+.uckk-assembly--batisseurs .uckk-assembly__header::before,
+.uckk-assembly-card--batisseurs::before {
+    background: $uckk-colorgreen;
+}
+
+.uckk-assembly--inquisiteurs .uckk-assembly__header::before,
+.uckk-assembly-card--inquisiteurs::before {
+    background: linear-gradient(180deg, $uckk-colorred, $uckk-colorblack);
+}
+
+.uckk-assembly--grand-jeu .uckk-assembly__header::before,
+.uckk-assembly-card--grand-jeu::before {
+    background: linear-gradient(180deg, $uckk-colorgold, $uckk-colorred, $uckk-colorblue);
+}
+
+/**
+ * State badges.
+ */
+
+.uckk-assembly-state {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .32rem .62rem;
+    border: 1px solid rgba($uckk-colorblue, .14);
+    border-radius: 999px;
+    background: rgba($uckk-colorivory, .9);
+    color: rgba($uckk-colorblack, .82);
+    font-family: $uckk-fonttechnical;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.uckk-assembly-state::before {
+    content: "";
+    display: inline-block;
+    width: .55rem;
+    height: .55rem;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+.uckk-assembly-state--planned {
+    color: $uckk-colorblue;
+}
+
+.uckk-assembly-state--open {
+    color: $uckk-colorgreen;
+}
+
+.uckk-assembly-state--deliberation {
+    color: $uckk-colorgold;
+}
+
+.uckk-assembly-state--voting,
+.uckk-assembly-state--reading {
+    color: $uckk-colorred;
+}
+
+.uckk-assembly-state--decision-published {
+    color: $uckk-colorblue;
+}
+
+.uckk-assembly-state--contestable {
+    color: $uckk-colorred;
+}
+
+.uckk-assembly-state--archived,
+.uckk-assembly-state--closed {
+    color: rgba($uckk-colorblack, .68);
+}
+
+/**
+ * Motion list.
+ */
+
+.uckk-motion-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.uckk-motion {
+    position: relative;
+    padding: 1rem;
+    border: 1px solid rgba($uckk-colorblue, .14);
+    border-radius: .85rem;
+    background: rgba($uckk-colorivory, .92);
+}
+
+.uckk-motion__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-block-end: .5rem;
+}
+
+.uckk-motion__title {
+    margin: 0;
+    color: $uckk-colorblack;
+    font-family: $uckk-fontinstitutional;
+    font-size: 1.1rem;
+    line-height: 1.3;
+}
+
+.uckk-motion__body {
+    color: rgba($uckk-colorblack, .8);
+    line-height: 1.55;
+}
+
+.uckk-motion__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin-block-start: .75rem;
+    color: rgba($uckk-colorblack, .68);
+    font-size: .8125rem;
+}
+
+.uckk-motion--accepted {
+    border-color: rgba($uckk-colorgreen, .36);
+}
+
+.uckk-motion--amended {
+    border-color: rgba($uckk-colorgold, .5);
+}
+
+.uckk-motion--contested {
+    border-color: rgba($uckk-colorred, .45);
+    background: linear-gradient(0deg, rgba($uckk-colorred, .04), rgba($uckk-colorivory, .96));
+}
+
+.uckk-motion--decided {
+    border-color: rgba($uckk-colorblue, .3);
+}
+
+/**
+ * Objections and amendments.
+ */
+
+.uckk-objection,
+.uckk-amendment {
+    padding: .85rem 1rem;
+    border-radius: .75rem;
+    background: rgba($uckk-colorivory, .86);
+}
+
+.uckk-objection {
+    border: 1px solid rgba($uckk-colorred, .32);
+    border-inline-start: .28rem solid $uckk-colorred;
+}
+
+.uckk-amendment {
+    border: 1px solid rgba($uckk-colorgold, .42);
+    border-inline-start: .28rem solid $uckk-colorgold;
+}
+
+.uckk-objection__title,
+.uckk-amendment__title {
+    margin: 0 0 .35rem;
+    font-family: $uckk-fonttechnical;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.uckk-objection__title {
+    color: $uckk-colorred;
+}
+
+.uckk-amendment__title {
+    color: $uckk-colorblue;
+}
+
+.uckk-objection__body,
+.uckk-amendment__body {
+    color: rgba($uckk-colorblack, .82);
+    line-height: 1.5;
+}
+
+/**
+ * Vote / reading panels.
+ */
+
+.uckk-assembly-reading,
+.uckk-vote-panel {
+    border: 1px solid rgba($uckk-colorblue, .14);
+    border-radius: .85rem;
+    background: rgba($uckk-colorivory, .94);
+    overflow: hidden;
+}
+
+.uckk-assembly-reading__header,
+.uckk-vote-panel__header {
+    padding: .85rem 1rem;
+    border-block-end: 1px solid rgba($uckk-colorblue, .12);
+    background: rgba($uckk-colorblue, .05);
+}
+
+.uckk-assembly-reading__title,
+.uckk-vote-panel__title {
+    margin: 0;
+    color: $uckk-colorblue;
+    font-family: $uckk-fonttechnical;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.uckk-assembly-reading__body,
+.uckk-vote-panel__body {
+    padding: 1rem;
+}
+
+.uckk-vote-meter {
+    display: grid;
+    gap: .5rem;
+}
+
+.uckk-vote-meter__row {
+    display: grid;
+    grid-template-columns: minmax(7rem, 12rem) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .65rem;
+}
+
+.uckk-vote-meter__label {
+    color: rgba($uckk-colorblack, .78);
+    font-size: .875rem;
+}
+
+.uckk-vote-meter__track {
+    height: .65rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba($uckk-colorblue, .12);
+}
+
+.uckk-vote-meter__bar {
+    display: block;
+    width: var(--uckk-vote-value, 0%);
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, $uckk-colorgold, $uckk-colorred);
+}
+
+.uckk-vote-meter__value {
+    color: rgba($uckk-colorblack, .7);
+    font-family: $uckk-fonttechnical;
+    font-size: .8125rem;
+}
+
+/**
+ * Decision panel.
+ */
+
+.uckk-decision {
+    position: relative;
+    padding: 1.25rem;
+    border: 1px solid rgba($uckk-colorgold, .46);
+    border-radius: 1rem;
+    background:
+        linear-gradient(135deg, rgba($uckk-colorgold, .12), transparent 45%),
+        rgba($uckk-colorivory, .98);
+    box-shadow: var(--uckk-assembly-shadow-soft);
+}
+
+.uckk-decision::before {
+    content: "";
+    position: absolute;
+    inset-block: 1.25rem;
+    inset-inline-start: 0;
+    width: .28rem;
+    border-radius: 999px;
+    background: $uckk-colorgold;
+}
+
+.uckk-decision__label {
+    margin-block-end: .35rem;
+    color: $uckk-colorblue;
+    font-family: $uckk-fonttechnical;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.uckk-decision__title {
+    margin: 0;
+    color: $uckk-colorblack;
+    font-family: $uckk-fontinstitutional;
+    font-size: 1.35rem;
+    line-height: 1.25;
+}
+
+.uckk-decision__body {
+    margin-block-start: .75rem;
+    color: rgba($uckk-colorblack, .82);
+    line-height: 1.6;
+}
+
+.uckk-decision__reasoning {
+    margin-block-start: 1rem;
+    padding: .9rem 1rem;
+    border-radius: .75rem;
+    background: rgba($uckk-colorblue, .06);
+    color: rgba($uckk-colorblack, .8);
+}
+
+.uckk-decision__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-block-start: 1rem;
+}
+
+/**
+ * Contestability and minority reports.
+ */
+
+.uckk-contestation,
+.uckk-minority-report {
+    padding: 1rem;
+    border-radius: .85rem;
+    line-height: 1.55;
+}
+
+.uckk-contestation {
+    border: 1px solid rgba($uckk-colorred, .34);
+    background: rgba($uckk-colorred, .045);
+}
+
+.uckk-minority-report {
+    border: 1px solid rgba($uckk-colorblue, .24);
+    background: rgba($uckk-colorblue, .05);
+}
+
+.uckk-contestation__title,
+.uckk-minority-report__title {
+    margin: 0 0 .5rem;
+    font-family: $uckk-fonttechnical;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.uckk-contestation__title {
+    color: $uckk-colorred;
+}
+
+.uckk-minority-report__title {
+    color: $uckk-colorblue;
+}
+
+/**
+ * Minutes and archive trace.
+ */
+
+.uckk-minutes,
+.uckk-assembly-archive-trace {
+    border: 1px dashed rgba($uckk-colorblue, .3);
+    border-radius: .85rem;
+    background: rgba($uckk-colorblue, .035);
+}
+
+.uckk-minutes {
+    padding: 1rem;
+}
+
+.uckk-minutes__title,
+.uckk-assembly-archive-trace__title {
+    margin: 0 0 .5rem;
+    color: $uckk-colorblue;
+    font-family: $uckk-fonttechnical;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.uckk-minutes__body,
+.uckk-assembly-archive-trace__body {
+    color: rgba($uckk-colorblack, .78);
+    line-height: 1.55;
+}
+
+.uckk-assembly-archive-trace {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    padding: .9rem 1rem;
+}
+
+.uckk-assembly-archive-trace__icon {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: rgba($uckk-colorblue, .1);
+    color: $uckk-colorblue;
+}
+
+/**
+ * Assembly quick teaser.
+ */
+
+.uckk-assembly-teaser {
+    display: grid;
+    gap: .65rem;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid rgba($uckk-colorgold, .34);
+    border-radius: 1rem;
+    background:
+        linear-gradient(145deg, rgba($uckk-colorgold, .08), rgba($uckk-colorblue, .04)),
+        rgba($uckk-colorivory, .96);
+    box-shadow: var(--uckk-assembly-shadow-soft);
+}
+
+.uckk-assembly-teaser__title {
+    margin: 0;
+    color: $uckk-colorblack;
+    font-family: $uckk-fontinstitutional;
+    font-size: 1.15rem;
+    line-height: 1.25;
+}
+
+.uckk-assembly-teaser__summary {
+    color: rgba($uckk-colorblack, .76);
+    font-size: .925rem;
+    line-height: 1.5;
+}
+
+.uckk-assembly-teaser__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-block-start: auto;
+}
+
+/**
+ * Lists and responsive layout.
+ */
+
+.uckk-assembly-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1rem;
+}
+
+.uckk-assembly-two-column {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 767.98px) {
+    .uckk-assembly__header-inner {
+        padding: 1.15rem;
+    }
+
+    .uckk-assembly-card__header,
+    .uckk-assembly-panel__header,
+    .uckk-motion__header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .uckk-vote-meter__row {
+        grid-template-columns: 1fr;
+        gap: .35rem;
+    }
+
+    .uckk-assembly-two-column {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/**
+ * Accessibility and motion preferences.
+ */
+
+.uckk-assembly a:focus-visible,
+.uckk-assembly button:focus-visible,
+.uckk-assembly [tabindex]:focus-visible {
+    outline: .2rem solid rgba($uckk-colorgold, .85);
+    outline-offset: .2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .uckk-assembly *,
+    .uckk-assembly *::before,
+    .uckk-assembly *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/**
+ * Dark region support.
+ *
+ * These classes are useful when assembly cards are shown inside darker
+ * dashboard or frontpage sections.
+ */
+
+.uckk-region--dark .uckk-assembly-card,
+.uckk-region--dark .uckk-assembly-panel,
+.uckk-region--dark .uckk-motion,
+.uckk-region--dark .uckk-decision,
+.uckk-region--dark .uckk-assembly-teaser {
+    border-color: rgba($uckk-colorivory, .18);
+    background: rgba($uckk-colorblack, .62);
+    color: $uckk-colorivory;
+}
+
+.uckk-region--dark .uckk-assembly-card__title,
+.uckk-region--dark .uckk-assembly-panel__title,
+.uckk-region--dark .uckk-motion__title,
+.uckk-region--dark .uckk-decision__title,
+.uckk-region--dark .uckk-assembly-teaser__title {
+    color: $uckk-colorivory;
+}
+
+.uckk-region--dark .uckk-assembly-card__summary,
+.uckk-region--dark .uckk-assembly-panel__summary,
+.uckk-region--dark .uckk-motion__body,
+.uckk-region--dark .uckk-decision__body,
+.uckk-region--dark .uckk-assembly-teaser__summary {
+    color: rgba($uckk-colorivory, .82);
+}

@@ -1,0 +1,380 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+}}
+{{!
+    @template block_uckk_dashboard/progress_summary
+
+    Progress summary card for the UCKK dashboard block.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * data-region="block-uckk-dashboard-progress-summary"
+
+    Context variables required for this template:
+    * userid int
+    * contextid int
+    * title string
+    * subtitle string
+    * overallpercent int
+    * overallpercentlabel string
+    * status string
+    * statuslabel string
+    * statusclass string
+    * courses array
+    * competencies array
+    * badges array
+    * alerts array
+    * hascourses bool
+    * hascompetencies bool
+    * hasbadges bool
+    * hasalerts bool
+    * hasviewurl bool
+    * coursecount int
+    * competencycount int
+    * badgecount int
+    * alertcount int
+    * completedcoursecount int
+    * completedcompetencycount int
+    * earnedbadgecount int
+    * viewurl string
+
+    Example context (json):
+    {
+        "userid": 3,
+        "contextid": 1,
+        "title": "My progress",
+        "subtitle": "Tronc commun",
+        "overallpercent": 42,
+        "overallpercentlabel": "42%",
+        "status": "in_progress",
+        "statuslabel": "In progress",
+        "statusclass": "uckk-status-in-progress",
+        "hascourses": true,
+        "hascompetencies": true,
+        "hasbadges": true,
+        "hasalerts": true,
+        "hasviewurl": true,
+        "coursecount": 2,
+        "competencycount": 2,
+        "badgecount": 2,
+        "alertcount": 1,
+        "completedcoursecount": 1,
+        "completedcompetencycount": 1,
+        "earnedbadgecount": 1,
+        "viewurl": "https://example.test/local/uckk/progress.php?id=3",
+        "courses": [
+            {
+                "id": 101,
+                "shortname": "UCKK-TC101",
+                "fullname": "Cartographie des idées avec l’IA",
+                "status": "completed",
+                "statuslabel": "Completed",
+                "statusclass": "uckk-status-completed",
+                "percent": 100,
+                "percentlabel": "100%",
+                "url": "https://example.test/course/view.php?id=101",
+                "hasurl": true,
+                "current": false
+            }
+        ],
+        "competencies": [
+            {
+                "id": 1,
+                "idnumber": "UCKK-COMP-001",
+                "shortname": "Read the game",
+                "status": "completed",
+                "statuslabel": "Completed",
+                "statusclass": "uckk-status-completed",
+                "rating": 3,
+                "ratinglabel": "Demonstrated independently"
+            }
+        ],
+        "badges": [
+            {
+                "id": 1,
+                "name": "Joueur initié",
+                "description": "Foundational UCKK badge.",
+                "earned": true,
+                "earnedlabel": "Earned",
+                "url": "https://example.test/badges/badge.php?hash=abc",
+                "hasurl": true
+            }
+        ],
+        "alerts": [
+            {
+                "level": "warning",
+                "levelclass": "alert-warning",
+                "message": "One item is pending review."
+            }
+        ]
+    }
+}}
+
+<section
+    class="block-uckk-dashboard-progress-summary card"
+    data-region="block-uckk-dashboard-progress-summary"
+    data-userid="{{userid}}"
+    data-contextid="{{contextid}}"
+>
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <h3 class="h5 mb-1">
+                    {{title}}
+                </h3>
+
+                {{#subtitle}}
+                    <div class="text-muted small">
+                        {{subtitle}}
+                    </div>
+                {{/subtitle}}
+            </div>
+
+            <span class="badge {{statusclass}}">
+                {{statuslabel}}
+            </span>
+        </div>
+
+        {{#hasalerts}}
+            <div class="block-uckk-dashboard-progress-alerts mb-3">
+                {{#alerts}}
+                    <div class="alert {{levelclass}} mb-2" role="status">
+                        {{message}}
+                    </div>
+                {{/alerts}}
+            </div>
+        {{/hasalerts}}
+
+        <div class="block-uckk-dashboard-progress-overall mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="font-weight-bold">
+                    {{#str}}progressoverall, block_uckk_dashboard{{/str}}
+                </span>
+                <span>
+                    {{overallpercentlabel}}
+                </span>
+            </div>
+
+            <div
+                class="progress"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="{{overallpercent}}"
+                aria-label="{{#str}}progressoverall, block_uckk_dashboard{{/str}}"
+            >
+                <div
+                    class="progress-bar {{statusclass}}"
+                    data-percent="{{overallpercent}}"
+                >
+                    {{overallpercentlabel}}
+                </div>
+            </div>
+        </div>
+
+        <div class="block-uckk-dashboard-progress-counts row mb-4">
+            <div class="col-12 col-md-4 mb-2 mb-md-0">
+                <div class="border rounded p-2 h-100">
+                    <div class="small text-muted">
+                        {{#str}}courses, block_uckk_dashboard{{/str}}
+                    </div>
+                    <div class="h5 mb-0">
+                        {{completedcoursecount}} / {{coursecount}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 mb-2 mb-md-0">
+                <div class="border rounded p-2 h-100">
+                    <div class="small text-muted">
+                        {{#str}}competencies, block_uckk_dashboard{{/str}}
+                    </div>
+                    <div class="h5 mb-0">
+                        {{completedcompetencycount}} / {{competencycount}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="border rounded p-2 h-100">
+                    <div class="small text-muted">
+                        {{#str}}badges, block_uckk_dashboard{{/str}}
+                    </div>
+                    <div class="h5 mb-0">
+                        {{earnedbadgecount}} / {{badgecount}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block-uckk-dashboard-progress-sections">
+            <section class="mb-4" aria-labelledby="block-uckk-progress-courses-{{uniqid}}">
+                <h4 id="block-uckk-progress-courses-{{uniqid}}" class="h6">
+                    {{#str}}courses, block_uckk_dashboard{{/str}}
+                </h4>
+
+                {{#hascourses}}
+                    <ul class="list-group">
+                        {{#courses}}
+                            <li class="list-group-item {{#current}}border-primary{{/current}}">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="font-weight-bold">
+                                            {{#hasurl}}
+                                                <a href="{{url}}">
+                                                    {{shortname}}
+                                                </a>
+                                            {{/hasurl}}
+                                            {{^hasurl}}
+                                                {{shortname}}
+                                            {{/hasurl}}
+                                        </div>
+
+                                        <div class="small text-muted">
+                                            {{fullname}}
+                                        </div>
+                                    </div>
+
+                                    <span class="badge {{statusclass}}">
+                                        {{statuslabel}}
+                                    </span>
+                                </div>
+
+                                <div class="mt-2">
+                                    <div class="d-flex justify-content-between small">
+                                        <span>{{#str}}progress, block_uckk_dashboard{{/str}}</span>
+                                        <span>{{percentlabel}}</span>
+                                    </div>
+
+                                    <div
+                                        class="progress"
+                                        role="progressbar"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        aria-valuenow="{{percent}}"
+                                        aria-label="{{shortname}}"
+                                    >
+                                        <div
+                                            class="progress-bar {{statusclass}}"
+                                            data-percent="{{percent}}"
+                                        >
+                                            {{percentlabel}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {{/courses}}
+                    </ul>
+                {{/hascourses}}
+
+                {{^hascourses}}
+                    <p class="text-muted mb-0">
+                        {{#str}}nocoursesummary, block_uckk_dashboard{{/str}}
+                    </p>
+                {{/hascourses}}
+            </section>
+
+            <section class="mb-4" aria-labelledby="block-uckk-progress-competencies-{{uniqid}}">
+                <h4 id="block-uckk-progress-competencies-{{uniqid}}" class="h6">
+                    {{#str}}competencies, block_uckk_dashboard{{/str}}
+                </h4>
+
+                {{#hascompetencies}}
+                    <ul class="list-group">
+                        {{#competencies}}
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="font-weight-bold">
+                                            {{shortname}}
+                                        </div>
+
+                                        {{#idnumber}}
+                                            <div class="small text-muted">
+                                                {{idnumber}}
+                                            </div>
+                                        {{/idnumber}}
+
+                                        <div class="small">
+                                            {{ratinglabel}}
+                                        </div>
+                                    </div>
+
+                                    <span class="badge {{statusclass}}">
+                                        {{statuslabel}}
+                                    </span>
+                                </div>
+                            </li>
+                        {{/competencies}}
+                    </ul>
+                {{/hascompetencies}}
+
+                {{^hascompetencies}}
+                    <p class="text-muted mb-0">
+                        {{#str}}nocompetencysummary, block_uckk_dashboard{{/str}}
+                    </p>
+                {{/hascompetencies}}
+            </section>
+
+            <section class="mb-4" aria-labelledby="block-uckk-progress-badges-{{uniqid}}">
+                <h4 id="block-uckk-progress-badges-{{uniqid}}" class="h6">
+                    {{#str}}badges, block_uckk_dashboard{{/str}}
+                </h4>
+
+                {{#hasbadges}}
+                    <ul class="list-group">
+                        {{#badges}}
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="font-weight-bold">
+                                            {{#hasurl}}
+                                                <a href="{{url}}">
+                                                    {{name}}
+                                                </a>
+                                            {{/hasurl}}
+                                            {{^hasurl}}
+                                                {{name}}
+                                            {{/hasurl}}
+                                        </div>
+
+                                        {{#description}}
+                                            <div class="small text-muted">
+                                                {{description}}
+                                            </div>
+                                        {{/description}}
+                                    </div>
+
+                                    <span class="badge {{#earned}}badge-success{{/earned}}{{^earned}}badge-light{{/earned}}">
+                                        {{earnedlabel}}
+                                    </span>
+                                </div>
+                            </li>
+                        {{/badges}}
+                    </ul>
+                {{/hasbadges}}
+
+                {{^hasbadges}}
+                    <p class="text-muted mb-0">
+                        {{#str}}nobadgesummary, block_uckk_dashboard{{/str}}
+                    </p>
+                {{/hasbadges}}
+            </section>
+        </div>
+
+        {{#hasviewurl}}
+            <div class="mt-3">
+                <a class="btn btn-secondary btn-sm" href="{{viewurl}}">
+                    {{#str}}viewfullprogress, block_uckk_dashboard{{/str}}
+                </a>
+            </div>
+        {{/hasviewurl}}
+    </div>
+</section>

@@ -1,0 +1,56 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Template for the UCKK integrity decision panel.
+
+    Context variables:
+    * id
+    * status
+    * decision
+    * correction
+    * appealpath
+    * hasdecision
+}}
+
+<div class="tool-uckkintegrity-decision-panel" data-region="uckkintegrity-decision-panel" data-caseid="{{id}}">
+    <h4>{{#str}}decision, tool_uckkintegrity{{/str}}</h4>
+
+    <dl class="row">
+        <dt class="col-sm-3">{{#str}}case, tool_uckkintegrity{{/str}}</dt>
+        <dd class="col-sm-9">#{{id}}</dd>
+
+        <dt class="col-sm-3">{{#str}}status, tool_uckkintegrity{{/str}}</dt>
+        <dd class="col-sm-9">{{status}}</dd>
+    </dl>
+
+    {{#hasdecision}}
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>{{#str}}decisiontext, tool_uckkintegrity{{/str}}</strong>
+            </div>
+            <div class="card-body">
+                {{{decision}}}
+            </div>
+        </div>
+
+        {{#correction}}
+            <div class="alert alert-warning" data-region="uckkintegrity-correction">
+                <h5 class="alert-heading">{{#str}}correction, tool_uckkintegrity{{/str}}</h5>
+                <div>{{{correction}}}</div>
+            </div>
+        {{/correction}}
+
+        {{#appealpath}}
+            <div class="alert alert-info" data-region="uckkintegrity-appeal-path">
+                <h5 class="alert-heading">{{#str}}appealpath, tool_uckkintegrity{{/str}}</h5>
+                <div>{{{appealpath}}}</div>
+            </div>
+        {{/appealpath}}
+    {{/hasdecision}}
+
+    {{^hasdecision}}
+        <div class="alert alert-secondary" data-region="uckkintegrity-no-decision">
+            {{#str}}nodecisionrecorded, tool_uckkintegrity{{/str}}
+        </div>
+    {{/hasdecision}}
+</div>

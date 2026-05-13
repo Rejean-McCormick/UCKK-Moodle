@@ -1,0 +1,268 @@
+{
+  "schema": "uckk.presets.cohorts.v1",
+  "idempotency": "cohort.idnumber",
+  "cohorts": [
+    {
+      "idnumber": "UCKK-COHORT-JOUEURS",
+      "name": "Joueurs UCKK",
+      "description": "Learners enrolled in the UCKK campus.",
+      "context": "system",
+      "visible": true,
+      "sync_roles": [
+        "joueur"
+      ],
+      "default_dashboard_variant": "joueur",
+      "notes": "Pedagogical learner cohort. Symbolic titles such as Joueur lucide are handled through badges, profile fields, competencies, and portfolio distinctions."
+    },
+    {
+      "idnumber": "UCKK-COHORT-MENTORS",
+      "name": "Mentors UCKK",
+      "description": "Teachers, facilitators, challenge evaluators, and assembly guides.",
+      "context": "system",
+      "visible": true,
+      "sync_roles": [
+        "mentor_uckk"
+      ],
+      "default_dashboard_variant": "mentor",
+      "notes": "Mentors teach courses, evaluate proof, guide challenge workflows, and facilitate assemblies where assigned."
+    },
+    {
+      "idnumber": "UCKK-COHORT-ARCHIVISTES",
+      "name": "Archivistes UCKK",
+      "description": "Archive validators, provenance reviewers, and versioning stewards.",
+      "context": "system",
+      "visible": true,
+      "sync_roles": [
+        "archiviste_uckk"
+      ],
+      "default_dashboard_variant": "archiviste",
+      "notes": "Archivistes validate archive items, review provenance, manage versions, and handle restricted archive visibility where permitted."
+    },
+    {
+      "idnumber": "UCKK-COHORT-INQUISITEURS",
+      "name": "Inquisiteurs UCKK",
+      "description": "Restricted ethical and methodological reviewers for integrity cases.",
+      "context": "system",
+      "visible": false,
+      "sync_roles": [
+        "inquisiteur_uckk"
+      ],
+      "default_dashboard_variant": "inquisiteur",
+      "notes": "The Inquisiteur is a guardrail, not a global administrator. Membership must remain restricted, auditable, and contestable."
+    },
+    {
+      "idnumber": "UCKK-COHORT-GESTIONNAIRES",
+      "name": "Gestionnaires UCKK",
+      "description": "Campus managers responsible for UCKK configuration, reports, seed execution, and institutional oversight.",
+      "context": "system",
+      "visible": false,
+      "sync_roles": [
+        "gestionnaire_uckk"
+      ],
+      "default_dashboard_variant": "gestionnaire",
+      "notes": "Gestionnaires manage UCKK configuration and reporting, but symbolic titles remain outside the Moodle role system."
+    },
+    {
+      "idnumber": "UCKK-COHORT-OBSERVATEURS",
+      "name": "Observateurs UCKK",
+      "description": "Restricted read-only participants.",
+      "context": "system",
+      "visible": true,
+      "sync_roles": [
+        "observateur_uckk"
+      ],
+      "default_dashboard_variant": "observateur",
+      "notes": "Observateurs can view only content explicitly exposed to them by capability and visibility rules."
+    },
+    {
+      "idnumber": "UCKK-COHORT-INVITES-PUBLICS-LIMITES",
+      "name": "Invités publics limités",
+      "description": "Public-facing read-only guests where public visibility is explicitly enabled.",
+      "context": "system",
+      "visible": false,
+      "sync_roles": [
+        "invite_public_limite"
+      ],
+      "default_dashboard_variant": "public_limited",
+      "notes": "This cohort must never bypass archive, integrity, privacy, or course visibility constraints."
+    },
+    {
+      "idnumber": "UCKK-COHORT-TRONC-COMMUN",
+      "name": "Tronc commun obligatoire",
+      "description": "Learners taking the mandatory UCKK tronc commun sequence.",
+      "context": "system",
+      "visible": true,
+      "sync_courses": [
+        "UCKK-TC101",
+        "UCKK-TC102",
+        "UCKK-TC103",
+        "UCKK-TC104",
+        "UCKK-TC105",
+        "UCKK-TC106",
+        "UCKK-TC107",
+        "UCKK-TC108"
+      ],
+      "default_dashboard_variant": "tronc_commun",
+      "notes": "Used for TC101–TC108 progress, competency, badge, and pathway reporting."
+    },
+    {
+      "idnumber": "UCKK-COHORT-ORIENTATION",
+      "name": "Orientation UCKK",
+      "description": "Participants enrolled in the UCKK orientation course.",
+      "context": "system",
+      "visible": true,
+      "sync_courses": [
+        "UCKK-000"
+      ],
+      "default_dashboard_variant": "orientation",
+      "notes": "Entry cohort for the UCKK-Moodle campus."
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-GRAND-JEU-SOCIAL",
+      "name": "Baccalauréat UCKK — Grand Jeu social",
+      "description": "Learners following the internal Grand Jeu social pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "grand_jeu_social",
+      "category": "UCKK-02",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-ARCHITECTURE-ECOSYSTEME-DIGITAL-KOA",
+      "name": "Baccalauréat UCKK — Architecture écosystème digital kOA",
+      "description": "Learners following the internal architecture écosystème digital kOA pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "architecture_ecosysteme_digital_koa",
+      "category": "UCKK-03",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-ARCHITECTURE-SOCIOTECHNIQUE",
+      "name": "Baccalauréat UCKK — Architecture sociotechnique",
+      "description": "Learners following the internal architecture sociotechnique pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "architecture_sociotechnique",
+      "category": "UCKK-04",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-SCIENCES-POLITIQUES",
+      "name": "Baccalauréat UCKK — Sciences politiques",
+      "description": "Learners following the internal sciences politiques pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "sciences_politiques",
+      "category": "UCKK-05",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-ECONOMIE",
+      "name": "Baccalauréat UCKK — Économie",
+      "description": "Learners following the internal économie pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "economie",
+      "category": "UCKK-06",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-ECOLOGIE",
+      "name": "Baccalauréat UCKK — Écologie",
+      "description": "Learners following the internal écologie pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "ecologie",
+      "category": "UCKK-07",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-METAPHYSIQUE",
+      "name": "Baccalauréat UCKK — Métaphysique",
+      "description": "Learners following the internal métaphysique pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "metaphysique",
+      "category": "UCKK-08",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-IA-GOUVERNABLE",
+      "name": "Baccalauréat UCKK — IA gouvernable",
+      "description": "Learners following the internal IA gouvernable pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "ia_gouvernable",
+      "category": "UCKK-09",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-LINGUISTIQUE-ARCHITECTURE-SENS",
+      "name": "Baccalauréat UCKK — Linguistique et architecture du sens",
+      "description": "Learners following the internal linguistique et architecture du sens pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "linguistique_architecture_du_sens",
+      "category": "UCKK-10",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-BACC-INTERVENTION-SOCIALE",
+      "name": "Baccalauréat UCKK — Intervention sociale",
+      "description": "Learners following the internal intervention sociale pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "intervention_sociale",
+      "category": "UCKK-11",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-MINEURE-MEDIAS-VIVANTS",
+      "name": "Mineure UCKK — Médias vivants et théâtre public",
+      "description": "Learners following the internal médias vivants et théâtre public pathway.",
+      "context": "system",
+      "visible": true,
+      "program": "medias_vivants_theatre_public",
+      "category": "UCKK-12",
+      "default_dashboard_variant": "program"
+    },
+    {
+      "idnumber": "UCKK-COHORT-DEFIS-KING-KLOWN",
+      "name": "Défis King Klown",
+      "description": "Participants in King Klown challenge workflows.",
+      "context": "system",
+      "visible": true,
+      "category": "UCKK-90",
+      "default_dashboard_variant": "challenge"
+    },
+    {
+      "idnumber": "UCKK-COHORT-ASSEMBLEES",
+      "name": "Assemblées UCKK",
+      "description": "Participants in structured UCKK Assemblées.",
+      "context": "system",
+      "visible": true,
+      "category": "UCKK-91",
+      "default_dashboard_variant": "assembly"
+    },
+    {
+      "idnumber": "UCKK-COHORT-ARCHIVES-PORTFOLIOS",
+      "name": "Archives et portfolios UCKK",
+      "description": "Participants with active archive or portfolio evidence workflows.",
+      "context": "system",
+      "visible": true,
+      "category": "UCKK-92",
+      "default_dashboard_variant": "archive"
+    },
+    {
+      "idnumber": "UCKK-COHORT-INTEGRITE",
+      "name": "Intégrité et Inquisiteur",
+      "description": "Restricted cohort for integrity workflow visibility and reporting.",
+      "context": "system",
+      "visible": false,
+      "category": "UCKK-99",
+      "default_dashboard_variant": "integrity",
+      "notes": "Membership must be controlled by explicit integrity capabilities, not by symbolic status."
+    }
+  ]
+}
