@@ -875,13 +875,3 @@ final class competency_seed {
         return $result;
     }
 }
-```
-
-Add these strings to `admin/tool/uckkseed/lang/en/tool_uckkseed.php` if they are not already present:
-
-```php id="897fjz"
-$string['seed:competencycreated'] = 'Competency created: {$a}';
-$string['seed:competencyupdated'] = 'Competency updated: {$a}';
-$string['validation:duplicatekey'] = 'Duplicate key found: {$a}';
-$string['validation:missingkey'] = 'A preset item is missing a key.';
-

@@ -1,11 +1,23 @@
 <?php
 // This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 
 namespace tool_uckkintegrity\event;
 
 defined('MOODLE_INTERNAL') || die();
 
-class case_opened extends \core\event\base {
+/**
+ * Event class for case_opened.
+ *
+ * @package    tool_uckkintegrity
+ * @copyright  2026 Univers-Cité King Klown
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+final class case_opened extends \core\event\base {
     protected function init(): void {
         $this->data['objecttable'] = 'tool_uckkintegrity_case';
         $this->data['crud'] = 'c';
@@ -17,14 +29,33 @@ class case_opened extends \core\event\base {
     }
 
     public function get_description(): string {
-        return "The user with id '$this->userid' opened integrity case '$this->objectid'.";
+        $userid = (int) ($this->userid ?? 0);
+        $caseid = (int) ($this->objectid ?? 0);
+        $status = (string) ($this->other['status'] ?? '');
+
+        return "User {$userid} performed integrity action 'open case' on case {$caseid} with status '{status}'.";
     }
 
     public function get_url(): \moodle_url {
-        return new \moodle_url('/admin/tool/uckkintegrity/case.php', ['id' => $this->objectid]);
+        return new \moodle_url('/admin/tool/uckkintegrity/case.php', ['id' => (int) $this->objectid]);
     }
 
-    public static function get_objectid_mapping(): array {
-        return ['db' => 'tool_uckkintegrity_case', 'restore' => 'tool_uckkintegrity_case'];
+    protected function get_legacy_logdata(): array {
+        return [
+            SITEID,
+            'tool_uckkintegrity',
+            'open case',
+            $this->get_url()->out(false),
+            (int) $this->objectid,
+            $this->contextinstanceid,
+        ];
+    }
+
+    protected function validate_data(): void {
+        parent::validate_data();
+
+        if (empty($this->objectid)) {
+            throw new \coding_exception('case_opened must contain an objectid.');
+        }
     }
 }

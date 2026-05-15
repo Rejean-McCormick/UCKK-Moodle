@@ -724,26 +724,3 @@ final class assembly_form extends moodleform {
         ];
     }
 }
-```
-
-Add these strings to `mod/uckkassembly/lang/en/uckkassembly.php` if missing:
-
-```php
-$string['assemblyidentity'] = 'Assembly identity';
-$string['assemblysummary'] = 'Assembly summary';
-$string['assemblysummary_help'] = 'Short internal summary of the Assembly purpose and expected governance output.';
-$string['facilitatornotes'] = 'Facilitator notes';
-$string['facilitatornotes_help'] = 'Internal facilitation notes. These do not replace minutes, decisions, or integrity records.';
-$string['minutespolicy'] = 'Minutes policy';
-$string['minutespolicy_help'] = 'Describe how minutes are produced, reviewed, published, corrected, and archived.';
-$string['integritysafeguards'] = 'Integrity safeguards';
-$string['requiresintegrityreview'] = 'Require integrity review before publication';
-$string['integritypolicy'] = 'Integrity policy';
-$string['integritypolicy_help'] = 'Describe safeguards for dignity, evidence quality, procedural justice, privacy, contestability, and non-manipulation.';
-$string['integritypolicyrequired'] = 'An integrity policy is required when integrity review is required.';
-$string['privacypolicy'] = 'Privacy policy';
-$string['privacypolicy_help'] = 'Describe what may be visible to participants, observers, public viewers, Archivistes, and Inquisiteurs.';
-$string['metadatajson'] = 'Metadata JSON';
-$string['metadatajson_help'] = 'Optional JSON metadata for service-layer use. Stable fields should remain first-class columns.';
-$string['invalidjson'] = 'Enter valid JSON.';
-$string['contestationpolicyrequired'] = 'A contestation policy is required when contestations are allowed without a positive contestability window.';

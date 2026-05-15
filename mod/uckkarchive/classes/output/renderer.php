@@ -353,16 +353,5 @@ final class renderer extends plugin_renderer_base {
         return $html;
     }
 }
-```
 
-Add this string if it is not already in `mod/uckkarchive/lang/en/uckkarchive.php`:
-
-```php
-$string['reason'] = 'Reason';
-```
-
-Add this to `mod/uckkarchive/lang/fr/uckkarchive.php`:
-
-```php
-$string['reason'] = 'Raison';
 

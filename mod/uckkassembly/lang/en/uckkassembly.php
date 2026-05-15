@@ -7,7 +7,7 @@
 // any later version.
 
 /**
- * French strings for UCKK Assemblies.
+ * English language strings for the UCKK Assembly activity module.
  *
  * @package    mod_uckkassembly
  * @copyright  2026 Univers-Cité King Klown
@@ -16,428 +16,762 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Assemblée UCKK';
-$string['pluginadministration'] = 'Administration de l’Assemblée UCKK';
-$string['modulename'] = 'Assemblée UCKK';
-$string['modulename_help'] = 'Une Assemblée UCKK est une activité de délibération structurée permettant de proposer des motions, de les amender, de voter, de publier des décisions, de contester des décisions et d’archiver les résultats.';
+$string['pluginname'] = 'UCKK Assembly';
+$string['modulename'] = 'UCKK Assembly';
+$string['modulename_help'] = 'Use an UCKK Assembly to structure motions, amendments, objections, votes or readings, decisions, minutes, contestations, and archive output.';
 $string['modulename_link'] = 'mod/uckkassembly/view';
-$string['modulenameplural'] = 'Assemblées UCKK';
+$string['modulenameplural'] = 'UCKK assemblies';
+$string['pluginadministration'] = 'UCKK Assembly administration';
 
 // Capabilities.
-$string['uckkassembly:addinstance'] = 'Ajouter une nouvelle Assemblée UCKK';
-$string['uckkassembly:view'] = 'Voir une Assemblée UCKK';
-$string['uckkassembly:createassembly'] = 'Créer une Assemblée UCKK';
-$string['uckkassembly:proposemotion'] = 'Proposer une motion';
-$string['uckkassembly:amendmotion'] = 'Amender une motion';
-$string['uckkassembly:vote'] = 'Voter dans une Assemblée UCKK';
-$string['uckkassembly:publishdecision'] = 'Publier une décision d’Assemblée';
-$string['uckkassembly:contestdecision'] = 'Contester une décision d’Assemblée';
-$string['uckkassembly:archive'] = 'Archiver une Assemblée UCKK';
+$string['uckkassembly:addinstance'] = 'Add a new UCKK Assembly';
+$string['uckkassembly:view'] = 'View UCKK Assembly';
+$string['uckkassembly:createassembly'] = 'Create and configure UCKK assemblies';
+$string['uckkassembly:proposemotion'] = 'Propose motions';
+$string['uckkassembly:amendmotion'] = 'Amend motions';
+$string['uckkassembly:objectmotion'] = 'Object to motions';
+$string['uckkassembly:vote'] = 'Vote or record readings';
+$string['uckkassembly:publishdecision'] = 'Publish Assembly decisions';
+$string['uckkassembly:contestdecision'] = 'Contest Assembly decisions';
+$string['uckkassembly:archive'] = 'Archive Assembly records';
+$string['uckkassembly:viewrestricted'] = 'View restricted Assembly information';
 
-// General labels.
-$string['actions'] = 'Actions';
-$string['active'] = 'Active';
-$string['archive'] = 'Archive';
-$string['assembliesincourse'] = 'Assemblées dans {$a}';
-$string['assembly'] = 'Assemblée';
-$string['assemblycode'] = 'Code de l’assemblée';
-$string['assemblycode_help'] = 'Code interne stable de l’assemblée. Utilisez des lettres, des chiffres, des tirets ou des traits de soulignement.';
-$string['assemblycontext'] = 'Contexte de l’assemblée';
-$string['assemblycontext_help'] = 'Décrivez le contexte pédagogique, institutionnel ou communautaire qui justifie cette assemblée.';
-$string['assemblydescription'] = 'Description de l’assemblée';
-$string['assemblyname'] = 'Assemblée';
-$string['assemblytitle'] = 'Titre de l’assemblée';
-$string['assemblytype'] = 'Type d’assemblée';
-$string['assemblytype_help'] = 'Le type d’assemblée précise la fonction de délibération : savoirs, défis, joueurs, bâtisseurs, inquisiteurs ou Grand Jeu.';
-$string['backtoassembly'] = 'Retour à l’assemblée';
-$string['backtocourse'] = 'Retour au cours';
-$string['cancel'] = 'Annuler';
-$string['close'] = 'Fermer';
-$string['confirm'] = 'Confirmer';
-$string['continue'] = 'Continuer';
-$string['course'] = 'Cours';
-$string['createdby'] = 'Créée par';
-$string['decision'] = 'Décision';
-$string['decisions'] = 'Décisions';
+// General fields.
+$string['name'] = 'Assembly name';
+$string['assemblyname'] = 'Assembly name';
+$string['assemblyintro'] = 'Assembly introduction';
+$string['assemblytype'] = 'Assembly type';
+$string['assemblystatus'] = 'Assembly status';
+$string['visibility'] = 'Visibility';
+$string['governance'] = 'Governance';
+$string['timeline'] = 'Timeline';
+$string['settings'] = 'Assembly settings';
+$string['configuration'] = 'Configuration';
+$string['summary'] = 'Summary';
 $string['description'] = 'Description';
-$string['details'] = 'Détails';
-$string['edit'] = 'Modifier';
-$string['error'] = 'Erreur';
-$string['general'] = 'Général';
-$string['hiddenfromstudents'] = 'Masquée aux participants';
-$string['instance'] = 'Instance';
-$string['invalidaction'] = 'Action invalide.';
-$string['invalidassembly'] = 'Assemblée invalide.';
-$string['invalidassemblytype'] = 'Type d’assemblée invalide.';
-$string['invalidvisibility'] = 'Visibilité invalide.';
-$string['loading'] = 'Chargement…';
-$string['missingassembly'] = 'Assemblée introuvable.';
-$string['modifiedby'] = 'Modifiée par';
-$string['motion'] = 'Motion';
-$string['motions'] = 'Motions';
-$string['name'] = 'Nom';
-$string['no'] = 'Non';
-$string['none'] = 'Aucun';
-$string['notavailable'] = 'Non disponible';
-$string['notset'] = 'Non défini';
-$string['overview'] = 'Vue d’ensemble';
-$string['participants'] = 'Participants';
-$string['preview'] = 'Aperçu';
-$string['required'] = 'Requis';
-$string['save'] = 'Enregistrer';
-$string['savechanges'] = 'Enregistrer les modifications';
-$string['status'] = 'Statut';
-$string['summary'] = 'Résumé';
-$string['timecreated'] = 'Date de création';
-$string['timemodified'] = 'Date de modification';
-$string['unknown'] = 'Inconnu';
-$string['view'] = 'Voir';
-$string['viewall'] = 'Tout voir';
-$string['visibility'] = 'Visibilité';
-$string['yes'] = 'Oui';
+$string['status'] = 'Status';
+$string['actions'] = 'Actions';
+$string['createdby'] = 'Created by';
+$string['modifiedby'] = 'Modified by';
+$string['timecreated'] = 'Created';
+$string['timemodified'] = 'Last modified';
 
 // Assembly types.
-$string['assemblytype:savoirs'] = 'Assemblée des savoirs';
-$string['assemblytype:defis'] = 'Assemblée des défis';
-$string['assemblytype:joueurs'] = 'Assemblée des joueurs';
-$string['assemblytype:batisseurs'] = 'Assemblée des bâtisseurs';
-$string['assemblytype:inquisiteurs'] = 'Assemblée des inquisiteurs';
-$string['assemblytype:grand_jeu'] = 'Assemblée du Grand Jeu';
+$string['assemblytype:savoirs'] = 'Knowledge Assembly';
+$string['assemblytype:defis'] = 'Challenge Assembly';
+$string['assemblytype:joueurs'] = 'Joueurs Assembly';
+$string['assemblytype:batisseurs'] = 'Bâtisseurs Assembly';
+$string['assemblytype:inquisiteurs'] = 'Inquisiteurs Assembly';
+$string['assemblytype:grand_jeu'] = 'Grand Jeu Assembly';
 
-// Common statuses.
-$string['status:draft'] = 'Brouillon';
+// Statuses.
+$string['status:draft'] = 'Draft';
 $string['status:active'] = 'Active';
-$string['status:hidden'] = 'Masquée';
-$string['status:pending'] = 'En attente';
-$string['status:pending_review'] = 'En attente de revue';
-$string['status:validated'] = 'Validée';
-$string['status:rejected'] = 'Rejetée';
-$string['status:correction_required'] = 'Correction requise';
-$string['status:contested'] = 'Contestée';
-$string['status:invalidated'] = 'Invalidée';
-$string['status:closed'] = 'Fermée';
-$string['status:archived'] = 'Archivée';
-$string['status:cancelled'] = 'Annulée';
+$string['status:hidden'] = 'Hidden';
+$string['status:pending'] = 'Pending';
+$string['status:pendingreview'] = 'Pending review';
+$string['status:validated'] = 'Validated';
+$string['status:rejected'] = 'Rejected';
+$string['status:correctionrequired'] = 'Correction required';
+$string['status:contested'] = 'Contested';
+$string['status:invalidated'] = 'Invalidated';
+$string['status:closed'] = 'Closed';
+$string['status:archived'] = 'Archived';
+$string['status:cancelled'] = 'Cancelled';
+$string['status:published'] = 'Published';
 
 // Visibility.
-$string['visibility:private'] = 'Privée';
-$string['visibility:user'] = 'Utilisateur';
-$string['visibility:group'] = 'Groupe';
-$string['visibility:course'] = 'Cours';
-$string['visibility:cohort'] = 'Cohorte';
-$string['visibility:program'] = 'Programme';
+$string['visibility:private'] = 'Private';
+$string['visibility:user'] = 'User';
+$string['visibility:group'] = 'Group';
+$string['visibility:course'] = 'Course';
+$string['visibility:cohort'] = 'Cohort';
+$string['visibility:program'] = 'Program';
 $string['visibility:institution'] = 'Institution';
-$string['visibility:public'] = 'Publique';
-$string['visibility:restricted'] = 'Restreinte';
-$string['visibility:restricted_integrity'] = 'Restreinte à l’intégrité';
-$string['visibility:hidden'] = 'Masquée';
-$string['visibility:archived'] = 'Archivée';
-
-// Form sections.
-$string['assemblysettings'] = 'Paramètres de l’assemblée';
-$string['deliberationsettings'] = 'Paramètres de délibération';
-$string['motionsettings'] = 'Paramètres des motions';
-$string['votingsettings'] = 'Paramètres de vote';
-$string['decisionsettings'] = 'Paramètres de décision';
-$string['integritysettings'] = 'Paramètres d’intégrité';
-$string['archivesettings'] = 'Paramètres d’archive';
-
-// Form fields.
-$string['agenda'] = 'Ordre du jour';
-$string['agenda_help'] = 'Listez les sujets, questions, motions attendues ou points de délibération.';
-$string['assemblyintro'] = 'Introduction de l’assemblée';
-$string['assemblyrules'] = 'Règles de l’assemblée';
-$string['assemblyrules_help'] = 'Définissez les règles de parole, de proposition, d’amendement, de vote, de contestation et d’archivage.';
-$string['deliberationguidelines'] = 'Directives de délibération';
-$string['deliberationguidelines_help'] = 'Indiquez comment les participants doivent argumenter, citer leurs preuves, traiter les désaccords et respecter la dignité des personnes.';
-$string['quorum'] = 'Quorum';
-$string['quorum_help'] = 'Nombre minimal ou pourcentage minimal de participants requis pour qu’un vote puisse être considéré comme valide.';
-$string['decisionthreshold'] = 'Seuil de décision';
-$string['decisionthreshold_help'] = 'Seuil minimal requis pour adopter une motion, publier une décision ou valider une orientation collective.';
-$string['allowmotions'] = 'Autoriser les motions';
-$string['allowamendments'] = 'Autoriser les amendements';
-$string['allowvotes'] = 'Autoriser les votes';
-$string['allowcontestation'] = 'Autoriser la contestation';
-$string['allowpublicsummary'] = 'Autoriser un résumé public';
-$string['requirehumanvalidation'] = 'Exiger une validation humaine';
-$string['integrityrequired'] = 'Revue d’intégrité requise';
-$string['integrityrequired_help'] = 'Exige une revue d’intégrité avant publication finale, archivage ou reconnaissance institutionnelle.';
-$string['archivepolicy'] = 'Politique d’archive';
-$string['archivepolicy_help'] = 'Détermine si l’assemblée produit une archive, un résumé d’archive ou un dossier complet.';
-$string['publicsummary'] = 'Résumé public';
-$string['publicsummary_help'] = 'Résumé visible selon la visibilité configurée. Ne doit pas contenir de données privées ou restreintes.';
-$string['privateinstructions'] = 'Instructions privées';
-$string['privateinstructions_help'] = 'Instructions visibles seulement aux personnes autorisées. Ne remplace pas les dossiers d’intégrité ou d’archive.';
-$string['timeopen'] = 'Date d’ouverture';
-$string['timeclose'] = 'Date de fermeture';
-$string['timeopen_help'] = 'Moment à partir duquel l’assemblée devient active.';
-$string['timeclose_help'] = 'Moment à partir duquel les nouvelles motions, amendements ou votes peuvent être fermés selon la configuration.';
-
-// Archive policies.
-$string['archivepolicy:none'] = 'Aucune archive';
-$string['archivepolicy:summary'] = 'Archive de synthèse';
-$string['archivepolicy:full'] = 'Archive complète';
-$string['archivepolicy:restricted_integrity'] = 'Archive restreinte à l’intégrité';
-
-// Index page.
-$string['noassemblies'] = 'Aucune assemblée n’est disponible dans ce cours.';
-$string['noassembliesvisible'] = 'Aucune assemblée visible ne vous est disponible dans ce cours.';
-
-// View page.
-$string['assemblyoverview'] = 'Vue d’ensemble de l’assemblée';
-$string['assemblyisclosed'] = 'Cette assemblée est fermée.';
-$string['assemblyisnotopen'] = 'Cette assemblée n’est pas encore ouverte.';
-$string['assemblyclosednotice'] = 'Cette assemblée est fermée. Les actions disponibles peuvent être limitées.';
-$string['assemblynonsovereignnotice'] = 'Les assemblées produisent des traces de délibération. Les décisions publiées, les corrections d’intégrité et les archives doivent rester auditables, contestables et validées humainement.';
-$string['viewassembly'] = 'Voir l’assemblée';
-$string['editassembly'] = 'Modifier l’assemblée';
-
-// Motions.
-$string['motiontitle'] = 'Titre de la motion';
-$string['motionbody'] = 'Texte de la motion';
-$string['motionbody_help'] = 'Formulez clairement la proposition, son contexte, ses effets attendus, ses preuves et ses limites.';
-$string['motiontype'] = 'Type de motion';
-$string['motionstatus'] = 'Statut de la motion';
-$string['motioncreated'] = 'Motion créée.';
-$string['motionupdated'] = 'Motion mise à jour.';
-$string['motiondeleted'] = 'Motion supprimée.';
-$string['motionpublished'] = 'Motion publiée.';
-$string['motionclosed'] = 'Motion fermée.';
-$string['motionproposedby'] = 'Proposée par';
-$string['motionproposedon'] = 'Proposée le';
-$string['motionrequirescontext'] = 'La motion doit inclure un contexte.';
-$string['motionrequiresbody'] = 'La motion doit inclure un texte.';
-$string['motionrequirescapability'] = 'Vous n’avez pas la permission de proposer une motion.';
-$string['proposemotion'] = 'Proposer une motion';
-$string['editmotion'] = 'Modifier la motion';
-$string['viewmotion'] = 'Voir la motion';
-$string['nomotions'] = 'Aucune motion n’a encore été proposée.';
-$string['nomotionsvisible'] = 'Aucune motion visible ne vous est disponible.';
-
-// Motion types.
-$string['motiontype:information'] = 'Information';
-$string['motiontype:recommendation'] = 'Recommandation';
-$string['motiontype:validation'] = 'Validation';
-$string['motiontype:correction'] = 'Correction';
-$string['motiontype:rejection'] = 'Rejet';
-$string['motiontype:archival'] = 'Archivage';
-$string['motiontype:integrity'] = 'Intégrité';
-
-// Amendments.
-$string['amendment'] = 'Amendement';
-$string['amendments'] = 'Amendements';
-$string['amendmenttitle'] = 'Titre de l’amendement';
-$string['amendmentbody'] = 'Texte de l’amendement';
-$string['amendmentreason'] = 'Raison de l’amendement';
-$string['amendmentcreated'] = 'Amendement créé.';
-$string['amendmentupdated'] = 'Amendement mis à jour.';
-$string['amendmentaccepted'] = 'Amendement accepté.';
-$string['amendmentrejected'] = 'Amendement rejeté.';
-$string['amendmotion'] = 'Amender la motion';
-$string['noamendments'] = 'Aucun amendement n’a encore été proposé.';
-$string['cannotamendmotion'] = 'Vous ne pouvez pas amender cette motion.';
-
-// Objects / objections.
-$string['objection'] = 'Objection';
-$string['objections'] = 'Objections';
-$string['objectmotion'] = 'Déposer une objection';
-$string['objectionbody'] = 'Texte de l’objection';
-$string['objectionreason'] = 'Raison de l’objection';
-$string['objectioncreated'] = 'Objection créée.';
-$string['objectionresolved'] = 'Objection résolue.';
-$string['noobjections'] = 'Aucune objection n’a été déposée.';
-
-// Votes.
-$string['vote'] = 'Vote';
-$string['votes'] = 'Votes';
-$string['votenow'] = 'Voter';
-$string['votechoice'] = 'Choix de vote';
-$string['votereason'] = 'Raison du vote';
-$string['votereason_help'] = 'Expliquez brièvement le raisonnement derrière votre vote. Cette justification peut être incluse dans les traces de délibération selon la visibilité.';
-$string['votesubmitted'] = 'Vote enregistré.';
-$string['voteupdated'] = 'Vote mis à jour.';
-$string['votecancelled'] = 'Vote annulé.';
-$string['votingnotopen'] = 'Le vote n’est pas ouvert.';
-$string['alreadyvoted'] = 'Vous avez déjà voté.';
-$string['cannotvote'] = 'Vous ne pouvez pas voter dans cette assemblée.';
-$string['novotes'] = 'Aucun vote n’a encore été enregistré.';
-$string['voteresults'] = 'Résultats du vote';
-$string['voteresultsrestricted'] = 'Les résultats détaillés du vote sont restreints.';
-$string['voterequireschoice'] = 'Veuillez choisir une option de vote.';
-
-// Vote choices.
-$string['votechoice:for'] = 'Pour';
-$string['votechoice:against'] = 'Contre';
-$string['votechoice:abstain'] = 'Abstention';
-$string['votechoice:needs_revision'] = 'Révision requise';
-$string['votechoice:block'] = 'Blocage motivé';
-
-// Decisions.
-$string['decisiontitle'] = 'Titre de la décision';
-$string['decisionbody'] = 'Texte de la décision';
-$string['decisiontype'] = 'Type de décision';
-$string['decisionstatus'] = 'Statut de la décision';
-$string['decisioncreated'] = 'Décision créée.';
-$string['decisionupdated'] = 'Décision mise à jour.';
-$string['decisionpublished'] = 'Décision publiée.';
-$string['decisioncontested'] = 'Décision contestée.';
-$string['decisionarchived'] = 'Décision archivée.';
-$string['publishdecision'] = 'Publier la décision';
-$string['viewdecision'] = 'Voir la décision';
-$string['nodecisions'] = 'Aucune décision n’a encore été publiée.';
-$string['cannotpublishdecision'] = 'Vous ne pouvez pas publier cette décision.';
-$string['decisionrequiresbody'] = 'La décision doit inclure un texte.';
-$string['decisionrequiresmotion'] = 'La décision doit être liée à une motion ou à un point de délibération.';
-
-// Decision types.
-$string['decisiontype:information'] = 'Information';
-$string['decisiontype:recommendation'] = 'Recommandation';
-$string['decisiontype:validation'] = 'Validation';
-$string['decisiontype:correction'] = 'Correction';
-$string['decisiontype:rejection'] = 'Rejet';
-$string['decisiontype:archival'] = 'Archivage';
-$string['decisiontype:integrity'] = 'Intégrité';
-
-// Minutes.
-$string['minutes'] = 'Procès-verbal';
-$string['minutesplural'] = 'Procès-verbaux';
-$string['minutesbody'] = 'Texte du procès-verbal';
-$string['minutescreated'] = 'Procès-verbal créé.';
-$string['minutesupdated'] = 'Procès-verbal mis à jour.';
-$string['minutespublished'] = 'Procès-verbal publié.';
-$string['minutesarchived'] = 'Procès-verbal archivé.';
-$string['viewminutes'] = 'Voir le procès-verbal';
-$string['editminutes'] = 'Modifier le procès-verbal';
-$string['nominutes'] = 'Aucun procès-verbal n’a encore été publié.';
-
-// Contestation.
-$string['contest'] = 'Contestation';
-$string['contests'] = 'Contestations';
-$string['contestdecision'] = 'Contester la décision';
-$string['contestreason'] = 'Raison de la contestation';
-$string['contestbody'] = 'Texte de la contestation';
-$string['contestcreated'] = 'Contestation créée.';
-$string['contestupdated'] = 'Contestation mise à jour.';
-$string['contestresolved'] = 'Contestation résolue.';
-$string['contestdismissed'] = 'Contestation rejetée.';
-$string['nocontests'] = 'Aucune contestation n’a été déposée.';
-$string['cannotcontestdecision'] = 'Vous ne pouvez pas contester cette décision.';
-$string['contestrequiresreason'] = 'La contestation doit inclure une raison.';
-
-// Integrity.
-$string['integrity'] = 'Intégrité';
-$string['integritycase'] = 'Dossier d’intégrité';
-$string['integritycases'] = 'Dossiers d’intégrité';
-$string['integritynotice'] = 'Avis d’intégrité';
-$string['integrityreview'] = 'Revue d’intégrité';
-$string['integritystate'] = 'État d’intégrité';
-$string['integritysummary'] = 'Synthèse d’intégrité';
-$string['integritywarnings'] = 'Avertissements d’intégrité';
-$string['openintegritycase'] = 'Ouvrir un dossier d’intégrité';
-$string['integritycaseopened'] = 'Dossier d’intégrité ouvert.';
-$string['cannotopenintegritycase'] = 'Vous ne pouvez pas ouvrir un dossier d’intégrité pour cette assemblée.';
-$string['integritynonsovereignnotice'] = 'Les actions d’intégrité sont des traces procédurales. Elles doivent rester auditables, contestables et soumises à validation humaine.';
-
-// Integrity states.
-$string['integritystate:unverified'] = 'Non vérifiée';
-$string['integritystate:human_reviewed'] = 'Revue humainement';
-$string['integritystate:verified'] = 'Vérifiée';
-$string['integritystate:contested'] = 'Contestée';
-$string['integritystate:invalidated'] = 'Invalidée';
-$string['integritystate:archived'] = 'Archivée';
-
-// Archive.
-$string['archiveassembly'] = 'Archiver l’assemblée';
-$string['archiveassemblyintro'] = 'Créer une archive de cette assemblée, incluant les motions, amendements, objections, votes, décisions, procès-verbaux, contestations, provenance et synthèse autorisée.';
-$string['archiveassemblyconfirm'] = 'Archiver l’assemblée';
-$string['assemblyarchived'] = 'Assemblée archivée.';
-$string['cannotarchiveassembly'] = 'Vous ne pouvez pas archiver cette assemblée.';
-$string['archivevisibility'] = 'Visibilité de l’archive';
-$string['archivereason'] = 'Raison de l’archivage';
-$string['archivewarnings'] = 'Avertissements d’archive';
-$string['archiveitemcreated'] = 'Élément d’archive créé.';
-$string['archiveempty'] = 'Aucune archive n’a encore été créée pour cette assemblée.';
+$string['visibility:institutional'] = 'Institutional';
+$string['visibility:public'] = 'Public';
+$string['visibility:restricted'] = 'Restricted';
+$string['visibility:restricted_integrity'] = 'Restricted integrity';
+$string['visibility:hidden'] = 'Hidden';
+$string['visibility:archived'] = 'Archived';
 
 // Provenance.
 $string['provenance'] = 'Provenance';
-$string['provenance:human'] = 'Humaine';
-$string['provenance:ai_assisted'] = 'Assistée par IA';
-$string['provenance:imported'] = 'Importée';
-$string['provenance:system'] = 'Système';
+$string['provenance:human'] = 'Human';
+$string['provenance:ai_assisted'] = 'AI-assisted';
+$string['provenance:imported'] = 'Imported';
+$string['provenance:system'] = 'System';
 $string['provenance:archive'] = 'Archive';
-$string['provenance:assembly'] = 'Assemblée';
-$string['provenance:challenge'] = 'Défi';
-$string['provenance:integrity'] = 'Intégrité';
-$string['provenancestatement'] = 'Déclaration de provenance';
-$string['provenancestatement_help'] = 'Expliquez l’origine de l’information, les transformations effectuées et les éléments vérifiables.';
+$string['provenance:assembly'] = 'Assembly';
+$string['provenance:challenge'] = 'Challenge';
+$string['provenance:integrity'] = 'Integrity';
 
-// AI policy.
-$string['aiassisted'] = 'Assisté par IA';
-$string['ailog'] = 'Journal de collaboration IA';
-$string['aipolicy'] = 'Politique IA';
-$string['aipolicynotice'] = 'L’IA peut aider à résumer, comparer, cartographier ou préparer une délibération. Elle ne peut pas publier une décision, valider l’intégrité, fermer un dossier, attribuer une reconnaissance ou remplacer la revue humaine.';
-$string['aioutputlabel'] = 'Brouillon assisté par IA. Ce contenu n’est pas une autorité finale. Les faits, preuves et décisions doivent être validés avant usage.';
+// Form sections.
+$string['motionsettings'] = 'Motion settings';
+$string['votingsettings'] = 'Voting settings';
+$string['decisionsettings'] = 'Decision settings';
+$string['archivesettings'] = 'Archive settings';
+$string['integritysettings'] = 'Integrity settings';
+$string['completionsettings'] = 'Completion settings';
 
-// Events.
-$string['eventassemblyviewed'] = 'Assemblée consultée';
-$string['eventmotioncreated'] = 'Motion créée';
-$string['eventmotionupdated'] = 'Motion mise à jour';
-$string['eventamendmentcreated'] = 'Amendement créé';
-$string['eventvotecreated'] = 'Vote enregistré';
-$string['eventdecisionpublished'] = 'Décision publiée';
-$string['eventdecisioncontested'] = 'Décision contestée';
-$string['eventminutespublished'] = 'Procès-verbal publié';
-$string['eventassemblyarchived'] = 'Assemblée archivée';
-$string['eventintegritycaseopened'] = 'Dossier d’intégrité ouvert';
+// Timeline.
+$string['timeopen'] = 'Opening time';
+$string['timeclose'] = 'Closing time';
+$string['contestuntil'] = 'Contestability window ends';
+$string['timeopen_help'] = 'Optional time when motions, amendments, objections, or readings may begin.';
+$string['timeclose_help'] = 'Optional time when normal Assembly participation closes.';
+$string['contestuntil_help'] = 'Optional deadline until which decisions may be contested.';
+$string['calendarevent:opens'] = '{$a} opens';
+$string['calendarevent:closes'] = '{$a} closes';
+$string['calendarevent:contestuntil'] = '{$a} contestability window ends';
 
-// External services / AJAX.
-$string['ajaxerror'] = 'Erreur lors du traitement de la requête.';
-$string['refresh'] = 'Actualiser';
-$string['refreshing'] = 'Actualisation…';
-$string['refreshed'] = 'Actualisé.';
-$string['refreshfailed'] = 'Impossible d’actualiser les données.';
-$string['saving'] = 'Enregistrement…';
-$string['saved'] = 'Enregistré.';
-$string['savefailed'] = 'Impossible d’enregistrer.';
-$string['submitting'] = 'Soumission…';
-$string['submitted'] = 'Soumis.';
-$string['submitfailed'] = 'Impossible de soumettre.';
+// Motions.
+$string['motion'] = 'Motion';
+$string['motions'] = 'Motions';
+$string['motiontitle'] = 'Motion title';
+$string['motionbody'] = 'Motion body';
+$string['motiontype'] = 'Motion type';
+$string['motionstatus'] = 'Motion status';
+$string['motioncreated'] = 'Motion created.';
+$string['motionupdated'] = 'Motion updated.';
+$string['motiondeleted'] = 'Motion deleted.';
+$string['motionpublished'] = 'Motion published.';
+$string['motionarchived'] = 'Motion archived.';
+$string['proposemotion'] = 'Propose motion';
+$string['editmotion'] = 'Edit motion';
+$string['viewmotion'] = 'View motion';
+$string['nomotions'] = 'No motions have been proposed yet.';
+$string['motionlocked'] = 'This motion is locked.';
+$string['motionnotfound'] = 'Motion not found.';
+$string['cannotproposemotion'] = 'You cannot propose a motion in this Assembly.';
+$string['cannoteditmotion'] = 'You cannot edit this motion.';
+$string['cannotviewmotion'] = 'You cannot view this motion.';
 
-// Privacy.
-$string['privacy:metadata'] = 'Le module Assemblée UCKK stocke des données liées aux assemblées, motions, amendements, objections, votes, décisions, procès-verbaux, contestations, provenance et archives selon les permissions du contexte.';
-$string['privacy:metadata:uckkassembly'] = 'Informations principales de l’assemblée.';
-$string['privacy:metadata:uckkassembly_motion'] = 'Motions proposées dans une assemblée.';
-$string['privacy:metadata:uckkassembly_amend'] = 'Amendements proposés sur les motions.';
-$string['privacy:metadata:uckkassembly_object'] = 'Objections ou oppositions déposées dans une assemblée.';
-$string['privacy:metadata:uckkassembly_vote'] = 'Votes enregistrés dans une assemblée.';
-$string['privacy:metadata:uckkassembly_decision'] = 'Décisions publiées par une assemblée.';
-$string['privacy:metadata:uckkassembly_minutes'] = 'Procès-verbaux et synthèses de délibération.';
-$string['privacy:metadata:uckkassembly_contest'] = 'Contestations déposées contre des décisions.';
-$string['privacy:metadata:userid'] = 'Identifiant de l’utilisateur concerné.';
-$string['privacy:metadata:createdby'] = 'Identifiant de l’utilisateur ayant créé l’enregistrement.';
-$string['privacy:metadata:modifiedby'] = 'Identifiant de l’utilisateur ayant modifié l’enregistrement.';
-$string['privacy:metadata:timecreated'] = 'Date de création.';
-$string['privacy:metadata:timemodified'] = 'Date de modification.';
-$string['privacy:metadata:visibility'] = 'Visibilité de l’enregistrement.';
-$string['privacy:metadata:status'] = 'Statut de l’enregistrement.';
-$string['privacy:metadata:metadata'] = 'Métadonnées JSON liées à l’enregistrement.';
+// Motion types.
+$string['motiontype:information'] = 'Information';
+$string['motiontype:recommendation'] = 'Recommendation';
+$string['motiontype:validation'] = 'Validation';
+$string['motiontype:correction'] = 'Correction';
+$string['motiontype:rejection'] = 'Rejection';
+$string['motiontype:archival'] = 'Archival';
+$string['motiontype:integrity'] = 'Integrity';
+
+// Amendments.
+$string['amendment'] = 'Amendment';
+$string['amendments'] = 'Amendments';
+$string['amendmotion'] = 'Amend motion';
+$string['amendmentbody'] = 'Amendment body';
+$string['amendmentcreated'] = 'Amendment created.';
+$string['amendmentupdated'] = 'Amendment updated.';
+$string['amendmentdeleted'] = 'Amendment deleted.';
+$string['noamendments'] = 'No amendments have been proposed yet.';
+$string['cannotamendmotion'] = 'You cannot amend this motion.';
+
+// Objections.
+$string['objection'] = 'Objection';
+$string['objections'] = 'Objections';
+$string['objectmotion'] = 'Object to motion';
+$string['objectionbody'] = 'Objection body';
+$string['objectioncreated'] = 'Objection recorded.';
+$string['objectionupdated'] = 'Objection updated.';
+$string['objectiondeleted'] = 'Objection deleted.';
+$string['noobjections'] = 'No objections have been recorded yet.';
+$string['cannotobjectmotion'] = 'You cannot object to this motion.';
+
+// Voting / readings.
+$string['vote'] = 'Vote';
+$string['votes'] = 'Votes';
+$string['votingmethod'] = 'Voting method';
+$string['votingmethod:readings'] = 'Readings';
+$string['votingmethod:consent'] = 'Consent';
+$string['votingmethod:majority'] = 'Majority';
+$string['votingmethod:supermajority'] = 'Supermajority';
+$string['votingmethod:consensus'] = 'Consensus';
+$string['votingmethod:advisory'] = 'Advisory';
+$string['quorum'] = 'Quorum';
+$string['quorum_help'] = 'Minimum number of eligible participants required before a decision can be published. Set to 0 for no quorum rule.';
+$string['castvote'] = 'Cast vote';
+$string['changevote'] = 'Change vote';
+$string['voterecorded'] = 'Vote recorded.';
+$string['cannotvote'] = 'You cannot vote in this Assembly.';
+$string['novotes'] = 'No votes have been recorded yet.';
+
+// Vote values.
+$string['vote:for'] = 'For';
+$string['vote:against'] = 'Against';
+$string['vote:abstain'] = 'Abstain';
+$string['vote:block'] = 'Block';
+$string['vote:reading'] = 'Reading recorded';
+$string['vote:consent'] = 'Consent';
+$string['vote:needswork'] = 'Needs work';
+
+// Decisions.
+$string['decision'] = 'Decision';
+$string['decisions'] = 'Decisions';
+$string['decisiontype'] = 'Decision type';
+$string['decisionbody'] = 'Decision body';
+$string['decisionstatus'] = 'Decision status';
+$string['publishdecision'] = 'Publish decision';
+$string['decisionpublished'] = 'Decision published.';
+$string['decisionupdated'] = 'Decision updated.';
+$string['decisionarchived'] = 'Decision archived.';
+$string['nodecisions'] = 'No decisions have been published yet.';
+$string['cannotpublishdecision'] = 'You cannot publish decisions in this Assembly.';
+
+// Decision types.
+$string['decisiontype:information'] = 'Information';
+$string['decisiontype:recommendation'] = 'Recommendation';
+$string['decisiontype:validation'] = 'Validation';
+$string['decisiontype:correction'] = 'Correction';
+$string['decisiontype:rejection'] = 'Rejection';
+$string['decisiontype:archival'] = 'Archival';
+$string['decisiontype:integrity'] = 'Integrity';
+
+// Minutes.
+$string['minutes'] = 'Minutes';
+$string['minutesformat'] = 'Minutes format';
+$string['minutesformat:structured'] = 'Structured';
+$string['minutesformat:narrative'] = 'Narrative';
+$string['minutesformat:transcript'] = 'Transcript';
+$string['minutesbody'] = 'Minutes body';
+$string['publishminutes'] = 'Publish minutes';
+$string['minutespublished'] = 'Minutes published.';
+$string['minutesupdated'] = 'Minutes updated.';
+$string['nominutes'] = 'No minutes have been published yet.';
+
+// Contestations.
+$string['contestation'] = 'Contestation';
+$string['contestations'] = 'Contestations';
+$string['contestdecision'] = 'Contest decision';
+$string['contestbody'] = 'Contestation body';
+$string['contestreason'] = 'Reason for contestation';
+$string['decisioncontested'] = 'Decision contested.';
+$string['nocontestations'] = 'No contestations have been recorded yet.';
+$string['cannotcontestdecision'] = 'You cannot contest this decision.';
+$string['contestclosed'] = 'The contestability window is closed.';
+
+// Archive.
+$string['archive'] = 'Archive';
+$string['archivepolicy'] = 'Archive policy';
+$string['archivepolicy:none'] = 'No archive';
+$string['archivepolicy:summary'] = 'Summary archive';
+$string['archivepolicy:full'] = 'Full archive';
+$string['archivepolicy:restricted_integrity'] = 'Restricted integrity archive';
+$string['archiveassembly'] = 'Archive Assembly';
+$string['assemblyarchived'] = 'Assembly archived.';
+$string['cannotarchiveassembly'] = 'You cannot archive this Assembly.';
+$string['archiveoutput'] = 'Archive output';
+$string['archiveempty'] = 'No archive output has been created yet.';
+
+// Integrity.
+$string['integrity'] = 'Integrity';
+$string['integritystate'] = 'Integrity state';
+$string['integritystate:unverified'] = 'Unverified';
+$string['integritystate:human_reviewed'] = 'Human reviewed';
+$string['integritystate:verified'] = 'Verified';
+$string['integritystate:contested'] = 'Contested';
+$string['integritystate:invalidated'] = 'Invalidated';
+$string['integritystate:archived'] = 'Archived';
+$string['integritynotice'] = 'Integrity notice';
+$string['integrityrestrictednotice'] = 'Some Assembly information is restricted to authorised integrity reviewers.';
+$string['integritynonsovereignnotice'] = 'Integrity records are procedural and contestable. They must remain auditable and subject to authorised human review.';
+
+// Configuration flags.
+$string['allowmotions'] = 'Allow motions';
+$string['allowamendments'] = 'Allow amendments';
+$string['allowobjections'] = 'Allow objections';
+$string['allowcontestations'] = 'Allow contestations';
+$string['allowmotions_help'] = 'Allow participants with the required capability to propose motions.';
+$string['allowamendments_help'] = 'Allow participants with the required capability to propose amendments.';
+$string['allowobjections_help'] = 'Allow participants to record objections to motions.';
+$string['allowcontestations_help'] = 'Allow participants with the required capability to contest decisions.';
 
 // Completion.
-$string['completionparticipate'] = 'Participer à l’assemblée';
-$string['completionparticipate_desc'] = 'Le participant doit déposer une motion, un amendement, une objection ou un vote.';
-$string['completionvote'] = 'Voter dans l’assemblée';
-$string['completionvote_desc'] = 'Le participant doit enregistrer un vote.';
-$string['completiondecisionviewed'] = 'Voir une décision publiée';
-$string['completiondecisionviewed_desc'] = 'Le participant doit consulter une décision publiée.';
+$string['completionrequiresmotion'] = 'Require motion';
+$string['completionrequiresmotion_help'] = 'The participant must propose at least one motion to complete this activity.';
+$string['completionrequirevote'] = 'Require vote or reading';
+$string['completionrequirevote_help'] = 'The participant must cast a vote or record a reading to complete this activity.';
+$string['completionrequiresdecision'] = 'Require published decision';
+$string['completionrequiresdecision_help'] = 'At least one decision must be published or archived for this activity to be completed.';
+$string['completiondetail:motion'] = 'A motion must be submitted';
+$string['completiondetail:vote'] = 'A vote or reading must be recorded';
+$string['completiondetail:decision'] = 'A decision must be published';
 
-// Validation errors.
-$string['err_requiredtitle'] = 'Le titre est requis.';
-$string['err_requiredbody'] = 'Le texte est requis.';
-$string['err_requiredsummary'] = 'Le résumé est requis.';
-$string['err_requiredreason'] = 'La raison est requise.';
-$string['err_invalidstatus'] = 'Statut invalide.';
-$string['err_invalidtype'] = 'Type invalide.';
-$string['err_invalidvisibility'] = 'Visibilité invalide.';
-$string['err_timeclosebeforeopen'] = 'La date de fermeture doit être postérieure à la date d’ouverture.';
-$string['err_quorumnegative'] = 'Le quorum ne peut pas être négatif.';
-$string['err_thresholdrange'] = 'Le seuil de décision doit être compris entre 0 et 100.';
+// File areas.
+$string['filearea:intro'] = 'Introduction';
+$string['filearea:motionattachments'] = 'Motion attachments';
+$string['filearea:amendmentattachments'] = 'Amendment attachments';
+$string['filearea:decisionattachments'] = 'Decision attachments';
+$string['filearea:minutesfiles'] = 'Minutes files';
+$string['filearea:contestattachments'] = 'Contestation attachments';
+
+// Recent activity / reports.
+$string['recentmotions'] = '{$a} recent Assembly motion(s)';
+$string['outline:motions'] = '{$a} motion(s)';
+$string['outline:votes'] = '{$a} vote(s)';
+$string['outline:contestations'] = '{$a} contestation(s)';
+$string['resetuserdata'] = 'Delete Assembly participant data';
+
+// Events.
+$string['eventassemblycreated'] = 'Assembly created';
+$string['eventassemblyupdated'] = 'Assembly updated';
+$string['eventassemblydeleted'] = 'Assembly deleted';
+$string['eventassemblyviewed'] = 'Assembly viewed';
+$string['eventmotioncreated'] = 'Motion created';
+$string['eventmotionupdated'] = 'Motion updated';
+$string['eventamendmentcreated'] = 'Amendment created';
+$string['eventobjectioncreated'] = 'Objection created';
+$string['eventvotecast'] = 'Vote cast';
+$string['eventdecisionpublished'] = 'Decision published';
+$string['eventdecisioncontested'] = 'Decision contested';
+$string['eventminutespublished'] = 'Minutes published';
+$string['eventassemblyarchived'] = 'Assembly archived';
+
+// Errors.
+$string['missingassembly'] = 'Assembly not found.';
+$string['invalidassemblytype'] = 'Invalid Assembly type.';
+$string['invalidassemblystatus'] = 'Invalid Assembly status.';
+$string['invalidvisibility'] = 'Invalid visibility.';
+$string['invalidvotingmethod'] = 'Invalid voting method.';
+$string['invalidmotion'] = 'Invalid motion.';
+$string['invaliddecision'] = 'Invalid decision.';
+$string['invalidcontestation'] = 'Invalid contestation.';
+$string['timeclosemustbeafteropen'] = 'The closing time must be after the opening time.';
+$string['contestuntilmustbeafterclose'] = 'The contestability deadline must be after the closing time.';
+$string['nopermission'] = 'You do not have permission to perform this Assembly action.';
+
+// UI actions.
+$string['viewassembly'] = 'View Assembly';
+$string['editassembly'] = 'Edit Assembly';
+$string['backtoassembly'] = 'Back to Assembly';
+$string['continueassembly'] = 'Continue Assembly';
+$string['saveasdraft'] = 'Save as draft';
+$string['publish'] = 'Publish';
+$string['close'] = 'Close';
+$string['reopen'] = 'Reopen';
+$string['archiveaction'] = 'Archive';
+$string['viewdetails'] = 'View details';
+
+// Notices.
+$string['assemblyderivednotice'] = 'Assembly records summarize deliberation. Decisions, contestations, integrity outcomes, and archive output remain governed records.';
+$string['humanvalidationnotice'] = 'Assembly decisions and integrity-sensitive outcomes require authorised human validation.';
+$string['publictheatrenotice'] = 'Public theatrical expression is permitted. Abuse, harassment, intimidation, doxxing, and fabricated evidence are not permitted.';
+
+// Privacy.
+$string['privacy:metadata'] = 'The UCKK Assembly activity stores Assembly participation records, including motions, amendments, objections, votes or readings, decisions, minutes, contestations, provenance, visibility, and audit metadata.';
+$string['privacy:metadata:uckkassembly_motion'] = 'Information about motions proposed in an Assembly.';
+$string['privacy:metadata:uckkassembly_motion:createdby'] = 'The user who proposed the motion.';
+$string['privacy:metadata:uckkassembly_motion:timemodified'] = 'The time the motion was last modified.';
+$string['privacy:metadata:uckkassembly_amend'] = 'Information about amendments proposed in an Assembly.';
+$string['privacy:metadata:uckkassembly_object'] = 'Information about objections recorded in an Assembly.';
+$string['privacy:metadata:uckkassembly_vote'] = 'Information about votes or readings recorded in an Assembly.';
+$string['privacy:metadata:uckkassembly_vote:userid'] = 'The user who cast the vote or recorded the reading.';
+$string['privacy:metadata:uckkassembly_decision'] = 'Information about decisions published by an Assembly.';
+$string['privacy:metadata:uckkassembly_minutes'] = 'Information about Assembly minutes.';
+$string['privacy:metadata:uckkassembly_contest'] = 'Information about contestations of Assembly decisions.';
+$string['privacy:metadata:uckkassembly_contest:createdby'] = 'The user who opened the contestation.';
+
+// Additional assembly governance strings.
+$string['acknowledgecontestability'] = 'Acknowledge contestability';
+$string['acknowledgecontestabilityrequired'] = 'Contestability must be acknowledged.';
+$string['affectedparties'] = 'Affected parties';
+$string['argumentpolicy'] = 'Argument policy';
+$string['authoritynotice'] = 'Authority notice';
+$string['conditionsrequired'] = 'Required conditions must be specified.';
+$string['conflictdeclared'] = 'Conflict declared';
+$string['conflictnotes'] = 'Conflict notes';
+$string['conflictnotesrequired'] = 'Conflict notes are required.';
+$string['deliberationdesign'] = 'Deliberation design';
+$string['entry'] = 'Entry';
+$string['evidencesummary'] = 'Evidence summary';
+$string['evidenceused'] = 'Evidence used';
+$string['expectedimpact'] = 'Expected impact';
+$string['expectedoutcome'] = 'Expected outcome';
+$string['notes'] = 'Notes';
+$string['participantpolicy'] = 'Participantpolicy';
+$string['proposalnotice'] = 'Proposalnotice';
+$string['publicationpolicy'] = 'Publicationpolicy';
+$string['reading'] = 'Reading';
+$string['reasoning'] = 'Reasoning';
+$string['relatedrecords'] = 'Relatedrecords';
+$string['result'] = 'Result';
+$string['resultsummary'] = 'Resultsummary';
+$string['scope'] = 'Scope';
+$string['subject'] = 'Subject';
+$string['subjecttype'] = 'Subject type';
+$string['subjecttype:amendment'] = 'Amendment';
+$string['subjecttype:decision'] = 'Decision';
+$string['subjecttype:minutes'] = 'Minutes';
+$string['subjecttype:motion'] = 'Motion';
+$string['subjecttype:objection'] = 'Objection';
+$string['subjecttype:vote'] = 'Vote';
+
+// Additional settings strings.
+$string['allowaisummary'] = 'Allow AI summaries';
+$string['allowaisummary_desc'] = 'Allow AI-assisted summaries when permissions, provenance, and human validation allow them.';
+$string['allowamendmentsbydefault'] = 'Allow amendments by default';
+$string['allowamendmentsbydefault_desc'] = 'Enable amendments by default for new assemblies.';
+$string['allowcontest'] = 'Allow contestation';
+$string['allowcontestation_desc'] = 'Allow eligible decisions to be contested according to the configured contestation policy.';
+$string['allowminorityreports'] = 'Allow minority reports';
+$string['allowminorityreports_desc'] = 'Allow minority positions to be attached to deliberations, decisions, or minutes.';
+$string['allowmotionsbydefault'] = 'Allow motions by default';
+$string['allowmotionsbydefault_desc'] = 'Enable motion proposals by default for new assemblies.';
+$string['allowmultiplereadings'] = 'Allow multiple readings';
+$string['allowobjectionsbydefault'] = 'Allow objections by default';
+$string['allowobjectionsbydefault_desc'] = 'Allow objections by default when motions and decisions permit them.';
+$string['allowobservers'] = 'Allow observers';
+$string['allowvotechange'] = 'Allow vote changes';
+$string['allowvotechange_desc'] = 'Allow an authorised participant to change their vote while voting is open.';
+$string['approvalpercent'] = 'Approval percentage';
+$string['contestwindowdays'] = 'Contestability window in days';
+$string['contestwindowdaysmustbepositive'] = 'The contestability window must be a positive number of days.';
+$string['defaultapprovalthreshold'] = 'Defaultapprovalthreshold';
+$string['defaultapprovalthreshold_desc'] = 'Configure defaultapprovalthreshold for UCKK assemblies.';
+$string['defaultarchivepolicy'] = 'Default archive policy';
+$string['defaultarchivepolicy_desc'] = 'Default archive policy proposed for new assemblies.';
+$string['defaultassemblytype'] = 'Defaultassemblytype';
+$string['defaultassemblytype_desc'] = 'Configure defaultassemblytype for UCKK assemblies.';
+$string['defaultdecisiontype'] = 'Defaultdecisiontype';
+$string['defaultdecisiontype_desc'] = 'Configure defaultdecisiontype for UCKK assemblies.';
+$string['defaultenabled'] = 'Enabled by default';
+$string['defaultenabled_desc'] = 'Enable new assemblies by default.';
+$string['defaultminutesvisibility'] = 'Default minutes visibility';
+$string['defaultminutesvisibility_desc'] = 'Default visibility used for minutes.';
+$string['defaultquorumpercent'] = 'Default quorum percentage';
+$string['defaultquorumpercent_desc'] = 'Default minimum quorum percentage.';
+$string['defaultvisibility'] = 'Default visibility';
+$string['defaultvisibility_desc'] = 'Default visibility applied to new assemblies.';
+$string['defaultvotemethod'] = 'Default vote method';
+$string['defaultvotemethod_desc'] = 'Default vote method proposed for new assemblies.';
+$string['enablearchiveexport'] = 'Enable archive export';
+$string['enablearchiveexport_desc'] = 'Allow Assembly traces to be exported to authorised archives.';
+$string['enableintegrityreview'] = 'Enable integrity review';
+$string['enableintegrityreview_desc'] = 'Allow assemblies to be linked to integrity reviews and cases.';
+$string['enableminutesbydefault'] = 'Enable minutes by default';
+$string['enableminutesbydefault_desc'] = 'Create or propose minutes by default for new assemblies.';
+$string['enablevotesbydefault'] = 'Enable votes by default';
+$string['enablevotesbydefault_desc'] = 'Enable vote mechanisms by default for new assemblies.';
+$string['labelaisummaries'] = 'Label AI summaries';
+$string['labelaisummaries_desc'] = 'Add a clear notice to AI-assisted summaries or drafts.';
+$string['logproceduralactions'] = 'Log procedural actions';
+$string['logproceduralactions_desc'] = 'Record important deliberation, vote, decision, contestation, and archive actions.';
+$string['maxamendmentspermotion'] = 'Maximum amendments per motion';
+$string['maxamendmentspermotion_desc'] = 'Limit the number of amendments that may be submitted for the same motion.';
+$string['pausepublicationonintegritycase'] = 'Pausepublicationonintegritycase';
+$string['pausepublicationonintegritycase_desc'] = 'Configure pausepublicationonintegritycase for UCKK assemblies.';
+$string['publicsummaryenabled'] = 'Public summary enabled';
+$string['quorumpercent'] = 'Quorum percentage';
+$string['requirearchivevalidation'] = 'Requirearchivevalidation';
+$string['requirefacilitatorapproval'] = 'Requirefacilitatorapproval';
+$string['requirehumanpublication'] = 'Requirehumanpublication';
+$string['requirehumanpublication_desc'] = 'Configure requirehumanpublication for UCKK assemblies.';
+$string['requirehumanvalidationforai'] = 'Requirehumanvalidationforai';
+$string['requirehumanvalidationforai_desc'] = 'Configure requirehumanvalidationforai for UCKK assemblies.';
+$string['requireminutesbeforedecision'] = 'Requireminutesbeforedecision';
+$string['requireminutesbeforepublication'] = 'Requireminutesbeforepublication';
+$string['requireminutesbeforepublication_desc'] = 'Configure requireminutesbeforepublication for UCKK assemblies.';
+$string['requiresintegrityreview'] = 'Requiresintegrityreview';
+$string['requirevoterationale'] = 'Requirevoterationale';
+$string['requirevoterationale_desc'] = 'Configure requirevoterationale for UCKK assemblies.';
+$string['restricteddatavisible'] = 'Restricteddatavisible';
+$string['restrictedvisibility'] = 'Restrictedvisibility';
+$string['restrictintegritydetails'] = 'Restrictintegritydetails';
+$string['restrictintegritydetails_desc'] = 'Configure restrictintegritydetails for UCKK assemblies.';
+$string['settings:ai'] = 'AI';
+$string['settings:ai_desc'] = 'Settings related to AI-assisted summaries, provenance, and human validation.';
+$string['settings:archive'] = 'Archive';
+$string['settings:archive_desc'] = 'Settings related to archiving decisions, minutes, and deliberation traces.';
+$string['settings:decisions'] = 'Decisions';
+$string['settings:decisions_desc'] = 'Settings related to decision types, methods, thresholds, and publication.';
+$string['settings:general'] = 'General';
+$string['settings:general_desc'] = 'General UCKK Assembly settings.';
+$string['settings:integrity'] = 'Integrity';
+$string['settings:integrity_desc'] = 'Settings related to safeguards, pauses, and integrity reviews.';
+$string['settings:minutes'] = 'Minutes';
+$string['settings:minutes_desc'] = 'Settings related to minutes creation, visibility, and publication.';
+$string['settings:motions'] = 'Motions';
+$string['settings:motions_desc'] = 'Settings related to motions, amendments, and objections.';
+$string['settings:votes'] = 'Votes';
+$string['settings:votes_desc'] = 'Settings related to vote methods, quorum, thresholds, and rationales.';
+$string['versionarchivedrecords'] = 'Version archived records';
+$string['versionarchivedrecords_desc'] = 'Create versioned archive records when decisions, minutes, or contestations are archived.';
+
+// Additional archive strings.
+$string['archivecontest'] = 'Archive contestation';
+$string['archivedecision'] = 'Archive decision';
+$string['archivedecision_help'] = 'Create an archive of the decision with its provenance, rationale, and required warnings.';
+$string['archiveminutes'] = 'Archive minutes';
+$string['archivenotes'] = 'Archive notes';
+$string['archivepolicy:decisionandminutes'] = 'Decision and minutes';
+$string['archivepolicy:decisiononly'] = 'Decision only';
+$string['archivepolicy:decisionsummary'] = 'Decision summary';
+$string['archivepolicy:fullrecord'] = 'Full record';
+$string['archivepolicy:minutesonly'] = 'Minutes only';
+$string['archivepolicy:restrictedintegrity'] = 'Restricted integrity archive';
+$string['archivesummarypolicy'] = 'Archive summary policy';
+
+// Additional motion and amendment strings.
+$string['amendmentclose'] = 'Amendment closing time';
+$string['amendmentclosemustbeaftermotionclose'] = 'The amendment closing time must be after the motion closing time.';
+$string['motionapproval'] = 'Motionapproval';
+$string['motionapproval:autoaccept'] = 'Auto-accept';
+$string['motionapproval:facilitatorreview'] = 'Facilitator review';
+$string['motionapproval:inquisiteurreview'] = 'Inquisiteur review';
+$string['motionapproval:mentorreview'] = 'Mentor review';
+$string['motionattachments'] = 'Motion attachments';
+$string['motionclose'] = 'Motion closing time';
+$string['motionclosemustbeafteropen'] = 'The motion closing time must be after motion opening time.';
+$string['motionconstraints'] = 'Motion constraints';
+$string['motiondraftsaved'] = 'Motion draft saved.';
+$string['motionfiles'] = 'Motion files';
+$string['motionopen'] = 'Motion opening time';
+$string['motionrationale'] = 'Motion rationale';
+$string['motions:none'] = 'No motions.';
+$string['motionsandamendments'] = 'Motions and amendments';
+$string['motionsubmitted'] = 'Motion submitted.';
+$string['motionsummary'] = 'Motion summary';
+$string['motiontext'] = 'Motion text';
+$string['motionvotingclosed'] = 'Voting for this motion is closed.';
+$string['objectionpolicy'] = 'Objectionpolicy';
+$string['objectionsandminorityreport'] = 'Objectionsandminorityreport';
+$string['savemotiondraft'] = 'Save motion draft';
+$string['submitmotion'] = 'Submit motion';
+$string['urgentmotion'] = 'Urgent motion';
+
+// Additional vote strings.
+$string['submitvote'] = 'Submit vote';
+$string['votechoice:oppose'] = 'Oppose';
+$string['votechoice:requestamendment'] = 'Request amendment';
+$string['votechoice:support'] = 'Support';
+$string['voteconditions'] = 'Vote conditions';
+$string['voteconfidence'] = 'Vote confidence';
+$string['votegovernancenotice'] = 'Votes and readings are deliberation traces. They do not override permissions, integrity requirements, or publication rules.';
+$string['votemethod:advisory'] = 'Advisory';
+$string['votemethod:consensus'] = 'Consensus';
+$string['votemethod:consent'] = 'Consent';
+$string['votemethod:qualifiedmajority'] = 'Qualified majority';
+$string['votemethod:simplemajority'] = 'Simple majority';
+$string['votenonsovereignnotice'] = 'A vote or reading is not sovereign by itself. The Assembly decision process remains authoritative.';
+$string['votenotcast'] = 'Vote not cast.';
+$string['voteonmotion'] = 'Vote on motion';
+$string['votepanel'] = 'Vote panel';
+$string['voterationale'] = 'Vote rationale';
+$string['voterationalerequired'] = 'A vote rationale is required.';
+$string['voteresultsummary'] = 'Vote result summary';
+$string['votevalue'] = 'Vote value';
+$string['votevisibility'] = 'Vote visibility';
+$string['votingandreadings'] = 'Voting and readings';
+$string['votingclose'] = 'Voting closing time';
+$string['votingclosemustbeafteropen'] = 'Voting closing time must be after voting opening time.';
+$string['votingopen'] = 'Voting opening time';
+
+// Additional decision strings.
+$string['decisionactions'] = 'Decision actions';
+$string['decisionarchive'] = 'Decision archive';
+$string['decisionconsequences'] = 'Decision consequences';
+$string['decisioncontent'] = 'Decision content';
+$string['decisiondate'] = 'Decision date';
+$string['decisionidentity'] = 'Decision identity';
+$string['decisionintegrity'] = 'Decision integrity';
+$string['decisionlegitimacy'] = 'Decision legitimacy';
+$string['decisionmethod'] = 'Decision method';
+$string['decisionmethod:consensus'] = 'Consensus';
+$string['decisionmethod:consent'] = 'Consent';
+$string['decisionmethod:facilitatorsynthesis'] = 'Facilitator synthesis';
+$string['decisionmethod:majorityvote'] = 'Majority vote';
+$string['decisionmethod:multiplereadings'] = 'Multiple readings';
+$string['decisionmethod:qualifiedmajority'] = 'Qualified majority';
+$string['decisionmethod:roughconsensus'] = 'Rough consensus';
+$string['decisionnonsovereignnotice'] = 'A published Assembly decision remains a human-validated, auditable, and contestable UCKK-Moodle decision under the applicable rules.';
+$string['decisionpanel'] = 'Decision panel';
+$string['decisionpublication'] = 'Decision publication';
+$string['decisionrationale'] = 'Decision rationale';
+$string['decisionreadings'] = 'Decision readings';
+$string['decisionreadingsnotice'] = 'Readings support deliberation. They do not replace human decision-making or Moodle permissions.';
+$string['decisions:none'] = 'No decisions.';
+$string['decisionsummary'] = 'Decision summary';
+$string['decisiontemplate'] = 'Decision template';
+$string['decisiontext'] = 'Decision text';
+$string['decisiontextempty'] = 'The decision text is empty.';
+$string['decisionwarnings'] = 'Decision warnings';
+$string['nodecisionactionsavailable'] = 'Nodecisionactionsavailable';
+$string['nodecisionavailable'] = 'No decision is available.';
+$string['submitdecisionreview'] = 'Submit decision review';
+
+// Additional minutes strings.
+$string['generateminutes'] = 'Generate minutes';
+$string['minutes:none'] = 'No minutes.';
+$string['minutesactions'] = 'Minutes actions';
+$string['minutescontent'] = 'Minutes content';
+$string['minutesgenerated'] = 'Minutes generated.';
+$string['minutesgovernancenotice'] = 'Minutes summarise a deliberation. They must remain verifiable, correctable, and archivable.';
+$string['minutesnonsovereignnotice'] = 'Minutes are not a final decision by themselves. They document deliberation and must be published or validated according to the configured rules.';
+$string['minutesnotgenerated'] = 'Minutes not generated.';
+$string['minutespolicy'] = 'Minutes policy';
+$string['minutesrestrictednotice'] = 'Some minutes content may be hidden according to visibility and permissions.';
+$string['minutestype:official'] = 'Official';
+$string['minutesunpublished'] = 'Minutes unpublished.';
+$string['minutesvisibility'] = 'Minutes visibility';
+$string['minuteswarnings'] = 'Minutes warnings';
+$string['unpublishminutes'] = 'Unpublish minutes';
+
+// Additional contestation strings.
+$string['contestability'] = 'Contestability';
+$string['contestabilitydays'] = 'Contestability days';
+$string['contestabilitydaysinvalid'] = 'The number of contestability days is invalid.';
+$string['contestabilityuntil'] = 'Contestable until';
+$string['contestactions'] = 'Contestation actions';
+$string['contestarchived'] = 'Contestation archived.';
+$string['contestationfiles'] = 'Contestation files';
+$string['contestationgrounds'] = 'Contestation grounds';
+$string['contestationpolicy'] = 'Contestation policy';
+$string['contestationpolicyrequired'] = 'The contestation policy is required.';
+$string['contestationsubject'] = 'Contestation subject';
+$string['contestationsummary'] = 'Contestation summary';
+$string['contestationtitle'] = 'Contestation title';
+$string['contestationtype'] = 'Contestationtype';
+$string['contestationtype:appeal'] = 'Appeal';
+$string['contestationtype:evidence'] = 'Evidence';
+$string['contestationtype:integrity'] = 'Integrity';
+$string['contestationtype:interpretation'] = 'Interpretation';
+$string['contestationtype:minorityreport'] = 'Minority report';
+$string['contestationtype:privacy'] = 'Privacy';
+$string['contestationtype:procedure'] = 'Procedure';
+$string['contestationurgency'] = 'Contestation urgency';
+$string['contestdecision_help'] = 'Explain why the decision is contested, including relevant facts, evidence, limits, or procedural risks.';
+$string['contestgovernancenotice'] = 'Contestation does not delete the original decision. It opens a review, response, or archive trace according to governance rules.';
+$string['contesthistory'] = 'Contestation history';
+$string['contestopened'] = 'Contestation opened.';
+$string['contestresponseadded'] = 'Contestation response added.';
+$string['contests:none'] = 'No contestations.';
+$string['conteststatement'] = 'Contestation statement';
+$string['contestsubject'] = 'Contested subject';
+$string['contestsummary'] = 'Contestation summary';
+$string['contestwarnings'] = 'Contestation warnings';
+$string['contestwithdrawn'] = 'Contestation withdrawn.';
+$string['dismisscontest'] = 'Dismiss contestation';
+$string['opencontest'] = 'Opencontest';
+$string['opencontestations'] = 'Opencontestations';
+$string['resolvecontest'] = 'Resolve contestation';
+$string['respondtocontest'] = 'Respondtocontest';
+$string['savecontestationdraft'] = 'Save contestation draft';
+$string['withdrawcontest'] = 'Withdraw contestation';
+
+// Additional integrity and privacy strings.
+$string['integritynotes'] = 'Integrity notes';
+$string['integritynotesrequired'] = 'Integrity notes are required.';
+$string['integritypauseallowed'] = 'Integrity pause allowed';
+$string['integritypolicy'] = 'Integrity policy';
+$string['integritypolicyrequired'] = 'The integrity policy is required.';
+$string['integrityreviewrequiredforcontestation'] = 'An integrity review is required for this contestation.';
+$string['integritysafeguards'] = 'Integrity safeguards';
+$string['integritystate:humanreviewed'] = 'Human reviewed';
+$string['privacy:path:assemblysummary'] = 'Assembly summary';
+$string['privacy:path:record'] = 'Assembly record';
+$string['privacyconcerns'] = 'Privacyconcerns';
+$string['privacyconcernsrequired'] = 'Privacyconcernsrequired is required.';
+$string['privacypolicy'] = 'Privacypolicy';
+
+// Additional completion strings.
+$string['completionmotiondesc'] = 'Completionmotiondesc';
+$string['completionmotionenabled'] = 'Completionmotionenabled';
+$string['completionmotiongroup'] = 'Completionmotiongroup';
+$string['completionparticipationdesc'] = 'Completionparticipationdesc';
+$string['completionparticipationenabled'] = 'Completionparticipationenabled';
+$string['completionparticipationgroup'] = 'Completionparticipationgroup';
+$string['completionvotedesc'] = 'Completionvotedesc';
+$string['completionvoteenabled'] = 'Completionvoteenabled';
+$string['completionvotegroup'] = 'Completionvotegroup';
+
+// Additional state, status and enum strings.
+$string['assemblytype:grandjeu'] = 'Grand Jeu Assembly';
+$string['confidence:high'] = 'High confidence';
+$string['confidence:low'] = 'Low confidence';
+$string['confidence:medium'] = 'Medium confidence';
+$string['state:archived'] = 'Archived';
+$string['state:cancelled'] = 'Cancelled';
+$string['state:closed'] = 'Closed';
+$string['state:contestation'] = 'In contestation';
+$string['state:decided'] = 'Decided';
+$string['state:deliberating'] = 'Deliberating';
+$string['state:draft'] = 'Draft';
+$string['state:open'] = 'Open';
+$string['state:scheduled'] = 'Scheduled';
+$string['state:voting'] = 'Voting';
+$string['status:contestabilitywindow'] = 'Contestability window';
+$string['status:decisiondraft'] = 'Decision draft';
+$string['status:decisionpublished'] = 'Decision published';
+$string['status:deliberation'] = 'Deliberation';
+$string['status:motionsopen'] = 'Motions open';
+$string['status:open'] = 'Open';
+$string['status:pausedforintegrity'] = 'Paused for integrity';
+$string['status:planned'] = 'Planned';
+$string['status:reopened'] = 'Reopened';
+$string['status:votingorreading'] = 'Voting or reading';
+$string['urgency:critical'] = 'Critical';
+$string['urgency:high'] = 'High';
+$string['urgency:low'] = 'Low';
+$string['urgency:normal'] = 'Normal';
+$string['visibility:restrictedintegrity'] = 'Restricted to integrity';
+
+// Additional task strings.
+$string['taskcloseexpiredvotes'] = 'Close expired votes';
+
+// Additional misc strings.
+$string['aiassistedreflection'] = 'AI-assisted reflection';
+$string['aicollaborationlog'] = 'AI collaboration log';
+$string['ailogrequired'] = 'The AI collaboration log is required.';
+$string['assemblycontestation'] = 'Assembly contestation';
+$string['assemblydecision'] = 'Assembly decision';
+$string['assemblyidentity'] = 'Assembly identity';
+$string['assemblyminutes'] = 'Assembly minutes';
+$string['assemblyscope'] = 'Assembly scope';
+$string['assemblysummary'] = 'Assembly summary';
+$string['autogenerateminutesdraft'] = 'Automatically generate a minutes draft';
+$string['autogenerateminutesdraft_desc'] = 'Allow a minutes draft to be prepared from deliberation traces. The draft must be human validated before publication.';
+$string['blockreason'] = 'Blocking reason';
+$string['blockreasonrequired'] = 'A blocking reason is required.';
+$string['cannotviewdecision'] = 'You cannot view this decision.';
+$string['cannotvoteonmotion'] = 'You cannot vote on this motion.';
+$string['existingvotenotice'] = 'A vote already exists for this target.';
+$string['facilitatornotes'] = 'Facilitator notes';
+$string['interpretation'] = 'Interpretation';
+$string['invalidassemblycode'] = 'Invalid Assembly code.';
+$string['invalidjson'] = 'Invalid JSON.';
+$string['invalidvotechoice'] = 'Invalid vote choice.';
+$string['invalidvotevalue'] = 'Invalid vote value.';
+$string['metadatajson'] = 'JSON metadata';
+$string['minorityposition'] = 'Minority position';
+$string['minoritypositionrequired'] = 'The minority position is required.';
+$string['minorityreport'] = 'Minority report';
+$string['minorityreportallowed'] = 'Minority report allowed';
+$string['minorityreportpolicy'] = 'Minority report policy';
+$string['minorityreports'] = 'Minority reports';
+$string['minorityreportsummary'] = 'Minority report summary';
+$string['missingvotetarget'] = 'Missing vote target.';
+$string['openedby'] = 'Openedby';
+$string['percentmustbeinrange'] = 'Percentmustbeinrange';
+$string['publishdecision_help'] = 'Help text for publishdecision.';
+$string['quorumreached'] = 'Quorumreached';
+$string['quorumrequiredtopublish'] = 'Quorumrequiredtopublish';
+$string['requestdecisionpause'] = 'Requestdecisionpause';
+$string['requesteddecisiontype'] = 'Requesteddecisiontype';
+$string['requestedoutcome'] = 'Requestedoutcome';
+$string['requestintegritycase'] = 'Requestintegritycase';
+$string['requestintegrityreview'] = 'Requestintegrityreview';
+$string['savedraft'] = 'Save draft';
+$string['showintegrityreading'] = 'Show integrity reading';
+$string['showminorityreading'] = 'Show minority reading';
+$string['showrawcount'] = 'Show raw count';
+$string['showrolereading'] = 'Show role reading';
+$string['submitcontestation'] = 'Submit contestation';
+$string['timedeliberationstarts'] = 'Deliberation start time';
+$string['timepublished'] = 'Publication time';
+$string['timepublishedafterdecision'] = 'Publication time must be after the decision time.';
+$string['timevotingends'] = 'Voting end time';
+$string['timevotingendsmustbeafterstart'] = 'Voting end time must be after voting start time.';
+$string['timevotingstarts'] = 'Voting start time';
+$string['timevotingstartsmustbeafterdeliberation'] = 'Voting start time must be after deliberation starts.';
+$string['unresolvedobjections'] = 'Unresolved objections';
+$string['viewallmotions'] = 'View all motions';

@@ -681,38 +681,3 @@ final class minutes_panel implements renderable, templatable {
         return [];
     }
 }
-```
-
-Add these strings to `mod/uckkassembly/lang/fr/uckkassembly.php` if missing:
-
-```php
-$string['minutesaction:create'] = 'Créer un procès-verbal';
-$string['minutesaction:edit'] = 'Modifier le procès-verbal';
-$string['minutesaction:publish'] = 'Publier le procès-verbal';
-$string['minutesaction:archive'] = 'Archiver le procès-verbal';
-$string['minutesaction:viewhistory'] = 'Voir l’historique';
-$string['minutesnonsovereignnotice'] = 'Le procès-verbal est une trace de délibération. Il doit rester vérifiable, contestable et archivable.';
-$string['minutesrestrictednotice'] = 'Certaines parties du procès-verbal sont restreintes selon les permissions d’intégrité ou de confidentialité.';
-$string['minutestype:working'] = 'Notes de travail';
-$string['minutestype:official'] = 'Procès-verbal officiel';
-$string['minutestype:publicsummary'] = 'Résumé public';
-$string['minutestype:restrictedintegrity'] = 'Résumé restreint d’intégrité';
-$string['restrictedvisibility'] = 'Visibilité restreinte';
-```
-
-Add these strings to `mod/uckkassembly/lang/en/uckkassembly.php` if missing:
-
-```php
-$string['minutesaction:create'] = 'Create minutes';
-$string['minutesaction:edit'] = 'Edit minutes';
-$string['minutesaction:publish'] = 'Publish minutes';
-$string['minutesaction:archive'] = 'Archive minutes';
-$string['minutesaction:viewhistory'] = 'View history';
-$string['minutesnonsovereignnotice'] = 'Minutes are a deliberation record. They must remain verifiable, contestable, and archivable.';
-$string['minutesrestrictednotice'] = 'Some parts of the minutes are restricted according to integrity or privacy permissions.';
-$string['minutestype:working'] = 'Working notes';
-$string['minutestype:official'] = 'Official minutes';
-$string['minutestype:publicsummary'] = 'Public summary';
-$string['minutestype:restrictedintegrity'] = 'Restricted integrity summary';
-$string['restrictedvisibility'] = 'Restricted visibility';
-

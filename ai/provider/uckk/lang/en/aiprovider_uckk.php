@@ -90,6 +90,37 @@ $string['error:providerrequestfailed'] = 'The AI provider request failed.';
 $string['error:emptyresponse'] = 'The AI provider returned an empty response.';
 $string['error:permissiondenied'] = 'You do not have permission to use the UCKK AI provider.';
 
+// Additional settings and privacy strings discovered by the string inventory.
+$string['privacy:path:ailogs'] = 'UCKK AI logs';
+$string['privacy:promptloggingdisabled'] = 'Prompt logging is disabled. Stored prompt content is not available for export.';
+$string['privacy:responseloggingdisabled'] = 'Response logging is disabled. Stored response content is not available for export.';
+$string['settings:provider_apikey'] = 'Provider API key';
+$string['settings:provider_apikey_desc'] = 'Secret key used to authenticate requests to the configured AI provider.';
+$string['settings:governance'] = 'Governance settings';
+$string['settings:governance_desc'] = 'Configure the non-sovereignty, human validation, and integrity boundaries for UCKK AI assistance.';
+$string['settings:limits'] = 'Limits and retention';
+$string['settings:limits_desc'] = 'Configure request limits, timeouts, and retention for UCKK AI assistance.';
+$string['settings:require_non_authority_label'] = 'Require non-authority label';
+$string['settings:require_non_authority_label_desc'] = 'Require every AI-assisted response to display a notice stating that AI output is not a final authority.';
+$string['settings:request_timeout'] = 'Request timeout';
+$string['settings:request_timeout_desc'] = 'Maximum number of seconds to wait for the configured AI provider before the request fails.';
+$string['settings:actions'] = 'Available AI actions';
+$string['settings:actions_desc'] = 'Enable or disable each governed UCKK AI action.';
+$string['settings:action_summarise_course_material'] = 'Enable course material summaries';
+$string['settings:action_summarise_course_material_desc'] = 'Allow authorized users to request non-authoritative summaries of selected course material.';
+$string['settings:action_map_problem'] = 'Enable problem mapping';
+$string['settings:action_map_problem_desc'] = 'Allow authorized users to map a problem into actors, assumptions, risks, forces, and possible corridors of action.';
+$string['settings:action_extract_uncertainties'] = 'Enable uncertainty extraction';
+$string['settings:action_extract_uncertainties_desc'] = 'Allow authorized users to identify claims, missing evidence, unresolved questions, and uncertainty signals.';
+$string['settings:action_draft_reflection'] = 'Enable reflection drafting';
+$string['settings:action_draft_reflection_desc'] = 'Allow authorized users to draft reflective text that must be verified and revised by the user.';
+$string['settings:action_summarise_assembly'] = 'Enable assembly discussion summaries';
+$string['settings:action_summarise_assembly_desc'] = 'Allow authorized users to summarize assembly discussion without replacing minutes, votes, or final decisions.';
+$string['settings:action_critique_ai_output'] = 'Enable AI output critique';
+$string['settings:action_critique_ai_output_desc'] = 'Allow authorized users to review AI-generated text for unsupported claims, hidden assumptions, and factual uncertainty.';
+$string['settings:action_prepare_integrity_review'] = 'Enable integrity review preparation';
+$string['settings:action_prepare_integrity_review_desc'] = 'Allow authorized users to prepare a structured brief for an authorized human integrity reviewer.';
+
 $string['aiprovider/uckk:configure'] = 'Configure the UCKK AI provider';
 $string['aiprovider/uckk:use'] = 'Use the UCKK AI provider';
 $string['aiprovider/uckk:viewlogs'] = 'View UCKK AI logs';

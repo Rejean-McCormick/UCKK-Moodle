@@ -1,3 +1,6 @@
+$string['pluginname'] = 'Tableau de bord UCKK';
+
+// Dashboard block settings.
 $string['settingsdisplayheading'] = 'Affichage du tableau de bord';
 $string['settingsdisplayheading_desc'] = 'Configurer les cartes UCKK affichées par défaut. Ces réglages ne contournent pas les capacités ni les règles de visibilité.';
 
@@ -48,3 +51,89 @@ $string['showrestrictedindicators'] = 'Afficher les indicateurs restreints lorsq
 $string['showrestrictedindicators_desc'] = 'Afficher les indicateurs de statut restreint seulement aux personnes qui disposent déjà des capacités requises.';
 $string['allowmanualrefresh'] = 'Autoriser l’actualisation manuelle';
 $string['allowmanualrefresh_desc'] = 'Permettre aux utilisateurs d’actualiser manuellement les résumés depuis le bloc.';
+
+// Instance configuration.
+$string['customtitle'] = 'Titre personnalisé';
+$string['dashboardtitle'] = 'Titre du tableau de bord';
+$string['dashboardvariant'] = 'Variante du tableau de bord';
+$string['dashboardcards'] = 'Cartes du tableau de bord';
+$string['displayoptions'] = 'Options d’affichage';
+$string['density'] = 'Densité d’affichage';
+$string['density_standard'] = 'Standard';
+$string['density_compact'] = 'Compact';
+$string['refreshrate'] = 'Fréquence d’actualisation';
+$string['instancescopenotice'] = 'Les réglages de cette instance contrôlent seulement l’affichage du bloc. Les permissions Moodle et les règles de visibilité UCKK restent appliquées.';
+
+// Dashboard variants.
+$string['variant_auto'] = 'Automatique';
+$string['variant_player'] = 'Joueur';
+$string['variant_mentor'] = 'Mentor';
+$string['variant_archivist'] = 'Archiviste';
+$string['variant_inquisitor'] = 'Inquisiteur';
+$string['variant_manager'] = 'Gestionnaire UCKK';
+
+// Viewer labels.
+$string['viewer:joueur'] = 'Joueur';
+$string['viewer:mentor'] = 'Mentor';
+
+// Generic card and progress states.
+$string['dashboardcardempty'] = 'Aucune donnée disponible pour cette carte.';
+$string['progressnotstarted'] = 'Non commencé';
+$string['progressinprogress'] = 'En cours';
+$string['progresspendingreview'] = 'En attente de révision';
+$string['progressblocked'] = 'Bloqué';
+$string['progresscompleted'] = 'Terminé';
+
+// Refresh UI.
+$string['refreshing'] = 'Actualisation du tableau de bord…';
+$string['refreshed'] = 'Tableau de bord actualisé.';
+$string['refreshfailed'] = 'L’actualisation du tableau de bord a échoué.';
+
+// Actions.
+$string['action:continue'] = 'Continuer';
+$string['action:review'] = 'Réviser';
+$string['action:submit'] = 'Soumettre';
+$string['action:viewdetails'] = 'Voir les détails';
+$string['gotodashboard'] = 'Aller au tableau de bord';
+
+// Challenges.
+$string['card:challenges'] = 'Défis';
+$string['challengesummary'] = 'Résumé des défis';
+$string['challenge:none'] = 'Aucun défi disponible.';
+$string['challenge:active'] = 'Défi actif';
+$string['challenge:pendingreview'] = 'En attente de révision';
+$string['challenge:revisionrequired'] = 'Révision requise';
+$string['challenge:validated'] = 'Validé';
+$string['challenge:contested'] = 'Contesté';
+$string['challenge:archived'] = 'Archivé';
+$string['challenge:viewall'] = 'Voir tous les défis';
+
+// Assemblies.
+$string['assemblysummary'] = 'Résumé des assemblées';
+$string['assemblysummary_help'] = 'Affiche une synthèse des Assemblées UCKK pertinentes selon les permissions et le contexte.';
+$string['noassemblies'] = 'Aucune assemblée à afficher.';
+
+// Badges.
+$string['mybadges'] = 'Mes badges';
+$string['viewallbadges'] = 'Voir tous les badges';
+$string['nobadgesyet'] = 'Aucun badge pour le moment';
+$string['nobadgesyet_desc'] = 'Les badges UCKK apparaîtront ici lorsqu’ils seront obtenus ou en progression.';
+$string['badgeearned'] = 'Badge obtenu';
+$string['badgenotearned'] = 'Badge non obtenu';
+$string['badgeavailable'] = 'Badge disponible';
+$string['badgependingreview'] = 'Badge en attente de révision';
+
+// Competency ratings.
+$string['competencyrating0'] = 'Non évalué';
+$string['competencyrating1'] = 'Découverte';
+$string['competencyrating2'] = 'En développement';
+$string['competencyrating3'] = 'Fonctionnel';
+$string['competencyrating4'] = 'Solide';
+$string['competencyrating5'] = 'Maîtrisé';
+
+// Staff / restricted views.
+$string['staff:submissions'] = 'Soumissions à réviser';
+
+// Errors and privacy.
+$string['error:nopermission'] = 'Vous n’avez pas la permission de voir cette information.';
+$string['privacy:metadata'] = 'Le bloc Tableau de bord UCKK affiche des données provenant des composants UCKK autorisés. Il ne stocke pas de données personnelles additionnelles par lui-même.';

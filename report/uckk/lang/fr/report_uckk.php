@@ -94,6 +94,9 @@ $string['column:visibility'] = 'Visibilité';
 $string['column:status'] = 'Statut';
 $string['column:total'] = 'Total';
 $string['column:members'] = 'Membres';
+// Additional report column strings discovered by the string inventory.
+$string['column:players'] = 'Joueurs';
+$string['column:programtype'] = 'Type de programme';
 $string['column:courses'] = 'Cours';
 $string['column:competency'] = 'Compétence';
 $string['column:rating'] = 'Niveau';

@@ -806,34 +806,3 @@ final class validation_report implements renderable, templatable {
         return '';
     }
 }
-```
-
-Add these strings to `admin/tool/uckkseed/lang/en/tool_uckkseed.php`:
-
-```php
-$string['severity_info'] = 'Info';
-$string['severity_success'] = 'Success';
-$string['severity_warning'] = 'Warning';
-$string['severity_error'] = 'Error';
-$string['severity_blocker'] = 'Blocker';
-
-$string['validationreport'] = 'Validation report';
-$string['validationreport_haserrors'] = 'The validation report contains errors that must be corrected before applying the seed.';
-$string['validationreport_haswarnings'] = 'The validation report contains warnings. Review them before applying the seed.';
-$string['validationreport_ok'] = 'Validation passed. Review the report before applying changes.';
-```
-
-Add these strings to `admin/tool/uckkseed/lang/fr/tool_uckkseed.php`:
-
-```php
-$string['severity_info'] = 'Info';
-$string['severity_success'] = 'Succès';
-$string['severity_warning'] = 'Avertissement';
-$string['severity_error'] = 'Erreur';
-$string['severity_blocker'] = 'Blocage';
-
-$string['validationreport'] = 'Rapport de validation';
-$string['validationreport_haserrors'] = 'Le rapport de validation contient des erreurs à corriger avant d’appliquer le seed.';
-$string['validationreport_haswarnings'] = 'Le rapport de validation contient des avertissements. Vérifiez-les avant d’appliquer le seed.';
-$string['validationreport_ok'] = 'La validation a réussi. Vérifiez le rapport avant d’appliquer les changements.';
-

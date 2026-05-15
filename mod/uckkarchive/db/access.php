@@ -135,28 +135,3 @@ $capabilities = [
         ],
     ],
 ];
-```
-
-Add these strings to `mod/uckkarchive/lang/en/uckkarchive.php`:
-
-```php
-$string['uckkarchive:addinstance'] = 'Add a UCKK Archive activity';
-$string['uckkarchive:view'] = 'View UCKK Archive';
-$string['uckkarchive:additem'] = 'Add archive items';
-$string['uckkarchive:validateitem'] = 'Validate archive items';
-$string['uckkarchive:reviseitem'] = 'Revise archive items';
-$string['uckkarchive:viewrestricted'] = 'View restricted archive records';
-$string['uckkarchive:export'] = 'Export archive records';
-```
-
-Add these strings to `mod/uckkarchive/lang/fr/uckkarchive.php`:
-
-```php
-$string['uckkarchive:addinstance'] = 'Ajouter une activité Archive UCKK';
-$string['uckkarchive:view'] = 'Voir l’Archive UCKK';
-$string['uckkarchive:additem'] = 'Ajouter des éléments d’archive';
-$string['uckkarchive:validateitem'] = 'Valider des éléments d’archive';
-$string['uckkarchive:reviseitem'] = 'Réviser des éléments d’archive';
-$string['uckkarchive:viewrestricted'] = 'Voir les traces d’archive restreintes';
-$string['uckkarchive:export'] = 'Exporter des traces d’archive';
-

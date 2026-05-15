@@ -293,18 +293,4 @@ final class seed_distribution extends scheduled_task {
         mtrace($prefix . ' ' . $text);
     }
 }
-```
-
-Add these strings to `admin/tool/uckkseed/lang/en/tool_uckkseed.php`:
-
-```php
-$string['task_seed_distribution'] = 'Seed UCKK distribution';
-$string['task_seed_distribution_failed'] = 'The scheduled UCKK seed distribution task failed.';
-```
-
-Add these strings to `admin/tool/uckkseed/lang/fr/tool_uckkseed.php`:
-
-```php
-$string['task_seed_distribution'] = 'Initialiser la distribution UCKK';
-$string['task_seed_distribution_failed'] = 'La tâche planifiée d’initialisation de la distribution UCKK a échoué.';
 

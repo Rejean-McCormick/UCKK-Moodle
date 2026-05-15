@@ -16,6 +16,8 @@ $string['privacy:metadata:note:userid'] = 'L’auteur de la note.';
 $string['privacy:metadata:note:body'] = 'Le contenu de la note.';
 $string['privacy:metadata:appeal'] = 'Les appels conservent les contestations des décisions d’intégrité.';
 $string['privacy:metadata:appeal:userid'] = 'L’utilisateur ayant soumis l’appel.';
+$string['privacy:metadata:case:metadata'] = 'Les métadonnées structurées du dossier.';
+$string['privacy:metadata:appeal:body'] = 'Le contenu de l’appel.';
 $string['privacy:pathcases'] = 'Dossiers d’intégrité';
 $string['privacy:pathnotes'] = 'Notes d’intégrité';
 $string['privacy:pathappeals'] = 'Appels d’intégrité';
@@ -79,6 +81,34 @@ $string['public_summary'] = 'Résumé public';
 $string['viewcase'] = 'Voir le dossier';
 $string['recorddecision'] = 'Enregistrer la décision';
 $string['submitappeal'] = 'Soumettre un appel';
+$string['caseid'] = 'ID du dossier';
+$string['noappealpath'] = 'Aucune voie d’appel n’est enregistrée pour ce dossier.';
+$string['appealnotice'] = 'Vous pouvez soumettre un appel pendant la fenêtre de contestation prévue.';
+$string['appealnotavailable'] = 'L’appel n’est pas disponible pour ce dossier.';
+$string['nodecisionrecorded'] = 'Aucune décision n’a encore été enregistrée.';
+$string['unknownuser'] = 'Utilisateur inconnu';
+$string['evidencelinks'] = 'Liens de preuve';
+$string['invalidjson'] = 'Le JSON fourni est invalide.';
+$string['appealunderreview'] = 'Appel en cours de révision.';
+$string['appealwithdrawn'] = 'Appel retiré.';
+$string['caseclosed'] = 'Dossier d’intégrité fermé.';
+$string['correctionrequested'] = 'Correction d’intégrité demandée.';
+$string['iteminvalidated'] = 'Élément invalidé pour raison d’intégrité.';
+$string['contextid'] = 'ID du contexte';
+$string['timeclosed'] = 'Date de clôture';
+$string['invalidseverity'] = 'Gravité d’intégrité invalide.';
+$string['invalidvisibility'] = 'Visibilité d’intégrité invalide.';
+
+// Report labels.
+$string['all'] = 'Tous';
+$string['filter'] = 'Filtrer';
+$string['total'] = 'Total';
+$string['downloadtext'] = 'Télécharger';
+$string['report:totalcases'] = 'Nombre total de dossiers';
+$string['report:opencases'] = 'Dossiers ouverts';
+$string['report:closedcases'] = 'Dossiers fermés';
+$string['report:criticalcases'] = 'Dossiers critiques';
+$string['report:overduecases'] = 'Dossiers en retard';
 
 $string['invalidcaseid'] = 'ID de dossier d’intégrité invalide.';
 $string['notpermitted'] = 'Vous n’avez pas l’autorisation d’accéder à ce dossier d’intégrité.';
@@ -89,6 +119,7 @@ $string['unknowntype'] = 'Type de dossier d’intégrité inconnu.';
 $string['eventcaseopened'] = 'Dossier d’intégrité ouvert';
 $string['eventcasereviewed'] = 'Dossier d’intégrité révisé';
 $string['eventcorrectionrequested'] = 'Correction d’intégrité demandée';
+$string['eventcorrectionissued'] = 'Correction d’intégrité émise';
 $string['eventiteminvalidated'] = 'Élément invalidé pour raison d’intégrité';
 $string['eventcaseclosed'] = 'Dossier d’intégrité fermé';
 
@@ -100,6 +131,15 @@ $string['uckkintegrity:issuecorrection'] = 'Émettre des corrections d’intégr
 $string['uckkintegrity:invalidate'] = 'Invalider des éléments sensibles à l’intégrité';
 $string['uckkintegrity:closecase'] = 'Fermer des dossiers d’intégrité';
 $string['uckkintegrity:viewrestricted'] = 'Voir les données d’intégrité restreintes';
+// Canonical capability names.
+$string['tool/uckkintegrity:view'] = 'Voir les dossiers d’intégrité';
+$string['tool/uckkintegrity:opencase'] = 'Ouvrir des dossiers d’intégrité';
+$string['tool/uckkintegrity:reviewcase'] = 'Réviser des dossiers d’intégrité';
+$string['tool/uckkintegrity:assigncase'] = 'Assigner des dossiers d’intégrité';
+$string['tool/uckkintegrity:issuecorrection'] = 'Émettre des corrections d’intégrité';
+$string['tool/uckkintegrity:invalidate'] = 'Invalider des éléments sensibles à l’intégrité';
+$string['tool/uckkintegrity:closecase'] = 'Fermer des dossiers d’intégrité';
+$string['tool/uckkintegrity:viewrestricted'] = 'Voir les données d’intégrité restreintes';
 
 $string['severity:low'] = 'Faible';
 $string['severity:normal'] = 'Normale';

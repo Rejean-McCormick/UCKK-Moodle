@@ -7,16 +7,16 @@
 // any later version.
 
 /**
- * Version metadata for the UCKK Assembly activity module.
+ * Version metadata for the UCKK Archive activity module.
  *
- * @package    mod_uckkassembly
+ * @package    mod_uckkarchive
  * @copyright  2026 Univers-Cité King Klown
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'mod_uckkassembly';
+$plugin->component = 'mod_uckkarchive';
 $plugin->version = 2026051200;
 $plugin->requires = 2025041400;
 $plugin->maturity = MATURITY_STABLE;

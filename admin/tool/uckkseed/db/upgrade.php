@@ -327,14 +327,4 @@ function tool_uckkseed_upgrade_table_has_fields(string $tablename, array $fields
 
     return true;
 }
-```
-
-Future migrations should be added as separate version gates:
-
-```php id="5w2j47"
-// if ($oldversion < 2026051201) {
-//     // XMLDB schema change or safe data migration here.
-//
-//     upgrade_plugin_savepoint(true, 2026051201, 'tool', 'uckkseed');
-// }
 

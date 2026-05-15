@@ -953,28 +953,3 @@ final class validation_result {
         return [];
     }
 }
-```
-
-Add these status strings to `admin/tool/uckkseed/lang/en/tool_uckkseed.php` if missing:
-
-```php
-$string['status_pending'] = 'Pending';
-$string['status_running'] = 'Running';
-$string['status_completed'] = 'Completed';
-$string['status_failed'] = 'Failed';
-$string['status_cancelled'] = 'Cancelled';
-$string['status_skipped'] = 'Skipped';
-$string['status_warning'] = 'Warning';
-```
-
-Add these to `admin/tool/uckkseed/lang/fr/tool_uckkseed.php` if missing:
-
-```php
-$string['status_pending'] = 'En attente';
-$string['status_running'] = 'En cours';
-$string['status_completed'] = 'Terminé';
-$string['status_failed'] = 'Échec';
-$string['status_cancelled'] = 'Annulé';
-$string['status_skipped'] = 'Ignoré';
-$string['status_warning'] = 'Avertissement';
-

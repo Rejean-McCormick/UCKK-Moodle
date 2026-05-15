@@ -1,3 +1,21 @@
+<?php
+// This file is part of Moodle - https://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// any later version.
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * English strings for the UCKK dashboard block.
+ *
+ * @package    block_uckk_dashboard
+ * @copyright  2026 Univers-Cité King Klown
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 $string['settingsdisplayheading'] = 'Dashboard display';
 $string['settingsdisplayheading_desc'] = 'Configure which UCKK dashboard cards are shown by default. These settings do not bypass capabilities or visibility rules.';
 

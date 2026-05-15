@@ -1,279 +1,279 @@
 <?php
 // This file is part of Moodle - http://moodle.org/
 
+declare(strict_types=1);
+
 namespace report_uckk\local;
+
+use context;
+use dml_exception;
+use moodle_url;
+use stdClass;
+use xmldb_table;
 
 defined('MOODLE_INTERNAL') || die();
 
-use context;
-use moodle_url;
-use report_uckk\output\report_card;
-
 /**
- * Base class and registry for UCKK institutional report sources.
- *
- * Canonical report keys are defined here so routing, report classes, language
- * strings, templates, exports and tests all use the same vocabulary.
+ * Registry and lightweight standalone query adapter for UCKK reports.
  *
  * @package    report_uckk
  * @copyright  2026
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-abstract class report_source {
-    /** Joueur progress report key. */
+final class report_source {
+    /** @var string */
+    public const COMPONENT = 'report_uckk';
+
+    /** @var string */
     public const REPORT_PLAYER_PROGRESS = 'player_progress';
-
-    /** Cohort progress report key. */
+    /** @var string */
     public const REPORT_COHORT_PROGRESS = 'cohort_progress';
-
-    /** Program progress report key. */
+    /** @var string */
     public const REPORT_PROGRAM_PROGRESS = 'program_progress';
-
-    /** Competency matrix report key. */
+    /** @var string */
     public const REPORT_COMPETENCY_MATRIX = 'competency_matrix';
-
-    /** Badge awards report key. */
+    /** @var string */
     public const REPORT_BADGE_AWARDS = 'badge_awards';
-
-    /** Challenge status report key. */
+    /** @var string */
     public const REPORT_CHALLENGE_STATUS = 'challenge_status';
-
-    /** Assembly decisions report key. */
+    /** @var string */
     public const REPORT_ASSEMBLY_DECISIONS = 'assembly_decisions';
-
-    /** Archive production report key. */
+    /** @var string */
     public const REPORT_ARCHIVE_PRODUCTION = 'archive_production';
-
-    /** Integrity cases report key. */
+    /** @var string */
     public const REPORT_INTEGRITY_CASES = 'integrity_cases';
 
-    /** AI usage report key. */
-    public const REPORT_AI_USAGE = 'ai_usage';
-
-    /** Privacy exports report key. */
-    public const REPORT_PRIVACY_EXPORTS = 'privacy_exports';
-
-    /** Default dashboard report. */
+    /** @var string */
     public const DEFAULT_REPORT = self::REPORT_PLAYER_PROGRESS;
 
+    /** @var string */
+    private string $key;
+    /** @var string */
+    private string $tablename;
+    /** @var array<int, array<string, string>> */
+    private array $columns;
+    /** @var string */
+    private string $viewcapability;
+
     /**
-     * Return all implemented report sources.
+     * Constructor.
      *
-     * The doctrine also names AI usage and privacy export reports. Their keys
-     * are reserved above, but they are not registered here unless corresponding
-     * concrete classes are present.
+     * @param string $key
+     * @param string $tablename
+     * @param array<int, array<string, string>> $columns
+     * @param string $viewcapability
+     */
+    public function __construct(string $key, string $tablename, array $columns, string $viewcapability = 'report/uckk:view') {
+        $this->key = $key;
+        $this->tablename = $tablename;
+        $this->columns = $columns;
+        $this->viewcapability = $viewcapability;
+    }
+
+    /**
+     * Return all canonical report sources.
      *
-     * @return array<string,self>
+     * @return array<string, self>
      */
     public static function all(): array {
-        return [
-            self::REPORT_PLAYER_PROGRESS => new \report_uckk\report\player_progress(),
-            self::REPORT_COHORT_PROGRESS => new \report_uckk\report\cohort_progress(),
-            self::REPORT_PROGRAM_PROGRESS => new \report_uckk\report\program_progress(),
-            self::REPORT_COMPETENCY_MATRIX => new \report_uckk\report\competency_report(),
-            self::REPORT_BADGE_AWARDS => new \report_uckk\report\badge_report(),
-            self::REPORT_CHALLENGE_STATUS => new \report_uckk\report\challenge_report(),
-            self::REPORT_ASSEMBLY_DECISIONS => new \report_uckk\report\assembly_report(),
-            self::REPORT_ARCHIVE_PRODUCTION => new \report_uckk\report\archive_report(),
-            self::REPORT_INTEGRITY_CASES => new \report_uckk\report\integrity_report(),
-        ];
-    }
-
-    /**
-     * Return a report source by key.
-     *
-     * @param string $key Report key.
-     * @return self
-     */
-    public static function get(string $key): self {
-        $sources = self::all();
-
-        if (array_key_exists($key, $sources)) {
-            return $sources[$key];
+        static $sources = null;
+        if ($sources !== null) {
+            return $sources;
         }
 
-        return $sources[self::DEFAULT_REPORT];
+        $sources = [
+            self::REPORT_PLAYER_PROGRESS => new self(self::REPORT_PLAYER_PROGRESS, 'local_uckk_pathway', [
+                self::column('userid', 'column:user', 'User'),
+                self::column('programid', 'column:program', 'Program'),
+                self::column('status', 'column:status', 'Status'),
+                self::column('visibility', 'column:visibility', 'Visibility'),
+            ]),
+            self::REPORT_COHORT_PROGRESS => new self(self::REPORT_COHORT_PROGRESS, 'cohort_members', [
+                self::column('cohortid', 'column:cohort', 'Cohort'),
+                self::column('userid', 'column:user', 'User'),
+                self::column('timeadded', 'column:created', 'Created'),
+            ]),
+            self::REPORT_PROGRAM_PROGRESS => new self(self::REPORT_PROGRAM_PROGRESS, 'local_uckk_program', [
+                self::column('id', 'column:id', 'ID'),
+                self::column('name', 'column:name', 'Name'),
+                self::column('status', 'column:status', 'Status'),
+            ]),
+            self::REPORT_COMPETENCY_MATRIX => new self(self::REPORT_COMPETENCY_MATRIX, 'competency', [
+                self::column('id', 'column:id', 'ID'),
+                self::column('shortname', 'column:competency', 'Competency'),
+                self::column('idnumber', 'column:status', 'Status'),
+            ]),
+            self::REPORT_BADGE_AWARDS => new self(self::REPORT_BADGE_AWARDS, 'badge_issued', [
+                self::column('userid', 'column:user', 'User'),
+                self::column('badgeid', 'column:badge', 'Badge'),
+                self::column('dateissued', 'column:issued', 'Issued'),
+            ]),
+            self::REPORT_CHALLENGE_STATUS => new self(self::REPORT_CHALLENGE_STATUS, 'uckkchallenge', [
+                self::column('id', 'column:id', 'ID'),
+                self::column('name', 'column:challenge', 'Challenge'),
+                self::column('type', 'column:challengetype', 'Challenge type'),
+                self::column('status', 'column:status', 'Status'),
+            ]),
+            self::REPORT_ASSEMBLY_DECISIONS => new self(self::REPORT_ASSEMBLY_DECISIONS, 'uckkassembly', [
+                self::column('id', 'column:id', 'ID'),
+                self::column('name', 'column:assembly', 'Assembly'),
+                self::column('type', 'column:assemblytype', 'Assembly type'),
+                self::column('status', 'column:status', 'Status'),
+            ]),
+            self::REPORT_ARCHIVE_PRODUCTION => new self(self::REPORT_ARCHIVE_PRODUCTION, 'uckkarchive_item', [
+                self::column('id', 'column:id', 'ID'),
+                self::column('title', 'column:archiveitem', 'Archive item'),
+                self::column('visibility', 'column:visibility', 'Visibility'),
+                self::column('validationstate', 'column:validationstate', 'Validation state'),
+            ]),
+            self::REPORT_INTEGRITY_CASES => new self(self::REPORT_INTEGRITY_CASES, 'tool_uckkintegrity_case', [
+                self::column('id', 'column:id', 'ID'),
+                self::column('type', 'column:casetype', 'Case type'),
+                self::column('severity', 'column:severity', 'Severity'),
+                self::column('status', 'column:status', 'Status'),
+            ]),
+        ];
+
+        return $sources;
     }
 
     /**
-     * Return true when a report key is registered.
+     * Check whether a report key exists.
      *
-     * @param string $key Report key.
+     * @param string $key
      * @return bool
      */
-    public static function exists(string $key): bool {
+    public static function has(string $key): bool {
         return array_key_exists($key, self::all());
     }
 
     /**
-     * Return canonical keys for all registered reports.
+     * Get one report source or the default source.
      *
-     * @return string[]
+     * @param string $key
+     * @return self
      */
-    public static function keys(): array {
-        return array_keys(self::all());
+    public static function get(string $key): self {
+        $all = self::all();
+        return $all[$key] ?? $all[self::DEFAULT_REPORT];
     }
 
     /**
-     * Return menu options for report selector UI.
-     *
-     * @param context|null $context Optional context for permission filtering.
-     * @return array<string,string>
-     */
-    public static function menu(?context $context = null): array {
-        $menu = [];
-
-        foreach (self::all() as $key => $source) {
-            if ($context !== null && !$source->can_view($context)) {
-                continue;
-            }
-
-            $menu[$key] = $source->get_title();
-        }
-
-        return $menu;
-    }
-
-    /**
-     * Canonical report key.
+     * Get report key.
      *
      * @return string
      */
-    abstract public function get_key(): string;
+    public function get_key(): string {
+        return $this->key;
+    }
 
     /**
-     * Report columns keyed by row field.
+     * Get source table name.
      *
-     * @return array<string,string>
+     * @return string
      */
-    abstract public function get_columns(): array;
+    public function get_tablename(): string {
+        return $this->tablename;
+    }
 
     /**
-     * Rows matching selected filters.
+     * Get column metadata.
      *
-     * Each row key must match get_columns().
-     *
-     * @param filters $filters Normalized filters.
-     * @return array<int,array<string,scalar|null>>
+     * @return array<int, array<string, string>>
      */
-    abstract public function get_rows(filters $filters): array;
+    public function get_columns(): array {
+        return $this->columns;
+    }
 
     /**
-     * Localized report title.
+     * Get report title.
      *
      * @return string
      */
     public function get_title(): string {
-        return get_string('report:' . $this->get_key(), 'report_uckk');
+        return $this->lang('report:' . $this->key, ucfirst(str_replace('_', ' ', $this->key)));
     }
 
     /**
-     * Localized report description.
+     * Get report description.
      *
      * @return string
      */
     public function get_description(): string {
-        return get_string('reportdesc:' . $this->get_key(), 'report_uckk');
+        return $this->lang('reportdesc:' . $this->key, $this->lang('summary', 'Summary'));
     }
 
     /**
-     * Required capability for this report.
+     * Check whether the viewer can access this source.
      *
-     * Reports default to normal report visibility. Sensitive reports, such as
-     * integrity cases, can override this and require report/uckk:viewall.
-     *
-     * @return string
-     */
-    public function get_required_capability(): string {
-        return 'report/uckk:view';
-    }
-
-    /**
-     * Check whether the current user can view this report.
-     *
-     * @param context $context Moodle context.
+     * @param context $context
      * @return bool
      */
     public function can_view(context $context): bool {
-        return has_capability($this->get_required_capability(), $context);
+        return has_capability($this->viewcapability, $context);
     }
 
     /**
-     * Build a dashboard card for this report.
+     * Return a lightweight count for the current filters.
      *
-     * @param filters $filters Current filters.
-     * @param bool $active Whether this source is selected.
-     * @return report_card
-     */
-    public function card(filters $filters, bool $active = false): report_card {
-        $cardfilters = $filters->with_report($this->get_key());
-        $url = new moodle_url('/report/uckk/index.php', $cardfilters->url_params());
-
-        return new report_card(
-            $this->get_key(),
-            $this->get_title(),
-            $this->get_description(),
-            $this->get_total($filters),
-            $url,
-            $active
-        );
-    }
-
-    /**
-     * Return total rows matching filters.
-     *
-     * @param filters $filters Normalized filters.
+     * @param filters $filters
      * @return int
      */
-    public function get_total(filters $filters): int {
-        $rows = $this->get_rows($filters);
+    public function count_rows(filters $filters): int {
+        global $DB;
 
-        if ($this->is_unavailable_rows($rows)) {
+        if (!$this->is_installed()) {
             return 0;
         }
 
-        return count($rows);
+        [$where, $params] = $this->build_where($filters);
+        try {
+            return (int) $DB->count_records_select($this->tablename, $where, $params);
+        } catch (dml_exception) {
+            return 0;
+        }
     }
 
     /**
-     * Return true if a Moodle table exists.
+     * Get rows matching the current filters.
      *
-     * @param string $tablename Table name without braces.
-     * @return bool
+     * @param filters $filters
+     * @return array<int, array<string, mixed>>
      */
-    protected function table_exists(string $tablename): bool {
+    public function get_rows(filters $filters): array {
         global $DB;
 
-        return $DB->get_manager()->table_exists($tablename);
-    }
+        if (!$this->is_installed()) {
+            return [];
+        }
 
-    /**
-     * Convert Moodle DB records into report rows using this source's columns.
-     *
-     * @param array<int|string,\stdClass> $records Database records.
-     * @return array<int,array<string,scalar|null>>
-     */
-    protected function records_to_rows(array $records): array {
-        $columns = array_keys($this->get_columns());
+        $fields = [];
+        $available = $this->available_columns();
+        foreach ($this->columns as $column) {
+            if (isset($available[$column['field']])) {
+                $fields[] = $column['field'];
+            }
+        }
+
+        if (empty($fields)) {
+            $fields = array_slice(array_keys($available), 0, 6);
+        }
+
+        [$where, $params] = $this->build_where($filters);
+        $select = implode(', ', $fields);
+
+        try {
+            $records = $DB->get_records_select($this->tablename, $where, $params, 'id ASC', $select, 0, $filters->limit);
+        } catch (dml_exception) {
+            return [];
+        }
+
         $rows = [];
-
         foreach ($records as $record) {
             $row = [];
-
-            foreach ($columns as $column) {
-                $value = $record->{$column} ?? null;
-
-                if (is_bool($value)) {
-                    $value = $value ? 1 : 0;
-                }
-
-                if (is_array($value) || is_object($value)) {
-                    $value = json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                }
-
-                $row[$column] = $value;
+            foreach ($fields as $field) {
+                $row[$field] = $record->{$field} ?? '';
             }
-
             $rows[] = $row;
         }
 
@@ -281,81 +281,140 @@ abstract class report_source {
     }
 
     /**
-     * Format a timestamp for display.
+     * Export this source as one template card.
      *
-     * @param int|null $timestamp Unix timestamp.
-     * @return string
+     * @param filters $filters
+     * @return array<string, mixed>
      */
-    protected function format_time(?int $timestamp): string {
-        if (empty($timestamp)) {
-            return '-';
-        }
-
-        return userdate($timestamp);
+    public function export_card(filters $filters): array {
+        return [
+            'key' => $this->key,
+            'title' => $this->get_title(),
+            'description' => $this->get_description(),
+            'total' => $this->count_rows($filters),
+            'url' => (new moodle_url('/report/uckk/index.php', $filters->with_report($this->key)->url_params()))->out(false),
+            'active' => $filters->report === $this->key,
+        ];
     }
 
     /**
-     * Format a database status value.
+     * Whether the backing table exists.
      *
-     * @param string|null $status Status.
-     * @param string|null $component Optional component for localized status strings.
+     * @return bool
+     */
+    public function is_installed(): bool {
+        global $DB;
+
+        $manager = $DB->get_manager();
+        return $manager->table_exists(new xmldb_table($this->tablename));
+    }
+
+    /**
+     * Return template-friendly empty-state explanation.
+     *
      * @return string
      */
-    protected function format_status(?string $status, ?string $component = null): string {
-        if ($status === null || $status === '') {
-            return '-';
-        }
+    public function installation_notice(): string {
+        return $this->lang('notinstalled', 'The required source table is not installed yet.');
+    }
 
-        if ($component !== null) {
-            $identifier = 'status:' . $status;
-            if (get_string_manager()->string_exists($identifier, $component)) {
-                return get_string($identifier, $component);
+    /**
+     * Build a WHERE clause from shared filters.
+     *
+     * @param filters $filters
+     * @return array{0:string,1:array<string,int|string>}
+     */
+    private function build_where(filters $filters): array {
+        $conditions = ['1 = 1'];
+        $params = [];
+
+        $available = $this->available_columns();
+
+        foreach ([
+            'userid',
+            'cohortid',
+            'programid',
+            'courseid',
+            'categoryid',
+            'competencyid',
+            'badgeid',
+        ] as $idfield) {
+            if (isset($available[$idfield])) {
+                $filters->add_id_condition($idfield, $idfield, $conditions, $params);
             }
         }
 
-        return s($status);
+        foreach ([
+            'status',
+            'visibility',
+            'challengetype',
+            'assemblytype',
+            'integritytype',
+        ] as $textfield) {
+            if (isset($available[$textfield])) {
+                $filters->add_text_condition($textfield, $textfield, $conditions, $params);
+            }
+        }
+
+        $timefield = isset($available['timecreated']) ? 'timecreated' :
+            (isset($available['timemodified']) ? 'timemodified' :
+            (isset($available['dateissued']) ? 'dateissued' : ''));
+
+        if ($timefield !== '') {
+            $filters->add_time_conditions($timefield, $conditions, $params, 'report');
+        }
+
+        return [implode(' AND ', $conditions), $params];
     }
 
     /**
-     * Return a consistent unavailable-source row.
+     * Return the available DB columns for this source table.
      *
-     * Used when a dependent plugin table is not installed yet. This keeps the
-     * dashboard renderable while making the missing source explicit.
-     *
-     * @return array<int,array<string,scalar|null>>
+     * @return array<string, mixed>
      */
-    protected function unavailable_row(): array {
-        $columns = array_keys($this->get_columns());
-        $row = [];
+    private function available_columns(): array {
+        global $DB;
 
-        foreach ($columns as $column) {
-            $row[$column] = '-';
+        try {
+            $columns = $DB->get_columns($this->tablename);
+        } catch (dml_exception) {
+            return [];
         }
 
-        $firstkey = reset($columns);
-        if ($firstkey !== false) {
-            $row[$firstkey] = get_string('notinstalled', 'report_uckk');
+        $result = [];
+        foreach ($columns as $name => $column) {
+            $result[strtolower($name)] = $column;
         }
 
-        return [$row];
+        return $result;
     }
 
     /**
-     * Check whether a row set is the standard unavailable-source row.
+     * Safe string lookup with fallback.
      *
-     * @param array<int,array<string,scalar|null>> $rows Rows.
-     * @return bool
+     * @param string $key
+     * @param string $fallback
+     * @return string
      */
-    private function is_unavailable_rows(array $rows): bool {
-        if (count($rows) !== 1) {
-            return false;
-        }
+    private function lang(string $key, string $fallback): string {
+        return get_string_manager()->string_exists($key, self::COMPONENT) ? get_string($key, self::COMPONENT) : $fallback;
+    }
 
-        $firstrow = reset($rows);
-        if (!is_array($firstrow)) {
-            return false;
-        }
-
-        return in_array(get_string('notinstalled', 'report_uckk'), $firstrow, true);
+    /**
+     * Create a column spec.
+     *
+     * @param string $field
+     * @param string $stringkey
+     * @param string $fallback
+     * @return array<string, string>
+     */
+    private static function column(string $field, string $stringkey, string $fallback): array {
+        return [
+            'key' => $field,
+            'field' => $field,
+            'stringkey' => $stringkey,
+            'fallback' => $fallback,
+            'label' => get_string_manager()->string_exists($stringkey, self::COMPONENT) ? get_string($stringkey, self::COMPONENT) : $fallback,
+        ];
     }
 }

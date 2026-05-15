@@ -1,0 +1,115 @@
+path,line,kind,raw,reason
+admin/tool/uckkintegrity/classes/output/case_list.php,167,php_get_string_dynamic,"get_string($key, 'tool_uckkintegrity')",dynamic_identifier_or_expression
+admin/tool/uckkintegrity/report.php,243,php_get_string_dynamic,"get_string($typekey, 'tool_uckkintegrity')",dynamic_identifier_or_expression
+admin/tool/uckkintegrity/report.php,248,php_get_string_dynamic,"get_string($severitykey, 'tool_uckkintegrity')",dynamic_identifier_or_expression
+admin/tool/uckkintegrity/report.php,253,php_get_string_dynamic,"get_string($statuskey, 'tool_uckkintegrity')",dynamic_identifier_or_expression
+admin/tool/uckkseed/classes/local/validation_result.php,855,php_get_string_dynamic,"get_string($key, 'tool_uckkseed')",dynamic_identifier_or_expression
+admin/tool/uckkseed/classes/output/renderer.php,476,php_get_string_dynamic,"get_string($key, 'tool_uckkseed')",dynamic_identifier_or_expression
+admin/tool/uckkseed/classes/output/renderer.php,490,php_get_string_dynamic,"get_string($key, 'tool_uckkseed')",dynamic_identifier_or_expression
+admin/tool/uckkseed/classes/output/renderer.php,506,php_get_string_dynamic,"get_string($key, 'tool_uckkseed')",dynamic_identifier_or_expression
+admin/tool/uckkseed/classes/output/renderer.php,522,php_get_string_dynamic,"get_string($key, 'tool_uckkseed')",dynamic_identifier_or_expression
+admin/tool/uckkseed/classes/output/renderer.php,536,php_get_string_dynamic,"get_string($severity, 'tool_uckkseed')",dynamic_identifier_or_expression
+admin/tool/uckkseed/classes/output/seed_summary.php,857,php_get_string_dynamic,"get_string($key, self::COMPONENT)",dynamic_identifier_or_expression
+admin/tool/uckkseed/classes/output/validation_report.php,736,php_get_string_dynamic,"get_string($key, self::COMPONENT)",dynamic_identifier_or_expression
+blocks/uckk_dashboard/classes/output/assembly_summary.php,357,php_get_string_dynamic,"get_string($stringkey, 'block_uckk_dashboard')",dynamic_identifier_or_expression
+blocks/uckk_dashboard/classes/output/assembly_summary.php,374,php_get_string_dynamic,"get_string($stringkey, 'block_uckk_dashboard')",dynamic_identifier_or_expression
+blocks/uckk_dashboard/classes/output/challenge_summary.php,404,php_get_string_dynamic,"get_string($stringkey, 'block_uckk_dashboard')",dynamic_identifier_or_expression
+blocks/uckk_dashboard/classes/output/dashboard_block.php,562,php_get_string_dynamic,"get_string($stringkey, 'block_uckk_dashboard')",dynamic_identifier_or_expression
+blocks/uckk_dashboard/edit_form.php,188,php_get_string_dynamic,"get_string($stringkey, 'block_uckk_dashboard')",dynamic_identifier_or_expression
+blocks/uckk_dashboard/tests/block_uckk_dashboard_test.php,347,php_get_string_dynamic,get_string(provider::get_reason(),dynamic_identifier_or_expression
+course/format/uckk/classes/local/sectionmap.php,575,php_get_string_dynamic,"get_string($identifier, self::COMPONENT)",dynamic_identifier_or_expression
+course/format/uckk/classes/output/courseformat/content.php,368,php_get_string_dynamic,"get_string($identifier, $component)",dynamic_identifier_or_expression
+course/format/uckk/classes/output/courseformat/content/section.php,370,php_get_string_dynamic,"get_string($identifier, $component)",dynamic_identifier_or_expression
+course/format/uckk/classes/output/courseformat/content/section/cmitem.php,229,php_get_string_dynamic,"get_string($key, 'format_uckk')",dynamic_identifier_or_expression
+course/format/uckk/classes/output/courseformat/content/section/cmitem.php,478,php_get_string_dynamic,"get_string($key, 'format_uckk')",dynamic_identifier_or_expression
+course/format/uckk/classes/output/courseformat/content/section/controlmenu.php,417,php_get_string_dynamic,"get_string($identifier, 'format_uckk')",dynamic_identifier_or_expression
+course/format/uckk/lib.php,259,php_get_string_dynamic,"get_string(                 'option_showrecognitionnotice',                 'format_uckk'             )",dynamic_identifier_or_expression
+course/format/uckk/lib.php,454,php_get_string_dynamic,"get_string($keys[$sectionnum], 'format_uckk')",dynamic_identifier_or_expression
+course/format/uckk/lib.php,659,php_get_string_dynamic,"get_string($keys[$sectionnum], 'format_uckk')",dynamic_identifier_or_expression
+local/uckk/amd/src/pathway.js,124,js_get_string_dynamic,"getString(key, COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/api/profile_api.php,1108,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/api/profile_api.php,1124,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/external/get_programs.php,521,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/external/get_programs.php,541,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/form/player_profile_form.php,640,php_get_string_dynamic,get_string(),dynamic_identifier_or_expression
+local/uckk/classes/form/player_profile_form.php,648,php_get_string_dynamic,"get_string($identifier, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/form/player_profile_form.php,652,php_get_string_dynamic,"get_string($identifier, 'theme_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/form/program_form.php,693,php_get_string_dynamic,"get_string($identifier, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/form/program_form.php,708,php_get_string_dynamic,"get_string($identifier, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/local/canon_item.php,1255,php_get_string_dynamic,"get_string($identifier, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/local/canon_item.php,1259,php_get_string_dynamic,"get_string($identifier, 'theme_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/local/program.php,640,php_get_string_dynamic,"get_string(self::INTERNAL_RECOGNITION_STRING, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/local/program.php,796,php_get_string_dynamic,"get_string($stringkey, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/local/program.php,818,php_get_string_dynamic,"get_string($stringkey, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/local/provenance.php,891,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/local/provenance.php,907,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/local/provenance.php,923,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/local/status.php,501,php_get_string_dynamic,"get_string($stringkey, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/local/visibility.php,713,php_get_string_dynamic,"get_string($identifier, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/local/visibility.php,745,php_get_string_dynamic,"get_string($identifier, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/output/canon_panel.php,847,php_get_string_dynamic,"get_string($identifier, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/output/canon_panel.php,851,php_get_string_dynamic,"get_string($identifier, 'theme_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/output/pathway_card.php,609,php_get_string_dynamic,"get_string($identifier, self::COMPONENT)",dynamic_identifier_or_expression
+local/uckk/classes/output/program_card.php,644,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/output/program_card.php,660,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/classes/output/program_card.php,676,php_get_string_dynamic,"get_string($stringkey, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/lib.php,608,php_get_string_dynamic,"get_string($identifier, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/locallib.php,819,php_get_string_dynamic,"get_string($identifier, $component, $a)",dynamic_identifier_or_expression
+local/uckk/pathways.php,135,php_get_string_dynamic,"get_string($identifier, 'local_uckk', $a)",dynamic_identifier_or_expression
+local/uckk/pathways.php,288,php_get_string_dynamic,"get_string($identifier, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/pathways.php,304,php_get_string_dynamic,"get_string($identifier, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/programs.php,691,php_get_string_dynamic,"get_string($identifier, 'local_uckk')",dynamic_identifier_or_expression
+local/uckk/programs.php,695,php_get_string_dynamic,"get_string($identifier, 'theme_uckk')",dynamic_identifier_or_expression
+mod/uckkarchive/amd/src/archive.js,590,js_get_string_dynamic,"getString(titleKey, COMPONENT)",dynamic_identifier_or_expression
+mod/uckkarchive/amd/src/archive.js,591,js_get_string_dynamic,"getString(bodyKey, COMPONENT)",dynamic_identifier_or_expression
+mod/uckkarchive/amd/src/archive.js,592,js_get_string_dynamic,"getString(buttonKey, COMPONENT)",dynamic_identifier_or_expression
+mod/uckkarchive/classes/form/archive_item_form.php,370,php_get_string_dynamic,"get_string($errorstring, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/form/archive_item_form.php,535,php_get_string_dynamic,"get_string($key, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/archive_item_card.php,982,php_get_string_dynamic,"get_string($key, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/archive_view.php,1039,php_get_string_dynamic,"get_string($key, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/kristal_card.php,316,php_get_string_dynamic,"get_string(string $key, string $default = '')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/kristal_card.php,591,php_get_string_dynamic,"get_string($key, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/kristal_card.php,595,php_get_string_dynamic,"get_string($altkey, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/kristal_card.php,611,php_get_string_dynamic,"get_string($stringkey, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/provenance_panel.php,649,php_get_string_dynamic,"get_string($key, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/provenance_panel.php,665,php_get_string_dynamic,"get_string($key, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/provenance_panel.php,681,php_get_string_dynamic,"get_string($key, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/classes/output/provenance_panel.php,697,php_get_string_dynamic,"get_string($stringkey, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/export.php,866,php_get_string_dynamic,"get_string($name, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkarchive/locallib.php,570,php_get_string_dynamic,"get_string($key, 'uckkarchive')",dynamic_identifier_or_expression
+mod/uckkassembly/amd/src/assembly.js,195,js_get_string_dynamic,"getString(loadingKey, COMPONENT)",dynamic_identifier_or_expression
+mod/uckkassembly/amd/src/assembly.js,201,js_get_string_dynamic,"getString(successKey, COMPONENT)",dynamic_identifier_or_expression
+mod/uckkassembly/amd/src/assembly.js,204,js_get_string_dynamic,"getString(failureKey, COMPONENT)",dynamic_identifier_or_expression
+mod/uckkassembly/classes/completion/custom_completion.php,128,php_get_string_dynamic,"get_string($stringkey, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/local/vote.php,662,php_get_string_dynamic,"get_string($key, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/assembly_view.php,794,php_get_string_dynamic,"get_string($key, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/decision_panel.php,776,php_get_string_dynamic,"get_string($key, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/minutes_panel.php,591,php_get_string_dynamic,"get_string($key, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/minutes_panel.php,612,php_get_string_dynamic,"get_string($key, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/minutes_panel.php,628,php_get_string_dynamic,"get_string($stringkey, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/motion_list.php,501,php_get_string_dynamic,"get_string($key, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/motion_list.php,517,php_get_string_dynamic,"get_string($key, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/vote_panel.php,623,php_get_string_dynamic,"get_string($key, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/vote_panel.php,639,php_get_string_dynamic,"get_string($key, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/output/vote_panel.php,655,php_get_string_dynamic,"get_string($stringkey, 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkassembly/classes/privacy/provider.php,426,php_get_string_dynamic,"get_string($config['lang'], 'uckkassembly')",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/completion/custom_completion.php,122,php_get_string_dynamic,"get_string(                 'completionmotiondesc',                 'uckkassembly',                 $this->get_required_count($assembly, self::RULE_MOTIONS)",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/completion/custom_completion.php,130,php_get_string_dynamic,"get_string(                 'completionparticipationdesc',                 'uckkassembly',                 $this->get_required_count($assembly, self::RULE_PARTICIPATION)",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/completion/custom_completion.php,138,php_get_string_dynamic,"get_string(                 'completionvotedesc',                 'uckkassembly',                 $this->get_required_count($assembly, self::RULE_VOTES)",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/form/challenge_form.php,479,php_get_string_dynamic,"get_string($errorcode, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/local/integrity_state.php,205,php_get_string_dynamic,"get_string($key, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/output/challenge_view.php,538,php_get_string_dynamic,"get_string($key, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/output/evaluation_panel.php,449,php_get_string_dynamic,"get_string($key, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/output/integrity_panel.php,531,php_get_string_dynamic,"get_string($key, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/output/integrity_panel.php,552,php_get_string_dynamic,"get_string($key, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/output/integrity_panel.php,573,php_get_string_dynamic,"get_string($key, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/output/integrity_panel.php,589,php_get_string_dynamic,"get_string($stringkey, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/classes/output/proof_list.php,698,php_get_string_dynamic,"get_string($stringkey, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/evaluate.php,280,php_get_string_dynamic,"get_string($key, 'uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/locallib.php,354,php_get_string_dynamic,"get_string($stringkey, 'mod_uckkchallenge')",dynamic_identifier_or_expression
+mod/uckkchallenge/locallib.php,383,php_get_string_dynamic,"get_string($stringkey, 'mod_uckkchallenge')",dynamic_identifier_or_expression
+report/uckk/classes/local/report_source.php,312,php_get_string_dynamic,"get_string($identifier, $component)",dynamic_identifier_or_expression
+report/uckk/classes/report/integrity_report.php,157,php_get_string_dynamic,"get_string($stringkey, 'tool_uckkintegrity')",dynamic_identifier_or_expression
+theme/uckk/classes/output/core_renderer.php,427,php_get_string_dynamic,"get_string($stringkey, 'theme_uckk')",dynamic_identifier_or_expression
+theme/uckk/classes/output/core_renderer.php,432,php_get_string_dynamic,"get_string($challengekey, 'theme_uckk')",dynamic_identifier_or_expression
+theme/uckk/classes/output/core_renderer.php,449,php_get_string_dynamic,"get_string($stringkey, 'theme_uckk')",dynamic_identifier_or_expression

@@ -595,12 +595,3 @@ final class renderer extends plugin_renderer_base {
         };
     }
 }
-```
-
-No new language keys are strictly required beyond the keys already planned for `tool_uckkseed`, but this renderer expects these template names to exist:
-
-```text id="f8jzfy"
-tool_uckkseed/seed_summary
-tool_uckkseed/validation_report
-tool_uckkseed/preset_card
-

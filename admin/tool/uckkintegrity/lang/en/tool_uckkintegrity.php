@@ -20,6 +20,13 @@ $string['decision'] = 'Decision';
 $string['appeal'] = 'Appeal';
 $string['report'] = 'Integrity report';
 
+// Additional template strings.
+$string['caseid'] = 'Case ID';
+$string['noappealpath'] = 'No appeal path has been recorded for this case.';
+$string['appealnotice'] = 'Appeals are recorded as contestations and do not override the integrity decision until a reviewer accepts the appeal.';
+$string['appealnotavailable'] = 'Appeal is not available for this case.';
+$string['nodecisionrecorded'] = 'No decision has been recorded for this case.';
+
 // Settings.
 $string['settings:general'] = 'Integrity settings';
 $string['settings:general_desc'] = 'Configure the UCKK Inquisiteur integrity workflow.';
@@ -43,6 +50,16 @@ $string['uckkintegrity:issuecorrection'] = 'Issue integrity corrections';
 $string['uckkintegrity:invalidate'] = 'Invalidate integrity-sensitive items';
 $string['uckkintegrity:closecase'] = 'Close integrity cases';
 $string['uckkintegrity:viewrestricted'] = 'View restricted integrity data';
+
+// Canonical Moodle capability strings.
+$string['tool/uckkintegrity:view'] = 'View integrity cases';
+$string['tool/uckkintegrity:opencase'] = 'Open integrity cases';
+$string['tool/uckkintegrity:reviewcase'] = 'Review integrity cases';
+$string['tool/uckkintegrity:assigncase'] = 'Assign integrity cases';
+$string['tool/uckkintegrity:issuecorrection'] = 'Issue integrity corrections';
+$string['tool/uckkintegrity:invalidate'] = 'Invalidate integrity-controlled items';
+$string['tool/uckkintegrity:closecase'] = 'Close integrity cases';
+$string['tool/uckkintegrity:viewrestricted'] = 'View restricted integrity data';
 
 // Case fields.
 $string['casetype'] = 'Case type';

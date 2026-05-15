@@ -10,7 +10,7 @@
 // Univers-Cité King Klown.
 
 /**
- * French language strings for the UCKK course format.
+ * English language strings for the UCKK course format.
  *
  * @package    format_uckk
  * @copyright  2026 Univers-Cité King Klown
@@ -19,435 +19,482 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// Required Moodle strings.
-$string['pluginname'] = 'Format UCKK';
-$string['sectionname'] = 'Section UCKK';
-$string['privacy:metadata'] = 'Le format de cours UCKK ne stocke aucune donnée personnelle.';
-
-// Page type strings.
-$string['page-course-view-uckk'] = 'Toute page principale de cours au format UCKK';
-$string['page-course-view-uckk-x'] = 'Toute page de cours au format UCKK';
-
-// Core course format actions.
-$string['addsections'] = 'Ajouter des sections UCKK';
-$string['currentsection'] = 'Section actuelle';
-$string['editsection'] = 'Modifier la section';
-$string['editsectionname'] = 'Modifier le nom de la section';
-$string['deletesection'] = 'Supprimer la section';
-$string['newsectionname'] = 'Nouveau nom de section : {$a}';
-$string['hidefromothers'] = 'Masquer la section';
-$string['showfromothers'] = 'Afficher la section';
+// Required Moodle course format strings.
+$string['pluginname'] = 'UCKK format';
+$string['sectionname'] = 'UCKK section';
 $string['section0name'] = 'Orientation';
-$string['sectionnamecustom'] = 'Section personnalisée';
-$string['sectionnotavailable'] = 'Cette section UCKK n’est pas disponible.';
-$string['sectionhidden'] = 'Section masquée';
-$string['sectionvisible'] = 'Section visible';
+$string['page-course-view-uckk'] = 'Any UCKK format course main page';
+$string['page-course-view-uckk-x'] = 'Any UCKK format course page';
 
 // Format identity.
-$string['formatname'] = 'Format UCKK';
-$string['formatfullname'] = 'Format de cours de l’Univers-Cité King Klown';
+$string['formatname'] = 'UCKK format';
+$string['formatdescription'] = 'A structured course format for the Univers-Cité King Klown: orientation, concepts, canonical material, workshop, proofs, deliberation, deliverable, evaluation and archive.';
 $string['formatshortname'] = 'UCKK';
-$string['formatdescription'] = 'Structure pédagogique UCKK : orientation, concepts, matière canonique, atelier, preuves, délibération, livrable, évaluation et archive.';
-$string['formatpurpose'] = 'Ce format transforme un cours Moodle en parcours UCKK orienté vers la preuve, la délibération, l’intégrité, l’action et la mémoire.';
-$string['formatnotetheme'] = 'Ce format organise le cours. Le thème UCKK gère l’apparence visuelle.';
-$string['formatnotcore'] = 'Ce format n’altère pas le cœur Moodle.';
-$string['formatnotdegree'] = 'Les reconnaissances UCKK sont internes, sauf reconnaissance officielle future.';
+$string['uckkformat'] = 'UCKK course format';
+$string['uckkcourse'] = 'UCKK course';
+$string['uckkcourseformat'] = 'UCKK course format';
+$string['uckksection'] = 'UCKK section';
+$string['uckksectionplural'] = 'UCKK sections';
 
-// Canonical course sections.
+// Canonical UCKK course sections.
 $string['section_orientation'] = 'Orientation';
-$string['section_concepts'] = 'Concepts clés';
-$string['section_canon'] = 'Matière canonique';
-$string['section_workshop'] = 'Atelier';
-$string['section_proofs'] = 'Preuves';
-$string['section_deliberation'] = 'Délibération';
-$string['section_deliverable'] = 'Livrable';
-$string['section_evaluation'] = 'Évaluation';
+$string['section_concepts'] = 'Key concepts';
+$string['section_canon'] = 'Canonical material';
+$string['section_workshop'] = 'Workshop';
+$string['section_proofs'] = 'Proofs';
+$string['section_deliberation'] = 'Deliberation';
+$string['section_deliverable'] = 'Deliverable';
+$string['section_evaluation'] = 'Evaluation';
 $string['section_archive'] = 'Archive';
 
-$string['section_orientation_desc'] = 'Entrée dans le cours, intention pédagogique, règles, attentes, parcours et avertissements institutionnels.';
-$string['section_concepts_desc'] = 'Définitions, distinctions, vocabulaire, modèles et concepts nécessaires pour lire le problème étudié.';
-$string['section_canon_desc'] = 'Textes, ressources, documents, références et éléments canoniques du cours.';
-$string['section_workshop_desc'] = 'Ateliers d’analyse, exercices, simulations, cartes, laboratoires et travaux préparatoires.';
-$string['section_proofs_desc'] = 'Production, dépôt, discussion et validation des preuves pédagogiques.';
-$string['section_deliberation_desc'] = 'Discussion structurée, assemblée, objections, interprétations et décisions collectives.';
-$string['section_deliverable_desc'] = 'Production finale, artefact, dossier, carte, rapport, stratégie ou prototype.';
-$string['section_evaluation_desc'] = 'Évaluation, rétroaction, critères, compétences, badges et décisions pédagogiques.';
-$string['section_archive_desc'] = 'Mémoire du cours : preuves, décisions, versions, corrections, Kristals et traces réutilisables.';
+// Canonical section descriptions.
+$string['section_orientation_desc'] = 'Entry point, purpose, rules, expectations and course map.';
+$string['section_concepts_desc'] = 'Core concepts, definitions and distinctions needed for the course.';
+$string['section_canon_desc'] = 'Canonical readings, references and source material.';
+$string['section_workshop_desc'] = 'Active work, analysis, mapping, practice and collaborative construction.';
+$string['section_proofs_desc'] = 'Evidence, traces, documents, observations and verifiable production.';
+$string['section_deliberation_desc'] = 'Structured discussion, objections, interpretation, collective reading and decision preparation.';
+$string['section_deliverable_desc'] = 'Final artifact, synthesis, project, prototype or validated submission.';
+$string['section_evaluation_desc'] = 'Feedback, grading, competency evidence and validation.';
+$string['section_archive_desc'] = 'Final memory of the course: proofs, decisions, Kristals, versions and reusable learning.';
 
 // Section short labels.
 $string['section_orientation_short'] = 'Orientation';
 $string['section_concepts_short'] = 'Concepts';
 $string['section_canon_short'] = 'Canon';
-$string['section_workshop_short'] = 'Atelier';
-$string['section_proofs_short'] = 'Preuves';
-$string['section_deliberation_short'] = 'Délibération';
-$string['section_deliverable_short'] = 'Livrable';
-$string['section_evaluation_short'] = 'Évaluation';
+$string['section_workshop_short'] = 'Workshop';
+$string['section_proofs_short'] = 'Proofs';
+$string['section_deliberation_short'] = 'Deliberation';
+$string['section_deliverable_short'] = 'Deliverable';
+$string['section_evaluation_short'] = 'Evaluation';
 $string['section_archive_short'] = 'Archive';
 
-// Section help labels.
-$string['sectionhelp_orientation'] = 'Présente le cadre du cours et les règles du jeu pédagogique.';
-$string['sectionhelp_concepts'] = 'Clarifie les mots, modèles et distinctions à maîtriser.';
-$string['sectionhelp_canon'] = 'Rassemble la matière de référence du cours.';
-$string['sectionhelp_workshop'] = 'Transforme la matière en exercices, cartes, simulations et analyses.';
-$string['sectionhelp_proofs'] = 'Rassemble les preuves produites par l’étudiant ou le groupe.';
-$string['sectionhelp_deliberation'] = 'Permet de discuter, objecter, interpréter et décider avec méthode.';
-$string['sectionhelp_deliverable'] = 'Accueille le livrable final ou l’artefact principal du cours.';
-$string['sectionhelp_evaluation'] = 'Rend visibles les critères, rétroactions, compétences et reconnaissances.';
-$string['sectionhelp_archive'] = 'Stabilise la mémoire du cours et les traces réutilisables.';
-
 // Course structure.
-$string['coursestructure'] = 'Structure du cours UCKK';
-$string['coursestructuredefault'] = 'Structure UCKK par défaut';
-$string['coursestructurecustom'] = 'Structure UCKK personnalisée';
-$string['coursestructurereset'] = 'Réinitialiser la structure UCKK';
-$string['coursestructurelocked'] = 'Structure verrouillée';
-$string['coursestructureunlocked'] = 'Structure modifiable';
-$string['coursestructurelocked_desc'] = 'Lorsque la structure est verrouillée, les sections canoniques UCKK ne peuvent pas être renommées automatiquement par le format.';
-$string['coursestructureunlocked_desc'] = 'Lorsque la structure est modifiable, les enseignants peuvent adapter les titres de section selon le cours.';
-$string['applydefaultstructure'] = 'Appliquer la structure UCKK par défaut';
-$string['applydefaultstructureconfirm'] = 'Voulez-vous appliquer les sections UCKK par défaut à ce cours?';
-$string['defaultstructureapplied'] = 'La structure UCKK par défaut a été appliquée.';
-$string['defaultstructurealreadyapplied'] = 'La structure UCKK par défaut est déjà présente.';
+$string['coursestructure'] = 'Course structure';
+$string['coursesections'] = 'Course sections';
+$string['coursemap'] = 'Course map';
+$string['courseflow'] = 'Course flow';
+$string['courseblueprint'] = 'Course blueprint';
+$string['sectionmap'] = 'Section map';
+$string['sectiontype'] = 'Section type';
+$string['sectionrole'] = 'Section role';
+$string['sectionmetadata'] = 'Section metadata';
+$string['sectionstatus'] = 'Section status';
+$string['sectionprogress'] = 'Section progress';
+$string['sectioncompletion'] = 'Section completion';
+$string['sectionarchive'] = 'Section archive';
+$string['sectionproofs'] = 'Section proofs';
+$string['sectionintegrity'] = 'Section integrity';
+$string['sectionvisibility'] = 'Section visibility';
 
-// Course display.
-$string['coursedisplay'] = 'Affichage du cours UCKK';
-$string['coursedisplay_singlepage'] = 'Toutes les sections sur une page';
-$string['coursedisplay_multipage'] = 'Une section par page';
-$string['coursedisplay_cards'] = 'Cartes UCKK';
-$string['coursedisplay_timeline'] = 'Parcours UCKK';
-$string['coursedisplay_compact'] = 'Compact';
-$string['coursedisplay_full'] = 'Complet';
-$string['coursedisplay_help'] = 'Détermine comment le parcours UCKK est affiché aux participants.';
+// Navigation.
+$string['jumpsection'] = 'Jump to section';
+$string['jumptoorientation'] = 'Jump to orientation';
+$string['jumptoconcepts'] = 'Jump to concepts';
+$string['jumptocanon'] = 'Jump to canonical material';
+$string['jumptoworkshop'] = 'Jump to workshop';
+$string['jumptoproofs'] = 'Jump to proofs';
+$string['jumptodeliberation'] = 'Jump to deliberation';
+$string['jumptodeliverable'] = 'Jump to deliverable';
+$string['jumptoevaluation'] = 'Jump to evaluation';
+$string['jumptoarchive'] = 'Jump to archive';
+$string['previoussection'] = 'Previous section';
+$string['nextsection'] = 'Next section';
+$string['currentsection'] = 'Current UCKK section';
+$string['returntocoursemap'] = 'Return to course map';
+$string['showcoursemap'] = 'Show course map';
+$string['hidecoursemap'] = 'Hide course map';
+$string['showsectiondetails'] = 'Show section details';
+$string['hidesectiondetails'] = 'Hide section details';
 
-// Course index and navigation.
-$string['courseindex'] = 'Index du cours UCKK';
-$string['courseindex_show'] = 'Afficher l’index UCKK';
-$string['courseindex_hide'] = 'Masquer l’index UCKK';
-$string['courseindex_desc'] = 'L’index UCKK aide les participants à naviguer entre orientation, concepts, preuves, délibération, livrable, évaluation et archive.';
-$string['coursemap'] = 'Carte du cours';
-$string['coursemap_show'] = 'Afficher la carte du cours';
-$string['coursemap_hide'] = 'Masquer la carte du cours';
-$string['coursemap_desc'] = 'La carte du cours donne une vue synthétique du parcours pédagogique UCKK.';
-$string['previoussection'] = 'Section précédente';
-$string['nextsection'] = 'Section suivante';
-$string['returntocourse'] = 'Retour au cours';
-$string['gotosection'] = 'Aller à la section';
-$string['gotosectionname'] = 'Aller à la section : {$a}';
+// Course actions.
+$string['startcourse'] = 'Start course';
+$string['continuecourse'] = 'Continue course';
+$string['resumecourse'] = 'Resume course';
+$string['reviewcourse'] = 'Review course';
+$string['completecourse'] = 'Complete course';
+$string['archivecourse'] = 'Archive course';
+$string['exportcoursearchive'] = 'Export course archive';
+$string['viewcoursearchive'] = 'View course archive';
+$string['viewproofs'] = 'View proofs';
+$string['submitproof'] = 'Submit proof';
+$string['viewdeliberation'] = 'View deliberation';
+$string['viewdeliverable'] = 'View deliverable';
+$string['viewevaluation'] = 'View evaluation';
+$string['viewintegrity'] = 'View integrity';
+$string['viewkristals'] = 'View Kristals';
 
-// UCKK course identity.
-$string['uckkcourse'] = 'Cours UCKK';
-$string['uckkcoursecode'] = 'Code du cours UCKK';
-$string['uckkcoursetype'] = 'Type de cours UCKK';
-$string['uckkcoursekind'] = 'Nature du cours UCKK';
-$string['uckkcoursekind_standard'] = 'Cours standard';
-$string['uckkcoursekind_tronccommun'] = 'Tronc commun';
-$string['uckkcoursekind_program'] = 'Programme interne';
-$string['uckkcoursekind_lab'] = 'Laboratoire';
-$string['uckkcoursekind_seminar'] = 'Séminaire';
-$string['uckkcoursekind_challenge'] = 'Défi';
-$string['uckkcoursekind_assembly'] = 'Assemblée';
-$string['uckkcoursekind_archive'] = 'Archive';
-$string['uckkcoursekind_integrity'] = 'Intégrité';
-$string['uckkcourseidentity'] = 'Identité UCKK du cours';
-$string['uckkcourseidentity_desc'] = 'Décrit le rôle du cours dans l’architecture pédagogique UCKK.';
-
-// Tronc commun.
-$string['tronccommun'] = 'Tronc commun';
-$string['tronccommun_desc'] = 'Le tronc commun forme la culture commune UCKK : systèmes, preuves, IA non souveraine, délibération, mobilisation responsable, intégrité et mémoire.';
-$string['tronccommun_course'] = 'Cours du tronc commun';
-$string['tronccommun_required'] = 'Obligatoire dans le tronc commun';
-$string['tronccommun_notrequired'] = 'Non obligatoire dans le tronc commun';
-$string['tronccommun_progress'] = 'Progression dans le tronc commun';
-$string['tronccommun_portfolio'] = 'Portfolio de joueur lucide';
-$string['tronccommun_proof'] = 'Preuve du tronc commun';
-
-// UCKK cycle.
-$string['cycle'] = 'Cycle UCKK';
-$string['cycle_know'] = 'Connaître';
-$string['cycle_choose'] = 'Choisir';
-$string['cycle_act'] = 'Agir';
-$string['cycle_remember'] = 'Se souvenir';
-$string['cycle_full'] = 'Connaître → Choisir → Agir → Se souvenir';
-$string['cycle_desc'] = 'Le cours doit relier connaissance, décision, action et mémoire.';
+// Completion and progress.
+$string['progress'] = 'Progress';
+$string['completion'] = 'Completion';
+$string['completionstate'] = 'Completion state';
+$string['notstarted'] = 'Not started';
+$string['inprogress'] = 'In progress';
+$string['completed'] = 'Completed';
+$string['completedwithproof'] = 'Completed with proof';
+$string['validated'] = 'Validated';
+$string['archived'] = 'Archived';
+$string['requiresproof'] = 'Requires proof';
+$string['requiresdeliberation'] = 'Requires deliberation';
+$string['requiresevaluation'] = 'Requires evaluation';
+$string['requiresarchive'] = 'Requires archive';
+$string['completionrequired'] = 'Completion required';
+$string['completionoptional'] = 'Completion optional';
+$string['completionblocked'] = 'Completion blocked';
+$string['completionblockedbyintegrity'] = 'Completion blocked by integrity review';
+$string['completionreadyforarchive'] = 'Ready for archive';
+$string['completionarchived'] = 'Archived';
 
 // Proofs.
-$string['proof'] = 'Preuve';
-$string['proofs'] = 'Preuves';
-$string['proofsection'] = 'Section des preuves';
-$string['proofrequired'] = 'Preuve requise';
-$string['proofoptional'] = 'Preuve optionnelle';
-$string['proofmissing'] = 'Preuve manquante';
-$string['proofsubmitted'] = 'Preuve déposée';
-$string['proofvalidated'] = 'Preuve validée';
-$string['proofcontested'] = 'Preuve contestée';
-$string['proofinvalidated'] = 'Preuve invalidée';
-$string['proofrequirements'] = 'Exigences de preuve';
-$string['proofrequirements_desc'] = 'Décrit les traces attendues : texte, fichier, carte, journal IA, rapport, décision, archive ou autre artefact vérifiable.';
-$string['proofsummary'] = 'Synthèse des preuves';
-$string['proofstatus'] = 'Statut des preuves';
-$string['proofsource'] = 'Source de la preuve';
-$string['proofprovenance'] = 'Provenance de la preuve';
+$string['proof'] = 'Proof';
+$string['proofs'] = 'Proofs';
+$string['proofrequired'] = 'Proof required';
+$string['proofoptional'] = 'Proof optional';
+$string['proofsubmitted'] = 'Proof submitted';
+$string['proofpending'] = 'Proof pending';
+$string['proofvalidated'] = 'Proof validated';
+$string['proofcontested'] = 'Proof contested';
+$string['proofinvalidated'] = 'Proof invalidated';
+$string['proofarchive'] = 'Proof archive';
+$string['proofsummary'] = 'Proof summary';
+$string['proofquality'] = 'Proof quality';
+$string['proofsource'] = 'Proof source';
+$string['proofprovenance'] = 'Proof provenance';
+$string['proofvisibility'] = 'Proof visibility';
+$string['proofcontext'] = 'Proof context';
 
-// Deliberation and assemblies.
-$string['deliberation'] = 'Délibération';
-$string['deliberationsection'] = 'Section de délibération';
-$string['deliberationrequired'] = 'Délibération requise';
-$string['assembly'] = 'Assemblée';
-$string['assemblies'] = 'Assemblées';
-$string['assemblylinked'] = 'Assemblée liée';
-$string['assemblymissing'] = 'Aucune assemblée liée';
-$string['assemblyrequired'] = 'Assemblée requise';
-$string['motion'] = 'Proposition';
+// Deliberation.
+$string['deliberation'] = 'Deliberation';
+$string['deliberationrequired'] = 'Deliberation required';
+$string['deliberationoptional'] = 'Deliberation optional';
+$string['deliberationopen'] = 'Deliberation open';
+$string['deliberationclosed'] = 'Deliberation closed';
+$string['deliberationarchived'] = 'Deliberation archived';
 $string['objection'] = 'Objection';
-$string['amendment'] = 'Amendement';
-$string['decision'] = 'Décision';
-$string['decisionrecord'] = 'Trace de décision';
-$string['minorityreport'] = 'Rapport minoritaire';
-$string['contestability'] = 'Contestabilité';
-$string['deliberation_desc'] = 'La délibération rend visibles les arguments, objections, décisions, désaccords persistants et traces de mémoire.';
-
-// Deliverable.
-$string['deliverable'] = 'Livrable';
-$string['deliverables'] = 'Livrables';
-$string['finaldeliverable'] = 'Livrable final';
-$string['deliverablerequired'] = 'Livrable requis';
-$string['deliverablemissing'] = 'Livrable manquant';
-$string['deliverablesubmitted'] = 'Livrable déposé';
-$string['deliverablevalidated'] = 'Livrable validé';
-$string['deliverable_desc'] = 'Le livrable final transforme l’apprentissage en artefact : carte, analyse, stratégie, dossier, prototype, rapport ou portfolio.';
-
-// Evaluation.
-$string['evaluation'] = 'Évaluation';
-$string['evaluationcriteria'] = 'Critères d’évaluation';
-$string['evaluationrubric'] = 'Grille d’évaluation';
-$string['evaluationfeedback'] = 'Rétroaction';
-$string['evaluationpending'] = 'Évaluation en attente';
-$string['evaluationcompleted'] = 'Évaluation terminée';
-$string['evaluation_desc'] = 'L’évaluation relie les critères, les preuves, les compétences, les badges, la rétroaction et la possibilité de correction.';
+$string['objections'] = 'Objections';
+$string['argument'] = 'Argument';
+$string['arguments'] = 'Arguments';
+$string['amendment'] = 'Amendment';
+$string['amendments'] = 'Amendments';
+$string['decision'] = 'Decision';
+$string['decisions'] = 'Decisions';
+$string['decisionrecord'] = 'Decision record';
+$string['minorityreport'] = 'Minority report';
 
 // Archive.
 $string['archive'] = 'Archive';
 $string['archives'] = 'Archives';
-$string['archivesection'] = 'Section d’archive';
-$string['archiveitem'] = 'Élément d’archive';
-$string['archiveitems'] = 'Éléments d’archive';
-$string['archiveenabled'] = 'Archive activée';
-$string['archivedisabled'] = 'Archive désactivée';
-$string['archiverequired'] = 'Archive requise';
-$string['archiveoptional'] = 'Archive optionnelle';
-$string['archivecreated'] = 'Archive créée';
-$string['archivemissing'] = 'Archive manquante';
-$string['archivelinked'] = 'Archive liée';
-$string['archivereusable'] = 'Archive réutilisable';
-$string['archive_desc'] = 'L’archive conserve preuves, décisions, corrections, versions, apprentissages et Kristals pédagogiques.';
-$string['kristal'] = 'Kristal pédagogique';
-$string['kristals'] = 'Kristals pédagogiques';
-$string['kristal_desc'] = 'Un Kristal stabilise un apprentissage, une décision, une définition ou une preuve réutilisable.';
+$string['archiveitem'] = 'Archive item';
+$string['archiveitems'] = 'Archive items';
+$string['archiveenabled'] = 'Archive enabled';
+$string['archivedisabled'] = 'Archive disabled';
+$string['archiverequired'] = 'Archive required';
+$string['archiveoptional'] = 'Archive optional';
+$string['archivecreated'] = 'Archive created';
+$string['archiveready'] = 'Ready to archive';
+$string['archivepending'] = 'Archive pending';
+$string['archivevalidated'] = 'Archive validated';
+$string['archivecontested'] = 'Archive contested';
+$string['archiveinvalidated'] = 'Archive invalidated';
+$string['archivememory'] = 'Course memory';
+$string['archiveprovenance'] = 'Archive provenance';
+$string['archivevisibility'] = 'Archive visibility';
+$string['archiveexport'] = 'Archive export';
+$string['kristal'] = 'Kristal';
+$string['kristals'] = 'Kristals';
+$string['kristalpedagogical'] = 'Pedagogical Kristal';
 
 // Integrity.
-$string['integrity'] = 'Intégrité';
-$string['integritysection'] = 'Intégrité du cours';
-$string['integrityrequired'] = 'Vérification d’intégrité requise';
-$string['integrityoptional'] = 'Vérification d’intégrité optionnelle';
-$string['integritynotice'] = 'Avis d’intégrité';
-$string['integritynotice_desc'] = 'Rappelle les limites UCKK : dignité, vérité, non-manipulation, justice procédurale et contestabilité.';
-$string['integrityok'] = 'Aucun problème d’intégrité signalé';
-$string['integritypending'] = 'Révision d’intégrité en attente';
-$string['integritycaseopen'] = 'Cas d’intégrité ouvert';
-$string['integritycaseclosed'] = 'Cas d’intégrité fermé';
-$string['integritycorrectionrequired'] = 'Correction d’intégrité requise';
-$string['integrityblocked'] = 'Progression bloquée par un cas d’intégrité';
+$string['integrity'] = 'Integrity';
+$string['integritycheck'] = 'Integrity check';
+$string['integritywarning'] = 'Integrity warning';
+$string['integrityrequired'] = 'Integrity review required';
+$string['integrityoptional'] = 'Integrity review optional';
+$string['integrityclear'] = 'No integrity issue';
+$string['integritypending'] = 'Integrity review pending';
+$string['integritycontested'] = 'Integrity contested';
+$string['integrityinvalidated'] = 'Invalidated by integrity review';
+$string['integritynotice'] = 'This course requires verifiable proof, clear distinctions between fact and interpretation, and respect for dignity.';
 $string['inquisiteur'] = 'Inquisiteur';
-$string['inquisiteur_desc'] = 'Fonction de vérification éthique et méthodologique : protéger les faits, la dignité, les règles, les preuves et la confiance collective.';
+$string['inquisiteurreview'] = 'Inquisiteur review';
+$string['contestability'] = 'Contestability';
+$string['contestable'] = 'Contestable';
+$string['contested'] = 'Contested';
 
-// AI.
-$string['ai'] = 'IA';
-$string['aiuse'] = 'Usage de l’IA';
-$string['aijournal'] = 'Journal de collaboration IA';
-$string['aiwarning'] = 'L’IA aide. Elle ne décide pas.';
-$string['aiwarning_desc'] = 'Toute sortie IA doit être vérifiée, située, critiquée et assumée par un humain.';
-$string['aiprovenance'] = 'Provenance IA';
-$string['aireviewrequired'] = 'Critique de sortie IA requise';
-$string['ainonsovereign'] = 'IA non souveraine';
-$string['humanvalidationrequired'] = 'Validation humaine requise';
+// AI governance.
+$string['ai'] = 'AI';
+$string['aigovernance'] = 'AI governance';
+$string['aiassisted'] = 'AI-assisted';
+$string['ainonsovereign'] = 'Non-sovereign AI';
+$string['aiwarning'] = 'AI may assist analysis, mapping and drafting, but it is not the final authority.';
+$string['airequiresvalidation'] = 'Human validation required';
+$string['ailog'] = 'AI collaboration log';
+$string['aiprovenance'] = 'AI provenance';
+$string['aiuncertainty'] = 'AI uncertainty';
 
-// Completion and progress.
-$string['completion'] = 'Achèvement';
-$string['completionuckk'] = 'Achèvement UCKK';
-$string['completionprogress'] = 'Progression UCKK';
-$string['completionnotstarted'] = 'Non commencé';
-$string['completioninprogress'] = 'En cours';
-$string['completiondone'] = 'Terminé';
-$string['completionblocked'] = 'Bloqué';
-$string['completionwaitingreview'] = 'En attente de révision';
-$string['completionrequiresproof'] = 'Nécessite une preuve';
-$string['completionrequiresdeliberation'] = 'Nécessite une délibération';
-$string['completionrequiresarchive'] = 'Nécessite une archive';
-$string['completionrequiresintegrity'] = 'Nécessite une vérification d’intégrité';
-$string['completionrequiresdeliverable'] = 'Nécessite un livrable';
-$string['completionrequiresfeedback'] = 'Nécessite une rétroaction';
+// UCKK canonical language.
+$string['uckk'] = 'UCKK';
+$string['uckkfullname'] = 'Univers-Cité King Klown';
+$string['uckkcampus'] = 'UCKK campus';
+$string['uckkmoodle'] = 'UCKK-Moodle';
+$string['grandjeu'] = 'Grand Jeu';
+$string['grandjeusocial'] = 'Grand Jeu social';
+$string['kingklown'] = 'King Klown';
+$string['koa'] = 'kOA';
+$string['koadigitalecosystem'] = 'kOA Digital Ecosystem';
+$string['joueur'] = 'Joueur';
+$string['joueurs'] = 'Joueurs';
+$string['joueurlucide'] = 'Lucid Joueur';
+$string['mentor'] = 'Mentor';
+$string['archiviste'] = 'Archivist';
+$string['assemblee'] = 'Assembly';
+$string['assemblees'] = 'Assemblies';
+$string['defi'] = 'Challenge';
+$string['defis'] = 'Challenges';
+$string['portfolio'] = 'Portfolio';
+$string['badges'] = 'Badges';
+$string['competencies'] = 'Competencies';
 
-// Status.
-$string['status'] = 'Statut';
-$string['status_draft'] = 'Brouillon';
-$string['status_active'] = 'Actif';
-$string['status_pending'] = 'En attente';
-$string['status_pendingreview'] = 'En attente de révision';
-$string['status_validated'] = 'Validé';
-$string['status_rejected'] = 'Rejeté';
-$string['status_correctionrequired'] = 'Correction requise';
-$string['status_contested'] = 'Contesté';
-$string['status_invalidated'] = 'Invalidé';
-$string['status_closed'] = 'Fermé';
-$string['status_archived'] = 'Archivé';
-$string['status_cancelled'] = 'Annulé';
-
-// Visibility.
-$string['visibility'] = 'Visibilité';
-$string['visibility_private'] = 'Privé';
-$string['visibility_user'] = 'Utilisateur';
-$string['visibility_group'] = 'Groupe';
-$string['visibility_course'] = 'Cours';
-$string['visibility_cohort'] = 'Cohorte';
-$string['visibility_institution'] = 'Institution';
-$string['visibility_public'] = 'Public';
+// UCKK method.
+$string['methodknow'] = 'Know';
+$string['methodchoose'] = 'Choose';
+$string['methodact'] = 'Act';
+$string['methodremember'] = 'Remember';
+$string['methodcycle'] = 'Know → Choose → Act → Remember';
+$string['coursepurpose'] = 'Course purpose';
+$string['learningcontract'] = 'Learning contract';
+$string['evidencecontract'] = 'Evidence contract';
+$string['deliberationcontract'] = 'Deliberation contract';
+$string['archivecontract'] = 'Archive contract';
+$string['ethicalboundary'] = 'Ethical boundary';
+$string['publicusewarning'] = 'Public or performative work must remain responsible, traceable and non-abusive.';
 
 // Settings.
-$string['settings_general'] = 'Réglages généraux du format UCKK';
-$string['settings_structure'] = 'Structure du cours';
-$string['settings_navigation'] = 'Navigation UCKK';
-$string['settings_completion'] = 'Achèvement UCKK';
-$string['settings_integrity'] = 'Intégrité';
-$string['settings_archive'] = 'Archive';
-$string['settings_advanced'] = 'Réglages avancés';
+$string['settingsheader'] = 'UCKK format settings';
+$string['settingsheader_desc'] = 'Configure how the UCKK course format displays sections, course navigation, proof indicators, archive markers and integrity warnings.';
 
-$string['settings_general_desc'] = 'Réglages généraux du format de cours UCKK.';
-$string['settings_structure_desc'] = 'Détermine comment les sections canoniques UCKK sont appliquées au cours.';
-$string['settings_navigation_desc'] = 'Contrôle l’affichage des éléments de navigation propres au format UCKK.';
-$string['settings_completion_desc'] = 'Contrôle l’affichage des indicateurs de progression UCKK.';
-$string['settings_integrity_desc'] = 'Contrôle les rappels visuels et pédagogiques liés à l’intégrité.';
-$string['settings_archive_desc'] = 'Contrôle les éléments de mémoire et d’archivage.';
-$string['settings_advanced_desc'] = 'Réglages destinés aux administrateurs et intégrateurs.';
+$string['settingshowcoursemap'] = 'Show course map';
+$string['settingshowcoursemap_desc'] = 'Display a UCKK course map above the course content.';
 
-// Course format options.
-$string['coursedisplaymode'] = 'Mode d’affichage UCKK';
-$string['coursedisplaymode_desc'] = 'Choisit le style d’affichage principal du cours UCKK.';
-$string['showcoursemap'] = 'Afficher la carte du cours';
-$string['showcoursemap_desc'] = 'Affiche une carte synthétique des sections UCKK en haut du cours.';
-$string['showsectiondescriptions'] = 'Afficher les descriptions des sections';
-$string['showsectiondescriptions_desc'] = 'Affiche une courte description pédagogique sous chaque titre de section.';
-$string['showintegritynotice'] = 'Afficher l’avis d’intégrité';
-$string['showintegritynotice_desc'] = 'Affiche un rappel des limites éthiques UCKK dans le cours.';
-$string['showarchivestatus'] = 'Afficher le statut d’archive';
-$string['showarchivestatus_desc'] = 'Affiche si les preuves, décisions ou livrables du cours ont été archivés.';
-$string['showproofstatus'] = 'Afficher le statut des preuves';
-$string['showproofstatus_desc'] = 'Affiche l’état des preuves attendues ou déposées.';
-$string['showaigovernance'] = 'Afficher le rappel IA non souveraine';
-$string['showaigovernance_desc'] = 'Affiche un rappel indiquant que l’IA est un outil de clarification, non une autorité finale.';
-$string['lockcanonicalsections'] = 'Verrouiller les sections canoniques';
-$string['lockcanonicalsections_desc'] = 'Empêche la modification automatique des sections UCKK par défaut.';
-$string['defaultsectionlayout'] = 'Disposition par défaut des sections';
-$string['defaultsectionlayout_desc'] = 'Définit la disposition visuelle des sections UCKK.';
+$string['settingshowsectionicons'] = 'Show section icons';
+$string['settingshowsectionicons_desc'] = 'Display icons for Orientation, Concepts, Canonical material, Workshop, Proofs, Deliberation, Deliverable, Evaluation and Archive.';
 
-// Section options.
-$string['sectiontype'] = 'Type de section UCKK';
-$string['sectiontype_desc'] = 'Définit le rôle pédagogique de cette section dans le format UCKK.';
-$string['sectionvisibilityrule'] = 'Règle de visibilité de section';
-$string['sectionvisibilityrule_desc'] = 'Détermine si la section est visible selon le contexte pédagogique, l’achèvement ou les permissions.';
-$string['sectionrequiresproof'] = 'Cette section exige une preuve';
-$string['sectionrequiresproof_desc'] = 'Indique que cette section doit conduire à une preuve ou à une trace vérifiable.';
-$string['sectionrequiresarchive'] = 'Cette section exige une archive';
-$string['sectionrequiresarchive_desc'] = 'Indique que cette section doit produire ou lier un élément d’archive.';
-$string['sectionrequiresdeliberation'] = 'Cette section exige une délibération';
-$string['sectionrequiresdeliberation_desc'] = 'Indique que cette section doit inclure une discussion structurée ou une assemblée.';
-$string['sectionrequiresintegrity'] = 'Cette section exige une vérification d’intégrité';
-$string['sectionrequiresintegrity_desc'] = 'Indique que cette section peut nécessiter une révision par l’Inquisiteur.';
+$string['settingshowprogress'] = 'Show course progress';
+$string['settingshowprogress_desc'] = 'Display a visual progress summary for the UCKK course.';
 
-// Renderer labels.
-$string['renderer_courseheader'] = 'En-tête du cours UCKK';
-$string['renderer_coursemap'] = 'Carte du cours UCKK';
-$string['renderer_sectionheader'] = 'En-tête de section UCKK';
-$string['renderer_sectionfooter'] = 'Pied de section UCKK';
-$string['renderer_progressbar'] = 'Barre de progression UCKK';
-$string['renderer_archivemarker'] = 'Marqueur d’archive';
-$string['renderer_integritymarker'] = 'Marqueur d’intégrité';
-$string['renderer_proofmarker'] = 'Marqueur de preuve';
-$string['renderer_aimarker'] = 'Marqueur IA';
+$string['settingshowproofmarkers'] = 'Show proof markers';
+$string['settingshowproofmarkers_desc'] = 'Display visual indicators for sections that require proof.';
 
-// Template labels.
-$string['template_viewsection'] = 'Voir la section';
-$string['template_viewcoursemap'] = 'Voir la carte du cours';
-$string['template_hidesectiondetails'] = 'Masquer les détails de la section';
-$string['template_showsectiondetails'] = 'Afficher les détails de la section';
-$string['template_continue'] = 'Continuer';
-$string['template_backtocourse'] = 'Retour au cours';
-$string['template_emptysection'] = 'Cette section ne contient pas encore d’activité.';
-$string['template_lockedsection'] = 'Cette section est verrouillée.';
-$string['template_restrictedsection'] = 'Cette section est restreinte.';
-$string['template_archivedsection'] = 'Cette section est archivée.';
-$string['template_integritywarning'] = 'Cette section comporte un rappel d’intégrité.';
-$string['template_aiwarning'] = 'Cette section peut impliquer l’usage de l’IA sous responsabilité humaine.';
+$string['settingshowarchivemarkers'] = 'Show archive markers';
+$string['settingshowarchivemarkers_desc'] = 'Display visual indicators for archive-ready and archived course elements.';
 
-// Notifications.
-$string['notice_structuremissing'] = 'La structure UCKK complète n’est pas encore appliquée à ce cours.';
-$string['notice_structurepartial'] = 'La structure UCKK est partielle.';
-$string['notice_structureready'] = 'La structure UCKK est prête.';
-$string['notice_proofmissing'] = 'Une ou plusieurs preuves attendues sont manquantes.';
-$string['notice_archivemissing'] = 'Aucun élément d’archive n’est encore lié.';
-$string['notice_integritypending'] = 'Une révision d’intégrité est en attente.';
-$string['notice_aiused'] = 'Ce cours contient des activités où l’IA peut être utilisée comme outil non souverain.';
-$string['notice_internalrecognition'] = 'Ce cours contribue à une reconnaissance interne UCKK.';
+$string['settingshowintegritywarnings'] = 'Show integrity warnings';
+$string['settingshowintegritywarnings_desc'] = 'Display integrity warnings where proof, deliberation or public action requires extra care.';
+
+$string['settingdefaultsections'] = 'Default UCKK sections';
+$string['settingdefaultsections_desc'] = 'Create the standard UCKK section structure when a course uses this format.';
+
+$string['settinglocksectionnames'] = 'Lock canonical section names';
+$string['settinglocksectionnames_desc'] = 'Keep canonical section names fixed to preserve the UCKK learning structure.';
+
+$string['settingallowcustomsections'] = 'Allow custom sections';
+$string['settingallowcustomsections_desc'] = 'Allow teachers to add custom sections after the canonical UCKK sections.';
+
+$string['settingcoursekind'] = 'UCKK course kind';
+$string['settingcoursekind_desc'] = 'Defines whether this course is part of orientation, tronc commun, program, challenge, assembly, archive or laboratory work.';
+
+$string['settingenablearchiveexport'] = 'Enable archive export';
+$string['settingenablearchiveexport_desc'] = 'Allow the course to generate or link to archive output when the required activities are complete.';
+
+$string['settingenableintegritypanel'] = 'Enable integrity panel';
+$string['settingenableintegritypanel_desc'] = 'Display a course-level integrity panel for proof, contestability and methodological warnings.';
+
+// Course kinds.
+$string['coursekind'] = 'Course kind';
+$string['coursekind_standard'] = 'Standard UCKK course';
+$string['coursekind_orientation'] = 'Orientation';
+$string['coursekind_tronccommun'] = 'Tronc commun';
+$string['coursekind_program'] = 'Program course';
+$string['coursekind_challenge'] = 'Challenge course';
+$string['coursekind_assembly'] = 'Assembly course';
+$string['coursekind_archive'] = 'Archive course';
+$string['coursekind_lab'] = 'Laboratory';
+$string['coursekind_seminar'] = 'Seminar';
+
+// Activity indicators.
+$string['activity_proof'] = 'Proof activity';
+$string['activity_deliberation'] = 'Deliberation activity';
+$string['activity_archive'] = 'Archive activity';
+$string['activity_evaluation'] = 'Evaluation activity';
+$string['activity_integrity'] = 'Integrity activity';
+$string['activity_ai'] = 'AI-assisted activity';
+$string['activity_canonical'] = 'Canonical material';
+$string['activity_workshop'] = 'Workshop activity';
+
+// Notifications and messages.
+$string['notice_formatpurpose'] = 'This course uses the UCKK format: learning must produce proof, deliberation, evaluation and memory.';
+$string['notice_notaccredited'] = 'UCKK recognitions are internal unless formal public accreditation exists.';
+$string['notice_integrity'] = 'Proof, interpretation, fiction, decision and public action must remain clearly distinguished.';
+$string['notice_archive'] = 'Important course output should be archived with provenance.';
+$string['notice_ai'] = 'AI assistance must be logged and validated by a human when used for course work.';
+$string['notice_emptysection'] = 'This UCKK section has no visible content yet.';
+$string['notice_hiddensection'] = 'This UCKK section is currently hidden.';
+$string['notice_unavailable'] = 'This UCKK section is not available yet.';
+
+// Additional strings discovered by the string inventory for format_uckk.
+$string['autocreatestandardsections'] = 'Auto-create standard sections';
+$string['autocreatestandardsections_desc'] = 'Automatically create the standard UCKK section structure when the course format is enabled.';
+$string['course_archive'] = 'Archive';
+$string['course_canon'] = 'Canon';
+$string['course_concepts'] = 'Concepts';
+$string['course_deliberation'] = 'Deliberation';
+$string['course_deliverable'] = 'Deliverable';
+$string['course_evaluation'] = 'Evaluation';
+$string['course_orientation'] = 'Orientation';
+$string['course_proofs'] = 'Proofs';
+$string['course_workshop'] = 'Workshop';
+$string['coursestyle_laboratory'] = 'Laboratory';
+$string['coursestyle_minimal'] = 'Minimal';
+$string['coursestyle_seminar'] = 'Seminar';
+$string['coursestyle_standard'] = 'Standard';
+$string['coursestyle_tronccommun'] = 'Tronc commun';
+$string['defaultcoursestyle'] = 'Default course style';
+$string['defaultcoursestyle_desc'] = 'Default visual and pedagogical style used by UCKK format courses.';
+$string['defaultsectiondisplay'] = 'Default section display';
+$string['defaultsectiondisplay_desc'] = 'Default display mode for sections in UCKK format courses.';
+$string['defaultsectionset'] = 'Default section set';
+$string['defaultsectionset_desc'] = 'Default standard section set created or suggested for new UCKK format courses.';
+$string['emphasizearchivesection'] = 'Emphasize archive section';
+$string['emphasizearchivesection_desc'] = 'Highlight the archive section so students can identify memory, provenance and final preservation work.';
+$string['emphasizeproofsection'] = 'Emphasize proof section';
+$string['emphasizeproofsection_desc'] = 'Highlight the proof section so students can identify expected evidence and validation work.';
+$string['linktoarchiveactivity'] = 'Link to archive activity';
+$string['linktoarchiveactivity_desc'] = 'Show links to the UCKK Archive activity when available in the course.';
+$string['linktoassemblyactivity'] = 'Link to assembly activity';
+$string['linktoassemblyactivity_desc'] = 'Show links to the UCKK Assembly activity when available in the course.';
+$string['linktochallengeactivity'] = 'Link to challenge activity';
+$string['linktochallengeactivity_desc'] = 'Show links to UCKK Challenge activities when available in the course.';
+$string['linktointegritytool'] = 'Link to integrity tool';
+$string['linktointegritytool_desc'] = 'Show links to the UCKK integrity tool for users with the required permissions.';
+$string['lockstandardsections'] = 'Lock standard sections';
+$string['lockstandardsections_desc'] = 'Prevent accidental renaming or removal of standard UCKK course sections.';
+$string['logformatdiagnostics'] = 'Log format diagnostics';
+$string['logformatdiagnostics_desc'] = 'Log diagnostic information about UCKK course format rendering and section mapping.';
+$string['maxsectiontitlelength'] = 'Maximum section title length';
+$string['maxsectiontitlelength_desc'] = 'Maximum number of characters allowed for generated or normalized UCKK section titles.';
+$string['mode_lab'] = 'Laboratory mode';
+$string['mode_program'] = 'Program mode';
+$string['mode_standard'] = 'Standard mode';
+$string['mode_tronccommun'] = 'Tronc commun mode';
+$string['option_showcanon'] = 'Show canon';
+$string['option_showevidenceflow'] = 'Show evidence flow';
+$string['option_showintegritynotice'] = 'Show integrity notice';
+$string['option_showrecognitionnotice'] = 'Show recognition notice';
+$string['option_uckkmode'] = 'UCKK mode';
+$string['section'] = 'Section';
+$string['sectionarchivable'] = 'Archivable section';
+$string['sectiondisplay_collapsed'] = 'Collapsed';
+$string['sectiondisplay_currentfirst'] = 'Current section first';
+$string['sectiondisplay_expanded'] = 'Expanded';
+$string['sectionintegritysensitive'] = 'Integrity-sensitive section';
+$string['sectionkind'] = 'Section kind';
+$string['sectionkind_archive'] = 'Archive';
+$string['sectionkind_auto'] = 'Automatic';
+$string['sectionkind_canon'] = 'Canon';
+$string['sectionkind_concepts'] = 'Concepts';
+$string['sectionkind_deliberation'] = 'Deliberation';
+$string['sectionkind_deliverable'] = 'Deliverable';
+$string['sectionkind_evaluation'] = 'Evaluation';
+$string['sectionkind_orientation'] = 'Orientation';
+$string['sectionkind_proofs'] = 'Proofs';
+$string['sectionkind_workshop'] = 'Workshop';
+$string['sectionset_archive'] = 'Archive section set';
+$string['sectionset_assembly'] = 'Assembly section set';
+$string['sectionset_challenge'] = 'Challenge section set';
+$string['sectionset_minimal'] = 'Minimal section set';
+$string['sectionset_standard'] = 'Standard section set';
+$string['sectionset_tronccommun'] = 'Tronc commun section set';
+$string['settings_diagnostics'] = 'Diagnostics';
+$string['settings_diagnostics_desc'] = 'Settings that control UCKK course format diagnostics and debug markers.';
+$string['settings_evidence'] = 'Evidence';
+$string['settings_evidence_desc'] = 'Settings that control proof, evidence and archive indicators in the course format.';
+$string['settings_indicators'] = 'Indicators';
+$string['settings_indicators_desc'] = 'Settings that control visual indicators shown in UCKK course sections.';
+$string['settings_pluginbridges'] = 'Plugin bridges';
+$string['settings_pluginbridges_desc'] = 'Settings that control optional links to other UCKK plugins.';
+$string['settings_sectionmap'] = 'Section map';
+$string['settings_sectionmap_desc'] = 'Settings that define the standard UCKK section map and display behavior.';
+$string['showainonsovereignnotice'] = 'Show AI non-sovereignty notice';
+$string['showainonsovereignnotice_desc'] = 'Display a notice that AI can assist but cannot decide, validate or replace human responsibility.';
+$string['showarchiveindicators'] = 'Show archive indicators';
+$string['showarchiveindicators_desc'] = 'Display archive-related indicators in UCKK course sections.';
+$string['showassemblymarkers'] = 'Show assembly markers';
+$string['showassemblymarkers_desc'] = 'Display markers for sections related to assemblies, deliberation and collective decisions.';
+$string['showcanonicalnotice'] = 'Show canonical notice';
+$string['showcanonicalnotice_desc'] = 'Display a notice when course material is canonical or linked to the UCKK canon.';
+$string['showchallengemarkers'] = 'Show challenge markers';
+$string['showchallengemarkers_desc'] = 'Display markers for sections linked to UCKK challenges.';
+$string['showcompletionoverview'] = 'Show completion overview';
+$string['showcompletionoverview_desc'] = 'Display a course-level overview of completion and progress in the UCKK format.';
+$string['showcourseidentity'] = 'Show course identity';
+$string['showcourseidentity_desc'] = 'Display UCKK course identity metadata such as course kind, style or pathway role.';
+$string['showcourseindexmetadata'] = 'Show course index metadata';
+$string['showcourseindexmetadata_desc'] = 'Display UCKK metadata in the course index when supported by the theme and format output.';
+$string['showdebugmarkers'] = 'Show debug markers';
+$string['showdebugmarkers_desc'] = 'Display debugging markers for section kind, mapping and plugin bridge status.';
+$string['showintegritymarkers'] = 'Show integrity markers';
+$string['showintegritymarkers_desc'] = 'Display integrity-related markers for sections that involve proof, review or contestability.';
+$string['showinternalrecognitionnotice'] = 'Show internal recognition notice';
+$string['showinternalrecognitionnotice_desc'] = 'Display a notice that UCKK recognition is internal unless formal public accreditation exists.';
+$string['showkoacycle'] = 'Show kOA cycle';
+$string['showkoacycle_desc'] = 'Display the kOA learning cycle when relevant to the course structure.';
+$string['showproofindicators'] = 'Show proof indicators';
+$string['showproofindicators_desc'] = 'Display proof and evidence indicators in UCKK course sections.';
+$string['showprovenancenotice'] = 'Show provenance notice';
+$string['showprovenancenotice_desc'] = 'Display a notice reminding users that important outputs should preserve provenance.';
+$string['showsectionicons'] = 'Show section icons';
+$string['showsectionicons_desc'] = 'Display icons associated with UCKK section kinds.';
+$string['showuckknavigation'] = 'Show UCKK navigation';
+$string['showuckknavigation_desc'] = 'Display UCKK-specific navigation between course sections and related activities.';
+$string['standardsectionkeys'] = 'Standard section keys';
+$string['standardsectionkeys_desc'] = 'Comma-separated list of section keys used for the standard UCKK section structure.';
+
+// Privacy.
+$string['privacy:metadata'] = 'The UCKK course format stores display preferences and course-format metadata only. Learning records, proofs, archives, integrity cases and submissions are owned by their respective Moodle or UCKK plugins.';
+$string['privacy:metadata:formatoptions'] = 'UCKK course format options may store section layout, display preferences and course-kind settings.';
+$string['privacy:metadata:formatoptions:courseid'] = 'The course ID associated with the UCKK format settings.';
+$string['privacy:metadata:formatoptions:name'] = 'The name of the stored format option.';
+$string['privacy:metadata:formatoptions:value'] = 'The value of the stored format option.';
 
 // Errors.
-$string['error_invalidsectiontype'] = 'Type de section UCKK invalide.';
-$string['error_invalidcoursedisplaymode'] = 'Mode d’affichage UCKK invalide.';
-$string['error_missingcanonicalsection'] = 'Section canonique manquante : {$a}.';
-$string['error_missingcoursecontext'] = 'Contexte de cours introuvable.';
-$string['error_cannotapplystructure'] = 'Impossible d’appliquer la structure UCKK à ce cours.';
-$string['error_cannotupdatesection'] = 'Impossible de mettre à jour la section UCKK.';
-$string['error_cannotreadformatoptions'] = 'Impossible de lire les options du format UCKK.';
-$string['error_cannotsaveformatoptions'] = 'Impossible d’enregistrer les options du format UCKK.';
-
-// Capabilities.
-$string['uckk:viewcourseformat'] = 'Voir le format de cours UCKK';
-$string['uckk:configurecourseformat'] = 'Configurer le format de cours UCKK';
-$string['uckk:applydefaultstructure'] = 'Appliquer la structure UCKK par défaut';
-$string['uckk:lockcanonicalsections'] = 'Verrouiller les sections canoniques UCKK';
-$string['uckk:viewintegritymarkers'] = 'Voir les marqueurs d’intégrité UCKK';
-$string['uckk:viewarchivemarkers'] = 'Voir les marqueurs d’archive UCKK';
-
-// Help strings.
-$string['help_formatpurpose'] = 'Le format UCKK organise le cours autour du cycle : connaître, choisir, agir, se souvenir.';
-$string['help_proof'] = 'Une preuve est une trace vérifiable : texte, fichier, carte, décision, journal IA, artefact, observation ou archive.';
-$string['help_archive'] = 'Une archive conserve la mémoire du cours : preuves, décisions, versions, corrections et apprentissages.';
-$string['help_integrity'] = 'L’intégrité protège la dignité, la vérité, la non-manipulation, la justice procédurale et la contestabilité.';
-$string['help_ai'] = 'L’IA peut aider à clarifier, synthétiser et cartographier. Elle ne remplace pas le jugement humain.';
-$string['help_deliberation'] = 'Une délibération structurée rend visibles les arguments, objections, critères et décisions.';
-$string['help_deliverable'] = 'Le livrable final doit démontrer une compétence par un artefact utile, vérifiable et archivable.';
-
-// Course creation / seed compatibility.
-$string['seed_defaultcoursename'] = 'Cours UCKK';
-$string['seed_defaultcourseshortname'] = 'UCKK-COURSE';
-$string['seed_defaultsummary'] = 'Cours créé avec le format UCKK.';
-$string['seed_structurecreated'] = 'Structure de cours UCKK créée.';
-$string['seed_structureupdated'] = 'Structure de cours UCKK mise à jour.';
-$string['seed_structureskipped'] = 'Structure de cours UCKK déjà présente.';
-$string['seed_sectioncreated'] = 'Section UCKK créée : {$a}.';
-$string['seed_sectionupdated'] = 'Section UCKK mise à jour : {$a}.';
+$string['error_invalidsectiontype'] = 'Invalid UCKK section type.';
+$string['error_missingsectionmap'] = 'The UCKK section map is missing.';
+$string['error_invalidcoursekind'] = 'Invalid UCKK course kind.';
+$string['error_archivepluginmissing'] = 'The UCKK archive plugin is not available.';
+$string['error_integritypluginmissing'] = 'The UCKK integrity tool is not available.';
+$string['error_challengepluginmissing'] = 'The UCKK challenge module is not available.';
+$string['error_assemblypluginmissing'] = 'The UCKK assembly module is not available.';
+$string['error_localuckkmissing'] = 'The local UCKK plugin is not available.';
 
 // Accessibility.
-$string['aria_coursemap'] = 'Carte du cours UCKK';
-$string['aria_sectionprogress'] = 'Progression de la section';
-$string['aria_sectionstatus'] = 'Statut de la section';
-$string['aria_proofstatus'] = 'Statut des preuves';
-$string['aria_integritystatus'] = 'Statut d’intégrité';
-$string['aria_archivestatus'] = 'Statut d’archive';
-$string['aria_cycle'] = 'Cycle UCKK : connaître, choisir, agir, se souvenir';
+$string['aria_coursemap'] = 'UCKK course map';
+$string['aria_sectionnavigation'] = 'UCKK section navigation';
+$string['aria_sectionstatus'] = 'UCKK section status';
+$string['aria_proofindicator'] = 'Proof indicator';
+$string['aria_archiveindicator'] = 'Archive indicator';
+$string['aria_integrityindicator'] = 'Integrity indicator';
+$string['aria_completionindicator'] = 'Completion indicator';
 
-// Boundary reminders.
-$string['boundary_course'] = 'Ce cours appartient au campus pédagogique UCKK.';
-$string['boundary_koa'] = 'kOA est le mouvement; UCKK est l’école; le kOA Digital Ecosystem est l’infrastructure.';
-$string['boundary_kingklown'] = 'King Klown est une figure narrative de mobilisation, non une autorité académique finale.';
-$string['boundary_inquisiteur'] = 'L’Inquisiteur protège la méthode, les faits, la dignité et la contestabilité.';
-$string['boundary_archive'] = 'L’Archive conserve la mémoire et les preuves du parcours.';
+// Template labels.
+$string['template_viewsection'] = 'View section';
+$string['template_expandsection'] = 'Expand section';
+$string['template_collapsesection'] = 'Collapse section';
+$string['template_viewproofs'] = 'View proofs';
+$string['template_submitproof'] = 'Submit proof';
+$string['template_viewarchive'] = 'View archive';
+$string['template_viewintegrity'] = 'View integrity';
+$string['template_continue'] = 'Continue';
+$string['template_backtocourse'] = 'Back to course';
+$string['template_loading'] = 'Loading UCKK course structure…';
+$string['template_empty'] = 'Nothing to display yet.';
+$string['template_error'] = 'The UCKK course format could not display this element.';
