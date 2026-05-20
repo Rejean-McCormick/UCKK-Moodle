@@ -1,56 +1,70 @@
-<?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/.
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 
-require_once(__DIR__ . '/../../../config.php');
+/**
+ * Behaviour for UCKK integrity review panels.
+ *
+ * @module     tool_uckkintegrity/review
+ * @copyright  2026
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-use tool_uckkintegrity\form\review_form;
-use tool_uckkintegrity\local\integrity_case;
-use tool_uckkintegrity\local\integrity_review;
+define([], function() {
+    /**
+     * Initialise review UI behaviour.
+     *
+     * @param {String} selector Root selector.
+     */
+    const init = function(selector) {
+        const root = document.querySelector(selector);
 
-require_login();
+        if (!root) {
+            return;
+        }
 
-$id = required_param('id', PARAM_INT);
+        root.classList.add('js-enhanced');
 
-$case = integrity_case::get($id);
-$context = context::instance_by_id($case->contextid, MUST_EXIST);
+        const statusField = root.querySelector('[name="status"]');
+        const assignedToField = root.querySelector('[name="assignedto"]');
+        const noteTypeField = root.querySelector('[name="notetype"]');
+        const bodyField = root.querySelector('[name="body"]');
 
-require_capability('tool/uckkintegrity:reviewcase', $context);
+        if (statusField && bodyField) {
+            statusField.addEventListener('change', function() {
+                const status = statusField.value;
 
-$url = new moodle_url('/admin/tool/uckkintegrity/review.php', ['id' => $id]);
+                if (status === 'correction_required' && noteTypeField) {
+                    noteTypeField.value = 'correction';
+                }
 
-$PAGE->set_url($url);
-$PAGE->set_context($context);
-$PAGE->set_pagelayout('admin');
-$PAGE->set_title(get_string('reviewcase', 'tool_uckkintegrity'));
-$PAGE->set_heading(get_string('pluginname', 'tool_uckkintegrity'));
+                if (status === 'waiting_for_response' && noteTypeField) {
+                    noteTypeField.value = 'response';
+                }
 
-$form = new review_form($url, [
-    'case' => $case,
-]);
+                if (status === 'resolved' && noteTypeField) {
+                    noteTypeField.value = 'decision';
+                }
 
-if ($form->is_cancelled()) {
-    redirect(new moodle_url('/admin/tool/uckkintegrity/case.php', [
-        'id' => $id,
-    ]));
-}
+                if (!bodyField.value.trim()) {
+                    bodyField.focus();
+                }
+            });
+        }
 
-if ($data = $form->get_data()) {
-    integrity_review::review($case, $data);
+        if (assignedToField && statusField) {
+            assignedToField.addEventListener('change', function() {
+                if (assignedToField.value && statusField.value === 'opened') {
+                    statusField.value = 'assigned';
+                }
+            });
+        }
+    };
 
-    redirect(
-        new moodle_url('/admin/tool/uckkintegrity/case.php', ['id' => $id]),
-        get_string('reviewrecorded', 'tool_uckkintegrity'),
-        null,
-        \core\output\notification::NOTIFY_SUCCESS
-    );
-}
-
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('reviewcase', 'tool_uckkintegrity'));
-$form->display();
-echo $OUTPUT->footer();
+    return {
+        init: init
+    };
+});

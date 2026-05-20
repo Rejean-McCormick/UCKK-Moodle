@@ -107,7 +107,7 @@ if ($hassiteconfig) {
         ));
 
         // ---------------------------------------------------------------------
-        // Presets.
+        // Academic registry JSON.
         // ---------------------------------------------------------------------
 
         $settings->add(new admin_setting_heading(
@@ -120,7 +120,7 @@ if ($hassiteconfig) {
             'tool_uckkseed/presetpath',
             new lang_string('presetpath', 'tool_uckkseed'),
             new lang_string('presetpath_desc', 'tool_uckkseed'),
-            'admin/tool/uckkseed/presets',
+            'academic_registry_json',
             PARAM_PATH
         ));
 

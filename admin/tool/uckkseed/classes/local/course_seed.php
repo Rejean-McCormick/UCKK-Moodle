@@ -18,357 +18,286 @@ declare(strict_types=1);
 
 namespace tool_uckkseed\local;
 
+use stdClass;
+
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/course/lib.php');
 
 /**
- * Applies, validates, resets, and exports UCKK course seed data.
+ * Seed handler for courses.json.
  *
- * This class owns only seed-time course creation/update coordination. It does
- * not become the owner of course pedagogy, challenge workflow, archive
- * validation, assembly decisions, integrity cases, reports, badges, or
- * competencies after the objects exist.
+ * This class validates and applies Moodle course records from the UCKK academic
+ * registry. It only owns Moodle course shell creation/update. It does not create
+ * activities, award badges, certify competencies, run AI decisions, or bypass
+ * archive/human-validation workflows.
  */
 final class course_seed {
-    /** Component name. */
-    private const COMPONENT = 'tool_uckkseed';
+    /** Component owning this handler. */
+    public const COMPONENT = 'tool_uckkseed';
 
     /** Preset id. */
-    private const PRESET = 'courses';
+    public const PRESET = 'courses';
 
-    /** Seed target type. */
-    private const TARGET_TYPE = 'course';
+    /** Target type. */
+    public const TARGET_TYPE = 'course';
 
-    /** Canonical UCKK course format value. */
-    private const COURSE_FORMAT = 'uckk';
+    /** Preset schema. */
+    public const SCHEMA = 'uckkseed.preset.v1';
 
-    /** Default course visibility. */
-    private const DEFAULT_VISIBLE = 1;
-
-    /** Default section count expected by format_uckk. */
-    private const DEFAULT_NUMSECTIONS = 9;
-
-    /** Metadata marker used to identify seed-managed courses. */
-    private const METADATA_SEEDED_BY = 'tool_uckkseed';
-
-    /** Validation severity: info. */
-    private const SEVERITY_INFO = 'info';
-
-    /** Validation severity: success. */
-    private const SEVERITY_SUCCESS = 'success';
-
-    /** Validation severity: warning. */
-    private const SEVERITY_WARNING = 'warning';
-
-    /** Validation severity: error. */
-    private const SEVERITY_ERROR = 'error';
-
-    /** Result status: completed. */
-    private const STATUS_COMPLETED = 'completed';
-
-    /** Result status: failed. */
-    private const STATUS_FAILED = 'failed';
-
-    /** Result status: warning. */
-    private const STATUS_WARNING = 'warning';
+    /** Preset version. */
+    public const VERSION = 2026051200;
 
     /** Mode: dry run. */
-    private const MODE_DRY_RUN = 'dry_run';
+    public const MODE_DRY_RUN = 'dry_run';
 
     /** Mode: apply. */
-    private const MODE_APPLY = 'apply';
+    public const MODE_APPLY = 'apply';
+
+    /** Mode: report. */
+    public const MODE_REPORT = 'report';
+
+    /** Mode: rollback plan. */
+    public const MODE_ROLLBACK_PLAN = 'rollback_plan';
+
+    /** Status: completed. */
+    public const STATUS_COMPLETED = 'completed';
+
+    /** Status: failed. */
+    public const STATUS_FAILED = 'failed';
+
+    /** Status: warning. */
+    public const STATUS_WARNING = 'warning';
+
+    /** Severity: info. */
+    public const SEVERITY_INFO = 'info';
+
+    /** Severity: success. */
+    public const SEVERITY_SUCCESS = 'success';
+
+    /** Severity: warning. */
+    public const SEVERITY_WARNING = 'warning';
+
+    /** Severity: error. */
+    public const SEVERITY_ERROR = 'error';
+
+    /** Severity: blocker. */
+    public const SEVERITY_BLOCKER = 'blocker';
+
+    /** Default course language. */
+    private const DEFAULT_LANGUAGE = 'fr';
+
+    /** Default course format. */
+    private const DEFAULT_FORMAT = 'uckk';
+
+    /** Metadata manager marker. */
+    private const METADATA_MANAGED_BY = 'managedby';
+
+    /** Manager marker value. */
+    private const MANAGED_BY = 'tool_uckkseed';
+
+    /** Config prefix for seeded course definitions. */
+    private const CONFIG_PREFIX = 'course_';
 
     /**
-     * Validate course preset rows.
+     * Validate course preset items.
      *
-     * @param array<int, array<string, mixed>|\stdClass> $items Course preset items.
+     * @param array<int, mixed> $items Course preset rows.
      * @param array<string, mixed> $options Runtime options.
      * @return validation_result
      */
     public function validate(array $items, array $options = []): validation_result {
-        $messages = [];
+        $result = $this->new_result('Course preset validation completed.');
+        $categorymap = $this->build_category_map($options);
+
+        if (empty($items)) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_WARNING,
+                '',
+                'Course preset is empty.',
+                ['preset' => self::PRESET]
+            );
+
+            return $this->finish_result($result);
+        }
+
         $seenkeys = [];
         $seenshortnames = [];
         $seenidnumbers = [];
-        $counts = $this->empty_counts();
 
-        foreach ($items as $index => $item) {
-            $row = $this->normalise_item($item);
-            $key = $row['key'];
-            $targetkey = $key !== '' ? $key : 'row_' . $index;
+        foreach ($items as $index => $rawitem) {
+            $item = $this->normalise_item($rawitem, $index);
+            $targetkey = $item['key'] !== '' ? $item['key'] : 'row_' . $index;
 
-            if ($key === '') {
-                $this->add_message(
-                    $messages,
-                    self::SEVERITY_ERROR,
-                    $targetkey,
-                    get_string('course_seed_missing_key', self::COMPONENT)
-                );
-                $counts['errors']++;
+            if ($item['key'] === '') {
+                $this->add_message($result, self::SEVERITY_ERROR, $targetkey, 'Course is missing key.');
             }
 
-            if ($row['fullname'] === '') {
-                $this->add_message(
-                    $messages,
-                    self::SEVERITY_ERROR,
-                    $targetkey,
-                    get_string('course_seed_missing_fullname', self::COMPONENT)
-                );
-                $counts['errors']++;
+            if ($item['fullname'] === '') {
+                $this->add_message($result, self::SEVERITY_ERROR, $targetkey, 'Course is missing fullname.');
             }
 
-            if ($row['shortname'] === '') {
-                $this->add_message(
-                    $messages,
-                    self::SEVERITY_ERROR,
-                    $targetkey,
-                    get_string('course_seed_missing_shortname', self::COMPONENT)
-                );
-                $counts['errors']++;
+            if ($item['shortname'] === '') {
+                $this->add_message($result, self::SEVERITY_ERROR, $targetkey, 'Course is missing shortname.');
             }
 
-            if ($row['category'] === '') {
-                $this->add_message(
-                    $messages,
-                    self::SEVERITY_ERROR,
-                    $targetkey,
-                    get_string('course_seed_missing_category', self::COMPONENT)
-                );
-                $counts['errors']++;
+            if ($item['idnumber'] === '') {
+                $this->add_message($result, self::SEVERITY_ERROR, $targetkey, 'Course is missing idnumber.');
             }
 
-            if ($row['format'] !== self::COURSE_FORMAT) {
+            if ($item['category'] === '') {
+                $this->add_message($result, self::SEVERITY_ERROR, $targetkey, 'Course is missing category.');
+            } else if (!$this->category_known($item['category'], $categorymap)) {
                 $this->add_message(
-                    $messages,
+                    $result,
+                    self::SEVERITY_ERROR,
+                    $targetkey,
+                    'Unknown course category: ' . $item['category'],
+                    ['category' => $item['category']]
+                );
+            }
+
+            if ($item['format'] === '') {
+                $this->add_message($result, self::SEVERITY_ERROR, $targetkey, 'Course is missing format.');
+            } else if (!$this->course_format_exists($item['format'])) {
+                $this->add_message(
+                    $result,
                     self::SEVERITY_WARNING,
                     $targetkey,
-                    get_string('course_seed_format_forced', self::COMPONENT, self::COURSE_FORMAT)
+                    'Course format is not installed or not discoverable yet: ' . $item['format'],
+                    ['format' => $item['format']]
                 );
-                $counts['warnings']++;
             }
 
-            if ($key !== '' && isset($seenkeys[$key])) {
+            $this->check_duplicate($result, $seenkeys, 'key', $item['key'], $targetkey);
+            $this->check_duplicate($result, $seenshortnames, 'shortname', $item['shortname'], $targetkey);
+            $this->check_duplicate($result, $seenidnumbers, 'idnumber', $item['idnumber'], $targetkey);
+
+            $existing = $this->get_existing_course($item);
+
+            if ($existing !== null) {
                 $this->add_message(
-                    $messages,
-                    self::SEVERITY_ERROR,
+                    $result,
+                    self::SEVERITY_INFO,
                     $targetkey,
-                    get_string('course_seed_duplicate_key', self::COMPONENT, $key)
+                    'Course exists and would be updated: ' . $item['shortname'],
+                    ['courseid' => (int)$existing->id]
                 );
-                $counts['errors']++;
-            }
-
-            if ($row['shortname'] !== '' && isset($seenshortnames[$row['shortname']])) {
+            } else {
                 $this->add_message(
-                    $messages,
-                    self::SEVERITY_ERROR,
+                    $result,
+                    self::SEVERITY_INFO,
                     $targetkey,
-                    get_string('course_seed_duplicate_shortname', self::COMPONENT, $row['shortname'])
+                    'Course would be created: ' . $item['shortname']
                 );
-                $counts['errors']++;
             }
 
-            if ($row['idnumber'] !== '' && isset($seenidnumbers[$row['idnumber']])) {
-                $this->add_message(
-                    $messages,
-                    self::SEVERITY_ERROR,
-                    $targetkey,
-                    get_string('course_seed_duplicate_idnumber', self::COMPONENT, $row['idnumber'])
-                );
-                $counts['errors']++;
-            }
-
-            if ($row['category'] !== '' && !$this->category_exists($row['category'])) {
-                $this->add_message(
-                    $messages,
-                    self::SEVERITY_ERROR,
-                    $targetkey,
-                    get_string('course_seed_unknown_category', self::COMPONENT, $row['category'])
-                );
-                $counts['errors']++;
-            }
-
-            if ($row['template'] !== '' && !$this->template_reference_is_valid($row['template'], $options)) {
-                $this->add_message(
-                    $messages,
-                    self::SEVERITY_WARNING,
-                    $targetkey,
-                    get_string('course_seed_unknown_template', self::COMPONENT, $row['template'])
-                );
-                $counts['warnings']++;
-            }
-
-            if ($key !== '') {
-                $seenkeys[$key] = true;
-            }
-
-            if ($row['shortname'] !== '') {
-                $seenshortnames[$row['shortname']] = true;
-            }
-
-            if ($row['idnumber'] !== '') {
-                $seenidnumbers[$row['idnumber']] = true;
-            }
-
-            if ($counts['errors'] === 0) {
-                $counts['skipped']++;
-            }
+            $this->increment($result, 'skipped');
         }
 
-        if ($counts['errors'] === 0 && empty($messages)) {
-            $this->add_message(
-                $messages,
-                self::SEVERITY_SUCCESS,
-                self::PRESET,
-                get_string('course_seed_validation_ok', self::COMPONENT)
-            );
-        }
-
-        return $this->make_result(
-            $counts['errors'] > 0 ? self::STATUS_FAILED : ($counts['warnings'] > 0 ? self::STATUS_WARNING : self::STATUS_COMPLETED),
-            get_string('course_seed_validation_summary', self::COMPONENT, count($items)),
-            $counts,
-            $messages
-        );
+        return $this->finish_result($result);
     }
 
     /**
-     * Apply course preset rows.
+     * Apply course preset items.
      *
-     * @param array<int, array<string, mixed>|\stdClass> $items Course preset items.
+     * @param array<int, mixed> $items Course preset rows.
      * @param array<string, mixed> $options Runtime options.
      * @return validation_result
      */
     public function apply(array $items, array $options = []): validation_result {
-        global $DB;
-
         $mode = $this->normalise_mode((string)($options['mode'] ?? self::MODE_APPLY));
         $dryrun = $mode === self::MODE_DRY_RUN || !empty($options['dryrun']) || !empty($options['dry_run']);
-        $force = !empty($options['force']);
+        $rollbackplan = $mode === self::MODE_ROLLBACK_PLAN || !empty($options['rollbackplan']);
 
         $validation = $this->validate($items, $options);
-        $validationdata = $this->result_to_array($validation);
 
-        if (!empty($validationdata['haserrors'])) {
+        if ($this->result_has_errors($validation)) {
             return $validation;
         }
 
-        $messages = [];
-        $counts = $this->empty_counts();
+        $result = $this->new_result(
+            ($dryrun || $rollbackplan)
+                ? 'Course seed dry run completed.'
+                : 'Course seed completed.'
+        );
 
-        foreach ($items as $item) {
-            $row = $this->normalise_item($item);
-            $targetkey = $row['key'] !== '' ? $row['key'] : $row['shortname'];
-
-            $categoryid = $this->resolve_category_id($row['category']);
+        foreach ($items as $index => $rawitem) {
+            $item = $this->normalise_item($rawitem, $index);
+            $targetkey = $item['key'] !== '' ? $item['key'] : 'row_' . $index;
+            $categoryid = $this->resolve_category_id($item['category']);
 
             if ($categoryid <= 0) {
                 $this->add_message(
-                    $messages,
+                    $result,
                     self::SEVERITY_ERROR,
                     $targetkey,
-                    get_string('course_seed_unknown_category', self::COMPONENT, $row['category'])
+                    'Cannot apply course because category does not exist in Moodle: ' . $item['category'],
+                    ['category' => $item['category']]
                 );
-                $counts['failed']++;
-                $counts['errors']++;
                 continue;
             }
 
-            $existing = $this->find_existing_course($row);
+            $existing = $this->get_existing_course($item);
 
-            if ($dryrun) {
+            if ($dryrun || $rollbackplan) {
                 $this->add_message(
-                    $messages,
+                    $result,
                     self::SEVERITY_INFO,
                     $targetkey,
-                    $existing
-                        ? get_string('course_seed_dryrun_update', self::COMPONENT, $row['shortname'])
-                        : get_string('course_seed_dryrun_create', self::COMPONENT, $row['shortname'])
+                    $existing === null
+                        ? 'Course would be created: ' . $item['shortname']
+                        : 'Course would be updated: ' . $item['shortname'],
+                    [
+                        'existingid' => $existing ? (int)$existing->id : 0,
+                        'course' => $item,
+                    ]
                 );
-                $counts['skipped']++;
+                $this->increment($result, 'skipped');
                 continue;
             }
 
-            $coursedata = $this->build_course_record($row, $categoryid, $existing);
-
-            if ($existing) {
-                if (!$force && !$this->course_is_seed_managed((int)$existing->id)) {
-                    $this->add_message(
-                        $messages,
-                        self::SEVERITY_WARNING,
-                        $targetkey,
-                        get_string('course_seed_existing_not_seeded', self::COMPONENT, $row['shortname'])
-                    );
-                    $counts['skipped']++;
-                    $counts['warnings']++;
-                    continue;
-                }
-
-                $coursedata->id = (int)$existing->id;
-                update_course($coursedata);
-
-                $this->mark_course_seeded((int)$existing->id, $row);
+            if ($existing === null) {
+                $course = $this->create_course($item, $categoryid);
 
                 $this->add_message(
-                    $messages,
+                    $result,
                     self::SEVERITY_SUCCESS,
                     $targetkey,
-                    get_string('course_seed_updated', self::COMPONENT, $row['shortname'])
+                    'Course created: ' . $item['shortname'],
+                    ['courseid' => (int)$course->id]
                 );
-                $counts['updated']++;
-                continue;
+
+                $this->increment($result, 'created');
+            } else {
+                $course = $this->update_course((int)$existing->id, $item, $categoryid);
+
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_SUCCESS,
+                    $targetkey,
+                    'Course updated: ' . $item['shortname'],
+                    ['courseid' => (int)$course->id]
+                );
+
+                $this->increment($result, 'updated');
             }
 
-            $course = create_course($coursedata);
-
-            $this->mark_course_seeded((int)$course->id, $row);
-
-            if (!empty($row['sections'])) {
-                $this->apply_section_names((int)$course->id, $row['sections']);
-            }
-
-            $this->add_message(
-                $messages,
-                self::SEVERITY_SUCCESS,
-                $targetkey,
-                get_string('course_seed_created', self::COMPONENT, $row['shortname'])
-            );
-            $counts['created']++;
+            $this->set_config_marker($item, (int)$course->id);
         }
 
-        $status = $counts['errors'] > 0
-            ? self::STATUS_FAILED
-            : ($counts['warnings'] > 0 ? self::STATUS_WARNING : self::STATUS_COMPLETED);
-
-        // Rebuild course cache after creating/updating several courses.
-        if (!$dryrun && ($counts['created'] > 0 || $counts['updated'] > 0)) {
-            rebuild_course_cache(0, true);
-        }
-
-        $summary = $dryrun
-            ? get_string('course_seed_apply_dryrun_summary', self::COMPONENT, count($items))
-            : get_string('course_seed_apply_summary', self::COMPONENT, [
-                'created' => $counts['created'],
-                'updated' => $counts['updated'],
-                'skipped' => $counts['skipped'],
-                'failed' => $counts['failed'],
-            ]);
-
-        return $this->make_result($status, $summary, $counts, $messages, [
-            'mode' => $mode,
-            'dryrun' => $dryrun,
-            'coursecount' => $DB->count_records_select('course', 'id <> :siteid', ['siteid' => SITEID]),
-        ]);
+        return $this->finish_result($result);
     }
 
     /**
      * Reset seed-managed courses.
      *
-     * This method only resets courses marked by tool_uckkseed metadata, unless
-     * force is set. It never deletes arbitrary Moodle courses by default.
+     * This reset is intentionally conservative. It hides courses by default and
+     * only deletes them when delete=true and confirm=true are both supplied.
      *
-     * @param array<int, array<string, mixed>|\stdClass> $items Course preset items.
+     * @param array<int, mixed> $items Course preset rows.
      * @param array<string, mixed> $options Runtime options.
      * @return validation_result
      */
@@ -377,268 +306,346 @@ final class course_seed {
 
         $mode = $this->normalise_mode((string)($options['mode'] ?? self::MODE_DRY_RUN));
         $dryrun = $mode === self::MODE_DRY_RUN || !empty($options['dryrun']) || !empty($options['dry_run']);
-        $force = !empty($options['force']);
-        $confirm = !empty($options['confirm']);
+        $delete = !empty($options['delete']);
+        $confirmed = !empty($options['confirm']);
 
-        $messages = [];
-        $counts = $this->empty_counts();
+        $result = $this->new_result(
+            $dryrun ? 'Course reset dry run completed.' : 'Course reset completed.'
+        );
 
-        if (!$dryrun && !$confirm) {
+        if ($delete && !$confirmed && !$dryrun) {
             $this->add_message(
-                $messages,
-                self::SEVERITY_ERROR,
-                self::PRESET,
-                get_string('course_seed_reset_requires_confirm', self::COMPONENT)
+                $result,
+                self::SEVERITY_BLOCKER,
+                '',
+                'Deleting courses requires confirm=true.'
             );
-            $counts['errors']++;
-            $counts['failed']++;
 
-            return $this->make_result(
-                self::STATUS_FAILED,
-                get_string('course_seed_reset_not_confirmed', self::COMPONENT),
-                $counts,
-                $messages
-            );
+            return $this->finish_result($result);
         }
 
-        $targets = [];
+        foreach ($items as $index => $rawitem) {
+            $item = $this->normalise_item($rawitem, $index);
+            $targetkey = $item['key'] !== '' ? $item['key'] : 'row_' . $index;
+            $course = $this->get_existing_course($item);
 
-        foreach ($items as $item) {
-            $row = $this->normalise_item($item);
-            $course = $this->find_existing_course($row);
-
-            if ($course) {
-                $targets[(int)$course->id] = $course;
-            }
-        }
-
-        if (empty($items)) {
-            $targets = $this->get_seed_managed_courses();
-        }
-
-        foreach ($targets as $course) {
-            $targetkey = !empty($course->idnumber) ? $course->idnumber : $course->shortname;
-
-            if ((int)$course->id === SITEID) {
+            if ($course === null) {
                 $this->add_message(
-                    $messages,
-                    self::SEVERITY_WARNING,
+                    $result,
+                    self::SEVERITY_INFO,
                     $targetkey,
-                    get_string('course_seed_reset_skip_site_course', self::COMPONENT)
+                    'Course already absent: ' . $item['shortname']
                 );
-                $counts['skipped']++;
-                $counts['warnings']++;
-                continue;
-            }
-
-            if (!$force && !$this->course_is_seed_managed((int)$course->id)) {
-                $this->add_message(
-                    $messages,
-                    self::SEVERITY_WARNING,
-                    $targetkey,
-                    get_string('course_seed_reset_skip_unmanaged', self::COMPONENT, $course->shortname)
-                );
-                $counts['skipped']++;
-                $counts['warnings']++;
+                $this->increment($result, 'skipped');
                 continue;
             }
 
             if ($dryrun) {
                 $this->add_message(
-                    $messages,
+                    $result,
                     self::SEVERITY_INFO,
                     $targetkey,
-                    get_string('course_seed_reset_dryrun_delete', self::COMPONENT, $course->shortname)
+                    $delete
+                        ? 'Course would be deleted: ' . $item['shortname']
+                        : 'Course would be hidden: ' . $item['shortname'],
+                    ['courseid' => (int)$course->id]
                 );
-                $counts['skipped']++;
+                $this->increment($result, 'skipped');
                 continue;
             }
 
-            delete_course($course, false);
+            if ($delete) {
+                delete_course((int)$course->id, false);
 
-            $this->add_message(
-                $messages,
-                self::SEVERITY_SUCCESS,
-                $targetkey,
-                get_string('course_seed_reset_deleted', self::COMPONENT, $course->shortname)
-            );
-            $counts['updated']++;
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_SUCCESS,
+                    $targetkey,
+                    'Course deleted: ' . $item['shortname'],
+                    ['courseid' => (int)$course->id]
+                );
+            } else {
+                $record = new stdClass();
+                $record->id = (int)$course->id;
+                $record->visible = 0;
+                $record->timemodified = time();
+                $DB->update_record('course', $record);
+
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_SUCCESS,
+                    $targetkey,
+                    'Course hidden: ' . $item['shortname'],
+                    ['courseid' => (int)$course->id]
+                );
+            }
+
+            unset_config(self::CONFIG_PREFIX . $item['key'] . '_id', self::COMPONENT);
+            unset_config(self::CONFIG_PREFIX . $item['key'] . '_definition', self::COMPONENT);
+            $this->increment($result, 'updated');
         }
 
-        if (!$dryrun && $counts['updated'] > 0) {
-            rebuild_course_cache(0, true);
-        }
-
-        $status = $counts['errors'] > 0
-            ? self::STATUS_FAILED
-            : ($counts['warnings'] > 0 ? self::STATUS_WARNING : self::STATUS_COMPLETED);
-
-        return $this->make_result(
-            $status,
-            get_string('course_seed_reset_summary', self::COMPONENT, [
-                'deleted' => $counts['updated'],
-                'skipped' => $counts['skipped'],
-            ]),
-            $counts,
-            $messages,
-            [
-                'mode' => $mode,
-                'dryrun' => $dryrun,
-                'force' => $force,
-            ]
-        );
+        return $this->finish_result($result);
     }
 
     /**
-     * Export current seed-managed courses into canonical preset shape.
+     * Export seed-managed course definitions.
      *
      * @param array<string, mixed> $options Runtime options.
      * @return array<string, mixed>
      */
     public function export(array $options = []): array {
+        global $DB;
+
         $items = [];
 
-        foreach ($this->get_seed_managed_courses() as $course) {
-            $categorykey = $this->get_category_key((int)$course->category);
+        $records = $DB->get_records('course', null, 'sortorder ASC, shortname ASC', '*', 0, 10000);
 
-            $items[] = [
-                'key' => !empty($course->idnumber) ? $course->idnumber : $course->shortname,
-                'fullname' => $course->fullname,
-                'shortname' => $course->shortname,
-                'idnumber' => $course->idnumber,
-                'category' => $categorykey,
-                'format' => $course->format,
-                'template' => $this->get_course_metadata_value((int)$course->id, 'template', ''),
-                'summary' => $course->summary,
-                'visible' => (int)$course->visible,
-                'startdate' => (int)$course->startdate,
-                'enddate' => (int)$course->enddate,
-                'sections' => $this->export_sections((int)$course->id),
-                'completion' => [
-                    'enabled' => (int)$course->enablecompletion === 1,
-                ],
-                'metadata' => $this->get_course_seed_metadata((int)$course->id),
-            ];
+        foreach ($records as $course) {
+            if ((int)$course->id === SITEID) {
+                continue;
+            }
+
+            $key = $this->key_from_course_record($course);
+            $stored = (string)get_config(self::COMPONENT, self::CONFIG_PREFIX . $key . '_definition');
+            $decoded = json_decode($stored, true);
+
+            if (is_array($decoded)) {
+                $items[] = $this->normalise_item($decoded);
+                continue;
+            }
+
+            if ($this->looks_like_uckk_course($course)) {
+                $items[] = $this->course_record_to_item($course);
+            }
         }
 
         return [
-            'schema' => 'uckkseed.preset.v1',
+            'schema' => self::SCHEMA,
             'component' => self::COMPONENT,
             'preset' => self::PRESET,
-            'version' => 2026051200,
+            'version' => self::VERSION,
             'items' => $items,
         ];
     }
 
     /**
-     * Normalise one course preset item.
+     * Normalise a raw course item.
      *
-     * @param array<string, mixed>|\stdClass $item Raw item.
+     * @param mixed $item Raw item.
+     * @param int $index Row index.
      * @return array<string, mixed>
      */
-    private function normalise_item(array|\stdClass $item): array {
-        $row = (array)$item;
-
-        $key = trim((string)($row['key'] ?? $row['idnumber'] ?? $row['shortname'] ?? ''));
-        $shortname = trim((string)($row['shortname'] ?? $key));
-        $idnumber = trim((string)($row['idnumber'] ?? $key));
-        $format = trim((string)($row['format'] ?? self::COURSE_FORMAT));
-
-        $sections = $row['sections'] ?? [];
-        $completion = $row['completion'] ?? [];
-        $metadata = $row['metadata'] ?? [];
-
-        if ($metadata instanceof \stdClass) {
-            $metadata = (array)$metadata;
+    private function normalise_item(mixed $item, int $index = 0): array {
+        if ($item instanceof stdClass) {
+            $item = (array)$item;
         }
 
-        if ($completion instanceof \stdClass) {
-            $completion = (array)$completion;
+        if (!is_array($item)) {
+            $item = [];
         }
 
-        if (!is_array($sections)) {
-            $sections = [];
+        $moodle = $this->normalise_assoc($item['moodle'] ?? []);
+        $metadata = $this->normalise_assoc($item['metadata'] ?? []);
+
+        foreach ([
+            'id',
+            'code',
+            'title',
+            'short_title',
+            'course_type',
+            'course_type_label',
+            'status',
+            'requirement_default',
+            'catalog_status_label',
+            'academic_block',
+            'learning_outcomes',
+            'assessment',
+            'ai_metadata',
+            'source',
+            'source_additional',
+        ] as $field) {
+            if (array_key_exists($field, $item) && !array_key_exists($field, $metadata)) {
+                $metadata[$field] = $item[$field];
+            }
         }
 
-        if (!is_array($completion)) {
-            $completion = [];
-        }
+        $shortname = $this->first_string(
+            $item['shortname'] ?? null,
+            $moodle['shortname'] ?? null,
+            $item['code'] ?? null,
+            $item['idnumber'] ?? null
+        );
 
-        if (!is_array($metadata)) {
-            $metadata = [];
-        }
+        $idnumber = $this->first_string(
+            $item['idnumber'] ?? null,
+            $moodle['idnumber'] ?? null,
+            $item['code'] ?? null,
+            $shortname
+        );
+
+        $fullname = $this->first_string(
+            $item['fullname'] ?? null,
+            $moodle['fullname'] ?? null,
+            $item['title'] ?? null,
+            $item['name'] ?? null,
+            $item['short_title'] ?? null,
+            $shortname
+        );
+
+        $key = $this->first_string(
+            $item['key'] ?? null,
+            $item['id'] ?? null,
+            $item['code'] ?? null,
+            $shortname,
+            $idnumber,
+            'course_' . $index
+        );
+
+        $category = $this->first_string(
+            $item['category'] ?? null,
+            $item['category_idnumber'] ?? null,
+            $moodle['category'] ?? null,
+            $moodle['category_idnumber'] ?? null,
+            $item['category_path'] ?? null,
+            $moodle['category_path'] ?? null
+        );
+
+        $summary = $this->first_string(
+            $item['summary'] ?? null,
+            $moodle['summary'] ?? null,
+            $item['description'] ?? null
+        );
+
+        $format = $this->first_string(
+            $item['format'] ?? null,
+            $moodle['format'] ?? null,
+            self::DEFAULT_FORMAT
+        );
+
+        $visible = $this->normalise_visible($item['visible'] ?? $moodle['visible'] ?? 0);
+        $lang = clean_param($this->first_string($item['lang'] ?? null, $moodle['lang'] ?? null, self::DEFAULT_LANGUAGE), PARAM_ALPHANUMEXT);
+        $enablecompletion = $this->normalise_bool($item['enablecompletion'] ?? $moodle['enablecompletion'] ?? true);
+        $summaryformat = $this->normalise_int($item['summaryformat'] ?? $moodle['summaryformat'] ?? FORMAT_HTML, FORMAT_HTML);
+        $startdate = $this->normalise_int($item['startdate'] ?? $moodle['startdate'] ?? 0, 0);
+        $enddate = $this->normalise_int($item['enddate'] ?? $moodle['enddate'] ?? 0, 0);
+        $sortorder = $this->normalise_int($item['sortorder'] ?? $moodle['sortorder'] ?? (($index + 1) * 10), (($index + 1) * 10));
+
+        $metadata[self::METADATA_MANAGED_BY] = self::MANAGED_BY;
+        $metadata['source_preset'] = self::PRESET;
 
         return [
-            'key' => clean_param($key, PARAM_TEXT),
-            'fullname' => trim((string)($row['fullname'] ?? $row['name'] ?? '')),
+            'key' => clean_param($this->normalise_key($key), PARAM_ALPHANUMEXT),
+            'fullname' => clean_param($fullname, PARAM_TEXT),
             'shortname' => clean_param($shortname, PARAM_TEXT),
             'idnumber' => clean_param($idnumber, PARAM_TEXT),
-            'category' => clean_param(trim((string)($row['category'] ?? $row['categorykey'] ?? '')), PARAM_TEXT),
+            'category' => clean_param($category, PARAM_TEXT),
+            'category_idnumber' => clean_param($this->first_string($item['category_idnumber'] ?? null, $moodle['category_idnumber'] ?? null, $category), PARAM_TEXT),
+            'category_path' => clean_param($this->first_string($item['category_path'] ?? null, $moodle['category_path'] ?? null), PARAM_TEXT),
             'format' => clean_param($format, PARAM_PLUGIN),
-            'template' => clean_param(trim((string)($row['template'] ?? '')), PARAM_TEXT),
-            'summary' => trim((string)($row['summary'] ?? $row['description'] ?? '')),
-            'visible' => isset($row['visible']) ? (int)(bool)$row['visible'] : self::DEFAULT_VISIBLE,
-            'startdate' => $this->normalise_time($row['startdate'] ?? 0),
-            'enddate' => $this->normalise_time($row['enddate'] ?? 0),
-            'sections' => $sections,
-            'completion' => $completion,
+            'summary' => $summary,
+            'summaryformat' => $summaryformat,
+            'visible' => $visible,
+            'lang' => $lang,
+            'enablecompletion' => $enablecompletion,
+            'startdate' => $startdate,
+            'enddate' => $enddate,
+            'template' => clean_param($this->first_string($item['template'] ?? null, $moodle['template'] ?? null), PARAM_ALPHANUMEXT),
+            'sections' => $this->normalise_list($item['sections'] ?? []),
+            'completion' => $this->normalise_assoc($item['completion'] ?? []),
+            'sortorder' => $sortorder,
             'metadata' => $metadata,
-            'sortorder' => (int)($row['sortorder'] ?? 0),
         ];
     }
 
     /**
-     * Build Moodle course data for create_course/update_course.
+     * Create a Moodle course.
      *
-     * @param array<string, mixed> $row Normalised row.
+     * @param array<string, mixed> $item Normalised item.
      * @param int $categoryid Category id.
-     * @param \stdClass|null $existing Existing course.
-     * @return \stdClass
+     * @return stdClass
      */
-    private function build_course_record(array $row, int $categoryid, ?\stdClass $existing): \stdClass {
-        $course = new \stdClass();
-        $course->fullname = $row['fullname'];
-        $course->shortname = $row['shortname'];
-        $course->idnumber = $row['idnumber'];
-        $course->category = $categoryid;
-        $course->format = self::COURSE_FORMAT;
-        $course->summary = $row['summary'];
-        $course->summaryformat = FORMAT_HTML;
-        $course->visible = $row['visible'];
-        $course->startdate = $row['startdate'];
-        $course->enddate = $row['enddate'];
-        $course->enablecompletion = !empty($row['completion']['enabled']) ? 1 : 0;
+    private function create_course(array $item, int $categoryid): stdClass {
+        $course = $this->course_data_object($item, $categoryid);
+        $created = create_course($course);
 
-        if ($existing) {
-            $course->id = (int)$existing->id;
-            $course->sortorder = (int)$existing->sortorder;
-            $course->numsections = (int)($existing->numsections ?? self::DEFAULT_NUMSECTIONS);
-        } else {
-            $course->numsections = (int)($row['completion']['numsections'] ?? self::DEFAULT_NUMSECTIONS);
-        }
+        return is_object($created) ? $created : (object)['id' => (int)$created];
+    }
+
+    /**
+     * Update a Moodle course.
+     *
+     * @param int $courseid Course id.
+     * @param array<string, mixed> $item Normalised item.
+     * @param int $categoryid Category id.
+     * @return stdClass
+     */
+    private function update_course(int $courseid, array $item, int $categoryid): stdClass {
+        global $DB;
+
+        $course = $this->course_data_object($item, $categoryid);
+        $course->id = $courseid;
+
+        update_course($course);
+
+        return $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
+    }
+
+    /**
+     * Build a Moodle course data object.
+     *
+     * @param array<string, mixed> $item Normalised item.
+     * @param int $categoryid Category id.
+     * @return stdClass
+     */
+    private function course_data_object(array $item, int $categoryid): stdClass {
+        $course = new stdClass();
+
+        $course->fullname = $item['fullname'];
+        $course->shortname = $item['shortname'];
+        $course->idnumber = $item['idnumber'];
+        $course->category = $categoryid;
+        $course->summary = $item['summary'];
+        $course->summaryformat = $item['summaryformat'];
+        $course->format = $item['format'];
+        $course->visible = $item['visible'];
+        $course->lang = $item['lang'];
+        $course->enablecompletion = $item['enablecompletion'] ? 1 : 0;
+        $course->startdate = $item['startdate'];
+        $course->enddate = $item['enddate'];
+
+        // Avoid unintended defaults when running from CLI.
+        $course->newsitems = 0;
+        $course->numsections = 0;
+        $course->showgrades = 1;
+        $course->showreports = 0;
+        $course->maxbytes = 0;
+        $course->groupmode = 0;
+        $course->groupmodeforce = 0;
+        $course->defaultgroupingid = 0;
 
         return $course;
     }
 
     /**
-     * Find an existing Moodle course for a seed row.
+     * Get an existing course by idnumber or shortname.
      *
-     * @param array<string, mixed> $row Normalised row.
-     * @return \stdClass|null
+     * @param array<string, mixed> $item Normalised item.
+     * @return stdClass|null
      */
-    private function find_existing_course(array $row): ?\stdClass {
+    private function get_existing_course(array $item): ?stdClass {
         global $DB;
 
-        if ($row['idnumber'] !== '') {
-            $course = $DB->get_record('course', ['idnumber' => $row['idnumber']], '*', IGNORE_MULTIPLE);
+        if ($item['idnumber'] !== '') {
+            $course = $DB->get_record('course', ['idnumber' => $item['idnumber']], '*', IGNORE_MISSING);
 
             if ($course) {
                 return $course;
             }
         }
 
-        if ($row['shortname'] !== '') {
-            $course = $DB->get_record('course', ['shortname' => $row['shortname']], '*', IGNORE_MULTIPLE);
+        if ($item['shortname'] !== '') {
+            $course = $DB->get_record('course', ['shortname' => $item['shortname']], '*', IGNORE_MISSING);
 
             if ($course) {
                 return $course;
@@ -649,29 +656,41 @@ final class course_seed {
     }
 
     /**
-     * Resolve category id from seed category key/idnumber/name.
+     * Resolve a category id by idnumber/name/path.
      *
-     * @param string $categorykey Category key.
+     * @param string $category Category reference.
      * @return int
      */
-    private function resolve_category_id(string $categorykey): int {
+    private function resolve_category_id(string $category): int {
         global $DB;
 
-        $categorykey = trim($categorykey);
+        $category = trim($category);
 
-        if ($categorykey === '') {
+        if ($category === '') {
             return 0;
         }
 
-        if (ctype_digit($categorykey) && $DB->record_exists('course_categories', ['id' => (int)$categorykey])) {
-            return (int)$categorykey;
+        $record = $DB->get_record('course_categories', ['idnumber' => $category], 'id', IGNORE_MISSING);
+
+        if ($record) {
+            return (int)$record->id;
         }
 
-        foreach (['idnumber', 'name'] as $field) {
-            $category = $DB->get_record('course_categories', [$field => $categorykey], 'id', IGNORE_MULTIPLE);
+        $record = $DB->get_record('course_categories', ['name' => $category], 'id', IGNORE_MISSING);
 
-            if ($category) {
-                return (int)$category->id;
+        if ($record) {
+            return (int)$record->id;
+        }
+
+        if (str_contains($category, '/')) {
+            $parts = array_values(array_filter(array_map('trim', explode('/', $category))));
+
+            if (!empty($parts)) {
+                $record = $DB->get_record('course_categories', ['name' => end($parts)], 'id', IGNORE_MISSING);
+
+                if ($record) {
+                    return (int)$record->id;
+                }
             }
         }
 
@@ -679,240 +698,396 @@ final class course_seed {
     }
 
     /**
-     * Return whether a category exists.
+     * Build category map from database and categories.json.
      *
-     * @param string $categorykey Category key.
-     * @return bool
+     * @param array<string, mixed> $options Runtime options.
+     * @return array<string, true>
      */
-    private function category_exists(string $categorykey): bool {
-        return $this->resolve_category_id($categorykey) > 0;
+    private function build_category_map(array $options): array {
+        global $DB;
+
+        $map = [];
+
+        if ($DB->get_manager()->table_exists('course_categories')) {
+            $records = $DB->get_records('course_categories');
+
+            foreach ($records as $record) {
+                foreach (['idnumber', 'name'] as $field) {
+                    if (!empty($record->{$field})) {
+                        $map[(string)$record->{$field}] = true;
+                    }
+                }
+            }
+        }
+
+        foreach ($this->load_categories_from_preset($options) as $category) {
+            foreach (['idnumber', 'key', 'id', 'name', 'path', 'legacy_idnumber'] as $field) {
+                if (!empty($category[$field])) {
+                    $map[(string)$category[$field]] = true;
+                }
+            }
+
+            if (!empty($category['metadata']) && is_array($category['metadata'])) {
+                foreach (['legacy_idnumber', 'course_prefix'] as $field) {
+                    if (!empty($category['metadata'][$field])) {
+                        $map[(string)$category['metadata'][$field]] = true;
+                    }
+                }
+            }
+        }
+
+        return $map;
     }
 
     /**
-     * Return whether a template reference looks valid.
+     * Load categories.json from preset data/path when available.
      *
-     * The course_template seeder owns actual template creation. This class only
-     * verifies references when template preset data was passed in options.
-     *
-     * @param string $template Template key.
      * @param array<string, mixed> $options Runtime options.
+     * @return array<int, array<string, mixed>>
+     */
+    private function load_categories_from_preset(array $options): array {
+        if (!empty($options['allpresets']['categories']['items']) && is_array($options['allpresets']['categories']['items'])) {
+            return $options['allpresets']['categories']['items'];
+        }
+
+        if (!empty($options['categories']['items']) && is_array($options['categories']['items'])) {
+            return $options['categories']['items'];
+        }
+
+        if (!empty($options['presetdata']['categories']['items']) && is_array($options['presetdata']['categories']['items'])) {
+            return $options['presetdata']['categories']['items'];
+        }
+
+        $presetpath = (string)($options['presetpath'] ?? '');
+
+        if ($presetpath === '') {
+            return [];
+        }
+
+        $path = rtrim($presetpath, DIRECTORY_SEPARATOR . '/\\') . DIRECTORY_SEPARATOR . 'categories.json';
+
+        if (!is_readable($path)) {
+            return [];
+        }
+
+        $decoded = json_decode((string)file_get_contents($path), true);
+
+        if (!is_array($decoded) || empty($decoded['items']) || !is_array($decoded['items'])) {
+            return [];
+        }
+
+        return $decoded['items'];
+    }
+
+    /**
+     * Whether a category is known.
+     *
+     * @param string $category Category reference.
+     * @param array<string, true> $categorymap Category map.
      * @return bool
      */
-    private function template_reference_is_valid(string $template, array $options): bool {
-        if ($template === '') {
+    private function category_known(string $category, array $categorymap): bool {
+        $category = trim($category);
+
+        if ($category === '') {
+            return false;
+        }
+
+        if (isset($categorymap[$category])) {
             return true;
         }
 
-        if (empty($options['course_templates']) || !is_array($options['course_templates'])) {
+        return $this->resolve_category_id($category) > 0;
+    }
+
+    /**
+     * Whether a course format exists.
+     *
+     * @param string $format Format plugin name.
+     * @return bool
+     */
+    private function course_format_exists(string $format): bool {
+        global $CFG;
+
+        $format = trim($format);
+
+        if ($format === '') {
+            return false;
+        }
+
+        if ($format === 'topics' || $format === 'weeks' || $format === 'singleactivity' || $format === 'social' || $format === 'site') {
             return true;
         }
 
-        foreach ($options['course_templates'] as $item) {
-            $row = (array)$item;
+        return is_readable($CFG->dirroot . '/course/format/' . $format . '/format.php')
+            || is_readable($CFG->dirroot . '/course/format/' . $format . '/lib.php')
+            || is_dir($CFG->dirroot . '/course/format/' . $format);
+    }
 
-            if ((string)($row['key'] ?? '') === $template) {
-                return true;
+    /**
+     * Convert a Moodle course record to seed item.
+     *
+     * @param stdClass $course Course record.
+     * @return array<string, mixed>
+     */
+    private function course_record_to_item(stdClass $course): array {
+        global $DB;
+
+        $category = $DB->get_record('course_categories', ['id' => $course->category], '*', IGNORE_MISSING);
+        $categoryref = $category ? ((string)$category->idnumber !== '' ? (string)$category->idnumber : (string)$category->name) : '';
+
+        return [
+            'key' => $this->key_from_course_record($course),
+            'fullname' => (string)$course->fullname,
+            'shortname' => (string)$course->shortname,
+            'idnumber' => (string)$course->idnumber,
+            'category' => $categoryref,
+            'category_idnumber' => $categoryref,
+            'format' => (string)$course->format,
+            'summary' => (string)$course->summary,
+            'summaryformat' => (int)$course->summaryformat,
+            'visible' => (int)$course->visible,
+            'lang' => (string)($course->lang ?? self::DEFAULT_LANGUAGE),
+            'enablecompletion' => !empty($course->enablecompletion),
+            'startdate' => (int)($course->startdate ?? 0),
+            'enddate' => (int)($course->enddate ?? 0),
+            'sections' => [],
+            'completion' => [],
+            'metadata' => [
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_preset' => self::PRESET,
+            ],
+        ];
+    }
+
+    /**
+     * Determine whether a course appears to be UCKK-owned.
+     *
+     * @param stdClass $course Course record.
+     * @return bool
+     */
+    private function looks_like_uckk_course(stdClass $course): bool {
+        $shortname = strtoupper((string)($course->shortname ?? ''));
+        $idnumber = strtoupper((string)($course->idnumber ?? ''));
+
+        return str_starts_with($shortname, 'UCKK-')
+            || str_starts_with($idnumber, 'UCKK-');
+    }
+
+    /**
+     * Build key from course record.
+     *
+     * @param stdClass $course Course record.
+     * @return string
+     */
+    private function key_from_course_record(stdClass $course): string {
+        $source = (string)($course->idnumber ?: $course->shortname ?: ('course_' . $course->id));
+
+        return $this->normalise_key($source);
+    }
+
+    /**
+     * Store a seed-managed course config marker.
+     *
+     * @param array<string, mixed> $item Normalised item.
+     * @param int $courseid Course id.
+     */
+    private function set_config_marker(array $item, int $courseid): void {
+        if ($item['key'] === '') {
+            return;
+        }
+
+        set_config(self::CONFIG_PREFIX . $item['key'] . '_id', $courseid, self::COMPONENT);
+        set_config(
+            self::CONFIG_PREFIX . $item['key'] . '_definition',
+            json_encode($item, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            self::COMPONENT
+        );
+    }
+
+    /**
+     * Check duplicate value.
+     *
+     * @param validation_result $result Result.
+     * @param array<string, true> $seen Seen values.
+     * @param string $field Field.
+     * @param string $value Value.
+     * @param string $targetkey Target key.
+     */
+    private function check_duplicate(validation_result $result, array &$seen, string $field, string $value, string $targetkey): void {
+        if ($value === '') {
+            return;
+        }
+
+        if (isset($seen[$value])) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_ERROR,
+                $targetkey,
+                'Duplicate course ' . $field . ': ' . $value,
+                [$field => $value]
+            );
+        }
+
+        $seen[$value] = true;
+    }
+
+    /**
+     * Get first non-empty string.
+     *
+     * @param mixed ...$values Values.
+     * @return string
+     */
+    private function first_string(mixed ...$values): string {
+        foreach ($values as $value) {
+            if ($value === null) {
+                continue;
             }
+
+            if (is_bool($value)) {
+                $value = $value ? '1' : '0';
+            }
+
+            if (is_scalar($value)) {
+                $text = trim((string)$value);
+
+                if ($text !== '') {
+                    return $text;
+                }
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Normalise key.
+     *
+     * @param string $value Raw value.
+     * @return string
+     */
+    private function normalise_key(string $value): string {
+        $value = strtolower(trim($value));
+        $value = preg_replace('/^[a-z]+:/', '', $value) ?? $value;
+        $value = preg_replace('/[^a-z0-9_]+/', '_', $value) ?? $value;
+        $value = preg_replace('/_+/', '_', $value) ?? $value;
+
+        return trim($value, '_');
+    }
+
+    /**
+     * Normalise associative data.
+     *
+     * @param mixed $value Value.
+     * @return array<string, mixed>
+     */
+    private function normalise_assoc(mixed $value): array {
+        if ($value instanceof stdClass) {
+            return (array)$value;
+        }
+
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (is_string($value) && trim($value) !== '') {
+            $decoded = json_decode($value, true);
+
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * Normalise list.
+     *
+     * @param mixed $value Value.
+     * @return array<int, mixed>
+     */
+    private function normalise_list(mixed $value): array {
+        if ($value instanceof stdClass) {
+            $value = (array)$value;
+        }
+
+        if (!is_array($value)) {
+            return [];
+        }
+
+        return array_values($value);
+    }
+
+    /**
+     * Normalise visibility.
+     *
+     * @param mixed $value Value.
+     * @return int
+     */
+    private function normalise_visible(mixed $value): int {
+        if (is_bool($value)) {
+            return $value ? 1 : 0;
+        }
+
+        if (is_int($value)) {
+            return $value ? 1 : 0;
+        }
+
+        if (is_string($value)) {
+            $value = strtolower(trim($value));
+
+            if (in_array($value, ['1', 'true', 'yes', 'visible', 'active', 'public'], true)) {
+                return 1;
+            }
+
+            if (in_array($value, ['0', 'false', 'no', 'hidden', 'inactive', 'draft'], true)) {
+                return 0;
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     * Normalise boolean.
+     *
+     * @param mixed $value Value.
+     * @return bool
+     */
+    private function normalise_bool(mixed $value): bool {
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        if (is_int($value)) {
+            return $value === 1;
+        }
+
+        if (is_string($value)) {
+            return in_array(strtolower(trim($value)), ['1', 'true', 'yes', 'enabled', 'on'], true);
         }
 
         return false;
     }
 
     /**
-     * Mark a course as managed by tool_uckkseed.
+     * Normalise integer.
      *
-     * Uses Moodle customfield-free config table storage to avoid inventing an
-     * extra course metadata table in tool_uckkseed.
-     *
-     * @param int $courseid Course id.
-     * @param array<string, mixed> $row Normalised row.
-     */
-    private function mark_course_seeded(int $courseid, array $row): void {
-        global $DB;
-
-        $metadata = $row['metadata'];
-        $metadata['seededby'] = self::METADATA_SEEDED_BY;
-        $metadata['preset'] = self::PRESET;
-        $metadata['key'] = $row['key'];
-        $metadata['template'] = $row['template'];
-        $metadata['timemodified'] = time();
-
-        set_config(
-            'course_' . $courseid,
-            json_encode($metadata, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-            self::COMPONENT
-        );
-
-        // Store a lightweight marker in the course summary when metadata is not
-        // enough for external inspection is intentionally avoided. Summary stays
-        // user-facing and remains owned by the preset row.
-        $DB->set_field('course', 'timemodified', time(), ['id' => $courseid]);
-    }
-
-    /**
-     * Return whether a course is seed-managed.
-     *
-     * @param int $courseid Course id.
-     * @return bool
-     */
-    private function course_is_seed_managed(int $courseid): bool {
-        $metadata = $this->get_course_seed_metadata($courseid);
-
-        return ($metadata['seededby'] ?? '') === self::METADATA_SEEDED_BY;
-    }
-
-    /**
-     * Return seed-managed courses.
-     *
-     * @return array<int, \stdClass>
-     */
-    private function get_seed_managed_courses(): array {
-        global $DB;
-
-        $courses = $DB->get_records_select('course', 'id <> :siteid', ['siteid' => SITEID], 'sortorder ASC, fullname ASC');
-        $managed = [];
-
-        foreach ($courses as $course) {
-            if ($this->course_is_seed_managed((int)$course->id)) {
-                $managed[(int)$course->id] = $course;
-            }
-        }
-
-        return $managed;
-    }
-
-    /**
-     * Get stored course seed metadata.
-     *
-     * @param int $courseid Course id.
-     * @return array<string, mixed>
-     */
-    private function get_course_seed_metadata(int $courseid): array {
-        $raw = get_config(self::COMPONENT, 'course_' . $courseid);
-
-        if (!$raw || !is_string($raw)) {
-            return [];
-        }
-
-        $decoded = json_decode($raw, true);
-
-        return is_array($decoded) ? $decoded : [];
-    }
-
-    /**
-     * Get one metadata value for a seed-managed course.
-     *
-     * @param int $courseid Course id.
-     * @param string $key Metadata key.
-     * @param mixed $default Default value.
-     * @return mixed
-     */
-    private function get_course_metadata_value(int $courseid, string $key, mixed $default = null): mixed {
-        $metadata = $this->get_course_seed_metadata($courseid);
-
-        return $metadata[$key] ?? $default;
-    }
-
-    /**
-     * Apply section names when sections are provided by the preset.
-     *
-     * @param int $courseid Course id.
-     * @param array<int, array<string, mixed>|\stdClass|string> $sections Sections.
-     */
-    private function apply_section_names(int $courseid, array $sections): void {
-        global $DB;
-
-        foreach ($sections as $index => $section) {
-            $row = is_array($section) || $section instanceof \stdClass ? (array)$section : ['name' => (string)$section];
-
-            $sectionnum = (int)($row['section'] ?? $row['num'] ?? $index);
-            $name = trim((string)($row['name'] ?? $row['title'] ?? ''));
-
-            if ($sectionnum < 0 || $name === '') {
-                continue;
-            }
-
-            $record = $DB->get_record('course_sections', [
-                'course' => $courseid,
-                'section' => $sectionnum,
-            ], 'id', IGNORE_MISSING);
-
-            if (!$record) {
-                continue;
-            }
-
-            $DB->set_field('course_sections', 'name', $name, ['id' => $record->id]);
-            $DB->set_field('course_sections', 'timemodified', time(), ['id' => $record->id]);
-        }
-    }
-
-    /**
-     * Export course section names.
-     *
-     * @param int $courseid Course id.
-     * @return array<int, array<string, mixed>>
-     */
-    private function export_sections(int $courseid): array {
-        global $DB;
-
-        $sections = $DB->get_records('course_sections', ['course' => $courseid], 'section ASC', 'section, name, visible');
-        $export = [];
-
-        foreach ($sections as $section) {
-            $export[] = [
-                'section' => (int)$section->section,
-                'name' => (string)$section->name,
-                'visible' => (int)$section->visible === 1,
-            ];
-        }
-
-        return $export;
-    }
-
-    /**
-     * Get a stable category key.
-     *
-     * @param int $categoryid Category id.
-     * @return string
-     */
-    private function get_category_key(int $categoryid): string {
-        global $DB;
-
-        $category = $DB->get_record('course_categories', ['id' => $categoryid], 'idnumber, name', IGNORE_MISSING);
-
-        if (!$category) {
-            return '';
-        }
-
-        return !empty($category->idnumber) ? $category->idnumber : $category->name;
-    }
-
-    /**
-     * Normalise a timestamp value.
-     *
-     * @param mixed $value Raw value.
+     * @param mixed $value Value.
+     * @param int $default Default.
      * @return int
      */
-    private function normalise_time(mixed $value): int {
-        if (is_int($value)) {
-            return max(0, $value);
-        }
-
+    private function normalise_int(mixed $value, int $default): int {
         if (is_numeric($value)) {
-            return max(0, (int)$value);
+            return (int)$value;
         }
 
-        if (is_string($value) && trim($value) !== '') {
-            $timestamp = strtotime($value);
-
-            return $timestamp === false ? 0 : $timestamp;
-        }
-
-        return 0;
+        return $default;
     }
 
     /**
-     * Normalise seed mode.
+     * Normalise mode.
      *
      * @param string $mode Raw mode.
      * @return string
@@ -920,123 +1095,101 @@ final class course_seed {
     private function normalise_mode(string $mode): string {
         $mode = clean_param($mode, PARAM_ALPHANUMEXT);
 
-        return in_array($mode, [
-            self::MODE_DRY_RUN,
+        $allowed = [
             self::MODE_APPLY,
-        ], true) ? $mode : self::MODE_APPLY;
-    }
-
-    /**
-     * Empty count shape.
-     *
-     * @return array<string, int>
-     */
-    private function empty_counts(): array {
-        return [
-            'created' => 0,
-            'updated' => 0,
-            'skipped' => 0,
-            'failed' => 0,
-            'warnings' => 0,
-            'errors' => 0,
+            self::MODE_DRY_RUN,
+            self::MODE_REPORT,
+            self::MODE_ROLLBACK_PLAN,
         ];
+
+        return in_array($mode, $allowed, true) ? $mode : self::MODE_DRY_RUN;
     }
 
     /**
-     * Add a canonical result message.
+     * Create validation result.
      *
-     * @param array<int, array<string, mixed>> $messages Messages.
+     * @param string $summary Summary.
+     * @return validation_result
+     */
+    private function new_result(string $summary): validation_result {
+        return validation_result::from_data([
+            'status' => self::STATUS_COMPLETED,
+            'summary' => $summary,
+            'counts' => [
+                'created' => 0,
+                'updated' => 0,
+                'skipped' => 0,
+                'failed' => 0,
+                'warnings' => 0,
+                'errors' => 0,
+            ],
+            'messages' => [],
+            'metadata' => [
+                'component' => self::COMPONENT,
+                'preset' => self::PRESET,
+                'targettype' => self::TARGET_TYPE,
+            ],
+        ]);
+    }
+
+    /**
+     * Add message.
+     *
+     * @param validation_result $result Result.
      * @param string $severity Severity.
      * @param string $targetkey Target key.
-     * @param string $message Message text.
-     * @param array<string, mixed> $metadata Optional metadata.
+     * @param string $message Message.
+     * @param array<string, mixed> $metadata Metadata.
      */
     private function add_message(
-        array &$messages,
+        validation_result $result,
         string $severity,
         string $targetkey,
         string $message,
         array $metadata = []
     ): void {
-        $messages[] = [
-            'severity' => $severity,
-            'component' => self::COMPONENT,
-            'preset' => self::PRESET,
-            'targettype' => self::TARGET_TYPE,
-            'targetkey' => $targetkey,
-            'message' => $message,
-            'metadata' => $metadata,
-        ];
-    }
+        $result->add_message(
+            $severity,
+            $message,
+            self::COMPONENT,
+            self::PRESET,
+            self::TARGET_TYPE,
+            $targetkey,
+            $metadata
+        );
 
-    /**
-     * Build a validation result.
-     *
-     * This expects validation_result to expose from_array(). The fallback
-     * constructor shape should be kept compatible when validation_result.php is
-     * generated.
-     *
-     * @param string $status Result status.
-     * @param string $summary Human summary.
-     * @param array<string, int> $counts Counts.
-     * @param array<int, array<string, mixed>> $messages Messages.
-     * @param array<string, mixed> $metadata Metadata.
-     * @return validation_result
-     */
-    private function make_result(
-        string $status,
-        string $summary,
-        array $counts,
-        array $messages,
-        array $metadata = []
-    ): validation_result {
-        $data = [
-            'status' => $status,
-            'ok' => $status !== self::STATUS_FAILED,
-            'haserrors' => $counts['errors'] > 0,
-            'haswarnings' => $counts['warnings'] > 0,
-            'summary' => $summary,
-            'counts' => $counts,
-            'messages' => $messages,
-            'created' => $counts['created'],
-            'updated' => $counts['updated'],
-            'skipped' => $counts['skipped'],
-            'failed' => $counts['failed'],
-            'metadata' => $metadata,
-        ];
-
-        if (method_exists(validation_result::class, 'from_array')) {
-            return validation_result::from_array($data);
+        if ($severity === self::SEVERITY_ERROR || $severity === self::SEVERITY_BLOCKER) {
+            $result->increment('failed');
         }
-
-        return new validation_result($data);
     }
 
     /**
-     * Convert validation_result to array.
+     * Increment count.
      *
      * @param validation_result $result Result.
-     * @return array<string, mixed>
+     * @param string $key Count key.
      */
-    private function result_to_array(validation_result $result): array {
-        if (method_exists($result, 'to_array')) {
-            $data = $result->to_array();
+    private function increment(validation_result $result, string $key): void {
+        $result->increment($key);
+    }
 
-            return is_array($data) ? $data : [];
-        }
+    /**
+     * Result has errors.
+     *
+     * @param validation_result $result Result.
+     * @return bool
+     */
+    private function result_has_errors(validation_result $result): bool {
+        return $result->has_errors();
+    }
 
-        if (method_exists($result, 'export')) {
-            $data = $result->export();
-
-            return is_array($data) ? $data : (array)$data;
-        }
-
-        if ($result instanceof \JsonSerializable) {
-            $data = $result->jsonSerialize();
-
-            return is_array($data) ? $data : (array)$data;
-        }
-
-        return get_object_vars($result);
+    /**
+     * Finalise result.
+     *
+     * @param validation_result $result Result.
+     * @return validation_result
+     */
+    private function finish_result(validation_result $result): validation_result {
+        return $result->complete($result->get_summary());
     }
 }

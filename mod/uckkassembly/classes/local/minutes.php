@@ -1,8 +1,3 @@
-`mod/uckkassembly/classes/local/minutes.php`
-
-Assemblies must support decision records, minutes/procès-verbaux, contestability, integrity review, and archive output.  UCKK-owned records should keep stable fields as first-class columns and use JSON `metadata` only for variable data. 
-
-```php
 <?php
 // This file is part of Moodle - https://moodle.org/
 //
@@ -864,4 +859,4 @@ final class minutes {
         return [];
     }
 }
-```
+

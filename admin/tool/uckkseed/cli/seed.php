@@ -43,6 +43,16 @@ const TOOL_UCKKSEED_EXIT_WARNING = 1;
 const TOOL_UCKKSEED_EXIT_ERROR = 2;
 
 /**
+ * Academic registry JSON directory.
+ */
+const TOOL_UCKKSEED_DEFAULT_PRESETPATH = 'academic_registry_json';
+
+/**
+ * Legacy plugin-local preset directory.
+ */
+const TOOL_UCKKSEED_LEGACY_PRESETPATH = 'admin/tool/uckkseed/presets';
+
+/**
  * Supported preset ids.
  */
 const TOOL_UCKKSEED_PRESETS = [
@@ -88,7 +98,7 @@ function tool_uckkseed_cli_seed_help(): never {
     cli_writeln("Seed the UCKK-Moodle distribution.");
     cli_writeln('');
     cli_writeln("Usage:");
-    cli_writeln("  php {$script} [--dry-run|--report|--rollback-plan] [--preset=<ids>] [--component=<components>] [--target=<key>] [--force] [--json]");
+    cli_writeln("  php {$script} [--dry-run|--report|--rollback-plan] [--preset=<ids>] [--component=<components>] [--target=<key>] [--presetpath=<path>] [--force] [--json]");
     cli_writeln('');
     cli_writeln("Modes:");
     cli_writeln("  --dry-run          Validate and simulate seed actions without writing records.");
@@ -103,12 +113,18 @@ function tool_uckkseed_cli_seed_help(): never {
     cli_writeln("                     Allowed: " . implode(', ', TOOL_UCKKSEED_COMPONENTS));
     cli_writeln("  --target           Optional target key, such as a course shortname or preset item key.");
     cli_writeln('');
+    cli_writeln("Academic registry JSON:");
+    cli_writeln("  --presetpath       Directory containing the academic registry JSON files.");
+    cli_writeln("                     Relative paths are resolved from Moodle root.");
+    cli_writeln("                     Default: " . TOOL_UCKKSEED_DEFAULT_PRESETPATH);
+    cli_writeln('');
     cli_writeln("Output:");
     cli_writeln("  --json             Print machine-readable JSON.");
     cli_writeln("  --no-progress      Suppress progress lines in text mode.");
     cli_writeln('');
     cli_writeln("Examples:");
     cli_writeln("  php {$script} --dry-run");
+    cli_writeln("  php {$script} --presetpath=academic_registry_json --dry-run");
     cli_writeln("  php {$script} --preset=categories,courses,competencies --dry-run");
     cli_writeln("  php {$script} --component=mod_uckkarchive --report");
     cli_writeln("  php {$script} --force");
@@ -141,6 +157,66 @@ function tool_uckkseed_cli_parse_list(?string $value): array {
     return array_values(array_unique(array_map(static function (string $item): string {
         return trim($item);
     }, $items)));
+}
+
+/**
+ * Return whether a path is absolute on Unix, Windows drive, or Windows UNC.
+ *
+ * @param string $path Path.
+ * @return bool
+ */
+function tool_uckkseed_cli_is_absolute_path(string $path): bool {
+    return preg_match('~^(?:[A-Za-z]:[\\\\/]|[\\\\/]{2}|[\\\\/])~', $path) === 1;
+}
+
+/**
+ * Resolve academic registry JSON path.
+ *
+ * @param mixed $clioption CLI --presetpath value.
+ * @return string Absolute directory path.
+ */
+function tool_uckkseed_cli_resolve_presetpath(mixed $clioption): string {
+    global $CFG;
+
+    $path = is_string($clioption) ? trim($clioption) : '';
+
+    if ($path === '') {
+        $configured = get_config('tool_uckkseed', 'presetpath');
+        $path = is_string($configured) ? trim($configured) : '';
+    }
+
+    if ($path === '' || $path === TOOL_UCKKSEED_LEGACY_PRESETPATH) {
+        $path = TOOL_UCKKSEED_DEFAULT_PRESETPATH;
+    }
+
+    $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+
+    if (tool_uckkseed_cli_is_absolute_path($path)) {
+        return rtrim($path, DIRECTORY_SEPARATOR);
+    }
+
+    return rtrim($CFG->dirroot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . trim($path, DIRECTORY_SEPARATOR);
+}
+
+/**
+ * Validate the academic registry JSON directory.
+ *
+ * @param string $presetpath Absolute preset path.
+ */
+function tool_uckkseed_cli_validate_presetpath(string $presetpath): void {
+    if (!is_dir($presetpath)) {
+        cli_error(
+            'Academic registry JSON directory not found: ' . $presetpath,
+            TOOL_UCKKSEED_EXIT_ERROR
+        );
+    }
+
+    if (!is_readable($presetpath)) {
+        cli_error(
+            'Academic registry JSON directory is not readable: ' . $presetpath,
+            TOOL_UCKKSEED_EXIT_ERROR
+        );
+    }
 }
 
 /**
@@ -207,6 +283,10 @@ function tool_uckkseed_cli_validate_presets(array $presets): void {
  */
 function tool_uckkseed_cli_validate_components(array $components): void {
     $invalid = array_values(array_diff($components, TOOL_UCKKSEED_COMPONENTS));
+
+    if (!empty($invalid)) {
+        cli_error(
+            'Invalid component(s): ' . implode(', ', $invalidCKKSEED_COMPONENTS));
 
     if (!empty($invalid)) {
         cli_error(
@@ -395,6 +475,7 @@ function tool_uckkseed_cli_exit_code(mixed $result): int {
         'preset' => null,
         'component' => null,
         'target' => null,
+        'presetpath' => null,
         'force' => false,
         'json' => false,
         'no-progress' => false,
@@ -421,10 +502,12 @@ if (!tool_uckkseed_cli_allowed()) {
 }
 
 $mode = tool_uckkseed_cli_resolve_mode($options);
+$presetpath = tool_uckkseed_cli_resolve_presetpath($options['presetpath']);
 $presets = tool_uckkseed_cli_parse_list($options['preset']);
 $components = tool_uckkseed_cli_parse_list($options['component']);
 $target = is_string($options['target']) ? trim($options['target']) : '';
 
+tool_uckkseed_cli_validate_presetpath($presetpath);
 tool_uckkseed_cli_validate_presets($presets);
 tool_uckkseed_cli_validate_components($components);
 
@@ -442,6 +525,7 @@ $showprogress = empty($options['json']) && empty($options['no-progress']);
 if ($showprogress) {
     cli_writeln('Starting UCKK distribution seed.');
     cli_writeln('Mode: ' . $mode);
+    cli_writeln('Academic JSON path: ' . $presetpath);
 
     if (!empty($presets)) {
         cli_writeln('Preset(s): ' . implode(', ', $presets));
@@ -463,6 +547,7 @@ if ($showprogress) {
 $seedoptions = [
     'action' => TOOL_UCKKSEED_ACTION_SEED,
     'mode' => $mode,
+    'presetpath' => $presetpath,
     'presets' => $presets,
     'components' => $components,
     'target' => $target,
@@ -473,7 +558,7 @@ $seedoptions = [
 ];
 
 try {
-    $seeder = new seeder();
+    $seeder = new seeder($presetpath);
     $result = $seeder->seed($seedoptions);
 
     if (!empty($options['json'])) {
@@ -490,11 +575,13 @@ try {
             'status' => 'failed',
             'summary' => $exception->getMessage(),
             'exception' => get_class($exception),
+            'presetpath' => $presetpath,
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     } else {
         cli_writeln('');
         cli_writeln('UCKK seed failed.');
         cli_writeln($exception->getMessage());
+        cli_writeln('Academic JSON path: ' . $presetpath);
 
         if (debugging('', DEBUG_DEVELOPER)) {
             cli_writeln($exception->getTraceAsString());

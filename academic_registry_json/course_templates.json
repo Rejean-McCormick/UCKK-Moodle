@@ -1,0 +1,1106 @@
+{
+  "schema": "uckkseed.preset.v1",
+  "component": "tool_uckkseed",
+  "preset": "course_templates",
+  "version": 2026051200,
+  "items": [
+    {
+      "key": "uckk_standard_course",
+      "name": "UCKK standard course",
+      "component": "format_uckk",
+      "description": "Default UCKK course structure using the canonical nine-section format.",
+      "defaults": {
+        "format": "uckk",
+        "numsections": 9,
+        "visible": true,
+        "lang": "fr",
+        "courseformatoptions": {
+          "uckkmode": "standard",
+          "showcanon": 1,
+          "showevidenceflow": 1,
+          "showintegritynotice": 1,
+          "showrecognitionnotice": 1
+        }
+      },
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "name": "Orientation",
+          "summary": "Cadre du cours, règles du jeu pédagogique, objectifs et parcours attendu.",
+          "options": {
+            "uckksectionkind": "orientation",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "name": "Concepts",
+          "summary": "Mots, modèles, distinctions et cartes conceptuelles à maîtriser.",
+          "options": {
+            "uckksectionkind": "concepts",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "name": "Matière canonique",
+          "summary": "Textes, références, documents, ressources et canon du cours.",
+          "options": {
+            "uckksectionkind": "canon",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "name": "Atelier",
+          "summary": "Exercices, simulations, cartographies, analyses et travaux préparatoires.",
+          "options": {
+            "uckksectionkind": "atelier",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "name": "Preuves",
+          "summary": "Production, dépôt, discussion et validation des preuves pédagogiques.",
+          "options": {
+            "uckksectionkind": "preuves",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "name": "Délibération",
+          "summary": "Discussion structurée, assemblée, objections, interprétations et décisions collectives.",
+          "options": {
+            "uckksectionkind": "deliberation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "name": "Livrable",
+          "summary": "Production finale, artefact, dossier, carte, rapport, stratégie ou prototype.",
+          "options": {
+            "uckksectionkind": "livrable",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "name": "Évaluation",
+          "summary": "Critères, rétroactions, compétences, badges et décisions pédagogiques.",
+          "options": {
+            "uckksectionkind": "evaluation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "name": "Archive",
+          "summary": "Mémoire du cours : preuves, décisions, versions, corrections, Kristals et traces réutilisables.",
+          "options": {
+            "uckksectionkind": "archive",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        }
+      ],
+      "activities": [
+        {
+          "key": "default_archive",
+          "component": "mod_uckkarchive",
+          "section": "archive",
+          "name": "Archive du cours",
+          "intro": "Mémoire du cours : preuves, décisions, versions, corrections, Kristals et traces réutilisables.",
+          "required": true,
+          "defaults": {
+            "status": "active",
+            "visibility": "course",
+            "completionadditem": 1,
+            "completionvalidateitem": 0
+          }
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "completionview": true,
+        "requires_evidence": true,
+        "requires_human_validation": true,
+        "requires_archive_trace": true
+      },
+      "metadata": {
+        "product": "UCKK-Moodle",
+        "course_type": "standard",
+        "recognition": "internal",
+        "source": "tool_uckkseed",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "course_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "uckk_tronc_commun_course",
+      "name": "UCKK tronc commun course",
+      "component": "format_uckk",
+      "description": "Template for TC101–TC108 courses with full evidence, deliberation, portfolio and archive flow.",
+      "defaults": {
+        "format": "uckk",
+        "numsections": 9,
+        "visible": true,
+        "lang": "fr",
+        "courseformatoptions": {
+          "uckkmode": "tronccommun",
+          "showcanon": 1,
+          "showevidenceflow": 1,
+          "showintegritynotice": 1,
+          "showrecognitionnotice": 1
+        }
+      },
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "name": "Orientation",
+          "summary": "Entrée dans le cours, objectifs du tronc commun, règles de preuve et cadre de reconnaissance interne.",
+          "options": {
+            "uckksectionkind": "orientation",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "name": "Concepts",
+          "summary": "Concepts UCKK, vocabulaire commun, distinctions et cartes du problème.",
+          "options": {
+            "uckksectionkind": "concepts",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "name": "Matière canonique",
+          "summary": "Matière canonique du tronc commun et références obligatoires.",
+          "options": {
+            "uckksectionkind": "canon",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "name": "Atelier",
+          "summary": "Ateliers de lecture du jeu social, cartographie, expérimentation et production préparatoire.",
+          "options": {
+            "uckksectionkind": "atelier",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "name": "Preuves",
+          "summary": "Preuves du portfolio : carte système, journal IA, participation, audit, éthique et synthèse.",
+          "options": {
+            "uckksectionkind": "preuves",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "name": "Délibération",
+          "summary": "Assemblée de cours, objections, interprétations, contestabilité et décisions pédagogiques.",
+          "options": {
+            "uckksectionkind": "deliberation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "name": "Livrable",
+          "summary": "Synthèse finale, artefact ou stratégie responsable liée au portfolio.",
+          "options": {
+            "uckksectionkind": "livrable",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "name": "Évaluation",
+          "summary": "Évaluation par compétences, rétroaction humaine, badges internes et validation pédagogique.",
+          "options": {
+            "uckksectionkind": "evaluation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "name": "Archive",
+          "summary": "Archivage du portfolio, des preuves, des décisions et des Kristals du tronc commun.",
+          "options": {
+            "uckksectionkind": "archive",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        }
+      ],
+      "activities": [
+        {
+          "key": "tronc_commun_default_challenge",
+          "component": "mod_uckkchallenge",
+          "section": "preuves",
+          "name": "Défi de preuve du tronc commun",
+          "intro": "Déposer une preuve structurée avec provenance, limites et lien aux compétences.",
+          "required": true,
+          "defaults": {
+            "challengetype": "evidence",
+            "status": "active",
+            "visibility": "course",
+            "archivepolicy": "summary",
+            "completionrequiresubmission": 1,
+            "completionrequirevalidation": 1,
+            "completionrequireintegrityclear": 1,
+            "completionrequirearchive": 1
+          }
+        },
+        {
+          "key": "tronc_commun_default_assembly",
+          "component": "mod_uckkassembly",
+          "section": "deliberation",
+          "name": "Assemblée du tronc commun",
+          "intro": "Délibération collective sur les preuves, objections et décisions pédagogiques.",
+          "required": true,
+          "defaults": {
+            "assemblytype": "savoirs",
+            "status": "active",
+            "visibility": "course",
+            "archivepolicy": "summary"
+          }
+        },
+        {
+          "key": "tronc_commun_default_archive",
+          "component": "mod_uckkarchive",
+          "section": "archive",
+          "name": "Archive du tronc commun",
+          "intro": "Archive des preuves, décisions, versions, corrections, Kristals et liens de portfolio.",
+          "required": true,
+          "defaults": {
+            "status": "active",
+            "visibility": "course",
+            "completionadditem": 1,
+            "completionvalidateitem": 1
+          }
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "completionview": true,
+        "requires_evidence": true,
+        "requires_human_validation": true,
+        "requires_archive_trace": true,
+        "requires_integrity_clear": true
+      },
+      "metadata": {
+        "product": "UCKK-Moodle",
+        "course_type": "tronc_commun",
+        "recognition": "internal",
+        "portfolio_required": true,
+        "source": "tool_uckkseed",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "course_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "uckk_program_course",
+      "name": "UCKK program course",
+      "component": "format_uckk",
+      "description": "Template for baccalauréat and program courses after the common core.",
+      "defaults": {
+        "format": "uckk",
+        "numsections": 9,
+        "visible": true,
+        "lang": "fr",
+        "courseformatoptions": {
+          "uckkmode": "program",
+          "showcanon": 1,
+          "showevidenceflow": 1,
+          "showintegritynotice": 1,
+          "showrecognitionnotice": 1
+        }
+      },
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "name": "Orientation",
+          "summary": "Orientation du cours, place dans le programme, compétences et règles de validation.",
+          "options": {
+            "uckksectionkind": "orientation",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "name": "Concepts",
+          "summary": "Concepts spécialisés du programme et modèles d’analyse.",
+          "options": {
+            "uckksectionkind": "concepts",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "name": "Matière canonique",
+          "summary": "Corpus, références, cas, textes et matériaux canoniques du programme.",
+          "options": {
+            "uckksectionkind": "canon",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "name": "Atelier",
+          "summary": "Ateliers de production, analyse, prototypage, simulation ou intervention.",
+          "options": {
+            "uckksectionkind": "atelier",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "name": "Preuves",
+          "summary": "Preuves d’apprentissage, productions, dossiers, cartes, données ou artefacts.",
+          "options": {
+            "uckksectionkind": "preuves",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "name": "Délibération",
+          "summary": "Assemblée, objections, décisions, rapports minoritaires et contestabilité.",
+          "options": {
+            "uckksectionkind": "deliberation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "name": "Livrable",
+          "summary": "Livrable final du cours ou artefact utile au programme.",
+          "options": {
+            "uckksectionkind": "livrable",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "name": "Évaluation",
+          "summary": "Évaluation, compétences, rétroaction humaine, badges internes et archive des décisions.",
+          "options": {
+            "uckksectionkind": "evaluation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "name": "Archive",
+          "summary": "Archive de cours : preuves, décisions, Kristals, révisions et export de traces.",
+          "options": {
+            "uckksectionkind": "archive",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        }
+      ],
+      "activities": [
+        {
+          "key": "program_default_challenge",
+          "component": "mod_uckkchallenge",
+          "section": "preuves",
+          "name": "Défi de programme",
+          "intro": "Défi de production d’une preuve ou d’un artefact lié au programme.",
+          "required": true,
+          "defaults": {
+            "challengetype": "program",
+            "status": "active",
+            "visibility": "course",
+            "archivepolicy": "summary",
+            "completionrequiresubmission": 1,
+            "completionrequirevalidation": 1,
+            "completionrequireintegrityclear": 1,
+            "completionrequirearchive": 1
+          }
+        },
+        {
+          "key": "program_default_assembly",
+          "component": "mod_uckkassembly",
+          "section": "deliberation",
+          "name": "Assemblée du cours",
+          "intro": "Assemblée de validation, objection, interprétation et décision.",
+          "required": true,
+          "defaults": {
+            "assemblytype": "savoirs",
+            "status": "active",
+            "visibility": "course",
+            "archivepolicy": "summary"
+          }
+        },
+        {
+          "key": "program_default_archive",
+          "component": "mod_uckkarchive",
+          "section": "archive",
+          "name": "Archive du cours",
+          "intro": "Archive des preuves, décisions, révisions, Kristals et traces exportables.",
+          "required": true,
+          "defaults": {
+            "status": "active",
+            "visibility": "course",
+            "completionadditem": 1,
+            "completionvalidateitem": 1
+          }
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "completionview": true,
+        "requires_evidence": true,
+        "requires_human_validation": true,
+        "requires_archive_trace": true,
+        "requires_integrity_clear": true
+      },
+      "metadata": {
+        "product": "UCKK-Moodle",
+        "course_type": "baccalaureat",
+        "recognition": "internal",
+        "source": "tool_uckkseed",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "course_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "uckk_mineure_course",
+      "name": "UCKK mineure course",
+      "component": "format_uckk",
+      "description": "Compact program-course template for mineure pathways.",
+      "defaults": {
+        "format": "uckk",
+        "numsections": 9,
+        "visible": true,
+        "lang": "fr",
+        "courseformatoptions": {
+          "uckkmode": "program",
+          "showcanon": 1,
+          "showevidenceflow": 1,
+          "showintegritynotice": 1,
+          "showrecognitionnotice": 1
+        }
+      },
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "name": "Orientation",
+          "summary": "Orientation de la mineure, objectifs, attentes et compétences ciblées.",
+          "options": {
+            "uckksectionkind": "orientation",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "name": "Concepts",
+          "summary": "Concepts essentiels et distinctions minimales de la mineure.",
+          "options": {
+            "uckksectionkind": "concepts",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "name": "Matière canonique",
+          "summary": "Corpus court, références et ressources prioritaires.",
+          "options": {
+            "uckksectionkind": "canon",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "name": "Atelier",
+          "summary": "Ateliers d’application et exercices ciblés.",
+          "options": {
+            "uckksectionkind": "atelier",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "name": "Preuves",
+          "summary": "Preuves concentrées sur les compétences de la mineure.",
+          "options": {
+            "uckksectionkind": "preuves",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "name": "Délibération",
+          "summary": "Discussion structurée et décisions pédagogiques liées aux preuves.",
+          "options": {
+            "uckksectionkind": "deliberation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "name": "Livrable",
+          "summary": "Livrable synthétique de la mineure.",
+          "options": {
+            "uckksectionkind": "livrable",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "name": "Évaluation",
+          "summary": "Rétroaction, compétences et reconnaissance interne.",
+          "options": {
+            "uckksectionkind": "evaluation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "name": "Archive",
+          "summary": "Archivage minimal des preuves, décisions et Kristals.",
+          "options": {
+            "uckksectionkind": "archive",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        }
+      ],
+      "activities": [
+        {
+          "key": "mineure_default_challenge",
+          "component": "mod_uckkchallenge",
+          "section": "preuves",
+          "name": "Défi de mineure",
+          "intro": "Preuve ciblée liée à une compétence de la mineure.",
+          "required": true,
+          "defaults": {
+            "challengetype": "evidence",
+            "status": "active",
+            "visibility": "course",
+            "archivepolicy": "summary",
+            "completionrequiresubmission": 1,
+            "completionrequirevalidation": 1,
+            "completionrequireintegrityclear": 1,
+            "completionrequirearchive": 1
+          }
+        },
+        {
+          "key": "mineure_default_archive",
+          "component": "mod_uckkarchive",
+          "section": "archive",
+          "name": "Archive de la mineure",
+          "intro": "Archive des preuves et décisions liées à la mineure.",
+          "required": true,
+          "defaults": {
+            "status": "active",
+            "visibility": "course",
+            "completionadditem": 1,
+            "completionvalidateitem": 0
+          }
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "completionview": true,
+        "requires_evidence": true,
+        "requires_human_validation": true,
+        "requires_archive_trace": true
+      },
+      "metadata": {
+        "product": "UCKK-Moodle",
+        "course_type": "mineure",
+        "recognition": "internal",
+        "source": "tool_uckkseed",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "course_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "uckk_seminaire_course",
+      "name": "UCKK seminar course",
+      "component": "format_uckk",
+      "description": "Seminar template for advanced discussion, canon work, deliberation and archive output.",
+      "defaults": {
+        "format": "uckk",
+        "numsections": 9,
+        "visible": true,
+        "lang": "fr",
+        "courseformatoptions": {
+          "uckkmode": "lab",
+          "showcanon": 1,
+          "showevidenceflow": 1,
+          "showintegritynotice": 1,
+          "showrecognitionnotice": 1
+        }
+      },
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "name": "Orientation",
+          "summary": "Problématique du séminaire, protocole de discussion et livrables attendus.",
+          "options": {
+            "uckksectionkind": "orientation",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "name": "Concepts",
+          "summary": "Concepts théoriques et distinctions du séminaire.",
+          "options": {
+            "uckksectionkind": "concepts",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "name": "Matière canonique",
+          "summary": "Lectures, textes, documents et cas du séminaire.",
+          "options": {
+            "uckksectionkind": "canon",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "name": "Atelier",
+          "summary": "Atelier de lecture, controverse, cartographie ou analyse.",
+          "options": {
+            "uckksectionkind": "atelier",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "name": "Preuves",
+          "summary": "Notes, traces, cartes, synthèses et preuves de participation.",
+          "options": {
+            "uckksectionkind": "preuves",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "name": "Délibération",
+          "summary": "Assemblée de discussion, objections et décisions interprétatives.",
+          "options": {
+            "uckksectionkind": "deliberation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "name": "Livrable",
+          "summary": "Synthèse, essai, rapport, protocole, carte ou position argumentée.",
+          "options": {
+            "uckksectionkind": "livrable",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "name": "Évaluation",
+          "summary": "Évaluation qualitative, compétences, rétroaction et reconnaissance interne.",
+          "options": {
+            "uckksectionkind": "evaluation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "name": "Archive",
+          "summary": "Mémoire du séminaire, décisions, objections, notes et Kristals.",
+          "options": {
+            "uckksectionkind": "archive",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        }
+      ],
+      "activities": [
+        {
+          "key": "seminaire_default_assembly",
+          "component": "mod_uckkassembly",
+          "section": "deliberation",
+          "name": "Assemblée du séminaire",
+          "intro": "Délibération structurée autour des textes, preuves, objections et interprétations.",
+          "required": true,
+          "defaults": {
+            "assemblytype": "savoirs",
+            "status": "active",
+            "visibility": "course",
+            "archivepolicy": "summary"
+          }
+        },
+        {
+          "key": "seminaire_default_archive",
+          "component": "mod_uckkarchive",
+          "section": "archive",
+          "name": "Archive du séminaire",
+          "intro": "Archive des textes travaillés, décisions, objections, synthèses et Kristals.",
+          "required": true,
+          "defaults": {
+            "status": "active",
+            "visibility": "course",
+            "completionadditem": 1,
+            "completionvalidateitem": 0
+          }
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "completionview": true,
+        "requires_evidence": true,
+        "requires_human_validation": true,
+        "requires_archive_trace": true
+      },
+      "metadata": {
+        "product": "UCKK-Moodle",
+        "course_type": "seminaire",
+        "recognition": "internal",
+        "source": "tool_uckkseed",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "course_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "uckk_laboratoire_course",
+      "name": "UCKK laboratory course",
+      "component": "format_uckk",
+      "description": "Laboratory template for prototypes, experiments, data, proof, assembly review and archive records.",
+      "defaults": {
+        "format": "uckk",
+        "numsections": 9,
+        "visible": true,
+        "lang": "fr",
+        "courseformatoptions": {
+          "uckkmode": "lab",
+          "showcanon": 1,
+          "showevidenceflow": 1,
+          "showintegritynotice": 1,
+          "showrecognitionnotice": 1
+        }
+      },
+      "sections": [
+        {
+          "number": 0,
+          "key": "orientation",
+          "name": "Orientation",
+          "summary": "Orientation du laboratoire, hypothèse, protocole, risques et règles de preuve.",
+          "options": {
+            "uckksectionkind": "orientation",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 1,
+          "key": "concepts",
+          "name": "Concepts",
+          "summary": "Concepts, modèles et critères techniques du laboratoire.",
+          "options": {
+            "uckksectionkind": "concepts",
+            "requiresproof": 0,
+            "archivable": 0,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 2,
+          "key": "canon",
+          "name": "Matière canonique",
+          "summary": "Références, protocoles, normes, cas et matière de référence.",
+          "options": {
+            "uckksectionkind": "canon",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 0
+          }
+        },
+        {
+          "number": 3,
+          "key": "atelier",
+          "name": "Atelier",
+          "summary": "Expérimentation, prototype, intervention, analyse de données ou simulation.",
+          "options": {
+            "uckksectionkind": "atelier",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 4,
+          "key": "preuves",
+          "name": "Preuves",
+          "summary": "Données, captures, journaux, résultats, observations et preuves du laboratoire.",
+          "options": {
+            "uckksectionkind": "preuves",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 5,
+          "key": "deliberation",
+          "name": "Délibération",
+          "summary": "Assemblée d’examen du prototype, objections, risques, corrections et décisions.",
+          "options": {
+            "uckksectionkind": "deliberation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 6,
+          "key": "livrable",
+          "name": "Livrable",
+          "summary": "Prototype, rapport, artefact, jeu de données, protocole ou démonstration.",
+          "options": {
+            "uckksectionkind": "livrable",
+            "requiresproof": 1,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 7,
+          "key": "evaluation",
+          "name": "Évaluation",
+          "summary": "Évaluation humaine, validation des preuves, compétences et reconnaissance interne.",
+          "options": {
+            "uckksectionkind": "evaluation",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        },
+        {
+          "number": 8,
+          "key": "archive",
+          "name": "Archive",
+          "summary": "Archive du laboratoire : prototypes, preuves, révisions, décisions et exports.",
+          "options": {
+            "uckksectionkind": "archive",
+            "requiresproof": 0,
+            "archivable": 1,
+            "integritysensitive": 1
+          }
+        }
+      ],
+      "activities": [
+        {
+          "key": "laboratoire_default_challenge",
+          "component": "mod_uckkchallenge",
+          "section": "preuves",
+          "name": "Défi de laboratoire",
+          "intro": "Déposer une preuve expérimentale avec provenance, limites, incertitude et contexte.",
+          "required": true,
+          "defaults": {
+            "challengetype": "laboratory",
+            "status": "active",
+            "visibility": "course",
+            "archivepolicy": "full",
+            "completionrequiresubmission": 1,
+            "completionrequirevalidation": 1,
+            "completionrequireintegrityclear": 1,
+            "completionrequirearchive": 1
+          }
+        },
+        {
+          "key": "laboratoire_default_assembly",
+          "component": "mod_uckkassembly",
+          "section": "deliberation",
+          "name": "Assemblée du laboratoire",
+          "intro": "Examen collectif des preuves, risques, objections, corrections et décisions.",
+          "required": true,
+          "defaults": {
+            "assemblytype": "batisseurs",
+            "status": "active",
+            "visibility": "course",
+            "archivepolicy": "full"
+          }
+        },
+        {
+          "key": "laboratoire_default_archive",
+          "component": "mod_uckkarchive",
+          "section": "archive",
+          "name": "Archive du laboratoire",
+          "intro": "Archive complète des prototypes, preuves, décisions, versions et exports.",
+          "required": true,
+          "defaults": {
+            "status": "active",
+            "visibility": "course",
+            "completionadditem": 1,
+            "completionvalidateitem": 1
+          }
+        }
+      ],
+      "completion": {
+        "enabled": true,
+        "completionview": true,
+        "requires_evidence": true,
+        "requires_human_validation": true,
+        "requires_archive_trace": true,
+        "requires_integrity_clear": true
+      },
+      "metadata": {
+        "product": "UCKK-Moodle",
+        "course_type": "laboratoire",
+        "recognition": "internal",
+        "source": "tool_uckkseed",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "course_templates",
+        "template_only": true
+      }
+    }
+  ]
+}

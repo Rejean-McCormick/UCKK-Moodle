@@ -15,7 +15,9 @@
  * These capabilities are intentionally limited to the course context.
  * The course format may display UCKK section metadata, evidence indicators,
  * archive indicators and integrity markers, but it must not implement global
- * governance, archive validation, challenge validation or Inquisiteur decisions.
+ * governance, archive validation, challenge validation, Assembly decisions,
+ * report execution, badge awarding, competency certification, or Inquisiteur
+ * decisions.
  *
  * @package    format_uckk
  * @copyright  2026 Univers-Cité King Klown
@@ -32,14 +34,17 @@ $capabilities = [
      * Orientation, Concepts, Matière canonique, Atelier, Preuves,
      * Délibération, Livrable, Évaluation and Archive.
      *
-     * This is a read-only capability and does not grant access to hidden
-     * Moodle sections, restricted activities, archive records or integrity data.
+     * This is a read-only display capability. It does not grant access to
+     * hidden Moodle sections, restricted activities, private submissions,
+     * archive records, integrity cases, grades, or non-visible activities.
      */
     'format/uckk:viewcoursemap' => [
+        'riskbitmask' => 0,
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
             'guest' => CAP_ALLOW,
+            'user' => CAP_ALLOW,
             'student' => CAP_ALLOW,
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
@@ -48,13 +53,15 @@ $capabilities = [
     ],
 
     /*
-     * View evidence indicators.
+     * View UCKK evidence indicators.
      *
      * Evidence indicators are presentation hints attached to UCKK course
      * sections or activities. They must not expose private submissions,
-     * restricted files, integrity cases or non-visible activities.
+     * restricted files, hidden activities, integrity cases, grades, or
+     * non-visible archive content.
      */
     'format/uckk:viewevidenceindicators' => [
+        'riskbitmask' => 0,
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
@@ -66,13 +73,14 @@ $capabilities = [
     ],
 
     /*
-     * View archive indicators.
+     * View UCKK archive indicators.
      *
      * Archive indicators show that a section or activity participates in the
      * UCKK memory layer. Access to actual archive items is controlled by
      * mod_uckkarchive capabilities, not by this course format capability.
      */
     'format/uckk:viewarchiveindicators' => [
+        'riskbitmask' => 0,
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
@@ -84,13 +92,12 @@ $capabilities = [
     ],
 
     /*
-     * View integrity markers.
+     * View UCKK integrity markers.
      *
-     * Integrity markers are sensitive because they may signal contestation,
-     * correction requirements or Inquisiteur review states. This capability
-     * is therefore not granted to students by default.
-     *
-     * Detailed integrity case access is controlled by tool_uckkintegrity.
+     * Integrity markers are presentation-level warnings or status indicators
+     * displayed by the course format. They must not expose restricted case
+     * contents, sanctions, investigations, private evidence, or Inquisiteur
+     * decision data. Detailed integrity authority stays in tool_uckkintegrity.
      */
     'format/uckk:viewintegritymarkers' => [
         'riskbitmask' => RISK_PERSONAL,
@@ -104,15 +111,14 @@ $capabilities = [
     ],
 
     /*
-     * Configure UCKK section semantics.
+     * Configure UCKK course sections.
      *
-     * This allows course editors to configure visual and semantic behaviour
-     * of the UCKK format inside a course. It must not allow plugin-wide
-     * configuration, role assignment, grade manipulation, archive validation
-     * or integrity decisions.
+     * Allows authorized course editors to configure UCKK section metadata,
+     * section display labels, canonical section flags, and format-specific
+     * course-format options.
      */
     'format/uckk:configuresections' => [
-        'riskbitmask' => RISK_CONFIG,
+        'riskbitmask' => RISK_CONFIG | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
@@ -123,15 +129,18 @@ $capabilities = [
     ],
 
     /*
-     * Manage the UCKK course blueprint.
+     * Manage UCKK course blueprint.
      *
-     * This capability is reserved for users who may apply or refresh the
-     * canonical UCKK course structure inside a course. It is intentionally
-     * stricter than configuresections because blueprint operations may affect
-     * several sections at once.
+     * Allows authorized course editors to manage the UCKK course blueprint,
+     * including canonical layout assumptions, section map configuration and
+     * format-level structure settings.
+     *
+     * This does not create courses, activities, badges, competencies, archives,
+     * challenges or assemblies. Those remain owned by their respective plugins
+     * and by tool_uckkseed where applicable.
      */
     'format/uckk:manageblueprint' => [
-        'riskbitmask' => RISK_CONFIG,
+        'riskbitmask' => RISK_CONFIG | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
@@ -144,7 +153,7 @@ $capabilities = [
     /*
      * Reset UCKK section names.
      *
-     * This allows authorized course editors to restore canonical section names:
+     * Allows authorized course editors to restore canonical UCKK section names:
      * Orientation, Concepts, Matière canonique, Atelier, Preuves,
      * Délibération, Livrable, Évaluation and Archive.
      */
@@ -162,9 +171,10 @@ $capabilities = [
     /*
      * View UCKK diagnostic information for a course.
      *
-     * This is for debugging the course format configuration and section map.
-     * It should not expose private learner data, submissions, grades, archive
-     * contents or integrity cases.
+     * This is for debugging the UCKK course format configuration, section map,
+     * format options and local display state. It must not expose private learner
+     * data, submissions, grades, archive contents, hidden records, integrity
+     * case contents, tokens or service credentials.
      */
     'format/uckk:viewdiagnostics' => [
         'riskbitmask' => RISK_CONFIG,

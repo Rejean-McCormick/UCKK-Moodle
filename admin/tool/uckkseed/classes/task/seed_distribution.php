@@ -41,6 +41,9 @@ final class seed_distribution extends scheduled_task {
     /** Canonical action. */
     private const ACTION_SEED = 'seed';
 
+    /** Default academic registry JSON folder, relative to Moodle root. */
+    private const DEFAULT_PRESET_PATH = 'academic_registry_json';
+
     /** Apply mode. */
     private const MODE_APPLY = 'apply';
 
@@ -85,15 +88,20 @@ final class seed_distribution extends scheduled_task {
         }
 
         $mode = $this->get_task_mode();
+        $presetpath = $this->resolve_preset_path();
 
         mtrace('[tool_uckkseed] Starting UCKK seed distribution task.');
         mtrace('[tool_uckkseed] Mode: ' . $mode);
+        mtrace('[tool_uckkseed] Academic registry JSON path: ' . $presetpath);
+
+        $this->ensure_preset_path_is_readable($presetpath);
 
         $options = [
             'action' => self::ACTION_SEED,
             'mode' => $mode,
             'source' => self::SOURCE,
             'scheduled' => true,
+            'presetpath' => $presetpath,
             'preset' => '',
             'presets' => [],
             'component' => '',
@@ -104,7 +112,7 @@ final class seed_distribution extends scheduled_task {
         ];
 
         try {
-            $seeder = new seeder();
+            $seeder = new seeder($presetpath);
             $result = $seeder->seed($options);
             $data = $this->result_to_array($result);
 
@@ -178,6 +186,100 @@ final class seed_distribution extends scheduled_task {
         }
 
         return $mode;
+    }
+
+    /**
+     * Resolve the academic registry JSON path.
+     *
+     * The admin setting may be:
+     * - empty: use academic_registry_json at Moodle root;
+     * - relative: resolve from Moodle root;
+     * - absolute: use as-is.
+     *
+     * @return string Absolute path.
+     */
+    private function resolve_preset_path(): string {
+        global $CFG;
+
+        $configured = get_config(self::COMPONENT, 'presetpath');
+
+        if ($configured === false || trim((string)$configured) === '') {
+            $configured = self::DEFAULT_PRESET_PATH;
+        }
+
+        $configured = $this->clean_path((string)$configured);
+
+        if ($configured === '') {
+            $configured = self::DEFAULT_PRESET_PATH;
+        }
+
+        if ($this->is_absolute_path($configured)) {
+            return rtrim($configured, DIRECTORY_SEPARATOR);
+        }
+
+        return rtrim($CFG->dirroot, DIRECTORY_SEPARATOR)
+            . DIRECTORY_SEPARATOR
+            . trim($configured, "\\/");
+    }
+
+    /**
+     * Basic path cleanup for an admin-controlled path setting.
+     *
+     * @param string $path Path.
+     * @return string Cleaned path.
+     */
+    private function clean_path(string $path): string {
+        $path = str_replace("\0", '', $path);
+        $path = trim($path);
+
+        // Keep Windows backslashes allowed, but normalize repeated trailing separators later.
+        return $path;
+    }
+
+    /**
+     * Whether a path is absolute on Windows or Unix-like systems.
+     *
+     * @param string $path Path.
+     * @return bool
+     */
+    private function is_absolute_path(string $path): bool {
+        if ($path === '') {
+            return false;
+        }
+
+        // Unix/Linux/macOS absolute path: /var/www/moodle/academic_registry_json.
+        if (str_starts_with($path, '/') || str_starts_with($path, '\\')) {
+            return true;
+        }
+
+        // Windows absolute path: C:\path or C:/path.
+        return (bool)preg_match('/^[A-Za-z]:[\\\\\\/]/', $path);
+    }
+
+    /**
+     * Fail early if the academic registry JSON folder is not readable.
+     *
+     * @param string $presetpath Absolute path.
+     * @return void
+     */
+    private function ensure_preset_path_is_readable(string $presetpath): void {
+        if (!is_dir($presetpath)) {
+            throw new \moodle_exception(
+                'presetpathnotfound',
+                self::COMPONENT,
+                '',
+                $presetpath
+            );
+        }
+
+        if (!is_readable($presetpath)) {
+            throw new \moodle_exception(
+                'presetpathnotreadable',
+                self::COMPONENT,
+                '',
+                $presetpath
+            );
+        }
     }
 
     /**
@@ -293,4 +395,3 @@ final class seed_distribution extends scheduled_task {
         mtrace($prefix . ' ' . $text);
     }
 }
-

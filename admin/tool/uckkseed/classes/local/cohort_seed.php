@@ -320,7 +320,7 @@ final class cohort_seed {
 
         $validation = $this->validate($items, $options);
 
-        if ($validation->haserrors) {
+        if ($validation->has_errors()) {
             return $validation;
         }
 
@@ -1044,32 +1044,11 @@ final class cohort_seed {
      * @return validation_result
      */
     private function new_result(string $summary): validation_result {
-        $result = new validation_result();
-        $result->status = self::STATUS_COMPLETED;
-        $result->ok = true;
-        $result->haserrors = false;
-        $result->haswarnings = false;
-        $result->summary = $summary;
-        $result->counts = [
-            'created' => 0,
-            'updated' => 0,
-            'skipped' => 0,
-            'failed' => 0,
-            'warnings' => 0,
-            'errors' => 0,
-        ];
-        $result->messages = [];
-        $result->created = [];
-        $result->updated = [];
-        $result->skipped = [];
-        $result->failed = [];
-        $result->metadata = [
+        return new validation_result(self::STATUS_COMPLETED, $summary, [
             'component' => self::COMPONENT,
             'preset' => self::PRESET,
             'targettype' => self::TARGET_TYPE,
-        ];
-
-        return $result;
+        ]);
     }
 
     /**
@@ -1088,25 +1067,15 @@ final class cohort_seed {
         string $message,
         array $metadata = []
     ): void {
-        $result->messages[] = [
-            'severity' => $severity,
-            'component' => self::COMPONENT,
-            'preset' => self::PRESET,
-            'targettype' => self::TARGET_TYPE,
-            'targetkey' => $targetkey,
-            'message' => $message,
-            'metadata' => $metadata,
-        ];
-
-        if (in_array($severity, [self::SEVERITY_ERROR, self::SEVERITY_BLOCKER], true)) {
-            $result->haserrors = true;
-            $this->increment($result, 'errors');
-        }
-
-        if ($severity === self::SEVERITY_WARNING) {
-            $result->haswarnings = true;
-            $this->increment($result, 'warnings');
-        }
+        $result->add_message(
+            $severity,
+            $message,
+            self::COMPONENT,
+            self::PRESET,
+            self::TARGET_TYPE,
+            $targetkey,
+            $metadata
+        );
     }
 
     /**
@@ -1116,11 +1085,7 @@ final class cohort_seed {
      * @param string $key Count key.
      */
     private function increment(validation_result $result, string $key): void {
-        if (!isset($result->counts[$key])) {
-            $result->counts[$key] = 0;
-        }
-
-        $result->counts[$key]++;
+        $result->increment($key);
     }
 
     /**
@@ -1129,14 +1094,12 @@ final class cohort_seed {
      * @param validation_result $result Result object.
      */
     private function finish_result(validation_result $result): void {
-        $result->ok = !$result->haserrors;
-
-        if ($result->haserrors) {
-            $result->status = self::STATUS_FAILED;
-        } else if ($result->haswarnings) {
-            $result->status = self::STATUS_WARNING;
+        if ($result->has_errors()) {
+            $result->set_status(self::STATUS_FAILED);
+        } else if ($result->has_warnings()) {
+            $result->set_status(self::STATUS_WARNING);
         } else {
-            $result->status = self::STATUS_COMPLETED;
+            $result->set_status(self::STATUS_COMPLETED);
         }
     }
 }

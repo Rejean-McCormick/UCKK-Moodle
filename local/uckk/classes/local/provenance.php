@@ -1,13 +1,3 @@
-Voici le contenu proposé pour :
-
-```text
-local/uckk/classes/local/provenance.php
-```
-
-Alignement UCKK : la provenance doit soutenir une mémoire structurée, liée, versionnée, auditable, réutilisable et reliée aux décisions/actions; elle protège aussi la distinction entre transparence du pouvoir et protection des personnes.  
-Alignement Moodle : puisque ces enregistrements peuvent contenir des données utilisateur, le plugin devra aussi les déclarer dans `classes/privacy/provider.php` pour export/suppression via la Privacy API. 
-
-```php
 <?php
 // This file is part of UCKK-Moodle.
 //
@@ -926,4 +916,3 @@ final class provenance {
         return ucfirst(str_replace('_', ' ', $action));
     }
 }
-```

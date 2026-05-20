@@ -96,6 +96,7 @@ const TOOL_UCKKSEED_CLI_COMPONENTS = [
         'preset' => null,
         'component' => null,
         'target' => null,
+        'presetpath' => null,
         'dry-run' => false,
         'rollback-plan' => false,
         'force' => false,
@@ -160,6 +161,7 @@ if (!in_array($scope, TOOL_UCKKSEED_CLI_RESET_SCOPES, true)) {
 $presets = tool_uckkseed_cli_parse_list_option($options['preset'], TOOL_UCKKSEED_CLI_PRESETS, 'preset');
 $components = tool_uckkseed_cli_parse_list_option($options['component'], TOOL_UCKKSEED_CLI_COMPONENTS, 'component');
 $targets = tool_uckkseed_cli_parse_free_list_option($options['target']);
+$presetpath = tool_uckkseed_cli_resolve_preset_path($options['presetpath']);
 
 $dryrun = !empty($options['dry-run']);
 $rollbackplan = !empty($options['rollback-plan']);
@@ -203,6 +205,7 @@ $resetoptions = [
     'presets' => $presets,
     'components' => $components,
     'targets' => $targets,
+    'presetpath' => $presetpath,
     'dryrun' => $dryrun,
     'dry_run' => $dryrun,
     'rollbackplan' => $rollbackplan,
@@ -235,10 +238,11 @@ try {
             cli_writeln('Targets: ' . implode(', ', $targets));
         }
 
+        cli_writeln('Academic registry JSON: ' . $presetpath);
         cli_writeln('');
     }
 
-    $seeder = new \tool_uckkseed\local\seeder();
+    $seeder = new \tool_uckkseed\local\seeder($presetpath);
     $result = $seeder->reset($resetoptions);
     $resultdata = tool_uckkseed_cli_result_to_array($result);
 
@@ -306,6 +310,8 @@ Options:
                              tool_uckkintegrity, report_uckk
 
 --target=<list>            Comma-separated target keys/idnumbers/shortnames.
+--presetpath=<path>        Academic registry JSON directory. Default: academic_registry_json at Moodle root.
+                           Relative paths are resolved from \$CFG->dirroot.
 --dry-run                  Do not change data. Report what would be reset.
 --rollback-plan            Do not change data. Produce a rollback plan.
 --force                    Allow broader reset scopes when confirmed.
@@ -316,6 +322,7 @@ Options:
 
 Examples:
 php admin/tool/uckkseed/cli/reset.php --dry-run
+php admin/tool/uckkseed/cli/reset.php --presetpath=academic_registry_json --dry-run
 php admin/tool/uckkseed/cli/reset.php --scope=reset_seed_logs --confirm
 php admin/tool/uckkseed/cli/reset.php --scope=reset_seeded_courses --preset=courses,course_templates --dry-run
 php admin/tool/uckkseed/cli/reset.php --scope=reset_all_uckk_seeded_content --force --confirm
@@ -324,6 +331,58 @@ php admin/tool/uckkseed/cli/reset.php --rollback-plan --json
 EOL;
 
     echo $help;
+}
+
+
+/**
+ * Resolve the academic registry JSON directory path.
+ *
+ * @param mixed $value Raw CLI option value.
+ * @return string Absolute directory path.
+ */
+function tool_uckkseed_cli_resolve_preset_path(mixed $value): string {
+    global $CFG;
+
+    if ($value !== null && $value !== false && trim((string)$value) !== '') {
+        $path = trim((string)$value);
+    } else {
+        $path = trim((string)get_config('tool_uckkseed', 'presetpath'));
+
+        if ($path === '') {
+            $path = 'academic_registry_json';
+        }
+    }
+
+    $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    $path = rtrim($path, DIRECTORY_SEPARATOR);
+
+    if (tool_uckkseed_cli_is_absolute_path($path)) {
+        return $path;
+    }
+
+    return rtrim($CFG->dirroot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $path;
+}
+
+/**
+ * Return whether a path is absolute on Windows or Unix-like systems.
+ *
+ * @param string $path Path.
+ * @return bool
+ */
+function tool_uckkseed_cli_is_absolute_path(string $path): bool {
+    if ($path === '') {
+        return false;
+    }
+
+    if (str_starts_with($path, DIRECTORY_SEPARATOR)) {
+        return true;
+    }
+
+    if (preg_match('/^[A-Za-z]:[\\\\\\/]/', $path) === 1) {
+        return true;
+    }
+
+    return str_starts_with($path, '\\\\');
 }
 
 /**

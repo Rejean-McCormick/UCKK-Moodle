@@ -5,13 +5,14 @@
   "version": 2026051200,
   "items": [
     {
-      "key": "uckk_root",
+      "id": "uckk_root",
       "name": "UCKK",
       "idnumber": "UCKK",
-      "parent": null,
+      "path": "UCKK",
+      "parent_idnumber": null,
       "description": "Catégorie racine de l’Univers-Cité King Klown Moodle Distribution.",
       "sortorder": 0,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "product": "UCKK-Moodle",
         "product_full_name": "Univers-Cité King Klown Moodle Distribution",
@@ -20,13 +21,14 @@
       }
     },
     {
-      "key": "00_accueil_et_orientation",
+      "id": "00_accueil_et_orientation",
       "name": "00 — Accueil et orientation",
       "idnumber": "UCKK-CAT-00-ACCUEIL-ORIENTATION",
-      "parent": "uckk_root",
+      "path": "UCKK / 00 — Accueil et orientation",
+      "parent_idnumber": "UCKK",
       "description": "Accueil, orientation générale, règles de participation, présentation du campus UCKK et premiers repères.",
       "sortorder": 10,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "orientation",
         "program": "tronc_commun",
@@ -34,126 +36,151 @@
       }
     },
     {
-      "key": "01_tronc_commun_obligatoire",
+      "id": "01_tronc_commun_obligatoire",
       "name": "01 — Tronc commun obligatoire",
-      "idnumber": "UCKK-CAT-01-TRONC-COMMUN",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-TC",
+      "path": "UCKK / 01 — Tronc commun obligatoire",
+      "parent_idnumber": "UCKK",
       "description": "Cours obligatoires du tronc commun UCKK, de UCKK-TC101 à UCKK-TC108.",
       "sortorder": 20,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "tronc_commun",
         "program": "tronc_commun",
         "course_prefix": "UCKK-TC",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-01-TRONC-COMMUN"
+      },
+      "legacy_idnumber": "UCKK-CAT-01-TRONC-COMMUN"
     },
     {
-      "key": "02_baccalaureat_grand_jeu_social",
+      "id": "02_baccalaureat_grand_jeu_social",
       "name": "02 — Baccalauréat Grand Jeu social",
-      "idnumber": "UCKK-CAT-02-GRAND-JEU-SOCIAL",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-GJS",
+      "path": "UCKK / 02 — Baccalauréat Grand Jeu social",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré à la lecture, la cartographie et l’action dans le Grand Jeu social.",
       "sortorder": 30,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "grand_jeu_social",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-02-GRAND-JEU-SOCIAL"
+      },
+      "legacy_idnumber": "UCKK-CAT-02-GRAND-JEU-SOCIAL"
     },
     {
-      "key": "03_baccalaureat_architecture_ecosysteme_digital_koa",
+      "id": "03_baccalaureat_architecture_ecosysteme_digital_koa",
       "name": "03 — Baccalauréat Architecture écosystème digital kOA",
-      "idnumber": "UCKK-CAT-03-KOA-DIGITAL",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-KOA",
+      "path": "UCKK / 03 — Baccalauréat Architecture écosystème digital kOA",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré à l’architecture de l’écosystème digital kOA et à ses infrastructures gouvernables.",
       "sortorder": 40,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "architecture_ecosysteme_digital_koa",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-03-KOA-DIGITAL"
+      },
+      "legacy_idnumber": "UCKK-CAT-03-KOA-DIGITAL"
     },
     {
-      "key": "04_baccalaureat_architecture_sociotechnique",
+      "id": "04_baccalaureat_architecture_sociotechnique",
       "name": "04 — Baccalauréat Architecture sociotechnique",
-      "idnumber": "UCKK-CAT-04-SOCIOTECHNIQUE",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-AS",
+      "path": "UCKK / 04 — Baccalauréat Architecture sociotechnique",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré aux systèmes sociotechniques, aux institutions, aux infrastructures sociales et aux dispositifs d’action.",
       "sortorder": 50,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "architecture_sociotechnique",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-04-SOCIOTECHNIQUE"
+      },
+      "legacy_idnumber": "UCKK-CAT-04-SOCIOTECHNIQUE"
     },
     {
-      "key": "05_baccalaureat_sciences_politiques",
+      "id": "05_baccalaureat_sciences_politiques",
       "name": "05 — Baccalauréat Sciences politiques",
-      "idnumber": "UCKK-CAT-05-SCIENCES-POLITIQUES",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-SP",
+      "path": "UCKK / 05 — Baccalauréat Sciences politiques",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré aux institutions, pouvoirs, conflits, décisions publiques et formes de légitimité.",
       "sortorder": 60,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "sciences_politiques",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-05-SCIENCES-POLITIQUES"
+      },
+      "legacy_idnumber": "UCKK-CAT-05-SCIENCES-POLITIQUES"
     },
     {
-      "key": "06_baccalaureat_economie",
+      "id": "06_baccalaureat_economie",
       "name": "06 — Baccalauréat Économie",
-      "idnumber": "UCKK-CAT-06-ECONOMIE",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-EC",
+      "path": "UCKK / 06 — Baccalauréat Économie",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré aux systèmes économiques, aux ressources, aux échanges, à la valeur et aux institutions économiques.",
       "sortorder": 70,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "economie",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-06-ECONOMIE"
+      },
+      "legacy_idnumber": "UCKK-CAT-06-ECONOMIE"
     },
     {
-      "key": "07_baccalaureat_ecologie",
+      "id": "07_baccalaureat_ecologie",
       "name": "07 — Baccalauréat Écologie",
-      "idnumber": "UCKK-CAT-07-ECOLOGIE",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-ECO",
+      "path": "UCKK / 07 — Baccalauréat Écologie",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré aux systèmes vivants, milieux, interdépendances écologiques et responsabilités collectives.",
       "sortorder": 80,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "ecologie",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-07-ECOLOGIE"
+      },
+      "legacy_idnumber": "UCKK-CAT-07-ECOLOGIE"
     },
     {
-      "key": "08_baccalaureat_metaphysique",
+      "id": "08_baccalaureat_metaphysique",
       "name": "08 — Baccalauréat Métaphysique",
-      "idnumber": "UCKK-CAT-08-METAPHYSIQUE",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-ME",
+      "path": "UCKK / 08 — Baccalauréat Métaphysique",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré aux concepts fondamentaux, cadres d’interprétation, visions du monde et architectures du sens.",
       "sortorder": 90,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "metaphysique",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-08-METAPHYSIQUE"
+      },
+      "legacy_idnumber": "UCKK-CAT-08-METAPHYSIQUE"
     },
     {
-      "key": "09_baccalaureat_ia_gouvernable",
+      "id": "09_baccalaureat_ia_gouvernable",
       "name": "09 — Baccalauréat IA gouvernable",
-      "idnumber": "UCKK-CAT-09-IA-GOUVERNABLE",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-IA",
+      "path": "UCKK / 09 — Baccalauréat IA gouvernable",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré à l’intelligence artificielle gouvernable, non souveraine, documentée et soumise à validation humaine.",
       "sortorder": 100,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "intelligence_artificielle_gouvernable",
@@ -162,60 +189,72 @@
           "requires_human_validation": true,
           "allow_decision_automation": false
         },
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-09-IA-GOUVERNABLE"
+      },
+      "legacy_idnumber": "UCKK-CAT-09-IA-GOUVERNABLE"
     },
     {
-      "key": "10_baccalaureat_linguistique_architecture_du_sens",
+      "id": "10_baccalaureat_linguistique_architecture_du_sens",
       "name": "10 — Baccalauréat Linguistique architecture du sens",
-      "idnumber": "UCKK-CAT-10-LINGUISTIQUE-SENS",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-LI",
+      "path": "UCKK / 10 — Baccalauréat Linguistique architecture du sens",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré au langage, aux signes, aux récits, aux cadres symboliques et à l’architecture du sens.",
       "sortorder": 110,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "linguistique_architecture_du_sens",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-10-LINGUISTIQUE-SENS"
+      },
+      "legacy_idnumber": "UCKK-CAT-10-LINGUISTIQUE-SENS"
     },
     {
-      "key": "11_baccalaureat_intervention_sociale",
+      "id": "11_baccalaureat_intervention_sociale",
       "name": "11 — Baccalauréat Intervention sociale",
-      "idnumber": "UCKK-CAT-11-INTERVENTION-SOCIALE",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-IS",
+      "path": "UCKK / 11 — Baccalauréat Intervention sociale",
+      "parent_idnumber": "UCKK",
       "description": "Programme consacré à l’intervention sociale, aux systèmes humains, à l’accompagnement, à la dignité et à l’action responsable.",
       "sortorder": 120,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "baccalaureat",
         "program": "intervention_sociale",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-11-INTERVENTION-SOCIALE"
+      },
+      "legacy_idnumber": "UCKK-CAT-11-INTERVENTION-SOCIALE"
     },
     {
-      "key": "12_mineure_medias_vivants_theatre_public",
+      "id": "12_mineure_medias_vivants_theatre_public",
       "name": "12 — Mineure Médias vivants théâtre public",
-      "idnumber": "UCKK-CAT-12-MEDIAS-VIVANTS",
-      "parent": "uckk_root",
+      "idnumber": "UCKK-MV",
+      "path": "UCKK / 12 — Mineure Médias vivants théâtre public",
+      "parent_idnumber": "UCKK",
       "description": "Mineure consacrée aux médias vivants, au théâtre public, à la performance et à la responsabilité de l’expression publique.",
       "sortorder": 130,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "mineure",
         "program": "medias_vivants_theatre_public",
         "formula": "Le spectacle est permis. L’abus ne l’est pas.",
-        "language": "fr"
-      }
+        "language": "fr",
+        "legacy_idnumber": "UCKK-CAT-12-MEDIAS-VIVANTS"
+      },
+      "legacy_idnumber": "UCKK-CAT-12-MEDIAS-VIVANTS"
     },
     {
-      "key": "13_seminaires_avances_laboratoires",
+      "id": "13_seminaires_avances_laboratoires",
       "name": "13 — Séminaires avancés et laboratoires",
       "idnumber": "UCKK-CAT-13-SEMINAIRES-LABS",
-      "parent": "uckk_root",
+      "path": "UCKK / 13 — Séminaires avancés et laboratoires",
+      "parent_idnumber": "UCKK",
       "description": "Séminaires avancés, laboratoires, prototypes, recherches appliquées et expérimentations encadrées.",
       "sortorder": 140,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "seminaire_laboratoire",
         "program": "seminaires_avances_laboratoires",
@@ -223,13 +262,14 @@
       }
     },
     {
-      "key": "90_defis_king_klown",
+      "id": "90_defis_king_klown",
       "name": "90 — Défis King Klown",
       "idnumber": "UCKK-CAT-90-DEFIS-KING-KLOWN",
-      "parent": "uckk_root",
+      "path": "UCKK / 90 — Défis King Klown",
+      "parent_idnumber": "UCKK",
       "description": "Espace institutionnel des Défis King Klown, des preuves, des validations et des parcours d’action.",
       "sortorder": 900,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "challenge_space",
         "component": "mod_uckkchallenge",
@@ -237,13 +277,14 @@
       }
     },
     {
-      "key": "91_assemblees",
+      "id": "91_assemblees",
       "name": "91 — Assemblées",
       "idnumber": "UCKK-CAT-91-ASSEMBLEES",
-      "parent": "uckk_root",
+      "path": "UCKK / 91 — Assemblées",
+      "parent_idnumber": "UCKK",
       "description": "Espace des Assemblées UCKK, des motions, délibérations, décisions, procès-verbaux et contestations.",
       "sortorder": 910,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "assembly_space",
         "component": "mod_uckkassembly",
@@ -251,13 +292,14 @@
       }
     },
     {
-      "key": "92_archives_et_portfolios",
+      "id": "92_archives_et_portfolios",
       "name": "92 — Archives et portfolios",
       "idnumber": "UCKK-CAT-92-ARCHIVES-PORTFOLIOS",
-      "parent": "uckk_root",
+      "path": "UCKK / 92 — Archives et portfolios",
+      "parent_idnumber": "UCKK",
       "description": "Espace des archives, preuves, Kristaux, portfolios, traces validées, révisions et exports.",
       "sortorder": 920,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "archive_space",
         "component": "mod_uckkarchive",
@@ -265,13 +307,14 @@
       }
     },
     {
-      "key": "99_integrite_inquisiteur",
+      "id": "99_integrite_inquisiteur",
       "name": "99 — Intégrité Inquisiteur",
       "idnumber": "UCKK-CAT-99-INTEGRITE-INQUISITEUR",
-      "parent": "uckk_root",
+      "path": "UCKK / 99 — Intégrité Inquisiteur",
+      "parent_idnumber": "UCKK",
       "description": "Espace restreint pour les processus d’intégrité, corrections, contestations, revues méthodologiques et gouvernance Inquisiteur.",
       "sortorder": 990,
-      "visible": true,
+      "visible": 1,
       "metadata": {
         "type": "integrity_space",
         "component": "tool_uckkintegrity",

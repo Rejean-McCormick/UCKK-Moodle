@@ -47,6 +47,9 @@ final class seed_form extends \moodleform {
     /** Mode: rollback plan. */
     public const MODE_ROLLBACK_PLAN = 'rollback_plan';
 
+    /** Default academic registry JSON folder, relative to Moodle dirroot. */
+    public const DEFAULT_PRESET_PATH = 'academic_registry_json';
+
     /** Preset: categories. */
     public const PRESET_CATEGORIES = 'categories';
 
@@ -327,6 +330,7 @@ final class seed_form extends \moodleform {
             'mode' => $mode,
             'presets' => $this->normalise_list($data->presets ?? []),
             'components' => $this->normalise_list($data->components ?? []),
+            'presetpath' => $this->get_preset_path(),
             'dryrun' => $mode === self::MODE_DRY_RUN,
             'report' => $mode === self::MODE_REPORT,
             'rollbackplan' => $mode === self::MODE_ROLLBACK_PLAN,
@@ -349,7 +353,9 @@ final class seed_form extends \moodleform {
     }
 
     /**
-     * Return preset path.
+     * Return configured academic registry JSON path.
+     *
+     * The value is normally relative to Moodle dirroot.
      *
      * @return string
      */
@@ -360,7 +366,7 @@ final class seed_form extends \moodleform {
             return $configured;
         }
 
-        return 'admin/tool/uckkseed/presets';
+        return self::DEFAULT_PRESET_PATH;
     }
 
     /**

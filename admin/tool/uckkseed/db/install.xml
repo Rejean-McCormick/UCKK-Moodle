@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="admin/tool/uckkseed/db" VERSION="2026051200" COMMENT="XMLDB file for the UCKK seed tool"
+<XMLDB PATH="admin/tool/uckkseed/db" VERSION="2026051201" COMMENT="XMLDB file for the UCKK seed tool"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -108,7 +108,6 @@
         <INDEX NAME="timecreated" UNIQUE="false" FIELDS="timecreated"/>
         <INDEX NAME="run_level" UNIQUE="false" FIELDS="runid, level"/>
         <INDEX NAME="run_preset" UNIQUE="false" FIELDS="runid, preset"/>
-        <INDEX NAME="target_lookup" UNIQUE="false" FIELDS="targettype, targetkey"/>
       </INDEXES>
     </TABLE>
   </TABLES>

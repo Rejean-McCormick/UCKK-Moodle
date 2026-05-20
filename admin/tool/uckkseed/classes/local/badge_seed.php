@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace tool_uckkseed\local;
 
+use html_writer;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
@@ -90,6 +91,41 @@ final class badge_seed {
 
     /** Seed manager name. */
     private const MANAGED_BY = 'tool_uckkseed';
+
+    /** Supported UCKK badge award criteria. */
+    private const SUPPORTED_CRITERIA = [
+        'pathway_completion',
+        'program_completion',
+        'course_completion',
+        'challenge_completion',
+        'assembly_participation',
+        'decision_record',
+        'integrity_review',
+        'ai_log',
+        'evidence_submission',
+        'human_validation',
+        'competency_threshold',
+        'competency_completion',
+        'archive_or_portfolio',
+        'no_unresolved_integrity_block',
+    ];
+
+    /** Criterion aliases accepted from generated registry JSON and older defaults. */
+    private const CRITERION_ALIASES = [
+        'competency_completion' => 'competency_threshold',
+        'competency_ids' => 'competency_threshold',
+        'archive' => 'archive_or_portfolio',
+        'portfolio' => 'archive_or_portfolio',
+        'proof_submission' => 'evidence_submission',
+        'proof' => 'evidence_submission',
+        'mentor_validation' => 'human_validation',
+        'human_review' => 'human_validation',
+        'pathway' => 'pathway_completion',
+        'program' => 'program_completion',
+        'course' => 'course_completion',
+        'challenge_validation' => 'challenge_completion',
+        'challenge' => 'challenge_completion',
+    ];
 
     /** Canonical badge keys. */
     private const CANONICAL_BADGES = [
@@ -569,7 +605,7 @@ final class badge_seed {
             $this->validate_required_award_rules($result, $item);
 
             foreach ($item['competencies'] as $competencyidnumber) {
-                if (!in_array($competencyidnumber, self::COMPETENCY_IDS, true)) {
+                if (!$this->is_known_competency_reference($competencyidnumber)) {
                     $this->add_message(
                         $result,
                         self::SEVERITY_WARNING,
@@ -615,7 +651,7 @@ final class badge_seed {
 
         $validation = $this->validate($items, $options);
 
-        if ($validation->haserrors) {
+        if ($validation->has_errors()) {
             return $validation;
         }
 
@@ -834,33 +870,45 @@ final class badge_seed {
     }
 
     /**
-     * Validate required UCKK badge award rules.
+     * Validate UCKK badge award rules.
+     *
+     * Criteria are policy descriptors, not automatic award bypasses. The final
+     * registry supports badges with different combinations of course, pathway,
+     * programme, challenge, assembly, evidence, archive, integrity and human
+     * validation criteria.
      *
      * @param validation_result $result Result object.
      * @param array<string, mixed> $item Normalised badge item.
      */
     private function validate_required_award_rules(validation_result $result, array $item): void {
-        $required = [
-            'evidence_submission',
-            'human_validation',
-            'competency_threshold',
-            'archive_or_portfolio',
-            'no_unresolved_integrity_block',
-        ];
+        if (empty($item['criteria'])) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_ERROR,
+                self::PRESET,
+                $item['key'],
+                get_string('badgeseedmissingcriterion', 'tool_uckkseed', 'supported_uckk_criterion')
+            );
+            return;
+        }
 
-        foreach ($required as $criterion) {
-            if (!in_array($criterion, $item['criteria'], true)) {
+        foreach ($item['criteria'] as $criterion) {
+            if (!in_array($criterion, self::SUPPORTED_CRITERIA, true)) {
                 $this->add_message(
                     $result,
-                    self::SEVERITY_ERROR,
+                    self::SEVERITY_WARNING,
                     self::PRESET,
                     $item['key'],
-                    get_string('badgeseedmissingcriterion', 'tool_uckkseed', $criterion)
+                    'Unsupported UCKK badge criterion: ' . $criterion,
+                    [
+                        'criterion' => $criterion,
+                        'supported' => self::SUPPORTED_CRITERIA,
+                    ]
                 );
             }
         }
 
-        if (!$item['requiredarchive']) {
+        if (!$item['requiredarchive'] && in_array('archive_or_portfolio', $item['criteria'], true)) {
             $this->add_message(
                 $result,
                 self::SEVERITY_ERROR,
@@ -870,7 +918,7 @@ final class badge_seed {
             );
         }
 
-        if (!$item['requireshumanvalidation']) {
+        if (!$item['requireshumanvalidation'] && in_array('human_validation', $item['criteria'], true)) {
             $this->add_message(
                 $result,
                 self::SEVERITY_ERROR,
@@ -880,6 +928,7 @@ final class badge_seed {
             );
         }
     }
+
 
     /**
      * Create a Moodle badge record.
@@ -1118,7 +1167,15 @@ final class badge_seed {
     }
 
     /**
-     * Normalise a preset row.
+     * Normalise one badge item.
+     *
+     * Supports both the original hand-written badge seed shape and the final
+     * academic_registry_json badge shape:
+     * - key/name/description
+     * - id/idnumber/title/short_title
+     * - badge_type/recognition
+     * - criteria or award_criteria as strings or objects with a type field
+     * - competencies or linked_competency_ids as registry competency references
      *
      * @param mixed $item Raw item.
      * @return array<string, mixed>
@@ -1132,24 +1189,300 @@ final class badge_seed {
             $item = [];
         }
 
-        $key = clean_param((string)($item['key'] ?? $item['shortname'] ?? ''), PARAM_ALPHANUMEXT);
-        $type = clean_param((string)($item['type'] ?? 'site'), PARAM_ALPHA);
+        $recognition = $item['recognition'] ?? [];
+        if ($recognition instanceof stdClass) {
+            $recognition = (array)$recognition;
+        }
+        if (!is_array($recognition)) {
+            $recognition = [];
+        }
+
+        $moodle = $item['moodle'] ?? [];
+        if ($moodle instanceof stdClass) {
+            $moodle = (array)$moodle;
+        }
+        if (!is_array($moodle)) {
+            $moodle = [];
+        }
+
+        $rawkey = $item['key']
+            ?? $item['shortname']
+            ?? $item['idnumber']
+            ?? $item['id']
+            ?? '';
+        $key = clean_param($this->normalise_key((string)$rawkey), PARAM_ALPHANUMEXT);
+
+        $rawtype = (string)($item['type'] ?? $moodle['type'] ?? $item['badge_type'] ?? 'site');
+        $type = $this->normalise_badge_type($rawtype);
+
         $metadata = $this->normalise_metadata($item['metadata'] ?? []);
         $metadata[self::METADATA_MANAGED_BY] = self::MANAGED_BY;
 
+        foreach ([
+            'id',
+            'object_type',
+            'idnumber',
+            'badge_type',
+            'status',
+            'program_id',
+            'pathway_id',
+            'linked_course_ids',
+            'recognition',
+            'ai_metadata',
+            'source',
+        ] as $field) {
+            if (array_key_exists($field, $item) && !array_key_exists($field, $metadata)) {
+                $metadata[$field] = $item[$field];
+            }
+        }
+
+        $criteriaitems = $this->normalise_criteria_payload($item['criteria'] ?? $item['award_criteria'] ?? []);
+        $criteria = $this->normalise_criteria($item['criteria'] ?? $item['award_criteria'] ?? []);
+        $competencies = $this->normalise_competencies(
+            $item['competencies']
+                ?? $item['linked_competency_ids']
+                ?? $this->extract_competencies_from_criteria_payload($criteriaitems)
+        );
+
+        if (empty($criteria) && !empty($competencies)) {
+            $criteria[] = 'competency_threshold';
+        }
+
+        if (empty($criteria)) {
+            $criteria[] = 'human_validation';
+        }
+
+        $description = (string)(
+            $item['description']
+            ?? $recognition['public_status_notice']
+            ?? $recognition['title']
+            ?? $item['summary']
+            ?? ''
+        );
+
         return [
             'key' => $key,
-            'name' => trim(clean_param((string)($item['name'] ?? $this->fallback_name($key)), PARAM_TEXT)),
-            'description' => trim(clean_param((string)($item['description'] ?? ''), PARAM_TEXT)),
-            'type' => in_array($type, ['site', 'course'], true) ? $type : 'site',
-            'courseidnumber' => clean_param((string)($item['courseidnumber'] ?? $item['course'] ?? ''), PARAM_TEXT),
-            'criteria' => $this->normalise_list($item['criteria'] ?? []),
-            'competencies' => $this->normalise_list($item['competencies'] ?? []),
-            'requiredarchive' => $this->normalise_bool($item['requiredarchive'] ?? true),
-            'requireshumanvalidation' => $this->normalise_bool($item['requireshumanvalidation'] ?? true),
-            'language' => clean_param((string)($item['language'] ?? self::DEFAULT_LANGUAGE), PARAM_ALPHANUMEXT),
+            'name' => trim(clean_param((string)($item['name'] ?? $item['title'] ?? $item['short_title'] ?? $recognition['title'] ?? $this->fallback_name($key)), PARAM_TEXT)),
+            'description' => trim(clean_param($description, PARAM_TEXT)),
+            'type' => $type,
+            'courseidnumber' => clean_param((string)($item['courseidnumber'] ?? $item['course'] ?? $moodle['courseidnumber'] ?? ''), PARAM_TEXT),
+            'criteria' => array_values(array_unique($criteria)),
+            'criteriaitems' => $criteriaitems,
+            'competencies' => array_values(array_unique($competencies)),
+            'requiredarchive' => $this->normalise_bool($item['requiredarchive'] ?? $item['required_archive'] ?? true),
+            'requireshumanvalidation' => $this->normalise_bool($item['requireshumanvalidation'] ?? $item['requires_human_validation'] ?? true),
+            'language' => clean_param((string)($item['language'] ?? $moodle['language'] ?? self::DEFAULT_LANGUAGE), PARAM_ALPHANUMEXT),
             'metadata' => $metadata,
         ];
+    }
+
+
+
+    /**
+     * Normalise a badge key/id into the seed key shape.
+     *
+     * @param string $value Raw value.
+     * @return string
+     */
+    private function normalise_key(string $value): string {
+        $value = strtolower(trim($value));
+        $value = preg_replace('/^[a-z]+:/', '', $value) ?? $value;
+        $value = preg_replace('/[^a-z0-9_]+/', '_', $value) ?? $value;
+        $value = trim($value, '_');
+
+        return $value;
+    }
+
+    /**
+     * Normalise Moodle badge type.
+     *
+     * @param string $type Raw type.
+     * @return string
+     */
+    private function normalise_badge_type(string $type): string {
+        $type = strtolower(trim($type));
+
+        if ($type === 'course' || $type === 'course_badge') {
+            return 'course';
+        }
+
+        return 'site';
+    }
+
+    /**
+     * Normalise criterion objects/strings to criterion type keys.
+     *
+     * @param mixed $criteria Raw criteria.
+     * @return string[]
+     */
+    private function normalise_criteria(mixed $criteria): array {
+        $payload = $this->normalise_criteria_payload($criteria);
+        $types = [];
+
+        foreach ($payload as $criterion) {
+            $type = $this->normalise_criterion_type((string)($criterion['type'] ?? ''));
+
+            if ($type !== '') {
+                $types[] = $type;
+            }
+        }
+
+        return array_values(array_unique($types));
+    }
+
+    /**
+     * Preserve criterion payload for metadata/export while accepting objects.
+     *
+     * @param mixed $criteria Raw criteria.
+     * @return array<int, array<string, mixed>>
+     */
+    private function normalise_criteria_payload(mixed $criteria): array {
+        if ($criteria instanceof stdClass) {
+            $criteria = (array)$criteria;
+        }
+
+        if ($criteria === null || $criteria === '') {
+            return [];
+        }
+
+        if (!is_array($criteria)) {
+            $criteria = [$criteria];
+        }
+
+        $items = [];
+
+        foreach ($criteria as $criterion) {
+            if ($criterion instanceof stdClass) {
+                $criterion = (array)$criterion;
+            }
+
+            if (is_array($criterion)) {
+                $type = $this->normalise_criterion_type((string)($criterion['type'] ?? $criterion['criterion'] ?? ''));
+
+                if ($type === '') {
+                    continue;
+                }
+
+                $criterion['type'] = $type;
+                $items[] = $criterion;
+                continue;
+            }
+
+            $type = $this->normalise_criterion_type((string)$criterion);
+
+            if ($type !== '') {
+                $items[] = ['type' => $type];
+            }
+        }
+
+        return $items;
+    }
+
+    /**
+     * Normalise one criterion type, including aliases.
+     *
+     * @param string $type Raw type.
+     * @return string
+     */
+    private function normalise_criterion_type(string $type): string {
+        $type = strtolower(trim($type));
+        $type = str_replace(['-', ' ', ':'], '_', $type);
+        $type = preg_replace('/[^a-z0-9_]+/', '_', $type) ?? $type;
+        $type = trim($type, '_');
+
+        if ($type === '') {
+            return '';
+        }
+
+        return self::CRITERION_ALIASES[$type] ?? $type;
+    }
+
+    /**
+     * Normalise competency refs. Accepts final registry refs and old idnumbers.
+     *
+     * @param mixed $competencies Raw competencies.
+     * @return string[]
+     */
+    private function normalise_competencies(mixed $competencies): array {
+        if ($competencies instanceof stdClass) {
+            $competencies = (array)$competencies;
+        }
+
+        if ($competencies === null || $competencies === '') {
+            return [];
+        }
+
+        if (!is_array($competencies)) {
+            $competencies = [$competencies];
+        }
+
+        $items = [];
+
+        foreach ($competencies as $competency) {
+            if ($competency instanceof stdClass) {
+                $competency = (array)$competency;
+            }
+
+            if (is_array($competency)) {
+                $value = (string)($competency['idnumber'] ?? $competency['id'] ?? $competency['key'] ?? '');
+            } else {
+                $value = (string)$competency;
+            }
+
+            $value = trim($value);
+
+            if ($value !== '') {
+                $items[] = clean_param($value, PARAM_TEXT);
+            }
+        }
+
+        return array_values(array_unique($items));
+    }
+
+    /**
+     * Extract competency refs from criteria payload.
+     *
+     * @param array<int, array<string, mixed>> $criteriaitems Criteria payload.
+     * @return string[]
+     */
+    private function extract_competencies_from_criteria_payload(array $criteriaitems): array {
+        $refs = [];
+
+        foreach ($criteriaitems as $criterion) {
+            foreach (['competency_ids', 'competencies', 'competency_idnumbers'] as $field) {
+                if (empty($criterion[$field])) {
+                    continue;
+                }
+
+                foreach ($this->normalise_competencies($criterion[$field]) as $ref) {
+                    $refs[] = $ref;
+                }
+            }
+        }
+
+        return array_values(array_unique($refs));
+    }
+
+    /**
+     * Check whether a competency reference is known or follows final syntax.
+     *
+     * @param string $idnumber Competency reference.
+     * @return bool
+     */
+    private function is_known_competency_reference(string $idnumber): bool {
+        if (in_array($idnumber, self::COMPETENCY_IDS, true)) {
+            return true;
+        }
+
+        if (preg_match('/^UCKK-COMP-[A-Z0-9-]+$/', $idnumber) === 1) {
+            return true;
+        }
+
+        if (preg_match('/^competency:[a-z0-9:_-]+$/', strtolower($idnumber)) === 1) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -1429,31 +1762,11 @@ final class badge_seed {
      * @return validation_result
      */
     private function new_result(string $summary): validation_result {
-        $result = new validation_result();
-        $result->status = self::STATUS_COMPLETED;
-        $result->ok = true;
-        $result->haserrors = false;
-        $result->haswarnings = false;
-        $result->summary = $summary;
-        $result->counts = [
-            'created' => 0,
-            'updated' => 0,
-            'skipped' => 0,
-            'failed' => 0,
-            'warnings' => 0,
-            'errors' => 0,
-        ];
-        $result->messages = [];
-        $result->created = [];
-        $result->updated = [];
-        $result->skipped = [];
-        $result->failed = [];
-        $result->metadata = [
+        return new validation_result(self::STATUS_COMPLETED, $summary, [
             'component' => self::COMPONENT,
             'preset' => self::PRESET,
-        ];
-
-        return $result;
+            'targettype' => self::TARGET_TYPE,
+        ]);
     }
 
     /**
@@ -1474,25 +1787,15 @@ final class badge_seed {
         string $message,
         array $metadata = []
     ): void {
-        $result->messages[] = [
-            'severity' => $severity,
-            'component' => self::COMPONENT,
-            'preset' => $preset,
-            'targettype' => self::TARGET_TYPE,
-            'targetkey' => $targetkey,
-            'message' => $message,
-            'metadata' => $metadata,
-        ];
-
-        if (in_array($severity, [self::SEVERITY_ERROR, self::SEVERITY_BLOCKER], true)) {
-            $result->haserrors = true;
-            $this->increment($result, 'errors');
-        }
-
-        if ($severity === self::SEVERITY_WARNING) {
-            $result->haswarnings = true;
-            $this->increment($result, 'warnings');
-        }
+        $result->add_message(
+            $severity,
+            $message,
+            self::COMPONENT,
+            $preset,
+            self::TARGET_TYPE,
+            $targetkey,
+            $metadata
+        );
     }
 
     /**
@@ -1502,11 +1805,7 @@ final class badge_seed {
      * @param string $key Count key.
      */
     private function increment(validation_result $result, string $key): void {
-        if (!isset($result->counts[$key])) {
-            $result->counts[$key] = 0;
-        }
-
-        $result->counts[$key]++;
+        $result->increment($key);
     }
 
     /**
@@ -1515,14 +1814,7 @@ final class badge_seed {
      * @param validation_result $result Result object.
      */
     private function finish_result(validation_result $result): void {
-        $result->ok = !$result->haserrors;
-
-        if ($result->haserrors) {
-            $result->status = self::STATUS_FAILED;
-        } else if ($result->haswarnings) {
-            $result->status = self::STATUS_WARNING;
-        } else {
-            $result->status = self::STATUS_COMPLETED;
-        }
+        $result->complete($result->get_summary());
     }
 }
+

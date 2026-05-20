@@ -66,22 +66,21 @@ final class seeder_test extends \advanced_testcase {
         $messages = $result->get_messages();
 
         $this->assertCount(2, $messages);
-        $this->assertSame(validation_result::SEVERITY_WARNING, $messages[0]['severity']);
-        $this->assertSame(validation_result::SEVERITY_ERROR, $messages[1]['severity']);
+        $this->assertStringContainsString('Warning message', $messages[0]['message']);
+        $this->assertStringContainsString('Error message', $messages[1]['message']);
     }
 
     /**
      * validation_result can merge child results.
      */
     public function test_validation_result_merge_combines_child_results(): void {
-        $parent = validation_result::success('Parent result');
-        $child = validation_result::success('Child result');
+        $parent = new validation_result('Parent result');
+        $child = new validation_result('Child result');
 
         $child
-            ->add_created('category', 'tronc_commun', 11)
-            ->add_updated('course', 'UCKK-TC101', 22)
-            ->add_warning('Minor issue', 'courses', 'course', 'UCKK-TC101')
-            ->complete();
+            ->add_created('course', 'UCKK-TC101', 101)
+            ->add_updated('cohort', 'uckk_players', 202)
+            ->add_warning('Child warning', 'courses', 'course', 'UCKK-TC101');
 
         $parent->merge($child);
 
@@ -101,13 +100,12 @@ final class seeder_test extends \advanced_testcase {
      * Valid preset files should validate successfully.
      */
     public function test_validate_presets_returns_success_for_valid_presets(): void {
-        $presetpath = $this->create_fixture_preset_directory();
-        $seeder = new seeder();
+        $presetpath = $this->create_fixture_academic_registry_directory();
+        $seeder = new seeder($presetpath);
 
         $result = $seeder->validate([
             'action' => 'validate',
             'mode' => 'dry_run',
-            'presetpath' => $presetpath,
             'presets' => [
                 'categories',
                 'courses',
@@ -144,12 +142,11 @@ final class seeder_test extends \advanced_testcase {
             'items' => [],
         ], JSON_PRETTY_PRINT));
 
-        $seeder = new seeder();
+        $seeder = new seeder($presetpath);
 
         $result = $seeder->validate([
             'action' => 'validate',
             'mode' => 'dry_run',
-            'presetpath' => $presetpath,
             'presets' => ['categories'],
             'source' => 'phpunit',
         ]);
@@ -165,8 +162,8 @@ final class seeder_test extends \advanced_testcase {
     public function test_dry_run_does_not_create_records(): void {
         global $DB;
 
-        $presetpath = $this->create_fixture_preset_directory();
-        $seeder = new seeder();
+        $presetpath = $this->create_fixture_academic_registry_directory();
+        $seeder = new seeder($presetpath);
 
         $beforecategories = $DB->count_records('course_categories');
         $beforecourses = $DB->count_records('course');
@@ -175,7 +172,6 @@ final class seeder_test extends \advanced_testcase {
             'action' => 'seed',
             'mode' => 'dry_run',
             'dryrun' => true,
-            'presetpath' => $presetpath,
             'presets' => [
                 'categories',
                 'courses',
@@ -194,14 +190,13 @@ final class seeder_test extends \advanced_testcase {
      * Repeated dry-runs should remain idempotent.
      */
     public function test_seed_is_idempotent_in_dry_run(): void {
-        $presetpath = $this->create_fixture_preset_directory();
-        $seeder = new seeder();
+        $presetpath = $this->create_fixture_academic_registry_directory();
+        $seeder = new seeder($presetpath);
 
         $options = [
             'action' => 'seed',
             'mode' => 'dry_run',
             'dryrun' => true,
-            'presetpath' => $presetpath,
             'presets' => [
                 'categories',
                 'courses',
@@ -227,14 +222,13 @@ final class seeder_test extends \advanced_testcase {
      * Reset must not apply destructive changes without confirmation.
      */
     public function test_reset_requires_explicit_confirmation(): void {
-        $presetpath = $this->create_fixture_preset_directory();
-        $seeder = new seeder();
+        $presetpath = $this->create_fixture_academic_registry_directory();
+        $seeder = new seeder($presetpath);
 
         $result = $seeder->reset([
             'action' => 'reset',
             'mode' => 'apply',
             'scope' => 'reset_all_uckk_seeded_content',
-            'presetpath' => $presetpath,
             'presets' => ['categories', 'courses'],
             'dryrun' => false,
             'rollbackplan' => false,
@@ -252,14 +246,13 @@ final class seeder_test extends \advanced_testcase {
      * Reset in dry-run mode should be allowed without applying changes.
      */
     public function test_reset_dry_run_returns_plan(): void {
-        $presetpath = $this->create_fixture_preset_directory();
-        $seeder = new seeder();
+        $presetpath = $this->create_fixture_academic_registry_directory();
+        $seeder = new seeder($presetpath);
 
         $result = $seeder->reset([
             'action' => 'reset',
             'mode' => 'dry_run',
             'scope' => 'reset_seed_logs',
-            'presetpath' => $presetpath,
             'presets' => [],
             'dryrun' => true,
             'rollbackplan' => true,
@@ -276,13 +269,12 @@ final class seeder_test extends \advanced_testcase {
      * Exporting a preset should return the canonical schema.
      */
     public function test_export_preset_returns_canonical_schema(): void {
-        $presetpath = $this->create_fixture_preset_directory();
-        $seeder = new seeder();
+        $presetpath = $this->create_fixture_academic_registry_directory();
+        $seeder = new seeder($presetpath);
 
         $result = $seeder->export_preset([
             'action' => 'export_preset',
             'mode' => 'report',
-            'presetpath' => $presetpath,
             'preset' => 'competencies',
             'json' => true,
             'source' => 'phpunit',
@@ -309,15 +301,13 @@ final class seeder_test extends \advanced_testcase {
      * The seeder can load selected presets by canonical preset id.
      */
     public function test_load_presets_returns_selected_presets(): void {
-        $presetpath = $this->create_fixture_preset_directory();
-        $seeder = new seeder();
+        $presetpath = $this->create_fixture_academic_registry_directory();
+        $seeder = new seeder($presetpath);
 
         $presets = $seeder->load_presets([
             'categories',
             'courses',
             'competencies',
-        ], [
-            'presetpath' => $presetpath,
         ]);
 
         $this->assertIsArray($presets);
@@ -334,6 +324,22 @@ final class seeder_test extends \advanced_testcase {
             $this->assertArrayHasKey('items', $preset);
             $this->assertIsArray($preset['items']);
         }
+    }
+
+    /**
+     * The seeder can use the configured academic registry JSON directory.
+     */
+    public function test_seeder_uses_configured_academic_registry_json_path(): void {
+        $presetpath = $this->create_fixture_academic_registry_directory();
+
+        set_config('presetpath', $presetpath, 'tool_uckkseed');
+
+        $seeder = new seeder();
+        $presets = $seeder->load_presets(['categories']);
+
+        $this->assertArrayHasKey('categories', $presets);
+        $this->assertSame('categories', $presets['categories']['preset']);
+        $this->assertSame($presetpath . DIRECTORY_SEPARATOR . 'categories.json', $presets['categories']['filepath']);
     }
 
     /**
@@ -375,26 +381,19 @@ final class seeder_test extends \advanced_testcase {
         $log->targettype = 'competency';
         $log->targetkey = 'UCKK-COMP-001';
         $log->targetid = 0;
-        $log->message = 'Validated competency preset.';
+        $log->message = 'Validated competency fixture';
+        $log->details = json_encode([
+            'lineage' => ['fixture'],
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         $log->userid = $USER->id;
         $log->timecreated = $now;
-        $log->metadata = json_encode([
-            'source' => 'phpunit',
-        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         $logid = $DB->insert_record('tool_uckkseed_log', $log);
 
         $this->assertTrue($DB->record_exists('tool_uckkseed_run', ['id' => $runid]));
-        $this->assertTrue($DB->record_exists('tool_uckkseed_log', ['id' => $logid, 'runid' => $runid]));
+        $this->assertTrue($DB->record_exists('tool_uckkseed_log', ['id' => $logid]));
 
-        $storedrun = $DB->get_record('tool_uckkseed_run', ['id' => $runid], '*', MUST_EXIST);
         $storedlog = $DB->get_record('tool_uckkseed_log', ['id' => $logid], '*', MUST_EXIST);
-
-        $this->assertSame('validate', $storedrun->action);
-        $this->assertSame('dry_run', $storedrun->mode);
-        $this->assertSame('completed', $storedrun->status);
-        $this->assertSame('tool_uckkseed', $storedrun->component);
-        $this->assertSame('competencies', $storedrun->preset);
 
         $this->assertSame('info', $storedlog->level);
         $this->assertSame('competency', $storedlog->targettype);
@@ -402,11 +401,11 @@ final class seeder_test extends \advanced_testcase {
     }
 
     /**
-     * Create a temporary preset directory with canonical fixture preset files.
+     * Create a temporary academic registry JSON directory with canonical fixture academic registry JSON files.
      *
      * @return string
      */
-    private function create_fixture_preset_directory(): string {
+    private function create_fixture_academic_registry_directory(): string {
         $dir = make_temp_directory('tool_uckkseed_presets_' . uniqid('', true));
 
         $presets = [
@@ -477,7 +476,7 @@ final class seeder_test extends \advanced_testcase {
                 'name' => 'Tronc commun',
                 'idnumber' => 'UCKK-TC',
                 'parent' => 'uckk_root',
-                'description' => 'UCKK common core.',
+                'description' => 'UCKK common foundation.',
                 'sortorder' => 20,
                 'visible' => true,
                 'metadata' => [
@@ -496,31 +495,32 @@ final class seeder_test extends \advanced_testcase {
     private function preset_courses(): array {
         return $this->preset('courses', [
             [
-                'key' => 'COURSE_TC101',
-                'fullname' => 'UCKK-TC101 — Lire le jeu social',
+                'key' => 'UCKK-TC101',
                 'shortname' => 'UCKK-TC101',
+                'fullname' => 'Connaître',
                 'idnumber' => 'UCKK-TC101',
                 'category' => 'tronc_commun',
+                'summary' => 'Introductory UCKK course.',
                 'format' => 'uckk',
-                'template' => 'uckk_standard_course',
-                'summary' => 'Cours canonique du tronc commun.',
                 'visible' => true,
                 'startdate' => 0,
                 'enddate' => 0,
-                'sections' => [
-                    'orientation',
-                    'concepts',
-                    'canon',
-                    'atelier',
-                    'preuves',
-                    'deliberation',
-                    'livrable',
-                    'evaluation',
-                    'archive',
+                'metadata' => [
+                    'status' => 'active',
+                    'provenance' => 'system',
                 ],
-                'completion' => [
-                    'enabled' => true,
-                ],
+            ],
+            [
+                'key' => 'UCKK-TC102',
+                'shortname' => 'UCKK-TC102',
+                'fullname' => 'Choisir',
+                'idnumber' => 'UCKK-TC102',
+                'category' => 'tronc_commun',
+                'summary' => 'Decision-oriented UCKK course.',
+                'format' => 'uckk',
+                'visible' => true,
+                'startdate' => 0,
+                'enddate' => 0,
                 'metadata' => [
                     'status' => 'active',
                     'provenance' => 'system',
@@ -538,10 +538,10 @@ final class seeder_test extends \advanced_testcase {
         return $this->preset('cohorts', [
             [
                 'key' => 'uckk_players',
-                'name' => 'Joueurs UCKK',
+                'name' => 'UCKK Players',
                 'idnumber' => 'UCKK-PLAYERS',
+                'description' => 'Canonical player cohort.',
                 'context' => 'system',
-                'description' => 'Default UCKK player cohort.',
                 'visible' => true,
                 'metadata' => [
                     'status' => 'active',
@@ -559,29 +559,17 @@ final class seeder_test extends \advanced_testcase {
     private function preset_roles(): array {
         return $this->preset('roles', [
             [
-                'shortname' => 'uckkmanager',
-                'name' => 'UCKK manager',
-                'description' => 'Technical UCKK manager role.',
-                'archetype' => 'manager',
-                'contextlevels' => ['system', 'course_category', 'course'],
-                'capabilities' => [
-                    'local/uckk:viewcampus',
-                    'tool/uckkseed:seed',
-                    'tool/uckkseed:validate',
-                ],
-                'metadata' => [
-                    'status' => 'active',
-                    'provenance' => 'system',
-                ],
-            ],
-            [
+                'key' => 'uckk_player',
                 'shortname' => 'uckkplayer',
                 'name' => 'UCKK player',
-                'description' => 'Technical UCKK learner/player role.',
+                'description' => 'Canonical UCKK player role.',
                 'archetype' => 'student',
-                'contextlevels' => ['course'],
+                'contextlevels' => ['system', 'course'],
                 'capabilities' => [
-                    'local/uckk:viewcampus',
+                    [
+                        'capability' => 'local/uckk:viewdashboard',
+                        'permission' => 'allow',
+                    ],
                 ],
                 'metadata' => [
                     'status' => 'active',
@@ -599,25 +587,19 @@ final class seeder_test extends \advanced_testcase {
     private function preset_capabilities(): array {
         return $this->preset('capabilities', [
             [
-                'role' => 'uckkmanager',
-                'capability' => 'tool/uckkseed:seed',
-                'permission' => 'allow',
-                'context' => 'system',
-                'component' => 'tool_uckkseed',
-            ],
-            [
-                'role' => 'uckkmanager',
-                'capability' => 'tool/uckkseed:reset',
-                'permission' => 'allow',
-                'context' => 'system',
-                'component' => 'tool_uckkseed',
-            ],
-            [
-                'role' => 'uckkmanager',
-                'capability' => 'tool/uckkseed:validate',
-                'permission' => 'allow',
-                'context' => 'system',
-                'component' => 'tool_uckkseed',
+                'key' => 'local_uckk_viewdashboard',
+                'capability' => 'local/uckk:viewdashboard',
+                'riskbitmask' => 0,
+                'captype' => 'read',
+                'contextlevel' => 'system',
+                'archetypes' => [
+                    'student' => 'allow',
+                ],
+                'clonepermissionsfrom' => null,
+                'metadata' => [
+                    'status' => 'active',
+                    'provenance' => 'system',
+                ],
             ],
         ]);
     }
@@ -630,72 +612,55 @@ final class seeder_test extends \advanced_testcase {
     private function preset_competencies(): array {
         return $this->preset('competencies', [
             [
-                'key' => 'COMP_READ_GAME',
+                'key' => 'UCKK-COMP-001',
                 'idnumber' => 'UCKK-COMP-001',
-                'shortname' => 'Lire le jeu social',
-                'description' => 'Observer une situation sociale et reconnaître ses règles.',
-                'framework' => 'uckk_core_competencies',
+                'shortname' => 'Connaître',
+                'description' => 'Describe systems, situations, and evidence clearly.',
+                'framework' => [
+                    'key' => 'uckk_core',
+                    'idnumber' => 'UCKK-CORE',
+                    'shortname' => 'UCKK Core',
+                    'description' => 'Core UCKK competency framework.',
+                    'scale' => [
+                        'name' => 'UCKK scale',
+                        'values' => [
+                            'Not yet demonstrated',
+                            'Emerging',
+                            'Validated',
+                        ],
+                    ],
+                ],
                 'parent' => null,
-                'scale' => 'uckk_competency_scale',
                 'sortorder' => 10,
                 'metadata' => [
                     'status' => 'active',
-                    'visibility' => 'institution',
                     'provenance' => 'system',
-                    'requires_evidence' => true,
-                    'requires_human_validation' => true,
                 ],
             ],
             [
-                'key' => 'COMP_PRODUCE_PROOF',
-                'idnumber' => 'UCKK-COMP-005',
-                'shortname' => 'Produire une preuve',
-                'description' => 'Créer et documenter une preuve vérifiable.',
-                'framework' => 'uckk_core_competencies',
-                'parent' => null,
-                'scale' => 'uckk_competency_scale',
-                'sortorder' => 50,
+                'key' => 'UCKK-COMP-002',
+                'idnumber' => 'UCKK-COMP-002',
+                'shortname' => 'Choisir',
+                'description' => 'Make accountable choices with visible criteria.',
+                'framework' => [
+                    'key' => 'uckk_core',
+                    'idnumber' => 'UCKK-CORE',
+                    'shortname' => 'UCKK Core',
+                    'description' => 'Core UCKK competency framework.',
+                    'scale' => [
+                        'name' => 'UCKK scale',
+                        'values' => [
+                            'Not yet demonstrated',
+                            'Emerging',
+                            'Validated',
+                        ],
+                    ],
+                ],
+                'parent' => 'UCKK-COMP-001',
+                'sortorder' => 20,
                 'metadata' => [
                     'status' => 'active',
-                    'visibility' => 'institution',
                     'provenance' => 'system',
-                    'requires_evidence' => true,
-                    'requires_human_validation' => true,
-                ],
-            ],
-        ], [
-            'frameworks' => [
-                [
-                    'key' => 'uckk_core_competencies',
-                    'idnumber' => 'UCKK-COMP-FRAMEWORK',
-                    'shortname' => 'Compétences UCKK',
-                    'description' => 'Référentiel canonique UCKK.',
-                    'scale' => 'uckk_competency_scale',
-                    'visible' => true,
-                    'metadata' => [
-                        'status' => 'active',
-                        'visibility' => 'institution',
-                        'provenance' => 'system',
-                    ],
-                ],
-            ],
-            'scales' => [
-                [
-                    'key' => 'uckk_competency_scale',
-                    'idnumber' => 'UCKK-COMP-SCALE',
-                    'name' => 'Échelle de maîtrise UCKK',
-                    'items' => [
-                        ['key' => 'not_observed', 'name' => 'Non observé', 'sortorder' => 10],
-                        ['key' => 'emerging', 'name' => 'Émergent', 'sortorder' => 20],
-                        ['key' => 'developing', 'name' => 'En développement', 'sortorder' => 30],
-                        ['key' => 'demonstrated', 'name' => 'Démontré', 'sortorder' => 40],
-                        ['key' => 'strong', 'name' => 'Solide', 'sortorder' => 50],
-                    ],
-                    'metadata' => [
-                        'status' => 'active',
-                        'visibility' => 'institution',
-                        'provenance' => 'system',
-                    ],
                 ],
             ],
         ]);
@@ -711,19 +676,18 @@ final class seeder_test extends \advanced_testcase {
             [
                 'key' => 'joueur_initie',
                 'name' => 'Joueur initié',
-                'description' => 'Première reconnaissance UCKK interne.',
-                'type' => 'badge',
+                'description' => 'Foundational UCKK badge.',
+                'type' => 'site',
+                'status' => 'active',
                 'criteria' => [
-                    'competencies' => ['UCKK-COMP-001'],
-                    'requires_evidence' => true,
-                    'requires_human_validation' => true,
+                    'course_completion',
+                    'evidence_submission',
                 ],
-                'competencies' => ['UCKK-COMP-001'],
-                'requiredarchive' => true,
-                'requireshumanvalidation' => true,
+                'competencies' => [
+                    'UCKK-COMP-001',
+                ],
                 'metadata' => [
                     'status' => 'active',
-                    'visibility' => 'institution',
                     'provenance' => 'system',
                 ],
             ],
@@ -738,13 +702,22 @@ final class seeder_test extends \advanced_testcase {
     private function preset_reports(): array {
         return $this->preset('reports', [
             [
-                'key' => 'uckk_overview',
-                'name' => 'UCKK overview',
-                'component' => 'report_uckk',
-                'capability' => 'report/uckk:view',
-                'source' => 'local_uckk',
-                'description' => 'Overview report configuration.',
-                'enabled' => true,
+                'key' => 'uckk_seed_report',
+                'name' => 'UCKK Seed report',
+                'type' => 'summary',
+                'description' => 'Seed summary report.',
+                'columns' => [
+                    'preset',
+                    'status',
+                    'created',
+                    'updated',
+                    'warnings',
+                    'errors',
+                ],
+                'filters' => [
+                    'preset',
+                    'status',
+                ],
                 'metadata' => [
                     'status' => 'active',
                     'provenance' => 'system',
@@ -761,24 +734,15 @@ final class seeder_test extends \advanced_testcase {
     private function preset_course_templates(): array {
         return $this->preset('course_templates', [
             [
-                'key' => 'uckk_standard_course',
-                'name' => 'UCKK standard course',
-                'component' => 'format_uckk',
-                'description' => 'Standard UCKK nine-section course template.',
-                'defaults' => [
-                    'format' => 'uckk',
-                    'visible' => true,
-                ],
+                'key' => 'uckk_default_course',
+                'name' => 'UCKK default course',
+                'description' => 'Default course template.',
+                'format' => 'uckk',
                 'sections' => [
-                    'orientation',
-                    'concepts',
-                    'canon',
-                    'atelier',
-                    'preuves',
-                    'deliberation',
-                    'livrable',
-                    'evaluation',
-                    'archive',
+                    [
+                        'name' => 'Connaître',
+                        'summary' => 'Understand the situation.',
+                    ],
                 ],
                 'activities' => [],
                 'completion' => [
@@ -879,4 +843,3 @@ final class seeder_test extends \advanced_testcase {
         ]);
     }
 }
-

@@ -37,12 +37,13 @@ use stdClass;
  *     'name' => 'Gestionnaire UCKK',
  *     'description' => '...',
  *     'archetype' => 'manager',
- *     'contextlevels' => ['system', 'course_category', 'course'],
+ *     'contextlevels' => ['system', 'course_category', 'course', 'module', 'block', 'user'],
  *     'capabilities' => [
  *         [
  *             'capability' => 'local/uckk:viewcampus',
  *             'permission' => 'allow',
  *             'context' => 'system',
+ *             'component' => 'local_uckk',
  *         ],
  *     ],
  *     'metadata' => [],
@@ -151,6 +152,13 @@ final class role_seed {
     ];
 
     /**
+     * Cached Moodle capability registry.
+     *
+     * @var array<string, array<string, mixed>>|null
+     */
+    private ?array $capabilityregistry = null;
+
+    /**
      * Validate role preset items.
      *
      * @param array<int, array<string, mixed>|stdClass> $items Preset items.
@@ -158,7 +166,7 @@ final class role_seed {
      * @return validation_result
      */
     public function validate(array $items, array $options = []): validation_result {
-        $result = validation_result::create([
+        $result = validation_result::from_data([
             'status' => 'completed',
             'ok' => true,
             'summary' => get_string('rolesvalidationcomplete', self::COMPONENT),
@@ -176,6 +184,7 @@ final class role_seed {
                 '',
                 []
             );
+            $this->finalise_result($result);
             return $result;
         }
 
@@ -252,7 +261,7 @@ final class role_seed {
             }
 
             foreach ($role['contextlevels'] as $contextlevel) {
-                if (!$this->context_level_to_constant($contextlevel)) {
+                if ($this->context_level_to_constant($contextlevel) === null) {
                     $this->add_message(
                         $result,
                         self::SEVERITY_ERROR,
@@ -270,15 +279,17 @@ final class role_seed {
                 $this->validate_capability_row($result, $shortname, $capabilityrow);
             }
 
-            $this->add_message(
-                $result,
-                self::SEVERITY_SUCCESS,
-                get_string('rolepresetvalid', self::COMPONENT, $shortname),
-                $shortname,
-                [
-                    'shortname' => $shortname,
-                ]
-            );
+            if (!$this->result_has_blockers_or_errors($result)) {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_SUCCESS,
+                    get_string('rolepresetvalid', self::COMPONENT, $shortname),
+                    $shortname,
+                    [
+                        'shortname' => $shortname,
+                    ]
+                );
+            }
         }
 
         $this->finalise_result($result);
@@ -297,7 +308,7 @@ final class role_seed {
         $mode = (string)($options['mode'] ?? self::MODE_APPLY);
         $dryrun = $this->is_dry_run($options);
 
-        $result = validation_result::create([
+        $result = validation_result::from_data([
             'status' => 'completed',
             'ok' => true,
             'summary' => $dryrun
@@ -356,6 +367,7 @@ final class role_seed {
             );
         }
 
+        $this->clear_access_caches();
         $this->finalise_result($result);
 
         return $result;
@@ -380,7 +392,7 @@ final class role_seed {
         $force = !empty($options['force']);
         $dryrun = $this->is_dry_run($options);
 
-        $result = validation_result::create([
+        $result = validation_result::from_data([
             'status' => 'completed',
             'ok' => true,
             'summary' => get_string('rolesresetcomplete', self::COMPONENT),
@@ -474,7 +486,7 @@ final class role_seed {
             }
         }
 
-        accesslib_clear_all_caches_for_unit_testing();
+        $this->clear_access_caches();
         $this->finalise_result($result);
 
         return $result;
@@ -637,6 +649,7 @@ final class role_seed {
                     'roleid' => $roleid,
                     'capability' => $capability,
                     'permission' => $permission,
+                    'context' => $contextlevel,
                     'contextid' => $context->id,
                 ]
             );
@@ -655,7 +668,9 @@ final class role_seed {
     private function validate_capability_row(validation_result $result, string $shortname, array $capabilityrow): void {
         $capability = clean_param((string)($capabilityrow['capability'] ?? ''), PARAM_CAPABILITY);
         $permission = clean_param((string)($capabilityrow['permission'] ?? self::PERMISSION_ALLOW), PARAM_ALPHANUMEXT);
-        $context = clean_param((string)($capabilityrow['context'] ?? 'system'), PARAM_ALPHANUMEXT);
+        $context = $this->normalise_context_level($capabilityrow['context'] ?? 'system');
+        $component = clean_param((string)($capabilityrow['component'] ?? ''), PARAM_COMPONENT);
+        $expectedcomponent = $this->capability_component($capability);
 
         if ($capability === '') {
             $this->add_message(
@@ -678,6 +693,35 @@ final class role_seed {
             );
         }
 
+        if (!$this->capability_exists($capability)) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_ERROR,
+                get_string('capabilitymissing', self::COMPONENT, $capability),
+                $shortname,
+                [
+                    ...$capabilityrow,
+                    'capability' => $capability,
+                    'reason' => 'Capability is not declared in Moodle capability registry. Check db/access.php and run upgrade.',
+                ]
+            );
+        }
+
+        if ($component !== '' && $expectedcomponent !== '' && $component !== $expectedcomponent) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_WARNING,
+                'Capability component mismatch: ' . $capability,
+                $shortname,
+                [
+                    ...$capabilityrow,
+                    'capability' => $capability,
+                    'component' => $component,
+                    'expectedcomponent' => $expectedcomponent,
+                ]
+            );
+        }
+
         if (!in_array($permission, $this->allowed_permissions(), true)) {
             $this->add_message(
                 $result,
@@ -691,7 +735,7 @@ final class role_seed {
             );
         }
 
-        if (!$this->context_level_to_constant($context)) {
+        if ($this->context_level_to_constant($context) === null) {
             $this->add_message(
                 $result,
                 self::SEVERITY_ERROR,
@@ -701,6 +745,24 @@ final class role_seed {
                 ]),
                 $shortname,
                 $capabilityrow
+            );
+            return;
+        }
+
+        $declaredcontext = $this->declared_capability_context($capability);
+
+        if ($declaredcontext !== null && $declaredcontext !== $context) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_WARNING,
+                'Capability context differs from db/access.php declaration: ' . $capability,
+                $shortname,
+                [
+                    ...$capabilityrow,
+                    'capability' => $capability,
+                    'presetcontext' => $context,
+                    'declaredcontext' => $declaredcontext,
+                ]
             );
         }
     }
@@ -776,6 +838,7 @@ final class role_seed {
                 'permission' => self::PERMISSION_ALLOW,
                 'context' => 'system',
                 'component' => $this->capability_component($capabilityrow),
+                'metadata' => [],
             ];
         }
 
@@ -807,6 +870,7 @@ final class role_seed {
                 CONTEXT_COURSECAT => 'course_category',
                 CONTEXT_COURSE => 'course',
                 CONTEXT_MODULE => 'module',
+                CONTEXT_BLOCK => 'block',
                 CONTEXT_USER => 'user',
                 default => '',
             };
@@ -817,9 +881,10 @@ final class role_seed {
 
         return match ($contextlevel) {
             'system', 'context_system' => 'system',
-            'coursecat', 'course_category', 'category', 'context_coursecat' => 'course_category',
+            'coursecat', 'course_category', 'coursecategory', 'category', 'context_coursecat' => 'course_category',
             'course', 'context_course' => 'course',
             'module', 'cm', 'activity', 'context_module' => 'module',
+            'block', 'context_block' => 'block',
             'user', 'context_user' => 'user',
             default => clean_param($contextlevel, PARAM_ALPHANUMEXT),
         };
@@ -837,6 +902,7 @@ final class role_seed {
             'course_category' => CONTEXT_COURSECAT,
             'course' => CONTEXT_COURSE,
             'module' => CONTEXT_MODULE,
+            'block' => CONTEXT_BLOCK,
             'user' => CONTEXT_USER,
             default => null,
         };
@@ -854,8 +920,6 @@ final class role_seed {
      * @return \context
      */
     private function context_for_capability_assignment(string $contextlevel): \context {
-        // Site-wide role capability configuration belongs to system context.
-        // Specific enrolments/role assignments are not performed by this class.
         return context_system::instance();
     }
 
@@ -902,6 +966,55 @@ final class role_seed {
         }
 
         return false;
+    }
+
+    /**
+     * Return whether the capability exists in Moodle's registered capability map.
+     *
+     * @param string $capability Capability name.
+     * @return bool
+     */
+    private function capability_exists(string $capability): bool {
+        $registry = $this->get_capability_registry();
+
+        return array_key_exists($capability, $registry);
+    }
+
+    /**
+     * Return canonical context from db/access.php for a capability.
+     *
+     * @param string $capability Capability name.
+     * @return string|null
+     */
+    private function declared_capability_context(string $capability): ?string {
+        $registry = $this->get_capability_registry();
+
+        if (empty($registry[$capability]['contextlevel'])) {
+            return null;
+        }
+
+        return $this->normalise_context_level((int)$registry[$capability]['contextlevel']);
+    }
+
+    /**
+     * Return Moodle's capability registry.
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    private function get_capability_registry(): array {
+        if ($this->capabilityregistry !== null) {
+            return $this->capabilityregistry;
+        }
+
+        $capabilities = get_all_capabilities();
+
+        if (!is_array($capabilities)) {
+            $capabilities = [];
+        }
+
+        $this->capabilityregistry = $capabilities;
+
+        return $this->capabilityregistry;
     }
 
     /**
@@ -1011,20 +1124,18 @@ final class role_seed {
         string $targetkey = '',
         array $metadata = []
     ): void {
-        $result->add_message([
-            'severity' => $severity,
-            'component' => self::COMPONENT,
-            'preset' => self::PRESET,
-            'targettype' => self::TARGET_TYPE,
-            'targetkey' => $targetkey,
-            'message' => $message,
-            'metadata' => $metadata,
-        ]);
+        $result->add_message(
+            $severity,
+            $message,
+            self::COMPONENT,
+            self::PRESET,
+            self::TARGET_TYPE,
+            $targetkey,
+            $metadata
+        );
 
         if ($severity === self::SEVERITY_ERROR || $severity === self::SEVERITY_BLOCKER) {
-            $this->increment($result, 'failed');
-        } else if ($severity === self::SEVERITY_WARNING) {
-            $this->increment($result, 'warnings');
+            $result->increment('failed');
         }
     }
 
@@ -1035,12 +1146,7 @@ final class role_seed {
      * @param string $counter Counter key.
      */
     private function increment(validation_result $result, string $counter): void {
-        if (method_exists($result, 'increment')) {
-            $result->increment($counter);
-            return;
-        }
-
-        $result->counts[$counter] = (int)($result->counts[$counter] ?? 0) + 1;
+        $result->increment($counter);
     }
 
     /**
@@ -1050,18 +1156,7 @@ final class role_seed {
      * @param validation_result $source Source result.
      */
     private function merge_result(validation_result $target, validation_result $source): void {
-        if (method_exists($target, 'merge')) {
-            $target->merge($source);
-            return;
-        }
-
-        foreach ($source->messages ?? [] as $message) {
-            $target->add_message((array)$message);
-        }
-
-        foreach ($source->counts ?? [] as $key => $value) {
-            $target->counts[$key] = (int)($target->counts[$key] ?? 0) + (int)$value;
-        }
+        $target->merge($source);
     }
 
     /**
@@ -1071,21 +1166,21 @@ final class role_seed {
      * @return bool
      */
     private function result_has_blockers_or_errors(validation_result $result): bool {
-        if (method_exists($result, 'has_errors')) {
-            return $result->has_errors();
+        return $result->has_errors();
+    }
+
+    /**
+     * Clear Moodle access caches safely.
+     */
+    private function clear_access_caches(): void {
+        if (function_exists('accesslib_clear_all_caches')) {
+            accesslib_clear_all_caches(false);
+            return;
         }
 
-        foreach ($result->messages ?? [] as $message) {
-            $severity = is_array($message)
-                ? ($message['severity'] ?? '')
-                : ($message->severity ?? '');
-
-            if ($severity === self::SEVERITY_ERROR || $severity === self::SEVERITY_BLOCKER) {
-                return true;
-            }
+        if (function_exists('accesslib_clear_all_caches_for_unit_testing')) {
+            accesslib_clear_all_caches_for_unit_testing();
         }
-
-        return false;
     }
 
     /**
@@ -1094,15 +1189,12 @@ final class role_seed {
      * @param validation_result $result Result object.
      */
     private function finalise_result(validation_result $result): void {
-        if (method_exists($result, 'finalise')) {
-            $result->finalise();
-            return;
+        if ($result->has_errors()) {
+            $result->set_status(validation_result::STATUS_FAILED);
+        } else if ($result->has_warnings()) {
+            $result->set_status(validation_result::STATUS_WARNING);
+        } else {
+            $result->set_status(validation_result::STATUS_COMPLETED);
         }
-
-        $haserrors = $this->result_has_blockers_or_errors($result);
-
-        $result->haserrors = $haserrors;
-        $result->ok = !$haserrors;
-        $result->status = $haserrors ? 'failed' : 'completed';
     }
 }

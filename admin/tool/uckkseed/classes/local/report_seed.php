@@ -92,10 +92,19 @@ final class report_seed {
      * @return validation_result
      */
     public function validate(array $items, array $options = []): validation_result {
-        $result = validation_result::create();
+        $result = validation_result::from_data([
+            'status' => validation_result::STATUS_COMPLETED,
+            'ok' => true,
+            'summary' => '',
+            'metadata' => [
+                'component' => self::COMPONENT,
+                'preset' => self::PRESET,
+                'targettype' => self::TARGET_TYPE,
+            ],
+        ]);
 
         if (empty($items)) {
-            $result->add_message(
+            $this->add_message($result,
                 self::SEVERITY_WARNING,
                 self::COMPONENT,
                 self::PRESET,
@@ -114,7 +123,7 @@ final class report_seed {
             $key = $row['key'];
 
             if ($key === '') {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_ERROR,
                     self::COMPONENT,
                     self::PRESET,
@@ -126,7 +135,7 @@ final class report_seed {
             }
 
             if (isset($seen[$key])) {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_ERROR,
                     self::COMPONENT,
                     self::PRESET,
@@ -140,7 +149,7 @@ final class report_seed {
             $seen[$key] = true;
 
             if ($row['name'] === '') {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_ERROR,
                     self::COMPONENT,
                     self::PRESET,
@@ -151,7 +160,7 @@ final class report_seed {
             }
 
             if ($row['component'] === '') {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_ERROR,
                     self::COMPONENT,
                     self::PRESET,
@@ -160,7 +169,7 @@ final class report_seed {
                     get_string('reportseed:error_missingcomponent', 'tool_uckkseed', $key)
                 );
             } else if (!$this->component_exists($row['component'])) {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_WARNING,
                     self::COMPONENT,
                     self::PRESET,
@@ -171,7 +180,7 @@ final class report_seed {
             }
 
             if ($row['capability'] === '') {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_ERROR,
                     self::COMPONENT,
                     self::PRESET,
@@ -180,7 +189,7 @@ final class report_seed {
                     get_string('reportseed:error_missingcapability', 'tool_uckkseed', $key)
                 );
             } else if (!$this->is_allowed_report_capability($row['capability'])) {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_ERROR,
                     self::COMPONENT,
                     self::PRESET,
@@ -191,7 +200,7 @@ final class report_seed {
             }
 
             if ($row['source'] === '') {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_ERROR,
                     self::COMPONENT,
                     self::PRESET,
@@ -200,7 +209,7 @@ final class report_seed {
                     get_string('reportseed:error_missingsource', 'tool_uckkseed', $key)
                 );
             } else if (!$this->is_allowed_report_source($row['source'])) {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_WARNING,
                     self::COMPONENT,
                     self::PRESET,
@@ -211,7 +220,7 @@ final class report_seed {
             }
 
             if (!$this->is_boolish($row['enabled'])) {
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_ERROR,
                     self::COMPONENT,
                     self::PRESET,
@@ -223,7 +232,7 @@ final class report_seed {
         }
 
         if (!$result->has_errors()) {
-            $result->add_message(
+            $this->add_message($result,
                 self::SEVERITY_SUCCESS,
                 self::COMPONENT,
                 self::PRESET,
@@ -267,7 +276,7 @@ final class report_seed {
 
             if ($existing !== null && $this->same_report_definition($existing, $canonical)) {
                 $result->increment('skipped');
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_INFO,
                     self::COMPONENT,
                     self::PRESET,
@@ -280,7 +289,7 @@ final class report_seed {
 
             if ($mode === self::MODE_DRY_RUN || $mode === self::MODE_REPORT || $mode === self::MODE_ROLLBACK_PLAN) {
                 $result->increment($existing === null ? 'created' : 'updated');
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_INFO,
                     self::COMPONENT,
                     self::PRESET,
@@ -308,7 +317,7 @@ final class report_seed {
             ];
 
             $result->increment($existing === null ? 'created' : 'updated');
-            $result->add_message(
+            $this->add_message($result,
                 self::SEVERITY_SUCCESS,
                 self::COMPONENT,
                 self::PRESET,
@@ -338,10 +347,19 @@ final class report_seed {
     public function reset(array $items, array $options = []): validation_result {
         $mode = $this->normalise_mode((string)($options['mode'] ?? self::MODE_DRY_RUN));
         $confirm = !empty($options['confirm']) || !empty($options['force']);
-        $result = validation_result::create();
+        $result = validation_result::from_data([
+            'status' => validation_result::STATUS_COMPLETED,
+            'ok' => true,
+            'summary' => '',
+            'metadata' => [
+                'component' => self::COMPONENT,
+                'preset' => self::PRESET,
+                'targettype' => self::TARGET_TYPE,
+            ],
+        ]);
 
         if (!$confirm && $mode === self::MODE_APPLY) {
-            $result->add_message(
+            $this->add_message($result,
                 self::SEVERITY_BLOCKER,
                 self::COMPONENT,
                 self::PRESET,
@@ -360,7 +378,7 @@ final class report_seed {
         foreach ($keys as $key) {
             if (!isset($current[$key]) && !isset($index[$key])) {
                 $result->increment('skipped');
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_INFO,
                     self::COMPONENT,
                     self::PRESET,
@@ -373,7 +391,7 @@ final class report_seed {
 
             if ($mode === self::MODE_DRY_RUN || $mode === self::MODE_REPORT || $mode === self::MODE_ROLLBACK_PLAN) {
                 $result->increment('updated');
-                $result->add_message(
+                $this->add_message($result,
                     self::SEVERITY_INFO,
                     self::COMPONENT,
                     self::PRESET,
@@ -387,7 +405,7 @@ final class report_seed {
             unset($current[$key], $index[$key]);
 
             $result->increment('updated');
-            $result->add_message(
+            $this->add_message($result,
                 self::SEVERITY_SUCCESS,
                 self::COMPONENT,
                 self::PRESET,
@@ -435,6 +453,42 @@ final class report_seed {
             'version' => 2026051200,
             'items' => $items,
         ];
+    }
+
+    /**
+     * Add a result message using the current validation_result API.
+     *
+     * This wrapper keeps this handler readable while adapting the older
+     * report_seed call shape to validation_result::add_message().
+     *
+     * @param validation_result $result Result object.
+     * @param string $severity Severity.
+     * @param string $component Component.
+     * @param string $preset Preset id.
+     * @param string $targettype Target type.
+     * @param string $targetkey Target key.
+     * @param string $message Message text.
+     * @param array<string, mixed> $metadata Metadata.
+     */
+    private function add_message(
+        validation_result $result,
+        string $severity,
+        string $component,
+        string $preset,
+        string $targettype,
+        string $targetkey,
+        string $message,
+        array $metadata = []
+    ): void {
+        $result->add_message(
+            $severity,
+            $message,
+            $component,
+            $preset,
+            $targettype,
+            $targetkey,
+            $metadata
+        );
     }
 
     /**

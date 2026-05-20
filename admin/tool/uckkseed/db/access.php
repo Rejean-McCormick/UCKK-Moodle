@@ -17,6 +17,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
+    /*
+     * Run seed operations.
+     *
+     * This capability allows a user to create or update seed-managed objects
+     * through tool_uckkseed. It is intentionally system-scoped because the seed
+     * tool coordinates multiple Moodle subsystems and UCKK plugins.
+     */
     'tool/uckkseed:seed' => [
         'riskbitmask' => RISK_CONFIG | RISK_DATALOSS,
         'captype' => 'write',
@@ -26,6 +33,12 @@ $capabilities = [
         ],
     ],
 
+    /*
+     * Run reset operations.
+     *
+     * This capability allows destructive or rollback-style seed operations.
+     * Keep restricted to trusted administrators/managers.
+     */
     'tool/uckkseed:reset' => [
         'riskbitmask' => RISK_CONFIG | RISK_DATALOSS,
         'captype' => 'write',
@@ -35,6 +48,12 @@ $capabilities = [
         ],
     ],
 
+    /*
+     * Validate seed presets.
+     *
+     * This capability allows reading and validating preset structure, routing,
+     * dependencies and seed-readiness without applying changes.
+     */
     'tool/uckkseed:validate' => [
         'riskbitmask' => RISK_CONFIG,
         'captype' => 'read',
@@ -44,6 +63,11 @@ $capabilities = [
         ],
     ],
 
+    /*
+     * Export seed presets.
+     *
+     * This capability allows exporting canonical preset data from Moodle state.
+     */
     'tool/uckkseed:exportpresets' => [
         'riskbitmask' => RISK_CONFIG,
         'captype' => 'read',

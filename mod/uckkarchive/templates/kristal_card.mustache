@@ -1,304 +1,235 @@
-<?php
-// This file is part of Moodle - https://moodle.org/
-//
-// Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// any later version.
+{{!
+    This file is part of Moodle - https://moodle.org/
 
-/**
- * Restore task for the UCKK Archive activity module.
- *
- * @package    mod_uckkarchive
- * @copyright  2026 Univers-Cité King Klown
- * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+}}
+{{!
+    @template mod_uckkarchive/kristal_card
 
-defined('MOODLE_INTERNAL') || die();
+    Kristal card for UCKK Archives.
 
-require_once($CFG->dirroot . '/mod/uckkarchive/backup/moodle2/restore_uckkarchive_stepslib.php');
+    This template is render-only. All values must be permission-filtered,
+    context-aware and formatted by PHP output classes or external services.
+}}
 
-/**
- * Restore task for mod_uckkarchive.
- *
- * The task wires the restore structure step, content decoding, activity-link
- * decoding, and legacy log restoration rules. Record creation, id mapping,
- * file-area restoration, provenance reconstruction, revision mapping, and
- * export metadata handling belong in restore_uckkarchive_activity_structure_step.
- */
-class restore_uckkarchive_activity_task extends restore_activity_task {
-    /**
-     * Define activity-specific restore settings.
-     *
-     * No custom task-level settings are required. User-data inclusion is
-     * governed by Moodle's standard activity restore settings and interpreted
-     * by the structure step.
-     */
-    protected function define_my_settings(): void {
-    }
+<article
+    class="uckkarchive-kristal-card {{statusclass}} {{visibilityclass}}"
+    data-region="uckkarchive-kristal-card"
+    data-kristal-id="{{id}}"
+    data-archive-id="{{archiveid}}"
+    data-item-id="{{itemid}}"
+    data-cmid="{{cmid}}"
+    data-context-id="{{contextid}}"
+>
+    <header class="uckkarchive-kristal-card__header">
+        <div class="uckkarchive-kristal-card__identity">
+            <p class="uckkarchive-kristal-card__eyebrow">
+                {{#str}} kristal, uckkarchive {{/str}}
+            </p>
 
-    /**
-     * Define restore steps.
-     */
-    protected function define_my_steps(): void {
-        $this->add_step(new restore_uckkarchive_activity_structure_step(
-            'uckkarchive_structure',
-            'uckkarchive.xml'
-        ));
-    }
+            <h3 class="uckkarchive-kristal-card__title">
+                {{#url}}
+                    <a href="{{url}}" class="uckkarchive-kristal-card__title-link">
+                        {{title}}
+                    </a>
+                {{/url}}
+                {{^url}}
+                    {{title}}
+                {{/url}}
+            </h3>
 
-    /**
-     * Define content fields requiring link decoding after restore.
-     *
-     * @return array
-     */
-    public static function define_decode_contents(): array {
-        $contents = [];
+            <div class="uckkarchive-kristal-card__meta">
+                {{#shortname}}
+                    <span class="uckkarchive-kristal-card__badge uckkarchive-kristal-card__badge--shortname">
+                        {{#str}} shortname, uckkarchive {{/str}}: {{shortname}}
+                    </span>
+                {{/shortname}}
 
-        // Main archive instance.
-        $contents[] = new restore_decode_content('uckkarchive', [
-            'intro',
-            'summary',
-            'policytext',
-            'retentionpolicy',
-            'metadata',
-        ], 'uckkarchive');
+                {{#kristaltypelabel}}
+                    <span class="uckkarchive-kristal-card__badge uckkarchive-kristal-card__badge--type">
+                        {{kristaltypelabel}}
+                    </span>
+                {{/kristaltypelabel}}
 
-        // Archive items.
-        $contents[] = new restore_decode_content('uckkarchive_item', [
-            'title',
-            'summary',
-            'content',
-            'sourceref',
-            'metadata',
-        ], 'uckkarchive_item');
+                {{#statuslabel}}
+                    <span class="uckkarchive-kristal-card__badge uckkarchive-kristal-card__badge--status {{statusclass}}">
+                        {{#str}} status, uckkarchive {{/str}}: {{statuslabel}}
+                    </span>
+                {{/statuslabel}}
 
-        // Kristals.
-        $contents[] = new restore_decode_content('uckkarchive_kristal', [
-            'title',
-            'summary',
-            'content',
-            'sourceref',
-            'metadata',
-        ], 'uckkarchive_kristal');
+                {{#visibilitylabel}}
+                    <span class="uckkarchive-kristal-card__badge uckkarchive-kristal-card__badge--visibility {{visibilityclass}}">
+                        {{visibilitylabel}}
+                    </span>
+                {{/visibilitylabel}}
 
-        // Proof records.
-        $contents[] = new restore_decode_content('uckkarchive_proof', [
-            'title',
-            'summary',
-            'content',
-            'sourceref',
-            'metadata',
-        ], 'uckkarchive_proof');
+                {{#versionlabel}}
+                    <span class="uckkarchive-kristal-card__badge uckkarchive-kristal-card__badge--version">
+                        {{versionlabel}}
+                    </span>
+                {{/versionlabel}}
+            </div>
+        </div>
+    </header>
 
-        // Provenance records.
-        $contents[] = new restore_decode_content('uckkarchive_prov', [
-            'summary',
-            'statement',
-            'sourcecomponent',
-            'sourceref',
-            'metadata',
-        ], 'uckkarchive_prov');
+    {{#hassummary}}
+        <section class="uckkarchive-kristal-card__section uckkarchive-kristal-card__summary">
+            <h4 class="uckkarchive-kristal-card__section-title">
+                {{#str}} summary, uckkarchive {{/str}}
+            </h4>
+            <div class="uckkarchive-kristal-card__section-content">
+                {{{summaryhtml}}}
+            </div>
+        </section>
+    {{/hassummary}}
 
-        // Revision records.
-        $contents[] = new restore_decode_content('uckkarchive_rev', [
-            'summary',
-            'reason',
-            'beforejson',
-            'afterjson',
-            'metadata',
-        ], 'uckkarchive_rev');
+    {{#hascontent}}
+        <section class="uckkarchive-kristal-card__section uckkarchive-kristal-card__content">
+            <h4 class="uckkarchive-kristal-card__section-title">
+                {{#str}} title, uckkarchive {{/str}}
+            </h4>
+            <div class="uckkarchive-kristal-card__section-content">
+                {{{contenthtml}}}
+            </div>
+        </section>
+    {{/hascontent}}
 
-        // Export records.
-        $contents[] = new restore_decode_content('uckkarchive_export', [
-            'title',
-            'summary',
-            'exportmanifest',
-            'metadata',
-        ], 'uckkarchive_export');
+    {{#hassource}}
+        <section class="uckkarchive-kristal-card__section uckkarchive-kristal-card__source">
+            <h4 class="uckkarchive-kristal-card__section-title">
+                {{#str}} provenance, uckkarchive {{/str}}
+            </h4>
 
-        return $contents;
-    }
+            <dl class="uckkarchive-kristal-card__facts">
+                {{#sourcetitle}}
+                    <div class="uckkarchive-kristal-card__fact">
+                        <dt>{{#str}} sourcetitle, uckkarchive {{/str}}</dt>
+                        <dd>{{sourcetitle}}</dd>
+                    </div>
+                {{/sourcetitle}}
 
-    /**
-     * Define rules for decoding encoded activity links after restore.
-     *
-     * These tokens should match backup_uckkarchive_activity_task::encode_content_links().
-     *
-     * @return array
-     */
-    public static function define_decode_rules(): array {
-        $rules = [];
+                {{#sourceauthor}}
+                    <div class="uckkarchive-kristal-card__fact">
+                        <dt>{{#str}} sourceauthor, uckkarchive {{/str}}</dt>
+                        <dd>{{sourceauthor}}</dd>
+                    </div>
+                {{/sourceauthor}}
 
-        $rules[] = new restore_decode_rule(
-            'UCKKARCHIVEINDEX',
-            '/mod/uckkarchive/index.php?id=$1',
-            'course'
-        );
+                {{#sourceurl}}
+                    <div class="uckkarchive-kristal-card__fact">
+                        <dt>{{#str}} sourceurl, uckkarchive {{/str}}</dt>
+                        <dd>
+                            <a href="{{sourceurl}}" rel="noopener noreferrer">
+                                {{sourceurl}}
+                            </a>
+                        </dd>
+                    </div>
+                {{/sourceurl}}
 
-        $rules[] = new restore_decode_rule(
-            'UCKKARCHIVEVIEWBYCMID',
-            '/mod/uckkarchive/view.php?id=$1',
-            'course_module'
-        );
+                {{#sourcecomponent}}
+                    <div class="uckkarchive-kristal-card__fact">
+                        <dt>{{#str}} sourcecomponent, uckkarchive {{/str}}</dt>
+                        <dd>{{sourcecomponent}}</dd>
+                    </div>
+                {{/sourcecomponent}}
+            </dl>
+        </section>
+    {{/hassource}}
 
-        $rules[] = new restore_decode_rule(
-            'UCKKARCHIVEVIEWBYID',
-            '/mod/uckkarchive/view.php?a=$1',
-            'uckkarchive'
-        );
+    {{#hasuncertaintynotes}}
+        <section class="uckkarchive-kristal-card__section uckkarchive-kristal-card__uncertainty">
+            <h4 class="uckkarchive-kristal-card__section-title">
+                {{#str}} uncertaintynotes, uckkarchive {{/str}}
+            </h4>
+            <div class="uckkarchive-kristal-card__section-content">
+                {{{uncertaintynotes}}}
+            </div>
+        </section>
+    {{/hasuncertaintynotes}}
 
-        $rules[] = new restore_decode_rule(
-            'UCKKARCHIVEITEMBYCMID',
-            '/mod/uckkarchive/item.php?id=$1',
-            'course_module'
-        );
+    {{#hasproofs}}
+        <section class="uckkarchive-kristal-card__section uckkarchive-kristal-card__proofs">
+            <h4 class="uckkarchive-kristal-card__section-title">
+                {{#str}} proofs, uckkarchive {{/str}}
+            </h4>
 
-        $rules[] = new restore_decode_rule(
-            'UCKKARCHIVEITEMBYID',
-            '/mod/uckkarchive/item.php?itemid=$1',
-            'uckkarchive_item'
-        );
+            <ul class="uckkarchive-kristal-card__proof-list">
+                {{#proofs}}
+                    <li class="uckkarchive-kristal-card__proof">
+                        {{#url}}
+                            <a href="{{url}}" class="uckkarchive-kristal-card__proof-title">
+                                {{title}}
+                            </a>
+                        {{/url}}
+                        {{^url}}
+                            <span class="uckkarchive-kristal-card__proof-title">{{title}}</span>
+                        {{/url}}
 
-        $rules[] = new restore_decode_rule(
-            'UCKKARCHIVEADDBYCMID',
-            '/mod/uckkarchive/add.php?id=$1',
-            'course_module'
-        );
+                        {{#prooftypelabel}}
+                            <span class="uckkarchive-kristal-card__proof-type">{{prooftypelabel}}</span>
+                        {{/prooftypelabel}}
 
-        $rules[] = new restore_decode_rule(
-            'UCKKARCHIVEVALIDATEBYCMID',
-            '/mod/uckkarchive/validate.php?id=$1',
-            'course_module'
-        );
+                        {{#statuslabel}}
+                            <span class="uckkarchive-kristal-card__proof-status status-{{status}}">
+                                {{statuslabel}}
+                            </span>
+                        {{/statuslabel}}
 
-        $rules[] = new restore_decode_rule(
-            'UCKKARCHIVEEXPORTBYCMID',
-            '/mod/uckkarchive/export.php?id=$1',
-            'course_module'
-        );
+                        {{#summary}}
+                            <p class="uckkarchive-kristal-card__proof-summary">{{summary}}</p>
+                        {{/summary}}
+                    </li>
+                {{/proofs}}
+            </ul>
+        </section>
+    {{/hasproofs}}
 
-        $rules[] = new restore_decode_rule(
-            'UCKKARCHIVEEXPORTBYID',
-            '/mod/uckkarchive/export.php?exportid=$1',
-            'uckkarchive_export'
-        );
+    {{#haswarnings}}
+        <section class="uckkarchive-kristal-card__section uckkarchive-kristal-card__warnings">
+            <h4 class="uckkarchive-kristal-card__section-title">
+                {{#str}} warnings, moodle {{/str}}
+            </h4>
 
-        return $rules;
-    }
+            <ul class="uckkarchive-kristal-card__warning-list">
+                {{#warnings}}
+                    <li class="uckkarchive-kristal-card__warning">{{.}}</li>
+                {{/warnings}}
+            </ul>
+        </section>
+    {{/haswarnings}}
 
-    /**
-     * Define legacy activity log restore rules.
-     *
-     * @return restore_log_rule[]
-     */
-    public static function define_restore_log_rules(): array {
-        $rules = [];
+    <footer class="uckkarchive-kristal-card__footer">
+        <div class="uckkarchive-kristal-card__dates">
+            {{#timecreatedlabel}}
+                <p class="uckkarchive-kristal-card__date">
+                    {{#str}} timecreated, moodle {{/str}}: {{timecreatedlabel}}
+                </p>
+            {{/timecreatedlabel}}
 
-        $rules[] = new restore_log_rule(
-            'uckkarchive',
-            'add',
-            'view.php?id={course_module}',
-            '{uckkarchive}'
-        );
+            {{#timemodifiedlabel}}
+                <p class="uckkarchive-kristal-card__date">
+                    {{#str}} timemodified, moodle {{/str}}: {{timemodifiedlabel}}
+                </p>
+            {{/timemodifiedlabel}}
+        </div>
 
-        $rules[] = new restore_log_rule(
-            'uckkarchive',
-            'update',
-            'view.php?id={course_module}',
-            '{uckkarchive}'
-        );
+        {{#hasprovenancehash}}
+            <p class="uckkarchive-kristal-card__hash">
+                <code>{{provenancehash}}</code>
+            </p>
+        {{/hasprovenancehash}}
 
-        $rules[] = new restore_log_rule(
-            'uckkarchive',
-            'view',
-            'view.php?id={course_module}',
-            '{uckkarchive}'
-        );
-
-        $rules[] = new restore_log_rule(
-            'uckkarchive',
-            'add item',
-            'add.php?id={course_module}',
-            '{uckkarchive_item}'
-        );
-
-        $rules[] = new restore_log_rule(
-            'uckkarchive',
-            'view item',
-            'item.php?id={course_module}&itemid={uckkarchive_item}',
-            '{uckkarchive_item}'
-        );
-
-        $rules[] = new restore_log_rule(
-            'uckkarchive',
-            'validate item',
-            'validate.php?id={course_module}&itemid={uckkarchive_item}',
-            '{uckkarchive_item}'
-        );
-
-        $rules[] = new restore_log_rule(
-            'uckkarchive',
-            'revise item',
-            'item.php?id={course_module}&itemid={uckkarchive_item}',
-            '{uckkarchive_rev}'
-        );
-
-        $rules[] = new restore_log_rule(
-            'uckkarchive',
-            'export',
-            'export.php?id={course_module}',
-            '{uckkarchive_export}'
-        );
-
-        return $rules;
-    }
-
-    /**
-     * Define legacy course-level log restore rules.
-     *
-     * @return restore_log_rule[]
-     */
-    public static function define_restore_log_rules_for_course(): array {
-        $rules = [];
-
-        $rules[] = new restore_log_rule(
-            'uckkarchive',
-            'view all',
-            'index.php?id={course}',
-            null
-        );
-
-        return $rules;
-    }
-
-    /**
-     * Return file areas used by the activity.
-     *
-     * Actual file restoration is performed by the restore structure step. These
-     * names must stay aligned with mod_uckkarchive::pluginfile(), backup steps,
-     * and the generated archive lib.php.
-     *
-     * @return string[]
-     */
-    public function get_fileareas(): array {
-        return [
-            'intro',
-            'proof_files',
-            'decision_attachments',
-            'minutes_files',
-            'kristal_files',
-            'portfolio_files',
-            'integrity_exports',
-        ];
-    }
-
-    /**
-     * Return encoded config-data attributes.
-     *
-     * @return string[]
-     */
-    public function get_configdata_encoded_attributes(): array {
-        return [];
-    }
-}
+        {{#hasactions}}
+            <div class="uckkarchive-kristal-card__actions">
+                {{#actions}}
+                    <a href="{{url}}" class="btn {{class}}">
+                        {{label}}
+                    </a>
+                {{/actions}}
+            </div>
+        {{/hasactions}}
+    </footer>
+</article>

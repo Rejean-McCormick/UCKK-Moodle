@@ -20,23 +20,33 @@ defined('MOODLE_INTERNAL') || die();
  * UCKK capability policy.
  *
  * Symbolic UCKK roles such as joueur_lucide, batisseur, archiviste,
- * inquisiteur, cartographe, architecte_sens, and similar distinctions
- * are intentionally not created here as Moodle roles.
+ * inquisiteur, cartographe, architecte_sens, and similar distinctions are
+ * intentionally not created here as Moodle roles.
  *
- * This file defines permission capabilities only. Role creation and
- * role-to-capability assignment for UCKK technical roles is handled by
- * the seed tool and Moodle administration.
+ * This file defines Moodle capabilities only. Role creation and role-to-
+ * capability assignment for UCKK technical roles is handled by tool_uckkseed
+ * and Moodle administration.
+ *
+ * Capability scope rule:
+ * - local_uckk owns global campus, program, pathway, profile, canon,
+ *   reporting-navigation, export, restricted-data, and integration permissions.
+ * - Activity-specific authority stays in mod_uckkchallenge, mod_uckkassembly,
+ *   and mod_uckkarchive.
+ * - Course-format display authority stays in format_uckk.
+ * - Report execution/export authority stays in report_uckk.
+ * - Seed-tool authority stays in tool_uckkseed.
  */
 $capabilities = [
 
-    /**
+    /*
      * View the UCKK campus layer.
      *
-     * This is the baseline read capability for authenticated users to access
-     * UCKK campus navigation, public program cards, pathway overview surfaces,
-     * and non-restricted institutional information.
+     * Baseline read capability for authenticated users to access UCKK campus
+     * navigation, public program cards, pathway overview surfaces, and
+     * non-restricted institutional information.
      */
     'local/uckk:viewcampus' => [
+        'riskbitmask' => 0,
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
@@ -48,42 +58,47 @@ $capabilities = [
         ],
     ],
 
-    /**
+    /*
      * Manage UCKK programs.
      *
      * Allows creation, update, hiding, archiving, ordering, and category linkage
-     * for canonical UCKK programs.
+     * for canonical UCKK programs. Programs are global institutional registry
+     * objects, even when they point to Moodle course categories.
      */
     'local/uckk:manageprograms' => [
         'riskbitmask' => RISK_CONFIG,
         'captype' => 'write',
-        'contextlevel' => CONTEXT_COURSECAT,
+        'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'manager' => CAP_ALLOW,
         ],
     ],
 
-    /**
+    /*
      * Manage UCKK pathways.
      *
-     * Allows configuration of pathway definitions, required courses,
-     * required badges, required competencies, and pathway status.
+     * Allows configuration of pathway definitions, required courses, required
+     * badges, required competencies, evidence requirements, ordering, and
+     * pathway status. Pathways are global institutional registry objects.
      */
     'local/uckk:managepathways' => [
         'riskbitmask' => RISK_CONFIG | RISK_PERSONAL,
         'captype' => 'write',
-        'contextlevel' => CONTEXT_COURSECAT,
+        'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => [
             'manager' => CAP_ALLOW,
         ],
     ],
 
-    /**
+    /*
      * Manage UCKK player profiles.
      *
-     * Allows authorized staff to update UCKK profile metadata, symbolic role
-     * assignments, pathway assignment references, visibility settings, and
-     * integrity flags where permitted.
+     * Allows authorized staff to update UCKK profile metadata, symbolic-role
+     * references, pathway assignment references, visibility settings, and
+     * integrity flags where permitted by service-layer checks.
+     *
+     * This remains user-context scoped because profile data is ultimately tied
+     * to users. System-level assignments may still grant this across users.
      */
     'local/uckk:manageprofiles' => [
         'riskbitmask' => RISK_PERSONAL,
@@ -94,7 +109,7 @@ $capabilities = [
         ],
     ],
 
-    /**
+    /*
      * Manage UCKK canon registry entries.
      *
      * Allows authorized users to manage canonical panels, institutional
@@ -109,7 +124,7 @@ $capabilities = [
         ],
     ],
 
-    /**
+    /*
      * View UCKK reports exposed through local_uckk.
      *
      * This does not replace report_uckk capabilities. It only gates local_uckk
@@ -124,11 +139,11 @@ $capabilities = [
         ],
     ],
 
-    /**
+    /*
      * Export UCKK local data.
      *
      * Allows export of local_uckk registry, profile, pathway, provenance,
-     * visibility, map, reflection, and status data where allowed by service
+     * visibility, map, reflection, and status data where allowed by service-
      * layer checks.
      */
     'local/uckk:exportdata' => [
@@ -140,13 +155,13 @@ $capabilities = [
         ],
     ],
 
-    /**
+    /*
      * View restricted UCKK local data.
      *
      * Allows access to restricted local_uckk records such as restricted profile
-     * metadata, restricted provenance summaries, hidden pathway status, or
-     * local integrity markers. This must always be combined with service-layer
-     * context checks.
+     * metadata, restricted provenance summaries, hidden pathway status, local
+     * integrity markers, or internal registry state. This must always be paired
+     * with service-layer context checks.
      */
     'local/uckk:viewrestricted' => [
         'riskbitmask' => RISK_PERSONAL,
@@ -157,7 +172,7 @@ $capabilities = [
         ],
     ],
 
-    /**
+    /*
      * Manage UCKK integrations.
      *
      * Allows configuration of cross-plugin bridges and external integration

@@ -1,0 +1,1573 @@
+{
+  "schema": "uckkseed.preset.v1",
+  "component": "tool_uckkseed",
+  "preset": "badges",
+  "version": 2026051200,
+  "items": [
+    {
+      "id": "badge:tronc-commun-completion",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-TC-COMPLETION",
+      "title": "Socle commun UCKK — Joueur lucide en formation",
+      "short_title": "Tronc commun",
+      "badge_type": "tronc_commun_completion",
+      "status": "active",
+      "program_id": "program:tronc-commun",
+      "pathway_id": "pathway:tronc-commun-main",
+      "linked_competency_ids": [
+        "competency:tronc-commun:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-tc101",
+          "course:uckk-tc102",
+          "course:uckk-tc103",
+          "course:uckk-tc104",
+          "course:uckk-tc105",
+          "course:uckk-tc106",
+          "course:uckk-tc107"
+        ],
+        "optional": [],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:tronc-commun-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:tronc-commun:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "internal_progression",
+        "title": "Progression du tronc commun UCKK",
+        "internal_title": "Aspirant UCKK — socle commun",
+        "symbolic_title": "Joueur lucide en formation",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Socle commun UCKK — Joueur lucide en formation",
+        "description": "Badge interne UCKK lié à Tronc commun obligatoire.",
+        "idnumber": "UCKK-BADGE-TC-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Tronc commun obligatoire. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "tronc-commun",
+          "aspirance",
+          "culture-commune",
+          "joueur-lucide"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/31_UCKK-tronc-commun.md",
+        "source_status": "canonical_program_document",
+        "source_version": "1.0"
+      },
+      "key": "tronc_commun_completion",
+      "name": "Socle commun UCKK — Joueur lucide en formation",
+      "description": "Badge interne UCKK lié à Tronc commun obligatoire.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "tronc_commun_completion",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:tronc-commun-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:tronc-commun:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:tronc-commun:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "active",
+        "program_id": "program:tronc-commun",
+        "pathway_id": "pathway:tronc-commun-main",
+        "sortorder": 10,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-grand-jeu-social-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-GJS-COMPLETION",
+      "title": "Parchemin de Magie opérable",
+      "short_title": "Grand Jeu social",
+      "badge_type": "parchemin_uckk",
+      "status": "internal_experimental",
+      "program_id": "program:grand-jeu-social-magie-operable",
+      "pathway_id": "pathway:grand-jeu-social-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:grand-jeu-social-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-gjs101",
+          "course:uckk-gjs102",
+          "course:uckk-gjs103",
+          "course:uckk-gjs104",
+          "course:uckk-gjs105",
+          "course:uckk-gjs106",
+          "course:uckk-gjs107",
+          "course:uckk-gjs108"
+        ],
+        "optional": [],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:grand-jeu-social-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:grand-jeu-social-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable",
+        "internal_title": "Mage UCKK du Grand Jeu social",
+        "symbolic_title": "Joueur lucide du Grand Jeu social",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable",
+        "description": "Badge interne UCKK lié à Voie du Grand Jeu social — Palier de Magie opérable.",
+        "idnumber": "UCKK-BADGE-GJS-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie du Grand Jeu social — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "grand-jeu-social",
+          "magie-operable",
+          "voie-transversale",
+          "systemes-sociaux"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/32_voie-grand-jeu-social-palier-magie-operable.md",
+        "source_status": "canonical_program_document",
+        "source_version": "0.1"
+      },
+      "key": "parchemin_grand_jeu_social_magie_operable",
+      "name": "Parchemin de Magie opérable",
+      "description": "Badge interne UCKK lié à Voie du Grand Jeu social — Palier de Magie opérable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:grand-jeu-social-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:grand-jeu-social-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:grand-jeu-social-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "internal_experimental",
+        "program_id": "program:grand-jeu-social-magie-operable",
+        "pathway_id": "pathway:grand-jeu-social-magie-operable-main",
+        "sortorder": 20,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-architecture-ecosysteme-digital-koa-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-KOA-COMPLETION",
+      "title": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
+      "short_title": "Architecture kOA",
+      "badge_type": "parchemin_uckk",
+      "status": "active",
+      "program_id": "program:architecture-ecosysteme-digital-koa-magie-operable",
+      "pathway_id": "pathway:architecture-ecosysteme-digital-koa-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:architecture-ecosysteme-digital-koa-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-koa101",
+          "course:uckk-koa102",
+          "course:uckk-koa103",
+          "course:uckk-koa104",
+          "course:uckk-koa105",
+          "course:uckk-koa201",
+          "course:uckk-koa202",
+          "course:uckk-koa203",
+          "course:uckk-koa204",
+          "course:uckk-koa205",
+          "course:uckk-koa206",
+          "course:uckk-koa207",
+          "course:uckk-koa208",
+          "course:uckk-koa209",
+          "course:uckk-koa210",
+          "course:uckk-koa301",
+          "course:uckk-koa302",
+          "course:uckk-koa303",
+          "course:uckk-koa304",
+          "course:uckk-koa305",
+          "course:uckk-koa307",
+          "course:uckk-koa308",
+          "course:uckk-koa309"
+        ],
+        "optional": [],
+        "final_project": [
+          "course:uckk-koa399"
+        ]
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:architecture-ecosysteme-digital-koa-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:architecture-ecosysteme-digital-koa-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
+        "internal_title": "Mage UCKK de l’Architecture de l’écosystème digital kOA",
+        "symbolic_title": "Architecte kOA",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
+        "description": "Badge interne UCKK lié à Voie de Magie opérable en Architecture de l’écosystème digital kOA.",
+        "idnumber": "UCKK-BADGE-KOA-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie de Magie opérable en Architecture de l’écosystème digital kOA. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "koa",
+          "ecosysteme-digital",
+          "architecture",
+          "sociotechnique",
+          "magie-operable"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/33_voie-magie-operable-architecture-ecosysteme-digital-kOA.md",
+        "source_status": "canonical_program_document",
+        "source_version": "0.2"
+      },
+      "key": "parchemin_architecture_ecosysteme_digital_koa_magie_operable",
+      "name": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
+      "description": "Badge interne UCKK lié à Voie de Magie opérable en Architecture de l’écosystème digital kOA.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:architecture-ecosysteme-digital-koa-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:architecture-ecosysteme-digital-koa-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:architecture-ecosysteme-digital-koa-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "active",
+        "program_id": "program:architecture-ecosysteme-digital-koa-magie-operable",
+        "pathway_id": "pathway:architecture-ecosysteme-digital-koa-magie-operable-main",
+        "sortorder": 30,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-architecture-sociotechnique-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-AS-COMPLETION",
+      "title": "Parchemin de Magie opérable en Architecture sociotechnique",
+      "short_title": "Architecture sociotechnique",
+      "badge_type": "parchemin_uckk",
+      "status": "active",
+      "program_id": "program:architecture-sociotechnique-magie-operable",
+      "pathway_id": "pathway:architecture-sociotechnique-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:architecture-sociotechnique-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-as201",
+          "course:uckk-as202",
+          "course:uckk-as203",
+          "course:uckk-as204",
+          "course:uckk-as205",
+          "course:uckk-as206"
+        ],
+        "optional": [
+          "course:uckk-as251",
+          "course:uckk-as252"
+        ],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:architecture-sociotechnique-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:architecture-sociotechnique-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable en Architecture sociotechnique",
+        "internal_title": "Mage UCKK en Architecture sociotechnique",
+        "symbolic_title": "Architecte du Grand Jeu",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable en Architecture sociotechnique",
+        "description": "Badge interne UCKK lié à Voie d’Architecture sociotechnique — Palier de Magie opérable.",
+        "idnumber": "UCKK-BADGE-AS-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie d’Architecture sociotechnique — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "architecture-sociotechnique",
+          "systemes",
+          "workflows",
+          "gouvernance",
+          "magie-operable"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/35_voie-architecture-sociotechnique.md",
+        "source_status": "canonical_program_document",
+        "source_version": "0.1"
+      },
+      "key": "parchemin_architecture_sociotechnique_magie_operable",
+      "name": "Parchemin de Magie opérable en Architecture sociotechnique",
+      "description": "Badge interne UCKK lié à Voie d’Architecture sociotechnique — Palier de Magie opérable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:architecture-sociotechnique-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:architecture-sociotechnique-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:architecture-sociotechnique-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "active",
+        "program_id": "program:architecture-sociotechnique-magie-operable",
+        "pathway_id": "pathway:architecture-sociotechnique-magie-operable-main",
+        "sortorder": 40,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-sciences-politiques-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-SP-COMPLETION",
+      "title": "Parchemin de Magie opérable",
+      "short_title": "Sciences politiques",
+      "badge_type": "parchemin_uckk",
+      "status": "internal_experimental",
+      "program_id": "program:sciences-politiques-magie-operable",
+      "pathway_id": "pathway:sciences-politiques-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:sciences-politiques-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-sp201",
+          "course:uckk-sp202",
+          "course:uckk-sp203",
+          "course:uckk-sp204"
+        ],
+        "optional": [
+          "course:uckk-sp251",
+          "course:uckk-sp252"
+        ],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:sciences-politiques-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:sciences-politiques-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable",
+        "internal_title": "Mage UCKK des Sciences politiques",
+        "symbolic_title": "Stratège civique",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable",
+        "description": "Badge interne UCKK lié à Voie des Sciences politiques — Palier de Magie opérable.",
+        "idnumber": "UCKK-BADGE-SP-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie des Sciences politiques — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "sciences-politiques",
+          "pouvoir",
+          "gouvernance",
+          "assemblees",
+          "magie-operable"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/36_voie-sciences-politiques.md",
+        "source_status": "canonical_program_document",
+        "source_version": "1.1"
+      },
+      "key": "parchemin_sciences_politiques_magie_operable",
+      "name": "Parchemin de Magie opérable",
+      "description": "Badge interne UCKK lié à Voie des Sciences politiques — Palier de Magie opérable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:sciences-politiques-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:sciences-politiques-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:sciences-politiques-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "internal_experimental",
+        "program_id": "program:sciences-politiques-magie-operable",
+        "pathway_id": "pathway:sciences-politiques-magie-operable-main",
+        "sortorder": 50,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-economie-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-EC-COMPLETION",
+      "title": "Parchemin de Magie opérable — Voie d’Économie",
+      "short_title": "Économie",
+      "badge_type": "parchemin_uckk",
+      "status": "active",
+      "program_id": "program:economie-magie-operable",
+      "pathway_id": "pathway:economie-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:economie-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-ec201",
+          "course:uckk-ec202",
+          "course:uckk-ec203"
+        ],
+        "optional": [
+          "course:uckk-ec251"
+        ],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:economie-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:economie-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable — Voie d’Économie",
+        "internal_title": "Mage UCKK en Économie",
+        "symbolic_title": "Architecte d’opportunités",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable — Voie d’Économie",
+        "description": "Badge interne UCKK lié à Voie d’Économie — Palier de Magie opérable.",
+        "idnumber": "UCKK-BADGE-EC-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie d’Économie — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "economie",
+          "ressources",
+          "flux",
+          "opportunites",
+          "magie-operable"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/37_voie-economie.md",
+        "source_status": "canonical_program_document",
+        "source_version": "0.1"
+      },
+      "key": "parchemin_economie_magie_operable",
+      "name": "Parchemin de Magie opérable — Voie d’Économie",
+      "description": "Badge interne UCKK lié à Voie d’Économie — Palier de Magie opérable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:economie-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:economie-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:economie-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "active",
+        "program_id": "program:economie-magie-operable",
+        "pathway_id": "pathway:economie-magie-operable-main",
+        "sortorder": 60,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-ecologie-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-ECO-COMPLETION",
+      "title": "Parchemin de Magie opérable",
+      "short_title": "Écologie",
+      "badge_type": "parchemin_uckk",
+      "status": "active",
+      "program_id": "program:ecologie-magie-operable",
+      "pathway_id": "pathway:ecologie-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:ecologie-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-eco201",
+          "course:uckk-eco202",
+          "course:uckk-eco203",
+          "course:uckk-eco204",
+          "course:uckk-eco205"
+        ],
+        "optional": [
+          "course:uckk-eco206"
+        ],
+        "final_project": [
+          "course:uckk-eco207"
+        ]
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:ecologie-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:ecologie-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable",
+        "internal_title": "Mage UCKK des systèmes vivants",
+        "symbolic_title": "Gardien des systèmes vivants",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable",
+        "description": "Badge interne UCKK lié à Voie d’Écologie — Palier de Magie opérable.",
+        "idnumber": "UCKK-BADGE-ECO-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie d’Écologie — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "ecologie",
+          "systemes-vivants",
+          "territoires",
+          "transition",
+          "magie-operable"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/38_voie-ecologie-palier-magie-operable.md",
+        "source_status": "canonical_program_document",
+        "source_version": "0.1"
+      },
+      "key": "parchemin_ecologie_magie_operable",
+      "name": "Parchemin de Magie opérable",
+      "description": "Badge interne UCKK lié à Voie d’Écologie — Palier de Magie opérable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:ecologie-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:ecologie-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:ecologie-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "active",
+        "program_id": "program:ecologie-magie-operable",
+        "pathway_id": "pathway:ecologie-magie-operable-main",
+        "sortorder": 70,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-metaphysique-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-ME-COMPLETION",
+      "title": "Parchemin de Magie opérable",
+      "short_title": "Métaphysique",
+      "badge_type": "parchemin_uckk",
+      "status": "internal_experimental",
+      "program_id": "program:metaphysique-magie-operable",
+      "pathway_id": "pathway:metaphysique-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:metaphysique-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-me201",
+          "course:uckk-me202",
+          "course:uckk-me203",
+          "course:uckk-me204"
+        ],
+        "optional": [],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:metaphysique-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:metaphysique-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable",
+        "internal_title": "Mage UCKK des Structures invisibles",
+        "symbolic_title": "Lecteur des structures invisibles",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable",
+        "description": "Badge interne UCKK lié à Voie de Métaphysique — Palier de Magie opérable.",
+        "idnumber": "UCKK-BADGE-ME-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie de Métaphysique — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "metaphysique",
+          "structures-invisibles",
+          "sens",
+          "symboles",
+          "magie-operable"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/34_voie-metaphysique-palier-magie-operable.md",
+        "source_status": "canonical_program_document",
+        "source_version": "0.1"
+      },
+      "key": "parchemin_metaphysique_magie_operable",
+      "name": "Parchemin de Magie opérable",
+      "description": "Badge interne UCKK lié à Voie de Métaphysique — Palier de Magie opérable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:metaphysique-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:metaphysique-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:metaphysique-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "internal_experimental",
+        "program_id": "program:metaphysique-magie-operable",
+        "pathway_id": "pathway:metaphysique-magie-operable-main",
+        "sortorder": 80,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-intelligence-artificielle-gouvernable-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-IA-COMPLETION",
+      "title": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
+      "short_title": "IA gouvernable",
+      "badge_type": "parchemin_uckk",
+      "status": "active",
+      "program_id": "program:intelligence-artificielle-gouvernable-magie-operable",
+      "pathway_id": "pathway:intelligence-artificielle-gouvernable-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:intelligence-artificielle-gouvernable-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-ia201",
+          "course:uckk-ia202",
+          "course:uckk-ia203",
+          "course:uckk-ia204",
+          "course:uckk-ia205"
+        ],
+        "optional": [],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:intelligence-artificielle-gouvernable-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:intelligence-artificielle-gouvernable-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
+        "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
+        "symbolic_title": "Cartographe augmenté",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
+        "description": "Badge interne UCKK lié à Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable.",
+        "idnumber": "UCKK-BADGE-IA-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "ia",
+          "machines-pensantes",
+          "gouvernance",
+          "cartographie",
+          "magie-operable"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/40_voie-intelligence-artificielle-gouvernable.md",
+        "source_status": "canonical_program_document",
+        "source_version": "0.2"
+      },
+      "key": "parchemin_intelligence_artificielle_gouvernable_magie_operable",
+      "name": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
+      "description": "Badge interne UCKK lié à Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:intelligence-artificielle-gouvernable-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:intelligence-artificielle-gouvernable-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:intelligence-artificielle-gouvernable-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "active",
+        "program_id": "program:intelligence-artificielle-gouvernable-magie-operable",
+        "pathway_id": "pathway:intelligence-artificielle-gouvernable-magie-operable-main",
+        "sortorder": 90,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-linguistique-architecture-sens-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-LI-COMPLETION",
+      "title": "Parchemin de Magie opérable",
+      "short_title": "Linguistique et architecture du sens",
+      "badge_type": "parchemin_uckk",
+      "status": "internal_experimental",
+      "program_id": "program:linguistique-architecture-sens-magie-operable",
+      "pathway_id": "pathway:linguistique-architecture-sens-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:linguistique-architecture-sens-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-li201",
+          "course:uckk-li202",
+          "course:uckk-li203",
+          "course:uckk-li204"
+        ],
+        "optional": [],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:linguistique-architecture-sens-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:linguistique-architecture-sens-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable",
+        "internal_title": "Mage UCKK du Sens",
+        "symbolic_title": "Architecte du sens",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable",
+        "description": "Badge interne UCKK lié à Voie de Linguistique et architecture du sens — Palier de Magie opérable.",
+        "idnumber": "UCKK-BADGE-LI-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie de Linguistique et architecture du sens — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "linguistique",
+          "architecture-du-sens",
+          "semantique",
+          "langage",
+          "magie-operable"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/39_voie-magie-operable-linguistique-architecture-du-sens.md",
+        "source_status": "canonical_program_document",
+        "source_version": "0.1"
+      },
+      "key": "parchemin_linguistique_architecture_sens_magie_operable",
+      "name": "Parchemin de Magie opérable",
+      "description": "Badge interne UCKK lié à Voie de Linguistique et architecture du sens — Palier de Magie opérable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:linguistique-architecture-sens-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:linguistique-architecture-sens-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:linguistique-architecture-sens-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "internal_experimental",
+        "program_id": "program:linguistique-architecture-sens-magie-operable",
+        "pathway_id": "pathway:linguistique-architecture-sens-magie-operable-main",
+        "sortorder": 100,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:parchemin-intervention-sociale-systemes-humains-magie-operable",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-IS-COMPLETION",
+      "title": "Parchemin de Magie opérable",
+      "short_title": "Intervention sociale et systèmes humains",
+      "badge_type": "parchemin_uckk",
+      "status": "active",
+      "program_id": "program:intervention-sociale-systemes-humains-magie-operable",
+      "pathway_id": "pathway:intervention-sociale-systemes-humains-magie-operable-main",
+      "linked_competency_ids": [
+        "competency:intervention-sociale-systemes-humains-magie-operable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-is201",
+          "course:uckk-is202",
+          "course:uckk-is203"
+        ],
+        "optional": [],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:intervention-sociale-systemes-humains-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:intervention-sociale-systemes-humains-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Magie opérable",
+        "internal_title": "Mage UCKK de l’Intervention sociale et des systèmes humains",
+        "symbolic_title": "Intervenant du Grand Jeu humain",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Parchemin de Magie opérable",
+        "description": "Badge interne UCKK lié à Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable.",
+        "idnumber": "UCKK-BADGE-IS-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "intervention-sociale",
+          "systemes-humains",
+          "dignite",
+          "reparation",
+          "magie-operable"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/41_voie-intervention-sociale-systemes-humains.md",
+        "source_status": "canonical_program_document",
+        "source_version": "0.1"
+      },
+      "key": "parchemin_intervention_sociale_systemes_humains_magie_operable",
+      "name": "Parchemin de Magie opérable",
+      "description": "Badge interne UCKK lié à Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "parchemin_uckk",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:intervention-sociale-systemes-humains-magie-operable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:intervention-sociale-systemes-humains-magie-operable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:intervention-sociale-systemes-humains-magie-operable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "active",
+        "program_id": "program:intervention-sociale-systemes-humains-magie-operable",
+        "pathway_id": "pathway:intervention-sociale-systemes-humains-magie-operable-main",
+        "sortorder": 110,
+        "source_family": "UCKK canon"
+      }
+    },
+    {
+      "id": "badge:medias-vivants-theatre-public-responsable-completion",
+      "object_type": "badge",
+      "idnumber": "UCKK-BADGE-MV-COMPLETION",
+      "title": "Progression interne — Médias vivants et théâtre public responsable",
+      "short_title": "Médias vivants",
+      "badge_type": "program_completion",
+      "status": "draft",
+      "program_id": "program:medias-vivants-theatre-public-responsable",
+      "pathway_id": "pathway:medias-vivants-theatre-public-responsable-main",
+      "linked_competency_ids": [
+        "competency:medias-vivants-theatre-public-responsable:synthesis"
+      ],
+      "linked_course_ids": {
+        "required": [
+          "course:uckk-mv201",
+          "course:uckk-mv202",
+          "course:uckk-mv203",
+          "course:uckk-mv204"
+        ],
+        "optional": [],
+        "final_project": []
+      },
+      "award_criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:medias-vivants-theatre-public-responsable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:medias-vivants-theatre-public-responsable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "recognition": {
+        "type": "internal_progression",
+        "title": "Progression interne — Médias vivants et théâtre public responsable",
+        "internal_title": null,
+        "symbolic_title": "Praticien du théâtre public responsable",
+        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+      },
+      "moodle": {
+        "name": "Progression interne — Médias vivants et théâtre public responsable",
+        "description": "Badge interne UCKK lié à Voie secondaire des Médias vivants et du théâtre public responsable.",
+        "idnumber": "UCKK-BADGE-MV-COMPLETION",
+        "visible": false,
+        "enabled": true,
+        "issuer": {
+          "name": "Univers-Cité King Klown",
+          "short_name": "UCKK"
+        }
+      },
+      "ai_metadata": {
+        "summary_for_retrieval": "Badge interne associé à Voie secondaire des Médias vivants et du théâtre public responsable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "tags": [
+          "medias-vivants",
+          "theatre-public",
+          "satire",
+          "mobilisation",
+          "voie-secondaire"
+        ],
+        "non_authority_rule": "AI outputs are assistive and never final authority."
+      },
+      "source": {
+        "canonical_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "source_status": "course_catalogue_only",
+        "source_version": "0.1"
+      },
+      "key": "medias_vivants_theatre_public_responsable_completion",
+      "name": "Progression interne — Médias vivants et théâtre public responsable",
+      "description": "Badge interne UCKK lié à Voie secondaire des Médias vivants et du théâtre public responsable.",
+      "visible": 0,
+      "enabled": 1,
+      "issuer": {
+        "name": "Univers-Cité King Klown",
+        "short_name": "UCKK"
+      },
+      "type": "program_completion",
+      "criteria": [
+        {
+          "type": "pathway_completion",
+          "pathway_id": "pathway:medias-vivants-theatre-public-responsable-main",
+          "required_courses": "all_required_course_refs",
+          "optional_courses": "not_required_unless_selected",
+          "final_project": "required_when_present"
+        },
+        {
+          "type": "competency_completion",
+          "competency_ids": [
+            "competency:medias-vivants-theatre-public-responsable:synthesis"
+          ],
+          "requirement": "required"
+        },
+        {
+          "type": "human_validation",
+          "authority": "mentor_or_authorized_reviewer",
+          "ai_authority": "not_allowed"
+        }
+      ],
+      "competencies": [
+        "competency:medias-vivants-theatre-public-responsable:synthesis"
+      ],
+      "requiredarchive": true,
+      "requireshumanvalidation": true,
+      "metadata": {
+        "issuer": "Univers-Cité King Klown",
+        "visibility": "institution",
+        "status": "draft",
+        "program_id": "program:medias-vivants-theatre-public-responsable",
+        "pathway_id": "pathway:medias-vivants-theatre-public-responsable-main",
+        "sortorder": 120,
+        "source_family": "UCKK canon"
+      }
+    }
+  ],
+  "metadata": {
+    "source_schema_version": "1.0",
+    "source_preset_type": "badges",
+    "source_family": "UCKK canon",
+    "source_generated_at": "2026-05-18T00:00:00-04:00",
+    "owner": "local_uckk",
+    "moodle_subsystem": "core_badges",
+    "reconciliation_key": "idnumber",
+    "default_public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+    "generation_scope": "UCKK internal badges and Parchemin-related recognition badges for presets/badges.json",
+    "validation_summary": {
+      "item_count": 12,
+      "program_completion_badge_count": 12,
+      "ai_non_authority_rule": "AI outputs are assistive and never final authority.",
+      "public_accreditation_notice_present": true
+    },
+    "standardization": {
+      "changed_envelope": true,
+      "preserved_items": 12,
+      "promoted_moodle_fields": [
+        "name",
+        "description",
+        "idnumber",
+        "visible",
+        "enabled",
+        "issuer"
+      ],
+      "added_compatibility_aliases": [
+        "key",
+        "type",
+        "criteria",
+        "competencies",
+        "requiredarchive",
+        "requireshumanvalidation"
+      ]
+    }
+  }
+}

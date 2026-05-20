@@ -29,24 +29,37 @@ use stdClass;
 /**
  * Seeds UCKK competency frameworks and competencies.
  *
- * Expected preset item shape:
+ * Supported preset item shapes:
  *
+ * Framework row:
  * [
- *     'key' => 'COMP_READ_GAME',
- *     'idnumber' => 'UCKK-COMP-001',
+ *     'object_type' => 'competency_framework',
+ *     'key' => 'uckk_competency_framework',
+ *     'idnumber' => 'UCKK-COMP-FRAMEWORK',
+ *     'shortname' => 'UCKK competency framework',
+ *     'description' => '...',
+ *     'metadata' => []
+ * ]
+ *
+ * Competency row:
+ * [
+ *     'key' => 'uckk_comp_tc101',
+ *     'idnumber' => 'UCKK-COMP-TC101',
  *     'shortname' => 'Read the game',
  *     'description' => '...',
- *     'framework' => 'uckk_competency_framework',
+ *     'framework' => 'UCKK-COMP-FRAMEWORK',
+ *     'framework_id' => 'UCKK-COMP-FRAMEWORK',
  *     'parent' => '',
+ *     'parent_idnumber' => '',
  *     'scale' => '',
  *     'sortorder' => 10,
  *     'metadata' => []
  * ]
  *
- * This class is intentionally idempotent:
+ * Idempotency:
  * - frameworks are matched by idnumber;
  * - competencies are matched by idnumber inside their framework;
- * - dry-run mode reports planned changes without writing data.
+ * - dry-run/report mode reports planned changes without writing data.
  */
 final class competency_seed {
     /** Component name. */
@@ -58,8 +71,8 @@ final class competency_seed {
     /** Target type. */
     private const TARGET_TYPE = 'competency';
 
-    /** Default framework key/idnumber. */
-    private const DEFAULT_FRAMEWORK = 'uckk_competency_framework';
+    /** Default framework idnumber. */
+    private const DEFAULT_FRAMEWORK = 'UCKK-COMP-FRAMEWORK';
 
     /** Default framework shortname. */
     private const DEFAULT_FRAMEWORK_SHORTNAME = 'UCKK competency framework';
@@ -72,6 +85,9 @@ final class competency_seed {
 
     /** Execution mode: report. */
     private const MODE_REPORT = 'report';
+
+    /** Execution mode: rollback plan. */
+    private const MODE_ROLLBACK_PLAN = 'rollback_plan';
 
     /** Severity: info. */
     private const SEVERITY_INFO = 'info';
@@ -87,6 +103,12 @@ final class competency_seed {
 
     /** Severity: blocker. */
     private const SEVERITY_BLOCKER = 'blocker';
+
+    /** Supported framework object marker. */
+    private const OBJECT_FRAMEWORK = 'competency_framework';
+
+    /** Supported competency object marker. */
+    private const OBJECT_COMPETENCY = 'competency';
 
     /**
      * Validate competency preset items.
@@ -110,17 +132,30 @@ final class competency_seed {
             return $this->finalise_result($result);
         }
 
-        $seen = [];
+        if (empty($items)) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_WARNING,
+                'No competency preset items were provided.',
+                '',
+                []
+            );
 
-        foreach ($items as $index => $item) {
-            $item = $this->normalise_item($item);
+            return $this->finalise_result($result);
+        }
+
+        $seen = [];
+        $frameworks = [];
+
+        foreach ($items as $index => $rawitem) {
+            $item = $this->normalise_item($rawitem);
             $targetkey = $item['key'] !== '' ? $item['key'] : 'index_' . $index;
 
             if ($item['key'] === '') {
                 $this->add_message(
                     $result,
                     self::SEVERITY_ERROR,
-                    get_string('validation:missingkey', self::COMPONENT),
+                    'Competency item is missing key.',
                     $targetkey,
                     ['index' => $index]
                 );
@@ -146,51 +181,68 @@ final class competency_seed {
                 );
             }
 
-            if ($item['framework'] === '') {
-                $this->add_message(
-                    $result,
-                    self::SEVERITY_ERROR,
-                    'Competency item is missing framework.',
-                    $targetkey,
-                    ['index' => $index]
-                );
-            }
-
-            if ($item['idnumber'] !== '') {
-                $duplicatekey = $item['framework'] . ':' . $item['idnumber'];
-
-                if (isset($seen[$duplicatekey])) {
-                    $this->add_message(
-                        $result,
-                        self::SEVERITY_ERROR,
-                        get_string('validation:duplicatekey', self::COMPONENT, $item['idnumber']),
-                        $targetkey,
-                        ['idnumber' => $item['idnumber'], 'framework' => $item['framework']]
-                    );
-                }
-
-                $seen[$duplicatekey] = true;
-            }
-
-            if (!$this->is_uckk_competency_idnumber($item['idnumber'])) {
+            if ($item['idnumber'] !== '' && !$this->is_uckk_competency_idnumber($item['idnumber'])) {
                 $this->add_message(
                     $result,
                     self::SEVERITY_WARNING,
-                    'Competency idnumber is not in the canonical UCKK-COMP-### form.',
+                    'Competency idnumber is not in the canonical UCKK-COMP-[A-Z0-9-]+ form.',
                     $targetkey,
                     ['idnumber' => $item['idnumber']]
                 );
             }
+
+            if ($item['object_type'] === self::OBJECT_FRAMEWORK) {
+                $duplicatekey = 'framework:' . $item['idnumber'];
+                $frameworks[$item['idnumber']] = true;
+            } else {
+                if ($item['framework'] === '') {
+                    $this->add_message(
+                        $result,
+                        self::SEVERITY_ERROR,
+                        'Competency item is missing framework.',
+                        $targetkey,
+                        ['index' => $index]
+                    );
+                }
+
+                $duplicatekey = $item['framework'] . ':' . $item['idnumber'];
+            }
+
+            if ($item['idnumber'] !== '' && isset($seen[$duplicatekey])) {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_ERROR,
+                    'Duplicate competency/framework idnumber in preset.',
+                    $targetkey,
+                    [
+                        'idnumber' => $item['idnumber'],
+                        'framework' => $item['framework'],
+                    ]
+                );
+            }
+
+            if ($item['idnumber'] !== '') {
+                $seen[$duplicatekey] = true;
+            }
         }
 
-        if (empty($items)) {
-            $this->add_message(
-                $result,
-                self::SEVERITY_WARNING,
-                'No competency preset items were provided.',
-                '',
-                []
-            );
+        foreach ($items as $index => $rawitem) {
+            $item = $this->normalise_item($rawitem);
+            $targetkey = $item['key'] !== '' ? $item['key'] : 'index_' . $index;
+
+            if ($item['object_type'] === self::OBJECT_FRAMEWORK) {
+                continue;
+            }
+
+            if ($item['framework'] !== '' && !isset($frameworks[$item['framework']]) && !$this->find_framework($item['framework'])) {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_INFO,
+                    'Referenced framework is not in this preset and does not exist yet; apply mode will create it.',
+                    $targetkey,
+                    ['framework' => $item['framework']]
+                );
+            }
         }
 
         return $this->finalise_result($result);
@@ -205,11 +257,10 @@ final class competency_seed {
      */
     public function apply(array $items, array $options = []): validation_result {
         $mode = $this->normalise_mode((string)($options['mode'] ?? self::MODE_APPLY));
-        $dryrun = $mode === self::MODE_DRY_RUN || !empty($options['dryrun']);
+        $dryrun = $mode === self::MODE_DRY_RUN || $mode === self::MODE_REPORT || !empty($options['dryrun']);
         $result = $this->new_result($dryrun ? self::MODE_DRY_RUN : self::MODE_APPLY);
 
         $validation = $this->validate($items, $options);
-
         $this->merge_result($result, $validation);
 
         if ($this->result_has_blocking_errors($validation)) {
@@ -218,10 +269,21 @@ final class competency_seed {
 
         $frameworkcache = [];
 
-        foreach ($items as $item) {
-            $item = $this->normalise_item($item);
+        foreach ($items as $rawitem) {
+            $item = $this->normalise_item($rawitem);
 
-            if ($item['idnumber'] === '' || $item['shortname'] === '' || $item['framework'] === '') {
+            if ($item['idnumber'] === '' || $item['shortname'] === '') {
+                $this->increment_count($result, 'failed');
+                continue;
+            }
+
+            if ($item['object_type'] === self::OBJECT_FRAMEWORK) {
+                $frameworkidnumber = $item['idnumber'];
+                $frameworkcache[$frameworkidnumber] = $this->ensure_framework($frameworkidnumber, $item, $dryrun, $result);
+                continue;
+            }
+
+            if ($item['framework'] === '') {
                 $this->increment_count($result, 'failed');
                 continue;
             }
@@ -232,17 +294,15 @@ final class competency_seed {
                 $frameworkcache[$frameworkidnumber] = $this->ensure_framework($frameworkidnumber, $options, $dryrun, $result);
             }
 
-            $frameworkid = $frameworkcache[$frameworkidnumber];
+            $frameworkid = (int)$frameworkcache[$frameworkidnumber];
 
             if ($dryrun) {
-                $exists = $this->find_competency($item['idnumber'], $frameworkid);
+                $exists = $frameworkid > 0 ? $this->find_competency($item['idnumber'], $frameworkid) : null;
 
                 $this->add_message(
                     $result,
                     self::SEVERITY_INFO,
-                    $exists
-                        ? 'Dry run: competency would be updated.'
-                        : 'Dry run: competency would be created.',
+                    $exists ? 'Dry run: competency would be updated.' : 'Dry run: competency would be created.',
                     $item['idnumber'],
                     [
                         'framework' => $frameworkidnumber,
@@ -264,7 +324,7 @@ final class competency_seed {
                     $this->add_message(
                         $result,
                         self::SEVERITY_SUCCESS,
-                        get_string('seed:competencyupdated', self::COMPONENT, $item['idnumber']),
+                        'Competency updated.',
                         $item['idnumber'],
                         ['framework' => $frameworkidnumber]
                     );
@@ -275,7 +335,7 @@ final class competency_seed {
                     $this->add_message(
                         $result,
                         self::SEVERITY_SUCCESS,
-                        get_string('seed:competencycreated', self::COMPONENT, $item['idnumber']),
+                        'Competency created.',
                         $item['idnumber'],
                         ['framework' => $frameworkidnumber]
                     );
@@ -311,8 +371,8 @@ final class competency_seed {
      * @return validation_result
      */
     public function reset(array $items, array $options = []): validation_result {
-        $mode = $this->normalise_mode((string)($options['mode'] ?? 'rollback_plan'));
-        $dryrun = $mode === self::MODE_DRY_RUN || $mode === 'rollback_plan' || empty($options['force']);
+        $mode = $this->normalise_mode((string)($options['mode'] ?? self::MODE_ROLLBACK_PLAN));
+        $dryrun = $mode === self::MODE_DRY_RUN || $mode === self::MODE_ROLLBACK_PLAN || empty($options['force']);
         $result = $this->new_result('reset');
 
         if (!$this->competency_api_available()) {
@@ -327,8 +387,20 @@ final class competency_seed {
             return $this->finalise_result($result);
         }
 
-        foreach ($items as $item) {
-            $item = $this->normalise_item($item);
+        foreach ($items as $rawitem) {
+            $item = $this->normalise_item($rawitem);
+
+            if ($item['object_type'] === self::OBJECT_FRAMEWORK) {
+                $this->increment_count($result, 'skipped');
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_INFO,
+                    'Framework reset is skipped by design.',
+                    $item['idnumber'],
+                    []
+                );
+                continue;
+            }
 
             if ($item['idnumber'] === '' || $item['framework'] === '') {
                 $this->increment_count($result, 'skipped');
@@ -368,7 +440,7 @@ final class competency_seed {
             }
 
             try {
-                api::delete_competency((int)$competency->get('id'));
+                api::delete_competency($competency->get('id'));
                 $this->increment_count($result, 'updated');
 
                 $this->add_message(
@@ -386,7 +458,7 @@ final class competency_seed {
                     self::SEVERITY_ERROR,
                     $exception->getMessage(),
                     $item['idnumber'],
-                    ['framework' => $item['framework']]
+                    ['exception' => get_class($exception)]
                 );
             }
         }
@@ -395,7 +467,7 @@ final class competency_seed {
     }
 
     /**
-     * Export existing UCKK competencies into preset-compatible rows.
+     * Export current competencies in preset shape.
      *
      * @param array<string, mixed> $options Runtime options.
      * @return array<string, mixed>
@@ -403,7 +475,7 @@ final class competency_seed {
     public function export(array $options = []): array {
         $frameworkidnumber = clean_param(
             (string)($options['framework'] ?? self::DEFAULT_FRAMEWORK),
-            PARAM_ALPHANUMEXT
+            PARAM_TEXT
         );
 
         $items = [];
@@ -412,18 +484,32 @@ final class competency_seed {
             $framework = $this->find_framework($frameworkidnumber);
 
             if ($framework) {
+                $items[] = [
+                    'object_type' => self::OBJECT_FRAMEWORK,
+                    'key' => $this->make_key((string)$framework->get('idnumber')),
+                    'idnumber' => (string)$framework->get('idnumber'),
+                    'shortname' => (string)$framework->get('shortname'),
+                    'description' => (string)$framework->get('description'),
+                    'metadata' => [
+                        'exported_from' => 'core_competency',
+                    ],
+                ];
+
                 $competencies = competency::get_records([
                     'competencyframeworkid' => (int)$framework->get('id'),
                 ], 'sortorder ASC, idnumber ASC');
 
                 foreach ($competencies as $competency) {
                     $items[] = [
+                        'object_type' => self::OBJECT_COMPETENCY,
                         'key' => $this->make_key((string)$competency->get('idnumber')),
                         'idnumber' => (string)$competency->get('idnumber'),
                         'shortname' => (string)$competency->get('shortname'),
                         'description' => (string)$competency->get('description'),
                         'framework' => $frameworkidnumber,
+                        'framework_id' => $frameworkidnumber,
                         'parent' => '',
+                        'parent_idnumber' => '',
                         'scale' => '',
                         'sortorder' => (int)$competency->get('sortorder'),
                         'metadata' => [
@@ -447,14 +533,14 @@ final class competency_seed {
      * Ensure a competency framework exists.
      *
      * @param string $idnumber Framework idnumber.
-     * @param array<string, mixed> $options Runtime options.
+     * @param array<string, mixed> $source Runtime options or framework item.
      * @param bool $dryrun Whether this is a dry run.
      * @param validation_result $result Result object.
      * @return int Framework id, or 0 during dry-run creation.
      */
     private function ensure_framework(
         string $idnumber,
-        array $options,
+        array $source,
         bool $dryrun,
         validation_result $result
     ): int {
@@ -479,9 +565,9 @@ final class competency_seed {
         $context = context_system::instance();
 
         $record = new stdClass();
-        $record->shortname = (string)($options['frameworkshortname'] ?? self::DEFAULT_FRAMEWORK_SHORTNAME);
+        $record->shortname = (string)($source['shortname'] ?? $source['frameworkshortname'] ?? self::DEFAULT_FRAMEWORK_SHORTNAME);
         $record->idnumber = $idnumber;
-        $record->description = (string)($options['frameworkdescription'] ?? 'UCKK canonical competency framework.');
+        $record->description = (string)($source['description'] ?? $source['frameworkdescription'] ?? 'UCKK canonical competency framework.');
         $record->descriptionformat = FORMAT_HTML;
         $record->contextid = $context->id;
         $record->visible = 1;
@@ -568,7 +654,8 @@ final class competency_seed {
             return null;
         }
 
-        return reset($records) ?: null;
+        $framework = reset($records);
+        return $framework instanceof competency_framework ? $framework : null;
     }
 
     /**
@@ -592,7 +679,8 @@ final class competency_seed {
             return null;
         }
 
-        return reset($records) ?: null;
+        $competency = reset($records);
+        return $competency instanceof competency ? $competency : null;
     }
 
     /**
@@ -621,16 +709,49 @@ final class competency_seed {
     private function normalise_item(array|stdClass $item): array {
         $item = (array)$item;
 
+        $objecttype = clean_param((string)($item['object_type'] ?? self::OBJECT_COMPETENCY), PARAM_ALPHANUMEXT);
+        $objecttype = $objecttype === self::OBJECT_FRAMEWORK ? self::OBJECT_FRAMEWORK : self::OBJECT_COMPETENCY;
+
         $idnumber = trim((string)($item['idnumber'] ?? $item['key'] ?? ''));
-        $framework = trim((string)($item['framework'] ?? self::DEFAULT_FRAMEWORK));
+
+        $framework = trim((string)(
+            $item['framework']
+            ?? $item['framework_id']
+            ?? $item['framework_idnumber']
+            ?? self::DEFAULT_FRAMEWORK
+        ));
+
+        $parent = trim((string)(
+            $item['parent']
+            ?? $item['parent_idnumber']
+            ?? $item['parent_competency_id']
+            ?? ''
+        ));
+
+        $shortname = trim((string)(
+            $item['shortname']
+            ?? $item['name']
+            ?? $item['short_title']
+            ?? $item['title']
+            ?? $idnumber
+        ));
+
+        $fullname = trim((string)(
+            $item['fullname']
+            ?? $item['title']
+            ?? $item['name']
+            ?? $shortname
+        ));
 
         return [
+            'object_type' => $objecttype,
             'key' => clean_param((string)($item['key'] ?? $this->make_key($idnumber)), PARAM_ALPHANUMEXT),
             'idnumber' => clean_param($idnumber, PARAM_TEXT),
-            'shortname' => trim(clean_param((string)($item['shortname'] ?? $item['name'] ?? ''), PARAM_TEXT)),
+            'shortname' => clean_param($shortname !== '' ? $shortname : $fullname, PARAM_TEXT),
+            'fullname' => clean_param($fullname, PARAM_TEXT),
             'description' => (string)($item['description'] ?? ''),
-            'framework' => clean_param($framework, PARAM_ALPHANUMEXT),
-            'parent' => clean_param((string)($item['parent'] ?? ''), PARAM_TEXT),
+            'framework' => $objecttype === self::OBJECT_FRAMEWORK ? '' : clean_param($framework, PARAM_TEXT),
+            'parent' => clean_param($parent, PARAM_TEXT),
             'scale' => clean_param((string)($item['scale'] ?? ''), PARAM_TEXT),
             'sortorder' => max(0, (int)($item['sortorder'] ?? 0)),
             'metadata' => $this->normalise_metadata($item['metadata'] ?? []),
@@ -674,7 +795,7 @@ final class competency_seed {
             self::MODE_APPLY,
             self::MODE_DRY_RUN,
             self::MODE_REPORT,
-            'rollback_plan',
+            self::MODE_ROLLBACK_PLAN,
         ], true) ? $mode : self::MODE_APPLY;
     }
 
@@ -692,11 +813,14 @@ final class competency_seed {
     /**
      * Validate canonical UCKK competency idnumber shape.
      *
+     * Final contract accepts semantic/non-numeric suffixes such as
+     * UCKK-COMP-TC101, UCKK-COMP-GJS-SYNTHESIS, and UCKK-COMP-FRAMEWORK.
+     *
      * @param string $idnumber Idnumber.
      * @return bool
      */
     private function is_uckk_competency_idnumber(string $idnumber): bool {
-        return preg_match('/^UCKK-COMP-\d{3}$/', $idnumber) === 1;
+        return preg_match('/^UCKK-COMP-[A-Z0-9-]+$/', $idnumber) === 1;
     }
 
     /**
@@ -707,8 +831,8 @@ final class competency_seed {
      */
     private function make_key(string $idnumber): string {
         $key = strtolower($idnumber);
-        $key = str_replace(['uckk-comp-', '-'], ['', '_'], $key);
-        $key = preg_replace('/[^a-z0-9_]+/', '_', $key);
+        $key = preg_replace('/^uckk-comp-/', '', $key) ?? $key;
+        $key = preg_replace('/[^a-z0-9_]+/', '_', $key) ?? $key;
 
         return trim((string)$key, '_');
     }
@@ -720,42 +844,20 @@ final class competency_seed {
      * @return validation_result
      */
     private function new_result(string $action): validation_result {
-        $result = new validation_result();
-
-        $result->status = 'pending';
-        $result->ok = true;
-        $result->haserrors = false;
-        $result->haswarnings = false;
-        $result->summary = '';
-        $result->counts = [
-            'created' => 0,
-            'updated' => 0,
-            'skipped' => 0,
-            'failed' => 0,
-            'warnings' => 0,
-            'errors' => 0,
-        ];
-        $result->messages = [];
-        $result->created = [];
-        $result->updated = [];
-        $result->skipped = [];
-        $result->failed = [];
-        $result->metadata = [
+        return new validation_result(validation_result::STATUS_PENDING, '', [
             'component' => self::COMPONENT,
             'preset' => self::PRESET,
             'targettype' => self::TARGET_TYPE,
             'action' => $action,
-        ];
-
-        return $result;
+        ]);
     }
 
     /**
-     * Add a message to a validation result.
+     * Add a canonical result message.
      *
      * @param validation_result $result Result object.
      * @param string $severity Severity.
-     * @param string $message Message.
+     * @param string $message Message text.
      * @param string $targetkey Target key.
      * @param array<string, mixed> $metadata Metadata.
      */
@@ -766,32 +868,15 @@ final class competency_seed {
         string $targetkey = '',
         array $metadata = []
     ): void {
-        $row = [
-            'severity' => $severity,
-            'component' => self::COMPONENT,
-            'preset' => self::PRESET,
-            'targettype' => self::TARGET_TYPE,
-            'targetkey' => $targetkey,
-            'message' => $message,
-            'metadata' => $metadata,
-        ];
-
-        if (method_exists($result, 'add_message')) {
-            $result->add_message($row);
-        } else {
-            $result->messages[] = $row;
-        }
-
-        if ($severity === self::SEVERITY_WARNING) {
-            $result->haswarnings = true;
-            $this->increment_count($result, 'warnings');
-        }
-
-        if (in_array($severity, [self::SEVERITY_ERROR, self::SEVERITY_BLOCKER], true)) {
-            $result->haserrors = true;
-            $result->ok = false;
-            $this->increment_count($result, 'errors');
-        }
+        $result->add_message(
+            $severity,
+            $message,
+            self::COMPONENT,
+            self::PRESET,
+            self::TARGET_TYPE,
+            $targetkey,
+            $metadata
+        );
     }
 
     /**
@@ -801,20 +886,7 @@ final class competency_seed {
      * @param validation_result $source Source result.
      */
     private function merge_result(validation_result $target, validation_result $source): void {
-        if (method_exists($target, 'merge')) {
-            $target->merge($source);
-            return;
-        }
-
-        $target->messages = array_merge($target->messages ?? [], $source->messages ?? []);
-
-        foreach (($source->counts ?? []) as $key => $value) {
-            $target->counts[$key] = ($target->counts[$key] ?? 0) + (int)$value;
-        }
-
-        $target->ok = !empty($target->ok) && !empty($source->ok);
-        $target->haserrors = !empty($target->haserrors) || !empty($source->haserrors);
-        $target->haswarnings = !empty($target->haswarnings) || !empty($source->haswarnings);
+        $target->merge($source);
     }
 
     /**
@@ -825,11 +897,7 @@ final class competency_seed {
      * @param int $amount Increment.
      */
     private function increment_count(validation_result $result, string $key, int $amount = 1): void {
-        if (!isset($result->counts) || !is_array($result->counts)) {
-            $result->counts = [];
-        }
-
-        $result->counts[$key] = ($result->counts[$key] ?? 0) + $amount;
+        $result->increment($key, $amount);
     }
 
     /**
@@ -839,7 +907,7 @@ final class competency_seed {
      * @return bool
      */
     private function result_has_blocking_errors(validation_result $result): bool {
-        foreach (($result->messages ?? []) as $message) {
+        foreach ($result->get_messages() as $message) {
             $message = (array)$message;
 
             if (in_array($message['severity'] ?? '', [self::SEVERITY_ERROR, self::SEVERITY_BLOCKER], true)) {
@@ -857,19 +925,15 @@ final class competency_seed {
      * @return validation_result
      */
     private function finalise_result(validation_result $result): validation_result {
-        $result->haserrors = !empty($result->haserrors);
-        $result->haswarnings = !empty($result->haswarnings);
-        $result->ok = !$result->haserrors;
-
-        if ($result->haserrors) {
-            $result->status = 'failed';
-            $result->summary = 'Competency seed completed with errors.';
-        } else if ($result->haswarnings) {
-            $result->status = 'warning';
-            $result->summary = 'Competency seed completed with warnings.';
+        if ($result->has_errors()) {
+            $result->set_status(validation_result::STATUS_FAILED);
+            $result->set_summary('Competency seed completed with errors.');
+        } else if ($result->has_warnings()) {
+            $result->set_status(validation_result::STATUS_WARNING);
+            $result->set_summary('Competency seed completed with warnings.');
         } else {
-            $result->status = 'completed';
-            $result->summary = 'Competency seed completed successfully.';
+            $result->set_status(validation_result::STATUS_COMPLETED);
+            $result->set_summary('Competency seed completed successfully.');
         }
 
         return $result;

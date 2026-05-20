@@ -1,0 +1,1454 @@
+{
+  "schema": "uckkseed.preset.v1",
+  "component": "tool_uckkseed",
+  "preset": "pathways",
+  "version": 2026051200,
+  "items": [
+    {
+      "id": "pathway:tronc-commun-main",
+      "program_id": "program:tronc-commun",
+      "title": "Parcours principal — Tronc commun obligatoire",
+      "status": "active",
+      "sequence_model": "ordered_courses",
+      "prerequisite_pathway_refs": [],
+      "cycles": [
+        {
+          "id": "cycle:tc-obligatoire",
+          "title": "Cours obligatoires du tronc commun",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-tc101",
+              "course_code": "UCKK-TC101",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "program_specific",
+              "variant_group": "variant:cartographie-des-idees-avec-l-ia"
+            },
+            {
+              "course_id": "course:uckk-tc102",
+              "course_code": "UCKK-TC102",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "program_specific",
+              "variant_group": "variant:intelligence-collective-expertise-situee-et-decision-legitime"
+            },
+            {
+              "course_id": "course:uckk-tc103",
+              "course_code": "UCKK-TC103",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "program_specific",
+              "variant_group": "variant:agitation-institutionnelle-et-mesure-de-l-utilite-reelle"
+            },
+            {
+              "course_id": "course:uckk-tc104",
+              "course_code": "UCKK-TC104",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "program_specific",
+              "variant_group": "variant:societe-des-flux-argent-information-et-pouvoir"
+            },
+            {
+              "course_id": "course:uckk-tc105",
+              "course_code": "UCKK-TC105",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 5,
+              "recognition_mode": "program_specific",
+              "variant_group": "variant:fiction-fondatrice-verite-morale-et-recits-symboliques"
+            },
+            {
+              "course_id": "course:uckk-tc106",
+              "course_code": "UCKK-TC106",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 6,
+              "recognition_mode": "program_specific",
+              "variant_group": "variant:mobilisation-multi-corridor-et-cooperation-pratique"
+            },
+            {
+              "course_id": "course:uckk-tc107",
+              "course_code": "UCKK-TC107",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 7,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/31_UCKK-tronc-commun.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "tronc_commun_main",
+      "name": "Parcours principal — Tronc commun obligatoire",
+      "fullname": "Parcours principal — Tronc commun obligatoire",
+      "shortname": "tronc_commun_main",
+      "program_code": "TC",
+      "idnumber": "UCKK-PATH-TC-MAIN",
+      "description": "Parcours UCKK lié au programme program:tronc-commun.",
+      "metadata": {
+        "course_ref_count": 7,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "ordered_courses",
+      "visibility": "institution",
+      "sortorder": 10
+    },
+    {
+      "id": "pathway:grand-jeu-social-magie-operable-main",
+      "program_id": "program:grand-jeu-social-magie-operable",
+      "title": "Parcours principal — Voie du Grand Jeu social — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "ordered_courses",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:gjs-obligatoire",
+          "title": "Cours obligatoires du Grand Jeu social",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-gjs101",
+              "course_code": "UCKK-GJS101",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-gjs102",
+              "course_code": "UCKK-GJS102",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-gjs103",
+              "course_code": "UCKK-GJS103",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-gjs104",
+              "course_code": "UCKK-GJS104",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-gjs105",
+              "course_code": "UCKK-GJS105",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 5,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-gjs106",
+              "course_code": "UCKK-GJS106",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 6,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-gjs107",
+              "course_code": "UCKK-GJS107",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 7,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-gjs108",
+              "course_code": "UCKK-GJS108",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 8,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/32_voie-grand-jeu-social-palier-magie-operable.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "grand_jeu_social_magie_operable_main",
+      "name": "Parcours principal — Voie du Grand Jeu social — Palier de Magie opérable",
+      "fullname": "Parcours principal — Voie du Grand Jeu social — Palier de Magie opérable",
+      "shortname": "grand_jeu_social_magie_operable_main",
+      "program_code": "GJS",
+      "idnumber": "UCKK-PATH-GJS-MAIN",
+      "description": "Parcours UCKK lié au programme program:grand-jeu-social-magie-operable.",
+      "metadata": {
+        "course_ref_count": 8,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "ordered_courses",
+      "visibility": "institution",
+      "sortorder": 20
+    },
+    {
+      "id": "pathway:architecture-ecosysteme-digital-koa-magie-operable-main",
+      "program_id": "program:architecture-ecosysteme-digital-koa-magie-operable",
+      "title": "Parcours principal — Architecture de l’écosystème digital kOA — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "cycles",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:koa-foundations",
+          "title": "Fondations de l’écosystème digital kOA",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-koa101",
+              "course_code": "UCKK-KOA101",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa102",
+              "course_code": "UCKK-KOA102",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa103",
+              "course_code": "UCKK-KOA103",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa104",
+              "course_code": "UCKK-KOA104",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa105",
+              "course_code": "UCKK-KOA105",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 5,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        },
+        {
+          "id": "cycle:koa-modules-workflows",
+          "title": "Modules opérables, workflows et coordination",
+          "sequence": 2,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-koa201",
+              "course_code": "UCKK-KOA201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:kristals-connaissance-verifiable-et-artefacts-semantiques"
+            },
+            {
+              "course_id": "course:uckk-koa202",
+              "course_code": "UCKK-KOA202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa203",
+              "course_code": "UCKK-KOA203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa204",
+              "course_code": "UCKK-KOA204",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa205",
+              "course_code": "UCKK-KOA205",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 5,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa206",
+              "course_code": "UCKK-KOA206",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 6,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa207",
+              "course_code": "UCKK-KOA207",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 7,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa208",
+              "course_code": "UCKK-KOA208",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 8,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa209",
+              "course_code": "UCKK-KOA209",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 9,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa210",
+              "course_code": "UCKK-KOA210",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 10,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa211",
+              "course_code": "UCKK-KOA211",
+              "requirement": "advanced_option",
+              "source_status_fr": "Option avancée",
+              "sequence": 11,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        },
+        {
+          "id": "cycle:koa-archives-resilience-deploiement",
+          "title": "Archives, résilience, distribution et déploiement",
+          "sequence": 3,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-koa301",
+              "course_code": "UCKK-KOA301",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa302",
+              "course_code": "UCKK-KOA302",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa303",
+              "course_code": "UCKK-KOA303",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa304",
+              "course_code": "UCKK-KOA304",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa305",
+              "course_code": "UCKK-KOA305",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 5,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa306",
+              "course_code": "UCKK-KOA306",
+              "requirement": "advanced_option",
+              "source_status_fr": "Option avancée",
+              "sequence": 6,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa307",
+              "course_code": "UCKK-KOA307",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 7,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa308",
+              "course_code": "UCKK-KOA308",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 8,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-koa309",
+              "course_code": "UCKK-KOA309",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 9,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        },
+        {
+          "id": "cycle:koa-projet-integrateur",
+          "title": "Projet intégrateur",
+          "sequence": 4,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-koa399",
+              "course_code": "UCKK-KOA399",
+              "requirement": "final_project",
+              "source_status_fr": "Projet final",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [
+        {
+          "id": "evidence:uckk-koa399",
+          "course_id": "course:uckk-koa399",
+          "title": "Preuve de réalisation liée au projet ou dossier de passage",
+          "required": true
+        }
+      ],
+      "source": {
+        "canonical_path": "UCKK_Canon/33_voie-magie-operable-architecture-ecosysteme-digital-kOA.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "architecture_ecosysteme_digital_koa_magie_operable_main",
+      "name": "Parcours principal — Architecture de l’écosystème digital kOA — Palier de Magie opérable",
+      "fullname": "Parcours principal — Architecture de l’écosystème digital kOA — Palier de Magie opérable",
+      "shortname": "architecture_ecosysteme_digital_koa_magie_operable_main",
+      "program_code": "KOA",
+      "idnumber": "UCKK-PATH-KOA-MAIN",
+      "description": "Parcours UCKK lié au programme program:architecture-ecosysteme-digital-koa-magie-operable.",
+      "metadata": {
+        "course_ref_count": 26,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "cycles",
+      "visibility": "institution",
+      "sortorder": 30
+    },
+    {
+      "id": "pathway:architecture-sociotechnique-magie-operable-main",
+      "program_id": "program:architecture-sociotechnique-magie-operable",
+      "title": "Parcours principal — Architecture sociotechnique — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "cycles",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:as-noyau",
+          "title": "Noyau d’architecture sociotechnique",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-as201",
+              "course_code": "UCKK-AS201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-as202",
+              "course_code": "UCKK-AS202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:kristals-connaissance-verifiable-et-artefacts-semantiques"
+            },
+            {
+              "course_id": "course:uckk-as203",
+              "course_code": "UCKK-AS203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:systemes-deterministes-et-ia-generative"
+            },
+            {
+              "course_id": "course:uckk-as204",
+              "course_code": "UCKK-AS204",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:developpement-doc-first-avec-ia"
+            },
+            {
+              "course_id": "course:uckk-as205",
+              "course_code": "UCKK-AS205",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 5,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-as206",
+              "course_code": "UCKK-AS206",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 6,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        },
+        {
+          "id": "cycle:as-options",
+          "title": "Options et approfondissements sociotechniques",
+          "sequence": 2,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-as251",
+              "course_code": "UCKK-AS251",
+              "requirement": "optional",
+              "source_status_fr": "Option",
+              "sequence": 1,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:boucles-de-retroaction-clinique-et-apprentissage-institutionnel"
+            },
+            {
+              "course_id": "course:uckk-as252",
+              "course_code": "UCKK-AS252",
+              "requirement": "optional",
+              "source_status_fr": "Option",
+              "sequence": 2,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:agitation-institutionnelle-et-mesure-de-l-utilite-reelle"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/35_voie-architecture-sociotechnique.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "architecture_sociotechnique_magie_operable_main",
+      "name": "Parcours principal — Architecture sociotechnique — Palier de Magie opérable",
+      "fullname": "Parcours principal — Architecture sociotechnique — Palier de Magie opérable",
+      "shortname": "architecture_sociotechnique_magie_operable_main",
+      "program_code": "AS",
+      "idnumber": "UCKK-PATH-AS-MAIN",
+      "description": "Parcours UCKK lié au programme program:architecture-sociotechnique-magie-operable.",
+      "metadata": {
+        "course_ref_count": 8,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "cycles",
+      "visibility": "institution",
+      "sortorder": 40
+    },
+    {
+      "id": "pathway:sciences-politiques-magie-operable-main",
+      "program_id": "program:sciences-politiques-magie-operable",
+      "title": "Parcours principal — Sciences politiques — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "cycles",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:sp-noyau",
+          "title": "Noyau de sciences politiques",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-sp201",
+              "course_code": "UCKK-SP201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-sp202",
+              "course_code": "UCKK-SP202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-sp203",
+              "course_code": "UCKK-SP203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:intelligence-collective-expertise-situee-et-decision-legitime"
+            },
+            {
+              "course_id": "course:uckk-sp204",
+              "course_code": "UCKK-SP204",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        },
+        {
+          "id": "cycle:sp-options",
+          "title": "Options et approfondissements politiques",
+          "sequence": 2,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-sp251",
+              "course_code": "UCKK-SP251",
+              "requirement": "optional",
+              "source_status_fr": "Option",
+              "sequence": 1,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:le-bouffon-le-roi-et-la-critique-symbolique-du-pouvoir"
+            },
+            {
+              "course_id": "course:uckk-sp252",
+              "course_code": "UCKK-SP252",
+              "requirement": "optional",
+              "source_status_fr": "Option",
+              "sequence": 2,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:mobilisation-multi-corridor-et-cooperation-pratique"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/36_voie-sciences-politiques.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "sciences_politiques_magie_operable_main",
+      "name": "Parcours principal — Sciences politiques — Palier de Magie opérable",
+      "fullname": "Parcours principal — Sciences politiques — Palier de Magie opérable",
+      "shortname": "sciences_politiques_magie_operable_main",
+      "program_code": "SP",
+      "idnumber": "UCKK-PATH-SP-MAIN",
+      "description": "Parcours UCKK lié au programme program:sciences-politiques-magie-operable.",
+      "metadata": {
+        "course_ref_count": 6,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "cycles",
+      "visibility": "institution",
+      "sortorder": 50
+    },
+    {
+      "id": "pathway:economie-magie-operable-main",
+      "program_id": "program:economie-magie-operable",
+      "title": "Parcours principal — Économie — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "cycles",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:ec-noyau",
+          "title": "Noyau d’économie",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-ec201",
+              "course_code": "UCKK-EC201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:societe-des-flux-argent-information-et-pouvoir"
+            },
+            {
+              "course_id": "course:uckk-ec202",
+              "course_code": "UCKK-EC202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-ec203",
+              "course_code": "UCKK-EC203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:ia-erreurs-emploi-et-moyens-de-production"
+            }
+          ]
+        },
+        {
+          "id": "cycle:ec-options",
+          "title": "Options et approfondissements économiques",
+          "sequence": 2,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-ec251",
+              "course_code": "UCKK-EC251",
+              "requirement": "optional",
+              "source_status_fr": "Option",
+              "sequence": 1,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:education-ouverte-certification-et-legitimite-sociale"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/37_voie-economie.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "economie_magie_operable_main",
+      "name": "Parcours principal — Économie — Palier de Magie opérable",
+      "fullname": "Parcours principal — Économie — Palier de Magie opérable",
+      "shortname": "economie_magie_operable_main",
+      "program_code": "EC",
+      "idnumber": "UCKK-PATH-EC-MAIN",
+      "description": "Parcours UCKK lié au programme program:economie-magie-operable.",
+      "metadata": {
+        "course_ref_count": 4,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "cycles",
+      "visibility": "institution",
+      "sortorder": 60
+    },
+    {
+      "id": "pathway:ecologie-magie-operable-main",
+      "program_id": "program:ecologie-magie-operable",
+      "title": "Parcours principal — Écologie — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "cycles",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:eco-noyau",
+          "title": "Noyau d’écologie systémique",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-eco201",
+              "course_code": "UCKK-ECO201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-eco202",
+              "course_code": "UCKK-ECO202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-eco203",
+              "course_code": "UCKK-ECO203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-eco204",
+              "course_code": "UCKK-ECO204",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-eco205",
+              "course_code": "UCKK-ECO205",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 5,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        },
+        {
+          "id": "cycle:eco-options",
+          "title": "Options écologie politique",
+          "sequence": 2,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-eco206",
+              "course_code": "UCKK-ECO206",
+              "requirement": "optional",
+              "source_status_fr": "Option",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        },
+        {
+          "id": "cycle:eco-projet",
+          "title": "Projet et prototypes de transition",
+          "sequence": 3,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-eco207",
+              "course_code": "UCKK-ECO207",
+              "requirement": "final_project",
+              "source_status_fr": "Projet",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [
+        {
+          "id": "evidence:uckk-eco207",
+          "course_id": "course:uckk-eco207",
+          "title": "Preuve de réalisation liée au projet ou dossier de passage",
+          "required": true
+        }
+      ],
+      "source": {
+        "canonical_path": "UCKK_Canon/38_voie-ecologie-palier-magie-operable.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "ecologie_magie_operable_main",
+      "name": "Parcours principal — Écologie — Palier de Magie opérable",
+      "fullname": "Parcours principal — Écologie — Palier de Magie opérable",
+      "shortname": "ecologie_magie_operable_main",
+      "program_code": "ECO",
+      "idnumber": "UCKK-PATH-ECO-MAIN",
+      "description": "Parcours UCKK lié au programme program:ecologie-magie-operable.",
+      "metadata": {
+        "course_ref_count": 7,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "cycles",
+      "visibility": "institution",
+      "sortorder": 70
+    },
+    {
+      "id": "pathway:metaphysique-magie-operable-main",
+      "program_id": "program:metaphysique-magie-operable",
+      "title": "Parcours principal — Métaphysique — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "cycles",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:me-noyau",
+          "title": "Noyau de métaphysique",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-me201",
+              "course_code": "UCKK-ME201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-me202",
+              "course_code": "UCKK-ME202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:fiction-fondatrice-verite-morale-et-recits-symboliques"
+            },
+            {
+              "course_id": "course:uckk-me203",
+              "course_code": "UCKK-ME203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:le-bouffon-le-roi-et-la-critique-symbolique-du-pouvoir"
+            },
+            {
+              "course_id": "course:uckk-me204",
+              "course_code": "UCKK-ME204",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:grammaires-symboliques-sephiroth-et-architecture-koa"
+            }
+          ]
+        },
+        {
+          "id": "cycle:me-avance",
+          "title": "Options et séminaires avancés",
+          "sequence": 2,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-me306",
+              "course_code": "UCKK-ME306",
+              "requirement": "advanced_option",
+              "source_status_fr": "Option avancée",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-me307",
+              "course_code": "UCKK-ME307",
+              "requirement": "advanced_option",
+              "source_status_fr": "Séminaire avancé",
+              "sequence": 2,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/34_voie-metaphysique-palier-magie-operable.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "metaphysique_magie_operable_main",
+      "name": "Parcours principal — Métaphysique — Palier de Magie opérable",
+      "fullname": "Parcours principal — Métaphysique — Palier de Magie opérable",
+      "shortname": "metaphysique_magie_operable_main",
+      "program_code": "ME",
+      "idnumber": "UCKK-PATH-ME-MAIN",
+      "description": "Parcours UCKK lié au programme program:metaphysique-magie-operable.",
+      "metadata": {
+        "course_ref_count": 6,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "cycles",
+      "visibility": "institution",
+      "sortorder": 80
+    },
+    {
+      "id": "pathway:intelligence-artificielle-gouvernable-magie-operable-main",
+      "program_id": "program:intelligence-artificielle-gouvernable-magie-operable",
+      "title": "Parcours principal — Intelligence artificielle gouvernable — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "ordered_courses",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:ia-noyau",
+          "title": "Noyau d’intelligence artificielle gouvernable",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-ia201",
+              "course_code": "UCKK-IA201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:cartographie-des-idees-avec-l-ia"
+            },
+            {
+              "course_id": "course:uckk-ia202",
+              "course_code": "UCKK-IA202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:ia-erreurs-emploi-et-moyens-de-production"
+            },
+            {
+              "course_id": "course:uckk-ia203",
+              "course_code": "UCKK-IA203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:developpement-doc-first-avec-ia"
+            },
+            {
+              "course_id": "course:uckk-ia204",
+              "course_code": "UCKK-IA204",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:systemes-deterministes-et-ia-generative"
+            },
+            {
+              "course_id": "course:uckk-ia205",
+              "course_code": "UCKK-IA205",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 5,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/40_voie-intelligence-artificielle-gouvernable.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "intelligence_artificielle_gouvernable_magie_operable_main",
+      "name": "Parcours principal — Intelligence artificielle gouvernable — Palier de Magie opérable",
+      "fullname": "Parcours principal — Intelligence artificielle gouvernable — Palier de Magie opérable",
+      "shortname": "intelligence_artificielle_gouvernable_magie_operable_main",
+      "program_code": "IA",
+      "idnumber": "UCKK-PATH-IA-MAIN",
+      "description": "Parcours UCKK lié au programme program:intelligence-artificielle-gouvernable-magie-operable.",
+      "metadata": {
+        "course_ref_count": 5,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "ordered_courses",
+      "visibility": "institution",
+      "sortorder": 90
+    },
+    {
+      "id": "pathway:linguistique-architecture-sens-magie-operable-main",
+      "program_id": "program:linguistique-architecture-sens-magie-operable",
+      "title": "Parcours principal — Linguistique et architecture du sens — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "cycles",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:li-noyau",
+          "title": "Noyau de linguistique et architecture du sens",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-li201",
+              "course_code": "UCKK-LI201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:kristals-connaissance-verifiable-et-artefacts-semantiques"
+            },
+            {
+              "course_id": "course:uckk-li202",
+              "course_code": "UCKK-LI202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:grammaires-symboliques-sephiroth-et-architecture-koa"
+            },
+            {
+              "course_id": "course:uckk-li203",
+              "course_code": "UCKK-LI203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "program_specific"
+            },
+            {
+              "course_id": "course:uckk-li204",
+              "course_code": "UCKK-LI204",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        },
+        {
+          "id": "cycle:li-avance",
+          "title": "Cours avancés de linguistique et architecture du sens",
+          "sequence": 2,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-li305",
+              "course_code": "UCKK-LI305",
+              "requirement": "advanced_option",
+              "source_status_fr": "Cours avancé",
+              "sequence": 1,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/39_voie-magie-operable-linguistique-architecture-du-sens.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "linguistique_architecture_sens_magie_operable_main",
+      "name": "Parcours principal — Linguistique et architecture du sens — Palier de Magie opérable",
+      "fullname": "Parcours principal — Linguistique et architecture du sens — Palier de Magie opérable",
+      "shortname": "linguistique_architecture_sens_magie_operable_main",
+      "program_code": "LI",
+      "idnumber": "UCKK-PATH-LI-MAIN",
+      "description": "Parcours UCKK lié au programme program:linguistique-architecture-sens-magie-operable.",
+      "metadata": {
+        "course_ref_count": 5,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "cycles",
+      "visibility": "institution",
+      "sortorder": 100
+    },
+    {
+      "id": "pathway:intervention-sociale-systemes-humains-magie-operable-main",
+      "program_id": "program:intervention-sociale-systemes-humains-magie-operable",
+      "title": "Parcours principal — Intervention sociale et systèmes humains — Palier de Magie opérable",
+      "status": "active",
+      "sequence_model": "ordered_courses",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:is-noyau",
+          "title": "Noyau d’intervention sociale et systèmes humains",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-is201",
+              "course_code": "UCKK-IS201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:boucles-de-retroaction-clinique-et-apprentissage-institutionnel"
+            },
+            {
+              "course_id": "course:uckk-is202",
+              "course_code": "UCKK-IS202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:education-ouverte-certification-et-legitimite-sociale"
+            },
+            {
+              "course_id": "course:uckk-is203",
+              "course_code": "UCKK-IS203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/41_voie-intervention-sociale-systemes-humains.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "intervention_sociale_systemes_humains_magie_operable_main",
+      "name": "Parcours principal — Intervention sociale et systèmes humains — Palier de Magie opérable",
+      "fullname": "Parcours principal — Intervention sociale et systèmes humains — Palier de Magie opérable",
+      "shortname": "intervention_sociale_systemes_humains_magie_operable_main",
+      "program_code": "IS",
+      "idnumber": "UCKK-PATH-IS-MAIN",
+      "description": "Parcours UCKK lié au programme program:intervention-sociale-systemes-humains-magie-operable.",
+      "metadata": {
+        "course_ref_count": 3,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "ordered_courses",
+      "visibility": "institution",
+      "sortorder": 110
+    },
+    {
+      "id": "pathway:medias-vivants-theatre-public-responsable-main",
+      "program_id": "program:medias-vivants-theatre-public-responsable",
+      "title": "Parcours principal — Médias vivants et théâtre public responsable",
+      "status": "active",
+      "sequence_model": "ordered_courses",
+      "prerequisite_pathway_refs": [
+        "pathway:tronc-commun-main"
+      ],
+      "cycles": [
+        {
+          "id": "cycle:mv-noyau",
+          "title": "Noyau des médias vivants et du théâtre public responsable",
+          "sequence": 1,
+          "course_refs": [
+            {
+              "course_id": "course:uckk-mv201",
+              "course_code": "UCKK-MV201",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 1,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:le-bouffon-le-roi-et-la-critique-symbolique-du-pouvoir"
+            },
+            {
+              "course_id": "course:uckk-mv202",
+              "course_code": "UCKK-MV202",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 2,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:fiction-fondatrice-verite-morale-et-recits-symboliques"
+            },
+            {
+              "course_id": "course:uckk-mv203",
+              "course_code": "UCKK-MV203",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 3,
+              "recognition_mode": "specialized_variant",
+              "variant_group": "variant:mobilisation-multi-corridor-et-cooperation-pratique"
+            },
+            {
+              "course_id": "course:uckk-mv204",
+              "course_code": "UCKK-MV204",
+              "requirement": "required",
+              "source_status_fr": "Obligatoire",
+              "sequence": 4,
+              "recognition_mode": "program_specific"
+            }
+          ]
+        }
+      ],
+      "completion_rule": {
+        "required_courses": "all_required_course_refs",
+        "optional_courses": "not_required_unless_selected",
+        "final_project": "required_when_present"
+      },
+      "competency_refs": [],
+      "badge_refs": [],
+      "evidence_requirements": [],
+      "source": {
+        "canonical_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
+        "catalogue_section": "## 3. Liste officielle des cours et ateliers"
+      },
+      "key": "medias_vivants_theatre_public_responsable_main",
+      "name": "Parcours principal — Médias vivants et théâtre public responsable",
+      "fullname": "Parcours principal — Médias vivants et théâtre public responsable",
+      "shortname": "medias_vivants_theatre_public_responsable_main",
+      "program_code": "MV",
+      "idnumber": "UCKK-PATH-MV-MAIN",
+      "description": "Parcours UCKK lié au programme program:medias-vivants-theatre-public-responsable.",
+      "metadata": {
+        "course_ref_count": 4,
+        "seededby": "tool_uckkseed",
+        "target_type": "pathway",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "pathways"
+      },
+      "pathway_type": "ordered_courses",
+      "visibility": "institution",
+      "sortorder": 120
+    }
+  ],
+  "metadata": {
+    "source_schema_version": "1.0",
+    "source_preset_type": "pathways",
+    "source_family": "UCKK canon",
+    "source_generated_at": "2026-05-18T00:00:00-04:00",
+    "generation_notes": [
+      "Generated from the official UCKK course catalogue and canonical pathway documents.",
+      "This file is the relationship layer: it links programs to course ids defined in presets/courses.json.",
+      "Shared tronc commun progression is represented through prerequisite_pathway_refs instead of duplicating TC course refs into every program.",
+      "Repeated course titles with distinct course codes are flagged with variant_group and recognition_mode=specialized_variant where applicable.",
+      "competency_refs and badge_refs are intentionally empty until presets/competencies.json and presets/badges.json are generated."
+    ],
+    "standardization": {
+      "changed_envelope": true,
+      "preserved_items": 12,
+      "added_item_fields": [
+        "key",
+        "name",
+        "fullname",
+        "shortname",
+        "idnumber",
+        "program_code",
+        "description",
+        "metadata.course_ref_count"
+      ],
+      "removed_items": 0,
+      "course_refs_checked_against_courses_json": true,
+      "missing_course_refs": [],
+      "program_refs_checked_against_programs_json": true,
+      "missing_program_refs": []
+    }
+  }
+}

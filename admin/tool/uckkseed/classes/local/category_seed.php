@@ -7,7 +7,7 @@
 // any later version.
 
 /**
- * Category preset seeder for tool_uckkseed.
+ * Category preset seeder for the UCKK seed tool.
  *
  * @package    tool_uckkseed
  * @copyright  2026 Univers-Cité King Klown
@@ -27,36 +27,44 @@ global $CFG;
 require_once($CFG->dirroot . '/course/lib.php');
 
 /**
- * Seeds Moodle course categories from admin/tool/uckkseed/presets/categories.json.
+ * Seeds Moodle course categories from academic_registry_json/categories.json.
  *
- * Expected preset item shape:
+ * Expected runtime item shape:
  *
  * [
- *     'key' => '01_tronc_commun_obligatoire',
- *     'name' => '01_Tronc_commun_obligatoire',
- *     'idnumber' => 'uckk_cat_01_tronc_commun_obligatoire',
- *     'parent' => 'uckk',
+ *     'key' => 'uckk_tc',
+ *     'name' => 'Tronc commun',
+ *     'idnumber' => 'UCKK-TC',
+ *     'parent' => '',
+ *     'parent_idnumber' => '',
  *     'description' => '...',
  *     'sortorder' => 10,
- *     'visible' => true,
+ *     'visible' => 1,
  *     'metadata' => [],
  * ]
  *
  * Idempotency key:
  * - course_categories.idnumber
  *
- * This class does not create courses, cohorts, roles, capabilities,
- * competencies, badges, reports, activities, or archive records.
+ * This class owns Moodle course category creation/update only. It must not
+ * create courses, cohorts, roles, capabilities, competencies, badges, reports,
+ * activities, archive records, program records, or pathway records.
  */
 final class category_seed {
+    /** Component name. */
+    public const COMPONENT = 'tool_uckkseed';
+
     /** Preset id handled by this class. */
     public const PRESET = 'categories';
 
-    /** Target type used in logs/results. */
+    /** Target type used in validation/log messages. */
     public const TARGET_TYPE = 'category';
 
-    /** Component name. */
-    public const COMPONENT = 'tool_uckkseed';
+    /** Runtime preset schema. */
+    public const SCHEMA = 'uckkseed.preset.v1';
+
+    /** Preset version. */
+    public const VERSION = 2026051200;
 
     /** Mode: dry run. */
     public const MODE_DRY_RUN = 'dry_run';
@@ -70,280 +78,288 @@ final class category_seed {
     /** Mode: rollback plan. */
     public const MODE_ROLLBACK_PLAN = 'rollback_plan';
 
-    /** Result severity: info. */
+    /** Result status: completed. */
+    public const STATUS_COMPLETED = 'completed';
+
+    /** Result status: failed. */
+    public const STATUS_FAILED = 'failed';
+
+    /** Result status: warning. */
+    public const STATUS_WARNING = 'warning';
+
+    /** Severity: info. */
     public const SEVERITY_INFO = 'info';
 
-    /** Result severity: success. */
+    /** Severity: success. */
     public const SEVERITY_SUCCESS = 'success';
 
-    /** Result severity: warning. */
+    /** Severity: warning. */
     public const SEVERITY_WARNING = 'warning';
 
-    /** Result severity: error. */
+    /** Severity: error. */
     public const SEVERITY_ERROR = 'error';
 
-    /** Result severity: blocker. */
+    /** Severity: blocker. */
     public const SEVERITY_BLOCKER = 'blocker';
 
+    /** Metadata marker key. */
+    private const METADATA_MANAGED_BY = 'managedby';
+
+    /** Metadata marker value. */
+    private const MANAGED_BY = 'tool_uckkseed';
+
+    /** @var seeder|null Parent seeder, when injected by the orchestration layer. */
+    private ?seeder $seeder;
+
     /**
-     * Validate category preset rows.
+     * Constructor.
      *
-     * @param array<int, array<string, mixed>|stdClass> $items Preset items.
+     * @param seeder|null $seeder Parent seeder, optional.
+     */
+    public function __construct(?seeder $seeder = null) {
+        $this->seeder = $seeder;
+    }
+
+    /**
+     * Validate category preset rows without writing database records.
+     *
+     * @param array<int, mixed> $items Preset item rows.
      * @param array<string, mixed> $options Runtime options.
      * @return validation_result
      */
     public function validate(array $items, array $options = []): validation_result {
-        $messages = [];
-        $counts = $this->empty_counts();
-        $seenidnumbers = [];
-        $seenkeys = [];
+        $result = $this->new_result('Category preset validation started.');
 
         if (empty($items)) {
-            $messages[] = $this->message(
+            $this->add_message(
+                $result,
                 self::SEVERITY_WARNING,
-                '',
-                'categories',
-                get_string('seedpresetempty', 'tool_uckkseed')
+                'Category preset is empty.',
+                self::PRESET
             );
-            $counts['warnings']++;
 
-            return $this->build_result($messages, $counts, [
-                'summary' => get_string('validationcompletedwithwarnings', 'tool_uckkseed'),
-            ]);
+            $this->finalise_result($result, 'Category preset validation completed with warnings.');
+            return $result;
         }
 
+        $seenkeys = [];
+        $seenidnumbers = [];
+        $presetrefs = $this->build_preset_reference_map($items);
+
         foreach ($items as $index => $rawitem) {
+            $beforeerrors = $this->count_errors($result);
             $item = $this->normalise_item($rawitem);
-            $targetkey = $item['key'] !== '' ? $item['key'] : 'index_' . $index;
+            $targetkey = $item['key'] !== '' ? $item['key'] : 'row_' . ($index + 1);
 
             if ($item['key'] === '') {
-                $messages[] = $this->message(
+                $this->add_message(
+                    $result,
                     self::SEVERITY_ERROR,
+                    'Category row is missing required field: key.',
                     $targetkey,
-                    'categories',
-                    get_string('seedcategorymissingkey', 'tool_uckkseed')
+                    ['row' => $index + 1]
                 );
-                $counts['errors']++;
             }
 
             if ($item['name'] === '') {
-                $messages[] = $this->message(
+                $this->add_message(
+                    $result,
                     self::SEVERITY_ERROR,
+                    'Category row is missing required field: name.',
                     $targetkey,
-                    'categories',
-                    get_string('seedcategorymissingname', 'tool_uckkseed')
+                    ['row' => $index + 1]
                 );
-                $counts['errors']++;
             }
 
             if ($item['idnumber'] === '') {
-                $messages[] = $this->message(
+                $this->add_message(
+                    $result,
                     self::SEVERITY_ERROR,
+                    'Category row is missing required field: idnumber.',
                     $targetkey,
-                    'categories',
-                    get_string('seedcategorymissingidnumber', 'tool_uckkseed')
+                    ['row' => $index + 1]
                 );
-                $counts['errors']++;
             }
 
-            if ($item['key'] !== '' && in_array($item['key'], $seenkeys, true)) {
-                $messages[] = $this->message(
+            if ($item['idnumber'] !== '' && core_text::strlen($item['idnumber']) > 100) {
+                $this->add_message(
+                    $result,
                     self::SEVERITY_ERROR,
+                    'Category idnumber exceeds Moodle course_categories.idnumber length.',
                     $targetkey,
-                    'categories',
-                    get_string('seedcategoryduplicatekey', 'tool_uckkseed', $item['key'])
+                    [
+                        'idnumber' => $item['idnumber'],
+                        'length' => core_text::strlen($item['idnumber']),
+                        'max' => 100,
+                    ]
                 );
-                $counts['errors']++;
             }
 
-            if ($item['idnumber'] !== '' && in_array($item['idnumber'], $seenidnumbers, true)) {
-                $messages[] = $this->message(
+            if ($item['name'] !== '' && core_text::strlen($item['name']) > 255) {
+                $this->add_message(
+                    $result,
                     self::SEVERITY_ERROR,
+                    'Category name exceeds Moodle course_categories.name length.',
                     $targetkey,
-                    'categories',
-                    get_string('seedcategoryduplicateidnumber', 'tool_uckkseed', $item['idnumber'])
+                    [
+                        'name' => $item['name'],
+                        'length' => core_text::strlen($item['name']),
+                        'max' => 255,
+                    ]
                 );
-                $counts['errors']++;
-            }
-
-            if ($item['parent'] !== '' && !$this->parent_exists_in_preset($item['parent'], $items)) {
-                $messages[] = $this->message(
-                    self::SEVERITY_WARNING,
-                    $targetkey,
-                    'categories',
-                    get_string('seedcategoryparentnotinpreset', 'tool_uckkseed', $item['parent'])
-                );
-                $counts['warnings']++;
             }
 
             if ($item['key'] !== '') {
-                $seenkeys[] = $item['key'];
+                if (isset($seenkeys[$item['key']])) {
+                    $this->add_message(
+                        $result,
+                        self::SEVERITY_ERROR,
+                        'Duplicate category key.',
+                        $targetkey,
+                        ['key' => $item['key']]
+                    );
+                }
+
+                $seenkeys[$item['key']] = true;
             }
 
             if ($item['idnumber'] !== '') {
-                $seenidnumbers[] = $item['idnumber'];
+                if (isset($seenidnumbers[$item['idnumber']])) {
+                    $this->add_message(
+                        $result,
+                        self::SEVERITY_ERROR,
+                        'Duplicate category idnumber.',
+                        $targetkey,
+                        ['idnumber' => $item['idnumber']]
+                    );
+                }
+
+                $seenidnumbers[$item['idnumber']] = true;
+            }
+
+            if (!$this->is_root_parent($item['parent'])) {
+                $parent = $item['parent'];
+
+                if (
+                    !isset($presetrefs[$parent])
+                    && $this->resolve_category_id($parent) <= 0
+                ) {
+                    $this->add_message(
+                        $result,
+                        self::SEVERITY_ERROR,
+                        'Category parent does not exist in Moodle and is not present in the category preset.',
+                        $targetkey,
+                        ['parent' => $parent]
+                    );
+                }
+            }
+
+            if ($this->count_errors($result) === $beforeerrors) {
+                $this->increment($result, 'skipped');
             }
         }
 
-        if ($counts['errors'] === 0 && $counts['warnings'] === 0) {
-            $messages[] = $this->message(
-                self::SEVERITY_SUCCESS,
-                '',
-                'categories',
-                get_string('seedcategoryvalidationok', 'tool_uckkseed')
-            );
-        }
-
-        return $this->build_result($messages, $counts, [
-            'summary' => $counts['errors'] > 0
-                ? get_string('validationfailed', 'tool_uckkseed')
-                : get_string('validationcompleted', 'tool_uckkseed'),
-        ]);
+        $this->finalise_result($result, 'Category preset validation completed.');
+        return $result;
     }
 
     /**
      * Apply category preset rows.
      *
-     * @param array<int, array<string, mixed>|stdClass> $items Preset items.
+     * @param array<int, mixed> $items Preset item rows.
      * @param array<string, mixed> $options Runtime options.
      * @return validation_result
      */
     public function apply(array $items, array $options = []): validation_result {
-        global $DB;
-
-        $mode = $this->normalise_mode((string)($options['mode'] ?? self::MODE_APPLY));
-        $messages = [];
-        $counts = $this->empty_counts();
-
         $validation = $this->validate($items, $options);
-        $validationdata = $this->result_to_array($validation);
 
-        if (!empty($validationdata['haserrors'])) {
+        if ($validation->has_errors()) {
             return $validation;
         }
 
-        $items = $this->sort_items_by_parent($items);
+        $mode = $this->normalise_mode((string)($options['mode'] ?? self::MODE_APPLY));
+        $dryrun = $this->is_dry_run($options) || $mode === self::MODE_REPORT;
+        $rollbackplan = $mode === self::MODE_ROLLBACK_PLAN || !empty($options['rollbackplan']);
 
-        $categorymap = $this->build_existing_category_map();
+        $result = $this->new_result(
+            ($dryrun || $rollbackplan)
+                ? 'Category seed dry run completed.'
+                : 'Category seed apply completed.'
+        );
+
+        if (empty($items)) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_WARNING,
+                'Category preset is empty.',
+                self::PRESET
+            );
+
+            $this->finalise_result($result);
+            return $result;
+        }
+
+        $remaining = [];
 
         foreach ($items as $rawitem) {
             $item = $this->normalise_item($rawitem);
-            $targetkey = $item['key'] !== '' ? $item['key'] : $item['idnumber'];
 
-            if ($item['idnumber'] === '') {
-                $messages[] = $this->message(
-                    self::SEVERITY_ERROR,
-                    $targetkey,
-                    'categories',
-                    get_string('seedcategorymissingidnumber', 'tool_uckkseed')
-                );
-                $counts['errors']++;
-                $counts['failed']++;
-                continue;
+            if ($item['idnumber'] !== '') {
+                $remaining[] = $item;
             }
+        }
 
-            $existing = $this->find_category_by_idnumber($item['idnumber']);
+        $createdorupdated = [];
+        $guard = 0;
 
-            if ($mode !== self::MODE_APPLY) {
-                $messages[] = $this->message(
-                    self::SEVERITY_INFO,
-                    $targetkey,
-                    'categories',
-                    $existing
-                        ? get_string('seedcategorywouldupdate', 'tool_uckkseed', $item['idnumber'])
-                        : get_string('seedcategorywouldcreate', 'tool_uckkseed', $item['idnumber'])
-                );
-                $counts['skipped']++;
-                continue;
-            }
+        while (!empty($remaining) && $guard < 1000) {
+            $guard++;
+            $progress = false;
 
-            $parentid = $this->resolve_parent_id($item, $categorymap);
-
-            try {
-                if ($existing) {
-                    $changed = $this->update_category($existing, $item, $parentid);
-
-                    if ($changed) {
-                        $counts['updated']++;
-                        $messages[] = $this->message(
-                            self::SEVERITY_SUCCESS,
-                            $targetkey,
-                            'categories',
-                            get_string('seedcategoryupdated', 'tool_uckkseed', $item['idnumber'])
-                        );
-                    } else {
-                        $counts['skipped']++;
-                        $messages[] = $this->message(
-                            self::SEVERITY_INFO,
-                            $targetkey,
-                            'categories',
-                            get_string('seedcategoryunchanged', 'tool_uckkseed', $item['idnumber'])
-                        );
-                    }
-
-                    $categorymap[$item['key']] = (int)$existing->id;
-                    $categorymap[$item['idnumber']] = (int)$existing->id;
+            foreach ($remaining as $offset => $item) {
+                if (!$this->parent_is_resolvable($item, $createdorupdated)) {
                     continue;
                 }
 
-                $category = $this->create_category($item, $parentid);
-                $counts['created']++;
+                $this->apply_one_category($result, $item, $dryrun || $rollbackplan);
+                $createdorupdated[$item['key']] = true;
+                $createdorupdated[$item['idnumber']] = true;
 
-                $categorymap[$item['key']] = (int)$category->id;
-                $categorymap[$item['idnumber']] = (int)$category->id;
+                unset($remaining[$offset]);
+                $progress = true;
+            }
 
-                $messages[] = $this->message(
-                    self::SEVERITY_SUCCESS,
-                    $targetkey,
-                    'categories',
-                    get_string('seedcategorycreated', 'tool_uckkseed', $item['idnumber'])
-                );
-            } catch (\Throwable $exception) {
-                $counts['failed']++;
-                $counts['errors']++;
+            $remaining = array_values($remaining);
 
-                $messages[] = $this->message(
-                    self::SEVERITY_ERROR,
-                    $targetkey,
-                    'categories',
-                    get_string('seedcategoryfailed', 'tool_uckkseed', [
-                        'idnumber' => $item['idnumber'],
-                        'message' => $exception->getMessage(),
-                    ]),
-                    [
-                        'exception' => get_class($exception),
-                    ]
-                );
+            if (!$progress) {
+                break;
             }
         }
 
-        // Repair Moodle category ordering after changes. This uses Moodle core's
-        // own ordering repair rather than writing sortorder directly.
-        if ($mode === self::MODE_APPLY && function_exists('fix_course_sortorder')) {
-            fix_course_sortorder();
+        foreach ($remaining as $item) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_ERROR,
+                'Category could not be applied because its parent could not be resolved.',
+                $item['key'] !== '' ? $item['key'] : $item['idnumber'],
+                [
+                    'parent' => $item['parent'],
+                    'idnumber' => $item['idnumber'],
+                ]
+            );
         }
 
-        $summary = $counts['errors'] > 0
-            ? get_string('seedcompletedwitherrors', 'tool_uckkseed')
-            : get_string('seedcompleted', 'tool_uckkseed');
-
-        return $this->build_result($messages, $counts, [
-            'summary' => $summary,
-            'metadata' => [
-                'mode' => $mode,
-                'preset' => self::PRESET,
-                'table' => 'course_categories',
-            ],
-        ]);
+        $this->finalise_result($result);
+        return $result;
     }
 
     /**
-     * Reset seeded categories.
+     * Reset seed-managed categories.
      *
-     * This method is conservative. It does not delete categories that contain
-     * courses or child categories unless force is explicitly provided.
+     * Reset is conservative. By default, it refuses to delete categories that
+     * contain courses or child categories.
      *
-     * @param array<int, array<string, mixed>|stdClass> $items Preset items.
+     * @param array<int, mixed> $items Preset item rows.
      * @param array<string, mixed> $options Runtime options.
      * @return validation_result
      */
@@ -351,121 +367,135 @@ final class category_seed {
         global $DB;
 
         $mode = $this->normalise_mode((string)($options['mode'] ?? self::MODE_DRY_RUN));
+        $dryrun = $this->is_dry_run($options) || $mode !== self::MODE_APPLY;
+        $confirmed = !empty($options['confirm']);
         $force = !empty($options['force']);
-        $confirm = !empty($options['confirm']);
-        $messages = [];
-        $counts = $this->empty_counts();
 
-        if (!$confirm) {
-            $messages[] = $this->message(
+        $result = $this->new_result(
+            $dryrun ? 'Category reset dry run completed.' : 'Category reset completed.'
+        );
+
+        if (!$dryrun && !$confirmed) {
+            $this->add_message(
+                $result,
                 self::SEVERITY_BLOCKER,
-                '',
-                'categories',
-                get_string('resetrequiresconfirmation', 'tool_uckkseed')
+                'Reset requires explicit confirmation.',
+                self::PRESET
             );
-            $counts['errors']++;
 
-            return $this->build_result($messages, $counts, [
-                'summary' => get_string('resetblocked', 'tool_uckkseed'),
-            ]);
+            $this->finalise_result($result);
+            return $result;
         }
 
-        $items = array_reverse($this->sort_items_by_parent($items));
+        $targets = [];
 
         foreach ($items as $rawitem) {
             $item = $this->normalise_item($rawitem);
-            $targetkey = $item['key'] !== '' ? $item['key'] : $item['idnumber'];
 
-            if ($item['idnumber'] === '') {
-                $counts['skipped']++;
-                continue;
-            }
-
-            $category = $this->find_category_by_idnumber($item['idnumber']);
-
-            if (!$category) {
-                $counts['skipped']++;
-                $messages[] = $this->message(
-                    self::SEVERITY_INFO,
-                    $targetkey,
-                    'categories',
-                    get_string('seedcategorynotfound', 'tool_uckkseed', $item['idnumber'])
-                );
-                continue;
-            }
-
-            $coursecount = $DB->count_records('course', ['category' => $category->id]);
-            $childcount = $DB->count_records('course_categories', ['parent' => $category->id]);
-
-            if (($coursecount > 0 || $childcount > 0) && !$force) {
-                $counts['skipped']++;
-                $counts['warnings']++;
-
-                $messages[] = $this->message(
-                    self::SEVERITY_WARNING,
-                    $targetkey,
-                    'categories',
-                    get_string('seedcategoryresetblockednotempty', 'tool_uckkseed', [
-                        'idnumber' => $item['idnumber'],
-                        'courses' => $coursecount,
-                        'children' => $childcount,
-                    ])
-                );
-                continue;
-            }
-
-            if ($mode !== self::MODE_APPLY) {
-                $counts['skipped']++;
-                $messages[] = $this->message(
-                    self::SEVERITY_INFO,
-                    $targetkey,
-                    'categories',
-                    get_string('seedcategorywoulddelete', 'tool_uckkseed', $item['idnumber'])
-                );
-                continue;
-            }
-
-            try {
-                $categoryobject = core_course_category::get((int)$category->id, MUST_EXIST, true);
-                $categoryobject->delete_full(false);
-                $counts['updated']++;
-
-                $messages[] = $this->message(
-                    self::SEVERITY_SUCCESS,
-                    $targetkey,
-                    'categories',
-                    get_string('seedcategorydeleted', 'tool_uckkseed', $item['idnumber'])
-                );
-            } catch (\Throwable $exception) {
-                $counts['failed']++;
-                $counts['errors']++;
-
-                $messages[] = $this->message(
-                    self::SEVERITY_ERROR,
-                    $targetkey,
-                    'categories',
-                    get_string('seedcategorydeletefailed', 'tool_uckkseed', [
-                        'idnumber' => $item['idnumber'],
-                        'message' => $exception->getMessage(),
-                    ])
-                );
+            if ($item['idnumber'] !== '') {
+                $targets[$item['idnumber']] = $item;
             }
         }
 
-        return $this->build_result($messages, $counts, [
-            'summary' => $counts['errors'] > 0
-                ? get_string('resetcompletedwitherrors', 'tool_uckkseed')
-                : get_string('resetcompleted', 'tool_uckkseed'),
-            'metadata' => [
-                'mode' => $mode,
-                'preset' => self::PRESET,
-                'force' => $force,
-            ],
-        ]);
+        if (empty($targets)) {
+            $records = $DB->get_records_select(
+                'course_categories',
+                $DB->sql_like('idnumber', ':prefix', false, false),
+                ['prefix' => 'UCKK-%'],
+                'sortorder DESC, id DESC',
+                'id, name, idnumber, parent'
+            );
+
+            foreach ($records as $record) {
+                $targets[(string)$record->idnumber] = [
+                    'key' => clean_param((string)$record->idnumber, PARAM_ALPHANUMEXT),
+                    'name' => (string)$record->name,
+                    'idnumber' => (string)$record->idnumber,
+                    'parent' => '',
+                    'description' => '',
+                    'descriptionformat' => FORMAT_HTML,
+                    'sortorder' => 0,
+                    'visible' => 1,
+                    'metadata' => [],
+                ];
+            }
+        }
+
+        foreach ($targets as $item) {
+            $category = $this->get_existing_category($item);
+
+            if (!$category) {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_INFO,
+                    'Category already absent.',
+                    $item['idnumber']
+                );
+                $this->increment($result, 'skipped');
+                continue;
+            }
+
+            $haschildren = $DB->record_exists('course_categories', ['parent' => (int)$category->id]);
+            $hascourses = $DB->record_exists('course', ['category' => (int)$category->id]);
+
+            if (($haschildren || $hascourses) && !$force) {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_WARNING,
+                    'Category reset skipped because category is not empty.',
+                    $item['idnumber'],
+                    [
+                        'categoryid' => (int)$category->id,
+                        'haschildren' => $haschildren,
+                        'hascourses' => $hascourses,
+                    ]
+                );
+                $this->increment($result, 'skipped');
+                continue;
+            }
+
+            if ($dryrun) {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_INFO,
+                    'Category would be deleted.',
+                    $item['idnumber'],
+                    ['categoryid' => (int)$category->id]
+                );
+                $this->increment($result, 'skipped');
+                continue;
+            }
+
+            $coursecat = core_course_category::get((int)$category->id, MUST_EXIST, true);
+
+            if (method_exists($coursecat, 'delete_full')) {
+                $coursecat->delete_full(false);
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_SUCCESS,
+                    'Category deleted.',
+                    $item['idnumber'],
+                    ['categoryid' => (int)$category->id]
+                );
+                $this->increment($result, 'updated');
+                continue;
+            }
+
+            $this->add_message(
+                $result,
+                self::SEVERITY_ERROR,
+                'Category delete API is unavailable.',
+                $item['idnumber'],
+                ['categoryid' => (int)$category->id]
+            );
+        }
+
+        $this->finalise_result($result);
+        return $result;
     }
 
     /**
-     * Export existing UCKK categories to canonical preset shape.
+     * Export category preset.
      *
      * @param array<string, mixed> $options Runtime options.
      * @return array<string, mixed>
@@ -473,309 +503,442 @@ final class category_seed {
     public function export(array $options = []): array {
         global $DB;
 
-        $prefix = (string)($options['idnumberprefix'] ?? 'uckk');
-        $categories = $DB->get_records_select(
+        $items = [];
+
+        $records = $DB->get_records_select(
             'course_categories',
-            $DB->sql_like('idnumber', ':prefix', false),
-            [
-                'prefix' => $prefix . '%',
-            ],
+            "idnumber <> ''",
+            [],
             'sortorder ASC, name ASC',
-            'id, name, idnumber, parent, description, descriptionformat, visible, sortorder, timecreated, timemodified'
+            'id, name, idnumber, description, descriptionformat, parent, visible, sortorder'
         );
 
-        $parentmap = [];
-        foreach ($categories as $category) {
-            $parentmap[(int)$category->id] = (string)$category->idnumber;
-        }
+        foreach ($records as $record) {
+            $idnumber = (string)$record->idnumber;
 
-        $items = [];
-        foreach ($categories as $category) {
-            $key = $this->key_from_idnumber((string)$category->idnumber);
+            if (empty($options['all']) && !preg_match('/^UCKK[-_]/i', $idnumber)) {
+                continue;
+            }
+
+            $parentidnumber = '';
+
+            if ((int)$record->parent > 0) {
+                $parentidnumber = (string)$DB->get_field(
+                    'course_categories',
+                    'idnumber',
+                    ['id' => (int)$record->parent],
+                    IGNORE_MISSING
+                );
+            }
 
             $items[] = [
-                'key' => $key,
-                'name' => (string)$category->name,
-                'idnumber' => (string)$category->idnumber,
-                'parent' => !empty($category->parent) && isset($parentmap[(int)$category->parent])
-                    ? $parentmap[(int)$category->parent]
-                    : '',
-                'description' => (string)$category->description,
-                'sortorder' => (int)$category->sortorder,
-                'visible' => (bool)$category->visible,
+                'key' => $this->normalise_key($idnumber),
+                'name' => (string)$record->name,
+                'idnumber' => $idnumber,
+                'parent' => $parentidnumber,
+                'parent_idnumber' => $parentidnumber,
+                'description' => (string)($record->description ?? ''),
+                'descriptionformat' => (int)($record->descriptionformat ?? FORMAT_HTML),
+                'sortorder' => (int)($record->sortorder ?? 0),
+                'visible' => (int)($record->visible ?? 1),
                 'metadata' => [
-                    'source' => 'tool_uckkseed_export',
-                    'timecreated' => (int)$category->timecreated,
-                    'timemodified' => (int)$category->timemodified,
+                    self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                    'source' => 'moodle_course_categories',
+                    'categoryid' => (int)$record->id,
                 ],
             ];
         }
 
         return [
-            'schema' => 'uckkseed.preset.v1',
+            'schema' => self::SCHEMA,
             'component' => self::COMPONENT,
             'preset' => self::PRESET,
-            'version' => 2026051200,
-            'items' => $items,
+            'version' => self::VERSION,
+            'items' => array_values($items),
         ];
     }
 
     /**
-     * Create a Moodle category.
+     * Apply one category row.
      *
-     * @param array<string, mixed> $item Normalised preset item.
-     * @param int $parentid Parent category id.
-     * @return stdClass|core_course_category
+     * @param validation_result $result Result.
+     * @param array<string, mixed> $item Normalised item.
+     * @param bool $dryrun Whether this is dry-run/report/rollback-plan mode.
      */
-    private function create_category(array $item, int $parentid): stdClass|core_course_category {
-        $data = new stdClass();
-        $data->name = $item['name'];
-        $data->idnumber = $item['idnumber'];
-        $data->parent = $parentid;
-        $data->description = $item['description'];
-        $data->descriptionformat = FORMAT_HTML;
-        $data->visible = $item['visible'] ? 1 : 0;
+    private function apply_one_category(validation_result $result, array $item, bool $dryrun): void {
+        $existing = $this->get_existing_category($item);
+        $parentid = $this->resolve_parent_id($item['parent']);
 
-        $category = create_course_category($data);
+        if (!$existing) {
+            if ($dryrun) {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_INFO,
+                    'Category would be created.',
+                    $item['idnumber'],
+                    ['proposed' => $item]
+                );
+                $this->increment($result, 'skipped');
+                return;
+            }
 
-        $this->write_metadata((int)$category->id, $item);
+            $category = core_course_category::create([
+                'name' => $item['name'],
+                'idnumber' => $item['idnumber'],
+                'description' => $item['description'],
+                'descriptionformat' => $item['descriptionformat'],
+                'parent' => $parentid,
+                'visible' => $item['visible'],
+            ]);
 
-        return $category;
+            $this->add_message(
+                $result,
+                self::SEVERITY_SUCCESS,
+                'Category created.',
+                $item['idnumber'],
+                ['categoryid' => (int)$category->id]
+            );
+            $this->increment($result, 'created');
+            return;
+        }
+
+        $changes = $this->category_changes($existing, $item, $parentid);
+
+        if (empty($changes)) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_INFO,
+                'Category unchanged.',
+                $item['idnumber'],
+                ['categoryid' => (int)$existing->id]
+            );
+            $this->increment($result, 'skipped');
+            return;
+        }
+
+        if ($dryrun) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_INFO,
+                'Category would be updated.',
+                $item['idnumber'],
+                [
+                    'categoryid' => (int)$existing->id,
+                    'changes' => $changes,
+                ]
+            );
+            $this->increment($result, 'skipped');
+            return;
+        }
+
+        $coursecat = core_course_category::get((int)$existing->id, MUST_EXIST, true);
+
+        $updatedata = [
+            'name' => $item['name'],
+            'idnumber' => $item['idnumber'],
+            'description' => $item['description'],
+            'descriptionformat' => $item['descriptionformat'],
+            'visible' => $item['visible'],
+        ];
+
+        if (method_exists($coursecat, 'update')) {
+            $coursecat->update($updatedata);
+        }
+
+        if ((int)$existing->parent !== $parentid && method_exists($coursecat, 'change_parent')) {
+            $coursecat->change_parent($parentid);
+        }
+
+        $this->add_message(
+            $result,
+            self::SEVERITY_SUCCESS,
+            'Category updated.',
+            $item['idnumber'],
+            [
+                'categoryid' => (int)$existing->id,
+                'changes' => $changes,
+            ]
+        );
+        $this->increment($result, 'updated');
     }
 
     /**
-     * Update a Moodle category if needed.
+     * Calculate update changes for an existing category.
      *
      * @param stdClass $existing Existing category record.
      * @param array<string, mixed> $item Normalised preset item.
-     * @param int $parentid Parent category id.
-     * @return bool Whether the category changed.
+     * @param int $parentid Resolved parent id.
+     * @return array<string, array<string, mixed>>
      */
-    private function update_category(stdClass $existing, array $item, int $parentid): bool {
-        $changed = false;
+    private function category_changes(stdClass $existing, array $item, int $parentid): array {
+        $changes = [];
 
-        $data = new stdClass();
-        $data->id = (int)$existing->id;
+        $checks = [
+            'name' => $item['name'],
+            'idnumber' => $item['idnumber'],
+            'description' => $item['description'],
+            'descriptionformat' => $item['descriptionformat'],
+            'visible' => $item['visible'],
+            'parent' => $parentid,
+        ];
 
-        if ((string)$existing->name !== $item['name']) {
-            $data->name = $item['name'];
-            $changed = true;
+        foreach ($checks as $field => $after) {
+            $before = $existing->{$field} ?? null;
+
+            if ($field === 'description') {
+                $before = (string)$before;
+                $after = (string)$after;
+            } else {
+                $before = is_numeric($before) ? (int)$before : $before;
+                $after = is_numeric($after) ? (int)$after : $after;
+            }
+
+            if ($before !== $after) {
+                $changes[$field] = [
+                    'before' => $before,
+                    'after' => $after,
+                ];
+            }
         }
 
-        if ((string)$existing->idnumber !== $item['idnumber']) {
-            $data->idnumber = $item['idnumber'];
-            $changed = true;
-        }
-
-        if ((int)$existing->parent !== $parentid) {
-            $data->parent = $parentid;
-            $changed = true;
-        }
-
-        if ((string)$existing->description !== $item['description']) {
-            $data->description = $item['description'];
-            $data->descriptionformat = FORMAT_HTML;
-            $changed = true;
-        }
-
-        if ((int)$existing->visible !== ($item['visible'] ? 1 : 0)) {
-            $data->visible = $item['visible'] ? 1 : 0;
-            $changed = true;
-        }
-
-        if ($changed) {
-            update_course_category($data);
-        }
-
-        $metadatachanged = $this->write_metadata((int)$existing->id, $item);
-
-        return $changed || $metadatachanged;
+        return $changes;
     }
 
     /**
-     * Store stable UCKK seed metadata in Moodle custom fields when available.
+     * Return existing Moodle category for a seed item.
      *
-     * For Moodle portability, this currently stores metadata only if future
-     * custom-field integration adds a handler. Stable matching still uses
-     * course_categories.idnumber.
-     *
-     * @param int $categoryid Category id.
      * @param array<string, mixed> $item Normalised item.
-     * @return bool Whether metadata changed.
+     * @return stdClass|null
      */
-    private function write_metadata(int $categoryid, array $item): bool {
-        // Course category custom fields are optional and site-specific.
-        // The canonical, portable seed key is course_categories.idnumber.
-        // Keep this method as the alignment point for future metadata handling.
-        return false;
+    private function get_existing_category(array $item): ?stdClass {
+        global $DB;
+
+        if ($item['idnumber'] !== '') {
+            $record = $DB->get_record(
+                'course_categories',
+                ['idnumber' => $item['idnumber']],
+                '*',
+                IGNORE_MISSING
+            );
+
+            if ($record) {
+                return $record;
+            }
+        }
+
+        if ($item['key'] !== '') {
+            $record = $DB->get_record(
+                'course_categories',
+                ['idnumber' => $item['key']],
+                '*',
+                IGNORE_MISSING
+            );
+
+            if ($record) {
+                return $record;
+            }
+        }
+
+        return null;
     }
 
     /**
-     * Resolve parent category id from preset parent key/idnumber.
+     * Resolve a category reference to a Moodle course category id.
      *
-     * @param array<string, mixed> $item Normalised item.
-     * @param array<string, int> $categorymap Known key/idnumber => id map.
-     * @return int
+     * @param string $reference Category id, idnumber, key, or name.
+     * @return int Category id, or 0 for root/unresolved.
      */
-    private function resolve_parent_id(array $item, array $categorymap): int {
-        if ($item['parent'] === '') {
+    private function resolve_category_id(string $reference): int {
+        global $DB;
+
+        $reference = trim($reference);
+
+        if ($this->is_root_parent($reference)) {
             return 0;
         }
 
-        if (isset($categorymap[$item['parent']])) {
-            return (int)$categorymap[$item['parent']];
+        if (ctype_digit($reference)) {
+            $id = (int)$reference;
+
+            if ($id > 0 && $DB->record_exists('course_categories', ['id' => $id])) {
+                return $id;
+            }
         }
 
-        $parent = $this->find_category_by_idnumber($item['parent']);
+        $id = $DB->get_field('course_categories', 'id', ['idnumber' => $reference], IGNORE_MISSING);
 
-        if ($parent) {
-            return (int)$parent->id;
+        if ($id) {
+            return (int)$id;
         }
 
-        return 0;
+        $id = $DB->get_field('course_categories', 'id', ['name' => $reference], IGNORE_MISSING);
+
+        return $id ? (int)$id : 0;
     }
 
     /**
-     * Build existing category map by idnumber.
-     *
-     * @return array<string, int>
-     */
-    private function build_existing_category_map(): array {
-        global $DB;
-
-        $map = [];
-        $categories = $DB->get_records_select(
-            'course_categories',
-            "idnumber <> ''",
-            [],
-            '',
-            'id, idnumber'
-        );
-
-        foreach ($categories as $category) {
-            $map[(string)$category->idnumber] = (int)$category->id;
-            $map[$this->key_from_idnumber((string)$category->idnumber)] = (int)$category->id;
-        }
-
-        return $map;
-    }
-
-    /**
-     * Find category by idnumber.
-     *
-     * @param string $idnumber Category idnumber.
-     * @return stdClass|null
-     */
-    private function find_category_by_idnumber(string $idnumber): ?stdClass {
-        global $DB;
-
-        if ($idnumber === '') {
-            return null;
-        }
-
-        $record = $DB->get_record(
-            'course_categories',
-            ['idnumber' => $idnumber],
-            'id, name, idnumber, parent, description, descriptionformat, visible, sortorder',
-            IGNORE_MISSING
-        );
-
-        return $record ?: null;
-    }
-
-    /**
-     * Sort categories so parents are processed before children.
-     *
-     * @param array<int, array<string, mixed>|stdClass> $items Raw items.
-     * @return array<int, array<string, mixed>>
-     */
-    private function sort_items_by_parent(array $items): array {
-        $normalised = array_map([$this, 'normalise_item'], $items);
-        $bykey = [];
-
-        foreach ($normalised as $item) {
-            $bykey[$item['key']] = $item;
-            $bykey[$item['idnumber']] = $item;
-        }
-
-        usort($normalised, static function (array $a, array $b) use ($bykey): int {
-            if ($a['parent'] === '' && $b['parent'] !== '') {
-                return -1;
-            }
-
-            if ($a['parent'] !== '' && $b['parent'] === '') {
-                return 1;
-            }
-
-            if ($a['parent'] === $b['key'] || $a['parent'] === $b['idnumber']) {
-                return 1;
-            }
-
-            if ($b['parent'] === $a['key'] || $b['parent'] === $a['idnumber']) {
-                return -1;
-            }
-
-            return $a['sortorder'] <=> $b['sortorder'];
-        });
-
-        return $normalised;
-    }
-
-    /**
-     * Whether a parent reference exists inside the preset item list.
+     * Resolve parent id.
      *
      * @param string $parent Parent reference.
-     * @param array<int, array<string, mixed>|stdClass> $items Preset items.
+     * @return int Parent id, or 0 for root.
+     */
+    private function resolve_parent_id(string $parent): int {
+        if ($this->is_root_parent($parent)) {
+            return 0;
+        }
+
+        return $this->resolve_category_id($parent);
+    }
+
+    /**
+     * Return whether an item parent can be resolved now.
+     *
+     * @param array<string, mixed> $item Normalised category item.
+     * @param array<string, bool> $createdorupdated References already processed this run.
      * @return bool
      */
-    private function parent_exists_in_preset(string $parent, array $items): bool {
-        if ($parent === '') {
+    private function parent_is_resolvable(array $item, array $createdorupdated): bool {
+        if ($this->is_root_parent($item['parent'])) {
             return true;
         }
+
+        if ($this->resolve_parent_id($item['parent']) > 0) {
+            return true;
+        }
+
+        return !empty($createdorupdated[$item['parent']]);
+    }
+
+    /**
+     * Return whether a parent reference means Moodle root.
+     *
+     * @param string $parent Parent reference.
+     * @return bool
+     */
+    private function is_root_parent(string $parent): bool {
+        $parent = strtolower(trim($parent));
+
+        return $parent === ''
+            || $parent === '0'
+            || $parent === 'root'
+            || $parent === 'top'
+            || $parent === 'system'
+            || $parent === 'site';
+    }
+
+    /**
+     * Build references available inside the current category preset.
+     *
+     * @param array<int, mixed> $items Raw items.
+     * @return array<string, bool>
+     */
+    private function build_preset_reference_map(array $items): array {
+        $refs = [];
 
         foreach ($items as $rawitem) {
             $item = $this->normalise_item($rawitem);
 
-            if ($item['key'] === $parent || $item['idnumber'] === $parent) {
-                return true;
+            foreach (['key', 'idnumber', 'name'] as $field) {
+                if ($item[$field] !== '') {
+                    $refs[$item[$field]] = true;
+                }
             }
         }
 
-        return $this->find_category_by_idnumber($parent) !== null;
+        return $refs;
     }
 
     /**
-     * Normalise one preset item.
+     * Normalise a raw category item.
      *
-     * @param array<string, mixed>|stdClass $rawitem Raw preset row.
+     * Supports canonical runtime fields and legacy aliases:
+     * - parent is canonical.
+     * - parent_idnumber may populate parent.
+     *
+     * @param mixed $rawitem Raw item.
      * @return array<string, mixed>
      */
-    private function normalise_item(array|stdClass $rawitem): array {
-        $item = (array)$rawitem;
-
-        $key = clean_param((string)($item['key'] ?? ''), PARAM_ALPHANUMEXT);
-        $idnumber = clean_param((string)($item['idnumber'] ?? $item['shortname'] ?? ''), PARAM_TEXT);
-
-        if ($key === '' && $idnumber !== '') {
-            $key = $this->key_from_idnumber($idnumber);
+    private function normalise_item(mixed $rawitem): array {
+        if ($rawitem instanceof stdClass) {
+            $rawitem = (array)$rawitem;
         }
 
-        $visible = $item['visible'] ?? true;
+        if (!is_array($rawitem)) {
+            $rawitem = [];
+        }
 
-        if (is_string($visible)) {
-            $visible = !in_array(strtolower($visible), ['0', 'false', 'no', 'hidden'], true);
+        $metadata = $this->normalise_metadata($rawitem['metadata'] ?? []);
+
+        $key = $this->string_value($rawitem, ['key', 'shortname', 'idnumber', 'code']);
+        $idnumber = $this->string_value($rawitem, ['idnumber', 'id_number', 'category_idnumber', 'category']);
+        $name = $this->string_value($rawitem, ['name', 'fullname', 'title', 'displayname']);
+        $parent = $this->string_value($rawitem, ['parent', 'parent_idnumber', 'parentkey', 'parent_key', 'parentidnumber']);
+        $description = $this->string_value($rawitem, ['description', 'summary', 'intro']);
+
+        if ($key === '' && $idnumber !== '') {
+            $key = $this->normalise_key($idnumber);
+        }
+
+        if ($idnumber === '' && $key !== '') {
+            $idnumber = $key;
+        }
+
+        if ($name === '' && $key !== '') {
+            $name = $this->fallback_name($key);
+        }
+
+        $metadata[self::METADATA_MANAGED_BY] = self::MANAGED_BY;
+
+        if (!array_key_exists('seeded_by', $metadata)) {
+            $metadata['seeded_by'] = self::MANAGED_BY;
+        }
+
+        if (!array_key_exists('source_preset', $metadata)) {
+            $metadata['source_preset'] = self::PRESET;
         }
 
         return [
-            'key' => $key,
-            'name' => trim(clean_param((string)($item['name'] ?? ''), PARAM_TEXT)),
-            'idnumber' => trim($idnumber),
-            'parent' => clean_param((string)($item['parent'] ?? ''), PARAM_TEXT),
-            'description' => clean_text((string)($item['description'] ?? ''), FORMAT_HTML),
-            'sortorder' => max(0, (int)($item['sortorder'] ?? 0)),
-            'visible' => (bool)$visible,
-            'metadata' => $this->normalise_metadata($item['metadata'] ?? []),
+            'key' => clean_param($this->normalise_key($key), PARAM_ALPHANUMEXT),
+            'name' => clean_param($name, PARAM_TEXT),
+            'idnumber' => clean_param($idnumber, PARAM_TEXT),
+            'parent' => clean_param($parent, PARAM_TEXT),
+            'parent_idnumber' => clean_param(
+                $this->string_value($rawitem, ['parent_idnumber', 'parent']),
+                PARAM_TEXT
+            ),
+            'description' => clean_param($description, PARAM_RAW),
+            'descriptionformat' => (int)($rawitem['descriptionformat'] ?? $rawitem['summaryformat'] ?? FORMAT_HTML),
+            'sortorder' => (int)($rawitem['sortorder'] ?? 0),
+            'visible' => $this->normalise_visible($rawitem['visible'] ?? $rawitem['visibility'] ?? 1),
+            'metadata' => $metadata,
         ];
+    }
+
+    /**
+     * Get the first non-empty string value from a row.
+     *
+     * @param array<string, mixed> $row Row.
+     * @param string[] $keys Candidate keys.
+     * @return string
+     */
+    private function string_value(array $row, array $keys): string {
+        foreach ($keys as $key) {
+            if (!array_key_exists($key, $row)) {
+                continue;
+            }
+
+            $value = $row[$key];
+
+            if ($value === null || $value === '') {
+                continue;
+            }
+
+            if (is_scalar($value)) {
+                return trim((string)$value);
+            }
+        }
+
+        return '';
     }
 
     /**
@@ -785,20 +948,6 @@ final class category_seed {
      * @return array<string, mixed>
      */
     private function normalise_metadata(mixed $metadata): array {
-        if ($metadata === null || $metadata === '') {
-            return [];
-        }
-
-        if (is_string($metadata)) {
-            $decoded = json_decode($metadata, true);
-
-            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                return $decoded;
-            }
-
-            return [];
-        }
-
         if ($metadata instanceof stdClass) {
             return (array)$metadata;
         }
@@ -807,25 +956,76 @@ final class category_seed {
             return $metadata;
         }
 
+        if (is_string($metadata) && trim($metadata) !== '') {
+            $decoded = json_decode($metadata, true);
+
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
         return [];
     }
 
     /**
-     * Convert an idnumber to a stable preset key.
+     * Normalise a key/idnumber-like string.
      *
-     * @param string $idnumber Category idnumber.
+     * @param string $value Raw value.
      * @return string
      */
-    private function key_from_idnumber(string $idnumber): string {
-        $key = strtolower(trim($idnumber));
-        $key = preg_replace('/[^a-z0-9_]+/', '_', $key) ?? $key;
-        $key = trim($key, '_');
+    private function normalise_key(string $value): string {
+        $value = strtolower(trim($value));
+        $value = preg_replace('/[^a-z0-9_:-]+/', '_', $value) ?? $value;
+        $value = preg_replace('/_+/', '_', $value) ?? $value;
 
-        return clean_param($key, PARAM_ALPHANUMEXT);
+        return trim($value, '_');
     }
 
     /**
-     * Normalise mode.
+     * Generate fallback name.
+     *
+     * @param string $key Key.
+     * @return string
+     */
+    private function fallback_name(string $key): string {
+        $name = str_replace(['_', '-'], ' ', $key);
+        $name = trim($name);
+
+        return $name === '' ? '' : core_text::strtotitle($name);
+    }
+
+    /**
+     * Normalise visibility to Moodle integer 0/1.
+     *
+     * @param mixed $value Raw value.
+     * @return int
+     */
+    private function normalise_visible(mixed $value): int {
+        if (is_bool($value)) {
+            return $value ? 1 : 0;
+        }
+
+        if (is_int($value)) {
+            return $value > 0 ? 1 : 0;
+        }
+
+        if (is_string($value)) {
+            $value = strtolower(trim($value));
+
+            if (in_array($value, ['1', 'true', 'yes', 'y', 'visible', 'public', 'course', 'institution', 'active'], true)) {
+                return 1;
+            }
+
+            if (in_array($value, ['0', 'false', 'no', 'n', 'hidden', 'private', 'draft', 'inactive'], true)) {
+                return 0;
+            }
+        }
+
+        return 1;
+    }
+
+    /**
+     * Normalise execution mode.
      *
      * @param string $mode Raw mode.
      * @return string
@@ -833,96 +1033,154 @@ final class category_seed {
     private function normalise_mode(string $mode): string {
         $mode = clean_param($mode, PARAM_ALPHANUMEXT);
 
-        return in_array($mode, [
-            self::MODE_DRY_RUN,
+        $allowed = [
             self::MODE_APPLY,
+            self::MODE_DRY_RUN,
             self::MODE_REPORT,
             self::MODE_ROLLBACK_PLAN,
-        ], true) ? $mode : self::MODE_DRY_RUN;
+        ];
+
+        return in_array($mode, $allowed, true) ? $mode : self::MODE_DRY_RUN;
     }
 
     /**
-     * Empty canonical counts.
+     * Return whether options request dry run.
      *
-     * @return array<string, int>
+     * @param array<string, mixed> $options Options.
+     * @return bool
      */
-    private function empty_counts(): array {
-        return [
+    private function is_dry_run(array $options): bool {
+        return !empty($options['dryrun'])
+            || !empty($options['dry_run'])
+            || (($options['mode'] ?? '') === self::MODE_DRY_RUN);
+    }
+
+    /**
+     * Create a validation result.
+     *
+     * @param string $summary Summary.
+     * @return validation_result
+     */
+    private function new_result(string $summary): validation_result {
+        $data = [
+            'status' => self::STATUS_COMPLETED,
+            'ok' => true,
+            'haserrors' => false,
+            'haswarnings' => false,
+            'summary' => $summary,
+            'counts' => [
+                'created' => 0,
+                'updated' => 0,
+                'skipped' => 0,
+                'failed' => 0,
+                'warnings' => 0,
+                'errors' => 0,
+            ],
+            'messages' => [],
             'created' => 0,
             'updated' => 0,
             'skipped' => 0,
             'failed' => 0,
-            'warnings' => 0,
-            'errors' => 0,
-        ];
-    }
-
-    /**
-     * Build a canonical message row.
-     *
-     * @param string $severity Severity.
-     * @param string $targetkey Target key.
-     * @param string $preset Preset id.
-     * @param string $message Message.
-     * @param array<string, mixed> $metadata Metadata.
-     * @return array<string, mixed>
-     */
-    private function message(
-        string $severity,
-        string $targetkey,
-        string $preset,
-        string $message,
-        array $metadata = []
-    ): array {
-        return [
-            'severity' => $severity,
-            'component' => self::COMPONENT,
-            'preset' => $preset,
-            'targettype' => self::TARGET_TYPE,
-            'targetkey' => $targetkey,
-            'message' => $message,
-            'metadata' => $metadata,
-        ];
-    }
-
-    /**
-     * Build a validation_result while keeping one construction point.
-     *
-     * The companion validation_result class should support from_array().
-     *
-     * @param array<int, array<string, mixed>> $messages Message rows.
-     * @param array<string, int> $counts Counts.
-     * @param array<string, mixed> $extra Extra result data.
-     * @return validation_result
-     */
-    private function build_result(array $messages, array $counts, array $extra = []): validation_result {
-        $haserrors = $counts['errors'] > 0;
-        $haswarnings = $counts['warnings'] > 0;
-
-        $data = array_merge([
-            'status' => $haserrors ? 'failed' : ($haswarnings ? 'warning' : 'completed'),
-            'ok' => !$haserrors,
-            'haserrors' => $haserrors,
-            'haswarnings' => $haswarnings,
-            'summary' => '',
-            'counts' => $counts,
-            'messages' => $messages,
-            'created' => $counts['created'],
-            'updated' => $counts['updated'],
-            'skipped' => $counts['skipped'],
-            'failed' => $counts['failed'],
             'metadata' => [
                 'component' => self::COMPONENT,
                 'preset' => self::PRESET,
                 'targettype' => self::TARGET_TYPE,
             ],
-        ], $extra);
+        ];
 
         if (method_exists(validation_result::class, 'from_array')) {
             return validation_result::from_array($data);
         }
 
-        return new validation_result($data);
+        if (method_exists(validation_result::class, 'from_data')) {
+            return validation_result::from_data($data);
+        }
+
+        return new validation_result(self::STATUS_COMPLETED, $summary, $data['metadata']);
+    }
+
+    /**
+     * Add a result message.
+     *
+     * @param validation_result $result Result object.
+     * @param string $severity Severity.
+     * @param string $message Message.
+     * @param string $targetkey Target key.
+     * @param array<string, mixed> $metadata Metadata.
+     */
+    private function add_message(
+        validation_result $result,
+        string $severity,
+        string $message,
+        string $targetkey = '',
+        array $metadata = []
+    ): void {
+        $result->add_message(
+            $severity,
+            $message,
+            self::COMPONENT,
+            self::PRESET,
+            self::TARGET_TYPE,
+            $targetkey,
+            $metadata
+        );
+
+        if ($severity === self::SEVERITY_ERROR || $severity === self::SEVERITY_BLOCKER) {
+            $this->increment($result, 'failed');
+            $this->increment($result, 'errors');
+        } else if ($severity === self::SEVERITY_WARNING) {
+            $this->increment($result, 'warnings');
+        }
+    }
+
+    /**
+     * Increment a result counter.
+     *
+     * @param validation_result $result Result.
+     * @param string $counter Counter key.
+     */
+    private function increment(validation_result $result, string $counter): void {
+        if (method_exists($result, 'increment')) {
+            $result->increment($counter);
+        }
+    }
+
+    /**
+     * Count errors from result payload.
+     *
+     * @param validation_result $result Result.
+     * @return int
+     */
+    private function count_errors(validation_result $result): int {
+        $data = $this->result_to_array($result);
+
+        return (int)($data['counts']['errors'] ?? $data['errors'] ?? 0);
+    }
+
+    /**
+     * Finalise result status and optional summary.
+     *
+     * @param validation_result $result Result.
+     * @param string|null $summary Optional summary.
+     */
+    private function finalise_result(validation_result $result, ?string $summary = null): void {
+        if ($result->has_errors()) {
+            if (method_exists($result, 'set_status')) {
+                $result->set_status(self::STATUS_FAILED);
+            }
+        } else if ($result->has_warnings()) {
+            if (method_exists($result, 'set_status')) {
+                $result->set_status(self::STATUS_WARNING);
+            }
+        } else if (method_exists($result, 'set_status')) {
+            $result->set_status(self::STATUS_COMPLETED);
+        }
+
+        if ($summary !== null && method_exists($result, 'set_summary')) {
+            $result->set_summary($summary);
+        } else if (method_exists($result, 'complete')) {
+            $result->complete($summary ?? $result->get_summary());
+        }
     }
 
     /**
@@ -933,13 +1191,25 @@ final class category_seed {
      */
     private function result_to_array(validation_result $result): array {
         if (method_exists($result, 'to_array')) {
-            return $result->to_array();
+            $data = $result->to_array();
+
+            return is_array($data) ? $data : [];
         }
 
-        if (method_exists($result, 'to_export')) {
-            return (array)$result->to_export();
+        if (method_exists($result, 'export')) {
+            $data = $result->export();
+
+            return is_array($data) ? $data : (array)$data;
+        }
+
+        if ($result instanceof \JsonSerializable) {
+            $data = $result->jsonSerialize();
+
+            return is_array($data) ? $data : (array)$data;
         }
 
         return get_object_vars($result);
     }
 }
+
+

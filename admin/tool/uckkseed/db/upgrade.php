@@ -26,10 +26,6 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool
  */
 function xmldb_tool_uckkseed_upgrade($oldversion): bool {
-    global $DB;
-
-    $dbman = $DB->get_manager();
-
     if ($oldversion < 2026051200) {
         // Initial stable release baseline.
         //
@@ -44,8 +40,22 @@ function xmldb_tool_uckkseed_upgrade($oldversion): bool {
         tool_uckkseed_upgrade_ensure_initial_tables();
         tool_uckkseed_upgrade_repair_initial_fields();
         tool_uckkseed_upgrade_repair_initial_indexes();
+        tool_uckkseed_upgrade_drop_unsafe_target_lookup_index();
 
         upgrade_plugin_savepoint(true, 2026051200, 'tool', 'uckkseed');
+    }
+
+    if ($oldversion < 2026051201) {
+        // Remove unsafe composite index from development/pre-release schemas.
+        //
+        // The composite index target_lookup(targettype, targetkey) can exceed
+        // Moodle/MySQL index limits because targettype is char(100) and
+        // targetkey is char(255). The single-column indexes targettype and
+        // targetkey are kept instead.
+        tool_uckkseed_upgrade_drop_unsafe_target_lookup_index();
+        tool_uckkseed_upgrade_repair_initial_indexes();
+
+        upgrade_plugin_savepoint(true, 2026051201, 'tool', 'uckkseed');
     }
 
     return true;
@@ -128,7 +138,7 @@ function tool_uckkseed_upgrade_ensure_initial_tables(): void {
 }
 
 /**
- * Repair initial fields expected by the stable 1.0.0 schema.
+ * Repair initial fields expected by the stable schema.
  *
  * This is conservative: it adds missing fields only when the table already
  * exists. It does not remove old fields or transform seed data destructively.
@@ -226,7 +236,11 @@ function tool_uckkseed_upgrade_add_missing_fields(string $tablename, array $fiel
 }
 
 /**
- * Repair indexes expected by the stable 1.0.0 schema.
+ * Repair indexes expected by the stable schema.
+ *
+ * The unsafe composite index target_lookup(targettype, targetkey) is
+ * intentionally not created here. targettype and targetkey are indexed
+ * separately to remain portable across Moodle-supported databases.
  *
  * @return void
  */
@@ -265,7 +279,6 @@ function tool_uckkseed_upgrade_repair_initial_indexes(): void {
             ['timecreated', ['timecreated']],
             ['run_level', ['runid', 'level']],
             ['run_preset', ['runid', 'preset']],
-            ['target_lookup', ['targettype', 'targetkey']],
         ],
     ];
 
@@ -304,6 +317,32 @@ function tool_uckkseed_upgrade_repair_initial_indexes(): void {
 }
 
 /**
+ * Drop the unsafe composite target lookup index if it exists.
+ *
+ * @return void
+ */
+function tool_uckkseed_upgrade_drop_unsafe_target_lookup_index(): void {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+
+    if (!$dbman->table_exists('tool_uckkseed_log')) {
+        return;
+    }
+
+    if (!tool_uckkseed_upgrade_table_has_fields('tool_uckkseed_log', ['targettype', 'targetkey'])) {
+        return;
+    }
+
+    $table = new xmldb_table('tool_uckkseed_log');
+    $index = new xmldb_index('target_lookup', XMLDB_INDEX_NOTUNIQUE, ['targettype', 'targetkey']);
+
+    if ($dbman->index_exists($table, $index)) {
+        $dbman->drop_index($table, $index);
+    }
+}
+
+/**
  * Return whether a table contains all requested fields.
  *
  * @param string $tablename Table name without braces.
@@ -327,4 +366,3 @@ function tool_uckkseed_upgrade_table_has_fields(string $tablename, array $fields
 
     return true;
 }
-

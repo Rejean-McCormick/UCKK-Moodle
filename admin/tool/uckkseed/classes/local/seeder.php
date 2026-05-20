@@ -36,6 +36,9 @@ final class seeder {
     /** Plugin component. */
     public const COMPONENT = 'tool_uckkseed';
 
+    /** Default academic registry JSON directory, relative to Moodle dirroot. */
+    public const DEFAULT_PRESET_PATH = 'academic_registry_json';
+
     /** Run table. */
     public const TABLE_RUN = 'tool_uckkseed_run';
 
@@ -111,6 +114,12 @@ final class seeder {
     /** Preset: categories. */
     public const PRESET_CATEGORIES = 'categories';
 
+    /** Preset: programs. */
+    public const PRESET_PROGRAMS = 'programs';
+
+    /** Preset: pathways. */
+    public const PRESET_PATHWAYS = 'pathways';
+
     /** Preset: courses. */
     public const PRESET_COURSES = 'courses';
 
@@ -153,24 +162,7 @@ final class seeder {
      * @param string|null $presetpath Optional preset directory path.
      */
     public function __construct(?string $presetpath = null) {
-        global $CFG;
-
-        if ($presetpath !== null && trim($presetpath) !== '') {
-            $this->presetpath = rtrim($presetpath, DIRECTORY_SEPARATOR);
-            return;
-        }
-
-        $configured = (string)get_config(self::COMPONENT, 'presetpath');
-
-        if ($configured === '') {
-            $configured = 'admin/tool/uckkseed/presets';
-        }
-
-        if ($this->is_absolute_path($configured)) {
-            $this->presetpath = rtrim($configured, DIRECTORY_SEPARATOR);
-        } else {
-            $this->presetpath = rtrim($CFG->dirroot . DIRECTORY_SEPARATOR . $configured, DIRECTORY_SEPARATOR);
-        }
+        $this->presetpath = $this->resolve_preset_path($presetpath);
     }
 
     /**
@@ -471,7 +463,7 @@ final class seeder {
             $path = $this->presetpath . DIRECTORY_SEPARATOR . $filename;
 
             if (!is_readable($path)) {
-                throw new moodle_exception('presetfilenotfound', self::COMPONENT, '', $filename);
+                throw new moodle_exception('presetfilenotfound', self::COMPONENT, '', $path);
             }
 
             $presets[$presetid] = $this->read_preset_file($presetid, $path);
@@ -490,6 +482,10 @@ final class seeder {
     public function run_preset(string $presetid, array $options): validation_result {
         $presetid = $this->normalise_preset_id($presetid);
         $presetdata = $options['presetdata'] ?? null;
+
+        if (!empty($options['presetpath'])) {
+            $this->presetpath = $this->resolve_preset_path($options['presetpath']);
+        }
 
         if (!is_array($presetdata)) {
             $loaded = $this->load_presets([$presetid]);
@@ -581,45 +577,83 @@ final class seeder {
         return $result;
     }
 
-    /**
-     * Create a seed run record.
-     *
-     * @param string $action Action.
-     * @param string $mode Mode.
-     * @param array<string, mixed> $options Options.
-     * @return int Run id, or 0 when table is unavailable.
-     */
-    public function create_run(string $action, string $mode, array $options): int {
-        global $USER;
 
-        $now = time();
+/**
+ * Create a seed run record.
+ *
+ * @param string $action Action.
+ * @param string $mode Mode.
+ * @param array<string, mixed> $options Options.
+ * @return int Run id, or 0 when table is unavailable.
+ */
+public function create_run(string $action, string $mode, array $options): int {
+    global $USER;
 
-        $record = new stdClass();
-        $record->action = $this->normalise_action($action);
-        $record->mode = $this->normalise_mode($mode);
-        $record->status = self::STATUS_RUNNING;
-        $record->component = self::COMPONENT;
-        $record->preset = $this->implode_list($options['presets'] ?? []);
-        $record->targettype = (string)($options['targettype'] ?? '');
-        $record->targetkey = (string)($options['targetkey'] ?? '');
-        $record->targetid = (int)($options['targetid'] ?? 0);
-        $record->summary = (string)($options['summary'] ?? '');
-        $record->details = null;
-        $record->userid = (int)($options['userid'] ?? $USER->id ?? 0);
-        $record->createdby = $record->userid;
-        $record->modifiedby = $record->userid;
-        $record->timecreated = $now;
-        $record->timemodified = $now;
-        $record->metadata = $this->encode_json([
-            'source' => $options['source'] ?? 'unknown',
-            'mode' => $record->mode,
-            'action' => $record->action,
-            'dryrun' => !empty($options['dryrun']),
-            'force' => !empty($options['force']),
-        ]);
+    $now = time();
+    $presets = $options['presets'] ?? [];
 
-        return $this->safe_insert_record(self::TABLE_RUN, $record);
+    if (!is_array($presets)) {
+        $presets = [$presets];
     }
+
+    $presets = array_values(array_filter(array_map(
+        static fn($preset): string => trim((string)$preset),
+        $presets
+    )));
+
+    $primarypreset = '';
+
+    if (count($presets) === 1) {
+        $primarypreset = $presets[0];
+    }
+
+    $record = new stdClass();
+    $record->action = $this->normalise_action($action);
+    $record->mode = $this->normalise_mode($mode);
+    $record->status = self::STATUS_RUNNING;
+    $record->component = self::COMPONENT;
+    $record->source = (string)($options['source'] ?? 'cli');
+
+    // IMPORTANT:
+    // tool_uckkseed_run.preset is char(100), so never store the full preset list here.
+    // Full list belongs in the text field tool_uckkseed_run.presets.
+    $record->preset = $primarypreset;
+    $record->presets = $this->encode_json($presets);
+    $record->components = $this->encode_json($options['components'] ?? []);
+
+    $record->summary = (string)($options['summary'] ?? '');
+    $record->details = null;
+
+    $record->created = 0;
+    $record->updated = 0;
+    $record->skipped = 0;
+    $record->failed = 0;
+    $record->warnings = 0;
+    $record->errors = 0;
+
+    $record->userid = (int)($options['userid'] ?? $USER->id ?? 0);
+    $record->createdby = $record->userid;
+    $record->modifiedby = $record->userid;
+
+    $record->timecreated = $now;
+    $record->timemodified = $now;
+    $record->timestarted = $now;
+    $record->timefinished = 0;
+    $record->duration = 0;
+
+    $record->metadata = $this->encode_json([
+        'source' => $record->source,
+        'mode' => $record->mode,
+        'action' => $record->action,
+        'dryrun' => !empty($options['dryrun']) || !empty($options['dry_run']),
+        'force' => !empty($options['force']),
+        'presetpath' => (string)($options['presetpath'] ?? $this->presetpath),
+    ]);
+
+    return $this->safe_insert_record(self::TABLE_RUN, $record);
+}
+
+
 
     /**
      * Log one seed step.
@@ -850,17 +884,19 @@ final class seeder {
     private function get_handler_class(string $presetid): ?string {
         return match ($presetid) {
             self::PRESET_CATEGORIES => category_seed::class,
-            self::PRESET_COURSES,
-            self::PRESET_COURSE_TEMPLATES,
-            self::PRESET_CHALLENGE_TEMPLATES,
-            self::PRESET_ASSEMBLY_TEMPLATES,
-            self::PRESET_ARCHIVE_TEMPLATES => course_seed::class,
+            self::PRESET_PROGRAMS => program_seed::class,
+            self::PRESET_PATHWAYS => pathway_seed::class,
+            self::PRESET_COURSES => course_seed::class,
             self::PRESET_COHORTS => cohort_seed::class,
-            self::PRESET_ROLES,
-            self::PRESET_CAPABILITIES => role_seed::class,
+            self::PRESET_ROLES => role_seed::class,
+            self::PRESET_CAPABILITIES => capability_seed::class,
             self::PRESET_COMPETENCIES => competency_seed::class,
             self::PRESET_BADGES => badge_seed::class,
             self::PRESET_REPORTS => report_seed::class,
+            self::PRESET_COURSE_TEMPLATES => course_template_seed::class,
+            self::PRESET_CHALLENGE_TEMPLATES => challenge_template_seed::class,
+            self::PRESET_ASSEMBLY_TEMPLATES => assembly_template_seed::class,
+            self::PRESET_ARCHIVE_TEMPLATES => archive_template_seed::class,
             default => null,
         };
     }
@@ -903,12 +939,15 @@ final class seeder {
         }
 
         $presets = $this->normalise_preset_ids($options['presets'] ?? []);
+        $presetpath = $this->resolve_preset_path($options['presetpath'] ?? null);
+        $this->presetpath = $presetpath;
 
         return [
             ...$options,
             'action' => $action,
             'mode' => $mode,
             'presets' => $presets,
+            'presetpath' => $presetpath,
             'components' => $this->normalise_list($options['components'] ?? []),
             'dryrun' => $mode === self::MODE_DRY_RUN,
             'report' => $mode === self::MODE_REPORT,
@@ -1078,17 +1117,19 @@ final class seeder {
     private function get_allowed_presets(): array {
         return [
             self::PRESET_CATEGORIES,
-            self::PRESET_COURSES,
+            self::PRESET_PROGRAMS,
+            self::PRESET_PATHWAYS,
             self::PRESET_COHORTS,
             self::PRESET_ROLES,
             self::PRESET_CAPABILITIES,
             self::PRESET_COMPETENCIES,
             self::PRESET_BADGES,
-            self::PRESET_REPORTS,
             self::PRESET_COURSE_TEMPLATES,
             self::PRESET_CHALLENGE_TEMPLATES,
             self::PRESET_ASSEMBLY_TEMPLATES,
             self::PRESET_ARCHIVE_TEMPLATES,
+            self::PRESET_COURSES,
+            self::PRESET_REPORTS,
         ];
     }
 
@@ -1100,6 +1141,8 @@ final class seeder {
     private function get_default_presets(): array {
         return [
             self::PRESET_CATEGORIES,
+            self::PRESET_PROGRAMS,
+            self::PRESET_PATHWAYS,
             self::PRESET_COHORTS,
             self::PRESET_ROLES,
             self::PRESET_CAPABILITIES,
@@ -1322,7 +1365,7 @@ final class seeder {
             'metadata' => [],
         ];
 
-        return new validation_result($payload);
+        return validation_result::from_data($payload);
     }
 
     /**
@@ -1533,6 +1576,37 @@ final class seeder {
      */
     private function implode_list(mixed $value): string {
         return implode(',', $this->normalise_list($value));
+    }
+
+    /**
+     * Resolve the academic registry JSON directory.
+     *
+     * The path may be absolute, or relative to Moodle dirroot.
+     *
+     * @param string|null $presetpath Optional path override.
+     * @return string Absolute directory path without trailing separator.
+     */
+    private function resolve_preset_path(?string $presetpath = null): string {
+        global $CFG;
+
+        $configured = trim((string)($presetpath ?? ''));
+
+        if ($configured === '') {
+            $configured = trim((string)get_config(self::COMPONENT, 'presetpath'));
+        }
+
+        if ($configured === '') {
+            $configured = self::DEFAULT_PRESET_PATH;
+        }
+
+        $configured = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $configured);
+        $configured = rtrim($configured, DIRECTORY_SEPARATOR);
+
+        if ($this->is_absolute_path($configured)) {
+            return $configured;
+        }
+
+        return rtrim($CFG->dirroot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $configured;
     }
 
     /**

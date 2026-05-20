@@ -1,0 +1,753 @@
+{
+  "schema": "uckkseed.preset.v1",
+  "component": "tool_uckkseed",
+  "preset": "assembly_templates",
+  "version": 2026051200,
+  "items": [
+    {
+      "key": "assembly_savoirs",
+      "name": "Assemblée des savoirs",
+      "component": "mod_uckkassembly",
+      "description": "Modèle d’assemblée pour examiner, discuter, corriger et légitimer des savoirs, concepts, Kristaux, preuves et décisions pédagogiques.",
+      "defaults": {
+        "assemblytype": "savoirs",
+        "status": "active",
+        "visibility": "course",
+        "provenance": "assembly",
+        "validationstate": "unverified",
+        "allowmotions": true,
+        "allowamendments": true,
+        "allowobjections": true,
+        "allowvotes": true,
+        "allowminorityreports": true,
+        "allowcontestations": true,
+        "requireminutes": true,
+        "requirearchive": true,
+        "decisiontypes": [
+          "information",
+          "recommendation",
+          "validation",
+          "correction",
+          "rejection",
+          "archival"
+        ],
+        "quorum": {
+          "enabled": true,
+          "minimum_participants": 3,
+          "minimum_percent": 0
+        },
+        "threshold": {
+          "type": "simple_majority",
+          "minimum_percent": 50
+        },
+        "archive": {
+          "component": "mod_uckkarchive",
+          "visibility": "course",
+          "provenance": "assembly",
+          "export_minutes": true,
+          "export_decisions": true
+        },
+        "visible": 1
+      },
+      "sections": [
+        {
+          "key": "orientation",
+          "name": "Orientation",
+          "description": "Objet de l’assemblée, contexte, règles et critères de légitimité.",
+          "sortorder": 10
+        },
+        {
+          "key": "motions",
+          "name": "Motions",
+          "description": "Propositions à examiner.",
+          "sortorder": 20
+        },
+        {
+          "key": "arguments",
+          "name": "Arguments et objections",
+          "description": "Arguments, réserves, objections et demandes de clarification.",
+          "sortorder": 30
+        },
+        {
+          "key": "amendments",
+          "name": "Amendements",
+          "description": "Corrections, précisions, retraits, ajouts et contre-propositions.",
+          "sortorder": 40
+        },
+        {
+          "key": "vote",
+          "name": "Vote ou lecture",
+          "description": "Expression structurée des positions.",
+          "sortorder": 50
+        },
+        {
+          "key": "decisions",
+          "name": "Décisions",
+          "description": "Décisions publiables, corrections requises et rapports minoritaires.",
+          "sortorder": 60
+        },
+        {
+          "key": "minutes",
+          "name": "Procès-verbal",
+          "description": "Trace officielle de l’assemblée.",
+          "sortorder": 70
+        },
+        {
+          "key": "archive",
+          "name": "Archive",
+          "description": "Archivage des décisions, preuves et procès-verbal.",
+          "sortorder": 80
+        }
+      ],
+      "activities": [
+        {
+          "key": "default_archive_link",
+          "component": "mod_uckkarchive",
+          "type": "archive_export",
+          "required": true,
+          "visibility": "course"
+        }
+      ],
+      "completion": {
+        "track_views": true,
+        "require_minutes": true,
+        "require_decision": false,
+        "require_archive": true
+      },
+      "metadata": {
+        "assembly_type": "savoirs",
+        "canonical_formula": "Connaître → Choisir → Agir → Se souvenir",
+        "language": "fr",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "assembly_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "assembly_defis",
+      "name": "Assemblée des défis",
+      "component": "mod_uckkassembly",
+      "description": "Modèle d’assemblée pour examiner les Défis King Klown, leurs preuves, validations, corrections et contestations.",
+      "defaults": {
+        "assemblytype": "defis",
+        "status": "active",
+        "visibility": "course",
+        "provenance": "challenge",
+        "validationstate": "unverified",
+        "allowmotions": true,
+        "allowamendments": true,
+        "allowobjections": true,
+        "allowvotes": true,
+        "allowminorityreports": true,
+        "allowcontestations": true,
+        "requireminutes": true,
+        "requirearchive": true,
+        "decisiontypes": [
+          "validation",
+          "correction",
+          "rejection",
+          "integrity",
+          "archival"
+        ],
+        "quorum": {
+          "enabled": true,
+          "minimum_participants": 2,
+          "minimum_percent": 0
+        },
+        "threshold": {
+          "type": "mentor_validation",
+          "minimum_percent": 50
+        },
+        "challenge": {
+          "component": "mod_uckkchallenge",
+          "requires_proof": true,
+          "requires_human_validation": true,
+          "allow_integrity_referral": true
+        },
+        "archive": {
+          "component": "mod_uckkarchive",
+          "visibility": "course",
+          "provenance": "challenge",
+          "export_minutes": true,
+          "export_decisions": true,
+          "export_proofs": true
+        },
+        "visible": 1
+      },
+      "sections": [
+        {
+          "key": "challenge_context",
+          "name": "Contexte du défi",
+          "description": "Défi examiné, compétence visée, preuve soumise et état de progression.",
+          "sortorder": 10
+        },
+        {
+          "key": "proof_review",
+          "name": "Revue des preuves",
+          "description": "Analyse des preuves, provenance, limites et incertitudes.",
+          "sortorder": 20
+        },
+        {
+          "key": "motions",
+          "name": "Motions",
+          "description": "Validation, correction, rejet, archivage ou examen d’intégrité.",
+          "sortorder": 30
+        },
+        {
+          "key": "deliberation",
+          "name": "Délibération",
+          "description": "Arguments, objections, amendements et rapport minoritaire.",
+          "sortorder": 40
+        },
+        {
+          "key": "decision",
+          "name": "Décision",
+          "description": "Décision motivée sur le défi.",
+          "sortorder": 50
+        },
+        {
+          "key": "minutes",
+          "name": "Procès-verbal",
+          "description": "Trace officielle de la délibération.",
+          "sortorder": 60
+        },
+        {
+          "key": "archive",
+          "name": "Archive",
+          "description": "Archivage des preuves, décisions et corrections.",
+          "sortorder": 70
+        }
+      ],
+      "activities": [
+        {
+          "key": "challenge_reference",
+          "component": "mod_uckkchallenge",
+          "type": "challenge_review",
+          "required": true,
+          "visibility": "course"
+        },
+        {
+          "key": "archive_export",
+          "component": "mod_uckkarchive",
+          "type": "proof_decision_archive",
+          "required": true,
+          "visibility": "course"
+        }
+      ],
+      "completion": {
+        "track_views": true,
+        "require_minutes": true,
+        "require_decision": true,
+        "require_archive": true
+      },
+      "metadata": {
+        "assembly_type": "defis",
+        "proof_required": true,
+        "human_validation_required": true,
+        "language": "fr",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "assembly_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "assembly_joueurs",
+      "name": "Assemblée des joueurs",
+      "component": "mod_uckkassembly",
+      "description": "Modèle d’assemblée pour les joueurs, parcours, rétroactions collectives, progression, entraide et reconnaissance interne.",
+      "defaults": {
+        "assemblytype": "joueurs",
+        "status": "active",
+        "visibility": "course",
+        "provenance": "assembly",
+        "validationstate": "unverified",
+        "allowmotions": true,
+        "allowamendments": true,
+        "allowobjections": true,
+        "allowvotes": true,
+        "allowminorityreports": true,
+        "allowcontestations": true,
+        "requireminutes": true,
+        "requirearchive": true,
+        "decisiontypes": [
+          "information",
+          "recommendation",
+          "validation",
+          "correction",
+          "archival"
+        ],
+        "quorum": {
+          "enabled": false,
+          "minimum_participants": 0,
+          "minimum_percent": 0
+        },
+        "threshold": {
+          "type": "consent",
+          "minimum_percent": 0
+        },
+        "recognition": {
+          "badges_allowed": true,
+          "requires_human_validation": true,
+          "public_recognition_default": false
+        },
+        "archive": {
+          "component": "mod_uckkarchive",
+          "visibility": "course",
+          "provenance": "assembly",
+          "export_minutes": true,
+          "export_decisions": true
+        },
+        "visible": 1
+      },
+      "sections": [
+        {
+          "key": "orientation",
+          "name": "Orientation",
+          "description": "Objet de l’assemblée et règles de participation.",
+          "sortorder": 10
+        },
+        {
+          "key": "player_updates",
+          "name": "Avancement des joueurs",
+          "description": "État des parcours, besoins, obstacles et prochains gestes.",
+          "sortorder": 20
+        },
+        {
+          "key": "motions",
+          "name": "Motions",
+          "description": "Propositions d’entraide, d’ajustement ou de reconnaissance.",
+          "sortorder": 30
+        },
+        {
+          "key": "deliberation",
+          "name": "Délibération",
+          "description": "Discussion, objections, amendements et consentement.",
+          "sortorder": 40
+        },
+        {
+          "key": "decisions",
+          "name": "Décisions",
+          "description": "Recommandations, corrections ou validations internes.",
+          "sortorder": 50
+        },
+        {
+          "key": "minutes",
+          "name": "Procès-verbal",
+          "description": "Trace officielle de l’assemblée.",
+          "sortorder": 60
+        }
+      ],
+      "activities": [
+        {
+          "key": "player_progress_summary",
+          "component": "block_uckk_dashboard",
+          "type": "progress_summary",
+          "required": false,
+          "visibility": "course"
+        },
+        {
+          "key": "archive_export",
+          "component": "mod_uckkarchive",
+          "type": "minutes_archive",
+          "required": true,
+          "visibility": "course"
+        }
+      ],
+      "completion": {
+        "track_views": true,
+        "require_minutes": true,
+        "require_decision": false,
+        "require_archive": true
+      },
+      "metadata": {
+        "assembly_type": "joueurs",
+        "symbolic_roles_allowed": true,
+        "technical_role_creation_allowed": false,
+        "language": "fr",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "assembly_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "assembly_batisseurs",
+      "name": "Assemblée des bâtisseurs",
+      "component": "mod_uckkassembly",
+      "description": "Modèle d’assemblée pour examiner prototypes, artefacts, infrastructures, projets et décisions de réalisation.",
+      "defaults": {
+        "assemblytype": "batisseurs",
+        "status": "active",
+        "visibility": "course",
+        "provenance": "assembly",
+        "validationstate": "unverified",
+        "allowmotions": true,
+        "allowamendments": true,
+        "allowobjections": true,
+        "allowvotes": true,
+        "allowminorityreports": true,
+        "allowcontestations": true,
+        "requireminutes": true,
+        "requirearchive": true,
+        "decisiontypes": [
+          "information",
+          "recommendation",
+          "validation",
+          "correction",
+          "rejection",
+          "archival"
+        ],
+        "quorum": {
+          "enabled": true,
+          "minimum_participants": 3,
+          "minimum_percent": 0
+        },
+        "threshold": {
+          "type": "qualified_majority",
+          "minimum_percent": 66
+        },
+        "builder_review": {
+          "requires_usefulness_statement": true,
+          "requires_risk_statement": true,
+          "requires_archive_evidence": true
+        },
+        "archive": {
+          "component": "mod_uckkarchive",
+          "visibility": "course",
+          "provenance": "assembly",
+          "export_minutes": true,
+          "export_decisions": true,
+          "export_artifacts": true
+        },
+        "visible": 1
+      },
+      "sections": [
+        {
+          "key": "artifact_context",
+          "name": "Contexte de l’artefact",
+          "description": "Problème, utilité, destinataires, limites et dépendances.",
+          "sortorder": 10
+        },
+        {
+          "key": "risk_review",
+          "name": "Risques et responsabilités",
+          "description": "Risques, abus possibles, contraintes d’entretien et critères de sécurité.",
+          "sortorder": 20
+        },
+        {
+          "key": "motions",
+          "name": "Motions",
+          "description": "Construire, modifier, suspendre, archiver ou réviser.",
+          "sortorder": 30
+        },
+        {
+          "key": "amendments",
+          "name": "Amendements",
+          "description": "Corrections techniques, sociales ou institutionnelles.",
+          "sortorder": 40
+        },
+        {
+          "key": "decision",
+          "name": "Décision",
+          "description": "Décision de réalisation ou de correction.",
+          "sortorder": 50
+        },
+        {
+          "key": "minutes",
+          "name": "Procès-verbal",
+          "description": "Trace officielle.",
+          "sortorder": 60
+        },
+        {
+          "key": "archive",
+          "name": "Archive",
+          "description": "Archivage de l’artefact, des preuves et des décisions.",
+          "sortorder": 70
+        }
+      ],
+      "activities": [
+        {
+          "key": "artifact_archive",
+          "component": "mod_uckkarchive",
+          "type": "portfolio_item",
+          "required": true,
+          "visibility": "course"
+        }
+      ],
+      "completion": {
+        "track_views": true,
+        "require_minutes": true,
+        "require_decision": true,
+        "require_archive": true
+      },
+      "metadata": {
+        "assembly_type": "batisseurs",
+        "badge_alignment": "batisseur_prototype",
+        "language": "fr",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "assembly_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "assembly_inquisiteurs",
+      "name": "Assemblée des inquisiteurs",
+      "component": "mod_uckkassembly",
+      "description": "Modèle d’assemblée restreinte pour corrections, contestations, intégrité méthodologique, invalidations et décisions sensibles.",
+      "defaults": {
+        "assemblytype": "inquisiteurs",
+        "status": "active",
+        "visibility": "restricted_integrity",
+        "provenance": "integrity",
+        "validationstate": "human_reviewed",
+        "allowmotions": true,
+        "allowamendments": true,
+        "allowobjections": true,
+        "allowvotes": true,
+        "allowminorityreports": true,
+        "allowcontestations": true,
+        "requireminutes": true,
+        "requirearchive": true,
+        "decisiontypes": [
+          "correction",
+          "rejection",
+          "integrity",
+          "archival"
+        ],
+        "quorum": {
+          "enabled": true,
+          "minimum_participants": 2,
+          "minimum_percent": 0
+        },
+        "threshold": {
+          "type": "human_integrity_review",
+          "minimum_percent": 0
+        },
+        "integrity": {
+          "component": "tool_uckkintegrity",
+          "can_open_case": true,
+          "can_issue_correction": true,
+          "can_recommend_invalidation": true,
+          "must_log_reason": true,
+          "must_allow_contestation": true
+        },
+        "archive": {
+          "component": "mod_uckkarchive",
+          "visibility": "restricted_integrity",
+          "provenance": "integrity",
+          "export_minutes": true,
+          "export_decisions": true,
+          "export_integrity_summary": true
+        }
+      },
+      "sections": [
+        {
+          "key": "case_context",
+          "name": "Contexte du dossier",
+          "description": "Objet contesté, source, preuve, acteur concerné et niveau de restriction.",
+          "sortorder": 10
+        },
+        {
+          "key": "method_review",
+          "name": "Revue méthodologique",
+          "description": "Analyse des preuves, raisonnements, dépendances et risques d’autorité cachée.",
+          "sortorder": 20
+        },
+        {
+          "key": "motions",
+          "name": "Motions",
+          "description": "Correction, invalidation, contestation, clôture ou archivage restreint.",
+          "sortorder": 30
+        },
+        {
+          "key": "responses",
+          "name": "Réponses et contestations",
+          "description": "Réponses des personnes concernées, objections et rapport minoritaire.",
+          "sortorder": 40
+        },
+        {
+          "key": "decision",
+          "name": "Décision d’intégrité",
+          "description": "Décision motivée, contestable et traçable.",
+          "sortorder": 50
+        },
+        {
+          "key": "minutes",
+          "name": "Procès-verbal restreint",
+          "description": "Trace officielle à visibilité restreinte.",
+          "sortorder": 60
+        },
+        {
+          "key": "archive",
+          "name": "Archive restreinte",
+          "description": "Archivage restreint du dossier et des décisions.",
+          "sortorder": 70
+        }
+      ],
+      "activities": [
+        {
+          "key": "integrity_case",
+          "component": "tool_uckkintegrity",
+          "type": "integrity_case",
+          "required": true,
+          "visibility": "restricted_integrity"
+        },
+        {
+          "key": "restricted_archive_export",
+          "component": "mod_uckkarchive",
+          "type": "integrity_exports",
+          "required": true,
+          "visibility": "restricted_integrity"
+        }
+      ],
+      "completion": {
+        "track_views": true,
+        "require_minutes": true,
+        "require_decision": true,
+        "require_archive": true
+      },
+      "metadata": {
+        "assembly_type": "inquisiteurs",
+        "canonical_formula": "Même le Roi-Clown peut être interrogé.",
+        "restricted": true,
+        "language": "fr",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "assembly_templates",
+        "template_only": true
+      }
+    },
+    {
+      "key": "assembly_grand_jeu",
+      "name": "Assemblée du Grand Jeu",
+      "component": "mod_uckkassembly",
+      "description": "Modèle d’assemblée pour décisions transversales, orientations institutionnelles, cartographie du Grand Jeu social et arbitrages collectifs.",
+      "defaults": {
+        "assemblytype": "grand_jeu",
+        "status": "active",
+        "visibility": "institution",
+        "provenance": "assembly",
+        "validationstate": "human_reviewed",
+        "allowmotions": true,
+        "allowamendments": true,
+        "allowobjections": true,
+        "allowvotes": true,
+        "allowminorityreports": true,
+        "allowcontestations": true,
+        "requireminutes": true,
+        "requirearchive": true,
+        "decisiontypes": [
+          "information",
+          "recommendation",
+          "validation",
+          "correction",
+          "rejection",
+          "archival",
+          "integrity"
+        ],
+        "quorum": {
+          "enabled": true,
+          "minimum_participants": 5,
+          "minimum_percent": 0
+        },
+        "threshold": {
+          "type": "qualified_majority",
+          "minimum_percent": 66
+        },
+        "governance": {
+          "requires_public_summary": true,
+          "allows_restricted_appendix": true,
+          "must_allow_contestation": true,
+          "requires_archive": true
+        },
+        "archive": {
+          "component": "mod_uckkarchive",
+          "visibility": "institution",
+          "provenance": "assembly",
+          "export_minutes": true,
+          "export_decisions": true,
+          "export_public_summary": true
+        },
+        "visible": 1
+      },
+      "sections": [
+        {
+          "key": "orientation",
+          "name": "Orientation",
+          "description": "Objet transversal, contexte institutionnel et portée de la décision.",
+          "sortorder": 10
+        },
+        {
+          "key": "map",
+          "name": "Carte du Grand Jeu",
+          "description": "Acteurs, contraintes, tensions, institutions, ressources et effets possibles.",
+          "sortorder": 20
+        },
+        {
+          "key": "motions",
+          "name": "Motions",
+          "description": "Propositions d’orientation, de correction, de validation ou d’archivage.",
+          "sortorder": 30
+        },
+        {
+          "key": "deliberation",
+          "name": "Délibération",
+          "description": "Arguments, objections, amendements et rapports minoritaires.",
+          "sortorder": 40
+        },
+        {
+          "key": "vote",
+          "name": "Vote ou consentement",
+          "description": "Expression collective structurée.",
+          "sortorder": 50
+        },
+        {
+          "key": "decision",
+          "name": "Décision",
+          "description": "Décision institutionnelle, résumé public et annexes restreintes au besoin.",
+          "sortorder": 60
+        },
+        {
+          "key": "minutes",
+          "name": "Procès-verbal",
+          "description": "Mémoire institutionnelle de l’assemblée.",
+          "sortorder": 70
+        },
+        {
+          "key": "archive",
+          "name": "Archive",
+          "description": "Archivage institutionnel.",
+          "sortorder": 80
+        }
+      ],
+      "activities": [
+        {
+          "key": "institutional_archive",
+          "component": "mod_uckkarchive",
+          "type": "decision_record",
+          "required": true,
+          "visibility": "institution"
+        },
+        {
+          "key": "governance_report",
+          "component": "report_uckk",
+          "type": "assembly_governance_report",
+          "required": false,
+          "visibility": "institution"
+        }
+      ],
+      "completion": {
+        "track_views": true,
+        "require_minutes": true,
+        "require_decision": true,
+        "require_archive": true
+      },
+      "metadata": {
+        "assembly_type": "grand_jeu",
+        "canonical_formula": "King Klown attire. L’Inquisiteur vérifie. Les Assemblées légitiment. Les Bâtisseurs réalisent. L’Archiviste se souvient.",
+        "language": "fr",
+        "seeded_by": "tool_uckkseed",
+        "source_preset": "assembly_templates",
+        "template_only": true
+      }
+    }
+  ]
+}

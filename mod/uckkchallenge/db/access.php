@@ -16,6 +16,21 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * UCKK Challenge capability policy.
+ *
+ * The challenge module owns challenge activity visibility, challenge creation,
+ * proof submission, evaluation, integrity validation hooks, and archive request
+ * authority for challenge outputs.
+ *
+ * It does not own:
+ * - global UCKK programs or pathways; those belong to local_uckk
+ * - course-format display rules; those belong to format_uckk
+ * - archive item lifecycle and restricted archive visibility; those belong to mod_uckkarchive
+ * - assembly decisions; those belong to mod_uckkassembly
+ * - seed execution; that belongs to tool_uckkseed
+ * - global integrity case handling; that belongs to tool_uckkintegrity
+ */
 $capabilities = [
     /*
      * Required Moodle activity-module capability.
@@ -24,7 +39,6 @@ $capabilities = [
      */
     'mod/uckkchallenge:addinstance' => [
         'riskbitmask' => RISK_XSS,
-
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
@@ -43,7 +57,6 @@ $capabilities = [
      */
     'mod/uckkchallenge:view' => [
         'riskbitmask' => RISK_PERSONAL,
-
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => [
@@ -62,8 +75,7 @@ $capabilities = [
      * configuration.
      */
     'mod/uckkchallenge:createchallenge' => [
-        'riskbitmask' => RISK_XSS | RISK_PERSONAL,
-
+        'riskbitmask' => RISK_XSS | RISK_PERSONAL | RISK_CONFIG,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => [
@@ -81,7 +93,6 @@ $capabilities = [
      */
     'mod/uckkchallenge:submitproof' => [
         'riskbitmask' => RISK_XSS | RISK_PERSONAL,
-
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => [
@@ -101,7 +112,6 @@ $capabilities = [
      */
     'mod/uckkchallenge:evaluate' => [
         'riskbitmask' => RISK_PERSONAL,
-
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => [
@@ -120,7 +130,6 @@ $capabilities = [
      */
     'mod/uckkchallenge:validateintegrity' => [
         'riskbitmask' => RISK_PERSONAL | RISK_DATALOSS,
-
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => [
@@ -137,7 +146,6 @@ $capabilities = [
      */
     'mod/uckkchallenge:archive' => [
         'riskbitmask' => RISK_PERSONAL | RISK_XSS,
-
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => [

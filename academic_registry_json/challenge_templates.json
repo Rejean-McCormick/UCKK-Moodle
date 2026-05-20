@@ -88,14 +88,15 @@
           "Aucune preuve non sourcée comme fait établi."
         ],
         "badges": [
-          "joueur_initie",
-          "gardien_preuve"
+          "UCKK-BADGE-TC-COMPLETION"
         ],
         "competencies": [
-          "UCKK-COMP-003",
-          "UCKK-COMP-005",
-          "UCKK-COMP-009"
-        ]
+          "UCKK-COMP-TC101",
+          "UCKK-COMP-TC107",
+          "UCKK-COMP-KOA204",
+          "UCKK-COMP-IA104"
+        ],
+        "visible": 1
       },
       "sections": [
         "orientation",
@@ -112,7 +113,9 @@
       "metadata": {
         "seeded_by": "tool_uckkseed",
         "template_family": "challenge",
-        "primary_language": "fr"
+        "primary_language": "fr",
+        "source_preset": "challenge_templates",
+        "template_only": true
       }
     },
     {
@@ -205,14 +208,16 @@
           "Toute contestation doit rester possible."
         ],
         "badges": [
-          "participant_assemblee",
-          "defi_king_klown"
+          "UCKK-BADGE-MV-COMPLETION",
+          "UCKK-BADGE-TC-COMPLETION"
         ],
         "competencies": [
-          "UCKK-COMP-007",
-          "UCKK-COMP-013",
-          "UCKK-COMP-014"
-        ]
+          "UCKK-COMP-TC109",
+          "UCKK-COMP-MV204",
+          "UCKK-COMP-TC108",
+          "UCKK-COMP-TC110"
+        ],
+        "visible": 1
       },
       "sections": [
         "orientation",
@@ -230,7 +235,9 @@
       "metadata": {
         "seeded_by": "tool_uckkseed",
         "template_family": "challenge",
-        "public_sensitive": true
+        "public_sensitive": true,
+        "source_preset": "challenge_templates",
+        "template_only": true
       }
     },
     {
@@ -325,14 +332,15 @@
           "Les conclusions doivent indiquer les incertitudes."
         ],
         "badges": [
-          "cartographe_systemes",
-          "inquisition_methodologique"
+          "UCKK-BADGE-GJS-COMPLETION",
+          "UCKK-BADGE-AS-COMPLETION"
         ],
         "competencies": [
-          "UCKK-COMP-002",
-          "UCKK-COMP-003",
-          "UCKK-COMP-011",
-          "UCKK-COMP-013"
+          "UCKK-COMP-GJS101",
+          "UCKK-COMP-GJS104",
+          "UCKK-COMP-TC108",
+          "UCKK-COMP-SP206",
+          "UCKK-COMP-KOA204"
         ]
       },
       "sections": [
@@ -351,7 +359,9 @@
       "metadata": {
         "seeded_by": "tool_uckkseed",
         "template_family": "challenge",
-        "restricted_default": true
+        "restricted_default": true,
+        "source_preset": "challenge_templates",
+        "template_only": true
       }
     },
     {
@@ -438,13 +448,16 @@
           "Respecter les informations restreintes."
         ],
         "badges": [
-          "cartographe_systemes"
+          "UCKK-BADGE-GJS-COMPLETION",
+          "UCKK-BADGE-AS-COMPLETION"
         ],
         "competencies": [
-          "UCKK-COMP-001",
-          "UCKK-COMP-002",
-          "UCKK-COMP-011"
-        ]
+          "UCKK-COMP-TC101",
+          "UCKK-COMP-GJS101",
+          "UCKK-COMP-KOA102",
+          "UCKK-COMP-AS201"
+        ],
+        "visible": 1
       },
       "sections": [
         "orientation",
@@ -461,7 +474,9 @@
       },
       "metadata": {
         "seeded_by": "tool_uckkseed",
-        "template_family": "challenge"
+        "template_family": "challenge",
+        "source_preset": "challenge_templates",
+        "template_only": true
       }
     },
     {
@@ -555,14 +570,17 @@
           "Documenter les risques d’usage."
         ],
         "badges": [
-          "batisseur_prototype",
-          "gardien_preuve"
+          "UCKK-BADGE-KOA-COMPLETION",
+          "UCKK-BADGE-AS-COMPLETION"
         ],
         "competencies": [
-          "UCKK-COMP-005",
-          "UCKK-COMP-012",
-          "UCKK-COMP-014"
-        ]
+          "UCKK-COMP-KOA209",
+          "UCKK-COMP-KOA210",
+          "UCKK-COMP-KOA399",
+          "UCKK-COMP-IA307",
+          "UCKK-COMP-KOA204"
+        ],
+        "visible": 1
       },
       "sections": [
         "orientation",
@@ -579,7 +597,9 @@
       },
       "metadata": {
         "seeded_by": "tool_uckkseed",
-        "template_family": "challenge"
+        "template_family": "challenge",
+        "source_preset": "challenge_templates",
+        "template_only": true
       }
     },
     {
@@ -673,14 +693,16 @@
           "Préserver une voie de contestation."
         ],
         "badges": [
-          "grand_jeu_social",
-          "participant_assemblee"
+          "UCKK-BADGE-GJS-COMPLETION",
+          "UCKK-BADGE-SP-COMPLETION",
+          "UCKK-BADGE-MV-COMPLETION"
         ],
         "competencies": [
-          "UCKK-COMP-006",
-          "UCKK-COMP-007",
-          "UCKK-COMP-008",
-          "UCKK-COMP-013"
+          "UCKK-COMP-TC106",
+          "UCKK-COMP-GJS103",
+          "UCKK-COMP-SP252",
+          "UCKK-COMP-MV203",
+          "UCKK-COMP-TC110"
         ]
       },
       "sections": [
@@ -698,7 +720,9 @@
       },
       "metadata": {
         "seeded_by": "tool_uckkseed",
-        "template_family": "challenge"
+        "template_family": "challenge",
+        "source_preset": "challenge_templates",
+        "template_only": true
       }
     },
     {
@@ -793,16 +817,16 @@
           "Les limites et incertitudes doivent être explicites."
         ],
         "badges": [
-          "joueur_lucide",
-          "architecte_sens",
-          "gardien_preuve"
+          "UCKK-BADGE-TC-COMPLETION",
+          "UCKK-BADGE-LI-COMPLETION",
+          "UCKK-BADGE-KOA-COMPLETION"
         ],
         "competencies": [
-          "UCKK-COMP-005",
-          "UCKK-COMP-008",
-          "UCKK-COMP-009",
-          "UCKK-COMP-012",
-          "UCKK-COMP-014"
+          "UCKK-COMP-TC-SYNTHESIS",
+          "UCKK-COMP-TC107",
+          "UCKK-COMP-KOA301",
+          "UCKK-COMP-KOA204",
+          "UCKK-COMP-TC110"
         ]
       },
       "sections": [
@@ -825,7 +849,9 @@
       "metadata": {
         "seeded_by": "tool_uckkseed",
         "template_family": "challenge",
-        "integrative": true
+        "integrative": true,
+        "source_preset": "challenge_templates",
+        "template_only": true
       }
     },
     {
@@ -933,17 +959,19 @@
           "Aucune décision ne doit être automatisée par IA."
         ],
         "badges": [
-          "defi_king_klown",
-          "inquisition_methodologique",
-          "archiviste_decision"
+          "UCKK-BADGE-MV-COMPLETION",
+          "UCKK-BADGE-GJS-COMPLETION",
+          "UCKK-BADGE-SP-COMPLETION"
         ],
         "competencies": [
-          "UCKK-COMP-004",
-          "UCKK-COMP-006",
-          "UCKK-COMP-008",
-          "UCKK-COMP-013",
-          "UCKK-COMP-014"
-        ]
+          "UCKK-COMP-MV201",
+          "UCKK-COMP-MV204",
+          "UCKK-COMP-GJS104",
+          "UCKK-COMP-TC110",
+          "UCKK-COMP-TC108",
+          "UCKK-COMP-KOA301"
+        ],
+        "visible": 1
       },
       "sections": [
         "orientation",
@@ -966,9 +994,10 @@
         "seeded_by": "tool_uckkseed",
         "template_family": "challenge",
         "king_klown": true,
-        "public_sensitive": true
+        "public_sensitive": true,
+        "source_preset": "challenge_templates",
+        "template_only": true
       }
     }
   ]
 }
-

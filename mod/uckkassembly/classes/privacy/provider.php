@@ -1,8 +1,3 @@
-`mod/uckkassembly/classes/privacy/provider.php`
-
-This provider implements Moodle’s privacy contract for a plugin that stores personal data. Moodle requires standard data-storing plugins to locate contexts, export user data, delete all user data in a context, delete one user’s data in approved contexts, locate users in a context, and delete data for multiple approved users.  UCKK specifies that `mod_uckkassembly` stores motions, votes/readings, arguments, and minutes contributions, so it must implement a real privacy provider.  Deletion must preserve institutional integrity where required, especially for assembly votes/readings and decisions, while handling personal participation according to privacy/retention policy. 
-
-```php
 <?php
 // This file is part of Moodle - https://moodle.org/
 //
@@ -230,8 +225,10 @@ final class provider implements
 
         $conditions = [];
         foreach (self::CONTRIBUTION_TABLES as $table => $config) {
+            $tablealias = self::alias_for_table($table);
+
             foreach ($config['useridfields'] as $field) {
-                $conditions[] = "{$tablealias = self::alias_for_table($table)}.{$field} = :{$tablealias}{$field}";
+                $conditions[] = "{$tablealias}.{$field} = :{$tablealias}{$field}";
                 $params[$tablealias . $field] = $userid;
             }
         }

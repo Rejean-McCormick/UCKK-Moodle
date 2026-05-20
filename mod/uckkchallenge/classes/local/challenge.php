@@ -1,8 +1,3 @@
-`mod/uckkchallenge/classes/local/challenge.php`
-
-This file is the local domain helper for Défis King Klown. It encodes the challenge structure, state machine, types, visibility values, and safe record normalization. It does **not** query the database, check Moodle capabilities, grade, validate integrity, archive, or award badges. Those actions belong in services/controllers. This matches the challenge contract: identity, statement, context, rules, corridors, evidence, evaluation, integrity validation, archive output, badges, and competencies.  It also follows the UCKK data model rule that records carry context, status, visibility, versioning, provenance, and metadata where appropriate. 
-
-```php
 <?php
 // This file is part of Moodle - https://moodle.org/
 //
@@ -956,4 +951,4 @@ final class challenge {
         return self::normalise_metadata($metadata);
     }
 }
-```
+
