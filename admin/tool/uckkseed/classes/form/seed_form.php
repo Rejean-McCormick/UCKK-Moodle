@@ -53,6 +53,12 @@ final class seed_form extends \moodleform {
     /** Preset: categories. */
     public const PRESET_CATEGORIES = 'categories';
 
+    /** Preset: programs. */
+    public const PRESET_PROGRAMS = 'programs';
+
+    /** Preset: pathways. */
+    public const PRESET_PATHWAYS = 'pathways';
+
     /** Preset: courses. */
     public const PRESET_COURSES = 'courses';
 
@@ -164,7 +170,7 @@ final class seed_form extends \moodleform {
             $presetoptions,
             [
                 'multiple' => 'multiple',
-                'size' => min(12, max(6, count($presetoptions))),
+                'size' => min(14, max(6, count($presetoptions))),
             ]
         );
         $select->setMultiple(true);
@@ -392,17 +398,19 @@ final class seed_form extends \moodleform {
 
         return [
             self::PRESET_CATEGORIES => get_string('preset_categories', 'tool_uckkseed'),
-            self::PRESET_COURSES => get_string('preset_courses', 'tool_uckkseed'),
+            self::PRESET_PROGRAMS => get_string('preset_programs', 'tool_uckkseed'),
+            self::PRESET_PATHWAYS => get_string('preset_pathways', 'tool_uckkseed'),
             self::PRESET_COHORTS => get_string('preset_cohorts', 'tool_uckkseed'),
             self::PRESET_ROLES => get_string('preset_roles', 'tool_uckkseed'),
             self::PRESET_CAPABILITIES => get_string('preset_capabilities', 'tool_uckkseed'),
             self::PRESET_COMPETENCIES => get_string('preset_competencies', 'tool_uckkseed'),
             self::PRESET_BADGES => get_string('preset_badges', 'tool_uckkseed'),
-            self::PRESET_REPORTS => get_string('preset_reports', 'tool_uckkseed'),
             self::PRESET_COURSE_TEMPLATES => get_string('preset_course_templates', 'tool_uckkseed'),
             self::PRESET_CHALLENGE_TEMPLATES => get_string('preset_challenge_templates', 'tool_uckkseed'),
             self::PRESET_ASSEMBLY_TEMPLATES => get_string('preset_assembly_templates', 'tool_uckkseed'),
             self::PRESET_ARCHIVE_TEMPLATES => get_string('preset_archive_templates', 'tool_uckkseed'),
+            self::PRESET_COURSES => get_string('preset_courses', 'tool_uckkseed'),
+            self::PRESET_REPORTS => get_string('preset_reports', 'tool_uckkseed'),
         ];
     }
 

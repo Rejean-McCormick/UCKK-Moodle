@@ -404,14 +404,18 @@ class format_uckk extends course_format_base {
     /**
      * Default blocks for newly created UCKK courses.
      *
-     * @return string
+     * Moodle core expects this method to return an array of block names.
+     *
+     * @return array<int, string>
      */
-    public function get_default_blocks(): string {
+    public function get_default_blocks(): array {
+        $blocks = ['completionstatus'];
+
         if (core_component::get_plugin_directory('block', 'uckk_dashboard') !== null) {
-            return 'uckk_dashboard,completionstatus';
+            array_unshift($blocks, 'uckk_dashboard');
         }
 
-        return 'completionstatus';
+        return $blocks;
     }
 
     /**

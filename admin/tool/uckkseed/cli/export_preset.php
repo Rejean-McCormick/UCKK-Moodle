@@ -34,17 +34,19 @@ const TOOL_UCKKSEED_COMPONENT = 'tool_uckkseed';
 function tool_uckkseed_cli_exportable_presets(): array {
     return [
         'categories',
-        'courses',
+        'programs',
+        'pathways',
         'cohorts',
         'roles',
         'capabilities',
         'competencies',
         'badges',
-        'reports',
         'course_templates',
         'challenge_templates',
         'assembly_templates',
         'archive_templates',
+        'courses',
+        'reports',
     ];
 }
 
@@ -63,6 +65,8 @@ function tool_uckkseed_cli_export_preset_help(): void {
     cli_writeln("Usage:");
     cli_writeln("  php {$script} --preset=categories");
     cli_writeln("  php {$script} --preset=all --output=/path/to/export-dir");
+    cli_writeln("  php {$script} --preset=programs --output=/path/to/programs.json --pretty");
+    cli_writeln("  php {$script} --preset=pathways --output=/path/to/pathways.json --pretty");
     cli_writeln("  php {$script} --preset=courses --output=/path/to/courses.json --pretty");
     cli_writeln("  php {$script} --list");
     cli_writeln('');

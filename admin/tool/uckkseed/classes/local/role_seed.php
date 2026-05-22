@@ -543,30 +543,54 @@ final class role_seed {
     private function create_or_update_role(array $role, validation_result $result): int {
         global $DB;
 
-        $existing = $DB->get_record('role', ['shortname' => $role['shortname']], '*', IGNORE_MISSING);
+        $shortname = (string)$role['shortname'];
+        $existing = $DB->get_record('role', ['shortname' => $shortname], '*', IGNORE_MISSING);
 
         if ($existing) {
-            update_role(
-                (int)$existing->id,
-                $role['name'],
-                $role['shortname'],
-                $role['description'],
-                $role['archetype']
-            );
+            $record = new stdClass();
+            $record->id = (int)$existing->id;
+            $record->name = (string)$role['name'];
+            $record->shortname = $shortname;
+            $record->description = (string)$role['description'];
+            $record->archetype = (string)$role['archetype'];
+
+            $DB->update_record('role', $record);
 
             $this->increment($result, 'updated');
+
+            $this->add_message(
+                $result,
+                self::SEVERITY_INFO,
+                get_string('roleupdated', self::COMPONENT, $shortname),
+                $shortname,
+                [
+                    'roleid' => (int)$existing->id,
+                    'shortname' => $shortname,
+                ]
+            );
 
             return (int)$existing->id;
         }
 
         $roleid = create_role(
-            $role['name'],
-            $role['shortname'],
-            $role['description'],
-            $role['archetype']
+            (string)$role['name'],
+            $shortname,
+            (string)$role['description'],
+            (string)$role['archetype']
         );
 
         $this->increment($result, 'created');
+
+        $this->add_message(
+            $result,
+            self::SEVERITY_INFO,
+            get_string('rolecreated', self::COMPONENT, $shortname),
+            $shortname,
+            [
+                'roleid' => (int)$roleid,
+                'shortname' => $shortname,
+            ]
+        );
 
         return (int)$roleid;
     }

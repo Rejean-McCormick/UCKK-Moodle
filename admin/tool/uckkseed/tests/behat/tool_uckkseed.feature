@@ -27,7 +27,7 @@ Feature: UCKK seed tool
     And I should not see "Coding error detected"
 
   @javascript
-  Scenario: Open the seed form and run a dry-run seed
+  Scenario: Open the seed form and run a full dry-run seed
     Given I navigate to "Plugins > Admin tools > UCKK seed tool" in site administration
     When I follow "Seed UCKK distribution"
     Then I should see "Seed UCKK distribution"
@@ -39,16 +39,40 @@ Feature: UCKK seed tool
     And I should not see "Coding error detected"
 
   @javascript
-  Scenario: Export the badges preset
+  Scenario Outline: Seed form exposes governed registry presets for dry-run seeding
+    Given I navigate to "Plugins > Admin tools > UCKK seed tool" in site administration
+    When I follow "Seed UCKK distribution"
+    Then I should see "Seed UCKK distribution"
+    When I set the field "Mode" to "Dry run"
+    And I set the field "Presets" to "<Preset label>"
+    And I press "Seed UCKK distribution"
+    Then I should see "Seed summary"
+    And I should see "<Preset key>"
+    And I should not see "Coding error detected"
+
+    Examples:
+      | Preset label | Preset key |
+      | Programs     | programs   |
+      | Pathways     | pathways   |
+      | Badges       | badges     |
+
+  @javascript
+  Scenario Outline: Export governed registry presets
     Given I navigate to "Plugins > Admin tools > UCKK seed tool" in site administration
     When I follow "Export preset"
     Then I should see "Export preset"
     And I should see "Export one canonical UCKK seed preset using the shared preset schema."
-    When I set the field "Preset" to "Badges"
+    When I set the field "Preset" to "<Preset label>"
     And I press "Export preset"
     Then I should see "Seed summary"
-    And I should see "badges"
+    And I should see "<Preset key>"
     And I should not see "Coding error detected"
+
+    Examples:
+      | Preset label | Preset key |
+      | Programs     | programs   |
+      | Pathways     | pathways   |
+      | Badges       | badges     |
 
   @javascript
   Scenario: Reset page requires explicit confirmation before destructive apply mode
@@ -70,6 +94,25 @@ Feature: UCKK seed tool
     Then I should see "Seed summary"
     And I should see "rollback"
     And I should not see "Coding error detected"
+
+  @javascript
+  Scenario Outline: Reset can preview governed registry presets with rollback plan
+    Given I navigate to "Plugins > Admin tools > UCKK seed tool" in site administration
+    When I follow "Reset UCKK seeded content"
+    Then I should see "Reset UCKK seeded content"
+    When I set the field "Mode" to "Rollback plan"
+    And I set the field "Presets" to "<Preset label>"
+    And I press "Reset UCKK seeded content"
+    Then I should see "Seed summary"
+    And I should see "rollback"
+    And I should see "<Preset key>"
+    And I should not see "Coding error detected"
+
+    Examples:
+      | Preset label | Preset key |
+      | Programs     | programs   |
+      | Pathways     | pathways   |
+      | Badges       | badges     |
 
   @javascript
   Scenario: Recent seed runs are visible on the dashboard after validation

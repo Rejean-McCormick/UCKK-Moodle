@@ -547,6 +547,7 @@ final class competency_seed {
         $framework = $this->find_framework($idnumber);
 
         if ($framework) {
+            $this->ensure_framework_scale_configured($framework, $source, $dryrun, $result);
             return (int)$framework->get('id');
         }
 
@@ -563,6 +564,7 @@ final class competency_seed {
         }
 
         $context = context_system::instance();
+        $scaleid = $this->resolve_framework_scaleid($source);
 
         $record = new stdClass();
         $record->shortname = (string)($source['shortname'] ?? $source['frameworkshortname'] ?? self::DEFAULT_FRAMEWORK_SHORTNAME);
@@ -571,8 +573,8 @@ final class competency_seed {
         $record->descriptionformat = FORMAT_HTML;
         $record->contextid = $context->id;
         $record->visible = 1;
-        $record->scaleid = 0;
-        $record->scaleconfiguration = '';
+        $record->scaleid = $scaleid;
+        $record->scaleconfiguration = $this->build_scale_configuration($scaleid);
 
         $created = api::create_framework($record);
 
@@ -581,10 +583,241 @@ final class competency_seed {
             self::SEVERITY_SUCCESS,
             'Competency framework created.',
             $idnumber,
-            ['framework' => $idnumber]
+            ['framework' => $idnumber, 'scaleid' => $scaleid]
         );
 
         return (int)$created->get('id');
+    }
+
+    /**
+     * Ensure an existing competency framework has a valid Moodle scale configuration.
+     *
+     * @param competency_framework $framework Existing framework.
+     * @param array<string, mixed> $source Runtime options or framework item.
+     * @param bool $dryrun Whether this is a dry run.
+     * @param validation_result $result Result object.
+     */
+    private function ensure_framework_scale_configured(
+        competency_framework $framework,
+        array $source,
+        bool $dryrun,
+        validation_result $result
+    ): void {
+        $scaleid = (int)$framework->get('scaleid');
+        $scaleconfiguration = (string)$framework->get('scaleconfiguration');
+
+        if (
+            $scaleid > 0
+            && $this->scale_configuration_has_default_and_proficient($scaleconfiguration, $scaleid)
+        ) {
+            return;
+        }
+
+        $idnumber = (string)$framework->get('idnumber');
+
+        if ($dryrun) {
+            $this->add_message(
+                $result,
+                self::SEVERITY_WARNING,
+                'Dry run: competency framework scale configuration would be repaired.',
+                $idnumber,
+                ['framework' => $idnumber]
+            );
+
+            return;
+        }
+
+        $scaleid = $this->resolve_framework_scaleid($source);
+        $record = $framework->to_record();
+        $record->scaleid = $scaleid;
+        $record->scaleconfiguration = $this->build_scale_configuration($scaleid);
+
+        if (method_exists(api::class, 'update_framework')) {
+            api::update_framework($record);
+        } else {
+            $framework->set('scaleid', $record->scaleid);
+            $framework->set('scaleconfiguration', $record->scaleconfiguration);
+            $framework->update();
+        }
+
+        $this->add_message(
+            $result,
+            self::SEVERITY_SUCCESS,
+            'Competency framework scale configuration repaired.',
+            $idnumber,
+            ['framework' => $idnumber, 'scaleid' => $scaleid]
+        );
+    }
+
+    /**
+     * Resolve the Moodle scale id to use for UCKK competency frameworks.
+     *
+     * @param array<string, mixed> $source Runtime options or framework item.
+     * @return int Moodle scale id.
+     */
+    private function resolve_framework_scaleid(array $source): int {
+        global $DB;
+
+        $metadata = $this->normalise_metadata($source['metadata'] ?? []);
+
+        $scaleid = max(0, (int)(
+            $source['scaleid']
+            ?? $source['frameworkscaleid']
+            ?? $metadata['scaleid']
+            ?? $metadata['frameworkscaleid']
+            ?? 0
+        ));
+
+        if ($scaleid > 0 && $DB->record_exists('scale', ['id' => $scaleid])) {
+            return $scaleid;
+        }
+
+        $existing = $this->find_existing_competency_scaleid();
+
+        if ($existing > 0) {
+            return $existing;
+        }
+
+        return $this->create_uckk_competency_scale();
+    }
+
+    /**
+     * Find an existing competency-like Moodle scale that has at least two levels.
+     *
+     * @return int Moodle scale id, or 0 if none was found.
+     */
+    private function find_existing_competency_scaleid(): int {
+        global $DB;
+
+        $records = $DB->get_records('scale', [], 'id ASC', 'id,name,scale');
+
+        foreach ($records as $record) {
+            $name = strtolower((string)$record->name);
+
+            if (
+                (strpos($name, 'uckk') !== false || strpos($name, 'compet') !== false || strpos($name, 'compét') !== false)
+                && count($this->scale_items((string)$record->scale)) >= 2
+            ) {
+                return (int)$record->id;
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     * Create the default UCKK competency scale.
+     *
+     * @return int New Moodle scale id.
+     */
+    private function create_uckk_competency_scale(): int {
+        global $DB;
+
+        $admin = get_admin();
+
+        $record = new stdClass();
+        $record->courseid = 0;
+        $record->userid = $admin ? (int)$admin->id : 0;
+        $record->name = 'UCKK competence scale';
+        $record->scale = 'Non encore démontré,Démontré';
+        $record->description = 'Scale created automatically by tool_uckkseed for UCKK competency frameworks.';
+        $record->descriptionformat = FORMAT_HTML;
+        $record->timemodified = time();
+
+        return (int)$DB->insert_record('scale', $record);
+    }
+
+    /**
+     * Build Moodle competency scale configuration JSON.
+     *
+     * The first scale value is the default. The last scale value is proficient.
+     *
+     * @param int $scaleid Moodle scale id.
+     * @return string JSON scale configuration.
+     */
+    private function build_scale_configuration(int $scaleid): string {
+        global $DB;
+
+        $scale = $DB->get_record('scale', ['id' => $scaleid], '*', MUST_EXIST);
+        $items = $this->scale_items((string)$scale->scale);
+
+        if (count($items) < 2) {
+            throw new \coding_exception('Competency scale requires at least two values.');
+        }
+
+        $lastposition = count($items);
+        $config = [
+            ['scaleid' => $scaleid],
+        ];
+
+        foreach ($items as $index => $name) {
+            $position = $index + 1;
+
+            $config[] = [
+                'id' => $position,
+                'name' => $name,
+                'scaledefault' => $position === 1 ? 1 : 0,
+                'proficient' => $position === $lastposition ? 1 : 0,
+            ];
+        }
+
+        $json = json_encode($config, JSON_UNESCAPED_UNICODE);
+
+        if ($json === false) {
+            throw new \coding_exception('Could not encode competency scale configuration.');
+        }
+
+        return $json;
+    }
+
+    /**
+     * Split a Moodle scale string into clean item names.
+     *
+     * @param string $scale Scale value.
+     * @return array<int, string> Scale items.
+     */
+    private function scale_items(string $scale): array {
+        $items = array_map('trim', explode(',', $scale));
+
+        return array_values(array_filter($items, static function (string $item): bool {
+            return $item !== '';
+        }));
+    }
+
+    /**
+     * Check whether scale configuration has both a default and a proficient value.
+     *
+     * @param string $value Scale configuration JSON.
+     * @param int $scaleid Expected Moodle scale id.
+     * @return bool
+     */
+    private function scale_configuration_has_default_and_proficient(string $value, int $scaleid): bool {
+        $defaultselected = false;
+        $proficientselected = false;
+
+        $config = json_decode($value);
+
+        if (!is_array($config) || empty($config)) {
+            return false;
+        }
+
+        $scaleinfo = array_shift($config);
+
+        if (empty($scaleinfo) || !isset($scaleinfo->scaleid) || (int)$scaleinfo->scaleid !== $scaleid) {
+            return false;
+        }
+
+        foreach ($config as $item) {
+            if (!empty($item->scaledefault)) {
+                $defaultselected = true;
+            }
+
+            if (!empty($item->proficient)) {
+                $proficientselected = true;
+            }
+        }
+
+        return $defaultselected && $proficientselected;
     }
 
     /**
@@ -628,8 +861,15 @@ final class competency_seed {
         $record->description = $item['description'];
         $record->descriptionformat = FORMAT_HTML;
         $record->sortorder = $item['sortorder'];
-        $record->scaleid = 0;
-        $record->scaleconfiguration = '';
+        $scaleid = (int)($item['scaleid'] ?? 0);
+
+        if ($scaleid > 0) {
+            $record->scaleid = $scaleid;
+            $record->scaleconfiguration = $this->build_scale_configuration($scaleid);
+        } else {
+            $record->scaleid = null;
+            $record->scaleconfiguration = null;
+        }
         $record->ruletype = null;
         $record->ruleoutcome = 0;
         $record->ruleconfig = null;
@@ -708,25 +948,71 @@ final class competency_seed {
      */
     private function normalise_item(array|stdClass $item): array {
         $item = (array)$item;
+        $metadata = $this->normalise_metadata($item['metadata'] ?? []);
+        $moodle = $this->normalise_metadata($item['moodle'] ?? []);
 
         $objecttype = clean_param((string)($item['object_type'] ?? self::OBJECT_COMPETENCY), PARAM_ALPHANUMEXT);
         $objecttype = $objecttype === self::OBJECT_FRAMEWORK ? self::OBJECT_FRAMEWORK : self::OBJECT_COMPETENCY;
 
         $idnumber = trim((string)($item['idnumber'] ?? $item['key'] ?? ''));
 
+        // The UCKK registry JSON may contain internal registry references such as
+        // "competency_framework:uckk-academic" in framework/framework_id. Moodle
+        // needs the actual competency framework idnumber instead.
         $framework = trim((string)(
-            $item['framework']
+            $item['framework_idnumber']
+            ?? $metadata['framework_idnumber']
+            ?? $moodle['framework_idnumber']
+            ?? $moodle['framework']
+            ?? $item['framework']
             ?? $item['framework_id']
-            ?? $item['framework_idnumber']
             ?? self::DEFAULT_FRAMEWORK
         ));
 
+        if ($framework === '' || str_starts_with($framework, 'competency_framework:')) {
+            $framework = self::DEFAULT_FRAMEWORK;
+        }
+
+        // Prefer Moodle parent idnumbers over registry ids. Top-level programme
+        // synthesis competencies should not use the framework idnumber as parent.
         $parent = trim((string)(
-            $item['parent']
+            $moodle['parent_idnumber']
             ?? $item['parent_idnumber']
+            ?? $item['parent']
             ?? $item['parent_competency_id']
             ?? ''
         ));
+
+        if (
+            $parent === self::DEFAULT_FRAMEWORK
+            || str_starts_with($parent, 'competency_framework:')
+            || str_starts_with($parent, 'competency:')
+        ) {
+            $parent = '';
+        }
+
+        $scale = $item['scale'] ?? '';
+        $scaleid = (int)(
+            $item['scaleid']
+            ?? $metadata['scaleid']
+            ?? $moodle['scaleid']
+            ?? 0
+        );
+
+        if (is_array($scale) || $scale instanceof stdClass) {
+            $scaledata = $this->normalise_metadata($scale);
+            $scale = (string)($scaledata['idnumber'] ?? $scaledata['id'] ?? '');
+
+            if ($scaleid <= 0) {
+                $scaleid = (int)(
+                    $scaledata['scaleid']
+                    ?? $scaledata['moodle_scaleid']
+                    ?? 0
+                );
+            }
+        } else {
+            $scale = (string)$scale;
+        }
 
         $shortname = trim((string)(
             $item['shortname']
@@ -752,9 +1038,10 @@ final class competency_seed {
             'description' => (string)($item['description'] ?? ''),
             'framework' => $objecttype === self::OBJECT_FRAMEWORK ? '' : clean_param($framework, PARAM_TEXT),
             'parent' => clean_param($parent, PARAM_TEXT),
-            'scale' => clean_param((string)($item['scale'] ?? ''), PARAM_TEXT),
+            'scale' => clean_param($scale, PARAM_TEXT),
+            'scaleid' => max(0, $scaleid),
             'sortorder' => max(0, (int)($item['sortorder'] ?? 0)),
-            'metadata' => $this->normalise_metadata($item['metadata'] ?? []),
+            'metadata' => $metadata,
         ];
     }
 

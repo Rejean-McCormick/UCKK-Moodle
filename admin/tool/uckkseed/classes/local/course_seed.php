@@ -24,14 +24,15 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/course/lib.php');
+require_once($CFG->dirroot . '/course/modlib.php');
 
 /**
  * Seed handler for courses.json.
  *
  * This class validates and applies Moodle course records from the UCKK academic
- * registry. It only owns Moodle course shell creation/update. It does not create
- * activities, award badges, certify competencies, run AI decisions, or bypass
- * archive/human-validation workflows.
+ * registry. It owns Moodle course shell creation/update plus template-driven
+ * section and activity creation/update. It does not award badges, certify
+ * competencies, run AI decisions, or bypass archive/human-validation workflows.
  */
 final class course_seed {
     /** Component owning this handler. */
@@ -128,7 +129,7 @@ final class course_seed {
         $seenidnumbers = [];
 
         foreach ($items as $index => $rawitem) {
-            $item = $this->normalise_item($rawitem, $index);
+            $item = $this->normalise_item($this->apply_template_to_raw_item($rawitem, $index, $options), $index);
             $targetkey = $item['key'] !== '' ? $item['key'] : 'row_' . $index;
 
             if ($item['key'] === '') {
@@ -225,7 +226,7 @@ final class course_seed {
         );
 
         foreach ($items as $index => $rawitem) {
-            $item = $this->normalise_item($rawitem, $index);
+            $item = $this->normalise_item($this->apply_template_to_raw_item($rawitem, $index, $options), $index);
             $targetkey = $item['key'] !== '' ? $item['key'] : 'row_' . $index;
             $categoryid = $this->resolve_category_id($item['category']);
 
@@ -285,6 +286,63 @@ final class course_seed {
                 $this->increment($result, 'updated');
             }
 
+            $this->apply_course_format_options((int)$course->id, $item);
+            $sectionstats = $this->apply_course_sections((int)$course->id, $item);
+
+            if (($sectionstats['created'] + $sectionstats['updated'] + $sectionstats['skipped']) > 0) {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_SUCCESS,
+                    $targetkey,
+                    'Course sections applied: ' . $item['shortname'],
+                    [
+                        'courseid' => (int)$course->id,
+                        'sectionscreated' => $sectionstats['created'],
+                        'sectionsupdated' => $sectionstats['updated'],
+                        'sectionskipped' => $sectionstats['skipped'],
+                    ]
+                );
+            } else {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_WARNING,
+                    $targetkey,
+                    'No course sections found in merged template definition: ' . $item['shortname'],
+                    [
+                        'courseid' => (int)$course->id,
+                        'template' => $item['template'],
+                    ]
+                );
+            }
+
+            $activitystats = $this->apply_course_activities((int)$course->id, $item);
+
+            if (($activitystats['created'] + $activitystats['updated'] + $activitystats['skipped']) > 0) {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_SUCCESS,
+                    $targetkey,
+                    'Course activities applied: ' . $item['shortname'],
+                    [
+                        'courseid' => (int)$course->id,
+                        'activitiescreated' => $activitystats['created'],
+                        'activitiesupdated' => $activitystats['updated'],
+                        'activitiesskipped' => $activitystats['skipped'],
+                    ]
+                );
+            } else {
+                $this->add_message(
+                    $result,
+                    self::SEVERITY_WARNING,
+                    $targetkey,
+                    'No course activities found in merged template definition: ' . $item['shortname'],
+                    [
+                        'courseid' => (int)$course->id,
+                        'template' => $item['template'],
+                    ]
+                );
+            }
+
             $this->set_config_marker($item, (int)$course->id);
         }
 
@@ -325,7 +383,7 @@ final class course_seed {
         }
 
         foreach ($items as $index => $rawitem) {
-            $item = $this->normalise_item($rawitem, $index);
+            $item = $this->normalise_item($this->apply_template_to_raw_item($rawitem, $index, $options), $index);
             $targetkey = $item['key'] !== '' ? $item['key'] : 'row_' . $index;
             $course = $this->get_existing_course($item);
 
@@ -523,7 +581,11 @@ final class course_seed {
             self::DEFAULT_FORMAT
         );
 
-        $visible = $this->normalise_visible($item['visible'] ?? $moodle['visible'] ?? 0);
+        $sections = $this->normalise_sections($item['sections'] ?? []);
+        $courseformatoptions = $this->normalise_assoc($item['courseformatoptions'] ?? $moodle['courseformatoptions'] ?? []);
+        $numsections = $this->normalise_numsections($item['numsections'] ?? $moodle['numsections'] ?? 0, $sections);
+
+        $visible = $this->normalise_visible($item['visible'] ?? $moodle['visible'] ?? 1, 1);
         $lang = clean_param($this->first_string($item['lang'] ?? null, $moodle['lang'] ?? null, self::DEFAULT_LANGUAGE), PARAM_ALPHANUMEXT);
         $enablecompletion = $this->normalise_bool($item['enablecompletion'] ?? $moodle['enablecompletion'] ?? true);
         $summaryformat = $this->normalise_int($item['summaryformat'] ?? $moodle['summaryformat'] ?? FORMAT_HTML, FORMAT_HTML);
@@ -533,6 +595,10 @@ final class course_seed {
 
         $metadata[self::METADATA_MANAGED_BY] = self::MANAGED_BY;
         $metadata['source_preset'] = self::PRESET;
+
+        if (!empty($item['template'])) {
+            $metadata['template'] = (string)$item['template'];
+        }
 
         return [
             'key' => clean_param($this->normalise_key($key), PARAM_ALPHANUMEXT),
@@ -551,11 +617,142 @@ final class course_seed {
             'startdate' => $startdate,
             'enddate' => $enddate,
             'template' => clean_param($this->first_string($item['template'] ?? null, $moodle['template'] ?? null), PARAM_ALPHANUMEXT),
-            'sections' => $this->normalise_list($item['sections'] ?? []),
+            'numsections' => $numsections,
+            'sections' => $sections,
+            'courseformatoptions' => $courseformatoptions,
+            'activities' => $this->normalise_activities($item['activities'] ?? []),
             'completion' => $this->normalise_assoc($item['completion'] ?? []),
             'sortorder' => $sortorder,
             'metadata' => $metadata,
         ];
+    }
+
+    /**
+     * Apply the course template referenced by a raw item before normalisation.
+     *
+     * @param mixed $rawitem Raw course row.
+     * @param int $index Row index.
+     * @param array<string, mixed> $options Runtime options.
+     * @return array<string, mixed>
+     */
+    private function apply_template_to_raw_item(mixed $rawitem, int $index, array $options): array {
+        if ($rawitem instanceof stdClass) {
+            $rawitem = (array)$rawitem;
+        }
+
+        if (!is_array($rawitem)) {
+            $rawitem = [];
+        }
+
+        $item = $rawitem;
+        $moodle = $this->normalise_assoc($item['moodle'] ?? []);
+
+        $templatekey = $this->first_string(
+            $item['template'] ?? null,
+            $moodle['template'] ?? null,
+            $item['course_template'] ?? null,
+            $moodle['course_template'] ?? null
+        );
+
+        if ($templatekey === '') {
+            return $item;
+        }
+
+        $templates = $this->load_course_templates_from_preset($options);
+        $template = $templates[$templatekey] ?? null;
+
+        if (!is_array($template)) {
+            return $item;
+        }
+
+        $defaults = $this->normalise_assoc($template['defaults'] ?? []);
+        $defaultmoodle = $this->normalise_assoc($defaults['moodle'] ?? []);
+
+        foreach ($defaults as $field => $value) {
+            if ($field === 'moodle') {
+                continue;
+            }
+
+            if ($field === 'courseformatoptions') {
+                $current = $this->normalise_assoc($item['courseformatoptions'] ?? $moodle['courseformatoptions'] ?? []);
+                $item['courseformatoptions'] = array_replace($this->normalise_assoc($value), $current);
+                continue;
+            }
+
+            if (!$this->default_field_has_value($field, $item[$field] ?? null)) {
+                $item[$field] = $value;
+            }
+        }
+
+        if (!empty($defaultmoodle)) {
+            foreach ($defaultmoodle as $field => $value) {
+                if (!$this->default_field_has_value($field, $moodle[$field] ?? null)) {
+                    $moodle[$field] = $value;
+                }
+            }
+
+            $item['moodle'] = $moodle;
+        }
+
+        if (empty($item['sections']) && !empty($template['sections']) && is_array($template['sections'])) {
+            $item['sections'] = $template['sections'];
+        }
+
+        if (empty($item['activities']) && !empty($template['activities']) && is_array($template['activities'])) {
+            $item['activities'] = $template['activities'];
+        }
+
+        if (empty($item['completion']) && !empty($template['completion']) && is_array($template['completion'])) {
+            $item['completion'] = $template['completion'];
+        }
+
+        $metadata = $this->normalise_assoc($item['metadata'] ?? []);
+        $metadata['template'] = $templatekey;
+        $metadata['template_applied'] = true;
+
+        if (!empty($template['metadata']) && is_array($template['metadata'])) {
+            $metadata['template_metadata'] = $template['metadata'];
+        }
+
+        $item['metadata'] = $metadata;
+        $item['template'] = $templatekey;
+
+        return $item;
+    }
+
+    /**
+     * Whether a field value should prevent template default replacement.
+     *
+     * @param string $field Field name.
+     * @param mixed $value Value.
+     * @return bool
+     */
+    private function default_field_has_value(string $field, mixed $value): bool {
+        if ($value === null) {
+            return false;
+        }
+
+        if ($field === 'visible') {
+            if (is_bool($value) || is_int($value)) {
+                return (int)$value === 1;
+            }
+
+            if (is_string($value)) {
+                return in_array(strtolower(trim($value)), ['1', 'true', 'yes', 'visible', 'active', 'public'], true);
+            }
+
+            return false;
+        }
+
+        if (is_string($value)) {
+            return trim($value) !== '';
+        }
+
+        if (is_array($value)) {
+            return !empty($value);
+        }
+
+        return true;
     }
 
     /**
@@ -592,6 +789,652 @@ final class course_seed {
     }
 
     /**
+     * Apply course-level format options.
+     *
+     * @param int $courseid Course id.
+     * @param array<string, mixed> $item Normalised item.
+     */
+    private function apply_course_format_options(int $courseid, array $item): void {
+        $options = $this->normalise_assoc($item['courseformatoptions'] ?? []);
+
+        foreach ($options as $name => $value) {
+            $this->set_course_format_option($courseid, (string)$item['format'], 0, (string)$name, $value);
+        }
+    }
+
+    /**
+     * Create or update course sections from the merged template definition.
+     *
+     * @param int $courseid Course id.
+     * @param array<string, mixed> $item Normalised item.
+     * @return array{created:int, updated:int, skipped:int}
+     */
+    private function apply_course_sections(int $courseid, array $item): array {
+        global $DB;
+
+        $sections = $this->normalise_sections($item['sections'] ?? []);
+
+        $stats = [
+            'created' => 0,
+            'updated' => 0,
+            'skipped' => 0,
+        ];
+
+        if (empty($sections)) {
+            return $stats;
+        }
+
+        $sectionnumbers = [];
+
+        foreach ($sections as $section) {
+            $sectionnumbers[] = (int)$section['number'];
+        }
+
+        $sectionnumbers = array_values(array_unique($sectionnumbers));
+        sort($sectionnumbers, SORT_NUMERIC);
+
+        course_create_sections_if_missing($courseid, $sectionnumbers);
+
+        $existing = $DB->get_records(
+            'course_sections',
+            ['course' => $courseid],
+            'section ASC',
+            'id,course,section,name,summary,summaryformat,sequence,visible,availability,timemodified'
+        );
+
+        $bysection = [];
+
+        foreach ($existing as $record) {
+            $bysection[(int)$record->section] = $record;
+        }
+
+        foreach ($sections as $section) {
+            $sectionnumber = (int)$section['number'];
+
+            if (isset($bysection[$sectionnumber])) {
+                $record = $bysection[$sectionnumber];
+                $created = false;
+            } else {
+                $record = $this->create_section_record($courseid, $sectionnumber);
+                $created = true;
+            }
+
+            $summary = (string)$section['summary'];
+            $summaryformat = (int)$section['summaryformat'];
+            $name = trim((string)$section['name']);
+            $visible = (int)$section['visible'];
+
+            $record->name = $name !== '' ? $name : null;
+            $record->summary = $summary;
+            $record->summaryformat = $summaryformat;
+            $record->visible = $visible;
+            $record->timemodified = time();
+
+            $DB->update_record('course_sections', $record);
+
+            if (!empty($section['options']) && is_array($section['options'])) {
+                foreach ($section['options'] as $optionname => $optionvalue) {
+                    $this->set_course_format_option(
+                        $courseid,
+                        (string)$item['format'],
+                        (int)$record->id,
+                        (string)$optionname,
+                        $optionvalue
+                    );
+                }
+            }
+
+            if ($created) {
+                $stats['created']++;
+            } else {
+                $stats['updated']++;
+            }
+        }
+
+        rebuild_course_cache($courseid, true);
+
+        return $stats;
+    }
+
+    /**
+     * Create or update course module activities from the merged template definition.
+     *
+     * @param int $courseid Course id.
+     * @param array<string, mixed> $item Normalised item.
+     * @return array{created:int, updated:int, skipped:int}
+     */
+    private function apply_course_activities(int $courseid, array $item): array {
+        global $DB;
+
+        $activities = $this->normalise_activities($item['activities'] ?? []);
+
+        $stats = [
+            'created' => 0,
+            'updated' => 0,
+            'skipped' => 0,
+        ];
+
+        if (empty($activities)) {
+            return $stats;
+        }
+
+        $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
+
+        foreach ($activities as $activity) {
+            $modname = $this->activity_component_to_modname((string)$activity['component']);
+
+            if ($modname === '') {
+                $stats['skipped']++;
+                continue;
+            }
+
+            if (!$DB->record_exists('modules', ['name' => $modname])) {
+                $stats['skipped']++;
+                continue;
+            }
+
+            $sectionnumber = $this->resolve_activity_section_number($courseid, $activity, $item);
+            $section = $DB->get_record('course_sections', ['course' => $courseid, 'section' => $sectionnumber], '*', IGNORE_MISSING);
+
+            if (!$section) {
+                course_create_sections_if_missing($courseid, [$sectionnumber]);
+                $section = $DB->get_record('course_sections', ['course' => $courseid, 'section' => $sectionnumber], '*', IGNORE_MISSING);
+            }
+
+            if (!$section) {
+                $stats['skipped']++;
+                continue;
+            }
+
+            $existing = $this->get_existing_activity($courseid, $modname, (string)$activity['name']);
+
+            if ($existing !== null) {
+                $this->update_existing_activity_instance($existing, $activity, $item);
+                $stats['updated']++;
+                continue;
+            }
+
+            $moduleinfo = $this->build_activity_moduleinfo($courseid, $modname, $sectionnumber, $activity, $item);
+            add_moduleinfo($moduleinfo, $course);
+            $stats['created']++;
+        }
+
+        rebuild_course_cache($courseid, true);
+
+        return $stats;
+    }
+
+    /**
+     * Build a Moodle moduleinfo object for add_moduleinfo().
+     *
+     * @param int $courseid Course id.
+     * @param string $modname Moodle module name.
+     * @param int $sectionnumber Section number.
+     * @param array<string, mixed> $activity Normalised activity.
+     * @param array<string, mixed> $item Normalised course item.
+     * @return stdClass
+     */
+    private function build_activity_moduleinfo(
+        int $courseid,
+        string $modname,
+        int $sectionnumber,
+        array $activity,
+        array $item
+    ): stdClass {
+        global $DB;
+
+        $module = $DB->get_record('modules', ['name' => $modname], '*', MUST_EXIST);
+        $defaults = $this->normalise_assoc($activity['defaults'] ?? []);
+        $metadata = [
+            self::METADATA_MANAGED_BY => self::MANAGED_BY,
+            'source_preset' => self::PRESET,
+            'course_key' => (string)$item['key'],
+            'course_shortname' => (string)$item['shortname'],
+            'course_template' => (string)$item['template'],
+            'activity_key' => (string)$activity['key'],
+            'activity_component' => (string)$activity['component'],
+            'activity_section' => (string)$activity['section'],
+        ];
+
+        $moduleinfo = new stdClass();
+        $moduleinfo->course = $courseid;
+        $moduleinfo->module = (int)$module->id;
+        $moduleinfo->modulename = $modname;
+        $moduleinfo->add = $modname;
+        $moduleinfo->section = $sectionnumber;
+        $moduleinfo->visible = 1;
+        $moduleinfo->visibleoncoursepage = 1;
+        $moduleinfo->showdescription = 0;
+        $moduleinfo->cmidnumber = '';
+        $moduleinfo->groupmode = 0;
+        $moduleinfo->groupingid = 0;
+        $moduleinfo->name = (string)$activity['name'];
+        $moduleinfo->intro = (string)$activity['intro'];
+        $moduleinfo->introformat = FORMAT_HTML;
+        $moduleinfo->completion = $this->activity_has_completion_rules($activity)
+            ? $this->completion_constant('COMPLETION_TRACKING_AUTOMATIC', 2)
+            : $this->completion_constant('COMPLETION_TRACKING_NONE', 0);
+        $moduleinfo->completionexpected = 0;
+        $moduleinfo->availabilityconditionsjson = '{"op":"&","c":[],"showc":[]}';
+        $moduleinfo->metadata = json_encode($metadata, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        foreach ($defaults as $name => $value) {
+            $moduleinfo->{$name} = $value;
+        }
+
+        if ($modname === 'uckkchallenge') {
+            $moduleinfo->challengetype = $this->first_string($moduleinfo->challengetype ?? null, 'evidence');
+            $moduleinfo->statement = $this->first_string($moduleinfo->statement ?? null, $moduleinfo->intro ?? null);
+            $moduleinfo->statementformat = FORMAT_HTML;
+            $moduleinfo->status = $this->first_string($moduleinfo->status ?? null, 'active');
+            $moduleinfo->visibility = $this->first_string($moduleinfo->visibility ?? null, 'course');
+            $moduleinfo->archivepolicy = $this->first_string($moduleinfo->archivepolicy ?? null, 'summary');
+            $moduleinfo->completionrequiresubmission = $this->normalise_visible($moduleinfo->completionrequiresubmission ?? 0, 0);
+            $moduleinfo->completionrequirevalidation = $this->normalise_visible($moduleinfo->completionrequirevalidation ?? 0, 0);
+        } else if ($modname === 'uckkassembly') {
+            $moduleinfo->assemblytype = $this->first_string($moduleinfo->assemblytype ?? null, 'savoirs');
+            $moduleinfo->purpose = $this->first_string($moduleinfo->purpose ?? null, $moduleinfo->intro ?? null);
+            $moduleinfo->status = $this->first_string($moduleinfo->status ?? null, 'active');
+            $moduleinfo->visibility = $this->first_string($moduleinfo->visibility ?? null, 'course');
+            $moduleinfo->archivepolicy = $this->first_string($moduleinfo->archivepolicy ?? null, 'summary');
+        } else if ($modname === 'uckkarchive') {
+            $moduleinfo->archivetype = $this->first_string($moduleinfo->archivetype ?? null, 'course');
+            $moduleinfo->status = $this->first_string($moduleinfo->status ?? null, 'active');
+            $moduleinfo->visibility = $this->first_string($moduleinfo->visibility ?? null, 'course');
+            $moduleinfo->defaultvisibility = $this->first_string($moduleinfo->defaultvisibility ?? null, $moduleinfo->visibility ?? null, 'course');
+            $moduleinfo->archivepolicy = $this->first_string($moduleinfo->archivepolicy ?? null, 'validated');
+
+            if (isset($moduleinfo->completionadditem) && !isset($moduleinfo->completionrequireitem)) {
+                $moduleinfo->completionrequireitem = $this->normalise_visible($moduleinfo->completionadditem, 0);
+            }
+
+            if (isset($moduleinfo->completionvalidateitem) && !isset($moduleinfo->completionrequirevalidation)) {
+                $moduleinfo->completionrequirevalidation = $this->normalise_visible($moduleinfo->completionvalidateitem, 0);
+            }
+
+            $moduleinfo->completionrequireitem = $this->normalise_visible($moduleinfo->completionrequireitem ?? 0, 0);
+            $moduleinfo->completionrequirevalidation = $this->normalise_visible($moduleinfo->completionrequirevalidation ?? 0, 0);
+        }
+
+        return $moduleinfo;
+    }
+
+    /**
+     * Update an existing seeded activity instance without duplicating modules.
+     *
+     * @param stdClass $existing Existing activity data.
+     * @param array<string, mixed> $activity Normalised activity.
+     * @param array<string, mixed> $item Normalised course item.
+     */
+    private function update_existing_activity_instance(stdClass $existing, array $activity, array $item): void {
+        global $DB;
+
+        $modname = (string)$existing->modname;
+        $table = $modname;
+        $columns = $DB->get_columns($table);
+        $record = new stdClass();
+        $record->id = (int)$existing->instance;
+        $record->name = (string)$activity['name'];
+
+        if (isset($columns['intro'])) {
+            $record->intro = (string)$activity['intro'];
+        }
+
+        if (isset($columns['introformat'])) {
+            $record->introformat = FORMAT_HTML;
+        }
+
+        $defaults = $this->normalise_assoc($activity['defaults'] ?? []);
+
+        foreach ($defaults as $field => $value) {
+            if (isset($columns[$field])) {
+                $record->{$field} = $value;
+            }
+        }
+
+        if ($modname === 'uckkarchive') {
+            if (isset($defaults['completionadditem']) && isset($columns['completionrequireitem'])) {
+                $record->completionrequireitem = $this->normalise_visible($defaults['completionadditem'], 0);
+            }
+
+            if (isset($defaults['completionvalidateitem']) && isset($columns['completionrequirevalidation'])) {
+                $record->completionrequirevalidation = $this->normalise_visible($defaults['completionvalidateitem'], 0);
+            }
+
+            if (isset($columns['defaultvisibility']) && !isset($record->defaultvisibility)) {
+                $record->defaultvisibility = $this->first_string($defaults['visibility'] ?? null, 'course');
+            }
+        }
+
+        if (isset($columns['metadata'])) {
+            $metadata = [
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_preset' => self::PRESET,
+                'course_key' => (string)$item['key'],
+                'course_shortname' => (string)$item['shortname'],
+                'course_template' => (string)$item['template'],
+                'activity_key' => (string)$activity['key'],
+                'activity_component' => (string)$activity['component'],
+                'activity_section' => (string)$activity['section'],
+            ];
+            $record->metadata = json_encode($metadata, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        }
+
+        if (isset($columns['timemodified'])) {
+            $record->timemodified = time();
+        }
+
+        $DB->update_record($table, $record);
+    }
+
+    /**
+     * Find an existing activity instance by module type and name in a course.
+     *
+     * @param int $courseid Course id.
+     * @param string $modname Module name.
+     * @param string $name Activity name.
+     * @return stdClass|null
+     */
+    private function get_existing_activity(int $courseid, string $modname, string $name): ?stdClass {
+        global $DB;
+
+        if (!$this->safe_activity_table($modname) || !$DB->get_manager()->table_exists($modname)) {
+            return null;
+        }
+
+        $sql = "SELECT cm.id AS cmid,
+                       cm.instance AS instance,
+                       m.name AS modname,
+                       a.name AS name
+                  FROM {course_modules} cm
+                  JOIN {modules} m ON m.id = cm.module
+                  JOIN {" . $modname . "} a ON a.id = cm.instance
+                 WHERE cm.course = :courseid
+                   AND m.name = :modname
+                   AND a.name = :name";
+
+        $record = $DB->get_record_sql($sql, [
+            'courseid' => $courseid,
+            'modname' => $modname,
+            'name' => $name,
+        ], IGNORE_MISSING);
+
+        return $record ?: null;
+    }
+
+    /**
+     * Resolve the course section number for an activity.
+     *
+     * @param int $courseid Course id.
+     * @param array<string, mixed> $activity Normalised activity.
+     * @param array<string, mixed> $item Normalised item.
+     * @return int
+     */
+    private function resolve_activity_section_number(int $courseid, array $activity, array $item): int {
+        global $DB;
+
+        $sectionref = trim((string)($activity['section'] ?? ''));
+
+        if ($sectionref !== '' && is_numeric($sectionref)) {
+            return max(0, (int)$sectionref);
+        }
+
+        $sectionkey = $this->normalise_key($sectionref);
+        $aliases = [
+            'orientation' => 0,
+            'concepts' => 1,
+            'matiere_canonique' => 2,
+            'mati_re_canonique' => 2,
+            'canon' => 2,
+            'atelier' => 3,
+            'preuves' => 4,
+            'preuve' => 4,
+            'evidence' => 4,
+            'deliberation' => 5,
+            'd_lib_ration' => 5,
+            'assembly' => 5,
+            'livrable' => 6,
+            'deliverable' => 6,
+            'evaluation' => 7,
+            'archive' => 8,
+        ];
+
+        if ($sectionkey !== '' && isset($aliases[$sectionkey])) {
+            return $aliases[$sectionkey];
+        }
+
+        foreach ($this->normalise_sections($item['sections'] ?? []) as $section) {
+            $keys = [
+                $this->normalise_key((string)($section['key'] ?? '')),
+                $this->normalise_key((string)($section['name'] ?? '')),
+                (string)($section['number'] ?? ''),
+            ];
+
+            if (in_array($sectionkey, $keys, true)) {
+                return max(0, (int)$section['number']);
+            }
+        }
+
+        $sections = $DB->get_records('course_sections', ['course' => $courseid], 'section ASC', 'section,name');
+
+        foreach ($sections as $section) {
+            $namekey = $this->normalise_key((string)($section->name ?? ''));
+
+            if ($sectionkey !== '' && $sectionkey === $namekey) {
+                return max(0, (int)$section->section);
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     * Normalise activity list.
+     *
+     * @param mixed $value Raw activities.
+     * @return array<int, array<string, mixed>>
+     */
+    private function normalise_activities(mixed $value): array {
+        $rawactivities = $this->normalise_list($value);
+        $activities = [];
+
+        foreach ($rawactivities as $index => $rawactivity) {
+            $activity = $this->normalise_activity($rawactivity, $index);
+
+            if ($activity['component'] === '' || $activity['name'] === '') {
+                continue;
+            }
+
+            $activities[] = $activity;
+        }
+
+        return $activities;
+    }
+
+    /**
+     * Normalise one activity definition.
+     *
+     * @param mixed $value Raw activity.
+     * @param int $fallbackindex Fallback index.
+     * @return array<string, mixed>
+     */
+    private function normalise_activity(mixed $value, int $fallbackindex): array {
+        if ($value instanceof stdClass) {
+            $value = (array)$value;
+        }
+
+        if (!is_array($value)) {
+            $value = [];
+        }
+
+        $component = $this->first_string($value['component'] ?? null, $value['module'] ?? null, $value['modname'] ?? null);
+        $key = $this->first_string($value['key'] ?? null, $value['id'] ?? null, 'activity_' . $fallbackindex);
+        $name = $this->first_string($value['name'] ?? null, $value['title'] ?? null, $key);
+        $intro = $this->first_string($value['intro'] ?? null, $value['summary'] ?? null, $value['description'] ?? null);
+        $section = $this->first_string($value['section'] ?? null, $value['sectionkey'] ?? null, $value['section_number'] ?? null, '0');
+
+        return [
+            'key' => clean_param($this->normalise_key($key), PARAM_ALPHANUMEXT),
+            'component' => clean_param($component, PARAM_COMPONENT),
+            'section' => clean_param($section, PARAM_TEXT),
+            'name' => clean_param($name, PARAM_TEXT),
+            'intro' => $intro,
+            'required' => $this->normalise_bool($value['required'] ?? true),
+            'defaults' => $this->normalise_assoc($value['defaults'] ?? []),
+            'metadata' => $this->normalise_assoc($value['metadata'] ?? []),
+        ];
+    }
+
+    /**
+     * Convert registry component to Moodle module name.
+     *
+     * @param string $component Registry component.
+     * @return string
+     */
+    private function activity_component_to_modname(string $component): string {
+        $component = trim($component);
+
+        if (str_starts_with($component, 'mod_')) {
+            $component = substr($component, 4);
+        }
+
+        $component = clean_param($component, PARAM_PLUGIN);
+
+        return $this->safe_activity_table($component) ? $component : '';
+    }
+
+    /**
+     * Whether a module/table is an allowed UCKK activity table.
+     *
+     * @param string $modname Module name.
+     * @return bool
+     */
+    private function safe_activity_table(string $modname): bool {
+        return in_array($modname, ['uckkchallenge', 'uckkassembly', 'uckkarchive'], true);
+    }
+
+    /**
+     * Whether activity should enable automatic completion tracking.
+     *
+     * @param array<string, mixed> $activity Normalised activity.
+     * @return bool
+     */
+    private function activity_has_completion_rules(array $activity): bool {
+        $defaults = $this->normalise_assoc($activity['defaults'] ?? []);
+
+        foreach (array_keys($defaults) as $key) {
+            if (str_starts_with((string)$key, 'completion')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return a Moodle completion constant value with a safe fallback.
+     *
+     * @param string $name Constant name.
+     * @param int $fallback Fallback value.
+     * @return int
+     */
+    private function completion_constant(string $name, int $fallback): int {
+        return defined($name) ? (int)constant($name) : $fallback;
+    }
+
+    /**
+     * Create a missing course_sections record.
+     *
+     * @param int $courseid Course id.
+     * @param int $sectionnumber Section number.
+     * @return stdClass
+     */
+    private function create_section_record(int $courseid, int $sectionnumber): stdClass {
+        global $DB;
+
+        $record = new stdClass();
+        $record->course = $courseid;
+        $record->section = $sectionnumber;
+        $record->name = null;
+        $record->summary = '';
+        $record->summaryformat = FORMAT_HTML;
+        $record->sequence = '';
+        $record->visible = 1;
+        $record->availability = null;
+        $record->timemodified = time();
+
+        $record->id = $DB->insert_record('course_sections', $record);
+
+        return $record;
+    }
+
+    /**
+     * Upsert a course format option.
+     *
+     * @param int $courseid Course id.
+     * @param string $format Course format.
+     * @param int $sectionid Section id, or 0 for course-level options.
+     * @param string $name Option name.
+     * @param mixed $value Option value.
+     */
+    private function set_course_format_option(int $courseid, string $format, int $sectionid, string $name, mixed $value): void {
+        global $DB;
+
+        $name = clean_param($name, PARAM_ALPHANUMEXT);
+
+        if ($name === '') {
+            return;
+        }
+
+        $params = [
+            'courseid' => $courseid,
+            'format' => $format,
+            'sectionid' => $sectionid,
+            'name' => $name,
+        ];
+
+        $record = $DB->get_record('course_format_options', $params, '*', IGNORE_MISSING);
+
+        if (!$record) {
+            $record = (object)$params;
+        }
+
+        $record->value = $this->format_option_value_to_string($value);
+
+        if (!empty($record->id)) {
+            $DB->update_record('course_format_options', $record);
+        } else {
+            $DB->insert_record('course_format_options', $record);
+        }
+    }
+
+    /**
+     * Convert a format option value to Moodle's storage format.
+     *
+     * @param mixed $value Raw value.
+     * @return string
+     */
+    private function format_option_value_to_string(mixed $value): string {
+        if (is_bool($value)) {
+            return $value ? '1' : '0';
+        }
+
+        if (is_int($value) || is_float($value)) {
+            return (string)$value;
+        }
+
+        if (is_string($value)) {
+            return trim($value);
+        }
+
+        if ($value === null) {
+            return '';
+        }
+
+        return json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '';
+    }
+
+    /**
      * Build a Moodle course data object.
      *
      * @param array<string, mixed> $item Normalised item.
@@ -616,7 +1459,7 @@ final class course_seed {
 
         // Avoid unintended defaults when running from CLI.
         $course->newsitems = 0;
-        $course->numsections = 0;
+        $course->numsections = (int)$item['numsections'];
         $course->showgrades = 1;
         $course->showreports = 0;
         $course->maxbytes = 0;
@@ -746,6 +1589,8 @@ final class course_seed {
      * @return array<int, array<string, mixed>>
      */
     private function load_categories_from_preset(array $options): array {
+        global $CFG;
+
         if (!empty($options['allpresets']['categories']['items']) && is_array($options['allpresets']['categories']['items'])) {
             return $options['allpresets']['categories']['items'];
         }
@@ -758,25 +1603,118 @@ final class course_seed {
             return $options['presetdata']['categories']['items'];
         }
 
-        $presetpath = (string)($options['presetpath'] ?? '');
+        $candidatepaths = $this->build_registry_file_candidates($options, 'categories.json');
 
-        if ($presetpath === '') {
-            return [];
+        $candidatepaths[] = $CFG->dirroot . DIRECTORY_SEPARATOR . 'academic_registry_json' . DIRECTORY_SEPARATOR . 'categories.json';
+        $candidatepaths[] = getcwd() . DIRECTORY_SEPARATOR . 'academic_registry_json' . DIRECTORY_SEPARATOR . 'categories.json';
+
+        foreach (array_unique($candidatepaths) as $path) {
+            if (!is_readable($path)) {
+                continue;
+            }
+
+            $decoded = json_decode((string)file_get_contents($path), true);
+
+            if (!is_array($decoded) || empty($decoded['items']) || !is_array($decoded['items'])) {
+                continue;
+            }
+
+            return $decoded['items'];
         }
 
-        $path = rtrim($presetpath, DIRECTORY_SEPARATOR . '/\\') . DIRECTORY_SEPARATOR . 'categories.json';
+        return [];
+    }
 
-        if (!is_readable($path)) {
-            return [];
+    /**
+     * Load course_templates.json from preset data/path when available.
+     *
+     * @param array<string, mixed> $options Runtime options.
+     * @return array<string, array<string, mixed>>
+     */
+    private function load_course_templates_from_preset(array $options): array {
+        global $CFG;
+
+        $items = [];
+
+        if (!empty($options['allpresets']['course_templates']['items']) && is_array($options['allpresets']['course_templates']['items'])) {
+            $items = $options['allpresets']['course_templates']['items'];
+        } else if (!empty($options['course_templates']['items']) && is_array($options['course_templates']['items'])) {
+            $items = $options['course_templates']['items'];
+        } else if (!empty($options['presetdata']['course_templates']['items']) && is_array($options['presetdata']['course_templates']['items'])) {
+            $items = $options['presetdata']['course_templates']['items'];
+        } else {
+            $candidatepaths = $this->build_registry_file_candidates($options, 'course_templates.json');
+
+            $candidatepaths[] = $CFG->dirroot . DIRECTORY_SEPARATOR . 'academic_registry_json' . DIRECTORY_SEPARATOR . 'course_templates.json';
+            $candidatepaths[] = getcwd() . DIRECTORY_SEPARATOR . 'academic_registry_json' . DIRECTORY_SEPARATOR . 'course_templates.json';
+
+            foreach (array_unique($candidatepaths) as $path) {
+                if (!is_readable($path)) {
+                    continue;
+                }
+
+                $decoded = json_decode((string)file_get_contents($path), true);
+
+                if (is_array($decoded) && !empty($decoded['items']) && is_array($decoded['items'])) {
+                    $items = $decoded['items'];
+                    break;
+                }
+            }
         }
 
-        $decoded = json_decode((string)file_get_contents($path), true);
+        $templates = [];
 
-        if (!is_array($decoded) || empty($decoded['items']) || !is_array($decoded['items'])) {
-            return [];
+        foreach ($items as $rawtemplate) {
+            if ($rawtemplate instanceof stdClass) {
+                $rawtemplate = (array)$rawtemplate;
+            }
+
+            if (!is_array($rawtemplate)) {
+                continue;
+            }
+
+            $key = $this->first_string(
+                $rawtemplate['key'] ?? null,
+                $rawtemplate['id'] ?? null,
+                $rawtemplate['code'] ?? null,
+                $rawtemplate['name'] ?? null
+            );
+
+            if ($key === '') {
+                continue;
+            }
+
+            $templates[$key] = $rawtemplate;
         }
 
-        return $decoded['items'];
+        return $templates;
+    }
+
+    /**
+     * Build candidate absolute paths for an academic registry file.
+     *
+     * @param array<string, mixed> $options Runtime options.
+     * @param string $filename File name.
+     * @return array<int, string>
+     */
+    private function build_registry_file_candidates(array $options, string $filename): array {
+        $candidatepaths = [];
+
+        foreach ([
+            'presetpath',
+            'preset_path',
+            'academic_registry_json_path',
+            'academicregistrypath',
+            'registry_path',
+            'jsonpath',
+            'path',
+        ] as $optionkey) {
+            if (!empty($options[$optionkey]) && is_string($options[$optionkey])) {
+                $candidatepaths[] = rtrim($options[$optionkey], DIRECTORY_SEPARATOR . '/\\') . DIRECTORY_SEPARATOR . $filename;
+            }
+        }
+
+        return $candidatepaths;
     }
 
     /**
@@ -1020,12 +1958,92 @@ final class course_seed {
     }
 
     /**
+     * Normalise course sections.
+     *
+     * @param mixed $value Raw sections value.
+     * @return array<int, array<string, mixed>>
+     */
+    private function normalise_sections(mixed $value): array {
+        $rawsections = $this->normalise_list($value);
+        $sections = [];
+
+        foreach ($rawsections as $index => $rawsection) {
+            $sections[] = $this->normalise_section($rawsection, $index);
+        }
+
+        usort($sections, static function(array $left, array $right): int {
+            return (int)$left['number'] <=> (int)$right['number'];
+        });
+
+        return $sections;
+    }
+
+    /**
+     * Normalise one section definition.
+     *
+     * @param mixed $value Raw section value.
+     * @param int $fallbacknumber Fallback section number.
+     * @return array<string, mixed>
+     */
+    private function normalise_section(mixed $value, int $fallbacknumber): array {
+        if ($value instanceof stdClass) {
+            $value = (array)$value;
+        }
+
+        if (!is_array($value)) {
+            $value = [];
+        }
+
+        $number = $this->normalise_int($value['number'] ?? $value['section'] ?? $fallbacknumber, $fallbacknumber);
+        $key = $this->first_string($value['key'] ?? null, $value['id'] ?? null, 'section_' . $number);
+        $name = $this->first_string($value['name'] ?? null, $value['title'] ?? null, $key);
+        $summary = $this->first_string($value['summary'] ?? null, $value['description'] ?? null, $value['intro'] ?? null);
+        $summaryformat = $this->normalise_int($value['summaryformat'] ?? $value['summary_format'] ?? FORMAT_HTML, FORMAT_HTML);
+
+        return [
+            'number' => $number,
+            'key' => clean_param($this->normalise_key($key), PARAM_ALPHANUMEXT),
+            'name' => clean_param($name, PARAM_TEXT),
+            'summary' => $summary,
+            'summaryformat' => $summaryformat,
+            'visible' => $this->normalise_visible($value['visible'] ?? 1, 1),
+            'options' => $this->normalise_assoc($value['options'] ?? []),
+        ];
+    }
+
+    /**
+     * Resolve the effective Moodle numsections value.
+     *
+     * Moodle stores the highest numbered non-general section in this field for
+     * legacy course formats. UCKK templates include section 0, so a template with
+     * sections 0..8 should write numsections=8.
+     *
+     * @param mixed $value Raw numsections value.
+     * @param array<int, array<string, mixed>> $sections Normalised sections.
+     * @return int
+     */
+    private function normalise_numsections(mixed $value, array $sections): int {
+        if (!empty($sections)) {
+            $max = 0;
+
+            foreach ($sections as $section) {
+                $max = max($max, (int)$section['number']);
+            }
+
+            return $max;
+        }
+
+        return max(0, $this->normalise_int($value, 0));
+    }
+
+    /**
      * Normalise visibility.
      *
      * @param mixed $value Value.
+     * @param int $default Default.
      * @return int
      */
-    private function normalise_visible(mixed $value): int {
+    private function normalise_visible(mixed $value, int $default = 0): int {
         if (is_bool($value)) {
             return $value ? 1 : 0;
         }
@@ -1046,7 +2064,7 @@ final class course_seed {
             }
         }
 
-        return 0;
+        return $default ? 1 : 0;
     }
 
     /**
@@ -1078,12 +2096,12 @@ final class course_seed {
      * @param int $default Default.
      * @return int
      */
-    private function normalise_int(mixed $value, int $default): int {
+    private function normalise_int(mixed $value, mixed $default): int {
         if (is_numeric($value)) {
             return (int)$value;
         }
 
-        return $default;
+        return (int)$default;
     }
 
     /**

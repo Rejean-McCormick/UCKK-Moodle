@@ -84,7 +84,7 @@
         "source_status": "canonical_program_document",
         "source_version": "1.0"
       },
-      "key": "tronc_commun_completion",
+      "key": "joueur_lucide",
       "name": "Socle commun UCKK — Joueur lucide en formation",
       "description": "Badge interne UCKK lié à Tronc commun obligatoire.",
       "visible": 0,
@@ -129,7 +129,11 @@
         "sortorder": 10,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "tronc_commun_completion",
+        "aliases": [
+          "tronc_commun_completion"
+        ]
       }
     },
     {
@@ -213,7 +217,7 @@
         "source_status": "canonical_program_document",
         "source_version": "0.1"
       },
-      "key": "parchemin_grand_jeu_social_magie_operable",
+      "key": "grand_jeu_social",
       "name": "Parchemin de Magie opérable",
       "description": "Badge interne UCKK lié à Voie du Grand Jeu social — Palier de Magie opérable.",
       "visible": 0,
@@ -258,7 +262,11 @@
         "sortorder": 20,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_grand_jeu_social_magie_operable",
+        "aliases": [
+          "parchemin_grand_jeu_social_magie_operable"
+        ]
       }
     },
     {
@@ -360,7 +368,7 @@
         "source_status": "canonical_program_document",
         "source_version": "0.2"
       },
-      "key": "parchemin_architecture_ecosysteme_digital_koa_magie_operable",
+      "key": "koa_digital_ecosystem",
       "name": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
       "description": "Badge interne UCKK lié à Voie de Magie opérable en Architecture de l’écosystème digital kOA.",
       "visible": 0,
@@ -405,7 +413,11 @@
         "sortorder": 30,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_architecture_ecosysteme_digital_koa_magie_operable",
+        "aliases": [
+          "parchemin_architecture_ecosysteme_digital_koa_magie_operable"
+        ]
       }
     },
     {
@@ -491,7 +503,7 @@
         "source_status": "canonical_program_document",
         "source_version": "0.1"
       },
-      "key": "parchemin_architecture_sociotechnique_magie_operable",
+      "key": "architecture_sociotechnique",
       "name": "Parchemin de Magie opérable en Architecture sociotechnique",
       "description": "Badge interne UCKK lié à Voie d’Architecture sociotechnique — Palier de Magie opérable.",
       "visible": 0,
@@ -536,7 +548,11 @@
         "sortorder": 40,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_architecture_sociotechnique_magie_operable",
+        "aliases": [
+          "parchemin_architecture_sociotechnique_magie_operable"
+        ]
       }
     },
     {
@@ -620,7 +636,7 @@
         "source_status": "canonical_program_document",
         "source_version": "1.1"
       },
-      "key": "parchemin_sciences_politiques_magie_operable",
+      "key": "sciences_politiques",
       "name": "Parchemin de Magie opérable",
       "description": "Badge interne UCKK lié à Voie des Sciences politiques — Palier de Magie opérable.",
       "visible": 0,
@@ -665,7 +681,11 @@
         "sortorder": 50,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_sciences_politiques_magie_operable",
+        "aliases": [
+          "parchemin_sciences_politiques_magie_operable"
+        ]
       }
     },
     {
@@ -747,7 +767,7 @@
         "source_status": "canonical_program_document",
         "source_version": "0.1"
       },
-      "key": "parchemin_economie_magie_operable",
+      "key": "economie",
       "name": "Parchemin de Magie opérable — Voie d’Économie",
       "description": "Badge interne UCKK lié à Voie d’Économie — Palier de Magie opérable.",
       "visible": 0,
@@ -792,7 +812,11 @@
         "sortorder": 60,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_economie_magie_operable",
+        "aliases": [
+          "parchemin_economie_magie_operable"
+        ]
       }
     },
     {
@@ -878,7 +902,7 @@
         "source_status": "canonical_program_document",
         "source_version": "0.1"
       },
-      "key": "parchemin_ecologie_magie_operable",
+      "key": "ecologie",
       "name": "Parchemin de Magie opérable",
       "description": "Badge interne UCKK lié à Voie d’Écologie — Palier de Magie opérable.",
       "visible": 0,
@@ -923,7 +947,11 @@
         "sortorder": 70,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_ecologie_magie_operable",
+        "aliases": [
+          "parchemin_ecologie_magie_operable"
+        ]
       }
     },
     {
@@ -1004,7 +1032,7 @@
         "source_status": "canonical_program_document",
         "source_version": "0.1"
       },
-      "key": "parchemin_metaphysique_magie_operable",
+      "key": "metaphysique",
       "name": "Parchemin de Magie opérable",
       "description": "Badge interne UCKK lié à Voie de Métaphysique — Palier de Magie opérable.",
       "visible": 0,
@@ -1049,7 +1077,11 @@
         "sortorder": 80,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_metaphysique_magie_operable",
+        "aliases": [
+          "parchemin_metaphysique_magie_operable"
+        ]
       }
     },
     {
@@ -1131,7 +1163,7 @@
         "source_status": "canonical_program_document",
         "source_version": "0.2"
       },
-      "key": "parchemin_intelligence_artificielle_gouvernable_magie_operable",
+      "key": "ia_gouvernable",
       "name": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
       "description": "Badge interne UCKK lié à Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable.",
       "visible": 0,
@@ -1176,7 +1208,11 @@
         "sortorder": 90,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_intelligence_artificielle_gouvernable_magie_operable",
+        "aliases": [
+          "parchemin_intelligence_artificielle_gouvernable_magie_operable"
+        ]
       }
     },
     {
@@ -1257,7 +1293,7 @@
         "source_status": "canonical_program_document",
         "source_version": "0.1"
       },
-      "key": "parchemin_linguistique_architecture_sens_magie_operable",
+      "key": "linguistique_architecture_du_sens",
       "name": "Parchemin de Magie opérable",
       "description": "Badge interne UCKK lié à Voie de Linguistique et architecture du sens — Palier de Magie opérable.",
       "visible": 0,
@@ -1302,7 +1338,11 @@
         "sortorder": 100,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_linguistique_architecture_sens_magie_operable",
+        "aliases": [
+          "parchemin_linguistique_architecture_sens_magie_operable"
+        ]
       }
     },
     {
@@ -1382,7 +1422,7 @@
         "source_status": "canonical_program_document",
         "source_version": "0.1"
       },
-      "key": "parchemin_intervention_sociale_systemes_humains_magie_operable",
+      "key": "intervention_sociale",
       "name": "Parchemin de Magie opérable",
       "description": "Badge interne UCKK lié à Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable.",
       "visible": 0,
@@ -1427,7 +1467,11 @@
         "sortorder": 110,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "parchemin_intervention_sociale_systemes_humains_magie_operable",
+        "aliases": [
+          "parchemin_intervention_sociale_systemes_humains_magie_operable"
+        ]
       }
     },
     {
@@ -1508,7 +1552,7 @@
         "source_status": "course_catalogue_only",
         "source_version": "0.1"
       },
-      "key": "medias_vivants_theatre_public_responsable_completion",
+      "key": "medias_vivants_theatre_public",
       "name": "Progression interne — Médias vivants et théâtre public responsable",
       "description": "Badge interne UCKK lié à Voie secondaire des Médias vivants et du théâtre public responsable.",
       "visible": 0,
@@ -1553,7 +1597,11 @@
         "sortorder": 120,
         "source_family": "UCKK canon",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "badges"
+        "source_preset": "badges",
+        "legacy_key": "medias_vivants_theatre_public_responsable_completion",
+        "aliases": [
+          "medias_vivants_theatre_public_responsable_completion"
+        ]
       }
     }
   ],

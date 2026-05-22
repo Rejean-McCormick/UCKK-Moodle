@@ -15,16 +15,6 @@
  * This file is included by /course/view.php when a course uses the
  * "uckk" course format.
  *
- * Its responsibility is intentionally narrow:
- * - obtain the course format instance;
- * - tell the format which section is currently requested;
- * - instantiate the course content output class;
- * - delegate rendering to the format renderer.
- *
- * UCKK pedagogical rules, section semantics, archive logic, integrity rules,
- * challenge workflows and assembly workflows must live in the format base class,
- * output classes, templates, activity modules or dedicated UCKK plugins.
- *
  * @package    format_uckk
  * @copyright  2026 Univers-Cité King Klown
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -33,14 +23,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 global $PAGE, $COURSE;
-
-// -----------------------------------------------------------------------------
-// Validate expected Moodle context.
-// -----------------------------------------------------------------------------
-//
-// Moodle includes this file from /course/view.php. The $course variable is
-// expected to be available in that scope. $section is also commonly provided
-// by course/view.php to indicate a single section request.
 
 if (empty($course) || empty($course->id)) {
     throw new coding_exception('format_uckk/format.php must be included from a valid course context.');
@@ -51,74 +33,71 @@ if (isset($section)) {
     $sectionnumber = (int) $section;
 }
 
-// Keep the current global course aligned with the course being rendered.
-if (!empty($COURSE->id) && (int) $COURSE->id !== (int) $course->id) {
+// Keep global course aligned with the rendered course.
+if (empty($COURSE->id) || (int) $COURSE->id !== (int) $course->id) {
     $COURSE = $course;
 }
 
-// -----------------------------------------------------------------------------
-// Prepare page identity.
-// -----------------------------------------------------------------------------
+// Do not call $PAGE->add_body_class() here.
+// In Moodle course format files, output may already have started.
+// Use a wrapper div instead.
+$wrapperclasses = [
+    'format-uckk',
+    'uckk-course-page',
+];
 
-$PAGE->add_body_class('format-uckk');
-$PAGE->add_body_class('uckk-course-page');
-
-if (!empty($course->idnumber) && preg_match('/^UCKK-/i', $course->idnumber)) {
-    $PAGE->add_body_class('uckk-course-canonical');
+$courseidentity = '';
+if (!empty($course->idnumber)) {
+    $courseidentity = (string) $course->idnumber;
+} else if (!empty($course->shortname)) {
+    $courseidentity = (string) $course->shortname;
 }
 
-if (!empty($course->idnumber) && preg_match('/^UCKK-TC/i', $course->idnumber)) {
-    $PAGE->add_body_class('uckk-course-tronccommun');
+if ($courseidentity !== '' && preg_match('/^UCKK-/i', $courseidentity)) {
+    $wrapperclasses[] = 'uckk-course-canonical';
 }
 
-// -----------------------------------------------------------------------------
-// Create and configure the course format instance.
-// -----------------------------------------------------------------------------
-//
-// In Moodle 4+ and 5+, course formats are implemented through the
-// core_courseformat subsystem. The format base instance becomes the exchange
-// object used by output classes and renderers.
+if ($courseidentity !== '' && preg_match('/^UCKK-TC/i', $courseidentity)) {
+    $wrapperclasses[] = 'uckk-course-tronccommun';
+}
 
-$format = core_courseformat\base::instance($course);
+// Use Moodle's course_get_format() helper.
+// This gives the real course format instance for this course.
+$format = course_get_format($course);
 
-// The section number is still the central request variable for course formats.
-// Output classes can use this to decide whether to render the whole course or a
-// single section view.
-$format->set_section_number($sectionnumber);
+// Moodle versions differ on the section setter name.
+if (method_exists($format, 'set_sectionnum')) {
+    $format->set_sectionnum($sectionnumber);
+} else if (method_exists($format, 'set_section_number')) {
+    $format->set_section_number($sectionnumber);
+}
 
-// -----------------------------------------------------------------------------
-// Optional AMD initialisation.
-// -----------------------------------------------------------------------------
-//
-// The UCKK format may provide amd/src/courseformat.js for small UI behaviours.
-// This call must remain non-critical: all course content must render correctly
-// without JavaScript.
-
-$PAGE->requires->js_call_amd('format_uckk/courseformat', 'init', [
-    [
-        'courseid' => (int) $course->id,
-        'section' => $sectionnumber,
-        'format' => 'uckk',
-    ],
-]);
-
-// -----------------------------------------------------------------------------
-// Render course content.
-// -----------------------------------------------------------------------------
-//
-// get_output_classname('content') returns the UCKK override when present:
+// Resolve the content output class.
+// Expected override when present:
 //   format_uckk\output\courseformat\content
-//
-// If no override exists, Moodle falls back to the core courseformat output.
-// The renderer then renders the named_templatable output object.
-
 $outputclass = $format->get_output_classname('content');
 
 if (!class_exists($outputclass)) {
-    throw new coding_exception('Unable to resolve UCKK course format content output class.');
+    throw new coding_exception('Unable to resolve UCKK course format content output class: ' . $outputclass);
 }
 
 $content = new $outputclass($format);
+
+// This requires:
+//   course/format/uckk/classes/output/renderer.php
+//
+// Do not bypass this. Moodle 4+ expects course formats to define their renderer.
 $renderer = $format->get_renderer($PAGE);
 
+echo html_writer::start_div(
+    implode(' ', $wrapperclasses),
+    [
+        'data-courseid' => (int) $course->id,
+        'data-section' => $sectionnumber,
+        'data-format' => 'uckk',
+    ]
+);
+
 echo $renderer->render($content);
+
+echo html_writer::end_div();

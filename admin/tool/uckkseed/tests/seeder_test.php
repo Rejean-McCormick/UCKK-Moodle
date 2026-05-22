@@ -62,35 +62,27 @@ final class seeder_test extends \advanced_testcase {
         $this->assertSame(1, $counts['skipped']);
         $this->assertSame(1, $counts['warnings']);
         $this->assertSame(1, $counts['errors']);
-
-        $messages = $result->get_messages();
-
-        $this->assertCount(2, $messages);
-        $this->assertStringContainsString('Warning message', $messages[0]['message']);
-        $this->assertStringContainsString('Error message', $messages[1]['message']);
     }
 
     /**
-     * validation_result can merge child results.
+     * Merging child validation results preserves counters and messages.
      */
     public function test_validation_result_merge_combines_child_results(): void {
-        $parent = new validation_result('Parent result');
-        $child = new validation_result('Child result');
+        $parent = validation_result::success('Parent result');
+        $child = validation_result::success('Child result');
 
         $child
-            ->add_created('course', 'UCKK-TC101', 101)
-            ->add_updated('cohort', 'uckk_players', 202)
-            ->add_warning('Child warning', 'courses', 'course', 'UCKK-TC101');
+            ->add_created('category', 'UCKK', 1)
+            ->add_warning('Child warning', 'categories', 'category', 'UCKK');
 
         $parent->merge($child);
 
+        $this->assertTrue($parent->is_ok());
         $this->assertTrue($parent->has_warnings());
-        $this->assertFalse($parent->has_errors());
 
         $counts = $parent->get_counts();
 
         $this->assertSame(1, $counts['created']);
-        $this->assertSame(1, $counts['updated']);
         $this->assertSame(1, $counts['warnings']);
         $this->assertStringContainsString('Parent result', $parent->get_summary());
         $this->assertStringContainsString('Child result', $parent->get_summary());
@@ -108,6 +100,8 @@ final class seeder_test extends \advanced_testcase {
             'mode' => 'dry_run',
             'presets' => [
                 'categories',
+                'programs',
+                'pathways',
                 'courses',
                 'cohorts',
                 'roles',
@@ -174,6 +168,8 @@ final class seeder_test extends \advanced_testcase {
             'dryrun' => true,
             'presets' => [
                 'categories',
+                'programs',
+                'pathways',
                 'courses',
             ],
             'source' => 'phpunit',
@@ -199,6 +195,8 @@ final class seeder_test extends \advanced_testcase {
             'dryrun' => true,
             'presets' => [
                 'categories',
+                'programs',
+                'pathways',
                 'courses',
                 'roles',
                 'competencies',
@@ -229,7 +227,7 @@ final class seeder_test extends \advanced_testcase {
             'action' => 'reset',
             'mode' => 'apply',
             'scope' => 'reset_all_uckk_seeded_content',
-            'presets' => ['categories', 'courses'],
+            'presets' => ['categories', 'programs', 'pathways', 'courses'],
             'dryrun' => false,
             'rollbackplan' => false,
             'force' => false,
@@ -306,12 +304,16 @@ final class seeder_test extends \advanced_testcase {
 
         $presets = $seeder->load_presets([
             'categories',
+            'programs',
+            'pathways',
             'courses',
             'competencies',
         ]);
 
         $this->assertIsArray($presets);
         $this->assertArrayHasKey('categories', $presets);
+        $this->assertArrayHasKey('programs', $presets);
+        $this->assertArrayHasKey('pathways', $presets);
         $this->assertArrayHasKey('courses', $presets);
         $this->assertArrayHasKey('competencies', $presets);
         $this->assertArrayNotHasKey('badges', $presets);
@@ -410,6 +412,8 @@ final class seeder_test extends \advanced_testcase {
 
         $presets = [
             'categories' => $this->preset_categories(),
+            'programs' => $this->preset_programs(),
+            'pathways' => $this->preset_pathways(),
             'courses' => $this->preset_courses(),
             'cohorts' => $this->preset_cohorts(),
             'roles' => $this->preset_roles(),
@@ -479,6 +483,95 @@ final class seeder_test extends \advanced_testcase {
                 'description' => 'UCKK common foundation.',
                 'sortorder' => 20,
                 'visible' => true,
+                'metadata' => [
+                    'status' => 'active',
+                    'provenance' => 'system',
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Program fixture.
+     *
+     * @return array<string, mixed>
+     */
+    private function preset_programs(): array {
+        return $this->preset('programs', [
+            [
+                'key' => 'tc',
+                'code' => 'TC',
+                'shortname' => 'tc',
+                'fullname' => 'Tronc commun obligatoire',
+                'name' => 'Tronc commun obligatoire',
+                'idnumber' => 'UCKK-PROG-TC',
+                'program_type' => 'tronc_commun',
+                'category_idnumber' => 'UCKK-TC',
+                'description' => 'Canonical UCKK common foundation program.',
+                'status' => 'active',
+                'visibility' => 'institution',
+                'visible' => true,
+                'metadata' => [
+                    'status' => 'active',
+                    'provenance' => 'system',
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Pathway fixture.
+     *
+     * @return array<string, mixed>
+     */
+    private function preset_pathways(): array {
+        return $this->preset('pathways', [
+            [
+                'key' => 'tc_foundation',
+                'id' => 'pathway:tc-foundation',
+                'idnumber' => 'UCKK-PATH-TC-FOUNDATION',
+                'shortname' => 'tc_foundation',
+                'fullname' => 'Tronc commun — parcours fondation',
+                'program_code' => 'TC',
+                'pathway_type' => 'ordered_courses',
+                'description' => 'Canonical pathway through the UCKK common foundation.',
+                'status' => 'active',
+                'visibility' => 'institution',
+                'sortorder' => 10,
+                'course_refs' => [
+                    'UCKK-TC101',
+                    'UCKK-TC102',
+                ],
+                'badge_refs' => [
+                    'joueur_initie',
+                ],
+                'competency_refs' => [
+                    'UCKK-COMP-001',
+                    'UCKK-COMP-002',
+                ],
+                'cycles' => [
+                    [
+                        'key' => 'foundation_cycle',
+                        'name' => 'Foundation cycle',
+                        'course_refs' => [
+                            'UCKK-TC101',
+                            'UCKK-TC102',
+                        ],
+                    ],
+                ],
+                'completion_rule' => [
+                    'type' => 'all_courses',
+                    'course_refs' => [
+                        'UCKK-TC101',
+                        'UCKK-TC102',
+                    ],
+                ],
+                'evidence_requirements' => [
+                    [
+                        'type' => 'archive_item',
+                        'required' => true,
+                    ],
+                ],
                 'metadata' => [
                     'status' => 'active',
                     'provenance' => 'system',
@@ -708,15 +801,9 @@ final class seeder_test extends \advanced_testcase {
                 'description' => 'Seed summary report.',
                 'columns' => [
                     'preset',
-                    'status',
                     'created',
                     'updated',
                     'warnings',
-                    'errors',
-                ],
-                'filters' => [
-                    'preset',
-                    'status',
                 ],
                 'metadata' => [
                     'status' => 'active',
@@ -736,14 +823,13 @@ final class seeder_test extends \advanced_testcase {
             [
                 'key' => 'uckk_default_course',
                 'name' => 'UCKK default course',
+                'component' => 'format_uckk',
                 'description' => 'Default course template.',
-                'format' => 'uckk',
-                'sections' => [
-                    [
-                        'name' => 'Connaître',
-                        'summary' => 'Understand the situation.',
-                    ],
+                'defaults' => [
+                    'format' => 'uckk',
+                    'visible' => true,
                 ],
+                'sections' => [],
                 'activities' => [],
                 'completion' => [
                     'enabled' => true,

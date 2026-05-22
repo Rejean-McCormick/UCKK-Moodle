@@ -273,6 +273,7 @@ define('UCKKARCHIVE_PROVENANCE_INTEGRITY', 'integrity');
  *
  * @return string[]
  */
+if (!function_exists('uckkarchive_get_statuses')) {
 function uckkarchive_get_statuses(): array {
     return [
         UCKKARCHIVE_STATUS_DRAFT,
@@ -287,12 +288,15 @@ function uckkarchive_get_statuses(): array {
         UCKKARCHIVE_STATUS_ARCHIVED,
     ];
 }
+}
+
 
 /**
  * Return archive status labels.
  *
  * @return array<string, string>
  */
+if (!function_exists('uckkarchive_get_status_options')) {
 function uckkarchive_get_status_options(): array {
     $options = [];
 
@@ -305,12 +309,15 @@ function uckkarchive_get_status_options(): array {
 
     return $options;
 }
+}
+
 
 /**
  * Return validation states.
  *
  * @return string[]
  */
+if (!function_exists('uckkarchive_get_validation_states')) {
 function uckkarchive_get_validation_states(): array {
     return [
         UCKKARCHIVE_VALIDATION_UNVERIFIED,
@@ -321,12 +328,15 @@ function uckkarchive_get_validation_states(): array {
         UCKKARCHIVE_VALIDATION_ARCHIVED,
     ];
 }
+}
+
 
 /**
  * Return validation state labels.
  *
  * @return array<string, string>
  */
+if (!function_exists('uckkarchive_get_validation_state_options')) {
 function uckkarchive_get_validation_state_options(): array {
     $options = [];
 
@@ -339,12 +349,15 @@ function uckkarchive_get_validation_state_options(): array {
 
     return $options;
 }
+}
+
 
 /**
  * Return archive visibilities.
  *
  * @return string[]
  */
+if (!function_exists('uckkarchive_get_visibilities')) {
 function uckkarchive_get_visibilities(): array {
     return [
         UCKKARCHIVE_VISIBILITY_PRIVATE,
@@ -356,12 +369,15 @@ function uckkarchive_get_visibilities(): array {
         UCKKARCHIVE_VISIBILITY_RESTRICTED_INTEGRITY,
     ];
 }
+}
+
 
 /**
  * Return archive visibility labels.
  *
  * @return array<string, string>
  */
+if (!function_exists('uckkarchive_get_visibility_options')) {
 function uckkarchive_get_visibility_options(): array {
     $options = [];
 
@@ -374,12 +390,15 @@ function uckkarchive_get_visibility_options(): array {
 
     return $options;
 }
+}
+
 
 /**
  * Return archive item types.
  *
  * @return string[]
  */
+if (!function_exists('uckkarchive_get_item_types')) {
 function uckkarchive_get_item_types(): array {
     return [
         UCKKARCHIVE_TYPE_PROOF,
@@ -393,12 +412,15 @@ function uckkarchive_get_item_types(): array {
         UCKKARCHIVE_TYPE_PUBLIC_SUMMARY,
     ];
 }
+}
+
 
 /**
  * Return archive item type labels.
  *
  * @return array<string, string>
  */
+if (!function_exists('uckkarchive_get_item_type_options')) {
 function uckkarchive_get_item_type_options(): array {
     $options = [];
 
@@ -411,12 +433,15 @@ function uckkarchive_get_item_type_options(): array {
 
     return $options;
 }
+}
+
 
 /**
  * Return provenance sources.
  *
  * @return string[]
  */
+if (!function_exists('uckkarchive_get_provenance_sources')) {
 function uckkarchive_get_provenance_sources(): array {
     return [
         UCKKARCHIVE_PROVENANCE_HUMAN,
@@ -429,12 +454,15 @@ function uckkarchive_get_provenance_sources(): array {
         UCKKARCHIVE_PROVENANCE_INTEGRITY,
     ];
 }
+}
+
 
 /**
  * Return provenance source labels.
  *
  * @return array<string, string>
  */
+if (!function_exists('uckkarchive_get_provenance_options')) {
 function uckkarchive_get_provenance_options(): array {
     $options = [];
 
@@ -447,6 +475,8 @@ function uckkarchive_get_provenance_options(): array {
 
     return $options;
 }
+}
+
 
 /**
  * Return true if the value is a valid archive status.
@@ -454,9 +484,12 @@ function uckkarchive_get_provenance_options(): array {
  * @param string $status Status.
  * @return bool
  */
+if (!function_exists('uckkarchive_is_valid_status')) {
 function uckkarchive_is_valid_status(string $status): bool {
     return in_array($status, uckkarchive_get_statuses(), true);
 }
+}
+
 
 /**
  * Return true if the value is a valid validation state.
@@ -464,9 +497,12 @@ function uckkarchive_is_valid_status(string $status): bool {
  * @param string $state Validation state.
  * @return bool
  */
+if (!function_exists('uckkarchive_is_valid_validation_state')) {
 function uckkarchive_is_valid_validation_state(string $state): bool {
     return in_array($state, uckkarchive_get_validation_states(), true);
 }
+}
+
 
 /**
  * Return true if the value is a valid archive visibility.
@@ -474,9 +510,12 @@ function uckkarchive_is_valid_validation_state(string $state): bool {
  * @param string $visibility Visibility.
  * @return bool
  */
+if (!function_exists('uckkarchive_is_valid_visibility')) {
 function uckkarchive_is_valid_visibility(string $visibility): bool {
     return in_array($visibility, uckkarchive_get_visibilities(), true);
 }
+}
+
 
 /**
  * Return true if the value is a valid archive item type.
@@ -484,9 +523,12 @@ function uckkarchive_is_valid_visibility(string $visibility): bool {
  * @param string $type Item type.
  * @return bool
  */
+if (!function_exists('uckkarchive_is_valid_item_type')) {
 function uckkarchive_is_valid_item_type(string $type): bool {
     return in_array($type, uckkarchive_get_item_types(), true);
 }
+}
+
 
 /**
  * Return true if the value is a valid provenance source.
@@ -494,9 +536,12 @@ function uckkarchive_is_valid_item_type(string $type): bool {
  * @param string $source Provenance source.
  * @return bool
  */
+if (!function_exists('uckkarchive_is_valid_provenance_source')) {
 function uckkarchive_is_valid_provenance_source(string $source): bool {
     return in_array($source, uckkarchive_get_provenance_sources(), true);
 }
+}
+
 
 /**
  * Normalise an archive status.
@@ -504,11 +549,14 @@ function uckkarchive_is_valid_provenance_source(string $source): bool {
  * @param string|null $status Raw status.
  * @return string
  */
+if (!function_exists('uckkarchive_normalise_status')) {
 function uckkarchive_normalise_status(?string $status): string {
     $status = clean_param((string)$status, PARAM_ALPHANUMEXT);
 
     return uckkarchive_is_valid_status($status) ? $status : UCKKARCHIVE_STATUS_DRAFT;
 }
+}
+
 
 /**
  * Normalise a validation state.
@@ -516,11 +564,14 @@ function uckkarchive_normalise_status(?string $status): string {
  * @param string|null $state Raw validation state.
  * @return string
  */
+if (!function_exists('uckkarchive_normalise_validation_state')) {
 function uckkarchive_normalise_validation_state(?string $state): string {
     $state = clean_param((string)$state, PARAM_ALPHANUMEXT);
 
     return uckkarchive_is_valid_validation_state($state) ? $state : UCKKARCHIVE_VALIDATION_UNVERIFIED;
 }
+}
+
 
 /**
  * Normalise visibility.
@@ -528,11 +579,14 @@ function uckkarchive_normalise_validation_state(?string $state): string {
  * @param string|null $visibility Raw visibility.
  * @return string
  */
+if (!function_exists('uckkarchive_normalise_visibility')) {
 function uckkarchive_normalise_visibility(?string $visibility): string {
     $visibility = clean_param((string)$visibility, PARAM_ALPHANUMEXT);
 
     return uckkarchive_is_valid_visibility($visibility) ? $visibility : UCKKARCHIVE_VISIBILITY_COURSE;
 }
+}
+
 
 /**
  * Normalise archive item type.
@@ -540,11 +594,14 @@ function uckkarchive_normalise_visibility(?string $visibility): string {
  * @param string|null $type Raw item type.
  * @return string
  */
+if (!function_exists('uckkarchive_normalise_item_type')) {
 function uckkarchive_normalise_item_type(?string $type): string {
     $type = clean_param((string)$type, PARAM_ALPHANUMEXT);
 
     return uckkarchive_is_valid_item_type($type) ? $type : UCKKARCHIVE_TYPE_PROOF;
 }
+}
+
 
 /**
  * Normalise provenance source.
@@ -552,11 +609,14 @@ function uckkarchive_normalise_item_type(?string $type): string {
  * @param string|null $source Raw provenance source.
  * @return string
  */
+if (!function_exists('uckkarchive_normalise_provenance_source')) {
 function uckkarchive_normalise_provenance_source(?string $source): string {
     $source = clean_param((string)$source, PARAM_ALPHANUMEXT);
 
     return uckkarchive_is_valid_provenance_source($source) ? $source : UCKKARCHIVE_PROVENANCE_HUMAN;
 }
+}
+
 
 /**
  * Return a translated string if it exists, otherwise a fallback.
@@ -565,6 +625,7 @@ function uckkarchive_normalise_provenance_source(?string $source): string {
  * @param string $fallback Fallback.
  * @return string
  */
+if (!function_exists('uckkarchive_get_string_if_exists')) {
 function uckkarchive_get_string_if_exists(string $key, string $fallback): string {
     if (get_string_manager()->string_exists($key, 'uckkarchive')) {
         return get_string($key, 'uckkarchive');
@@ -572,6 +633,8 @@ function uckkarchive_get_string_if_exists(string $key, string $fallback): string
 
     return $fallback;
 }
+}
+
 
 /**
  * Build a module URL.
@@ -580,6 +643,7 @@ function uckkarchive_get_string_if_exists(string $key, string $fallback): string
  * @param array<string, mixed> $params URL params.
  * @return moodle_url
  */
+if (!function_exists('uckkarchive_url')) {
 function uckkarchive_url(string $script = 'view.php', array $params = []): moodle_url {
     $script = clean_param($script, PARAM_FILE);
 
@@ -589,6 +653,8 @@ function uckkarchive_url(string $script = 'view.php', array $params = []): moodl
 
     return new moodle_url('/mod/uckkarchive/' . $script, $params);
 }
+}
+
 
 /**
  * Build the activity view URL.
@@ -596,9 +662,12 @@ function uckkarchive_url(string $script = 'view.php', array $params = []): moodl
  * @param int $cmid Course module id.
  * @return moodle_url
  */
+if (!function_exists('uckkarchive_view_url')) {
 function uckkarchive_view_url(int $cmid): moodle_url {
     return uckkarchive_url('view.php', ['id' => $cmid]);
 }
+}
+
 
 /**
  * Build the activity index URL.
@@ -606,9 +675,12 @@ function uckkarchive_view_url(int $cmid): moodle_url {
  * @param int $courseid Course id.
  * @return moodle_url
  */
+if (!function_exists('uckkarchive_index_url')) {
 function uckkarchive_index_url(int $courseid): moodle_url {
     return uckkarchive_url('index.php', ['id' => $courseid]);
 }
+}
+
 
 /**
  * Build archive item URL.
@@ -617,12 +689,15 @@ function uckkarchive_index_url(int $courseid): moodle_url {
  * @param int $itemid Item id.
  * @return moodle_url
  */
+if (!function_exists('uckkarchive_item_url')) {
 function uckkarchive_item_url(int $cmid, int $itemid): moodle_url {
     return uckkarchive_url('item.php', [
         'id' => $cmid,
         'itemid' => $itemid,
     ]);
 }
+}
+
 
 /**
  * Build add item URL.
@@ -631,9 +706,12 @@ function uckkarchive_item_url(int $cmid, int $itemid): moodle_url {
  * @param array<string, mixed> $params Extra params.
  * @return moodle_url
  */
+if (!function_exists('uckkarchive_add_url')) {
 function uckkarchive_add_url(int $cmid, array $params = []): moodle_url {
     return uckkarchive_url('add.php', ['id' => $cmid] + $params);
 }
+}
+
 
 /**
  * Build validation URL.
@@ -642,12 +720,15 @@ function uckkarchive_add_url(int $cmid, array $params = []): moodle_url {
  * @param int $itemid Item id.
  * @return moodle_url
  */
+if (!function_exists('uckkarchive_validate_url')) {
 function uckkarchive_validate_url(int $cmid, int $itemid): moodle_url {
     return uckkarchive_url('validate.php', [
         'id' => $cmid,
         'itemid' => $itemid,
     ]);
 }
+}
+
 
 /**
  * Build export URL.
@@ -656,9 +737,12 @@ function uckkarchive_validate_url(int $cmid, int $itemid): moodle_url {
  * @param array<string, mixed> $params Extra params.
  * @return moodle_url
  */
+if (!function_exists('uckkarchive_export_url')) {
 function uckkarchive_export_url(int $cmid, array $params = []): moodle_url {
     return uckkarchive_url('export.php', ['id' => $cmid] + $params);
 }
+}
+
 
 /**
  * Resolve course, course module, archive instance, and module context.
@@ -667,6 +751,7 @@ function uckkarchive_export_url(int $cmid, array $params = []): moodle_url {
  * @param int $archiveid Archive instance id.
  * @return array{0: stdClass, 1: stdClass, 2: stdClass, 3: context_module}
  */
+if (!function_exists('uckkarchive_get_page_records')) {
 function uckkarchive_get_page_records(int $cmid = 0, int $archiveid = 0): array {
     global $DB;
 
@@ -686,6 +771,8 @@ function uckkarchive_get_page_records(int $cmid = 0, int $archiveid = 0): array 
 
     return [$course, $cm, $archive, $context];
 }
+}
+
 
 /**
  * Require login and view capability for an archive activity page.
@@ -694,6 +781,7 @@ function uckkarchive_get_page_records(int $cmid = 0, int $archiveid = 0): array 
  * @param int $archiveid Archive instance id.
  * @return array{0: stdClass, 1: stdClass, 2: stdClass, 3: context_module}
  */
+if (!function_exists('uckkarchive_require_page')) {
 function uckkarchive_require_page(int $cmid = 0, int $archiveid = 0): array {
     [$course, $cm, $archive, $context] = uckkarchive_get_page_records($cmid, $archiveid);
 
@@ -702,6 +790,8 @@ function uckkarchive_require_page(int $cmid = 0, int $archiveid = 0): array {
 
     return [$course, $cm, $archive, $context];
 }
+}
+
 
 /**
  * Configure PAGE for an archive page.
@@ -714,6 +804,7 @@ function uckkarchive_require_page(int $cmid = 0, int $archiveid = 0): array {
  * @param string $title Page title.
  * @return void
  */
+if (!function_exists('uckkarchive_setup_page')) {
 function uckkarchive_setup_page(
     moodle_page $page,
     stdClass $course,
@@ -729,6 +820,8 @@ function uckkarchive_setup_page(
     $page->set_title($title);
     $page->set_heading(format_string($course->fullname));
 }
+}
+
 
 /**
  * Mark the archive module as viewed.
@@ -737,10 +830,13 @@ function uckkarchive_setup_page(
  * @param stdClass $cm Course module.
  * @return void
  */
+if (!function_exists('uckkarchive_mark_viewed')) {
 function uckkarchive_mark_viewed(stdClass $course, stdClass $cm): void {
     $completion = new completion_info($course);
     $completion->set_module_viewed($cm);
 }
+}
+
 
 /**
  * Return whether the user can add archive items.
@@ -749,9 +845,12 @@ function uckkarchive_mark_viewed(stdClass $course, stdClass $cm): void {
  * @param stdClass|null $user User.
  * @return bool
  */
+if (!function_exists('uckkarchive_can_add_item')) {
 function uckkarchive_can_add_item(context_module $context, ?stdClass $user = null): bool {
     return has_capability('mod/uckkarchive:additem', $context, $user);
 }
+}
+
 
 /**
  * Return whether the user can validate archive items.
@@ -760,9 +859,12 @@ function uckkarchive_can_add_item(context_module $context, ?stdClass $user = nul
  * @param stdClass|null $user User.
  * @return bool
  */
+if (!function_exists('uckkarchive_can_validate_item')) {
 function uckkarchive_can_validate_item(context_module $context, ?stdClass $user = null): bool {
     return has_capability('mod/uckkarchive:validateitem', $context, $user);
 }
+}
+
 
 /**
  * Return whether the user can revise archive items.
@@ -774,9 +876,12 @@ function uckkarchive_can_validate_item(context_module $context, ?stdClass $user 
  * @param stdClass|null $user User.
  * @return bool
  */
+if (!function_exists('uckkarchive_can_revise_item')) {
 function uckkarchive_can_revise_item(context_module $context, ?stdClass $user = null): bool {
     return has_capability('mod/uckkarchive:reviseitem', $context, $user);
 }
+}
+
 
 /**
  * Return whether the user can see restricted archive data.
@@ -785,9 +890,12 @@ function uckkarchive_can_revise_item(context_module $context, ?stdClass $user = 
  * @param stdClass|null $user User.
  * @return bool
  */
+if (!function_exists('uckkarchive_can_view_restricted')) {
 function uckkarchive_can_view_restricted(context_module $context, ?stdClass $user = null): bool {
     return has_capability('mod/uckkarchive:viewrestricted', $context, $user);
 }
+}
+
 
 /**
  * Return whether the user can export archive data.
@@ -796,9 +904,12 @@ function uckkarchive_can_view_restricted(context_module $context, ?stdClass $use
  * @param stdClass|null $user User.
  * @return bool
  */
+if (!function_exists('uckkarchive_can_export')) {
 function uckkarchive_can_export(context_module $context, ?stdClass $user = null): bool {
     return has_capability('mod/uckkarchive:export', $context, $user);
 }
+}
+
 
 /**
  * Return whether a user can view an archive item.
@@ -811,6 +922,7 @@ function uckkarchive_can_export(context_module $context, ?stdClass $user = null)
  * @param stdClass|null $user User.
  * @return bool
  */
+if (!function_exists('uckkarchive_can_view_item')) {
 function uckkarchive_can_view_item(stdClass $item, context_module $context, ?stdClass $user = null): bool {
     global $USER;
 
@@ -841,6 +953,8 @@ function uckkarchive_can_view_item(stdClass $item, context_module $context, ?std
 
     return true;
 }
+}
+
 
 /**
  * Return common export context for permission-filtered item cards.
@@ -850,6 +964,7 @@ function uckkarchive_can_view_item(stdClass $item, context_module $context, ?std
  * @param context_module $context Context.
  * @return stdClass
  */
+if (!function_exists('uckkarchive_prepare_item_export')) {
 function uckkarchive_prepare_item_export(stdClass $item, stdClass $cm, context_module $context): stdClass {
     $data = new stdClass();
 
@@ -879,6 +994,8 @@ function uckkarchive_prepare_item_export(stdClass $item, stdClass $cm, context_m
 
     return $data;
 }
+}
+
 
 /**
  * Load one archive item.
@@ -887,6 +1004,7 @@ function uckkarchive_prepare_item_export(stdClass $item, stdClass $cm, context_m
  * @param int|null $archiveid Optional archive instance id.
  * @return stdClass
  */
+if (!function_exists('uckkarchive_get_item')) {
 function uckkarchive_get_item(int $itemid, ?int $archiveid = null): stdClass {
     global $DB;
 
@@ -898,6 +1016,8 @@ function uckkarchive_get_item(int $itemid, ?int $archiveid = null): stdClass {
 
     return $DB->get_record(UCKKARCHIVE_ITEM_TABLE, $conditions, '*', MUST_EXIST);
 }
+}
+
 
 /**
  * Load visible archive items for a module instance.
@@ -910,6 +1030,7 @@ function uckkarchive_get_item(int $itemid, ?int $archiveid = null): stdClass {
  * @param int $offset Offset.
  * @return stdClass[]
  */
+if (!function_exists('uckkarchive_get_visible_items')) {
 function uckkarchive_get_visible_items(
     stdClass $archive,
     context_module $context,
@@ -963,6 +1084,8 @@ function uckkarchive_get_visible_items(
 
     return $DB->get_records_sql($sql, $params, $offset, $limit);
 }
+}
+
 
 /**
  * Count visible archive items for a module instance.
@@ -973,6 +1096,7 @@ function uckkarchive_get_visible_items(
  * @param array<string, mixed> $filters Filters.
  * @return int
  */
+if (!function_exists('uckkarchive_count_visible_items')) {
 function uckkarchive_count_visible_items(
     stdClass $archive,
     context_module $context,
@@ -981,6 +1105,8 @@ function uckkarchive_count_visible_items(
 ): int {
     return count(uckkarchive_get_visible_items($archive, $context, $user, $filters, 0, 0));
 }
+}
+
 
 /**
  * Decode JSON metadata safely.
@@ -988,6 +1114,7 @@ function uckkarchive_count_visible_items(
  * @param mixed $metadata Raw metadata.
  * @return array<string, mixed>
  */
+if (!function_exists('uckkarchive_decode_metadata')) {
 function uckkarchive_decode_metadata(mixed $metadata): array {
     if ($metadata === null || $metadata === '') {
         return [];
@@ -1013,6 +1140,8 @@ function uckkarchive_decode_metadata(mixed $metadata): array {
 
     return $decoded;
 }
+}
+
 
 /**
  * Encode metadata as JSON or null.
@@ -1020,6 +1149,7 @@ function uckkarchive_decode_metadata(mixed $metadata): array {
  * @param array<string, mixed>|stdClass|null $metadata Metadata.
  * @return string|null
  */
+if (!function_exists('uckkarchive_encode_metadata')) {
 function uckkarchive_encode_metadata(array|stdClass|null $metadata): ?string {
     if ($metadata instanceof stdClass) {
         $metadata = (array)$metadata;
@@ -1031,6 +1161,8 @@ function uckkarchive_encode_metadata(array|stdClass|null $metadata): ?string {
 
     return json_encode($metadata, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 }
+}
+
 
 /**
  * Compute a deterministic provenance hash.
@@ -1038,6 +1170,7 @@ function uckkarchive_encode_metadata(array|stdClass|null $metadata): ?string {
  * @param array<string, mixed>|stdClass|string $payload Hash payload.
  * @return string
  */
+if (!function_exists('uckkarchive_compute_provenance_hash')) {
 function uckkarchive_compute_provenance_hash(array|stdClass|string $payload): string {
     if ($payload instanceof stdClass) {
         $payload = (array)$payload;
@@ -1050,6 +1183,8 @@ function uckkarchive_compute_provenance_hash(array|stdClass|string $payload): st
 
     return hash('sha256', (string)$payload);
 }
+}
+
 
 /**
  * Create a revision record from previous and new item state.
@@ -1065,6 +1200,7 @@ function uckkarchive_compute_provenance_hash(array|stdClass|string $payload): st
  * @param int|null $integritycaseid Linked integrity case id.
  * @return int Revision id.
  */
+if (!function_exists('uckkarchive_create_revision')) {
 function uckkarchive_create_revision(
     stdClass $olditem,
     stdClass $newitem,
@@ -1109,6 +1245,8 @@ function uckkarchive_create_revision(
 
     return (int)$DB->insert_record(UCKKARCHIVE_REVISION_TABLE, $record);
 }
+}
+
 
 /**
  * Insert a provenance record for an archive item.
@@ -1124,6 +1262,7 @@ function uckkarchive_create_revision(
  * @param array<string, mixed> $metadata Additional metadata.
  * @return int Provenance record id.
  */
+if (!function_exists('uckkarchive_create_provenance_record')) {
 function uckkarchive_create_provenance_record(
     int $archiveid,
     int $itemid,
@@ -1170,6 +1309,8 @@ function uckkarchive_create_provenance_record(
 
     return (int)$DB->insert_record(UCKKARCHIVE_PROVENANCE_TABLE, $record);
 }
+}
+
 
 /**
  * Return whether an item status is terminal.
@@ -1177,6 +1318,7 @@ function uckkarchive_create_provenance_record(
  * @param string $status Status.
  * @return bool
  */
+if (!function_exists('uckkarchive_is_terminal_status')) {
 function uckkarchive_is_terminal_status(string $status): bool {
     $status = uckkarchive_normalise_status($status);
 
@@ -1187,6 +1329,8 @@ function uckkarchive_is_terminal_status(string $status): bool {
         UCKKARCHIVE_STATUS_ARCHIVED,
     ], true);
 }
+}
+
 
 /**
  * Return whether an item can be submitted for review.
@@ -1194,6 +1338,7 @@ function uckkarchive_is_terminal_status(string $status): bool {
  * @param stdClass $item Item.
  * @return bool
  */
+if (!function_exists('uckkarchive_item_can_submit')) {
 function uckkarchive_item_can_submit(stdClass $item): bool {
     $status = uckkarchive_normalise_status($item->status ?? null);
 
@@ -1202,6 +1347,8 @@ function uckkarchive_item_can_submit(stdClass $item): bool {
         UCKKARCHIVE_STATUS_CONTESTED,
     ], true);
 }
+}
+
 
 /**
  * Return whether an item can be validated.
@@ -1209,6 +1356,7 @@ function uckkarchive_item_can_submit(stdClass $item): bool {
  * @param stdClass $item Item.
  * @return bool
  */
+if (!function_exists('uckkarchive_item_can_validate')) {
 function uckkarchive_item_can_validate(stdClass $item): bool {
     $status = uckkarchive_normalise_status($item->status ?? null);
 
@@ -1218,6 +1366,8 @@ function uckkarchive_item_can_validate(stdClass $item): bool {
         UCKKARCHIVE_STATUS_CONTESTED,
     ], true);
 }
+}
+
 
 /**
  * Return whether an item can be revised.
@@ -1225,6 +1375,7 @@ function uckkarchive_item_can_validate(stdClass $item): bool {
  * @param stdClass $item Item.
  * @return bool
  */
+if (!function_exists('uckkarchive_item_can_revise')) {
 function uckkarchive_item_can_revise(stdClass $item): bool {
     $status = uckkarchive_normalise_status($item->status ?? null);
 
@@ -1233,6 +1384,8 @@ function uckkarchive_item_can_revise(stdClass $item): bool {
         UCKKARCHIVE_STATUS_ARCHIVED,
     ], true);
 }
+}
+
 
 /**
  * Return whether an item can be exported.
@@ -1240,6 +1393,7 @@ function uckkarchive_item_can_revise(stdClass $item): bool {
  * @param stdClass $item Item.
  * @return bool
  */
+if (!function_exists('uckkarchive_item_can_export')) {
 function uckkarchive_item_can_export(stdClass $item): bool {
     $status = uckkarchive_normalise_status($item->status ?? null);
 
@@ -1250,6 +1404,8 @@ function uckkarchive_item_can_export(stdClass $item): bool {
         UCKKARCHIVE_STATUS_ARCHIVED,
     ], true);
 }
+}
+
 
 /**
  * Build a compact archive summary for dashboards/reports.
@@ -1259,6 +1415,7 @@ function uckkarchive_item_can_export(stdClass $item): bool {
  * @param stdClass|null $user User.
  * @return stdClass
  */
+if (!function_exists('uckkarchive_get_summary')) {
 function uckkarchive_get_summary(stdClass $archive, context_module $context, ?stdClass $user = null): stdClass {
     $summary = new stdClass();
 
@@ -1277,4 +1434,5 @@ function uckkarchive_get_summary(stdClass $archive, context_module $context, ?st
     $summary->restrictedvisible = uckkarchive_can_view_restricted($context, $user);
 
     return $summary;
+}
 }

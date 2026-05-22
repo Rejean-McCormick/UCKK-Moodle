@@ -41,7 +41,7 @@
       "role": "uckkmanager",
       "capability": "local/uckk:manageprofiles",
       "permission": "allow",
-      "context": "system",
+      "context": "user",
       "component": "local_uckk",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -195,7 +195,7 @@
       "role": "uckkmanager",
       "capability": "block/uckk_dashboard:view",
       "permission": "allow",
-      "context": "system",
+      "context": "block",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -206,7 +206,7 @@
       "role": "uckkmanager",
       "capability": "block/uckk_dashboard:viewothers",
       "permission": "allow",
-      "context": "system",
+      "context": "block",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -217,7 +217,7 @@
       "role": "uckkmanager",
       "capability": "block/uckk_dashboard:configure",
       "permission": "allow",
-      "context": "system",
+      "context": "block",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -228,7 +228,7 @@
       "role": "uckkmanager",
       "capability": "block/uckk_dashboard:addinstance",
       "permission": "allow",
-      "context": "system",
+      "context": "block",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -239,7 +239,7 @@
       "role": "uckkmanager",
       "capability": "block/uckk_dashboard:myaddinstance",
       "permission": "allow",
-      "context": "user",
+      "context": "system",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -690,7 +690,7 @@
       "role": "uckkmentor",
       "capability": "block/uckk_dashboard:view",
       "permission": "allow",
-      "context": "system",
+      "context": "block",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -701,7 +701,7 @@
       "role": "uckkmentor",
       "capability": "block/uckk_dashboard:viewothers",
       "permission": "allow",
-      "context": "system",
+      "context": "block",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -965,7 +965,7 @@
       "role": "uckkplayer",
       "capability": "block/uckk_dashboard:view",
       "permission": "allow",
-      "context": "system",
+      "context": "block",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -976,7 +976,7 @@
       "role": "uckkplayer",
       "capability": "block/uckk_dashboard:myaddinstance",
       "permission": "allow",
-      "context": "user",
+      "context": "system",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",
@@ -1493,7 +1493,7 @@
       "role": "uckkobserver",
       "capability": "block/uckk_dashboard:view",
       "permission": "allow",
-      "context": "system",
+      "context": "block",
       "component": "block_uckk_dashboard",
       "metadata": {
         "managedby": "tool_uckkseed",

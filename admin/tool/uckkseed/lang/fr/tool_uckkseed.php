@@ -103,6 +103,8 @@ $string['severity_blocker'] = 'Bloquant';
 
 // Preset names.
 $string['preset_categories'] = 'Catégories';
+$string['preset_programs'] = 'Programmes';
+$string['preset_pathways'] = 'Parcours';
 $string['preset_courses'] = 'Cours';
 $string['preset_cohorts'] = 'Cohortes';
 $string['preset_roles'] = 'Rôles';
@@ -117,6 +119,8 @@ $string['preset_archive_templates'] = 'Gabarits d’archives';
 
 // Preset files.
 $string['presetfile_categories'] = 'categories.json';
+$string['presetfile_programs'] = 'programs.json';
+$string['presetfile_pathways'] = 'pathways.json';
 $string['presetfile_courses'] = 'courses.json';
 $string['presetfile_cohorts'] = 'cohorts.json';
 $string['presetfile_roles'] = 'roles.json';
@@ -142,6 +146,7 @@ $string['reportfield'] = 'Produire un rapport';
 $string['rollbackplanfield'] = 'Produire un plan de retour arrière';
 $string['force'] = 'Forcer';
 $string['confirm'] = 'Confirmer';
+$string['confirmseed'] = 'Confirmer la génération';
 $string['confirmationrequired'] = 'Une confirmation explicite est requise.';
 $string['returnurl'] = 'URL de retour';
 $string['scope'] = 'Portée';
@@ -152,6 +157,7 @@ $string['selectaction'] = 'Sélectionner l’action';
 
 // Reset scopes.
 $string['reset_scope'] = 'Portée de réinitialisation';
+$string['resetscope'] = 'Portée de réinitialisation';
 $string['reset_seed_logs'] = 'Réinitialiser les journaux de graine';
 $string['reset_seeded_content'] = 'Réinitialiser le contenu généré';
 $string['reset_seeded_courses'] = 'Réinitialiser les cours générés';
@@ -250,6 +256,8 @@ $string['dryrunwouldreset'] = 'Simulation : l’objet serait réinitialisé.';
 
 // Seed object labels.
 $string['category'] = 'Catégorie';
+$string['program'] = 'Programme';
+$string['pathway'] = 'Parcours';
 $string['course'] = 'Cours';
 $string['cohort'] = 'Cohorte';
 $string['role'] = 'Rôle';

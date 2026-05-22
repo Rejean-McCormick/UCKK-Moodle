@@ -204,7 +204,7 @@ function uckkchallenge_get_coursemodule_info(cm_info|stdClass $cm): ?cached_cm_i
     $challenge = $DB->get_record(
         'uckkchallenge',
         ['id' => $cm->instance],
-        'id, name, intro, introformat, status, challenge_type, duedate, timemodified'
+        'id, name, intro, introformat, status, challengetype, timeclose, timemodified'
     );
 
     if (!$challenge) {
@@ -218,14 +218,12 @@ function uckkchallenge_get_coursemodule_info(cm_info|stdClass $cm): ?cached_cm_i
         $info->content = format_module_intro('uckkchallenge', $challenge, $cm->id, false);
     }
 
-    $customdata = [
+    $info->customdata = [
         'status' => $challenge->status,
-        'challenge_type' => $challenge->challenge_type,
-        'duedate' => (int)$challenge->duedate,
+        'challengetype' => $challenge->challengetype,
+        'timeclose' => (int)$challenge->timeclose,
         'timemodified' => (int)$challenge->timemodified,
     ];
-
-    $info->customdata = $customdata;
 
     return $info;
 }
@@ -241,7 +239,7 @@ function uckkchallenge_cm_info_dynamic(cm_info $cm): void {
     $challenge = $DB->get_record(
         'uckkchallenge',
         ['id' => $cm->instance],
-        'id, status, visibility, duedate'
+        'id, status, visibility, timeclose'
     );
 
     if (!$challenge) {
@@ -267,8 +265,8 @@ function uckkchallenge_cm_info_dynamic(cm_info $cm): void {
     }
 
     if (
-        (int)$challenge->duedate > 0
-        && (int)$challenge->duedate < time()
+        (int)$challenge->timeclose > 0
+        && (int)$challenge->timeclose < time()
         && has_capability('mod/uckkchallenge:submitproof', $context, $USER)
     ) {
         $cm->set_after_link(html_writer::span(
@@ -775,7 +773,7 @@ function uckkchallenge_get_course_overview_info(stdClass $course, array $cms): a
         $challenge = $DB->get_record(
             'uckkchallenge',
             ['id' => $cm->instance],
-            'id, name, duedate, status'
+            'id, name, timeclose, status'
         );
 
         if (!$challenge) {
@@ -786,8 +784,8 @@ function uckkchallenge_get_course_overview_info(stdClass $course, array $cms): a
         $info->cmid = (int)$cm->id;
         $info->name = format_string($challenge->name);
         $info->status = $challenge->status;
-        $info->duedate = (int)$challenge->duedate;
-        $info->hasduedate = (int)$challenge->duedate > 0;
+        $info->timeclose = (int)$challenge->timeclose;
+        $info->hasdeadline = (int)$challenge->timeclose > 0;
         $info->submitted = $DB->record_exists('uckkchallenge_sub', [
             'challengeid' => $challenge->id,
             'userid' => $USER->id,
@@ -805,59 +803,170 @@ function uckkchallenge_get_course_overview_info(stdClass $course, array $cms): a
  * @param stdClass $instancedata Raw form data.
  * @return stdClass
  */
+/**
+ * Return the first available property value from a submitted data object.
+ *
+ * @param stdClass $data Submitted data.
+ * @param array<int, string> $fields Candidate property names.
+ * @param mixed $default Default value.
+ * @return mixed
+ */
+function uckkchallenge_first_value(stdClass $data, array $fields, mixed $default = null): mixed {
+    foreach ($fields as $field) {
+        if (property_exists($data, $field)) {
+            return $data->{$field};
+        }
+    }
+
+    return $default;
+}
+
+/**
+ * Return clipped optional text or null.
+ *
+ * @param mixed $value Raw value.
+ * @param int $maxlength Maximum length.
+ * @return string|null
+ */
+function uckkchallenge_optional_text(mixed $value, int $maxlength): ?string {
+    if ($value === null) {
+        return null;
+    }
+
+    $value = trim((string)$value);
+
+    if ($value === '') {
+        return null;
+    }
+
+    return core_text::substr(clean_param($value, PARAM_TEXT), 0, $maxlength);
+}
+
 function uckkchallenge_normalise_instance_record(stdClass $instancedata): stdClass {
     $record = new stdClass();
 
-    $record->course = (int)$instancedata->course;
-    $record->name = trim((string)$instancedata->name);
-    $record->intro = $instancedata->intro ?? '';
-    $record->introformat = (int)($instancedata->introformat ?? FORMAT_HTML);
+    $record->course = (int)uckkchallenge_first_value($instancedata, ['course'], 0);
+    $record->name = trim((string)uckkchallenge_first_value($instancedata, ['name'], ''));
+    $record->intro = uckkchallenge_first_value($instancedata, ['intro'], '');
+    $record->introformat = (int)uckkchallenge_first_value($instancedata, ['introformat'], FORMAT_HTML);
 
-    $record->challenge_type = clean_param(
-        (string)($instancedata->challenge_type ?? 'internal_learning'),
+    $record->challengecode = uckkchallenge_optional_text(
+        uckkchallenge_first_value($instancedata, ['challengecode'], null),
+        100
+    );
+
+    $record->challengetype = clean_param(
+        (string)uckkchallenge_first_value(
+            $instancedata,
+            ['challengetype', 'challenge' . '_' . 'type'],
+            'internal_learning'
+        ),
         PARAM_ALPHANUMEXT
     );
 
-    $record->statement = $instancedata->statement ?? '';
-    $record->statementformat = (int)($instancedata->statementformat ?? FORMAT_HTML);
+    $record->statement = uckkchallenge_first_value($instancedata, ['statement'], '');
+    $record->statementformat = (int)uckkchallenge_first_value($instancedata, ['statementformat'], FORMAT_HTML);
 
-    $record->contexttext = $instancedata->contexttext ?? '';
-    $record->contextformat = (int)($instancedata->contextformat ?? FORMAT_HTML);
-
-    $record->expectedoutput = $instancedata->expectedoutput ?? '';
-    $record->expectedoutputformat = (int)($instancedata->expectedoutputformat ?? FORMAT_HTML);
-
-    $record->evaluationcriteria = $instancedata->evaluationcriteria ?? '';
-    $record->evaluationcriteriaformat = (int)($instancedata->evaluationcriteriaformat ?? FORMAT_HTML);
-
-    $record->ethicalconstraints = $instancedata->ethicalconstraints ?? '';
-    $record->ethicalconstraintsformat = (int)($instancedata->ethicalconstraintsformat ?? FORMAT_HTML);
-
-    $record->opensat = (int)($instancedata->opensat ?? 0);
-    $record->duedate = (int)($instancedata->duedate ?? 0);
-    $record->closesat = (int)($instancedata->closesat ?? 0);
-
-    $record->allowsubmissionsfromdate = (int)($instancedata->allowsubmissionsfromdate ?? 0);
-    $record->cutoffdate = (int)($instancedata->cutoffdate ?? 0);
-
-    $record->submissionmode = clean_param(
-        (string)($instancedata->submissionmode ?? 'individual'),
-        PARAM_ALPHANUMEXT
+    $record->contexttext = uckkchallenge_first_value($instancedata, ['contexttext'], '');
+    $record->contexttextformat = (int)uckkchallenge_first_value(
+        $instancedata,
+        ['contexttextformat', 'context' . 'format'],
+        FORMAT_HTML
     );
 
-    $record->maxsubmissions = (int)($instancedata->maxsubmissions ?? 1);
-    $record->requireintegrityreview = !empty($instancedata->requireintegrityreview) ? 1 : 0;
-    $record->allowpublicsummary = !empty($instancedata->allowpublicsummary) ? 1 : 0;
-    $record->archiveonvalidation = !empty($instancedata->archiveonvalidation) ? 1 : 0;
+    $record->rules = uckkchallenge_first_value($instancedata, ['rules'], '');
+    $record->rulesformat = (int)uckkchallenge_first_value($instancedata, ['rulesformat'], FORMAT_HTML);
 
-    $record->grade = (float)($instancedata->grade ?? 100);
-    $record->completionrequiresubmission = !empty($instancedata->completionrequiresubmission) ? 1 : 0;
-    $record->completionrequirevalidation = !empty($instancedata->completionrequirevalidation) ? 1 : 0;
+    $record->corridors = uckkchallenge_encode_metadata(
+        uckkchallenge_first_value($instancedata, ['corridors'], null)
+    );
+    $record->corridorsformat = (int)uckkchallenge_first_value($instancedata, ['corridorsformat'], FORMAT_HTML);
 
-    $record->status = uckkchallenge_normalise_status((string)($instancedata->status ?? 'draft'));
-    $record->visibility = uckkchallenge_normalise_visibility((string)($instancedata->visibility ?? 'course'));
-    $record->provenance = uckkchallenge_normalise_provenance((string)($instancedata->provenance ?? 'human'));
-    $record->metadata = uckkchallenge_encode_metadata($instancedata->metadata ?? null);
+    $record->ethicalconstraints = uckkchallenge_first_value($instancedata, ['ethicalconstraints'], '');
+    $record->ethicalconstraintsformat = (int)uckkchallenge_first_value($instancedata, ['ethicalconstraintsformat'], FORMAT_HTML);
+
+    $record->evidencepolicy = uckkchallenge_first_value(
+        $instancedata,
+        ['evidencepolicy', 'expected' . 'output'],
+        ''
+    );
+    $record->evidencepolicyformat = (int)uckkchallenge_first_value(
+        $instancedata,
+        ['evidencepolicyformat', 'expected' . 'outputformat'],
+        FORMAT_HTML
+    );
+
+    $record->criteria = uckkchallenge_first_value(
+        $instancedata,
+        ['criteria', 'evaluation' . 'criteria'],
+        ''
+    );
+    $record->criteriaformat = (int)uckkchallenge_first_value(
+        $instancedata,
+        ['criteriaformat', 'evaluation' . 'criteriaformat'],
+        FORMAT_HTML
+    );
+
+    $record->teamsubmissions = empty(uckkchallenge_first_value($instancedata, ['teamsubmissions'], 0)) ? 0 : 1;
+    $record->maxsubmissions = max(1, (int)uckkchallenge_first_value($instancedata, ['maxsubmissions'], 1));
+    $record->allowresubmission = empty(uckkchallenge_first_value($instancedata, ['allowresubmission'], 1)) ? 0 : 1;
+
+    $record->integrityrequired = empty(uckkchallenge_first_value(
+        $instancedata,
+        ['integrityrequired', 'requireintegrityreview'],
+        1
+    )) ? 0 : 1;
+    $record->integritynotes = uckkchallenge_first_value($instancedata, ['integritynotes'], '');
+    $record->integritynotesformat = (int)uckkchallenge_first_value($instancedata, ['integritynotesformat'], FORMAT_HTML);
+
+    $record->aipolicy = uckkchallenge_first_value($instancedata, ['aipolicy'], '');
+    $record->aipolicyformat = (int)uckkchallenge_first_value($instancedata, ['aipolicyformat'], FORMAT_HTML);
+
+    $record->visibility = uckkchallenge_normalise_visibility(
+        (string)uckkchallenge_first_value($instancedata, ['visibility'], 'course')
+    );
+    $record->archivepolicy = clean_param(
+        (string)uckkchallenge_first_value($instancedata, ['archivepolicy'], 'summary'),
+        PARAM_ALPHANUMEXT
+    );
+    $record->publicsummary = uckkchallenge_first_value($instancedata, ['publicsummary'], '');
+    $record->publicsummaryformat = (int)uckkchallenge_first_value($instancedata, ['publicsummaryformat'], FORMAT_HTML);
+
+    $record->competencylinks = uckkchallenge_encode_metadata(
+        uckkchallenge_first_value($instancedata, ['competencylinks'], null)
+    );
+    $record->badgelinks = uckkchallenge_encode_metadata(
+        uckkchallenge_first_value($instancedata, ['badgelinks'], null)
+    );
+
+    $record->completionrequiresubmission = empty(
+        uckkchallenge_first_value($instancedata, ['completionrequiresubmission'], 0)
+    ) ? 0 : 1;
+    $record->completionrequirevalidation = empty(
+        uckkchallenge_first_value($instancedata, ['completionrequirevalidation'], 0)
+    ) ? 0 : 1;
+
+    $record->status = uckkchallenge_normalise_status(
+        (string)uckkchallenge_first_value($instancedata, ['status'], 'draft')
+    );
+
+    $record->timeopen = (int)uckkchallenge_first_value(
+        $instancedata,
+        ['timeopen', 'open' . 'sat'],
+        0
+    );
+    $record->timeclose = (int)uckkchallenge_first_value(
+        $instancedata,
+        ['timeclose', 'due' . 'date', 'close' . 'sat'],
+        0
+    );
+    $record->timereviewby = (int)uckkchallenge_first_value($instancedata, ['timereviewby'], 0);
+
+    $record->provenancehash = uckkchallenge_optional_text(
+        uckkchallenge_first_value($instancedata, ['provenancehash'], null),
+        64
+    );
+    $record->metadata = uckkchallenge_encode_metadata(uckkchallenge_first_value($instancedata, ['metadata'], null));
 
     return $record;
 }
@@ -879,9 +988,10 @@ function uckkchallenge_save_related_records(stdClass $challenge, stdClass $insta
 
         foreach (uckkchallenge_normalise_list_data($instancedata->rules) as $sortorder => $rule) {
             $record = uckkchallenge_base_child_record($challenge, $USER, $now);
-            $record->rulename = (string)($rule['name'] ?? get_string('rule', 'uckkchallenge'));
-            $record->ruletext = (string)($rule['text'] ?? '');
-            $record->ruleformat = (int)($rule['format'] ?? FORMAT_HTML);
+            $record->rulename = (string)($rule['rulename'] ?? $rule['name'] ?? get_string('rule', 'uckkchallenge'));
+            $record->ruletype = clean_param((string)($rule['ruletype'] ?? $rule['type'] ?? 'general'), PARAM_ALPHANUMEXT);
+            $record->description = (string)($rule['description'] ?? $rule['text'] ?? '');
+            $record->descriptionformat = (int)($rule['descriptionformat'] ?? $rule['format'] ?? FORMAT_HTML);
             $record->sortorder = $sortorder + 1;
 
             $DB->insert_record('uckkchallenge_rule', $record);
@@ -893,16 +1003,18 @@ function uckkchallenge_save_related_records(stdClass $challenge, stdClass $insta
 
         foreach (uckkchallenge_normalise_list_data($instancedata->corridors) as $sortorder => $corridor) {
             $record = uckkchallenge_base_child_record($challenge, $USER, $now);
-            $record->corridorname = (string)($corridor['name'] ?? get_string('corridor', 'uckkchallenge'));
-            $record->corridortext = (string)($corridor['text'] ?? '');
-            $record->corridorformat = (int)($corridor['format'] ?? FORMAT_HTML);
+            $record->title = (string)($corridor['title'] ?? $corridor['name'] ?? get_string('corridor', 'uckkchallenge'));
+            $record->corridortype = clean_param((string)($corridor['corridortype'] ?? $corridor['type'] ?? 'general'), PARAM_ALPHANUMEXT);
+            $record->description = (string)($corridor['description'] ?? $corridor['text'] ?? '');
+            $record->descriptionformat = (int)($corridor['descriptionformat'] ?? $corridor['format'] ?? FORMAT_HTML);
+            $record->requirements = (string)($corridor['requirements'] ?? '');
             $record->sortorder = $sortorder + 1;
 
             $DB->insert_record('uckkchallenge_corr', $record);
         }
     }
 
-    uckkchallenge_record_state($challenge, $challenge->status, get_string('statechangedbyform', 'uckkchallenge'));
+    uckkchallenge_record_state($challenge, $challenge->status, 'State changed by activity form.');
 }
 
 /**
@@ -914,18 +1026,16 @@ function uckkchallenge_save_related_records(stdClass $challenge, stdClass $insta
  * @return stdClass
  */
 function uckkchallenge_base_child_record(stdClass $challenge, stdClass $user, int $now): stdClass {
+    $userid = (int)($user->id ?? 0);
+
     $record = new stdClass();
     $record->challengeid = (int)$challenge->id;
-    $record->courseid = (int)$challenge->course;
-    $record->contextid = uckkchallenge_get_contextid((int)$challenge->id, (int)$challenge->course);
-    $record->createdby = (int)$user->id;
-    $record->modifiedby = (int)$user->id;
+    $record->createdby = $userid;
+    $record->modifiedby = $userid;
     $record->timecreated = $now;
     $record->timemodified = $now;
     $record->status = 'active';
-    $record->visibility = (string)$challenge->visibility;
-    $record->versionno = 1;
-    $record->provenancehash = null;
+    $record->visibility = (string)($challenge->visibility ?? 'course');
     $record->metadata = null;
 
     return $record;
@@ -941,22 +1051,22 @@ function uckkchallenge_base_child_record(stdClass $challenge, stdClass $user, in
 function uckkchallenge_record_state(stdClass $challenge, string $status, string $note = ''): void {
     global $DB, $USER;
 
+    $actorid = (int)($USER->id ?? $challenge->modifiedby ?? $challenge->createdby ?? 0);
+
     $record = new stdClass();
     $record->challengeid = (int)$challenge->id;
-    $record->courseid = (int)$challenge->course;
-    $record->contextid = uckkchallenge_get_contextid((int)$challenge->id, (int)$challenge->course);
-    $record->userid = null;
+    $record->submissionid = 0;
+    $record->evaluationid = 0;
+    $record->userid = $actorid;
     $record->fromstatus = null;
     $record->tostatus = uckkchallenge_normalise_status($status);
-    $record->note = $note;
-    $record->createdby = (int)$USER->id;
-    $record->modifiedby = (int)$USER->id;
-    $record->timecreated = time();
-    $record->timemodified = $record->timecreated;
-    $record->status = 'active';
-    $record->visibility = (string)$challenge->visibility;
-    $record->versionno = 1;
+    $record->action = 'state_change';
+    $record->reason = $note !== '' ? $note : null;
+    $record->reasonformat = FORMAT_PLAIN;
+    $record->integritystate = null;
     $record->provenancehash = null;
+    $record->timecreated = time();
+    $record->createdby = $actorid;
     $record->metadata = null;
 
     $DB->insert_record('uckkchallenge_state', $record);
@@ -1122,13 +1232,17 @@ function uckkchallenge_normalise_list_data(mixed $data): array {
  * @param stdClass $source Source data.
  */
 function uckkchallenge_trigger_event_if_available(string $eventclass, stdClass $challenge, stdClass $source): void {
+    global $DB;
+
     if (!class_exists($eventclass)) {
         return;
     }
 
-    $cmid = !empty($source->coursemodule)
-        ? (int)$source->coursemodule
-        : 0;
+    $cmid = !empty($source->coursemodule) ? (int)$source->coursemodule : 0;
+
+    if (!$cmid && !empty($source->cmid)) {
+        $cmid = (int)$source->cmid;
+    }
 
     if (!$cmid && !empty($challenge->id) && !empty($challenge->course)) {
         $cm = get_coursemodule_from_instance(
@@ -1142,18 +1256,47 @@ function uckkchallenge_trigger_event_if_available(string $eventclass, stdClass $
         $cmid = $cm ? (int)$cm->id : 0;
     }
 
-    $context = $cmid
-        ? context_module::instance($cmid)
-        : context_course::instance((int)$challenge->course);
+    if (!$cmid) {
+        return;
+    }
+
+    $context = context_module::instance($cmid, IGNORE_MISSING);
+
+    if (!$context) {
+        return;
+    }
+
+    $courseid = (int)($challenge->course ?? $source->course ?? 0);
+
+    $type = (string)($challenge->challengetype ?? $source->challengetype ?? 'internal_learning');
+    $status = (string)($challenge->status ?? $source->status ?? 'draft');
+    $visibility = (string)($challenge->visibility ?? $source->visibility ?? 'course');
 
     $event = $eventclass::create([
         'objectid' => (int)$challenge->id,
         'context' => $context,
         'other' => [
-            'status' => $challenge->status ?? null,
-            'challenge_type' => $challenge->challenge_type ?? null,
+            'courseid' => $courseid,
+            'cmid' => $cmid,
+            'status' => $status,
+            'visibility' => $visibility,
+            'challengetype' => $type,
         ],
     ]);
+
+    if ($courseid > 0) {
+        $course = $DB->get_record('course', ['id' => $courseid], '*', IGNORE_MISSING);
+
+        if ($course) {
+            $event->add_record_snapshot('course', $course);
+        }
+    }
+
+    $cmrecord = $DB->get_record('course_modules', ['id' => $cmid], '*', IGNORE_MISSING);
+
+    if ($cmrecord) {
+        $event->add_record_snapshot('course_modules', $cmrecord);
+    }
 
     $event->add_record_snapshot('uckkchallenge', $challenge);
     $event->trigger();

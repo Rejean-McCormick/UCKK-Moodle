@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace mod_uckkassembly\output;
 
+use context_module;
 use moodle_url;
 use renderable;
 use renderer_base;
@@ -189,31 +190,60 @@ final class assembly_view implements renderable, templatable {
      * @param array<string, mixed>|stdClass|null $archivepanel Optional archive panel data.
      */
     public function __construct(
-        int $assemblyid,
-        int $cmid,
-        int $courseid,
-        int $contextid,
-        array|stdClass $assembly,
-        array $motions = [],
-        array $decisions = [],
-        array $contests = [],
-        array $minutes = [],
-        array $actions = [],
-        array|stdClass|null $integritypanel = null,
-        array|stdClass|null $archivepanel = null
+        int|stdClass $assembly,
+        int|stdClass $cm,
+        int|stdClass $course,
+        int|context_module $context,
+        array|stdClass $viewdata = [],
+        array $options = [],
+        array $legacydecisions = [],
+        array $legacycontests = [],
+        array $legacyminutes = [],
+        array $legacyactions = [],
+        array|stdClass|null $legacyintegritypanel = null,
+        array|stdClass|null $legacyarchivepanel = null
     ) {
-        $this->assemblyid = max(0, $assemblyid);
-        $this->cmid = max(0, $cmid);
-        $this->courseid = max(0, $courseid);
-        $this->contextid = max(0, $contextid);
-        $this->assembly = (array)$assembly;
-        $this->motions = array_map([$this, 'normalise_motion'], $motions);
-        $this->decisions = array_map([$this, 'normalise_decision'], $decisions);
-        $this->contests = array_map([$this, 'normalise_contest'], $contests);
-        $this->minutes = array_map([$this, 'normalise_minutes'], $minutes);
-        $this->actions = array_map([$this, 'normalise_action'], $actions);
-        $this->integritypanel = $integritypanel;
-        $this->archivepanel = $archivepanel;
+        // Compatibility mode for the previous internal constructor signature.
+        if (is_int($assembly)) {
+            $this->assemblyid = max(0, $assembly);
+            $this->cmid = max(0, (int)$cm);
+            $this->courseid = max(0, (int)$course);
+            $this->contextid = max(0, (int)$context);
+            $this->assembly = (array)$viewdata;
+            $this->motions = array_map([$this, 'normalise_motion'], $options);
+            $this->decisions = array_map([$this, 'normalise_decision'], $legacydecisions);
+            $this->contests = array_map([$this, 'normalise_contest'], $legacycontests);
+            $this->minutes = array_map([$this, 'normalise_minutes'], $legacyminutes);
+            $this->actions = array_map([$this, 'normalise_action'], $legacyactions);
+            $this->integritypanel = $legacyintegritypanel;
+            $this->archivepanel = $legacyarchivepanel;
+            return;
+        }
+
+        $viewdata = (array)$viewdata;
+        $options = (array)$options;
+
+        $this->assemblyid = max(0, (int)($assembly->id ?? 0));
+        $this->cmid = max(0, (int)($cm->id ?? 0));
+        $this->courseid = max(0, (int)($course->id ?? $assembly->course ?? 0));
+        $this->contextid = max(0, (int)($context->id ?? 0));
+
+        $assemblydata = array_merge((array)$assembly, (array)($viewdata['assembly'] ?? []));
+        $assemblydata['notices'] = $viewdata['notices'] ?? $options['notices'] ?? $assemblydata['notices'] ?? [];
+        $assemblydata['warnings'] = $viewdata['warnings'] ?? $options['warnings'] ?? $assemblydata['warnings'] ?? [];
+
+        $this->assembly = $assemblydata;
+        $this->motions = array_map([$this, 'normalise_motion'], (array)($viewdata['motions'] ?? []));
+        $this->decisions = array_map([$this, 'normalise_decision'], (array)($viewdata['decisions'] ?? []));
+        $this->contests = array_map(
+            [$this, 'normalise_contest'],
+            (array)($viewdata['contests'] ?? $viewdata['contestations'] ?? [])
+        );
+        $this->minutes = array_map([$this, 'normalise_minutes'], (array)($viewdata['minutes'] ?? []));
+        $this->actions = array_map([$this, 'normalise_action'], (array)($viewdata['actions'] ?? $options['actions'] ?? []));
+
+        $this->integritypanel = $viewdata['integritypanel'] ?? $options['integritypanel'] ?? null;
+        $this->archivepanel = $viewdata['archivepanel'] ?? $viewdata['archive'] ?? $options['archivepanel'] ?? null;
     }
 
     /**
@@ -265,21 +295,21 @@ final class assembly_view implements renderable, templatable {
         $data->motions = $this->build_motion_rows();
         $data->hasmotions = !empty($data->motions);
         $data->motioncount = count($data->motions);
-        $data->emptymotionslabel = get_string('motions:none', 'uckkassembly');
+        $data->emptymotionslabel = $this->get_lang_or_fallback('motions:none', 'No motions yet');
 
         $data->decisions = $this->build_decision_rows();
         $data->hasdecisions = !empty($data->decisions);
         $data->decisioncount = count($data->decisions);
-        $data->emptydecisionslabel = get_string('decisions:none', 'uckkassembly');
+        $data->emptydecisionslabel = $this->get_lang_or_fallback('decisions:none', 'No decisions yet');
 
         $data->contests = $this->build_contest_rows();
         $data->hascontests = !empty($data->contests);
         $data->contestcount = count($data->contests);
-        $data->emptycontestslabel = get_string('contests:none', 'uckkassembly');
+        $data->emptycontestslabel = $this->get_lang_or_fallback('contests:none', 'No contestations yet');
 
         $data->minutes = $this->build_minutes_rows();
         $data->hasminutes = !empty($data->minutes);
-        $data->emptyminuteslabel = get_string('minutes:none', 'uckkassembly');
+        $data->emptyminuteslabel = $this->get_lang_or_fallback('minutes:none', 'No minutes yet');
 
         $data->actions = $this->build_action_rows();
         $data->hasactions = !empty($data->actions);
@@ -297,7 +327,7 @@ final class assembly_view implements renderable, templatable {
         $data->haswarnings = !empty($data->warnings);
 
         $data->summarycards = $this->build_summary_cards($data);
-        $data->authoritynotice = get_string('assemblynonsovereignnotice', 'uckkassembly');
+        $data->authoritynotice = $this->get_lang_or_fallback('assemblynonsovereignnotice', 'This assembly is a pedagogical deliberation space.');
 
         return $data;
     }
@@ -483,7 +513,7 @@ final class assembly_view implements renderable, templatable {
 
         return [
             'id' => max(0, (int)($row['id'] ?? 0)),
-            'title' => format_string((string)($row['title'] ?? $row['name'] ?? get_string('minutes', 'uckkassembly'))),
+            'title' => format_string((string)($row['title'] ?? $row['name'] ?? $this->get_lang_or_fallback('minutes', 'Minutes'))),
             'summary' => (string)($row['summary'] ?? ''),
             'hassummary' => trim((string)($row['summary'] ?? '')) !== '',
             'status' => $status,
@@ -501,7 +531,22 @@ final class assembly_view implements renderable, templatable {
      * @param array<string, mixed>|stdClass $action Raw action.
      * @return array<string, mixed>
      */
-    private function normalise_action(array|stdClass $action): array {
+    private function normalise_action(mixed $action): array {
+        if (!is_array($action) && !$action instanceof stdClass) {
+            return [
+                'key' => '',
+                'label' => '',
+                'url' => '',
+                'hasurl' => false,
+                'primary' => false,
+                'danger' => false,
+                'secondary' => true,
+                'disabled' => true,
+                'disabledreason' => '',
+                'hasdisabledreason' => false,
+            ];
+        }
+
         $row = (array)$action;
         $key = clean_param((string)($row['key'] ?? $row['action'] ?? ''), PARAM_ALPHANUMEXT);
         $url = $this->normalise_url($row['url'] ?? null);
@@ -585,19 +630,19 @@ final class assembly_view implements renderable, templatable {
         return [
             (object)[
                 'key' => 'motions',
-                'label' => get_string('motions', 'uckkassembly'),
+                'label' => $this->get_lang_or_fallback('motions', 'Motions'),
                 'value' => (string)$data->motioncount,
                 'class' => $data->hasmotions ? 'has-items' : 'is-empty',
             ],
             (object)[
                 'key' => 'decisions',
-                'label' => get_string('decisions', 'uckkassembly'),
+                'label' => $this->get_lang_or_fallback('decisions', 'Decisions'),
                 'value' => (string)$data->decisioncount,
                 'class' => $data->hasdecisions ? 'has-items' : 'is-empty',
             ],
             (object)[
                 'key' => 'contests',
-                'label' => get_string('contests', 'uckkassembly'),
+                'label' => $this->get_lang_or_fallback('contests', 'Contestations'),
                 'value' => (string)$data->contestcount,
                 'class' => $data->hascontests ? 'has-warning' : 'is-clear',
             ],

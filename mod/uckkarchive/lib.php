@@ -114,15 +114,12 @@ function uckkarchive_add_instance(stdClass $archive, $mform = null): int {
     $archive->createdby = (int)$USER->id;
     $archive->modifiedby = (int)$USER->id;
 
-    $archive->status = uckkarchive_normalise_status($archive->status ?? UCKKARCHIVE_STATUS_ACTIVE);
-    $archive->visibility = uckkarchive_normalise_visibility($archive->visibility ?? UCKKARCHIVE_VISIBILITY_COURSE);
-    $archive->metadata = uckkarchive_normalise_metadata($archive->metadata ?? null);
+    $record = uckkarchive_prepare_instance_record($archive, true);
+    $record->id = $DB->insert_record(UCKKARCHIVE_TABLE, $record);
 
-    if (empty($archive->versionno)) {
-        $archive->versionno = 1;
-    }
-
-    $archive->id = $DB->insert_record(UCKKARCHIVE_TABLE, $archive);
+    $archive->id = (int)$record->id;
+    $archive->completionrequireitem = (int)$record->completionrequireitem;
+    $archive->completionrequirevalidation = (int)$record->completionrequirevalidation;
 
     uckkarchive_update_calendar_events($archive);
     uckkarchive_update_completion_metadata($archive);
@@ -144,16 +141,11 @@ function uckkarchive_update_instance(stdClass $archive, $mform = null): bool {
     $archive->timemodified = time();
     $archive->modifiedby = (int)$USER->id;
 
-    $archive->status = uckkarchive_normalise_status($archive->status ?? UCKKARCHIVE_STATUS_ACTIVE);
-    $archive->visibility = uckkarchive_normalise_visibility($archive->visibility ?? UCKKARCHIVE_VISIBILITY_COURSE);
-    $archive->metadata = uckkarchive_normalise_metadata($archive->metadata ?? null);
+    $record = uckkarchive_prepare_instance_record($archive, false);
+    $result = $DB->update_record(UCKKARCHIVE_TABLE, $record);
 
-    if (empty($archive->versionno)) {
-        $current = $DB->get_record(UCKKARCHIVE_TABLE, ['id' => $archive->id], 'id, versionno', MUST_EXIST);
-        $archive->versionno = max(1, (int)$current->versionno);
-    }
-
-    $result = $DB->update_record(UCKKARCHIVE_TABLE, $archive);
+    $archive->completionrequireitem = (int)$record->completionrequireitem;
+    $archive->completionrequirevalidation = (int)$record->completionrequirevalidation;
 
     uckkarchive_update_calendar_events($archive);
     uckkarchive_update_completion_metadata($archive);
@@ -326,7 +318,7 @@ function uckkarchive_get_coursemodule_info(stdClass $coursemodule): ?cached_cm_i
     $archive = $DB->get_record(
         UCKKARCHIVE_TABLE,
         ['id' => $coursemodule->instance],
-        'id, name, intro, introformat, status, visibility, timeopen, timeclose',
+        'id, name, intro, introformat, status, visibility, defaultvisibility, archivepolicy, timemodified',
         IGNORE_MISSING
     );
 
@@ -344,8 +336,9 @@ function uckkarchive_get_coursemodule_info(stdClass $coursemodule): ?cached_cm_i
     $customdata = [
         'status' => $archive->status ?? UCKKARCHIVE_STATUS_ACTIVE,
         'visibility' => $archive->visibility ?? UCKKARCHIVE_VISIBILITY_COURSE,
-        'timeopen' => (int)($archive->timeopen ?? 0),
-        'timeclose' => (int)($archive->timeclose ?? 0),
+        'defaultvisibility' => $archive->defaultvisibility ?? UCKKARCHIVE_VISIBILITY_COURSE,
+        'archivepolicy' => $archive->archivepolicy ?? 'validated',
+        'timemodified' => (int)($archive->timemodified ?? 0),
     ];
 
     $info->customdata = $customdata;
@@ -440,7 +433,7 @@ function uckkarchive_get_completion_state($course, $cm, $userid, $type): bool {
     $archive = $DB->get_record(
         UCKKARCHIVE_TABLE,
         ['id' => $cm->instance],
-        'id, completionadditem, completionvalidateitem',
+        'id, completionrequireitem, completionrequirevalidation',
         IGNORE_MISSING
     );
 
@@ -450,7 +443,7 @@ function uckkarchive_get_completion_state($course, $cm, $userid, $type): bool {
 
     $conditions = [];
 
-    if (!empty($archive->completionadditem)) {
+    if (!empty($archive->completionrequireitem)) {
         $conditions[] = $DB->record_exists_select(
             'uckkarchive_item',
             'archiveid = :archiveid AND (userid = :userid OR createdby = :createdby)',
@@ -462,7 +455,7 @@ function uckkarchive_get_completion_state($course, $cm, $userid, $type): bool {
         );
     }
 
-    if (!empty($archive->completionvalidateitem)) {
+    if (!empty($archive->completionrequirevalidation)) {
         $conditions[] = $DB->record_exists_select(
             'uckkarchive_item',
             'archiveid = :archiveid
@@ -643,28 +636,6 @@ function uckkarchive_update_calendar_events(stdClass $archive): void {
         'modulename' => 'uckkarchive',
         'instance' => $instanceid,
     ]);
-
-    $cmid = (int)($archive->coursemodule ?? 0);
-
-    if (!empty($archive->timeopen)) {
-        uckkarchive_create_calendar_event(
-            $archive,
-            $cmid,
-            (int)$archive->timeopen,
-            get_string('calendarevent:opens', 'uckkarchive', $archive->name),
-            'open'
-        );
-    }
-
-    if (!empty($archive->timeclose)) {
-        uckkarchive_create_calendar_event(
-            $archive,
-            $cmid,
-            (int)$archive->timeclose,
-            get_string('calendarevent:closes', 'uckkarchive', $archive->name),
-            'close'
-        );
-    }
 }
 
 /**
@@ -715,12 +686,12 @@ function uckkarchive_update_completion_metadata(stdClass $archive): void {
     $record->id = (int)$archive->id;
     $record->timemodified = time();
 
-    if (isset($archive->completionadditem)) {
-        $record->completionadditem = empty($archive->completionadditem) ? 0 : 1;
+    if (isset($archive->completionrequireitem)) {
+        $record->completionrequireitem = empty($archive->completionrequireitem) ? 0 : 1;
     }
 
-    if (isset($archive->completionvalidateitem)) {
-        $record->completionvalidateitem = empty($archive->completionvalidateitem) ? 0 : 1;
+    if (isset($archive->completionrequirevalidation)) {
+        $record->completionrequirevalidation = empty($archive->completionrequirevalidation) ? 0 : 1;
     }
 
     $DB->update_record(UCKKARCHIVE_TABLE, $record);
@@ -826,6 +797,94 @@ function uckkarchive_get_filearea_table(string $filearea): string {
         UCKKARCHIVE_FILEAREA_PORTFOLIO_FILES => 'uckkarchive_item',
         default => '',
     };
+}
+
+
+/**
+ * Build a database-safe archive instance record.
+ *
+ * This function is deliberately schema-owned. Moodle form/moduleinfo objects may
+ * contain Moodle form/moduleinfo objects may contain fields that are not columns
+ * in the uckkarchive table; they must not be passed directly to
+ * insert_record()/update_record().
+ *
+ * @param stdClass $data Raw module data.
+ * @param bool $isnew Whether this is a new instance.
+ * @return stdClass Database-safe instance record.
+ */
+function uckkarchive_prepare_instance_record(stdClass $data, bool $isnew): stdClass {
+    global $USER, $DB;
+
+    $record = new stdClass();
+
+    if (!$isnew) {
+        $record->id = (int)($data->id ?? $data->instance ?? 0);
+    }
+
+    $record->course = (int)($data->course ?? 0);
+    $record->name = trim((string)($data->name ?? ''));
+    $record->intro = $data->intro ?? '';
+    $record->introformat = (int)($data->introformat ?? FORMAT_HTML);
+
+    $record->archivecode = uckkarchive_optional_text($data->archivecode ?? null, 100);
+    $record->archivetype = clean_param((string)($data->archivetype ?? 'course'), PARAM_ALPHANUMEXT);
+    $record->archivepolicy = clean_param((string)($data->archivepolicy ?? 'validated'), PARAM_ALPHANUMEXT);
+
+    $visibility = uckkarchive_normalise_visibility($data->visibility ?? UCKKARCHIVE_VISIBILITY_COURSE);
+    $record->visibility = $visibility;
+    $record->defaultvisibility = uckkarchive_normalise_visibility($data->defaultvisibility ?? $visibility);
+
+    $record->requirevalidation = empty($data->requirevalidation) ? 0 : 1;
+    $record->allowpublicitems = empty($data->allowpublicitems) ? 0 : 1;
+    $record->allowexports = isset($data->allowexports) ? (empty($data->allowexports) ? 0 : 1) : 1;
+
+    $record->completionrequireitem = empty($data->completionrequireitem ?? 0) ? 0 : 1;
+    $record->completionrequirevalidation = empty($data->completionrequirevalidation ?? 0) ? 0 : 1;
+
+    $record->status = uckkarchive_normalise_status($data->status ?? UCKKARCHIVE_STATUS_ACTIVE);
+    $record->versionno = max(1, (int)($data->versionno ?? 1));
+    $record->metadata = uckkarchive_normalise_metadata($data->metadata ?? null);
+
+    $record->timemodified = (int)($data->timemodified ?? time());
+    $record->modifiedby = (int)($data->modifiedby ?? $USER->id ?? 0);
+
+    if ($isnew) {
+        $record->timecreated = (int)($data->timecreated ?? time());
+        $record->createdby = (int)($data->createdby ?? $USER->id ?? 0);
+    } else if (!empty($record->id)) {
+        $current = $DB->get_record(UCKKARCHIVE_TABLE, ['id' => $record->id], 'id, timecreated, createdby, versionno', IGNORE_MISSING);
+
+        if ($current) {
+            $record->timecreated = (int)$current->timecreated;
+            $record->createdby = (int)$current->createdby;
+            $record->versionno = max((int)$current->versionno, $record->versionno);
+        }
+    }
+
+    return $record;
+}
+
+
+
+/**
+ * Return a clipped optional text value or null.
+ *
+ * @param mixed $value Raw value.
+ * @param int $maxlength Maximum length.
+ * @return string|null
+ */
+function uckkarchive_optional_text(mixed $value, int $maxlength): ?string {
+    if ($value === null) {
+        return null;
+    }
+
+    $value = trim((string)$value);
+
+    if ($value === '') {
+        return null;
+    }
+
+    return core_text::substr(clean_param($value, PARAM_TEXT), 0, $maxlength);
 }
 
 /**

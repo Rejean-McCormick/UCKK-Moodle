@@ -82,7 +82,7 @@
         "internal_title": "Mage UCKK du Grand Jeu social",
         "symbolic_title": "Joueur lucide du Grand Jeu social"
       },
-      "status": "internal_experimental",
+      "status": "draft",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
       "summary": "Voie transversale principale de l’Univers-Cité King Klown. Elle forme des personnes capables de lire la société comme un système composé de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.",
       "moodle": {
@@ -255,7 +255,7 @@
         "internal_title": "Mage UCKK des Sciences politiques",
         "symbolic_title": "Stratège civique"
       },
-      "status": "internal_experimental",
+      "status": "draft",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
       "summary": "Voie formant des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.",
       "moodle": {
@@ -429,7 +429,7 @@
         "internal_title": "Mage UCKK des Structures invisibles",
         "symbolic_title": "Lecteur des structures invisibles"
       },
-      "status": "internal_experimental",
+      "status": "draft",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
       "summary": "Voie formant des personnes capables d’étudier les structures invisibles qui organisent notre rapport au réel : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage, croyance, récit et symboles.",
       "moodle": {
@@ -545,7 +545,7 @@
         "internal_title": "Mage UCKK du Sens",
         "symbolic_title": "Architecte du sens"
       },
-      "status": "internal_experimental",
+      "status": "draft",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
       "summary": "Voie formant des personnes capables de comprendre les langues comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes, réputation et pouvoir symbolique.",
       "moodle": {

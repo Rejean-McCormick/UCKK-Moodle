@@ -302,6 +302,8 @@ final class reset_form extends moodleform {
 
         return [
             'categories' => get_string('preset_categories', 'tool_uckkseed'),
+            'programs' => get_string('preset_programs', 'tool_uckkseed'),
+            'pathways' => get_string('preset_pathways', 'tool_uckkseed'),
             'courses' => get_string('preset_courses', 'tool_uckkseed'),
             'cohorts' => get_string('preset_cohorts', 'tool_uckkseed'),
             'roles' => get_string('preset_roles', 'tool_uckkseed'),

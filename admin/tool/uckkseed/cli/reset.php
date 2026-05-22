@@ -61,6 +61,8 @@ const TOOL_UCKKSEED_CLI_RESET_SCOPES = [
  */
 const TOOL_UCKKSEED_CLI_PRESETS = [
     'categories',
+    'programs',
+    'pathways',
     'courses',
     'cohorts',
     'roles',
@@ -298,9 +300,10 @@ Options:
 
 --preset=<list>            Comma-separated preset ids to reset or inspect.
                            Allowed:
-                             categories, courses, cohorts, roles, capabilities,
-                             competencies, badges, reports, course_templates,
-                             challenge_templates, assembly_templates, archive_templates
+                             categories, programs, pathways, courses, cohorts,
+                             roles, capabilities, competencies, badges, reports,
+                             course_templates, challenge_templates,
+                             assembly_templates, archive_templates
 
 --component=<list>         Comma-separated UCKK components to target.
                            Allowed:
@@ -325,6 +328,7 @@ php admin/tool/uckkseed/cli/reset.php --dry-run
 php admin/tool/uckkseed/cli/reset.php --presetpath=academic_registry_json --dry-run
 php admin/tool/uckkseed/cli/reset.php --scope=reset_seed_logs --confirm
 php admin/tool/uckkseed/cli/reset.php --scope=reset_seeded_courses --preset=courses,course_templates --dry-run
+php admin/tool/uckkseed/cli/reset.php --preset=programs,pathways --dry-run
 php admin/tool/uckkseed/cli/reset.php --scope=reset_all_uckk_seeded_content --force --confirm
 php admin/tool/uckkseed/cli/reset.php --rollback-plan --json
 

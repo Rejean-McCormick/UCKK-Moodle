@@ -738,45 +738,57 @@ final class pathway_seed {
         return $map;
     }
 
-    /**
-     * Build badge reference map.
-     *
-     * @param array<string, mixed> $options Runtime options.
-     * @return array<string, bool>
-     */
-    private function build_badge_map(array $options): array {
-        global $DB;
+/**
+ * Build badge reference map.
+ *
+ * Moodle badge table schemas differ between versions. Do not assume
+ * non-core/generated columns such as uniquehash or idnumber exist.
+ *
+ * @param array<string, mixed> $options Runtime options.
+ * @return array<string, bool>
+ */
+private function build_badge_map(array $options): array {
+    global $DB;
 
-        $map = [];
+    $map = [];
 
-        if ($this->table_exists(self::TABLE_BADGE)) {
-            foreach ($DB->get_records(self::TABLE_BADGE, null, '', 'id, name, uniquehash') as $badge) {
-                $map[(string)$badge->id] = true;
-                if (!empty($badge->name)) {
-                    $map[(string)$badge->name] = true;
-                }
-                if (!empty($badge->uniquehash)) {
-                    $map[(string)$badge->uniquehash] = true;
-                }
+    if ($this->table_exists(self::TABLE_BADGE)) {
+        $columns = $DB->get_columns(self::TABLE_BADGE);
+        $fields = [];
+
+        foreach (['id', 'name', 'uniquehash', 'idnumber'] as $field) {
+            if (array_key_exists($field, $columns)) {
+                $fields[] = $field;
             }
         }
 
-        foreach ($this->read_preset_items($options, 'badges') as $badge) {
-            if ($badge instanceof stdClass) {
-                $badge = (array)$badge;
-            }
-            if (!is_array($badge)) {
-                continue;
-            }
-            foreach (['id', 'key', 'idnumber', 'shortname'] as $field) {
-                if (!empty($badge[$field])) {
-                    $map[(string)$badge[$field]] = true;
+        if (!empty($fields)) {
+            foreach ($DB->get_records(self::TABLE_BADGE, null, '', implode(', ', $fields)) as $badge) {
+                foreach (['id', 'name', 'uniquehash', 'idnumber'] as $field) {
+                    if (property_exists($badge, $field) && !empty($badge->{$field})) {
+                        $map[(string)$badge->{$field}] = true;
+                    }
                 }
             }
         }
-
-        return $map;
     }
+
+    foreach ($this->read_preset_items($options, 'badges') as $badge) {
+        if ($badge instanceof stdClass) {
+            $badge = (array)$badge;
+        }
+        if (!is_array($badge)) {
+            continue;
+        }
+        foreach (['id', 'key', 'idnumber', 'shortname', 'name'] as $field) {
+            if (!empty($badge[$field])) {
+                $map[(string)$badge[$field]] = true;
+            }
+        }
+    }
+
+    return $map;
+}
 
     /**
      * Build competency reference map.

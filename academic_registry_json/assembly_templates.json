@@ -496,9 +496,9 @@
       "defaults": {
         "assemblytype": "inquisiteurs",
         "status": "active",
-        "visibility": "restricted_integrity",
+        "visibility": "restricted",
         "provenance": "integrity",
-        "validationstate": "human_reviewed",
+        "validationstate": "validated",
         "allowmotions": true,
         "allowamendments": true,
         "allowobjections": true,
@@ -532,7 +532,7 @@
         },
         "archive": {
           "component": "mod_uckkarchive",
-          "visibility": "restricted_integrity",
+          "visibility": "restricted",
           "provenance": "integrity",
           "export_minutes": true,
           "export_decisions": true,
@@ -589,14 +589,14 @@
           "component": "tool_uckkintegrity",
           "type": "integrity_case",
           "required": true,
-          "visibility": "restricted_integrity"
+          "visibility": "restricted"
         },
         {
           "key": "restricted_archive_export",
           "component": "mod_uckkarchive",
           "type": "integrity_exports",
           "required": true,
-          "visibility": "restricted_integrity"
+          "visibility": "restricted"
         }
       ],
       "completion": {
@@ -625,7 +625,7 @@
         "status": "active",
         "visibility": "institution",
         "provenance": "assembly",
-        "validationstate": "human_reviewed",
+        "validationstate": "validated",
         "allowmotions": true,
         "allowamendments": true,
         "allowobjections": true,

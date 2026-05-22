@@ -57,6 +57,8 @@ const TOOL_UCKKSEED_LEGACY_PRESETPATH = 'admin/tool/uckkseed/presets';
  */
 const TOOL_UCKKSEED_PRESETS = [
     'categories',
+    'programs',
+    'pathways',
     'courses',
     'cohorts',
     'roles',
@@ -125,7 +127,8 @@ function tool_uckkseed_cli_seed_help(): never {
     cli_writeln("Examples:");
     cli_writeln("  php {$script} --dry-run");
     cli_writeln("  php {$script} --presetpath=academic_registry_json --dry-run");
-    cli_writeln("  php {$script} --preset=categories,courses,competencies --dry-run");
+    cli_writeln("  php {$script} --preset=categories,programs,pathways,courses,competencies --dry-run");
+    cli_writeln("  php {$script} --preset=programs,pathways --report");
     cli_writeln("  php {$script} --component=mod_uckkarchive --report");
     cli_writeln("  php {$script} --force");
     cli_writeln('');
@@ -283,10 +286,6 @@ function tool_uckkseed_cli_validate_presets(array $presets): void {
  */
 function tool_uckkseed_cli_validate_components(array $components): void {
     $invalid = array_values(array_diff($components, TOOL_UCKKSEED_COMPONENTS));
-
-    if (!empty($invalid)) {
-        cli_error(
-            'Invalid component(s): ' . implode(', ', $invalidCKKSEED_COMPONENTS));
 
     if (!empty($invalid)) {
         cli_error(

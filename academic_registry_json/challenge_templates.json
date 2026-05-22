@@ -99,10 +99,22 @@
         "visible": 1
       },
       "sections": [
-        "orientation",
-        "preuves",
-        "evaluation",
-        "archive"
+        {
+          "number": 1,
+          "key": "orientation"
+        },
+        {
+          "number": 2,
+          "key": "preuves"
+        },
+        {
+          "number": 3,
+          "key": "evaluation"
+        },
+        {
+          "number": 4,
+          "key": "archive"
+        }
       ],
       "activities": [],
       "completion": {
@@ -220,11 +232,26 @@
         "visible": 1
       },
       "sections": [
-        "orientation",
-        "atelier",
-        "preuves",
-        "deliberation",
-        "archive"
+        {
+          "number": 1,
+          "key": "orientation"
+        },
+        {
+          "number": 2,
+          "key": "atelier"
+        },
+        {
+          "number": 3,
+          "key": "preuves"
+        },
+        {
+          "number": 4,
+          "key": "deliberation"
+        },
+        {
+          "number": 5,
+          "key": "archive"
+        }
       ],
       "activities": [],
       "completion": {
@@ -248,7 +275,7 @@
       "defaults": {
         "challenge_type": "institutional_audit",
         "status": "draft",
-        "visibility": "restricted",
+        "visibility": "private",
         "provenance": "system",
         "validationstate": "unverified",
         "requires_human_validation": true,
@@ -344,11 +371,26 @@
         ]
       },
       "sections": [
-        "orientation",
-        "concepts",
-        "preuves",
-        "evaluation",
-        "archive"
+        {
+          "number": 1,
+          "key": "orientation"
+        },
+        {
+          "number": 2,
+          "key": "concepts"
+        },
+        {
+          "number": 3,
+          "key": "preuves"
+        },
+        {
+          "number": 4,
+          "key": "evaluation"
+        },
+        {
+          "number": 5,
+          "key": "archive"
+        }
       ],
       "activities": [],
       "completion": {
@@ -460,11 +502,26 @@
         "visible": 1
       },
       "sections": [
-        "orientation",
-        "concepts",
-        "atelier",
-        "preuves",
-        "archive"
+        {
+          "number": 1,
+          "key": "orientation"
+        },
+        {
+          "number": 2,
+          "key": "concepts"
+        },
+        {
+          "number": 3,
+          "key": "atelier"
+        },
+        {
+          "number": 4,
+          "key": "preuves"
+        },
+        {
+          "number": 5,
+          "key": "archive"
+        }
       ],
       "activities": [],
       "completion": {
@@ -583,11 +640,26 @@
         "visible": 1
       },
       "sections": [
-        "orientation",
-        "atelier",
-        "livrable",
-        "evaluation",
-        "archive"
+        {
+          "number": 1,
+          "key": "orientation"
+        },
+        {
+          "number": 2,
+          "key": "atelier"
+        },
+        {
+          "number": 3,
+          "key": "livrable"
+        },
+        {
+          "number": 4,
+          "key": "evaluation"
+        },
+        {
+          "number": 5,
+          "key": "archive"
+        }
       ],
       "activities": [],
       "completion": {
@@ -610,7 +682,7 @@
       "defaults": {
         "challenge_type": "mobilisation",
         "status": "draft",
-        "visibility": "program",
+        "visibility": "institution",
         "provenance": "system",
         "validationstate": "unverified",
         "requires_human_validation": true,
@@ -706,11 +778,26 @@
         ]
       },
       "sections": [
-        "orientation",
-        "deliberation",
-        "atelier",
-        "preuves",
-        "archive"
+        {
+          "number": 1,
+          "key": "orientation"
+        },
+        {
+          "number": 2,
+          "key": "deliberation"
+        },
+        {
+          "number": 3,
+          "key": "atelier"
+        },
+        {
+          "number": 4,
+          "key": "preuves"
+        },
+        {
+          "number": 5,
+          "key": "archive"
+        }
       ],
       "activities": [],
       "completion": {
@@ -733,7 +820,7 @@
       "defaults": {
         "challenge_type": "capstone",
         "status": "draft",
-        "visibility": "program",
+        "visibility": "institution",
         "provenance": "system",
         "validationstate": "unverified",
         "requires_human_validation": true,
@@ -830,14 +917,38 @@
         ]
       },
       "sections": [
-        "orientation",
-        "canon",
-        "atelier",
-        "preuves",
-        "deliberation",
-        "livrable",
-        "evaluation",
-        "archive"
+        {
+          "number": 1,
+          "key": "orientation"
+        },
+        {
+          "number": 2,
+          "key": "canon"
+        },
+        {
+          "number": 3,
+          "key": "atelier"
+        },
+        {
+          "number": 4,
+          "key": "preuves"
+        },
+        {
+          "number": 5,
+          "key": "deliberation"
+        },
+        {
+          "number": 6,
+          "key": "livrable"
+        },
+        {
+          "number": 7,
+          "key": "evaluation"
+        },
+        {
+          "number": 8,
+          "key": "archive"
+        }
       ],
       "activities": [],
       "completion": {
@@ -974,14 +1085,38 @@
         "visible": 1
       },
       "sections": [
-        "orientation",
-        "canon",
-        "atelier",
-        "preuves",
-        "deliberation",
-        "livrable",
-        "evaluation",
-        "archive"
+        {
+          "number": 1,
+          "key": "orientation"
+        },
+        {
+          "number": 2,
+          "key": "canon"
+        },
+        {
+          "number": 3,
+          "key": "atelier"
+        },
+        {
+          "number": 4,
+          "key": "preuves"
+        },
+        {
+          "number": 5,
+          "key": "deliberation"
+        },
+        {
+          "number": 6,
+          "key": "livrable"
+        },
+        {
+          "number": 7,
+          "key": "evaluation"
+        },
+        {
+          "number": 8,
+          "key": "archive"
+        }
       ],
       "activities": [],
       "completion": {

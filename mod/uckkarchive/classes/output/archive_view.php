@@ -209,6 +209,13 @@ final class archive_view implements renderable, templatable {
     private array $actions;
 
     /**
+     * Direct template context supplied by view.php.
+     *
+     * @var stdClass|null
+     */
+    private ?stdClass $directcontext = null;
+
+    /**
      * Constructor.
      *
      * @param int $archiveid Archive instance id.
@@ -225,11 +232,11 @@ final class archive_view implements renderable, templatable {
      * @param array<int, array<string, mixed>|stdClass> $actions Permitted action rows.
      */
     public function __construct(
-        int $archiveid,
-        int $cmid,
-        int $courseid,
-        int $contextid,
-        string $title,
+        int|array|stdClass $archiveid,
+        ?int $cmid = null,
+        ?int $courseid = null,
+        ?int $contextid = null,
+        ?string $title = null,
         string $introhtml = '',
         array $summary = [],
         array $items = [],
@@ -238,11 +245,29 @@ final class archive_view implements renderable, templatable {
         array $exports = [],
         array $actions = []
     ) {
+        if (is_array($archiveid) || $archiveid instanceof stdClass) {
+            $this->directcontext = $this->normalise_direct_context((object)$archiveid);
+
+            $this->archiveid = max(0, (int)($this->directcontext->archiveid ?? $this->directcontext->id ?? 0));
+            $this->cmid = max(0, (int)($this->directcontext->cmid ?? 0));
+            $this->courseid = max(0, (int)($this->directcontext->courseid ?? 0));
+            $this->contextid = max(0, (int)($this->directcontext->contextid ?? 0));
+            $this->title = format_string((string)($this->directcontext->title ?? ''));
+            $this->introhtml = (string)($this->directcontext->introhtml ?? $this->directcontext->intro ?? '');
+            $this->summary = (array)$this->directcontext;
+            $this->items = [];
+            $this->kristals = [];
+            $this->proofs = [];
+            $this->exports = [];
+            $this->actions = [];
+            return;
+        }
+
         $this->archiveid = max(0, $archiveid);
-        $this->cmid = max(0, $cmid);
-        $this->courseid = max(0, $courseid);
-        $this->contextid = max(0, $contextid);
-        $this->title = format_string($title);
+        $this->cmid = max(0, (int)($cmid ?? 0));
+        $this->courseid = max(0, (int)($courseid ?? 0));
+        $this->contextid = max(0, (int)($contextid ?? 0));
+        $this->title = format_string((string)($title ?? ''));
         $this->introhtml = $introhtml;
         $this->summary = $summary;
         $this->items = array_map([$this, 'normalise_archive_item'], $items);
@@ -253,12 +278,108 @@ final class archive_view implements renderable, templatable {
     }
 
     /**
+     * Normalise a direct template context supplied by view.php.
+     *
+     * @param stdClass $context Direct template context.
+     * @return stdClass
+     */
+    private function normalise_direct_context(stdClass $context): stdClass {
+        $data = (object)(array)$context;
+
+        if (!isset($data->archiveid) && isset($data->id)) {
+            $data->archiveid = (int)$data->id;
+        }
+
+        if (!isset($data->id) && isset($data->archiveid)) {
+            $data->id = (int)$data->archiveid;
+        }
+
+        $data->cmid = (int)($data->cmid ?? 0);
+        $data->courseid = (int)($data->courseid ?? 0);
+        $data->contextid = (int)($data->contextid ?? 0);
+        $data->title = format_string((string)($data->title ?? ''));
+
+        if (!isset($data->heading)) {
+            $data->heading = $this->get_component_string('archiveview', 'Archive');
+        }
+
+        if (!isset($data->introhtml) && isset($data->intro)) {
+            $data->introhtml = (string)$data->intro;
+        }
+
+        if (!isset($data->intro) && isset($data->introhtml)) {
+            $data->intro = (string)$data->introhtml;
+        }
+
+        $intro = (string)($data->introhtml ?? $data->intro ?? '');
+        if (!isset($data->hasintro)) {
+            $data->hasintro = trim(strip_tags($intro)) !== '';
+        }
+
+        if (!isset($data->uniqid)) {
+            $data->uniqid = 'uckkarchive-view-' . $data->cmid;
+        }
+
+        if (!isset($data->viewurl)) {
+            $data->viewurl = (new moodle_url('/mod/uckkarchive/view.php', ['id' => $data->cmid]))->out(false);
+        }
+
+        if (!isset($data->additemurl)) {
+            $data->additemurl = (new moodle_url('/mod/uckkarchive/add.php', ['id' => $data->cmid]))->out(false);
+        }
+
+        if (!isset($data->validateurl)) {
+            $data->validateurl = (new moodle_url('/mod/uckkarchive/validate.php', ['id' => $data->cmid]))->out(false);
+        }
+
+        if (!isset($data->exporturl)) {
+            $data->exporturl = (new moodle_url('/mod/uckkarchive/export.php', ['id' => $data->cmid]))->out(false);
+        }
+
+        foreach (['items', 'kristals', 'proofs', 'actions', 'statuscounts', 'warnings', 'notices'] as $field) {
+            if (!isset($data->{$field}) || !is_array($data->{$field})) {
+                $data->{$field} = [];
+            }
+        }
+
+        $data->hasitems = (bool)($data->hasitems ?? !empty($data->items));
+        $data->itemcount = (int)($data->itemcount ?? count($data->items));
+        $data->haskristals = (bool)($data->haskristals ?? !empty($data->kristals));
+        $data->kristalcount = (int)($data->kristalcount ?? count($data->kristals));
+        $data->hasactions = (bool)($data->hasactions ?? !empty($data->actions));
+        $data->hasstatuscounts = (bool)($data->hasstatuscounts ?? !empty($data->statuscounts));
+        $data->haswarnings = (bool)($data->haswarnings ?? !empty($data->warnings));
+        $data->hasnotices = (bool)($data->hasnotices ?? !empty($data->notices));
+
+        if (!isset($data->exports) || (!is_array($data->exports) && !$data->exports instanceof stdClass)) {
+            $data->exports = (object)[
+                'canexport' => false,
+                'exporturl' => $data->exporturl,
+            ];
+        }
+
+        if (!isset($data->provenance) || (!is_array($data->provenance) && !$data->provenance instanceof stdClass)) {
+            $data->provenance = new stdClass();
+        }
+
+        if (!isset($data->validation) || (!is_array($data->validation) && !$data->validation instanceof stdClass)) {
+            $data->validation = new stdClass();
+        }
+
+        return $data;
+    }
+
+    /**
      * Export context for Mustache.
      *
      * @param renderer_base $output Renderer.
      * @return stdClass
      */
     public function export_for_template(renderer_base $output): stdClass {
+        if ($this->directcontext !== null) {
+            return $this->directcontext;
+        }
+
         $status = $this->normalise_status((string)($this->summary['status'] ?? self::STATUS_ACTIVE));
         $visibility = $this->normalise_visibility((string)($this->summary['visibility'] ?? self::VISIBILITY_COURSE));
         $validationstate = $this->normalise_validation_state(

@@ -38,7 +38,7 @@
         {
           "capability": "local/uckk:manageprofiles",
           "permission": "allow",
-          "context": "system",
+          "context": "user",
           "component": "local_uckk"
         },
         {
@@ -402,13 +402,13 @@
         {
           "capability": "local/uckk:manageprofiles",
           "permission": "allow",
-          "context": "course",
+          "context": "user",
           "component": "local_uckk"
         },
         {
           "capability": "local/uckk:viewreports",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "local_uckk"
         },
         {
@@ -576,19 +576,19 @@
         {
           "capability": "tool/uckkintegrity:view",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "tool_uckkintegrity"
         },
         {
           "capability": "tool/uckkintegrity:opencase",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "tool_uckkintegrity"
         },
         {
           "capability": "report/uckk:view",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "report_uckk"
         }
       ],
@@ -706,19 +706,19 @@
         {
           "capability": "tool/uckkintegrity:view",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "tool_uckkintegrity"
         },
         {
           "capability": "tool/uckkintegrity:opencase",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "tool_uckkintegrity"
         },
         {
           "capability": "report/uckk:view",
           "permission": "allow",
-          "context": "user",
+          "context": "system",
           "component": "report_uckk"
         }
       ],
@@ -752,7 +752,7 @@
         {
           "capability": "local/uckk:viewrestricted",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "local_uckk"
         },
         {
@@ -860,25 +860,25 @@
         {
           "capability": "tool/uckkintegrity:view",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "tool_uckkintegrity"
         },
         {
           "capability": "tool/uckkintegrity:opencase",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "tool_uckkintegrity"
         },
         {
           "capability": "report/uckk:view",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "report_uckk"
         },
         {
           "capability": "report/uckk:export",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "report_uckk"
         }
       ],
@@ -1166,13 +1166,13 @@
         {
           "capability": "report/uckk:view",
           "permission": "allow",
-          "context": "course",
+          "context": "system",
           "component": "report_uckk"
         },
         {
           "capability": "report/uckk:export",
           "permission": "prevent",
-          "context": "course",
+          "context": "system",
           "component": "report_uckk"
         }
       ],
@@ -1296,7 +1296,7 @@
         {
           "capability": "report/uckk:view",
           "permission": "prevent",
-          "context": "course",
+          "context": "system",
           "component": "report_uckk"
         },
         {
@@ -1308,7 +1308,7 @@
         {
           "capability": "report/uckk:export",
           "permission": "prevent",
-          "context": "course",
+          "context": "system",
           "component": "report_uckk"
         }
       ],

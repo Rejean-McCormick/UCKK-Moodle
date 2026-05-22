@@ -7,16 +7,16 @@
 // any later version.
 
 /**
- * Custom completion rules for UCKK Assemblies.
+ * Custom completion rules for UCKK Challenges.
  *
- * @package    mod_uckkassembly
+ * @package    mod_uckkchallenge
  * @copyright  2026 Univers-Cité King Klown
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 declare(strict_types=1);
 
-namespace mod_uckkassembly\completion;
+namespace mod_uckkchallenge\completion;
 
 use core_completion\activity_custom_completion;
 use stdClass;
@@ -24,46 +24,22 @@ use stdClass;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Activity custom completion implementation for mod_uckkassembly.
+ * Activity custom completion implementation for mod_uckkchallenge.
  *
  * Supported rules:
- * - completionmotionenabled + completionmotioncount
- * - completionparticipationenabled + completionparticipationcount
- * - completionvoteenabled + completionvotecount
- *
- * The rules count learner activity inside the Assembly. They do not validate
- * decisions, publish minutes, archive records, or resolve contestations.
+ * - completionrequiresubmission
+ * - completionrequirevalidation
  */
 final class custom_completion extends activity_custom_completion {
     /**
-     * Rule key: required motions.
+     * Rule key: user must submit proof/evidence.
      */
-    public const RULE_MOTIONS = 'completionmotionenabled';
+    public const RULE_SUBMISSION = 'completionrequiresubmission';
 
     /**
-     * Rule key: required participation.
+     * Rule key: user submission must be validated/reviewed.
      */
-    public const RULE_PARTICIPATION = 'completionparticipationenabled';
-
-    /**
-     * Rule key: required votes/readings.
-     */
-    public const RULE_VOTES = 'completionvoteenabled';
-
-    /**
-     * Setting key: required motion count.
-     */
-    private const FIELD_MOTION_COUNT = 'completionmotioncount';
-
-    /**
-     * Setting key: required participation count.
-     */
-    private const FIELD_PARTICIPATION_COUNT = 'completionparticipationcount';
-
-    /**
-     * Setting key: required vote/reading count.
-     */
-    private const FIELD_VOTE_COUNT = 'completionvotecount';
+    public const RULE_VALIDATION = 'completionrequirevalidation';
 
     /**
      * Return the state for a custom completion rule.
@@ -74,26 +50,22 @@ final class custom_completion extends activity_custom_completion {
     public function get_state(string $rule): int {
         $this->validate_rule($rule);
 
-        $assembly = $this->get_assembly_instance();
+        $challenge = $this->get_challenge_instance();
 
-        if (!$this->is_rule_enabled($assembly, $rule)) {
+        if (!$this->is_rule_enabled($challenge, $rule)) {
             return COMPLETION_INCOMPLETE;
         }
 
-        $required = $this->get_required_count($assembly, $rule);
+        $challengeid = (int)$challenge->id;
+        $userid = (int)$this->userid;
 
-        if ($required <= 0) {
-            return COMPLETION_INCOMPLETE;
-        }
-
-        $actual = match ($rule) {
-            self::RULE_MOTIONS => $this->count_user_motions((int)$assembly->id, (int)$this->userid),
-            self::RULE_PARTICIPATION => $this->count_user_participation((int)$assembly->id, (int)$this->userid),
-            self::RULE_VOTES => $this->count_user_votes((int)$assembly->id, (int)$this->userid),
-            default => 0,
+        $complete = match ($rule) {
+            self::RULE_SUBMISSION => $this->has_user_submission($challengeid, $userid),
+            self::RULE_VALIDATION => $this->has_user_validated_submission($challengeid, $userid),
+            default => false,
         };
 
-        return $actual >= $required ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE;
+        return $complete ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE;
     }
 
     /**
@@ -103,9 +75,8 @@ final class custom_completion extends activity_custom_completion {
      */
     public static function get_defined_custom_rules(): array {
         return [
-            self::RULE_MOTIONS,
-            self::RULE_PARTICIPATION,
-            self::RULE_VOTES,
+            self::RULE_SUBMISSION,
+            self::RULE_VALIDATION,
         ];
     }
 
@@ -115,30 +86,20 @@ final class custom_completion extends activity_custom_completion {
      * @return array<string, string>
      */
     public function get_custom_rule_descriptions(): array {
-        $assembly = $this->get_assembly_instance();
+        $challenge = $this->get_challenge_instance();
         $descriptions = [];
 
-        if ($this->is_rule_enabled($assembly, self::RULE_MOTIONS)) {
-            $descriptions[self::RULE_MOTIONS] = get_string(
-                'completionmotiondesc',
-                'uckkassembly',
-                $this->get_required_count($assembly, self::RULE_MOTIONS)
+        if ($this->is_rule_enabled($challenge, self::RULE_SUBMISSION)) {
+            $descriptions[self::RULE_SUBMISSION] = $this->safe_get_string(
+                'completionrequiresubmissiondesc',
+                'Submit proof for this challenge.'
             );
         }
 
-        if ($this->is_rule_enabled($assembly, self::RULE_PARTICIPATION)) {
-            $descriptions[self::RULE_PARTICIPATION] = get_string(
-                'completionparticipationdesc',
-                'uckkassembly',
-                $this->get_required_count($assembly, self::RULE_PARTICIPATION)
-            );
-        }
-
-        if ($this->is_rule_enabled($assembly, self::RULE_VOTES)) {
-            $descriptions[self::RULE_VOTES] = get_string(
-                'completionvotedesc',
-                'uckkassembly',
-                $this->get_required_count($assembly, self::RULE_VOTES)
+        if ($this->is_rule_enabled($challenge, self::RULE_VALIDATION)) {
+            $descriptions[self::RULE_VALIDATION] = $this->safe_get_string(
+                'completionrequirevalidationdesc',
+                'Receive validation for submitted proof.'
             );
         }
 
@@ -153,22 +114,34 @@ final class custom_completion extends activity_custom_completion {
     public function get_sort_order(): array {
         return [
             'completionview',
-            self::RULE_MOTIONS,
-            self::RULE_PARTICIPATION,
-            self::RULE_VOTES,
+            self::RULE_SUBMISSION,
+            self::RULE_VALIDATION,
         ];
     }
 
     /**
-     * Load the Assembly instance for this course module.
+     * Validate that a rule is known.
+     *
+     * Moodle expects this method to be public.
+     *
+     * @param string $rule Rule name.
+     */
+    public function validate_rule(string $rule): void {
+        if (!in_array($rule, self::get_defined_custom_rules(), true)) {
+            throw new \coding_exception('Unknown UCKK Challenge completion rule: ' . $rule);
+        }
+    }
+
+    /**
+     * Load the Challenge instance for this course module.
      *
      * @return stdClass
      */
-    private function get_assembly_instance(): stdClass {
+    private function get_challenge_instance(): stdClass {
         global $DB;
 
         return $DB->get_record(
-            'uckkassembly',
+            'uckkchallenge',
             ['id' => $this->cm->instance],
             '*',
             MUST_EXIST
@@ -176,159 +149,45 @@ final class custom_completion extends activity_custom_completion {
     }
 
     /**
-     * Validate that a rule is known.
+     * Check whether a rule is enabled for this Challenge instance.
      *
-     * @param string $rule Rule name.
-     */
-    private function validate_rule(string $rule): void {
-        if (!in_array($rule, self::get_defined_custom_rules(), true)) {
-            throw new \coding_exception('Unknown UCKK Assembly completion rule: ' . $rule);
-        }
-    }
-
-    /**
-     * Check whether a rule is enabled for this Assembly instance.
-     *
-     * @param stdClass $assembly Assembly instance.
+     * @param stdClass $challenge Challenge instance.
      * @param string $rule Rule name.
      * @return bool
      */
-    private function is_rule_enabled(stdClass $assembly, string $rule): bool {
-        return !empty($assembly->{$rule});
+    private function is_rule_enabled(stdClass $challenge, string $rule): bool {
+        return !empty($challenge->{$rule});
     }
 
     /**
-     * Return configured required count for a rule.
+     * Check whether the user has at least one meaningful submission.
      *
-     * @param stdClass $assembly Assembly instance.
-     * @param string $rule Rule name.
-     * @return int
-     */
-    private function get_required_count(stdClass $assembly, string $rule): int {
-        $field = match ($rule) {
-            self::RULE_MOTIONS => self::FIELD_MOTION_COUNT,
-            self::RULE_PARTICIPATION => self::FIELD_PARTICIPATION_COUNT,
-            self::RULE_VOTES => self::FIELD_VOTE_COUNT,
-            default => '',
-        };
-
-        if ($field === '' || empty($assembly->{$field})) {
-            return 0;
-        }
-
-        return max(0, (int)$assembly->{$field});
-    }
-
-    /**
-     * Count motions proposed by the user in this Assembly.
-     *
-     * @param int $assemblyid Assembly id.
+     * @param int $challengeid Challenge id.
      * @param int $userid User id.
-     * @return int
+     * @return bool
      */
-    private function count_user_motions(int $assemblyid, int $userid): int {
-        return $this->count_user_records('uckkassembly_motion', $assemblyid, $userid, [
-            'draft',
-            'withdrawn',
-            'rejected',
-            'invalidated',
-        ]);
-    }
-
-    /**
-     * Count votes/readings submitted by the user in this Assembly.
-     *
-     * @param int $assemblyid Assembly id.
-     * @param int $userid User id.
-     * @return int
-     */
-    private function count_user_votes(int $assemblyid, int $userid): int {
-        return $this->count_user_records('uckkassembly_vote', $assemblyid, $userid, [
-            'draft',
-            'withdrawn',
-            'invalidated',
-        ]);
-    }
-
-    /**
-     * Count all meaningful user participation in this Assembly.
-     *
-     * Participation includes motions, amendments, objections, votes/readings,
-     * minutes contributions, and contestations where those tables exist.
-     *
-     * @param int $assemblyid Assembly id.
-     * @param int $userid User id.
-     * @return int
-     */
-    private function count_user_participation(int $assemblyid, int $userid): int {
-        $excludedstatuses = [
-            'draft',
-            'withdrawn',
-            'rejected',
-            'invalidated',
-        ];
-
-        return $this->count_user_records('uckkassembly_motion', $assemblyid, $userid, $excludedstatuses)
-            + $this->count_user_records('uckkassembly_amend', $assemblyid, $userid, $excludedstatuses)
-            + $this->count_user_records('uckkassembly_object', $assemblyid, $userid, $excludedstatuses)
-            + $this->count_user_records('uckkassembly_vote', $assemblyid, $userid, $excludedstatuses)
-            + $this->count_user_records('uckkassembly_minutes', $assemblyid, $userid, $excludedstatuses)
-            + $this->count_user_records('uckkassembly_contest', $assemblyid, $userid, $excludedstatuses);
-    }
-
-    /**
-     * Count records in an Assembly-owned table for a user.
-     *
-     * This helper is defensive about column names because UCKK tables use a
-     * consistent domain shape, but early migration versions may use either
-     * assemblyid or uckkassemblyid and either userid or createdby.
-     *
-     * @param string $tablename Moodle table name without braces.
-     * @param int $assemblyid Assembly id.
-     * @param int $userid User id.
-     * @param array<int, string> $excludedstatuses Statuses not counted as completion.
-     * @return int
-     */
-    private function count_user_records(
-        string $tablename,
-        int $assemblyid,
-        int $userid,
-        array $excludedstatuses = []
-    ): int {
+    private function has_user_submission(int $challengeid, int $userid): bool {
         global $DB;
 
-        $dbman = $DB->get_manager();
-
-        if (!$dbman->table_exists($tablename)) {
-            return 0;
-        }
-
-        $assemblyfield = $this->first_existing_field($tablename, [
-            'assemblyid',
-            'uckkassemblyid',
-            'instanceid',
-        ]);
-
-        $userfield = $this->first_existing_field($tablename, [
-            'userid',
-            'createdby',
-            'authorid',
-        ]);
-
-        if ($assemblyfield === null || $userfield === null) {
-            return 0;
+        if (!$this->table_exists('uckkchallenge_sub')) {
+            return false;
         }
 
         $params = [
-            'assemblyid' => $assemblyid,
+            'challengeid' => $challengeid,
             'userid' => $userid,
         ];
 
-        $where = "{$assemblyfield} = :assemblyid AND {$userfield} = :userid";
+        $where = 'challengeid = :challengeid AND userid = :userid';
 
-        if ($this->field_exists($tablename, 'status') && !empty($excludedstatuses)) {
+        if ($this->field_exists('uckkchallenge_sub', 'status')) {
             [$notinsql, $notinparams] = $DB->get_in_or_equal(
-                $excludedstatuses,
+                [
+                    'draft',
+                    'withdrawn',
+                    'rejected',
+                    'invalidated',
+                ],
                 SQL_PARAMS_NAMED,
                 'excludedstatus',
                 false
@@ -338,30 +197,178 @@ final class custom_completion extends activity_custom_completion {
             $params = array_merge($params, $notinparams);
         }
 
-        return (int)$DB->count_records_select($tablename, $where, $params);
+        return $DB->record_exists_select('uckkchallenge_sub', $where, $params);
     }
 
     /**
-     * Return the first existing field from a candidate list.
+     * Check whether the user has at least one validated/reviewed submission.
      *
-     * @param string $tablename Table name without braces.
-     * @param array<int, string> $candidates Candidate field names.
-     * @return string|null
+     * @param int $challengeid Challenge id.
+     * @param int $userid User id.
+     * @return bool
      */
-    private function first_existing_field(string $tablename, array $candidates): ?string {
-        foreach ($candidates as $candidate) {
-            if ($this->field_exists($tablename, $candidate)) {
-                return $candidate;
-            }
+    private function has_user_validated_submission(int $challengeid, int $userid): bool {
+        global $DB;
+
+        if (!$this->table_exists('uckkchallenge_sub')) {
+            return false;
         }
 
-        return null;
+        if ($this->has_user_submission_with_validated_status($challengeid, $userid)) {
+            return true;
+        }
+
+        if ($this->has_user_submission_with_review_timestamp($challengeid, $userid)) {
+            return true;
+        }
+
+        if ($this->has_user_evaluation($challengeid, $userid)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check validated statuses on the submission table.
+     *
+     * @param int $challengeid Challenge id.
+     * @param int $userid User id.
+     * @return bool
+     */
+    private function has_user_submission_with_validated_status(int $challengeid, int $userid): bool {
+        global $DB;
+
+        if (!$this->field_exists('uckkchallenge_sub', 'status')) {
+            return false;
+        }
+
+        [$insql, $inparams] = $DB->get_in_or_equal(
+            [
+                'validated',
+                'accepted',
+                'approved',
+                'complete',
+                'completed',
+                'passed',
+            ],
+            SQL_PARAMS_NAMED,
+            'validstatus'
+        );
+
+        $params = array_merge([
+            'challengeid' => $challengeid,
+            'userid' => $userid,
+        ], $inparams);
+
+        $where = "challengeid = :challengeid AND userid = :userid AND status {$insql}";
+
+        return $DB->record_exists_select('uckkchallenge_sub', $where, $params);
+    }
+
+    /**
+     * Check reviewed timestamp on the submission table.
+     *
+     * @param int $challengeid Challenge id.
+     * @param int $userid User id.
+     * @return bool
+     */
+    private function has_user_submission_with_review_timestamp(int $challengeid, int $userid): bool {
+        global $DB;
+
+        if (!$this->field_exists('uckkchallenge_sub', 'reviewedtime')) {
+            return false;
+        }
+
+        return $DB->record_exists_select(
+            'uckkchallenge_sub',
+            'challengeid = :challengeid AND userid = :userid AND reviewedtime > 0',
+            [
+                'challengeid' => $challengeid,
+                'userid' => $userid,
+            ]
+        );
+    }
+
+    /**
+     * Check whether a submission by this user has an evaluation.
+     *
+     * @param int $challengeid Challenge id.
+     * @param int $userid User id.
+     * @return bool
+     */
+    private function has_user_evaluation(int $challengeid, int $userid): bool {
+        global $DB;
+
+        if (!$this->table_exists('uckkchallenge_eval')) {
+            return false;
+        }
+
+        $sql = "SELECT 1
+                  FROM {uckkchallenge_eval} e
+                  JOIN {uckkchallenge_sub} s ON s.id = e.submissionid
+                 WHERE s.challengeid = :challengeid
+                   AND s.userid = :userid";
+
+        $params = [
+            'challengeid' => $challengeid,
+            'userid' => $userid,
+        ];
+
+        if ($this->field_exists('uckkchallenge_eval', 'status')) {
+            [$notinsql, $notinparams] = $DB->get_in_or_equal(
+                [
+                    'draft',
+                    'withdrawn',
+                    'invalidated',
+                ],
+                SQL_PARAMS_NAMED,
+                'excludedstatus',
+                false
+            );
+
+            $sql .= " AND e.status {$notinsql}";
+            $params = array_merge($params, $notinparams);
+        }
+
+        $sql .= " LIMIT 1";
+
+        return (bool)$DB->get_record_sql($sql, $params, IGNORE_MISSING);
+    }
+
+    /**
+     * Safe string lookup with fallback.
+     *
+     * @param string $identifier String identifier.
+     * @param string $fallback Fallback text.
+     * @return string
+     */
+    private function safe_get_string(string $identifier, string $fallback): string {
+        $manager = get_string_manager();
+
+        if ($manager->string_exists($identifier, 'uckkchallenge')) {
+            return get_string($identifier, 'uckkchallenge');
+        }
+
+        return $fallback;
+    }
+
+    /**
+     * Check whether a table exists.
+     *
+     * @param string $tablename Moodle table name without braces.
+     * @return bool
+     */
+    private function table_exists(string $tablename): bool {
+        global $DB;
+
+        return $DB->get_manager()->table_exists($tablename);
     }
 
     /**
      * Check whether a database field exists.
      *
-     * @param string $tablename Table name without braces.
+     * @param string $tablename Moodle table name without braces.
      * @param string $fieldname Field name.
      * @return bool
      */

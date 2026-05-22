@@ -27,10 +27,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+declare(strict_types=1);
+
 namespace format_uckk\output\courseformat;
 
+use context_course;
+use core\output\renderer_base;
 use core_courseformat\output\local\content as core_content;
-use renderer_base;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
@@ -92,20 +95,20 @@ class content extends core_content {
             $data = (object) $data;
         }
 
+        if (!$data instanceof stdClass) {
+            $data = new stdClass();
+        }
+
         $course = $this->format->get_course();
-        $coursecontext = \context_course::instance($course->id);
+        $coursecontext = context_course::instance((int) $course->id);
 
-        $courseidnumber = clean_param($course->idnumber ?? '', PARAM_TEXT);
+        $rawidnumber = trim((string) ($course->idnumber ?? ''));
+        $rawshortname = trim((string) ($course->shortname ?? ''));
+
+        $courseidnumber = clean_param($rawidnumber, PARAM_TEXT);
+
         $courseshortname = format_string(
-            $course->shortname ?? '',
-            true,
-            [
-                'context' => $coursecontext,
-                'escape' => false,
-            ]
-        );
-        $coursefullname = format_string(
-            $course->fullname ?? '',
+            $rawshortname,
             true,
             [
                 'context' => $coursecontext,
@@ -113,15 +116,33 @@ class content extends core_content {
             ]
         );
 
-        $isuckkcourse = $this->is_uckk_course($courseidnumber, $courseshortname);
-        $istronccommun = $this->is_tronc_commun_course($courseidnumber, $courseshortname);
-        $coursekind = $this->get_course_kind($courseidnumber, $courseshortname);
+        $coursefullname = format_string(
+            (string) ($course->fullname ?? ''),
+            true,
+            [
+                'context' => $coursecontext,
+                'escape' => false,
+            ]
+        );
+
+        $coursecode = $this->normalise_course_code($rawidnumber, $rawshortname);
+        $isuckkcourse = $this->is_uckk_course($coursecode);
+        $istronccommun = $this->is_tronc_commun_course($coursecode);
+        $coursekind = $this->get_course_kind($coursecode);
 
         $data->uckk = (object) [
             'component' => 'format_uckk',
             'productname' => 'UCKK-Moodle',
-            'fullname' => $this->safe_get_string('uckkfullname', 'theme_uckk', 'Univers-Cité King Klown'),
-            'campus' => $this->safe_get_string('uckkcampus', 'theme_uckk', 'Campus UCKK'),
+            'fullname' => $this->safe_get_string(
+                'uckkfullname',
+                'theme_uckk',
+                'Univers-Cité King Klown'
+            ),
+            'campus' => $this->safe_get_string(
+                'uckkcampus',
+                'theme_uckk',
+                'Campus UCKK'
+            ),
             'tagline' => $this->safe_get_string(
                 'uckktagline',
                 'theme_uckk',
@@ -149,7 +170,8 @@ class content extends core_content {
             'fullname' => $coursefullname,
             'shortname' => $courseshortname,
             'idnumber' => $courseidnumber,
-            'format' => clean_param($course->format ?? 'uckk', PARAM_ALPHANUMEXT),
+            'code' => $coursecode,
+            'format' => clean_param((string) ($course->format ?? 'uckk'), PARAM_ALPHANUMEXT),
             'isuckkcourse' => $isuckkcourse,
             'istronccommun' => $istronccommun,
             'isprogramcourse' => $isuckkcourse && !$istronccommun,
@@ -195,80 +217,95 @@ class content extends core_content {
     }
 
     /**
-     * Determine whether the course is an UCKK course.
+     * Normalise the course code used for UCKK detection.
      *
      * @param string $idnumber Course idnumber.
      * @param string $shortname Course shortname.
+     * @return string Normalised course code.
+     */
+    protected function normalise_course_code(string $idnumber, string $shortname): string {
+        $code = trim($idnumber !== '' ? $idnumber : $shortname);
+        $code = clean_param($code, PARAM_TEXT);
+
+        return strtoupper($code);
+    }
+
+    /**
+     * Determine whether the course is an UCKK course.
+     *
+     * @param string $coursecode Normalised course code.
      * @return bool
      */
-    protected function is_uckk_course(string $idnumber, string $shortname): bool {
-        return preg_match('/^UCKK-/i', $idnumber) === 1
-            || preg_match('/^UCKK-/i', $shortname) === 1;
+    protected function is_uckk_course(string $coursecode): bool {
+        return preg_match('/^UCKK-/i', $coursecode) === 1;
     }
 
     /**
      * Determine whether the course belongs to the UCKK tronc commun.
      *
-     * @param string $idnumber Course idnumber.
-     * @param string $shortname Course shortname.
+     * @param string $coursecode Normalised course code.
      * @return bool
      */
-    protected function is_tronc_commun_course(string $idnumber, string $shortname): bool {
-        return preg_match('/^UCKK-TC/i', $idnumber) === 1
-            || preg_match('/^UCKK-TC/i', $shortname) === 1;
+    protected function is_tronc_commun_course(string $coursecode): bool {
+        return preg_match('/^UCKK-TC/i', $coursecode) === 1;
     }
 
     /**
      * Return the UCKK course kind.
      *
-     * @param string $idnumber Course idnumber.
-     * @param string $shortname Course shortname.
+     * @param string $coursecode Normalised course code.
      * @return string
      */
-    protected function get_course_kind(string $idnumber, string $shortname): string {
-        $code = strtoupper(trim($idnumber !== '' ? $idnumber : $shortname));
-
-        if (preg_match('/^UCKK-TC/', $code)) {
+    protected function get_course_kind(string $coursecode): string {
+        if (preg_match('/^UCKK-TC/', $coursecode)) {
             return 'tronccommun';
         }
 
-        if (preg_match('/^UCKK-GJS/', $code)) {
+        if (preg_match('/^UCKK-GJS/', $coursecode)) {
             return 'grandjeusocial';
         }
 
-        if (preg_match('/^UCKK-KOA|^UCKK-DIGITAL/', $code)) {
+        if (preg_match('/^UCKK-KOA|^UCKK-DIGITAL/', $coursecode)) {
             return 'koadigital';
         }
 
-        if (preg_match('/^UCKK-IA|^UCKK-AI/', $code)) {
-            return 'iagouvernable';
-        }
-
-        if (preg_match('/^UCKK-ARCH|^UCKK-SOCIO/', $code)) {
+        if (preg_match('/^UCKK-AS/', $coursecode)) {
             return 'architecture';
         }
 
-        if (preg_match('/^UCKK-ECO/', $code)) {
+        if (preg_match('/^UCKK-SP/', $coursecode)) {
+            return 'sociopolitique';
+        }
+
+        if (preg_match('/^UCKK-ECO/', $coursecode)) {
             return 'ecologie';
         }
 
-        if (preg_match('/^UCKK-META/', $code)) {
+        if (preg_match('/^UCKK-EC/', $coursecode)) {
+            return 'educationcertification';
+        }
+
+        if (preg_match('/^UCKK-ME/', $coursecode)) {
             return 'metaphysique';
         }
 
-        if (preg_match('/^UCKK-LING/', $code)) {
+        if (preg_match('/^UCKK-IA|^UCKK-AI/', $coursecode)) {
+            return 'iagouvernable';
+        }
+
+        if (preg_match('/^UCKK-LI/', $coursecode)) {
             return 'linguistique';
         }
 
-        if (preg_match('/^UCKK-INT|^UCKK-SOCIAL/', $code)) {
+        if (preg_match('/^UCKK-IS/', $coursecode)) {
             return 'intervention';
         }
 
-        if (preg_match('/^UCKK-MEDIA/', $code)) {
+        if (preg_match('/^UCKK-MV/', $coursecode)) {
             return 'mediasvivants';
         }
 
-        if (preg_match('/^UCKK-/', $code)) {
+        if (preg_match('/^UCKK-/', $coursecode)) {
             return 'program';
         }
 
@@ -283,18 +320,76 @@ class content extends core_content {
      */
     protected function get_course_kind_label(string $kind): string {
         $labels = [
-            'tronccommun' => $this->safe_get_string('tronccommun', 'theme_uckk', 'Tronc commun'),
-            'grandjeusocial' => $this->safe_get_string('program_gjs', 'theme_uckk', 'Grand Jeu social'),
-            'koadigital' => $this->safe_get_string('program_koa_digital', 'theme_uckk', 'kOA Digital Ecosystem'),
-            'iagouvernable' => $this->safe_get_string('program_ai', 'theme_uckk', 'IA gouvernable'),
-            'architecture' => $this->safe_get_string('program_sociotech', 'theme_uckk', 'Architecture sociotechnique'),
-            'ecologie' => $this->safe_get_string('program_ecology', 'theme_uckk', 'Écologie'),
-            'metaphysique' => $this->safe_get_string('program_metaphysics', 'theme_uckk', 'Métaphysique'),
-            'linguistique' => $this->safe_get_string('program_linguistics', 'theme_uckk', 'Linguistique et architecture du sens'),
-            'intervention' => $this->safe_get_string('program_socialintervention', 'theme_uckk', 'Intervention sociale'),
-            'mediasvivants' => $this->safe_get_string('program_livingmedia', 'theme_uckk', 'Médias vivants'),
-            'program' => $this->safe_get_string('programs', 'theme_uckk', 'Programme UCKK'),
-            'standard' => $this->safe_get_string('course', 'moodle', 'Cours'),
+            'tronccommun' => $this->safe_get_string(
+                'tronccommun',
+                'theme_uckk',
+                'Tronc commun'
+            ),
+            'grandjeusocial' => $this->safe_get_string(
+                'program_gjs',
+                'theme_uckk',
+                'Grand Jeu social'
+            ),
+            'koadigital' => $this->safe_get_string(
+                'program_koa_digital',
+                'theme_uckk',
+                'kOA Digital Ecosystem'
+            ),
+            'architecture' => $this->safe_get_string(
+                'program_sociotech',
+                'theme_uckk',
+                'Architecture sociotechnique'
+            ),
+            'sociopolitique' => $this->safe_get_string(
+                'program_sociopolitical',
+                'theme_uckk',
+                'Systèmes sociaux et politiques'
+            ),
+            'educationcertification' => $this->safe_get_string(
+                'program_education_certification',
+                'theme_uckk',
+                'Éducation ouverte et certification'
+            ),
+            'ecologie' => $this->safe_get_string(
+                'program_ecology',
+                'theme_uckk',
+                'Écologie'
+            ),
+            'metaphysique' => $this->safe_get_string(
+                'program_metaphysics',
+                'theme_uckk',
+                'Métaphysique'
+            ),
+            'iagouvernable' => $this->safe_get_string(
+                'program_ai',
+                'theme_uckk',
+                'IA gouvernable'
+            ),
+            'linguistique' => $this->safe_get_string(
+                'program_linguistics',
+                'theme_uckk',
+                'Linguistique et architecture du sens'
+            ),
+            'intervention' => $this->safe_get_string(
+                'program_socialintervention',
+                'theme_uckk',
+                'Intervention sociale'
+            ),
+            'mediasvivants' => $this->safe_get_string(
+                'program_livingmedia',
+                'theme_uckk',
+                'Médias vivants'
+            ),
+            'program' => $this->safe_get_string(
+                'programs',
+                'theme_uckk',
+                'Programme UCKK'
+            ),
+            'standard' => $this->safe_get_string(
+                'course',
+                'moodle',
+                'Cours'
+            ),
         ];
 
         return $labels[$kind] ?? $labels['standard'];
@@ -307,13 +402,21 @@ class content extends core_content {
      * @return string
      */
     protected function get_course_css_class(string $kind): string {
-        return 'format-uckk-course-kind-' . clean_param($kind, PARAM_ALPHANUMEXT);
+        $kind = strtolower($kind);
+        $kind = preg_replace('/[^a-z0-9_-]+/', '-', $kind);
+        $kind = trim((string) $kind, '-_');
+
+        if ($kind === '') {
+            $kind = 'standard';
+        }
+
+        return 'format-uckk-course-kind-' . $kind;
     }
 
     /**
      * Build the standard UCKK section map for Mustache templates.
      *
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
     protected function get_standard_sections_for_template(): array {
         $sections = [];
@@ -338,15 +441,51 @@ class content extends core_content {
      */
     protected function get_section_label(string $key): string {
         $labels = [
-            'orientation' => $this->safe_get_string('course_orientation', 'theme_uckk', 'Orientation'),
-            'concepts' => $this->safe_get_string('course_concepts', 'theme_uckk', 'Concepts clés'),
-            'canon' => $this->safe_get_string('course_canon', 'theme_uckk', 'Matière canonique'),
-            'atelier' => $this->safe_get_string('course_workshop', 'theme_uckk', 'Atelier'),
-            'preuves' => $this->safe_get_string('course_proofs', 'theme_uckk', 'Preuves'),
-            'deliberation' => $this->safe_get_string('course_deliberation', 'theme_uckk', 'Délibération'),
-            'livrable' => $this->safe_get_string('course_deliverable', 'theme_uckk', 'Livrable'),
-            'evaluation' => $this->safe_get_string('course_evaluation', 'theme_uckk', 'Évaluation'),
-            'archive' => $this->safe_get_string('course_archive', 'theme_uckk', 'Archive'),
+            'orientation' => $this->safe_get_string(
+                'course_orientation',
+                'theme_uckk',
+                'Orientation'
+            ),
+            'concepts' => $this->safe_get_string(
+                'course_concepts',
+                'theme_uckk',
+                'Concepts clés'
+            ),
+            'canon' => $this->safe_get_string(
+                'course_canon',
+                'theme_uckk',
+                'Matière canonique'
+            ),
+            'atelier' => $this->safe_get_string(
+                'course_workshop',
+                'theme_uckk',
+                'Atelier'
+            ),
+            'preuves' => $this->safe_get_string(
+                'course_proofs',
+                'theme_uckk',
+                'Preuves'
+            ),
+            'deliberation' => $this->safe_get_string(
+                'course_deliberation',
+                'theme_uckk',
+                'Délibération'
+            ),
+            'livrable' => $this->safe_get_string(
+                'course_deliverable',
+                'theme_uckk',
+                'Livrable'
+            ),
+            'evaluation' => $this->safe_get_string(
+                'course_evaluation',
+                'theme_uckk',
+                'Évaluation'
+            ),
+            'archive' => $this->safe_get_string(
+                'course_archive',
+                'theme_uckk',
+                'Archive'
+            ),
         ];
 
         return $labels[$key] ?? ucfirst($key);

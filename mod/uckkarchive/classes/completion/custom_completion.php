@@ -18,7 +18,6 @@ declare(strict_types=1);
 
 namespace mod_uckkarchive\completion;
 
-use cm_info;
 use coding_exception;
 use core_completion\activity_custom_completion;
 use stdClass;
@@ -34,22 +33,19 @@ defined('MOODLE_INTERNAL') || die();
  */
 final class custom_completion extends activity_custom_completion {
     /** Completion rule: the user has created at least one archive item. */
-    public const RULE_ITEM_ADDED = 'completionitemadded';
+    public const RULE_ITEM_ADDED = 'completionrequireitem';
 
     /** Completion rule: the user has at least one validated archive item. */
-    public const RULE_ITEM_VALIDATED = 'completionitemvalidated';
+    public const RULE_ITEM_VALIDATED = 'completionrequirevalidateditem';
 
-    /** Completion rule: the user has created at least one Kristal. */
-    public const RULE_KRISTAL_CREATED = 'completionkristalcreated';
+    /** Legacy/config alias used by older install.xml snapshots. */
+    private const ALIAS_ITEM_VALIDATED = 'completionrequirevalidation';
 
-    /** Completion rule: the archive activity contains at least one validated item. */
-    public const RULE_ARCHIVE_HAS_VALIDATED_ITEM = 'completionarchivevalidated';
+    /** Legacy/config alias used by older completion snapshots. */
+    private const LEGACY_ITEM_ADDED = 'completionitemadded';
 
-    /** Completion rule: the archive activity has been exported. */
-    public const RULE_ARCHIVE_EXPORTED = 'completionarchiveexported';
-
-    /** Completion rule: the archive activity itself is archived. */
-    public const RULE_ARCHIVE_STATE = 'completionarchivestate';
+    /** Legacy/config alias used by older completion snapshots. */
+    private const LEGACY_ITEM_VALIDATED = 'completionitemvalidated';
 
     /**
      * Return completion state for a custom rule.
@@ -58,6 +54,7 @@ final class custom_completion extends activity_custom_completion {
      * @return int COMPLETION_COMPLETE or COMPLETION_INCOMPLETE.
      */
     public function get_state(string $rule): int {
+        $rule = $this->normalise_rule($rule);
         $this->validate_rule($rule);
 
         if (!$this->is_rule_enabled($rule)) {
@@ -67,10 +64,6 @@ final class custom_completion extends activity_custom_completion {
         return match ($rule) {
             self::RULE_ITEM_ADDED => $this->has_user_archive_item(),
             self::RULE_ITEM_VALIDATED => $this->has_user_validated_archive_item(),
-            self::RULE_KRISTAL_CREATED => $this->has_user_kristal(),
-            self::RULE_ARCHIVE_HAS_VALIDATED_ITEM => $this->archive_has_validated_item(),
-            self::RULE_ARCHIVE_EXPORTED => $this->archive_has_export(),
-            self::RULE_ARCHIVE_STATE => $this->archive_is_archived(),
             default => COMPLETION_INCOMPLETE,
         };
     }
@@ -78,34 +71,15 @@ final class custom_completion extends activity_custom_completion {
     /**
      * Return all custom rules defined by this activity.
      *
-     * @return string[]
+     * These names must match the rules returned by mod_form::add_completion_rules().
+     *
+     * @return array<int, string>
      */
     public static function get_defined_custom_rules(): array {
         return [
             self::RULE_ITEM_ADDED,
             self::RULE_ITEM_VALIDATED,
-            self::RULE_KRISTAL_CREATED,
-            self::RULE_ARCHIVE_HAS_VALIDATED_ITEM,
-            self::RULE_ARCHIVE_EXPORTED,
-            self::RULE_ARCHIVE_STATE,
         ];
-    }
-
-    /**
-     * Return the custom rules available for this module instance.
-     *
-     * @return string[]
-     */
-    public function get_available_custom_rules(): array {
-        $available = [];
-
-        foreach (self::get_defined_custom_rules() as $rule) {
-            if ($this->is_rule_enabled($rule)) {
-                $available[] = $rule;
-            }
-        }
-
-        return $available;
     }
 
     /**
@@ -116,19 +90,36 @@ final class custom_completion extends activity_custom_completion {
     public function get_custom_rule_descriptions(): array {
         $descriptions = [];
 
-        foreach ($this->get_available_custom_rules() as $rule) {
-            $descriptions[$rule] = match ($rule) {
-                self::RULE_ITEM_ADDED => get_string('completionitemadded_desc', 'uckkarchive'),
-                self::RULE_ITEM_VALIDATED => get_string('completionitemvalidated_desc', 'uckkarchive'),
-                self::RULE_KRISTAL_CREATED => get_string('completionkristalcreated_desc', 'uckkarchive'),
-                self::RULE_ARCHIVE_HAS_VALIDATED_ITEM => get_string('completionarchivevalidated_desc', 'uckkarchive'),
-                self::RULE_ARCHIVE_EXPORTED => get_string('completionarchiveexported_desc', 'uckkarchive'),
-                self::RULE_ARCHIVE_STATE => get_string('completionarchivestate_desc', 'uckkarchive'),
-                default => '',
-            };
+        if ($this->is_rule_enabled(self::RULE_ITEM_ADDED)) {
+            $descriptions[self::RULE_ITEM_ADDED] = $this->safe_get_string(
+                'completionrequireitem_desc',
+                $this->safe_get_string('completionrequireitem', 'Require the learner to add an archive item.')
+            );
         }
 
-        return array_filter($descriptions);
+        if ($this->is_rule_enabled(self::RULE_ITEM_VALIDATED)) {
+            $descriptions[self::RULE_ITEM_VALIDATED] = $this->safe_get_string(
+                'completionrequirevalidateditem_desc',
+                $this->safe_get_string('completionrequirevalidateditem', 'Require the learner to have a validated archive item.')
+            );
+        }
+
+        return $descriptions;
+    }
+
+    /**
+     * Return display order for completion rules.
+     *
+     * Moodle's activity_custom_completion parent requires this method.
+     *
+     * @return array<int, string>
+     */
+    public function get_sort_order(): array {
+        return [
+            'completionview',
+            self::RULE_ITEM_ADDED,
+            self::RULE_ITEM_VALIDATED,
+        ];
     }
 
     /**
@@ -138,46 +129,94 @@ final class custom_completion extends activity_custom_completion {
      * @return bool
      */
     public function is_defined(string $rule): bool {
-        return in_array($rule, self::get_defined_custom_rules(), true);
+        return in_array($this->normalise_rule($rule), self::get_defined_custom_rules(), true);
     }
 
     /**
      * Throw if a rule is unknown.
      *
+     * Moodle expects this method to be public.
+     *
      * @param string $rule Completion rule name.
      */
-    private function validate_rule(string $rule): void {
+    public function validate_rule(string $rule): void {
         if (!$this->is_defined($rule)) {
-            throw new coding_exception("Unknown mod_uckkarchive custom completion rule: {$rule}");
+            throw new coding_exception('Unknown mod_uckkarchive custom completion rule: ' . $rule);
         }
     }
 
     /**
      * Return whether a custom completion rule is enabled for this cm.
      *
-     * Supports both:
-     * - values stored in cm_info customdata['customcompletionrules']; and
-     * - direct fields on the archive instance record.
+     * Supports values stored in cm_info customdata['customcompletionrules'] and
+     * direct fields on the archive instance record. Compatibility aliases cover
+     * older snapshots that used completionrequirevalidation or completionitem*.
      *
      * @param string $rule Rule name.
      * @return bool
      */
     private function is_rule_enabled(string $rule): bool {
+        $rule = $this->normalise_rule($rule);
+        $aliases = $this->get_rule_aliases($rule);
+
         if (
             isset($this->cm->customdata['customcompletionrules'])
             && is_array($this->cm->customdata['customcompletionrules'])
-            && array_key_exists($rule, $this->cm->customdata['customcompletionrules'])
         ) {
-            return !empty($this->cm->customdata['customcompletionrules'][$rule]);
+            foreach ($aliases as $alias) {
+                if (array_key_exists($alias, $this->cm->customdata['customcompletionrules'])) {
+                    return !empty($this->cm->customdata['customcompletionrules'][$alias]);
+                }
+            }
         }
 
         $archive = $this->get_archive_instance();
 
-        if ($archive !== null && property_exists($archive, $rule)) {
-            return !empty($archive->{$rule});
+        if ($archive !== null) {
+            foreach ($aliases as $alias) {
+                if (property_exists($archive, $alias)) {
+                    return !empty($archive->{$alias});
+                }
+            }
         }
 
         return false;
+    }
+
+    /**
+     * Normalise legacy/config rule names to active rule names.
+     *
+     * @param string $rule Rule name.
+     * @return string
+     */
+    private function normalise_rule(string $rule): string {
+        return match ($rule) {
+            self::ALIAS_ITEM_VALIDATED,
+            self::LEGACY_ITEM_VALIDATED => self::RULE_ITEM_VALIDATED,
+            self::LEGACY_ITEM_ADDED => self::RULE_ITEM_ADDED,
+            default => $rule,
+        };
+    }
+
+    /**
+     * Return accepted storage aliases for a rule.
+     *
+     * @param string $rule Active rule name.
+     * @return array<int, string>
+     */
+    private function get_rule_aliases(string $rule): array {
+        return match ($rule) {
+            self::RULE_ITEM_ADDED => [
+                self::RULE_ITEM_ADDED,
+                self::LEGACY_ITEM_ADDED,
+            ],
+            self::RULE_ITEM_VALIDATED => [
+                self::RULE_ITEM_VALIDATED,
+                self::ALIAS_ITEM_VALIDATED,
+                self::LEGACY_ITEM_VALIDATED,
+            ],
+            default => [$rule],
+        };
     }
 
     /**
@@ -256,8 +295,9 @@ final class custom_completion extends activity_custom_completion {
 
         foreach (['userid', 'authorid', 'createdby', 'submittedby', 'ownerid'] as $field) {
             if ($this->field_exists($tablename, $field)) {
-                $fields[] = "{$field} = :{$field}";
-                $params[$field] = $this->userid;
+                $paramname = 'user_' . $field;
+                $fields[] = "{$field} = :{$paramname}";
+                $params[$paramname] = (int)$this->userid;
             }
         }
 
@@ -385,137 +425,19 @@ final class custom_completion extends activity_custom_completion {
     }
 
     /**
-     * Completion state when the current user has created a Kristal.
+     * Safe component language string lookup.
      *
-     * @return int
+     * @param string $identifier String identifier.
+     * @param string $fallback Fallback value.
+     * @return string
      */
-    private function has_user_kristal(): int {
-        global $DB;
+    private function safe_get_string(string $identifier, string $fallback): string {
+        $manager = get_string_manager();
 
-        $tablename = 'uckkarchive_kristal';
-
-        if (!$this->table_exists($tablename)) {
-            return COMPLETION_INCOMPLETE;
+        if ($manager->string_exists($identifier, 'uckkarchive')) {
+            return get_string($identifier, 'uckkarchive');
         }
 
-        $archivecondition = $this->get_archive_condition($tablename);
-
-        if ($archivecondition === null) {
-            return COMPLETION_INCOMPLETE;
-        }
-
-        $params = [
-            'archiveid' => reset($archivecondition),
-        ];
-
-        $archivefield = key($archivecondition);
-        $usercondition = $this->get_user_condition($tablename, $params);
-
-        $count = $DB->count_records_select(
-            $tablename,
-            "{$archivefield} = :archiveid AND {$usercondition['sql']}",
-            $usercondition['params']
-        );
-
-        return $count > 0 ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE;
-    }
-
-    /**
-     * Completion state when the archive has any validated item.
-     *
-     * @return int
-     */
-    private function archive_has_validated_item(): int {
-        global $DB;
-
-        $tablename = 'uckkarchive_item';
-
-        if (!$this->table_exists($tablename)) {
-            return COMPLETION_INCOMPLETE;
-        }
-
-        $archivecondition = $this->get_archive_condition($tablename);
-
-        if ($archivecondition === null) {
-            return COMPLETION_INCOMPLETE;
-        }
-
-        $params = [
-            'archiveid' => reset($archivecondition),
-        ];
-
-        $archivefield = key($archivecondition);
-        $validatedcondition = $this->get_validated_condition($tablename, $params);
-
-        $count = $DB->count_records_select(
-            $tablename,
-            "{$archivefield} = :archiveid AND {$validatedcondition['sql']}",
-            $validatedcondition['params']
-        );
-
-        return $count > 0 ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE;
-    }
-
-    /**
-     * Completion state when an export package exists for this archive.
-     *
-     * @return int
-     */
-    private function archive_has_export(): int {
-        global $DB;
-
-        $tablename = 'uckkarchive_export';
-
-        if (!$this->table_exists($tablename)) {
-            return COMPLETION_INCOMPLETE;
-        }
-
-        $archivecondition = $this->get_archive_condition($tablename);
-
-        if ($archivecondition === null) {
-            return COMPLETION_INCOMPLETE;
-        }
-
-        $params = [
-            'archiveid' => reset($archivecondition),
-        ];
-
-        $archivefield = key($archivecondition);
-        $statussql = '1 = 1';
-
-        if ($this->field_exists($tablename, 'status')) {
-            $statussql = 'status IN (:statusexported, :statuspublished, :statusarchived)';
-            $params['statusexported'] = 'exported';
-            $params['statuspublished'] = 'published';
-            $params['statusarchived'] = 'archived';
-        }
-
-        $count = $DB->count_records_select(
-            $tablename,
-            "{$archivefield} = :archiveid AND {$statussql}",
-            $params
-        );
-
-        return $count > 0 ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE;
-    }
-
-    /**
-     * Completion state when the archive activity itself is archived.
-     *
-     * @return int
-     */
-    private function archive_is_archived(): int {
-        $archive = $this->get_archive_instance();
-
-        if ($archive === null) {
-            return COMPLETION_INCOMPLETE;
-        }
-
-        $state = clean_param((string)($archive->state ?? ''), PARAM_ALPHANUMEXT);
-        $status = clean_param((string)($archive->status ?? ''), PARAM_ALPHANUMEXT);
-
-        return $state === 'archived' || $status === 'archived'
-            ? COMPLETION_COMPLETE
-            : COMPLETION_INCOMPLETE;
+        return $fallback;
     }
 }

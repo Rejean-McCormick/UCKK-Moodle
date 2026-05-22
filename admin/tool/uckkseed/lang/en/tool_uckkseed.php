@@ -51,67 +51,75 @@ $string['enabletool_desc'] = 'Allow authorised administrators to use the UCKK se
 $string['allowcli'] = 'Allow CLI execution';
 $string['allowcli_desc'] = 'Allow the UCKK seed CLI scripts to run seed, reset, validation, and export operations.';
 $string['allowreset'] = 'Allow reset operations';
-$string['allowreset_desc'] = 'Allow authorised users to reset UCKK seeded content. Reset operations must remain scoped to seeded content only.';
-$string['allowdryrun'] = 'Allow dry-run mode';
-$string['allowdryrun_desc'] = 'Allow users to preview seed, reset, and validation actions without changing Moodle data.';
-$string['defaultmode'] = 'Default execution mode';
-$string['defaultmode_desc'] = 'The default mode used by the seed form and CLI scripts when no explicit mode is provided.';
+$string['allowreset_desc'] = 'Allow authorised users to reset UCKK seeded content.';
+$string['allowresetdangerous'] = 'Allow destructive reset modes';
+$string['allowresetdangerous_desc'] = 'Allow reset modes that delete or roll back seeded records. Keep disabled outside controlled maintenance windows.';
 $string['presetpath'] = 'Academic registry JSON path';
-$string['presetpath_desc'] = 'Path to the UCKK academic registry JSON directory. Relative paths are resolved from the Moodle root. Default: academic_registry_json.';
-$string['logretentiondays'] = 'Log retention in days';
-$string['logretentiondays_desc'] = 'Number of days to retain UCKK seed execution logs.';
-$string['autoseedoninstall'] = 'Auto-seed on install';
-$string['autoseedoninstall_desc'] = 'Automatically seed the UCKK distribution when the scheduled seed task runs. Use with care on production sites.';
-$string['requireconfirmation'] = 'Require confirmation';
-$string['requireconfirmation_desc'] = 'Require explicit confirmation before applying seed or reset operations.';
-$string['configmissing'] = 'The UCKK seed configuration is missing or incomplete.';
-$string['toolisdisabled'] = 'The UCKK seed tool is disabled.';
+$string['presetpath_desc'] = 'Directory containing UCKK academic registry JSON preset files.';
+$string['logretentiondays'] = 'Log retention days';
+$string['logretentiondays_desc'] = 'Number of days to keep UCKK seed execution logs.';
 
 // Actions.
 $string['action'] = 'Action';
-$string['actions'] = 'Actions';
 $string['action_seed'] = 'Seed';
 $string['action_reset'] = 'Reset';
 $string['action_validate'] = 'Validate';
-$string['action_export_preset'] = 'Export preset';
-$string['action:seed'] = 'Seed';
-$string['action:reset'] = 'Reset';
-$string['action:validate'] = 'Validate';
-$string['action:export_preset'] = 'Export preset';
+$string['action_export'] = 'Export preset';
+$string['runseed'] = 'Run seed';
+$string['runreset'] = 'Run reset';
+$string['runvalidation'] = 'Run validation';
+$string['runexport'] = 'Run export';
 
 // Modes.
 $string['mode'] = 'Mode';
 $string['mode_apply'] = 'Apply';
+$string['mode_dryrun'] = 'Dry run';
 $string['mode_dry_run'] = 'Dry run';
 $string['mode_report'] = 'Report';
+$string['mode_rollbackplan'] = 'Rollback plan';
 $string['mode_rollback_plan'] = 'Rollback plan';
-$string['mode:apply'] = 'Apply';
-$string['mode:dry_run'] = 'Dry run';
-$string['mode:report'] = 'Report';
-$string['mode:rollback_plan'] = 'Rollback plan';
 $string['dryrun'] = 'Dry run';
-$string['dryrunnotice'] = 'Dry-run mode is enabled. No Moodle data will be changed.';
+$string['apply'] = 'Apply';
+$string['report'] = 'Report';
 $string['rollbackplan'] = 'Rollback plan';
-$string['rollbackplannotice'] = 'Rollback-plan mode reports what would need to be reversed. It does not delete arbitrary Moodle data.';
-$string['reportmode'] = 'Report mode';
-$string['applymode'] = 'Apply mode';
 
-// Statuses.
+// Reset scopes.
+$string['resetscope'] = 'Reset scope';
+$string['resetscope_logs'] = 'Seed logs only';
+$string['resetscope_content'] = 'Seeded content';
+$string['resetscope_courses'] = 'Seeded courses';
+$string['resetscope_roles'] = 'Seeded roles and capabilities';
+$string['resetscope_badges'] = 'Seeded badges';
+$string['resetscope_all'] = 'All UCKK seeded content';
+$string['confirmreset'] = 'I understand that reset may remove seeded content.';
+$string['force'] = 'Force';
+$string['confirm'] = 'Confirm';
+
+// Status.
 $string['status'] = 'Status';
 $string['status_pending'] = 'Pending';
 $string['status_running'] = 'Running';
 $string['status_completed'] = 'Completed';
+$string['status_warning'] = 'Warning';
 $string['status_failed'] = 'Failed';
 $string['status_cancelled'] = 'Cancelled';
 $string['status_skipped'] = 'Skipped';
-$string['status_warning'] = 'Warning';
-$string['status:pending'] = 'Pending';
-$string['status:running'] = 'Running';
-$string['status:completed'] = 'Completed';
-$string['status:failed'] = 'Failed';
-$string['status:cancelled'] = 'Cancelled';
-$string['status:skipped'] = 'Skipped';
-$string['status:warning'] = 'Warning';
+$string['result'] = 'Result';
+$string['result_ok'] = 'OK';
+$string['result_failed'] = 'Failed';
+$string['ok'] = 'OK';
+$string['failed'] = 'Failed';
+$string['warning'] = 'Warning';
+$string['warnings'] = 'Warnings';
+$string['errors'] = 'Errors';
+$string['created'] = 'Created';
+$string['updated'] = 'Updated';
+$string['skipped'] = 'Skipped';
+$string['deleted'] = 'Deleted';
+$string['messages'] = 'Messages';
+$string['metadata'] = 'Metadata';
+$string['summary'] = 'Summary';
+$string['counts'] = 'Counts';
 
 // Validation severities.
 $string['severity'] = 'Severity';
@@ -128,6 +136,8 @@ $string['severity:blocker'] = 'Blocker';
 
 // Preset labels.
 $string['preset_categories'] = 'Categories';
+$string['preset_programs'] = 'Programs';
+$string['preset_pathways'] = 'Pathways';
 $string['preset_courses'] = 'Courses';
 $string['preset_cohorts'] = 'Cohorts';
 $string['preset_roles'] = 'Roles';
@@ -141,6 +151,8 @@ $string['preset_assembly_templates'] = 'Assembly templates';
 $string['preset_archive_templates'] = 'Archive templates';
 
 $string['preset:categories'] = 'Categories';
+$string['preset:programs'] = 'Programs';
+$string['preset:pathways'] = 'Pathways';
 $string['preset:courses'] = 'Courses';
 $string['preset:cohorts'] = 'Cohorts';
 $string['preset:roles'] = 'Roles';
@@ -162,109 +174,94 @@ $string['presetschema'] = 'Preset schema';
 $string['presetschemaexpected'] = 'Expected preset schema: {$a}';
 $string['presetitemcount'] = '{$a} item(s)';
 $string['presetrequired'] = 'Required preset';
-$string['presetenabled'] = 'Enabled preset';
-$string['presetdisabled'] = 'Disabled preset';
-$string['presetexported'] = 'Preset exported.';
-$string['presetexportfailed'] = 'Preset export failed.';
+$string['presetoptional'] = 'Optional preset';
+$string['presetselected'] = 'Selected preset';
+$string['presetcomponent'] = 'Preset component';
 
 // Forms.
-$string['seedform'] = 'Seed form';
-$string['resetform'] = 'Reset form';
-$string['components'] = 'Components';
-$string['selectedcomponents'] = 'Selected components';
-$string['selectpresets'] = 'Select presets';
-$string['selectcomponents'] = 'Select components';
-$string['confirm'] = 'Confirm';
-$string['force'] = 'Force';
-$string['returnurl'] = 'Return URL';
-$string['confirmationrequired'] = 'You must confirm this operation before it can run.';
-$string['confirmseed'] = 'I understand that this will seed the UCKK distribution.';
-$string['confirmreset'] = 'I understand that this will reset selected UCKK seeded content.';
-$string['confirmvalidate'] = 'Validate the current UCKK distribution.';
-$string['confirmexportpreset'] = 'Export the selected UCKK preset.';
-$string['nothingselected'] = 'Nothing was selected.';
-$string['invalidmode'] = 'Invalid seed mode.';
-$string['invalidaction'] = 'Invalid seed action.';
-$string['invalidpreset'] = 'Invalid preset.';
-$string['invalidcomponent'] = 'Invalid component.';
-$string['cannotreset'] = 'Reset operations are disabled.';
-$string['cannotruncli'] = 'CLI execution is disabled.';
-$string['cannotseed'] = 'You do not have permission to seed the UCKK distribution.';
-$string['cannotvalidate'] = 'You do not have permission to validate the UCKK distribution.';
-$string['cannotexportpresets'] = 'You do not have permission to export UCKK presets.';
+$string['form:selectpresets'] = 'Select presets';
+$string['form:selectcomponents'] = 'Select components';
+$string['form:selecttargets'] = 'Select targets';
+$string['form:executionoptions'] = 'Execution options';
+$string['form:exportoptions'] = 'Export options';
+$string['form:resetoptions'] = 'Reset options';
+$string['form:validationoptions'] = 'Validation options';
+$string['form:advanced'] = 'Advanced options';
+$string['form:dangerzone'] = 'Danger zone';
+$string['form:confirmrequired'] = 'Confirmation is required before continuing.';
+$string['form:forcewarning'] = 'Force mode bypasses some safety checks. Use only during controlled maintenance.';
+$string['form:presetpath'] = 'Academic registry JSON path';
+$string['form:presetpath_help'] = 'Use an absolute path or a path relative to the Moodle root.';
+$string['form:outputpath'] = 'Output path';
+$string['form:outputpath_help'] = 'Directory or JSON file path where exported presets will be written.';
 
-// Reset scopes.
-$string['scope'] = 'Scope';
-$string['resetscope'] = 'Reset scope';
-$string['scope_reset_seed_logs'] = 'Reset seed logs';
-$string['scope_reset_seeded_content'] = 'Reset seeded content';
-$string['scope_reset_seeded_courses'] = 'Reset seeded courses';
-$string['scope_reset_seeded_roles'] = 'Reset seeded roles';
-$string['scope_reset_seeded_badges'] = 'Reset seeded badges';
-$string['scope_reset_all_uckk_seeded_content'] = 'Reset all UCKK seeded content';
-$string['reset_seed_logs'] = 'Reset seed logs';
-$string['reset_seeded_content'] = 'Reset seeded content';
-$string['reset_seeded_courses'] = 'Reset seeded courses';
-$string['reset_seeded_roles'] = 'Reset seeded roles';
-$string['reset_seeded_badges'] = 'Reset seeded badges';
-$string['reset_all_uckk_seeded_content'] = 'Reset all UCKK seeded content';
-$string['resetwarning'] = 'Reset operations only affect UCKK seeded content and must not delete arbitrary Moodle data.';
-$string['resetcompleted'] = 'Reset completed.';
-$string['resetfailed'] = 'Reset failed.';
-
-// Results and counts.
-$string['summary'] = 'Summary';
-$string['details'] = 'Details';
-$string['message'] = 'Message';
-$string['messages'] = 'Messages';
-$string['metadata'] = 'Metadata';
+// Dashboard and reports.
+$string['dashboard'] = 'UCKK seed dashboard';
+$string['recentruns'] = 'Recent runs';
 $string['runid'] = 'Run ID';
-$string['created'] = 'Created';
-$string['updated'] = 'Updated';
-$string['skipped'] = 'Skipped';
-$string['failed'] = 'Failed';
-$string['warnings'] = 'Warnings';
-$string['errors'] = 'Errors';
-$string['count_created'] = 'Created: {$a}';
-$string['count_updated'] = 'Updated: {$a}';
-$string['count_skipped'] = 'Skipped: {$a}';
-$string['count_failed'] = 'Failed: {$a}';
-$string['count_warnings'] = 'Warnings: {$a}';
-$string['count_errors'] = 'Errors: {$a}';
-$string['validationpassed'] = 'Validation passed.';
+$string['runcreated'] = 'Run created';
+$string['runstarted'] = 'Run started';
+$string['runfinished'] = 'Run finished';
+$string['runduration'] = 'Duration';
+$string['runby'] = 'Run by';
+$string['noruns'] = 'No UCKK seed runs found.';
+$string['viewrun'] = 'View run';
+$string['runlog'] = 'Run log';
+$string['loglevel'] = 'Log level';
+$string['logmessage'] = 'Log message';
+$string['logdetails'] = 'Details';
+$string['viewlogs'] = 'View logs';
+$string['clearfilters'] = 'Clear filters';
+
+// Intro/help text.
+$string['seedtoolintro'] = 'Use this tool to validate, seed, export, or reset the canonical UCKK distribution data.';
+$string['seeddistribution_desc'] = 'Create or update the canonical UCKK campus seed data using idempotent seed operations.';
+$string['resetdistribution_desc'] = 'Reset only content explicitly created by the UCKK seed tool.';
+$string['validatedistribution_desc'] = 'Check the current UCKK installation and seed data without modifying records.';
+$string['exportpreset_desc'] = 'Export one canonical UCKK seed preset using the shared preset schema.';
+$string['dryrundesc'] = 'Dry run reports what would change without writing records.';
+$string['rollbackplandesc'] = 'Rollback plan reports what would be needed to reverse the selected seed operations.';
+
+// Confirmations and warnings.
+$string['confirmapply'] = 'I understand that this operation may create or update Moodle records.';
+$string['confirmdangerousreset'] = 'I understand that this reset mode may remove seeded records.';
+$string['confirmforce'] = 'I understand that force mode may bypass safety checks.';
+$string['dangerousresetdisabled'] = 'Destructive reset modes are disabled in plugin settings.';
+$string['clidisabled'] = 'CLI execution is disabled in plugin settings.';
+$string['tooldisabled'] = 'The UCKK seed tool is disabled in plugin settings.';
+$string['resetdisabled'] = 'Reset operations are disabled in plugin settings.';
+$string['operationrequiresadmin'] = 'This operation requires site administrator permissions.';
+
+// Execution summaries.
+$string['seedstarted'] = 'Seed operation started.';
+$string['seedcompleted'] = 'Seed operation completed.';
+$string['seedfailed'] = 'Seed operation failed.';
+$string['resetstarted'] = 'Reset operation started.';
+$string['resetcompleted'] = 'Reset operation completed.';
+$string['resetfailed'] = 'Reset operation failed.';
+$string['validationstarted'] = 'Validation started.';
+$string['validationcompleted'] = 'Validation completed.';
 $string['validationfailed'] = 'Validation failed.';
-$string['seedcompleted'] = 'Seed completed.';
-$string['seedfailed'] = 'Seed failed.';
-$string['seedtooldisabled'] = 'The seed tool is disabled.';
-$string['missingcapability'] = 'Missing required capability.';
-$string['cliaccessdisabled'] = 'CLI access is disabled for the UCKK seed tool.';
+$string['exportstarted'] = 'Preset export started.';
+$string['exportfinished'] = 'Preset export completed.';
+$string['exportfailedmessage'] = 'Preset export failed.';
 
-// CLI.
-$string['cli:seed:help'] = 'Seed the UCKK distribution from canonical presets.';
-$string['cli:reset:help'] = 'Reset UCKK seeded content.';
-$string['cli:validate:help'] = 'Validate UCKK seed presets and current seeded state.';
-$string['cli:exportpreset:help'] = 'Export UCKK seed presets.';
-$string['cli:invalidoption'] = 'Invalid CLI option: {$a}';
-$string['cli:missingoption'] = 'Missing CLI option: {$a}';
-$string['cli:confirmrequired'] = 'Confirmation is required. Add --confirm to continue.';
-$string['cli:dryrun'] = 'CLI dry run';
-$string['cli:jsonoutput'] = 'JSON output';
-$string['cli:quiet'] = 'Quiet mode';
-
-// Events and logging.
-$string['event_seed_started'] = 'UCKK seed started';
-$string['event_seed_completed'] = 'UCKK seed completed';
-$string['event_seed_failed'] = 'UCKK seed failed';
-$string['event_reset_started'] = 'UCKK reset started';
-$string['event_reset_completed'] = 'UCKK reset completed';
-$string['event_reset_failed'] = 'UCKK reset failed';
-$string['event_validation_started'] = 'UCKK validation started';
-$string['event_validation_completed'] = 'UCKK validation completed';
-$string['event_preset_exported'] = 'UCKK preset exported';
-$string['logentry'] = 'Log entry';
-$string['logentries'] = 'Log entries';
-$string['logretentiontask'] = 'Purge old UCKK seed logs';
-$string['scheduledseedtask'] = 'Scheduled UCKK seed distribution';
+// Generic seeder messages.
+$string['seed:created'] = 'Created {$a}.';
+$string['seed:updated'] = 'Updated {$a}.';
+$string['seed:skipped'] = 'Skipped {$a}.';
+$string['seed:deleted'] = 'Deleted {$a}.';
+$string['seed:validated'] = 'Validated {$a}.';
+$string['seed:warning'] = 'Warning: {$a}';
+$string['seed:error'] = 'Error: {$a}';
+$string['seed:blocker'] = 'Blocker: {$a}';
+$string['seed:dryruncreate'] = 'Would create {$a}.';
+$string['seed:dryrunupdate'] = 'Would update {$a}.';
+$string['seed:dryrundelete'] = 'Would delete {$a}.';
+$string['seed:notmanaged'] = 'Existing record is not managed by the UCKK seed tool: {$a}';
+$string['seed:manualskip'] = 'Manual record skipped: {$a}';
+$string['seed:dependencywarning'] = 'Dependency warning: {$a}';
+$string['seed:dependencymissing'] = 'Required dependency missing: {$a}';
 
 // Category seeding.
 $string['categoryseed:created'] = 'Category created: {$a}';
@@ -287,10 +284,10 @@ $string['courseseed:validationok'] = 'Course validation OK: {$a}';
 $string['courseseed:error_missingidnumber'] = 'Course definition is missing an idnumber.';
 $string['courseseed:error_missingshortname'] = 'Course definition is missing a shortname.';
 $string['courseseed:error_missingfullname'] = 'Course definition is missing a fullname.';
-$string['courseseed:error_missingcategory'] = 'Course definition is missing a category.';
-$string['courseseed:error_categorynotfound'] = 'Course category not found: {$a}';
-$string['courseseed:error_duplicateshortname'] = 'Duplicate course shortname: {$a}';
 $string['courseseed:error_duplicateidnumber'] = 'Duplicate course idnumber: {$a}';
+$string['courseseed:error_duplicateshortname'] = 'Duplicate course shortname: {$a}';
+$string['courseseed:error_categorynotfound'] = 'Course category not found: {$a}';
+$string['courseseed:error_templateinvalid'] = 'Invalid course template: {$a}';
 $string['courseseed:warning_existingmanual'] = 'Existing course is not marked as UCKK seeded: {$a}';
 
 // Cohort seeding.
@@ -302,30 +299,27 @@ $string['cohortseed:validationok'] = 'Cohort validation OK: {$a}';
 $string['cohortseed:error_missingidnumber'] = 'Cohort definition is missing an idnumber.';
 $string['cohortseed:error_missingname'] = 'Cohort definition is missing a name.';
 $string['cohortseed:error_duplicateidnumber'] = 'Duplicate cohort idnumber: {$a}';
-$string['cohortseed:error_invalidcontext'] = 'Invalid cohort context: {$a}';
+$string['cohortseed:error_contextnotfound'] = 'Cohort context not found: {$a}';
 $string['cohortseed:warning_existingmanual'] = 'Existing cohort is not marked as UCKK seeded: {$a}';
 
-// Role seeding.
+// Role and capability seeding.
 $string['roleseed:created'] = 'Role created: {$a}';
 $string['roleseed:updated'] = 'Role updated: {$a}';
 $string['roleseed:skipped'] = 'Role skipped: {$a}';
 $string['roleseed:reset'] = 'Role reset: {$a}';
 $string['roleseed:validationok'] = 'Role validation OK: {$a}';
-$string['roleseed:error_missingidnumber'] = 'Role definition is missing an idnumber.';
 $string['roleseed:error_missingshortname'] = 'Role definition is missing a shortname.';
 $string['roleseed:error_missingname'] = 'Role definition is missing a name.';
-$string['roleseed:error_duplicateidnumber'] = 'Duplicate role idnumber: {$a}';
 $string['roleseed:error_duplicateshortname'] = 'Duplicate role shortname: {$a}';
 $string['roleseed:error_invalidarchetype'] = 'Invalid role archetype: {$a}';
+$string['roleseed:error_capabilitynotfound'] = 'Unknown capability in role definition: {$a}';
 $string['roleseed:warning_existingmanual'] = 'Existing role is not marked as UCKK seeded: {$a}';
 
-// Capability seeding.
-$string['capabilityseed:created'] = 'Capability override created: {$a}';
-$string['capabilityseed:updated'] = 'Capability override updated: {$a}';
-$string['capabilityseed:skipped'] = 'Capability override skipped: {$a}';
-$string['capabilityseed:reset'] = 'Capability override reset: {$a}';
+$string['capabilityseed:created'] = 'Capability assigned: {$a}';
+$string['capabilityseed:updated'] = 'Capability updated: {$a}';
+$string['capabilityseed:skipped'] = 'Capability skipped: {$a}';
+$string['capabilityseed:reset'] = 'Capability reset: {$a}';
 $string['capabilityseed:validationok'] = 'Capability validation OK: {$a}';
-$string['capabilityseed:error_missingrole'] = 'Capability definition is missing a role.';
 $string['capabilityseed:error_missingcapability'] = 'Capability definition is missing a capability.';
 $string['capabilityseed:error_invalidpermission'] = 'Invalid capability permission: {$a}';
 $string['capabilityseed:error_rolenotfound'] = 'Role not found for capability override: {$a}';
@@ -356,6 +350,7 @@ $string['badgeseed:error_duplicateidnumber'] = 'Duplicate badge idnumber: {$a}';
 $string['badgeseed:error_invalidtype'] = 'Invalid badge type: {$a}';
 $string['badgeseed:error_coursenotfound'] = 'Badge course not found: {$a}';
 $string['badgeseed:warning_existingmanual'] = 'Existing badge is not marked as UCKK seeded: {$a}';
+$string['badgeseednoncanonical'] = 'Badge preset item is not part of the canonical UCKK badge vocabulary.';
 
 // Template seeding.
 $string['templateseed:created'] = 'Template created: {$a}';
@@ -513,6 +508,8 @@ $string['idnumber'] = 'ID number';
 $string['shortname'] = 'Shortname';
 $string['fullname'] = 'Full name';
 $string['description'] = 'Description';
+$string['program'] = 'Program';
+$string['pathway'] = 'Pathway';
 $string['name'] = 'Name';
 $string['key'] = 'Key';
 $string['enabled'] = 'Enabled';
@@ -653,3 +650,80 @@ $string['reportseed:error_duplicatekey'] = 'Duplicate report key: {$a}';
 $string['reportseed:error_invalidcapability'] = 'Report definition has an invalid capability: {$a}';
 $string['reportseed:error_missingsource'] = 'Report definition is missing a source.';
 $string['reportseed:warning_unknownsource'] = 'Unknown report source: {$a}';
+
+
+// Seeder runtime messages missing from earlier language inventory.
+$string['presetschemavalid'] = 'Preset schema is valid.';
+$string['presetschemainvalid'] = 'Preset schema is invalid.';
+$string['presetrunning'] = 'Running preset: {$a}';
+$string['presetmethodmissing'] = 'Preset handler method is missing: {$a}';
+$string['presetitemsmissing'] = 'Preset does not contain a valid items array: {$a}';
+$string['presethandlermissing'] = 'Preset handler is missing: {$a}';
+$string['presetexportcompleted'] = 'Preset export completed.';
+$string['confirmationrequired'] = 'Confirmation is required before continuing.';
+
+// Role seed runtime messages.
+$string['rolepresetvalid'] = 'Role preset is valid.';
+$string['rolesvalidationcomplete'] = 'Role validation completed.';
+$string['rolesseedcomplete'] = 'Role seed completed.';
+$string['rolesdryruncomplete'] = 'Role seed dry run completed.';
+$string['rolesresetcomplete'] = 'Role reset completed.';
+$string['rolespresetempty'] = 'Role preset is empty.';
+$string['roleshortnamemissing'] = 'Role shortname is missing.';
+$string['roleduplicated'] = 'Duplicate role shortname: {$a}';
+$string['rolenotcanonicaltechnical'] = 'Role is not a canonical technical UCKK role: {$a}';
+$string['rolenamemissing'] = 'Role name is missing.';
+$string['rolecontextlevelsmissing'] = 'Role context levels are missing: {$a}';
+$string['roleinvalidcontextlevel'] = 'Role has an invalid context level: {$a}';
+$string['rolesymbolicnotallowed'] = 'Symbolic role names are not allowed here: {$a}';
+$string['rolewouldseed'] = 'Role would be seeded: {$a}';
+$string['roleseeded'] = 'Role seeded: {$a}';
+$string['roleupdated'] = 'Role updated.';
+$string['rolecreated'] = 'Role created.';
+$string['roleunchanged'] = 'Role unchanged.';
+$string['rolenotfoundskipped'] = 'Role not found; skipped: {$a}';
+$string['rolesresetrequiresconfirmation'] = 'Role reset requires confirmation.';
+$string['rolecontextlevelsupdated'] = 'Role context levels updated.';
+$string['capabilityassigned'] = 'Capability assigned.';
+$string['capabilityupdated'] = 'Capability updated.';
+$string['capabilityunchanged'] = 'Capability unchanged.';
+$string['capabilityremoved'] = 'Capability removed.';
+
+// Seed form/settings strings referenced by current tool code.
+$string['modecheckboxconflict'] = 'Choose only one execution mode.';
+$string['protectnonseededcontent'] = 'Protect non-seeded content';
+$string['protectnonseededcontent_desc'] = 'Prevent reset operations from changing content that was not created by the UCKK seed tool.';
+$string['resetformnotice'] = 'Reset operations can hide or remove seeded records. Use dry run first.';
+$string['rollbackplan_desc'] = 'Generate a rollback plan without applying destructive changes.';
+$string['rollbackplanrequired'] = 'Rollback plan is required for this reset mode.';
+$string['resetconfirmationrequired'] = 'Reset confirmation is required.';
+$string['resetrequiresconfirmation'] = 'Reset requires confirmation.';
+$string['resetallrequiresforce'] = 'Resetting all seeded content requires force.';
+$string['resetblocked'] = 'Reset was blocked.';
+$string['resetcompletedwitherrors'] = 'Reset completed with errors.';
+
+// Report seed runtime/default strings.
+$string['reportseed:unchanged'] = 'Report unchanged: {$a}';
+$string['reportseed:default_archive_production'] = 'Archive production';
+$string['reportseed:default_archive_production_desc'] = 'Default report for UCKK archive production.';
+$string['reportseed:default_assembly_decisions'] = 'Assembly decisions';
+$string['reportseed:default_assembly_decisions_desc'] = 'Default report for UCKK assembly decisions.';
+$string['reportseed:default_badge_awards'] = 'Badge awards';
+$string['reportseed:default_badge_awards_desc'] = 'Default report for UCKK badge awards.';
+$string['reportseed:default_course_progress'] = 'Course progress';
+$string['reportseed:default_course_progress_desc'] = 'Default report for UCKK course progress.';
+$string['reportseed:default_integrity_cases'] = 'Integrity cases';
+$string['reportseed:default_integrity_cases_desc'] = 'Default report for UCKK integrity cases.';
+
+// Badge seed runtime messages.
+$string['badgesvalidationcomplete'] = 'Badge validation completed.';
+$string['badgesseedcomplete'] = 'Badge seed completed.';
+$string['badgesdryruncomplete'] = 'Badge seed dry run completed.';
+$string['badgesresetcomplete'] = 'Badge reset completed.';
+$string['badgesresetdryruncomplete'] = 'Badge reset dry run completed.';
+$string['badgeseedcreated'] = 'Badge created: {$a}';
+$string['badgeseedupdated'] = 'Badge updated: {$a}';
+$string['badgeseedunchanged'] = 'Badge unchanged: {$a}';
+$string['badgeseedalreadyabsent'] = 'Badge already absent: {$a}';
+$string['badgeseedwouldremove'] = 'Badge would be removed: {$a}';
+$string['badgeseedremoved'] = 'Badge removed: {$a}';

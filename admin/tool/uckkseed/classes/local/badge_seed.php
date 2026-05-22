@@ -35,17 +35,23 @@ require_once($CFG->libdir . '/badgeslib.php');
  * technical roles.
  */
 final class badge_seed {
-    /** Component owning this seeder. */
+    /** Owning component. */
     public const COMPONENT = 'tool_uckkseed';
 
     /** Preset id. */
     public const PRESET = 'badges';
 
-    /** Target type for validation messages. */
-    public const TARGET_TYPE = 'badge';
-
-    /** Preset schema. */
+    /** Preset schema id. */
     public const SCHEMA = 'uckkseed.preset.v1';
+
+    /** Preset version. */
+    public const VERSION = 2026051200;
+
+    /** Metadata owner marker. */
+    private const MANAGED_BY = 'tool_uckkseed';
+
+    /** Metadata key: managed by. */
+    private const METADATA_MANAGED_BY = 'managedby';
 
     /** Mode: dry run. */
     public const MODE_DRY_RUN = 'dry_run';
@@ -58,15 +64,6 @@ final class badge_seed {
 
     /** Mode: rollback plan. */
     public const MODE_ROLLBACK_PLAN = 'rollback_plan';
-
-    /** Status: completed. */
-    public const STATUS_COMPLETED = 'completed';
-
-    /** Status: failed. */
-    public const STATUS_FAILED = 'failed';
-
-    /** Status: warning. */
-    public const STATUS_WARNING = 'warning';
 
     /** Severity: info. */
     public const SEVERITY_INFO = 'info';
@@ -83,65 +80,9 @@ final class badge_seed {
     /** Severity: blocker. */
     public const SEVERITY_BLOCKER = 'blocker';
 
-    /** Default badge language. */
-    private const DEFAULT_LANGUAGE = 'fr';
-
-    /** Seed-managed metadata key. */
-    private const METADATA_MANAGED_BY = 'managedby';
-
-    /** Seed manager name. */
-    private const MANAGED_BY = 'tool_uckkseed';
-
-    /** Supported UCKK badge award criteria. */
-    private const SUPPORTED_CRITERIA = [
-        'pathway_completion',
-        'program_completion',
-        'course_completion',
-        'challenge_completion',
-        'assembly_participation',
-        'decision_record',
-        'integrity_review',
-        'ai_log',
-        'evidence_submission',
-        'human_validation',
-        'competency_threshold',
-        'competency_completion',
-        'archive_or_portfolio',
-        'no_unresolved_integrity_block',
-    ];
-
-    /** Criterion aliases accepted from generated registry JSON and older defaults. */
-    private const CRITERION_ALIASES = [
-        'competency_completion' => 'competency_threshold',
-        'competency_ids' => 'competency_threshold',
-        'archive' => 'archive_or_portfolio',
-        'portfolio' => 'archive_or_portfolio',
-        'proof_submission' => 'evidence_submission',
-        'proof' => 'evidence_submission',
-        'mentor_validation' => 'human_validation',
-        'human_review' => 'human_validation',
-        'pathway' => 'pathway_completion',
-        'program' => 'program_completion',
-        'course' => 'course_completion',
-        'challenge_validation' => 'challenge_completion',
-        'challenge' => 'challenge_completion',
-    ];
-
-    /** Canonical badge keys. */
+    /** Canonical badge keys managed by this seed. */
     private const CANONICAL_BADGES = [
-        'joueur_initie',
         'joueur_lucide',
-        'cartographe_systemes',
-        'gardien_preuve',
-        'participant_assemblee',
-        'batisseur_prototype',
-        'archiviste_decision',
-        'defi_king_klown',
-        'inquisition_methodologique',
-        'architecte_sens',
-        'architecte_opportunites',
-        'gardien_systemes_vivants',
-        'ia_gouvernable',
         'grand_jeu_social',
         'koa_digital_ecosystem',
         'architecture_sociotechnique',
@@ -149,342 +90,294 @@ final class badge_seed {
         'economie',
         'ecologie',
         'metaphysique',
+        'ia_gouvernable',
         'linguistique_architecture_du_sens',
         'intervention_sociale',
         'medias_vivants_theatre_public',
     ];
 
-    /** Canonical competency idnumbers. */
-    private const COMPETENCY_IDS = [
-        'UCKK-COMP-001',
-        'UCKK-COMP-002',
-        'UCKK-COMP-003',
-        'UCKK-COMP-004',
-        'UCKK-COMP-005',
-        'UCKK-COMP-006',
-        'UCKK-COMP-007',
-        'UCKK-COMP-008',
-        'UCKK-COMP-009',
-        'UCKK-COMP-010',
-        'UCKK-COMP-011',
-        'UCKK-COMP-012',
-        'UCKK-COMP-013',
-        'UCKK-COMP-014',
-    ];
-
-    /** Default badge definitions. */
+    /**
+     * Default canonical badge definitions.
+     *
+     * @var array<int, array<string, mixed>>
+     */
     private const DEFAULT_BADGES = [
         [
-            'key' => 'joueur_initie',
-            'name' => 'Joueur initié',
-            'description' => 'Première reconnaissance interne UCKK pour l’entrée documentée dans le campus, le tronc commun et le cycle Connaître → Choisir → Agir → Se souvenir.',
+            'key' => 'tronc_commun_completion',
+            'name' => 'Tronc commun UCKK complété',
+            'description' => 'Reconnaît la complétion du tronc commun obligatoire UCKK.',
             'type' => 'site',
             'criteria' => [
-                'course_completion',
                 'evidence_submission',
                 'human_validation',
                 'competency_threshold',
                 'archive_or_portfolio',
                 'no_unresolved_integrity_block',
             ],
-            'competencies' => ['UCKK-COMP-001', 'UCKK-COMP-014'],
+            'competencies' => [
+                'UCKK-COMM-FOUNDATION',
+            ],
             'requiredarchive' => true,
             'requireshumanvalidation' => true,
             'metadata' => [
-                'category' => 'foundational',
-                'symbolic_role' => 'joueur',
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'not_moodle_role' => true,
+                'symbolic_role' => 'Aspirant UCKK',
             ],
         ],
         [
-            'key' => 'joueur_lucide',
-            'name' => 'Joueur lucide',
-            'description' => 'Reconnaissance interne pour un Joueur capable de lire les systèmes, distinguer fiction et fait, produire des preuves et documenter ses choix.',
+            'key' => 'parchemin_grand_jeu_social_magie_operable',
+            'name' => 'Parchemin — Grand Jeu social',
+            'description' => 'Reconnaît une progression validée dans la Voie du Grand Jeu social au Palier de Magie opérable.',
             'type' => 'site',
             'criteria' => [
-                'course_completion',
                 'evidence_submission',
                 'human_validation',
                 'competency_threshold',
                 'archive_or_portfolio',
                 'no_unresolved_integrity_block',
             ],
-            'competencies' => ['UCKK-COMP-001', 'UCKK-COMP-003', 'UCKK-COMP-005', 'UCKK-COMP-014'],
+            'competencies' => [
+                'UCKK-GJS-MAGIE-OPERABLE',
+            ],
             'requiredarchive' => true,
             'requireshumanvalidation' => true,
             'metadata' => [
-                'category' => 'foundational',
-                'symbolic_role' => 'joueur_lucide',
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'program' => 'GJS',
+                'palier' => 'magie_operable',
+            ],
+        ],
+        [
+            'key' => 'parchemin_architecture_ecosysteme_digital_koa_magie_operable',
+            'name' => 'Parchemin — Architecture d’écosystème digital / KOA',
+            'description' => 'Reconnaît une progression validée dans la Voie Architecture d’écosystème digital / KOA au Palier de Magie opérable.',
+            'type' => 'site',
+            'criteria' => [
+                'evidence_submission',
+                'human_validation',
+                'competency_threshold',
+                'archive_or_portfolio',
+                'no_unresolved_integrity_block',
+            ],
+            'competencies' => [
+                'UCKK-KOA-MAGIE-OPERABLE',
+            ],
+            'requiredarchive' => true,
+            'requireshumanvalidation' => true,
+            'metadata' => [
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'program' => 'KOA',
+                'palier' => 'magie_operable',
+            ],
+        ],
+        [
+            'key' => 'parchemin_architecture_sociotechnique_magie_operable',
+            'name' => 'Parchemin — Architecture sociotechnique',
+            'description' => 'Reconnaît une progression validée dans la Voie Architecture sociotechnique au Palier de Magie opérable.',
+            'type' => 'site',
+            'criteria' => [
+                'evidence_submission',
+                'human_validation',
+                'competency_threshold',
+                'archive_or_portfolio',
+                'no_unresolved_integrity_block',
+            ],
+            'competencies' => [
+                'UCKK-AS-MAGIE-OPERABLE',
+            ],
+            'requiredarchive' => true,
+            'requireshumanvalidation' => true,
+            'metadata' => [
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'program' => 'AS',
+                'palier' => 'magie_operable',
+            ],
+        ],
+        [
+            'key' => 'parchemin_sciences_politiques_magie_operable',
+            'name' => 'Parchemin — Sciences politiques',
+            'description' => 'Reconnaît une progression validée dans la Voie des Sciences politiques au Palier de Magie opérable.',
+            'type' => 'site',
+            'criteria' => [
+                'evidence_submission',
+                'human_validation',
+                'competency_threshold',
+                'archive_or_portfolio',
+                'no_unresolved_integrity_block',
+            ],
+            'competencies' => [
+                'UCKK-SP-MAGIE-OPERABLE',
+            ],
+            'requiredarchive' => true,
+            'requireshumanvalidation' => true,
+            'metadata' => [
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'program' => 'SP',
+                'palier' => 'magie_operable',
+            ],
+        ],
+        [
+            'key' => 'parchemin_metaphysique_magie_operable',
+            'name' => 'Parchemin — Métaphysique',
+            'description' => 'Reconnaît une progression validée dans la Voie de Métaphysique au Palier de Magie opérable.',
+            'type' => 'site',
+            'criteria' => [
+                'evidence_submission',
+                'human_validation',
+                'competency_threshold',
+                'archive_or_portfolio',
+                'no_unresolved_integrity_block',
+            ],
+            'competencies' => [
+                'UCKK-ME-MAGIE-OPERABLE',
+            ],
+            'requiredarchive' => true,
+            'requireshumanvalidation' => true,
+            'metadata' => [
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'program' => 'ME',
+                'palier' => 'magie_operable',
+            ],
+        ],
+        [
+            'key' => 'parchemin_linguistique_architecture_sens_magie_operable',
+            'name' => 'Parchemin — Linguistique et architecture du sens',
+            'description' => 'Reconnaît une progression validée dans la Voie de Linguistique et architecture du sens au Palier de Magie opérable.',
+            'type' => 'site',
+            'criteria' => [
+                'evidence_submission',
+                'human_validation',
+                'competency_threshold',
+                'archive_or_portfolio',
+                'no_unresolved_integrity_block',
+            ],
+            'competencies' => [
+                'UCKK-LI-MAGIE-OPERABLE',
+            ],
+            'requiredarchive' => true,
+            'requireshumanvalidation' => true,
+            'metadata' => [
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'program' => 'LI',
+                'palier' => 'magie_operable',
+            ],
+        ],
+        [
+            'key' => 'gardien_d_archive',
+            'name' => 'Gardien d’archive',
+            'description' => 'Reconnaît une pratique fiable de conservation et de contextualisation des traces.',
+            'type' => 'site',
+            'criteria' => [
+                'archive_or_portfolio',
+                'human_validation',
+                'no_unresolved_integrity_block',
+            ],
+            'competencies' => [
+                'UCKK-ARCHIVE-GOVERNANCE',
+            ],
+            'requiredarchive' => true,
+            'requireshumanvalidation' => true,
+            'metadata' => [
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'symbolic_role' => 'Gardien d’archive',
                 'not_moodle_role' => true,
             ],
         ],
         [
-            'key' => 'cartographe_systemes',
-            'name' => 'Cartographe de systèmes',
-            'description' => 'Reconnaissance interne pour la capacité à cartographier des systèmes, flux, pouvoirs, preuves et zones d’incertitude.',
+            'key' => 'lecteur_des_traces',
+            'name' => 'Lecteur des traces',
+            'description' => 'Reconnaît la capacité à lire, relier et interpréter des traces documentées.',
             'type' => 'site',
             'criteria' => [
                 'evidence_submission',
-                'human_validation',
-                'competency_threshold',
                 'archive_or_portfolio',
-                'no_unresolved_integrity_block',
+                'human_validation',
             ],
-            'competencies' => ['UCKK-COMP-002', 'UCKK-COMP-011'],
+            'competencies' => [
+                'UCKK-TRACE-READING',
+            ],
             'requiredarchive' => true,
             'requireshumanvalidation' => true,
             'metadata' => [
-                'category' => 'foundational',
-                'symbolic_role' => 'cartographe',
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'symbolic_role' => 'Lecteur des traces',
                 'not_moodle_role' => true,
             ],
         ],
         [
-            'key' => 'gardien_preuve',
-            'name' => 'Gardien de la preuve',
-            'description' => 'Reconnaissance interne pour la production, la protection, la provenance et la discussion responsable des preuves.',
+            'key' => 'inquisiteur_certifie',
+            'name' => 'Inquisiteur certifié',
+            'description' => 'Reconnaît une capacité validée à conduire une lecture d’intégrité sous supervision humaine.',
             'type' => 'site',
             'criteria' => [
-                'evidence_submission',
                 'human_validation',
-                'competency_threshold',
-                'archive_or_portfolio',
+                'integrity_case_reviewed',
                 'no_unresolved_integrity_block',
             ],
-            'competencies' => ['UCKK-COMP-003', 'UCKK-COMP-005', 'UCKK-COMP-009'],
-            'requiredarchive' => true,
+            'competencies' => [
+                'UCKK-INTEGRITY-REVIEW',
+            ],
+            'requiredarchive' => false,
             'requireshumanvalidation' => true,
             'metadata' => [
-                'category' => 'foundational',
-                'symbolic_role' => 'gardien_preuve',
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'symbolic_role' => 'Inquisiteur',
                 'not_moodle_role' => true,
             ],
         ],
         [
-            'key' => 'participant_assemblee',
-            'name' => 'Participant d’Assemblée',
-            'description' => 'Reconnaissance interne pour participation documentée à une Assemblée UCKK avec motion, argument, vote, décision ou procès-verbal.',
-            'type' => 'site',
-            'criteria' => [
-                'assembly_participation',
-                'evidence_submission',
-                'human_validation',
-                'archive_or_portfolio',
-                'no_unresolved_integrity_block',
-            ],
-            'competencies' => ['UCKK-COMP-006', 'UCKK-COMP-008', 'UCKK-COMP-013'],
-            'requiredarchive' => true,
-            'requireshumanvalidation' => true,
-            'metadata' => [
-                'category' => 'foundational',
-                'source_component' => 'mod_uckkassembly',
-            ],
-        ],
-        [
-            'key' => 'batisseur_prototype',
-            'name' => 'Bâtisseur de prototype',
-            'description' => 'Reconnaissance interne pour la construction d’un artefact utile, documenté, contestable et archivable.',
+            'key' => 'officiant_de_la_preuve',
+            'name' => 'Officiant de la preuve',
+            'description' => 'Reconnaît la capacité à accompagner la constitution et la validation de preuves.',
             'type' => 'site',
             'criteria' => [
                 'evidence_submission',
                 'human_validation',
-                'competency_threshold',
                 'archive_or_portfolio',
-                'no_unresolved_integrity_block',
             ],
-            'competencies' => ['UCKK-COMP-012', 'UCKK-COMP-013'],
+            'competencies' => [
+                'UCKK-EVIDENCE-OFFICIANT',
+            ],
             'requiredarchive' => true,
             'requireshumanvalidation' => true,
             'metadata' => [
-                'category' => 'foundational',
-                'symbolic_role' => 'batisseur',
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'symbolic_role' => 'Officiant de la preuve',
                 'not_moodle_role' => true,
             ],
         ],
         [
-            'key' => 'archiviste_decision',
-            'name' => 'Archiviste de décision',
-            'description' => 'Reconnaissance interne pour documentation et archivage fiable d’une décision, de sa provenance, de sa version et de son contexte.',
+            'key' => 'assembleur_de_kristaux',
+            'name' => 'Assembleur de kristaux',
+            'description' => 'Reconnaît une pratique validée de composition et d’assemblage de kristaux.',
             'type' => 'site',
             'criteria' => [
-                'decision_record',
-                'evidence_submission',
-                'human_validation',
                 'archive_or_portfolio',
-                'no_unresolved_integrity_block',
-            ],
-            'competencies' => ['UCKK-COMP-008', 'UCKK-COMP-009'],
-            'requiredarchive' => true,
-            'requireshumanvalidation' => true,
-            'metadata' => [
-                'category' => 'foundational',
-                'source_component' => 'mod_uckkarchive',
-            ],
-        ],
-        [
-            'key' => 'defi_king_klown',
-            'name' => 'Défi King Klown validé',
-            'description' => 'Reconnaissance interne pour un Défi King Klown complété, évalué, validé humainement et archivé.',
-            'type' => 'site',
-            'criteria' => [
-                'challenge_validation',
-                'evidence_submission',
-                'human_validation',
-                'archive_or_portfolio',
-                'no_unresolved_integrity_block',
-            ],
-            'competencies' => ['UCKK-COMP-005', 'UCKK-COMP-007', 'UCKK-COMP-013'],
-            'requiredarchive' => true,
-            'requireshumanvalidation' => true,
-            'metadata' => [
-                'category' => 'foundational',
-                'source_component' => 'mod_uckkchallenge',
-            ],
-        ],
-        [
-            'key' => 'inquisition_methodologique',
-            'name' => 'Inquisition méthodologique réussie',
-            'description' => 'Reconnaissance interne pour une correction, contestation ou vérification méthodologique menée avec rigueur, dignité et traçabilité.',
-            'type' => 'site',
-            'criteria' => [
-                'integrity_review',
-                'evidence_submission',
-                'human_validation',
-                'archive_or_portfolio',
-                'no_unresolved_integrity_block',
-            ],
-            'competencies' => ['UCKK-COMP-010', 'UCKK-COMP-011', 'UCKK-COMP-013'],
-            'requiredarchive' => true,
-            'requireshumanvalidation' => true,
-            'metadata' => [
-                'category' => 'foundational',
-                'source_component' => 'tool_uckkintegrity',
-            ],
-        ],
-        [
-            'key' => 'architecte_sens',
-            'name' => 'Architecte du sens',
-            'description' => 'Reconnaissance interne pour la conception claire de relations, récits, concepts et décisions qui augmentent la compréhension collective.',
-            'type' => 'site',
-            'criteria' => [
-                'evidence_submission',
                 'human_validation',
                 'competency_threshold',
-                'archive_or_portfolio',
-                'no_unresolved_integrity_block',
             ],
-            'competencies' => ['UCKK-COMP-001', 'UCKK-COMP-003', 'UCKK-COMP-014'],
+            'competencies' => [
+                'UCKK-KRISTAL-ASSEMBLY',
+            ],
             'requiredarchive' => true,
             'requireshumanvalidation' => true,
             'metadata' => [
-                'category' => 'symbolic_distinction',
-                'symbolic_role' => 'architecte_sens',
+                self::METADATA_MANAGED_BY => self::MANAGED_BY,
+                'source_family' => 'UCKK canon',
+                'symbolic_role' => 'Assembleur de kristaux',
                 'not_moodle_role' => true,
-            ],
-        ],
-        [
-            'key' => 'architecte_opportunites',
-            'name' => 'Architecte d’opportunités',
-            'description' => 'Reconnaissance interne pour la transformation d’une lecture de système en possibilités d’action responsables.',
-            'type' => 'site',
-            'criteria' => [
-                'evidence_submission',
-                'human_validation',
-                'competency_threshold',
-                'archive_or_portfolio',
-                'no_unresolved_integrity_block',
-            ],
-            'competencies' => ['UCKK-COMP-002', 'UCKK-COMP-007', 'UCKK-COMP-012'],
-            'requiredarchive' => true,
-            'requireshumanvalidation' => true,
-            'metadata' => [
-                'category' => 'symbolic_distinction',
-                'symbolic_role' => 'architecte_opportunites',
-                'not_moodle_role' => true,
-            ],
-        ],
-        [
-            'key' => 'gardien_systemes_vivants',
-            'name' => 'Gardien des systèmes vivants',
-            'description' => 'Reconnaissance interne pour la protection active des systèmes humains, écologiques, institutionnels ou sociotechniques.',
-            'type' => 'site',
-            'criteria' => [
-                'evidence_submission',
-                'human_validation',
-                'competency_threshold',
-                'archive_or_portfolio',
-                'no_unresolved_integrity_block',
-            ],
-            'competencies' => ['UCKK-COMP-007', 'UCKK-COMP-010', 'UCKK-COMP-013'],
-            'requiredarchive' => true,
-            'requireshumanvalidation' => true,
-            'metadata' => [
-                'category' => 'symbolic_distinction',
-                'symbolic_role' => 'gardien_systemes_vivants',
-                'not_moodle_role' => true,
-            ],
-        ],
-        [
-            'key' => 'ia_gouvernable',
-            'name' => 'IA gouvernable',
-            'description' => 'Reconnaissance interne pour l’usage non souverain, vérifiable, incertain et humainement validé de l’intelligence artificielle.',
-            'type' => 'site',
-            'criteria' => [
-                'ai_log',
-                'evidence_submission',
-                'human_validation',
-                'competency_threshold',
-                'archive_or_portfolio',
-                'no_unresolved_integrity_block',
-            ],
-            'competencies' => ['UCKK-COMP-004', 'UCKK-COMP-010', 'UCKK-COMP-013'],
-            'requiredarchive' => true,
-            'requireshumanvalidation' => true,
-            'metadata' => [
-                'category' => 'program',
-                'program' => 'intelligence_artificielle_gouvernable',
-                'ai_policy_non_sovereign' => true,
-            ],
-        ],
-        [
-            'key' => 'grand_jeu_social',
-            'name' => 'Grand Jeu social',
-            'description' => 'Reconnaissance interne de programme pour le Grand Jeu social.',
-            'type' => 'site',
-            'criteria' => [
-                'program_completion',
-                'evidence_submission',
-                'human_validation',
-                'competency_threshold',
-                'archive_or_portfolio',
-                'no_unresolved_integrity_block',
-            ],
-            'competencies' => ['UCKK-COMP-001', 'UCKK-COMP-007', 'UCKK-COMP-014'],
-            'requiredarchive' => true,
-            'requireshumanvalidation' => true,
-            'metadata' => [
-                'category' => 'program',
-                'program' => 'grand_jeu_social',
-            ],
-        ],
-        [
-            'key' => 'koa_digital_ecosystem',
-            'name' => 'kOA Digital Ecosystem',
-            'description' => 'Reconnaissance interne de programme pour l’architecture de l’écosystème digital kOA.',
-            'type' => 'site',
-            'criteria' => [
-                'program_completion',
-                'evidence_submission',
-                'human_validation',
-                'competency_threshold',
-                'archive_or_portfolio',
-                'no_unresolved_integrity_block',
-            ],
-            'competencies' => ['UCKK-COMP-002', 'UCKK-COMP-004', 'UCKK-COMP-012'],
-            'requiredarchive' => true,
-            'requireshumanvalidation' => true,
-            'metadata' => [
-                'category' => 'program',
-                'program' => 'architecture_ecosysteme_digital_koa',
             ],
         ],
     ];
@@ -729,7 +622,7 @@ final class badge_seed {
     /**
      * Reset seed-managed badge definitions.
      *
-     * This deletes only badges that carry the seed-managed uniquehash used by
+     * This deletes only badges that carry the seed-managed config marker used by
      * this seeder. It must not remove manually created badges or revoke awards
      * outside Moodle's normal badge deletion behaviour.
      *
@@ -777,8 +670,7 @@ final class badge_seed {
         }
 
         foreach (array_unique($keys) as $key) {
-            $uniquehash = $this->get_uniquehash($key);
-            $badge = $DB->get_record('badge', ['uniquehash' => $uniquehash], '*', IGNORE_MISSING);
+            $badge = $this->get_existing_badge(['key' => $key]);
 
             if (!$badge) {
                 $this->add_message(
@@ -834,13 +726,11 @@ final class badge_seed {
      * @return array<string, mixed>
      */
     public function export(array $options = []): array {
-        global $DB;
-
         $items = [];
 
         if (empty($options['defaults'])) {
             foreach (self::CANONICAL_BADGES as $key) {
-                $badge = $DB->get_record('badge', ['uniquehash' => $this->get_uniquehash($key)], '*', IGNORE_MISSING);
+                $badge = $this->get_existing_badge(['key' => $key]);
 
                 if (!$badge) {
                     continue;
@@ -864,71 +754,61 @@ final class badge_seed {
             'schema' => self::SCHEMA,
             'component' => self::COMPONENT,
             'preset' => self::PRESET,
-            'version' => 2026051200,
+            'version' => self::VERSION,
             'items' => $normalised,
+            'metadata' => [
+                'source' => self::COMPONENT,
+                'exportedat' => date(DATE_ATOM),
+                'managedby' => self::MANAGED_BY,
+                'guardrails' => [
+                    'badges_are_not_roles',
+                    'badges_do_not_award_themselves',
+                    'human_validation_required',
+                    'archive_or_evidence_required',
+                ],
+            ],
         ];
     }
 
     /**
-     * Validate UCKK badge award rules.
-     *
-     * Criteria are policy descriptors, not automatic award bypasses. The final
-     * registry supports badges with different combinations of course, pathway,
-     * programme, challenge, assembly, evidence, archive, integrity and human
-     * validation criteria.
+     * Validate required award rules.
      *
      * @param validation_result $result Result object.
      * @param array<string, mixed> $item Normalised badge item.
      */
     private function validate_required_award_rules(validation_result $result, array $item): void {
+        $targetkey = $item['key'];
+
         if (empty($item['criteria'])) {
             $this->add_message(
                 $result,
-                self::SEVERITY_ERROR,
+                self::SEVERITY_WARNING,
                 self::PRESET,
-                $item['key'],
-                get_string('badgeseedmissingcriterion', 'tool_uckkseed', 'supported_uckk_criterion')
+                $targetkey,
+                get_string('badgeseednocriteria', 'tool_uckkseed')
             );
-            return;
         }
 
-        foreach ($item['criteria'] as $criterion) {
-            if (!in_array($criterion, self::SUPPORTED_CRITERIA, true)) {
-                $this->add_message(
-                    $result,
-                    self::SEVERITY_WARNING,
-                    self::PRESET,
-                    $item['key'],
-                    'Unsupported UCKK badge criterion: ' . $criterion,
-                    [
-                        'criterion' => $criterion,
-                        'supported' => self::SUPPORTED_CRITERIA,
-                    ]
-                );
-            }
-        }
-
-        if (!$item['requiredarchive'] && in_array('archive_or_portfolio', $item['criteria'], true)) {
+        if ($item['requireshumanvalidation'] === false) {
             $this->add_message(
                 $result,
                 self::SEVERITY_ERROR,
                 self::PRESET,
-                $item['key'],
-                get_string('badgeseedrequiresarchive', 'tool_uckkseed')
+                $targetkey,
+                get_string('badgeseedrequiresvalidation', 'tool_uckkseed')
             );
         }
 
-        if (!$item['requireshumanvalidation'] && in_array('human_validation', $item['criteria'], true)) {
+        if ($item['requiredarchive'] === false && !in_array('evidence_submission', $item['criteria'], true)) {
             $this->add_message(
                 $result,
-                self::SEVERITY_ERROR,
+                self::SEVERITY_WARNING,
                 self::PRESET,
-                $item['key'],
-                get_string('badgeseedrequireshumanvalidation', 'tool_uckkseed')
+                $targetkey,
+                get_string('badgeseedrequiresarchiveorevidence', 'tool_uckkseed')
             );
         }
     }
-
 
     /**
      * Create a Moodle badge record.
@@ -967,8 +847,8 @@ final class badge_seed {
         $badge->imageauthoremail = $this->get_support_email();
         $badge->imageauthorurl = $this->get_site_url();
         $badge->imagecaption = get_string('badgeseedimagecaption', 'tool_uckkseed');
-        $badge->uniquehash = $this->get_uniquehash($item['key']);
 
+        $this->add_optional_field($badge, 'uniquehash', $this->get_uniquehash($item['key']));
         $this->add_optional_field($badge, 'visible', 1);
         $this->add_optional_field($badge, 'metadata', $this->encode_metadata($item));
 
@@ -1083,7 +963,7 @@ final class badge_seed {
         global $DB;
 
         $badge = $DB->get_record('badge', ['id' => $badgeid], '*', MUST_EXIST);
-        $key = $this->get_key_from_uniquehash((string)$badge->uniquehash);
+        $key = $this->get_key_from_badge_record($badge);
 
         if ($DB->get_manager()->table_exists('badge_criteria')) {
             $criteria = $DB->get_records('badge_criteria', ['badgeid' => $badgeid]);
@@ -1111,8 +991,7 @@ final class badge_seed {
         $DB->delete_records('badge', ['id' => $badgeid]);
 
         if ($key !== '') {
-            unset_config('badge_' . $key . '_id', self::COMPONENT);
-            unset_config('badge_' . $key . '_definition', self::COMPONENT);
+            $this->unset_config_marker($key);
         }
     }
 
@@ -1125,9 +1004,38 @@ final class badge_seed {
     private function get_existing_badge(array $item): ?stdClass {
         global $DB;
 
-        $uniquehash = $this->get_uniquehash($item['key']);
+        $key = clean_param((string)($item['key'] ?? ''), PARAM_ALPHANUMEXT);
 
-        return $DB->get_record('badge', ['uniquehash' => $uniquehash], '*', IGNORE_MISSING) ?: null;
+        if ($key === '') {
+            return null;
+        }
+
+        $badgeid = (int)get_config(self::COMPONENT, 'badge_' . $key . '_id');
+
+        if ($badgeid > 0) {
+            $badge = $DB->get_record('badge', ['id' => $badgeid], '*', IGNORE_MISSING);
+
+            if ($badge) {
+                return $badge;
+            }
+
+            $this->unset_config_marker($key);
+        }
+
+        if ($this->badge_table_has_field('uniquehash')) {
+            $badge = $DB->get_record(
+                'badge',
+                ['uniquehash' => $this->get_uniquehash($key)],
+                '*',
+                IGNORE_MISSING
+            );
+
+            if ($badge) {
+                return $badge;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -1137,8 +1045,8 @@ final class badge_seed {
      * @return array<string, mixed>
      */
     private function badge_record_to_item(stdClass $badge): array {
-        $key = $this->get_key_from_uniquehash((string)$badge->uniquehash);
-        $stored = (string)get_config(self::COMPONENT, 'badge_' . $key . '_definition');
+        $key = $this->get_key_from_badge_record($badge);
+        $stored = $key === '' ? '' : (string)get_config(self::COMPONENT, 'badge_' . $key . '_definition');
         $decoded = json_decode($stored, true);
 
         if (is_array($decoded)) {
@@ -1146,7 +1054,7 @@ final class badge_seed {
         }
 
         return [
-            'key' => $key,
+            'key' => $key !== '' ? $key : clean_param((string)$badge->name, PARAM_ALPHANUMEXT),
             'name' => (string)$badge->name,
             'description' => (string)$badge->description,
             'type' => ((int)$badge->type === BADGE_TYPE_COURSE) ? 'course' : 'site',
@@ -1189,104 +1097,120 @@ final class badge_seed {
             $item = [];
         }
 
-        $recognition = $item['recognition'] ?? [];
-        if ($recognition instanceof stdClass) {
-            $recognition = (array)$recognition;
-        }
-        if (!is_array($recognition)) {
-            $recognition = [];
-        }
-
-        $moodle = $item['moodle'] ?? [];
-        if ($moodle instanceof stdClass) {
-            $moodle = (array)$moodle;
-        }
-        if (!is_array($moodle)) {
-            $moodle = [];
-        }
-
-        $rawkey = $item['key']
-            ?? $item['shortname']
-            ?? $item['idnumber']
-            ?? $item['id']
-            ?? '';
-        $key = clean_param($this->normalise_key((string)$rawkey), PARAM_ALPHANUMEXT);
-
-        $rawtype = (string)($item['type'] ?? $moodle['type'] ?? $item['badge_type'] ?? 'site');
-        $type = $this->normalise_badge_type($rawtype);
-
         $metadata = $this->normalise_metadata($item['metadata'] ?? []);
-        $metadata[self::METADATA_MANAGED_BY] = self::MANAGED_BY;
-
-        foreach ([
-            'id',
-            'object_type',
-            'idnumber',
-            'badge_type',
-            'status',
-            'program_id',
-            'pathway_id',
-            'linked_course_ids',
-            'recognition',
-            'ai_metadata',
-            'source',
-        ] as $field) {
-            if (array_key_exists($field, $item) && !array_key_exists($field, $metadata)) {
-                $metadata[$field] = $item[$field];
-            }
+        $recognition = [];
+        if (isset($item['recognition'])) {
+            $recognition = $this->normalise_metadata($item['recognition']);
         }
 
-        $criteriaitems = $this->normalise_criteria_payload($item['criteria'] ?? $item['award_criteria'] ?? []);
+        $key = (string)($item['key'] ?? '');
+        if ($key === '') {
+            $key = (string)($item['idnumber'] ?? '');
+        }
+        if ($key === '') {
+            $key = (string)($item['id'] ?? '');
+        }
+
+        $name = (string)($item['name'] ?? '');
+        if ($name === '') {
+            $name = (string)($item['title'] ?? '');
+        }
+        if ($name === '') {
+            $name = (string)($item['short_title'] ?? '');
+        }
+
+        $description = (string)($item['description'] ?? '');
+        if ($description === '') {
+            $description = (string)($item['summary'] ?? '');
+        }
+        if ($description === '' && !empty($recognition['description'])) {
+            $description = (string)$recognition['description'];
+        }
+        if ($description === '') {
+            $description = $this->fallback_name($key);
+        }
+
+        $badge_type = (string)($item['type'] ?? '');
+        if ($badge_type === '') {
+            $badge_type = (string)($item['badge_type'] ?? '');
+        }
+        if ($badge_type === '') {
+            $badge_type = (string)($recognition['moodle_badge_type'] ?? '');
+        }
+
         $criteria = $this->normalise_criteria($item['criteria'] ?? $item['award_criteria'] ?? []);
+        $criteria_payload = $this->normalise_criteria_payload($item['criteria'] ?? $item['award_criteria'] ?? []);
+
         $competencies = $this->normalise_competencies(
             $item['competencies']
                 ?? $item['linked_competency_ids']
-                ?? $this->extract_competencies_from_criteria_payload($criteriaitems)
+                ?? $metadata['linked_competency_ids']
+                ?? []
         );
 
-        if (empty($criteria) && !empty($competencies)) {
-            $criteria[] = 'competency_threshold';
+        if (empty($competencies)) {
+            $competencies = $this->extract_competencies_from_criteria_payload($criteria_payload);
         }
 
-        if (empty($criteria)) {
-            $criteria[] = 'human_validation';
-        }
+        $courseidnumber = (string)($item['courseidnumber'] ?? $item['course_idnumber'] ?? $item['course'] ?? '');
 
-        $description = (string)(
-            $item['description']
-            ?? $recognition['public_status_notice']
-            ?? $recognition['title']
-            ?? $item['summary']
-            ?? ''
+        $requiredarchive = $this->normalise_bool(
+            $item['requiredarchive']
+                ?? $item['requires_archive']
+                ?? $item['requiresarchive']
+                ?? $metadata['requires_archive']
+                ?? true
         );
+
+        $requireshumanvalidation = $this->normalise_bool(
+            $item['requireshumanvalidation']
+                ?? $item['requires_human_validation']
+                ?? $metadata['requires_human_validation']
+                ?? true
+        );
+
+        $language = (string)($item['language'] ?? $metadata['language'] ?? current_language() ?: 'en');
+
+        $metadata[self::METADATA_MANAGED_BY] = $metadata[self::METADATA_MANAGED_BY] ?? self::MANAGED_BY;
+        $metadata['source_preset'] = self::PRESET;
+        if (!empty($recognition)) {
+            $metadata['recognition'] = $recognition;
+        }
+
+        if (!empty($item['id'])) {
+            $metadata['source_id'] = (string)$item['id'];
+        }
+        if (!empty($item['idnumber'])) {
+            $metadata['source_idnumber'] = (string)$item['idnumber'];
+        }
+        if (!empty($item['code'])) {
+            $metadata['code'] = (string)$item['code'];
+        }
 
         return [
-            'key' => $key,
-            'name' => trim(clean_param((string)($item['name'] ?? $item['title'] ?? $item['short_title'] ?? $recognition['title'] ?? $this->fallback_name($key)), PARAM_TEXT)),
-            'description' => trim(clean_param($description, PARAM_TEXT)),
-            'type' => $type,
-            'courseidnumber' => clean_param((string)($item['courseidnumber'] ?? $item['course'] ?? $moodle['courseidnumber'] ?? ''), PARAM_TEXT),
-            'criteria' => array_values(array_unique($criteria)),
-            'criteriaitems' => $criteriaitems,
-            'competencies' => array_values(array_unique($competencies)),
-            'requiredarchive' => $this->normalise_bool($item['requiredarchive'] ?? $item['required_archive'] ?? true),
-            'requireshumanvalidation' => $this->normalise_bool($item['requireshumanvalidation'] ?? $item['requires_human_validation'] ?? true),
-            'language' => clean_param((string)($item['language'] ?? $moodle['language'] ?? self::DEFAULT_LANGUAGE), PARAM_ALPHANUMEXT),
+            'key' => clean_param($this->normalise_key($key), PARAM_ALPHANUMEXT),
+            'name' => clean_param($name, PARAM_TEXT),
+            'description' => clean_param($description, PARAM_TEXT),
+            'type' => $this->normalise_badge_type($badge_type),
+            'courseidnumber' => clean_param($courseidnumber, PARAM_TEXT),
+            'criteria' => $criteria,
+            'competencies' => $competencies,
+            'requiredarchive' => $requiredarchive,
+            'requireshumanvalidation' => $requireshumanvalidation,
+            'language' => clean_param($language, PARAM_ALPHANUMEXT),
             'metadata' => $metadata,
         ];
     }
 
-
-
     /**
-     * Normalise a badge key/id into the seed key shape.
+     * Normalise badge key.
      *
      * @param string $value Raw value.
      * @return string
      */
     private function normalise_key(string $value): string {
         $value = strtolower(trim($value));
-        $value = preg_replace('/^[a-z]+:/', '', $value) ?? $value;
+        $value = str_replace([':', '-', ' ', '/', '\\'], '_', $value);
         $value = preg_replace('/[^a-z0-9_]+/', '_', $value) ?? $value;
         $value = trim($value, '_');
 
@@ -1294,7 +1218,7 @@ final class badge_seed {
     }
 
     /**
-     * Normalise Moodle badge type.
+     * Normalise badge type.
      *
      * @param string $type Raw type.
      * @return string
@@ -1302,7 +1226,7 @@ final class badge_seed {
     private function normalise_badge_type(string $type): string {
         $type = strtolower(trim($type));
 
-        if ($type === 'course' || $type === 'course_badge') {
+        if (in_array($type, ['course', 'course_badge'], true)) {
             return 'course';
         }
 
@@ -1310,204 +1234,199 @@ final class badge_seed {
     }
 
     /**
-     * Normalise criterion objects/strings to criterion type keys.
+     * Normalise criteria to a list of criterion keys.
      *
      * @param mixed $criteria Raw criteria.
      * @return string[]
      */
     private function normalise_criteria(mixed $criteria): array {
-        $payload = $this->normalise_criteria_payload($criteria);
-        $types = [];
+        $items = $this->normalise_list($criteria);
+        $normalised = [];
 
-        foreach ($payload as $criterion) {
-            $type = $this->normalise_criterion_type((string)($criterion['type'] ?? ''));
+        foreach ($items as $item) {
+            if ($item instanceof stdClass) {
+                $item = (array)$item;
+            }
 
-            if ($type !== '') {
-                $types[] = $type;
+            if (is_array($item)) {
+                $candidate = (string)($item['type'] ?? $item['key'] ?? $item['id'] ?? $item['criterion'] ?? '');
+            } else {
+                $candidate = (string)$item;
+            }
+
+            $candidate = $this->normalise_criterion_type($candidate);
+
+            if ($candidate !== '') {
+                $normalised[] = $candidate;
             }
         }
 
-        return array_values(array_unique($types));
+        return array_values(array_unique($normalised));
     }
 
     /**
-     * Preserve criterion payload for metadata/export while accepting objects.
+     * Normalise criteria payload.
      *
      * @param mixed $criteria Raw criteria.
-     * @return array<int, array<string, mixed>>
+     * @return array<int, mixed>
      */
     private function normalise_criteria_payload(mixed $criteria): array {
-        if ($criteria instanceof stdClass) {
-            $criteria = (array)$criteria;
-        }
+        $items = $this->normalise_list($criteria);
+        $normalised = [];
 
-        if ($criteria === null || $criteria === '') {
-            return [];
-        }
-
-        if (!is_array($criteria)) {
-            $criteria = [$criteria];
-        }
-
-        $items = [];
-
-        foreach ($criteria as $criterion) {
-            if ($criterion instanceof stdClass) {
-                $criterion = (array)$criterion;
+        foreach ($items as $item) {
+            if ($item instanceof stdClass) {
+                $item = (array)$item;
             }
 
-            if (is_array($criterion)) {
-                $type = $this->normalise_criterion_type((string)($criterion['type'] ?? $criterion['criterion'] ?? ''));
-
-                if ($type === '') {
-                    continue;
-                }
-
-                $criterion['type'] = $type;
-                $items[] = $criterion;
-                continue;
-            }
-
-            $type = $this->normalise_criterion_type((string)$criterion);
-
-            if ($type !== '') {
-                $items[] = ['type' => $type];
+            if (is_array($item)) {
+                $normalised[] = $item;
             }
         }
 
-        return $items;
+        return $normalised;
     }
 
     /**
-     * Normalise one criterion type, including aliases.
+     * Normalise one criterion type.
      *
-     * @param string $type Raw type.
+     * @param string $type Criterion type.
      * @return string
      */
     private function normalise_criterion_type(string $type): string {
         $type = strtolower(trim($type));
-        $type = str_replace(['-', ' ', ':'], '_', $type);
+        $type = str_replace(['-', ' ', ':', '/'], '_', $type);
         $type = preg_replace('/[^a-z0-9_]+/', '_', $type) ?? $type;
         $type = trim($type, '_');
 
-        if ($type === '') {
-            return '';
-        }
-
-        return self::CRITERION_ALIASES[$type] ?? $type;
+        return $type;
     }
 
     /**
-     * Normalise competency refs. Accepts final registry refs and old idnumbers.
+     * Normalise competency references.
      *
      * @param mixed $competencies Raw competencies.
      * @return string[]
      */
     private function normalise_competencies(mixed $competencies): array {
-        if ($competencies instanceof stdClass) {
-            $competencies = (array)$competencies;
-        }
+        $items = $this->normalise_list($competencies);
+        $normalised = [];
 
-        if ($competencies === null || $competencies === '') {
-            return [];
-        }
-
-        if (!is_array($competencies)) {
-            $competencies = [$competencies];
-        }
-
-        $items = [];
-
-        foreach ($competencies as $competency) {
-            if ($competency instanceof stdClass) {
-                $competency = (array)$competency;
+        foreach ($items as $item) {
+            if ($item instanceof stdClass) {
+                $item = (array)$item;
             }
 
-            if (is_array($competency)) {
-                $value = (string)($competency['idnumber'] ?? $competency['id'] ?? $competency['key'] ?? '');
+            if (is_array($item)) {
+                $candidate = (string)($item['idnumber'] ?? $item['id'] ?? $item['shortname'] ?? $item['key'] ?? '');
             } else {
-                $value = (string)$competency;
+                $candidate = (string)$item;
             }
 
-            $value = trim($value);
+            $candidate = clean_param(trim($candidate), PARAM_TEXT);
 
-            if ($value !== '') {
-                $items[] = clean_param($value, PARAM_TEXT);
+            if ($candidate !== '') {
+                $normalised[] = $candidate;
             }
         }
 
-        return array_values(array_unique($items));
+        return array_values(array_unique($normalised));
     }
 
     /**
-     * Extract competency refs from criteria payload.
+     * Extract competencies from structured criteria payload.
      *
-     * @param array<int, array<string, mixed>> $criteriaitems Criteria payload.
+     * @param array<int, mixed> $criteriaitems Criteria payload.
      * @return string[]
      */
     private function extract_competencies_from_criteria_payload(array $criteriaitems): array {
-        $refs = [];
+        $competencies = [];
 
         foreach ($criteriaitems as $criterion) {
-            foreach (['competency_ids', 'competencies', 'competency_idnumbers'] as $field) {
-                if (empty($criterion[$field])) {
-                    continue;
-                }
+            if (!is_array($criterion)) {
+                continue;
+            }
 
-                foreach ($this->normalise_competencies($criterion[$field]) as $ref) {
-                    $refs[] = $ref;
-                }
+            $candidates = $criterion['competencies']
+                ?? $criterion['linked_competency_ids']
+                ?? $criterion['competency_ids']
+                ?? $criterion['competency']
+                ?? [];
+
+            foreach ($this->normalise_competencies($candidates) as $competency) {
+                $competencies[] = $competency;
             }
         }
 
-        return array_values(array_unique($refs));
+        return array_values(array_unique($competencies));
     }
 
     /**
-     * Check whether a competency reference is known or follows final syntax.
+     * Return whether a competency reference is known.
      *
-     * @param string $idnumber Competency reference.
+     * Validation intentionally accepts future references because competencies may
+     * be seeded in the same run or on another environment.
+     *
+     * @param string $idnumber Competency idnumber/reference.
      * @return bool
      */
     private function is_known_competency_reference(string $idnumber): bool {
-        if (in_array($idnumber, self::COMPETENCY_IDS, true)) {
+        global $DB;
+
+        if ($idnumber === '') {
             return true;
         }
 
-        if (preg_match('/^UCKK-COMP-[A-Z0-9-]+$/', $idnumber) === 1) {
-            return true;
+        $tables = [
+            'competency',
+            'tool_lp_competency',
+        ];
+
+        foreach ($tables as $table) {
+            if ($DB->get_manager()->table_exists($table)
+                && $DB->record_exists($table, ['idnumber' => $idnumber])) {
+                return true;
+            }
         }
 
-        if (preg_match('/^competency:[a-z0-9:_-]+$/', strtolower($idnumber)) === 1) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
-     * Build human-readable criteria description.
+     * Build criteria description HTML.
      *
      * @param array<string, mixed> $item Normalised item.
      * @return string
      */
     private function build_criteria_description(array $item): string {
         $lines = [
-            get_string('badgeseedcriterianotice', 'tool_uckkseed'),
-            html_writer::start_tag('ul'),
+            html_writer::tag('p', get_string('badgeseedcriteriadescription', 'tool_uckkseed')),
         ];
 
+        $items = [];
+
         foreach ($item['criteria'] as $criterion) {
-            $lines[] = html_writer::tag('li', s($criterion));
+            $items[] = html_writer::tag('li', s($criterion));
         }
 
-        if (!empty($item['competencies'])) {
-            $lines[] = html_writer::tag(
-                'li',
-                get_string('badgeseedcompetenciescriterion', 'tool_uckkseed', implode(', ', $item['competencies']))
-            );
+        foreach ($item['competencies'] as $competency) {
+            $items[] = html_writer::tag('li', get_string('badgeseedcriterioncompetency', 'tool_uckkseed', $competency));
         }
 
+        if ($item['requiredarchive']) {
+            $items[] = html_writer::tag('li', get_string('badgeseedcriterionarchive', 'tool_uckkseed'));
+        }
+
+        if ($item['requireshumanvalidation']) {
+            $items[] = html_writer::tag('li', get_string('badgeseedcriterionhuman', 'tool_uckkseed'));
+        }
+
+        if (empty($items)) {
+            $items[] = html_writer::tag('li', get_string('badgeseedcriterionmanual', 'tool_uckkseed'));
+        }
+
+        $lines[] = html_writer::start_tag('ul');
+        $lines[] = implode("\n", $items);
         $lines[] = html_writer::end_tag('ul');
 
         return implode("\n", $lines);
@@ -1529,6 +1448,56 @@ final class badge_seed {
     }
 
     /**
+     * Remove the config marker for a seed-managed badge key.
+     *
+     * @param string $key Badge key.
+     */
+    private function unset_config_marker(string $key): void {
+        unset_config('badge_' . $key . '_id', self::COMPONENT);
+        unset_config('badge_' . $key . '_definition', self::COMPONENT);
+    }
+
+    /**
+     * Resolve the seed key that owns a Moodle badge record.
+     *
+     * @param stdClass $badge Badge record.
+     * @return string Badge key, or empty string when not seed-managed.
+     */
+    private function get_key_from_badge_record(stdClass $badge): string {
+        $badgeid = (int)($badge->id ?? 0);
+
+        if ($badgeid > 0) {
+            foreach (self::CANONICAL_BADGES as $key) {
+                if ((int)get_config(self::COMPONENT, 'badge_' . $key . '_id') === $badgeid) {
+                    return $key;
+                }
+            }
+        }
+
+        if ($this->badge_table_has_field('uniquehash') && property_exists($badge, 'uniquehash')) {
+            $key = $this->get_key_from_uniquehash((string)$badge->uniquehash);
+
+            if ($key !== '') {
+                return $key;
+            }
+        }
+
+        if ($this->badge_table_has_field('metadata') && property_exists($badge, 'metadata')) {
+            $metadata = json_decode((string)$badge->metadata, true);
+
+            if (is_array($metadata)) {
+                $key = clean_param((string)($metadata['key'] ?? ''), PARAM_ALPHANUMEXT);
+
+                if ($key !== '') {
+                    return $key;
+                }
+            }
+        }
+
+        return '';
+    }
+
+    /**
      * Add optional object property only when Moodle badge table has the field.
      *
      * @param stdClass $record Record.
@@ -1536,13 +1505,30 @@ final class badge_seed {
      * @param mixed $value Field value.
      */
     private function add_optional_field(stdClass $record, string $field, mixed $value): void {
-        global $DB;
-
-        $columns = $DB->get_columns('badge');
-
-        if (array_key_exists($field, $columns)) {
+        if ($this->badge_table_has_field($field)) {
             $record->{$field} = $value;
         }
+    }
+
+    /**
+     * Return whether the Moodle badge table has a field.
+     *
+     * Moodle badge schema differs across supported versions. The seed tool must
+     * never require non-core/generated columns such as uniquehash or metadata.
+     *
+     * @param string $field Field name.
+     * @return bool
+     */
+    private function badge_table_has_field(string $field): bool {
+        global $DB;
+
+        static $columns = null;
+
+        if ($columns === null) {
+            $columns = $DB->get_columns('badge');
+        }
+
+        return array_key_exists($field, $columns);
     }
 
     /**
@@ -1552,7 +1538,11 @@ final class badge_seed {
      * @return string
      */
     private function encode_metadata(array $item): string {
-        return json_encode($item['metadata'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $metadata = $item['metadata'];
+        $metadata['key'] = $item['key'];
+        $metadata[self::METADATA_MANAGED_BY] = self::MANAGED_BY;
+
+        return json_encode($metadata, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 
     /**
@@ -1642,8 +1632,8 @@ final class badge_seed {
         $mode = clean_param($mode, PARAM_ALPHANUMEXT);
 
         $allowed = [
-            self::MODE_APPLY,
             self::MODE_DRY_RUN,
+            self::MODE_APPLY,
             self::MODE_REPORT,
             self::MODE_ROLLBACK_PLAN,
         ];
@@ -1652,75 +1642,69 @@ final class badge_seed {
     }
 
     /**
-     * Normalise a list of strings.
+     * Normalise a list-like value.
      *
-     * @param mixed $value Raw value.
-     * @return string[]
+     * @param mixed $value Value.
+     * @return array<int, mixed>
      */
     private function normalise_list(mixed $value): array {
-        if (is_string($value)) {
-            $decoded = json_decode($value, true);
-
-            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                $value = $decoded;
-            } else {
-                $value = array_map('trim', explode(',', $value));
-            }
+        if ($value instanceof stdClass) {
+            $value = (array)$value;
         }
 
-        if (!is_array($value)) {
+        if ($value === null || $value === '') {
             return [];
         }
 
-        $items = [];
+        if (is_array($value)) {
+            $islist = array_keys($value) === range(0, count($value) - 1);
 
-        foreach ($value as $item) {
-            $item = clean_param((string)$item, PARAM_ALPHANUMEXT);
-
-            if ($item !== '') {
-                $items[] = $item;
+            if ($islist) {
+                return array_values($value);
             }
+
+            return [$value];
         }
 
-        return array_values(array_unique($items));
+        return [$value];
     }
 
     /**
      * Normalise metadata.
      *
-     * @param mixed $metadata Raw metadata.
+     * @param mixed $metadata Metadata.
      * @return array<string, mixed>
      */
     private function normalise_metadata(mixed $metadata): array {
-        if ($metadata === null || $metadata === '') {
+        if ($metadata instanceof stdClass) {
+            $metadata = (array)$metadata;
+        }
+
+        if (!is_array($metadata)) {
             return [];
         }
 
-        if (is_string($metadata)) {
-            $decoded = json_decode($metadata, true);
+        $normalised = [];
 
-            if (json_last_error() !== JSON_ERROR_NONE || !is_array($decoded)) {
-                return [];
+        foreach ($metadata as $key => $value) {
+            if (!is_string($key)) {
+                continue;
             }
 
-            return $decoded;
+            if ($value instanceof stdClass) {
+                $value = (array)$value;
+            }
+
+            $normalised[clean_param($key, PARAM_ALPHANUMEXT)] = $value;
         }
 
-        if ($metadata instanceof stdClass) {
-            return (array)$metadata;
-        }
-
-        if (is_array($metadata)) {
-            return $metadata;
-        }
-
-        return [];
+        return $normalised;
     }
 
     /**
-     * Normalise boolean values.
+     * Normalise boolean.
      *
-     * @param mixed $value Raw value.
+     * @param mixed $value Value.
      * @return bool
      */
     private function normalise_bool(mixed $value): bool {
@@ -1733,48 +1717,43 @@ final class badge_seed {
         }
 
         if (is_string($value)) {
-            return in_array(strtolower($value), ['1', 'true', 'yes', 'enabled', 'on'], true);
+            return in_array(strtolower(trim($value)), ['1', 'true', 'yes', 'enabled', 'on', 'required'], true);
         }
 
         return false;
     }
 
     /**
-     * Build fallback display name from key.
+     * Build fallback display name.
      *
      * @param string $key Badge key.
      * @return string
      */
     private function fallback_name(string $key): string {
-        $key = trim(str_replace('_', ' ', $key));
+        $key = str_replace('_', ' ', $key);
 
-        if ($key === '') {
-            return '';
-        }
-
-        return ucfirst($key);
+        return $key === '' ? get_string('pluginname', 'tool_uckkseed') : ucfirst($key);
     }
 
     /**
-     * Create a validation result.
+     * Create validation result.
      *
      * @param string $summary Summary.
      * @return validation_result
      */
     private function new_result(string $summary): validation_result {
-        return new validation_result(self::STATUS_COMPLETED, $summary, [
+        return validation_result::success($summary, [
             'component' => self::COMPONENT,
             'preset' => self::PRESET,
-            'targettype' => self::TARGET_TYPE,
         ]);
     }
 
     /**
-     * Add a message to a validation result.
+     * Add result message.
      *
-     * @param validation_result $result Result object.
+     * @param validation_result $result Result.
      * @param string $severity Severity.
-     * @param string $preset Preset.
+     * @param string $preset Preset id.
      * @param string $targetkey Target key.
      * @param string $message Message.
      * @param array<string, mixed> $metadata Metadata.
@@ -1792,14 +1771,14 @@ final class badge_seed {
             $message,
             self::COMPONENT,
             $preset,
-            self::TARGET_TYPE,
+            self::PRESET,
             $targetkey,
             $metadata
         );
     }
 
     /**
-     * Increment a count in a validation result.
+     * Increment validation result.
      *
      * @param validation_result $result Result object.
      * @param string $key Count key.
@@ -1817,4 +1796,3 @@ final class badge_seed {
         $result->complete($result->get_summary());
     }
 }
-

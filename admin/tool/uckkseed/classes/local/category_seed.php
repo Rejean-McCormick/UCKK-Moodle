@@ -181,7 +181,7 @@ final class category_seed {
                 );
             }
 
-            if ($item['idnumber'] !== '' && core_text::strlen($item['idnumber']) > 100) {
+            if ($item['idnumber'] !== '' && \core_text::strlen($item['idnumber']) > 100) {
                 $this->add_message(
                     $result,
                     self::SEVERITY_ERROR,
@@ -189,13 +189,13 @@ final class category_seed {
                     $targetkey,
                     [
                         'idnumber' => $item['idnumber'],
-                        'length' => core_text::strlen($item['idnumber']),
+                        'length' => \core_text::strlen($item['idnumber']),
                         'max' => 100,
                     ]
                 );
             }
 
-            if ($item['name'] !== '' && core_text::strlen($item['name']) > 255) {
+            if ($item['name'] !== '' && \core_text::strlen($item['name']) > 255) {
                 $this->add_message(
                     $result,
                     self::SEVERITY_ERROR,
@@ -203,7 +203,7 @@ final class category_seed {
                     $targetkey,
                     [
                         'name' => $item['name'],
-                        'length' => core_text::strlen($item['name']),
+                        'length' => \core_text::strlen($item['name']),
                         'max' => 255,
                     ]
                 );
@@ -991,7 +991,7 @@ final class category_seed {
         $name = str_replace(['_', '-'], ' ', $key);
         $name = trim($name);
 
-        return $name === '' ? '' : core_text::strtotitle($name);
+        return $name === '' ? '' : \core_text::strtotitle($name);
     }
 
     /**
