@@ -1111,6 +1111,3 @@ $string['task:validation_correction_reason'] = 'Automatic validation marked this
 $string['task:validation_ready_reason'] = 'Automatic validation marked this item as ready for review.';
 $string['task_generate_archive_exports'] = 'Generate archive exports';
 $string['useroutline'] = 'Archive activity contribution';
-
-// Added from embedded scan results to unblock local development upgrade.
-$string['event:archiveviewed'] = 'E Ve Nt A Rc Hi Ve Vi Ew Ed';

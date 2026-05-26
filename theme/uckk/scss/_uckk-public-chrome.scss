@@ -1,0 +1,45 @@
+/**
+ * UCKK public Moodle chrome.
+ *
+ * Owns Moodle header/breadcrumb/title refinements for public UCKK pages.
+ * Does not style local_uckk page components.
+ */
+
+body.pagelayout-local_uckk_public,
+body:has(.local-uckk-public-page) {
+    --theme-uckk-public-chrome-title-line-height: 1.24;
+    --theme-uckk-public-chrome-title-padding-bottom: 0.08em;
+}
+
+/* Moodle page title above the local UCKK page */
+body.pagelayout-local_uckk_public #page-header h1,
+body:has(.local-uckk-public-page) #page-header h1,
+body.pagelayout-local_uckk_public .page-header-headings h1,
+body:has(.local-uckk-public-page) .page-header-headings h1 {
+    overflow: visible;
+    padding-bottom: var(--theme-uckk-public-chrome-title-padding-bottom);
+    font-family: var(--theme-uckk-font-serif, Georgia, "Times New Roman", serif);
+    line-height: var(--theme-uckk-public-chrome-title-line-height);
+    letter-spacing: -0.015em;
+}
+
+/* Breadcrumb / fil d’Ariane */
+body.pagelayout-local_uckk_public #page-navbar,
+body:has(.local-uckk-public-page) #page-navbar,
+body.pagelayout-local_uckk_public .breadcrumb-nav,
+body:has(.local-uckk-public-page) .breadcrumb-nav,
+body.pagelayout-local_uckk_public .breadcrumb,
+body:has(.local-uckk-public-page) .breadcrumb {
+    overflow: visible;
+    font-family: var(--theme-uckk-font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+/* Top Moodle navigation text rhythm only */
+body.pagelayout-local_uckk_public .navbar,
+body:has(.local-uckk-public-page) .navbar,
+body.pagelayout-local_uckk_public .primary-navigation .nav-link,
+body:has(.local-uckk-public-page) .primary-navigation .nav-link {
+    line-height: 1.35;
+}

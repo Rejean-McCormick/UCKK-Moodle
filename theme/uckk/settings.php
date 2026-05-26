@@ -18,13 +18,20 @@
  * Theme settings for theme_uckk.
  *
  * @package    theme_uckk
- * @copyright  2026 Momus et Bouche Cousue
+ * @copyright  2026 Réjean McCormick
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-if ($ADMIN->fulltree) {
+if ($hassiteconfig) {
+    $settings = new admin_settingpage(
+        'themesettinguckk',
+        get_string('configtitle', 'theme_uckk')
+    );
+    $ADMIN->add('themes', $settings);
+
+    if ($ADMIN->fulltree) {
     /*
      * UCKK identity.
      *
@@ -144,6 +151,19 @@ if ($ADMIN->fulltree) {
     ));
 
     $settings->add(new admin_setting_configstoredfile(
+        'theme_uckk/loginbackground',
+        get_string('loginbackground', 'theme_uckk'),
+        get_string('loginbackground_desc', 'theme_uckk'),
+        'loginbackground',
+        0,
+        [
+            'maxfiles' => 1,
+            'subdirs' => 0,
+            'accepted_types' => ['.svg', '.png', '.jpg', '.jpeg', '.webp'],
+        ]
+    ));
+
+    $settings->add(new admin_setting_configstoredfile(
         'theme_uckk/favicon',
         get_string('favicon', 'theme_uckk'),
         get_string('favicon_desc', 'theme_uckk'),
@@ -158,6 +178,10 @@ if ($ADMIN->fulltree) {
 
     /*
      * Colour system.
+     *
+     * Defaults follow the UCKK visual style:
+     * deep petroleum green, parchment ivory, aged gold/bronze,
+     * blue-green shadow and dark institutional ink.
      */
 
     $settings->add(new admin_setting_heading(
@@ -170,63 +194,63 @@ if ($ADMIN->fulltree) {
         'theme_uckk/brandprimary',
         get_string('brandprimary', 'theme_uckk'),
         get_string('brandprimary_desc', 'theme_uckk'),
-        '#2b0f54'
+        '#1e6864'
     ));
 
     $settings->add(new admin_setting_configcolourpicker(
         'theme_uckk/brandsecondary',
         get_string('brandsecondary', 'theme_uckk'),
         get_string('brandsecondary_desc', 'theme_uckk'),
-        '#f2b705'
+        '#54736f'
     ));
 
     $settings->add(new admin_setting_configcolourpicker(
         'theme_uckk/brandaccent',
         get_string('brandaccent', 'theme_uckk'),
         get_string('brandaccent_desc', 'theme_uckk'),
-        '#e83f6f'
+        '#b9934b'
     ));
 
     $settings->add(new admin_setting_configcolourpicker(
         'theme_uckk/surfacebackground',
         get_string('surfacebackground', 'theme_uckk'),
         get_string('surfacebackground_desc', 'theme_uckk'),
-        '#f7f4ef'
+        '#f7f1df'
     ));
 
     $settings->add(new admin_setting_configcolourpicker(
         'theme_uckk/surfacetext',
         get_string('surfacetext', 'theme_uckk'),
         get_string('surfacetext_desc', 'theme_uckk'),
-        '#171321'
+        '#172321'
     ));
 
     $settings->add(new admin_setting_configcolourpicker(
         'theme_uckk/integritycolour',
         get_string('integritycolour', 'theme_uckk'),
         get_string('integritycolour_desc', 'theme_uckk'),
-        '#0b7285'
+        '#8f2f2f'
     ));
 
     $settings->add(new admin_setting_configcolourpicker(
         'theme_uckk/archivecolour',
         get_string('archivecolour', 'theme_uckk'),
         get_string('archivecolour_desc', 'theme_uckk'),
-        '#5c6f45'
+        '#b9934b'
     ));
 
     $settings->add(new admin_setting_configcolourpicker(
         'theme_uckk/assemblycolour',
         get_string('assemblycolour', 'theme_uckk'),
         get_string('assemblycolour_desc', 'theme_uckk'),
-        '#6f42c1'
+        '#1e6864'
     ));
 
     $settings->add(new admin_setting_configcolourpicker(
         'theme_uckk/challengecolour',
         get_string('challengecolour', 'theme_uckk'),
         get_string('challengecolour_desc', 'theme_uckk'),
-        '#d9480f'
+        '#54736f'
     ));
 
     /*
@@ -487,4 +511,5 @@ if ($ADMIN->fulltree) {
         '',
         PARAM_RAW
     ));
+}
 }

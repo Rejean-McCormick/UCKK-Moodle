@@ -507,6 +507,3 @@ $string['settings_navigation'] = 'Navigation';
 $string['settings_navigation_desc'] = 'Settings that control UCKK-specific course navigation and course index metadata.';
 $string['showintegritynotice'] = 'Show integrity notice';
 $string['showintegritynotice_desc'] = 'Display a UCKK integrity notice in courses that require proof, deliberation, archive or human validation.';
-
-// Added from embedded scan results to unblock local development upgrade.
-$string['sectionrequiresproof'] = 'S Ec Ti On Re Qu Ir Es Pr Oo F';

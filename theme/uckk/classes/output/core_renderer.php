@@ -10,15 +10,18 @@
 // Univers-Cité King Klown.
 
 /**
- * Core renderer override for the UCKK theme.
+ * Core renderer helpers for the UCKK theme.
  *
- * This renderer provides presentation helpers for the UCKK theme.
+ * UCKK is a thin child theme over Boost. This renderer must not replace
+ * Moodle or Boost behaviour; it only exposes presentation helpers for
+ * UCKK-specific templates and layout fragments.
+ *
  * It must not contain institutional workflow rules, grading logic,
  * integrity decisions, archive validation rules, or permission policy.
  *
- * Business data must be prepared by the relevant plugin or output exporter.
- * This renderer only formats safe display data and delegates HTML to
- * Mustache templates where possible.
+ * Business data must be prepared by the relevant plugin, renderable,
+ * output exporter, external service, or block. This renderer only formats
+ * safe display data and delegates HTML to Mustache templates where possible.
  *
  * @package    theme_uckk
  * @copyright  2026 Univers-Cité King Klown
@@ -36,9 +39,8 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * UCKK core renderer.
  *
- * The theme is expected to inherit from Boost or a Boost-compatible parent.
- * If the parent theme changes, this class can be adjusted to extend the
- * relevant parent renderer while keeping the public helper methods stable.
+ * This class intentionally extends Boost and should not override Moodle core
+ * rendering methods unless there is a documented presentational requirement.
  *
  * @package    theme_uckk
  */
@@ -46,10 +48,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Render the UCKK campus header.
      *
-     * This helper is intended for layout files such as:
-     * - theme/uckk/layout/frontpage.php
-     * - theme/uckk/layout/dashboard.php
-     * - theme/uckk/layout/course.php
+     * This helper is intended for UCKK-specific presentation surfaces such as
+     * the front page, dashboard fragments, blocks, and Mustache-backed outputs.
+     * It must not be used to decide page access, academic state, or workflow.
      *
      * @param array $overrides Optional display overrides.
      * @return string Rendered HTML.
@@ -79,10 +80,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function uckk_canonical_statement(?string $statement = null, string $type = 'default', ?string $title = null): string {
         $statement = $statement ?? get_string('formula_governance', 'theme_uckk');
+        $type = clean_param($type, PARAM_ALPHANUMEXT);
 
         $classes = [
             'uckk-canonical-statement',
-            'uckk-canonical-statement-' . clean_param($type, PARAM_ALPHANUMEXT),
+            'uckk-canonical-statement-' . $type,
         ];
 
         if ($type === 'warning') {
@@ -152,6 +154,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Render a UCKK status badge.
      *
+     * This is visual only. The status must be computed by the caller.
+     *
      * @param string $status Machine status.
      * @param string|null $label Optional display label.
      * @param string $extra Extra CSS classes.
@@ -177,6 +181,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
     /**
      * Render a UCKK visibility badge.
+     *
+     * This is visual only. Visibility rules must be computed by the caller.
      *
      * @param string $visibility Visibility key.
      * @param string|null $label Optional display label.
@@ -226,7 +232,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function uckk_ai_warning(): string {
         return html_writer::div(
-            html_writer::span(get_string('ai_nonsovereign', 'theme_uckk'), 'uckk-ai-label mr-2')
+            html_writer::span(s(get_string('ai_nonsovereign', 'theme_uckk')), 'uckk-ai-label mr-2')
             . html_writer::span(s(get_string('ai_warning', 'theme_uckk'))),
             'uckk-ai-notice',
             [
@@ -289,14 +295,14 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $data->duedate = $data->duedate ?? '';
         $data->hasduedate = !empty($data->duedate);
 
-        $data->participantscount = $data->participantscount ?? 0;
-        $data->hasparticipants = !empty($data->hasparticipants);
+        $data->participantscount = (int)($data->participantscount ?? 0);
+        $data->hasparticipants = !empty($data->hasparticipants) || $data->participantscount > 0;
 
-        $data->proofscount = $data->proofscount ?? 0;
-        $data->hasproofs = !empty($data->hasproofs);
+        $data->proofscount = (int)($data->proofscount ?? 0);
+        $data->hasproofs = !empty($data->hasproofs) || $data->proofscount > 0;
 
         $data->completionpercent = $this->normalise_percent($data->completionpercent ?? 0);
-        $data->hasprogress = !empty($data->hasprogress);
+        $data->hasprogress = !empty($data->hasprogress) || $data->completionpercent > 0;
 
         $data->submiturl = $this->normalise_url($data->submiturl ?? '');
         $data->hassubmiturl = !empty($data->submiturl);
@@ -311,10 +317,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $data->iscontested = !empty($data->iscontested);
         $data->isinvalidated = !empty($data->isinvalidated);
         $data->isarchived = !empty($data->isarchived);
-        $data->canview = $data->canview ?? true;
+
+        // Permission flags are display inputs, not theme decisions.
+        $data->canview = !empty($data->canview);
         $data->cansubmit = !empty($data->cansubmit);
         $data->canreviewintegrity = !empty($data->canreviewintegrity);
-        $data->showpublicwarning = $data->showpublicwarning ?? true;
+        $data->showpublicwarning = !isset($data->showpublicwarning) || !empty($data->showpublicwarning);
 
         if (!isset($data->tags) || !is_array($data->tags)) {
             $data->tags = [];
@@ -334,6 +342,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string Rendered HTML.
      */
     public function uckk_card(string $title, string $body, array $options = []): string {
+        $status = clean_param($options['status'] ?? '', PARAM_ALPHANUMEXT);
+
         $data = (object)[
             'title' => $title,
             'body' => $body,
@@ -342,10 +352,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'url' => $this->normalise_url($options['url'] ?? ''),
             'hasurl' => !empty($options['url']),
             'linklabel' => $options['linklabel'] ?? get_string('template_viewdetails', 'theme_uckk'),
-            'classes' => $options['classes'] ?? '',
-            'status' => $options['status'] ?? '',
-            'hasstatus' => !empty($options['status']),
-            'statuslabel' => $options['statuslabel'] ?? '',
+            'classes' => $this->normalise_classes($options['classes'] ?? ''),
+            'status' => $status,
+            'hasstatus' => $status !== '',
+            'statuslabel' => $options['statuslabel'] ?? ($status !== '' ? $this->get_status_label($status) : ''),
         ];
 
         return $this->render_from_template('theme_uckk/uckk_card', $data);
@@ -359,8 +369,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
     protected function get_uckk_base_context(): stdClass {
         global $CFG;
 
+        $course = $this->page->course ?? null;
+
         $data = new stdClass();
-        $data->sitename = format_string($this->page->course->fullname ?? get_site()->fullname);
+        $data->sitename = format_string($course->fullname ?? get_site()->fullname);
         $data->wwwroot = $CFG->wwwroot;
         $data->pageurl = $this->page->url instanceof moodle_url ? $this->page->url->out(false) : '';
         $data->component = 'theme_uckk';
@@ -387,10 +399,24 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         if (is_string($url)) {
-            return $url;
+            return trim($url);
         }
 
         return '';
+    }
+
+    /**
+     * Normalise a space-separated CSS class list.
+     *
+     * @param mixed $classes Raw class list.
+     * @return string
+     */
+    protected function normalise_classes($classes): string {
+        if (!is_string($classes)) {
+            return '';
+        }
+
+        return trim(preg_replace('/[^A-Za-z0-9_\-\s]/', '', $classes));
     }
 
     /**
@@ -416,6 +442,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Get a readable status label from theme language strings.
      *
+     * This is a display fallback only. It must not be used to infer workflow state.
+     *
      * @param string $status Status key.
      * @return string
      */
@@ -438,6 +466,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Get a readable visibility label from theme language strings.
      *
+     * This is a display fallback only. It must not be used to infer visibility rules.
+     *
      * @param string $visibility Visibility key.
      * @return string
      */
@@ -453,7 +483,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-     * Get a UCKK status type compatible with the challenge teaser template.
+     * Get a UCKK status type compatible with presentational templates.
      *
      * @param string $status Status key.
      * @return string Bootstrap-ish status type.
@@ -510,7 +540,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Get Bootstrap badge class from UCKK status.
      *
-     * Kept compatible with Bootstrap 4 naming used by many Moodle themes.
+     * Kept compatible with Bootstrap 4 naming used by Moodle/Boost.
      *
      * @param string $status Status key.
      * @return string

@@ -29,7 +29,7 @@
  * - AI authority logic.
  *
  * @module     theme_uckk/navigation
- * @copyright  2026 Momus et Bouche Cousue
+ * @copyright  2026 Réjean McCormick
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

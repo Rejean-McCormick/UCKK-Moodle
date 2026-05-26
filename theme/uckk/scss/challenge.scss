@@ -2,11 +2,13 @@
  * Challenge SCSS for theme_uckk.
  *
  * Visual layer for Défis King Klown and mod_uckkchallenge surfaces.
- * This file must not implement permissions, grading, evidence validation,
- * archive decisions, or integrity workflow logic.
+ *
+ * This file is presentation-only. It must not implement permissions, grading,
+ * evidence validation, archive decisions, integrity workflow, status authority,
+ * or academic business logic.
  *
  * @package    theme_uckk
- * @copyright  2026 Momus et Bouche Cousue
+ * @copyright  2026 Réjean McCormick
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -172,14 +174,14 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
     border-bottom: 1px solid $uckk-surface-border;
     background:
         linear-gradient(135deg, rgba($uckk-challenge-colour, .08), rgba($uckk-brand-secondary, .10)),
-        lighten($uckk-surface-background, 2%);
+        mix(#fff, $uckk-surface-background, 35%);
 }
 
 .uckk-challenge-card__title {
     margin: 0;
     color: $uckk-brand-primary;
     font-size: 1.35rem;
-    font-weight: 850;
+    font-weight: 800;
     line-height: 1.15;
 }
 
@@ -201,7 +203,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
     gap: .75rem;
     padding: 1rem 1.25rem;
     border-top: 1px solid $uckk-surface-border;
-    background-color: lighten($uckk-surface-background, 1%);
+    background-color: mix(#fff, $uckk-surface-background, 25%);
 }
 
 /* ==========================================================================
@@ -224,46 +226,46 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 
 .uckk-challenge-status--draft {
     background-color: rgba($uckk-surface-text-muted, .14);
-    color: darken($uckk-surface-text-muted, 8%);
+    color: mix(#000, $uckk-surface-text-muted, 16%);
 }
 
 .uckk-challenge-status--published,
 .uckk-challenge-status--open {
     background-color: rgba($uckk-challenge-colour, .14);
-    color: darken($uckk-challenge-colour, 12%);
+    color: mix(#000, $uckk-challenge-colour, 24%);
 }
 
 .uckk-challenge-status--submitted,
 .uckk-challenge-status--under-review {
     background-color: rgba($uckk-info-colour, .12);
-    color: darken($uckk-info-colour, 10%);
+    color: mix(#000, $uckk-info-colour, 20%);
 }
 
 .uckk-challenge-status--integrity-review {
     background-color: rgba($uckk-integrity-colour, .13);
-    color: darken($uckk-integrity-colour, 10%);
+    color: mix(#000, $uckk-integrity-colour, 20%);
 }
 
 .uckk-challenge-status--revision-required {
     background-color: rgba($uckk-warning-colour, .18);
-    color: darken($uckk-warning-colour, 18%);
+    color: mix(#000, $uckk-warning-colour, 36%);
 }
 
 .uckk-challenge-status--validated {
     background-color: rgba($uckk-success-colour, .15);
-    color: darken($uckk-success-colour, 12%);
+    color: mix(#000, $uckk-success-colour, 24%);
 }
 
 .uckk-challenge-status--contested,
 .uckk-challenge-status--invalidated {
     background-color: rgba($uckk-danger-colour, .14);
-    color: darken($uckk-danger-colour, 8%);
+    color: mix(#000, $uckk-danger-colour, 16%);
 }
 
 .uckk-challenge-status--archived,
 .uckk-challenge-status--closed {
     background-color: rgba($uckk-archive-colour, .16);
-    color: darken($uckk-archive-colour, 9%);
+    color: mix(#000, $uckk-archive-colour, 18%);
 }
 
 /* ==========================================================================
@@ -277,7 +279,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
     border: 1px solid rgba($uckk-challenge-colour, .28);
     border-radius: 999rem;
     background-color: rgba($uckk-challenge-colour, .08);
-    color: darken($uckk-challenge-colour, 10%);
+    color: mix(#000, $uckk-challenge-colour, 20%);
     font-size: .75rem;
     font-weight: 700;
 }
@@ -285,7 +287,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 .uckk-challenge-type--public {
     border-color: rgba($uckk-brand-accent, .35);
     background-color: rgba($uckk-brand-accent, .10);
-    color: darken($uckk-brand-accent, 10%);
+    color: mix(#000, $uckk-brand-accent, 20%);
 }
 
 .uckk-challenge-type--internal {
@@ -297,13 +299,13 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 .uckk-challenge-type--evaluated {
     border-color: rgba($uckk-info-colour, .30);
     background-color: rgba($uckk-info-colour, .10);
-    color: darken($uckk-info-colour, 10%);
+    color: mix(#000, $uckk-info-colour, 20%);
 }
 
 .uckk-challenge-type--capstone {
     border-color: rgba($uckk-brand-secondary, .55);
     background-color: rgba($uckk-brand-secondary, .22);
-    color: darken($uckk-brand-secondary, 30%);
+    color: mix(#000, $uckk-brand-secondary, 50%);
 }
 
 /* ==========================================================================
@@ -311,12 +313,12 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
    ========================================================================== */
 
 .uckk-challenge-statement {
+    padding: 1.25rem;
     border: 1px solid rgba($uckk-challenge-colour, .26);
     border-radius: $border-radius-lg;
     background:
         linear-gradient(135deg, rgba($uckk-challenge-colour, .07), rgba($uckk-brand-secondary, .08)),
         $uckk-surface-card;
-    padding: 1.25rem;
 }
 
 .uckk-challenge-statement__label,
@@ -326,7 +328,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
     margin-bottom: .5rem;
     color: $uckk-surface-text-muted;
     font-size: .78rem;
-    font-weight: 850;
+    font-weight: 800;
     letter-spacing: .05em;
     text-transform: uppercase;
 }
@@ -341,10 +343,10 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 .uckk-challenge-rules,
 .uckk-challenge-corridors,
 .uckk-challenge-evidence {
+    padding: 1.25rem;
     border: 1px solid $uckk-surface-border;
     border-radius: $border-radius-lg;
     background-color: $uckk-surface-card;
-    padding: 1.25rem;
 }
 
 .uckk-challenge-rules ul,
@@ -385,7 +387,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
     border-radius: 999rem;
     background-color: $uckk-challenge-colour;
     color: #fff;
-    font-weight: 850;
+    font-weight: 800;
 }
 
 .uckk-challenge-corridor__title {
@@ -421,7 +423,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
     padding: .85rem;
     border: 1px solid $uckk-surface-border;
     border-radius: $border-radius;
-    background-color: lighten($uckk-surface-background, 2%);
+    background-color: mix(#fff, $uckk-surface-background, 35%);
 }
 
 .uckk-challenge-proof__icon {
@@ -432,7 +434,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
     height: 2.25rem;
     border-radius: 999rem;
     background-color: rgba($uckk-info-colour, .12);
-    color: darken($uckk-info-colour, 10%);
+    color: mix(#000, $uckk-info-colour, 20%);
 }
 
 .uckk-challenge-proof__title {
@@ -486,8 +488,8 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 
 .uckk-challenge-submission__title {
     margin: 0;
-    color: darken($uckk-info-colour, 10%);
-    font-weight: 850;
+    color: mix(#000, $uckk-info-colour, 20%);
+    font-weight: 800;
 }
 
 .uckk-challenge-submission__body {
@@ -497,7 +499,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 .uckk-challenge-submission__footer {
     padding: 1rem 1.25rem;
     border-top: 1px solid $uckk-surface-border;
-    background-color: lighten($uckk-surface-background, 1%);
+    background-color: mix(#fff, $uckk-surface-background, 25%);
 }
 
 /* ==========================================================================
@@ -527,7 +529,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 .uckk-challenge-evaluation__feedback {
     padding: 1rem;
     border-radius: $border-radius;
-    background-color: lighten($uckk-surface-background, 1%);
+    background-color: mix(#fff, $uckk-surface-background, 25%);
     color: $uckk-surface-text;
 }
 
@@ -551,8 +553,8 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 
 .uckk-challenge-integrity__title {
     margin: 0;
-    color: darken($uckk-integrity-colour, 10%);
-    font-weight: 850;
+    color: mix(#000, $uckk-integrity-colour, 20%);
+    font-weight: 800;
 }
 
 .uckk-challenge-integrity__body {
@@ -575,7 +577,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 }
 
 .uckk-challenge-integrity--blocked .uckk-challenge-integrity__title {
-    color: darken($uckk-danger-colour, 8%);
+    color: mix(#000, $uckk-danger-colour, 16%);
 }
 
 /* ==========================================================================
@@ -598,8 +600,8 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 
 .uckk-challenge-archive__title {
     margin: 0;
-    color: darken($uckk-archive-colour, 10%);
-    font-weight: 850;
+    color: mix(#000, $uckk-archive-colour, 20%);
+    font-weight: 800;
 }
 
 .uckk-challenge-archive__body {
@@ -610,13 +612,13 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
     display: inline-flex;
     align-items: center;
     gap: .35rem;
-    color: darken($uckk-archive-colour, 8%);
+    color: mix(#000, $uckk-archive-colour, 16%);
     font-weight: 800;
 }
 
 .uckk-challenge-archive-link:hover,
 .uckk-challenge-archive-link:focus {
-    color: darken($uckk-archive-colour, 16%);
+    color: mix(#000, $uckk-archive-colour, 32%);
 }
 
 /* ==========================================================================
@@ -624,19 +626,19 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
    ========================================================================== */
 
 .uckk-challenge-theatre-notice {
+    padding: 1rem 1.25rem;
     border: 1px solid rgba($uckk-brand-accent, .35);
     border-left: .4rem solid $uckk-brand-accent;
     border-radius: $border-radius-lg;
     background:
         linear-gradient(135deg, rgba($uckk-brand-accent, .08), rgba($uckk-brand-secondary, .08)),
         $uckk-surface-card;
-    padding: 1rem 1.25rem;
 }
 
 .uckk-challenge-theatre-notice__title {
     margin: 0 0 .35rem;
-    color: darken($uckk-brand-accent, 10%);
-    font-weight: 850;
+    color: mix(#000, $uckk-brand-accent, 20%);
+    font-weight: 800;
 }
 
 .uckk-challenge-theatre-notice__text {
@@ -724,7 +726,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 .uckk-challenge-list-item__title {
     margin: 0 0 .5rem;
     color: $uckk-brand-primary;
-    font-weight: 850;
+    font-weight: 800;
 }
 
 .uckk-challenge-list-item__summary {
@@ -735,7 +737,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 .uckk-challenge-list-item__footer {
     padding: .85rem 1rem;
     border-top: 1px solid $uckk-surface-border;
-    background-color: lighten($uckk-surface-background, 1%);
+    background-color: mix(#fff, $uckk-surface-background, 25%);
 }
 
 /* ==========================================================================
@@ -753,7 +755,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 .uckk-challenge-empty__title {
     margin: 0 0 .5rem;
     color: $uckk-brand-primary;
-    font-weight: 850;
+    font-weight: 800;
 }
 
 .uckk-challenge-empty__text {
@@ -806,8 +808,8 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 
 .uckk-challenge-action--primary:hover,
 .uckk-challenge-action--primary:focus {
-    border-color: darken($uckk-challenge-colour, 8%);
-    background-color: darken($uckk-challenge-colour, 8%);
+    border-color: mix(#000, $uckk-challenge-colour, 16%);
+    background-color: mix(#000, $uckk-challenge-colour, 16%);
     color: #fff;
 }
 
@@ -817,9 +819,23 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
     color: #fff;
 }
 
+.uckk-challenge-action--integrity:hover,
+.uckk-challenge-action--integrity:focus {
+    border-color: mix(#000, $uckk-integrity-colour, 16%);
+    background-color: mix(#000, $uckk-integrity-colour, 16%);
+    color: #fff;
+}
+
 .uckk-challenge-action--archive {
     border-color: $uckk-archive-colour;
     background-color: $uckk-archive-colour;
+    color: #fff;
+}
+
+.uckk-challenge-action--archive:hover,
+.uckk-challenge-action--archive:focus {
+    border-color: mix(#000, $uckk-archive-colour, 16%);
+    background-color: mix(#000, $uckk-archive-colour, 16%);
     color: #fff;
 }
 
@@ -834,7 +850,7 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 
     .activityiconcontainer {
         background-color: rgba($uckk-challenge-colour, .12);
-        color: darken($uckk-challenge-colour, 10%);
+        color: mix(#000, $uckk-challenge-colour, 20%);
     }
 
     .activityname a {
@@ -871,6 +887,13 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
 
 .uckk-challenge .text-muted {
     color: $uckk-surface-text-muted !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .uckk-challenge-loading {
+        animation: none;
+        background-position: 0 0;
+    }
 }
 
 /* ==========================================================================
@@ -957,4 +980,3 @@ $box-shadow-lg: 0 1rem 2.5rem rgba(23, 19, 33, .16) !default;
         color: #000 !important;
     }
 }
-

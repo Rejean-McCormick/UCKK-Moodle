@@ -14,10 +14,13 @@
 // along with UCKK-Moodle. If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Dashboard styles for the UCKK theme.
+ * Dashboard component styles for the UCKK theme.
  *
- * These rules style the UCKK dashboard surface, dashboard header, quick links,
+ * These rules style UCKK dashboard surfaces, headers, quick links,
  * progress summaries, cards, and institutional status notices.
+ *
+ * They are intentionally component-scoped so the theme can remain a thin
+ * Boost child theme. They must not require a custom dashboard layout file.
  *
  * They must remain visual only. They must not encode programme rules,
  * challenge rules, assembly outcomes, archive validation, integrity decisions,
@@ -28,13 +31,17 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-.theme-uckk {
+:root,
+.theme-uckk,
+.theme-uckk-dashboard,
+.block_uckk_dashboard {
     --uckk-dashboard-surface: var(--bs-body-bg, #fff);
     --uckk-dashboard-surface-alt: var(--bs-light, #f8f9fa);
     --uckk-dashboard-border: var(--bs-border-color, #dee2e6);
     --uckk-dashboard-text: var(--bs-body-color, #212529);
     --uckk-dashboard-muted: var(--bs-secondary-color, #6c757d);
     --uckk-dashboard-primary: var(--bs-primary, #0d6efd);
+    --uckk-dashboard-primary-rgb: var(--bs-primary-rgb, 13, 110, 253);
     --uckk-dashboard-secondary: var(--bs-secondary, #6c757d);
     --uckk-dashboard-success: var(--bs-success, #198754);
     --uckk-dashboard-warning: var(--bs-warning, #ffc107);
@@ -42,9 +49,11 @@
     --uckk-dashboard-radius: var(--bs-border-radius-lg, .5rem);
     --uckk-dashboard-shadow: 0 .75rem 2rem rgba(0, 0, 0, .08);
     --uckk-dashboard-shadow-sm: 0 .25rem .75rem rgba(0, 0, 0, .06);
+    --uckk-dashboard-focus-ring: rgba(var(--uckk-dashboard-primary-rgb), .35);
 }
 
-.theme-uckk-dashboard {
+.theme-uckk-dashboard,
+.block_uckk_dashboard .theme-uckk-dashboard {
     color: var(--uckk-dashboard-text);
 }
 
@@ -53,10 +62,10 @@
         position: relative;
         overflow: hidden;
         border: 1px solid var(--uckk-dashboard-border);
-        background:
-            radial-gradient(circle at top right, rgba(13, 110, 253, .12), transparent 22rem),
-            linear-gradient(135deg, var(--uckk-dashboard-surface), var(--uckk-dashboard-surface-alt));
+        background-color: var(--uckk-dashboard-surface);
+        background-image: none;
         box-shadow: var(--uckk-dashboard-shadow);
+        color: var(--uckk-dashboard-text);
     }
 
     .theme-uckk-campus-label {
@@ -119,6 +128,11 @@
             color: var(--uckk-dashboard-primary);
             text-decoration: underline;
         }
+
+        &:focus-visible {
+            outline: .2rem solid var(--uckk-dashboard-focus-ring);
+            outline-offset: .15rem;
+        }
     }
 }
 
@@ -143,12 +157,13 @@
 .theme-uckk-progressbar {
     height: .65rem;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, .06);
-    background-color: rgba(0, 0, 0, .06);
+    border: 1px solid var(--bs-border-color-translucent, rgba(0, 0, 0, .175));
+    background-color: var(--uckk-dashboard-surface-alt);
     border-radius: 999rem;
 
     .progress-bar {
-        background: linear-gradient(90deg, var(--uckk-dashboard-primary), var(--uckk-dashboard-success));
+        background-color: var(--uckk-dashboard-primary);
+        background-image: none;
         border-radius: inherit;
     }
 }
@@ -182,7 +197,7 @@
         }
 
         &:focus-visible {
-            outline: .2rem solid rgba(13, 110, 253, .35);
+            outline: .2rem solid var(--uckk-dashboard-focus-ring);
             outline-offset: .15rem;
         }
     }
@@ -223,6 +238,7 @@
 
     .theme-uckk-dashboard-card-title {
         margin: 0;
+        color: var(--uckk-dashboard-text);
         font-size: 1.05rem;
         font-weight: 700;
     }
@@ -388,6 +404,10 @@
         &:last-child {
             border-bottom: 0;
         }
+
+        @include media-breakpoint-down(sm) {
+            flex-direction: column;
+        }
     }
 
     .theme-uckk-dashboard-list-title {
@@ -424,6 +444,233 @@
     }
 }
 
+/* ==========================================================================
+   UCKK dashboard cleanup — no ghost wrapper slabs
+   ========================================================================== */
+
+/*
+ * This block keeps the Boost dashboard layout, but removes Moodle's extra
+ * painted shells around dashboard blocks. Only the true content cards remain
+ * visible. It also removes the green/gold blended backgrounds from dashboard
+ * surfaces.
+ */
+
+:root,
+.theme-uckk,
+.path-my,
+.theme-uckk-dashboard,
+.block_uckk_dashboard {
+    --uckk-dashboard-petrol: var(--uckk-petrol, #1e6864);
+    --uckk-dashboard-petrol-dark: var(--uckk-petrol-dark, #073f3b);
+    --uckk-dashboard-paper: var(--uckk-paper, #f4ecd2);
+    --uckk-dashboard-paper-soft: var(--uckk-paper-soft, #fbf6e7);
+    --uckk-dashboard-paper-deep: var(--uckk-paper-deep, #eadfbd);
+    --uckk-dashboard-gold: var(--uckk-gold, #c49a3a);
+    --uckk-dashboard-gold-soft: rgba(196, 154, 58, .34);
+    --uckk-dashboard-gold-strong: rgba(196, 154, 58, .52);
+    --uckk-dashboard-ink: var(--uckk-ink, #102724);
+    --uckk-dashboard-muted: var(--uckk-muted, #52615d);
+
+    --uckk-dashboard-surface: var(--uckk-dashboard-paper-soft);
+    --uckk-dashboard-surface-alt: var(--uckk-dashboard-paper);
+    --uckk-dashboard-border: var(--uckk-dashboard-gold-soft);
+    --uckk-dashboard-text: var(--uckk-dashboard-ink);
+    --uckk-dashboard-primary: var(--uckk-dashboard-petrol);
+    --uckk-dashboard-primary-rgb: 30, 104, 100;
+    --uckk-dashboard-radius: 1.05rem;
+    --uckk-dashboard-shadow: 0 .65rem 1.5rem rgba(5, 47, 45, .08);
+    --uckk-dashboard-shadow-sm: 0 .35rem .85rem rgba(5, 47, 45, .06);
+    --uckk-dashboard-focus-ring: rgba(30, 104, 100, .28);
+}
+
+/* Page background stays parchment, not mixed white panels. */
+body.path-my,
+body.path-my #page,
+body.path-my #page-wrapper,
+body.path-my #page.drawers,
+body.path-my .main-inner,
+body.path-my #page-content,
+body.path-my #region-main,
+body.path-my #region-main-box {
+    background-color: var(--uckk-dashboard-paper) !important;
+    background-image: none !important;
+    color: var(--uckk-dashboard-text);
+}
+
+/* The page sheet may remain, but it must not become another framed dashboard card. */
+body.path-my #region-main,
+body.path-my #region-main-box,
+body.path-my [role="main"],
+body.path-my .block-region,
+body.path-my [data-region="blocks-column"],
+body.path-my #block-region-content,
+body.path-my .block-region-content,
+body.path-my .dashboard-card-deck,
+body.path-my .block-cards,
+body.path-my .card-deck.dashboard-card-deck {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Remove the visible pale slabs behind Course overview and Timeline. */
+body.path-my #region-main .block,
+body.path-my #region-main .block.card,
+body.path-my #region-main section.block,
+body.path-my #region-main .block_myoverview,
+body.path-my #region-main .block_timeline,
+body.path-my #region-main .block_myoverview.card,
+body.path-my #region-main .block_timeline.card,
+body.path-my #region-main [data-block="myoverview"],
+body.path-my #region-main [data-block="timeline"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+/* Space the real dashboard cards without exposing a wrapper rectangle. */
+body.path-my #region-main .block_myoverview,
+body.path-my #region-main .block_timeline,
+body.path-my #region-main [data-block="myoverview"],
+body.path-my #region-main [data-block="timeline"] {
+    margin: 0 0 1.5rem !important;
+}
+
+/* The actual visible dashboard cards. */
+body.path-my #region-main .block_myoverview > .card-body,
+body.path-my #region-main .block_timeline > .card-body,
+body.path-my #region-main [data-block="myoverview"] > .card-body,
+body.path-my #region-main [data-block="timeline"] > .card-body {
+    background: var(--uckk-dashboard-surface) !important;
+    background-color: var(--uckk-dashboard-surface) !important;
+    background-image: none !important;
+    border: 2px solid var(--uckk-dashboard-gold-strong) !important;
+    border-radius: var(--uckk-dashboard-radius) !important;
+    box-shadow: none !important;
+    padding: 1.15rem 1.35rem 1.35rem !important;
+}
+
+/* Clear inner utility wrappers that paint rectangular background slabs. */
+body.path-my #region-main .block_myoverview > .card-body > *,
+body.path-my #region-main .block_timeline > .card-body > *,
+body.path-my #region-main .block_myoverview .card-body > .container-fluid,
+body.path-my #region-main .block_timeline .card-body > .container-fluid,
+body.path-my #region-main .block_myoverview [data-region],
+body.path-my #region-main .block_timeline [data-region],
+body.path-my #region-main .block_myoverview .dashboard-card-deck,
+body.path-my #region-main .block_timeline .dashboard-card-deck,
+body.path-my #region-main .block_myoverview .block-cards,
+body.path-my #region-main .block_timeline .block-cards {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: var(--uckk-dashboard-gold-soft) !important;
+    box-shadow: none !important;
+}
+
+/* Headings: no accidental filled highlight rectangle. */
+body.path-my #region-main .block_myoverview .card-title,
+body.path-my #region-main .block_timeline .card-title,
+body.path-my #region-main .block_myoverview h2,
+body.path-my #region-main .block_timeline h2,
+body.path-my #region-main .block_myoverview h3,
+body.path-my #region-main .block_timeline h3 {
+    display: inline-block;
+    margin-bottom: .85rem;
+    padding: 0 0 .15rem;
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--uckk-dashboard-ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 800;
+    letter-spacing: .025em;
+    box-shadow: inset 0 -.18rem 0 rgba(196, 154, 58, .22);
+}
+
+/* Header card: flat parchment, no green/gold blend. */
+body.path-my #page-header {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.35rem;
+    padding: 1.25rem 1.4rem;
+    background: var(--uckk-dashboard-surface) !important;
+    background-color: var(--uckk-dashboard-surface) !important;
+    background-image: none !important;
+    border: 2px solid var(--uckk-dashboard-gold-soft) !important;
+    border-left: .5rem solid var(--uckk-dashboard-petrol) !important;
+    border-radius: var(--uckk-dashboard-radius);
+    box-shadow: none !important;
+}
+
+body.path-my #page-header::before {
+    background-image: none !important;
+}
+
+body.path-my #page-header h1,
+body.path-my #page-header .h1,
+body.path-my #page-header .page-header-headings h1 {
+    color: var(--uckk-dashboard-ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 800;
+    letter-spacing: .015em;
+}
+
+/* Buttons and links. */
+body.path-my .btn-primary,
+body.path-my .btn-secondary {
+    background-color: var(--uckk-dashboard-petrol) !important;
+    background-image: none !important;
+    border-color: var(--uckk-dashboard-petrol-dark) !important;
+    color: var(--uckk-dashboard-paper-soft) !important;
+    box-shadow: none !important;
+}
+
+body.path-my .btn-primary:hover,
+body.path-my .btn-primary:focus,
+body.path-my .btn-secondary:hover,
+body.path-my .btn-secondary:focus {
+    background-color: var(--uckk-dashboard-petrol-dark) !important;
+    border-color: var(--uckk-dashboard-gold) !important;
+    color: var(--uckk-dashboard-paper-soft) !important;
+}
+
+body.path-my a,
+body.path-my .btn-link {
+    color: var(--uckk-dashboard-petrol);
+}
+
+body.path-my a:hover,
+body.path-my a:focus,
+body.path-my .btn-link:hover,
+body.path-my .btn-link:focus {
+    color: var(--uckk-dashboard-petrol-dark);
+}
+
+/* Keep dashboard course cards clean when courses eventually exist. */
+body.path-my .dashboard-card,
+body.path-my .block_myoverview .dashboard-card {
+    background-color: var(--uckk-dashboard-surface) !important;
+    background-image: none !important;
+    border: 2px solid var(--uckk-dashboard-gold-soft) !important;
+    border-radius: var(--uckk-dashboard-radius) !important;
+    box-shadow: none !important;
+    transition: border-color 160ms ease-in-out, box-shadow 160ms ease-in-out;
+}
+
+body.path-my .dashboard-card:hover,
+body.path-my .dashboard-card:focus-within,
+body.path-my .block_myoverview .dashboard-card:hover,
+body.path-my .block_myoverview .dashboard-card:focus-within {
+    border-color: rgba(30, 104, 100, .44) !important;
+    box-shadow: var(--uckk-dashboard-shadow) !important;
+}
+
+
 @media print {
     .theme-uckk-dashboard-header,
     .theme-uckk-dashboard-card,
@@ -431,6 +678,7 @@
     .theme-uckk-dashboard-notice {
         border-color: #000;
         box-shadow: none;
+        break-inside: avoid;
     }
 
     .theme-uckk-dashboard-quicklinks,

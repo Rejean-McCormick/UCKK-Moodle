@@ -3,19 +3,12 @@
  *
  * File: theme/uckk/scss/assembly.scss
  *
- * This file styles UCKK Assembly interfaces only.
+ * Presentation-only styles for UCKK Assembly interfaces.
  *
- * It must not implement assembly logic, voting logic, permissions,
+ * This file must not implement assembly logic, voting logic, permissions,
  * decision validity, archive validation, integrity review, or workflow state.
  * Those responsibilities belong to mod_uckkassembly, mod_uckkarchive,
- * tool_uckkintegrity, local_uckk and report_uckk.
- *
- * Visual doctrine:
- * - Assemblies = collective legitimacy.
- * - Motions = proposals entering deliberation.
- * - Objections = protected contestability.
- * - Decisions = documented collective orientation.
- * - Archives = memory and traceability.
+ * tool_uckkintegrity, local_uckk, and report_uckk.
  */
 
 .uckk-assembly {
@@ -25,7 +18,7 @@
     --uckk-assembly-shadow-soft: 0 .35rem 1rem rgba(0, 0, 0, .06);
     --uckk-assembly-gap: 1rem;
 
-    color: $body-color;
+    color: var(--bs-body-color, #{$body-color});
 }
 
 /**
@@ -119,7 +112,7 @@
 }
 
 /**
- * Assembly cards and panels.
+ * Cards and panels.
  */
 
 .uckk-assembly-card,
@@ -183,6 +176,8 @@
 
 /**
  * Assembly type markers.
+ *
+ * These classes only style state already produced by the owning plugin.
  */
 
 .uckk-assembly--savoirs .uckk-assembly__header::before,
@@ -217,12 +212,16 @@
 
 /**
  * State badges.
+ *
+ * The theme styles labels only. It does not compute, validate, or authorize
+ * state transitions.
  */
 
 .uckk-assembly-state {
     display: inline-flex;
     align-items: center;
     gap: .4rem;
+    max-width: 100%;
     padding: .32rem .62rem;
     border: 1px solid rgba($uckk-colorblue, .14);
     border-radius: 999px;
@@ -239,6 +238,7 @@
 
 .uckk-assembly-state::before {
     content: "";
+    flex: 0 0 auto;
     display: inline-block;
     width: .55rem;
     height: .55rem;
@@ -390,15 +390,15 @@
 }
 
 /**
- * Vote / reading panels.
+ * Reading and vote panels.
  */
 
 .uckk-assembly-reading,
 .uckk-vote-panel {
+    overflow: hidden;
     border: 1px solid rgba($uckk-colorblue, .14);
     border-radius: .85rem;
     background: rgba($uckk-colorivory, .94);
-    overflow: hidden;
 }
 
 .uckk-assembly-reading__header,
@@ -683,7 +683,7 @@
     }
 
     .uckk-vote-meter__row {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: .35rem;
     }
 
@@ -711,6 +711,25 @@
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
+    }
+}
+
+@media (forced-colors: active) {
+    .uckk-assembly-card,
+    .uckk-assembly-panel,
+    .uckk-motion,
+    .uckk-decision,
+    .uckk-assembly-teaser,
+    .uckk-objection,
+    .uckk-amendment,
+    .uckk-contestation,
+    .uckk-minority-report {
+        border-color: CanvasText;
+        box-shadow: none;
+    }
+
+    .uckk-assembly-state::before {
+        forced-color-adjust: auto;
     }
 }
 

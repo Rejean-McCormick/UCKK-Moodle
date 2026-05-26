@@ -17,15 +17,15 @@
 /**
  * UCKK theme renderer.
  *
- * This renderer centralises rendering helpers for UCKK theme templates.
+ * This renderer centralises presentation helpers for UCKK theme templates.
  *
- * It must remain a presentation-layer renderer. It may prepare safe default
- * values for theme templates and call render_from_template(), but it must not
- * decide academic progression, challenge validation, assembly legitimacy,
+ * It must remain a thin theme-layer renderer. It may prepare safe default
+ * values for Mustache templates and call render_from_template(), but it must
+ * not decide academic progression, challenge validation, assembly legitimacy,
  * archive validation, integrity outcomes, badge attribution, competency
- * mastery, or AI authority.
+ * mastery, permissions, enrolment, or AI authority.
  *
- * Institutional workflow belongs to the dedicated UCKK plugins:
+ * Institutional workflow belongs to dedicated UCKK plugins:
  * - local_uckk for the institutional registry and shared services.
  * - mod_uckkchallenge for Défis King Klown.
  * - mod_uckkassembly for Assemblées.
@@ -35,7 +35,7 @@
  * - aiprovider_uckk for governed AI provider integration.
  *
  * @package    theme_uckk
- * @copyright  2026 Momus et Bouche Cousue
+ * @copyright  2026 Réjean McCormick
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -49,9 +49,9 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Renderer for UCKK theme-specific templates.
  *
- * The methods in this class accept data already prepared by the caller.
- * They only normalise the data shape, apply safe defaults for missing visual
- * labels, and delegate HTML generation to Mustache templates.
+ * The methods in this class accept data already prepared by callers.
+ * They only normalise presentation data, apply visual defaults, and delegate
+ * HTML generation to Mustache templates.
  */
 class theme_uckk_renderer extends plugin_renderer_base {
     /**
@@ -67,6 +67,7 @@ class theme_uckk_renderer extends plugin_renderer_base {
         $context->subtitle = $context->subtitle ?? get_string('dashboardsubtitle', 'theme_uckk');
         $context->campuslabel = $context->campuslabel ?? get_string('campuslabel', 'theme_uckk');
         $context->progresspercent = $this->normalise_percent($context->progresspercent ?? 0);
+
         $context->hasalerts = !empty($context->hasalerts);
         $context->showprogram = !empty($context->showprogram);
         $context->quicklinks = $this->normalise_list($context->quicklinks ?? []);
@@ -150,6 +151,10 @@ class theme_uckk_renderer extends plugin_renderer_base {
     /**
      * Render a challenge teaser.
      *
+     * The caller must provide already-authorised display data. This method
+     * must not decide challenge availability, validation, completion, grading,
+     * proof status, or integrity consequences.
+     *
      * @param array|stdClass $data Template context.
      * @return string Rendered HTML.
      */
@@ -175,6 +180,10 @@ class theme_uckk_renderer extends plugin_renderer_base {
 
     /**
      * Render an assembly teaser.
+     *
+     * The caller must provide already-authorised display data. This method
+     * must not decide assembly legitimacy, votes, contestation, archive status,
+     * or participant authority.
      *
      * @param array|stdClass $data Template context.
      * @return string Rendered HTML.
@@ -204,6 +213,9 @@ class theme_uckk_renderer extends plugin_renderer_base {
 
     /**
      * Render an integrity notice.
+     *
+     * The caller must provide already-authorised display data. This method
+     * must not decide whether an integrity case exists or what its outcome is.
      *
      * @param array|stdClass $data Template context.
      * @return string Rendered HTML.
@@ -236,10 +248,10 @@ class theme_uckk_renderer extends plugin_renderer_base {
     }
 
     /**
-     * Normalise a template list so Mustache can use section-first checks.
+     * Normalise a template list so Mustache can use section checks.
      *
      * @param mixed $items Raw items.
-     * @return array
+     * @return array Normalised list of stdClass objects.
      */
     private function normalise_list(mixed $items): array {
         if ($items instanceof stdClass) {
@@ -254,7 +266,7 @@ class theme_uckk_renderer extends plugin_renderer_base {
 
         foreach ($items as $item) {
             if ($item instanceof stdClass) {
-                $normalised[] = $item;
+                $normalised[] = clone $item;
                 continue;
             }
 

@@ -11,14 +11,18 @@
 /**
  * Default SCSS preset for the UCKK theme.
  *
- * This preset follows the Boost-compatible Moodle SCSS pattern:
- * 1. define theme variables;
- * 2. import Font Awesome, Bootstrap and Moodle;
- * 3. import UCKK presentation layers.
+ * This preset is the central visual-token source for theme_uckk.
  *
- * This file must remain presentation-only.
- * It must not contain permissions, workflow logic, grading rules,
- * archive validation rules, integrity decisions, or AI policy logic.
+ * Responsibilities:
+ * 1. define UCKK SCSS brand tokens;
+ * 2. expose matching CSS custom properties for local_uckk and UCKK-owned UI;
+ * 3. map UCKK tokens to Bootstrap/Moodle variables before imports;
+ * 4. import Boost-compatible base layers;
+ * 5. import UCKK presentation-only layers.
+ *
+ * Boost remains the structural source of truth. This file must not contain
+ * permissions, workflow logic, grading rules, archive validation rules,
+ * integrity decisions, AI policy logic, navigation authority or routing logic.
  *
  * @package    theme_uckk
  * @copyright  2026 Univers-Cité King Klown
@@ -26,94 +30,194 @@
  */
 
 // -----------------------------------------------------------------------------
-// UCKK brand tokens.
+// UCKK canonical SCSS brand tokens.
+// These values are the source of truth for theme_uckk.
+// local_uckk consumes the exported --theme-uckk-* CSS variables.
 // -----------------------------------------------------------------------------
 
-$uckk-black: #111827 !default;
-$uckk-ink: #1f2937 !default;
-$uckk-muted: #6b7280 !default;
-$uckk-border: #e5e7eb !default;
-$uckk-border-strong: #d1d5db !default;
+$uckk-ink: #172321 !default;
+$uckk-ink-soft: #2f3f3b !default;
+$uckk-black: #0e1715 !default;
 
-$uckk-surface: #ffffff !default;
-$uckk-surface-soft: #f9fafb !default;
-$uckk-surface-warm: #fffaf0 !default;
+$uckk-petrol: #1e6864 !default;
+$uckk-petrol-dark: #164c49 !default;
+$uckk-petrol-soft: #dbecea !default;
 
-$uckk-gold: #b7791f !default;
-$uckk-gold-soft: #fef3c7 !default;
+$uckk-parchment: #f6f0df !default;
+$uckk-parchment-light: #fbf7eb !default;
+$uckk-parchment-deep: #e6dcc2 !default;
 
-$uckk-red: #b91c1c !default;
-$uckk-red-soft: #fee2e2 !default;
+$uckk-gold: #b99045 !default;
+$uckk-gold-dark: #7f642f !default;
+$uckk-gold-soft: #eadcb8 !default;
 
-$uckk-blue: #1d4ed8 !default;
-$uckk-blue-soft: #dbeafe !default;
+$uckk-bronze: #9b7441 !default;
+$uckk-bluegrey: #5f7876 !default;
+$uckk-bluegrey-soft: #dfe8e5 !default;
 
-$uckk-green: #047857 !default;
-$uckk-green-soft: #d1fae5 !default;
+$uckk-red: #8f2f2f !default;
+$uckk-red-soft: #f2dfdc !default;
 
-$uckk-purple: #6d28d9 !default;
-$uckk-purple-soft: #ede9fe !default;
+$uckk-purple: #5c4468 !default;
+$uckk-purple-soft: #ede6ef !default;
 
-$uckk-slate: #475569 !default;
-$uckk-slate-soft: #f1f5f9 !default;
+$uckk-card: #fffaf0 !default;
 
-$uckk-radius-sm: .375rem !default;
-$uckk-radius-md: .75rem !default;
-$uckk-radius-lg: 1rem !default;
+$uckk-line: rgba(23, 35, 33, .16) !default;
+$uckk-line-strong: rgba(23, 35, 33, .28) !default;
 
-$uckk-shadow-sm: 0 .125rem .25rem rgba(17, 24, 39, .06) !default;
-$uckk-shadow-md: 0 .5rem 1.25rem rgba(17, 24, 39, .10) !default;
-$uckk-shadow-focus: 0 0 0 .2rem rgba(183, 121, 31, .25) !default;
+$uckk-shadow: 0 18px 42px rgba(23, 35, 33, .12) !default;
+$uckk-shadow-soft: 0 8px 20px rgba(23, 35, 33, .08) !default;
+$uckk-shadow-focus: 0 0 0 .2rem rgba(30, 104, 100, .28) !default;
+
+$uckk-radius-small: .55rem !default;
+$uckk-radius: .9rem !default;
+$uckk-radius-large: 1.15rem !default;
+
+$uckk-max-width: 1440px !default;
+
+// -----------------------------------------------------------------------------
+// Backward-compatible aliases.
+// Keep these aliases because existing UCKK partials may still reference them.
+// New code should prefer the canonical names above.
+// -----------------------------------------------------------------------------
+
+$uckk-muted: $uckk-ink-soft !default;
+$uckk-border: $uckk-line !default;
+$uckk-border-strong: $uckk-line-strong !default;
+
+$uckk-paper: $uckk-parchment !default;
+$uckk-paper-soft: $uckk-parchment-light !default;
+
+$uckk-surface: $uckk-card !default;
+$uckk-surface-soft: $uckk-parchment-light !default;
+$uckk-surface-warm: $uckk-parchment !default;
+
+$uckk-blue: $uckk-bluegrey !default;
+$uckk-blue-soft: $uckk-bluegrey-soft !default;
+
+$uckk-green: $uckk-petrol !default;
+$uckk-green-soft: $uckk-petrol-soft !default;
+
+$uckk-slate: $uckk-bluegrey !default;
+$uckk-slate-soft: $uckk-bluegrey-soft !default;
+
+$uckk-radius-sm: $uckk-radius-small !default;
+$uckk-radius-md: $uckk-radius !default;
+$uckk-radius-lg: $uckk-radius-large !default;
+
+$uckk-shadow-sm: $uckk-shadow-soft !default;
+$uckk-shadow-md: $uckk-shadow !default;
+
+// -----------------------------------------------------------------------------
+// Exported CSS custom properties.
+// These variables align theme_uckk with local_uckk/styles.css.
+// local_uckk should consume these as var(--theme-uckk-*, fallback).
+// -----------------------------------------------------------------------------
+
+:root {
+    --theme-uckk-ink: #{$uckk-ink};
+    --theme-uckk-ink-soft: #{$uckk-ink-soft};
+    --theme-uckk-black: #{$uckk-black};
+
+    --theme-uckk-petrol: #{$uckk-petrol};
+    --theme-uckk-petrol-dark: #{$uckk-petrol-dark};
+    --theme-uckk-petrol-soft: #{$uckk-petrol-soft};
+
+    --theme-uckk-parchment: #{$uckk-parchment};
+    --theme-uckk-parchment-light: #{$uckk-parchment-light};
+    --theme-uckk-parchment-deep: #{$uckk-parchment-deep};
+
+    --theme-uckk-gold: #{$uckk-gold};
+    --theme-uckk-gold-dark: #{$uckk-gold-dark};
+    --theme-uckk-gold-soft: #{$uckk-gold-soft};
+
+    --theme-uckk-bronze: #{$uckk-bronze};
+    --theme-uckk-bluegrey: #{$uckk-bluegrey};
+    --theme-uckk-bluegrey-soft: #{$uckk-bluegrey-soft};
+
+    --theme-uckk-red: #{$uckk-red};
+    --theme-uckk-red-soft: #{$uckk-red-soft};
+
+    --theme-uckk-purple: #{$uckk-purple};
+    --theme-uckk-purple-soft: #{$uckk-purple-soft};
+
+    --theme-uckk-card: #{$uckk-card};
+
+    --theme-uckk-line: #{$uckk-line};
+    --theme-uckk-line-strong: #{$uckk-line-strong};
+
+    --theme-uckk-shadow: #{$uckk-shadow};
+    --theme-uckk-shadow-soft: #{$uckk-shadow-soft};
+    --theme-uckk-shadow-focus: #{$uckk-shadow-focus};
+
+    --theme-uckk-radius: #{$uckk-radius};
+    --theme-uckk-radius-small: #{$uckk-radius-small};
+    --theme-uckk-radius-large: #{$uckk-radius-large};
+
+    --theme-uckk-max-width: #{$uckk-max-width};
+}
 
 // -----------------------------------------------------------------------------
 // Bootstrap / Moodle theme variables.
 // These are intentionally declared before Bootstrap and Moodle imports.
 // -----------------------------------------------------------------------------
 
-$primary: $uckk-gold !default;
-$secondary: $uckk-slate !default;
-$success: $uckk-green !default;
-$info: $uckk-blue !default;
+$primary: $uckk-petrol !default;
+$secondary: $uckk-bluegrey !default;
+$success: $uckk-petrol !default;
+$info: $uckk-bluegrey !default;
 $warning: $uckk-gold !default;
 $danger: $uckk-red !default;
-$light: $uckk-surface-soft !default;
+$light: $uckk-parchment-light !default;
 $dark: $uckk-black !default;
 
-$body-bg: $uckk-surface !default;
+$body-bg: $uckk-card !default;
 $body-color: $uckk-ink !default;
 
-$link-color: $uckk-blue !default;
-$link-hover-color: $uckk-black !default;
+// Keep Boost/Moodle .container widths aligned with the UCKK public layout token.
+// This prevents public UCKK pages from being visually constrained by the
+// default Bootstrap xl container while still keeping Moodle structural layouts.
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: $uckk-max-width
+) !default;
 
-$border-color: $uckk-border !default;
-$border-radius: $uckk-radius-sm !default;
-$border-radius-lg: $uckk-radius-md !default;
+$link-color: $uckk-petrol !default;
+$link-hover-color: $uckk-petrol-dark !default;
+
+$border-color: $uckk-line !default;
+$border-radius: $uckk-radius-small !default;
+$border-radius-lg: $uckk-radius !default;
 $border-radius-sm: .25rem !default;
 
-$card-border-color: $uckk-border !default;
-$card-border-radius: $uckk-radius-lg !default;
-$card-cap-bg: $uckk-surface-soft !default;
+$card-bg: $uckk-card !default;
+$card-border-color: $uckk-line !default;
+$card-border-radius: $uckk-radius !default;
+$card-cap-bg: $uckk-parchment-light !default;
 
 $navbar-light-color: $uckk-ink !default;
 $navbar-light-hover-color: $uckk-black !default;
-$navbar-light-active-color: $uckk-gold !default;
+$navbar-light-active-color: $uckk-petrol !default;
 
-$dropdown-link-hover-bg: $uckk-gold-soft !default;
-$dropdown-link-active-bg: $uckk-gold !default;
-$dropdown-link-active-color: $uckk-black !default;
+$dropdown-link-hover-bg: $uckk-petrol-soft !default;
+$dropdown-link-active-bg: $uckk-petrol !default;
+$dropdown-link-active-color: $uckk-card !default;
 
-$input-border-color: $uckk-border-strong !default;
-$input-focus-border-color: $uckk-gold !default;
+$input-border-color: $uckk-line-strong !default;
+$input-focus-border-color: $uckk-petrol !default;
 $input-focus-box-shadow: $uckk-shadow-focus !default;
 
 $btn-focus-box-shadow: $uckk-shadow-focus !default;
 
-$progress-bg: $uckk-slate-soft !default;
-$progress-bar-bg: $uckk-gold !default;
+$progress-bg: $uckk-bluegrey-soft !default;
+$progress-bar-bg: $uckk-petrol !default;
 
 $breadcrumb-bg: transparent !default;
-$breadcrumb-divider-color: $uckk-muted !default;
-$breadcrumb-active-color: $uckk-muted !default;
+$breadcrumb-divider-color: $uckk-ink-soft !default;
+$breadcrumb-active-color: $uckk-ink-soft !default;
 
 $badge-font-weight: 700 !default;
 
@@ -132,41 +236,80 @@ $font-family-sans-serif:
     "Segoe UI Symbol",
     "Noto Color Emoji" !default;
 
+$font-family-serif:
+    Georgia,
+    "Times New Roman",
+    "Noto Serif",
+    serif !default;
+
+$font-family-base: $font-family-sans-serif !default;
+$headings-font-family: $font-family-serif !default;
+$headings-color: $uckk-ink !default;
+$headings-font-weight: 700 !default;
+
 // -----------------------------------------------------------------------------
 // Moodle base imports.
 // These imports follow the Boost-compatible preset structure.
 // -----------------------------------------------------------------------------
 
-@import "../../boost/scss/fontawesome";
-@import "../../boost/scss/bootstrap";
-@import "../../boost/scss/moodle";
+@import "fontawesome";
+@import "bootstrap";
+@import "moodle";
 
 // -----------------------------------------------------------------------------
-// UCKK theme layers.
-// Keep these imports after Moodle so UCKK styles can refine presentation
-// without altering Moodle core behavior.
+// UCKK presentation layers.
+// Keep these imports after Moodle so UCKK styles refine presentation only.
+// These partials must not assume custom replacements for Boost layouts.
 // -----------------------------------------------------------------------------
 
-@import "../uckk";
-@import "../components";
-@import "../navigation";
-@import "../dashboard";
-@import "../course";
-@import "../challenge";
-@import "../assembly";
-@import "../archive";
+@import "uckk";
+@import "components";
+@import "navigation";
+@import "dashboard";
+@import "course";
+@import "challenge";
+@import "assembly";
+@import "archive";
 
 // -----------------------------------------------------------------------------
 // Preset-level global refinements.
 // -----------------------------------------------------------------------------
 
 body {
-    background-color: $uckk-surface;
+    background:
+        linear-gradient(180deg, rgba(246, 240, 223, .92), rgba(255, 250, 240, 1) 20rem),
+        $uckk-parchment;
     color: $uckk-ink;
+    font-family: $font-family-base;
+}
+
+h1,
+h2,
+h3,
+.page-header-headings h1,
+.card-title,
+.uckk-heading {
+    color: $uckk-ink;
+    font-family: $headings-font-family;
+    letter-spacing: .015em;
 }
 
 a {
     text-underline-offset: .16em;
+}
+
+.btn-primary,
+.btn.btn-primary {
+    background-color: $uckk-petrol;
+    border-color: $uckk-petrol;
+    color: $uckk-card;
+
+    &:hover,
+    &:focus {
+        background-color: $uckk-petrol-dark;
+        border-color: $uckk-petrol-dark;
+        color: $uckk-card;
+    }
 }
 
 a:focus,
@@ -179,24 +322,26 @@ button:focus,
 }
 
 // -----------------------------------------------------------------------------
-// Moodle layout refinements.
+// Boost-safe Moodle refinements.
+// Keep these cosmetic only: no drawer sizing, no page positioning,
+// no region ownership, and no assumptions about custom UCKK layout files.
 // -----------------------------------------------------------------------------
 
-#page {
-    background: linear-gradient(180deg, $uckk-surface-soft 0%, $uckk-surface 18rem);
+.pagelayout-frontpage #page,
+.uckk-campus-shell {
+    background:
+        radial-gradient(circle at top left, rgba(30, 104, 100, .16), transparent 24rem),
+        radial-gradient(circle at top right, rgba(185, 144, 69, .12), transparent 26rem),
+        linear-gradient(180deg, $uckk-parchment 0%, $uckk-card 18rem);
 }
 
 #page-header {
-    border-bottom: 1px solid rgba(209, 213, 219, .7);
-}
-
-#region-main {
-    border-radius: $uckk-radius-lg;
+    border-bottom: 1px solid rgba(185, 144, 69, .36);
 }
 
 .drawer,
 .drawer-toggles .drawer-toggler {
-    border-color: $uckk-border;
+    border-color: $uckk-line;
 }
 
 .moremenu {
@@ -206,7 +351,7 @@ button:focus,
         &.active,
         &:hover,
         &:focus {
-            color: $uckk-gold;
+            color: $uckk-petrol;
         }
     }
 }
@@ -215,11 +360,11 @@ button:focus,
 .secondary-navigation {
     .navigation {
         .nav-link {
-            border-radius: $uckk-radius-sm;
+            border-radius: $uckk-radius-small;
 
             &:hover,
             &:focus {
-                background-color: $uckk-gold-soft;
+                background-color: $uckk-petrol-soft;
             }
         }
     }
@@ -230,30 +375,30 @@ button:focus,
 // -----------------------------------------------------------------------------
 
 .activity-item {
-    border-color: $uckk-border;
-    border-radius: $uckk-radius-md;
+    border-color: $uckk-line;
+    border-radius: $uckk-radius;
 
     &:hover {
-        border-color: $uckk-border-strong;
+        border-color: $uckk-line-strong;
     }
 }
 
 .activityiconcontainer {
-    border-radius: $uckk-radius-sm;
+    border-radius: $uckk-radius-small;
 }
 
 .courseindex {
     .courseindex-item {
-        border-radius: $uckk-radius-sm;
+        border-radius: $uckk-radius-small;
 
         &:hover,
         &:focus {
-            background-color: $uckk-gold-soft;
+            background-color: $uckk-petrol-soft;
         }
 
         &.pageitem {
-            background-color: $uckk-gold-soft;
-            color: $uckk-black;
+            background-color: $uckk-petrol-soft;
+            color: $uckk-ink;
             font-weight: 700;
         }
     }
@@ -261,7 +406,7 @@ button:focus,
 
 .path-course-view {
     .completion-info {
-        border-radius: $uckk-radius-md;
+        border-radius: $uckk-radius;
     }
 }
 
@@ -271,28 +416,28 @@ button:focus,
 
 .form-control,
 .custom-select {
-    border-color: $uckk-border-strong;
-    border-radius: $uckk-radius-sm;
+    border-color: $uckk-line-strong;
+    border-radius: $uckk-radius-small;
 }
 
 .form-control:focus,
 .custom-select:focus {
-    border-color: $uckk-gold;
+    border-color: $uckk-petrol;
 }
 
 .table {
     th {
-        color: $uckk-slate;
+        color: $uckk-petrol;
         font-weight: 700;
     }
 }
 
 .generaltable {
-    border-color: $uckk-border;
+    border-color: $uckk-line;
 
     th,
     td {
-        border-color: $uckk-border;
+        border-color: $uckk-line;
     }
 }
 
@@ -301,66 +446,97 @@ button:focus,
 // -----------------------------------------------------------------------------
 
 .alert {
-    border-radius: $uckk-radius-md;
+    border-radius: $uckk-radius;
 }
 
 .alert-info {
-    border-color: rgba(29, 78, 216, .24);
-    background-color: $uckk-blue-soft;
-    color: #0f2f68;
+    border-color: rgba(95, 120, 118, .28);
+    background-color: $uckk-bluegrey-soft;
+    color: #294540;
 }
 
 .alert-success {
-    border-color: rgba(4, 120, 87, .24);
-    background-color: $uckk-green-soft;
-    color: #064e3b;
+    border-color: rgba(30, 104, 100, .28);
+    background-color: $uckk-petrol-soft;
+    color: $uckk-petrol-dark;
 }
 
 .alert-warning {
-    border-color: rgba(183, 121, 31, .28);
+    border-color: rgba(185, 144, 69, .34);
     background-color: $uckk-gold-soft;
-    color: #78350f;
+    color: #5f461a;
 }
 
 .alert-danger {
-    border-color: rgba(185, 28, 28, .24);
+    border-color: rgba(143, 47, 47, .28);
     background-color: $uckk-red-soft;
-    color: #7f1d1d;
+    color: #5d1e1e;
 }
 
 // -----------------------------------------------------------------------------
 // UCKK semantic root classes.
 // These classes are useful for layout templates and body/page context.
+// They mirror :root variables for legacy contexts that scope UCKK UI under
+// .uckk-theme rather than using document-level :root.
 // -----------------------------------------------------------------------------
 
 .uckk-theme {
+    --theme-uckk-ink: #{$uckk-ink};
+    --theme-uckk-ink-soft: #{$uckk-ink-soft};
+    --theme-uckk-black: #{$uckk-black};
+    --theme-uckk-petrol: #{$uckk-petrol};
+    --theme-uckk-petrol-dark: #{$uckk-petrol-dark};
+    --theme-uckk-petrol-soft: #{$uckk-petrol-soft};
+    --theme-uckk-parchment: #{$uckk-parchment};
+    --theme-uckk-parchment-light: #{$uckk-parchment-light};
+    --theme-uckk-parchment-deep: #{$uckk-parchment-deep};
+    --theme-uckk-gold: #{$uckk-gold};
+    --theme-uckk-gold-dark: #{$uckk-gold-dark};
+    --theme-uckk-gold-soft: #{$uckk-gold-soft};
+    --theme-uckk-bronze: #{$uckk-bronze};
+    --theme-uckk-bluegrey: #{$uckk-bluegrey};
+    --theme-uckk-bluegrey-soft: #{$uckk-bluegrey-soft};
+    --theme-uckk-red: #{$uckk-red};
+    --theme-uckk-red-soft: #{$uckk-red-soft};
+    --theme-uckk-purple: #{$uckk-purple};
+    --theme-uckk-purple-soft: #{$uckk-purple-soft};
+    --theme-uckk-card: #{$uckk-card};
+    --theme-uckk-line: #{$uckk-line};
+    --theme-uckk-line-strong: #{$uckk-line-strong};
+    --theme-uckk-shadow: #{$uckk-shadow};
+    --theme-uckk-shadow-soft: #{$uckk-shadow-soft};
+    --theme-uckk-shadow-focus: #{$uckk-shadow-focus};
+    --theme-uckk-radius: #{$uckk-radius};
+    --theme-uckk-radius-small: #{$uckk-radius-small};
+    --theme-uckk-radius-large: #{$uckk-radius-large};
+    --theme-uckk-max-width: #{$uckk-max-width};
+
+    // Legacy aliases retained for old UCKK templates and partials.
+    --uckk-petrol: #{$uckk-petrol};
+    --uckk-petrol-dark: #{$uckk-petrol-dark};
+    --uckk-petrol-soft: #{$uckk-petrol-soft};
+    --uckk-paper: #{$uckk-parchment};
+    --uckk-paper-soft: #{$uckk-parchment-light};
     --uckk-black: #{$uckk-black};
     --uckk-ink: #{$uckk-ink};
-    --uckk-muted: #{$uckk-muted};
-    --uckk-border: #{$uckk-border};
-    --uckk-border-strong: #{$uckk-border-strong};
-    --uckk-surface: #{$uckk-surface};
-    --uckk-surface-soft: #{$uckk-surface-soft};
-    --uckk-surface-warm: #{$uckk-surface-warm};
+    --uckk-muted: #{$uckk-ink-soft};
+    --uckk-border: #{$uckk-line};
+    --uckk-border-strong: #{$uckk-line-strong};
+    --uckk-surface: #{$uckk-card};
+    --uckk-surface-soft: #{$uckk-parchment-light};
+    --uckk-surface-warm: #{$uckk-parchment};
     --uckk-gold: #{$uckk-gold};
     --uckk-gold-soft: #{$uckk-gold-soft};
     --uckk-red: #{$uckk-red};
     --uckk-red-soft: #{$uckk-red-soft};
-    --uckk-blue: #{$uckk-blue};
-    --uckk-blue-soft: #{$uckk-blue-soft};
-    --uckk-green: #{$uckk-green};
-    --uckk-green-soft: #{$uckk-green-soft};
+    --uckk-blue: #{$uckk-bluegrey};
+    --uckk-blue-soft: #{$uckk-bluegrey-soft};
+    --uckk-green: #{$uckk-petrol};
+    --uckk-green-soft: #{$uckk-petrol-soft};
     --uckk-purple: #{$uckk-purple};
     --uckk-purple-soft: #{$uckk-purple-soft};
-    --uckk-slate: #{$uckk-slate};
-    --uckk-slate-soft: #{$uckk-slate-soft};
-}
-
-.uckk-campus-shell {
-    background:
-        radial-gradient(circle at top left, rgba(183, 121, 31, .10), transparent 24rem),
-        radial-gradient(circle at top right, rgba(109, 40, 217, .08), transparent 26rem),
-        $uckk-surface;
+    --uckk-slate: #{$uckk-bluegrey};
+    --uckk-slate-soft: #{$uckk-bluegrey-soft};
 }
 
 .uckk-campus-main {
@@ -368,7 +544,7 @@ button:focus,
 }
 
 .uckk-campus-aside {
-    border-left: 1px solid $uckk-border;
+    border-left: 1px solid $uckk-line;
 }
 
 // -----------------------------------------------------------------------------

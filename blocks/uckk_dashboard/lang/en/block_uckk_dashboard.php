@@ -15,6 +15,8 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2026 Univers-Cité King Klown
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+ 
+$string['pluginname'] = 'UCKK Dashboard';
 
 $string['settingsdisplayheading'] = 'Dashboard display';
 $string['settingsdisplayheading_desc'] = 'Configure which UCKK dashboard cards are shown by default. These settings do not bypass capabilities or visibility rules.';

@@ -1,15 +1,23 @@
 @theme @theme_uckk
-Feature: UCKK theme front page and institutional framing
+Feature: UCKK theme as a thin Boost child theme
   In order to enter the Univers-Cité King Klown Moodle campus coherently
-  As a visitor or authenticated user
-  I need the UCKK theme to display the correct public identity, navigation, boundaries, integrity notice, and archive framing
+  As a visitor, authenticated user, teacher, or administrator
+  I need the UCKK theme to preserve Moodle Boost behaviour while displaying UCKK public identity and institutional framing
 
   Background:
     Given the following config values are set as admin:
       | theme | uckk |
     And the following "users" exist:
-      | username | firstname | lastname | email              |
+      | username | firstname | lastname | email                |
       | player1  | Lucid     | Player   | player1@example.test |
+      | teacher1 | Course    | Teacher  | teacher1@example.test |
+    And the following "courses" exist:
+      | fullname         | shortname | category | format |
+      | UCKK Test Course | UCKK101   | 0        | topics |
+    And the following "course enrolments" exist:
+      | user     | course  | role           |
+      | player1  | UCKK101 | student        |
+      | teacher1 | UCKK101 | editingteacher |
     And I purge all Moodle caches
 
   @javascript
@@ -20,7 +28,7 @@ Feature: UCKK theme front page and institutional framing
     And I should see "Understand the game. Play with lucidity. Change the rules."
     And I should see "A Moodle campus for learning the Grand Jeu social through courses, challenges, assemblies, evidence, and archives."
     And I should see "Enter the campus"
-    And "theme-uckk-frontpage" "css_element" should exist
+    And ".theme-uckk-frontpage" "css_element" should exist
 
   @javascript
   Scenario: A visitor sees the UCKK entry cards
@@ -79,7 +87,7 @@ Feature: UCKK theme front page and institutional framing
     Then I should see "Enter the Univers-Cité King Klown"
     And I should see "My campus"
     And I should not see "Enter the campus"
-    And "theme-uckk-frontpage" "css_element" should exist
+    And ".theme-uckk-frontpage" "css_element" should exist
 
   @javascript
   Scenario: UCKK front page remains usable on a small viewport
@@ -90,18 +98,18 @@ Feature: UCKK theme front page and institutional framing
     And I should see "Play"
     And I should see "Assemblies"
     And I should see "Archives"
-    And "theme-uckk-frontpage__cards" "css_element" should exist
+    And ".theme-uckk-frontpage__cards" "css_element" should exist
 
   @javascript
   Scenario: UCKK theme exposes the expected visual regions
     When I am on site homepage
-    Then "theme-uckk-frontpage" "css_element" should exist
-    And "uckk-seal" "css_element" should exist
-    And "frontpage-actions" "css_element" should exist
-    And "uckk-entry-cards" "css_element" should exist
-    And "uckk-boundary" "css_element" should exist
-    And "uckk-integrity-notice" "css_element" should exist
-    And "uckk-ai-notice" "css_element" should exist
+    Then ".theme-uckk-frontpage" "css_element" should exist
+    And ".uckk-seal" "css_element" should exist
+    And ".frontpage-actions" "css_element" should exist
+    And ".uckk-entry-cards" "css_element" should exist
+    And ".uckk-boundary" "css_element" should exist
+    And ".uckk-integrity-notice" "css_element" should exist
+    And ".uckk-ai-notice" "css_element" should exist
 
   @javascript
   Scenario: UCKK theme displays the governance formula
@@ -119,6 +127,40 @@ Feature: UCKK theme front page and institutional framing
     And I should not see "official university degree"
     And I should not see "state-accredited bachelor's degree"
     And I should not see "recognized university credit"
+
+  @javascript
+  Scenario: Standard course pages keep Boost-compatible Moodle behaviour
+    Given I log in as "teacher1"
+    When I am on the "UCKK Test Course" "Course" page
+    Then I should see "UCKK Test Course"
+    And "#page" "css_element" should exist
+    And "#region-main" "css_element" should exist
+    And I should not see "Enter the Univers-Cité King Klown"
+
+  @javascript
+  Scenario: Teacher can still use Moodle course editing controls
+    Given I log in as "teacher1"
+    And I am on the "UCKK Test Course" "Course" page
+    When I turn editing mode on
+    Then I should see "Add an activity or resource"
+    And "#region-main" "css_element" should exist
+
+  @javascript
+  Scenario: Student can access a standard course page without frontpage chrome
+    Given I log in as "player1"
+    When I am on the "UCKK Test Course" "Course" page
+    Then I should see "UCKK Test Course"
+    And "#region-main" "css_element" should exist
+    And I should not see "Institutional boundary"
+    And I should not see "Enter the campus"
+
+  @javascript
+  Scenario: Admin pages remain usable under the UCKK theme
+    Given I log in as "admin"
+    When I navigate to "Appearance > Themes > Theme selector" in site administration
+    Then I should see "Theme selector"
+    And "#region-main" "css_element" should exist
+    And I should not see "Enter the Univers-Cité King Klown"
 
   @javascript
   Scenario: UCKK theme supports keyboard focus on main entry actions

@@ -3,8 +3,9 @@
  *
  * This file defines the visual identity layer for UCKK-Moodle.
  *
- * It styles the theme-specific templates and shared UCKK interface patterns.
- * It must not contain workflow logic, permission logic, grading logic, or data logic.
+ * It styles only UCKK-owned templates and shared UCKK interface patterns.
+ * It must not take ownership of Moodle/Boost page layout, drawers, navigation,
+ * course editing controls, grading UI, permissions, workflow state, or data logic.
  *
  * @package    theme_uckk
  * @copyright  2026 UCKK
@@ -12,87 +13,226 @@
  */
 
 /* ==========================================================================
-   UCKK brand tokens
+   UCKK brand tokens — official theme source of truth
    ========================================================================== */
 
-$theme-uckk-black: #0b0b0f !default;
-$theme-uckk-black-soft: #15151c !default;
-$theme-uckk-ivory: #f7f1df !default;
-$theme-uckk-ivory-muted: #eee3c8 !default;
-$theme-uckk-red: #b32222 !default;
-$theme-uckk-red-dark: #7f1717 !default;
-$theme-uckk-gold: #b9934b !default;
-$theme-uckk-gold-soft: #d2b574 !default;
-$theme-uckk-blue: #121a3a !default;
-$theme-uckk-blue-soft: #1e2a54 !default;
-$theme-uckk-green: #84b84a !default;
-$theme-uckk-green-soft: #dcecc4 !default;
-$theme-uckk-white: #fff !default;
-$theme-uckk-grey-100: #f7f7f8 !default;
-$theme-uckk-grey-200: #ececf0 !default;
-$theme-uckk-grey-300: #d6d8df !default;
-$theme-uckk-grey-600: #606477 !default;
-$theme-uckk-grey-800: #252735 !default;
+/*
+ * Naming policy:
+ *
+ * - SCSS variables use $theme-uckk-*.
+ * - Global CSS custom properties use --theme-uckk-*.
+ * - Legacy/runtime aliases use --uckk-* for existing theme, Boost and plugin code.
+ *
+ * local_uckk/styles.css must consume --theme-uckk-* through local aliases.
+ * theme_uckk remains the global visual identity layer.
+ */
 
+/* Core palette. */
+$theme-uckk-ink: #172321 !default;
+$theme-uckk-ink-soft: #2f3f3b !default;
+$theme-uckk-petrol: #1e6864 !default;
+$theme-uckk-petrol-dark: #164c49 !default;
+$theme-uckk-petrol-deep: #052f2d !default;
+$theme-uckk-petrol-soft: #dbecea !default;
+$theme-uckk-parchment: #f6f0df !default;
+$theme-uckk-parchment-light: #fbf7eb !default;
+$theme-uckk-parchment-deep: #e6dcc2 !default;
+$theme-uckk-gold: #b99045 !default;
+$theme-uckk-gold-light: #d8b85a !default;
+$theme-uckk-gold-dark: #7f642f !default;
+$theme-uckk-bronze: #9b7441 !default;
+$theme-uckk-bluegrey: #5f7876 !default;
+$theme-uckk-card: #fffaf0 !default;
+$theme-uckk-danger: #8f2f2f !default;
+$theme-uckk-danger-dark: #642020 !default;
+
+/* Neutral aliases used by existing Boost skin rules. */
+$theme-uckk-grey-100: #f4efe3 !default;
+$theme-uckk-grey-200: #e7ddca !default;
+$theme-uckk-grey-300: #d2c5ab !default;
+$theme-uckk-grey-600: #5d6f6a !default;
+$theme-uckk-grey-800: #243632 !default;
+
+/* Legacy SCSS aliases retained for existing component rules. */
+$theme-uckk-black: $theme-uckk-ink !default;
+$theme-uckk-black-soft: #0f1f1d !default;
+$theme-uckk-ivory: $theme-uckk-parchment !default;
+$theme-uckk-ivory-muted: $theme-uckk-parchment-deep !default;
+$theme-uckk-red: $theme-uckk-danger !default;
+$theme-uckk-red-dark: $theme-uckk-danger-dark !default;
+$theme-uckk-blue: $theme-uckk-bluegrey !default;
+$theme-uckk-blue-soft: #78918d !default;
+$theme-uckk-green: $theme-uckk-petrol !default;
+$theme-uckk-green-soft: $theme-uckk-petrol-soft !default;
+$theme-uckk-white: $theme-uckk-card !default;
+
+/* Typography. */
+$theme-uckk-font-title: Georgia, "Times New Roman", serif !default;
+$theme-uckk-font-display: Cambria, Georgia, "Times New Roman", serif !default;
+$theme-uckk-font-body: system-ui, -apple-system, "Segoe UI", Arial, sans-serif !default;
+
+/* Geometry. */
 $theme-uckk-radius-sm: .375rem !default;
-$theme-uckk-radius: .75rem !default;
+$theme-uckk-radius-small: .55rem !default;
+$theme-uckk-radius: .9rem !default;
 $theme-uckk-radius-lg: 1.25rem !default;
 $theme-uckk-radius-xl: 2rem !default;
+$theme-uckk-max-width: 1440px !default;
 
-$theme-uckk-shadow-sm: 0 .25rem .75rem rgba(11, 11, 15, .12) !default;
-$theme-uckk-shadow: 0 1rem 2.5rem rgba(11, 11, 15, .18) !default;
-$theme-uckk-shadow-lg: 0 2rem 4rem rgba(11, 11, 15, .28) !default;
+/* Lines, borders and shadows. */
+$theme-uckk-line: rgba(23, 35, 33, .16) !default;
+$theme-uckk-line-strong: rgba(23, 35, 33, .28) !default;
+$theme-uckk-gold-border: rgba(185, 144, 69, .42) !default;
+$theme-uckk-gold-border-strong: rgba(185, 144, 69, .58) !default;
+$theme-uckk-shadow-sm: 0 .25rem .75rem rgba(23, 35, 33, .1) !default;
+$theme-uckk-shadow-soft: 0 .5rem 1.25rem rgba(23, 35, 33, .08) !default;
+$theme-uckk-shadow: 0 1rem 2.5rem rgba(23, 35, 33, .16) !default;
+$theme-uckk-shadow-lg: 0 2rem 4rem rgba(23, 35, 33, .24) !default;
 
-$theme-uckk-border-soft: 1px solid rgba(255, 255, 255, .18) !default;
-$theme-uckk-border-dark: 1px solid rgba(11, 11, 15, .12) !default;
-
+/* Component-level SCSS conveniences. */
+$theme-uckk-border-soft: 2px solid rgba(185, 144, 69, .28) !default;
+$theme-uckk-border-dark: 2px solid rgba(23, 35, 33, .14) !default;
+$theme-uckk-border-gold: 2px solid $theme-uckk-gold-border !default;
 $theme-uckk-transition: 160ms ease-in-out !default;
+
+/* ==========================================================================
+   Mixins
+   ========================================================================== */
+
+@mixin theme-uckk-eyebrow-text {
+    color: var(--uckk-gold);
+    font-family: $theme-uckk-font-body;
+    font-size: .765625rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+@mixin theme-uckk-focus-ring {
+    outline: .1875rem solid var(--uckk-petrol);
+    outline-offset: .1875rem;
+}
 
 /* ==========================================================================
    CSS custom properties
    ========================================================================== */
 
 :root {
-    --uckk-black: #{$theme-uckk-black};
+    /* Official global theme tokens. */
+    --theme-uckk-ink: #{$theme-uckk-ink};
+    --theme-uckk-ink-soft: #{$theme-uckk-ink-soft};
+    --theme-uckk-petrol: #{$theme-uckk-petrol};
+    --theme-uckk-petrol-dark: #{$theme-uckk-petrol-dark};
+    --theme-uckk-petrol-deep: #{$theme-uckk-petrol-deep};
+    --theme-uckk-petrol-soft: #{$theme-uckk-petrol-soft};
+    --theme-uckk-parchment: #{$theme-uckk-parchment};
+    --theme-uckk-parchment-light: #{$theme-uckk-parchment-light};
+    --theme-uckk-parchment-deep: #{$theme-uckk-parchment-deep};
+    --theme-uckk-gold: #{$theme-uckk-gold};
+    --theme-uckk-gold-light: #{$theme-uckk-gold-light};
+    --theme-uckk-gold-dark: #{$theme-uckk-gold-dark};
+    --theme-uckk-gold-border: #{$theme-uckk-gold-border};
+    --theme-uckk-bronze: #{$theme-uckk-bronze};
+    --theme-uckk-bluegrey: #{$theme-uckk-bluegrey};
+    --theme-uckk-card: #{$theme-uckk-card};
+    --theme-uckk-danger: #{$theme-uckk-danger};
+    --theme-uckk-danger-dark: #{$theme-uckk-danger-dark};
+    --theme-uckk-line: #{$theme-uckk-line};
+    --theme-uckk-line-strong: #{$theme-uckk-line-strong};
+    --theme-uckk-shadow: #{$theme-uckk-shadow};
+    --theme-uckk-shadow-soft: #{$theme-uckk-shadow-soft};
+    --theme-uckk-shadow-sm: #{$theme-uckk-shadow-sm};
+    --theme-uckk-shadow-lg: #{$theme-uckk-shadow-lg};
+    --theme-uckk-radius: #{$theme-uckk-radius};
+    --theme-uckk-radius-small: #{$theme-uckk-radius-small};
+    --theme-uckk-radius-sm: #{$theme-uckk-radius-sm};
+    --theme-uckk-radius-lg: #{$theme-uckk-radius-lg};
+    --theme-uckk-radius-xl: #{$theme-uckk-radius-xl};
+    --theme-uckk-max-width: #{$theme-uckk-max-width};
+    --theme-uckk-font-title: #{$theme-uckk-font-title};
+    --theme-uckk-font-display: #{$theme-uckk-font-display};
+    --theme-uckk-font-body: #{$theme-uckk-font-body};
+
+    /* Public/local plugin aliases consumed by local_uckk/styles.css. */
+    --theme-uckk-font-serif: var(--theme-uckk-font-title);
+    --theme-uckk-font-sans: var(--theme-uckk-font-body);
+    --theme-uckk-public-max-width: #{$theme-uckk-max-width};
+    --theme-uckk-public-content-inset: clamp(1rem, 2vw, 1.75rem);
+
+    /* Official runtime aliases used by UCKK-owned templates and plugin CSS. */
+    --uckk-ink: var(--theme-uckk-ink);
+    --uckk-ink-soft: var(--theme-uckk-ink-soft);
+    --uckk-petrol: var(--theme-uckk-petrol);
+    --uckk-petrol-dark: var(--theme-uckk-petrol-dark);
+    --uckk-petrol-deep: var(--theme-uckk-petrol-deep);
+    --uckk-petrol-soft: var(--theme-uckk-petrol-soft);
+    --uckk-parchment: var(--theme-uckk-parchment);
+    --uckk-parchment-light: var(--theme-uckk-parchment-light);
+    --uckk-parchment-deep: var(--theme-uckk-parchment-deep);
+    --uckk-gold: var(--theme-uckk-gold);
+    --uckk-gold-light: var(--theme-uckk-gold-light);
+    --uckk-gold-soft: var(--theme-uckk-gold-light);
+    --uckk-gold-dark: var(--theme-uckk-gold-dark);
+    --uckk-gold-border: var(--theme-uckk-gold-border);
+    --uckk-bronze: var(--theme-uckk-bronze);
+    --uckk-bluegrey: var(--theme-uckk-bluegrey);
+    --uckk-card: var(--theme-uckk-card);
+    --uckk-line: var(--theme-uckk-line);
+    --uckk-line-strong: var(--theme-uckk-line-strong);
+    --uckk-shadow: var(--theme-uckk-shadow);
+    --uckk-shadow-soft: var(--theme-uckk-shadow-soft);
+    --uckk-shadow-sm: var(--theme-uckk-shadow-sm);
+    --uckk-shadow-lg: var(--theme-uckk-shadow-lg);
+    --uckk-radius: var(--theme-uckk-radius);
+    --uckk-radius-small: var(--theme-uckk-radius-small);
+    --uckk-radius-sm: var(--theme-uckk-radius-sm);
+    --uckk-radius-lg: var(--theme-uckk-radius-lg);
+    --uckk-radius-xl: var(--theme-uckk-radius-xl);
+    --uckk-max-width: var(--theme-uckk-max-width);
+    --uckk-font-title: var(--theme-uckk-font-title);
+    --uckk-font-display: var(--theme-uckk-font-display);
+    --uckk-font-body: var(--theme-uckk-font-body);
+
+    /* Legacy aliases retained so older theme rules continue to compile/render. */
+    --uckk-black: var(--theme-uckk-ink);
     --uckk-black-soft: #{$theme-uckk-black-soft};
-    --uckk-ivory: #{$theme-uckk-ivory};
-    --uckk-ivory-muted: #{$theme-uckk-ivory-muted};
-    --uckk-red: #{$theme-uckk-red};
-    --uckk-red-dark: #{$theme-uckk-red-dark};
-    --uckk-gold: #{$theme-uckk-gold};
-    --uckk-gold-soft: #{$theme-uckk-gold-soft};
-    --uckk-blue: #{$theme-uckk-blue};
+    --uckk-ivory: var(--theme-uckk-parchment);
+    --uckk-ivory-muted: var(--theme-uckk-parchment-deep);
+    --uckk-red: var(--theme-uckk-danger);
+    --uckk-red-dark: var(--theme-uckk-danger-dark);
+    --uckk-blue: var(--theme-uckk-bluegrey);
     --uckk-blue-soft: #{$theme-uckk-blue-soft};
-    --uckk-green: #{$theme-uckk-green};
-    --uckk-green-soft: #{$theme-uckk-green-soft};
-    --uckk-white: #{$theme-uckk-white};
+    --uckk-green: var(--theme-uckk-petrol);
+    --uckk-green-soft: var(--theme-uckk-petrol-soft);
+    --uckk-white: var(--theme-uckk-card);
     --uckk-grey-100: #{$theme-uckk-grey-100};
     --uckk-grey-200: #{$theme-uckk-grey-200};
     --uckk-grey-300: #{$theme-uckk-grey-300};
     --uckk-grey-600: #{$theme-uckk-grey-600};
     --uckk-grey-800: #{$theme-uckk-grey-800};
-    --uckk-radius-sm: #{$theme-uckk-radius-sm};
-    --uckk-radius: #{$theme-uckk-radius};
-    --uckk-radius-lg: #{$theme-uckk-radius-lg};
-    --uckk-radius-xl: #{$theme-uckk-radius-xl};
-    --uckk-shadow-sm: #{$theme-uckk-shadow-sm};
-    --uckk-shadow: #{$theme-uckk-shadow};
-    --uckk-shadow-lg: #{$theme-uckk-shadow-lg};
+    --uckk-muted: #{$theme-uckk-grey-600};
+
+    /* Moodle/Boost skin aliases used later in this file. */
+    --uckk-paper: var(--theme-uckk-parchment);
+    --uckk-paper-soft: var(--theme-uckk-parchment-light);
+    --uckk-paper-deep: var(--theme-uckk-parchment-deep);
+    --uckk-rule-gold: var(--theme-uckk-gold-border);
+    --uckk-rule-gold-soft: rgba(185, 144, 69, .28);
 }
 
-/* ==========================================================================
-   Shared helpers
+/* ========================================================================== 
+   Shared UCKK components
    ========================================================================== */
 
 .theme-uckk-surface {
-    background: var(--uckk-white);
-    border: $theme-uckk-border-dark;
+    background: var(--uckk-paper);
+    border: $theme-uckk-border-gold;
     border-radius: var(--uckk-radius);
     box-shadow: var(--uckk-shadow-sm);
 }
 
 .theme-uckk-surface-dark {
-    background: linear-gradient(135deg, var(--uckk-black), var(--uckk-blue));
+    background: var(--uckk-petrol-deep);
     color: var(--uckk-ivory);
     border: $theme-uckk-border-soft;
     border-radius: var(--uckk-radius);
@@ -100,11 +240,7 @@ $theme-uckk-transition: 160ms ease-in-out !default;
 }
 
 .theme-uckk-eyebrow {
-    color: var(--uckk-gold);
-    font-size: .765625rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
+    @include theme-uckk-eyebrow-text;
 }
 
 .theme-uckk-muted {
@@ -113,39 +249,68 @@ $theme-uckk-transition: 160ms ease-in-out !default;
 
 .theme-uckk-divider {
     width: 100%;
-    height: 1px;
+    height: 2px;
     margin: 1.5rem 0;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(185, 147, 75, .5),
-        transparent
-    );
+    background: rgba(185, 147, 75, .5);
 }
 
 .theme-uckk-focus-ring:focus,
 .theme-uckk-focus-ring:focus-visible {
-    outline: .1875rem solid var(--uckk-gold);
-    outline-offset: .1875rem;
+    @include theme-uckk-focus-ring;
 }
 
-/* ==========================================================================
-   Buttons and links
+.theme-uckk-official-label {
+    @include theme-uckk-eyebrow-text;
+    color: var(--uckk-petrol);
+}
+
+.theme-uckk-cartouche {
+    padding: 1rem 1.25rem;
+    color: var(--uckk-ink);
+    background: var(--uckk-paper-soft);
+    border: $theme-uckk-border-gold;
+    border-left: .5rem solid var(--uckk-petrol);
+    border-radius: var(--uckk-radius);
+}
+
+.theme-uckk-medallion {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    color: var(--uckk-petrol);
+    background: var(--uckk-paper);
+    border: 2px solid rgba(185, 147, 75, .48);
+    border-radius: 999rem;
+    box-shadow: inset 0 0 0 .25rem rgba(255, 250, 240, .72);
+}
+
+/* ========================================================================== 
+   Front page component
    ========================================================================== */
 
 .theme-uckk-frontpage {
+    background:
+        radial-gradient(circle at 14% 0%, rgba(185, 147, 75, .24), transparent 30rem),
+        radial-gradient(circle at 88% 10%, rgba(30, 104, 100, .26), transparent 26rem),
+        linear-gradient(180deg, var(--uckk-ink) 0%, var(--uckk-petrol) 36rem, var(--uckk-paper) 36rem);
+    color: var(--uckk-ink);
+    overflow: hidden;
+    font-family: $theme-uckk-font-body;
+
     .btn-primary {
-        background: var(--uckk-red);
-        border-color: var(--uckk-red);
+        background: var(--uckk-petrol);
+        border-color: var(--uckk-petrol);
         color: var(--uckk-white);
-        box-shadow: 0 .5rem 1.25rem rgba(179, 34, 34, .28);
+        box-shadow: 0 .5rem 1.25rem rgba(30, 104, 100, .28);
 
         &:hover,
         &:focus {
-            background: var(--uckk-red-dark);
-            border-color: var(--uckk-red-dark);
+            background: var(--uckk-ink);
+            border-color: var(--uckk-ink);
             color: var(--uckk-white);
-            box-shadow: 0 .75rem 1.75rem rgba(179, 34, 34, .35);
+            box-shadow: 0 .75rem 1.75rem rgba(30, 104, 100, .36);
         }
     }
 
@@ -183,19 +348,6 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     }
 }
 
-/* ==========================================================================
-   Front page layout
-   ========================================================================== */
-
-.theme-uckk-frontpage {
-    background:
-        radial-gradient(circle at 15% 0%, rgba(185, 147, 75, .2), transparent 28rem),
-        radial-gradient(circle at 85% 10%, rgba(132, 184, 74, .13), transparent 24rem),
-        linear-gradient(180deg, var(--uckk-black) 0%, var(--uckk-blue) 36rem, var(--uckk-ivory) 36rem);
-    color: var(--uckk-black);
-    overflow: hidden;
-}
-
 .theme-uckk-frontpage__hero {
     position: relative;
     color: var(--uckk-ivory);
@@ -212,6 +364,7 @@ $theme-uckk-transition: 160ms ease-in-out !default;
             linear-gradient(90deg, rgba(255, 255, 255, .15) 1px, transparent 1px);
         background-size: 4rem 4rem;
         mask-image: linear-gradient(180deg, #000, transparent 92%);
+        -webkit-mask-image: linear-gradient(180deg, #000, transparent 92%);
     }
 }
 
@@ -238,7 +391,19 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     background: rgba(255, 255, 255, .08);
     border: $theme-uckk-border-soft;
     border-radius: 999rem;
-    backdrop-filter: blur(.5rem);
+}
+
+@supports (backdrop-filter: blur(.5rem)) or (-webkit-backdrop-filter: blur(.5rem)) {
+    .theme-uckk-frontpage__seal,
+    .theme-uckk-frontpage__formula-card {
+        backdrop-filter: blur(.5rem);
+        -webkit-backdrop-filter: blur(.5rem);
+    }
+
+    .theme-uckk-frontpage__formula-card {
+        backdrop-filter: blur(.75rem);
+        -webkit-backdrop-filter: blur(.75rem);
+    }
 }
 
 .theme-uckk-frontpage__seal-mark {
@@ -264,13 +429,14 @@ $theme-uckk-transition: 160ms ease-in-out !default;
 }
 
 .theme-uckk-frontpage__eyebrow {
-    @extend .theme-uckk-eyebrow;
+    @include theme-uckk-eyebrow-text;
     margin-bottom: .75rem;
 }
 
 .theme-uckk-frontpage__title {
     margin: 0 0 1rem;
     color: var(--uckk-white);
+    font-family: $theme-uckk-font-title;
     font-size: clamp(2.5rem, 6vw, 5.75rem);
     font-weight: 800;
     line-height: .95;
@@ -316,19 +482,18 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     height: 100%;
     padding: 2rem;
     background:
-        linear-gradient(145deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .04)),
-        linear-gradient(180deg, rgba(185, 147, 75, .22), rgba(11, 11, 15, .28));
+        linear-gradient(145deg, rgba(255, 250, 240, .14), rgba(255, 250, 240, .04)),
+        linear-gradient(180deg, rgba(185, 147, 75, .24), rgba(23, 35, 33, .3));
     border: $theme-uckk-border-soft;
     border-radius: var(--uckk-radius-xl);
     box-shadow: var(--uckk-shadow-lg);
-    backdrop-filter: blur(.75rem);
 
     &::after {
         content: "";
         position: absolute;
         inset: 1rem;
         pointer-events: none;
-        border: 1px solid rgba(185, 147, 75, .28);
+        border: 2px solid rgba(185, 147, 75, .28);
         border-radius: calc(var(--uckk-radius-xl) - .5rem);
     }
 }
@@ -364,7 +529,7 @@ $theme-uckk-transition: 160ms ease-in-out !default;
             display: inline-block;
             width: 1.35rem;
             margin-left: -1.35rem;
-            color: var(--uckk-red);
+            color: var(--uckk-gold);
             font-size: .75rem;
             vertical-align: .1rem;
         }
@@ -380,10 +545,6 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     line-height: 1.5;
 }
 
-/* ==========================================================================
-   Front page main content
-   ========================================================================== */
-
 .theme-uckk-frontpage__main {
     position: relative;
     padding: 4rem 0 5rem;
@@ -396,16 +557,17 @@ $theme-uckk-transition: 160ms ease-in-out !default;
 }
 
 .theme-uckk-frontpage__section-label {
-    @extend .theme-uckk-eyebrow;
-    color: var(--uckk-red);
+    @include theme-uckk-eyebrow-text;
+    color: var(--uckk-petrol);
     margin-bottom: .5rem;
 }
 
 .theme-uckk-frontpage__section-title {
     margin: 0;
-    color: var(--uckk-black);
+    color: var(--uckk-ink);
+    font-family: $theme-uckk-font-display;
     font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 750;
+    font-weight: 700;
     line-height: 1.2;
     letter-spacing: -.03em;
     text-wrap: balance;
@@ -424,8 +586,10 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     flex-direction: column;
     min-height: 18rem;
     padding: 1.5rem;
-    background: var(--uckk-white);
-    border: $theme-uckk-border-dark;
+    background:
+        linear-gradient(180deg, rgba(255, 250, 240, .92), rgba(247, 241, 223, .96)),
+        var(--uckk-paper);
+    border: $theme-uckk-border-gold;
     border-radius: var(--uckk-radius-lg);
     box-shadow: var(--uckk-shadow-sm);
     transition:
@@ -499,8 +663,8 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     }
 }
 
-/* ==========================================================================
-   Boundary section
+/* ========================================================================== 
+   Boundary and notice components
    ========================================================================== */
 
 .theme-uckk-frontpage__boundary {
@@ -546,10 +710,6 @@ $theme-uckk-transition: 160ms ease-in-out !default;
         line-height: 1.45;
     }
 }
-
-/* ==========================================================================
-   Notices
-   ========================================================================== */
 
 .theme-uckk-frontpage__notices {
     display: grid;
@@ -627,7 +787,7 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     border-left: .375rem solid var(--uckk-gold);
 }
 
-/* ==========================================================================
+/* ========================================================================== 
    UCKK badges and markers
    ========================================================================== */
 
@@ -652,7 +812,7 @@ $theme-uckk-transition: 160ms ease-in-out !default;
 
 .theme-uckk-status--validated {
     background: var(--uckk-green-soft);
-    color: #2f5b20;
+    color: var(--uckk-petrol);
 }
 
 .theme-uckk-status--contested,
@@ -667,18 +827,18 @@ $theme-uckk-transition: 160ms ease-in-out !default;
 }
 
 .theme-uckk-status--archived {
-    background: rgba(18, 26, 58, .12);
-    color: var(--uckk-blue);
+    background: rgba(84, 115, 111, .14);
+    color: var(--uckk-bluegrey);
 }
 
 .theme-uckk-visibility {
-    background: rgba(18, 26, 58, .08);
-    color: var(--uckk-blue);
+    background: rgba(30, 104, 100, .08);
+    color: var(--uckk-petrol);
 }
 
 .theme-uckk-marker--ai {
     background: var(--uckk-green-soft);
-    color: #2f5b20;
+    color: var(--uckk-petrol);
 }
 
 .theme-uckk-marker--integrity {
@@ -691,8 +851,8 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     color: #6b4d13;
 }
 
-/* ==========================================================================
-   Dashboard-ready surfaces
+/* ========================================================================== 
+   Dashboard/card components
    ========================================================================== */
 
 .theme-uckk-dashboard-shell {
@@ -730,11 +890,968 @@ $theme-uckk-transition: 160ms ease-in-out !default;
 .theme-uckk-progress-line__bar {
     min-width: .25rem;
     height: 100%;
-    background: linear-gradient(90deg, var(--uckk-red), var(--uckk-gold));
+    background: var(--uckk-petrol);
     border-radius: inherit;
 }
 
 /* ==========================================================================
+   UCKK global Boost skin — parchment / petrol / gold
+   Applies beyond dashboard: admin pages, course management, category pages.
+   No yellow/green gradients; surfaces follow the poster style.
+   ========================================================================== */
+
+/* Global UCKK tokens are defined once at the top of this file. */
+
+/* Base page: remove Boost white seams and accidental pale gradients. */
+html,
+body,
+#page-wrapper,
+#page,
+#page.drawers,
+#page-content,
+#region-main,
+#region-main-box,
+#region-main-settings-menu,
+.main-inner,
+.drawer,
+.drawercontent,
+.drawer-toggles .drawer-toggler,
+.pagelayout-admin #page,
+.path-admin #page,
+.path-course-management #page,
+.path-course #page,
+.path-course #region-main {
+    background-image: none !important;
+    background-color: var(--uckk-paper) !important;
+    color: var(--uckk-ink);
+}
+
+/* Main Moodle content sheet. */
+.main-inner,
+#region-main {
+    background: var(--uckk-paper-soft) !important;
+    border: 2px solid var(--uckk-gold-soft);
+    box-shadow: 0 .75rem 2rem rgba(5, 47, 45, .08);
+}
+
+/* Top navbar: flat petrol, poster-like, no gradient. */
+.navbar.fixed-top,
+.navbar-light,
+.moremenu,
+.secondary-navigation,
+.activity-navigation {
+    background-image: none !important;
+    background-color: var(--uckk-petrol-deep) !important;
+    border-bottom: 4px solid var(--uckk-gold);
+    color: var(--uckk-paper-soft);
+}
+
+.navbar.fixed-top .navbar-brand,
+.navbar.fixed-top .nav-link,
+.navbar.fixed-top .login,
+.navbar.fixed-top a,
+.navbar.fixed-top .usertext,
+.moremenu .nav-link,
+.secondary-navigation .nav-link,
+.activity-navigation .nav-link {
+    color: var(--uckk-paper-soft) !important;
+}
+
+.navbar.fixed-top .nav-link.active,
+.moremenu .nav-link.active,
+.secondary-navigation .nav-link.active,
+.activity-navigation .nav-link.active {
+    background: rgba(196, 154, 58, .18) !important;
+    color: var(--uckk-paper-soft) !important;
+    border-bottom-color: var(--uckk-gold) !important;
+}
+
+/* Keep avatar/menu readable on petrol nav. */
+.navbar.fixed-top .userinitials,
+.navbar.fixed-top .popover-region-toggle,
+.navbar.fixed-top .icon {
+    color: var(--uckk-paper-soft) !important;
+}
+
+/* Page header: parchment, not white. */
+#page-header,
+.page-context-header,
+.page-header-headings {
+    background-image: none !important;
+    background-color: var(--uckk-paper-soft) !important;
+    color: var(--uckk-ink);
+}
+
+#page-header {
+    border-bottom: 1px solid var(--uckk-gold-soft);
+}
+
+/* Headings: institutional/poster tone. */
+h1,
+h2,
+h3,
+.page-header-headings h1,
+#region-main h2 {
+    color: var(--uckk-ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 800;
+    letter-spacing: .035em;
+}
+
+/* Links. */
+a,
+a:visited,
+.btn-link {
+    color: var(--uckk-petrol) !important;
+}
+
+a:hover,
+.btn-link:hover {
+    color: var(--uckk-petrol-dark) !important;
+}
+
+/* Buttons. */
+.btn-primary,
+.btn-secondary,
+.btn-outline-primary:hover,
+input[type="submit"],
+button[type="submit"] {
+    background-image: none !important;
+    background-color: var(--uckk-petrol) !important;
+    border-color: var(--uckk-petrol-dark) !important;
+    color: var(--uckk-paper-soft) !important;
+    box-shadow: none !important;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+input[type="submit"]:hover,
+button[type="submit"]:hover {
+    background-color: var(--uckk-petrol-dark) !important;
+    border-color: var(--uckk-gold) !important;
+}
+
+/* Cards, admin boxes, course category panels. */
+.card,
+.box,
+.generalbox,
+.adminsettings,
+.settingsform,
+.category-listing,
+.course-listing,
+.coursecat-management,
+.course_category_tree,
+.course_category_tree .category,
+.course_category_tree .content,
+.coursebox,
+.path-course-management .category,
+.path-course-management .course-listing,
+.path-course-management .category-listing,
+.path-admin .form-item,
+.path-admin .form-group,
+.path-admin .settingsform {
+    background-image: none !important;
+    background-color: var(--uckk-paper-soft) !important;
+    border-color: var(--uckk-gold-soft) !important;
+    color: var(--uckk-ink);
+}
+
+/* Course/category management rows. */
+.course_category_tree .category > .info,
+.course_category_tree .courses .coursebox,
+.path-course-management .listitem,
+.path-course-management .listing-actions,
+.path-course-management .item-actions,
+.path-course-management .category-item,
+.path-course-management .course-listitem,
+.path-course-management .category-listitem {
+    background-image: none !important;
+    background-color: var(--uckk-paper) !important;
+    border-color: rgba(196, 154, 58, .28) !important;
+}
+
+/* Poster-style left rule. */
+.course_category_tree,
+.coursecat-management,
+.path-course-management .category-listing,
+#region-main > .box,
+#region-main > .generalbox {
+    border-left: .35rem solid var(--uckk-petrol) !important;
+}
+
+/* Tables. */
+table,
+.generaltable,
+table.collection,
+.table {
+    background: var(--uckk-paper-soft) !important;
+    color: var(--uckk-ink);
+    border-color: var(--uckk-gold-soft) !important;
+}
+
+.generaltable th,
+.table th,
+thead th {
+    background-image: none !important;
+    background-color: var(--uckk-petrol-deep) !important;
+    color: var(--uckk-paper-soft) !important;
+    border-color: var(--uckk-gold) !important;
+}
+
+.generaltable td,
+.table td,
+tbody td {
+    background-color: var(--uckk-paper-soft) !important;
+    border-color: rgba(196, 154, 58, .24) !important;
+}
+
+/* Tabs. */
+.nav-tabs,
+.nav-tabs .nav-link,
+.nav-tabs .nav-item.show .nav-link {
+    border-color: var(--uckk-gold-soft) !important;
+}
+
+.nav-tabs .nav-link {
+    background: var(--uckk-paper) !important;
+    color: var(--uckk-petrol) !important;
+}
+
+.nav-tabs .nav-link.active {
+    background: var(--uckk-paper-soft) !important;
+    color: var(--uckk-ink) !important;
+    border-top: 4px solid var(--uckk-petrol) !important;
+}
+
+/* Forms. */
+.form-control,
+.custom-select,
+select,
+input[type="text"],
+input[type="search"],
+textarea {
+    background: var(--uckk-paper-soft) !important;
+    color: var(--uckk-ink) !important;
+    border-color: rgba(16, 39, 36, .28) !important;
+}
+
+.form-control:focus,
+.custom-select:focus,
+select:focus,
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+    border-color: var(--uckk-petrol) !important;
+    box-shadow: 0 0 0 .2rem rgba(30, 104, 100, .16) !important;
+}
+
+/* Dropdowns, popovers, modals. */
+.dropdown-menu,
+.popover,
+.modal-content {
+    background: var(--uckk-paper-soft) !important;
+    border: 1px solid var(--uckk-gold-soft) !important;
+    color: var(--uckk-ink);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background: rgba(30, 104, 100, .1) !important;
+    color: var(--uckk-ink) !important;
+}
+
+/* Breadcrumb and small navigation details. */
+.breadcrumb,
+.breadcrumb-item,
+.breadcrumb-item a {
+    background: transparent !important;
+    color: var(--uckk-petrol) !important;
+}
+
+.breadcrumb-item.active {
+    color: var(--uckk-muted) !important;
+}
+
+/* Poster-like section dividers. */
+hr,
+.dropdown-divider {
+    border-top-color: var(--uckk-gold-soft) !important;
+}
+
+
+/* ==========================================================================
+   UCKK dashboard and navbar refinement
+   Fixes:
+   - remove the pale wrapper slabs behind dashboard blocks
+   - remove the filled "More" active rectangle
+   - use clean mixed-case institutional brand text
+   - avoid cheap-looking tiny logo on the dark navbar
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Navbar brand: text-first, mixed case, no tiny logo plaque.
+   The full logo remains available for front page/watermarks, but the navbar
+   should behave like institutional signage.
+   -------------------------------------------------------------------------- */
+
+.navbar.fixed-top {
+    min-height: 4.25rem;
+}
+
+.navbar.fixed-top .navbar-brand {
+    display: inline-flex !important;
+    align-items: center;
+    min-width: 18rem;
+    min-height: 4.25rem;
+    margin: 0;
+    padding: 0 1.4rem;
+    color: var(--uckk-paper-soft) !important;
+    font-family: $theme-uckk-font-body;
+    font-size: 0 !important;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: none !important;
+    letter-spacing: 0;
+}
+
+/* Hide Moodle logo image and older pseudo-logo treatments. */
+.navbar.fixed-top .navbar-brand img,
+.navbar.fixed-top .navbar-brand picture,
+.navbar.fixed-top .navbar-brand::before {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+
+/* Deliberate brand text, not uppercase/small-caps. */
+.navbar.fixed-top .navbar-brand::after {
+    content: "Univers-Cité King Klown";
+    display: inline-block;
+    color: var(--uckk-paper-soft);
+    font-family: $theme-uckk-font-body;
+    font-size: 1.08rem;
+    font-weight: 650;
+    font-variant: normal;
+    letter-spacing: .005em;
+    line-height: 1.15;
+    text-transform: none !important;
+    white-space: nowrap;
+    text-shadow: none;
+}
+
+.navbar.fixed-top .navbar-brand:hover::after,
+.navbar.fixed-top .navbar-brand:focus::after {
+    color: var(--uckk-gold-soft);
+}
+
+/* Optional subtle institutional mark: thin gold rule before the brand. */
+.navbar.fixed-top .navbar-brand {
+    border-left: 3px solid var(--uckk-gold);
+}
+
+/* --------------------------------------------------------------------------
+   Navbar menu: active item should be an underline, not a filled block.
+   -------------------------------------------------------------------------- */
+
+.navbar.fixed-top .moremenu,
+.navbar.fixed-top .primary-navigation,
+.navbar.fixed-top .secondary-navigation {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+.navbar.fixed-top .moremenu .nav-link,
+.navbar.fixed-top .primary-navigation .nav-link,
+.navbar.fixed-top .secondary-navigation .nav-link,
+.navbar.fixed-top .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 4.25rem;
+    padding: 0 1rem;
+    color: var(--uckk-paper-soft) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-family: $theme-uckk-font-body;
+    font-size: .98rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+    text-transform: none !important;
+}
+
+.navbar.fixed-top .moremenu .nav-link.active,
+.navbar.fixed-top .primary-navigation .nav-link.active,
+.navbar.fixed-top .secondary-navigation .nav-link.active,
+.navbar.fixed-top .nav-link.active,
+.navbar.fixed-top .nav-item.show > .nav-link,
+.navbar.fixed-top .nav-link[aria-current="page"] {
+    color: var(--uckk-gold-soft) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border-bottom: 4px solid var(--uckk-gold) !important;
+    box-shadow: none !important;
+}
+
+.navbar.fixed-top .moremenu .nav-link:hover,
+.navbar.fixed-top .primary-navigation .nav-link:hover,
+.navbar.fixed-top .secondary-navigation .nav-link:hover,
+.navbar.fixed-top .nav-link:hover {
+    color: var(--uckk-gold-soft) !important;
+    background: rgba(255, 250, 240, .05) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard page shell: keep one page sheet only.
+   -------------------------------------------------------------------------- */
+
+body.path-my #page,
+body.path-my #page-wrapper,
+body.path-my #page-content {
+    background: var(--uckk-paper) !important;
+    background-color: var(--uckk-paper) !important;
+    background-image: none !important;
+}
+
+body.path-my .main-inner {
+    background: var(--uckk-paper-soft) !important;
+    border: 2px solid var(--uckk-gold-soft) !important;
+    box-shadow: none !important;
+}
+
+/* Remove wrapper layers around the dashboard blocks. */
+body.path-my #region-main,
+body.path-my #region-main-box,
+body.path-my #block-region-content,
+body.path-my .block-region,
+body.path-my [data-region="blocks-column"],
+body.path-my .dashboard-card-deck,
+body.path-my .dashboard-card-deck .card-deck,
+body.path-my .block-region-content,
+body.path-my .block-region-content > .row,
+body.path-my .row[data-region],
+body.path-my .row[data-region="blocks-column"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard blocks: clear the outer block/card shell. The block body becomes
+   the only visible framed card.
+   -------------------------------------------------------------------------- */
+
+body.path-my #region-main .block_myoverview,
+body.path-my #region-main .block_timeline,
+body.path-my #region-main .block_myoverview.card,
+body.path-my #region-main .block_timeline.card,
+body.path-my #region-main section.block_myoverview,
+body.path-my #region-main section.block_timeline,
+body.path-my #region-main [data-block="myoverview"],
+body.path-my #region-main [data-block="timeline"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 0 1.5rem !important;
+}
+
+/* Hide empty shell headers; we restyle titles in the body area. */
+body.path-my #region-main .block_myoverview > .card-header,
+body.path-my #region-main .block_timeline > .card-header,
+body.path-my #region-main .block_myoverview .card-header,
+body.path-my #region-main .block_timeline .card-header {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+/* The visible card only. */
+body.path-my #region-main .block_myoverview > .card-body,
+body.path-my #region-main .block_timeline > .card-body,
+body.path-my #region-main [data-block="myoverview"] > .card-body,
+body.path-my #region-main [data-block="timeline"] > .card-body {
+    background: var(--uckk-paper-soft) !important;
+    background-color: var(--uckk-paper-soft) !important;
+    background-image: none !important;
+    border: 2px solid var(--uckk-rule-gold, rgba(196, 154, 58, .48)) !important;
+    border-radius: var(--uckk-radius-lg, 1.25rem) !important;
+    box-shadow: none !important;
+    padding: 1.15rem 1.4rem !important;
+}
+
+/* Clear inner Moodle regions that were creating the pale ghost slabs. */
+body.path-my #region-main .block_myoverview .card-body > .container-fluid,
+body.path-my #region-main .block_timeline .card-body > .container-fluid,
+body.path-my #region-main .block_myoverview .block-cards,
+body.path-my #region-main .block_timeline .block-cards,
+body.path-my #region-main .block_myoverview .dashboard-card-deck,
+body.path-my #region-main .block_timeline .dashboard-card-deck,
+body.path-my #region-main .block_myoverview [data-region],
+body.path-my #region-main .block_timeline [data-region],
+body.path-my #region-main .block_myoverview .row,
+body.path-my #region-main .block_timeline .row {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Block titles: remove accidental highlight rectangle. Use text + gold rule. */
+body.path-my #region-main .block_myoverview h2,
+body.path-my #region-main .block_timeline h2,
+body.path-my #region-main .block_myoverview h3,
+body.path-my #region-main .block_timeline h3,
+body.path-my #region-main .block_myoverview .card-title,
+body.path-my #region-main .block_timeline .card-title {
+    display: inline-block;
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 0 0 .35rem;
+    color: var(--uckk-ink);
+    background: transparent !important;
+    background-color: transparent !important;
+    font-family: $theme-uckk-font-title;
+    font-weight: 800;
+    letter-spacing: .025em;
+}
+
+body.path-my #region-main .block_myoverview h2::after,
+body.path-my #region-main .block_timeline h2::after,
+body.path-my #region-main .block_myoverview h3::after,
+body.path-my #region-main .block_timeline h3::after,
+body.path-my #region-main .block_myoverview .card-title::after,
+body.path-my #region-main .block_timeline .card-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--uckk-rule-gold, rgba(196, 154, 58, .48));
+}
+
+/* Compact the empty states so the page feels structured, not inflated. */
+body.path-my #region-main .block_myoverview .empty-placeholder-image-sm,
+body.path-my #region-main .block_timeline .empty-placeholder-image-sm,
+body.path-my #region-main .block_myoverview img.icon,
+body.path-my #region-main .block_timeline img.icon {
+    opacity: .72;
+}
+
+body.path-my #region-main .block_myoverview .text-center,
+body.path-my #region-main .block_timeline .text-center {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+/* --------------------------------------------------------------------------
+   Page header: deliberate, flat parchment panel.
+   -------------------------------------------------------------------------- */
+
+body.path-my #page-header {
+    background: var(--uckk-paper-soft) !important;
+    background-color: var(--uckk-paper-soft) !important;
+    background-image: none !important;
+    border: 2px solid var(--uckk-rule-gold, rgba(196, 154, 58, .48)) !important;
+    border-left: .5rem solid var(--uckk-petrol) !important;
+    border-radius: var(--uckk-radius-lg, 1.25rem) !important;
+    box-shadow: none !important;
+}
+
+body.path-my #page-header::before {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+
+body.path-my #page-header::after {
+    content: "";
+    position: absolute;
+    right: 1.25rem;
+    bottom: -.65rem;
+    width: clamp(5rem, 13vw, 9rem);
+    aspect-ratio: 1;
+    pointer-events: none;
+    opacity: .055;
+    background-image: url([[pix:theme_uckk|LogoUCKK_256px]]) !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* Small screens: keep brand compact and avoid watermark clutter. */
+@media (max-width: 767.98px) {
+    .navbar.fixed-top .navbar-brand {
+        min-width: auto;
+        padding-inline: .75rem;
+    }
+
+    .navbar.fixed-top .navbar-brand::after {
+        content: "UCKK";
+        font-size: 1rem;
+    }
+
+    body.path-my #page-header::after {
+        display: none !important;
+    }
+
+    body.path-my #region-main .block_myoverview > .card-body,
+    body.path-my #region-main .block_timeline > .card-body {
+        padding: 1rem !important;
+    }
+}
+
+/* ==========================================================================
+   UCKK secondary navigation correction
+   Admin/course tab navigation must stay parchment, not dark navbar.
+   Only .navbar.fixed-top should use the dark petrol treatment.
+   ========================================================================== */
+
+/* Reset Moodle secondary navigation away from the top navbar treatment. */
+#page .secondary-navigation,
+#page .secondary-navigation .navigation,
+#page .secondary-navigation .moremenu,
+#page .secondary-navigation .nav-tabs,
+#page .secondary-navigation .nav,
+#page .activity-navigation,
+#page .activity-navigation .navigation,
+#page .activity-navigation .moremenu,
+#page .activity-navigation .nav {
+    background: var(--uckk-paper-soft) !important;
+    background-color: var(--uckk-paper-soft) !important;
+    background-image: none !important;
+    border-top: 0 !important;
+    border-bottom: 2px solid var(--uckk-rule-gold, rgba(196, 154, 58, .48)) !important;
+    box-shadow: none !important;
+    color: var(--uckk-ink) !important;
+}
+
+/* Secondary nav wrapper spacing. */
+#page .secondary-navigation {
+    margin-top: 0;
+    border-top: 2px solid var(--uckk-rule-gold-soft, rgba(196, 154, 58, .32)) !important;
+}
+
+/* Secondary nav links: parchment tabs, petrol text. */
+#page .secondary-navigation .nav-link,
+#page .secondary-navigation .moremenu .nav-link,
+#page .activity-navigation .nav-link,
+#page .activity-navigation .moremenu .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3.25rem !important;
+    padding: .85rem 1.25rem !important;
+    color: var(--uckk-petrol) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-bottom: 4px solid transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-family: $theme-uckk-font-body;
+    font-size: .98rem;
+    font-weight: 650;
+    letter-spacing: .015em;
+    text-transform: none !important;
+}
+
+/* Active secondary nav tab. */
+#page .secondary-navigation .nav-link.active,
+#page .secondary-navigation .moremenu .nav-link.active,
+#page .secondary-navigation .nav-item.show > .nav-link,
+#page .secondary-navigation .nav-link[aria-current="page"],
+#page .activity-navigation .nav-link.active,
+#page .activity-navigation .moremenu .nav-link.active,
+#page .activity-navigation .nav-item.show > .nav-link,
+#page .activity-navigation .nav-link[aria-current="page"] {
+    color: var(--uckk-ink) !important;
+    background: var(--uckk-paper) !important;
+    background-color: var(--uckk-paper) !important;
+    background-image: none !important;
+    border-bottom-color: var(--uckk-petrol) !important;
+    box-shadow: none !important;
+}
+
+/* Hover state. */
+#page .secondary-navigation .nav-link:hover,
+#page .secondary-navigation .moremenu .nav-link:hover,
+#page .activity-navigation .nav-link:hover,
+#page .activity-navigation .moremenu .nav-link:hover {
+    color: var(--uckk-petrol-dark) !important;
+    background: rgba(30, 104, 100, .06) !important;
+    border-bottom-color: var(--uckk-gold) !important;
+}
+
+/* More dropdown from secondary nav should also be parchment. */
+#page .secondary-navigation .dropdown-menu,
+#page .activity-navigation .dropdown-menu {
+    background: var(--uckk-paper-soft) !important;
+    background-color: var(--uckk-paper-soft) !important;
+    background-image: none !important;
+    border: 2px solid var(--uckk-rule-gold, rgba(196, 154, 58, .48)) !important;
+    box-shadow: 0 .75rem 1.5rem rgba(16, 39, 36, .12) !important;
+}
+
+#page .secondary-navigation .dropdown-item,
+#page .activity-navigation .dropdown-item {
+    color: var(--uckk-petrol) !important;
+    background: transparent !important;
+}
+
+#page .secondary-navigation .dropdown-item:hover,
+#page .secondary-navigation .dropdown-item:focus,
+#page .activity-navigation .dropdown-item:hover,
+#page .activity-navigation .dropdown-item:focus {
+    color: var(--uckk-ink) !important;
+    background: rgba(30, 104, 100, .08) !important;
+}
+
+/* Keep the real top navbar dark after the secondary-navigation reset. */
+.navbar.fixed-top {
+    background: var(--uckk-petrol-deep) !important;
+    background-color: var(--uckk-petrol-deep) !important;
+    background-image: none !important;
+    border-bottom: 4px solid var(--uckk-gold) !important;
+}
+
+/* But do not let the top-navbar rules leak into page-level tabs. */
+#page .secondary-navigation .moremenu .nav-link.active,
+#page .activity-navigation .moremenu .nav-link.active {
+    background-color: var(--uckk-paper) !important;
+}
+
+/* ==========================================================================
+   UCKK final top navbar correction
+   Compact, balanced, non-wrapping institutional top bar.
+   This overrides earlier broad Boost/navbar rules.
+   ========================================================================== */
+
+.navbar.fixed-top {
+    min-height: 3.75rem !important;
+    height: 3.75rem !important;
+    padding: 0 1.35rem !important;
+    display: flex !important;
+    align-items: center !important;
+    background: var(--uckk-petrol-deep) !important;
+    background-color: var(--uckk-petrol-deep) !important;
+    background-image: none !important;
+    border-bottom: 4px solid var(--uckk-gold) !important;
+    box-shadow: none !important;
+}
+
+/* Moodle usually puts the navbar content inside .container-fluid. */
+.navbar.fixed-top > .container-fluid {
+    min-height: 3.75rem !important;
+    height: 3.75rem !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 1rem;
+}
+
+/* Brand area: text-only for now; the detailed logo belongs in hero/frontpage. */
+.navbar.fixed-top .navbar-brand {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
+    min-width: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    min-height: 3.75rem !important;
+    height: 3.75rem !important;
+    margin: 0 2.25rem 0 0 !important;
+    padding: 0 1rem 0 0 !important;
+    border: 0 !important;
+    color: transparent !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+}
+
+/* Hide prior logo/pseudo-logo treatments in the top bar only. */
+.navbar.fixed-top .navbar-brand::before,
+.navbar.fixed-top .navbar-brand img,
+.navbar.fixed-top .navbar-brand picture,
+.navbar.fixed-top .navbar-brand .logo,
+.navbar.fixed-top .navbar-brand .site-name {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+
+/* Clean brand text: mixed case, calmer weight, no fake small caps. */
+.navbar.fixed-top .navbar-brand::after {
+    content: "Univers-Cité King Klown";
+    display: inline-block !important;
+    color: var(--uckk-paper-soft) !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 650 !important;
+    font-variant: normal !important;
+    letter-spacing: .005em !important;
+    line-height: 1 !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+    text-shadow: none !important;
+}
+
+/* Subtle institutional mark beside the brand without using the low-res logo. */
+.navbar.fixed-top .navbar-brand {
+    box-shadow: inset 3px 0 0 var(--uckk-gold);
+    padding-left: .85rem !important;
+}
+
+/* Top navbar links: underline active state, no filled block. */
+.navbar.fixed-top .nav-link,
+.navbar.fixed-top .moremenu .nav-link,
+.navbar.fixed-top .primary-navigation .nav-link,
+.navbar.fixed-top .secondary-navigation .nav-link {
+    min-height: 3.75rem !important;
+    height: 3.75rem !important;
+    padding: 0 .9rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+    color: var(--uckk-paper-soft) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-bottom: 4px solid transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif !important;
+    font-size: .96rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+}
+
+.navbar.fixed-top .nav-link.active,
+.navbar.fixed-top .moremenu .nav-link.active,
+.navbar.fixed-top .primary-navigation .nav-link.active,
+.navbar.fixed-top .secondary-navigation .nav-link.active,
+.navbar.fixed-top .nav-link[aria-current="page"],
+.navbar.fixed-top .nav-item.show > .nav-link {
+    color: var(--uckk-gold-soft) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border-bottom-color: var(--uckk-gold) !important;
+    box-shadow: none !important;
+}
+
+.navbar.fixed-top .nav-link:hover,
+.navbar.fixed-top .moremenu .nav-link:hover,
+.navbar.fixed-top .primary-navigation .nav-link:hover,
+.navbar.fixed-top .secondary-navigation .nav-link:hover,
+.navbar.fixed-top .nav-link:focus {
+    color: var(--uckk-gold-soft) !important;
+    background: rgba(255, 250, 240, .05) !important;
+    border-bottom-color: rgba(196, 154, 58, .55) !important;
+}
+
+/* Right-side controls: never wrap, keep vertical alignment. */
+.navbar.fixed-top .navbar-nav,
+.navbar.fixed-top .usermenu,
+.navbar.fixed-top .popover-region,
+.navbar.fixed-top .editmode-switch-form,
+.navbar.fixed-top .editmode-switch-form label,
+.navbar.fixed-top .form-check,
+.navbar.fixed-top .form-switch,
+.navbar.fixed-top .simplesearchform,
+.navbar.fixed-top .divider {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+}
+
+.navbar.fixed-top .navbar-nav {
+    gap: .65rem !important;
+    margin-left: auto !important;
+}
+
+/* Fix Edit mode label wrapping and vertical offset. */
+.navbar.fixed-top .editmode-switch-form {
+    min-width: max-content !important;
+    margin: 0 !important;
+}
+
+.navbar.fixed-top .editmode-switch-form label,
+.navbar.fixed-top .form-check-label {
+    white-space: nowrap !important;
+    line-height: 1 !important;
+    margin: 0 .45rem 0 0 !important;
+    color: var(--uckk-paper-soft) !important;
+}
+
+.navbar.fixed-top .form-switch,
+.navbar.fixed-top .form-check {
+    min-height: 3.75rem !important;
+    margin: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Notification and message icons. */
+.navbar.fixed-top .popover-region-toggle,
+.navbar.fixed-top .icon,
+.navbar.fixed-top .usertext {
+    color: var(--uckk-paper-soft) !important;
+}
+
+.navbar.fixed-top .popover-region {
+    min-height: 3.75rem !important;
+}
+
+/* User avatar alignment. */
+.navbar.fixed-top .usermenu {
+    min-height: 3.75rem !important;
+}
+
+.navbar.fixed-top .userinitials,
+.navbar.fixed-top .avatars {
+    margin-left: .5rem !important;
+}
+
+/* Small screens: use short brand label to protect the right controls. */
+@media (max-width: 767.98px) {
+    .navbar.fixed-top {
+        padding-inline: .85rem !important;
+    }
+
+    .navbar.fixed-top .navbar-brand {
+        margin-right: .75rem !important;
+        padding-left: .65rem !important;
+        padding-right: .5rem !important;
+    }
+
+    .navbar.fixed-top .navbar-brand::after {
+        content: "UCKK";
+        font-size: 1rem !important;
+    }
+}
+
+/* ========================================================================== 
    Accessibility and motion preferences
    ========================================================================== */
 
@@ -742,8 +1859,7 @@ $theme-uckk-transition: 160ms ease-in-out !default;
 .theme-uckk-frontpage button:focus-visible,
 .theme-uckk-dashboard-card a:focus-visible,
 .theme-uckk-dashboard-card button:focus-visible {
-    outline: .1875rem solid var(--uckk-gold);
-    outline-offset: .1875rem;
+    @include theme-uckk-focus-ring;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -767,7 +1883,7 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     .theme-uckk-frontpage__boundary,
     .theme-uckk-frontpage__notice,
     .theme-uckk-dashboard-card {
-        border: 1px solid CanvasText;
+        border: 2px solid CanvasText;
         box-shadow: none;
     }
 
@@ -777,8 +1893,8 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     }
 }
 
-/* ==========================================================================
-   Responsive layout
+/* ========================================================================== 
+   Responsive layout for UCKK-owned components
    ========================================================================== */
 
 @media (max-width: 1199.98px) {
@@ -809,7 +1925,7 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     .theme-uckk-frontpage {
         background:
             radial-gradient(circle at 30% 0%, rgba(185, 147, 75, .22), transparent 20rem),
-            linear-gradient(180deg, var(--uckk-black) 0%, var(--uckk-blue) 32rem, var(--uckk-ivory) 32rem);
+            linear-gradient(180deg, var(--uckk-ink) 0%, var(--uckk-petrol) 32rem, var(--uckk-paper) 32rem);
     }
 
     .theme-uckk-frontpage__hero {
@@ -866,7 +1982,7 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     }
 }
 
-/* ==========================================================================
+/* ========================================================================== 
    Print
    ========================================================================== */
 
@@ -889,6 +2005,269 @@ $theme-uckk-transition: 160ms ease-in-out !default;
     .theme-uckk-frontpage__actions,
     .theme-uckk-frontpage__card-link {
         display: none !important;
+    }
+}
+
+/* ==========================================================================
+   UCKK public Moodle chrome — no breadcrumb, no redundant Moodle title
+   ========================================================================== */
+
+/*
+ * This section belongs in theme_uckk, not local_uckk.
+ *
+ * It owns Moodle chrome on public UCKK pages only:
+ * - hide the Moodle breadcrumb;
+ * - hide the redundant Moodle page title;
+ * - remove the vertical space those elements leave behind;
+ * - keep the top Moodle navbar compact and accent-safe.
+ *
+ * The local page content remains owned by local/uckk/styles.css.
+ */
+
+body.pagelayout-local_uckk_public,
+body:has(.local-uckk-public-page) {
+    --theme-uckk-public-content-inset: clamp(1rem, 2vw, 1.75rem);
+}
+
+/* Hide breadcrumb / fil d'Ariane on public UCKK pages. */
+body.pagelayout-local_uckk_public #page-navbar,
+body:has(.local-uckk-public-page) #page-navbar,
+body.pagelayout-local_uckk_public .breadcrumb-nav,
+body:has(.local-uckk-public-page) .breadcrumb-nav,
+body.pagelayout-local_uckk_public .breadcrumb,
+body:has(.local-uckk-public-page) .breadcrumb {
+    display: none !important;
+}
+
+/* Hide redundant Moodle page title above local_uckk content. */
+body.pagelayout-local_uckk_public #page-header,
+body:has(.local-uckk-public-page) #page-header {
+    display: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Remove the vertical space left by hidden Moodle chrome. */
+body.pagelayout-local_uckk_public #page-content,
+body:has(.local-uckk-public-page) #page-content,
+body.pagelayout-local_uckk_public #page.drawers .main-inner,
+body:has(.local-uckk-public-page) #page.drawers .main-inner {
+    padding-top: 0 !important;
+}
+
+/* Keep the local public page close to the top rail. */
+body.pagelayout-local_uckk_public .local-uckk,
+body:has(.local-uckk-public-page) .local-uckk {
+    padding-top: .65rem !important;
+}
+
+/* Top bar rhythm on public pages: compact, non-clipping, accent-safe. */
+body.pagelayout-local_uckk_public .navbar.fixed-top,
+body:has(.local-uckk-public-page) .navbar.fixed-top,
+body.notloggedin .navbar.fixed-top {
+    height: auto !important;
+    min-height: 3.35rem !important;
+    overflow: visible !important;
+}
+
+body.pagelayout-local_uckk_public .navbar.fixed-top > .container-fluid,
+body:has(.local-uckk-public-page) .navbar.fixed-top > .container-fluid,
+body.notloggedin .navbar.fixed-top > .container-fluid {
+    height: auto !important;
+    min-height: 3.35rem !important;
+}
+
+body.pagelayout-local_uckk_public .navbar.fixed-top .navbar-brand,
+body.pagelayout-local_uckk_public .navbar.fixed-top .nav-link,
+body.pagelayout-local_uckk_public .navbar.fixed-top .moremenu .nav-link,
+body.pagelayout-local_uckk_public .navbar.fixed-top .primary-navigation .nav-link,
+body:has(.local-uckk-public-page) .navbar.fixed-top .navbar-brand,
+body:has(.local-uckk-public-page) .navbar.fixed-top .nav-link,
+body:has(.local-uckk-public-page) .navbar.fixed-top .moremenu .nav-link,
+body:has(.local-uckk-public-page) .navbar.fixed-top .primary-navigation .nav-link,
+body.notloggedin .navbar.fixed-top .navbar-brand,
+body.notloggedin .navbar.fixed-top .nav-link,
+body.notloggedin .navbar.fixed-top .login,
+body.notloggedin .navbar.fixed-top .langmenu,
+body.notloggedin .navbar.fixed-top .dropdown-toggle {
+    height: auto !important;
+    min-height: 3.35rem !important;
+    line-height: 1.32 !important;
+    overflow: visible !important;
+}
+
+body.pagelayout-local_uckk_public .navbar.fixed-top .nav-link,
+body:has(.local-uckk-public-page) .navbar.fixed-top .nav-link,
+body.notloggedin .navbar.fixed-top .nav-link,
+body.notloggedin .navbar.fixed-top .login,
+body.notloggedin .navbar.fixed-top .langmenu,
+body.notloggedin .navbar.fixed-top .dropdown-toggle {
+    font-size: .94rem !important;
+}
+
+@media (max-width: 767.98px) {
+    body.pagelayout-local_uckk_public,
+    body:has(.local-uckk-public-page) {
+        --theme-uckk-public-content-inset: clamp(.5rem, 2vw, .85rem);
+    }
+
+    body.pagelayout-local_uckk_public .local-uckk,
+    body:has(.local-uckk-public-page) .local-uckk {
+        padding-top: .45rem !important;
+    }
+}
+
+/* ========================================================================== 
+   UCKK login page — spacing and contrast
+   ========================================================================== */
+
+/*
+ * Login belongs to theme_uckk, not local_uckk.
+ *
+ * The login background image is emitted without a gradient from lib.php.
+ * This block only handles spacing, text contrast and form rhythm.
+ */
+
+body#page-login-index,
+body.pagelayout-login {
+    --theme-uckk-login-left-padding-x: clamp(2rem, 5vw, 5.5rem);
+    --theme-uckk-login-left-padding-y: clamp(2rem, 6vh, 5rem);
+    --theme-uckk-login-right-padding-x: clamp(2rem, 5vw, 5rem);
+    --theme-uckk-login-right-padding-y: clamp(2rem, 6vh, 5rem);
+    --theme-uckk-login-form-padding: clamp(1.5rem, 2.8vw, 2.75rem);
+    --theme-uckk-login-form-width: 38rem;
+    --theme-uckk-login-copy-width: min(34rem, 74%);
+    --theme-uckk-login-title-color: #fffaf0;
+    --theme-uckk-login-copy-color: #fffaf0;
+    --theme-uckk-login-title-shadow: 0 2px 10px rgba(0, 0, 0, .72);
+    --theme-uckk-login-copy-shadow: 0 2px 8px rgba(0, 0, 0, .68);
+}
+
+/* Left visual panel: spacing only. Do not tint the background image. */
+body#page-login-index #page .login-layout-left,
+body.pagelayout-login #page .login-layout-left {
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    opacity: 1 !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    background-blend-mode: normal !important;
+    padding:
+        var(--theme-uckk-login-left-padding-y)
+        var(--theme-uckk-login-left-padding-x) !important;
+}
+
+/* Defensive reset only; the real shade fix belongs in theme_uckk/lib.php. */
+body#page-login-index #page .login-layout-left::before,
+body#page-login-index #page .login-layout-left::after,
+body.pagelayout-login #page .login-layout-left::before,
+body.pagelayout-login #page .login-layout-left::after {
+    display: none !important;
+    visibility: hidden !important;
+    content: none !important;
+    opacity: 0 !important;
+    background: none !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    pointer-events: none !important;
+}
+
+/* Copy block inside the left visual panel. */
+body#page-login-index #page .login-layout-left .login-layout-left-content,
+body.pagelayout-login #page .login-layout-left .login-layout-left-content {
+    position: relative;
+    z-index: 1;
+    max-width: var(--theme-uckk-login-copy-width);
+    margin-inline: auto;
+    padding-inline: clamp(.5rem, 1.5vw, 1.25rem);
+    color: var(--theme-uckk-login-copy-color) !important;
+}
+
+body#page-login-index #page .login-layout-left .login-layout-left-content > h1,
+body#page-login-index #page .login-layout-left .login-layout-left-content > h1.mb-3,
+body.pagelayout-login #page .login-layout-left .login-layout-left-content > h1,
+body.pagelayout-login #page .login-layout-left .login-layout-left-content > h1.mb-3 {
+    overflow: visible;
+    color: var(--theme-uckk-login-title-color) !important;
+    font-family: var(--theme-uckk-font-title, Georgia, "Times New Roman", serif) !important;
+    font-weight: 800 !important;
+    line-height: 1.14 !important;
+    letter-spacing: .01em !important;
+    text-shadow: var(--theme-uckk-login-title-shadow);
+}
+
+body#page-login-index #page .login-layout-left .login-layout-left-content p,
+body#page-login-index #page .login-layout-left .login-layout-left-content .login-layout-stats,
+body#page-login-index #page .login-layout-left .login-layout-left-content .login-layout-stats *,
+body.pagelayout-login #page .login-layout-left .login-layout-left-content p,
+body.pagelayout-login #page .login-layout-left .login-layout-left-content .login-layout-stats,
+body.pagelayout-login #page .login-layout-left .login-layout-left-content .login-layout-stats * {
+    color: var(--theme-uckk-login-copy-color) !important;
+    text-shadow: var(--theme-uckk-login-copy-shadow);
+}
+
+/* Right login panel spacing. */
+body#page-login-index #region-main.login-layout-right,
+body.pagelayout-login #region-main.login-layout-right {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    padding:
+        var(--theme-uckk-login-right-padding-y)
+        var(--theme-uckk-login-right-padding-x) !important;
+}
+
+/* Login box itself. */
+body#page-login-index #region-main.login-layout-right .login-container,
+body#page-login-index #region-main.login-layout-right .login-wrapper,
+body#page-login-index #region-main.login-layout-right .loginform,
+body#page-login-index #region-main.login-layout-right .card,
+body.pagelayout-login #region-main.login-layout-right .login-container,
+body.pagelayout-login #region-main.login-layout-right .login-wrapper,
+body.pagelayout-login #region-main.login-layout-right .loginform,
+body.pagelayout-login #region-main.login-layout-right .card {
+    box-sizing: border-box;
+    width: min(100%, var(--theme-uckk-login-form-width));
+    padding: var(--theme-uckk-login-form-padding) !important;
+}
+
+/* Form rhythm. */
+body#page-login-index #region-main.login-layout-right .form-group,
+body#page-login-index #region-main.login-layout-right .form-control,
+body.pagelayout-login #region-main.login-layout-right .form-group,
+body.pagelayout-login #region-main.login-layout-right .form-control {
+    margin-bottom: 1rem;
+}
+
+body#page-login-index #region-main.login-layout-right .btn,
+body.pagelayout-login #region-main.login-layout-right .btn {
+    min-height: 2.65rem;
+    margin-top: .75rem;
+}
+
+@media (max-width: 767.98px) {
+    body#page-login-index,
+    body.pagelayout-login {
+        --theme-uckk-login-left-padding-x: clamp(1rem, 4vw, 1.5rem);
+        --theme-uckk-login-left-padding-y: clamp(1.5rem, 4vh, 2.5rem);
+        --theme-uckk-login-right-padding-x: 1.25rem;
+        --theme-uckk-login-right-padding-y: 1.25rem;
+        --theme-uckk-login-form-padding: 1.25rem;
+        --theme-uckk-login-copy-width: 100%;
+    }
+
+    body#page-login-index #page .login-layout-left .login-layout-left-content,
+    body.pagelayout-login #page .login-layout-left .login-layout-left-content {
+        padding-inline: 0;
     }
 }
 

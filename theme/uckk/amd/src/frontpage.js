@@ -7,7 +7,7 @@
  * archive, challenge, assembly, or AI decision logic.
  *
  * @module     theme_uckk/frontpage
- * @copyright  2026 Momus et Bouche Cousue
+ * @copyright  2026 Réjean McCormick
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

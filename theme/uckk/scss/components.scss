@@ -12,6 +12,7 @@
  * Shared visual components for the UCKK theme.
  *
  * This file must remain presentation-only.
+ * It must not replace Boost layout behaviour or depend on custom layout files.
  * Business rules, permission checks, URLs, states and workflow decisions
  * must be prepared by PHP renderers, exporters, output classes or plugins.
  *
@@ -21,70 +22,174 @@
  */
 
 // -----------------------------------------------------------------------------
-// Local design tokens.
+// Official UCKK theme design tokens.
+//
+// The theme owns the global visual identity tokens with the --theme-uckk-*
+// prefix. Component-level $uckk-* aliases are kept inside this file only so
+// existing shared theme components remain stable while the public local_uckk
+// pages consume the canonical --theme-uckk-* variables.
 // -----------------------------------------------------------------------------
 
-$uckk-black: #111827 !default;
-$uckk-ink: #1f2937 !default;
-$uckk-muted: #6b7280 !default;
-$uckk-border: #e5e7eb !default;
-$uckk-border-strong: #d1d5db !default;
-$uckk-surface: #ffffff !default;
-$uckk-surface-soft: #f9fafb !default;
-$uckk-surface-warm: #fffaf0 !default;
+$theme-uckk-ink: #172321 !default;
+$theme-uckk-ink-soft: #2f3f3b !default;
+$theme-uckk-petrol: #1e6864 !default;
+$theme-uckk-petrol-dark: #164c49 !default;
+$theme-uckk-petrol-soft: #dbecea !default;
+$theme-uckk-parchment: #f6f0df !default;
+$theme-uckk-parchment-light: #fbf7eb !default;
+$theme-uckk-parchment-deep: #e6dcc2 !default;
+$theme-uckk-gold: #b99045 !default;
+$theme-uckk-gold-dark: #7f642f !default;
+$theme-uckk-bronze: #9b7441 !default;
+$theme-uckk-bluegrey: #5f7876 !default;
+$theme-uckk-card: #fffaf0 !default;
+$theme-uckk-line: rgba(23, 35, 33, .16) !default;
+$theme-uckk-line-strong: rgba(23, 35, 33, .28) !default;
+$theme-uckk-shadow: 0 18px 42px rgba(23, 35, 33, .12) !default;
+$theme-uckk-shadow-soft: 0 8px 20px rgba(23, 35, 33, .08) !default;
+$theme-uckk-radius: .9rem !default;
+$theme-uckk-radius-small: .55rem !default;
+$theme-uckk-max-width: 1180px !default;
 
-$uckk-gold: #b7791f !default;
-$uckk-gold-soft: #fef3c7 !default;
-$uckk-red: #b91c1c !default;
-$uckk-red-soft: #fee2e2 !default;
-$uckk-blue: #1d4ed8 !default;
-$uckk-blue-soft: #dbeafe !default;
-$uckk-green: #047857 !default;
-$uckk-green-soft: #d1fae5 !default;
-$uckk-purple: #6d28d9 !default;
-$uckk-purple-soft: #ede9fe !default;
-$uckk-slate: #475569 !default;
-$uckk-slate-soft: #f1f5f9 !default;
+// Semantic component aliases.
+$uckk-black: $theme-uckk-ink !default;
+$uckk-ink: $theme-uckk-ink-soft !default;
+$uckk-muted: $theme-uckk-bluegrey !default;
+$uckk-border: $theme-uckk-line !default;
+$uckk-border-strong: $theme-uckk-line-strong !default;
+$uckk-surface: $theme-uckk-card !default;
+$uckk-surface-soft: $theme-uckk-parchment-light !default;
+$uckk-surface-warm: $theme-uckk-parchment !default;
 
-$uckk-radius-sm: .375rem !default;
+$uckk-petrol: $theme-uckk-petrol !default;
+$uckk-paper: $theme-uckk-parchment !default;
+$uckk-bronze: $theme-uckk-bronze !default;
+$uckk-bluegrey: $theme-uckk-bluegrey !default;
+$uckk-gold: $theme-uckk-gold !default;
+$uckk-gold-dark: $theme-uckk-gold-dark !default;
+$uckk-gold-soft: rgba(185, 144, 69, .18) !default;
+
+$uckk-red: #8f2f2f !default;
+$uckk-red-soft: rgba(143, 47, 47, .12) !default;
+$uckk-blue: $theme-uckk-bluegrey !default;
+$uckk-blue-soft: rgba(95, 120, 118, .14) !default;
+$uckk-green: $theme-uckk-petrol !default;
+$uckk-green-soft: rgba(30, 104, 100, .12) !default;
+$uckk-purple: #5d526f !default;
+$uckk-purple-soft: rgba(93, 82, 111, .12) !default;
+$uckk-slate: $theme-uckk-bluegrey !default;
+$uckk-slate-soft: rgba(95, 120, 118, .10) !default;
+
+$uckk-radius-sm: $theme-uckk-radius-small !default;
 $uckk-radius-md: .75rem !default;
-$uckk-radius-lg: 1rem !default;
+$uckk-radius-lg: $theme-uckk-radius !default;
 
-$uckk-shadow-sm: 0 .125rem .25rem rgba(17, 24, 39, .06) !default;
-$uckk-shadow-md: 0 .5rem 1.25rem rgba(17, 24, 39, .10) !default;
-$uckk-shadow-focus: 0 0 0 .2rem rgba(183, 121, 31, .25) !default;
+$uckk-shadow-sm: $theme-uckk-shadow-soft !default;
+$uckk-shadow-md: $theme-uckk-shadow !default;
+$uckk-shadow-focus: 0 0 0 .2rem rgba(30, 104, 100, .25) !default;
 
 $uckk-transition-fast: 120ms ease-in-out !default;
 $uckk-transition-default: 180ms ease-in-out !default;
 
 // -----------------------------------------------------------------------------
-// Root variables for runtime theming.
+// Local mixins.
+//
+// Keep these local to this file. Do not extend Bootstrap, Boost or Moodle
+// selectors from UCKK components; use namespaced mixins instead so this file
+// remains a thin presentation layer over Boost.
+// -----------------------------------------------------------------------------
+
+@mixin uckk-card-shell {
+    border: 1px solid $uckk-border;
+    border-radius: $uckk-radius-lg;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, .74), rgba(247, 241, 223, .92)),
+        $uckk-surface;
+    box-shadow: $uckk-shadow-sm;
+}
+
+@mixin uckk-card-interactive {
+    transition:
+        border-color $uckk-transition-default,
+        box-shadow $uckk-transition-default,
+        transform $uckk-transition-default;
+
+    &:hover {
+        border-color: $uckk-border-strong;
+        box-shadow: $uckk-shadow-md;
+        transform: translateY(-1px);
+    }
+}
+
+
+// -----------------------------------------------------------------------------
+// Root CSS variables for runtime theming.
+//
+// Canonical variables use --theme-uckk-*.
+// Legacy --uckk-* aliases are exported for compatibility with existing UCKK
+// components and plugins during the alignment of local_uckk and theme_uckk.
 // -----------------------------------------------------------------------------
 
 :root {
-    --uckk-black: #{$uckk-black};
-    --uckk-ink: #{$uckk-ink};
-    --uckk-muted: #{$uckk-muted};
-    --uckk-border: #{$uckk-border};
-    --uckk-border-strong: #{$uckk-border-strong};
-    --uckk-surface: #{$uckk-surface};
-    --uckk-surface-soft: #{$uckk-surface-soft};
-    --uckk-surface-warm: #{$uckk-surface-warm};
-    --uckk-gold: #{$uckk-gold};
+    --theme-uckk-ink: #{$theme-uckk-ink};
+    --theme-uckk-ink-soft: #{$theme-uckk-ink-soft};
+    --theme-uckk-petrol: #{$theme-uckk-petrol};
+    --theme-uckk-petrol-dark: #{$theme-uckk-petrol-dark};
+    --theme-uckk-petrol-soft: #{$theme-uckk-petrol-soft};
+    --theme-uckk-parchment: #{$theme-uckk-parchment};
+    --theme-uckk-parchment-light: #{$theme-uckk-parchment-light};
+    --theme-uckk-parchment-deep: #{$theme-uckk-parchment-deep};
+    --theme-uckk-gold: #{$theme-uckk-gold};
+    --theme-uckk-gold-dark: #{$theme-uckk-gold-dark};
+    --theme-uckk-bronze: #{$theme-uckk-bronze};
+    --theme-uckk-bluegrey: #{$theme-uckk-bluegrey};
+    --theme-uckk-card: #{$theme-uckk-card};
+    --theme-uckk-line: #{$theme-uckk-line};
+    --theme-uckk-line-strong: #{$theme-uckk-line-strong};
+    --theme-uckk-shadow: #{$theme-uckk-shadow};
+    --theme-uckk-shadow-soft: #{$theme-uckk-shadow-soft};
+    --theme-uckk-radius: #{$theme-uckk-radius};
+    --theme-uckk-radius-small: #{$theme-uckk-radius-small};
+    --theme-uckk-max-width: #{$theme-uckk-max-width};
+
+    --uckk-black: var(--theme-uckk-ink);
+    --uckk-ink: var(--theme-uckk-ink);
+    --uckk-ink-soft: var(--theme-uckk-ink-soft);
+    --uckk-muted: var(--theme-uckk-bluegrey);
+    --uckk-border: var(--theme-uckk-line);
+    --uckk-border-strong: var(--theme-uckk-line-strong);
+    --uckk-surface: var(--theme-uckk-card);
+    --uckk-surface-soft: var(--theme-uckk-parchment-light);
+    --uckk-surface-warm: var(--theme-uckk-parchment);
+    --uckk-petrol: var(--theme-uckk-petrol);
+    --uckk-petrol-dark: var(--theme-uckk-petrol-dark);
+    --uckk-petrol-soft: var(--theme-uckk-petrol-soft);
+    --uckk-paper: var(--theme-uckk-parchment);
+    --uckk-parchment: var(--theme-uckk-parchment);
+    --uckk-parchment-light: var(--theme-uckk-parchment-light);
+    --uckk-parchment-deep: var(--theme-uckk-parchment-deep);
+    --uckk-bronze: var(--theme-uckk-bronze);
+    --uckk-bluegrey: var(--theme-uckk-bluegrey);
+    --uckk-gold: var(--theme-uckk-gold);
+    --uckk-gold-dark: var(--theme-uckk-gold-dark);
     --uckk-gold-soft: #{$uckk-gold-soft};
     --uckk-red: #{$uckk-red};
     --uckk-red-soft: #{$uckk-red-soft};
     --uckk-blue: #{$uckk-blue};
     --uckk-blue-soft: #{$uckk-blue-soft};
-    --uckk-green: #{$uckk-green};
+    --uckk-green: var(--theme-uckk-petrol);
     --uckk-green-soft: #{$uckk-green-soft};
     --uckk-purple: #{$uckk-purple};
     --uckk-purple-soft: #{$uckk-purple-soft};
-    --uckk-slate: #{$uckk-slate};
+    --uckk-slate: var(--theme-uckk-bluegrey);
     --uckk-slate-soft: #{$uckk-slate-soft};
-    --uckk-radius-sm: #{$uckk-radius-sm};
+    --uckk-radius-sm: var(--theme-uckk-radius-small);
     --uckk-radius-md: #{$uckk-radius-md};
-    --uckk-radius-lg: #{$uckk-radius-lg};
+    --uckk-radius-lg: var(--theme-uckk-radius);
+    --uckk-radius: var(--theme-uckk-radius);
+    --uckk-radius-small: var(--theme-uckk-radius-small);
+    --uckk-shadow: var(--theme-uckk-shadow);
+    --uckk-shadow-soft: var(--theme-uckk-shadow-soft);
 }
 
 // -----------------------------------------------------------------------------
@@ -133,23 +238,11 @@ $uckk-transition-default: 180ms ease-in-out !default;
 
 .uckk-card,
 .uckk-panel {
-    border: 1px solid $uckk-border;
-    border-radius: $uckk-radius-lg;
-    background: $uckk-surface;
-    box-shadow: $uckk-shadow-sm;
+    @include uckk-card-shell;
 }
 
 .uckk-card {
-    transition:
-        border-color $uckk-transition-default,
-        box-shadow $uckk-transition-default,
-        transform $uckk-transition-default;
-
-    &:hover {
-        border-color: $uckk-border-strong;
-        box-shadow: $uckk-shadow-md;
-        transform: translateY(-1px);
-    }
+    @include uckk-card-interactive;
 }
 
 .uckk-panel {
@@ -162,7 +255,80 @@ $uckk-transition-default: 180ms ease-in-out !default;
 
 .uckk-panel-warm {
     background: $uckk-surface-warm;
-    border-color: rgba(183, 121, 31, .28);
+    border-color: rgba(185, 147, 75, .38);
+}
+
+// -----------------------------------------------------------------------------
+// Institutional visual language.
+// -----------------------------------------------------------------------------
+
+.uckk-institutional-panel {
+    position: relative;
+    overflow: hidden;
+    padding: 1.25rem;
+    border: 1px solid rgba(185, 147, 75, .38);
+    border-radius: $uckk-radius-lg;
+    background:
+        radial-gradient(circle at 0 0, rgba(30, 104, 100, .12), transparent 18rem),
+        linear-gradient(180deg, rgba(255, 255, 255, .78), rgba(247, 241, 223, .96)),
+        $uckk-paper;
+    color: $uckk-ink;
+    box-shadow: $uckk-shadow-md;
+
+    &::before {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: .35rem;
+        content: "";
+        background: linear-gradient(180deg, $uckk-petrol, $uckk-bronze);
+    }
+}
+
+.uckk-cartouche {
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(30, 104, 100, .22);
+    border-inline-start: .35rem solid $uckk-petrol;
+    border-radius: $uckk-radius-md;
+    background: rgba(30, 104, 100, .08);
+    color: $uckk-ink;
+}
+
+.uckk-official-label {
+    margin: 0 0 .35rem;
+    color: $uckk-petrol;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.uckk-seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    color: $uckk-petrol;
+    background: radial-gradient(circle, rgba(185, 147, 75, .20), rgba(247, 241, 223, .92));
+    border: 1px solid rgba(185, 147, 75, .48);
+    border-radius: 999rem;
+    box-shadow: inset 0 0 0 .25rem rgba(255, 255, 255, .42);
+}
+
+.uckk-divider-ornamental {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: $uckk-bronze;
+
+    &::before,
+    &::after {
+        flex: 1 1 auto;
+        height: 1px;
+        content: "";
+        background: linear-gradient(90deg, transparent, rgba(185, 147, 75, .55), transparent);
+    }
 }
 
 .uckk-card-title,
@@ -336,14 +502,14 @@ $uckk-transition-default: 180ms ease-in-out !default;
 }
 
 .uckk-link {
-    color: $uckk-blue;
+    color: $uckk-petrol;
     font-weight: 600;
     text-decoration-thickness: .08em;
     text-underline-offset: .18em;
 
     &:hover,
     &:focus {
-        color: $uckk-black;
+        color: $uckk-bronze;
     }
 }
 
@@ -440,7 +606,8 @@ $uckk-transition-default: 180ms ease-in-out !default;
 }
 
 .uckk-dashboard-card {
-    @extend .uckk-card;
+    @include uckk-card-shell;
+    @include uckk-card-interactive;
     padding: 1rem;
 
     .uckk-dashboard-card-header {
@@ -704,7 +871,8 @@ $uckk-transition-default: 180ms ease-in-out !default;
 
 .uckk-assembly-teaser,
 .uckk-assembly-card {
-    @extend .uckk-card;
+    @include uckk-card-shell;
+    @include uckk-card-interactive;
     border-left: .3rem solid $uckk-purple;
 }
 
@@ -751,7 +919,8 @@ $uckk-transition-default: 180ms ease-in-out !default;
 .uckk-archive-card,
 .uckk-proof-card,
 .uckk-kristal-card {
-    @extend .uckk-card;
+    @include uckk-card-shell;
+    @include uckk-card-interactive;
 }
 
 .uckk-archive-card {
@@ -870,7 +1039,8 @@ $uckk-transition-default: 180ms ease-in-out !default;
 // -----------------------------------------------------------------------------
 
 .uckk-portfolio-card {
-    @extend .uckk-card;
+    @include uckk-card-shell;
+    @include uckk-card-interactive;
     border-left: .3rem solid $uckk-blue;
 }
 
@@ -974,7 +1144,8 @@ $uckk-transition-default: 180ms ease-in-out !default;
 }
 
 .uckk-report-card {
-    @extend .uckk-card;
+    @include uckk-card-shell;
+    @include uckk-card-interactive;
     padding: 1rem;
 }
 
@@ -1068,7 +1239,15 @@ $uckk-transition-default: 180ms ease-in-out !default;
 
 @media (prefers-reduced-motion: reduce) {
     .uckk-card,
+    .uckk-dashboard-card,
     .uckk-challenge-teaser,
+    .uckk-assembly-teaser,
+    .uckk-assembly-card,
+    .uckk-archive-card,
+    .uckk-proof-card,
+    .uckk-kristal-card,
+    .uckk-portfolio-card,
+    .uckk-report-card,
     .uckk-nav-chip,
     .uckk-btn-soft,
     .uckk-btn-gold,
@@ -1077,7 +1256,15 @@ $uckk-transition-default: 180ms ease-in-out !default;
     }
 
     .uckk-card:hover,
-    .uckk-challenge-teaser:hover {
+    .uckk-dashboard-card:hover,
+    .uckk-challenge-teaser:hover,
+    .uckk-assembly-teaser:hover,
+    .uckk-assembly-card:hover,
+    .uckk-archive-card:hover,
+    .uckk-proof-card:hover,
+    .uckk-kristal-card:hover,
+    .uckk-portfolio-card:hover,
+    .uckk-report-card:hover {
         transform: none;
     }
 }
@@ -1089,10 +1276,15 @@ $uckk-transition-default: 180ms ease-in-out !default;
 @media (forced-colors: active) {
     .uckk-card,
     .uckk-panel,
+    .uckk-dashboard-card,
     .uckk-challenge-teaser,
+    .uckk-assembly-teaser,
     .uckk-assembly-card,
     .uckk-archive-card,
     .uckk-proof-card,
+    .uckk-kristal-card,
+    .uckk-portfolio-card,
+    .uckk-report-card,
     .uckk-integrity-panel,
     .uckk-ai-notice {
         border: 1px solid CanvasText;
