@@ -14,12 +14,7 @@ if ($hassiteconfig || has_capability('report/uckk:view', $systemcontext)) {
     ));
 }
 
-if ($hassiteconfig) {
-    $settings = new admin_settingpage(
-        'report_uckk_settings',
-        get_string('settings', 'report_uckk')
-    );
-
+if ($hassiteconfig && $settings) {
     $settings->add(new admin_setting_configcheckbox(
         'report_uckk/allowjsonexport',
         get_string('settings:allowjsonexport', 'report_uckk'),
@@ -41,6 +36,4 @@ if ($hassiteconfig) {
         100,
         PARAM_INT
     ));
-
-    $ADMIN->add('reports', $settings);
 }
