@@ -59,7 +59,7 @@
       },
       "palier": {
         "id": "aspirance",
-        "title": "Aspirance / préparation commune aux Voies et passages de Palier"
+        "title": "Aspirance / préparation commune aux Voies et passages de Niveau"
       },
       "recognition": {
         "type": "internal_progression",
@@ -67,7 +67,7 @@
         "internal_title": "Aspirant UCKK — socle commun",
         "symbolic_title": "Joueur lucide en formation"
       },
-      "description": "Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Palier visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
+      "description": "Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Niveau visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
       "evidence_expectation": [
         "completion_des_cours_requis",
         "portfolio_ou_dossier_de_preuves",
@@ -81,7 +81,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Tronc commun obligatoire. Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Palier visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
+        "summary_for_retrieval": "Compétence synthèse associée à Tronc commun obligatoire. Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Niveau visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
         "tags": [
           "tronc-commun",
           "aspirance",
@@ -127,11 +127,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK du Grand Jeu social",
         "symbolic_title": "Joueur lucide du Grand Jeu social"
       },
@@ -149,7 +149,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie du Grand Jeu social — Palier de Magie opérable. Voie transversale principale de l’Univers-Cité King Klown. Elle forme des personnes capables de lire la société comme un système composé de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie du Grand Jeu social. Voie transversale principale de l’Univers-Cité King Klown. Elle forme des personnes capables de lire la société comme un système composé de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.",
         "tags": [
           "grand-jeu-social",
           "magie-operable",
@@ -195,11 +195,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
+        "title": "Parchemin de Puissance opératoire en Architecture de l’écosystème digital kOA",
         "internal_title": "Mage UCKK de l’Architecture de l’écosystème digital kOA",
         "symbolic_title": "Architecte kOA"
       },
@@ -217,7 +217,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie de Magie opérable en Architecture de l’écosystème digital kOA. Voie formant des architectes sociotechniques capables de comprendre, documenter, opérer, adapter, auditer et déployer l’écosystème digital kOA comme infrastructure de connaissance, de délibération, de décision, d’exécution et de mémoire.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie de l’Architecture de l’écosystème digital kOA. Voie formant des architectes sociotechniques capables de comprendre, documenter, opérer, adapter, auditer et déployer l’écosystème digital kOA comme infrastructure de connaissance, de délibération, de décision, d’exécution et de mémoire.",
         "tags": [
           "koa",
           "ecosysteme-digital",
@@ -264,11 +264,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable en Architecture sociotechnique",
+        "title": "Parchemin de Puissance opératoire en Architecture sociotechnique",
         "internal_title": "Mage UCKK en Architecture sociotechnique",
         "symbolic_title": "Architecte du Grand Jeu"
       },
@@ -286,7 +286,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie d’Architecture sociotechnique — Palier de Magie opérable. Voie fondatrice qui forme des personnes capables de comprendre, concevoir, déployer et auditer des systèmes combinant humains, technologies, institutions, données, règles, rôles, plateformes, workflows, décisions et boucles de mémoire.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie de l’Architecture sociotechnique. Voie fondatrice qui forme des personnes capables de comprendre, concevoir, déployer et auditer des systèmes combinant humains, technologies, institutions, données, règles, rôles, plateformes, workflows, décisions et boucles de mémoire.",
         "tags": [
           "architecture-sociotechnique",
           "systemes",
@@ -333,11 +333,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK des Sciences politiques",
         "symbolic_title": "Stratège civique"
       },
@@ -355,7 +355,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie des Sciences politiques — Palier de Magie opérable. Voie formant des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie des Sciences politiques. Voie formant des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.",
         "tags": [
           "sciences-politiques",
           "pouvoir",
@@ -402,11 +402,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable — Voie d’Économie",
+        "title": "Parchemin de Puissance opératoire — Voie d’Économie",
         "internal_title": "Mage UCKK en Économie",
         "symbolic_title": "Architecte d’opportunités"
       },
@@ -424,7 +424,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie d’Économie — Palier de Magie opérable. Voie formant des Aspirants capables de lire l’économie comme une architecture de règles, ressources, flux, incitatifs, intermédiaires, dépendances, capture et opportunités, afin de concevoir des modèles viables et des systèmes plus justes de circulation de la valeur.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie de l’Économie. Voie formant des Aspirants capables de lire l’économie comme une architecture de règles, ressources, flux, incitatifs, intermédiaires, dépendances, capture et opportunités, afin de concevoir des modèles viables et des systèmes plus justes de circulation de la valeur.",
         "tags": [
           "economie",
           "ressources",
@@ -471,11 +471,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK des systèmes vivants",
         "symbolic_title": "Gardien des systèmes vivants"
       },
@@ -493,7 +493,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie d’Écologie — Palier de Magie opérable. Voie formant des personnes capables de comprendre les systèmes vivants, les territoires, les ressources, les interdépendances matérielles, les crises environnementales et les liens entre société et environnement.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie de l’Écologie. Voie formant des personnes capables de comprendre les systèmes vivants, les territoires, les ressources, les interdépendances matérielles, les crises environnementales et les liens entre société et environnement.",
         "tags": [
           "ecologie",
           "systemes-vivants",
@@ -540,11 +540,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK des Structures invisibles",
         "symbolic_title": "Lecteur des structures invisibles"
       },
@@ -562,7 +562,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie de Métaphysique — Palier de Magie opérable. Voie formant des personnes capables d’étudier les structures invisibles qui organisent notre rapport au réel : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage, croyance, récit et symboles.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie de la Métaphysique. Voie formant des personnes capables d’étudier les structures invisibles qui organisent notre rapport au réel : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage, croyance, récit et symboles.",
         "tags": [
           "metaphysique",
           "structures-invisibles",
@@ -609,11 +609,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
+        "title": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
         "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
         "symbolic_title": "Cartographe augmenté"
       },
@@ -631,7 +631,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable. Voie formant des Aspirants capables d’utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans jamais lui déléguer l’autorité finale.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie de l’Intelligence artificielle gouvernable. Voie formant des Aspirants capables d’utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans jamais lui déléguer l’autorité finale.",
         "tags": [
           "ia",
           "machines-pensantes",
@@ -678,11 +678,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK du Sens",
         "symbolic_title": "Architecte du sens"
       },
@@ -700,7 +700,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie de Linguistique et architecture du sens — Palier de Magie opérable. Voie formant des personnes capables de comprendre les langues comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes, réputation et pouvoir symbolique.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie de la Linguistique et de l’architecture du sens. Voie formant des personnes capables de comprendre les langues comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes, réputation et pouvoir symbolique.",
         "tags": [
           "linguistique",
           "architecture-du-sens",
@@ -747,11 +747,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK de l’Intervention sociale et des systèmes humains",
         "symbolic_title": "Intervenant du Grand Jeu humain"
       },
@@ -769,7 +769,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable. Voie formant des personnes capables de comprendre les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, famille, communauté, institutions, aide, dignité et réparation.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie de l’Intervention sociale et des systèmes humains. Voie formant des personnes capables de comprendre les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, famille, communauté, institutions, aide, dignité et réparation.",
         "tags": [
           "intervention-sociale",
           "systemes-humains",

@@ -119,7 +119,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-GRAND-JEU-SOCIAL",
-      "name": "Baccalauréat UCKK — Grand Jeu social",
+      "name": "Voie du Grand Jeu social",
       "description": "Learners following the internal Grand Jeu social pathway.",
       "context": "system",
       "visible": true,
@@ -129,7 +129,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-ARCHITECTURE-ECOSYSTEME-DIGITAL-KOA",
-      "name": "Baccalauréat UCKK — Architecture écosystème digital kOA",
+      "name": "Voie de l’Architecture de l’écosystème digital kOA",
       "description": "Learners following the internal architecture écosystème digital kOA pathway.",
       "context": "system",
       "visible": true,
@@ -139,7 +139,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-ARCHITECTURE-SOCIOTECHNIQUE",
-      "name": "Baccalauréat UCKK — Architecture sociotechnique",
+      "name": "Voie de l’Architecture sociotechnique",
       "description": "Learners following the internal architecture sociotechnique pathway.",
       "context": "system",
       "visible": true,
@@ -149,7 +149,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-SCIENCES-POLITIQUES",
-      "name": "Baccalauréat UCKK — Sciences politiques",
+      "name": "Voie des Sciences politiques",
       "description": "Learners following the internal sciences politiques pathway.",
       "context": "system",
       "visible": true,
@@ -159,7 +159,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-ECONOMIE",
-      "name": "Baccalauréat UCKK — Économie",
+      "name": "Voie de l’Économie",
       "description": "Learners following the internal économie pathway.",
       "context": "system",
       "visible": true,
@@ -169,7 +169,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-ECOLOGIE",
-      "name": "Baccalauréat UCKK — Écologie",
+      "name": "Voie de l’Écologie",
       "description": "Learners following the internal écologie pathway.",
       "context": "system",
       "visible": true,
@@ -179,7 +179,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-METAPHYSIQUE",
-      "name": "Baccalauréat UCKK — Métaphysique",
+      "name": "Voie de la Métaphysique",
       "description": "Learners following the internal métaphysique pathway.",
       "context": "system",
       "visible": true,
@@ -189,7 +189,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-IA-GOUVERNABLE",
-      "name": "Baccalauréat UCKK — IA gouvernable",
+      "name": "Voie de l’Intelligence artificielle gouvernable",
       "description": "Learners following the internal IA gouvernable pathway.",
       "context": "system",
       "visible": true,
@@ -199,7 +199,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-LINGUISTIQUE-ARCHITECTURE-SENS",
-      "name": "Baccalauréat UCKK — Linguistique et architecture du sens",
+      "name": "Voie de la Linguistique et de l’architecture du sens",
       "description": "Learners following the internal linguistique et architecture du sens pathway.",
       "context": "system",
       "visible": true,
@@ -209,7 +209,7 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-INTERVENTION-SOCIALE",
-      "name": "Baccalauréat UCKK — Intervention sociale",
+      "name": "Voie de l’Intervention sociale et des systèmes humains",
       "description": "Learners following the internal intervention sociale pathway.",
       "context": "system",
       "visible": true,

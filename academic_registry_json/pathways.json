@@ -116,7 +116,7 @@
     {
       "id": "pathway:grand-jeu-social-magie-operable-main",
       "program_id": "program:grand-jeu-social-magie-operable",
-      "title": "Parcours principal — Voie du Grand Jeu social — Palier de Magie opérable",
+      "title": "Parcours principal — Voie du Grand Jeu social",
       "status": "active",
       "sequence_model": "ordered_courses",
       "prerequisite_pathway_refs": [
@@ -209,8 +209,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "grand_jeu_social_magie_operable_main",
-      "name": "Parcours principal — Voie du Grand Jeu social — Palier de Magie opérable",
-      "fullname": "Parcours principal — Voie du Grand Jeu social — Palier de Magie opérable",
+      "name": "Parcours principal — Voie du Grand Jeu social",
+      "fullname": "Parcours principal — Voie du Grand Jeu social",
       "shortname": "grand_jeu_social_magie_operable_main",
       "program_code": "GJS",
       "idnumber": "UCKK-PATH-GJS-MAIN",
@@ -229,7 +229,7 @@
     {
       "id": "pathway:architecture-ecosysteme-digital-koa-magie-operable-main",
       "program_id": "program:architecture-ecosysteme-digital-koa-magie-operable",
-      "title": "Parcours principal — Architecture de l’écosystème digital kOA — Palier de Magie opérable",
+      "title": "Parcours principal — Architecture de l’écosystème digital kOA — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "cycles",
       "prerequisite_pathway_refs": [
@@ -495,8 +495,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "architecture_ecosysteme_digital_koa_magie_operable_main",
-      "name": "Parcours principal — Architecture de l’écosystème digital kOA — Palier de Magie opérable",
-      "fullname": "Parcours principal — Architecture de l’écosystème digital kOA — Palier de Magie opérable",
+      "name": "Parcours principal — Architecture de l’écosystème digital kOA — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Architecture de l’écosystème digital kOA — Niveau de Puissance opératoire",
       "shortname": "architecture_ecosysteme_digital_koa_magie_operable_main",
       "program_code": "KOA",
       "idnumber": "UCKK-PATH-KOA-MAIN",
@@ -515,7 +515,7 @@
     {
       "id": "pathway:architecture-sociotechnique-magie-operable-main",
       "program_id": "program:architecture-sociotechnique-magie-operable",
-      "title": "Parcours principal — Architecture sociotechnique — Palier de Magie opérable",
+      "title": "Parcours principal — Architecture sociotechnique — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "cycles",
       "prerequisite_pathway_refs": [
@@ -620,8 +620,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "architecture_sociotechnique_magie_operable_main",
-      "name": "Parcours principal — Architecture sociotechnique — Palier de Magie opérable",
-      "fullname": "Parcours principal — Architecture sociotechnique — Palier de Magie opérable",
+      "name": "Parcours principal — Architecture sociotechnique — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Architecture sociotechnique — Niveau de Puissance opératoire",
       "shortname": "architecture_sociotechnique_magie_operable_main",
       "program_code": "AS",
       "idnumber": "UCKK-PATH-AS-MAIN",
@@ -640,7 +640,7 @@
     {
       "id": "pathway:sciences-politiques-magie-operable-main",
       "program_id": "program:sciences-politiques-magie-operable",
-      "title": "Parcours principal — Sciences politiques — Palier de Magie opérable",
+      "title": "Parcours principal — Sciences politiques — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "cycles",
       "prerequisite_pathway_refs": [
@@ -727,8 +727,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "sciences_politiques_magie_operable_main",
-      "name": "Parcours principal — Sciences politiques — Palier de Magie opérable",
-      "fullname": "Parcours principal — Sciences politiques — Palier de Magie opérable",
+      "name": "Parcours principal — Sciences politiques — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Sciences politiques — Niveau de Puissance opératoire",
       "shortname": "sciences_politiques_magie_operable_main",
       "program_code": "SP",
       "idnumber": "UCKK-PATH-SP-MAIN",
@@ -747,7 +747,7 @@
     {
       "id": "pathway:economie-magie-operable-main",
       "program_id": "program:economie-magie-operable",
-      "title": "Parcours principal — Économie — Palier de Magie opérable",
+      "title": "Parcours principal — Économie — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "cycles",
       "prerequisite_pathway_refs": [
@@ -818,8 +818,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "economie_magie_operable_main",
-      "name": "Parcours principal — Économie — Palier de Magie opérable",
-      "fullname": "Parcours principal — Économie — Palier de Magie opérable",
+      "name": "Parcours principal — Économie — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Économie — Niveau de Puissance opératoire",
       "shortname": "economie_magie_operable_main",
       "program_code": "EC",
       "idnumber": "UCKK-PATH-EC-MAIN",
@@ -838,7 +838,7 @@
     {
       "id": "pathway:ecologie-magie-operable-main",
       "program_id": "program:ecologie-magie-operable",
-      "title": "Parcours principal — Écologie — Palier de Magie opérable",
+      "title": "Parcours principal — Écologie — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "cycles",
       "prerequisite_pathway_refs": [
@@ -944,8 +944,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "ecologie_magie_operable_main",
-      "name": "Parcours principal — Écologie — Palier de Magie opérable",
-      "fullname": "Parcours principal — Écologie — Palier de Magie opérable",
+      "name": "Parcours principal — Écologie — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Écologie — Niveau de Puissance opératoire",
       "shortname": "ecologie_magie_operable_main",
       "program_code": "ECO",
       "idnumber": "UCKK-PATH-ECO-MAIN",
@@ -964,7 +964,7 @@
     {
       "id": "pathway:metaphysique-magie-operable-main",
       "program_id": "program:metaphysique-magie-operable",
-      "title": "Parcours principal — Métaphysique — Palier de Magie opérable",
+      "title": "Parcours principal — Métaphysique — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "cycles",
       "prerequisite_pathway_refs": [
@@ -1051,8 +1051,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "metaphysique_magie_operable_main",
-      "name": "Parcours principal — Métaphysique — Palier de Magie opérable",
-      "fullname": "Parcours principal — Métaphysique — Palier de Magie opérable",
+      "name": "Parcours principal — Métaphysique — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Métaphysique — Niveau de Puissance opératoire",
       "shortname": "metaphysique_magie_operable_main",
       "program_code": "ME",
       "idnumber": "UCKK-PATH-ME-MAIN",
@@ -1071,7 +1071,7 @@
     {
       "id": "pathway:intelligence-artificielle-gouvernable-magie-operable-main",
       "program_id": "program:intelligence-artificielle-gouvernable-magie-operable",
-      "title": "Parcours principal — Intelligence artificielle gouvernable — Palier de Magie opérable",
+      "title": "Parcours principal — Intelligence artificielle gouvernable — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "ordered_courses",
       "prerequisite_pathway_refs": [
@@ -1144,8 +1144,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "intelligence_artificielle_gouvernable_magie_operable_main",
-      "name": "Parcours principal — Intelligence artificielle gouvernable — Palier de Magie opérable",
-      "fullname": "Parcours principal — Intelligence artificielle gouvernable — Palier de Magie opérable",
+      "name": "Parcours principal — Intelligence artificielle gouvernable — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Intelligence artificielle gouvernable — Niveau de Puissance opératoire",
       "shortname": "intelligence_artificielle_gouvernable_magie_operable_main",
       "program_code": "IA",
       "idnumber": "UCKK-PATH-IA-MAIN",
@@ -1164,7 +1164,7 @@
     {
       "id": "pathway:linguistique-architecture-sens-magie-operable-main",
       "program_id": "program:linguistique-architecture-sens-magie-operable",
-      "title": "Parcours principal — Linguistique et architecture du sens — Palier de Magie opérable",
+      "title": "Parcours principal — Linguistique et architecture du sens — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "cycles",
       "prerequisite_pathway_refs": [
@@ -1242,8 +1242,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "linguistique_architecture_sens_magie_operable_main",
-      "name": "Parcours principal — Linguistique et architecture du sens — Palier de Magie opérable",
-      "fullname": "Parcours principal — Linguistique et architecture du sens — Palier de Magie opérable",
+      "name": "Parcours principal — Linguistique et architecture du sens — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Linguistique et architecture du sens — Niveau de Puissance opératoire",
       "shortname": "linguistique_architecture_sens_magie_operable_main",
       "program_code": "LI",
       "idnumber": "UCKK-PATH-LI-MAIN",
@@ -1262,7 +1262,7 @@
     {
       "id": "pathway:intervention-sociale-systemes-humains-magie-operable-main",
       "program_id": "program:intervention-sociale-systemes-humains-magie-operable",
-      "title": "Parcours principal — Intervention sociale et systèmes humains — Palier de Magie opérable",
+      "title": "Parcours principal — Intervention sociale et systèmes humains — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "ordered_courses",
       "prerequisite_pathway_refs": [
@@ -1317,8 +1317,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "intervention_sociale_systemes_humains_magie_operable_main",
-      "name": "Parcours principal — Intervention sociale et systèmes humains — Palier de Magie opérable",
-      "fullname": "Parcours principal — Intervention sociale et systèmes humains — Palier de Magie opérable",
+      "name": "Parcours principal — Intervention sociale et systèmes humains — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Intervention sociale et systèmes humains — Niveau de Puissance opératoire",
       "shortname": "intervention_sociale_systemes_humains_magie_operable_main",
       "program_code": "IS",
       "idnumber": "UCKK-PATH-IS-MAIN",

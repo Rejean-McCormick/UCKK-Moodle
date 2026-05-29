@@ -129,7 +129,7 @@ final class badge_seed {
         [
             'key' => 'parchemin_grand_jeu_social_magie_operable',
             'name' => 'Parchemin — Grand Jeu social',
-            'description' => 'Reconnaît une progression validée dans la Voie du Grand Jeu social au Palier de Magie opérable.',
+            'description' => 'Reconnaît une progression validée dans la Voie du Grand Jeu social au Niveau de Puissance opératoire.',
             'type' => 'site',
             'criteria' => [
                 'evidence_submission',
@@ -153,7 +153,7 @@ final class badge_seed {
         [
             'key' => 'parchemin_architecture_ecosysteme_digital_koa_magie_operable',
             'name' => 'Parchemin — Architecture d’écosystème digital / KOA',
-            'description' => 'Reconnaît une progression validée dans la Voie Architecture d’écosystème digital / KOA au Palier de Magie opérable.',
+            'description' => 'Reconnaît une progression validée dans la Voie Architecture d’écosystème digital / KOA au Niveau de Puissance opératoire.',
             'type' => 'site',
             'criteria' => [
                 'evidence_submission',
@@ -177,7 +177,7 @@ final class badge_seed {
         [
             'key' => 'parchemin_architecture_sociotechnique_magie_operable',
             'name' => 'Parchemin — Architecture sociotechnique',
-            'description' => 'Reconnaît une progression validée dans la Voie Architecture sociotechnique au Palier de Magie opérable.',
+            'description' => 'Reconnaît une progression validée dans la Voie Architecture sociotechnique au Niveau de Puissance opératoire.',
             'type' => 'site',
             'criteria' => [
                 'evidence_submission',
@@ -201,7 +201,7 @@ final class badge_seed {
         [
             'key' => 'parchemin_sciences_politiques_magie_operable',
             'name' => 'Parchemin — Sciences politiques',
-            'description' => 'Reconnaît une progression validée dans la Voie des Sciences politiques au Palier de Magie opérable.',
+            'description' => 'Reconnaît une progression validée dans la Voie des Sciences politiques au Niveau de Puissance opératoire.',
             'type' => 'site',
             'criteria' => [
                 'evidence_submission',
@@ -225,7 +225,7 @@ final class badge_seed {
         [
             'key' => 'parchemin_metaphysique_magie_operable',
             'name' => 'Parchemin — Métaphysique',
-            'description' => 'Reconnaît une progression validée dans la Voie de Métaphysique au Palier de Magie opérable.',
+            'description' => 'Reconnaît une progression validée dans la Voie de Métaphysique au Niveau de Puissance opératoire.',
             'type' => 'site',
             'criteria' => [
                 'evidence_submission',
@@ -249,7 +249,7 @@ final class badge_seed {
         [
             'key' => 'parchemin_linguistique_architecture_sens_magie_operable',
             'name' => 'Parchemin — Linguistique et architecture du sens',
-            'description' => 'Reconnaît une progression validée dans la Voie de Linguistique et architecture du sens au Palier de Magie opérable.',
+            'description' => 'Reconnaît une progression validée dans la Voie de Linguistique et architecture du sens au Niveau de Puissance opératoire.',
             'type' => 'site',
             'criteria' => [
                 'evidence_submission',

@@ -140,7 +140,7 @@
       "id": "badge:parchemin-grand-jeu-social-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-GJS-COMPLETION",
-      "title": "Parchemin de Magie opérable",
+      "title": "Parchemin de Puissance opératoire",
       "short_title": "Grand Jeu social",
       "badge_type": "parchemin_uckk",
       "status": "internal_experimental",
@@ -186,14 +186,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK du Grand Jeu social",
         "symbolic_title": "Joueur lucide du Grand Jeu social",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable",
-        "description": "Badge interne UCKK lié à Voie du Grand Jeu social — Palier de Magie opérable.",
+        "name": "Parchemin de Puissance opératoire",
+        "description": "Badge interne UCKK lié à Voie du Grand Jeu social.",
         "idnumber": "UCKK-BADGE-GJS-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -203,7 +203,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie du Grand Jeu social — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie du Grand Jeu social. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "grand-jeu-social",
           "magie-operable",
@@ -218,8 +218,8 @@
         "source_version": "0.1"
       },
       "key": "grand_jeu_social",
-      "name": "Parchemin de Magie opérable",
-      "description": "Badge interne UCKK lié à Voie du Grand Jeu social — Palier de Magie opérable.",
+      "name": "Parchemin de Puissance opératoire",
+      "description": "Badge interne UCKK lié à Voie du Grand Jeu social.",
       "visible": 0,
       "enabled": 1,
       "issuer": {
@@ -273,7 +273,7 @@
       "id": "badge:parchemin-architecture-ecosysteme-digital-koa-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-KOA-COMPLETION",
-      "title": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
+      "title": "Parchemin de Puissance opératoire en Architecture de l’écosystème digital kOA",
       "short_title": "Architecture kOA",
       "badge_type": "parchemin_uckk",
       "status": "active",
@@ -336,14 +336,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
+        "title": "Parchemin de Puissance opératoire en Architecture de l’écosystème digital kOA",
         "internal_title": "Mage UCKK de l’Architecture de l’écosystème digital kOA",
         "symbolic_title": "Architecte kOA",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
-        "description": "Badge interne UCKK lié à Voie de Magie opérable en Architecture de l’écosystème digital kOA.",
+        "name": "Parchemin de Puissance opératoire en Architecture de l’écosystème digital kOA",
+        "description": "Badge interne UCKK lié à Voie de l’Architecture de l’écosystème digital kOA.",
         "idnumber": "UCKK-BADGE-KOA-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -353,7 +353,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de Magie opérable en Architecture de l’écosystème digital kOA. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Architecture de l’écosystème digital kOA. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "koa",
           "ecosysteme-digital",
@@ -369,8 +369,8 @@
         "source_version": "0.2"
       },
       "key": "koa_digital_ecosystem",
-      "name": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
-      "description": "Badge interne UCKK lié à Voie de Magie opérable en Architecture de l’écosystème digital kOA.",
+      "name": "Parchemin de Puissance opératoire en Architecture de l’écosystème digital kOA",
+      "description": "Badge interne UCKK lié à Voie de l’Architecture de l’écosystème digital kOA.",
       "visible": 0,
       "enabled": 1,
       "issuer": {
@@ -424,7 +424,7 @@
       "id": "badge:parchemin-architecture-sociotechnique-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-AS-COMPLETION",
-      "title": "Parchemin de Magie opérable en Architecture sociotechnique",
+      "title": "Parchemin de Puissance opératoire en Architecture sociotechnique",
       "short_title": "Architecture sociotechnique",
       "badge_type": "parchemin_uckk",
       "status": "active",
@@ -471,14 +471,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable en Architecture sociotechnique",
+        "title": "Parchemin de Puissance opératoire en Architecture sociotechnique",
         "internal_title": "Mage UCKK en Architecture sociotechnique",
         "symbolic_title": "Architecte du Grand Jeu",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable en Architecture sociotechnique",
-        "description": "Badge interne UCKK lié à Voie d’Architecture sociotechnique — Palier de Magie opérable.",
+        "name": "Parchemin de Puissance opératoire en Architecture sociotechnique",
+        "description": "Badge interne UCKK lié à Voie de l’Architecture sociotechnique.",
         "idnumber": "UCKK-BADGE-AS-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -488,7 +488,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie d’Architecture sociotechnique — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Architecture sociotechnique. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "architecture-sociotechnique",
           "systemes",
@@ -504,8 +504,8 @@
         "source_version": "0.1"
       },
       "key": "architecture_sociotechnique",
-      "name": "Parchemin de Magie opérable en Architecture sociotechnique",
-      "description": "Badge interne UCKK lié à Voie d’Architecture sociotechnique — Palier de Magie opérable.",
+      "name": "Parchemin de Puissance opératoire en Architecture sociotechnique",
+      "description": "Badge interne UCKK lié à Voie de l’Architecture sociotechnique.",
       "visible": 0,
       "enabled": 1,
       "issuer": {
@@ -559,7 +559,7 @@
       "id": "badge:parchemin-sciences-politiques-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-SP-COMPLETION",
-      "title": "Parchemin de Magie opérable",
+      "title": "Parchemin de Puissance opératoire",
       "short_title": "Sciences politiques",
       "badge_type": "parchemin_uckk",
       "status": "internal_experimental",
@@ -604,14 +604,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK des Sciences politiques",
         "symbolic_title": "Stratège civique",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable",
-        "description": "Badge interne UCKK lié à Voie des Sciences politiques — Palier de Magie opérable.",
+        "name": "Parchemin de Puissance opératoire",
+        "description": "Badge interne UCKK lié à Voie des Sciences politiques.",
         "idnumber": "UCKK-BADGE-SP-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -621,7 +621,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie des Sciences politiques — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie des Sciences politiques. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "sciences-politiques",
           "pouvoir",
@@ -637,8 +637,8 @@
         "source_version": "1.1"
       },
       "key": "sciences_politiques",
-      "name": "Parchemin de Magie opérable",
-      "description": "Badge interne UCKK lié à Voie des Sciences politiques — Palier de Magie opérable.",
+      "name": "Parchemin de Puissance opératoire",
+      "description": "Badge interne UCKK lié à Voie des Sciences politiques.",
       "visible": 0,
       "enabled": 1,
       "issuer": {
@@ -692,7 +692,7 @@
       "id": "badge:parchemin-economie-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-EC-COMPLETION",
-      "title": "Parchemin de Magie opérable — Voie d’Économie",
+      "title": "Parchemin de Puissance opératoire — Voie d’Économie",
       "short_title": "Économie",
       "badge_type": "parchemin_uckk",
       "status": "active",
@@ -735,14 +735,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable — Voie d’Économie",
+        "title": "Parchemin de Puissance opératoire — Voie d’Économie",
         "internal_title": "Mage UCKK en Économie",
         "symbolic_title": "Architecte d’opportunités",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable — Voie d’Économie",
-        "description": "Badge interne UCKK lié à Voie d’Économie — Palier de Magie opérable.",
+        "name": "Parchemin de Puissance opératoire — Voie d’Économie",
+        "description": "Badge interne UCKK lié à Voie de l’Économie.",
         "idnumber": "UCKK-BADGE-EC-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -752,7 +752,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie d’Économie — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Économie. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "economie",
           "ressources",
@@ -768,8 +768,8 @@
         "source_version": "0.1"
       },
       "key": "economie",
-      "name": "Parchemin de Magie opérable — Voie d’Économie",
-      "description": "Badge interne UCKK lié à Voie d’Économie — Palier de Magie opérable.",
+      "name": "Parchemin de Puissance opératoire — Voie d’Économie",
+      "description": "Badge interne UCKK lié à Voie de l’Économie.",
       "visible": 0,
       "enabled": 1,
       "issuer": {
@@ -823,7 +823,7 @@
       "id": "badge:parchemin-ecologie-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-ECO-COMPLETION",
-      "title": "Parchemin de Magie opérable",
+      "title": "Parchemin de Puissance opératoire",
       "short_title": "Écologie",
       "badge_type": "parchemin_uckk",
       "status": "active",
@@ -870,14 +870,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK des systèmes vivants",
         "symbolic_title": "Gardien des systèmes vivants",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable",
-        "description": "Badge interne UCKK lié à Voie d’Écologie — Palier de Magie opérable.",
+        "name": "Parchemin de Puissance opératoire",
+        "description": "Badge interne UCKK lié à Voie de l’Écologie.",
         "idnumber": "UCKK-BADGE-ECO-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -887,7 +887,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie d’Écologie — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Écologie. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "ecologie",
           "systemes-vivants",
@@ -903,8 +903,8 @@
         "source_version": "0.1"
       },
       "key": "ecologie",
-      "name": "Parchemin de Magie opérable",
-      "description": "Badge interne UCKK lié à Voie d’Écologie — Palier de Magie opérable.",
+      "name": "Parchemin de Puissance opératoire",
+      "description": "Badge interne UCKK lié à Voie de l’Écologie.",
       "visible": 0,
       "enabled": 1,
       "issuer": {
@@ -958,7 +958,7 @@
       "id": "badge:parchemin-metaphysique-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-ME-COMPLETION",
-      "title": "Parchemin de Magie opérable",
+      "title": "Parchemin de Puissance opératoire",
       "short_title": "Métaphysique",
       "badge_type": "parchemin_uckk",
       "status": "internal_experimental",
@@ -1000,14 +1000,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK des Structures invisibles",
         "symbolic_title": "Lecteur des structures invisibles",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable",
-        "description": "Badge interne UCKK lié à Voie de Métaphysique — Palier de Magie opérable.",
+        "name": "Parchemin de Puissance opératoire",
+        "description": "Badge interne UCKK lié à Voie de la Métaphysique.",
         "idnumber": "UCKK-BADGE-ME-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -1017,7 +1017,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de Métaphysique — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de la Métaphysique. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "metaphysique",
           "structures-invisibles",
@@ -1033,8 +1033,8 @@
         "source_version": "0.1"
       },
       "key": "metaphysique",
-      "name": "Parchemin de Magie opérable",
-      "description": "Badge interne UCKK lié à Voie de Métaphysique — Palier de Magie opérable.",
+      "name": "Parchemin de Puissance opératoire",
+      "description": "Badge interne UCKK lié à Voie de la Métaphysique.",
       "visible": 0,
       "enabled": 1,
       "issuer": {
@@ -1088,7 +1088,7 @@
       "id": "badge:parchemin-intelligence-artificielle-gouvernable-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-IA-COMPLETION",
-      "title": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
+      "title": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
       "short_title": "IA gouvernable",
       "badge_type": "parchemin_uckk",
       "status": "active",
@@ -1131,14 +1131,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
+        "title": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
         "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
         "symbolic_title": "Cartographe augmenté",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
-        "description": "Badge interne UCKK lié à Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable.",
+        "name": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
+        "description": "Badge interne UCKK lié à Voie de l’Intelligence artificielle gouvernable.",
         "idnumber": "UCKK-BADGE-IA-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -1148,7 +1148,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Intelligence artificielle gouvernable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "ia",
           "machines-pensantes",
@@ -1164,8 +1164,8 @@
         "source_version": "0.2"
       },
       "key": "ia_gouvernable",
-      "name": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
-      "description": "Badge interne UCKK lié à Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable.",
+      "name": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
+      "description": "Badge interne UCKK lié à Voie de l’Intelligence artificielle gouvernable.",
       "visible": 0,
       "enabled": 1,
       "issuer": {
@@ -1219,7 +1219,7 @@
       "id": "badge:parchemin-linguistique-architecture-sens-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-LI-COMPLETION",
-      "title": "Parchemin de Magie opérable",
+      "title": "Parchemin de Puissance opératoire",
       "short_title": "Linguistique et architecture du sens",
       "badge_type": "parchemin_uckk",
       "status": "internal_experimental",
@@ -1261,14 +1261,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK du Sens",
         "symbolic_title": "Architecte du sens",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable",
-        "description": "Badge interne UCKK lié à Voie de Linguistique et architecture du sens — Palier de Magie opérable.",
+        "name": "Parchemin de Puissance opératoire",
+        "description": "Badge interne UCKK lié à Voie de la Linguistique et de l’architecture du sens.",
         "idnumber": "UCKK-BADGE-LI-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -1278,7 +1278,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de Linguistique et architecture du sens — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de la Linguistique et de l’architecture du sens. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "linguistique",
           "architecture-du-sens",
@@ -1294,8 +1294,8 @@
         "source_version": "0.1"
       },
       "key": "linguistique_architecture_du_sens",
-      "name": "Parchemin de Magie opérable",
-      "description": "Badge interne UCKK lié à Voie de Linguistique et architecture du sens — Palier de Magie opérable.",
+      "name": "Parchemin de Puissance opératoire",
+      "description": "Badge interne UCKK lié à Voie de la Linguistique et de l’architecture du sens.",
       "visible": 0,
       "enabled": 1,
       "issuer": {
@@ -1349,7 +1349,7 @@
       "id": "badge:parchemin-intervention-sociale-systemes-humains-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-IS-COMPLETION",
-      "title": "Parchemin de Magie opérable",
+      "title": "Parchemin de Puissance opératoire",
       "short_title": "Intervention sociale et systèmes humains",
       "badge_type": "parchemin_uckk",
       "status": "active",
@@ -1390,14 +1390,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK de l’Intervention sociale et des systèmes humains",
         "symbolic_title": "Intervenant du Grand Jeu humain",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Magie opérable",
-        "description": "Badge interne UCKK lié à Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable.",
+        "name": "Parchemin de Puissance opératoire",
+        "description": "Badge interne UCKK lié à Voie de l’Intervention sociale et des systèmes humains.",
         "idnumber": "UCKK-BADGE-IS-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -1407,7 +1407,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Intervention sociale et des systèmes humains. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
         "tags": [
           "intervention-sociale",
           "systemes-humains",
@@ -1423,8 +1423,8 @@
         "source_version": "0.1"
       },
       "key": "intervention_sociale",
-      "name": "Parchemin de Magie opérable",
-      "description": "Badge interne UCKK lié à Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable.",
+      "name": "Parchemin de Puissance opératoire",
+      "description": "Badge interne UCKK lié à Voie de l’Intervention sociale et des systèmes humains.",
       "visible": 0,
       "enabled": 1,
       "issuer": {

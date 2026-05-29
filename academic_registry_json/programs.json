@@ -16,7 +16,7 @@
       },
       "palier": {
         "id": "aspirance",
-        "title": "Aspirance / préparation commune aux Voies et passages de Palier"
+        "title": "Aspirance / préparation commune aux Voies et passages de Niveau"
       },
       "recognition": {
         "type": "internal_progression",
@@ -27,7 +27,7 @@
       },
       "status": "active",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Palier visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
+      "summary": "Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Niveau visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
       "moodle": {
         "category_idnumber": "UCKK-TC",
         "category_path": "UCKK / Tronc commun",
@@ -52,7 +52,7 @@
       "category_idnumber": "UCKK-TC",
       "category_path": "UCKK / Tronc commun",
       "visible": 1,
-      "description": "Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Palier visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
+      "description": "Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Niveau visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
       "category": "UCKK-TC",
       "visibility": "institution",
       "sortorder": 10,
@@ -64,7 +64,7 @@
     {
       "id": "program:grand-jeu-social-magie-operable",
       "code": "GJS",
-      "title": "Voie du Grand Jeu social — Palier de Magie opérable",
+      "title": "Voie du Grand Jeu social",
       "short_title": "Grand Jeu social",
       "program_type": "voie_uckk",
       "domain": {
@@ -73,11 +73,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK du Grand Jeu social",
         "symbolic_title": "Joueur lucide du Grand Jeu social"
@@ -102,9 +102,9 @@
         "systemes-sociaux"
       ],
       "key": "gjs",
-      "name": "Voie du Grand Jeu social — Palier de Magie opérable",
+      "name": "Voie du Grand Jeu social",
       "shortname": "GJS",
-      "fullname": "Voie du Grand Jeu social — Palier de Magie opérable",
+      "fullname": "Voie du Grand Jeu social",
       "idnumber": "UCKK-PROG-GJS",
       "category_idnumber": "UCKK-GJS",
       "category_path": "UCKK / Voies / Grand Jeu social",
@@ -121,7 +121,7 @@
     {
       "id": "program:architecture-ecosysteme-digital-koa-magie-operable",
       "code": "KOA",
-      "title": "Voie de Magie opérable en Architecture de l’écosystème digital kOA",
+      "title": "Voie de l’Architecture de l’écosystème digital kOA",
       "short_title": "Architecture kOA",
       "program_type": "voie_uckk",
       "domain": {
@@ -130,11 +130,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable en Architecture de l’écosystème digital kOA",
+        "title": "Parchemin de Puissance opératoire en Architecture de l’écosystème digital kOA",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK de l’Architecture de l’écosystème digital kOA",
         "symbolic_title": "Architecte kOA"
@@ -160,9 +160,9 @@
         "magie-operable"
       ],
       "key": "koa",
-      "name": "Voie de Magie opérable en Architecture de l’écosystème digital kOA",
+      "name": "Voie de l’Architecture de l’écosystème digital kOA",
       "shortname": "KOA",
-      "fullname": "Voie de Magie opérable en Architecture de l’écosystème digital kOA",
+      "fullname": "Voie de l’Architecture de l’écosystème digital kOA",
       "idnumber": "UCKK-PROG-KOA",
       "category_idnumber": "UCKK-KOA",
       "category_path": "UCKK / Voies / Architecture de l’écosystème digital kOA",
@@ -179,7 +179,7 @@
     {
       "id": "program:architecture-sociotechnique-magie-operable",
       "code": "AS",
-      "title": "Voie d’Architecture sociotechnique — Palier de Magie opérable",
+      "title": "Voie de l’Architecture sociotechnique",
       "short_title": "Architecture sociotechnique",
       "program_type": "voie_uckk",
       "domain": {
@@ -188,11 +188,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable en Architecture sociotechnique",
+        "title": "Parchemin de Puissance opératoire en Architecture sociotechnique",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK en Architecture sociotechnique",
         "symbolic_title": "Architecte du Grand Jeu"
@@ -218,9 +218,9 @@
         "magie-operable"
       ],
       "key": "as",
-      "name": "Voie d’Architecture sociotechnique — Palier de Magie opérable",
+      "name": "Voie de l’Architecture sociotechnique",
       "shortname": "AS",
-      "fullname": "Voie d’Architecture sociotechnique — Palier de Magie opérable",
+      "fullname": "Voie de l’Architecture sociotechnique",
       "idnumber": "UCKK-PROG-AS",
       "category_idnumber": "UCKK-AS",
       "category_path": "UCKK / Voies / Architecture sociotechnique",
@@ -237,7 +237,7 @@
     {
       "id": "program:sciences-politiques-magie-operable",
       "code": "SP",
-      "title": "Voie des Sciences politiques — Palier de Magie opérable",
+      "title": "Voie des Sciences politiques",
       "short_title": "Sciences politiques",
       "program_type": "voie_uckk",
       "domain": {
@@ -246,11 +246,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK des Sciences politiques",
         "symbolic_title": "Stratège civique"
@@ -276,9 +276,9 @@
         "magie-operable"
       ],
       "key": "sp",
-      "name": "Voie des Sciences politiques — Palier de Magie opérable",
+      "name": "Voie des Sciences politiques",
       "shortname": "SP",
-      "fullname": "Voie des Sciences politiques — Palier de Magie opérable",
+      "fullname": "Voie des Sciences politiques",
       "idnumber": "UCKK-PROG-SP",
       "category_idnumber": "UCKK-SP",
       "category_path": "UCKK / Voies / Sciences politiques",
@@ -295,7 +295,7 @@
     {
       "id": "program:economie-magie-operable",
       "code": "EC",
-      "title": "Voie d’Économie — Palier de Magie opérable",
+      "title": "Voie de l’Économie",
       "short_title": "Économie",
       "program_type": "voie_uckk",
       "domain": {
@@ -304,11 +304,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable — Voie d’Économie",
+        "title": "Parchemin de Puissance opératoire — Voie d’Économie",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK en Économie",
         "symbolic_title": "Architecte d’opportunités"
@@ -334,9 +334,9 @@
         "magie-operable"
       ],
       "key": "ec",
-      "name": "Voie d’Économie — Palier de Magie opérable",
+      "name": "Voie de l’Économie",
       "shortname": "EC",
-      "fullname": "Voie d’Économie — Palier de Magie opérable",
+      "fullname": "Voie de l’Économie",
       "idnumber": "UCKK-PROG-EC",
       "category_idnumber": "UCKK-EC",
       "category_path": "UCKK / Voies / Économie",
@@ -353,7 +353,7 @@
     {
       "id": "program:ecologie-magie-operable",
       "code": "ECO",
-      "title": "Voie d’Écologie — Palier de Magie opérable",
+      "title": "Voie de l’Écologie",
       "short_title": "Écologie",
       "program_type": "voie_uckk",
       "domain": {
@@ -362,11 +362,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK des systèmes vivants",
         "symbolic_title": "Gardien des systèmes vivants"
@@ -392,9 +392,9 @@
         "magie-operable"
       ],
       "key": "eco",
-      "name": "Voie d’Écologie — Palier de Magie opérable",
+      "name": "Voie de l’Écologie",
       "shortname": "ECO",
-      "fullname": "Voie d’Écologie — Palier de Magie opérable",
+      "fullname": "Voie de l’Écologie",
       "idnumber": "UCKK-PROG-ECO",
       "category_idnumber": "UCKK-ECO",
       "category_path": "UCKK / Voies / Écologie",
@@ -411,7 +411,7 @@
     {
       "id": "program:metaphysique-magie-operable",
       "code": "ME",
-      "title": "Voie de Métaphysique — Palier de Magie opérable",
+      "title": "Voie de la Métaphysique",
       "short_title": "Métaphysique",
       "program_type": "voie_uckk",
       "domain": {
@@ -420,11 +420,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK des Structures invisibles",
         "symbolic_title": "Lecteur des structures invisibles"
@@ -450,9 +450,9 @@
         "magie-operable"
       ],
       "key": "me",
-      "name": "Voie de Métaphysique — Palier de Magie opérable",
+      "name": "Voie de la Métaphysique",
       "shortname": "ME",
-      "fullname": "Voie de Métaphysique — Palier de Magie opérable",
+      "fullname": "Voie de la Métaphysique",
       "idnumber": "UCKK-PROG-ME",
       "category_idnumber": "UCKK-ME",
       "category_path": "UCKK / Voies / Métaphysique",
@@ -469,7 +469,7 @@
     {
       "id": "program:intelligence-artificielle-gouvernable-magie-operable",
       "code": "IA",
-      "title": "Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable",
+      "title": "Voie de l’Intelligence artificielle gouvernable",
       "short_title": "IA gouvernable",
       "program_type": "voie_uckk",
       "domain": {
@@ -478,11 +478,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable en Intelligence artificielle gouvernable",
+        "title": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
         "symbolic_title": "Cartographe augmenté"
@@ -508,9 +508,9 @@
         "magie-operable"
       ],
       "key": "ia",
-      "name": "Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable",
+      "name": "Voie de l’Intelligence artificielle gouvernable",
       "shortname": "IA",
-      "fullname": "Voie de l’Intelligence artificielle gouvernable — Palier de Magie opérable",
+      "fullname": "Voie de l’Intelligence artificielle gouvernable",
       "idnumber": "UCKK-PROG-IA",
       "category_idnumber": "UCKK-IA",
       "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
@@ -527,7 +527,7 @@
     {
       "id": "program:linguistique-architecture-sens-magie-operable",
       "code": "LI",
-      "title": "Voie de Linguistique et architecture du sens — Palier de Magie opérable",
+      "title": "Voie de la Linguistique et de l’architecture du sens",
       "short_title": "Linguistique et architecture du sens",
       "program_type": "voie_uckk",
       "domain": {
@@ -536,11 +536,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK du Sens",
         "symbolic_title": "Architecte du sens"
@@ -566,9 +566,9 @@
         "magie-operable"
       ],
       "key": "li",
-      "name": "Voie de Linguistique et architecture du sens — Palier de Magie opérable",
+      "name": "Voie de la Linguistique et de l’architecture du sens",
       "shortname": "LI",
-      "fullname": "Voie de Linguistique et architecture du sens — Palier de Magie opérable",
+      "fullname": "Voie de la Linguistique et de l’architecture du sens",
       "idnumber": "UCKK-PROG-LI",
       "category_idnumber": "UCKK-LI",
       "category_path": "UCKK / Voies / Linguistique et architecture du sens",
@@ -585,7 +585,7 @@
     {
       "id": "program:intervention-sociale-systemes-humains-magie-operable",
       "code": "IS",
-      "title": "Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable",
+      "title": "Voie de l’Intervention sociale et des systèmes humains",
       "short_title": "Intervention sociale et systèmes humains",
       "program_type": "voie_uckk",
       "domain": {
@@ -594,11 +594,11 @@
       },
       "palier": {
         "id": "magie-operable",
-        "title": "Magie opérable"
+        "title": "Puissance opératoire"
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Magie opérable",
+        "title": "Parchemin de Puissance opératoire",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK de l’Intervention sociale et des systèmes humains",
         "symbolic_title": "Intervenant du Grand Jeu humain"
@@ -624,9 +624,9 @@
         "magie-operable"
       ],
       "key": "is",
-      "name": "Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable",
+      "name": "Voie de l’Intervention sociale et des systèmes humains",
       "shortname": "IS",
-      "fullname": "Voie de l’Intervention sociale et des systèmes humains — Palier de Magie opérable",
+      "fullname": "Voie de l’Intervention sociale et des systèmes humains",
       "idnumber": "UCKK-PROG-IS",
       "category_idnumber": "UCKK-IS",
       "category_path": "UCKK / Voies / Intervention sociale et systèmes humains",
