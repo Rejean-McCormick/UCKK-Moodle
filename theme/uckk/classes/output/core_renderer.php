@@ -46,6 +46,27 @@ defined('MOODLE_INTERNAL') || die();
  */
 class core_renderer extends \theme_boost\output\core_renderer {
     /**
+     * Whether the login background AMD module has already been queued.
+     *
+     * @var bool
+     */
+    protected $uckkloginbackgroundinitialised = false;
+
+    /**
+     * Add theme-specific footer requirements.
+     *
+     * This override queues the login background selector before Moodle prints
+     * standard footer JavaScript. The module is only loaded on the login page.
+     *
+     * @return string Standard end-of-body HTML.
+     */
+    public function standard_end_of_body_html() {
+        $this->initialise_login_background();
+
+        return parent::standard_end_of_body_html();
+    }
+
+    /**
      * Render the UCKK campus header.
      *
      * This helper is intended for UCKK-specific presentation surfaces such as
@@ -437,6 +458,139 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         return $value;
+    }
+
+    /**
+     * Queue the time-aware login background module when rendering the login page.
+     *
+     * Image URLs come from Moodle theme stored files, not from hardcoded pix
+     * paths. This preserves the existing loginbackground setting as a fallback
+     * and allows the new day/between/night fileareas to be configured in the
+     * theme settings.
+     *
+     * @return void
+     */
+    protected function initialise_login_background(): void {
+        if ($this->uckkloginbackgroundinitialised) {
+            return;
+        }
+
+        $this->uckkloginbackgroundinitialised = true;
+
+        if (!$this->is_uckk_login_page()) {
+            return;
+        }
+
+        $config = $this->get_login_background_config();
+
+        if (empty($config['images']['day'])
+                && empty($config['images']['between'])
+                && empty($config['images']['night'])
+                && empty($config['fallback'])) {
+            return;
+        }
+
+        $this->page->requires->js_call_amd('theme_uckk/login_background', 'init', [$config]);
+    }
+
+    /**
+     * Determine whether the current page is the Moodle login page.
+     *
+     * @return bool
+     */
+    protected function is_uckk_login_page(): bool {
+        $pagelayout = $this->page->pagelayout ?? '';
+        $pagetype = $this->page->pagetype ?? '';
+
+        return $pagelayout === 'login' || $pagetype === 'login-index';
+    }
+
+    /**
+     * Build the login background AMD configuration.
+     *
+     * @return array<string, mixed>
+     */
+    protected function get_login_background_config(): array {
+        $fallback = $this->get_theme_setting_file_url('loginbackground');
+
+        $day = $this->get_theme_setting_file_url('loginbackgroundday');
+        $between = $this->get_theme_setting_file_url('loginbackgroundbetween');
+        $night = $this->get_theme_setting_file_url('loginbackgroundnight');
+
+        if ($day === '') {
+            $day = $fallback;
+        }
+
+        if ($between === '') {
+            $between = $fallback;
+        }
+
+        if ($night === '') {
+            $night = $fallback;
+        }
+
+        return [
+            'selector' => '.login-layout-left',
+            'images' => [
+                'day' => $day,
+                'between' => $between,
+                'night' => $night,
+            ],
+            'fallback' => $fallback,
+            'solar' => [
+                'latitude' => $this->get_float_theme_config('loginbackgroundlatitude', 45.5017),
+                'longitude' => $this->get_float_theme_config('loginbackgroundlongitude', -73.5673),
+                'twilightminutes' => $this->get_int_theme_config('loginbackgroundtwilightminutes', 60),
+            ],
+        ];
+    }
+
+    /**
+     * Get a stored-file URL from the theme settings.
+     *
+     * @param string $filearea Theme filearea.
+     * @return string Absolute URL, or empty string when no file is configured.
+     */
+    protected function get_theme_setting_file_url(string $filearea): string {
+        if (!function_exists('theme_uckk_get_setting_file_url')) {
+            return '';
+        }
+
+        return \theme_uckk_get_setting_file_url($filearea);
+    }
+
+    /**
+     * Get a float theme config value with a safe fallback.
+     *
+     * @param string $name Config key.
+     * @param float $default Default value.
+     * @return float
+     */
+    protected function get_float_theme_config(string $name, float $default): float {
+        $value = get_config('theme_uckk', $name);
+
+        if ($value === false || $value === null || $value === '') {
+            return $default;
+        }
+
+        return is_numeric($value) ? (float)$value : $default;
+    }
+
+    /**
+     * Get an integer theme config value with a safe fallback.
+     *
+     * @param string $name Config key.
+     * @param int $default Default value.
+     * @return int
+     */
+    protected function get_int_theme_config(string $name, int $default): int {
+        $value = get_config('theme_uckk', $name);
+
+        if ($value === false || $value === null || $value === '') {
+            return $default;
+        }
+
+        return is_numeric($value) ? (int)$value : $default;
     }
 
     /**

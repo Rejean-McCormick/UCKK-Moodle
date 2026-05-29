@@ -22,7 +22,27 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__ . '/../../config.php');
+$moodleconfig = null;
+
+if (!empty($_SERVER['DOCUMENT_ROOT'])) {
+    $candidate = rtrim($_SERVER['DOCUMENT_ROOT'], "\\/") . DIRECTORY_SEPARATOR . 'config.php';
+    if (is_readable($candidate)) {
+        $moodleconfig = $candidate;
+    }
+}
+
+if ($moodleconfig === null) {
+    $candidate = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'config.php';
+    if (is_readable($candidate)) {
+        $moodleconfig = $candidate;
+    }
+}
+
+if ($moodleconfig === null) {
+    throw new \RuntimeException('Cannot locate Moodle config.php.');
+}
+
+require_once($moodleconfig);
 
 defined('MOODLE_INTERNAL') || die();
 

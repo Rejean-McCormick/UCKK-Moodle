@@ -176,6 +176,9 @@ $uckk-nav-transition: 160ms ease-in-out !default;
         background-color $uckk-nav-transition,
         border-color $uckk-nav-transition,
         box-shadow $uckk-nav-transition;
+    border-bottom: 0;
+    background-image: none;
+    text-decoration: none;
 
     &:hover,
     &:focus {
@@ -192,15 +195,17 @@ $uckk-nav-transition: 160ms ease-in-out !default;
 .navbar .nav-link[aria-current="true"] {
     color: $uckk-nav-active-text;
     background-color: $uckk-nav-accent;
-    box-shadow:
-        inset 0 -.1875rem 0 $uckk-nav-gold,
-        0 .125rem .3rem rgba(23, 35, 33, .12);
+    border-bottom: 0;
+    background-image: none;
+    box-shadow: 0 .125rem .3rem rgba(23, 35, 33, .12);
     font-weight: 750;
+    text-decoration: none;
 
     &:hover,
     &:focus {
         color: $uckk-nav-active-text;
         background-color: $uckk-nav-accent-strong;
+        text-decoration: none;
     }
 }
 
@@ -252,17 +257,15 @@ $uckk-nav-transition: 160ms ease-in-out !default;
     .nav-link[aria-current="true"] {
         color: $uckk-nav-active-text;
         background-color: $uckk-nav-accent;
+        border-bottom: 0;
+        background-image: none;
+        box-shadow: 0 .125rem .3rem rgba(23, 35, 33, .12);
         font-weight: 750;
+        text-decoration: none;
 
         &::after {
-            position: absolute;
-            right: .75rem;
-            bottom: .25rem;
-            left: .75rem;
-            height: .1875rem;
-            content: "";
-            background: $uckk-nav-gold;
-            border-radius: $uckk-nav-pill-radius;
+            display: none;
+            content: none;
         }
     }
 }
@@ -277,7 +280,11 @@ $uckk-nav-transition: 160ms ease-in-out !default;
     .nav-link[aria-current="page"] {
         color: $uckk-nav-active-text;
         background-color: $uckk-nav-accent;
+        border-bottom: 0;
+        background-image: none;
+        box-shadow: none;
         font-weight: 750;
+        text-decoration: none;
 
         &:hover,
         &:focus {
@@ -471,9 +478,10 @@ $uckk-nav-transition: 160ms ease-in-out !default;
         &[aria-current="true"] {
             color: $uckk-nav-active-text;
             background-color: $uckk-nav-accent;
-            border-color: $uckk-nav-accent $uckk-nav-accent $uckk-nav-accent;
-            box-shadow: inset 0 -.1875rem 0 $uckk-nav-gold;
+            border-color: $uckk-nav-accent;
+            box-shadow: none;
             font-weight: 750;
+            text-decoration: none;
         }
     }
 
@@ -482,7 +490,8 @@ $uckk-nav-transition: 160ms ease-in-out !default;
     .moremenu .nav-link[aria-current="true"] {
         color: $uckk-nav-active-text;
         background-color: $uckk-nav-accent;
-        box-shadow: inset 0 -.1875rem 0 $uckk-nav-gold;
+        box-shadow: none;
+        text-decoration: none;
     }
 }
 
@@ -540,7 +549,8 @@ $uckk-nav-transition: 160ms ease-in-out !default;
         color: $uckk-nav-active-text;
         background-color: $uckk-nav-accent;
         border-color: $uckk-nav-accent;
-        box-shadow: inset 0 -.1875rem 0 $uckk-nav-gold;
+        box-shadow: none;
+        text-decoration: none;
 
         &:hover,
         &:focus {
@@ -624,7 +634,8 @@ $uckk-nav-transition: 160ms ease-in-out !default;
         color: $uckk-nav-active-text;
         background-color: var(--uckk-nav-domain-color);
         border-color: var(--uckk-nav-domain-color);
-        box-shadow: inset 0 -.1875rem 0 $uckk-nav-gold;
+        box-shadow: none;
+        text-decoration: none;
 
         &:hover,
         &:focus {
@@ -818,13 +829,6 @@ body.pagelayout-secure {
             width: 100%;
             margin-right: 0;
         }
-    }
-
-    .primary-navigation .nav-link.active::after,
-    .primary-navigation .nav-link[aria-current="page"]::after,
-    .primary-navigation .nav-link[aria-current="true"]::after {
-        right: .5rem;
-        left: .5rem;
     }
 }
 

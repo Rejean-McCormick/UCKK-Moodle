@@ -85,8 +85,8 @@ final class lib_test extends \advanced_testcase {
         $this->assertSame((int)$data->introformat, (int)$record->introformat);
         $this->assertSame('active', $record->status);
         $this->assertSame('course', $record->visibility);
-        $this->assertSame(1, (int)$record->completionadditem);
-        $this->assertSame(0, (int)$record->completionvalidateitem);
+        $this->assertSame(1, (int)$record->completionrequireitem);
+        $this->assertSame(0, (int)$record->completionrequirevalidation);
         $this->assertSame(1, (int)$record->versionno);
 
         $this->assertGreaterThan(0, (int)$record->createdby);
@@ -117,8 +117,8 @@ final class lib_test extends \advanced_testcase {
         $data->intro = '<p>Updated archive intro.</p>';
         $data->status = 'pending_review';
         $data->visibility = 'restricted_integrity';
-        $data->completionadditem = 1;
-        $data->completionvalidateitem = 1;
+        $data->completionrequireitem = 1;
+        $data->completionrequirevalidation = 1;
         $data->metadata = [
             'fixture' => 'lib_test',
             'updated' => true,
@@ -135,8 +135,8 @@ final class lib_test extends \advanced_testcase {
         $this->assertSame('<p>Updated archive intro.</p>', $record->intro);
         $this->assertSame('pending_review', $record->status);
         $this->assertSame('restricted_integrity', $record->visibility);
-        $this->assertSame(1, (int)$record->completionadditem);
-        $this->assertSame(1, (int)$record->completionvalidateitem);
+        $this->assertSame(1, (int)$record->completionrequireitem);
+        $this->assertSame(1, (int)$record->completionrequirevalidation);
 
         $metadata = json_decode((string)$record->metadata, true);
         $this->assertIsArray($metadata);
@@ -224,6 +224,7 @@ final class lib_test extends \advanced_testcase {
         yield 'institution' => ['institution', 'institution'];
         yield 'public' => ['public', 'public'];
         yield 'restricted' => ['restricted', 'restricted'];
+        yield 'restricted cultural' => ['restricted_cultural', 'restricted_cultural'];
         yield 'restricted integrity' => ['restricted_integrity', 'restricted_integrity'];
         yield 'hidden' => ['hidden', 'hidden'];
         yield 'archived' => ['archived', 'archived'];
@@ -277,17 +278,47 @@ final class lib_test extends \advanced_testcase {
     }
 
     /**
-     * The archive declares the canonical file areas.
+     * The archive declares canonical archive, media, export, and advisory file areas.
      */
-    public function test_get_fileareas_returns_canonical_archive_fileareas(): void {
-        $this->assertSame([
+    public function test_get_fileareas_returns_canonical_archive_media_and_advisory_fileareas(): void {
+        $fileareas = uckkarchive_get_fileareas();
+
+        $expected = [
+            'item_content',
+            'item_publicsummary',
+            'item_files',
             'proof_files',
             'decision_attachments',
             'minutes_files',
             'kristal_files',
             'portfolio_files',
             'integrity_exports',
-        ], uckkarchive_get_fileareas());
+            'provenance_files',
+            'validation_files',
+            'revision_files',
+            'export_package',
+            'export_manifest',
+            'media_original',
+            'media_preview',
+            'media_thumbnail',
+            'media_derivative',
+            'media_caption',
+            'media_transcript',
+            'media_attachment',
+            'content_review_files',
+            'external_work_reference_files',
+            'cultural_protocol_files',
+        ];
+
+        foreach ($expected as $filearea) {
+            $this->assertContains($filearea, $fileareas, 'Missing file area: ' . $filearea);
+        }
+
+        $this->assertSame(
+            count($fileareas),
+            count(array_unique($fileareas)),
+            'File areas must not contain duplicates.'
+        );
     }
 
     /**
@@ -307,12 +338,32 @@ final class lib_test extends \advanced_testcase {
      * @return \Generator
      */
     public static function filearea_table_provider(): \Generator {
+        yield 'item content' => ['item_content', 'uckkarchive_item'];
+        yield 'item public summary' => ['item_publicsummary', 'uckkarchive_item'];
+        yield 'item files' => ['item_files', 'uckkarchive_item'];
         yield 'proof files' => ['proof_files', 'uckkarchive_proof'];
         yield 'kristal files' => ['kristal_files', 'uckkarchive_kristal'];
         yield 'integrity exports' => ['integrity_exports', 'uckkarchive_export'];
         yield 'decision attachments' => ['decision_attachments', 'uckkarchive_item'];
         yield 'minutes files' => ['minutes_files', 'uckkarchive_item'];
         yield 'portfolio files' => ['portfolio_files', 'uckkarchive_item'];
+        yield 'provenance files' => ['provenance_files', 'uckkarchive_prov'];
+        yield 'validation files' => ['validation_files', 'uckkarchive_rev'];
+        yield 'revision files' => ['revision_files', 'uckkarchive_rev'];
+        yield 'export package' => ['export_package', 'uckkarchive_export'];
+        yield 'export manifest' => ['export_manifest', 'uckkarchive_export'];
+
+        yield 'media original' => ['media_original', 'uckkarchive_media_version'];
+        yield 'media preview' => ['media_preview', 'uckkarchive_media_version'];
+        yield 'media thumbnail' => ['media_thumbnail', 'uckkarchive_media_version'];
+        yield 'media derivative' => ['media_derivative', 'uckkarchive_media_version'];
+        yield 'media caption' => ['media_caption', 'uckkarchive_media_version'];
+        yield 'media transcript' => ['media_transcript', 'uckkarchive_media_version'];
+        yield 'media attachment' => ['media_attachment', 'uckkarchive_media_version'];
+
+        yield 'content review files' => ['content_review_files', 'uckkarchive_content_review'];
+        yield 'external work reference files' => ['external_work_reference_files', 'uckkarchive_external_work'];
+        yield 'cultural protocol files' => ['cultural_protocol_files', 'uckkarchive_content_marker'];
         yield 'unknown' => ['unknown_filearea', ''];
     }
 
@@ -347,7 +398,7 @@ final class lib_test extends \advanced_testcase {
     }
 
     /**
-     * Completion is false when the add-item rule is enabled and no user item
+     * Completion is false when the completion item rule is enabled and no user item
      * exists.
      */
     public function test_completion_add_item_rule_requires_user_item(): void {
@@ -355,8 +406,8 @@ final class lib_test extends \advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $data = $this->get_valid_instance_data((int)$course->id);
-        $data->completionadditem = 1;
-        $data->completionvalidateitem = 0;
+        $data->completionrequireitem = 1;
+        $data->completionrequirevalidation = 0;
 
         $archiveid = uckkarchive_add_instance($data, null);
 
@@ -368,7 +419,7 @@ final class lib_test extends \advanced_testcase {
     }
 
     /**
-     * Completion is true when the add-item rule is enabled and a user item
+     * Completion is true when the completion item rule is enabled and a user item
      * exists.
      */
     public function test_completion_add_item_rule_passes_when_user_item_exists(): void {
@@ -378,8 +429,8 @@ final class lib_test extends \advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $data = $this->get_valid_instance_data((int)$course->id);
-        $data->completionadditem = 1;
-        $data->completionvalidateitem = 0;
+        $data->completionrequireitem = 1;
+        $data->completionrequirevalidation = 0;
 
         $archiveid = uckkarchive_add_instance($data, null);
 
@@ -403,8 +454,8 @@ final class lib_test extends \advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $data = $this->get_valid_instance_data((int)$course->id);
-        $data->completionadditem = 0;
-        $data->completionvalidateitem = 1;
+        $data->completionrequireitem = 0;
+        $data->completionrequirevalidation = 1;
 
         $archiveid = uckkarchive_add_instance($data, null);
 
@@ -526,6 +577,211 @@ final class lib_test extends \advanced_testcase {
         $this->assertTrue(uckkarchive_can_view_filearea_item($cm, $context, 'decision_attachments', $itemid));
     }
 
+
+    /**
+     * Deleting an archive instance removes owned media, advisory, and external-work records.
+     */
+    public function test_delete_instance_removes_media_advisory_and_external_work_records(): void {
+        global $DB;
+
+        $this->require_tables([
+            'uckkarchive_media',
+            'uckkarchive_media_version',
+            'uckkarchive_content_marker',
+            'uckkarchive_content_review',
+            'uckkarchive_external_work',
+        ]);
+
+        $course = $this->getDataGenerator()->create_course();
+        $user = $this->getDataGenerator()->create_user();
+
+        [$archive, $cm] = $this->create_archive_module($course);
+        $context = context_module::instance((int)$cm->id);
+
+        $mediaid = $this->insert_media((int)$archive->id, (int)$course->id, (int)$cm->id, (int)$context->id, (int)$user->id);
+        $versionid = $this->insert_media_version(
+            (int)$archive->id,
+            (int)$course->id,
+            (int)$cm->id,
+            (int)$context->id,
+            (int)$user->id,
+            $mediaid
+        );
+        $markerid = $this->insert_content_marker(
+            (int)$archive->id,
+            (int)$course->id,
+            (int)$cm->id,
+            (int)$context->id,
+            (int)$user->id,
+            $mediaid
+        );
+        $reviewid = $this->insert_content_review(
+            (int)$archive->id,
+            (int)$course->id,
+            (int)$cm->id,
+            (int)$context->id,
+            (int)$user->id,
+            $markerid
+        );
+        $externalworkid = $this->insert_external_work(
+            (int)$archive->id,
+            (int)$course->id,
+            (int)$cm->id,
+            (int)$context->id,
+            (int)$user->id
+        );
+
+        $this->assertTrue($DB->record_exists('uckkarchive_media', ['id' => $mediaid]));
+        $this->assertTrue(uckkarchive_delete_instance((int)$archive->id));
+
+        $this->assertFalse($DB->record_exists('uckkarchive_media', ['id' => $mediaid]));
+        $this->assertFalse($DB->record_exists('uckkarchive_media_version', ['id' => $versionid]));
+        $this->assertFalse($DB->record_exists('uckkarchive_content_marker', ['id' => $markerid]));
+        $this->assertFalse($DB->record_exists('uckkarchive_content_review', ['id' => $reviewid]));
+        $this->assertFalse($DB->record_exists('uckkarchive_external_work', ['id' => $externalworkid]));
+    }
+
+    /**
+     * Media file-area checks allow normal course-visible media version files.
+     */
+    public function test_can_view_filearea_item_allows_course_visible_media_version(): void {
+        $this->require_tables([
+            'uckkarchive_media',
+            'uckkarchive_media_version',
+        ]);
+
+        $course = $this->getDataGenerator()->create_course();
+        $user = $this->getDataGenerator()->create_user();
+        $this->setUser($user);
+
+        [$archive, $cm] = $this->create_archive_module($course);
+        $context = context_module::instance((int)$cm->id);
+
+        $mediaid = $this->insert_media((int)$archive->id, (int)$course->id, (int)$cm->id, (int)$context->id, (int)$user->id, [
+            'visibility' => 'course',
+        ]);
+        $versionid = $this->insert_media_version(
+            (int)$archive->id,
+            (int)$course->id,
+            (int)$cm->id,
+            (int)$context->id,
+            (int)$user->id,
+            $mediaid,
+            [
+                'visibility' => 'course',
+            ]
+        );
+
+        $this->assertTrue(uckkarchive_can_view_filearea_item($cm, $context, 'media_original', $versionid));
+    }
+
+    /**
+     * Restricted media file-area checks require restricted-media authority.
+     */
+    public function test_can_view_filearea_item_requires_capability_for_restricted_media_version(): void {
+        $this->require_tables([
+            'uckkarchive_media',
+            'uckkarchive_media_version',
+        ]);
+
+        $course = $this->getDataGenerator()->create_course();
+        $owner = $this->getDataGenerator()->create_user();
+        $viewer = $this->getDataGenerator()->create_user();
+
+        [$archive, $cm] = $this->create_archive_module($course);
+        $context = context_module::instance((int)$cm->id);
+
+        $mediaid = $this->insert_media((int)$archive->id, (int)$course->id, (int)$cm->id, (int)$context->id, (int)$owner->id, [
+            'visibility' => 'restricted',
+        ]);
+        $versionid = $this->insert_media_version(
+            (int)$archive->id,
+            (int)$course->id,
+            (int)$cm->id,
+            (int)$context->id,
+            (int)$owner->id,
+            $mediaid,
+            [
+                'visibility' => 'restricted',
+            ]
+        );
+
+        $this->setUser($viewer);
+        $this->assertFalse(uckkarchive_can_view_filearea_item($cm, $context, 'media_original', $versionid));
+
+        $this->assign_capability_to_user((int)$viewer->id, 'mod/uckkarchive:viewrestrictedmedia', $context);
+        $this->assertTrue(uckkarchive_can_view_filearea_item($cm, $context, 'media_original', $versionid));
+    }
+
+    /**
+     * External-work and advisory file areas resolve to their owning records.
+     */
+    public function test_can_view_filearea_item_resolves_external_work_and_advisory_fileareas(): void {
+        $this->require_tables([
+            'uckkarchive_external_work',
+            'uckkarchive_content_marker',
+            'uckkarchive_content_review',
+        ]);
+
+        $course = $this->getDataGenerator()->create_course();
+        $user = $this->getDataGenerator()->create_user();
+        $this->setUser($user);
+
+        [$archive, $cm] = $this->create_archive_module($course);
+        $context = context_module::instance((int)$cm->id);
+
+        $externalworkid = $this->insert_external_work(
+            (int)$archive->id,
+            (int)$course->id,
+            (int)$cm->id,
+            (int)$context->id,
+            (int)$user->id,
+            ['visibility' => 'course']
+        );
+        $markerid = $this->insert_content_marker(
+            (int)$archive->id,
+            (int)$course->id,
+            (int)$cm->id,
+            (int)$context->id,
+            (int)$user->id,
+            0,
+            ['visibility' => 'course']
+        );
+        $reviewid = $this->insert_content_review(
+            (int)$archive->id,
+            (int)$course->id,
+            (int)$cm->id,
+            (int)$context->id,
+            (int)$user->id,
+            $markerid,
+            ['visibility' => 'course']
+        );
+
+        $this->assertTrue(
+            uckkarchive_can_view_filearea_item($cm, $context, 'external_work_reference_files', $externalworkid)
+        );
+        $this->assertTrue(
+            uckkarchive_can_view_filearea_item($cm, $context, 'cultural_protocol_files', $markerid)
+        );
+        $this->assertTrue(
+            uckkarchive_can_view_filearea_item($cm, $context, 'content_review_files', $reviewid)
+        );
+    }
+
+    /**
+     * Course reset keeps archive data as institutional memory.
+     */
+    public function test_reset_userdata_reports_archive_preservation(): void {
+        $data = new stdClass();
+        $data->courseid = 1;
+
+        $result = uckkarchive_reset_userdata($data);
+
+        $this->assertCount(1, $result);
+        $this->assertFalse($result[0]['error']);
+        $this->assertIsString($result[0]['item']);
+    }
+
     /**
      * Build valid activity instance data for add/update callbacks.
      *
@@ -542,8 +798,8 @@ final class lib_test extends \advanced_testcase {
         $data->visibility = 'course';
         $data->timeopen = 0;
         $data->timeclose = 0;
-        $data->completionadditem = 1;
-        $data->completionvalidateitem = 0;
+        $data->completionrequireitem = 1;
+        $data->completionrequirevalidation = 0;
         $data->metadata = [
             'fixture' => 'lib_test',
         ];
@@ -627,11 +883,9 @@ final class lib_test extends \advanced_testcase {
      * @return int Archive item id.
      */
     private function insert_archive_item(int $archiveid, int $courseid, int $userid, array $overrides = []): int {
-        global $DB;
-
         $now = time();
 
-        $record = (object)array_merge([
+        return $this->insert_filtered_record('uckkarchive_item', array_merge([
             'archiveid' => $archiveid,
             'courseid' => $courseid,
             'cmid' => 0,
@@ -656,9 +910,7 @@ final class lib_test extends \advanced_testcase {
             'timecreated' => $now,
             'timemodified' => $now,
             'metadata' => json_encode(['fixture' => 'lib_test']),
-        ], $overrides);
-
-        return (int)$DB->insert_record('uckkarchive_item', $record);
+        ], $overrides));
     }
 
     /**
@@ -671,11 +923,9 @@ final class lib_test extends \advanced_testcase {
      * @return int Archive proof id.
      */
     private function insert_archive_proof(int $archiveid, int $courseid, int $userid, array $overrides = []): int {
-        global $DB;
-
         $now = time();
 
-        $record = (object)array_merge([
+        return $this->insert_filtered_record('uckkarchive_proof', array_merge([
             'archiveid' => $archiveid,
             'itemid' => 0,
             'courseid' => $courseid,
@@ -700,9 +950,347 @@ final class lib_test extends \advanced_testcase {
             'timecreated' => $now,
             'timemodified' => $now,
             'metadata' => json_encode(['fixture' => 'lib_test']),
-        ], $overrides);
+        ], $overrides));
+    }
 
-        return (int)$DB->insert_record('uckkarchive_proof', $record);
+
+    /**
+     * Insert a minimal media record.
+     *
+     * @param int $archiveid Archive instance id.
+     * @param int $courseid Course id.
+     * @param int $cmid Course module id.
+     * @param int $contextid Context id.
+     * @param int $userid User id.
+     * @param array<string, mixed> $overrides Field overrides.
+     * @return int Media id.
+     */
+    private function insert_media(
+        int $archiveid,
+        int $courseid,
+        int $cmid,
+        int $contextid,
+        int $userid,
+        array $overrides = []
+    ): int {
+        $now = time();
+
+        return $this->insert_filtered_record('uckkarchive_media', array_merge([
+            'uuid' => $this->uuid(),
+            'archiveid' => $archiveid,
+            'courseid' => $courseid,
+            'cmid' => $cmid,
+            'contextid' => $contextid,
+            'ownerid' => $userid,
+            'userid' => $userid,
+            'createdby' => $userid,
+            'modifiedby' => $userid,
+            'sourceid' => 0,
+            'title' => 'Media item',
+            'subtitle' => '',
+            'description' => 'Media description.',
+            'mediatype' => 'document',
+            'mimetype' => 'text/plain',
+            'status' => 'active',
+            'visibility' => 'course',
+            'audiencesuitability' => 'guided',
+            'licensekey' => '',
+            'rightsstatement' => '',
+            'language' => 'fr',
+            'duration' => 0,
+            'pagecount' => 1,
+            'hashoriginal' => '',
+            'currentversionid' => 0,
+            'provenanceid' => 0,
+            'metadata' => json_encode(['fixture' => 'lib_test']),
+            'timecreated' => $now,
+            'timemodified' => $now,
+        ], $overrides));
+    }
+
+    /**
+     * Insert a minimal media version record.
+     *
+     * @param int $archiveid Archive instance id.
+     * @param int $courseid Course id.
+     * @param int $cmid Course module id.
+     * @param int $contextid Context id.
+     * @param int $userid User id.
+     * @param int $mediaid Media id.
+     * @param array<string, mixed> $overrides Field overrides.
+     * @return int Media version id.
+     */
+    private function insert_media_version(
+        int $archiveid,
+        int $courseid,
+        int $cmid,
+        int $contextid,
+        int $userid,
+        int $mediaid,
+        array $overrides = []
+    ): int {
+        $now = time();
+
+        return $this->insert_filtered_record('uckkarchive_media_version', array_merge([
+            'uuid' => $this->uuid(),
+            'archiveid' => $archiveid,
+            'courseid' => $courseid,
+            'cmid' => $cmid,
+            'contextid' => $contextid,
+            'mediaid' => $mediaid,
+            'versionno' => 1,
+            'versionnumber' => 1,
+            'label' => 'Version 1',
+            'status' => 'active',
+            'visibility' => 'course',
+            'filearea' => 'media_original',
+            'filename' => 'media.txt',
+            'filesize' => 10,
+            'mimetype' => 'text/plain',
+            'contenthash' => sha1('media'),
+            'iscurrent' => 1,
+            'createdby' => $userid,
+            'modifiedby' => $userid,
+            'metadata' => json_encode(['fixture' => 'lib_test']),
+            'timecreated' => $now,
+            'timemodified' => $now,
+        ], $overrides));
+    }
+
+    /**
+     * Insert a minimal content marker record.
+     *
+     * @param int $archiveid Archive instance id.
+     * @param int $courseid Course id.
+     * @param int $cmid Course module id.
+     * @param int $contextid Context id.
+     * @param int $userid User id.
+     * @param int $mediaid Optional media id.
+     * @param array<string, mixed> $overrides Field overrides.
+     * @return int Content marker id.
+     */
+    private function insert_content_marker(
+        int $archiveid,
+        int $courseid,
+        int $cmid,
+        int $contextid,
+        int $userid,
+        int $mediaid = 0,
+        array $overrides = []
+    ): int {
+        $now = time();
+
+        return $this->insert_filtered_record('uckkarchive_content_marker', array_merge([
+            'uuid' => $this->uuid(),
+            'archiveid' => $archiveid,
+            'courseid' => $courseid,
+            'cmid' => $cmid,
+            'contextid' => $contextid,
+            'mediaid' => $mediaid,
+            'targettype' => $mediaid > 0 ? 'media' : 'external_work',
+            'targetid' => $mediaid,
+            'targetuuid' => '',
+            'tagid' => 0,
+            'tagsetid' => 0,
+            'tagkey' => 'violence',
+            'locatortype' => 'timecode',
+            'locatorvalue' => '00:01:00',
+            'locatorstart' => '00:01:00',
+            'locatorend' => '00:02:00',
+            'locatorsort' => 60,
+            'severity' => 'moderate',
+            'visibility' => 'course',
+            'audiencesuitability' => 'guided',
+            'reviewstate' => 'pending_review',
+            'reviewedby' => 0,
+            'timereviewed' => 0,
+            'note' => 'Marker note.',
+            'teachingcontext' => 'Teaching context.',
+            'culturalprotocolnote' => '',
+            'reviewrationale' => '',
+            'createdby' => $userid,
+            'modifiedby' => $userid,
+            'metadata' => json_encode(['fixture' => 'lib_test']),
+            'timecreated' => $now,
+            'timemodified' => $now,
+        ], $overrides));
+    }
+
+    /**
+     * Insert a minimal content review record.
+     *
+     * @param int $archiveid Archive instance id.
+     * @param int $courseid Course id.
+     * @param int $cmid Course module id.
+     * @param int $contextid Context id.
+     * @param int $userid User id.
+     * @param int $markerid Marker id.
+     * @param array<string, mixed> $overrides Field overrides.
+     * @return int Content review id.
+     */
+    private function insert_content_review(
+        int $archiveid,
+        int $courseid,
+        int $cmid,
+        int $contextid,
+        int $userid,
+        int $markerid,
+        array $overrides = []
+    ): int {
+        $now = time();
+
+        return $this->insert_filtered_record('uckkarchive_content_review', array_merge([
+            'uuid' => $this->uuid(),
+            'archiveid' => $archiveid,
+            'courseid' => $courseid,
+            'cmid' => $cmid,
+            'contextid' => $contextid,
+            'markerid' => $markerid,
+            'reviewerid' => $userid,
+            'userid' => $userid,
+            'createdby' => $userid,
+            'modifiedby' => $userid,
+            'state' => 'approved',
+            'severity' => 'moderate',
+            'audiencesuitability' => 'guided',
+            'visibility' => 'course',
+            'rationale' => 'Review rationale.',
+            'reviewnote' => 'Review note.',
+            'metadata' => json_encode(['fixture' => 'lib_test']),
+            'timecreated' => $now,
+            'timemodified' => $now,
+        ], $overrides));
+    }
+
+    /**
+     * Insert a minimal external work record.
+     *
+     * @param int $archiveid Archive instance id.
+     * @param int $courseid Course id.
+     * @param int $cmid Course module id.
+     * @param int $contextid Context id.
+     * @param int $userid User id.
+     * @param array<string, mixed> $overrides Field overrides.
+     * @return int External work id.
+     */
+    private function insert_external_work(
+        int $archiveid,
+        int $courseid,
+        int $cmid,
+        int $contextid,
+        int $userid,
+        array $overrides = []
+    ): int {
+        $now = time();
+
+        return $this->insert_filtered_record('uckkarchive_external_work', array_merge([
+            'uuid' => $this->uuid(),
+            'archiveid' => $archiveid,
+            'courseid' => $courseid,
+            'cmid' => $cmid,
+            'contextid' => $contextid,
+            'ownerid' => $userid,
+            'userid' => $userid,
+            'createdby' => $userid,
+            'modifiedby' => $userid,
+            'worktype' => 'film',
+            'status' => 'active',
+            'visibility' => 'course',
+            'audiencesuitability' => 'guided',
+            'rightsstatus' => 'licensed_external',
+            'title' => 'External work',
+            'subtitle' => '',
+            'creator' => 'Creator',
+            'publisher' => 'Publisher',
+            'publicationyear' => 2020,
+            'language' => 'fr',
+            'sourceurl' => 'https://example.test/external-work',
+            'identifier' => 'EXT-001',
+            'identifiertype' => 'local_identifier',
+            'citation' => 'External work citation.',
+            'rightsstatement' => 'Rights statement.',
+            'licensekey' => 'licensed',
+            'sourcenote' => 'Source note.',
+            'teachingnote' => 'Teaching note.',
+            'culturalprotocolnote' => '',
+            'description' => 'External work description.',
+            'provenanceid' => 0,
+            'metadata' => json_encode(['fixture' => 'lib_test']),
+            'timecreated' => $now,
+            'timemodified' => $now,
+        ], $overrides));
+    }
+
+    /**
+     * Insert a record while ignoring fields that are not present in the active schema.
+     *
+     * @param string $table Table name.
+     * @param array<string, mixed> $data Data.
+     * @return int Inserted id.
+     */
+    private function insert_filtered_record(string $table, array $data): int {
+        global $DB;
+
+        $this->assertTrue($this->table_exists($table), 'Missing table required by test: ' . $table);
+
+        $columns = $DB->get_columns($table);
+        $record = new stdClass();
+
+        foreach ($data as $field => $value) {
+            if (array_key_exists($field, $columns)) {
+                $record->{$field} = $value;
+            }
+        }
+
+        return (int)$DB->insert_record($table, $record);
+    }
+
+    /**
+     * Require tables for a test.
+     *
+     * @param string[] $tables Table names.
+     */
+    private function require_tables(array $tables): void {
+        foreach ($tables as $table) {
+            if (!$this->table_exists($table)) {
+                $this->markTestSkipped('Required table is not installed yet: ' . $table);
+            }
+        }
+    }
+
+    /**
+     * Return whether a table exists.
+     *
+     * @param string $table Table name.
+     * @return bool
+     */
+    private function table_exists(string $table): bool {
+        global $DB;
+
+        return $DB->get_manager()->table_exists(new \xmldb_table($table));
+    }
+
+    /**
+     * Return a UUID.
+     *
+     * @return string
+     */
+    private function uuid(): string {
+        if (class_exists('\core\uuid')) {
+            return \core\uuid::generate();
+        }
+
+        return sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            random_int(0, 0xffff),
+            random_int(0, 0xffff),
+            random_int(0, 0xffff),
+            random_int(0, 0x0fff) | 0x4000,
+            random_int(0, 0x3fff) | 0x8000,
+            random_int(0, 0xffff),
+            random_int(0, 0xffff),
+            random_int(0, 0xffff)
+        );
     }
 
     /**

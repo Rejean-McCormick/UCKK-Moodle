@@ -1,0 +1,367 @@
+{
+  "schema": "local_uckk.news.v1",
+  "component": "local_uckk",
+  "page": "news",
+  "title": "Actualités et appels UCKK",
+  "description": "Fil public des actualités, appels, annonces d’assemblées, défis et avis d’intégrité de l’Univers-Cité King Klown.",
+  "updated_at": "2026-05-23",
+  "public_url": "/local/uckk/news.php",
+  "display": {
+    "eyebrow": "Journal public",
+    "summary": "Repères publics, appels ouverts, avis d’intégrité, annonces d’assemblées et traces de construction de l’Univers-Cité King Klown.",
+    "boundarynotice": "Les informations publiées ici documentent l’activité interne de la cité-école. Elles ne constituent pas des annonces d’accréditation publique, de grade universitaire reconnu par l’État ou de titre professionnel réglementé."
+  },
+  "filters": [
+    {
+      "key": "actualite",
+      "label": "Actualités"
+    },
+    {
+      "key": "appel",
+      "label": "Appels"
+    },
+    {
+      "key": "assemblee",
+      "label": "Assemblées"
+    },
+    {
+      "key": "avis",
+      "label": "Avis"
+    }
+  ],
+  "items": [
+    {
+      "id": "news:campus-public-uckk",
+      "type": "actualite",
+      "type_label": "Actualité",
+      "status": "published",
+      "status_label": "Publié",
+      "visibility": "public",
+      "pinned": true,
+      "sort_order": 10,
+      "published_at": "2026-05-23",
+      "title": "Ouverture du portail public UCKK",
+      "subtitle": "Une cité-école expérimentale pour comprendre le Grand Jeu social.",
+      "summary": "L’Univers-Cité King Klown ouvre son portail public : Accueil, À propos, Voies, Cours, Défis, Assemblées, Intégrité, Archives, Actualités et Contact.",
+      "body": "UCKK présente désormais un espace public cohérent pour expliquer sa mission, ses Voies, ses défis, ses assemblées, ses règles d’intégrité et ses archives. Ce portail ne remplace pas Moodle : il donne une façade institutionnelle claire au campus pédagogique.",
+      "tags": [
+        "campus",
+        "institution",
+        "grand-jeu-social"
+      ],
+      "audience": [
+        "public",
+        "joueurs",
+        "aspirants"
+      ],
+      "related_pages": [
+        {
+          "label": "À propos",
+          "url": "/local/uckk/about.php"
+        },
+        {
+          "label": "Voies UCKK",
+          "url": "/local/uckk/programs.php"
+        }
+      ],
+      "cta": {
+        "label": "Découvrir UCKK",
+        "url": "/local/uckk/about.php"
+      }
+    },
+    {
+      "id": "news:canon-niveaux-parchemins",
+      "type": "avis",
+      "type_label": "Avis",
+      "status": "published",
+      "status_label": "Publié",
+      "visibility": "public",
+      "pinned": true,
+      "sort_order": 20,
+      "published_at": "2026-05-23",
+      "title": "Clarification des Niveaux et Parchemins UCKK",
+      "subtitle": "Les reconnaissances UCKK sont internes à la cité-école.",
+      "summary": "UCKK clarifie sa nomenclature : Voies, Niveaux, titres internes, dossiers de passage et Parchemins UCKK ne doivent pas être confondus avec des diplômes publics accrédités.",
+      "body": "Les reconnaissances UCKK sont des attestations de parcours propres à la cité-école. Elles documentent une progression pédagogique, des preuves, des compétences, des défis et des passages de Niveau. Elles ne constituent pas des diplômes publics, grades universitaires ou titres professionnels reconnus par l’État, sauf reconnaissance officielle future.",
+      "tags": [
+        "canon",
+        "niveaux",
+        "parchemins",
+        "reconnaissance-interne"
+      ],
+      "audience": [
+        "public",
+        "joueurs",
+        "mentors"
+      ],
+      "related_pages": [
+        {
+          "label": "Voies UCKK",
+          "url": "/local/uckk/programs.php"
+        },
+        {
+          "label": "Intégrité",
+          "url": "/local/uckk/integrity.php"
+        }
+      ],
+      "cta": {
+        "label": "Voir les Voies",
+        "url": "/local/uckk/programs.php"
+      }
+    },
+    {
+      "id": "call:defis-regles-invisibles",
+      "type": "appel",
+      "type_label": "Appel",
+      "status": "open",
+      "status_label": "Ouvert",
+      "visibility": "public",
+      "pinned": false,
+      "sort_order": 30,
+      "published_at": "2026-05-23",
+      "closes_at": null,
+      "title": "Appel à défis — Cartographier une règle invisible",
+      "subtitle": "Observer, documenter, expliquer, corriger.",
+      "summary": "UCKK invite les Joueurs à identifier une règle invisible du Grand Jeu social et à produire une carte claire de ses effets.",
+      "body": "Une règle invisible peut être une norme sociale, une procédure opaque, un filtre algorithmique, une hiérarchie implicite, une réputation, une contrainte économique ou une habitude institutionnelle. Le défi consiste à la rendre lisible, à distinguer faits et hypothèses, puis à proposer une amélioration vérifiable.",
+      "tags": [
+        "appel",
+        "defi",
+        "enquete",
+        "preuves"
+      ],
+      "audience": [
+        "joueurs",
+        "aspirants",
+        "batisseurs"
+      ],
+      "expected_outputs": [
+        "Carte du système observé",
+        "Sources ou observations documentées",
+        "Distinction claire entre faits, hypothèses et interprétations",
+        "Proposition de correction ou d’amélioration"
+      ],
+      "related_pages": [
+        {
+          "label": "Défis",
+          "url": "/local/uckk/challenges.php"
+        },
+        {
+          "label": "Archives",
+          "url": "/local/uckk/archives.php"
+        }
+      ],
+      "cta": {
+        "label": "Voir les défis",
+        "url": "/local/uckk/challenges.php"
+      }
+    },
+    {
+      "id": "assembly:assemblee-des-defis-ouverture",
+      "type": "assemblee",
+      "type_label": "Assemblée",
+      "status": "planned",
+      "status_label": "Planifié",
+      "visibility": "public",
+      "pinned": false,
+      "sort_order": 40,
+      "published_at": "2026-05-23",
+      "title": "Préparation de l’Assemblée des Défis",
+      "subtitle": "Proposer, recevoir et évaluer les défis UCKK.",
+      "summary": "L’Assemblée des Défis sera chargée de recevoir les propositions, examiner les règles, évaluer les preuves et recommander l’archivage des résultats.",
+      "body": "Une Assemblée UCKK n’est pas une foule punitive ni une autorité arbitraire. Elle doit produire des décisions documentées, contestables, amendables et archivables. L’Assemblée des Défis servira à vérifier la valeur pédagogique des défis, leurs limites éthiques et leur contribution au Grand Jeu social.",
+      "tags": [
+        "assemblee",
+        "defis",
+        "gouvernance",
+        "preuves"
+      ],
+      "audience": [
+        "joueurs",
+        "mentors",
+        "inquisiteurs"
+      ],
+      "related_pages": [
+        {
+          "label": "Assemblées",
+          "url": "/local/uckk/assemblies.php"
+        },
+        {
+          "label": "Intégrité",
+          "url": "/local/uckk/integrity.php"
+        }
+      ],
+      "cta": {
+        "label": "Comprendre les Assemblées",
+        "url": "/local/uckk/assemblies.php"
+      }
+    },
+    {
+      "id": "notice:integrite-theatre-public",
+      "type": "avis",
+      "type_label": "Avis",
+      "status": "published",
+      "status_label": "Publié",
+      "visibility": "public",
+      "pinned": false,
+      "sort_order": 50,
+      "published_at": "2026-05-23",
+      "title": "Rappel d’intégrité — le théâtre public doit éclairer",
+      "subtitle": "Le spectacle est permis. L’abus ne l’est pas.",
+      "summary": "King Klown peut attirer l’attention, mais les faits, les règles, les preuves et la dignité des personnes doivent rester protégés.",
+      "body": "Le théâtre public responsable peut utiliser l’humour, la provocation contrôlée, le récit ou la mise en scène. Il ne doit jamais remplacer les preuves, humilier des personnes, fabriquer de faux faits, rendre les règles opaques ou donner à King Klown une autorité souveraine. L’Inquisiteur protège l’intégrité du jeu.",
+      "tags": [
+        "integrite",
+        "king-klown",
+        "theatre-public",
+        "inquisiteur"
+      ],
+      "audience": [
+        "public",
+        "joueurs",
+        "contributeurs"
+      ],
+      "related_pages": [
+        {
+          "label": "Intégrité",
+          "url": "/local/uckk/integrity.php"
+        },
+        {
+          "label": "Défis",
+          "url": "/local/uckk/challenges.php"
+        }
+      ],
+      "cta": {
+        "label": "Lire les règles d’intégrité",
+        "url": "/local/uckk/integrity.php"
+      }
+    },
+    {
+      "id": "news:archives-kristals-memoire",
+      "type": "actualite",
+      "type_label": "Actualité",
+      "status": "published",
+      "status_label": "Publié",
+      "visibility": "public",
+      "pinned": false,
+      "sort_order": 60,
+      "published_at": "2026-05-23",
+      "title": "Les Archives UCKK deviennent la mémoire publique du campus",
+      "subtitle": "Conserver les preuves, les décisions, les versions et les apprentissages.",
+      "summary": "Les Archives UCKK rassembleront les traces publiques : versions du canon, décisions d’assemblées, défis terminés, dossiers de preuves et Kristals pédagogiques.",
+      "body": "Une archive UCKK n’est pas un simple stockage. Elle doit préserver le contexte, la provenance, la version, l’auteur, les limites et l’état d’intégrité d’un document ou d’un artefact. Les Archives rendent possible la mémoire collective : connaître, choisir, agir, puis se souvenir.",
+      "tags": [
+        "archives",
+        "kristals",
+        "memoire",
+        "preuves"
+      ],
+      "audience": [
+        "public",
+        "joueurs",
+        "archivistes"
+      ],
+      "related_pages": [
+        {
+          "label": "Archives",
+          "url": "/local/uckk/archives.php"
+        },
+        {
+          "label": "Assemblées",
+          "url": "/local/uckk/assemblies.php"
+        }
+      ],
+      "cta": {
+        "label": "Consulter les Archives",
+        "url": "/local/uckk/archives.php"
+      }
+    },
+    {
+      "id": "call:batisseurs-pages-publiques",
+      "type": "appel",
+      "type_label": "Appel",
+      "status": "open",
+      "status_label": "Ouvert",
+      "visibility": "public",
+      "pinned": false,
+      "sort_order": 70,
+      "published_at": "2026-05-23",
+      "closes_at": null,
+      "title": "Appel aux Bâtisseurs — consolider les pages publiques UCKK",
+      "subtitle": "Transformer l’architecture canonique en portail clair, sobre et sérieux.",
+      "summary": "UCKK cherche à stabiliser ses pages publiques : Accueil, À propos, Voies, Cours, Défis, Assemblées, Intégrité, Archives, Actualités et Contact.",
+      "body": "Les contributions attendues portent sur la clarté des textes, la navigation, la hiérarchie visuelle, la distinction des rôles, l’accessibilité, la cohérence avec le canon et la sobriété institutionnelle. Toute proposition doit renforcer la lisibilité entre kOA, UCKK, le kOA Digital Ecosystem, King Klown, l’Inquisiteur, les Assemblées et les Archives.",
+      "tags": [
+        "appel",
+        "batisseurs",
+        "site-public",
+        "canon"
+      ],
+      "audience": [
+        "batisseurs",
+        "contributeurs",
+        "mentors"
+      ],
+      "expected_outputs": [
+        "Correction ou amélioration de texte",
+        "Proposition de structure de page",
+        "Signalement d’ambiguïté canonique",
+        "Amélioration visuelle ou accessibilité"
+      ],
+      "related_pages": [
+        {
+          "label": "Contact",
+          "url": "/local/uckk/contact.php"
+        },
+        {
+          "label": "À propos",
+          "url": "/local/uckk/about.php"
+        }
+      ],
+      "cta": {
+        "label": "Proposer une contribution",
+        "url": "/local/uckk/contact.php?subject=contribution"
+      }
+    },
+    {
+      "id": "news:cycle-koa-operable",
+      "type": "actualite",
+      "type_label": "Actualité",
+      "status": "draft",
+      "status_label": "Brouillon",
+      "visibility": "internal",
+      "pinned": false,
+      "sort_order": 80,
+      "published_at": null,
+      "title": "Connaître → Choisir → Agir → Se souvenir",
+      "subtitle": "Le cycle opérable enseigné par UCKK.",
+      "summary": "UCKK préparera une introduction publique au cycle connaissance, choix, action et mémoire.",
+      "body": "Ce cycle sert de colonne vertébrale pédagogique : comprendre une situation, délibérer ou choisir une action, exécuter avec méthode, puis archiver les preuves et les apprentissages. Il relie la formation, les défis, les assemblées, les outils numériques et les Archives.",
+      "tags": [
+        "cycle",
+        "koa-digital-ecosystem",
+        "pedagogie",
+        "memoire"
+      ],
+      "audience": [
+        "public",
+        "joueurs",
+        "aspirants"
+      ],
+      "related_pages": [
+        {
+          "label": "Cours",
+          "url": "/local/uckk/courses.php"
+        },
+        {
+          "label": "Archives",
+          "url": "/local/uckk/archives.php"
+        }
+      ],
+      "cta": {
+        "label": "Voir les cours",
+        "url": "/local/uckk/courses.php"
+      }
+    }
+  ]
+}

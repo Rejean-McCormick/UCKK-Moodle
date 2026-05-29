@@ -394,7 +394,23 @@ $string['favicon_desc'] = 'Browser icon used for the UCKK Moodle site.';
 $string['frontpagebackground'] = 'Front page background';
 $string['frontpagebackground_desc'] = 'Background image used by the UCKK front page hero area.';
 $string['loginbackground'] = 'Login page background';
-$string['loginbackground_desc'] = 'Background image used on the Moodle login screen.';
+$string['loginbackground_desc'] = 'Fallback background image used on the Moodle login screen when no time-based login background is available.';
+$string['loginbackgrounddynamicheading'] = 'Time-based login backgrounds';
+$string['loginbackgrounddynamicheading_desc'] = 'Configure the day, penumbra and night images used automatically on the Moodle login screen.';
+$string['loginbackgrounddynamicenabled'] = 'Use time-based login backgrounds';
+$string['loginbackgrounddynamicenabled_desc'] = 'If enabled, the login page chooses between the day, penumbra and night images according to the configured solar reference point. The regular login page background remains the fallback.';
+$string['loginbackgroundday'] = 'Login background — day';
+$string['loginbackgroundday_desc'] = 'Image used on the Moodle login screen between sunrise and sunset.';
+$string['loginbackgroundbetween'] = 'Login background — penumbra';
+$string['loginbackgroundbetween_desc'] = 'Image used on the Moodle login screen during the transition period before sunrise and after sunset.';
+$string['loginbackgroundnight'] = 'Login background — night';
+$string['loginbackgroundnight_desc'] = 'Image used on the Moodle login screen during nighttime.';
+$string['loginbackgroundlatitude'] = 'Solar reference latitude';
+$string['loginbackgroundlatitude_desc'] = 'Latitude used to calculate sunrise and sunset for the login background rotation. Use the official UCKK location or another institutional reference point.';
+$string['loginbackgroundlongitude'] = 'Solar reference longitude';
+$string['loginbackgroundlongitude_desc'] = 'Longitude used to calculate sunrise and sunset for the login background rotation. Use the official UCKK location or another institutional reference point.';
+$string['loginbackgroundtransitionminutes'] = 'Penumbra duration';
+$string['loginbackgroundtransitionminutes_desc'] = 'Duration, in minutes, of the transition image before sunrise and after sunset.';
 
 // Theme colours.
 $string['coloursheading'] = 'Colours';

@@ -70,6 +70,9 @@ final class archive_view implements renderable, templatable {
     /** Status: archived. */
     public const STATUS_ARCHIVED = 'archived';
 
+    /** Status: deleted. */
+    public const STATUS_DELETED = 'deleted';
+
     /** Visibility: private. */
     public const VISIBILITY_PRIVATE = 'private';
 
@@ -100,6 +103,9 @@ final class archive_view implements renderable, templatable {
     /** Visibility: restricted integrity. */
     public const VISIBILITY_RESTRICTED_INTEGRITY = 'restricted_integrity';
 
+    /** Visibility: restricted cultural. */
+    public const VISIBILITY_RESTRICTED_CULTURAL = 'restricted_cultural';
+
     /** Visibility: hidden. */
     public const VISIBILITY_HIDDEN = 'hidden';
 
@@ -124,105 +130,80 @@ final class archive_view implements renderable, templatable {
     /** Validation state: archived. */
     public const VALIDATION_ARCHIVED = 'archived';
 
-    /**
-     * Archive instance id.
-     *
-     * @var int
-     */
+    /** Severity: notice. */
+    public const SEVERITY_NOTICE = 'notice';
+
+    /** Severity: moderate. */
+    public const SEVERITY_MODERATE = 'moderate';
+
+    /** Severity: strong. */
+    public const SEVERITY_STRONG = 'strong';
+
+    /** Severity: restricted. */
+    public const SEVERITY_RESTRICTED = 'restricted';
+
+    /** @var int Archive instance id. */
     private int $archiveid;
 
-    /**
-     * Course module id.
-     *
-     * @var int
-     */
+    /** @var int Course module id. */
     private int $cmid;
 
-    /**
-     * Course id.
-     *
-     * @var int
-     */
+    /** @var int Course id. */
     private int $courseid;
 
-    /**
-     * Context id.
-     *
-     * @var int
-     */
+    /** @var int Context id. */
     private int $contextid;
 
-    /**
-     * Archive title.
-     *
-     * @var string
-     */
+    /** @var string Archive title. */
     private string $title;
 
-    /**
-     * Archive intro HTML.
-     *
-     * @var string
-     */
+    /** @var string Archive intro HTML. */
     private string $introhtml;
 
-    /**
-     * Prepared archive summary.
-     *
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> Prepared archive summary. */
     private array $summary;
 
-    /**
-     * Prepared archive item rows.
-     *
-     * @var array<int, array<string, mixed>>
-     */
+    /** @var array<int, array<string, mixed>> Prepared archive item rows. */
     private array $items;
 
-    /**
-     * Prepared Kristal rows.
-     *
-     * @var array<int, array<string, mixed>>
-     */
+    /** @var array<int, array<string, mixed>> Prepared Kristal rows. */
     private array $kristals;
 
-    /**
-     * Prepared proof rows.
-     *
-     * @var array<int, array<string, mixed>>
-     */
+    /** @var array<int, array<string, mixed>> Prepared proof rows. */
     private array $proofs;
 
-    /**
-     * Prepared export rows.
-     *
-     * @var array<int, array<string, mixed>>
-     */
+    /** @var array<int, array<string, mixed>> Prepared export rows. */
     private array $exports;
 
-    /**
-     * Prepared action rows.
-     *
-     * @var array<int, array<string, mixed>>
-     */
+    /** @var array<int, array<string, mixed>> Prepared media rows. */
+    private array $media;
+
+    /** @var array<int, array<string, mixed>> Prepared media collection rows. */
+    private array $collections;
+
+    /** @var array<int, array<string, mixed>> Prepared external work rows. */
+    private array $externalworks;
+
+    /** @var array<int, array<string, mixed>> Prepared content marker rows. */
+    private array $contentmarkers;
+
+    /** @var array<int, array<string, mixed>> Prepared action rows. */
     private array $actions;
 
-    /**
-     * Direct template context supplied by view.php.
-     *
-     * @var stdClass|null
-     */
+    /** @var stdClass|null Direct template context supplied by view.php. */
     private ?stdClass $directcontext = null;
 
     /**
      * Constructor.
      *
-     * @param int $archiveid Archive instance id.
-     * @param int $cmid Course module id.
-     * @param int $courseid Course id.
-     * @param int $contextid Moodle context id.
-     * @param string $title Archive title.
+     * Direct context mode is preserved for controllers that already prepare the
+     * full template payload. Structured mode accepts already-filtered rows.
+     *
+     * @param int|array<string, mixed>|stdClass $archiveid Archive id or direct template context.
+     * @param int|null $cmid Course module id.
+     * @param int|null $courseid Course id.
+     * @param int|null $contextid Moodle context id.
+     * @param string|null $title Archive title.
      * @param string $introhtml Already formatted intro HTML.
      * @param array<string, mixed> $summary Already-filtered summary.
      * @param array<int, array<string, mixed>|stdClass> $items Archive item rows.
@@ -230,6 +211,10 @@ final class archive_view implements renderable, templatable {
      * @param array<int, array<string, mixed>|stdClass> $proofs Proof rows.
      * @param array<int, array<string, mixed>|stdClass> $exports Export rows.
      * @param array<int, array<string, mixed>|stdClass> $actions Permitted action rows.
+     * @param array<int, array<string, mixed>|stdClass> $media Media rows.
+     * @param array<int, array<string, mixed>|stdClass> $collections Media collection rows.
+     * @param array<int, array<string, mixed>|stdClass> $externalworks External work rows.
+     * @param array<int, array<string, mixed>|stdClass> $contentmarkers Content marker rows.
      */
     public function __construct(
         int|array|stdClass $archiveid,
@@ -243,7 +228,11 @@ final class archive_view implements renderable, templatable {
         array $kristals = [],
         array $proofs = [],
         array $exports = [],
-        array $actions = []
+        array $actions = [],
+        array $media = [],
+        array $collections = [],
+        array $externalworks = [],
+        array $contentmarkers = []
     ) {
         if (is_array($archiveid) || $archiveid instanceof stdClass) {
             $this->directcontext = $this->normalise_direct_context((object)$archiveid);
@@ -259,6 +248,10 @@ final class archive_view implements renderable, templatable {
             $this->kristals = [];
             $this->proofs = [];
             $this->exports = [];
+            $this->media = [];
+            $this->collections = [];
+            $this->externalworks = [];
+            $this->contentmarkers = [];
             $this->actions = [];
             return;
         }
@@ -274,6 +267,10 @@ final class archive_view implements renderable, templatable {
         $this->kristals = array_map([$this, 'normalise_kristal'], $kristals);
         $this->proofs = array_map([$this, 'normalise_proof'], $proofs);
         $this->exports = array_map([$this, 'normalise_export'], $exports);
+        $this->media = array_map([$this, 'normalise_media'], $media);
+        $this->collections = array_map([$this, 'normalise_collection'], $collections);
+        $this->externalworks = array_map([$this, 'normalise_external_work'], $externalworks);
+        $this->contentmarkers = array_map([$this, 'normalise_content_marker'], $contentmarkers);
         $this->actions = array_map([$this, 'normalise_action'], $actions);
     }
 
@@ -336,7 +333,26 @@ final class archive_view implements renderable, templatable {
             $data->exporturl = (new moodle_url('/mod/uckkarchive/export.php', ['id' => $data->cmid]))->out(false);
         }
 
-        foreach (['items', 'kristals', 'proofs', 'actions', 'statuscounts', 'warnings', 'notices'] as $field) {
+        if (!isset($data->mediaurl)) {
+            $data->mediaurl = (new moodle_url('/mod/uckkarchive/media.php', ['id' => $data->cmid]))->out(false);
+        }
+
+        $listfields = [
+            'items',
+            'kristals',
+            'proofs',
+            'actions',
+            'statuscounts',
+            'warnings',
+            'notices',
+            'media',
+            'collections',
+            'externalworks',
+            'contentmarkers',
+            'advisories',
+        ];
+
+        foreach ($listfields as $field) {
             if (!isset($data->{$field}) || !is_array($data->{$field})) {
                 $data->{$field} = [];
             }
@@ -346,6 +362,18 @@ final class archive_view implements renderable, templatable {
         $data->itemcount = (int)($data->itemcount ?? count($data->items));
         $data->haskristals = (bool)($data->haskristals ?? !empty($data->kristals));
         $data->kristalcount = (int)($data->kristalcount ?? count($data->kristals));
+        $data->hasproofs = (bool)($data->hasproofs ?? !empty($data->proofs));
+        $data->proofcount = (int)($data->proofcount ?? count($data->proofs));
+        $data->hasmedia = (bool)($data->hasmedia ?? !empty($data->media));
+        $data->mediacount = (int)($data->mediacount ?? count($data->media));
+        $data->hascollections = (bool)($data->hascollections ?? !empty($data->collections));
+        $data->collectioncount = (int)($data->collectioncount ?? count($data->collections));
+        $data->hasexternalworks = (bool)($data->hasexternalworks ?? !empty($data->externalworks));
+        $data->externalworkcount = (int)($data->externalworkcount ?? count($data->externalworks));
+        $data->hascontentmarkers = (bool)($data->hascontentmarkers ?? !empty($data->contentmarkers));
+        $data->contentmarkercount = (int)($data->contentmarkercount ?? count($data->contentmarkers));
+        $data->hasadvisories = (bool)($data->hasadvisories ?? !empty($data->advisories) || $data->hascontentmarkers);
+        $data->advisorycount = (int)($data->advisorycount ?? max(count($data->advisories), $data->contentmarkercount));
         $data->hasactions = (bool)($data->hasactions ?? !empty($data->actions));
         $data->hasstatuscounts = (bool)($data->hasstatuscounts ?? !empty($data->statuscounts));
         $data->haswarnings = (bool)($data->haswarnings ?? !empty($data->warnings));
@@ -410,6 +438,10 @@ final class archive_view implements renderable, templatable {
             'id' => $this->cmid,
         ]))->out(false);
 
+        $data->mediaurl = (new moodle_url('/mod/uckkarchive/media.php', [
+            'id' => $this->cmid,
+        ]))->out(false);
+
         $data->hasintro = trim($this->introhtml) !== '';
         $data->introhtml = $this->introhtml;
 
@@ -428,8 +460,13 @@ final class archive_view implements renderable, templatable {
         $data->isrestricted = in_array($visibility, [
             self::VISIBILITY_RESTRICTED,
             self::VISIBILITY_RESTRICTED_INTEGRITY,
+            self::VISIBILITY_RESTRICTED_CULTURAL,
             self::VISIBILITY_HIDDEN,
         ], true);
+
+        $data->isculturalrestricted = $visibility === self::VISIBILITY_RESTRICTED_CULTURAL
+            || !empty($this->summary['culturalprotocol'])
+            || !empty($this->summary['hasculturalprotocol']);
 
         $data->isvalidated = in_array($validationstate, [
             self::VALIDATION_HUMAN_REVIEWED,
@@ -469,6 +506,24 @@ final class archive_view implements renderable, templatable {
         $data->hasexports = !empty($data->exports);
         $data->exportcount = count($data->exports);
 
+        $data->media = $this->build_media_rows();
+        $data->hasmedia = !empty($data->media);
+        $data->mediacount = count($data->media);
+
+        $data->collections = $this->build_collection_rows();
+        $data->hascollections = !empty($data->collections);
+        $data->collectioncount = count($data->collections);
+
+        $data->externalworks = $this->build_external_work_rows();
+        $data->hasexternalworks = !empty($data->externalworks);
+        $data->externalworkcount = count($data->externalworks);
+
+        $data->contentmarkers = $this->build_content_marker_rows();
+        $data->hascontentmarkers = !empty($data->contentmarkers);
+        $data->contentmarkercount = count($data->contentmarkers);
+        $data->hasadvisories = $data->hascontentmarkers;
+        $data->advisorycount = $data->contentmarkercount;
+
         $data->actions = $this->build_action_rows();
         $data->hasactions = !empty($data->actions);
 
@@ -485,6 +540,10 @@ final class archive_view implements renderable, templatable {
         $data->emptykristalslabel = get_string('kristals:none', 'uckkarchive');
         $data->emptyproofslabel = get_string('proofs:none', 'uckkarchive');
         $data->emptyexportslabel = get_string('exports:none', 'uckkarchive');
+        $data->emptymedialabel = $this->get_component_string('media:none', 'No media has been added.');
+        $data->emptycollectionslabel = $this->get_component_string('mediacollections:none', 'No media collections have been added.');
+        $data->emptyexternalworkslabel = $this->get_component_string('externalworks:none', 'No external works have been added.');
+        $data->emptycontentmarkerslabel = $this->get_component_string('contentmarkers:none', 'No content advisories have been added.');
         $data->notice = get_string('archivegovernancenotice', 'uckkarchive');
 
         return $data;
@@ -526,11 +585,8 @@ final class archive_view implements renderable, templatable {
             'sourceid' => max(0, (int)($row['sourceid'] ?? 0)),
             'timemodified' => max(0, (int)($row['timemodified'] ?? 0)),
             'timecreated' => max(0, (int)($row['timecreated'] ?? 0)),
-            'restricted' => !empty($row['restricted']) || in_array($visibility, [
-                self::VISIBILITY_RESTRICTED,
-                self::VISIBILITY_RESTRICTED_INTEGRITY,
-                self::VISIBILITY_HIDDEN,
-            ], true),
+            'restricted' => !empty($row['restricted']) || $this->is_restricted_visibility($visibility),
+            'culturalprotocol' => !empty($row['culturalprotocol']) || $visibility === self::VISIBILITY_RESTRICTED_CULTURAL,
         ];
     }
 
@@ -606,13 +662,163 @@ final class archive_view implements renderable, templatable {
 
         return [
             'id' => max(0, (int)($row['id'] ?? 0)),
-            'title' => format_string((string)($row['title'] ?? $row['name'] ?? '')),
-            'exporttype' => clean_param((string)($row['exporttype'] ?? $row['type'] ?? 'package'), PARAM_ALPHANUMEXT),
+            'title' => format_string((string)($row['title'] ?? $row['name'] ?? $row['packagename'] ?? '')),
+            'exporttype' => clean_param((string)($row['exporttype'] ?? $row['exportscope'] ?? $row['type'] ?? 'package'), PARAM_ALPHANUMEXT),
             'exporttypelabel' => format_string((string)($row['exporttypelabel'] ?? '')),
+            'exportformat' => clean_param((string)($row['exportformat'] ?? ''), PARAM_ALPHANUMEXT),
             'status' => $status,
             'statuslabel' => format_string((string)($row['statuslabel'] ?? $this->get_status_label($status))),
             'url' => $this->normalise_url($row['url'] ?? null),
             'downloadurl' => $this->normalise_url($row['downloadurl'] ?? null),
+            'timecreated' => max(0, (int)($row['timecreated'] ?? 0)),
+            'timemodified' => max(0, (int)($row['timemodified'] ?? 0)),
+        ];
+    }
+
+    /**
+     * Normalise media row.
+     *
+     * @param array<string, mixed>|stdClass $media Raw row.
+     * @return array<string, mixed>
+     */
+    private function normalise_media(array|stdClass $media): array {
+        $row = (array)$media;
+        $status = $this->normalise_status((string)($row['status'] ?? self::STATUS_ACTIVE));
+        $visibility = $this->normalise_visibility((string)($row['visibility'] ?? self::VISIBILITY_COURSE));
+
+        return [
+            'id' => max(0, (int)($row['id'] ?? 0)),
+            'uuid' => clean_param((string)($row['uuid'] ?? ''), PARAM_TEXT),
+            'title' => format_string((string)($row['title'] ?? $row['name'] ?? '')),
+            'summary' => format_string((string)($row['summary'] ?? '')),
+            'description' => (string)($row['description'] ?? ''),
+            'mediatype' => clean_param((string)($row['mediatype'] ?? $row['type'] ?? 'media'), PARAM_ALPHANUMEXT),
+            'mediatypelabel' => format_string((string)($row['mediatypelabel'] ?? '')),
+            'mimetype' => clean_param((string)($row['mimetype'] ?? ''), PARAM_TEXT),
+            'status' => $status,
+            'statuslabel' => format_string((string)($row['statuslabel'] ?? $this->get_status_label($status))),
+            'visibility' => $visibility,
+            'visibilitylabel' => format_string((string)($row['visibilitylabel'] ?? $this->get_visibility_label($visibility))),
+            'url' => $this->normalise_url($row['url'] ?? null),
+            'thumbnailurl' => $this->normalise_url($row['thumbnailurl'] ?? $row['thumburl'] ?? null),
+            'previewurl' => $this->normalise_url($row['previewurl'] ?? null),
+            'downloadurl' => $this->normalise_url($row['downloadurl'] ?? null),
+            'versioncount' => max(0, (int)($row['versioncount'] ?? 0)),
+            'contentmarkercount' => max(0, (int)($row['contentmarkercount'] ?? $row['advisorycount'] ?? 0)),
+            'hasadvisories' => !empty($row['hasadvisories']) || (int)($row['contentmarkercount'] ?? $row['advisorycount'] ?? 0) > 0,
+            'restricted' => !empty($row['restricted']) || $this->is_restricted_visibility($visibility),
+            'culturalprotocol' => !empty($row['culturalprotocol']) || $visibility === self::VISIBILITY_RESTRICTED_CULTURAL,
+            'timecreated' => max(0, (int)($row['timecreated'] ?? 0)),
+            'timemodified' => max(0, (int)($row['timemodified'] ?? 0)),
+        ];
+    }
+
+    /**
+     * Normalise media collection row.
+     *
+     * @param array<string, mixed>|stdClass $collection Raw row.
+     * @return array<string, mixed>
+     */
+    private function normalise_collection(array|stdClass $collection): array {
+        $row = (array)$collection;
+        $status = $this->normalise_status((string)($row['status'] ?? self::STATUS_ACTIVE));
+        $visibility = $this->normalise_visibility((string)($row['visibility'] ?? self::VISIBILITY_COURSE));
+
+        return [
+            'id' => max(0, (int)($row['id'] ?? 0)),
+            'uuid' => clean_param((string)($row['uuid'] ?? ''), PARAM_TEXT),
+            'title' => format_string((string)($row['title'] ?? $row['name'] ?? '')),
+            'summary' => format_string((string)($row['summary'] ?? '')),
+            'description' => (string)($row['description'] ?? ''),
+            'status' => $status,
+            'statuslabel' => format_string((string)($row['statuslabel'] ?? $this->get_status_label($status))),
+            'visibility' => $visibility,
+            'visibilitylabel' => format_string((string)($row['visibilitylabel'] ?? $this->get_visibility_label($visibility))),
+            'url' => $this->normalise_url($row['url'] ?? null),
+            'media' => is_array($row['media'] ?? null) ? $row['media'] : [],
+            'mediacount' => max(0, (int)($row['mediacount'] ?? $row['itemcount'] ?? 0)),
+            'restricted' => !empty($row['restricted']) || $this->is_restricted_visibility($visibility),
+            'culturalprotocol' => !empty($row['culturalprotocol']) || $visibility === self::VISIBILITY_RESTRICTED_CULTURAL,
+            'timecreated' => max(0, (int)($row['timecreated'] ?? 0)),
+            'timemodified' => max(0, (int)($row['timemodified'] ?? 0)),
+        ];
+    }
+
+    /**
+     * Normalise external work row.
+     *
+     * @param array<string, mixed>|stdClass $work Raw row.
+     * @return array<string, mixed>
+     */
+    private function normalise_external_work(array|stdClass $work): array {
+        $row = (array)$work;
+        $status = $this->normalise_status((string)($row['status'] ?? self::STATUS_ACTIVE));
+        $visibility = $this->normalise_visibility((string)($row['visibility'] ?? self::VISIBILITY_COURSE));
+
+        return [
+            'id' => max(0, (int)($row['id'] ?? 0)),
+            'uuid' => clean_param((string)($row['uuid'] ?? ''), PARAM_TEXT),
+            'title' => format_string((string)($row['title'] ?? $row['name'] ?? '')),
+            'subtitle' => format_string((string)($row['subtitle'] ?? '')),
+            'creator' => format_string((string)($row['creator'] ?? $row['author'] ?? '')),
+            'publisher' => format_string((string)($row['publisher'] ?? '')),
+            'publicationyear' => max(0, (int)($row['publicationyear'] ?? $row['year'] ?? 0)),
+            'language' => clean_param((string)($row['language'] ?? ''), PARAM_TEXT),
+            'worktype' => clean_param((string)($row['worktype'] ?? $row['type'] ?? 'other'), PARAM_ALPHANUMEXT),
+            'worktypelabel' => format_string((string)($row['worktypelabel'] ?? '')),
+            'rightsstatus' => clean_param((string)($row['rightsstatus'] ?? 'unknown'), PARAM_ALPHANUMEXT),
+            'rightsstatuslabel' => format_string((string)($row['rightsstatuslabel'] ?? '')),
+            'status' => $status,
+            'statuslabel' => format_string((string)($row['statuslabel'] ?? $this->get_status_label($status))),
+            'visibility' => $visibility,
+            'visibilitylabel' => format_string((string)($row['visibilitylabel'] ?? $this->get_visibility_label($visibility))),
+            'url' => $this->normalise_url($row['url'] ?? null),
+            'sourceurl' => $this->normalise_url($row['sourceurl'] ?? null),
+            'media_count' => max(0, (int)($row['media_count'] ?? $row['mediacount'] ?? 0)),
+            'contentmarkercount' => max(0, (int)($row['contentmarkercount'] ?? $row['advisorycount'] ?? 0)),
+            'hasadvisories' => !empty($row['hasadvisories']) || (int)($row['contentmarkercount'] ?? $row['advisorycount'] ?? 0) > 0,
+            'restricted' => !empty($row['restricted']) || $this->is_restricted_visibility($visibility),
+            'culturalprotocol' => !empty($row['culturalprotocol']) || $visibility === self::VISIBILITY_RESTRICTED_CULTURAL,
+            'timecreated' => max(0, (int)($row['timecreated'] ?? 0)),
+            'timemodified' => max(0, (int)($row['timemodified'] ?? 0)),
+        ];
+    }
+
+    /**
+     * Normalise content marker row.
+     *
+     * @param array<string, mixed>|stdClass $marker Raw row.
+     * @return array<string, mixed>
+     */
+    private function normalise_content_marker(array|stdClass $marker): array {
+        $row = (array)$marker;
+        $severity = $this->normalise_severity((string)($row['severity'] ?? self::SEVERITY_NOTICE));
+        $visibility = $this->normalise_visibility((string)($row['visibility'] ?? self::VISIBILITY_COURSE));
+        $reviewstate = $this->normalise_status((string)($row['reviewstate'] ?? $row['status'] ?? self::STATUS_PENDING_REVIEW));
+
+        return [
+            'id' => max(0, (int)($row['id'] ?? 0)),
+            'uuid' => clean_param((string)($row['uuid'] ?? ''), PARAM_TEXT),
+            'mediaid' => max(0, (int)($row['mediaid'] ?? 0)),
+            'externalworkid' => max(0, (int)($row['externalworkid'] ?? 0)),
+            'targettype' => clean_param((string)($row['targettype'] ?? ''), PARAM_ALPHANUMEXT),
+            'targetid' => max(0, (int)($row['targetid'] ?? 0)),
+            'tagkey' => clean_param((string)($row['tagkey'] ?? $row['tag'] ?? ''), PARAM_ALPHANUMEXT),
+            'taglabel' => format_string((string)($row['taglabel'] ?? $row['label'] ?? '')),
+            'severity' => $severity,
+            'severitylabel' => format_string((string)($row['severitylabel'] ?? $this->get_severity_label($severity))),
+            'reviewstate' => $reviewstate,
+            'reviewstatelabel' => format_string((string)($row['reviewstatelabel'] ?? $this->get_status_label($reviewstate))),
+            'visibility' => $visibility,
+            'visibilitylabel' => format_string((string)($row['visibilitylabel'] ?? $this->get_visibility_label($visibility))),
+            'locatortype' => clean_param((string)($row['locatortype'] ?? ''), PARAM_ALPHANUMEXT),
+            'locator' => format_string((string)($row['locator'] ?? $row['locatorvalue'] ?? '')),
+            'locatorlabel' => format_string((string)($row['locatorlabel'] ?? '')),
+            'description' => (string)($row['description'] ?? ''),
+            'url' => $this->normalise_url($row['url'] ?? null),
+            'restricted' => !empty($row['restricted']) || $severity === self::SEVERITY_RESTRICTED
+                || $this->is_restricted_visibility($visibility),
+            'culturalprotocol' => !empty($row['culturalprotocol']) || $visibility === self::VISIBILITY_RESTRICTED_CULTURAL,
             'timecreated' => max(0, (int)($row['timecreated'] ?? 0)),
             'timemodified' => max(0, (int)($row['timemodified'] ?? 0)),
         ];
@@ -679,6 +885,7 @@ final class archive_view implements renderable, templatable {
                 'visibilityclass' => 'visibility-' . str_replace('_', '-', $item['visibility']),
                 'validationstate' => $item['validationstate'],
                 'validationlabel' => $item['validationlabel'],
+                'validationclass' => 'validation-' . str_replace('_', '-', $item['validationstate']),
                 'provenance' => $item['provenance'],
                 'provenancelabel' => $item['provenancelabel'],
                 'hasprovenance' => $item['provenance'] !== '',
@@ -694,6 +901,7 @@ final class archive_view implements renderable, templatable {
                 'timemodifiedlabel' => $item['timemodified'] > 0 ? userdate($item['timemodified']) : '',
                 'hastimemodified' => $item['timemodified'] > 0,
                 'restricted' => $item['restricted'],
+                'culturalprotocol' => $item['culturalprotocol'],
             ];
         }
 
@@ -729,6 +937,7 @@ final class archive_view implements renderable, templatable {
                 'statusclass' => 'status-' . str_replace('_', '-', $kristal['status']),
                 'validationstate' => $kristal['validationstate'],
                 'validationlabel' => $kristal['validationlabel'],
+                'validationclass' => 'validation-' . str_replace('_', '-', $kristal['validationstate']),
                 'url' => $kristal['url'],
                 'hasurl' => $kristal['url'] !== '',
                 'timecreated' => $kristal['timecreated'],
@@ -807,6 +1016,8 @@ final class archive_view implements renderable, templatable {
                 'exporttypelabel' => $export['exporttypelabel'] !== ''
                     ? $export['exporttypelabel']
                     : $this->get_export_type_label($export['exporttype']),
+                'exportformat' => $export['exportformat'],
+                'hasexportformat' => $export['exportformat'] !== '',
                 'status' => $export['status'],
                 'statuslabel' => $export['statuslabel'],
                 'statusclass' => 'status-' . str_replace('_', '-', $export['status']),
@@ -820,6 +1031,233 @@ final class archive_view implements renderable, templatable {
                 'timemodified' => $export['timemodified'],
                 'timemodifiedlabel' => $export['timemodified'] > 0 ? userdate($export['timemodified']) : '',
                 'hastimemodified' => $export['timemodified'] > 0,
+            ];
+        }
+
+        return $rows;
+    }
+
+    /**
+     * Build media rows.
+     *
+     * @return array<int, stdClass>
+     */
+    private function build_media_rows(): array {
+        $rows = [];
+
+        foreach ($this->media as $media) {
+            if ($media['title'] === '') {
+                continue;
+            }
+
+            $rows[] = (object)[
+                'id' => $media['id'],
+                'uuid' => $media['uuid'],
+                'title' => $media['title'],
+                'summary' => $media['summary'],
+                'hassummary' => $media['summary'] !== '',
+                'description' => $media['description'],
+                'hasdescription' => trim(strip_tags($media['description'])) !== '',
+                'mediatype' => $media['mediatype'],
+                'mediatypelabel' => $media['mediatypelabel'] !== ''
+                    ? $media['mediatypelabel']
+                    : $this->get_media_type_label($media['mediatype']),
+                'mimetype' => $media['mimetype'],
+                'hasmimetype' => $media['mimetype'] !== '',
+                'status' => $media['status'],
+                'statuslabel' => $media['statuslabel'],
+                'statusclass' => 'status-' . str_replace('_', '-', $media['status']),
+                'visibility' => $media['visibility'],
+                'visibilitylabel' => $media['visibilitylabel'],
+                'visibilityclass' => 'visibility-' . str_replace('_', '-', $media['visibility']),
+                'url' => $media['url'],
+                'hasurl' => $media['url'] !== '',
+                'thumbnailurl' => $media['thumbnailurl'],
+                'hasthumbnail' => $media['thumbnailurl'] !== '',
+                'previewurl' => $media['previewurl'],
+                'haspreview' => $media['previewurl'] !== '',
+                'downloadurl' => $media['downloadurl'],
+                'hasdownloadurl' => $media['downloadurl'] !== '',
+                'versioncount' => $media['versioncount'],
+                'hasversions' => $media['versioncount'] > 0,
+                'contentmarkercount' => $media['contentmarkercount'],
+                'hasadvisories' => $media['hasadvisories'],
+                'restricted' => $media['restricted'],
+                'culturalprotocol' => $media['culturalprotocol'],
+                'timecreated' => $media['timecreated'],
+                'timecreatedlabel' => $media['timecreated'] > 0 ? userdate($media['timecreated']) : '',
+                'hastimecreated' => $media['timecreated'] > 0,
+                'timemodified' => $media['timemodified'],
+                'timemodifiedlabel' => $media['timemodified'] > 0 ? userdate($media['timemodified']) : '',
+                'hastimemodified' => $media['timemodified'] > 0,
+            ];
+        }
+
+        return $rows;
+    }
+
+    /**
+     * Build media collection rows.
+     *
+     * @return array<int, stdClass>
+     */
+    private function build_collection_rows(): array {
+        $rows = [];
+
+        foreach ($this->collections as $collection) {
+            if ($collection['title'] === '') {
+                continue;
+            }
+
+            $rows[] = (object)[
+                'id' => $collection['id'],
+                'uuid' => $collection['uuid'],
+                'title' => $collection['title'],
+                'summary' => $collection['summary'],
+                'hassummary' => $collection['summary'] !== '',
+                'description' => $collection['description'],
+                'hasdescription' => trim(strip_tags($collection['description'])) !== '',
+                'status' => $collection['status'],
+                'statuslabel' => $collection['statuslabel'],
+                'statusclass' => 'status-' . str_replace('_', '-', $collection['status']),
+                'visibility' => $collection['visibility'],
+                'visibilitylabel' => $collection['visibilitylabel'],
+                'visibilityclass' => 'visibility-' . str_replace('_', '-', $collection['visibility']),
+                'url' => $collection['url'],
+                'hasurl' => $collection['url'] !== '',
+                'media' => $collection['media'],
+                'hasmedia' => !empty($collection['media']),
+                'mediacount' => $collection['mediacount'],
+                'restricted' => $collection['restricted'],
+                'culturalprotocol' => $collection['culturalprotocol'],
+                'timecreated' => $collection['timecreated'],
+                'timecreatedlabel' => $collection['timecreated'] > 0 ? userdate($collection['timecreated']) : '',
+                'hastimecreated' => $collection['timecreated'] > 0,
+                'timemodified' => $collection['timemodified'],
+                'timemodifiedlabel' => $collection['timemodified'] > 0 ? userdate($collection['timemodified']) : '',
+                'hastimemodified' => $collection['timemodified'] > 0,
+            ];
+        }
+
+        return $rows;
+    }
+
+    /**
+     * Build external work rows.
+     *
+     * @return array<int, stdClass>
+     */
+    private function build_external_work_rows(): array {
+        $rows = [];
+
+        foreach ($this->externalworks as $work) {
+            if ($work['title'] === '') {
+                continue;
+            }
+
+            $rows[] = (object)[
+                'id' => $work['id'],
+                'uuid' => $work['uuid'],
+                'title' => $work['title'],
+                'subtitle' => $work['subtitle'],
+                'hassubtitle' => $work['subtitle'] !== '',
+                'creator' => $work['creator'],
+                'hascreator' => $work['creator'] !== '',
+                'publisher' => $work['publisher'],
+                'haspublisher' => $work['publisher'] !== '',
+                'publicationyear' => $work['publicationyear'],
+                'haspublicationyear' => $work['publicationyear'] > 0,
+                'language' => $work['language'],
+                'haslanguage' => $work['language'] !== '',
+                'worktype' => $work['worktype'],
+                'worktypelabel' => $work['worktypelabel'] !== ''
+                    ? $work['worktypelabel']
+                    : $this->get_external_work_type_label($work['worktype']),
+                'rightsstatus' => $work['rightsstatus'],
+                'rightsstatuslabel' => $work['rightsstatuslabel'] !== ''
+                    ? $work['rightsstatuslabel']
+                    : $this->get_rights_status_label($work['rightsstatus']),
+                'status' => $work['status'],
+                'statuslabel' => $work['statuslabel'],
+                'statusclass' => 'status-' . str_replace('_', '-', $work['status']),
+                'visibility' => $work['visibility'],
+                'visibilitylabel' => $work['visibilitylabel'],
+                'visibilityclass' => 'visibility-' . str_replace('_', '-', $work['visibility']),
+                'url' => $work['url'],
+                'hasurl' => $work['url'] !== '',
+                'sourceurl' => $work['sourceurl'],
+                'hassourceurl' => $work['sourceurl'] !== '',
+                'mediacount' => $work['media_count'],
+                'hasmedia' => $work['media_count'] > 0,
+                'contentmarkercount' => $work['contentmarkercount'],
+                'hasadvisories' => $work['hasadvisories'],
+                'restricted' => $work['restricted'],
+                'culturalprotocol' => $work['culturalprotocol'],
+                'timecreated' => $work['timecreated'],
+                'timecreatedlabel' => $work['timecreated'] > 0 ? userdate($work['timecreated']) : '',
+                'hastimecreated' => $work['timecreated'] > 0,
+                'timemodified' => $work['timemodified'],
+                'timemodifiedlabel' => $work['timemodified'] > 0 ? userdate($work['timemodified']) : '',
+                'hastimemodified' => $work['timemodified'] > 0,
+            ];
+        }
+
+        return $rows;
+    }
+
+    /**
+     * Build content marker rows.
+     *
+     * @return array<int, stdClass>
+     */
+    private function build_content_marker_rows(): array {
+        $rows = [];
+
+        foreach ($this->contentmarkers as $marker) {
+            $label = $marker['taglabel'] !== ''
+                ? $marker['taglabel']
+                : $this->get_content_tag_label($marker['tagkey']);
+
+            if ($label === '') {
+                continue;
+            }
+
+            $rows[] = (object)[
+                'id' => $marker['id'],
+                'uuid' => $marker['uuid'],
+                'mediaid' => $marker['mediaid'],
+                'externalworkid' => $marker['externalworkid'],
+                'targettype' => $marker['targettype'],
+                'targetid' => $marker['targetid'],
+                'tagkey' => $marker['tagkey'],
+                'taglabel' => $label,
+                'severity' => $marker['severity'],
+                'severitylabel' => $marker['severitylabel'],
+                'severityclass' => 'severity-' . str_replace('_', '-', $marker['severity']),
+                'reviewstate' => $marker['reviewstate'],
+                'reviewstatelabel' => $marker['reviewstatelabel'],
+                'reviewstateclass' => 'reviewstate-' . str_replace('_', '-', $marker['reviewstate']),
+                'visibility' => $marker['visibility'],
+                'visibilitylabel' => $marker['visibilitylabel'],
+                'visibilityclass' => 'visibility-' . str_replace('_', '-', $marker['visibility']),
+                'locatortype' => $marker['locatortype'],
+                'haslocatortype' => $marker['locatortype'] !== '',
+                'locator' => $marker['locator'],
+                'haslocator' => $marker['locator'] !== '',
+                'locatorlabel' => $marker['locatorlabel'],
+                'haslocatorlabel' => $marker['locatorlabel'] !== '',
+                'description' => $marker['description'],
+                'hasdescription' => trim(strip_tags($marker['description'])) !== '',
+                'url' => $marker['url'],
+                'hasurl' => $marker['url'] !== '',
+                'restricted' => $marker['restricted'],
+                'culturalprotocol' => $marker['culturalprotocol'],
+                'timecreated' => $marker['timecreated'],
+                'timecreatedlabel' => $marker['timecreated'] > 0 ? userdate($marker['timecreated']) : '',
+                'hastimecreated' => $marker['timecreated'] > 0,
+                'timemodified' => $marker['timemodified'],
+                'timemodifiedlabel' => $marker['timemodified'] > 0 ? userdate($marker['timemodified']) : '',
+                'hastimemodified' => $marker['timemodified'] > 0,
             ];
         }
 
@@ -868,7 +1306,7 @@ final class archive_view implements renderable, templatable {
      * @return array<int, stdClass>
      */
     private function build_stats(stdClass $data): array {
-        return [
+        $stats = [
             (object)[
                 'key' => 'items',
                 'label' => get_string('archiveitems', 'uckkarchive'),
@@ -888,12 +1326,38 @@ final class archive_view implements renderable, templatable {
                 'class' => $data->proofcount > 0 ? 'state-active' : 'state-empty',
             ],
             (object)[
+                'key' => 'media',
+                'label' => $this->get_component_string('media', 'Media'),
+                'value' => (string)$data->mediacount,
+                'class' => $data->mediacount > 0 ? 'state-active' : 'state-empty',
+            ],
+            (object)[
+                'key' => 'collections',
+                'label' => $this->get_component_string('mediacollections', 'Collections'),
+                'value' => (string)$data->collectioncount,
+                'class' => $data->collectioncount > 0 ? 'state-active' : 'state-empty',
+            ],
+            (object)[
+                'key' => 'externalworks',
+                'label' => $this->get_component_string('externalworks', 'External works'),
+                'value' => (string)$data->externalworkcount,
+                'class' => $data->externalworkcount > 0 ? 'state-active' : 'state-empty',
+            ],
+            (object)[
+                'key' => 'advisories',
+                'label' => $this->get_component_string('contentadvisories', 'Content advisories'),
+                'value' => (string)$data->advisorycount,
+                'class' => $data->advisorycount > 0 ? 'state-active' : 'state-empty',
+            ],
+            (object)[
                 'key' => 'validation',
                 'label' => get_string('validationstate', 'uckkarchive'),
                 'value' => $data->validationlabel,
                 'class' => $data->validationclass,
             ],
         ];
+
+        return $stats;
     }
 
     /**
@@ -1011,6 +1475,7 @@ final class archive_view implements renderable, templatable {
             self::STATUS_INVALIDATED,
             self::STATUS_CLOSED,
             self::STATUS_ARCHIVED,
+            self::STATUS_DELETED,
         ];
 
         return in_array($status, $allowed, true) ? $status : self::STATUS_ACTIVE;
@@ -1036,6 +1501,7 @@ final class archive_view implements renderable, templatable {
             self::VISIBILITY_PUBLIC,
             self::VISIBILITY_RESTRICTED,
             self::VISIBILITY_RESTRICTED_INTEGRITY,
+            self::VISIBILITY_RESTRICTED_CULTURAL,
             self::VISIBILITY_HIDDEN,
             self::VISIBILITY_ARCHIVED,
         ];
@@ -1062,6 +1528,40 @@ final class archive_view implements renderable, templatable {
         ];
 
         return in_array($state, $allowed, true) ? $state : self::VALIDATION_UNVERIFIED;
+    }
+
+    /**
+     * Normalise content advisory severity.
+     *
+     * @param string $severity Raw severity.
+     * @return string
+     */
+    private function normalise_severity(string $severity): string {
+        $severity = clean_param($severity, PARAM_ALPHANUMEXT);
+
+        $allowed = [
+            self::SEVERITY_NOTICE,
+            self::SEVERITY_MODERATE,
+            self::SEVERITY_STRONG,
+            self::SEVERITY_RESTRICTED,
+        ];
+
+        return in_array($severity, $allowed, true) ? $severity : self::SEVERITY_NOTICE;
+    }
+
+    /**
+     * Whether a visibility is restricted.
+     *
+     * @param string $visibility Visibility.
+     * @return bool
+     */
+    private function is_restricted_visibility(string $visibility): bool {
+        return in_array($visibility, [
+            self::VISIBILITY_RESTRICTED,
+            self::VISIBILITY_RESTRICTED_INTEGRITY,
+            self::VISIBILITY_RESTRICTED_CULTURAL,
+            self::VISIBILITY_HIDDEN,
+        ], true);
     }
 
     /**
@@ -1135,6 +1635,60 @@ final class archive_view implements renderable, templatable {
     }
 
     /**
+     * Get media type label.
+     *
+     * @param string $type Media type.
+     * @return string
+     */
+    private function get_media_type_label(string $type): string {
+        return $this->get_component_string('mediatype:' . $type, ucfirst(str_replace('_', ' ', $type)));
+    }
+
+    /**
+     * Get external work type label.
+     *
+     * @param string $type External work type.
+     * @return string
+     */
+    private function get_external_work_type_label(string $type): string {
+        return $this->get_component_string('externalworktype:' . $type, ucfirst(str_replace('_', ' ', $type)));
+    }
+
+    /**
+     * Get rights status label.
+     *
+     * @param string $status Rights status.
+     * @return string
+     */
+    private function get_rights_status_label(string $status): string {
+        return $this->get_component_string('rightsstatus:' . $status, ucfirst(str_replace('_', ' ', $status)));
+    }
+
+    /**
+     * Get content tag label.
+     *
+     * @param string $tagkey Tag key.
+     * @return string
+     */
+    private function get_content_tag_label(string $tagkey): string {
+        if ($tagkey === '') {
+            return '';
+        }
+
+        return $this->get_component_string('contenttag:' . $tagkey, ucfirst(str_replace('_', ' ', $tagkey)));
+    }
+
+    /**
+     * Get severity label.
+     *
+     * @param string $severity Severity.
+     * @return string
+     */
+    private function get_severity_label(string $severity): string {
+        return $this->get_component_string('severity:' . $severity, ucfirst(str_replace('_', ' ', $severity)));
+    }
+
+    /**
      * Get action label.
      *
      * @param string $key Action key.
@@ -1171,7 +1725,7 @@ final class archive_view implements renderable, templatable {
      */
     private function get_alert_class(string $severity): string {
         return match ($severity) {
-            'danger', 'error', 'invalidated', 'restricted' => 'danger',
+            'danger', 'error', 'invalidated', 'restricted', 'strong' => 'danger',
             'success', 'validated', 'verified' => 'success',
             'info', 'notice' => 'info',
             default => 'warning',

@@ -21,6 +21,12 @@ namespace mod_uckkarchive;
 
 use advanced_testcase;
 use context_module;
+use mod_uckkarchive\local\content_marker;
+use mod_uckkarchive\local\external_work;
+use mod_uckkarchive\local\file_area_registry;
+use mod_uckkarchive\local\media;
+use mod_uckkarchive\local\media_collection;
+use mod_uckkarchive\local\media_version;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
@@ -31,8 +37,9 @@ require_once($CFG->dirroot . '/mod/uckkarchive/locallib.php');
 /**
  * Tests for archive local helpers.
  *
- * These tests intentionally target stable procedural helpers from locallib.php.
- * Workflow-heavy behaviour belongs in service-specific tests.
+ * These tests intentionally target stable procedural helpers from locallib.php
+ * and lightweight local-domain integration points. Workflow-heavy behaviour
+ * belongs in service-specific tests.
  *
  * @coversNothing
  */
@@ -126,7 +133,10 @@ final class archive_test extends advanced_testcase {
     public function test_normalise_validation_state_falls_back_to_unverified(): void {
         $this->assertSame(UCKKARCHIVE_VALIDATION_UNVERIFIED, uckkarchive_normalise_validation_state('not-a-state'));
         $this->assertSame(UCKKARCHIVE_VALIDATION_UNVERIFIED, uckkarchive_normalise_validation_state(null));
-        $this->assertSame(UCKKARCHIVE_VALIDATION_VERIFIED, uckkarchive_normalise_validation_state(UCKKARCHIVE_VALIDATION_VERIFIED));
+        $this->assertSame(
+            UCKKARCHIVE_VALIDATION_VERIFIED,
+            uckkarchive_normalise_validation_state(UCKKARCHIVE_VALIDATION_VERIFIED)
+        );
     }
 
     /**
@@ -210,10 +220,128 @@ final class archive_test extends advanced_testcase {
     public function test_url_helpers_generate_expected_paths(): void {
         $this->assertSame('/mod/uckkarchive/view.php?id=42', uckkarchive_view_url(42)->out_as_local_url(false));
         $this->assertSame('/mod/uckkarchive/index.php?id=7', uckkarchive_index_url(7)->out_as_local_url(false));
-        $this->assertSame('/mod/uckkarchive/item.php?id=42&amp;itemid=9', uckkarchive_item_url(42, 9)->out_as_local_url(false));
+        $this->assertSame(
+            '/mod/uckkarchive/item.php?id=42&amp;itemid=9',
+            uckkarchive_item_url(42, 9)->out_as_local_url(false)
+        );
         $this->assertSame('/mod/uckkarchive/add.php?id=42', uckkarchive_add_url(42)->out_as_local_url(false));
-        $this->assertSame('/mod/uckkarchive/validate.php?id=42&amp;itemid=9', uckkarchive_validate_url(42, 9)->out_as_local_url(false));
+        $this->assertSame(
+            '/mod/uckkarchive/validate.php?id=42&amp;itemid=9',
+            uckkarchive_validate_url(42, 9)->out_as_local_url(false)
+        );
         $this->assertSame('/mod/uckkarchive/export.php?id=42', uckkarchive_export_url(42)->out_as_local_url(false));
+    }
+
+    /**
+     * File area registry should expose canonical archive, media, content advisory, and export areas.
+     */
+    public function test_file_area_registry_lists_canonical_fileareas(): void {
+        $this->assertSame('mod_uckkarchive', file_area_registry::get_component());
+
+        $archiveareas = file_area_registry::get_archive_fileareas();
+        $mediaareas = file_area_registry::get_media_fileareas();
+        $contentareas = file_area_registry::get_content_advisory_fileareas();
+        $exportareas = file_area_registry::get_export_fileareas();
+        $allareas = file_area_registry::get_all_fileareas();
+
+        $this->assertContains(file_area_registry::INTRO, $archiveareas);
+        $this->assertContains(file_area_registry::ITEM_CONTENT, $archiveareas);
+        $this->assertContains(file_area_registry::ITEM_FILES, $archiveareas);
+        $this->assertContains(file_area_registry::PROOF_FILES, $archiveareas);
+
+        $this->assertContains(file_area_registry::MEDIA_ORIGINAL, $mediaareas);
+        $this->assertContains(file_area_registry::MEDIA_PREVIEW, $mediaareas);
+        $this->assertContains(file_area_registry::MEDIA_THUMBNAIL, $mediaareas);
+        $this->assertContains(file_area_registry::MEDIA_DERIVATIVE, $mediaareas);
+        $this->assertContains(file_area_registry::MEDIA_CAPTION, $mediaareas);
+        $this->assertContains(file_area_registry::MEDIA_TRANSCRIPT, $mediaareas);
+        $this->assertContains(file_area_registry::MEDIA_ATTACHMENT, $mediaareas);
+
+        $this->assertContains(file_area_registry::CONTENT_REVIEW_FILES, $contentareas);
+        $this->assertContains(file_area_registry::EXTERNAL_WORK_REFERENCE_FILES, $contentareas);
+        $this->assertContains(file_area_registry::CULTURAL_PROTOCOL_FILES, $contentareas);
+
+        $this->assertContains(file_area_registry::EXPORT_PACKAGE, $exportareas);
+        $this->assertContains(file_area_registry::EXPORT_MANIFEST, $exportareas);
+
+        $this->assertContains(file_area_registry::MEDIA_ORIGINAL, $allareas);
+        $this->assertContains(file_area_registry::CONTENT_REVIEW_FILES, $allareas);
+        $this->assertTrue(file_area_registry::is_valid_filearea(file_area_registry::MEDIA_ORIGINAL));
+        $this->assertTrue(file_area_registry::is_media_filearea(file_area_registry::MEDIA_ORIGINAL));
+        $this->assertTrue(file_area_registry::is_content_advisory_filearea(file_area_registry::CONTENT_REVIEW_FILES));
+        $this->assertTrue(file_area_registry::is_export_filearea(file_area_registry::EXPORT_PACKAGE));
+    }
+
+    /**
+     * Media domain constants should expose canonical statuses, visibilities, suitability, and types.
+     */
+    public function test_media_domain_lists_canonical_values(): void {
+        $this->assertContains(media::STATUS_DRAFT, media::statuses());
+        $this->assertContains(media::STATUS_ACTIVE, media::statuses());
+        $this->assertContains(media::STATUS_RESTRICTED, media::statuses());
+        $this->assertContains(media::STATUS_ARCHIVED, media::statuses());
+        $this->assertContains(media::STATUS_DELETED_SOFT, media::statuses());
+
+        $this->assertContains(media::VISIBILITY_PRIVATE, media::visibilities());
+        $this->assertContains(media::VISIBILITY_COURSE, media::visibilities());
+        $this->assertContains(media::VISIBILITY_PUBLIC, media::visibilities());
+        $this->assertContains(media::VISIBILITY_RESTRICTED_INTEGRITY, media::visibilities());
+        $this->assertContains(media::VISIBILITY_RESTRICTED_CULTURAL, media::visibilities());
+
+        $this->assertContains(media::SUITABILITY_GENERAL, media::audience_suitabilities());
+        $this->assertContains(media::SUITABILITY_GUIDED, media::audience_suitabilities());
+        $this->assertContains(media::SUITABILITY_RESTRICTED_CULTURAL, media::audience_suitabilities());
+
+        $this->assertContains(media::TYPE_IMAGE, media::mediatypes());
+        $this->assertContains(media::TYPE_VIDEO, media::mediatypes());
+        $this->assertContains(media::TYPE_AUDIO, media::mediatypes());
+        $this->assertContains(media::TYPE_DOCUMENT, media::mediatypes());
+        $this->assertContains(media::TYPE_EXTERNAL_REFERENCE, media::mediatypes());
+    }
+
+    /**
+     * External work domain constants should expose canonical values.
+     */
+    public function test_external_work_domain_lists_canonical_values(): void {
+        $this->assertContains(external_work::TYPE_BOOK, external_work::work_types());
+        $this->assertContains(external_work::TYPE_FILM, external_work::work_types());
+        $this->assertContains(external_work::TYPE_WEBSITE, external_work::work_types());
+        $this->assertContains(external_work::TYPE_EXTERNAL_VIDEO, external_work::work_types());
+        $this->assertContains(external_work::TYPE_OTHER, external_work::work_types());
+
+        $this->assertContains(external_work::STATUS_DRAFT, external_work::statuses());
+        $this->assertContains(external_work::STATUS_ACTIVE, external_work::statuses());
+        $this->assertContains(external_work::STATUS_RESTRICTED, external_work::statuses());
+        $this->assertContains(external_work::STATUS_ARCHIVED, external_work::statuses());
+
+        $this->assertContains(external_work::RIGHTS_UNKNOWN, external_work::rights_statuses());
+        $this->assertContains(external_work::RIGHTS_LICENSED_EXTERNAL, external_work::rights_statuses());
+        $this->assertContains(external_work::RIGHTS_OPEN_LICENSE, external_work::rights_statuses());
+        $this->assertContains(external_work::RIGHTS_RESTRICTED_REFERENCE, external_work::rights_statuses());
+    }
+
+    /**
+     * Content marker domain constants should expose canonical values.
+     */
+    public function test_content_marker_domain_lists_canonical_values(): void {
+        $this->assertContains(content_marker::TARGET_MEDIA, content_marker::target_types());
+        $this->assertContains(content_marker::TARGET_MEDIA_VERSION, content_marker::target_types());
+        $this->assertContains(content_marker::TARGET_ARCHIVE_ITEM, content_marker::target_types());
+        $this->assertContains(content_marker::TARGET_EXTERNAL_WORK, content_marker::target_types());
+
+        $this->assertContains(content_marker::SEVERITY_NOTICE, content_marker::severities());
+        $this->assertContains(content_marker::SEVERITY_MODERATE, content_marker::severities());
+        $this->assertContains(content_marker::SEVERITY_STRONG, content_marker::severities());
+        $this->assertContains(content_marker::SEVERITY_RESTRICTED, content_marker::severities());
+
+        $this->assertContains(content_marker::REVIEW_DRAFT, content_marker::review_states());
+        $this->assertContains(content_marker::REVIEW_PENDING, content_marker::review_states());
+        $this->assertContains(content_marker::REVIEW_APPROVED, content_marker::review_states());
+        $this->assertContains(content_marker::REVIEW_CONTESTED, content_marker::review_states());
+
+        $this->assertContains(content_marker::LOCATOR_TIMECODE, content_marker::locator_types());
+        $this->assertContains(content_marker::LOCATOR_PAGE, content_marker::locator_types());
+        $this->assertContains(content_marker::LOCATOR_MANUAL_REFERENCE, content_marker::locator_types());
     }
 
     /**
@@ -407,6 +535,274 @@ final class archive_test extends advanced_testcase {
     }
 
     /**
+     * Media create/export should round-trip through the local media domain.
+     */
+    public function test_media_create_and_export_record_round_trip(): void {
+        $this->assertTrue($this->table_exists(media::TABLE), 'Media table must exist for media library tests.');
+
+        [$course, $archive, $cm, $context] = $this->create_archive_activity();
+        $user = $this->getDataGenerator()->create_user();
+
+        $record = media::create([
+            'archiveid' => (int)$archive->id,
+            'courseid' => (int)$course->id,
+            'cmid' => (int)$cm->id,
+            'contextid' => (int)$context->id,
+            'userid' => (int)$user->id,
+            'ownerid' => (int)$user->id,
+            'title' => 'Test media',
+            'summary' => 'Test media summary',
+            'description' => 'Test media description',
+            'mediatype' => media::TYPE_VIDEO,
+            'mimetype' => 'video/mp4',
+            'status' => media::STATUS_ACTIVE,
+            'visibility' => media::VISIBILITY_COURSE,
+            'audiencesuitability' => media::SUITABILITY_GUIDED,
+            'source' => 'uckk',
+            'metadata' => ['test' => true],
+        ], (int)$user->id);
+
+        $this->assertGreaterThan(0, (int)$record->id);
+        $this->assertSame('Test media', $record->title);
+        $this->assertSame(media::TYPE_VIDEO, $record->mediatype);
+        $this->assertSame(media::STATUS_ACTIVE, $record->status);
+        $this->assertMatchesRegularExpression('/^[0-9a-fA-F-]{36}$/', $record->uuid);
+
+        $export = media::export_record($record);
+
+        $this->assertSame((int)$record->id, (int)$export->id);
+        $this->assertSame('Test media', $export->title);
+        $this->assertSame(media::TYPE_VIDEO, $export->mediatype);
+        $this->assertSame(media::VISIBILITY_COURSE, $export->visibility);
+        $this->assertSame(['test' => true], $export->metadata);
+    }
+
+    /**
+     * Media versions should be creatable and selectable as current.
+     */
+    public function test_media_version_create_initial_and_make_current(): void {
+        $this->assertTrue($this->table_exists(media::TABLE), 'Media table must exist for version tests.');
+        $this->assertTrue($this->table_exists(media_version::TABLE), 'Media version table must exist.');
+
+        [$course, $archive, $cm, $context] = $this->create_archive_activity();
+        $user = $this->getDataGenerator()->create_user();
+
+        $media = media::create([
+            'archiveid' => (int)$archive->id,
+            'courseid' => (int)$course->id,
+            'cmid' => (int)$cm->id,
+            'contextid' => (int)$context->id,
+            'userid' => (int)$user->id,
+            'ownerid' => (int)$user->id,
+            'title' => 'Versioned media',
+            'mediatype' => media::TYPE_DOCUMENT,
+            'mimetype' => 'application/pdf',
+            'status' => media::STATUS_ACTIVE,
+            'visibility' => media::VISIBILITY_COURSE,
+        ], (int)$user->id);
+
+        $initial = media_version::create_initial($media, null, [
+            'label' => 'Initial version',
+            'filearea' => media_version::FILEAREA_ORIGINAL,
+            'filename' => 'initial.pdf',
+            'mimetype' => 'application/pdf',
+            'contenthash' => str_repeat('a', 40),
+            'filesize' => 1234,
+            'metadata' => ['initial' => true],
+        ]);
+
+        $this->assertSame((int)$media->id, (int)$initial->mediaid);
+        $this->assertSame(1, (int)$initial->versionnumber);
+        $this->assertSame(1, (int)$initial->iscurrent);
+        $this->assertSame(1, media_version::count_versions((int)$media->id));
+
+        $second = media_version::create($media, [
+            'label' => 'Second version',
+            'filearea' => media_version::FILEAREA_ORIGINAL,
+            'filename' => 'second.pdf',
+            'mimetype' => 'application/pdf',
+            'contenthash' => str_repeat('b', 40),
+            'filesize' => 2345,
+            'metadata' => ['second' => true],
+        ]);
+
+        media_version::make_current((int)$second->id);
+
+        $current = media_version::get_current((int)$media->id, MUST_EXIST);
+
+        $this->assertSame((int)$second->id, (int)$current->id);
+        $this->assertSame(2, media_version::count_versions((int)$media->id));
+
+        $summary = media_version::export_summary($current);
+        $this->assertSame((int)$second->id, (int)$summary['id']);
+        $this->assertSame('Second version', $summary['label']);
+    }
+
+    /**
+     * Media collections should add, count, list, and remove media.
+     */
+    public function test_media_collection_adds_lists_and_removes_media(): void {
+        $this->assertTrue($this->table_exists(media::TABLE), 'Media table must exist for collection tests.');
+        $this->assertTrue($this->table_exists('uckkarchive_media_collection'), 'Media collection table must exist.');
+        $this->assertTrue($this->table_exists('uckkarchive_media_collection_item'), 'Collection item table must exist.');
+
+        [$course, $archive, $cm, $context] = $this->create_archive_activity();
+        $user = $this->getDataGenerator()->create_user();
+
+        $media = media::create([
+            'archiveid' => (int)$archive->id,
+            'courseid' => (int)$course->id,
+            'cmid' => (int)$cm->id,
+            'contextid' => (int)$context->id,
+            'userid' => (int)$user->id,
+            'ownerid' => (int)$user->id,
+            'title' => 'Collection media',
+            'mediatype' => media::TYPE_IMAGE,
+            'mimetype' => 'image/png',
+            'status' => media::STATUS_ACTIVE,
+            'visibility' => media::VISIBILITY_COURSE,
+        ], (int)$user->id);
+
+        $collection = media_collection::create([
+            'archiveid' => (int)$archive->id,
+            'courseid' => (int)$course->id,
+            'cmid' => (int)$cm->id,
+            'contextid' => (int)$context->id,
+            'title' => 'Teaching collection',
+            'description' => 'Collection description',
+            'visibility' => media_collection::VISIBILITY_COURSE,
+            'status' => media_collection::STATUS_ACTIVE,
+            'metadata' => ['purpose' => 'test'],
+        ], (int)$user->id);
+
+        $membership = media_collection::add_media((int)$collection->id, (int)$media->id, (int)$user->id, 10, [
+            'role' => 'primary',
+        ]);
+
+        $this->assertGreaterThan(0, (int)$membership->id);
+        $this->assertSame(1, media_collection::count_media((int)$collection->id));
+        $this->assertTrue(media_collection::contains_media((int)$collection->id, (int)$media->id));
+
+        $listed = media_collection::get_media((int)$collection->id);
+        $this->assertCount(1, $listed);
+        $this->assertSame((int)$media->id, (int)reset($listed)->id);
+
+        $this->assertTrue(media_collection::remove_media((int)$collection->id, (int)$media->id));
+        $this->assertSame(0, media_collection::count_media((int)$collection->id));
+    }
+
+    /**
+     * External work create/export should round-trip through the local domain.
+     */
+    public function test_external_work_create_and_export_record_round_trip(): void {
+        $this->assertTrue($this->table_exists(external_work::TABLE), 'External work table must exist.');
+
+        [$course, $archive, $cm, $context] = $this->create_archive_activity();
+        $user = $this->getDataGenerator()->create_user();
+
+        $work = external_work::create([
+            'archiveid' => (int)$archive->id,
+            'courseid' => (int)$course->id,
+            'cmid' => (int)$cm->id,
+            'contextid' => (int)$context->id,
+            'ownerid' => (int)$user->id,
+            'userid' => (int)$user->id,
+            'title' => 'External film',
+            'worktype' => external_work::TYPE_FILM,
+            'creator' => 'Film creator',
+            'publisher' => 'Film publisher',
+            'publicationyear' => 2024,
+            'language' => 'en',
+            'sourceurl' => 'https://example.test/external-film',
+            'citation' => 'Film creator. External film. 2024.',
+            'rightsstatus' => external_work::RIGHTS_LICENSED_EXTERNAL,
+            'visibility' => external_work::VISIBILITY_COURSE,
+            'audiencesuitability' => external_work::SUITABILITY_GUIDED,
+            'status' => external_work::STATUS_ACTIVE,
+            'metadata' => ['test' => true],
+        ], (int)$user->id);
+
+        $this->assertGreaterThan(0, (int)$work->id);
+        $this->assertSame('External film', $work->title);
+        $this->assertSame(external_work::TYPE_FILM, $work->worktype);
+        $this->assertSame(external_work::STATUS_ACTIVE, $work->status);
+
+        $export = external_work::export_record($work);
+
+        $this->assertSame((int)$work->id, (int)$export->id);
+        $this->assertSame('External film', $export->title);
+        $this->assertSame(external_work::TYPE_FILM, $export->worktype);
+        $this->assertSame(external_work::RIGHTS_LICENSED_EXTERNAL, $export->rightsstatus);
+        $this->assertSame(['test' => true], $export->metadata);
+    }
+
+    /**
+     * Content marker create/list should work for media targets.
+     */
+    public function test_content_marker_create_and_list_by_media(): void {
+        $this->assertTrue($this->table_exists(media::TABLE), 'Media table must exist for marker tests.');
+        $this->assertTrue($this->table_exists(content_marker::TABLE), 'Content marker table must exist.');
+
+        [$course, $archive, $cm, $context] = $this->create_archive_activity();
+        $user = $this->getDataGenerator()->create_user();
+
+        $media = media::create([
+            'archiveid' => (int)$archive->id,
+            'courseid' => (int)$course->id,
+            'cmid' => (int)$cm->id,
+            'contextid' => (int)$context->id,
+            'userid' => (int)$user->id,
+            'ownerid' => (int)$user->id,
+            'title' => 'Advisory media',
+            'mediatype' => media::TYPE_VIDEO,
+            'mimetype' => 'video/mp4',
+            'status' => media::STATUS_ACTIVE,
+            'visibility' => media::VISIBILITY_COURSE,
+        ], (int)$user->id);
+
+        $marker = content_marker::create([
+            'archiveid' => (int)$archive->id,
+            'courseid' => (int)$course->id,
+            'cmid' => (int)$cm->id,
+            'contextid' => (int)$context->id,
+            'mediaid' => (int)$media->id,
+            'targettype' => content_marker::TARGET_MEDIA,
+            'targetid' => (int)$media->id,
+            'tagkey' => 'violence',
+            'category' => 'content_warning',
+            'severity' => content_marker::SEVERITY_MODERATE,
+            'audiencesuitability' => content_marker::SUITABILITY_GUIDED,
+            'reviewstate' => content_marker::REVIEW_PENDING,
+            'visibility' => content_marker::VISIBILITY_COURSE,
+            'locatortype' => content_marker::LOCATOR_TIMECODE,
+            'locatorvalue' => '00:01:20',
+            'locatorstart' => '00:01:20',
+            'description' => 'Moderate scene advisory.',
+            'note' => 'Provide context before screening.',
+            'metadata' => ['test' => true],
+        ], (int)$user->id);
+
+        $this->assertGreaterThan(0, (int)$marker->id);
+        $this->assertSame(content_marker::TARGET_MEDIA, $marker->targettype);
+        $this->assertSame(content_marker::SEVERITY_MODERATE, $marker->severity);
+        $this->assertSame(content_marker::REVIEW_PENDING, $marker->reviewstate);
+
+        $markers = content_marker::list_by_media((int)$media->id);
+
+        $this->assertCount(1, $markers);
+        $this->assertSame((int)$marker->id, (int)reset($markers)->id);
+
+        $reviewed = content_marker::set_review_state(
+            (int)$marker->id,
+            content_marker::REVIEW_APPROVED,
+            'Reviewed in test.',
+            (int)$user->id
+        );
+
+        $this->assertSame(content_marker::REVIEW_APPROVED, $reviewed->reviewstate);
+    }
+
+    /**
      * Item state helpers should reflect canonical workflow rules.
      */
     public function test_item_state_helpers(): void {
@@ -506,8 +902,6 @@ final class archive_test extends advanced_testcase {
         stdClass $user,
         array $overrides = []
     ): stdClass {
-        global $DB;
-
         $now = time();
 
         $record = (object)array_merge([
@@ -543,8 +937,42 @@ final class archive_test extends advanced_testcase {
             'metadata' => null,
         ], $overrides);
 
-        $record->id = $DB->insert_record(UCKKARCHIVE_ITEM_TABLE, $record);
+        return $this->insert_filtered(UCKKARCHIVE_ITEM_TABLE, $record);
+    }
 
-        return $DB->get_record(UCKKARCHIVE_ITEM_TABLE, ['id' => $record->id], '*', MUST_EXIST);
+    /**
+     * Insert a record after filtering to fields that exist in the current schema.
+     *
+     * @param string $table Table name.
+     * @param stdClass $record Record.
+     * @return stdClass Inserted record.
+     */
+    private function insert_filtered(string $table, stdClass $record): stdClass {
+        global $DB;
+
+        $columns = $DB->get_columns($table);
+        $filtered = new stdClass();
+
+        foreach (get_object_vars($record) as $field => $value) {
+            if (array_key_exists($field, $columns)) {
+                $filtered->{$field} = $value;
+            }
+        }
+
+        $filtered->id = $DB->insert_record($table, $filtered);
+
+        return $DB->get_record($table, ['id' => $filtered->id], '*', MUST_EXIST);
+    }
+
+    /**
+     * Return whether a table exists in the current test database.
+     *
+     * @param string $table Table name.
+     * @return bool
+     */
+    private function table_exists(string $table): bool {
+        global $DB;
+
+        return $DB->get_manager()->table_exists(new \xmldb_table($table));
     }
 }

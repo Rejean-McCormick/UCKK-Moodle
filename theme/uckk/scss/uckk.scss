@@ -998,24 +998,51 @@ h3,
     letter-spacing: .035em;
 }
 
-/* Links. */
-a,
-a:visited,
+/* Links.
+ *
+ * Keep UCKK brand colour on normal text links only. Do not apply visited-link
+ * colour to buttons, drawers, course index items, menus, or role=button links:
+ * those components must keep their own contrast states.
+ */
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]),
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):visited,
 .btn-link {
     color: var(--uckk-petrol) !important;
 }
 
-a:hover,
-.btn-link:hover {
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):hover,
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):focus,
+.btn-link:hover,
+.btn-link:focus {
     color: var(--uckk-petrol-dark) !important;
 }
 
-/* Buttons. */
+/* Buttons.
+ *
+ * Anchor buttons may be visited links. Force button text contrast on button
+ * states instead of relying on generic a:visited rules.
+ */
 .btn-primary,
+.btn-primary:visited,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
 .btn-secondary,
+.btn-secondary:visited,
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
 .btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
 input[type="submit"],
-button[type="submit"] {
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+input[type="submit"]:active,
+button[type="submit"],
+button[type="submit"]:hover,
+button[type="submit"]:focus,
+button[type="submit"]:active {
     background-image: none !important;
     background-color: var(--uckk-petrol) !important;
     border-color: var(--uckk-petrol-dark) !important;
@@ -1024,9 +1051,17 @@ button[type="submit"] {
 }
 
 .btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
 .btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
 input[type="submit"]:hover,
-button[type="submit"]:hover {
+input[type="submit"]:focus,
+input[type="submit"]:active,
+button[type="submit"]:hover,
+button[type="submit"]:focus,
+button[type="submit"]:active {
     background-color: var(--uckk-petrol-dark) !important;
     border-color: var(--uckk-gold) !important;
 }
@@ -1767,6 +1802,102 @@ body.path-my #page-header::after {
     color: var(--uckk-gold-soft) !important;
     background: rgba(255, 250, 240, .05) !important;
     border-bottom-color: rgba(196, 154, 58, .55) !important;
+}
+
+/* ==========================================================================
+   UCKK active navigation underline guard
+   ========================================================================== */
+
+/*
+ * Prevent active navigation markers from stacking.
+ *
+ * theme_uckk/scss/navigation.scss is inlined after this file, so these rules
+ * use higher specificity and !important only on the visual reset points.
+ * They do not replace Moodle navigation; they only remove duplicate active
+ * indicators created by border + box-shadow + generated ::after underlines.
+ */
+
+/* Top Moodle navbar: keep one active marker only. */
+.navbar.fixed-top .nav-link,
+.navbar.fixed-top .nav-link:visited,
+.navbar.fixed-top .nav-link:hover,
+.navbar.fixed-top .nav-link:focus,
+.navbar.fixed-top .nav-link.active,
+.navbar.fixed-top .nav-link[aria-current="page"],
+.navbar.fixed-top .nav-link[aria-current="true"],
+.navbar.fixed-top .nav-item.show > .nav-link {
+    text-decoration: none !important;
+}
+
+.navbar.fixed-top .nav-link.active,
+.navbar.fixed-top .moremenu .nav-link.active,
+.navbar.fixed-top .primary-navigation .nav-link.active,
+.navbar.fixed-top .secondary-navigation .nav-link.active,
+.navbar.fixed-top .nav-link[aria-current="page"],
+.navbar.fixed-top .nav-link[aria-current="true"],
+.navbar.fixed-top .nav-item.show > .nav-link {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border-bottom-color: var(--uckk-gold) !important;
+    box-shadow: none !important;
+}
+
+/*
+ * navigation.scss adds a generated underline to active primary-navigation
+ * links. The fixed top navbar already uses border-bottom for its single active
+ * marker, so generated underline layers must be suppressed there.
+ *
+ * Do not suppress .dropdown-toggle::after globally; Bootstrap uses it for the
+ * dropdown caret.
+ */
+.navbar.fixed-top .primary-navigation .nav-link.active::before,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="page"]::before,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="true"]::before,
+.navbar.fixed-top .moremenu .nav-link.active::before,
+.navbar.fixed-top .moremenu .nav-link[aria-current="page"]::before,
+.navbar.fixed-top .moremenu .nav-link[aria-current="true"]::before,
+.navbar.fixed-top .primary-navigation .nav-link.active:not(.dropdown-toggle)::after,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="page"]:not(.dropdown-toggle)::after,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="true"]:not(.dropdown-toggle)::after,
+.navbar.fixed-top .moremenu .nav-link.active:not(.dropdown-toggle)::after,
+.navbar.fixed-top .moremenu .nav-link[aria-current="page"]:not(.dropdown-toggle)::after,
+.navbar.fixed-top .moremenu .nav-link[aria-current="true"]:not(.dropdown-toggle)::after {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    content: none !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Public local_uckk nav: never inherit theme-generated underlines. */
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link:visited,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link:visited,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link:hover,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link:hover,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link:focus,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link:focus,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link.is-active,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.is-active,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link[aria-current="page"],
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link[aria-current="page"] {
+    text-decoration: none !important;
+    background-image: none !important;
+}
+
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link::before,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link::after,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link::before,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link::after {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    content: none !important;
+    background: none !important;
+    box-shadow: none !important;
 }
 
 /* Right-side controls: never wrap, keep vertical alignment. */

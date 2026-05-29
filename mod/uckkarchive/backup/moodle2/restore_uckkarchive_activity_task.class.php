@@ -23,8 +23,9 @@ require_once($CFG->dirroot . '/mod/uckkarchive/backup/moodle2/restore_uckkarchiv
  *
  * The task wires the restore structure step, content decoding, activity-link
  * decoding, and legacy log restoration rules. Record creation, id mapping,
- * file-area restoration, provenance reconstruction, revision mapping, and
- * export metadata handling belong in restore_uckkarchive_activity_structure_step.
+ * file-area restoration, provenance reconstruction, revision mapping, media
+ * mapping, content advisory mapping, external work mapping, and export metadata
+ * handling belong in restore_uckkarchive_activity_structure_step.
  */
 class restore_uckkarchive_activity_task extends restore_activity_task {
     /**
@@ -33,12 +34,16 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
      * No custom task-level settings are required. User-data inclusion is
      * governed by Moodle's standard activity restore settings and interpreted
      * by the structure step.
+     *
+     * @return void
      */
     protected function define_my_settings(): void {
     }
 
     /**
      * Define restore steps.
+     *
+     * @return void
      */
     protected function define_my_steps(): void {
         $this->add_step(new restore_uckkarchive_activity_structure_step(
@@ -50,7 +55,7 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
     /**
      * Define content fields requiring link decoding after restore.
      *
-     * @return array
+     * @return restore_decode_content[]
      */
     public static function define_decode_contents(): array {
         $contents = [];
@@ -69,7 +74,11 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
             'title',
             'summary',
             'content',
+            'publicsummary',
+            'description',
+            'notes',
             'sourceref',
+            'sourceurl',
             'metadata',
         ], 'uckkarchive_item');
 
@@ -78,7 +87,10 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
             'title',
             'summary',
             'content',
+            'description',
+            'notes',
             'sourceref',
+            'sourceurl',
             'metadata',
         ], 'uckkarchive_kristal');
 
@@ -87,7 +99,10 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
             'title',
             'summary',
             'content',
+            'description',
+            'notes',
             'sourceref',
+            'sourceurl',
             'metadata',
         ], 'uckkarchive_proof');
 
@@ -97,6 +112,7 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
             'statement',
             'sourcecomponent',
             'sourceref',
+            'sourceurl',
             'metadata',
         ], 'uckkarchive_prov');
 
@@ -113,9 +129,138 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
         $contents[] = new restore_decode_content('uckkarchive_export', [
             'title',
             'summary',
+            'description',
+            'reason',
             'exportmanifest',
             'metadata',
         ], 'uckkarchive_export');
+
+        // Media records.
+        $contents[] = new restore_decode_content('uckkarchive_media', [
+            'title',
+            'description',
+            'alttext',
+            'caption',
+            'rightsnote',
+            'transcript',
+            'metadata',
+        ], 'uckkarchive_media');
+
+        // Media version records.
+        $contents[] = new restore_decode_content('uckkarchive_media_version', [
+            'title',
+            'label',
+            'summary',
+            'description',
+            'changenote',
+            'rightsnote',
+            'metadata',
+        ], 'uckkarchive_media_version');
+
+        // Media relation records.
+        $contents[] = new restore_decode_content('uckkarchive_media_relation', [
+            'title',
+            'description',
+            'note',
+            'metadata',
+        ], 'uckkarchive_media_relation');
+
+        // Media tag records.
+        $contents[] = new restore_decode_content('uckkarchive_media_tag', [
+            'tag',
+            'tagkey',
+            'label',
+            'description',
+            'metadata',
+        ], 'uckkarchive_media_tag');
+
+        // Media collection records.
+        $contents[] = new restore_decode_content('uckkarchive_media_collection', [
+            'title',
+            'summary',
+            'description',
+            'metadata',
+        ], 'uckkarchive_media_collection');
+
+        // Media collection membership records.
+        $contents[] = new restore_decode_content('uckkarchive_media_collection_item', [
+            'title',
+            'summary',
+            'description',
+            'note',
+            'metadata',
+        ], 'uckkarchive_media_collection_item');
+
+        // Media source records.
+        $contents[] = new restore_decode_content('uckkarchive_media_source', [
+            'title',
+            'description',
+            'sourceurl',
+            'sourcenote',
+            'rightsstatement',
+            'licensekey',
+            'metadata',
+        ], 'uckkarchive_media_source');
+
+        // Content advisory tag records.
+        $contents[] = new restore_decode_content('uckkarchive_content_tag', [
+            'tagkey',
+            'label',
+            'category',
+            'description',
+            'guidance',
+            'metadata',
+        ], 'uckkarchive_content_tag');
+
+        // Content advisory tag-set records.
+        $contents[] = new restore_decode_content('uckkarchive_content_tag_set', [
+            'tagsetkey',
+            'label',
+            'description',
+            'version',
+            'metadata',
+        ], 'uckkarchive_content_tag_set');
+
+        // Content marker records.
+        $contents[] = new restore_decode_content('uckkarchive_content_marker', [
+            'title',
+            'summary',
+            'description',
+            'note',
+            'locator',
+            'locatorstart',
+            'locatorend',
+            'locatorlabel',
+            'culturalprotocolnote',
+            'metadata',
+        ], 'uckkarchive_content_marker');
+
+        // Content review records.
+        $contents[] = new restore_decode_content('uckkarchive_content_review', [
+            'rationale',
+            'reviewnote',
+            'decisionnote',
+            'culturalprotocolnote',
+            'metadata',
+        ], 'uckkarchive_content_review');
+
+        // External work records.
+        $contents[] = new restore_decode_content('uckkarchive_external_work', [
+            'title',
+            'subtitle',
+            'creator',
+            'publisher',
+            'sourceurl',
+            'identifier',
+            'citation',
+            'rightsstatement',
+            'licensekey',
+            'sourcenote',
+            'teachingnote',
+            'culturalprotocolnote',
+            'description',
+            'metadata',
+        ], 'uckkarchive_external_work');
 
         return $contents;
     }
@@ -125,7 +270,7 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
      *
      * These tokens should match backup_uckkarchive_activity_task::encode_content_links().
      *
-     * @return array
+     * @return restore_decode_rule[]
      */
     public static function define_decode_rules(): array {
         $rules = [];
@@ -182,6 +327,42 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
             'UCKKARCHIVEEXPORTBYID',
             '/mod/uckkarchive/export.php?exportid=$1',
             'uckkarchive_export'
+        );
+
+        $rules[] = new restore_decode_rule(
+            'UCKKARCHIVEMEDIABYCMID',
+            '/mod/uckkarchive/media.php?id=$1',
+            'course_module'
+        );
+
+        $rules[] = new restore_decode_rule(
+            'UCKKARCHIVEMEDIABYID',
+            '/mod/uckkarchive/media.php?mediaid=$1',
+            'uckkarchive_media'
+        );
+
+        $rules[] = new restore_decode_rule(
+            'UCKKARCHIVEMEDIAVERSIONBYID',
+            '/mod/uckkarchive/media.php?versionid=$1',
+            'uckkarchive_media_version'
+        );
+
+        $rules[] = new restore_decode_rule(
+            'UCKKARCHIVEMEDIACOLLECTIONBYID',
+            '/mod/uckkarchive/media.php?collectionid=$1',
+            'uckkarchive_media_collection'
+        );
+
+        $rules[] = new restore_decode_rule(
+            'UCKKARCHIVEEXTERNALWORKBYID',
+            '/mod/uckkarchive/media.php?externalworkid=$1',
+            'uckkarchive_external_work'
+        );
+
+        $rules[] = new restore_decode_rule(
+            'UCKKARCHIVECONTENTMARKERBYID',
+            '/mod/uckkarchive/media.php?contentmarkerid=$1',
+            'uckkarchive_content_marker'
         );
 
         return $rules;
@@ -251,6 +432,76 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
             '{uckkarchive_export}'
         );
 
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'view media',
+            'media.php?id={course_module}&mediaid={uckkarchive_media}',
+            '{uckkarchive_media}'
+        );
+
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'add media',
+            'media.php?id={course_module}',
+            '{uckkarchive_media}'
+        );
+
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'update media',
+            'media.php?id={course_module}&mediaid={uckkarchive_media}',
+            '{uckkarchive_media}'
+        );
+
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'delete media',
+            'media.php?id={course_module}',
+            '{uckkarchive_media}'
+        );
+
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'version media',
+            'media.php?id={course_module}&mediaid={uckkarchive_media}',
+            '{uckkarchive_media_version}'
+        );
+
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'export media',
+            'export.php?id={course_module}',
+            '{uckkarchive_export}'
+        );
+
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'create media collection',
+            'media.php?id={course_module}&collectionid={uckkarchive_media_collection}',
+            '{uckkarchive_media_collection}'
+        );
+
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'create content marker',
+            'media.php?id={course_module}&contentmarkerid={uckkarchive_content_marker}',
+            '{uckkarchive_content_marker}'
+        );
+
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'review content marker',
+            'media.php?id={course_module}&contentmarkerid={uckkarchive_content_marker}',
+            '{uckkarchive_content_review}'
+        );
+
+        $rules[] = new restore_log_rule(
+            'uckkarchive',
+            'create external work',
+            'media.php?id={course_module}&externalworkid={uckkarchive_external_work}',
+            '{uckkarchive_external_work}'
+        );
+
         return $rules;
     }
 
@@ -276,20 +527,46 @@ class restore_uckkarchive_activity_task extends restore_activity_task {
      * Return file areas used by the activity.
      *
      * Actual file restoration is performed by the restore structure step. These
-     * names must stay aligned with mod_uckkarchive::pluginfile(), backup steps,
-     * and the generated archive lib.php.
+     * names must stay aligned with mod_uckkarchive_pluginfile(), backup steps,
+     * restore steps, privacy provider, file_area_registry, and tests.
      *
      * @return string[]
      */
     public function get_fileareas(): array {
         return [
             'intro',
+
+            // Archive file areas.
+            'item_content',
+            'item_publicsummary',
+            'item_files',
             'proof_files',
             'decision_attachments',
             'minutes_files',
             'kristal_files',
             'portfolio_files',
             'integrity_exports',
+            'provenance_files',
+            'validation_files',
+            'revision_files',
+
+            // Media file areas.
+            'media_original',
+            'media_preview',
+            'media_thumbnail',
+            'media_derivative',
+            'media_caption',
+            'media_transcript',
+            'media_attachment',
+
+            // Content advisory and external-work file areas.
+            'content_review_files',
+            'external_work_reference_files',
+            'cultural_protocol_files',
+
+            // Export file areas.
+            'export_package',
+            'export_manifest',
         ];
     }
 

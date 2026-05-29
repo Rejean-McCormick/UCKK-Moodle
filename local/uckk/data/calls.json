@@ -1,0 +1,478 @@
+{
+  "schema": "local_uckk.calls.v1",
+  "component": "local_uckk",
+  "kind": "public_contribution_calls",
+  "version": 2026052301,
+  "title": "Appels UCKK",
+  "subtitle": "Contribuer au Grand Jeu social par des preuves, des projets, des défis et des assemblées.",
+  "summary": "Les appels UCKK ouvrent des espaces de contribution structurée : bâtir, proposer, relire, documenter, archiver et transformer une idée en preuve publique ou interne.",
+  "status_note": "Les appels UCKK sont des invitations publiques ou internes à contribuer à la cité-école. Ils ne constituent ni des concours d’État, ni des appels universitaires accrédités, ni des promesses de diplôme, d’emploi, de financement ou de reconnaissance externe.",
+  "updated_at": "2026-05-23",
+  "page": {
+    "slug": "news",
+    "section": "calls",
+    "navigation_key": "news",
+    "eyebrow": "Contributions",
+    "title": "Appels UCKK",
+    "summary": "Des invitations à contribuer à la cité-école par des textes, des preuves, des projets, des défis, des observations et des archives.",
+    "boundarynotice": "Reconnaissances et contributions internes UCKK — traces propres à la cité-école, non encore reconnues par l’État.",
+    "primary_action_label": "Consulter les appels ouverts"
+  },
+  "publication": {
+    "status": "active",
+    "visibility": "mixed",
+    "review_policy": "Chaque appel doit pouvoir être relu, contesté raisonnablement, corrigé et archivé.",
+    "archive_policy": "Les contributions retenues peuvent être versées aux Archives UCKK avec date, provenance, statut et contexte.",
+    "integrity_policy": "Aucun appel ne doit confondre fiction, hypothèse, interprétation et fait; aucune contribution ne doit présenter UCKK comme une institution accréditée par l’État."
+  },
+  "labels": {
+    "status": {
+      "open": "Ouvert",
+      "closed": "Fermé",
+      "draft": "Brouillon",
+      "archived": "Archivé"
+    },
+    "visibility": {
+      "public": "Public",
+      "internal": "Interne",
+      "restricted": "Restreint"
+    },
+    "type": {
+      "appel_aux_batisseurs": "Appel aux Bâtisseurs",
+      "appel_a_defis": "Appel à défis",
+      "appel_aux_archives": "Appel aux Archives",
+      "appel_aux_assemblees": "Appel aux Assemblées",
+      "appel_a_preuves": "Appel à preuves",
+      "appel_a_contribution_pedagogique": "Appel à contribution pédagogique"
+    },
+    "tone": {
+      "institutional": "Institutionnel",
+      "civic": "Civique",
+      "documentary": "Documentaire",
+      "deliberative": "Délibératif",
+      "methodological": "Méthodologique",
+      "public_pedagogy": "Pédagogie publique"
+    }
+  },
+  "items": [
+    {
+      "id": "call:builders:campus-public",
+      "slug": "batir-les-pages-publiques-uckk",
+      "status": "open",
+      "visibility": "public",
+      "type": "appel_aux_batisseurs",
+      "tone": "institutional",
+      "title": "Bâtir les pages publiques de l’Univers-Cité",
+      "summary": "Appel aux Bâtisseurs pour structurer les pages publiques UCKK : Accueil, À propos, Voies, Cours, Défis, Assemblées, Intégrité, Archives, Actualités et Contact.",
+      "purpose": "Transformer le canon UCKK en portail institutionnel clair, sobre et traçable.",
+      "audience": [
+        "Bâtisseurs",
+        "contributeurs techniques",
+        "rédacteurs",
+        "designers",
+        "relecteurs du canon"
+      ],
+      "expected_contributions": [
+        "propositions de structure",
+        "textes de page",
+        "composants visuels",
+        "corrections terminologiques",
+        "repérage des ambiguïtés",
+        "améliorations d’accessibilité"
+      ],
+      "submission_format": [
+        "texte structuré",
+        "patch de code",
+        "maquette",
+        "note de relecture",
+        "liste de corrections"
+      ],
+      "related_pages": [
+        "/local/uckk/about.php",
+        "/local/uckk/programs.php",
+        "/local/uckk/assemblies.php",
+        "/local/uckk/integrity.php",
+        "/local/uckk/archives.php"
+      ],
+      "related_assembly": "Assemblée des Bâtisseurs",
+      "integrity_requirements": [
+        "distinguer clairement UCKK, kOA, King Klown et le kOA Digital Ecosystem",
+        "ne pas présenter UCKK comme une université accréditée",
+        "ne pas inventer de partenaires",
+        "documenter les décisions importantes",
+        "préserver un ton clair, digne et non manipulateur"
+      ],
+      "outputs": [
+        "pages publiques prêtes à intégrer",
+        "éléments de navigation",
+        "textes institutionnels",
+        "notes d’archive"
+      ],
+      "archive_policy": "Les contributions retenues peuvent être versées aux Archives UCKK avec mention du contexte, de la date et du statut.",
+      "call_to_action": "Proposer une amélioration concrète du portail public UCKK.",
+      "display_order": 1,
+      "status_label": "Ouvert",
+      "visibility_label": "Public",
+      "type_label": "Appel aux Bâtisseurs",
+      "tone_label": "Institutionnel",
+      "primary_action_label": "Proposer une amélioration concrète du portail public UCKK.",
+      "landing_page": "/local/uckk/about.php",
+      "review": {
+        "assembly": "Assemblée des Bâtisseurs",
+        "integrity_required": true,
+        "archive_required": true
+      }
+    },
+    {
+      "id": "call:challenges:first-public-cycle",
+      "slug": "premier-cycle-de-defis-publics",
+      "status": "open",
+      "visibility": "public",
+      "type": "appel_a_defis",
+      "tone": "civic",
+      "title": "Premier cycle de Défis King Klown",
+      "summary": "Appel à proposer des défis publics capables de transformer une question sociale, technique, culturelle ou stratégique en épreuve collective documentée.",
+      "purpose": "Lancer des défis clairs, évaluables et utiles aux Voies UCKK.",
+      "audience": [
+        "Joueurs",
+        "Aspirants",
+        "enseignants",
+        "créateurs",
+        "observateurs critiques",
+        "équipes de projet"
+      ],
+      "expected_contributions": [
+        "proposition de défi",
+        "règles du défi",
+        "critères d’évaluation",
+        "risques de confusion",
+        "preuves attendues",
+        "lien avec un cours ou une Voie"
+      ],
+      "submission_format": [
+        "fiche de défi",
+        "scénario court",
+        "grille de critères",
+        "prototype",
+        "post-mortem d’un défi existant"
+      ],
+      "related_pages": [
+        "/local/uckk/challenges.php",
+        "/local/uckk/assemblies.php",
+        "/local/uckk/archives.php"
+      ],
+      "related_assembly": "Assemblée des Défis",
+      "integrity_requirements": [
+        "publier les règles avant le lancement",
+        "rendre les critères visibles",
+        "distinguer fiction, hypothèse et fait",
+        "protéger les personnes contre l’humiliation",
+        "produire une trace archivable",
+        "permettre une contestation raisonnable"
+      ],
+      "outputs": [
+        "défi public",
+        "preuve de compétence",
+        "travail pratique",
+        "archive de résultat",
+        "post-mortem"
+      ],
+      "archive_policy": "Chaque défi retenu doit produire une trace minimale : énoncé, règles, critères, productions, résultat et leçons apprises.",
+      "call_to_action": "Soumettre une proposition de défi avec ses règles et ses critères.",
+      "display_order": 2,
+      "status_label": "Ouvert",
+      "visibility_label": "Public",
+      "type_label": "Appel à défis",
+      "tone_label": "Civique",
+      "primary_action_label": "Soumettre une proposition de défi avec ses règles et ses critères.",
+      "landing_page": "/local/uckk/challenges.php",
+      "review": {
+        "assembly": "Assemblée des Défis",
+        "integrity_required": true,
+        "archive_required": true
+      }
+    },
+    {
+      "id": "call:archives:canon-memory",
+      "slug": "archives-du-canon-et-des-decisions",
+      "status": "open",
+      "visibility": "public",
+      "type": "appel_aux_archives",
+      "tone": "documentary",
+      "title": "Constituer les Archives publiques du canon",
+      "summary": "Appel à rassembler, classer et clarifier les versions du canon, les décisions d’assemblées, les corrections majeures et les contributions retenues.",
+      "purpose": "Construire une mémoire institutionnelle lisible : ce qui a été décidé, corrigé, discuté ou archivé.",
+      "audience": [
+        "Archivistes",
+        "Bâtisseurs",
+        "relecteurs",
+        "participants aux assemblées",
+        "responsables de preuve"
+      ],
+      "expected_contributions": [
+        "version datée du canon",
+        "résumé de décision",
+        "trace de correction",
+        "dossier de preuve",
+        "fiche d’archive",
+        "index de contributions"
+      ],
+      "submission_format": [
+        "document Markdown",
+        "fiche JSON",
+        "résumé structuré",
+        "table de correspondance",
+        "preuve liée à une décision"
+      ],
+      "related_pages": [
+        "/local/uckk/archives.php",
+        "/local/uckk/integrity.php",
+        "/local/uckk/assemblies.php"
+      ],
+      "related_assembly": "Assemblée des Savoirs",
+      "integrity_requirements": [
+        "indiquer la provenance",
+        "dater les versions",
+        "séparer brouillon, décision et archive",
+        "ne pas effacer les corrections importantes",
+        "rendre les changements compréhensibles"
+      ],
+      "outputs": [
+        "archive publique",
+        "fiche de version",
+        "index canonique",
+        "dossier de preuve",
+        "note de correction"
+      ],
+      "archive_policy": "Les archives doivent conserver la trace du contexte, du statut, des contributeurs si autorisés, et des liens vers les décisions concernées.",
+      "call_to_action": "Soumettre une pièce archivable avec sa date, sa provenance et son statut.",
+      "display_order": 3,
+      "status_label": "Ouvert",
+      "visibility_label": "Public",
+      "type_label": "Appel aux Archives",
+      "tone_label": "Documentaire",
+      "primary_action_label": "Soumettre une pièce archivable avec sa date, sa provenance et son statut.",
+      "landing_page": "/local/uckk/archives.php",
+      "review": {
+        "assembly": "Assemblée des Savoirs",
+        "integrity_required": true,
+        "archive_required": true
+      }
+    },
+    {
+      "id": "call:assemblies:public-observers",
+      "slug": "observateurs-et-contributeurs-des-assemblees",
+      "status": "open",
+      "visibility": "public",
+      "type": "appel_aux_assemblees",
+      "tone": "deliberative",
+      "title": "Observateurs et contributeurs des Assemblées",
+      "summary": "Appel aux personnes capables d’observer, relire, questionner et améliorer les délibérations UCKK sans transformer l’assemblée en foule punitive.",
+      "purpose": "Renforcer la qualité collective des décisions, des corrections et des reconnaissances internes.",
+      "audience": [
+        "Joueurs",
+        "Aspirants",
+        "relecteurs",
+        "médiateurs",
+        "observateurs",
+        "contributeurs méthodiques"
+      ],
+      "expected_contributions": [
+        "question claire",
+        "observation argumentée",
+        "preuve ou trace",
+        "proposition de correction",
+        "objection formulée dignement",
+        "synthèse de discussion"
+      ],
+      "submission_format": [
+        "note courte",
+        "commentaire structuré",
+        "dossier de preuve",
+        "proposition de règle",
+        "demande de clarification"
+      ],
+      "related_pages": [
+        "/local/uckk/assemblies.php",
+        "/local/uckk/integrity.php",
+        "/local/uckk/archives.php"
+      ],
+      "related_assembly": "Assemblée du Grand Jeu",
+      "integrity_requirements": [
+        "viser les idées, systèmes et comportements plutôt que détruire les personnes",
+        "argumenter avec des traces",
+        "accepter la correction",
+        "ne pas confondre popularité et légitimité",
+        "ne pas remplacer l’Inquisiteur en matière d’intégrité"
+      ],
+      "outputs": [
+        "synthèse d’assemblée",
+        "correction du canon",
+        "recommandation",
+        "renvoi vers archive",
+        "demande d’enquête d’intégrité"
+      ],
+      "archive_policy": "Les observations importantes peuvent être conservées comme traces d’assemblée, avec anonymisation si nécessaire.",
+      "call_to_action": "Soumettre une question ou une contribution destinée à une Assemblée UCKK.",
+      "display_order": 4,
+      "status_label": "Ouvert",
+      "visibility_label": "Public",
+      "type_label": "Appel aux Assemblées",
+      "tone_label": "Délibératif",
+      "primary_action_label": "Soumettre une question ou une contribution destinée à une Assemblée UCKK.",
+      "landing_page": "/local/uckk/assemblies.php",
+      "review": {
+        "assembly": "Assemblée du Grand Jeu",
+        "integrity_required": true,
+        "archive_required": true
+      }
+    },
+    {
+      "id": "call:proofs:portfolio-kristals",
+      "slug": "dossiers-de-preuves-et-kristals",
+      "status": "open",
+      "visibility": "internal",
+      "type": "appel_a_preuves",
+      "tone": "methodological",
+      "title": "Dossiers de preuves, portfolios et pré-Kristals",
+      "summary": "Appel à structurer des preuves de compétence, des portfolios et des unités de mémoire compatibles avec les parcours UCKK.",
+      "purpose": "Relier apprentissage, défi, contribution, projet et mémoire.",
+      "audience": [
+        "Aspirants",
+        "Joueurs",
+        "participants aux cours",
+        "Bâtisseurs",
+        "Archivistes"
+      ],
+      "expected_contributions": [
+        "preuve de compétence",
+        "portfolio",
+        "journal de processus",
+        "post-mortem",
+        "fiche de projet",
+        "unité de mémoire"
+      ],
+      "submission_format": [
+        "dossier structuré",
+        "archive Moodle",
+        "document de preuve",
+        "lien vers production",
+        "fiche de réflexion"
+      ],
+      "related_pages": [
+        "/local/uckk/courses.php",
+        "/local/uckk/challenges.php",
+        "/local/uckk/archives.php"
+      ],
+      "related_assembly": "Assemblée des Savoirs",
+      "integrity_requirements": [
+        "rendre la provenance vérifiable",
+        "séparer production personnelle, aide externe et usage de l’IA",
+        "documenter les critères",
+        "ne pas présenter une reconnaissance interne comme diplôme public",
+        "conserver les traces utiles à l’évaluation"
+      ],
+      "outputs": [
+        "portfolio UCKK",
+        "preuve de compétence",
+        "pré-Kristal",
+        "archive de projet",
+        "dossier de passage"
+      ],
+      "archive_policy": "Les dossiers retenus peuvent alimenter les Archives UCKK, les portfolios et les décisions de reconnaissance interne.",
+      "call_to_action": "Préparer un dossier de preuve clair, daté et vérifiable.",
+      "display_order": 5,
+      "status_label": "Ouvert",
+      "visibility_label": "Interne",
+      "type_label": "Appel à preuves",
+      "tone_label": "Méthodologique",
+      "primary_action_label": "Préparer un dossier de preuve clair, daté et vérifiable.",
+      "landing_page": "/local/uckk/courses.php",
+      "review": {
+        "assembly": "Assemblée des Savoirs",
+        "integrity_required": true,
+        "archive_required": true
+      }
+    },
+    {
+      "id": "call:public-pedagogy:mini-lessons",
+      "slug": "mini-lecons-et-cartographies-publiques",
+      "status": "open",
+      "visibility": "public",
+      "type": "appel_a_contribution_pedagogique",
+      "tone": "public_pedagogy",
+      "title": "Mini-leçons, cartographies et explications publiques",
+      "summary": "Appel à produire des contenus courts qui rendent les systèmes sociaux, techniques ou culturels plus compréhensibles sans sacrifier la rigueur.",
+      "purpose": "Transformer l’attention publique en apprentissage, puis en défi, contribution, projet et mémoire.",
+      "audience": [
+        "créateurs",
+        "pédagogues",
+        "cartographes",
+        "analystes",
+        "étudiants UCKK",
+        "participants aux défis"
+      ],
+      "expected_contributions": [
+        "mini-leçon",
+        "cartographie de système",
+        "thread pédagogique",
+        "explication courte",
+        "analyse de mécanisme social",
+        "correction publique"
+      ],
+      "submission_format": [
+        "texte court",
+        "schéma",
+        "carte visuelle",
+        "script vidéo",
+        "fiche pédagogique",
+        "prototype de publication"
+      ],
+      "related_pages": [
+        "/local/uckk/news.php",
+        "/local/uckk/challenges.php",
+        "/local/uckk/archives.php"
+      ],
+      "related_assembly": "Assemblée des Savoirs",
+      "integrity_requirements": [
+        "nommer le but pédagogique",
+        "distinguer fait, interprétation et fiction",
+        "éviter le ton messianique, sectaire ou humiliant",
+        "citer les sources lorsque nécessaire",
+        "indiquer ce que le public peut faire après"
+      ],
+      "outputs": [
+        "publication pédagogique",
+        "défi dérivé",
+        "ressource de cours",
+        "archive de contribution",
+        "correction publique"
+      ],
+      "archive_policy": "Les meilleures contributions peuvent être archivées avec leur contexte et servir de ressources pour les cours, défis ou assemblées.",
+      "call_to_action": "Soumettre une mini-leçon ou une cartographie qui ouvre vers une action réelle.",
+      "display_order": 6,
+      "status_label": "Ouvert",
+      "visibility_label": "Public",
+      "type_label": "Appel à contribution pédagogique",
+      "tone_label": "Pédagogie publique",
+      "primary_action_label": "Soumettre une mini-leçon ou une cartographie qui ouvre vers une action réelle.",
+      "landing_page": "/local/uckk/news.php",
+      "review": {
+        "assembly": "Assemblée des Savoirs",
+        "integrity_required": true,
+        "archive_required": true
+      }
+    }
+  ],
+  "guardrails": [
+    "La viralité ne remplace pas la vérité.",
+    "La popularité ne remplace pas la décision légitime.",
+    "Chaque appel doit indiquer son but pédagogique.",
+    "Chaque appel doit distinguer fiction, hypothèse, interprétation et fait.",
+    "Les contributions doivent viser l’apprentissage, la preuve, l’action ou la mémoire.",
+    "Les personnes doivent être protégées contre l’humiliation et l’abus.",
+    "Les résultats importants doivent être explicables et archivables.",
+    "Les reconnaissances associées aux appels sont internes à UCKK.",
+    "Aucun appel ne doit promettre une reconnaissance externe, un diplôme public, un financement ou un statut officiel."
+  ]
+}

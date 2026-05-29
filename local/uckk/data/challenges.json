@@ -1,0 +1,758 @@
+<?php
+// This file is part of UCKK-Moodle.
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// any later version.
+//
+// UCKK-Moodle adapts Moodle as the pedagogical campus of the
+// Univers-Cité King Klown.
+
+/**
+ * Public UCKK challenges page.
+ *
+ * This page presents Défis King Klown as public learning challenges.
+ * It is a presentation/controller file for the local_uckk plugin.
+ *
+ * It must not create challenges, validate proofs, award recognitions,
+ * mutate archives, or make integrity decisions. Those actions belong to
+ * mod_uckkchallenge, mod_uckkarchive, mod_uckkassembly and tool_uckkintegrity.
+ *
+ * Public-page style contract:
+ * - CSS is owned by local_uckk/styles.css.
+ * - Classes follow the local-uckk-public-* convention.
+ * - Navigation uses local-uckk-public-nav__link and is-active.
+ *
+ * @package    local_uckk
+ * @copyright  2026 Univers-Cité King Klown
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+require_once(__DIR__ . '/../../config.php');
+
+$context = context_system::instance();
+
+$PAGE->set_context($context);
+$PAGE->set_url(new moodle_url('/local/uckk/challenges.php'));
+$PAGE->set_pagelayout('standard');
+$PAGE->set_title(local_uckk_challenges_string('public_challenges_title', 'Défis'));
+$PAGE->set_heading(local_uckk_challenges_string('uckkfullname', 'Univers-Cité King Klown'));
+$PAGE->set_cacheable(true);
+$PAGE->requires->css(new moodle_url('/local/uckk/styles.css'));
+
+$status = optional_param('status', 'open', PARAM_ALPHANUMEXT);
+$status = local_uckk_challenges_normalise_status($status);
+
+$challenges = local_uckk_challenges_get_challenges($status);
+
+echo $OUTPUT->header();
+
+echo html_writer::start_div('local-uckk local-uckk-public-page local-uckk-public-page--challenges', [
+    'data-region' => 'local-uckk-public-page',
+    'data-page' => 'challenges',
+]);
+
+echo local_uckk_challenges_render_public_nav('challenges');
+
+echo html_writer::start_tag('header', ['class' => 'local-uckk-public-hero']);
+
+echo html_writer::div(
+    local_uckk_challenges_string('public_challenges_eyebrow', 'Défis King Klown'),
+    'local-uckk-public-eyebrow'
+);
+
+echo html_writer::tag(
+    'h2',
+    local_uckk_challenges_string('public_challenges_heading', 'Transformer l’attention en apprentissage'),
+    ['class' => 'local-uckk-public-title']
+);
+
+echo html_writer::tag(
+    'p',
+    local_uckk_challenges_string(
+        'public_challenges_summary',
+        'Les Défis King Klown transforment une question sociale, technique, culturelle ou stratégique en apprentissage collectif, vérifiable et archivable.'
+    ),
+    ['class' => 'local-uckk-public-summary']
+);
+
+echo html_writer::div(
+    local_uckk_challenges_string(
+        'public_challenges_boundary',
+        'Un défi UCKK peut être spectaculaire, drôle ou provocant, mais il doit rester pédagogique, documentable et responsable.'
+    ),
+    'local-uckk-public-boundary'
+);
+
+echo html_writer::end_tag('header');
+
+echo html_writer::start_tag('main', ['class' => 'local-uckk-public-body']);
+
+echo html_writer::start_div('local-uckk-public-card-grid local-uckk-public-card-grid--principles');
+
+echo local_uckk_challenges_render_info_card(
+    'King Klown attire',
+    'Le défi capte l’attention, rend une question mémorable et ouvre une scène d’apprentissage.',
+    'spectacle'
+);
+
+echo local_uckk_challenges_render_info_card(
+    'L’Inquisiteur vérifie',
+    'Les règles, les faits, les preuves et la dignité des personnes doivent rester protégés.',
+    'integrity'
+);
+
+echo local_uckk_challenges_render_info_card(
+    'Les Assemblées légitiment',
+    'Les résultats importants peuvent être discutés, contestés, corrigés ou validés collectivement.',
+    'assembly'
+);
+
+echo local_uckk_challenges_render_info_card(
+    'L’Archiviste se souvient',
+    'Un défi sérieux laisse des traces : preuves, décisions, corrections, apprentissages et versions.',
+    'archive'
+);
+
+echo html_writer::end_div();
+
+echo html_writer::start_tag('section', ['class' => 'local-uckk-public-section local-uckk-public-section--challenge-rules']);
+
+echo html_writer::tag(
+    'h3',
+    local_uckk_challenges_string('public_challenges_rules_title', 'Règles d’un défi UCKK'),
+    ['class' => 'local-uckk-public-section__title']
+);
+
+echo html_writer::tag(
+    'p',
+    local_uckk_challenges_string(
+        'public_challenges_rules_summary',
+        'Un défi peut ouvrir une scène publique, mais il doit toujours protéger l’apprentissage, les personnes, les preuves et la possibilité de contestation.'
+    ),
+    ['class' => 'local-uckk-public-section__body']
+);
+
+echo html_writer::start_tag('ol', ['class' => 'local-uckk-public-list local-uckk-public-list--rules']);
+echo html_writer::tag('li', 'Le but pédagogique doit être clair.');
+echo html_writer::tag('li', 'Les règles doivent être connues avant l’action.');
+echo html_writer::tag('li', 'Les preuves attendues doivent être explicites.');
+echo html_writer::tag('li', 'Les participants doivent pouvoir documenter leur réponse.');
+echo html_writer::tag('li', 'La contestation doit rester possible.');
+echo html_writer::tag('li', 'Aucune humiliation, manipulation, menace, diffamation ou fabrication de preuves n’est acceptable.');
+echo html_writer::tag('li', 'Un défi peut être suspendu ou invalidé si l’intégrité est compromise.');
+echo html_writer::end_tag('ol');
+
+echo local_uckk_challenges_render_notice(
+    'Intégrité',
+    local_uckk_challenges_string(
+        'public_challenges_warning',
+        'Le spectacle est permis. L’abus ne l’est pas.'
+    ),
+    'integrity'
+);
+
+echo html_writer::end_tag('section');
+
+echo html_writer::start_tag('section', ['class' => 'local-uckk-public-section local-uckk-public-section--challenge-cycle']);
+
+echo html_writer::tag(
+    'h3',
+    local_uckk_challenges_string('public_challenges_cycle_title', 'Cycle d’un défi'),
+    ['class' => 'local-uckk-public-section__title']
+);
+
+echo html_writer::start_div('local-uckk-public-card-grid local-uckk-public-card-grid--steps');
+
+echo local_uckk_challenges_render_step('1', 'Appel', 'Une question ou une tension est formulée comme défi.');
+echo local_uckk_challenges_render_step('2', 'Réponse', 'Les Joueurs proposent une action, une analyse, un prototype ou une performance pédagogique.');
+echo local_uckk_challenges_render_step('3', 'Preuves', 'La réponse est documentée : sources, traces, décisions, artefacts, limites.');
+echo local_uckk_challenges_render_step('4', 'Vérification', 'L’intégrité, la clarté des règles et la qualité des preuves sont examinées.');
+echo local_uckk_challenges_render_step('5', 'Assemblée', 'Les résultats importants peuvent être discutés, amendés, contestés ou légitimés.');
+echo local_uckk_challenges_render_step('6', 'Archive', 'Les apprentissages, corrections et décisions sont conservés pour transmission.');
+
+echo html_writer::end_div();
+echo html_writer::end_tag('section');
+
+echo html_writer::start_tag('section', ['class' => 'local-uckk-public-section local-uckk-public-section--challenge-list']);
+
+echo html_writer::start_div('local-uckk-public-section__header');
+echo html_writer::tag(
+    'h3',
+    local_uckk_challenges_string('public_challenges_list_title', 'Défis'),
+    ['class' => 'local-uckk-public-section__title']
+);
+echo local_uckk_challenges_render_filters($status);
+echo html_writer::end_div();
+
+if (empty($challenges)) {
+    echo html_writer::div(
+        local_uckk_challenges_string('public_challenges_none', 'Aucun défi ne correspond au filtre sélectionné.'),
+        'alert alert-info',
+        ['role' => 'status']
+    );
+} else {
+    echo html_writer::start_div('local-uckk-public-card-grid local-uckk-public-card-grid--challenges');
+
+    foreach ($challenges as $challenge) {
+        echo local_uckk_challenges_render_card($challenge);
+    }
+
+    echo html_writer::end_div();
+}
+
+echo html_writer::end_tag('section');
+
+echo html_writer::start_tag('section', ['class' => 'local-uckk-public-section local-uckk-public-section--challenge-actions']);
+
+echo html_writer::tag(
+    'h3',
+    local_uckk_challenges_string('public_challenges_actions_title', 'Participer'),
+    ['class' => 'local-uckk-public-section__title']
+);
+
+echo html_writer::start_div('local-uckk-public-cta');
+
+$categoryurl = local_uckk_challenges_get_category_url();
+if ($categoryurl !== null) {
+    echo html_writer::link(
+        $categoryurl,
+        local_uckk_challenges_string('public_challenges_viewspace', 'Voir l’espace des défis'),
+        ['class' => 'btn btn-primary local-uckk-public-cta__action']
+    );
+}
+
+echo html_writer::link(
+    new moodle_url('/local/uckk/contact.php', ['subject' => 'challenge']),
+    local_uckk_challenges_string('public_challenges_propose', 'Proposer un défi'),
+    ['class' => 'btn btn-outline-primary local-uckk-public-cta__action']
+);
+
+echo html_writer::link(
+    new moodle_url('/local/uckk/integrity.php'),
+    local_uckk_challenges_string('public_challenges_integrity', 'Consulter les règles d’intégrité'),
+    ['class' => 'btn btn-outline-secondary local-uckk-public-cta__action']
+);
+
+echo html_writer::end_div();
+
+echo html_writer::end_tag('section');
+
+echo html_writer::end_tag('main');
+echo html_writer::end_div();
+
+echo $OUTPUT->footer();
+
+/**
+ * Return translated string with fallback.
+ *
+ * Uses the new public_* language keys first. Legacy public:* keys can still be
+ * resolved because Moodle string identifiers may contain punctuation, but new
+ * code should use underscore keys.
+ *
+ * @param string $identifier Language string identifier.
+ * @param string $fallback Fallback text.
+ * @return string
+ */
+function local_uckk_challenges_string(string $identifier, string $fallback): string {
+    if (get_string_manager()->string_exists($identifier, 'local_uckk')) {
+        return get_string($identifier, 'local_uckk');
+    }
+
+    if (get_string_manager()->string_exists($identifier, 'theme_uckk')) {
+        return get_string($identifier, 'theme_uckk');
+    }
+
+    return $fallback;
+}
+
+/**
+ * Render public navigation using the official public style contract.
+ *
+ * @param string $active Active page key.
+ * @return string
+ */
+function local_uckk_challenges_render_public_nav(string $active): string {
+    $items = [
+        'home' => [
+            'label' => local_uckk_challenges_string('public_nav_home', 'Accueil'),
+            'url' => new moodle_url('/local/uckk/index.php'),
+        ],
+        'about' => [
+            'label' => local_uckk_challenges_string('public_nav_about', 'À propos'),
+            'url' => new moodle_url('/local/uckk/about.php'),
+        ],
+        'programs' => [
+            'label' => local_uckk_challenges_string('public_nav_programs', 'Voies'),
+            'url' => new moodle_url('/local/uckk/programs.php'),
+        ],
+        'courses' => [
+            'label' => local_uckk_challenges_string('public_nav_courses', 'Cours'),
+            'url' => new moodle_url('/local/uckk/courses.php'),
+        ],
+        'challenges' => [
+            'label' => local_uckk_challenges_string('public_nav_challenges', 'Défis'),
+            'url' => new moodle_url('/local/uckk/challenges.php'),
+        ],
+        'assemblies' => [
+            'label' => local_uckk_challenges_string('public_nav_assemblies', 'Assemblées'),
+            'url' => new moodle_url('/local/uckk/assemblies.php'),
+        ],
+        'integrity' => [
+            'label' => local_uckk_challenges_string('public_nav_integrity', 'Intégrité'),
+            'url' => new moodle_url('/local/uckk/integrity.php'),
+        ],
+        'archives' => [
+            'label' => local_uckk_challenges_string('public_nav_archives', 'Archives'),
+            'url' => new moodle_url('/local/uckk/archives.php'),
+        ],
+        'news' => [
+            'label' => local_uckk_challenges_string('public_nav_news', 'Actualités'),
+            'url' => new moodle_url('/local/uckk/news.php'),
+        ],
+        'contact' => [
+            'label' => local_uckk_challenges_string('public_nav_contact', 'Contact'),
+            'url' => new moodle_url('/local/uckk/contact.php'),
+        ],
+    ];
+
+    $output = html_writer::start_tag('nav', [
+        'class' => 'local-uckk-public-nav',
+        'aria-label' => local_uckk_challenges_string('public_nav_label', 'Navigation publique UCKK'),
+    ]);
+
+    $output .= html_writer::start_tag('ul', ['class' => 'local-uckk-public-nav__list']);
+
+    foreach ($items as $key => $item) {
+        $isactive = $key === $active;
+
+        $output .= html_writer::start_tag('li', ['class' => 'local-uckk-public-nav__item']);
+        $output .= html_writer::link(
+            $item['url'],
+            s($item['label']),
+            [
+                'class' => $isactive
+                    ? 'local-uckk-public-nav__link is-active'
+                    : 'local-uckk-public-nav__link',
+                'aria-current' => $isactive ? 'page' : null,
+            ]
+        );
+        $output .= html_writer::end_tag('li');
+    }
+
+    $output .= html_writer::end_tag('ul');
+    $output .= html_writer::end_tag('nav');
+
+    return $output;
+}
+
+/**
+ * Render a principle card.
+ *
+ * @param string $title Card title.
+ * @param string $body Card body.
+ * @param string $type Card type.
+ * @return string
+ */
+function local_uckk_challenges_render_info_card(string $title, string $body, string $type): string {
+    $output = html_writer::start_tag('article', [
+        'class' => 'local-uckk-public-card local-uckk-public-card--principle local-uckk-public-card--' . clean_param($type, PARAM_ALPHANUMEXT),
+    ]);
+
+    $output .= html_writer::tag('h3', s($title), ['class' => 'local-uckk-public-card__title']);
+    $output .= html_writer::tag('p', s($body), ['class' => 'local-uckk-public-card__body']);
+    $output .= html_writer::end_tag('article');
+
+    return $output;
+}
+
+/**
+ * Render a cycle step.
+ *
+ * @param string $number Step number.
+ * @param string $title Step title.
+ * @param string $body Step body.
+ * @return string
+ */
+function local_uckk_challenges_render_step(string $number, string $title, string $body): string {
+    $output = html_writer::start_tag('article', ['class' => 'local-uckk-public-card local-uckk-public-card--step']);
+    $output .= html_writer::div(s($number), 'local-uckk-public-card__eyebrow');
+    $output .= html_writer::tag('h4', s($title), ['class' => 'local-uckk-public-card__title']);
+    $output .= html_writer::tag('p', s($body), ['class' => 'local-uckk-public-card__body']);
+    $output .= html_writer::end_tag('article');
+
+    return $output;
+}
+
+/**
+ * Render a notice.
+ *
+ * @param string $title Notice title.
+ * @param string $body Notice body.
+ * @param string $type Notice type.
+ * @return string
+ */
+function local_uckk_challenges_render_notice(string $title, string $body, string $type = 'institutional'): string {
+    $output = html_writer::start_div(
+        'local-uckk-public-notice local-uckk-public-notice--' . clean_param($type, PARAM_ALPHANUMEXT),
+        ['role' => 'note']
+    );
+
+    $output .= html_writer::div(s($title), 'local-uckk-public-notice__title');
+    $output .= html_writer::div(s($body), 'local-uckk-public-notice__body');
+    $output .= html_writer::end_div();
+
+    return $output;
+}
+
+/**
+ * Render status filters.
+ *
+ * @param string $selectedstatus Selected status.
+ * @return string
+ */
+function local_uckk_challenges_render_filters(string $selectedstatus): string {
+    $statuses = [
+        'open' => 'Ouverts',
+        'underreview' => 'En révision',
+        'archived' => 'Archivés',
+        'all' => 'Tous',
+    ];
+
+    $output = html_writer::start_tag('form', [
+        'method' => 'get',
+        'action' => new moodle_url('/local/uckk/challenges.php'),
+        'class' => 'local-uckk-public-filter',
+    ]);
+
+    $output .= html_writer::label('Statut', 'local-uckk-challenge-status', false, [
+        'class' => 'sr-only',
+    ]);
+
+    $output .= html_writer::select(
+        $statuses,
+        'status',
+        $selectedstatus,
+        false,
+        [
+            'id' => 'local-uckk-challenge-status',
+            'class' => 'custom-select custom-select-sm local-uckk-public-filter__select',
+            'onchange' => 'this.form.submit()',
+        ]
+    );
+
+    $output .= html_writer::end_tag('form');
+
+    return $output;
+}
+
+/**
+ * Return challenges from local JSON data or fallback examples.
+ *
+ * @param string $status Status filter.
+ * @return array<int, stdClass>
+ */
+function local_uckk_challenges_get_challenges(string $status = 'open'): array {
+    $items = local_uckk_challenges_load_json_items();
+
+    if (empty($items)) {
+        $items = local_uckk_challenges_get_fallback_items();
+    }
+
+    $items = array_map(static function(array $item): stdClass {
+        $challenge = new stdClass();
+
+        $challenge->title = clean_text($item['title'] ?? '');
+        $challenge->status = local_uckk_challenges_normalise_status($item['status'] ?? 'open');
+        $challenge->kind = clean_text($item['kind'] ?? 'Défi public');
+        $challenge->summary = clean_text($item['summary'] ?? '');
+        $challenge->proofs = [];
+
+        if (!empty($item['proofs']) && is_array($item['proofs'])) {
+            foreach ($item['proofs'] as $proof) {
+                $challenge->proofs[] = clean_text((string)$proof);
+            }
+        }
+
+        $challenge->assembly = clean_text($item['assembly'] ?? 'Assemblée des Défis');
+        $challenge->archive = clean_text($item['archive'] ?? 'Archive publique à constituer');
+        $challenge->url = clean_text($item['url'] ?? '');
+
+        return $challenge;
+    }, $items);
+
+    if ($status !== 'all') {
+        $items = array_values(array_filter($items, static function(stdClass $challenge) use ($status): bool {
+            return $challenge->status === $status;
+        }));
+    }
+
+    return $items;
+}
+
+/**
+ * Load challenge items from local/uckk/data/challenges.json.
+ *
+ * Expected JSON:
+ * {
+ *   "items": [
+ *     {
+ *       "title": "...",
+ *       "status": "open",
+ *       "kind": "...",
+ *       "summary": "...",
+ *       "proofs": ["...", "..."],
+ *       "assembly": "...",
+ *       "archive": "...",
+ *       "url": "..."
+ *     }
+ *   ]
+ * }
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function local_uckk_challenges_load_json_items(): array {
+    $path = __DIR__ . '/data/challenges.json';
+
+    if (!is_readable($path)) {
+        return [];
+    }
+
+    $raw = file_get_contents($path);
+
+    if ($raw === false || trim($raw) === '') {
+        return [];
+    }
+
+    $decoded = json_decode($raw, true);
+
+    if (!is_array($decoded)) {
+        debugging('local_uckk: Invalid challenges.json.', DEBUG_DEVELOPER);
+        return [];
+    }
+
+    if (isset($decoded['items']) && is_array($decoded['items'])) {
+        return $decoded['items'];
+    }
+
+    if (array_is_list($decoded)) {
+        return $decoded;
+    }
+
+    return [];
+}
+
+/**
+ * Fallback challenges used before data/challenges.json exists.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function local_uckk_challenges_get_fallback_items(): array {
+    return [
+        [
+            'title' => 'Cartographier une règle invisible',
+            'status' => 'open',
+            'kind' => 'Défi d’enquête',
+            'summary' => 'Choisir une situation ordinaire et montrer les règles invisibles qui la structurent : accès, réputation, pouvoir, plateforme, argent, statut ou procédure.',
+            'proofs' => [
+                'Carte du système observé',
+                'Sources ou observations documentées',
+                'Hypothèses séparées des faits',
+                'Proposition de correction ou d’amélioration',
+            ],
+            'assembly' => 'Assemblée des Savoirs',
+            'archive' => 'Portfolio ou archive de défi',
+            'url' => '',
+        ],
+        [
+            'title' => 'Réparer une règle injuste',
+            'status' => 'open',
+            'kind' => 'Défi de réparation',
+            'summary' => 'Identifier une règle qui produit un effet injuste ou absurde, puis proposer une version plus claire, plus vérifiable ou plus digne.',
+            'proofs' => [
+                'Règle initiale',
+                'Effets observés',
+                'Version corrigée',
+                'Critères de vérification',
+            ],
+            'assembly' => 'Assemblée des Défis',
+            'archive' => 'Dossier de réparation',
+            'url' => '',
+        ],
+        [
+            'title' => 'Rendre une idée complexe mémorable',
+            'status' => 'underreview',
+            'kind' => 'Défi de théâtre pédagogique',
+            'summary' => 'Créer une scène, une énigme, une vidéo courte, une affiche ou une intervention qui éclaire une idée complexe sans manipuler ni humilier.',
+            'proofs' => [
+                'Objet produit',
+                'Intention pédagogique',
+                'Limites et risques',
+                'Révision après critique',
+            ],
+            'assembly' => 'Assemblée des Joueurs',
+            'archive' => 'Archive commentée',
+            'url' => '',
+        ],
+        [
+            'title' => 'Connaître → Choisir → Agir → Se souvenir',
+            'status' => 'archived',
+            'kind' => 'Défi de cycle complet',
+            'summary' => 'Démontrer un cycle UCKK complet : apprendre une situation, choisir une action, agir avec méthode, puis archiver ce qui a été compris.',
+            'proofs' => [
+                'Trace d’apprentissage',
+                'Décision documentée',
+                'Action ou prototype',
+                'Archive finale',
+            ],
+            'assembly' => 'Assemblée du Grand Jeu',
+            'archive' => 'Kristal ou portfolio',
+            'url' => '',
+        ],
+    ];
+}
+
+/**
+ * Render one challenge card.
+ *
+ * @param stdClass $challenge Challenge record.
+ * @return string
+ */
+function local_uckk_challenges_render_card(stdClass $challenge): string {
+    $output = html_writer::start_tag('article', [
+        'class' => 'local-uckk-public-card local-uckk-public-card--challenge local-uckk-public-card--status-' .
+            clean_param($challenge->status, PARAM_ALPHANUMEXT),
+    ]);
+
+    $output .= html_writer::div(
+        s(local_uckk_challenges_get_status_label($challenge->status)),
+        'local-uckk-public-card__eyebrow'
+    );
+
+    $output .= html_writer::tag('h3', s($challenge->title), [
+        'class' => 'local-uckk-public-card__title',
+    ]);
+
+    $output .= html_writer::div(s($challenge->kind), 'local-uckk-public-meta local-uckk-public-meta--kind');
+
+    $output .= html_writer::tag('p', s($challenge->summary), [
+        'class' => 'local-uckk-public-card__body',
+    ]);
+
+    if (!empty($challenge->proofs)) {
+        $output .= html_writer::div('Preuves attendues', 'local-uckk-public-meta__label');
+        $output .= html_writer::start_tag('ul', ['class' => 'local-uckk-public-list local-uckk-public-list--proofs']);
+
+        foreach ($challenge->proofs as $proof) {
+            $output .= html_writer::tag('li', s($proof));
+        }
+
+        $output .= html_writer::end_tag('ul');
+    }
+
+    $output .= html_writer::start_div('local-uckk-public-meta');
+    $output .= local_uckk_challenges_render_meta('Assemblée', $challenge->assembly);
+    $output .= local_uckk_challenges_render_meta('Archive', $challenge->archive);
+    $output .= html_writer::end_div();
+
+    if (!empty($challenge->url)) {
+        $output .= html_writer::div(
+            html_writer::link(
+                new moodle_url($challenge->url),
+                'Ouvrir le défi',
+                ['class' => 'btn btn-outline-primary btn-sm local-uckk-public-card__action']
+            ),
+            'local-uckk-public-card__footer'
+        );
+    }
+
+    $output .= html_writer::end_tag('article');
+
+    return $output;
+}
+
+/**
+ * Render challenge metadata.
+ *
+ * @param string $label Label.
+ * @param string $value Value.
+ * @return string
+ */
+function local_uckk_challenges_render_meta(string $label, string $value): string {
+    if ($value === '') {
+        return '';
+    }
+
+    $output = html_writer::start_tag('span', ['class' => 'local-uckk-public-meta__item']);
+    $output .= html_writer::span(s($label) . ' : ', 'local-uckk-public-meta__label');
+    $output .= html_writer::span(s($value), 'local-uckk-public-meta__value');
+    $output .= html_writer::end_tag('span');
+
+    return $output;
+}
+
+/**
+ * Return category URL for challenge space if it exists.
+ *
+ * @return moodle_url|null
+ */
+function local_uckk_challenges_get_category_url(): ?moodle_url {
+    global $DB;
+
+    $category = $DB->get_record(
+        'course_categories',
+        ['idnumber' => 'UCKK-CAT-90-DEFIS-KING-KLOWN'],
+        'id',
+        IGNORE_MISSING
+    );
+
+    if (!$category) {
+        return null;
+    }
+
+    return new moodle_url('/course/index.php', ['categoryid' => $category->id]);
+}
+
+/**
+ * Normalise challenge status.
+ *
+ * @param string $status Raw status.
+ * @return string
+ */
+function local_uckk_challenges_normalise_status(string $status): string {
+    $status = clean_param($status, PARAM_ALPHANUMEXT);
+
+    $aliases = [
+        '' => 'open',
+        'active' => 'open',
+        'published' => 'open',
+        'review' => 'underreview',
+        'under_review' => 'underreview',
+        'under-review' => 'underreview',
+        'closed' => 'archived',
+    ];
+
+    $status = $aliases[$status] ?? $status;
+
+    $allowed = ['open', 'underreview', 'archived', 'all'];
+
+    return in_array($status, $allowed, true) ? $status : 'open';
+}
+
+/**
+ * Return public status label.
+ *
+ * @param string $status Status.
+ * @return string
+ */
+function local_uckk_challenges_get_status_label(string $status): string {
+    $labels = [
+        'open' => 'Ouvert',
+        'underreview' => 'En révision',
+        'archived' => 'Archivé',
+        'all' => 'Tous',
+    ];
+
+    return $labels[$status] ?? $status;
+}

@@ -28,115 +28,770 @@ defined('MOODLE_INTERNAL') || die();
  * - Do not run archive validation, export generation, privacy deletion, or
  *   integrity workflows from here.
  * - Use XMLDB/database manager operations for schema changes.
- * - Add one version-gated block per future schema/data migration.
+ * - Add one version-gated block per schema/data migration.
  *
  * @param int $oldversion Previously installed plugin version.
  * @return bool
  */
 function xmldb_uckkarchive_upgrade($oldversion): bool {
-    global $DB;
-
-    $dbman = $DB->get_manager();
-
     if ($oldversion < 2026051200) {
         // Initial stable release baseline.
         //
-        // The complete initial schema is defined in db/install.xml and is used
-        // for clean installs. This savepoint exists for development or
-        // pre-release sites that may already have an earlier plugin version
-        // recorded in Moodle before the stable 1.0.0 release.
-        //
-        // If a pre-release database is missing a final table or field, keep the
-        // repair helpers below available for future targeted migrations, but do
-        // not duplicate the whole install.xml schema here.
-
+        // The complete initial archive schema is defined in db/install.xml and
+        // is used for clean installs. This block is conservative for
+        // development/pre-release sites that already had the module installed.
         uckkarchive_upgrade_repair_initial_indexes();
 
         upgrade_mod_savepoint(true, 2026051200, 'uckkarchive');
+    }
+
+    if ($oldversion < 2026052700) {
+        // Add the self-contained media library, content advisory, and external
+        // work schema introduced after the initial archive-only baseline.
+        uckkarchive_upgrade_create_media_advisory_external_tables();
+
+        upgrade_mod_savepoint(true, 2026052700, 'uckkarchive');
+    }
+
+    if ($oldversion < 2026052701) {
+        // Expand export records so media/collection exports can store scope,
+        // redaction, package, manifest, provenance, and processing status.
+        uckkarchive_upgrade_extend_export_table();
+
+        upgrade_mod_savepoint(true, 2026052701, 'uckkarchive');
+    }
+
+    if ($oldversion < 2026052702) {
+        // Repair and add indexes for archive, media, advisory, external work,
+        // and export lookup paths.
+        uckkarchive_upgrade_repair_initial_indexes();
+        uckkarchive_upgrade_repair_media_advisory_external_indexes();
+
+        upgrade_mod_savepoint(true, 2026052702, 'uckkarchive');
     }
 
     return true;
 }
 
 /**
+ * Create media, content advisory, and external work tables when upgrading an
+ * older installation.
+ *
+ * @return void
+ */
+function uckkarchive_upgrade_create_media_advisory_external_tables(): void {
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_media', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('archiveid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('courseid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('cmid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('contextid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('userid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('ownerid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('currentversionid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('externalworkid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('sourceid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('mediatype', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('mimetype', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('status', XMLDB_TYPE_CHAR, '50', true, false, 'draft'),
+        uckkarchive_upgrade_field('visibility', XMLDB_TYPE_CHAR, '50', true, false, 'course'),
+        uckkarchive_upgrade_field('audiencesuitability', XMLDB_TYPE_CHAR, '50', true, false, 'guided'),
+        uckkarchive_upgrade_field('source', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('title', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('summary', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('description', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('restricted', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('culturalprotocol', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('archiveid', XMLDB_INDEX_NOTUNIQUE, ['archiveid']),
+        new xmldb_index('courseid', XMLDB_INDEX_NOTUNIQUE, ['courseid']),
+        new xmldb_index('cmid', XMLDB_INDEX_NOTUNIQUE, ['cmid']),
+        new xmldb_index('contextid', XMLDB_INDEX_NOTUNIQUE, ['contextid']),
+        new xmldb_index('status', XMLDB_INDEX_NOTUNIQUE, ['status']),
+        new xmldb_index('visibility', XMLDB_INDEX_NOTUNIQUE, ['visibility']),
+        new xmldb_index('mediatype', XMLDB_INDEX_NOTUNIQUE, ['mediatype']),
+        new xmldb_index('ownerid', XMLDB_INDEX_NOTUNIQUE, ['ownerid']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_media_version', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('mediaid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('versionnumber', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('versionno', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('label', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('status', XMLDB_TYPE_CHAR, '50', true, false, 'active'),
+        uckkarchive_upgrade_field('filearea', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('filepath', XMLDB_TYPE_CHAR, '255', true, false, '/'),
+        uckkarchive_upgrade_field('filename', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('filesize', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('mimetype', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('contenthash', XMLDB_TYPE_CHAR, '40', true, false, ''),
+        uckkarchive_upgrade_field('iscurrent', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('mediaid', XMLDB_INDEX_NOTUNIQUE, ['mediaid']),
+        new xmldb_index('media_version', XMLDB_INDEX_NOTUNIQUE, ['mediaid', 'versionnumber']),
+        new xmldb_index('status', XMLDB_INDEX_NOTUNIQUE, ['status']),
+        new xmldb_index('iscurrent', XMLDB_INDEX_NOTUNIQUE, ['iscurrent']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_media_source', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('archiveid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('mediaid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('externalworkid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('sourcecomponent', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('sourceitemid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('sourcetype', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('sourceurl', XMLDB_TYPE_CHAR, '1333', false),
+        uckkarchive_upgrade_field('title', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('citation', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('rightsstatus', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('archiveid', XMLDB_INDEX_NOTUNIQUE, ['archiveid']),
+        new xmldb_index('mediaid', XMLDB_INDEX_NOTUNIQUE, ['mediaid']),
+        new xmldb_index('externalworkid', XMLDB_INDEX_NOTUNIQUE, ['externalworkid']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_media_collection', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('archiveid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('courseid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('cmid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('contextid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('ownerid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('title', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('summary', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('description', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('status', XMLDB_TYPE_CHAR, '50', true, false, 'active'),
+        uckkarchive_upgrade_field('visibility', XMLDB_TYPE_CHAR, '50', true, false, 'course'),
+        uckkarchive_upgrade_field('sortorder', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('archiveid', XMLDB_INDEX_NOTUNIQUE, ['archiveid']),
+        new xmldb_index('status', XMLDB_INDEX_NOTUNIQUE, ['status']),
+        new xmldb_index('visibility', XMLDB_INDEX_NOTUNIQUE, ['visibility']),
+        new xmldb_index('ownerid', XMLDB_INDEX_NOTUNIQUE, ['ownerid']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_media_collection_item', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('collectionid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('mediaid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('sortorder', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('addedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+    ], [
+        new xmldb_index('collectionid', XMLDB_INDEX_NOTUNIQUE, ['collectionid']),
+        new xmldb_index('mediaid', XMLDB_INDEX_NOTUNIQUE, ['mediaid']),
+        new xmldb_index('collection_media', XMLDB_INDEX_UNIQUE, ['collectionid', 'mediaid']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_media_relation', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('archiveid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('mediaid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('sourcemediaid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('targetmediaid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('targetid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('targettype', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('relationtype', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('type', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('status', XMLDB_TYPE_CHAR, '50', true, false, 'active'),
+        uckkarchive_upgrade_field('note', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('archiveid', XMLDB_INDEX_NOTUNIQUE, ['archiveid']),
+        new xmldb_index('mediaid', XMLDB_INDEX_NOTUNIQUE, ['mediaid']),
+        new xmldb_index('sourcemediaid', XMLDB_INDEX_NOTUNIQUE, ['sourcemediaid']),
+        new xmldb_index('targetmediaid', XMLDB_INDEX_NOTUNIQUE, ['targetmediaid']),
+        new xmldb_index('relationtype', XMLDB_INDEX_NOTUNIQUE, ['relationtype']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_media_tag', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('archiveid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('mediaid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('tag', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('tagkey', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('name', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('rawname', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('tagtype', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('type', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('archiveid', XMLDB_INDEX_NOTUNIQUE, ['archiveid']),
+        new xmldb_index('mediaid', XMLDB_INDEX_NOTUNIQUE, ['mediaid']),
+        new xmldb_index('tagkey', XMLDB_INDEX_NOTUNIQUE, ['tagkey']),
+        new xmldb_index('tag', XMLDB_INDEX_NOTUNIQUE, ['tag']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_content_tag_set', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('tagsetkey', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('setkey', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('label', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('description', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('status', XMLDB_TYPE_CHAR, '50', true, false, 'active'),
+        uckkarchive_upgrade_field('version', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('sortorder', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('tagsetkey', XMLDB_INDEX_NOTUNIQUE, ['tagsetkey']),
+        new xmldb_index('status', XMLDB_INDEX_NOTUNIQUE, ['status']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_content_tag', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('tagsetid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('tagkey', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('label', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('category', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('description', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('defaultseverity', XMLDB_TYPE_CHAR, '50', true, false, 'notice'),
+        uckkarchive_upgrade_field('severity', XMLDB_TYPE_CHAR, '50', true, false, 'notice'),
+        uckkarchive_upgrade_field('defaultaudiencesuitability', XMLDB_TYPE_CHAR, '50', true, false, 'guided'),
+        uckkarchive_upgrade_field('audiencesuitability', XMLDB_TYPE_CHAR, '50', true, false, 'guided'),
+        uckkarchive_upgrade_field('defaultreviewstate', XMLDB_TYPE_CHAR, '50', true, false, 'pending_review'),
+        uckkarchive_upgrade_field('iscultural', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('restrictsbydefault', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('requiresreview', XMLDB_TYPE_INTEGER, '1', true, false, 1),
+        uckkarchive_upgrade_field('status', XMLDB_TYPE_CHAR, '50', true, false, 'active'),
+        uckkarchive_upgrade_field('sortorder', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('tagsetid', XMLDB_INDEX_NOTUNIQUE, ['tagsetid']),
+        new xmldb_index('tagkey', XMLDB_INDEX_NOTUNIQUE, ['tagkey']),
+        new xmldb_index('category', XMLDB_INDEX_NOTUNIQUE, ['category']),
+        new xmldb_index('status', XMLDB_INDEX_NOTUNIQUE, ['status']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_content_marker', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('archiveid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('courseid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('cmid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('contextid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('mediaid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('externalworkid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('targettype', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('targetid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('userid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('tagkey', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('tag', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('contenttag', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('advisorytag', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('tagcategory', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('severity', XMLDB_TYPE_CHAR, '50', true, false, 'notice'),
+        uckkarchive_upgrade_field('audiencesuitability', XMLDB_TYPE_CHAR, '50', true, false, 'guided'),
+        uckkarchive_upgrade_field('reviewstate', XMLDB_TYPE_CHAR, '50', true, false, 'pending_review'),
+        uckkarchive_upgrade_field('visibility', XMLDB_TYPE_CHAR, '50', true, false, 'course'),
+        uckkarchive_upgrade_field('locatortype', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('locator', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('locatorvalue', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('locatorstart', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('locatorend', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('locatorlabel', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('description', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('note', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('culturalprotocol', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('restricted', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('requirescontext', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('redacted', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('archiveid', XMLDB_INDEX_NOTUNIQUE, ['archiveid']),
+        new xmldb_index('mediaid', XMLDB_INDEX_NOTUNIQUE, ['mediaid']),
+        new xmldb_index('externalworkid', XMLDB_INDEX_NOTUNIQUE, ['externalworkid']),
+        new xmldb_index('target', XMLDB_INDEX_NOTUNIQUE, ['targettype', 'targetid']),
+        new xmldb_index('tagkey', XMLDB_INDEX_NOTUNIQUE, ['tagkey']),
+        new xmldb_index('severity', XMLDB_INDEX_NOTUNIQUE, ['severity']),
+        new xmldb_index('reviewstate', XMLDB_INDEX_NOTUNIQUE, ['reviewstate']),
+        new xmldb_index('visibility', XMLDB_INDEX_NOTUNIQUE, ['visibility']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_content_review', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('archiveid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('courseid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('cmid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('contextid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('markerid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('reviewerid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('userid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('state', XMLDB_TYPE_CHAR, '50', true, false, 'draft'),
+        uckkarchive_upgrade_field('severity', XMLDB_TYPE_CHAR, '50', true, false, 'notice'),
+        uckkarchive_upgrade_field('audiencesuitability', XMLDB_TYPE_CHAR, '50', true, false, 'guided'),
+        uckkarchive_upgrade_field('rationale', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('reviewnote', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('culturalprotocol', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('restricted', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('markerid', XMLDB_INDEX_NOTUNIQUE, ['markerid']),
+        new xmldb_index('reviewerid', XMLDB_INDEX_NOTUNIQUE, ['reviewerid']),
+        new xmldb_index('state', XMLDB_INDEX_NOTUNIQUE, ['state']),
+    ]);
+
+    uckkarchive_upgrade_create_table_if_missing('uckkarchive_external_work', [
+        uckkarchive_upgrade_field('id', XMLDB_TYPE_INTEGER, '10', true, true),
+        uckkarchive_upgrade_field('uuid', XMLDB_TYPE_CHAR, '36', true, false, ''),
+        uckkarchive_upgrade_field('archiveid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('courseid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('cmid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('contextid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('ownerid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('worktype', XMLDB_TYPE_CHAR, '50', true, false, 'other'),
+        uckkarchive_upgrade_field('status', XMLDB_TYPE_CHAR, '50', true, false, 'active'),
+        uckkarchive_upgrade_field('visibility', XMLDB_TYPE_CHAR, '50', true, false, 'course'),
+        uckkarchive_upgrade_field('audiencesuitability', XMLDB_TYPE_CHAR, '50', true, false, 'guided'),
+        uckkarchive_upgrade_field('rightsstatus', XMLDB_TYPE_CHAR, '50', true, false, 'unknown'),
+        uckkarchive_upgrade_field('title', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('subtitle', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('creator', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('publisher', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('publicationyear', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('language', XMLDB_TYPE_CHAR, '20', true, false, ''),
+        uckkarchive_upgrade_field('sourceurl', XMLDB_TYPE_CHAR, '1333', false),
+        uckkarchive_upgrade_field('identifier', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('identifiertype', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('citation', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('rightsstatement', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('licensekey', XMLDB_TYPE_CHAR, '100', true, false, ''),
+        uckkarchive_upgrade_field('sourcenote', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('teachingnote', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('culturalprotocolnote', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('description', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('provenanceid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ], [
+        new xmldb_key('primary', XMLDB_KEY_PRIMARY, ['id']),
+        new xmldb_key('uuid', XMLDB_KEY_UNIQUE, ['uuid']),
+    ], [
+        new xmldb_index('archiveid', XMLDB_INDEX_NOTUNIQUE, ['archiveid']),
+        new xmldb_index('worktype', XMLDB_INDEX_NOTUNIQUE, ['worktype']),
+        new xmldb_index('status', XMLDB_INDEX_NOTUNIQUE, ['status']),
+        new xmldb_index('visibility', XMLDB_INDEX_NOTUNIQUE, ['visibility']),
+        new xmldb_index('ownerid', XMLDB_INDEX_NOTUNIQUE, ['ownerid']),
+    ]);
+}
+
+/**
+ * Add fields needed by media/advisory/export workflows to uckkarchive_export.
+ *
+ * @return void
+ */
+function uckkarchive_upgrade_extend_export_table(): void {
+    $fields = [
+        uckkarchive_upgrade_field('courseid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('cmid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('contextid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('userid', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('exportscope', XMLDB_TYPE_CHAR, '50', true, false, 'archive_items'),
+        uckkarchive_upgrade_field('exportformat', XMLDB_TYPE_CHAR, '50', true, false, 'json'),
+        uckkarchive_upgrade_field('packagename', XMLDB_TYPE_CHAR, '255', true, false, ''),
+        uckkarchive_upgrade_field('description', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('itemids', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('reason', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('auditnote', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('redactionlevel', XMLDB_TYPE_CHAR, '50', true, false, 'standard'),
+        uckkarchive_upgrade_field('redacted', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('includefiles', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('includeproofs', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('includeprovenance', XMLDB_TYPE_INTEGER, '1', true, false, 1),
+        uckkarchive_upgrade_field('includeversions', XMLDB_TYPE_INTEGER, '1', true, false, 0),
+        uckkarchive_upgrade_field('fileitemid', XMLDB_TYPE_INTEGER, '10', false, false, null),
+        uckkarchive_upgrade_field('downloadcount', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('lastdownloaded', XMLDB_TYPE_INTEGER, '10', false, false, null),
+        uckkarchive_upgrade_field('timequeued', XMLDB_TYPE_INTEGER, '10', false, false, null),
+        uckkarchive_upgrade_field('timestarted', XMLDB_TYPE_INTEGER, '10', false, false, null),
+        uckkarchive_upgrade_field('timecompleted', XMLDB_TYPE_INTEGER, '10', false, false, null),
+        uckkarchive_upgrade_field('error', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('visibility', XMLDB_TYPE_CHAR, '50', true, false, 'private'),
+        uckkarchive_upgrade_field('versionno', XMLDB_TYPE_INTEGER, '10', true, false, 1),
+        uckkarchive_upgrade_field('provenancehash', XMLDB_TYPE_CHAR, '64', true, false, ''),
+        uckkarchive_upgrade_field('integritycaseid', XMLDB_TYPE_INTEGER, '10', false, false, null),
+        uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('createdby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('modifiedby', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+        uckkarchive_upgrade_field('timemodified', XMLDB_TYPE_INTEGER, '10', true, false, 0),
+    ];
+
+    foreach ($fields as $field) {
+        uckkarchive_upgrade_add_field_if_missing('uckkarchive_export', $field);
+    }
+}
+
+/**
  * Repair indexes expected by the initial archive schema when upgrading from an
  * early development snapshot.
- *
- * This function is intentionally conservative. It only adds indexes when the
- * target table and target fields already exist. Fresh installs are handled by
- * db/install.xml.
  *
  * @return void
  */
 function uckkarchive_upgrade_repair_initial_indexes(): void {
-    global $DB;
-
-    $dbman = $DB->get_manager();
-
     $indexes = [
         'uckkarchive_item' => [
-            ['uckkarchive_item_archiveid_ix', ['archiveid']],
-            ['uckkarchive_item_status_ix', ['status']],
-            ['uckkarchive_item_visibility_ix', ['visibility']],
-            ['uckkarchive_item_source_ix', ['sourcecomponent', 'sourceid']],
-            ['uckkarchive_item_user_ix', ['userid']],
-            ['uckkarchive_item_createdby_ix', ['createdby']],
+            ['archiveid', ['archiveid']],
+            ['status', ['status']],
+            ['visibility', ['visibility']],
+            ['source', ['sourcecomponent', 'sourceid']],
+            ['userid', ['userid']],
+            ['createdby', ['createdby']],
         ],
         'uckkarchive_kristal' => [
-            ['uckkarchive_kristal_archiveid_ix', ['archiveid']],
-            ['uckkarchive_kristal_itemid_ix', ['itemid']],
-            ['uckkarchive_kristal_proofid_ix', ['proofid']],
-            ['uckkarchive_kristal_status_ix', ['status']],
-            ['uckkarchive_kristal_visibility_ix', ['visibility']],
-            ['uckkarchive_kristal_validation_ix', ['validationstate']],
-            ['uckkarchive_kristal_source_ix', ['sourcecomponent', 'sourceid']],
+            ['archiveid', ['archiveid']],
+            ['itemid', ['itemid']],
+            ['proofid', ['proofid']],
+            ['status', ['status']],
+            ['visibility', ['visibility']],
+            ['validation', ['validationstate']],
+            ['source', ['sourcecomponent', 'sourceid']],
         ],
         'uckkarchive_proof' => [
-            ['uckkarchive_proof_archiveid_ix', ['archiveid']],
-            ['uckkarchive_proof_itemid_ix', ['itemid']],
-            ['uckkarchive_proof_status_ix', ['status']],
-            ['uckkarchive_proof_visibility_ix', ['visibility']],
-            ['uckkarchive_proof_provenance_ix', ['provenance']],
-            ['uckkarchive_proof_user_ix', ['userid']],
+            ['archiveid', ['archiveid']],
+            ['itemid', ['itemid']],
+            ['status', ['status']],
+            ['visibility', ['visibility']],
+            ['provenance', ['provenance']],
+            ['userid', ['userid']],
         ],
         'uckkarchive_prov' => [
-            ['uckkarchive_prov_archiveid_ix', ['archiveid']],
-            ['uckkarchive_prov_itemid_ix', ['itemid']],
-            ['uckkarchive_prov_source_ix', ['sourcecomponent', 'sourceid']],
-            ['uckkarchive_prov_provenance_ix', ['provenance']],
+            ['archiveid', ['archiveid']],
+            ['itemid', ['itemid']],
+            ['source', ['sourcecomponent', 'sourceid']],
+            ['provenance', ['provenance']],
         ],
         'uckkarchive_rev' => [
-            ['uckkarchive_rev_archiveid_ix', ['archiveid']],
-            ['uckkarchive_rev_itemid_ix', ['itemid']],
-            ['uckkarchive_rev_version_ix', ['versionno']],
-            ['uckkarchive_rev_createdby_ix', ['createdby']],
+            ['archiveid', ['archiveid']],
+            ['itemid', ['itemid']],
+            ['version', ['versionno']],
+            ['createdby', ['createdby']],
         ],
         'uckkarchive_export' => [
-            ['uckkarchive_export_archiveid_ix', ['archiveid']],
-            ['uckkarchive_export_status_ix', ['status']],
-            ['uckkarchive_export_visibility_ix', ['visibility']],
-            ['uckkarchive_export_createdby_ix', ['createdby']],
+            ['archiveid', ['archiveid']],
+            ['status', ['status']],
+            ['visibility', ['visibility']],
+            ['createdby', ['createdby']],
+            ['userid', ['userid']],
+            ['exportscope', ['exportscope']],
+            ['exportformat', ['exportformat']],
         ],
     ];
 
+    uckkarchive_upgrade_add_indexes($indexes);
+}
+
+/**
+ * Repair indexes expected by media/advisory/external-work schema.
+ *
+ * @return void
+ */
+function uckkarchive_upgrade_repair_media_advisory_external_indexes(): void {
+    $indexes = [
+        'uckkarchive_media' => [
+            ['archiveid', ['archiveid']],
+            ['courseid', ['courseid']],
+            ['cmid', ['cmid']],
+            ['contextid', ['contextid']],
+            ['status', ['status']],
+            ['visibility', ['visibility']],
+            ['mediatype', ['mediatype']],
+            ['ownerid', ['ownerid']],
+        ],
+        'uckkarchive_media_version' => [
+            ['mediaid', ['mediaid']],
+            ['media_version', ['mediaid', 'versionnumber']],
+            ['status', ['status']],
+            ['iscurrent', ['iscurrent']],
+        ],
+        'uckkarchive_media_source' => [
+            ['archiveid', ['archiveid']],
+            ['mediaid', ['mediaid']],
+            ['externalworkid', ['externalworkid']],
+        ],
+        'uckkarchive_media_collection' => [
+            ['archiveid', ['archiveid']],
+            ['status', ['status']],
+            ['visibility', ['visibility']],
+            ['ownerid', ['ownerid']],
+        ],
+        'uckkarchive_media_collection_item' => [
+            ['collectionid', ['collectionid']],
+            ['mediaid', ['mediaid']],
+            ['collection_media', ['collectionid', 'mediaid'], XMLDB_INDEX_UNIQUE],
+        ],
+        'uckkarchive_media_relation' => [
+            ['archiveid', ['archiveid']],
+            ['mediaid', ['mediaid']],
+            ['sourcemediaid', ['sourcemediaid']],
+            ['targetmediaid', ['targetmediaid']],
+            ['relationtype', ['relationtype']],
+        ],
+        'uckkarchive_media_tag' => [
+            ['archiveid', ['archiveid']],
+            ['mediaid', ['mediaid']],
+            ['tagkey', ['tagkey']],
+            ['tag', ['tag']],
+        ],
+        'uckkarchive_content_tag_set' => [
+            ['tagsetkey', ['tagsetkey']],
+            ['status', ['status']],
+        ],
+        'uckkarchive_content_tag' => [
+            ['tagsetid', ['tagsetid']],
+            ['tagkey', ['tagkey']],
+            ['category', ['category']],
+            ['status', ['status']],
+        ],
+        'uckkarchive_content_marker' => [
+            ['archiveid', ['archiveid']],
+            ['mediaid', ['mediaid']],
+            ['externalworkid', ['externalworkid']],
+            ['target', ['targettype', 'targetid']],
+            ['tagkey', ['tagkey']],
+            ['severity', ['severity']],
+            ['reviewstate', ['reviewstate']],
+            ['visibility', ['visibility']],
+        ],
+        'uckkarchive_content_review' => [
+            ['markerid', ['markerid']],
+            ['reviewerid', ['reviewerid']],
+            ['state', ['state']],
+        ],
+        'uckkarchive_external_work' => [
+            ['archiveid', ['archiveid']],
+            ['worktype', ['worktype']],
+            ['status', ['status']],
+            ['visibility', ['visibility']],
+            ['ownerid', ['ownerid']],
+        ],
+    ];
+
+    uckkarchive_upgrade_add_indexes($indexes);
+}
+
+/**
+ * Create a table if missing. If the table already exists, add missing fields
+ * and indexes only.
+ *
+ * @param string $tablename Table name without braces.
+ * @param xmldb_field[] $fields Fields.
+ * @param xmldb_key[] $keys Keys.
+ * @param xmldb_index[] $indexes Indexes.
+ * @return void
+ */
+function uckkarchive_upgrade_create_table_if_missing(
+    string $tablename,
+    array $fields,
+    array $keys = [],
+    array $indexes = []
+): void {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+    $table = new xmldb_table($tablename);
+
+    foreach ($fields as $field) {
+        $table->addField($field);
+    }
+
+    foreach ($keys as $key) {
+        $table->addKey($key);
+    }
+
+    foreach ($indexes as $index) {
+        $table->addIndex($index);
+    }
+
+    if (!$dbman->table_exists($table)) {
+        $dbman->create_table($table);
+        return;
+    }
+
+    foreach ($fields as $field) {
+        uckkarchive_upgrade_add_field_if_missing($tablename, $field);
+    }
+
+    foreach ($indexes as $index) {
+        uckkarchive_upgrade_add_index_if_possible($tablename, $index);
+    }
+}
+
+/**
+ * Build an XMLDB field.
+ *
+ * @param string $name Field name.
+ * @param int $type XMLDB type.
+ * @param string|null $precision Precision.
+ * @param bool $notnull Not null.
+ * @param bool $sequence Auto sequence.
+ * @param mixed $default Default value.
+ * @return xmldb_field
+ */
+function uckkarchive_upgrade_field(
+    string $name,
+    int $type,
+    ?string $precision = null,
+    bool $notnull = false,
+    bool $sequence = false,
+    mixed $default = null
+): xmldb_field {
+    return new xmldb_field($name, $type, $precision, null, $notnull, $sequence, $default);
+}
+
+/**
+ * Add a field if missing.
+ *
+ * @param string $tablename Table name without braces.
+ * @param xmldb_field $field Field definition.
+ * @return void
+ */
+function uckkarchive_upgrade_add_field_if_missing(string $tablename, xmldb_field $field): void {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+    $table = new xmldb_table($tablename);
+
+    if (!$dbman->table_exists($table)) {
+        return;
+    }
+
+    if (!$dbman->field_exists($table, $field)) {
+        $dbman->add_field($table, $field);
+    }
+}
+
+/**
+ * Add indexes for a grouped table specification.
+ *
+ * @param array<string, array<int, array<int, mixed>>> $indexes Index map.
+ * @return void
+ */
+function uckkarchive_upgrade_add_indexes(array $indexes): void {
     foreach ($indexes as $tablename => $tableindexes) {
-        if (!$dbman->table_exists($tablename)) {
-            continue;
-        }
+        foreach ($tableindexes as $indexspec) {
+            $indexname = (string)$indexspec[0];
+            $fields = $indexspec[1];
+            $type = $indexspec[2] ?? XMLDB_INDEX_NOTUNIQUE;
 
-        $table = new xmldb_table($tablename);
-
-        foreach ($tableindexes as [$indexname, $fields]) {
-            if (!uckkarchive_upgrade_table_has_fields($tablename, $fields)) {
+            if (!is_array($fields)) {
                 continue;
             }
 
-            $index = new xmldb_index($indexname, XMLDB_INDEX_NOTUNIQUE, $fields);
-
-            if (!$dbman->index_exists($table, $index)) {
-                $dbman->add_index($table, $index);
-            }
+            $index = new xmldb_index($indexname, $type, $fields);
+            uckkarchive_upgrade_add_index_if_possible($tablename, $index);
         }
+    }
+}
+
+/**
+ * Add index if the table and all fields exist.
+ *
+ * @param string $tablename Table name without braces.
+ * @param xmldb_index $index Index.
+ * @return void
+ */
+function uckkarchive_upgrade_add_index_if_possible(string $tablename, xmldb_index $index): void {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+    $table = new xmldb_table($tablename);
+
+    if (!$dbman->table_exists($table)) {
+        return;
+    }
+
+    if (!uckkarchive_upgrade_table_has_fields($tablename, $index->getFields())) {
+        return;
+    }
+
+    if (!$dbman->index_exists($table, $index)) {
+        $dbman->add_index($table, $index);
     }
 }
 
@@ -149,6 +804,13 @@ function uckkarchive_upgrade_repair_initial_indexes(): void {
  */
 function uckkarchive_upgrade_table_has_fields(string $tablename, array $fields): bool {
     global $DB;
+
+    $table = new xmldb_table($tablename);
+    $dbman = $DB->get_manager();
+
+    if (!$dbman->table_exists($table)) {
+        return false;
+    }
 
     $columns = $DB->get_columns($tablename);
 

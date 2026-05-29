@@ -1190,18 +1190,86 @@
     {
       "shortname": "uckkpublicguest",
       "name": "Invité public limité UCKK",
-      "description": "Rôle technique pour accès public très limité aux espaces explicitement rendus visibles.",
+      "description": "Rôle technique pour le compte de visite et l'accès public très limité aux espaces explicitement rendus visibles.",
       "archetype": "guest",
       "contextlevels": [
+        "system",
         "course",
-        "module"
+        "module",
+        "block"
       ],
       "capabilities": [
         {
-          "capability": "local/uckk:viewcampus",
-          "permission": "allow",
+          "capability": "aiprovider/uckk:configure",
+          "permission": "prohibit",
           "context": "system",
-          "component": "local_uckk"
+          "component": "aiprovider_uckk"
+        },
+        {
+          "capability": "aiprovider/uckk:use",
+          "permission": "prohibit",
+          "context": "course",
+          "component": "aiprovider_uckk"
+        },
+        {
+          "capability": "aiprovider/uckk:viewlogs",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "aiprovider_uckk"
+        },
+        {
+          "capability": "block/uckk_dashboard:addinstance",
+          "permission": "prohibit",
+          "context": "block",
+          "component": "block_uckk_dashboard"
+        },
+        {
+          "capability": "block/uckk_dashboard:configure",
+          "permission": "prohibit",
+          "context": "block",
+          "component": "block_uckk_dashboard"
+        },
+        {
+          "capability": "block/uckk_dashboard:myaddinstance",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "block_uckk_dashboard"
+        },
+        {
+          "capability": "block/uckk_dashboard:view",
+          "permission": "prevent",
+          "context": "block",
+          "component": "block_uckk_dashboard"
+        },
+        {
+          "capability": "block/uckk_dashboard:viewothers",
+          "permission": "prohibit",
+          "context": "block",
+          "component": "block_uckk_dashboard"
+        },
+        {
+          "capability": "format/uckk:configuresections",
+          "permission": "prohibit",
+          "context": "course",
+          "component": "format_uckk"
+        },
+        {
+          "capability": "format/uckk:manageblueprint",
+          "permission": "prohibit",
+          "context": "course",
+          "component": "format_uckk"
+        },
+        {
+          "capability": "format/uckk:resetsectionnames",
+          "permission": "prohibit",
+          "context": "course",
+          "component": "format_uckk"
+        },
+        {
+          "capability": "format/uckk:viewarchiveindicators",
+          "permission": "prohibit",
+          "context": "course",
+          "component": "format_uckk"
         },
         {
           "capability": "format/uckk:viewcoursemap",
@@ -1210,58 +1278,190 @@
           "component": "format_uckk"
         },
         {
-          "capability": "format/uckk:viewevidenceindicators",
-          "permission": "prevent",
+          "capability": "format/uckk:viewdiagnostics",
+          "permission": "prohibit",
           "context": "course",
           "component": "format_uckk"
         },
         {
-          "capability": "format/uckk:viewarchiveindicators",
-          "permission": "prevent",
+          "capability": "format/uckk:viewevidenceindicators",
+          "permission": "prohibit",
           "context": "course",
           "component": "format_uckk"
         },
         {
           "capability": "format/uckk:viewintegritymarkers",
-          "permission": "prevent",
+          "permission": "prohibit",
           "context": "course",
           "component": "format_uckk"
         },
         {
-          "capability": "mod/uckkchallenge:view",
+          "capability": "local/uckk:exportdata",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "local_uckk"
+        },
+        {
+          "capability": "local/uckk:managecanon",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "local_uckk"
+        },
+        {
+          "capability": "local/uckk:manageintegrations",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "local_uckk"
+        },
+        {
+          "capability": "local/uckk:managepathways",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "local_uckk"
+        },
+        {
+          "capability": "local/uckk:manageprofiles",
+          "permission": "prohibit",
+          "context": "user",
+          "component": "local_uckk"
+        },
+        {
+          "capability": "local/uckk:manageprograms",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "local_uckk"
+        },
+        {
+          "capability": "local/uckk:viewcampus",
           "permission": "allow",
-          "context": "module",
-          "component": "mod_uckkchallenge"
+          "context": "system",
+          "component": "local_uckk"
         },
         {
-          "capability": "mod/uckkchallenge:submitproof",
-          "permission": "prevent",
-          "context": "module",
-          "component": "mod_uckkchallenge"
+          "capability": "local/uckk:viewreports",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "local_uckk"
         },
         {
-          "capability": "mod/uckkassembly:view",
-          "permission": "allow",
-          "context": "module",
-          "component": "mod_uckkassembly"
+          "capability": "local/uckk:viewrestricted",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "local_uckk"
         },
         {
-          "capability": "mod/uckkassembly:proposemotion",
-          "permission": "prevent",
+          "capability": "mod/uckkarchive:addexternalworks",
+          "permission": "prohibit",
           "context": "module",
-          "component": "mod_uckkassembly"
+          "component": "mod_uckkarchive"
         },
         {
-          "capability": "mod/uckkassembly:amendmotion",
-          "permission": "prevent",
-          "context": "module",
-          "component": "mod_uckkassembly"
+          "capability": "mod/uckkarchive:addinstance",
+          "permission": "prohibit",
+          "context": "course",
+          "component": "mod_uckkarchive"
         },
         {
-          "capability": "mod/uckkassembly:vote",
-          "permission": "prevent",
+          "capability": "mod/uckkarchive:additem",
+          "permission": "prohibit",
           "context": "module",
-          "component": "mod_uckkassembly"
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:addmedia",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:deleteexternalworks",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:deletemedia",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:downloadmedia",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:editexternalworks",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:editmedia",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:export",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:exportmedia",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:manageadvisories",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:managecontentadvisories",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:manageexternalworks",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:managemediacollections",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:reviewadvisories",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:reviseitem",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:validateitem",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:versionmedia",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
         },
         {
           "capability": "mod/uckkarchive:view",
@@ -1270,46 +1470,226 @@
           "component": "mod_uckkarchive"
         },
         {
-          "capability": "mod/uckkarchive:additem",
+          "capability": "mod/uckkarchive:viewadvisories",
+          "permission": "prevent",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:viewculturallyrestricted",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:viewexternalworks",
+          "permission": "prevent",
+          "context": "module",
+          "component": "mod_uckkarchive"
+        },
+        {
+          "capability": "mod/uckkarchive:viewmedia",
           "permission": "prevent",
           "context": "module",
           "component": "mod_uckkarchive"
         },
         {
           "capability": "mod/uckkarchive:viewrestricted",
-          "permission": "prevent",
+          "permission": "prohibit",
           "context": "module",
           "component": "mod_uckkarchive"
         },
         {
-          "capability": "tool/uckkintegrity:view",
-          "permission": "prevent",
-          "context": "system",
-          "component": "tool_uckkintegrity"
+          "capability": "mod/uckkarchive:viewrestrictedmedia",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkarchive"
         },
         {
-          "capability": "tool/uckkintegrity:viewrestricted",
-          "permission": "prevent",
+          "capability": "mod/uckkassembly:addinstance",
+          "permission": "prohibit",
+          "context": "course",
+          "component": "mod_uckkassembly"
+        },
+        {
+          "capability": "mod/uckkassembly:amendmotion",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkassembly"
+        },
+        {
+          "capability": "mod/uckkassembly:archive",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkassembly"
+        },
+        {
+          "capability": "mod/uckkassembly:contestdecision",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkassembly"
+        },
+        {
+          "capability": "mod/uckkassembly:createassembly",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkassembly"
+        },
+        {
+          "capability": "mod/uckkassembly:proposemotion",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkassembly"
+        },
+        {
+          "capability": "mod/uckkassembly:publishdecision",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkassembly"
+        },
+        {
+          "capability": "mod/uckkassembly:view",
+          "permission": "allow",
+          "context": "module",
+          "component": "mod_uckkassembly"
+        },
+        {
+          "capability": "mod/uckkassembly:vote",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkassembly"
+        },
+        {
+          "capability": "mod/uckkchallenge:addinstance",
+          "permission": "prohibit",
+          "context": "course",
+          "component": "mod_uckkchallenge"
+        },
+        {
+          "capability": "mod/uckkchallenge:archive",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkchallenge"
+        },
+        {
+          "capability": "mod/uckkchallenge:createchallenge",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkchallenge"
+        },
+        {
+          "capability": "mod/uckkchallenge:evaluate",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkchallenge"
+        },
+        {
+          "capability": "mod/uckkchallenge:submitproof",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkchallenge"
+        },
+        {
+          "capability": "mod/uckkchallenge:validateintegrity",
+          "permission": "prohibit",
+          "context": "module",
+          "component": "mod_uckkchallenge"
+        },
+        {
+          "capability": "mod/uckkchallenge:view",
+          "permission": "allow",
+          "context": "module",
+          "component": "mod_uckkchallenge"
+        },
+        {
+          "capability": "report/uckk:export",
+          "permission": "prohibit",
           "context": "system",
-          "component": "tool_uckkintegrity"
+          "component": "report_uckk"
         },
         {
           "capability": "report/uckk:view",
-          "permission": "prevent",
+          "permission": "prohibit",
           "context": "system",
           "component": "report_uckk"
         },
         {
           "capability": "report/uckk:viewall",
-          "permission": "prevent",
+          "permission": "prohibit",
           "context": "system",
           "component": "report_uckk"
         },
         {
-          "capability": "report/uckk:export",
+          "capability": "tool/uckkintegrity:assigncase",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkintegrity"
+        },
+        {
+          "capability": "tool/uckkintegrity:closecase",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkintegrity"
+        },
+        {
+          "capability": "tool/uckkintegrity:invalidate",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkintegrity"
+        },
+        {
+          "capability": "tool/uckkintegrity:issuecorrection",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkintegrity"
+        },
+        {
+          "capability": "tool/uckkintegrity:opencase",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkintegrity"
+        },
+        {
+          "capability": "tool/uckkintegrity:reviewcase",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkintegrity"
+        },
+        {
+          "capability": "tool/uckkintegrity:view",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkintegrity"
+        },
+        {
+          "capability": "tool/uckkintegrity:viewrestricted",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkintegrity"
+        },
+        {
+          "capability": "tool/uckkseed:exportpresets",
           "permission": "prevent",
           "context": "system",
-          "component": "report_uckk"
+          "component": "tool_uckkseed"
+        },
+        {
+          "capability": "tool/uckkseed:reset",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkseed"
+        },
+        {
+          "capability": "tool/uckkseed:seed",
+          "permission": "prohibit",
+          "context": "system",
+          "component": "tool_uckkseed"
+        },
+        {
+          "capability": "tool/uckkseed:validate",
+          "permission": "prevent",
+          "context": "system",
+          "component": "tool_uckkseed"
         }
       ],
       "metadata": {
@@ -1318,9 +1698,12 @@
         "symbolic_role": null,
         "not_symbolic": true,
         "public_limited": true,
-        "description_fr": "Accès public limité aux contenus explicitement visibles. Aucune preuve, décision, archive restreinte ou rapport privé.",
+        "description_fr": "Accès de visite en lecture très limitée. Aucune preuve, vote, proposition, archive restreinte, rapport privé, export, IA ou action d’administration.",
         "seeded_by": "tool_uckkseed",
-        "source_preset": "roles"
+        "source_preset": "roles",
+        "read_only": true,
+        "hard_no_write": true,
+        "visitor_account": "visite"
       }
     }
   ]

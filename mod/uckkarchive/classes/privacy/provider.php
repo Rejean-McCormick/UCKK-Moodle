@@ -34,13 +34,17 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Privacy provider for mod_uckkarchive.
  *
- * Archive records can be institutional memory, but they can also contain
- * personal data: user-authored evidence, portfolio items, Kristals, validation
- * notes, provenance statements, revisions, and export logs.
+ * UCKK Archive is an institutional memory module. Some records are institutional
+ * and must remain historically coherent, but many archive records can contain
+ * personal data: user-authored archive items, media records, evidence, proofs,
+ * Kristals, provenance statements, revision notes, validation records, content
+ * advisories, cultural protocol reviews, external work references, media source
+ * notes, and export logs.
  *
- * Deletion methods avoid silent archive erasure where possible by anonymising
- * user references and redacting user-authored fields. Full context deletion
- * removes archive child records and files inside that context.
+ * User deletion therefore avoids silent destruction of institutional memory
+ * where possible. It anonymises user references and redacts user-authored text.
+ * Full context deletion removes child records and plugin-owned files in that
+ * Moodle context.
  */
 final class provider implements
     \core_privacy\local\metadata\provider,
@@ -53,13 +57,257 @@ final class provider implements
     private const COMPONENT = 'mod_uckkarchive';
 
     /**
-     * Plugin table map.
+     * Tables owned by the plugin and potentially containing personal data.
+     *
+     * userfields:
+     * - user id fields that can identify a person.
+     *
+     * textfields:
+     * - text/json fields that can contain personal data and should be redacted
+     *   when a user is erased.
+     *
+     * metadata:
+     * - language string identifier used by get_metadata().
+     *
+     * Keep child tables before parent tables so full-context deletion does not
+     * trip over database foreign keys.
      */
     private const TABLES = [
-        'uckkarchive' => [
+        'uckkarchive_content_review' => [
+            'userfields' => ['userid', 'reviewerid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'rationale',
+                'reviewnote',
+                'note',
+                'metadata',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_content_review',
+        ],
+        'uckkarchive_content_marker' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby', 'reviewedby'],
+            'textfields' => [
+                'description',
+                'note',
+                'advisorynote',
+                'teachingnote',
+                'locator',
+                'locatorlabel',
+                'metadata',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_content_marker',
+        ],
+        'uckkarchive_content_tag' => [
             'userfields' => ['userid', 'createdby', 'modifiedby'],
-            'textfields' => ['name', 'intro', 'archivecontext', 'archivepurpose', 'metadata'],
-            'metadata' => 'privacy:metadata:uckkarchive',
+            'textfields' => [
+                'tagkey',
+                'label',
+                'name',
+                'description',
+                'metadata',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_content_tag',
+        ],
+        'uckkarchive_content_tag_set' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'tagsetkey',
+                'setkey',
+                'label',
+                'name',
+                'description',
+                'metadata',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_content_tag_set',
+        ],
+        'uckkarchive_media_collection_item' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'note',
+                'metadata',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_media_collection_item',
+        ],
+        'uckkarchive_media_relation' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'relationtype',
+                'description',
+                'note',
+                'metadata',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_media_relation',
+        ],
+        'uckkarchive_media_tag' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'tag',
+                'tagkey',
+                'name',
+                'rawname',
+                'note',
+                'metadata',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_media_tag',
+        ],
+        'uckkarchive_media_source' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'source',
+                'sourcetype',
+                'sourceurl',
+                'sourceauthor',
+                'citation',
+                'rightsstatement',
+                'sourcenote',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_media_source',
+        ],
+        'uckkarchive_media_version' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'label',
+                'title',
+                'filename',
+                'mimetype',
+                'contenthash',
+                'filehash',
+                'changecomment',
+                'reason',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_media_version',
+        ],
+        'uckkarchive_media_collection' => [
+            'userfields' => ['userid', 'ownerid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'title',
+                'name',
+                'summary',
+                'description',
+                'purpose',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_media_collection',
+        ],
+        'uckkarchive_media' => [
+            'userfields' => ['userid', 'ownerid', 'createdby', 'modifiedby', 'validatedby'],
+            'textfields' => [
+                'title',
+                'name',
+                'summary',
+                'description',
+                'caption',
+                'transcript',
+                'source',
+                'sourcetype',
+                'sourceurl',
+                'sourceauthor',
+                'license',
+                'rightsstatement',
+                'sourcenote',
+                'teachingnote',
+                'culturalprotocolnote',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_media',
+        ],
+        'uckkarchive_external_work' => [
+            'userfields' => ['userid', 'ownerid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'title',
+                'subtitle',
+                'creator',
+                'publisher',
+                'sourceurl',
+                'identifier',
+                'citation',
+                'rightsstatement',
+                'licensekey',
+                'sourcenote',
+                'teachingnote',
+                'culturalprotocolnote',
+                'description',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_external_work',
+        ],
+        'uckkarchive_export' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby', 'exportedby'],
+            'textfields' => [
+                'title',
+                'summary',
+                'description',
+                'reason',
+                'auditnote',
+                'notes',
+                'exportpath',
+                'packagename',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_export',
+        ],
+        'uckkarchive_rev' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby'],
+            'textfields' => [
+                'reason',
+                'notes',
+                'summary',
+                'contentbefore',
+                'contentafter',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_rev',
+        ],
+        'uckkarchive_prov' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby', 'validatedby'],
+            'textfields' => [
+                'statement',
+                'source',
+                'sourceauthor',
+                'sourceurl',
+                'notes',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_prov',
+        ],
+        'uckkarchive_proof' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby', 'validatedby'],
+            'textfields' => [
+                'title',
+                'summary',
+                'content',
+                'description',
+                'sourceauthor',
+                'sourceurl',
+                'notes',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_proof',
+        ],
+        'uckkarchive_kristal' => [
+            'userfields' => ['userid', 'createdby', 'modifiedby', 'validatedby'],
+            'textfields' => [
+                'title',
+                'summary',
+                'statement',
+                'content',
+                'contexttext',
+                'proof',
+                'notes',
+                'metadata',
+                'provenancehash',
+            ],
+            'metadata' => 'privacy:metadata:uckkarchive_kristal',
         ],
         'uckkarchive_item' => [
             'userfields' => ['userid', 'createdby', 'modifiedby', 'validatedby'],
@@ -78,79 +326,21 @@ final class provider implements
             ],
             'metadata' => 'privacy:metadata:uckkarchive_item',
         ],
-        'uckkarchive_kristal' => [
-            'userfields' => ['userid', 'createdby', 'modifiedby', 'validatedby'],
-            'textfields' => [
-                'title',
-                'summary',
-                'statement',
-                'content',
-                'contexttext',
-                'proof',
-                'notes',
-                'metadata',
-                'provenancehash',
-            ],
-            'metadata' => 'privacy:metadata:uckkarchive_kristal',
-        ],
-        'uckkarchive_proof' => [
-            'userfields' => ['userid', 'createdby', 'modifiedby', 'validatedby'],
-            'textfields' => [
-                'title',
-                'summary',
-                'content',
-                'description',
-                'sourceauthor',
-                'sourceurl',
-                'notes',
-                'metadata',
-                'provenancehash',
-            ],
-            'metadata' => 'privacy:metadata:uckkarchive_proof',
-        ],
-        'uckkarchive_prov' => [
-            'userfields' => ['userid', 'createdby', 'modifiedby', 'validatedby'],
-            'textfields' => [
-                'statement',
-                'source',
-                'sourceauthor',
-                'sourceurl',
-                'notes',
-                'metadata',
-                'provenancehash',
-            ],
-            'metadata' => 'privacy:metadata:uckkarchive_prov',
-        ],
-        'uckkarchive_rev' => [
+        'uckkarchive' => [
             'userfields' => ['userid', 'createdby', 'modifiedby'],
             'textfields' => [
-                'reason',
-                'notes',
-                'summary',
-                'contentbefore',
-                'contentafter',
+                'name',
+                'intro',
+                'archivecontext',
+                'archivepurpose',
                 'metadata',
-                'provenancehash',
             ],
-            'metadata' => 'privacy:metadata:uckkarchive_rev',
-        ],
-        'uckkarchive_export' => [
-            'userfields' => ['userid', 'createdby', 'modifiedby', 'exportedby'],
-            'textfields' => [
-                'title',
-                'summary',
-                'reason',
-                'notes',
-                'exportpath',
-                'metadata',
-                'provenancehash',
-            ],
-            'metadata' => 'privacy:metadata:uckkarchive_export',
+            'metadata' => 'privacy:metadata:uckkarchive',
         ],
     ];
 
     /**
-     * File areas that can hold user content.
+     * Plugin file areas that can contain personal data.
      */
     private const FILE_AREAS = [
         'item_content',
@@ -161,6 +351,72 @@ final class provider implements
         'portfolio_files',
         'integrity_exports',
         'export_packages',
+
+        'media_original',
+        'media_preview',
+        'media_thumbnail',
+        'media_derivative',
+        'media_caption',
+        'media_transcript',
+        'media_attachment',
+
+        'content_review_files',
+        'external_work_reference_files',
+        'cultural_protocol_files',
+
+        'export_manifest',
+        'export_package',
+    ];
+
+    /**
+     * File areas associated with table records.
+     */
+    private const TABLE_FILE_AREAS = [
+        'uckkarchive_item' => [
+            'item_content',
+            'proof_files',
+            'decision_attachments',
+            'minutes_files',
+            'portfolio_files',
+        ],
+        'uckkarchive_kristal' => [
+            'kristal_files',
+        ],
+        'uckkarchive_proof' => [
+            'proof_files',
+        ],
+        'uckkarchive_export' => [
+            'export_packages',
+            'integrity_exports',
+            'export_manifest',
+            'export_package',
+        ],
+        'uckkarchive_media' => [
+            'media_original',
+            'media_preview',
+            'media_thumbnail',
+            'media_derivative',
+            'media_caption',
+            'media_transcript',
+            'media_attachment',
+        ],
+        'uckkarchive_media_version' => [
+            'media_original',
+            'media_preview',
+            'media_derivative',
+            'media_caption',
+            'media_transcript',
+            'media_attachment',
+        ],
+        'uckkarchive_content_review' => [
+            'content_review_files',
+        ],
+        'uckkarchive_content_marker' => [
+            'cultural_protocol_files',
+        ],
+        'uckkarchive_external_work' => [
+            'external_work_reference_files',
+        ],
     ];
 
     /**
@@ -171,73 +427,161 @@ final class provider implements
      */
     public static function get_metadata(collection $collection): collection {
         $commonfields = [
-            'id' => 'privacy:metadata:common:id',
+            'uuid' => 'privacy:metadata:common:uuid',
+            'archiveid' => 'privacy:metadata:common:archiveid',
             'courseid' => 'privacy:metadata:common:courseid',
             'cmid' => 'privacy:metadata:common:cmid',
             'contextid' => 'privacy:metadata:common:contextid',
             'userid' => 'privacy:metadata:common:userid',
+            'ownerid' => 'privacy:metadata:common:ownerid',
             'createdby' => 'privacy:metadata:common:createdby',
             'modifiedby' => 'privacy:metadata:common:modifiedby',
+            'validatedby' => 'privacy:metadata:common:validatedby',
+            'reviewerid' => 'privacy:metadata:common:reviewerid',
+            'exportedby' => 'privacy:metadata:common:exportedby',
             'timecreated' => 'privacy:metadata:common:timecreated',
             'timemodified' => 'privacy:metadata:common:timemodified',
+            'timevalidated' => 'privacy:metadata:common:timevalidated',
             'status' => 'privacy:metadata:common:status',
             'visibility' => 'privacy:metadata:common:visibility',
             'metadata' => 'privacy:metadata:common:metadata',
             'provenancehash' => 'privacy:metadata:common:provenancehash',
         ];
 
-        $collection->add_database_table('uckkarchive', $commonfields + [
-            'name' => 'privacy:metadata:uckkarchive:name',
-            'intro' => 'privacy:metadata:uckkarchive:intro',
-        ], 'privacy:metadata:uckkarchive');
+        $tablefields = [
+            'uckkarchive' => [
+                'name' => 'privacy:metadata:uckkarchive:name',
+                'intro' => 'privacy:metadata:uckkarchive:intro',
+                'archivecontext' => 'privacy:metadata:uckkarchive:archivecontext',
+                'archivepurpose' => 'privacy:metadata:uckkarchive:archivepurpose',
+            ],
+            'uckkarchive_item' => [
+                'title' => 'privacy:metadata:uckkarchive_item:title',
+                'summary' => 'privacy:metadata:uckkarchive_item:summary',
+                'content' => 'privacy:metadata:uckkarchive_item:content',
+                'itemtype' => 'privacy:metadata:uckkarchive_item:itemtype',
+                'sourcecomponent' => 'privacy:metadata:uckkarchive_item:sourcecomponent',
+                'sourceid' => 'privacy:metadata:uckkarchive_item:sourceid',
+                'sourceurl' => 'privacy:metadata:uckkarchive_item:sourceurl',
+                'sourceauthor' => 'privacy:metadata:uckkarchive_item:sourceauthor',
+                'sourcedate' => 'privacy:metadata:uckkarchive_item:sourcedate',
+            ],
+            'uckkarchive_kristal' => [
+                'title' => 'privacy:metadata:uckkarchive_kristal:title',
+                'statement' => 'privacy:metadata:uckkarchive_kristal:statement',
+                'content' => 'privacy:metadata:uckkarchive_kristal:content',
+                'contexttext' => 'privacy:metadata:uckkarchive_kristal:contexttext',
+                'proof' => 'privacy:metadata:uckkarchive_kristal:proof',
+            ],
+            'uckkarchive_proof' => [
+                'title' => 'privacy:metadata:uckkarchive_proof:title',
+                'summary' => 'privacy:metadata:uckkarchive_proof:summary',
+                'content' => 'privacy:metadata:uckkarchive_proof:content',
+                'description' => 'privacy:metadata:uckkarchive_proof:description',
+                'sourceurl' => 'privacy:metadata:uckkarchive_proof:sourceurl',
+            ],
+            'uckkarchive_prov' => [
+                'statement' => 'privacy:metadata:uckkarchive_prov:statement',
+                'source' => 'privacy:metadata:uckkarchive_prov:source',
+                'sourceurl' => 'privacy:metadata:uckkarchive_prov:sourceurl',
+            ],
+            'uckkarchive_rev' => [
+                'reason' => 'privacy:metadata:uckkarchive_rev:reason',
+                'contentbefore' => 'privacy:metadata:uckkarchive_rev:contentbefore',
+                'contentafter' => 'privacy:metadata:uckkarchive_rev:contentafter',
+            ],
+            'uckkarchive_export' => [
+                'exportformat' => 'privacy:metadata:uckkarchive_export:exportformat',
+                'exportscope' => 'privacy:metadata:uckkarchive_export:exportscope',
+                'reason' => 'privacy:metadata:uckkarchive_export:reason',
+                'exportpath' => 'privacy:metadata:uckkarchive_export:exportpath',
+                'packagename' => 'privacy:metadata:uckkarchive_export:packagename',
+            ],
+            'uckkarchive_media' => [
+                'title' => 'privacy:metadata:uckkarchive_media:title',
+                'summary' => 'privacy:metadata:uckkarchive_media:summary',
+                'description' => 'privacy:metadata:uckkarchive_media:description',
+                'mediatype' => 'privacy:metadata:uckkarchive_media:mediatype',
+                'mimetype' => 'privacy:metadata:uckkarchive_media:mimetype',
+                'sourceurl' => 'privacy:metadata:uckkarchive_media:sourceurl',
+                'caption' => 'privacy:metadata:uckkarchive_media:caption',
+                'transcript' => 'privacy:metadata:uckkarchive_media:transcript',
+            ],
+            'uckkarchive_media_version' => [
+                'label' => 'privacy:metadata:uckkarchive_media_version:label',
+                'filename' => 'privacy:metadata:uckkarchive_media_version:filename',
+                'contenthash' => 'privacy:metadata:uckkarchive_media_version:contenthash',
+                'changecomment' => 'privacy:metadata:uckkarchive_media_version:changecomment',
+            ],
+            'uckkarchive_media_source' => [
+                'source' => 'privacy:metadata:uckkarchive_media_source:source',
+                'sourceurl' => 'privacy:metadata:uckkarchive_media_source:sourceurl',
+                'citation' => 'privacy:metadata:uckkarchive_media_source:citation',
+                'rightsstatement' => 'privacy:metadata:uckkarchive_media_source:rightsstatement',
+            ],
+            'uckkarchive_media_collection' => [
+                'title' => 'privacy:metadata:uckkarchive_media_collection:title',
+                'summary' => 'privacy:metadata:uckkarchive_media_collection:summary',
+                'description' => 'privacy:metadata:uckkarchive_media_collection:description',
+            ],
+            'uckkarchive_media_collection_item' => [
+                'note' => 'privacy:metadata:uckkarchive_media_collection_item:note',
+            ],
+            'uckkarchive_media_relation' => [
+                'relationtype' => 'privacy:metadata:uckkarchive_media_relation:relationtype',
+                'description' => 'privacy:metadata:uckkarchive_media_relation:description',
+            ],
+            'uckkarchive_media_tag' => [
+                'tag' => 'privacy:metadata:uckkarchive_media_tag:tag',
+                'tagkey' => 'privacy:metadata:uckkarchive_media_tag:tagkey',
+            ],
+            'uckkarchive_content_tag' => [
+                'tagkey' => 'privacy:metadata:uckkarchive_content_tag:tagkey',
+                'label' => 'privacy:metadata:uckkarchive_content_tag:label',
+                'description' => 'privacy:metadata:uckkarchive_content_tag:description',
+            ],
+            'uckkarchive_content_tag_set' => [
+                'tagsetkey' => 'privacy:metadata:uckkarchive_content_tag_set:tagsetkey',
+                'label' => 'privacy:metadata:uckkarchive_content_tag_set:label',
+                'description' => 'privacy:metadata:uckkarchive_content_tag_set:description',
+            ],
+            'uckkarchive_content_marker' => [
+                'tagkey' => 'privacy:metadata:uckkarchive_content_marker:tagkey',
+                'severity' => 'privacy:metadata:uckkarchive_content_marker:severity',
+                'audiencesuitability' => 'privacy:metadata:uckkarchive_content_marker:audiencesuitability',
+                'locator' => 'privacy:metadata:uckkarchive_content_marker:locator',
+                'description' => 'privacy:metadata:uckkarchive_content_marker:description',
+                'note' => 'privacy:metadata:uckkarchive_content_marker:note',
+            ],
+            'uckkarchive_content_review' => [
+                'state' => 'privacy:metadata:uckkarchive_content_review:state',
+                'severity' => 'privacy:metadata:uckkarchive_content_review:severity',
+                'audiencesuitability' => 'privacy:metadata:uckkarchive_content_review:audiencesuitability',
+                'rationale' => 'privacy:metadata:uckkarchive_content_review:rationale',
+                'reviewnote' => 'privacy:metadata:uckkarchive_content_review:reviewnote',
+            ],
+            'uckkarchive_external_work' => [
+                'title' => 'privacy:metadata:uckkarchive_external_work:title',
+                'subtitle' => 'privacy:metadata:uckkarchive_external_work:subtitle',
+                'creator' => 'privacy:metadata:uckkarchive_external_work:creator',
+                'publisher' => 'privacy:metadata:uckkarchive_external_work:publisher',
+                'sourceurl' => 'privacy:metadata:uckkarchive_external_work:sourceurl',
+                'identifier' => 'privacy:metadata:uckkarchive_external_work:identifier',
+                'citation' => 'privacy:metadata:uckkarchive_external_work:citation',
+                'rightsstatement' => 'privacy:metadata:uckkarchive_external_work:rightsstatement',
+                'description' => 'privacy:metadata:uckkarchive_external_work:description',
+            ],
+        ];
 
-        $collection->add_database_table('uckkarchive_item', $commonfields + [
-            'title' => 'privacy:metadata:uckkarchive_item:title',
-            'summary' => 'privacy:metadata:uckkarchive_item:summary',
-            'content' => 'privacy:metadata:uckkarchive_item:content',
-            'itemtype' => 'privacy:metadata:uckkarchive_item:itemtype',
-            'sourcecomponent' => 'privacy:metadata:uckkarchive_item:sourcecomponent',
-            'sourceid' => 'privacy:metadata:uckkarchive_item:sourceid',
-            'sourceurl' => 'privacy:metadata:uckkarchive_item:sourceurl',
-            'sourceauthor' => 'privacy:metadata:uckkarchive_item:sourceauthor',
-            'sourcedate' => 'privacy:metadata:uckkarchive_item:sourcedate',
-        ], 'privacy:metadata:uckkarchive_item');
+        foreach (self::TABLES as $table => $config) {
+            $fields = $commonfields + ($tablefields[$table] ?? []);
 
-        $collection->add_database_table('uckkarchive_kristal', $commonfields + [
-            'title' => 'privacy:metadata:uckkarchive_kristal:title',
-            'statement' => 'privacy:metadata:uckkarchive_kristal:statement',
-            'contexttext' => 'privacy:metadata:uckkarchive_kristal:contexttext',
-            'proof' => 'privacy:metadata:uckkarchive_kristal:proof',
-        ], 'privacy:metadata:uckkarchive_kristal');
-
-        $collection->add_database_table('uckkarchive_proof', $commonfields + [
-            'archiveitemid' => 'privacy:metadata:uckkarchive_proof:archiveitemid',
-            'prooftype' => 'privacy:metadata:uckkarchive_proof:prooftype',
-            'content' => 'privacy:metadata:uckkarchive_proof:content',
-            'sourceurl' => 'privacy:metadata:uckkarchive_proof:sourceurl',
-        ], 'privacy:metadata:uckkarchive_proof');
-
-        $collection->add_database_table('uckkarchive_prov', $commonfields + [
-            'archiveitemid' => 'privacy:metadata:uckkarchive_prov:archiveitemid',
-            'statement' => 'privacy:metadata:uckkarchive_prov:statement',
-            'source' => 'privacy:metadata:uckkarchive_prov:source',
-            'sourceurl' => 'privacy:metadata:uckkarchive_prov:sourceurl',
-        ], 'privacy:metadata:uckkarchive_prov');
-
-        $collection->add_database_table('uckkarchive_rev', $commonfields + [
-            'archiveitemid' => 'privacy:metadata:uckkarchive_rev:archiveitemid',
-            'reason' => 'privacy:metadata:uckkarchive_rev:reason',
-            'notes' => 'privacy:metadata:uckkarchive_rev:notes',
-            'contentbefore' => 'privacy:metadata:uckkarchive_rev:contentbefore',
-            'contentafter' => 'privacy:metadata:uckkarchive_rev:contentafter',
-        ], 'privacy:metadata:uckkarchive_rev');
-
-        $collection->add_database_table('uckkarchive_export', $commonfields + [
-            'exportformat' => 'privacy:metadata:uckkarchive_export:exportformat',
-            'exportscope' => 'privacy:metadata:uckkarchive_export:exportscope',
-            'reason' => 'privacy:metadata:uckkarchive_export:reason',
-            'exportpath' => 'privacy:metadata:uckkarchive_export:exportpath',
-        ], 'privacy:metadata:uckkarchive_export');
+            $collection->add_database_table(
+                $table,
+                $fields,
+                $config['metadata']
+            );
+        }
 
         $collection->add_subsystem_link('core_files', [], 'privacy:metadata:files');
 
@@ -254,7 +598,7 @@ final class provider implements
         $contextlist = new contextlist();
 
         foreach (self::TABLES as $table => $config) {
-            if (!self::table_exists($table) || !self::field_exists($table, 'contextid')) {
+            if (!self::table_exists($table)) {
                 continue;
             }
 
@@ -275,10 +619,11 @@ final class provider implements
                 continue;
             }
 
-            $sql = 'SELECT DISTINCT ctx.id
-                      FROM {context} ctx
-                      JOIN {' . $table . '} t ON t.contextid = ctx.id
-                     WHERE ' . implode(' OR ', $conditions);
+            $sql = self::get_contexts_sql_for_table($table, implode(' OR ', $conditions));
+
+            if ($sql === '') {
+                continue;
+            }
 
             $contextlist->add_from_sql($sql, $params);
         }
@@ -296,7 +641,6 @@ final class provider implements
 
         foreach ($contextlist->get_contexts() as $context) {
             $export = new stdClass();
-            $export->archives = [];
 
             foreach (array_keys(self::TABLES) as $table) {
                 $records = self::get_user_records_in_context($table, (int)$user->id, $context);
@@ -319,8 +663,8 @@ final class provider implements
      * Delete all personal archive data in a context.
      *
      * This is used when the context itself is being expired/deleted. It removes
-     * child archive records and file areas in the context, while preserving the
-     * activity instance shell where Moodle owns that lifecycle.
+     * plugin child records and file areas in the context. The activity instance
+     * shell is not deleted here because Moodle owns that lifecycle.
      *
      * @param context $context Context.
      */
@@ -330,18 +674,22 @@ final class provider implements
         self::delete_all_archive_files_in_context($context);
 
         foreach (array_keys(self::TABLES) as $table) {
-            if (!self::table_exists($table) || !self::field_exists($table, 'contextid')) {
+            if (!self::table_exists($table)) {
+                continue;
+            }
+
+            [$select, $params] = self::get_context_select_for_table($table, $context);
+
+            if ($select === '') {
                 continue;
             }
 
             if ($table === 'uckkarchive') {
-                self::anonymise_all_user_references_in_context($table, $context);
+                self::anonymise_all_user_references_in_context($table, $select, $params);
                 continue;
             }
 
-            $DB->delete_records_select($table, 'contextid = :contextid', [
-                'contextid' => $context->id,
-            ]);
+            $DB->delete_records_select($table, $select, $params);
         }
     }
 
@@ -367,7 +715,13 @@ final class provider implements
         $context = $userlist->get_context();
 
         foreach (self::TABLES as $table => $config) {
-            if (!self::table_exists($table) || !self::field_exists($table, 'contextid')) {
+            if (!self::table_exists($table)) {
+                continue;
+            }
+
+            [$contextselect, $contextparams] = self::get_context_select_for_table($table, $context);
+
+            if ($contextselect === '') {
                 continue;
             }
 
@@ -378,12 +732,10 @@ final class provider implements
 
                 $sql = "SELECT {$field}
                           FROM {{$table}}
-                         WHERE contextid = :contextid
+                         WHERE {$contextselect}
                            AND {$field} <> 0";
 
-                $userlist->add_from_sql($field, $sql, [
-                    'contextid' => $context->id,
-                ]);
+                $userlist->add_from_sql($field, $sql, $contextparams);
             }
         }
     }
@@ -409,7 +761,7 @@ final class provider implements
      * @param array<int, string> $subcontext Subcontext.
      */
     private static function export_user_files(context $context, int $userid, array $subcontext): void {
-        foreach (['uckkarchive_item', 'uckkarchive_kristal', 'uckkarchive_proof', 'uckkarchive_export'] as $table) {
+        foreach (array_keys(self::TABLE_FILE_AREAS) as $table) {
             $records = self::get_user_records_in_context($table, $userid, $context);
 
             foreach ($records as $record) {
@@ -439,7 +791,7 @@ final class provider implements
         global $DB;
 
         foreach (self::TABLES as $table => $config) {
-            if (!self::table_exists($table) || !self::field_exists($table, 'contextid')) {
+            if (!self::table_exists($table)) {
                 continue;
             }
 
@@ -475,10 +827,13 @@ final class provider implements
         int $userid,
         context $context
     ): array {
+        [$contextselect, $params] = self::get_context_select_for_table($table, $context);
+
+        if ($contextselect === '') {
+            return ['', []];
+        }
+
         $conditions = [];
-        $params = [
-            'contextid' => $context->id,
-        ];
 
         foreach ($userfields as $field) {
             if (!self::field_exists($table, $field)) {
@@ -495,7 +850,7 @@ final class provider implements
         }
 
         return [
-            'contextid = :contextid AND (' . implode(' OR ', $conditions) . ')',
+            $contextselect . ' AND (' . implode(' OR ', $conditions) . ')',
             $params,
         ];
     }
@@ -511,7 +866,7 @@ final class provider implements
     private static function get_user_records_in_context(string $table, int $userid, context $context): array {
         global $DB;
 
-        if (!self::table_exists($table) || !self::field_exists($table, 'contextid')) {
+        if (!self::table_exists($table)) {
             return [];
         }
 
@@ -539,7 +894,16 @@ final class provider implements
     private static function prepare_record_for_export(stdClass $record): stdClass {
         $data = clone $record;
 
-        foreach (['timecreated', 'timemodified', 'timevalidated', 'sourcedate'] as $field) {
+        foreach ([
+            'timecreated',
+            'timemodified',
+            'timevalidated',
+            'sourcedate',
+            'timequeued',
+            'timestarted',
+            'timecompleted',
+            'lastdownloaded',
+        ] as $field) {
             if (!empty($data->{$field})) {
                 $data->{$field . 'readable'} = userdate((int)$data->{$field});
             }
@@ -570,10 +934,7 @@ final class provider implements
                 continue;
             }
 
-            $value = $field === 'metadata'
-                ? null
-                : get_string('privacy:deleted', 'uckkarchive');
-
+            $value = self::redacted_value_for_field($field);
             $DB->set_field_select($table, $field, $value, $select, $params);
         }
 
@@ -583,24 +944,36 @@ final class provider implements
     }
 
     /**
-     * Anonymise all user references in an instance record for a context.
+     * Anonymise all user references in records matching a context selection.
+     *
+     * Used for the activity instance table during context deletion. Moodle owns
+     * the module instance lifecycle, so this privacy provider must not delete
+     * the instance record itself.
      *
      * @param string $table Table name.
-     * @param context $context Context.
+     * @param string $select SQL select.
+     * @param array<string, mixed> $params SQL params.
      */
-    private static function anonymise_all_user_references_in_context(string $table, context $context): void {
+    private static function anonymise_all_user_references_in_context(string $table, string $select, array $params): void {
         global $DB;
 
         if (!isset(self::TABLES[$table])) {
             return;
         }
 
-        $select = 'contextid = :contextid';
-        $params = ['contextid' => $context->id];
-
         foreach (self::TABLES[$table]['userfields'] as $field) {
             if (self::field_exists($table, $field)) {
                 $DB->set_field_select($table, $field, 0, $select, $params);
+            }
+        }
+
+        foreach (self::TABLES[$table]['textfields'] as $field) {
+            if (!self::field_exists($table, $field)) {
+                continue;
+            }
+
+            if ($field === 'metadata') {
+                $DB->set_field_select($table, $field, '{}', $select, $params);
             }
         }
 
@@ -650,26 +1023,80 @@ final class provider implements
      * @return array<int, string>
      */
     private static function get_file_areas_for_table(string $table): array {
-        return match ($table) {
-            'uckkarchive_item' => [
-                'item_content',
-                'proof_files',
-                'decision_attachments',
-                'minutes_files',
-                'portfolio_files',
-            ],
-            'uckkarchive_kristal' => [
-                'kristal_files',
-            ],
-            'uckkarchive_proof' => [
-                'proof_files',
-            ],
-            'uckkarchive_export' => [
-                'export_packages',
-                'integrity_exports',
-            ],
-            default => [],
-        };
+        return self::TABLE_FILE_AREAS[$table] ?? [];
+    }
+
+    /**
+     * Build SQL that returns context ids for a table/user condition.
+     *
+     * @param string $table Table name.
+     * @param string $usercondition User condition using alias t.
+     * @return string SQL.
+     */
+    private static function get_contexts_sql_for_table(string $table, string $usercondition): string {
+        if (self::field_exists($table, 'contextid')) {
+            return "SELECT DISTINCT ctx.id
+                      FROM {context} ctx
+                      JOIN {{$table}} t ON t.contextid = ctx.id
+                     WHERE {$usercondition}";
+        }
+
+        if (self::field_exists($table, 'archiveid') &&
+                self::table_exists('uckkarchive') &&
+                self::field_exists('uckkarchive', 'contextid')) {
+            return "SELECT DISTINCT ctx.id
+                      FROM {context} ctx
+                      JOIN {uckkarchive} a ON a.contextid = ctx.id
+                      JOIN {{$table}} t ON t.archiveid = a.id
+                     WHERE {$usercondition}";
+        }
+
+        return '';
+    }
+
+    /**
+     * Build a context filter for a table.
+     *
+     * @param string $table Table name.
+     * @param context $context Context.
+     * @return array{0:string,1:array<string,mixed>}
+     */
+    private static function get_context_select_for_table(string $table, context $context): array {
+        if (self::field_exists($table, 'contextid')) {
+            return [
+                'contextid = :contextid',
+                ['contextid' => $context->id],
+            ];
+        }
+
+        if (self::field_exists($table, 'archiveid') &&
+                self::table_exists('uckkarchive') &&
+                self::field_exists('uckkarchive', 'contextid')) {
+            return [
+                'archiveid IN (SELECT id FROM {uckkarchive} WHERE contextid = :contextid)',
+                ['contextid' => $context->id],
+            ];
+        }
+
+        return ['', []];
+    }
+
+    /**
+     * Get redacted value for a field.
+     *
+     * @param string $field Field name.
+     * @return string
+     */
+    private static function redacted_value_for_field(string $field): string {
+        if ($field === 'metadata') {
+            return '{}';
+        }
+
+        if ($field === 'provenancehash') {
+            return '';
+        }
+
+        return get_string('privacy:deleted', 'uckkarchive');
     }
 
     /**

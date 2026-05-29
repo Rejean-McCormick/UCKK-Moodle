@@ -26,7 +26,9 @@ require_once($CFG->dirroot . '/mod/uckkarchive/backup/moodle2/backup_uckkarchive
  * structure belongs in backup_uckkarchive_activity_structure_step.
  *
  * UCKK Archive owns archive items, proof packages, Kristals, provenance,
- * revisions, exports, validation state, and restricted archive metadata.
+ * revisions, exports, validation state, media/didactic material, external
+ * work references, content advisories, cultural protocol notes, and restricted
+ * archive metadata.
  */
 class backup_uckkarchive_activity_task extends backup_activity_task {
     /**
@@ -35,6 +37,8 @@ class backup_uckkarchive_activity_task extends backup_activity_task {
      * The Archive activity currently relies on Moodle's standard activity
      * backup settings: activity inclusion, user data, files, groups,
      * completion, and gradebook where applicable.
+     *
+     * @return void
      */
     protected function define_my_settings(): void {
         // No custom backup settings.
@@ -42,6 +46,8 @@ class backup_uckkarchive_activity_task extends backup_activity_task {
 
     /**
      * Define backup steps.
+     *
+     * @return void
      */
     protected function define_my_steps(): void {
         $this->add_step(new backup_uckkarchive_activity_structure_step(
@@ -54,19 +60,21 @@ class backup_uckkarchive_activity_task extends backup_activity_task {
      * Return file areas used by this activity.
      *
      * These names must match the component/filearea values used by lib.php,
-     * controllers, forms, output classes, item services, revision services,
-     * export services, and pluginfile handling.
+     * controllers, forms, output classes, services, revision services, export
+     * services, privacy provider, restore steps, and pluginfile handling.
      *
      * @return array<int, string>
      */
     public function get_fileareas(): array {
         return [
+            // Moodle activity intro.
             'intro',
 
             // Archive item text/file areas.
             'item_content',
             'item_publicsummary',
             'item_files',
+            'item_attachment',
 
             // Canonical archive domain file areas.
             'proof_files',
@@ -80,6 +88,24 @@ class backup_uckkarchive_activity_task extends backup_activity_task {
             'provenance_files',
             'validation_files',
             'revision_files',
+
+            // Media library file areas.
+            'media_original',
+            'media_preview',
+            'media_thumbnail',
+            'media_derivative',
+            'media_caption',
+            'media_transcript',
+            'media_attachment',
+
+            // Content advisory / cultural protocol support.
+            'content_review_files',
+            'content_marker_files',
+            'content_tag_files',
+            'cultural_protocol_files',
+
+            // External work reference support.
+            'external_work_reference_files',
 
             // Export package storage.
             'export_package',
@@ -150,7 +176,34 @@ class backup_uckkarchive_activity_task extends backup_activity_task {
         $search = '/(' . $base . '\/mod\/uckkarchive\/export\.php\?id=)([0-9]+)(&amp;|&)exportid=([0-9]+)/';
         $content = preg_replace($search, '$@UCKKARCHIVEEXPORTPACKAGEBYCMID*$2*$4@$', $content);
 
+        // Media library controller links by course module id.
+        $search = '/(' . $base . '\/mod\/uckkarchive\/media\.php\?id=)([0-9]+)/';
+        $content = preg_replace($search, '$@UCKKARCHIVEMEDIABYCMID*$2@$', $content);
+
+        // Media item links by course module id and media id.
+        $search = '/(' . $base . '\/mod\/uckkarchive\/media\.php\?id=)([0-9]+)(&amp;|&)mediaid=([0-9]+)/';
+        $content = preg_replace($search, '$@UCKKARCHIVEMEDIAITEMBYCMID*$2*$4@$', $content);
+
+        // Media collection links by course module id and collection id.
+        $search = '/(' . $base . '\/mod\/uckkarchive\/media\.php\?id=)([0-9]+)(&amp;|&)collectionid=([0-9]+)/';
+        $content = preg_replace($search, '$@UCKKARCHIVEMEDIACOLLECTIONBYCMID*$2*$4@$', $content);
+
+        // Media version links by course module id, media id, and version id.
+        $search = '/(' . $base . '\/mod\/uckkarchive\/media\.php\?id=)([0-9]+)(&amp;|&)mediaid=([0-9]+)(&amp;|&)versionid=([0-9]+)/';
+        $content = preg_replace($search, '$@UCKKARCHIVEMEDIAVERSIONBYCMID*$2*$4*$6@$', $content);
+
+        // External work links by course module id and external work id.
+        $search = '/(' . $base . '\/mod\/uckkarchive\/media\.php\?id=)([0-9]+)(&amp;|&)externalworkid=([0-9]+)/';
+        $content = preg_replace($search, '$@UCKKARCHIVEEXTERNALWORKBYCMID*$2*$4@$', $content);
+
+        // Content marker links by course module id and marker id.
+        $search = '/(' . $base . '\/mod\/uckkarchive\/media\.php\?id=)([0-9]+)(&amp;|&)contentmarkerid=([0-9]+)/';
+        $content = preg_replace($search, '$@UCKKARCHIVECONTENTMARKERBYCMID*$2*$4@$', $content);
+
+        // Content advisory panel links by course module id and media id.
+        $search = '/(' . $base . '\/mod\/uckkarchive\/media\.php\?id=)([0-9]+)(&amp;|&)mediaid=([0-9]+)(&amp;|&)panel=contentadvisory/';
+        $content = preg_replace($search, '$@UCKKARCHIVECONTENTADVISORYBYCMID*$2*$4@$', $content);
+
         return $content;
     }
 }
-

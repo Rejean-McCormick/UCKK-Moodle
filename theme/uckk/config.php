@@ -18,8 +18,9 @@ defined('MOODLE_INTERNAL') || die();
  * - global UCKK visual identity tokens;
  * - SCSS loading;
  * - renderer overrides;
- * - the public campus gate layout;
- * - the dedicated local_uckk public page layout shell.
+ * - public visual polish;
+ * - the Moodle root layout adapter that prevents the native course-list
+ *   frontpage from being exposed at /.
  *
  * It must not contain grading logic, permission logic, workflow logic,
  * archive logic, integrity logic or data ownership.
@@ -54,8 +55,9 @@ $THEME->extrascsscallback = 'theme_uckk_get_extra_scss';
 /*
  * Layout contracts.
  *
- * The default Moodle screens deliberately delegate to Boost drawers.
- * UCKK-owned public pages use the custom local_uckk_public layout.
+ * Default Moodle screens delegate to Boost drawers.
+ * Public UCKK plugin pages also delegate to Boost drawers so the Moodle top bar,
+ * user menu, language menu and standard navigation remain consistent.
  */
 $uckkdrawers = [
     'theme' => 'boost',
@@ -76,6 +78,23 @@ $uckkcolumns1 = [
     'regions' => [],
 ];
 
+$uckkpublic = $uckkdrawersnoregions + [
+    'options' => [
+        'nonavbar' => false,
+        'langmenu' => true,
+    ],
+];
+
+$uckkfrontpage = [
+    'theme' => 'uckk',
+    'file' => 'frontpage.php',
+    'regions' => [],
+    'options' => [
+        'nonavbar' => true,
+        'langmenu' => true,
+    ],
+];
+
 $THEME->layouts = [
     'base' => $uckkdrawersnoregions,
 
@@ -92,19 +111,15 @@ $THEME->layouts = [
     'incourse' => $uckkdrawers,
 
     /*
-     * UCKK public campus gate.
+     * Moodle root page (/).
      *
-     * This is the only standard Moodle layout owned by theme_uckk directly.
+     * This must use the UCKK frontpage adapter, not Boost drawers.php, because
+     * Moodle's native frontpage body may expose the configured course list.
+     *
+     * The adapter renders the local_uckk public home page and keeps
+     * $OUTPUT->main_content() only as a hidden layout-contract fallback.
      */
-    'frontpage' => [
-        'file' => 'frontpage.php',
-        'regions' => ['side-pre'],
-        'defaultregion' => 'side-pre',
-        'options' => [
-            'nonavbar' => false,
-            'langmenu' => true,
-        ],
-    ],
+    'frontpage' => $uckkfrontpage,
 
     /*
      * Public institutional pages from local_uckk.
@@ -112,20 +127,10 @@ $THEME->layouts = [
      * Controllers or \local_uckk\local\public_pages::setup_page() may set:
      * $PAGE->set_pagelayout('local_uckk_public');
      *
-     * Baseline recovery:
-     * keep this on Boost drawers.php for now. This restores the previous
-     * working state. Fix the mosaic through local_uckk/styles.css and asset
-     * paths before attempting a custom layout shell again.
+     * Keep plugin public pages on Boost drawers.php so they retain the Moodle
+     * top bar and shell.
      */
-    'local_uckk_public' => [
-        'theme' => 'boost',
-        'file' => 'drawers.php',
-        'regions' => [],
-        'options' => [
-            'nonavbar' => false,
-            'langmenu' => true,
-        ],
-    ],
+    'local_uckk_public' => $uckkpublic,
 
     'mydashboard' => $uckkdrawers + [
         'options' => [
@@ -206,4 +211,4 @@ $THEME->layouts = [
     ],
 ];
 
-unset($uckkdrawers, $uckkdrawersnoregions, $uckkcolumns1);
+unset($uckkdrawers, $uckkdrawersnoregions, $uckkcolumns1, $uckkpublic, $uckkfrontpage);

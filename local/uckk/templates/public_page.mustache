@@ -1,0 +1,481 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/public_page
+
+    Public institutional page shell for local_uckk.
+
+    This template is the single visual contract for the public UCKK pages:
+    Accueil, À propos, Voies, Cours, Défis, Assemblées, Intégrité,
+    Archives, Actualités and Contact.
+
+    It is intentionally render-only.
+
+    It must not:
+    - query or mutate the database;
+    - decide visibility or permissions;
+    - validate challenges, archives or assemblies;
+    - assign roles, badges, levels or parchments;
+    - publish institutional recognition;
+    - decide integrity cases;
+    - create authoritative canon.
+
+    Official context contract:
+    {
+        "uniqid": "local-uckk-public-page-abc123",
+        "slug": "about",
+        "component": "local_uckk",
+        "pagetype": "institutional",
+        "ispublic": true,
+        "classes": "local-uckk local-uckk-public-page local-uckk-public-page--about local-uckk-public-page--layout-wide local-uckk-public-page--with-aside",
+        "layout": "wide",
+        "navigationlayout": "singleline",
+        "layoutclasses": "local-uckk-public-layout local-uckk-public-layout--wide local-uckk-public-layout--with-aside",
+        "bodyclasses": "local-uckk-public-body local-uckk-public-body--wide local-uckk-public-body--with-aside",
+        "mainclasses": "local-uckk-public-main local-uckk-public-main--wide local-uckk-public-main--with-aside",
+        "asideclasses": "local-uckk-public-aside local-uckk-public-aside--wide",
+        "hasaside": true,
+
+        "eyebrow": "Univers-Cité King Klown",
+        "title": "À propos",
+        "subtitle": "Cité-école expérimentale du mouvement kOA.",
+        "summary": "UCKK forme, rassemble, documente, défie, vérifie et archive.",
+        "boundarynotice": "kOA est le mouvement. UCKK est l’école. Le kOA Digital Ecosystem est l’infrastructure. King Klown est la figure narrative. L’Inquisiteur protège l’intégrité.",
+
+        "hasnavigation": true,
+        "navigationclasses": "local-uckk-public-nav local-uckk-public-nav--singleline",
+        "navigation": [
+            {
+                "key": "home",
+                "label": "Accueil",
+                "url": "https://example.test/local/uckk/index.php",
+                "active": false,
+                "classes": "local-uckk-public-nav__link",
+                "itemclasses": "local-uckk-public-nav__item",
+                "ariacurrent": "",
+                "hasariacurrent": false
+            }
+        ],
+
+        "hasquicklinks": true,
+        "quicklinks": [
+            {
+                "label": "Explorer les Voies",
+                "url": "https://example.test/local/uckk/programs.php",
+                "description": "Voir le Tronc commun, les Voies fondatrices et les reconnaissances internes."
+            }
+        ],
+
+        "hassections": true,
+        "sections": [
+            {
+                "title": "Mission",
+                "eyebrow": "Former",
+                "body": "Comprendre le jeu. Jouer avec lucidité. Changer les règles.",
+                "hasitems": true,
+                "items": [
+                    {
+                        "title": "Voies",
+                        "body": "Parcours de formation et d’expérimentation.",
+                        "url": "https://example.test/local/uckk/programs.php",
+                        "actionlabel": "Voir",
+                        "hasaction": true
+                    }
+                ]
+            }
+        ],
+
+        "hascards": true,
+        "cards": [
+            {
+                "eyebrow": "Défis",
+                "title": "Défis King Klown",
+                "body": "Épreuves publiques ou internes orientées vers preuves, apprentissage et archive.",
+                "url": "https://example.test/local/uckk/challenges.php",
+                "actionlabel": "Consulter",
+                "hasaction": true
+            }
+        ],
+
+        "hasnotices": true,
+        "notices": [
+            {
+                "type": "institutional",
+                "title": "Reconnaissances internes UCKK",
+                "body": "Attestations de parcours propres à la cité-école, non encore reconnues par l’État."
+            }
+        ],
+
+        "hasmetadata": true,
+        "metadata": [
+            {
+                "label": "Statut",
+                "value": "Page publique"
+            }
+        ],
+
+        "hascta": true,
+        "cta": {
+            "title": "Participer",
+            "body": "Proposer une contribution, un défi, une correction ou une archive.",
+            "url": "https://example.test/local/uckk/contact.php",
+            "actionlabel": "Contacter UCKK",
+            "label": "Contacter UCKK",
+            "hasaction": true,
+            "classes": "btn btn-primary local-uckk-public-cta__link"
+        }
+    }
+}}
+
+<div
+    id="{{uniqid}}"
+    class="{{classes}}"
+    data-region="local-uckk-public-page"
+    data-component="{{component}}"
+    data-page-slug="{{slug}}"
+    data-page-type="{{pagetype}}"
+    data-layout="{{layout}}"
+    data-navigation-layout="{{navigationlayout}}"
+    data-has-aside="{{#hasaside}}true{{/hasaside}}{{^hasaside}}false{{/hasaside}}"
+    {{#ispublic}}data-public="true"{{/ispublic}}
+>
+    <div class="local-uckk-public-shell" data-region="local-uckk-public-shell">
+        {{#hasnavigation}}
+            <nav
+                class="{{navigationclasses}}"
+                aria-label="Navigation publique UCKK"
+                data-region="local-uckk-public-navigation"
+            >
+                <div class="local-uckk-public-nav__viewport">
+                    <ul class="local-uckk-public-nav__list" role="list">
+                        {{#navigation}}
+                            <li class="{{itemclasses}}">
+                                <a
+                                    class="{{classes}}"
+                                    href="{{url}}"
+                                    data-nav-key="{{key}}"
+                                    data-nav-active="{{#active}}true{{/active}}{{^active}}false{{/active}}"
+                                    {{#hasariacurrent}}aria-current="{{ariacurrent}}"{{/hasariacurrent}}
+                                >
+                                    <span class="local-uckk-public-nav__label">
+                                        {{label}}
+                                    </span>
+                                </a>
+                            </li>
+                        {{/navigation}}
+                    </ul>
+                </div>
+            </nav>
+        {{/hasnavigation}}
+
+        <header
+            class="local-uckk-public-hero"
+            data-region="local-uckk-public-hero"
+            aria-labelledby="{{uniqid}}-title"
+        >
+            <div class="local-uckk-public-hero__content">
+                {{#eyebrow}}
+                    <p class="local-uckk-public-eyebrow">
+                        {{eyebrow}}
+                    </p>
+                {{/eyebrow}}
+
+                <h1 id="{{uniqid}}-title" class="local-uckk-public-title">
+                    {{title}}
+                </h1>
+
+                {{#subtitle}}
+                    <p class="local-uckk-public-subtitle">
+                        {{subtitle}}
+                    </p>
+                {{/subtitle}}
+
+                {{#summary}}
+                    <p class="local-uckk-public-summary">
+                        {{summary}}
+                    </p>
+                {{/summary}}
+
+                {{#boundarynotice}}
+                    <div
+                        class="local-uckk-public-boundary"
+                        role="note"
+                        data-region="local-uckk-boundary-notice"
+                    >
+                        {{boundarynotice}}
+                    </div>
+                {{/boundarynotice}}
+            </div>
+        </header>
+
+        {{#hasquicklinks}}
+            <section
+                class="local-uckk-public-section local-uckk-public-section--quicklinks"
+                aria-labelledby="{{uniqid}}-quicklinks-title"
+                data-region="local-uckk-public-quicklinks"
+            >
+                <h2 id="{{uniqid}}-quicklinks-title" class="local-uckk-public-section__title">
+                    <span class="local-uckk-public-section__title-text">
+                        Repères rapides
+                    </span>
+                </h2>
+
+                <div class="local-uckk-public-card-grid local-uckk-public-card-grid--quicklinks">
+                    {{#quicklinks}}
+                        <a class="local-uckk-public-card local-uckk-public-card--quicklink" href="{{url}}">
+                            <span class="local-uckk-public-card__title">
+                                {{label}}
+                            </span>
+
+                            {{#description}}
+                                <span class="local-uckk-public-card__body">
+                                    {{description}}
+                                </span>
+                            {{/description}}
+                        </a>
+                    {{/quicklinks}}
+                </div>
+            </section>
+        {{/hasquicklinks}}
+
+        <div class="{{bodyclasses}}" data-region="local-uckk-public-body">
+            <main class="{{mainclasses}}" data-region="local-uckk-public-main">
+                {{#hassections}}
+                    {{#sections}}
+                        <section
+                            class="{{classes}}"
+                            data-region="local-uckk-public-section"
+                        >
+                            {{#eyebrow}}
+                                <p class="local-uckk-public-section__eyebrow">
+                                    {{eyebrow}}
+                                </p>
+                            {{/eyebrow}}
+
+                            {{#title}}
+                                <h2 class="local-uckk-public-section__title">
+                                    <span class="local-uckk-public-section__title-text">
+                                        {{title}}
+                                    </span>
+                                </h2>
+                            {{/title}}
+
+                            {{#body}}
+                                <p class="local-uckk-public-section__body">
+                                    {{body}}
+                                </p>
+                            {{/body}}
+
+                            {{#hasitems}}
+                                <div class="local-uckk-public-card-grid local-uckk-public-section__items">
+                                    {{#items}}
+                                        <article class="{{classes}}">
+                                            <div class="local-uckk-public-card__content">
+                                                {{#eyebrow}}
+                                                    <p class="local-uckk-public-card__eyebrow">
+                                                        {{eyebrow}}
+                                                    </p>
+                                                {{/eyebrow}}
+
+                                                {{#title}}
+                                                    <h3 class="local-uckk-public-card__title">
+                                                        {{#url}}
+                                                            <a class="local-uckk-public-card__title-link" href="{{url}}">
+                                                                {{title}}
+                                                            </a>
+                                                        {{/url}}
+                                                        {{^url}}
+                                                            {{title}}
+                                                        {{/url}}
+                                                    </h3>
+                                                {{/title}}
+
+                                                {{#body}}
+                                                    <p class="local-uckk-public-card__body">
+                                                        {{body}}
+                                                    </p>
+                                                {{/body}}
+                                            </div>
+
+                                            {{#hasaction}}
+                                                <p class="local-uckk-public-card__action">
+                                                    <a class="local-uckk-public-card__action-link" href="{{url}}">
+                                                        {{actionlabel}}
+                                                    </a>
+                                                </p>
+                                            {{/hasaction}}
+                                        </article>
+                                    {{/items}}
+                                </div>
+                            {{/hasitems}}
+                        </section>
+                    {{/sections}}
+                {{/hassections}}
+
+                {{#hascards}}
+                    <section
+                        class="local-uckk-public-section local-uckk-public-section--cards"
+                        aria-labelledby="{{uniqid}}-cards-title"
+                        data-region="local-uckk-public-cards"
+                    >
+                        <h2 id="{{uniqid}}-cards-title" class="local-uckk-public-section__title">
+                            <span class="local-uckk-public-section__title-text">
+                                {{cardsheading}}
+                            </span>
+                        </h2>
+
+                        <div class="local-uckk-public-card-grid">
+                            {{#cards}}
+                                <article class="{{classes}}">
+                                    <div class="local-uckk-public-card__content">
+                                        {{#eyebrow}}
+                                            <p class="local-uckk-public-card__eyebrow">
+                                                {{eyebrow}}
+                                            </p>
+                                        {{/eyebrow}}
+
+                                        {{#title}}
+                                            <h3 class="local-uckk-public-card__title">
+                                                {{#url}}
+                                                    <a href="{{url}}">
+                                                        {{title}}
+                                                    </a>
+                                                {{/url}}
+                                                {{^url}}
+                                                    {{title}}
+                                                {{/url}}
+                                            </h3>
+                                        {{/title}}
+
+                                        {{#body}}
+                                            <p class="local-uckk-public-card__body">
+                                                {{body}}
+                                            </p>
+                                        {{/body}}
+                                    </div>
+
+                                    {{#hasaction}}
+                                        <p class="local-uckk-public-card__action">
+                                            <a class="local-uckk-public-card__action-link" href="{{url}}">
+                                                {{actionlabel}}
+                                            </a>
+                                        </p>
+                                    {{/hasaction}}
+                                </article>
+                            {{/cards}}
+                        </div>
+                    </section>
+                {{/hascards}}
+            </main>
+
+            {{#hasaside}}
+                <aside
+                    class="{{asideclasses}}"
+                    data-region="local-uckk-public-aside"
+                    aria-label="Repères institutionnels"
+                >
+                    <div class="local-uckk-public-aside__inner">
+                        {{#hasnotices}}
+                            <section class="local-uckk-public-section local-uckk-public-section--notices">
+                                {{#notices}}
+                                    <article class="{{classes}}">
+                                        {{#title}}
+                                            <h2 class="local-uckk-public-notice__title">
+                                                {{title}}
+                                            </h2>
+                                        {{/title}}
+
+                                        {{#body}}
+                                            <p class="local-uckk-public-notice__body">
+                                                {{body}}
+                                            </p>
+                                        {{/body}}
+                                    </article>
+                                {{/notices}}
+                            </section>
+                        {{/hasnotices}}
+
+                        {{#hasmetadata}}
+                            <section
+                                class="local-uckk-public-section local-uckk-public-section--metadata"
+                                aria-labelledby="{{uniqid}}-metadata-title"
+                            >
+                                <h2 id="{{uniqid}}-metadata-title" class="local-uckk-public-section__title">
+                                    <span class="local-uckk-public-section__title-text">
+                                        Statut de la page
+                                    </span>
+                                </h2>
+
+                                <dl class="local-uckk-public-meta">
+                                    {{#metadata}}
+                                        <div class="local-uckk-public-meta__item">
+                                            <dt class="local-uckk-public-meta__label">
+                                                {{label}}
+                                            </dt>
+                                            <dd class="local-uckk-public-meta__value">
+                                                {{value}}
+                                            </dd>
+                                        </div>
+                                    {{/metadata}}
+                                </dl>
+                            </section>
+                        {{/hasmetadata}}
+
+                        {{#hascta}}
+                            {{#cta}}
+                                <section class="local-uckk-public-cta">
+                                    {{#title}}
+                                        <h2 class="local-uckk-public-cta__title">
+                                            {{title}}
+                                        </h2>
+                                    {{/title}}
+
+                                    {{#body}}
+                                        <p class="local-uckk-public-cta__body">
+                                            {{body}}
+                                        </p>
+                                    {{/body}}
+
+                                    {{#url}}
+                                        <p class="local-uckk-public-cta__action">
+                                            <a
+                                                class="{{#classes}}{{classes}}{{/classes}}{{^classes}}btn btn-primary local-uckk-public-cta__link{{/classes}}"
+                                                href="{{url}}"
+                                            >
+                                                <span class="local-uckk-public-cta__link-label">
+                                                    {{#actionlabel}}
+                                                        {{actionlabel}}
+                                                    {{/actionlabel}}
+                                                    {{^actionlabel}}
+                                                        {{#label}}
+                                                            {{label}}
+                                                        {{/label}}
+                                                        {{^label}}
+                                                            Continuer
+                                                        {{/label}}
+                                                    {{/actionlabel}}
+                                                </span>
+                                            </a>
+                                        </p>
+                                    {{/url}}
+                                </section>
+                            {{/cta}}
+                        {{/hascta}}
+                    </div>
+                </aside>
+            {{/hasaside}}
+        </div>
+    </div>
+</div>
+
+

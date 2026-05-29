@@ -435,6 +435,9 @@ function theme_uckk_get_setting_file_url(string $filearea): string {
         'favicon',
         'frontpagebackground',
         'loginbackground',
+        'loginbackgroundday',
+        'loginbackgroundbetween',
+        'loginbackgroundnight',
         'heroimage',
         'sealimage',
     ];
@@ -472,6 +475,74 @@ function theme_uckk_get_setting_file_url(string $filearea): string {
 }
 
 /**
+ * Return the configured login background image URLs.
+ *
+ * The old loginbackground setting is kept as a fallback. The three new file
+ * areas support the day / between / night visual cycle on the login page.
+ *
+ * @return array<string, string>
+ */
+function theme_uckk_get_login_background_urls(): array {
+    $legacy = theme_uckk_get_setting_file_url('loginbackground');
+
+    $day = theme_uckk_get_setting_file_url('loginbackgroundday');
+    $between = theme_uckk_get_setting_file_url('loginbackgroundbetween');
+    $night = theme_uckk_get_setting_file_url('loginbackgroundnight');
+
+    if ($day === '') {
+        $day = $legacy;
+    }
+
+    if ($between === '') {
+        $between = $day !== '' ? $day : $legacy;
+    }
+
+    if ($night === '') {
+        $night = $legacy !== '' ? $legacy : $day;
+    }
+
+    $fallback = $legacy !== '' ? $legacy : ($night !== '' ? $night : ($between !== '' ? $between : $day));
+
+    return [
+        'day' => $day,
+        'between' => $between,
+        'night' => $night,
+        'fallback' => $fallback,
+    ];
+}
+
+/**
+ * Return login background configuration for the AMD module.
+ *
+ * The location is intentionally institutional, not user-specific. No browser
+ * geolocation permission and no IP geolocation are required.
+ *
+ * @return array<string, mixed>
+ */
+function theme_uckk_get_login_background_config(): array {
+    return [
+        'images' => theme_uckk_get_login_background_urls(),
+        'targetSelector' => '.login-layout-left',
+        'periodClasses' => [
+            'day' => 'theme-uckk-login-background--day',
+            'between' => 'theme-uckk-login-background--between',
+            'night' => 'theme-uckk-login-background--night',
+        ],
+        'solar' => [
+            'latitude' => 45.5017,
+            'longitude' => -73.5673,
+            'twilightMinutes' => 60,
+        ],
+        'fallbackWindows' => [
+            'morningBetweenStart' => '06:00',
+            'dayStart' => '07:00',
+            'eveningBetweenStart' => '18:00',
+            'nightStart' => '19:00',
+        ],
+    ];
+}
+
+/**
  * Return extra SCSS appended after the main SCSS.
  *
  * This supports administrator-controlled custom CSS through the `rawscss`
@@ -495,16 +566,28 @@ function theme_uckk_get_extra_scss(theme_config $theme): string {
     $scss[] = '.uckk-archive-signal { border-inline-start: .25rem solid $uckk-bluegrey; }';
     $scss[] = '.uckk-experiment-signal { border-inline-start: .25rem solid $uckk-petrol; }';
 
-    $loginbackgroundurl = theme_uckk_get_setting_file_url('loginbackground');
+    $loginbackgrounds = theme_uckk_get_login_background_urls();
+    $loginbackgroundurl = $loginbackgrounds['fallback'];
 
     if ($loginbackgroundurl !== '') {
-        $loginbackgroundurl = str_replace("'", "\\'", $loginbackgroundurl);
-
         $scss[] = '';
         $scss[] = '/* UCKK login page background. */';
         $scss[] = 'body.pagelayout-login {';
         $scss[] = '    min-height: 100vh;';
         $scss[] = '    background: #071514 !important;';
+
+        foreach ([
+            'day' => 'day',
+            'between' => 'between',
+            'night' => 'night',
+            'fallback' => 'fallback',
+        ] as $key => $csskey) {
+            if (!empty($loginbackgrounds[$key])) {
+                $url = str_replace("'", "\\'", $loginbackgrounds[$key]);
+                $scss[] = "    --theme-uckk-login-background-{$csskey}: url('{$url}');";
+            }
+        }
+
         $scss[] = '}';
         $scss[] = 'body.pagelayout-login #page,';
         $scss[] = 'body.pagelayout-login #page-wrapper,';
@@ -515,7 +598,7 @@ function theme_uckk_get_extra_scss(theme_config $theme): string {
         $scss[] = 'body.pagelayout-login #page .login-layout-left,';
         $scss[] = 'body#page-login-index .login-layout-left,';
         $scss[] = 'body#page-login-index #page .login-layout-left {';
-        $scss[] = "    background-image: url('{$loginbackgroundurl}') !important;";
+        $scss[] = '    background-image: var(--theme-uckk-login-background-fallback, var(--theme-uckk-login-background-night, var(--theme-uckk-login-background-day))) !important;';
         $scss[] = '    background-position: center center !important;';
         $scss[] = '    background-size: cover !important;';
         $scss[] = '    background-repeat: no-repeat !important;';
@@ -524,6 +607,24 @@ function theme_uckk_get_extra_scss(theme_config $theme): string {
         $scss[] = '    opacity: 1 !important;';
         $scss[] = '    filter: none !important;';
         $scss[] = '    mix-blend-mode: normal !important;';
+        $scss[] = '}';
+        $scss[] = 'body.pagelayout-login.theme-uckk-login-background--day .login-layout-left,';
+        $scss[] = 'body.pagelayout-login.theme-uckk-login-background--day #page .login-layout-left,';
+        $scss[] = 'body#page-login-index.theme-uckk-login-background--day .login-layout-left,';
+        $scss[] = 'body#page-login-index.theme-uckk-login-background--day #page .login-layout-left {';
+        $scss[] = '    background-image: var(--theme-uckk-login-background-day, var(--theme-uckk-login-background-fallback)) !important;';
+        $scss[] = '}';
+        $scss[] = 'body.pagelayout-login.theme-uckk-login-background--between .login-layout-left,';
+        $scss[] = 'body.pagelayout-login.theme-uckk-login-background--between #page .login-layout-left,';
+        $scss[] = 'body#page-login-index.theme-uckk-login-background--between .login-layout-left,';
+        $scss[] = 'body#page-login-index.theme-uckk-login-background--between #page .login-layout-left {';
+        $scss[] = '    background-image: var(--theme-uckk-login-background-between, var(--theme-uckk-login-background-day, var(--theme-uckk-login-background-fallback))) !important;';
+        $scss[] = '}';
+        $scss[] = 'body.pagelayout-login.theme-uckk-login-background--night .login-layout-left,';
+        $scss[] = 'body.pagelayout-login.theme-uckk-login-background--night #page .login-layout-left,';
+        $scss[] = 'body#page-login-index.theme-uckk-login-background--night .login-layout-left,';
+        $scss[] = 'body#page-login-index.theme-uckk-login-background--night #page .login-layout-left {';
+        $scss[] = '    background-image: var(--theme-uckk-login-background-night, var(--theme-uckk-login-background-fallback, var(--theme-uckk-login-background-day))) !important;';
         $scss[] = '}';
         $scss[] = 'body.pagelayout-login .login-layout-left::before,';
         $scss[] = 'body.pagelayout-login .login-layout-left::after,';
@@ -577,6 +678,9 @@ function theme_uckk_get_extra_scss(theme_config $theme): string {
  * - favicon
  * - frontpagebackground
  * - loginbackground
+ * - loginbackgroundday
+ * - loginbackgroundbetween
+ * - loginbackgroundnight
  * - heroimage
  * - sealimage
  *
@@ -611,6 +715,9 @@ function theme_uckk_pluginfile(
         'favicon',
         'frontpagebackground',
         'loginbackground',
+        'loginbackgroundday',
+        'loginbackgroundbetween',
+        'loginbackgroundnight',
         'heroimage',
         'sealimage',
     ];

@@ -1,0 +1,595 @@
+{
+  "schema": "local_uckk.public_archives.v1",
+  "version": 2026052302,
+  "locale": "fr",
+  "title": "Archives UCKK",
+  "short_title": "Archives",
+  "status": "public_seed",
+  "summary": "Les Archives UCKK conservent les traces publiques de la cité-école : versions du canon, décisions, défis, travaux, modèles, corrections et dossiers de preuves. Elles ne sont pas un simple dépôt de fichiers; elles sont une mémoire structurée, vérifiable et réutilisable.",
+  "public_notice": "Archives publiques UCKK — mémoire institutionnelle de la cité-école expérimentale. Les contenus publics ne doivent pas exposer de données personnelles, dossiers privés ou informations sensibles.",
+  "page": {
+    "slug": "archives",
+    "component": "local_uckk",
+    "pagetype": "public_archives",
+    "ispublic": true,
+    "eyebrow": "Mémoire institutionnelle",
+    "title": "Archives UCKK",
+    "subtitle": "Mémoire structurée, preuves, décisions et corrections",
+    "summary": "Les Archives UCKK conservent les traces publiques de la cité-école : versions du canon, décisions, défis, travaux, modèles, corrections et dossiers de preuves. Elles ne sont pas un simple dépôt de fichiers; elles sont une mémoire structurée, vérifiable et réutilisable.",
+    "boundarynotice": "Archives publiques UCKK — mémoire institutionnelle de la cité-école expérimentale. Les contenus publics ne doivent pas exposer de données personnelles, dossiers privés ou informations sensibles.",
+    "quicklinks": [
+      {
+        "key": "canon",
+        "label": "Canon",
+        "url": "/local/uckk/about.php",
+        "description": "Lire les textes structurants, limites et décisions de nomenclature."
+      },
+      {
+        "key": "integrity",
+        "label": "Intégrité",
+        "url": "/local/uckk/integrity.php",
+        "description": "Consulter les règles de preuve, de correction et de contestation."
+      },
+      {
+        "key": "challenges",
+        "label": "Défis",
+        "url": "/local/uckk/challenges.php",
+        "description": "Relier les archives aux Défis publics et à leurs critères."
+      },
+      {
+        "key": "news",
+        "label": "Actualités",
+        "url": "/local/uckk/news.php",
+        "description": "Suivre les corrections, annonces et évolutions publiques."
+      }
+    ],
+    "sections": [
+      {
+        "key": "principles",
+        "eyebrow": "Doctrine",
+        "title": "Principes d’archivage",
+        "summary": "Les Archives UCKK ne sont pas un dépôt passif : elles organisent les traces, les preuves, les versions et les corrections.",
+        "source": "principles"
+      },
+      {
+        "key": "collections",
+        "eyebrow": "Collections",
+        "title": "Collections publiques",
+        "summary": "Les collections regroupent les archives selon leur fonction institutionnelle : mémoire publique, trace institutionnelle et preuves d’apprentissage.",
+        "source": "collections"
+      },
+      {
+        "key": "categories",
+        "eyebrow": "Classement",
+        "title": "Catégories",
+        "summary": "Les catégories permettent de distinguer canon, décisions, défis, preuves, Kristals, assemblées, rapports et paquets techniques.",
+        "source": "categories"
+      },
+      {
+        "key": "items",
+        "eyebrow": "Archives",
+        "title": "Éléments publics",
+        "summary": "Les éléments listés ici sont publiables, versionnables, contestables ou destinés à devenir des repères publics.",
+        "source": "items"
+      }
+    ],
+    "notices": [
+      {
+        "key": "public_boundary",
+        "type": "institutional",
+        "title": "Frontière publique",
+        "body": "Archives publiques UCKK — mémoire institutionnelle de la cité-école expérimentale. Les contenus publics ne doivent pas exposer de données personnelles, dossiers privés ou informations sensibles."
+      },
+      {
+        "key": "privacy",
+        "type": "integrity",
+        "title": "Protection des personnes",
+        "body": "Les archives publiques décrivent les règles, preuves, décisions et corrections admissibles; elles ne doivent pas exposer inutilement des personnes, dossiers privés ou données sensibles."
+      }
+    ],
+    "metadata": [
+      {
+        "label": "Statut",
+        "value": "Mémoire publique de travail"
+      },
+      {
+        "label": "Version",
+        "value": "2026052302"
+      },
+      {
+        "label": "Portée",
+        "value": "Pages publiques UCKK"
+      }
+    ],
+    "cta": {
+      "title": "Contribuer à la mémoire publique",
+      "body": "Une archive utile doit pouvoir être reliée à une source, une date, un statut, une fonction et une possibilité de correction.",
+      "label": "Proposer une correction",
+      "url": "/local/uckk/contact.php"
+    }
+  },
+  "principles": [
+    {
+      "key": "structured_memory",
+      "title": "Mémoire structurée",
+      "text": "Chaque archive doit pouvoir être reliée à un type, une origine, une date, un statut, des sources et une fonction."
+    },
+    {
+      "key": "traceability",
+      "title": "Traçabilité",
+      "text": "Une décision, un défi ou une reconnaissance sérieuse doit laisser une trace lisible, vérifiable et contestable."
+    },
+    {
+      "key": "reuse",
+      "title": "Réutilisation",
+      "text": "Une archive UCKK doit pouvoir servir à apprendre, corriger, transmettre, auditer ou reconstruire un raisonnement."
+    },
+    {
+      "key": "privacy",
+      "title": "Protection des personnes",
+      "text": "La transparence vise le pouvoir, les règles, les critères et les décisions; elle ne doit pas exposer inutilement les personnes."
+    },
+    {
+      "key": "exportability",
+      "title": "Exportabilité",
+      "text": "Les artefacts importants doivent pouvoir être exportés ou reconstruits afin qu’une communauté ne perde pas sa mémoire."
+    }
+  ],
+  "visibility_levels": [
+    {
+      "key": "public",
+      "label": "Public",
+      "description": "Visible publiquement; ne contient pas de données personnelles sensibles."
+    },
+    {
+      "key": "restricted",
+      "label": "Restreint",
+      "description": "Réservé aux personnes autorisées; peut contenir du contexte opérationnel non public."
+    },
+    {
+      "key": "private",
+      "label": "Privé",
+      "description": "Non publié; contient des informations personnelles, sensibles ou disciplinaires."
+    }
+  ],
+  "categories": [
+    {
+      "key": "canon",
+      "label": "Canon",
+      "description": "Versions, errata, décisions de nomenclature et textes structurants."
+    },
+    {
+      "key": "decisions",
+      "label": "Décisions",
+      "description": "Décisions d’assemblées, motifs, options, critères, dissidences et responsabilités."
+    },
+    {
+      "key": "challenges",
+      "label": "Défis",
+      "description": "Défis publics, règles, résultats, preuves et post-mortems."
+    },
+    {
+      "key": "proofs",
+      "label": "Dossiers de preuves",
+      "description": "Modèles, exemples publics et méthodes de preuve vérifiable."
+    },
+    {
+      "key": "kristals",
+      "label": "Kristals",
+      "description": "Unités de connaissance vérifiable, transmissible et réutilisable."
+    },
+    {
+      "key": "assemblies",
+      "label": "Assemblées",
+      "description": "Ordres du jour publics, décisions, corrections et comptes rendus admissibles."
+    },
+    {
+      "key": "reports",
+      "label": "Rapports",
+      "description": "Bilans, audits, post-mortems et rapports de progression."
+    },
+    {
+      "key": "runtime",
+      "label": "Runtime packs",
+      "description": "Paquets techniques, modèles, versions exportables et documentation opérable."
+    }
+  ],
+  "collections": [
+    {
+      "key": "public_memory",
+      "title": "Mémoire publique",
+      "description": "Archives publiables liées aux règles, décisions, versions, défis, modèles et apprentissages.",
+      "visibility": "public"
+    },
+    {
+      "key": "institutional_trace",
+      "title": "Trace institutionnelle",
+      "description": "Décisions, corrections et changements de gouvernance devant rester lisibles dans le temps.",
+      "visibility": "public"
+    },
+    {
+      "key": "learning_evidence",
+      "title": "Preuves d’apprentissage",
+      "description": "Dossiers, modèles et exemples publics permettant de comprendre comment UCKK évalue et transmet.",
+      "visibility": "public"
+    }
+  ],
+  "items": [
+    {
+      "id": "archive:canon:root-working-version",
+      "slug": "canon-racine-version-de-travail",
+      "title": "Canon UCKK — version de travail",
+      "type": "canon_version",
+      "category": "canon",
+      "collection": "public_memory",
+      "status": "published",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Point d’entrée public vers les textes structurants : architecture UCKK, nomenclature, Voies, Niveaux, Assemblées, Archives, intégrité et limites institutionnelles.",
+      "why_archived": "Le canon fixe les termes, les limites et les règles de lecture de la cité-école.",
+      "public_note": "Document canonique de travail; il peut être corrigé, versionné et contesté.",
+      "related_pages": [
+        "/local/uckk/about.php",
+        "/local/uckk/programs.php",
+        "/local/uckk/integrity.php"
+      ],
+      "tags": [
+        "canon",
+        "nomenclature",
+        "limites",
+        "uckk"
+      ],
+      "sort_order": 1,
+      "featured": true,
+      "anchor": "canon-racine-version-de-travail",
+      "display": {
+        "eyebrow": "Canon version",
+        "title": "Canon UCKK — version de travail",
+        "summary": "Point d’entrée public vers les textes structurants : architecture UCKK, nomenclature, Voies, Niveaux, Assemblées, Archives, intégrité et limites institutionnelles.",
+        "status": "published",
+        "category": "canon",
+        "collection": "public_memory",
+        "date": "2026-05-23"
+      }
+    },
+    {
+      "id": "archive:canon:equivalences-appellations",
+      "slug": "equivalences-appellations",
+      "title": "Équivalences d’appellations",
+      "type": "reference_table",
+      "category": "canon",
+      "collection": "institutional_trace",
+      "status": "published",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Tableau public distinguant les anciennes appellations académiques des Niveaux UCKK, titres internes et Parchemins UCKK.",
+      "why_archived": "Évite la confusion entre reconnaissances internes et diplômes publics reconnus par l’État.",
+      "public_note": "Les durées sont cumulatives : 1 an, 2 ans, 3 ans, 5 ans, 7 ans.",
+      "related_pages": [
+        "/local/uckk/programs.php"
+      ],
+      "tags": [
+        "niveaux",
+        "parchemins",
+        "reconnaissances",
+        "transparence"
+      ],
+      "sort_order": 2,
+      "featured": true,
+      "anchor": "equivalences-appellations",
+      "display": {
+        "eyebrow": "Reference table",
+        "title": "Équivalences d’appellations",
+        "summary": "Tableau public distinguant les anciennes appellations académiques des Niveaux UCKK, titres internes et Parchemins UCKK.",
+        "status": "published",
+        "category": "canon",
+        "collection": "institutional_trace",
+        "date": "2026-05-23"
+      }
+    },
+    {
+      "id": "archive:decision:public-pages-phase",
+      "slug": "decision-pages-publiques-uckk",
+      "title": "Décision — Pages publiques UCKK",
+      "type": "decision",
+      "category": "decisions",
+      "collection": "institutional_trace",
+      "status": "published",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Décision de structurer les pages publiques autour d’Accueil, À propos, Voies, Cours, Défis, Assemblées, Intégrité, Archives, Actualités et Contact.",
+      "why_archived": "Une décision d’architecture publique doit laisser une trace afin que la navigation puisse être corrigée ou auditée.",
+      "public_note": "La structure privilégie les fonctions canoniques UCKK plutôt qu’une imitation complète d’un portail universitaire classique.",
+      "related_pages": [
+        "/local/uckk/index.php",
+        "/local/uckk/archives.php"
+      ],
+      "tags": [
+        "navigation",
+        "pages publiques",
+        "architecture",
+        "mémoire"
+      ],
+      "sort_order": 3,
+      "featured": true,
+      "anchor": "decision-pages-publiques-uckk",
+      "display": {
+        "eyebrow": "Decision",
+        "title": "Décision — Pages publiques UCKK",
+        "summary": "Décision de structurer les pages publiques autour d’Accueil, À propos, Voies, Cours, Défis, Assemblées, Intégrité, Archives, Actualités et Contact.",
+        "status": "published",
+        "category": "decisions",
+        "collection": "institutional_trace",
+        "date": "2026-05-23"
+      }
+    },
+    {
+      "id": "archive:integrity:public-doctrine",
+      "slug": "doctrine-publique-integrite",
+      "title": "Doctrine publique d’intégrité",
+      "type": "policy",
+      "category": "decisions",
+      "collection": "institutional_trace",
+      "status": "published",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Règles publiques sur la preuve, la distinction fiction/fait, la non-humiliation, l’IA non souveraine, la contestation et les limites des reconnaissances internes.",
+      "why_archived": "Les règles d’intégrité doivent être publiques, vérifiables et révisables.",
+      "public_note": "La transparence vise les règles et le pouvoir; les personnes demeurent protégées.",
+      "related_pages": [
+        "/local/uckk/integrity.php"
+      ],
+      "tags": [
+        "intégrité",
+        "inquisiteur",
+        "preuve",
+        "contestation"
+      ],
+      "sort_order": 4,
+      "featured": false,
+      "anchor": "doctrine-publique-integrite",
+      "display": {
+        "eyebrow": "Policy",
+        "title": "Doctrine publique d’intégrité",
+        "summary": "Règles publiques sur la preuve, la distinction fiction/fait, la non-humiliation, l’IA non souveraine, la contestation et les limites des reconnaissances internes.",
+        "status": "published",
+        "category": "decisions",
+        "collection": "institutional_trace",
+        "date": "2026-05-23"
+      }
+    },
+    {
+      "id": "archive:assemblies:public-roles",
+      "slug": "roles-publics-assemblees",
+      "title": "Rôles publics des Assemblées",
+      "type": "reference",
+      "category": "assemblies",
+      "collection": "public_memory",
+      "status": "published",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Repère public décrivant les Assemblées des Savoirs, des Défis, des Joueurs, des Inquisiteurs, des Bâtisseurs et du Grand Jeu.",
+      "why_archived": "Les Assemblées légitiment les décisions, mais ne doivent pas devenir des foules punitives ou arbitraires.",
+      "public_note": "Chaque Assemblée doit être liée à des règles, des preuves, des responsabilités et une mémoire.",
+      "related_pages": [
+        "/local/uckk/assemblies.php",
+        "/local/uckk/integrity.php"
+      ],
+      "tags": [
+        "assemblées",
+        "gouvernance",
+        "décision",
+        "limites"
+      ],
+      "sort_order": 5,
+      "featured": false,
+      "anchor": "roles-publics-assemblees",
+      "display": {
+        "eyebrow": "Reference",
+        "title": "Rôles publics des Assemblées",
+        "summary": "Repère public décrivant les Assemblées des Savoirs, des Défis, des Joueurs, des Inquisiteurs, des Bâtisseurs et du Grand Jeu.",
+        "status": "published",
+        "category": "assemblies",
+        "collection": "public_memory",
+        "date": "2026-05-23"
+      }
+    },
+    {
+      "id": "archive:challenge:model-public",
+      "slug": "modele-defi-public",
+      "title": "Modèle public de Défi UCKK",
+      "type": "template",
+      "category": "challenges",
+      "collection": "learning_evidence",
+      "status": "draft",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Structure minimale d’un Défi : intention, règles, preuves attendues, limites, critères, durée, modalités de contestation et archivage.",
+      "why_archived": "Un Défi public doit être assez vivant pour mobiliser et assez clair pour éviter la manipulation ou l’humiliation.",
+      "public_note": "Un Défi sans critères ni preuve ne devrait pas être reconnu comme Défi UCKK.",
+      "related_pages": [
+        "/local/uckk/challenges.php",
+        "/local/uckk/integrity.php"
+      ],
+      "tags": [
+        "défi",
+        "preuve",
+        "théâtre responsable",
+        "critères"
+      ],
+      "sort_order": 6,
+      "featured": false,
+      "anchor": "modele-defi-public",
+      "display": {
+        "eyebrow": "Template",
+        "title": "Modèle public de Défi UCKK",
+        "summary": "Structure minimale d’un Défi : intention, règles, preuves attendues, limites, critères, durée, modalités de contestation et archivage.",
+        "status": "draft",
+        "category": "challenges",
+        "collection": "learning_evidence",
+        "date": "2026-05-23"
+      }
+    },
+    {
+      "id": "archive:proofs:portfolio-model",
+      "slug": "modele-dossier-preuves",
+      "title": "Modèle de dossier de preuves",
+      "type": "template",
+      "category": "proofs",
+      "collection": "learning_evidence",
+      "status": "draft",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Modèle de dossier permettant de relier travaux, sources, traces, décisions, commentaires, révisions et preuves de progression.",
+      "why_archived": "Les Niveaux et Parchemins UCKK doivent reposer sur des preuves lisibles plutôt que sur le prestige ou l’affirmation.",
+      "public_note": "Le modèle public ne doit pas contenir de données privées d’apprenants.",
+      "related_pages": [
+        "/local/uckk/programs.php",
+        "/local/uckk/courses.php"
+      ],
+      "tags": [
+        "preuves",
+        "portfolio",
+        "parchemins",
+        "évaluation"
+      ],
+      "sort_order": 7,
+      "featured": false,
+      "anchor": "modele-dossier-preuves",
+      "display": {
+        "eyebrow": "Template",
+        "title": "Modèle de dossier de preuves",
+        "summary": "Modèle de dossier permettant de relier travaux, sources, traces, décisions, commentaires, révisions et preuves de progression.",
+        "status": "draft",
+        "category": "proofs",
+        "collection": "learning_evidence",
+        "date": "2026-05-23"
+      }
+    },
+    {
+      "id": "archive:kristals:introduction",
+      "slug": "introduction-kristals",
+      "title": "Introduction aux Kristals",
+      "type": "knowledge_unit",
+      "category": "kristals",
+      "collection": "public_memory",
+      "status": "draft",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Introduction aux Kristals comme unités de connaissance vérifiable, liées à des sources, des décisions, des corrections et des usages possibles.",
+      "why_archived": "Les Kristals transforment l’apprentissage en mémoire réutilisable.",
+      "public_note": "Un Kristal doit rester vérifiable, corrigeable et relié à sa provenance.",
+      "related_pages": [
+        "/local/uckk/archives.php"
+      ],
+      "tags": [
+        "kristals",
+        "connaissance",
+        "provenance",
+        "réutilisation"
+      ],
+      "sort_order": 8,
+      "featured": false,
+      "anchor": "introduction-kristals",
+      "display": {
+        "eyebrow": "Knowledge unit",
+        "title": "Introduction aux Kristals",
+        "summary": "Introduction aux Kristals comme unités de connaissance vérifiable, liées à des sources, des décisions, des corrections et des usages possibles.",
+        "status": "draft",
+        "category": "kristals",
+        "collection": "public_memory",
+        "date": "2026-05-23"
+      }
+    },
+    {
+      "id": "archive:report:first-public-runtime-pack",
+      "slug": "runtime-pack-public-uckk-moodle",
+      "title": "Runtime pack public UCKK-Moodle",
+      "type": "runtime_pack",
+      "category": "runtime",
+      "collection": "institutional_trace",
+      "status": "planned",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Paquet exportable décrivant les pages publiques, données JSON, modules UCKK, limites de responsabilité et procédure de déploiement.",
+      "why_archived": "Les artefacts importants doivent rester exportables afin d’éviter la perte de mémoire ou le verrouillage technique.",
+      "public_note": "À publier lorsque les pages publiques et les données minimales seront stabilisées.",
+      "related_pages": [
+        "/local/uckk/about.php",
+        "/local/uckk/archives.php"
+      ],
+      "tags": [
+        "runtime",
+        "export",
+        "moodle",
+        "anti-lock-in"
+      ],
+      "sort_order": 9,
+      "featured": false,
+      "anchor": "runtime-pack-public-uckk-moodle",
+      "display": {
+        "eyebrow": "Runtime pack",
+        "title": "Runtime pack public UCKK-Moodle",
+        "summary": "Paquet exportable décrivant les pages publiques, données JSON, modules UCKK, limites de responsabilité et procédure de déploiement.",
+        "status": "planned",
+        "category": "runtime",
+        "collection": "institutional_trace",
+        "date": "2026-05-23"
+      }
+    },
+    {
+      "id": "archive:postmortem:documented-errors",
+      "slug": "erreurs-documentees",
+      "title": "Erreurs documentées et corrections",
+      "type": "postmortem",
+      "category": "reports",
+      "collection": "institutional_trace",
+      "status": "draft",
+      "visibility": "public",
+      "date": "2026-05-23",
+      "summary": "Registre public des erreurs non sensibles : erreurs de nomenclature, confusions de termes, corrections techniques et décisions de clarification.",
+      "why_archived": "Une cité-école sérieuse garde la mémoire de ses corrections afin d’apprendre publiquement.",
+      "public_note": "Les erreurs impliquant des personnes ou des dossiers sensibles ne doivent pas être publiées ici.",
+      "related_pages": [
+        "/local/uckk/integrity.php",
+        "/local/uckk/news.php"
+      ],
+      "tags": [
+        "post-mortem",
+        "corrections",
+        "apprentissage",
+        "audit"
+      ],
+      "sort_order": 10,
+      "featured": false,
+      "anchor": "erreurs-documentees",
+      "display": {
+        "eyebrow": "Postmortem",
+        "title": "Erreurs documentées et corrections",
+        "summary": "Registre public des erreurs non sensibles : erreurs de nomenclature, confusions de termes, corrections techniques et décisions de clarification.",
+        "status": "draft",
+        "category": "reports",
+        "collection": "institutional_trace",
+        "date": "2026-05-23"
+      }
+    }
+  ],
+  "rendering": {
+    "default_filter": "public",
+    "default_sort": "date_desc",
+    "featured_limit": 3,
+    "show_status_badges": true,
+    "show_visibility_badges": false,
+    "empty_message": "Aucune archive publique ne correspond aux filtres sélectionnés.",
+    "show_category_filter": true,
+    "show_collection_filter": true,
+    "show_search": true,
+    "card_source": "items",
+    "section_sources": [
+      "principles",
+      "collections",
+      "categories",
+      "items"
+    ]
+  }
+}

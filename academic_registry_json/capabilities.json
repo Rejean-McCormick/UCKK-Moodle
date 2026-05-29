@@ -1535,13 +1535,574 @@
     },
     {
       "role": "uckkpublicguest",
+      "capability": "aiprovider/uckk:configure",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "aiprovider_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "aiprovider/uckk:use",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "aiprovider_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "aiprovider/uckk:viewlogs",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "aiprovider_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "block/uckk_dashboard:addinstance",
+      "permission": "prohibit",
+      "context": "block",
+      "component": "block_uckk_dashboard",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "block/uckk_dashboard:configure",
+      "permission": "prohibit",
+      "context": "block",
+      "component": "block_uckk_dashboard",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "block/uckk_dashboard:myaddinstance",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "block_uckk_dashboard",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "block/uckk_dashboard:view",
+      "permission": "prevent",
+      "context": "block",
+      "component": "block_uckk_dashboard",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "block/uckk_dashboard:viewothers",
+      "permission": "prohibit",
+      "context": "block",
+      "component": "block_uckk_dashboard",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "format/uckk:configuresections",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "format_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "format/uckk:manageblueprint",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "format_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "format/uckk:resetsectionnames",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "format_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "format/uckk:viewarchiveindicators",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "format_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "format/uckk:viewcoursemap",
+      "permission": "allow",
+      "context": "course",
+      "component": "format_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "format/uckk:viewdiagnostics",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "format_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "format/uckk:viewevidenceindicators",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "format_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "format/uckk:viewintegritymarkers",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "format_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "local/uckk:exportdata",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "local_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "local/uckk:managecanon",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "local_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "local/uckk:manageintegrations",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "local_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "local/uckk:managepathways",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "local_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "local/uckk:manageprofiles",
+      "permission": "prohibit",
+      "context": "user",
+      "component": "local_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "local/uckk:manageprograms",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "local_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
       "capability": "local/uckk:viewcampus",
       "permission": "allow",
       "context": "system",
       "component": "local_uckk",
       "metadata": {
         "managedby": "tool_uckkseed",
-        "source_family": "UCKK canon"
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "local/uckk:viewreports",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "local_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "local/uckk:viewrestricted",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "local_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:addexternalworks",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:addinstance",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:additem",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:addmedia",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:deleteexternalworks",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:deletemedia",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:downloadmedia",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:editexternalworks",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:editmedia",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:export",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:exportmedia",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:manageadvisories",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:managecontentadvisories",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:manageexternalworks",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:managemediacollections",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:reviewadvisories",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:reviseitem",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:validateitem",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:versionmedia",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
       }
     },
     {
@@ -1552,7 +2113,490 @@
       "component": "mod_uckkarchive",
       "metadata": {
         "managedby": "tool_uckkseed",
-        "source_family": "UCKK canon"
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:viewadvisories",
+      "permission": "prevent",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:viewculturallyrestricted",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:viewexternalworks",
+      "permission": "prevent",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:viewmedia",
+      "permission": "prevent",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:viewrestricted",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkarchive:viewrestrictedmedia",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkarchive",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkassembly:addinstance",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "mod_uckkassembly",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkassembly:amendmotion",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkassembly",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkassembly:archive",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkassembly",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkassembly:contestdecision",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkassembly",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkassembly:createassembly",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkassembly",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkassembly:proposemotion",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkassembly",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkassembly:publishdecision",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkassembly",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkassembly:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkassembly",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkassembly:vote",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkassembly",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkchallenge:addinstance",
+      "permission": "prohibit",
+      "context": "course",
+      "component": "mod_uckkchallenge",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkchallenge:archive",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkchallenge",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkchallenge:createchallenge",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkchallenge",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkchallenge:evaluate",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkchallenge",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkchallenge:submitproof",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkchallenge",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkchallenge:validateintegrity",
+      "permission": "prohibit",
+      "context": "module",
+      "component": "mod_uckkchallenge",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "mod/uckkchallenge:view",
+      "permission": "allow",
+      "context": "module",
+      "component": "mod_uckkchallenge",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "report/uckk:export",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "report_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "report/uckk:view",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "report_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "report/uckk:viewall",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "report_uckk",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkintegrity:assigncase",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkintegrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkintegrity:closecase",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkintegrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkintegrity:invalidate",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkintegrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkintegrity:issuecorrection",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkintegrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkintegrity:opencase",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkintegrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkintegrity:reviewcase",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkintegrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkintegrity:view",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkintegrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkintegrity:viewrestricted",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkintegrity",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkseed:exportpresets",
+      "permission": "prevent",
+      "context": "system",
+      "component": "tool_uckkseed",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkseed:reset",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkseed",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkseed:seed",
+      "permission": "prohibit",
+      "context": "system",
+      "component": "tool_uckkseed",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
+      }
+    },
+    {
+      "role": "uckkpublicguest",
+      "capability": "tool/uckkseed:validate",
+      "permission": "prevent",
+      "context": "system",
+      "component": "tool_uckkseed",
+      "metadata": {
+        "managedby": "tool_uckkseed",
+        "source_family": "UCKK visit account",
+        "read_only": true,
+        "visitor_account": "visite"
       }
     }
   ],

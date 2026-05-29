@@ -163,6 +163,51 @@ if ($hassiteconfig) {
         ]
     ));
 
+    /*
+     * Time-aware login backgrounds.
+     *
+     * These images are stored as Moodle theme files, not as fixed files under pix/.
+     * The existing loginbackground setting remains available as the fallback.
+     */
+    $settings->add(new admin_setting_configstoredfile(
+        'theme_uckk/loginbackgroundday',
+        get_string('loginbackgroundday', 'theme_uckk'),
+        get_string('loginbackgroundday_desc', 'theme_uckk'),
+        'loginbackgroundday',
+        0,
+        [
+            'maxfiles' => 1,
+            'subdirs' => 0,
+            'accepted_types' => ['.svg', '.png', '.jpg', '.jpeg', '.webp'],
+        ]
+    ));
+
+    $settings->add(new admin_setting_configstoredfile(
+        'theme_uckk/loginbackgroundbetween',
+        get_string('loginbackgroundbetween', 'theme_uckk'),
+        get_string('loginbackgroundbetween_desc', 'theme_uckk'),
+        'loginbackgroundbetween',
+        0,
+        [
+            'maxfiles' => 1,
+            'subdirs' => 0,
+            'accepted_types' => ['.svg', '.png', '.jpg', '.jpeg', '.webp'],
+        ]
+    ));
+
+    $settings->add(new admin_setting_configstoredfile(
+        'theme_uckk/loginbackgroundnight',
+        get_string('loginbackgroundnight', 'theme_uckk'),
+        get_string('loginbackgroundnight_desc', 'theme_uckk'),
+        'loginbackgroundnight',
+        0,
+        [
+            'maxfiles' => 1,
+            'subdirs' => 0,
+            'accepted_types' => ['.svg', '.png', '.jpg', '.jpeg', '.webp'],
+        ]
+    ));
+
     $settings->add(new admin_setting_configstoredfile(
         'theme_uckk/favicon',
         get_string('favicon', 'theme_uckk'),

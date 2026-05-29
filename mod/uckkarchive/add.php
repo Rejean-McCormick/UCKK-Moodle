@@ -14,7 +14,29 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__ . '/../../config.php');
+declare(strict_types=1);
+
+$moodleconfig = null;
+
+if (!empty($_SERVER['DOCUMENT_ROOT'])) {
+    $candidate = rtrim($_SERVER['DOCUMENT_ROOT'], "\\/") . DIRECTORY_SEPARATOR . 'config.php';
+    if (is_readable($candidate)) {
+        $moodleconfig = $candidate;
+    }
+}
+
+if ($moodleconfig === null) {
+    $candidate = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'config.php';
+    if (is_readable($candidate)) {
+        $moodleconfig = $candidate;
+    }
+}
+
+if ($moodleconfig === null) {
+    throw new \RuntimeException('Cannot locate Moodle config.php.');
+}
+
+require_once($moodleconfig);
 require_once($CFG->dirroot . '/mod/uckkarchive/locallib.php');
 
 defined('MOODLE_INTERNAL') || die();
@@ -27,7 +49,8 @@ $id = optional_param('id', 0, PARAM_INT); // Course module id.
 $a = optional_param('a', 0, PARAM_INT); // Archive instance id.
 $returnurl = optional_param('returnurl', '', PARAM_LOCALURL);
 
-// Optional origin data supplied by challenge, assembly, course format, integrity, reports, or portfolio flows.
+// Optional origin data supplied by challenge, assembly, course format, integrity,
+// reports, portfolio, media, or external-work flows.
 $origincomponent = optional_param('origincomponent', '', PARAM_COMPONENT);
 $originarea = optional_param('originarea', '', PARAM_ALPHANUMEXT);
 $originid = optional_param('originid', 0, PARAM_INT);
@@ -39,7 +62,8 @@ if ($id) {
     $archive = $DB->get_record('uckkarchive', ['id' => $cm->instance], '*', MUST_EXIST);
 } else if ($a) {
     $archive = $DB->get_record('uckkarchive', ['id' => $a], '*', MUST_EXIST);
-    $course = $DB->get_record('course', ['id' => $archive->course], '*', MUST_EXIST);
+    $courseid = property_exists($archive, 'course') ? (int)$archive->course : (int)($archive->courseid ?? 0);
+    $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
     $cm = get_coursemodule_from_instance('uckkarchive', $archive->id, $course->id, false, MUST_EXIST);
 } else {
     throw new moodle_exception('missingparam', 'error', '', 'id');
@@ -52,14 +76,21 @@ require_capability('mod/uckkarchive:view', $context);
 require_capability('mod/uckkarchive:additem', $context);
 
 $viewurl = new moodle_url('/mod/uckkarchive/view.php', ['id' => $cm->id]);
-$pageurl = new moodle_url('/mod/uckkarchive/add.php', [
+$mediaurl = new moodle_url('/mod/uckkarchive/media.php', ['id' => $cm->id]);
+
+$pageparams = [
     'id' => $cm->id,
     'origincomponent' => $origincomponent,
     'originarea' => $originarea,
     'originid' => $originid,
     'origintype' => $origintype,
-]);
+];
 
+if ($returnurl !== '') {
+    $pageparams['returnurl'] = $returnurl;
+}
+
+$pageurl = new moodle_url('/mod/uckkarchive/add.php', $pageparams);
 $return = $returnurl !== '' ? new moodle_url($returnurl) : $viewurl;
 
 $PAGE->set_url($pageurl);
@@ -83,6 +114,9 @@ $allowedtypes = [
     'reflection',
     'portfolio_item',
     'version_record',
+    'media_reference',
+    'external_work_reference',
+    'content_advisory_reference',
 ];
 
 $allowedstatuses = [
@@ -99,7 +133,9 @@ $allowedvisibilities = [
     'institution',
     'institutional',
     'public',
+    'restricted',
     'restricted_integrity',
+    'restricted_cultural',
 ];
 
 $allowedprovenance = [
@@ -111,12 +147,19 @@ $allowedprovenance = [
     'assembly',
     'challenge',
     'integrity',
+    'media',
+    'external_work',
 ];
 
 $allowedvalidation = [
     'unverified',
     'human_reviewed',
 ];
+
+$defaultvisibility = get_config('uckkarchive', 'defaultvisibility') ?: 'course';
+if (!in_array($defaultvisibility, $allowedvisibilities, true)) {
+    $defaultvisibility = 'course';
+}
 
 $draftitemid = file_get_submitted_draft_itemid('itemfiles');
 file_prepare_draft_area(
@@ -178,7 +221,7 @@ $defaultdata->cmid = $cm->id;
 $defaultdata->contextid = $context->id;
 $defaultdata->itemtype = $origintype !== '' && in_array($origintype, $allowedtypes, true) ? $origintype : 'proof';
 $defaultdata->status = 'draft';
-$defaultdata->visibility = get_config('uckkarchive', 'defaultvisibility') ?: 'course';
+$defaultdata->visibility = $defaultvisibility;
 $defaultdata->provenance = $origincomponent !== '' ? 'imported' : 'human';
 $defaultdata->validationstate = 'unverified';
 $defaultdata->origincomponent = $origincomponent;
@@ -187,17 +230,28 @@ $defaultdata->originid = $originid;
 $defaultdata->itemfiles = $draftitemid;
 $defaultdata->proof_files = $draftproofid;
 
+$editoroptions = [
+    'context' => $context,
+    'maxfiles' => EDITOR_UNLIMITED_FILES,
+    'maxbytes' => get_max_upload_file_size(),
+    'trusttext' => false,
+    'noclean' => false,
+    'subdirs' => false,
+];
+
+$summaryeditoroptions = [
+    'context' => $context,
+    'maxfiles' => 0,
+    'maxbytes' => 0,
+    'trusttext' => false,
+    'noclean' => false,
+    'subdirs' => false,
+];
+
 $defaultdata = file_prepare_standard_editor(
     $defaultdata,
     'content',
-    [
-        'context' => $context,
-        'maxfiles' => EDITOR_UNLIMITED_FILES,
-        'maxbytes' => get_max_upload_file_size(),
-        'trusttext' => false,
-        'noclean' => false,
-        'subdirs' => false,
-    ],
+    $editoroptions,
     $context,
     'mod_uckkarchive',
     'item_content',
@@ -207,17 +261,10 @@ $defaultdata = file_prepare_standard_editor(
 $defaultdata = file_prepare_standard_editor(
     $defaultdata,
     'publicsummary',
-    [
-        'context' => $context,
-        'maxfiles' => 0,
-        'maxbytes' => 0,
-        'trusttext' => false,
-        'noclean' => false,
-        'subdirs' => false,
-    ],
+    $summaryeditoroptions,
     $context,
     'mod_uckkarchive',
-    'public_summary',
+    'item_publicsummary',
     0
 );
 
@@ -246,19 +293,19 @@ if ($data = $form->get_data()) {
         throw new moodle_exception('invalidarchivevalidationstate', 'uckkarchive');
     }
 
-    $now = time();
-
     $metadata = [
         'origin' => [
-            'component' => $data->origincomponent ?? '',
-            'area' => $data->originarea ?? '',
+            'component' => clean_param((string)($data->origincomponent ?? ''), PARAM_COMPONENT),
+            'area' => clean_param((string)($data->originarea ?? ''), PARAM_ALPHANUMEXT),
             'id' => (int)($data->originid ?? 0),
+            'type' => clean_param((string)$origintype, PARAM_ALPHANUMEXT),
         ],
         'created_from' => 'mod_uckkarchive/add.php',
         'ai_policy' => [
             'non_sovereign' => true,
             'requires_human_validation' => true,
         ],
+        'media_advisory_ready' => true,
     ];
 
     if (!empty($data->metadatajson)) {
@@ -268,8 +315,10 @@ if ($data = $form->get_data()) {
             throw new moodle_exception('invalidmetadatajson', 'uckkarchive');
         }
 
-        $metadata = array_merge($metadata, $decoded);
+        $metadata = array_replace_recursive($metadata, $decoded);
     }
+
+    $now = time();
 
     $record = new stdClass();
     $record->archiveid = (int)$archive->id;
@@ -302,19 +351,18 @@ if ($data = $form->get_data()) {
     $record->timemodified = $now;
     $record->metadata = json_encode($metadata, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
+    if ($record->metadata === false) {
+        throw new moodle_exception('invalidmetadatajson', 'uckkarchive');
+    }
+
+    $transaction = $DB->start_delegated_transaction();
+
     $itemid = (int)$DB->insert_record('uckkarchive_item', $record);
 
     $data = file_postupdate_standard_editor(
         $data,
         'content',
-        [
-            'context' => $context,
-            'maxfiles' => EDITOR_UNLIMITED_FILES,
-            'maxbytes' => get_max_upload_file_size(),
-            'trusttext' => false,
-            'noclean' => false,
-            'subdirs' => false,
-        ],
+        $editoroptions,
         $context,
         'mod_uckkarchive',
         'item_content',
@@ -324,17 +372,10 @@ if ($data = $form->get_data()) {
     $data = file_postupdate_standard_editor(
         $data,
         'publicsummary',
-        [
-            'context' => $context,
-            'maxfiles' => 0,
-            'maxbytes' => 0,
-            'trusttext' => false,
-            'noclean' => false,
-            'subdirs' => false,
-        ],
+        $summaryeditoroptions,
         $context,
         'mod_uckkarchive',
-        'public_summary',
+        'item_publicsummary',
         $itemid
     );
 
@@ -347,7 +388,10 @@ if ($data = $form->get_data()) {
     $updaterecord->timemodified = time();
 
     if (!empty($updaterecord->content)) {
-        $updaterecord->provenancehash = hash('sha256', $updaterecord->content . '|' . $record->sourceurl . '|' . $record->sourceauthor);
+        $updaterecord->provenancehash = hash(
+            'sha256',
+            $updaterecord->content . '|' . $record->sourceurl . '|' . $record->sourceauthor . '|' . $record->provenance
+        );
     }
 
     $DB->update_record('uckkarchive_item', $updaterecord);
@@ -406,11 +450,23 @@ if ($data = $form->get_data()) {
         'origincomponent' => $record->origincomponent,
         'originarea' => $record->originarea,
         'originid' => $record->originid,
+        'item_files_filearea' => 'item_files',
+        'proof_files_filearea' => 'proof_files',
+        'content_filearea' => 'item_content',
+        'publicsummary_filearea' => 'item_publicsummary',
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+    if ($revision->metadata === false) {
+        $revision->metadata = '{}';
+    }
 
     if ($DB->get_manager()->table_exists('uckkarchive_rev')) {
         $DB->insert_record('uckkarchive_rev', $revision);
     }
+
+    $createditem = $DB->get_record('uckkarchive_item', ['id' => $itemid], '*', MUST_EXIST);
+
+    $transaction->allow_commit();
 
     if (class_exists(archive_item_created::class)) {
         $event = archive_item_created::create([
@@ -418,10 +474,13 @@ if ($data = $form->get_data()) {
             'context' => $context,
             'other' => [
                 'archiveid' => (int)$archive->id,
+                'courseid' => (int)$course->id,
+                'cmid' => (int)$cm->id,
                 'itemtype' => $record->itemtype,
                 'status' => $record->status,
                 'visibility' => $record->visibility,
                 'validationstate' => $record->validationstate,
+                'provenance' => $record->provenance,
                 'origincomponent' => $record->origincomponent,
                 'originarea' => $record->originarea,
                 'originid' => $record->originid,
@@ -431,7 +490,7 @@ if ($data = $form->get_data()) {
         $event->add_record_snapshot('course', $course);
         $event->add_record_snapshot('course_modules', $cm);
         $event->add_record_snapshot('uckkarchive', $archive);
-        $event->add_record_snapshot('uckkarchive_item', $DB->get_record('uckkarchive_item', ['id' => $itemid], '*', MUST_EXIST));
+        $event->add_record_snapshot('uckkarchive_item', $createditem);
         $event->trigger();
     }
 
@@ -488,6 +547,22 @@ if ($origincomponent !== '' || $originid > 0) {
     echo html_writer::end_div();
     echo html_writer::end_div();
 }
+
+echo html_writer::start_div('uckkarchive-add__actions mb-3');
+
+echo html_writer::link($viewurl, get_string('backtoarchive', 'uckkarchive'), [
+    'class' => 'btn btn-secondary mr-2',
+]);
+
+if (has_capability('mod/uckkarchive:viewmedia', $context) ||
+        has_capability('mod/uckkarchive:addmedia', $context) ||
+        has_capability('mod/uckkarchive:managemedia', $context)) {
+    echo html_writer::link($mediaurl, get_string('medialibrary', 'uckkarchive'), [
+        'class' => 'btn btn-outline-secondary',
+    ]);
+}
+
+echo html_writer::end_div();
 
 $form->display();
 

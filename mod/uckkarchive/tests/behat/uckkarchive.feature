@@ -1,6 +1,6 @@
 @mod @mod_uckkarchive
 Feature: Use UCKK Archive activities
-  In order to preserve course memory, proof, decisions, Kristals, and validated records
+  In order to preserve course memory, proof, decisions, Kristals, media, content advisories, and validated records
   As a teacher, archivist, or learner
   I need UCKK Archive activities to expose safe archive workflows in Moodle
 
@@ -10,8 +10,8 @@ Feature: Use UCKK Archive activities
       | teacher1 | Ada       | Archivist | teacher1@example.com  |
       | student1 | Jules     | Player    | student1@example.com  |
     And the following "courses" exist:
-      | fullname                  | shortname | category |
-      | UCKK Archive Test Course  | UCKKARCH  | 0        |
+      | fullname                 | shortname | category |
+      | UCKK Archive Test Course | UCKKARCH  | 0        |
     And the following "course enrolments" exist:
       | user     | course   | role           |
       | teacher1 | UCKKARCH | editingteacher |
@@ -28,13 +28,13 @@ Feature: Use UCKK Archive activities
       | Archive type       | Course memory         |
       | Archive status     | Active                |
       | Visibility         | Course                |
-      | Archive purpose    | Preserve course proofs, decisions, minutes, Kristals, and public summaries with provenance and revision history. |
+      | Archive purpose    | Preserve course proofs, decisions, minutes, Kristals, media, and public summaries with provenance and revision history. |
       | Archive scope      | Course-level archive for UCKK Archive Test Course. |
       | Public summary     | Public-safe summary of validated course memory. |
       | Default item type  | Proof                 |
       | Default provenance | Human                 |
       | Provenance policy  | Each item must declare origin, author, source, evidence, validation state, visibility, and revision information. |
-      | Evidence policy    | Accepted evidence may include text, files, URLs, decisions, minutes, Kristals, portfolio records, and integrity summaries. |
+      | Evidence policy    | Accepted evidence may include text, files, URLs, decisions, minutes, Kristals, media, portfolio records, and integrity summaries. |
       | Validation workflow | Human review         |
       | Validation criteria | An authorised human reviewer must verify provenance, visibility, restricted data, and validation state before publication or export. |
       | Contestability window in days | 30        |
@@ -68,6 +68,8 @@ Feature: Use UCKK Archive activities
     Then I should see "Student visible archive"
     And I should not see "Validate archive item"
     And I should not see "Export archive"
+    And I should not see "Add media"
+    And I should not see "Add collection"
 
   @javascript
   Scenario: A teacher configures validation, revision, and export safeguards
@@ -86,7 +88,7 @@ Feature: Use UCKK Archive activities
       | Default item type  | Integrity summary |
       | Default provenance | Integrity |
       | Provenance policy  | Restricted evidence must include origin, source, review state, validation state, and revision record. |
-      | Evidence policy    | Restricted evidence may include proof files, review notes, integrity summaries, and redacted public summaries. |
+      | Evidence policy    | Restricted evidence may include proof files, review notes, integrity summaries, media records, and redacted public summaries. |
       | Validation workflow | Integrity review |
       | Validation criteria | Integrity-restricted archive items must be reviewed by an authorised human reviewer before publication or export. |
       | Contestability window in days | 60 |
@@ -146,3 +148,93 @@ Feature: Use UCKK Archive activities
       | Student must add at least one archive item to complete this activity | 1 |
       | Student must have at least one validated archive item to complete this activity | 1 |
     Then I should see "Completion archive"
+
+  @javascript
+  Scenario: A teacher opens the media library from an archive activity
+    Given I log in as "teacher1"
+    And I am on "UCKKARCH" course homepage
+    And I turn editing mode on
+    And I add a "UCKK Archive" to section "1" and I fill the form with:
+      | Archive name       | Media library archive |
+      | Archive code       | UCKK-ARCH-MEDIA |
+      | Archive type       | Course memory |
+      | Archive status     | Active |
+      | Visibility         | Course |
+      | Archive purpose    | Preserve didactic media with provenance and advisories. |
+      | Archive scope      | Course media archive. |
+      | Provenance policy  | Media must preserve source, author, rights status, visibility, and advisory state. |
+    When I follow "Media library archive"
+    Then I should see "Media library archive"
+    And I should see "Media"
+    And I should see "Media library"
+    And I should see "Add media"
+    And I should see "Add collection"
+
+  @javascript
+  Scenario: A teacher can open media export options
+    Given I log in as "teacher1"
+    And I am on "UCKKARCH" course homepage
+    And I turn editing mode on
+    And I add a "UCKK Archive" to section "1" and I fill the form with:
+      | Archive name       | Exportable media archive |
+      | Archive code       | UCKK-ARCH-EXPORT-MEDIA |
+      | Archive type       | Course memory |
+      | Archive status     | Active |
+      | Visibility         | Course |
+      | Archive purpose    | Preserve media records that can be exported with audit logging. |
+      | Archive scope      | Course media export archive. |
+      | Provenance policy  | Exports must preserve provenance, visibility, redaction state, and audit trail. |
+      | Export policy      | Validated items only |
+    When I follow "Exportable media archive"
+    And I follow "Export archive"
+    Then I should see "Export archive"
+    And I should see "Export options"
+    And I should see "Scope"
+    And I should see "Format"
+    And I should see "Visibility"
+    And I should see "Download export"
+
+  @javascript
+  Scenario: A teacher sees content advisory controls for archive media
+    Given I log in as "teacher1"
+    And I am on "UCKKARCH" course homepage
+    And I turn editing mode on
+    And I add a "UCKK Archive" to section "1" and I fill the form with:
+      | Archive name       | Advisory archive |
+      | Archive code       | UCKK-ARCH-ADVISORY |
+      | Archive type       | Course memory |
+      | Archive status     | Active |
+      | Visibility         | Course |
+      | Archive purpose    | Preserve media with content advisory and cultural protocol notes. |
+      | Archive scope      | Course advisory archive. |
+      | Provenance policy  | Advisory markers must preserve source, target, review state, visibility, and cultural protocol context. |
+    When I follow "Advisory archive"
+    Then I should see "Advisory archive"
+    And I should see "Content advisories"
+    And I should see "Cultural protocol"
+
+  @javascript
+  Scenario: A student cannot see teacher-only archive management actions
+    Given I log in as "teacher1"
+    And I am on "UCKKARCH" course homepage
+    And I turn editing mode on
+    And I add a "UCKK Archive" to section "1" and I fill the form with:
+      | Archive name       | Learner safe archive |
+      | Archive code       | UCKK-ARCH-LEARNER-SAFE |
+      | Archive type       | Course memory |
+      | Archive status     | Active |
+      | Visibility         | Course |
+      | Archive purpose    | Preserve learner-visible memory while hiding restricted management actions. |
+      | Archive scope      | Course learner archive. |
+      | Provenance policy  | Learner-facing archive data must expose only safe validated summaries. |
+    And I log out
+    When I log in as "student1"
+    And I am on "UCKKARCH" course homepage
+    And I follow "Learner safe archive"
+    Then I should see "Learner safe archive"
+    And I should not see "Add media"
+    And I should not see "Add collection"
+    And I should not see "Review advisory"
+    And I should not see "Export media"
+    And I should not see "Manage external works"
+

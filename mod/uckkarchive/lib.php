@@ -16,56 +16,68 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+require_once(__DIR__ . '/locallib.php');
+
 /**
  * Component name.
  */
-define('UCKKARCHIVE_COMPONENT', 'mod_uckkarchive');
-
+defined('UCKKARCHIVE_COMPONENT') || define('UCKKARCHIVE_COMPONENT', 'mod_uckkarchive');
 /**
  * Main instance table.
  */
-define('UCKKARCHIVE_TABLE', 'uckkarchive');
-
+defined('UCKKARCHIVE_TABLE') || define('UCKKARCHIVE_TABLE', 'uckkarchive');
 /**
  * Common statuses.
  */
-define('UCKKARCHIVE_STATUS_DRAFT', 'draft');
-define('UCKKARCHIVE_STATUS_ACTIVE', 'active');
-define('UCKKARCHIVE_STATUS_PENDING_REVIEW', 'pending_review');
-define('UCKKARCHIVE_STATUS_VALIDATED', 'validated');
-define('UCKKARCHIVE_STATUS_REJECTED', 'rejected');
-define('UCKKARCHIVE_STATUS_CORRECTION_REQUIRED', 'correction_required');
-define('UCKKARCHIVE_STATUS_CONTESTED', 'contested');
-define('UCKKARCHIVE_STATUS_INVALIDATED', 'invalidated');
-define('UCKKARCHIVE_STATUS_CLOSED', 'closed');
-define('UCKKARCHIVE_STATUS_ARCHIVED', 'archived');
-
+defined('UCKKARCHIVE_STATUS_DRAFT') || define('UCKKARCHIVE_STATUS_DRAFT', 'draft');
+defined('UCKKARCHIVE_STATUS_ACTIVE') || define('UCKKARCHIVE_STATUS_ACTIVE', 'active');
+defined('UCKKARCHIVE_STATUS_PENDING_REVIEW') || define('UCKKARCHIVE_STATUS_PENDING_REVIEW', 'pending_review');
+defined('UCKKARCHIVE_STATUS_VALIDATED') || define('UCKKARCHIVE_STATUS_VALIDATED', 'validated');
+defined('UCKKARCHIVE_STATUS_REJECTED') || define('UCKKARCHIVE_STATUS_REJECTED', 'rejected');
+defined('UCKKARCHIVE_STATUS_CORRECTION_REQUIRED') || define('UCKKARCHIVE_STATUS_CORRECTION_REQUIRED', 'correction_required');
+defined('UCKKARCHIVE_STATUS_CONTESTED') || define('UCKKARCHIVE_STATUS_CONTESTED', 'contested');
+defined('UCKKARCHIVE_STATUS_INVALIDATED') || define('UCKKARCHIVE_STATUS_INVALIDATED', 'invalidated');
+defined('UCKKARCHIVE_STATUS_CLOSED') || define('UCKKARCHIVE_STATUS_CLOSED', 'closed');
+defined('UCKKARCHIVE_STATUS_ARCHIVED') || define('UCKKARCHIVE_STATUS_ARCHIVED', 'archived');
+defined('UCKKARCHIVE_STATUS_DELETED_SOFT') || define('UCKKARCHIVE_STATUS_DELETED_SOFT', 'deleted_soft');
+defined('UCKKARCHIVE_STATUS_RESTRICTED') || define('UCKKARCHIVE_STATUS_RESTRICTED', 'restricted');
 /**
  * Common visibilities.
  */
-define('UCKKARCHIVE_VISIBILITY_PRIVATE', 'private');
-define('UCKKARCHIVE_VISIBILITY_USER', 'user');
-define('UCKKARCHIVE_VISIBILITY_GROUP', 'group');
-define('UCKKARCHIVE_VISIBILITY_COURSE', 'course');
-define('UCKKARCHIVE_VISIBILITY_COHORT', 'cohort');
-define('UCKKARCHIVE_VISIBILITY_PROGRAM', 'program');
-define('UCKKARCHIVE_VISIBILITY_INSTITUTION', 'institution');
-define('UCKKARCHIVE_VISIBILITY_PUBLIC', 'public');
-define('UCKKARCHIVE_VISIBILITY_RESTRICTED', 'restricted');
-define('UCKKARCHIVE_VISIBILITY_RESTRICTED_INTEGRITY', 'restricted_integrity');
-define('UCKKARCHIVE_VISIBILITY_HIDDEN', 'hidden');
-define('UCKKARCHIVE_VISIBILITY_ARCHIVED', 'archived');
-
+defined('UCKKARCHIVE_VISIBILITY_PRIVATE') || define('UCKKARCHIVE_VISIBILITY_PRIVATE', 'private');
+defined('UCKKARCHIVE_VISIBILITY_USER') || define('UCKKARCHIVE_VISIBILITY_USER', 'user');
+defined('UCKKARCHIVE_VISIBILITY_GROUP') || define('UCKKARCHIVE_VISIBILITY_GROUP', 'group');
+defined('UCKKARCHIVE_VISIBILITY_COURSE') || define('UCKKARCHIVE_VISIBILITY_COURSE', 'course');
+defined('UCKKARCHIVE_VISIBILITY_COHORT') || define('UCKKARCHIVE_VISIBILITY_COHORT', 'cohort');
+defined('UCKKARCHIVE_VISIBILITY_PROGRAM') || define('UCKKARCHIVE_VISIBILITY_PROGRAM', 'program');
+defined('UCKKARCHIVE_VISIBILITY_INSTITUTION') || define('UCKKARCHIVE_VISIBILITY_INSTITUTION', 'institution');
+defined('UCKKARCHIVE_VISIBILITY_PUBLIC') || define('UCKKARCHIVE_VISIBILITY_PUBLIC', 'public');
+defined('UCKKARCHIVE_VISIBILITY_RESTRICTED') || define('UCKKARCHIVE_VISIBILITY_RESTRICTED', 'restricted');
+defined('UCKKARCHIVE_VISIBILITY_RESTRICTED_INTEGRITY') || define('UCKKARCHIVE_VISIBILITY_RESTRICTED_INTEGRITY', 'restricted_integrity');
+defined('UCKKARCHIVE_VISIBILITY_RESTRICTED_CULTURAL') || define('UCKKARCHIVE_VISIBILITY_RESTRICTED_CULTURAL', 'restricted_cultural');
+defined('UCKKARCHIVE_VISIBILITY_HIDDEN') || define('UCKKARCHIVE_VISIBILITY_HIDDEN', 'hidden');
+defined('UCKKARCHIVE_VISIBILITY_ARCHIVED') || define('UCKKARCHIVE_VISIBILITY_ARCHIVED', 'archived');
 /**
  * Required archive file areas.
  */
-define('UCKKARCHIVE_FILEAREA_PROOF_FILES', 'proof_files');
-define('UCKKARCHIVE_FILEAREA_DECISION_ATTACHMENTS', 'decision_attachments');
-define('UCKKARCHIVE_FILEAREA_MINUTES_FILES', 'minutes_files');
-define('UCKKARCHIVE_FILEAREA_KRISTAL_FILES', 'kristal_files');
-define('UCKKARCHIVE_FILEAREA_PORTFOLIO_FILES', 'portfolio_files');
-define('UCKKARCHIVE_FILEAREA_INTEGRITY_EXPORTS', 'integrity_exports');
-
+defined('UCKKARCHIVE_FILEAREA_PROOF_FILES') || define('UCKKARCHIVE_FILEAREA_PROOF_FILES', 'proof_files');
+defined('UCKKARCHIVE_FILEAREA_DECISION_ATTACHMENTS') || define('UCKKARCHIVE_FILEAREA_DECISION_ATTACHMENTS', 'decision_attachments');
+defined('UCKKARCHIVE_FILEAREA_MINUTES_FILES') || define('UCKKARCHIVE_FILEAREA_MINUTES_FILES', 'minutes_files');
+defined('UCKKARCHIVE_FILEAREA_KRISTAL_FILES') || define('UCKKARCHIVE_FILEAREA_KRISTAL_FILES', 'kristal_files');
+defined('UCKKARCHIVE_FILEAREA_PORTFOLIO_FILES') || define('UCKKARCHIVE_FILEAREA_PORTFOLIO_FILES', 'portfolio_files');
+defined('UCKKARCHIVE_FILEAREA_INTEGRITY_EXPORTS') || define('UCKKARCHIVE_FILEAREA_INTEGRITY_EXPORTS', 'integrity_exports');
+defined('UCKKARCHIVE_FILEAREA_MEDIA_ORIGINAL') || define('UCKKARCHIVE_FILEAREA_MEDIA_ORIGINAL', 'media_original');
+defined('UCKKARCHIVE_FILEAREA_MEDIA_PREVIEW') || define('UCKKARCHIVE_FILEAREA_MEDIA_PREVIEW', 'media_preview');
+defined('UCKKARCHIVE_FILEAREA_MEDIA_THUMBNAIL') || define('UCKKARCHIVE_FILEAREA_MEDIA_THUMBNAIL', 'media_thumbnail');
+defined('UCKKARCHIVE_FILEAREA_MEDIA_DERIVATIVE') || define('UCKKARCHIVE_FILEAREA_MEDIA_DERIVATIVE', 'media_derivative');
+defined('UCKKARCHIVE_FILEAREA_MEDIA_CAPTION') || define('UCKKARCHIVE_FILEAREA_MEDIA_CAPTION', 'media_caption');
+defined('UCKKARCHIVE_FILEAREA_MEDIA_TRANSCRIPT') || define('UCKKARCHIVE_FILEAREA_MEDIA_TRANSCRIPT', 'media_transcript');
+defined('UCKKARCHIVE_FILEAREA_MEDIA_ATTACHMENT') || define('UCKKARCHIVE_FILEAREA_MEDIA_ATTACHMENT', 'media_attachment');
+defined('UCKKARCHIVE_FILEAREA_CONTENT_REVIEW_FILES') || define('UCKKARCHIVE_FILEAREA_CONTENT_REVIEW_FILES', 'content_review_files');
+defined('UCKKARCHIVE_FILEAREA_EXTERNAL_WORK_REFERENCE_FILES') || define('UCKKARCHIVE_FILEAREA_EXTERNAL_WORK_REFERENCE_FILES', 'external_work_reference_files');
+defined('UCKKARCHIVE_FILEAREA_CULTURAL_PROTOCOL_FILES') || define('UCKKARCHIVE_FILEAREA_CULTURAL_PROTOCOL_FILES', 'cultural_protocol_files');
+defined('UCKKARCHIVE_FILEAREA_EXPORT_MANIFEST') || define('UCKKARCHIVE_FILEAREA_EXPORT_MANIFEST', 'export_manifest');
+defined('UCKKARCHIVE_FILEAREA_EXPORT_PACKAGE') || define('UCKKARCHIVE_FILEAREA_EXPORT_PACKAGE', 'export_package');
 /**
  * Return supported Moodle features.
  *
@@ -183,6 +195,16 @@ function uckkarchive_delete_instance($id): bool {
     }
 
     foreach ([
+        'uckkarchive_content_review',
+        'uckkarchive_content_marker',
+        'uckkarchive_media_collection_item',
+        'uckkarchive_media_collection',
+        'uckkarchive_media_relation',
+        'uckkarchive_media_tag',
+        'uckkarchive_media_source',
+        'uckkarchive_media_version',
+        'uckkarchive_media',
+        'uckkarchive_external_work',
         'uckkarchive_export',
         'uckkarchive_rev',
         'uckkarchive_prov',
@@ -190,7 +212,7 @@ function uckkarchive_delete_instance($id): bool {
         'uckkarchive_kristal',
         'uckkarchive_item',
     ] as $table) {
-        $DB->delete_records($table, ['archiveid' => $id]);
+        uckkarchive_delete_records_by_archiveid($table, $id);
     }
 
     $DB->delete_records('event', [
@@ -218,29 +240,13 @@ function uckkarchive_user_outline($course, $user, $mod, $archive): ?stdClass {
     $archiveid = (int)$archive->id;
     $userid = (int)$user->id;
 
-    $itemcount = $DB->count_records_select(
-        'uckkarchive_item',
-        'archiveid = :archiveid AND (userid = :userid OR createdby = :createdby)',
-        [
-            'archiveid' => $archiveid,
-            'userid' => $userid,
-            'createdby' => $userid,
-        ]
-    );
-
-    $proofcount = $DB->count_records_select(
-        'uckkarchive_proof',
-        'archiveid = :archiveid AND (userid = :userid OR createdby = :createdby)',
-        [
-            'archiveid' => $archiveid,
-            'userid' => $userid,
-            'createdby' => $userid,
-        ]
-    );
+    $itemcount = uckkarchive_count_user_records('uckkarchive_item', $archiveid, $userid);
+    $proofcount = uckkarchive_count_user_records('uckkarchive_proof', $archiveid, $userid);
+    $mediacount = uckkarchive_count_user_records('uckkarchive_media', $archiveid, $userid, ['userid', 'ownerid', 'createdby']);
 
     $lastactivity = uckkarchive_get_user_last_activity_time($archiveid, $userid);
 
-    if ($itemcount === 0 && $proofcount === 0 && $lastactivity === 0) {
+    if ($itemcount === 0 && $proofcount === 0 && $mediacount === 0 && $lastactivity === 0) {
         return null;
     }
 
@@ -248,6 +254,7 @@ function uckkarchive_user_outline($course, $user, $mod, $archive): ?stdClass {
     $result->info = get_string('useroutline', 'uckkarchive', [
         'items' => $itemcount,
         'proofs' => $proofcount,
+        'media' => $mediacount,
     ]);
     $result->time = $lastactivity;
 
@@ -282,7 +289,25 @@ function uckkarchive_user_complete($course, $user, $mod, $archive): void {
         10
     );
 
-    if (!$items) {
+    $media = [];
+    if (uckkarchive_lib_table_exists('uckkarchive_media')) {
+        $media = $DB->get_records_select(
+            'uckkarchive_media',
+            'archiveid = :archiveid AND (userid = :userid OR ownerid = :ownerid OR createdby = :createdby)',
+            [
+                'archiveid' => $archiveid,
+                'userid' => $userid,
+                'ownerid' => $userid,
+                'createdby' => $userid,
+            ],
+            'timemodified DESC',
+            'id, title, status, visibility, timemodified',
+            0,
+            10
+        );
+    }
+
+    if (!$items && !$media) {
         echo $OUTPUT->notification(get_string('nouserarchiveitems', 'uckkarchive'), 'info');
         return;
     }
@@ -298,6 +323,20 @@ function uckkarchive_user_complete($course, $user, $mod, $archive): void {
 
         if (!empty($item->timemodified)) {
             $label .= ' — ' . userdate((int)$item->timemodified);
+        }
+
+        echo html_writer::tag('li', $label);
+    }
+
+    foreach ($media as $mediaitem) {
+        $label = format_string($mediaitem->title ?? get_string('media', 'uckkarchive'));
+
+        if (!empty($mediaitem->status)) {
+            $label .= ' — ' . s($mediaitem->status);
+        }
+
+        if (!empty($mediaitem->timemodified)) {
+            $label .= ' — ' . userdate((int)$mediaitem->timemodified);
         }
 
         echo html_writer::tag('li', $label);
@@ -364,18 +403,16 @@ function uckkarchive_pluginfile($course, $cm, $context, $filearea, $args, $force
     }
 
     require_login($course, false, $cm);
-    require_capability('mod/uckkarchive:view', $context);
-
-    $validfileareas = uckkarchive_get_fileareas();
 
     if ($filearea === 'intro') {
-        $itemid = array_shift($args);
+        require_capability('mod/uckkarchive:view', $context);
+        $itemid = (int)array_shift($args);
 
-        if ((int)$itemid !== 0) {
+        if ($itemid !== 0) {
             return false;
         }
     } else {
-        if (!in_array($filearea, $validfileareas, true)) {
+        if (!in_array($filearea, uckkarchive_get_fileareas(), true)) {
             return false;
         }
 
@@ -385,7 +422,15 @@ function uckkarchive_pluginfile($course, $cm, $context, $filearea, $args, $force
 
         $itemid = (int)array_shift($args);
 
+        if ($itemid <= 0) {
+            return false;
+        }
+
         if (!uckkarchive_can_view_filearea_item($cm, $context, $filearea, $itemid)) {
+            return false;
+        }
+
+        if (!uckkarchive_can_download_filearea($context, $filearea)) {
             return false;
         }
     }
@@ -416,6 +461,8 @@ function uckkarchive_pluginfile($course, $cm, $context, $filearea, $args, $force
     }
 
     send_stored_file($file, 0, 0, $forcedownload, $options);
+
+    return true;
 }
 
 /**
@@ -554,6 +601,17 @@ function uckkarchive_extend_navigation(navigation_node $navref, stdClass $course
         );
     }
 
+    if (uckkarchive_lib_has_capability('mod/uckkarchive:viewmedia', $context)) {
+        $navref->add(
+            get_string('medialibrary', 'uckkarchive'),
+            new moodle_url('/mod/uckkarchive/media.php', ['id' => $cm->id]),
+            navigation_node::TYPE_SETTING,
+            null,
+            'uckkarchive_media_library',
+            new pix_icon('i/media', '')
+        );
+    }
+
     if (has_capability('mod/uckkarchive:validateitem', $context)) {
         $navref->add(
             get_string('validatearchiveitems', 'uckkarchive'),
@@ -565,7 +623,7 @@ function uckkarchive_extend_navigation(navigation_node $navref, stdClass $course
         );
     }
 
-    if (has_capability('mod/uckkarchive:export', $context)) {
+    if (uckkarchive_lib_has_capability('mod/uckkarchive:export', $context)) {
         $navref->add(
             get_string('exportarchive', 'uckkarchive'),
             new moodle_url('/mod/uckkarchive/export.php', ['id' => $cm->id]),
@@ -590,22 +648,53 @@ function uckkarchive_get_user_last_activity_time(int $archiveid, int $userid): i
     $times = [];
 
     foreach ([
-        'uckkarchive_item' => 'createdby',
-        'uckkarchive_kristal' => 'createdby',
-        'uckkarchive_proof' => 'createdby',
-        'uckkarchive_prov' => 'createdby',
-        'uckkarchive_rev' => 'createdby',
-        'uckkarchive_export' => 'createdby',
-    ] as $table => $userfield) {
+        'uckkarchive_item' => ['userid', 'createdby', 'modifiedby'],
+        'uckkarchive_kristal' => ['createdby', 'modifiedby'],
+        'uckkarchive_proof' => ['userid', 'createdby', 'modifiedby'],
+        'uckkarchive_prov' => ['createdby', 'modifiedby'],
+        'uckkarchive_rev' => ['createdby', 'modifiedby'],
+        'uckkarchive_export' => ['userid', 'createdby', 'modifiedby', 'exportedby'],
+        'uckkarchive_media' => ['userid', 'ownerid', 'createdby', 'modifiedby'],
+        'uckkarchive_media_version' => ['userid', 'createdby', 'modifiedby'],
+        'uckkarchive_media_source' => ['userid', 'createdby', 'modifiedby'],
+        'uckkarchive_media_collection' => ['userid', 'ownerid', 'createdby', 'modifiedby'],
+        'uckkarchive_media_relation' => ['userid', 'createdby', 'modifiedby'],
+        'uckkarchive_media_tag' => ['userid', 'createdby', 'modifiedby'],
+        'uckkarchive_content_marker' => ['userid', 'createdby', 'modifiedby'],
+        'uckkarchive_content_review' => ['userid', 'reviewerid', 'createdby', 'modifiedby'],
+        'uckkarchive_external_work' => ['userid', 'ownerid', 'createdby', 'modifiedby'],
+    ] as $table => $userfields) {
+        if (!uckkarchive_lib_table_exists($table) || !uckkarchive_table_has_field($table, 'archiveid')) {
+            continue;
+        }
+
+        $columns = uckkarchive_existing_fields($table, $userfields);
+        if (empty($columns)) {
+            continue;
+        }
+
+        $conditions = [];
+        $params = [
+            'archiveid' => $archiveid,
+            'userid' => $userid,
+        ];
+
+        foreach ($columns as $column) {
+            $conditions[] = "{$column} = :userid";
+        }
+
+        $timefield = uckkarchive_table_has_field($table, 'timemodified') ? 'timemodified' : 'timecreated';
+
+        if (!uckkarchive_table_has_field($table, $timefield)) {
+            continue;
+        }
+
         $time = $DB->get_field_sql(
-            "SELECT MAX(timemodified)
+            "SELECT MAX({$timefield})
                FROM {{$table}}
               WHERE archiveid = :archiveid
-                AND {$userfield} = :userid",
-            [
-                'archiveid' => $archiveid,
-                'userid' => $userid,
-            ]
+                AND (" . implode(' OR ', $conditions) . ")",
+            $params
         );
 
         if ($time) {
@@ -703,6 +792,15 @@ function uckkarchive_update_completion_metadata(stdClass $archive): void {
  * @return string[]
  */
 function uckkarchive_get_fileareas(): array {
+    if (class_exists('\mod_uckkarchive\local\file_area_registry') &&
+            method_exists('\mod_uckkarchive\local\file_area_registry', 'get_fileareas')) {
+        $areas = \mod_uckkarchive\local\file_area_registry::get_fileareas();
+
+        if (is_array($areas) && !empty($areas)) {
+            return array_values(array_unique(array_map('strval', $areas)));
+        }
+    }
+
     return [
         UCKKARCHIVE_FILEAREA_PROOF_FILES,
         UCKKARCHIVE_FILEAREA_DECISION_ATTACHMENTS,
@@ -710,6 +808,18 @@ function uckkarchive_get_fileareas(): array {
         UCKKARCHIVE_FILEAREA_KRISTAL_FILES,
         UCKKARCHIVE_FILEAREA_PORTFOLIO_FILES,
         UCKKARCHIVE_FILEAREA_INTEGRITY_EXPORTS,
+        UCKKARCHIVE_FILEAREA_MEDIA_ORIGINAL,
+        UCKKARCHIVE_FILEAREA_MEDIA_PREVIEW,
+        UCKKARCHIVE_FILEAREA_MEDIA_THUMBNAIL,
+        UCKKARCHIVE_FILEAREA_MEDIA_DERIVATIVE,
+        UCKKARCHIVE_FILEAREA_MEDIA_CAPTION,
+        UCKKARCHIVE_FILEAREA_MEDIA_TRANSCRIPT,
+        UCKKARCHIVE_FILEAREA_MEDIA_ATTACHMENT,
+        UCKKARCHIVE_FILEAREA_CONTENT_REVIEW_FILES,
+        UCKKARCHIVE_FILEAREA_EXTERNAL_WORK_REFERENCE_FILES,
+        UCKKARCHIVE_FILEAREA_CULTURAL_PROTOCOL_FILES,
+        UCKKARCHIVE_FILEAREA_EXPORT_MANIFEST,
+        UCKKARCHIVE_FILEAREA_EXPORT_PACKAGE,
     ];
 }
 
@@ -729,46 +839,82 @@ function uckkarchive_can_view_filearea_item($cm, context $context, string $filea
         return false;
     }
 
-    $table = uckkarchive_get_filearea_table($filearea);
+    $record = null;
+    $table = '';
 
-    if ($table === '') {
-        return false;
+    foreach (uckkarchive_get_filearea_tables($filearea) as $candidate) {
+        if (!uckkarchive_lib_table_exists($candidate)) {
+            continue;
+        }
+
+        $candidate_record = $DB->get_record($candidate, ['id' => $itemid], '*', IGNORE_MISSING);
+
+        if (!$candidate_record) {
+            continue;
+        }
+
+        if (uckkarchive_record_matches_archive($candidate, $candidate_record, (int)$cm->instance)) {
+            $record = $candidate_record;
+            $table = $candidate;
+            break;
+        }
     }
-
-    $record = $DB->get_record($table, ['id' => $itemid], '*', IGNORE_MISSING);
 
     if (!$record) {
         return false;
     }
 
-    $archiveid = (int)($record->archiveid ?? 0);
-
-    if ($archiveid <= 0 || $archiveid !== (int)$cm->instance) {
+    if (!uckkarchive_lib_has_capability('mod/uckkarchive:view', $context) &&
+            !uckkarchive_lib_has_capability('mod/uckkarchive:viewmedia', $context)) {
         return false;
     }
 
-    $visibility = uckkarchive_normalise_visibility($record->visibility ?? UCKKARCHIVE_VISIBILITY_COURSE);
+    $visibility = uckkarchive_lib_normalise_visibility($record->visibility ?? UCKKARCHIVE_VISIBILITY_COURSE);
 
-    if (in_array($visibility, [
-        UCKKARCHIVE_VISIBILITY_RESTRICTED,
-        UCKKARCHIVE_VISIBILITY_RESTRICTED_INTEGRITY,
-    ], true)) {
-        return has_capability('mod/uckkarchive:viewrestricted', $context);
+    if (uckkarchive_lib_is_restricted_visibility($visibility)) {
+        if ($visibility === UCKKARCHIVE_VISIBILITY_RESTRICTED_CULTURAL) {
+            return uckkarchive_lib_has_capability('mod/uckkarchive:viewculturallyrestricted', $context) ||
+                uckkarchive_lib_has_capability('mod/uckkarchive:manageadvisories', $context) ||
+                uckkarchive_lib_has_capability('mod/uckkarchive:viewrestricted', $context) ||
+                uckkarchive_lib_has_capability('mod/uckkarchive:viewrestrictedmedia', $context);
+        }
+
+        return uckkarchive_lib_has_capability('mod/uckkarchive:viewrestricted', $context) ||
+            uckkarchive_lib_has_capability('mod/uckkarchive:viewrestrictedmedia', $context);
     }
 
     if (in_array($visibility, [
         UCKKARCHIVE_VISIBILITY_HIDDEN,
         UCKKARCHIVE_VISIBILITY_ARCHIVED,
     ], true)) {
-        return has_capability('mod/uckkarchive:viewrestricted', $context);
+        return uckkarchive_lib_has_capability('mod/uckkarchive:viewrestricted', $context) ||
+            uckkarchive_lib_has_capability('mod/uckkarchive:manageadvisories', $context);
     }
 
     if (!empty($record->userid) && (int)$record->userid === (int)$USER->id) {
         return true;
     }
 
+    if (!empty($record->ownerid) && (int)$record->ownerid === (int)$USER->id) {
+        return true;
+    }
+
     if (!empty($record->createdby) && (int)$record->createdby === (int)$USER->id) {
         return true;
+    }
+
+    if (uckkarchive_filearea_is_media($filearea)) {
+        return uckkarchive_lib_has_capability('mod/uckkarchive:viewmedia', $context);
+    }
+
+    if (uckkarchive_filearea_is_advisory($filearea)) {
+        return uckkarchive_lib_has_capability('mod/uckkarchive:viewadvisories', $context) ||
+            uckkarchive_lib_has_capability('mod/uckkarchive:manageadvisories', $context);
+    }
+
+    if (uckkarchive_filearea_is_export($filearea)) {
+        return uckkarchive_lib_has_capability('mod/uckkarchive:export', $context) ||
+            uckkarchive_lib_has_capability('mod/uckkarchive:exportmedia', $context);
     }
 
     return in_array($visibility, [
@@ -782,23 +928,318 @@ function uckkarchive_can_view_filearea_item($cm, context $context, string $filea
 }
 
 /**
- * Map file area to owner table.
+ * Return whether the current user may download a file area.
+ *
+ * @param context $context Module context.
+ * @param string $filearea File area.
+ * @return bool
+ */
+function uckkarchive_can_download_filearea(context $context, string $filearea): bool {
+    if (uckkarchive_filearea_is_media($filearea)) {
+        if (in_array($filearea, [
+            UCKKARCHIVE_FILEAREA_MEDIA_PREVIEW,
+            UCKKARCHIVE_FILEAREA_MEDIA_THUMBNAIL,
+            UCKKARCHIVE_FILEAREA_MEDIA_CAPTION,
+            UCKKARCHIVE_FILEAREA_MEDIA_TRANSCRIPT,
+        ], true)) {
+            return uckkarchive_lib_has_capability('mod/uckkarchive:viewmedia', $context) ||
+                uckkarchive_lib_has_capability('mod/uckkarchive:downloadmedia', $context);
+        }
+
+        return uckkarchive_lib_has_capability('mod/uckkarchive:downloadmedia', $context);
+    }
+
+    if (uckkarchive_filearea_is_advisory($filearea)) {
+        return uckkarchive_lib_has_capability('mod/uckkarchive:viewadvisories', $context) ||
+            uckkarchive_lib_has_capability('mod/uckkarchive:manageadvisories', $context);
+    }
+
+    if (uckkarchive_filearea_is_export($filearea)) {
+        return uckkarchive_lib_has_capability('mod/uckkarchive:export', $context) ||
+            uckkarchive_lib_has_capability('mod/uckkarchive:exportmedia', $context);
+    }
+
+    return uckkarchive_lib_has_capability('mod/uckkarchive:view', $context);
+}
+
+/**
+ * Map file area to owner tables.
+ *
+ * Media file areas may be itemid = media.id or itemid = media_version.id,
+ * depending on whether the file is attached to the current media record or a
+ * concrete version record.
+ *
+ * @param string $filearea File area.
+ * @return string[]
+ */
+function uckkarchive_get_filearea_tables(string $filearea): array {
+    return match ($filearea) {
+        UCKKARCHIVE_FILEAREA_PROOF_FILES => ['uckkarchive_proof'],
+        UCKKARCHIVE_FILEAREA_KRISTAL_FILES => ['uckkarchive_kristal'],
+        UCKKARCHIVE_FILEAREA_INTEGRITY_EXPORTS,
+        UCKKARCHIVE_FILEAREA_EXPORT_MANIFEST,
+        UCKKARCHIVE_FILEAREA_EXPORT_PACKAGE => ['uckkarchive_export'],
+        UCKKARCHIVE_FILEAREA_DECISION_ATTACHMENTS,
+        UCKKARCHIVE_FILEAREA_MINUTES_FILES,
+        UCKKARCHIVE_FILEAREA_PORTFOLIO_FILES => ['uckkarchive_item'],
+        UCKKARCHIVE_FILEAREA_MEDIA_ORIGINAL,
+        UCKKARCHIVE_FILEAREA_MEDIA_PREVIEW,
+        UCKKARCHIVE_FILEAREA_MEDIA_THUMBNAIL,
+        UCKKARCHIVE_FILEAREA_MEDIA_DERIVATIVE,
+        UCKKARCHIVE_FILEAREA_MEDIA_CAPTION,
+        UCKKARCHIVE_FILEAREA_MEDIA_TRANSCRIPT,
+        UCKKARCHIVE_FILEAREA_MEDIA_ATTACHMENT => ['uckkarchive_media', 'uckkarchive_media_version'],
+        UCKKARCHIVE_FILEAREA_CONTENT_REVIEW_FILES => ['uckkarchive_content_review'],
+        UCKKARCHIVE_FILEAREA_EXTERNAL_WORK_REFERENCE_FILES => ['uckkarchive_external_work'],
+        UCKKARCHIVE_FILEAREA_CULTURAL_PROTOCOL_FILES => ['uckkarchive_content_marker'],
+        default => [],
+    };
+}
+
+/**
+ * Map file area to primary owner table.
  *
  * @param string $filearea File area.
  * @return string
  */
 function uckkarchive_get_filearea_table(string $filearea): string {
-    return match ($filearea) {
-        UCKKARCHIVE_FILEAREA_PROOF_FILES => 'uckkarchive_proof',
-        UCKKARCHIVE_FILEAREA_KRISTAL_FILES => 'uckkarchive_kristal',
-        UCKKARCHIVE_FILEAREA_INTEGRITY_EXPORTS => 'uckkarchive_export',
-        UCKKARCHIVE_FILEAREA_DECISION_ATTACHMENTS,
-        UCKKARCHIVE_FILEAREA_MINUTES_FILES,
-        UCKKARCHIVE_FILEAREA_PORTFOLIO_FILES => 'uckkarchive_item',
-        default => '',
-    };
+    $tables = uckkarchive_get_filearea_tables($filearea);
+
+    return $tables[0] ?? '';
 }
 
+/**
+ * Return whether a file area belongs to the media subsystem.
+ *
+ * @param string $filearea File area.
+ * @return bool
+ */
+function uckkarchive_filearea_is_media(string $filearea): bool {
+    return in_array($filearea, [
+        UCKKARCHIVE_FILEAREA_MEDIA_ORIGINAL,
+        UCKKARCHIVE_FILEAREA_MEDIA_PREVIEW,
+        UCKKARCHIVE_FILEAREA_MEDIA_THUMBNAIL,
+        UCKKARCHIVE_FILEAREA_MEDIA_DERIVATIVE,
+        UCKKARCHIVE_FILEAREA_MEDIA_CAPTION,
+        UCKKARCHIVE_FILEAREA_MEDIA_TRANSCRIPT,
+        UCKKARCHIVE_FILEAREA_MEDIA_ATTACHMENT,
+    ], true);
+}
+
+/**
+ * Return whether a file area belongs to content advisory/cultural protocol data.
+ *
+ * @param string $filearea File area.
+ * @return bool
+ */
+function uckkarchive_filearea_is_advisory(string $filearea): bool {
+    return in_array($filearea, [
+        UCKKARCHIVE_FILEAREA_CONTENT_REVIEW_FILES,
+        UCKKARCHIVE_FILEAREA_CULTURAL_PROTOCOL_FILES,
+    ], true);
+}
+
+/**
+ * Return whether a file area is an export area.
+ *
+ * @param string $filearea File area.
+ * @return bool
+ */
+function uckkarchive_filearea_is_export(string $filearea): bool {
+    return in_array($filearea, [
+        UCKKARCHIVE_FILEAREA_INTEGRITY_EXPORTS,
+        UCKKARCHIVE_FILEAREA_EXPORT_MANIFEST,
+        UCKKARCHIVE_FILEAREA_EXPORT_PACKAGE,
+    ], true);
+}
+
+/**
+ * Return whether a table exists.
+ *
+ * @param string $table Table name without prefix.
+ * @return bool
+ */
+function uckkarchive_lib_table_exists(string $table): bool {
+    global $DB;
+
+    return $DB->get_manager()->table_exists(new xmldb_table($table));
+}
+
+/**
+ * Return whether a table has a field.
+ *
+ * @param string $table Table name without prefix.
+ * @param string $field Field name.
+ * @return bool
+ */
+function uckkarchive_table_has_field(string $table, string $field): bool {
+    global $DB;
+
+    if (!uckkarchive_lib_table_exists($table)) {
+        return false;
+    }
+
+    $columns = $DB->get_columns($table);
+
+    return array_key_exists($field, $columns);
+}
+
+/**
+ * Return existing fields from a candidate list.
+ *
+ * @param string $table Table name without prefix.
+ * @param string[] $fields Candidate fields.
+ * @return string[]
+ */
+function uckkarchive_existing_fields(string $table, array $fields): array {
+    global $DB;
+
+    if (!uckkarchive_lib_table_exists($table)) {
+        return [];
+    }
+
+    $columns = $DB->get_columns($table);
+    $existing = [];
+
+    foreach ($fields as $field) {
+        if (array_key_exists($field, $columns)) {
+            $existing[] = $field;
+        }
+    }
+
+    return $existing;
+}
+
+/**
+ * Delete records by archiveid when the table/field exists.
+ *
+ * @param string $table Table name without prefix.
+ * @param int $archiveid Archive id.
+ * @return void
+ */
+function uckkarchive_delete_records_by_archiveid(string $table, int $archiveid): void {
+    global $DB;
+
+    if (!uckkarchive_lib_table_exists($table) || !uckkarchive_table_has_field($table, 'archiveid')) {
+        return;
+    }
+
+    $DB->delete_records($table, ['archiveid' => $archiveid]);
+}
+
+/**
+ * Count records associated with a user.
+ *
+ * @param string $table Table name without prefix.
+ * @param int $archiveid Archive id.
+ * @param int $userid User id.
+ * @param string[] $userfields User field candidates.
+ * @return int
+ */
+function uckkarchive_count_user_records(
+    string $table,
+    int $archiveid,
+    int $userid,
+    array $userfields = ['userid', 'createdby']
+): int {
+    global $DB;
+
+    if (!uckkarchive_lib_table_exists($table) || !uckkarchive_table_has_field($table, 'archiveid')) {
+        return 0;
+    }
+
+    $fields = uckkarchive_existing_fields($table, $userfields);
+
+    if (empty($fields)) {
+        return 0;
+    }
+
+    $conditions = [];
+    foreach ($fields as $field) {
+        $conditions[] = "{$field} = :userid";
+    }
+
+    return (int)$DB->count_records_select(
+        $table,
+        'archiveid = :archiveid AND (' . implode(' OR ', $conditions) . ')',
+        [
+            'archiveid' => $archiveid,
+            'userid' => $userid,
+        ]
+    );
+}
+
+/**
+ * Return whether a known capability is granted.
+ *
+ * Unknown capabilities are treated as unavailable so this file can remain
+ * compatible while db/access.php is being expanded.
+ *
+ * @param string $capability Capability name.
+ * @param context $context Context.
+ * @return bool
+ */
+function uckkarchive_lib_has_capability(string $capability, context $context): bool {
+    if (function_exists('get_capability_info') && !get_capability_info($capability)) {
+        return false;
+    }
+
+    return has_capability($capability, $context);
+}
+
+/**
+ * Return whether a visibility value is restricted.
+ *
+ * @param string $visibility Visibility.
+ * @return bool
+ */
+function uckkarchive_lib_is_restricted_visibility(string $visibility): bool {
+    return in_array($visibility, [
+        UCKKARCHIVE_VISIBILITY_RESTRICTED,
+        UCKKARCHIVE_VISIBILITY_RESTRICTED_INTEGRITY,
+        UCKKARCHIVE_VISIBILITY_RESTRICTED_CULTURAL,
+    ], true);
+}
+
+/**
+ * Return whether a file-area owner record belongs to this archive instance.
+ *
+ * @param string $table Table name.
+ * @param stdClass $record Owner record.
+ * @param int $archiveid Archive instance id.
+ * @return bool
+ */
+function uckkarchive_record_matches_archive(string $table, stdClass $record, int $archiveid): bool {
+    global $DB;
+
+    if ($archiveid <= 0) {
+        return false;
+    }
+
+    if (!empty($record->archiveid)) {
+        return (int)$record->archiveid === $archiveid;
+    }
+
+    if ($table === 'uckkarchive_media_version' && !empty($record->mediaid) && uckkarchive_lib_table_exists('uckkarchive_media')) {
+        $media = $DB->get_record('uckkarchive_media', ['id' => (int)$record->mediaid], 'id, archiveid', IGNORE_MISSING);
+
+        return $media && (int)$media->archiveid === $archiveid;
+    }
+
+    if ($table === 'uckkarchive_content_review' && !empty($record->markerid) &&
+            uckkarchive_lib_table_exists('uckkarchive_content_marker')) {
+        $marker = $DB->get_record(
+            'uckkarchive_content_marker',
+            ['id' => (int)$record->markerid],
+            'id, archiveid',
+            IGNORE_MISSING
+        );
+
+        return $marker && (int)$marker->archiveid === $archiveid;
+    }
+
+    return false;
+}
 
 /**
  * Build a database-safe archive instance record.
@@ -830,9 +1271,9 @@ function uckkarchive_prepare_instance_record(stdClass $data, bool $isnew): stdCl
     $record->archivetype = clean_param((string)($data->archivetype ?? 'course'), PARAM_ALPHANUMEXT);
     $record->archivepolicy = clean_param((string)($data->archivepolicy ?? 'validated'), PARAM_ALPHANUMEXT);
 
-    $visibility = uckkarchive_normalise_visibility($data->visibility ?? UCKKARCHIVE_VISIBILITY_COURSE);
+    $visibility = uckkarchive_lib_normalise_visibility($data->visibility ?? UCKKARCHIVE_VISIBILITY_COURSE);
     $record->visibility = $visibility;
-    $record->defaultvisibility = uckkarchive_normalise_visibility($data->defaultvisibility ?? $visibility);
+    $record->defaultvisibility = uckkarchive_lib_normalise_visibility($data->defaultvisibility ?? $visibility);
 
     $record->requirevalidation = empty($data->requirevalidation) ? 0 : 1;
     $record->allowpublicitems = empty($data->allowpublicitems) ? 0 : 1;
@@ -841,7 +1282,7 @@ function uckkarchive_prepare_instance_record(stdClass $data, bool $isnew): stdCl
     $record->completionrequireitem = empty($data->completionrequireitem ?? 0) ? 0 : 1;
     $record->completionrequirevalidation = empty($data->completionrequirevalidation ?? 0) ? 0 : 1;
 
-    $record->status = uckkarchive_normalise_status($data->status ?? UCKKARCHIVE_STATUS_ACTIVE);
+    $record->status = uckkarchive_lib_normalise_status($data->status ?? UCKKARCHIVE_STATUS_ACTIVE);
     $record->versionno = max(1, (int)($data->versionno ?? 1));
     $record->metadata = uckkarchive_normalise_metadata($data->metadata ?? null);
 
@@ -863,8 +1304,6 @@ function uckkarchive_prepare_instance_record(stdClass $data, bool $isnew): stdCl
 
     return $record;
 }
-
-
 
 /**
  * Return a clipped optional text value or null.
@@ -893,7 +1332,7 @@ function uckkarchive_optional_text(mixed $value, int $maxlength): ?string {
  * @param string|null $status Raw status.
  * @return string
  */
-function uckkarchive_normalise_status(?string $status): string {
+function uckkarchive_lib_normalise_status(?string $status): string {
     $status = clean_param((string)$status, PARAM_ALPHANUMEXT);
 
     $allowed = [
@@ -907,6 +1346,8 @@ function uckkarchive_normalise_status(?string $status): string {
         UCKKARCHIVE_STATUS_INVALIDATED,
         UCKKARCHIVE_STATUS_CLOSED,
         UCKKARCHIVE_STATUS_ARCHIVED,
+        UCKKARCHIVE_STATUS_DELETED_SOFT,
+        UCKKARCHIVE_STATUS_RESTRICTED,
     ];
 
     return in_array($status, $allowed, true) ? $status : UCKKARCHIVE_STATUS_ACTIVE;
@@ -918,7 +1359,7 @@ function uckkarchive_normalise_status(?string $status): string {
  * @param string|null $visibility Raw visibility.
  * @return string
  */
-function uckkarchive_normalise_visibility(?string $visibility): string {
+function uckkarchive_lib_normalise_visibility(?string $visibility): string {
     $visibility = clean_param((string)$visibility, PARAM_ALPHANUMEXT);
 
     $allowed = [
@@ -932,6 +1373,7 @@ function uckkarchive_normalise_visibility(?string $visibility): string {
         UCKKARCHIVE_VISIBILITY_PUBLIC,
         UCKKARCHIVE_VISIBILITY_RESTRICTED,
         UCKKARCHIVE_VISIBILITY_RESTRICTED_INTEGRITY,
+        UCKKARCHIVE_VISIBILITY_RESTRICTED_CULTURAL,
         UCKKARCHIVE_VISIBILITY_HIDDEN,
         UCKKARCHIVE_VISIBILITY_ARCHIVED,
     ];

@@ -12,6 +12,12 @@
  * locally, validate archive records, create provenance, or generate packages
  * client-side.
  *
+ * Supported scopes:
+ * - archive: selected archive item export through the registered item export service;
+ * - items: selected archive item export service;
+ * - media: selected media export service;
+ * - collection: media collection export service.
+ *
  * @module     mod_uckkarchive/export
  * @copyright  2026 Univers-Cité King Klown
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -24,11 +30,31 @@ import {getString} from 'core/str';
 
 const COMPONENT = 'uckkarchive';
 
+const SCOPES = {
+    archive: 'archive',
+    items: 'items',
+    media: 'media',
+    collection: 'collection',
+};
+
+const STATES = {
+    pending: 'pending',
+    queued: 'queued',
+    processing: 'processing',
+    complete: 'complete',
+    completed: 'completed',
+    ready: 'ready',
+    failed: 'failed',
+    blocked: 'blocked',
+    cancelled: 'cancelled',
+};
+
 const DEFAULT_METHODS = {
-    prepare: 'mod_uckkarchive_prepare_export',
+    preview: 'mod_uckkarchive_get_export_preview',
     status: 'mod_uckkarchive_get_export_status',
-    cancel: 'mod_uckkarchive_cancel_export',
-    panel: 'mod_uckkarchive_get_export_panel',
+    items: 'mod_uckkarchive_export_items',
+    media: 'mod_uckkarchive_export_media',
+    collection: 'mod_uckkarchive_export_collection',
 };
 
 const SELECTORS = {
@@ -40,11 +66,22 @@ const SELECTORS = {
     progressBar: '[data-region="uckkarchive-export-progressbar"]',
     downloadRegion: '[data-region="uckkarchive-export-download"]',
     downloadLink: '[data-region="uckkarchive-export-download-link"]',
+    manifestRegion: '[data-region="uckkarchive-export-manifest"]',
+    manifestLink: '[data-region="uckkarchive-export-manifest-link"]',
     warningRegion: '[data-region="uckkarchive-export-warnings"]',
 
     scopeInput: '[data-field="export-scope"]',
     formatInput: '[data-field="export-format"]',
     visibilityInput: '[data-field="export-visibility"]',
+    redactionLevelInput: '[data-field="redaction-level"]',
+    descriptionInput: '[data-field="export-description"]',
+    reasonInput: '[data-field="export-reason"]',
+
+    itemIdsInput: '[data-field="itemids"]',
+    mediaIdsInput: '[data-field="mediaids"]',
+    collectionIdInput: '[data-field="collectionid"]',
+    collectionUuidInput: '[data-field="collectionuuid"]',
+
     includeProofsInput: '[data-field="include-proofs"]',
     includeProvenanceInput: '[data-field="include-provenance"]',
     includeRevisionsInput: '[data-field="include-revisions"]',
@@ -52,7 +89,22 @@ const SELECTORS = {
     includeRestrictedInput: '[data-field="include-restricted"]',
     includeIntegrityInput: '[data-field="include-integrity"]',
     anonymiseInput: '[data-field="anonymise-users"]',
-    reasonInput: '[data-field="export-reason"]',
+
+    includeFilesInput: '[data-field="include-files"]',
+    includeOriginalsInput: '[data-field="include-originals"]',
+    includeDerivativesInput: '[data-field="include-derivatives"]',
+    includeThumbnailsInput: '[data-field="include-thumbnails"]',
+    includePreviewsInput: '[data-field="include-previews"]',
+    includeCaptionsInput: '[data-field="include-captions"]',
+    includeTranscriptsInput: '[data-field="include-transcripts"]',
+    includeAttachmentsInput: '[data-field="include-attachments"]',
+    includeVersionsInput: '[data-field="include-versions"]',
+    includeRelationsInput: '[data-field="include-relations"]',
+    includeTagsInput: '[data-field="include-tags"]',
+    includeAdvisoriesInput: '[data-field="include-advisories"]',
+    includeExternalRefsInput: '[data-field="include-external-refs"]',
+    includeExternalWorksInput: '[data-field="include-external-works"]',
+    includeRedactedManifestInput: '[data-field="include-redacted-manifest"]',
 
     actionPrepare: '[data-action="uckkarchive-prepare-export"]',
     actionRefresh: '[data-action="uckkarchive-refresh-export"]',
@@ -102,10 +154,11 @@ const getNumberData = (element, key, fallback = 0) => {
  * @returns {Object}
  */
 const getMethods = (root, options = {}) => ({
-    prepare: root.dataset.prepareMethod || options.prepareMethod || DEFAULT_METHODS.prepare,
+    preview: root.dataset.previewMethod || options.previewMethod || DEFAULT_METHODS.preview,
     status: root.dataset.statusMethod || options.statusMethod || DEFAULT_METHODS.status,
-    cancel: root.dataset.cancelMethod || options.cancelMethod || DEFAULT_METHODS.cancel,
-    panel: root.dataset.panelMethod || options.panelMethod || DEFAULT_METHODS.panel,
+    items: root.dataset.itemsMethod || options.itemsMethod || DEFAULT_METHODS.items,
+    media: root.dataset.mediaMethod || options.mediaMethod || DEFAULT_METHODS.media,
+    collection: root.dataset.collectionMethod || options.collectionMethod || DEFAULT_METHODS.collection,
 });
 
 /**
@@ -121,12 +174,63 @@ const getBaseArgs = root => ({
 });
 
 /**
+ * Normalise export scope.
+ *
+ * @param {String} scope Raw scope.
+ * @returns {String}
+ */
+const normaliseScope = scope => {
+    const value = String(scope || '').trim().toLowerCase();
+
+    return Object.values(SCOPES).includes(value) ? value : SCOPES.archive;
+};
+
+/**
+ * Normalise service state to the UI state vocabulary.
+ *
+ * @param {Object} response Service response.
+ * @returns {String}
+ */
+const normaliseState = (response = {}) => {
+    const value = String(response.status || response.state || '').trim().toLowerCase();
+
+    if ([STATES.complete, STATES.completed, STATES.ready].includes(value)) {
+        return STATES.complete;
+    }
+
+    if ([STATES.failed, STATES.blocked].includes(value)) {
+        return STATES.failed;
+    }
+
+    if (value === STATES.cancelled) {
+        return STATES.cancelled;
+    }
+
+    if ([STATES.pending, STATES.queued, STATES.processing].includes(value)) {
+        return value;
+    }
+
+    return response.downloadurl ? STATES.complete : '';
+};
+
+/**
  * Validate required identifiers.
  *
  * @param {Object} args Request arguments.
+ * @param {String} scope Export scope.
  * @returns {Boolean}
  */
-const hasRequiredIdentifiers = args => Boolean(args.cmid && args.archiveid);
+const hasRequiredIdentifiers = (args, scope = SCOPES.archive) => {
+    if (!args.cmid) {
+        return false;
+    }
+
+    if ([SCOPES.media, SCOPES.items, SCOPES.collection].includes(scope)) {
+        return true;
+    }
+
+    return Boolean(args.archiveid);
+};
 
 /**
  * Set local status text.
@@ -205,30 +309,229 @@ const collectSingleValue = (root, selector) => {
 };
 
 /**
+ * Collect boolean field value with a default.
+ *
+ * @param {HTMLElement} root Export root.
+ * @param {String} selector Field selector.
+ * @param {Boolean} fallback Fallback.
+ * @returns {Boolean}
+ */
+const collectBoolean = (root, selector, fallback = false) => {
+    const fields = Array.from(root.querySelectorAll(selector));
+
+    if (!fields.length) {
+        return fallback;
+    }
+
+    return Boolean(collectSingleValue(root, selector));
+};
+
+/**
+ * Collect a positive integer from one selector.
+ *
+ * @param {HTMLElement} root Export root.
+ * @param {String} selector Field selector.
+ * @param {Number} fallback Fallback.
+ * @returns {Number}
+ */
+const collectInteger = (root, selector, fallback = 0) => {
+    const value = Number(collectSingleValue(root, selector) || fallback);
+
+    return Number.isFinite(value) && value > 0 ? Math.trunc(value) : fallback;
+};
+
+/**
+ * Split a comma/space separated id list.
+ *
+ * @param {String} value Raw value.
+ * @returns {Number[]}
+ */
+const splitIdList = value => String(value || '')
+    .split(/[,\s]+/)
+    .map(id => Number(id))
+    .filter(id => Number.isInteger(id) && id > 0);
+
+/**
+ * Collect ids from checkboxes, multiselects, text fields or data attributes.
+ *
+ * @param {HTMLElement} root Export root.
+ * @param {String} selector Field selector.
+ * @param {String} datasetKey Root dataset key.
+ * @returns {Number[]}
+ */
+const collectIds = (root, selector, datasetKey) => {
+    const fields = Array.from(root.querySelectorAll(selector));
+    const ids = [];
+
+    fields.forEach(field => {
+        if (field.type === 'checkbox') {
+            if (field.checked) {
+                ids.push(...splitIdList(field.value || field.dataset.id));
+            }
+            return;
+        }
+
+        if (field.tagName === 'SELECT' && field.multiple) {
+            Array.from(field.selectedOptions).forEach(option => {
+                ids.push(...splitIdList(option.value));
+            });
+            return;
+        }
+
+        ids.push(...splitIdList(field.value || field.dataset.id));
+    });
+
+    ids.push(...splitIdList(root.dataset?.[datasetKey]));
+
+    return Array.from(new Set(ids));
+};
+
+/**
  * Collect export options from the form.
  *
  * @param {HTMLElement} root Export root.
  * @returns {Object}
  */
 const collectExportData = root => {
-    const form = root.querySelector(SELECTORS.form);
     const base = getBaseArgs(root);
+    const scope = normaliseScope(collectSingleValue(root, SELECTORS.scopeInput) || root.dataset.scope);
 
     return {
         ...base,
-        scope: String(collectSingleValue(root, SELECTORS.scopeInput) || 'archive'),
-        format: String(collectSingleValue(root, SELECTORS.formatInput) || 'json'),
-        visibility: String(collectSingleValue(root, SELECTORS.visibilityInput) || 'course'),
-        includeproofs: Boolean(collectSingleValue(root, SELECTORS.includeProofsInput)),
-        includeprovenance: Boolean(collectSingleValue(root, SELECTORS.includeProvenanceInput)),
-        includerevisions: Boolean(collectSingleValue(root, SELECTORS.includeRevisionsInput)),
-        includekristals: Boolean(collectSingleValue(root, SELECTORS.includeKristalsInput)),
-        includerestricted: Boolean(collectSingleValue(root, SELECTORS.includeRestrictedInput)),
-        includeintegrity: Boolean(collectSingleValue(root, SELECTORS.includeIntegrityInput)),
-        anonymiseusers: Boolean(collectSingleValue(root, SELECTORS.anonymiseInput)),
+        scope,
+        format: String(collectSingleValue(root, SELECTORS.formatInput) || root.dataset.format || 'json'),
+        visibility: String(collectSingleValue(root, SELECTORS.visibilityInput) || root.dataset.visibility || 'course'),
+        redactionlevel: String(
+            collectSingleValue(root, SELECTORS.redactionLevelInput) ||
+            root.dataset.redactionLevel ||
+            'standard'
+        ),
+        description: String(collectSingleValue(root, SELECTORS.descriptionInput) || ''),
         reason: String(collectSingleValue(root, SELECTORS.reasonInput) || ''),
-        sesskey: form?.dataset?.sesskey || M.cfg.sesskey,
+
+        itemids: collectIds(root, SELECTORS.itemIdsInput, 'itemids'),
+        mediaids: collectIds(root, SELECTORS.mediaIdsInput, 'mediaids'),
+        collectionid: collectInteger(root, SELECTORS.collectionIdInput, getNumberData(root, 'collectionid')),
+        collectionuuid: String(collectSingleValue(root, SELECTORS.collectionUuidInput) || root.dataset.collectionuuid || ''),
+
+        includeproofs: collectBoolean(root, SELECTORS.includeProofsInput, true),
+        includeprovenance: collectBoolean(root, SELECTORS.includeProvenanceInput, true),
+        includerevisions: collectBoolean(root, SELECTORS.includeRevisionsInput, true),
+        includekristals: collectBoolean(root, SELECTORS.includeKristalsInput, true),
+        includerestricted: collectBoolean(root, SELECTORS.includeRestrictedInput, false),
+        includeintegrity: collectBoolean(root, SELECTORS.includeIntegrityInput, false),
+        anonymiseusers: collectBoolean(root, SELECTORS.anonymiseInput, false),
+
+        includefiles: collectBoolean(root, SELECTORS.includeFilesInput, true),
+        includeoriginals: collectBoolean(root, SELECTORS.includeOriginalsInput, true),
+        includederivatives: collectBoolean(root, SELECTORS.includeDerivativesInput, true),
+        includethumbnails: collectBoolean(root, SELECTORS.includeThumbnailsInput, true),
+        includepreviews: collectBoolean(root, SELECTORS.includePreviewsInput, true),
+        includecaptions: collectBoolean(root, SELECTORS.includeCaptionsInput, true),
+        includetranscripts: collectBoolean(root, SELECTORS.includeTranscriptsInput, true),
+        includeattachments: collectBoolean(root, SELECTORS.includeAttachmentsInput, true),
+        includeversions: collectBoolean(root, SELECTORS.includeVersionsInput, true),
+        includerelations: collectBoolean(root, SELECTORS.includeRelationsInput, true),
+        includetags: collectBoolean(root, SELECTORS.includeTagsInput, true),
+        includeadvisories: collectBoolean(root, SELECTORS.includeAdvisoriesInput, true),
+        includeexternalrefs: collectBoolean(root, SELECTORS.includeExternalRefsInput, true),
+        includeexternalworks: collectBoolean(root, SELECTORS.includeExternalWorksInput, true),
+        includeredactedmanifest: collectBoolean(root, SELECTORS.includeRedactedManifestInput, true),
     };
+};
+
+/**
+ * Build service arguments for the selected scope.
+ *
+ * Only registered Moodle external services are used:
+ * - mod_uckkarchive_export_items
+ * - mod_uckkarchive_export_media
+ * - mod_uckkarchive_export_collection
+ *
+ * The legacy `archive` scope is treated as an item export and therefore
+ * requires selected item ids. A full-archive prepare service must be added
+ * server-side before the UI can call one.
+ *
+ * @param {Object} data Collected export data.
+ * @returns {Object}
+ */
+const buildServiceArgs = data => {
+    if (data.scope === SCOPES.media) {
+        return {
+            cmid: data.cmid,
+            mediaids: data.mediaids,
+            format: data.format || 'zip',
+            options: {
+                includeoriginals: data.includeoriginals,
+                includederivatives: data.includederivatives,
+                includethumbnails: data.includethumbnails,
+                includepreviews: data.includepreviews,
+                includecaptions: data.includecaptions,
+                includetranscripts: data.includetranscripts,
+                includeattachments: data.includeattachments,
+                includeversions: data.includeversions,
+                includerelations: data.includerelations,
+                includetags: data.includetags,
+                includeadvisories: data.includeadvisories,
+                includeexternalrefs: data.includeexternalrefs,
+                redactionlevel: data.redactionlevel,
+                visibility: data.visibility,
+            },
+            reason: data.reason,
+        };
+    }
+
+    if (data.scope === SCOPES.collection) {
+        return {
+            cmid: data.cmid,
+            collectionid: data.collectionid,
+            collectionuuid: data.collectionuuid,
+            format: data.format || 'zip',
+            options: {
+                includefiles: data.includefiles,
+                includethumbnails: data.includethumbnails,
+                includepreviews: data.includepreviews,
+                includederivatives: data.includederivatives,
+                includeversions: data.includeversions,
+                includeadvisories: data.includeadvisories,
+                includeexternalworks: data.includeexternalworks,
+                redactionlevel: data.redactionlevel,
+                visibility: data.visibility,
+            },
+            reason: data.reason,
+        };
+    }
+
+    return {
+        cmid: data.cmid,
+        itemids: data.itemids,
+        exportformat: data.format || 'json',
+        description: data.description,
+        reason: data.reason,
+        redactionlevel: data.redactionlevel,
+        includeproofs: data.includeproofs,
+        includeprovenance: data.includeprovenance,
+        includeversions: data.includeversions,
+    };
+};
+
+/**
+ * Return method name for the selected scope.
+ *
+ * @param {Object} methods Configured method names.
+ * @param {String} scope Export scope.
+ * @returns {String}
+ */
+const methodForScope = (methods, scope) => {
+    if (scope === SCOPES.media) {
+        return methods.media;
+    }
+
+    if (scope === SCOPES.collection) {
+        return methods.collection;
+    }
+
+    return methods.items;
 };
 
 /**
@@ -251,7 +554,13 @@ const callService = (methodname, args) => Ajax.call([{
  */
 const confirmExport = async(data) => {
     const title = await getString('confirmexport', COMPONENT);
-    const message = data.includerestricted || data.includeintegrity
+    const restricted = data.includerestricted ||
+        data.includeintegrity ||
+        data.redactionlevel !== 'none' ||
+        data.scope === SCOPES.media ||
+        data.scope === SCOPES.collection;
+
+    const message = restricted
         ? await getString('confirmrestrictedexportbody', COMPONENT)
         : await getString('confirmexportbody', COMPONENT);
     const confirm = await getString('exportarchive', COMPONENT);
@@ -279,7 +588,7 @@ const confirmExport = async(data) => {
  * @returns {Promise<Boolean>}
  */
 const validateBeforePrepare = async(root, data) => {
-    if (!hasRequiredIdentifiers(data)) {
+    if (!hasRequiredIdentifiers(data, data.scope)) {
         await Notification.alert(
             await getString('exporterror', COMPONENT),
             await getString('exportmissingidentifiers', COMPONENT)
@@ -287,7 +596,31 @@ const validateBeforePrepare = async(root, data) => {
         return false;
     }
 
-    if (!data.reason.trim() && (data.includerestricted || data.includeintegrity)) {
+    if (data.scope === SCOPES.media && !data.mediaids.length) {
+        await Notification.alert(
+            await getString('exporterror', COMPONENT),
+            await getString('medianotfound', COMPONENT)
+        );
+        return false;
+    }
+
+    if ((data.scope === SCOPES.items || data.scope === SCOPES.archive) && !data.itemids.length) {
+        await Notification.alert(
+            await getString('exporterror', COMPONENT),
+            await getString('noitemsselected', COMPONENT)
+        );
+        return false;
+    }
+
+    if (data.scope === SCOPES.collection && !data.collectionid && !data.collectionuuid.trim()) {
+        await Notification.alert(
+            await getString('exporterror', COMPONENT),
+            await getString('nomediacollections', COMPONENT)
+        );
+        return false;
+    }
+
+    if (!data.reason.trim() && (data.includerestricted || data.includeintegrity || data.redactionlevel === 'restricted')) {
         await Notification.alert(
             await getString('exporterror', COMPONENT),
             await getString('exportreasonrequired', COMPONENT)
@@ -330,14 +663,24 @@ const prepareExport = async(root, options = {}) => {
     try {
         setStatus(root, await getString('exportpreparing', COMPONENT));
 
-        const response = await callService(methods.prepare, data);
+        const response = await callService(methodForScope(methods, data.scope), buildServiceArgs(data));
 
         applyExportResponse(root, response);
 
-        if (response?.status === 'complete' || response?.downloadurl) {
+        const state = normaliseState(response);
+
+        if (state === STATES.complete || response?.downloadurl) {
             root.classList.remove(CLASSES.pending);
             root.classList.add(CLASSES.complete);
             setStatus(root, await getString('exportready', COMPONENT));
+            stopPolling(root);
+            return;
+        }
+
+        if (state === STATES.failed) {
+            root.classList.add(CLASSES.error);
+            root.classList.remove(CLASSES.pending);
+            setStatus(root, await getString('exportfailed', COMPONENT));
             stopPolling(root);
             return;
         }
@@ -365,7 +708,7 @@ const refreshStatus = async(root, options = {}) => {
     const methods = getMethods(root, options);
     const args = getBaseArgs(root);
 
-    if (!hasRequiredIdentifiers(args)) {
+    if (!hasRequiredIdentifiers(args, SCOPES.archive) || !args.exportid) {
         return null;
     }
 
@@ -373,15 +716,21 @@ const refreshStatus = async(root, options = {}) => {
         const response = await callService(methods.status, args);
         applyExportResponse(root, response);
 
-        if (response?.status === 'complete' || response?.downloadurl) {
+        const state = normaliseState(response);
+
+        if (state === STATES.complete || response?.downloadurl) {
             root.classList.remove(CLASSES.pending);
             root.classList.add(CLASSES.complete);
             setStatus(root, await getString('exportready', COMPONENT));
             stopPolling(root);
-        } else if (response?.status === 'failed') {
+        } else if (state === STATES.failed) {
             root.classList.add(CLASSES.error);
             root.classList.remove(CLASSES.pending);
             setStatus(root, await getString('exportfailed', COMPONENT));
+            stopPolling(root);
+        } else if (state === STATES.cancelled) {
+            root.classList.remove(CLASSES.pending, CLASSES.complete);
+            setStatus(root, await getString('exportcancelled', COMPONENT));
             stopPolling(root);
         }
 
@@ -395,7 +744,11 @@ const refreshStatus = async(root, options = {}) => {
 };
 
 /**
- * Refresh export panel markup.
+ * Refresh export panel/status using registered services only.
+ *
+ * If an export id is present, refresh status through
+ * mod_uckkarchive_get_export_status. Otherwise, preview item/archive export
+ * data through mod_uckkarchive_get_export_preview when item ids are available.
  *
  * @param {HTMLElement} root Export root.
  * @param {Object} options Initialisation options.
@@ -405,22 +758,30 @@ const refreshPanel = async(root, options = {}) => {
     const methods = getMethods(root, options);
     const args = getBaseArgs(root);
 
-    if (!hasRequiredIdentifiers(args)) {
-        return;
-    }
-
     setLoading(root, true);
 
     try {
         setStatus(root, await getString('exportrefreshing', COMPONENT));
 
-        const response = await callService(methods.panel, args);
+        if (args.exportid) {
+            await refreshStatus(root, options);
+            return;
+        }
 
-        if (response?.template && response?.context) {
-            const html = await Templates.render(response.template, response.context);
-            replacePanel(root, html, '');
-        } else if (response?.html) {
-            replacePanel(root, response.html, response.js || '');
+        const data = collectExportData(root);
+
+        if ((data.scope === SCOPES.archive || data.scope === SCOPES.items) && data.itemids.length) {
+            const preview = await callService(methods.preview, {
+                cmid: data.cmid,
+                itemids: data.itemids,
+                exportformat: data.format || 'json',
+                includeproofs: data.includeproofs,
+                includeprovenance: data.includeprovenance,
+                includeversions: data.includeversions,
+            });
+
+            applyExportResponse(root, preview);
+            renderPreview(root, preview);
         }
 
         setStatus(root, await getString('exportrefreshed', COMPONENT));
@@ -434,59 +795,63 @@ const refreshPanel = async(root, options = {}) => {
 };
 
 /**
- * Cancel export.
+ * Stop local export polling.
+ *
+ * No cancel-export external function is registered for this component. This
+ * action therefore only stops the local polling loop. Server-side cancellation
+ * must be implemented and registered before this module can cancel jobs.
  *
  * @param {HTMLElement} root Export root.
- * @param {Object} options Initialisation options.
  * @returns {Promise<void>}
  */
-const cancelExport = async(root, options = {}) => {
-    const title = await getString('cancelexport', COMPONENT);
-    const message = await getString('cancelexportbody', COMPONENT);
-    const confirm = await getString('cancelexport', COMPONENT);
-    const cancel = await getString('cancel', 'moodle');
+const cancelExport = async(root) => {
+    stopPolling(root);
+    root.classList.remove(CLASSES.pending);
+    setStatus(root, await getString('exportpollingstopped', COMPONENT));
+};
 
-    const confirmed = await new Promise(resolve => {
-        Notification.confirm(
-            title,
-            message,
-            confirm,
-            cancel,
-            () => resolve(true),
-            () => resolve(false)
-        );
+/**
+ * Render a lightweight export preview when the registered preview service is used.
+ *
+ * @param {HTMLElement} root Export root.
+ * @param {Object} preview Preview response.
+ */
+const renderPreview = (root, preview = {}) => {
+    const panel = root.querySelector(SELECTORS.panel);
+
+    if (!panel || !preview || typeof preview !== 'object') {
+        return;
+    }
+
+    const list = document.createElement('dl');
+    list.className = 'row uckkarchive-export__preview';
+
+    const rows = [
+        ['format', preview.format],
+        ['itemcount', preview.itemcount],
+        ['proofcount', preview.proofcount],
+        ['provenancecount', preview.provenancecount],
+        ['revisioncount', preview.revisioncount],
+    ];
+
+    rows.forEach(([key, value]) => {
+        if (value === undefined || value === null || value === '') {
+            return;
+        }
+
+        const term = document.createElement('dt');
+        term.className = 'col-sm-4';
+        term.textContent = key;
+
+        const description = document.createElement('dd');
+        description.className = 'col-sm-8';
+        description.textContent = String(value);
+
+        list.appendChild(term);
+        list.appendChild(description);
     });
 
-    if (!confirmed) {
-        return;
-    }
-
-    const methods = getMethods(root, options);
-    const args = getBaseArgs(root);
-
-    if (!hasRequiredIdentifiers(args)) {
-        return;
-    }
-
-    setLoading(root, true);
-
-    try {
-        await callService(methods.cancel, {
-            ...args,
-            sesskey: M.cfg.sesskey,
-        });
-
-        stopPolling(root);
-        root.classList.remove(CLASSES.pending, CLASSES.complete);
-        setStatus(root, await getString('exportcancelled', COMPONENT));
-        await refreshPanel(root, options);
-    } catch (error) {
-        root.classList.add(CLASSES.error);
-        setStatus(root, await getString('exportcancelfailed', COMPONENT));
-        Notification.exception(error);
-    } finally {
-        setLoading(root, false);
-    }
+    panel.replaceChildren(list);
 };
 
 /**
@@ -504,11 +869,16 @@ const applyExportResponse = (root, response = {}) => {
         root.dataset.exportid = String(response.exportid);
     }
 
-    if (response.status) {
-        root.dataset.exportStatus = response.status;
+    if (response.exportuuid) {
+        root.dataset.exportuuid = String(response.exportuuid);
     }
 
-    updateProgress(root, Number(response.progress ?? 0));
+    const state = normaliseState(response);
+    if (state) {
+        root.dataset.exportStatus = state;
+    }
+
+    updateProgress(root, Number(response.progress ?? (state === STATES.complete ? 100 : 0)));
 
     if (response.message) {
         setStatus(root, response.message);
@@ -516,6 +886,14 @@ const applyExportResponse = (root, response = {}) => {
 
     if (response.downloadurl) {
         showDownload(root, response.downloadurl, response.filename || '');
+    }
+
+    if (response.manifesturl) {
+        showManifest(root, response.manifesturl);
+    }
+
+    if (response.manifest) {
+        root.dataset.manifest = typeof response.manifest === 'string' ? response.manifest : JSON.stringify(response.manifest);
     }
 
     if (response.warnings) {
@@ -580,6 +958,26 @@ const showDownload = (root, url, filename = '') => {
 };
 
 /**
+ * Display manifest link.
+ *
+ * @param {HTMLElement} root Export root.
+ * @param {String} url Manifest URL.
+ */
+const showManifest = (root, url) => {
+    const region = root.querySelector(SELECTORS.manifestRegion);
+    const link = root.querySelector(SELECTORS.manifestLink);
+
+    if (region) {
+        region.hidden = false;
+        region.classList.remove(CLASSES.hidden);
+    }
+
+    if (link) {
+        link.href = url;
+    }
+};
+
+/**
  * Display warning messages.
  *
  * @param {HTMLElement} root Export root.
@@ -629,6 +1027,11 @@ const replacePanel = (root, html, js = '') => {
     if (js) {
         Templates.runTemplateJS(js);
     }
+
+    initialiseRoot(root, {
+        ...root.dataset,
+        preserveInitialised: true,
+    });
 };
 
 /**
@@ -639,6 +1042,10 @@ const replacePanel = (root, html, js = '') => {
  */
 const startPolling = (root, options = {}) => {
     stopPolling(root);
+
+    if (!getNumberData(root, 'exportid')) {
+        return;
+    }
 
     pollCounts.set(root, 0);
 
@@ -737,18 +1144,41 @@ const handleClick = (event, root, options = {}) => {
 };
 
 /**
+ * Handle form submit events.
+ *
+ * @param {SubmitEvent} event Submit event.
+ * @param {HTMLElement} root Export root.
+ * @param {Object} options Initialisation options.
+ */
+const handleSubmit = (event, root, options = {}) => {
+    if (!event.target.matches(SELECTORS.form)) {
+        return;
+    }
+
+    event.preventDefault();
+    prepareExport(root, options);
+};
+
+/**
  * Initialise one root.
  *
  * @param {HTMLElement} root Export root.
  * @param {Object} options Initialisation options.
  */
 const initialiseRoot = (root, options = {}) => {
-    if (!root || root.getAttribute(ATTRIBUTES.initialised) === 'true') {
+    if (!root) {
         return;
     }
 
-    root.setAttribute(ATTRIBUTES.initialised, 'true');
-    root.addEventListener('click', event => handleClick(event, root, options));
+    if (root.getAttribute(ATTRIBUTES.initialised) === 'true' && !options.preserveInitialised) {
+        return;
+    }
+
+    if (root.getAttribute(ATTRIBUTES.initialised) !== 'true') {
+        root.addEventListener('click', event => handleClick(event, root, options));
+        root.addEventListener('submit', event => handleSubmit(event, root, options));
+        root.setAttribute(ATTRIBUTES.initialised, 'true');
+    }
 
     if (root.dataset.autopoll === 'true') {
         startPolling(root, options);
@@ -841,4 +1271,20 @@ export const stop = rootId => {
     if (root) {
         stopPolling(root);
     }
+};
+
+/**
+ * Public helper to collect export data for tests.
+ *
+ * @param {String} rootId Root id.
+ * @returns {Object|null}
+ */
+export const collect = rootId => {
+    const root = document.getElementById(rootId);
+
+    if (!root) {
+        return null;
+    }
+
+    return collectExportData(root);
 };
