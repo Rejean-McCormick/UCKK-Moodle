@@ -437,7 +437,7 @@ final class canon_api {
             '33_baccalaureat_architecture_ecosysteme_digital_koa' => [
                 'key' => '33_baccalaureat_architecture_ecosysteme_digital_koa',
                 'path' => 'UCKK_Canon/33_baccalaureat-architecture-ecosysteme-digital-kOA.md',
-                'title' => 'Baccalauréat en Architecture de l’écosystème digital kOA',
+                'title' => 'Voie de l’Architecture de l’écosystème digital kOA',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'architecture_ecosysteme_digital_koa',
                 'sortorder' => 330,
@@ -445,7 +445,7 @@ final class canon_api {
             '34_baccalaureat_metaphysique' => [
                 'key' => '34_baccalaureat_metaphysique',
                 'path' => 'UCKK_Canon/34_baccalaureat-metaphysique.md',
-                'title' => 'Baccalauréat en Métaphysique',
+                'title' => 'Voie de la Métaphysique',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'metaphysique',
                 'sortorder' => 340,
@@ -453,7 +453,7 @@ final class canon_api {
             '35_baccalaureat_architecture_sociotechnique' => [
                 'key' => '35_baccalaureat_architecture_sociotechnique',
                 'path' => 'UCKK_Canon/35_baccalaureat-architecture-sociotechnique.md',
-                'title' => 'Baccalauréat en Architecture sociotechnique',
+                'title' => 'Voie de l’Architecture sociotechnique',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'architecture_sociotechnique',
                 'sortorder' => 350,
@@ -461,7 +461,7 @@ final class canon_api {
             '36_baccalaureat_sciences_politiques' => [
                 'key' => '36_baccalaureat_sciences_politiques',
                 'path' => 'UCKK_Canon/36_baccalaureat-sciences-politiques.md',
-                'title' => 'Baccalauréat en Sciences politiques',
+                'title' => 'Voie des Sciences politiques',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'sciences_politiques',
                 'sortorder' => 360,
@@ -469,7 +469,7 @@ final class canon_api {
             '37_baccalaureat_economie' => [
                 'key' => '37_baccalaureat_economie',
                 'path' => 'UCKK_Canon/37_baccalaureat-economie.md',
-                'title' => 'Baccalauréat en Économie',
+                'title' => 'Voie de l’Économie',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'economie',
                 'sortorder' => 370,
@@ -477,7 +477,7 @@ final class canon_api {
             '38_baccalaureat_ecologie' => [
                 'key' => '38_baccalaureat_ecologie',
                 'path' => 'UCKK_Canon/38_baccalaureat-ecologie.md',
-                'title' => 'Baccalauréat en Écologie',
+                'title' => 'Voie de l’Écologie',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'ecologie',
                 'sortorder' => 380,
@@ -485,7 +485,7 @@ final class canon_api {
             '39_baccalaureat_linguistique_architecture_du_sens' => [
                 'key' => '39_baccalaureat_linguistique_architecture_du_sens',
                 'path' => 'UCKK_Canon/39_baccalaureat-linguistique-architecture-du-sens.md',
-                'title' => 'Baccalauréat en Linguistique et architecture du sens',
+                'title' => 'Voie de la Linguistique et de l’architecture du sens',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'linguistique_architecture_du_sens',
                 'sortorder' => 390,
@@ -493,7 +493,7 @@ final class canon_api {
             '40_baccalaureat_ia_gouvernable' => [
                 'key' => '40_baccalaureat_ia_gouvernable',
                 'path' => 'UCKK_Canon/40_baccalaureat-intelligence-artificielle-gouvernable.md',
-                'title' => 'Baccalauréat en Intelligence artificielle gouvernable',
+                'title' => 'Voie de l’Intelligence artificielle gouvernable',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'intelligence_artificielle_gouvernable',
                 'sortorder' => 400,
@@ -501,7 +501,7 @@ final class canon_api {
             '41_baccalaureat_intervention_sociale' => [
                 'key' => '41_baccalaureat_intervention_sociale',
                 'path' => 'UCKK_Canon/41_baccalaureat-intervention-sociale-systemes-humains.md',
-                'title' => 'Baccalauréat en Intervention sociale et systèmes humains',
+                'title' => 'Voie de l’Intervention sociale et des systèmes humains',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'intervention_sociale',
                 'sortorder' => 410,

@@ -201,7 +201,7 @@ final class block_uckk_dashboard_test extends \advanced_testcase {
             'pathway' => [
                 'id' => 10,
                 'shortname' => 'grand_jeu_social',
-                'fullname' => 'Baccalauréat UCKK — Grand Jeu social',
+                'fullname' => 'Voie du Grand Jeu social',
                 'programname' => 'Grand Jeu social',
                 'status' => 'active',
                 'statuslabel' => 'Active',

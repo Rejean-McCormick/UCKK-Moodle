@@ -171,7 +171,7 @@ final class program_api {
             [
                 'shortname' => 'architecture_ecosysteme_digital_koa',
                 'idnumber' => 'UCKK-PROG-KOA-DIGITAL',
-                'fullname' => 'Baccalauréat en Architecture de l’écosystème digital kOA',
+                'fullname' => 'Voie de l’Architecture de l’écosystème digital kOA',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne pour comprendre, déployer, auditer et gouverner le kOA Digital Ecosystem.',
                 'status' => self::STATUS_ACTIVE,
@@ -181,7 +181,7 @@ final class program_api {
             [
                 'shortname' => 'architecture_sociotechnique',
                 'idnumber' => 'UCKK-PROG-SOCIOTECH',
-                'fullname' => 'Baccalauréat en Architecture sociotechnique',
+                'fullname' => 'Voie de l’Architecture sociotechnique',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne sur les systèmes combinant humains, technologies, institutions, données, règles, rôles, permissions, workflows et mémoire.',
                 'status' => self::STATUS_ACTIVE,
@@ -191,7 +191,7 @@ final class program_api {
             [
                 'shortname' => 'sciences_politiques',
                 'idnumber' => 'UCKK-PROG-POL',
-                'fullname' => 'Baccalauréat en Sciences politiques',
+                'fullname' => 'Voie des Sciences politiques',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne sur le pouvoir, les institutions, les assemblées, les lois, les partis, les mouvements, les votes et la légitimité.',
                 'status' => self::STATUS_ACTIVE,
@@ -201,7 +201,7 @@ final class program_api {
             [
                 'shortname' => 'economie',
                 'idnumber' => 'UCKK-PROG-ECO',
-                'fullname' => 'Baccalauréat en Économie',
+                'fullname' => 'Voie de l’Économie',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne sur l’argent comme règle du jeu : ressources, incitatifs, marchés, travail, valeur, extraction et redistribution.',
                 'status' => self::STATUS_ACTIVE,
@@ -211,7 +211,7 @@ final class program_api {
             [
                 'shortname' => 'ecologie',
                 'idnumber' => 'UCKK-PROG-ECOLOGIE',
-                'fullname' => 'Baccalauréat en Écologie',
+                'fullname' => 'Voie de l’Écologie',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne sur les systèmes vivants, territoires, ressources, crises climatiques et liens entre société et environnement.',
                 'status' => self::STATUS_ACTIVE,
@@ -221,7 +221,7 @@ final class program_api {
             [
                 'shortname' => 'metaphysique',
                 'idnumber' => 'UCKK-PROG-META',
-                'fullname' => 'Baccalauréat en Métaphysique',
+                'fullname' => 'Voie de la Métaphysique',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne d’interprétation, de discernement et de méthode sur vérité, sens, conscience, liberté, pouvoir, ordre, chaos et croyance.',
                 'status' => self::STATUS_ACTIVE,
@@ -231,7 +231,7 @@ final class program_api {
             [
                 'shortname' => 'intelligence_artificielle_gouvernable',
                 'idnumber' => 'UCKK-PROG-IA',
-                'fullname' => 'Baccalauréat en Intelligence artificielle gouvernable',
+                'fullname' => 'Voie de l’Intelligence artificielle gouvernable',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne sur l’IA comme outil de lecture, création, cartographie, simulation et accélération, jamais comme autorité finale.',
                 'status' => self::STATUS_ACTIVE,
@@ -241,7 +241,7 @@ final class program_api {
             [
                 'shortname' => 'linguistique_architecture_du_sens',
                 'idnumber' => 'UCKK-PROG-LING',
-                'fullname' => 'Baccalauréat en Linguistique et architecture du sens',
+                'fullname' => 'Voie de la Linguistique et de l’architecture du sens',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne sur les langues comme infrastructures du monde social : mots, concepts, traductions, catégories, récits et pouvoir symbolique.',
                 'status' => self::STATUS_ACTIVE,
@@ -251,7 +251,7 @@ final class program_api {
             [
                 'shortname' => 'intervention_sociale_systemes_humains',
                 'idnumber' => 'UCKK-PROG-ISH',
-                'fullname' => 'Baccalauréat en Intervention sociale et systèmes humains',
+                'fullname' => 'Voie de l’Intervention sociale et des systèmes humains',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne sur les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, communauté, institutions, aide, dignité et réparation.',
                 'status' => self::STATUS_ACTIVE,

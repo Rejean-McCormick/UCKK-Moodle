@@ -387,7 +387,7 @@ final class pathway {
             [
                 'shortname' => 'grand_jeu_social',
                 'idnumber' => 'UCKK-PATH-GJS',
-                'fullname' => 'Baccalauréat interne du Grand Jeu social',
+                'fullname' => 'Voie UCKK — Niveau visé : Puissance opératoire du Grand Jeu social',
                 'pathwaytype' => self::TYPE_BACCALAUREAT,
                 'description' => 'Parcours interne pour apprendre à lire le Grand Jeu social, ses règles visibles et invisibles, ses institutions, ses récits, ses flux et ses possibilités de réparation.',
                 'requiredcompetencies' => [
@@ -412,7 +412,7 @@ final class pathway {
             [
                 'shortname' => 'architecture_ecosysteme_digital_koa',
                 'idnumber' => 'UCKK-PATH-KOA-DIGITAL',
-                'fullname' => 'Baccalauréat interne en Architecture de l’écosystème digital kOA',
+                'fullname' => 'Voie UCKK — Niveau visé : Puissance opératoire en Architecture de l’écosystème digital kOA',
                 'pathwaytype' => self::TYPE_BACCALAUREAT,
                 'description' => 'Parcours interne pour comprendre, concevoir et gouverner le kOA Digital Ecosystem comme infrastructure numérique opérable, sans confondre l’école UCKK avec toute l’infrastructure kOA.',
                 'requiredcompetencies' => [

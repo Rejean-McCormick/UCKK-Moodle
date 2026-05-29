@@ -214,14 +214,14 @@ function local_uckk_public_programs_public_title(string $fullname, string $short
     $title = preg_replace('/\s+/u', ' ', $title) ?? $title;
     $title = trim($title);
 
-    // Remove suffix such as "— Palier de Magie opérable".
+    // Remove suffix such as "— Niveau de Puissance opératoire".
     $title = preg_replace(
-        '/\s*[—–-]\s*Palier\s+de\s+Magie\s+op[ée]rable\s*$/iu',
+        '/\s*[—–-]\s*Niveau\s+de\s+Magie\s+op[ée]rable\s*$/iu',
         '',
         $title
     ) ?? $title;
 
-    // Special case: "Voie de Magie opérable en Architecture..."
+    // Special case: "Voie de Puissance opératoire en Architecture..."
     $title = preg_replace(
         '/^Voie\s+de\s+Magie\s+op[ée]rable\s+en\s+/iu',
         '',

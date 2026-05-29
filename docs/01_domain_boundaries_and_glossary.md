@@ -137,7 +137,7 @@ Archives preserve both readings and decisions when connected mode is used.
 | Preuve | File, text, link, observation, decision, grade, or archive item supporting competence |
 | Portfolio | Aggregated evidence map attached to a Joueur |
 | Tronc commun | Mandatory course set seeded by `tool_uckkseed` |
-| Baccalauréat UCKK | Internal pathway composed of Moodle categories/courses/competencies/badges |
+| Voie UCKK | Internal pathway composed of Moodle categories/courses/competencies/badges |
 | kOA cycle | Connaître → Choisir → Agir → Se souvenir |
 | Standalone mode | Core UCKK-Moodle operating mode with Konnaxion disabled or absent |
 | Konnaxion-connected mode | Optional operating mode where UCKK-Moodle connects to Konnaxion through Moodle-controlled settings, services, capabilities, logs, privacy coverage, and tests |
