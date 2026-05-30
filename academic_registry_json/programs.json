@@ -2,7 +2,7 @@
   "schema": "uckkseed.preset.v1",
   "component": "tool_uckkseed",
   "preset": "programs",
-  "version": 2026051200,
+  "version": 2026053001,
   "items": [
     {
       "id": "program:tronc-commun",
@@ -82,13 +82,13 @@
         "internal_title": "Mage UCKK du Grand Jeu social",
         "symbolic_title": "Joueur lucide du Grand Jeu social"
       },
-      "status": "draft",
+      "status": "active",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
       "summary": "Voie transversale principale de l’Univers-Cité King Klown. Elle forme des personnes capables de lire la société comme un système composé de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.",
       "moodle": {
         "category_idnumber": "UCKK-GJS",
         "category_path": "UCKK / Voies / Grand Jeu social",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/32_voie-grand-jeu-social-palier-magie-operable.md",
@@ -108,7 +108,7 @@
       "idnumber": "UCKK-PROG-GJS",
       "category_idnumber": "UCKK-GJS",
       "category_path": "UCKK / Voies / Grand Jeu social",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie transversale principale de l’Univers-Cité King Klown. Elle forme des personnes capables de lire la société comme un système composé de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.",
       "category": "UCKK-GJS",
       "visibility": "institution",
@@ -122,7 +122,7 @@
       "id": "program:architecture-ecosysteme-digital-koa-magie-operable",
       "code": "KOA",
       "title": "Voie de l’Architecture de l’écosystème digital kOA",
-      "short_title": "Architecture kOA",
+      "short_title": "Architecture de l’écosystème digital kOA",
       "program_type": "voie_uckk",
       "domain": {
         "id": "systemes-sociotechniques-ecosystemes-numeriques",
@@ -145,7 +145,7 @@
       "moodle": {
         "category_idnumber": "UCKK-KOA",
         "category_path": "UCKK / Voies / Architecture de l’écosystème digital kOA",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/33_voie-magie-operable-architecture-ecosysteme-digital-kOA.md",
@@ -166,7 +166,7 @@
       "idnumber": "UCKK-PROG-KOA",
       "category_idnumber": "UCKK-KOA",
       "category_path": "UCKK / Voies / Architecture de l’écosystème digital kOA",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie formant des architectes sociotechniques capables de comprendre, documenter, opérer, adapter, auditer et déployer l’écosystème digital kOA comme infrastructure de connaissance, de délibération, de décision, d’exécution et de mémoire.",
       "category": "UCKK-KOA",
       "visibility": "institution",
@@ -203,7 +203,7 @@
       "moodle": {
         "category_idnumber": "UCKK-AS",
         "category_path": "UCKK / Voies / Architecture sociotechnique",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/35_voie-architecture-sociotechnique.md",
@@ -224,7 +224,7 @@
       "idnumber": "UCKK-PROG-AS",
       "category_idnumber": "UCKK-AS",
       "category_path": "UCKK / Voies / Architecture sociotechnique",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie fondatrice qui forme des personnes capables de comprendre, concevoir, déployer et auditer des systèmes combinant humains, technologies, institutions, données, règles, rôles, plateformes, workflows, décisions et boucles de mémoire.",
       "category": "UCKK-AS",
       "visibility": "institution",
@@ -255,13 +255,13 @@
         "internal_title": "Mage UCKK des Sciences politiques",
         "symbolic_title": "Stratège civique"
       },
-      "status": "draft",
+      "status": "active",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
       "summary": "Voie formant des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.",
       "moodle": {
         "category_idnumber": "UCKK-SP",
         "category_path": "UCKK / Voies / Sciences politiques",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/36_voie-sciences-politiques.md",
@@ -282,7 +282,7 @@
       "idnumber": "UCKK-PROG-SP",
       "category_idnumber": "UCKK-SP",
       "category_path": "UCKK / Voies / Sciences politiques",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie formant des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.",
       "category": "UCKK-SP",
       "visibility": "institution",
@@ -319,7 +319,7 @@
       "moodle": {
         "category_idnumber": "UCKK-EC",
         "category_path": "UCKK / Voies / Économie",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/37_voie-economie.md",
@@ -340,7 +340,7 @@
       "idnumber": "UCKK-PROG-EC",
       "category_idnumber": "UCKK-EC",
       "category_path": "UCKK / Voies / Économie",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie formant des Aspirants capables de lire l’économie comme une architecture de règles, ressources, flux, incitatifs, intermédiaires, dépendances, capture et opportunités, afin de concevoir des modèles viables et des systèmes plus justes de circulation de la valeur.",
       "category": "UCKK-EC",
       "visibility": "institution",
@@ -377,7 +377,7 @@
       "moodle": {
         "category_idnumber": "UCKK-ECO",
         "category_path": "UCKK / Voies / Écologie",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/38_voie-ecologie-palier-magie-operable.md",
@@ -398,7 +398,7 @@
       "idnumber": "UCKK-PROG-ECO",
       "category_idnumber": "UCKK-ECO",
       "category_path": "UCKK / Voies / Écologie",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie formant des personnes capables de comprendre les systèmes vivants, les territoires, les ressources, les interdépendances matérielles, les crises environnementales et les liens entre société et environnement.",
       "category": "UCKK-ECO",
       "visibility": "institution",
@@ -429,13 +429,13 @@
         "internal_title": "Mage UCKK des Structures invisibles",
         "symbolic_title": "Lecteur des structures invisibles"
       },
-      "status": "draft",
+      "status": "active",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
       "summary": "Voie formant des personnes capables d’étudier les structures invisibles qui organisent notre rapport au réel : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage, croyance, récit et symboles.",
       "moodle": {
         "category_idnumber": "UCKK-ME",
         "category_path": "UCKK / Voies / Métaphysique",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/34_voie-metaphysique-palier-magie-operable.md",
@@ -456,7 +456,7 @@
       "idnumber": "UCKK-PROG-ME",
       "category_idnumber": "UCKK-ME",
       "category_path": "UCKK / Voies / Métaphysique",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie formant des personnes capables d’étudier les structures invisibles qui organisent notre rapport au réel : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage, croyance, récit et symboles.",
       "category": "UCKK-ME",
       "visibility": "institution",
@@ -470,7 +470,7 @@
       "id": "program:intelligence-artificielle-gouvernable-magie-operable",
       "code": "IA",
       "title": "Voie de l’Intelligence artificielle gouvernable",
-      "short_title": "IA gouvernable",
+      "short_title": "Intelligence artificielle gouvernable",
       "program_type": "voie_uckk",
       "domain": {
         "id": "machines-pensantes",
@@ -493,7 +493,7 @@
       "moodle": {
         "category_idnumber": "UCKK-IA",
         "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/40_voie-intelligence-artificielle-gouvernable.md",
@@ -514,7 +514,7 @@
       "idnumber": "UCKK-PROG-IA",
       "category_idnumber": "UCKK-IA",
       "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie formant des Aspirants capables d’utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans jamais lui déléguer l’autorité finale.",
       "category": "UCKK-IA",
       "visibility": "institution",
@@ -545,13 +545,13 @@
         "internal_title": "Mage UCKK du Sens",
         "symbolic_title": "Architecte du sens"
       },
-      "status": "draft",
+      "status": "active",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
       "summary": "Voie formant des personnes capables de comprendre les langues comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes, réputation et pouvoir symbolique.",
       "moodle": {
         "category_idnumber": "UCKK-LI",
         "category_path": "UCKK / Voies / Linguistique et architecture du sens",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/39_voie-magie-operable-linguistique-architecture-du-sens.md",
@@ -572,7 +572,7 @@
       "idnumber": "UCKK-PROG-LI",
       "category_idnumber": "UCKK-LI",
       "category_path": "UCKK / Voies / Linguistique et architecture du sens",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie formant des personnes capables de comprendre les langues comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes, réputation et pouvoir symbolique.",
       "category": "UCKK-LI",
       "visibility": "institution",
@@ -609,7 +609,7 @@
       "moodle": {
         "category_idnumber": "UCKK-IS",
         "category_path": "UCKK / Voies / Intervention sociale et systèmes humains",
-        "visible": false
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/41_voie-intervention-sociale-systemes-humains.md",
@@ -630,7 +630,7 @@
       "idnumber": "UCKK-PROG-IS",
       "category_idnumber": "UCKK-IS",
       "category_path": "UCKK / Voies / Intervention sociale et systèmes humains",
-      "visible": 0,
+      "visible": 1,
       "description": "Voie formant des personnes capables de comprendre les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, famille, communauté, institutions, aide, dignité et réparation.",
       "category": "UCKK-IS",
       "visibility": "institution",
@@ -643,30 +643,31 @@
     {
       "id": "program:medias-vivants-theatre-public-responsable",
       "code": "MV",
-      "title": "Voie secondaire des Médias vivants et du théâtre public responsable",
-      "short_title": "Médias vivants",
-      "program_type": "voie_secondaire",
+      "title": "Voie des Médias vivants et du théâtre public responsable",
+      "short_title": "Médias vivants et théâtre public responsable",
+      "program_type": "voie_uckk",
       "domain": {
         "id": "medias-vivants-theatre-public",
         "title": "Médias vivants et théâtre public responsable"
       },
       "palier": {
-        "id": "voie-secondaire",
-        "title": "Voie secondaire — palier non spécifié dans le catalogue source"
+        "id": "magie-operable",
+        "title": "Puissance opératoire"
       },
       "recognition": {
-        "type": "internal_progression",
-        "title": "Progression interne — Médias vivants et théâtre public responsable",
+        "type": "parchemin_uckk",
+        "title": "Parchemin de Puissance opératoire",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-        "symbolic_title": "Praticien du théâtre public responsable"
+        "symbolic_title": "Praticien du théâtre public responsable",
+        "internal_title": "Mage UCKK des Médias vivants et du théâtre public responsable"
       },
-      "status": "draft",
+      "status": "active",
       "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie secondaire centrée sur le théâtre public, la satire responsable, les récits symboliques, la mobilisation multi-corridor et les interventions publiques capables de rendre les systèmes lisibles sans humilier ni manipuler.",
+      "summary": "Voie centrée sur le théâtre public, la satire responsable, les récits symboliques, la mobilisation multi-corridor et les interventions publiques capables de rendre les systèmes lisibles sans humilier ni manipuler.",
       "moodle": {
         "category_idnumber": "UCKK-MV",
-        "category_path": "UCKK / Voies secondaires / Médias vivants et théâtre public responsable",
-        "visible": false
+        "category_path": "UCKK / Voies / Médias vivants et théâtre public responsable",
+        "visible": true
       },
       "source": {
         "canonical_path": "UCKK_Canon/42_UCKK-liste-et-fiches-de-cours.md",
@@ -678,17 +679,17 @@
         "theatre-public",
         "satire",
         "mobilisation",
-        "voie-secondaire"
+        "puissance-operatoire"
       ],
       "key": "mv",
-      "name": "Voie secondaire des Médias vivants et du théâtre public responsable",
+      "name": "Voie des Médias vivants et du théâtre public responsable",
       "shortname": "MV",
-      "fullname": "Voie secondaire des Médias vivants et du théâtre public responsable",
+      "fullname": "Voie des Médias vivants et du théâtre public responsable",
       "idnumber": "UCKK-PROG-MV",
       "category_idnumber": "UCKK-MV",
-      "category_path": "UCKK / Voies secondaires / Médias vivants et théâtre public responsable",
-      "visible": 0,
-      "description": "Voie secondaire centrée sur le théâtre public, la satire responsable, les récits symboliques, la mobilisation multi-corridor et les interventions publiques capables de rendre les systèmes lisibles sans humilier ni manipuler.",
+      "category_path": "UCKK / Voies / Médias vivants et théâtre public responsable",
+      "visible": 1,
+      "description": "Voie centrée sur le théâtre public, la satire responsable, les récits symboliques, la mobilisation multi-corridor et les interventions publiques capables de rendre les systèmes lisibles sans humilier ni manipuler.",
       "category": "UCKK-MV",
       "visibility": "institution",
       "sortorder": 120,
@@ -702,7 +703,7 @@
     "source_schema_version": "1.0",
     "source_preset_type": "programs",
     "source_family": "UCKK canon",
-    "source_generated_at": "2026-05-18T00:00:00-04:00",
+    "source_generated_at": "2026-05-30T00:00:00-04:00",
     "institution": {
       "id": "uckk",
       "short_name": "UCKK",
@@ -725,7 +726,13 @@
         "category_path",
         "visible"
       ],
-      "removed_items": 0
+      "removed_items": 0,
+      "nomenclature_errata_applied": [
+        "Public Voie titles do not include Niveau or Palier labels.",
+        "Visible labels use Puissance opératoire instead of Magie opérable.",
+        "GJS, SP, ME, LI and MV are active public Voies.",
+        "MV is normalized as a Voie UCKK, not a secondary public label."
+      ]
     }
   }
 }
