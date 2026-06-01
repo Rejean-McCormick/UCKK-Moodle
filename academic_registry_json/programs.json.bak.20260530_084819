@@ -134,7 +134,7 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
+        "title": "Parchemin de Puissance opératoire en Architecture de l’écosystème digital kOA",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK de l’Architecture de l’écosystème digital kOA",
         "symbolic_title": "Architecte kOA"
@@ -192,7 +192,7 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
+        "title": "Parchemin de Puissance opératoire en Architecture sociotechnique",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK en Architecture sociotechnique",
         "symbolic_title": "Architecte du Grand Jeu"
@@ -308,7 +308,7 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
+        "title": "Parchemin de Puissance opératoire — Voie d’Économie",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK en Économie",
         "symbolic_title": "Architecte d’opportunités"
@@ -482,7 +482,7 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
+        "title": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
         "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
         "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
         "symbolic_title": "Cartographe augmenté"
@@ -644,7 +644,7 @@
       "id": "program:medias-vivants-theatre-public-responsable",
       "code": "MV",
       "title": "Voie des Médias vivants et du théâtre public responsable",
-      "short_title": "Médias vivants",
+      "short_title": "Médias vivants et théâtre public responsable",
       "program_type": "voie_uckk",
       "domain": {
         "id": "medias-vivants-theatre-public",
@@ -679,8 +679,7 @@
         "theatre-public",
         "satire",
         "mobilisation",
-        "puissance-operatoire",
-        "voie-uckk"
+        "puissance-operatoire"
       ],
       "key": "mv",
       "name": "Voie des Médias vivants et du théâtre public responsable",

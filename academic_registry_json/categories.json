@@ -59,14 +59,17 @@
       "idnumber": "UCKK-GJS",
       "path": "UCKK / 02 — Voie du Grand Jeu social",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré à la lecture, la cartographie et l’action dans le Grand Jeu social.",
+      "description": "Voie consacrée à la lecture, à la cartographie et à l’action dans le Grand Jeu social.",
       "sortorder": 30,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "grand_jeu_social",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-02-GRAND-JEU-SOCIAL"
+        "legacy_idnumber": "UCKK-CAT-02-GRAND-JEU-SOCIAL",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-02-GRAND-JEU-SOCIAL"
     },
@@ -76,14 +79,17 @@
       "idnumber": "UCKK-KOA",
       "path": "UCKK / 03 — Voie de l’Architecture de l’écosystème digital kOA",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré à l’architecture de l’écosystème digital kOA et à ses infrastructures gouvernables.",
+      "description": "Voie consacrée à l’architecture de l’écosystème digital kOA et à ses infrastructures gouvernables.",
       "sortorder": 40,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "architecture_ecosysteme_digital_koa",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-03-KOA-DIGITAL"
+        "legacy_idnumber": "UCKK-CAT-03-KOA-DIGITAL",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-03-KOA-DIGITAL"
     },
@@ -93,14 +99,17 @@
       "idnumber": "UCKK-AS",
       "path": "UCKK / 04 — Voie de l’Architecture sociotechnique",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré aux systèmes sociotechniques, aux institutions, aux infrastructures sociales et aux dispositifs d’action.",
+      "description": "Voie consacrée aux systèmes sociotechniques, aux institutions, aux infrastructures sociales et aux dispositifs d’action.",
       "sortorder": 50,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "architecture_sociotechnique",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-04-SOCIOTECHNIQUE"
+        "legacy_idnumber": "UCKK-CAT-04-SOCIOTECHNIQUE",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-04-SOCIOTECHNIQUE"
     },
@@ -110,14 +119,17 @@
       "idnumber": "UCKK-SP",
       "path": "UCKK / 05 — Voie des Sciences politiques",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré aux institutions, pouvoirs, conflits, décisions publiques et formes de légitimité.",
+      "description": "Voie consacrée aux institutions, aux pouvoirs, aux conflits, aux décisions publiques et aux formes de légitimité.",
       "sortorder": 60,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "sciences_politiques",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-05-SCIENCES-POLITIQUES"
+        "legacy_idnumber": "UCKK-CAT-05-SCIENCES-POLITIQUES",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-05-SCIENCES-POLITIQUES"
     },
@@ -127,14 +139,17 @@
       "idnumber": "UCKK-EC",
       "path": "UCKK / 06 — Voie de l’Économie",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré aux systèmes économiques, aux ressources, aux échanges, à la valeur et aux institutions économiques.",
+      "description": "Voie consacrée aux systèmes économiques, aux ressources, aux échanges, à la valeur et aux institutions économiques.",
       "sortorder": 70,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "economie",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-06-ECONOMIE"
+        "legacy_idnumber": "UCKK-CAT-06-ECONOMIE",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-06-ECONOMIE"
     },
@@ -144,14 +159,17 @@
       "idnumber": "UCKK-ECO",
       "path": "UCKK / 07 — Voie de l’Écologie",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré aux systèmes vivants, milieux, interdépendances écologiques et responsabilités collectives.",
+      "description": "Voie consacrée aux systèmes vivants, aux milieux, aux interdépendances écologiques et aux responsabilités collectives.",
       "sortorder": 80,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "ecologie",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-07-ECOLOGIE"
+        "legacy_idnumber": "UCKK-CAT-07-ECOLOGIE",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-07-ECOLOGIE"
     },
@@ -161,28 +179,31 @@
       "idnumber": "UCKK-ME",
       "path": "UCKK / 08 — Voie de la Métaphysique",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré aux concepts fondamentaux, cadres d’interprétation, visions du monde et architectures du sens.",
+      "description": "Voie consacrée aux concepts fondamentaux, aux cadres d’interprétation, aux visions du monde et aux architectures du sens.",
       "sortorder": 90,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "metaphysique",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-08-METAPHYSIQUE"
+        "legacy_idnumber": "UCKK-CAT-08-METAPHYSIQUE",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-08-METAPHYSIQUE"
     },
     {
       "id": "09_baccalaureat_ia_gouvernable",
-      "name": "09 — Baccalauréat IA gouvernable",
+      "name": "09 — Voie de l’Intelligence artificielle gouvernable",
       "idnumber": "UCKK-IA",
-      "path": "UCKK / 09 — Baccalauréat IA gouvernable",
+      "path": "UCKK / 09 — Voie de l’Intelligence artificielle gouvernable",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré à l’intelligence artificielle gouvernable, non souveraine, documentée et soumise à validation humaine.",
+      "description": "Voie consacrée à l’intelligence artificielle gouvernable, non souveraine, documentée et soumise à validation humaine.",
       "sortorder": 100,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "intelligence_artificielle_gouvernable",
         "ai_policy": {
           "non_sovereign": true,
@@ -190,73 +211,85 @@
           "allow_decision_automation": false
         },
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-09-IA-GOUVERNABLE"
+        "legacy_idnumber": "UCKK-CAT-09-IA-GOUVERNABLE",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-09-IA-GOUVERNABLE"
     },
     {
       "id": "10_baccalaureat_linguistique_architecture_du_sens",
-      "name": "10 — Baccalauréat Linguistique architecture du sens",
+      "name": "10 — Voie de la Linguistique et de l’architecture du sens",
       "idnumber": "UCKK-LI",
-      "path": "UCKK / 10 — Baccalauréat Linguistique architecture du sens",
+      "path": "UCKK / 10 — Voie de la Linguistique et de l’architecture du sens",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré au langage, aux signes, aux récits, aux cadres symboliques et à l’architecture du sens.",
+      "description": "Voie consacrée au langage, aux signes, aux récits, aux cadres symboliques et à l’architecture du sens.",
       "sortorder": 110,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "linguistique_architecture_du_sens",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-10-LINGUISTIQUE-SENS"
+        "legacy_idnumber": "UCKK-CAT-10-LINGUISTIQUE-SENS",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-10-LINGUISTIQUE-SENS"
     },
     {
       "id": "11_baccalaureat_intervention_sociale",
-      "name": "11 — Baccalauréat Intervention sociale",
+      "name": "11 — Voie de l’Intervention sociale et des systèmes humains",
       "idnumber": "UCKK-IS",
-      "path": "UCKK / 11 — Baccalauréat Intervention sociale",
+      "path": "UCKK / 11 — Voie de l’Intervention sociale et des systèmes humains",
       "parent_idnumber": "UCKK",
-      "description": "Programme consacré à l’intervention sociale, aux systèmes humains, à l’accompagnement, à la dignité et à l’action responsable.",
+      "description": "Voie consacrée à l’intervention sociale, aux systèmes humains, à l’accompagnement, à la dignité et à l’action responsable.",
       "sortorder": 120,
       "visible": 1,
       "metadata": {
-        "type": "baccalaureat",
+        "type": "voie",
         "program": "intervention_sociale",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-11-INTERVENTION-SOCIALE"
+        "legacy_idnumber": "UCKK-CAT-11-INTERVENTION-SOCIALE",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       },
       "legacy_idnumber": "UCKK-CAT-11-INTERVENTION-SOCIALE"
     },
     {
       "id": "12_mineure_medias_vivants_theatre_public",
-      "name": "12 — Mineure Médias vivants théâtre public",
+      "name": "12 — Voie des Médias vivants et du théâtre public",
       "idnumber": "UCKK-MV",
-      "path": "UCKK / 12 — Mineure Médias vivants théâtre public",
+      "path": "UCKK / 12 — Voie des Médias vivants et du théâtre public",
       "parent_idnumber": "UCKK",
-      "description": "Mineure consacrée aux médias vivants, au théâtre public, à la performance et à la responsabilité de l’expression publique.",
+      "description": "Voie consacrée aux médias vivants, au théâtre public, à la performance et à la responsabilité de l’expression publique.",
       "sortorder": 130,
       "visible": 1,
       "metadata": {
-        "type": "mineure",
+        "type": "voie",
         "program": "medias_vivants_theatre_public",
         "formula": "Le spectacle est permis. L’abus ne l’est pas.",
         "language": "fr",
-        "legacy_idnumber": "UCKK-CAT-12-MEDIAS-VIVANTS"
+        "legacy_idnumber": "UCKK-CAT-12-MEDIAS-VIVANTS",
+        "niveau_vise": "Initiation",
+        "titre_interne": "Initié UCKK",
+        "parchemin_uckk": "Parchemin d’Initiation"
       },
       "legacy_idnumber": "UCKK-CAT-12-MEDIAS-VIVANTS"
     },
     {
       "id": "13_seminaires_avances_laboratoires",
-      "name": "13 — Séminaires avancés et laboratoires",
+      "name": "13 — Laboratoires avancés et chantiers",
       "idnumber": "UCKK-CAT-13-SEMINAIRES-LABS",
-      "path": "UCKK / 13 — Séminaires avancés et laboratoires",
+      "path": "UCKK / 13 — Laboratoires avancés et chantiers",
       "parent_idnumber": "UCKK",
-      "description": "Séminaires avancés, laboratoires, prototypes, recherches appliquées et expérimentations encadrées.",
+      "description": "Laboratoires avancés, chantiers, prototypes, recherches appliquées et expérimentations encadrées.",
       "sortorder": 140,
       "visible": 1,
       "metadata": {
-        "type": "seminaire_laboratoire",
+        "type": "laboratoire_chantier",
         "program": "seminaires_avances_laboratoires",
         "language": "fr"
       }
