@@ -2098,3 +2098,24 @@
 .path-mod-uckkarchive .uckkarchive-media-library-editor__summary {
     max-width: 720px !important;
 }
+
+
+/* Public UCKK CTA contrast: keep text readable on petrol buttons. */
+.local-uckk .local-uckk-public-cta__link,
+.local-uckk .local-uckk-public-cta__link:link,
+.local-uckk .local-uckk-public-cta__link:visited,
+.local-uckk .local-uckk-public-cta__link:hover,
+.local-uckk .local-uckk-public-cta__link:focus,
+.local-uckk .local-uckk-public-cta__action .btn,
+.local-uckk .local-uckk-public-cta__action .btn:link,
+.local-uckk .local-uckk-public-cta__action .btn:visited,
+.local-uckk .local-uckk-public-cta__action .btn:hover,
+.local-uckk .local-uckk-public-cta__action .btn:focus {
+    color: var(--uckk-card, #fffaf0) !important;
+    text-decoration: none !important;
+}
+
+.local-uckk .local-uckk-public-cta__link *,
+.local-uckk .local-uckk-public-cta__action .btn * {
+    color: inherit !important;
+}

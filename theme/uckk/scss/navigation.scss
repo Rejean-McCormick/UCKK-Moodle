@@ -724,6 +724,44 @@ $uckk-nav-transition: 160ms ease-in-out !default;
     }
 }
 
+/**
+ * Keep user-menu entries readable on the pale dropdown surface.
+ * The active/top entry uses the same green pill language as public navigation.
+ */
+.navbar.fixed-top .usermenu .dropdown-menu,
+.navbar.fixed-top #user-action-menu {
+    background-color: $uckk-nav-bg;
+    color: $uckk-nav-text;
+}
+
+.navbar.fixed-top .usermenu .dropdown-menu .dropdown-item,
+.navbar.fixed-top #user-action-menu .dropdown-item {
+    color: $uckk-nav-accent !important;
+    background-color: transparent;
+    border-radius: $uckk-nav-pill-radius;
+    font-weight: 650;
+}
+
+.navbar.fixed-top .usermenu .dropdown-menu .dropdown-item:hover,
+.navbar.fixed-top .usermenu .dropdown-menu .dropdown-item:focus,
+.navbar.fixed-top .usermenu .dropdown-menu .dropdown-item.active,
+.navbar.fixed-top .usermenu .dropdown-menu .dropdown-item:first-child,
+.navbar.fixed-top #user-action-menu .dropdown-item:hover,
+.navbar.fixed-top #user-action-menu .dropdown-item:focus,
+.navbar.fixed-top #user-action-menu .dropdown-item.active,
+.navbar.fixed-top #user-action-menu .dropdown-item:first-child {
+    color: $uckk-nav-active-text !important;
+    background-color: $uckk-nav-accent !important;
+    text-decoration: none;
+}
+
+.navbar.fixed-top .usermenu .dropdown-menu .dropdown-item:hover,
+.navbar.fixed-top .usermenu .dropdown-menu .dropdown-item:focus,
+.navbar.fixed-top #user-action-menu .dropdown-item:hover,
+.navbar.fixed-top #user-action-menu .dropdown-item:focus {
+    background-color: $uckk-nav-accent-strong !important;
+}
+
 .popover-region {
     .popover-region-toggle {
         border-radius: $uckk-nav-radius-sm;
