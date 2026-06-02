@@ -62,8 +62,6 @@
         "title": "Univers-Cité King Klown",
         "subtitle": "Campus Moodle public",
         "summary": "Présentation publique d’UCKK.",
-        "boundarynotice": "Les reconnaissances UCKK ne sont pas des diplômes publics reconnus par l’État.",
-
         "hasnavigation": true,
         "navigationclasses": "local-uckk-public-nav local-uckk-public-nav--singleline",
         "navigation": [
@@ -117,15 +115,6 @@
         "has_mediatheque_explorer": true,
         "mediatheque_explorer_id": "local-uckk-mediatheque-explorer-abc123",
         "mediatheque_initial_state_json": "{\"cmid\":0,\"archiveid\":0,\"query\":\"\",\"filters\":{},\"page\":1,\"perpage\":12,\"sort\":\"relevance\"}",
-
-        "hasnotices": true,
-        "notices": [
-            {
-                "type": "institutional",
-                "title": "Reconnaissances internes UCKK",
-                "body": "Attestations de parcours propres à la cité-école, non encore reconnues par l’État."
-            }
-        ],
 
         "hasmetadata": true,
         "metadata": [
@@ -217,15 +206,6 @@
                     </p>
                 {{/summary}}
 
-                {{#boundarynotice}}
-                    <div
-                        class="local-uckk-public-boundary"
-                        role="note"
-                        data-region="local-uckk-boundary-notice"
-                    >
-                        {{boundarynotice}}
-                    </div>
-                {{/boundarynotice}}
             </div>
         </header>
 
@@ -546,26 +526,6 @@
                     aria-label="Repères institutionnels"
                 >
                     <div class="local-uckk-public-aside__inner">
-                        {{#hasnotices}}
-                            <section class="local-uckk-public-section local-uckk-public-section--notices">
-                                {{#notices}}
-                                    <article class="{{classes}}">
-                                        {{#title}}
-                                            <h2 class="local-uckk-public-notice__title">
-                                                {{title}}
-                                            </h2>
-                                        {{/title}}
-
-                                        {{#body}}
-                                            <p class="local-uckk-public-notice__body">
-                                                {{body}}
-                                            </p>
-                                        {{/body}}
-                                    </article>
-                                {{/notices}}
-                            </section>
-                        {{/hasnotices}}
-
                         {{#hasmetadata}}
                             <section
                                 class="local-uckk-public-section local-uckk-public-section--metadata"
