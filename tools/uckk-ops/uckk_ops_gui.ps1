@@ -141,8 +141,20 @@ function Invoke-UckkCheckedNative {
         [string]$ErrorMessage = "Commande échouée."
     )
 
-    $output = & $ScriptBlock 2>&1
-    $exit = $LASTEXITCODE
+    # Some native tools, especially git push/pull over HTTPS/SSH, write normal
+    # progress lines to STDERR even when the command succeeds. With the global
+    # $ErrorActionPreference set to Stop, PowerShell can treat those STDERR lines
+    # as terminating NativeCommandError exceptions. Capture them as output and
+    # decide success/failure only from the native exit code.
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = "Continue"
+        $output = & $ScriptBlock 2>&1
+        $exit = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
 
     if ($null -ne $output) {
         $output
@@ -261,7 +273,7 @@ function Invoke-UckkGitCommitPush {
         throw "Message de commit requis."
     }
 
-    $status = & git -C $Script:GitRepoRoot status --porcelain 2>&1
+    $status = Invoke-UckkGitCommand @("status", "--porcelain")
     if ([string]::IsNullOrWhiteSpace(($status -join "`n"))) {
         "No local changes to commit."
     }
