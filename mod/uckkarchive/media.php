@@ -49,10 +49,13 @@ defined('MOODLE_INTERNAL') || die();
 
 use core\output\notification;
 use mod_uckkarchive\local\context_resolver;
+use mod_uckkarchive\form\media_form;
+use mod_uckkarchive\local\media as media_record;
 use mod_uckkarchive\local\media_collection;
 use mod_uckkarchive\local\media_policy;
 use mod_uckkarchive\local\media_search;
 use mod_uckkarchive\output\media_library;
+use mod_uckkarchive\output\media_library_editor;
 
 /**
  * Get a component string with fallback.
@@ -347,7 +350,6 @@ function mod_uckkarchive_media_build_filters(
         'external',
         'unknown',
     ];
-
     $q = optional_param('q', '', PARAM_NOTAGS);
     if ($q === '') {
         $q = optional_param('search', '', PARAM_NOTAGS);
@@ -543,6 +545,224 @@ function mod_uckkarchive_media_build_page_url(int $cmid, array $filters): moodle
 }
 
 /**
+ * Return whether the current action opens the unified media-library editor.
+ *
+ * @param string $action Current action.
+ * @return bool
+ */
+function mod_uckkarchive_media_is_editor_action(string $action): bool {
+    return in_array($action, ['add', 'edit'], true);
+}
+
+/**
+ * Build a Moodle form URL for the media-library editor.
+ *
+ * @param int $cmid Course module id.
+ * @param string $action Current action.
+ * @param int $mediaid Optional media id.
+ * @return moodle_url
+ */
+function mod_uckkarchive_media_editor_form_url(int $cmid, string $action, int $mediaid = 0): moodle_url {
+    $params = [
+        'id' => $cmid,
+        'action' => $action,
+    ];
+
+    if ($mediaid > 0) {
+        $params['mediaid'] = $mediaid;
+    }
+
+    return new moodle_url('/mod/uckkarchive/media.php', $params);
+}
+
+/**
+ * Prepare a media record for the existing media form.
+ *
+ * The form is the canonical field collector. This adapter maps storage fields
+ * and older aliases back into the form field names without deciding policy.
+ *
+ * @param stdClass $media Media record.
+ * @param stdClass $course Course record.
+ * @param stdClass $cm Course module record.
+ * @param stdClass $archive Archive instance.
+ * @param context_module $context Module context.
+ * @return stdClass
+ */
+function mod_uckkarchive_media_prepare_editor_form_data(
+    stdClass $media,
+    stdClass $course,
+    stdClass $cm,
+    stdClass $archive,
+    context_module $context
+): stdClass {
+    $data = clone $media;
+
+    $data->id = (int)$cm->id;
+    $data->mediaid = (int)($media->id ?? 0);
+    $data->archiveid = (int)$archive->id;
+    $data->courseid = (int)$course->id;
+    $data->cmid = (int)$cm->id;
+    $data->contextid = (int)$context->id;
+
+    if (!empty($media->licensekey) && empty($data->license)) {
+        $data->license = (string)$media->licensekey;
+    }
+
+    if (!empty($media->rightsstatement) && empty($data->rightsnote)) {
+        $data->rightsnote = (string)$media->rightsstatement;
+    }
+
+    if (!empty($media->rightsstatus) && empty($data->rightsnote)) {
+        $data->rightsnote = (string)$media->rightsstatus;
+    }
+
+    if (!empty($media->source) && empty($data->sourcetype)) {
+        $data->sourcetype = (string)$media->source;
+    }
+
+    if (!empty($media->metadata) && is_string($media->metadata)) {
+        $decoded = json_decode($media->metadata, true);
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+            $data->metadata = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $data->creator = (string)($decoded['creator'] ?? ($data->creator ?? ''));
+            $data->datecreated = (string)($decoded['datecreated'] ?? ($data->datecreated ?? ''));
+            $data->tags = !empty($decoded['keywords']) && is_array($decoded['keywords'])
+                ? implode(', ', array_map('strval', $decoded['keywords']))
+                : (string)($data->tags ?? '');
+            $data->internalnote = (string)($decoded['notes'] ?? ($data->internalnote ?? ''));
+        }
+    }
+
+    return $data;
+}
+
+/**
+ * Convert submitted media form data into media persistence fields.
+ *
+ * @param stdClass $data Submitted form data.
+ * @param stdClass $course Course record.
+ * @param stdClass $cm Course module record.
+ * @param stdClass $archive Archive instance.
+ * @param context_module $context Module context.
+ * @return array<string,mixed>
+ */
+function mod_uckkarchive_media_editor_record_from_form(
+    stdClass $data,
+    stdClass $course,
+    stdClass $cm,
+    stdClass $archive,
+    context_module $context
+): array {
+    $metadata = mod_uckkarchive_media_editor_metadata_from_form($data);
+
+    return [
+        'archiveid' => (int)$archive->id,
+        'courseid' => (int)$course->id,
+        'cmid' => (int)$cm->id,
+        'contextid' => (int)$context->id,
+        'externalworkid' => (int)($data->externalworkid ?? 0),
+        'title' => (string)($data->title ?? ''),
+        'summary' => (string)($data->summary ?? ''),
+        'description' => (string)($data->description ?? ''),
+        'mediatype' => (string)($data->mediatype ?? 'document'),
+        'sourcetype' => (string)($data->sourcetype ?? ''),
+        'source' => (string)($data->sourcetype ?? ''),
+        'sourceurl' => (string)($data->sourceurl ?? ''),
+        'license' => (string)($data->license ?? ''),
+        'licensekey' => (string)($data->license ?? ''),
+        'rightsstatement' => (string)($data->rightsnote ?? ''),
+        'status' => (string)($data->status ?? 'draft'),
+        'visibility' => (string)($data->visibility ?? 'course'),
+        'audiencesuitability' => (string)($data->audiencesuitability ?? 'guided'),
+        'culturalprotocol' => !empty($data->culturalprotocolrequired) ? 1 : 0,
+        'restricted' => mod_uckkarchive_media_editor_is_restricted_form_data($data) ? 1 : 0,
+        'language' => (string)($data->language ?? ''),
+        'metadata' => $metadata,
+    ];
+}
+
+/**
+ * Convert media-form metadata fields into a structured metadata array.
+ *
+ * @param stdClass $data Submitted form data.
+ * @return array<string,mixed>
+ */
+function mod_uckkarchive_media_editor_metadata_from_form(stdClass $data): array {
+    $metadata = [];
+
+    $rawmetadata = trim((string)($data->metadata ?? ''));
+    if ($rawmetadata !== '') {
+        $decoded = json_decode($rawmetadata, true);
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+            $metadata = $decoded;
+        } else {
+            $metadata['notes_raw'] = $rawmetadata;
+        }
+    }
+
+    foreach ([
+        'creator',
+        'datecreated',
+        'alttext',
+        'transcriptsummary',
+        'collectionhint',
+        'advisoryhint',
+        'advisoryseverity',
+        'culturalprotocolnote',
+        'sourceownership',
+        'citation',
+        'externalworktitle',
+        'externalworktype',
+        'externalworkcreator',
+        'externalworkyear',
+        'externalworkidentifier',
+        'externalworknote',
+        'internalnote',
+    ] as $field) {
+        if (isset($data->{$field}) && trim((string)$data->{$field}) !== '') {
+            $metadata[$field] = (string)$data->{$field};
+        }
+    }
+
+    $tags = trim((string)($data->tags ?? ''));
+    if ($tags !== '') {
+        $decodedtags = json_decode($tags, true);
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decodedtags)) {
+            $metadata['keywords'] = array_values(array_map('strval', $decodedtags));
+        } else {
+            $metadata['keywords'] = array_values(array_filter(array_map('trim', explode(',', $tags)), 'strlen'));
+        }
+    }
+
+    if (!empty($data->hasadvisory)) {
+        $metadata['hasadvisory'] = true;
+    }
+
+    if (!empty($data->culturalprotocolrequired)) {
+        $metadata['culturalprotocolrequired'] = true;
+    }
+
+    return $metadata;
+}
+
+/**
+ * Whether submitted form data implies restricted handling.
+ *
+ * @param stdClass $data Submitted form data.
+ * @return bool
+ */
+function mod_uckkarchive_media_editor_is_restricted_form_data(stdClass $data): bool {
+    $visibility = (string)($data->visibility ?? '');
+    $audience = (string)($data->audiencesuitability ?? '');
+    $status = (string)($data->status ?? '');
+
+    return in_array($visibility, ['restricted', 'restricted_integrity', 'restricted_cultural'], true)
+        || in_array($audience, ['restricted', 'restricted_integrity', 'restricted_cultural', 'staff_only'], true)
+        || $status === 'restricted'
+        || !empty($data->culturalprotocolrequired);
+}
+
+/**
  * Load media records for the current request.
  *
  * @param int $archiveid Archive id.
@@ -709,6 +929,57 @@ $filters = mod_uckkarchive_media_build_filters($mediaid, $collectionid, $externa
 require_login($course, false, $cm);
 mod_uckkarchive_media_require_action_capabilities($context, $action, $filters, $media, $collection);
 
+$editorform = null;
+if (mod_uckkarchive_media_is_editor_action($action)) {
+    $formurl = mod_uckkarchive_media_editor_form_url((int)$cm->id, $action, $mediaid);
+    $editorform = new media_form($formurl, [
+        'context' => $context,
+        'course' => $course,
+        'cm' => $cm,
+        'archive' => $archive,
+        'archiveid' => (int)$archive->id,
+        'courseid' => (int)$course->id,
+        'cmid' => (int)$cm->id,
+        'contextid' => (int)$context->id,
+        'returnurl' => (new moodle_url('/mod/uckkarchive/media.php', ['id' => (int)$cm->id]))->out(false),
+    ]);
+
+    if ($media !== null) {
+        $editorform->set_data(mod_uckkarchive_media_prepare_editor_form_data($media, $course, $cm, $archive, $context));
+    }
+
+    if ($editorform->is_cancelled()) {
+        redirect(new moodle_url('/mod/uckkarchive/media.php', ['id' => (int)$cm->id]));
+    }
+
+    if (($formdata = $editorform->get_data()) !== null) {
+        $record = mod_uckkarchive_media_editor_record_from_form($formdata, $course, $cm, $archive, $context);
+
+        if ($action === 'edit') {
+            if ($media === null) {
+                throw new moodle_exception('missingparam', 'error', '', 'mediaid');
+            }
+
+            $saved = media_record::update($mediaid, $record);
+            $message = mod_uckkarchive_media_string('mediaupdated', 'Media updated.');
+        } else {
+            $saved = media_record::create($record);
+            $message = mod_uckkarchive_media_string('mediacreated', 'Media created.');
+        }
+
+        redirect(
+            new moodle_url('/mod/uckkarchive/media.php', [
+                'id' => (int)$cm->id,
+                'mediaid' => (int)$saved->id,
+                'action' => 'edit',
+            ]),
+            $message,
+            null,
+            notification::NOTIFY_SUCCESS
+        );
+    }
+}
+
 $pageurl = mod_uckkarchive_media_build_page_url((int)$cm->id, $filters);
 $viewurl = new moodle_url('/mod/uckkarchive/view.php', ['id' => (int)$cm->id]);
 $return = $returnurl !== '' ? new moodle_url($returnurl) : $viewurl;
@@ -733,6 +1004,17 @@ $PAGE->requires->js_call_amd('mod_uckkarchive/media', 'init', [[
     'collectionid' => $collectionid,
     'action' => $action,
 ]]);
+
+if (mod_uckkarchive_media_is_editor_action($action)) {
+    $PAGE->requires->js_call_amd('mod_uckkarchive/media_library_editor', 'init', [[
+        'root' => 'uckkarchive-media-library-editor',
+        'cmid' => (int)$cm->id,
+        'archiveid' => (int)$archive->id,
+        'contextid' => (int)$context->id,
+        'mediaid' => $mediaid,
+        'action' => $action,
+    ]]);
+}
 
 if ($action === 'collection' || $action === 'addcollection') {
     $PAGE->requires->js_call_amd('mod_uckkarchive/media_collection', 'init', [[
@@ -786,22 +1068,42 @@ try {
 
     $renderer = $PAGE->get_renderer('mod_uckkarchive');
 
-    $renderable = new media_library(
-        $context,
-        $course,
-        $cm,
-        $archive,
-        $mediaresult->items,
-        $collections,
-        $filters,
-        (int)$mediaresult->total,
-        (int)$mediaresult->page,
-        (int)$mediaresult->perpage,
-        $notificationmessage,
-        $notificationtype
-    );
+    if (mod_uckkarchive_media_is_editor_action($action) && $editorform !== null) {
+        ob_start();
+        $editorform->display();
+        $formhtml = (string)ob_get_clean();
 
-    echo $renderer->render($renderable);
+        $renderable = new media_library_editor(
+            $context,
+            $course,
+            $cm,
+            $archive,
+            $media,
+            $formhtml,
+            $action,
+            $notificationmessage,
+            $notificationtype
+        );
+
+        echo $renderer->render($renderable);
+    } else {
+        $renderable = new media_library(
+            $context,
+            $course,
+            $cm,
+            $archive,
+            $mediaresult->items,
+            $collections,
+            $filters,
+            (int)$mediaresult->total,
+            (int)$mediaresult->page,
+            (int)$mediaresult->perpage,
+            $notificationmessage,
+            $notificationtype
+        );
+
+        echo $renderer->render($renderable);
+    }
 } catch (required_capability_exception $exception) {
     debugging($exception->getMessage(), DEBUG_DEVELOPER, $exception->getTrace());
 

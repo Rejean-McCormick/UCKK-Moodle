@@ -52,7 +52,9 @@ defined('MOODLE_INTERNAL') || die();
  * - hascards, cards, cardsheading;
  * - hasnotices, notices;
  * - hasmetadata, metadata;
- * - hascta, cta.
+ * - hascta, cta;
+ * - has_mediatheque_explorer, mediatheque_explorer_id, mediatheque_initial_state,
+ *   mediatheque_initial_state_json.
  *
  * @package local_uckk
  */
@@ -87,6 +89,7 @@ final class public_page implements renderable, templatable {
     public const KEY_ASSEMBLIES = 'assemblies';
     public const KEY_INTEGRITY = 'integrity';
     public const KEY_ARCHIVES = 'archives';
+    public const KEY_MEDIATHEQUE = 'mediatheque';
     public const KEY_NEWS = 'news';
     public const KEY_CONTACT = 'contact';
 
@@ -198,6 +201,18 @@ final class public_page implements renderable, templatable {
         );
         $data->hascta = !empty((array)$data->cta);
 
+        $data->has_mediatheque_explorer = self::bool_value($this->definition, 'has_mediatheque_explorer');
+        $data->mediatheque_explorer_id = self::dom_id_value(
+            $this->definition,
+            'mediatheque_explorer_id',
+            'local-uckk-mediatheque-explorer-' . substr(md5($data->uniqid), 0, 8)
+        );
+        $data->mediatheque_initial_state = self::array_value($this->definition, 'mediatheque_initial_state');
+        $data->mediatheque_initial_state_json = json_encode(
+            $data->mediatheque_initial_state,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        ) ?: '{}';
+
         $data->hasaside = $data->hasnotices || $data->hasmetadata || $data->hascta;
         $data->rootclasses = self::page_classes($this->slug, $layout, $data->hasaside);
         $data->classes = $data->rootclasses;
@@ -255,6 +270,7 @@ final class public_page implements renderable, templatable {
             self::KEY_ASSEMBLIES => ['Assemblées', 'Délibérer, vérifier, orienter'],
             self::KEY_INTEGRITY => ['Intégrité', 'Protéger la preuve et la dignité'],
             self::KEY_ARCHIVES => ['Archives', 'Conserver les traces publiques'],
+            self::KEY_MEDIATHEQUE => ['Médiathèque UCKK', 'Archives publiques'],
             self::KEY_NEWS => ['Actualités', 'Nouvelles et appels'],
             self::KEY_CONTACT => ['Contact', 'Entrer en relation'],
         ];
@@ -279,6 +295,9 @@ final class public_page implements renderable, templatable {
             'notices' => [],
             'metadata' => [],
             'cta' => [],
+            'has_mediatheque_explorer' => false,
+            'mediatheque_explorer_id' => '',
+            'mediatheque_initial_state' => [],
         ];
     }
 
@@ -298,6 +317,7 @@ final class public_page implements renderable, templatable {
             self::KEY_ASSEMBLIES => 'Repères d’assemblée',
             self::KEY_INTEGRITY => 'Repères d’intégrité',
             self::KEY_ARCHIVES => 'Repères d’archive',
+            self::KEY_MEDIATHEQUE => 'Explorer la Médiathèque',
             self::KEY_NEWS => 'Repères d’actualité',
             self::KEY_CONTACT => 'Repères de contact',
         ];
@@ -305,25 +325,26 @@ final class public_page implements renderable, templatable {
         return $headings[$slug] ?? 'Repères publics';
     }
 
-	/**
-	 * Default public navigation.
-	 *
-	 * @return array<int, array<string, mixed>>
-	 */
-	private static function default_navigation(): array {
-		return [
-			['key' => self::KEY_HOME, 'label' => 'Accueil', 'url' => '/local/uckk/index.php'],
-			['key' => self::KEY_ABOUT, 'label' => 'À propos', 'url' => '/local/uckk/about.php'],
-			['key' => self::KEY_PROGRAMS, 'label' => 'Voies', 'url' => '/local/uckk/programs.php'],
-			['key' => self::KEY_COURSES, 'label' => 'Cours', 'url' => '/local/uckk/courses.php'],
-			['key' => self::KEY_CHALLENGES, 'label' => 'Défis', 'url' => '/local/uckk/challenges.php'],
-			['key' => self::KEY_ASSEMBLIES, 'label' => 'Assemblées', 'url' => '/local/uckk/assemblies.php'],
-			['key' => self::KEY_INTEGRITY, 'label' => 'Intégrité', 'url' => '/local/uckk/integrity.php'],
-			['key' => self::KEY_ARCHIVES, 'label' => 'Archives', 'url' => '/local/uckk/archives.php'],
-			['key' => self::KEY_NEWS, 'label' => 'Actualités', 'url' => '/local/uckk/news.php'],
-			['key' => self::KEY_CONTACT, 'label' => 'Contact', 'url' => '/local/uckk/contact.php'],
-		];
-	}	
+    /**
+     * Default public navigation.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    private static function default_navigation(): array {
+        return [
+            ['key' => self::KEY_HOME, 'label' => 'Accueil', 'url' => '/local/uckk/index.php'],
+            ['key' => self::KEY_ABOUT, 'label' => 'À propos', 'url' => '/local/uckk/about.php'],
+            ['key' => self::KEY_PROGRAMS, 'label' => 'Voies', 'url' => '/local/uckk/programs.php'],
+            ['key' => self::KEY_COURSES, 'label' => 'Cours', 'url' => '/local/uckk/courses.php'],
+            ['key' => self::KEY_CHALLENGES, 'label' => 'Défis', 'url' => '/local/uckk/challenges.php'],
+            ['key' => self::KEY_ASSEMBLIES, 'label' => 'Assemblées', 'url' => '/local/uckk/assemblies.php'],
+            ['key' => self::KEY_INTEGRITY, 'label' => 'Intégrité', 'url' => '/local/uckk/integrity.php'],
+            ['key' => self::KEY_ARCHIVES, 'label' => 'Archives', 'url' => '/local/uckk/archives.php'],
+            ['key' => self::KEY_MEDIATHEQUE, 'label' => 'Médiathèque', 'url' => '/local/uckk/mediatheque.php'],
+            ['key' => self::KEY_NEWS, 'label' => 'Actualités', 'url' => '/local/uckk/news.php'],
+            ['key' => self::KEY_CONTACT, 'label' => 'Contact', 'url' => '/local/uckk/contact.php'],
+        ];
+    }
 
     /**
      * Normalise older context keys into the official context contract.
@@ -694,6 +715,8 @@ final class public_page implements renderable, templatable {
      * Build root page classes.
      *
      * @param string $slug Page slug.
+     * @param string $layout Layout key.
+     * @param bool $hasaside Whether the page has aside content.
      * @return string
      */
     private static function page_classes(string $slug, string $layout, bool $hasaside): string {
@@ -1073,6 +1096,7 @@ final class public_page implements renderable, templatable {
             self::KEY_ASSEMBLIES,
             self::KEY_INTEGRITY,
             self::KEY_ARCHIVES,
+            self::KEY_MEDIATHEQUE,
             self::KEY_NEWS,
             self::KEY_CONTACT,
         ];
@@ -1147,6 +1171,42 @@ final class public_page implements renderable, templatable {
         }
 
         return implode(' ', $out);
+    }
+
+    /**
+     * Get boolean value from an array.
+     *
+     * @param array<string, mixed> $data Data.
+     * @param string $key Key.
+     * @param bool $default Default.
+     * @return bool
+     */
+    private static function bool_value(array $data, string $key, bool $default = false): bool {
+        if (!array_key_exists($key, $data)) {
+            return $default;
+        }
+
+        return !empty($data[$key]);
+    }
+
+    /**
+     * Get safe DOM id value.
+     *
+     * @param array<string, mixed> $data Data.
+     * @param string $key Key.
+     * @param string $default Default.
+     * @return string
+     */
+    private static function dom_id_value(array $data, string $key, string $default): string {
+        if (!array_key_exists($key, $data) || !is_scalar($data[$key])) {
+            return $default;
+        }
+
+        $value = trim((string)$data[$key]);
+        $value = preg_replace('/[^A-Za-z0-9_-]+/', '-', $value) ?? '';
+        $value = trim($value, '-');
+
+        return $value !== '' ? $value : $default;
     }
 
     /**

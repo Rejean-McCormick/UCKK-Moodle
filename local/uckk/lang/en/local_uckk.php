@@ -954,6 +954,14 @@ $string['profilesaving'] = 'Saving profile…';
 $string['refreshfailed'] = 'Refresh failed.';
 $string['symbolicrole_permission_warning'] = 'This symbolic role does not grant Moodle permissions by itself.';
 
+// Public Médiathèque page.
+$string['mediatheque_title'] = 'UCKK Médiathèque';
+$string['mediatheque_eyebrow'] = 'Public archives';
+$string['mediatheque_summary'] = 'Explore public media, collections, external works, and documented passages from the UCKK archive.';
+$string['mediatheque_search_placeholder'] = 'Search the Médiathèque';
+$string['mediatheque_result_count_one'] = '{$a} public result';
+$string['mediatheque_result_count_many'] = '{$a} public results';
+
 // Additional renderer, file area and privacy strings.
 $string['back'] = 'Back';
 $string['components'] = 'Components';

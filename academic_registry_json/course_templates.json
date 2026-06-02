@@ -364,7 +364,7 @@
       "key": "uckk_program_course",
       "name": "UCKK program course",
       "component": "format_uckk",
-      "description": "Template for baccalauréat and program courses after the common core.",
+      "description": "Template for UCKK Voie courses after the common core.",
       "defaults": {
         "format": "uckk",
         "numsections": 9,
@@ -546,19 +546,22 @@
       },
       "metadata": {
         "product": "UCKK-Moodle",
-        "course_type": "baccalaureat",
+        "course_type": "voie_uckk",
         "recognition": "internal",
         "source": "tool_uckkseed",
         "seeded_by": "tool_uckkseed",
         "source_preset": "course_templates",
-        "template_only": true
+        "template_only": true,
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire"
       }
     },
     {
       "key": "uckk_mineure_course",
-      "name": "UCKK mineure course",
+      "name": "UCKK voie d’initiation course",
       "component": "format_uckk",
-      "description": "Compact program-course template for mineure pathways.",
+      "description": "Compact UCKK pathway template for an initiation-level Voie.",
       "defaults": {
         "format": "uckk",
         "numsections": 9,
@@ -577,7 +580,7 @@
           "number": 0,
           "key": "orientation",
           "name": "Orientation",
-          "summary": "Orientation de la mineure, objectifs, attentes et compétences ciblées.",
+          "summary": "Orientation de la voie d’initiation, objectifs, attentes et compétences ciblées.",
           "options": {
             "uckksectionkind": "orientation",
             "requiresproof": 0,
@@ -589,7 +592,7 @@
           "number": 1,
           "key": "concepts",
           "name": "Concepts",
-          "summary": "Concepts essentiels et distinctions minimales de la mineure.",
+          "summary": "Concepts essentiels et distinctions minimales de la voie d’initiation.",
           "options": {
             "uckksectionkind": "concepts",
             "requiresproof": 0,
@@ -625,7 +628,7 @@
           "number": 4,
           "key": "preuves",
           "name": "Preuves",
-          "summary": "Preuves concentrées sur les compétences de la mineure.",
+          "summary": "Preuves concentrées sur les compétences de la voie d’initiation.",
           "options": {
             "uckksectionkind": "preuves",
             "requiresproof": 1,
@@ -649,7 +652,7 @@
           "number": 6,
           "key": "livrable",
           "name": "Livrable",
-          "summary": "Livrable synthétique de la mineure.",
+          "summary": "Livrable synthétique de la voie d’initiation.",
           "options": {
             "uckksectionkind": "livrable",
             "requiresproof": 1,
@@ -687,8 +690,8 @@
           "key": "mineure_default_challenge",
           "component": "mod_uckkchallenge",
           "section": "preuves",
-          "name": "Défi de mineure",
-          "intro": "Preuve ciblée liée à une compétence de la mineure.",
+          "name": "Défi de voie d’initiation",
+          "intro": "Preuve ciblée liée à une compétence de la voie d’initiation.",
           "required": true,
           "defaults": {
             "challengetype": "evidence",
@@ -705,8 +708,8 @@
           "key": "mineure_default_archive",
           "component": "mod_uckkarchive",
           "section": "archive",
-          "name": "Archive de la mineure",
-          "intro": "Archive des preuves et décisions liées à la mineure.",
+          "name": "Archive de la voie d’initiation",
+          "intro": "Archive des preuves et décisions liées à la voie d’initiation.",
           "required": true,
           "defaults": {
             "status": "active",
@@ -725,12 +728,15 @@
       },
       "metadata": {
         "product": "UCKK-Moodle",
-        "course_type": "mineure",
+        "course_type": "voie_initiation",
         "recognition": "internal",
         "source": "tool_uckkseed",
         "seeded_by": "tool_uckkseed",
         "source_preset": "course_templates",
-        "template_only": true
+        "template_only": true,
+        "niveau_vise": "Initiation",
+        "titre_interne": "Initié UCKK",
+        "parchemin_uckk": "Parchemin d’Initiation"
       }
     },
     {

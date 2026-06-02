@@ -1279,3 +1279,262 @@ body:has(.local-uckk-public-page) [role="main"] {
         box-shadow: none;
     }
 }
+
+
+
+/* ==========================================================================
+   Public Médiathèque explorer
+   ========================================================================== */
+
+.local-uckk-public-page--mediatheque .local-uckk-public-hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.local-uckk-public-page--mediatheque .local-uckk-public-hero::after {
+    content: "";
+    position: absolute;
+    right: clamp(1rem, 4vw, 3rem);
+    bottom: clamp(1rem, 4vw, 2.5rem);
+    width: clamp(8rem, 18vw, 16rem);
+    height: clamp(8rem, 18vw, 16rem);
+    border: 1px solid rgba(185, 144, 69, 0.22);
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 35% 35%, rgba(185, 144, 69, 0.16), transparent 0.35rem),
+        radial-gradient(circle at 65% 40%, rgba(30, 104, 100, 0.16), transparent 0.45rem),
+        radial-gradient(circle at 48% 68%, rgba(23, 35, 33, 0.12), transparent 0.35rem);
+    opacity: 0.72;
+    pointer-events: none;
+}
+
+.local-uckk-mediatheque-explorer,
+[data-region="local-uckk-mediatheque-explorer"] {
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    margin-block: clamp(1.25rem, 3vw, 2.25rem);
+    padding: clamp(1rem, 2.4vw, 1.5rem);
+    border: 1px solid var(--uckk-line);
+    border-radius: var(--uckk-radius-large);
+    background:
+        linear-gradient(135deg, rgba(255, 250, 240, 0.96), rgba(246, 240, 223, 0.9)),
+        radial-gradient(circle at top right, rgba(30, 104, 100, 0.08), transparent 45%);
+    box-shadow: var(--uckk-shadow-soft);
+}
+
+.local-uckk-mediatheque-explorer.is-loading,
+[data-region="local-uckk-mediatheque-explorer"].is-loading {
+    cursor: progress;
+}
+
+.local-uckk-mediatheque-explorer.is-loading [data-region="mediatheque-results"],
+[data-region="local-uckk-mediatheque-explorer"].is-loading [data-region="mediatheque-results"] {
+    opacity: 0.58;
+}
+
+.local-uckk-mediatheque-explorer [data-region="mediatheque-search-form"],
+[data-region="local-uckk-mediatheque-explorer"] [data-region="mediatheque-search-form"] {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(0.85rem, 2vw, 1.25rem);
+    border: 1px solid rgba(30, 104, 100, 0.18);
+    border-radius: var(--uckk-radius);
+    background: rgba(219, 236, 234, 0.32);
+}
+
+.local-uckk-mediatheque-explorer input[type="search"],
+.local-uckk-mediatheque-explorer input[type="text"],
+.local-uckk-mediatheque-explorer select,
+[data-region="local-uckk-mediatheque-explorer"] input[type="search"],
+[data-region="local-uckk-mediatheque-explorer"] input[type="text"],
+[data-region="local-uckk-mediatheque-explorer"] select {
+    width: 100%;
+    min-height: 2.75rem;
+    border: 1px solid rgba(23, 35, 33, 0.2);
+    border-radius: var(--uckk-radius-small);
+    background: rgba(255, 250, 240, 0.92);
+    color: var(--uckk-ink);
+}
+
+.local-uckk-mediatheque-explorer input[type="search"]:focus,
+.local-uckk-mediatheque-explorer input[type="text"]:focus,
+.local-uckk-mediatheque-explorer select:focus,
+[data-region="local-uckk-mediatheque-explorer"] input[type="search"]:focus,
+[data-region="local-uckk-mediatheque-explorer"] input[type="text"]:focus,
+[data-region="local-uckk-mediatheque-explorer"] select:focus {
+    border-color: var(--uckk-petrol);
+    box-shadow: 0 0 0 0.18rem rgba(30, 104, 100, 0.14);
+    outline: 0;
+}
+
+.local-uckk-mediatheque-explorer__filters,
+[data-region="local-uckk-mediatheque-explorer"] .local-uckk-mediatheque-explorer__filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+.local-uckk-mediatheque-explorer__actions,
+[data-region="local-uckk-mediatheque-explorer"] .local-uckk-mediatheque-explorer__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.local-uckk-mediatheque-explorer [data-region="mediatheque-status"],
+[data-region="local-uckk-mediatheque-explorer"] [data-region="mediatheque-status"] {
+    min-height: 1.4rem;
+    color: var(--uckk-ink-muted);
+    font-size: 0.95rem;
+}
+
+.local-uckk-mediatheque-explorer [data-region="mediatheque-count"],
+[data-region="local-uckk-mediatheque-explorer"] [data-region="mediatheque-count"] {
+    font-variant-numeric: tabular-nums;
+    color: var(--uckk-petrol-dark);
+    font-weight: 700;
+}
+
+.local-uckk-mediatheque-explorer [data-region="mediatheque-results"],
+[data-region="local-uckk-mediatheque-explorer"] [data-region="mediatheque-results"] {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.9rem, 2vw, 1.25rem);
+    transition: opacity 160ms ease-in-out;
+}
+
+.local-uckk-mediatheque-card {
+    display: flex;
+    min-height: 100%;
+    border: 1px solid rgba(23, 35, 33, 0.14);
+    border-radius: var(--uckk-radius);
+    background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(246, 240, 223, 0.92));
+    box-shadow: var(--uckk-shadow-faint);
+    overflow: hidden;
+}
+
+.local-uckk-mediatheque-card__body {
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+    width: 100%;
+    padding: 1rem;
+}
+
+.local-uckk-mediatheque-card__eyebrow {
+    margin: 0;
+    color: var(--uckk-petrol-dark);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.local-uckk-mediatheque-card__title {
+    margin: 0;
+    color: var(--uckk-ink);
+    font-family: var(--uckk-font-serif);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.25;
+}
+
+.local-uckk-mediatheque-card__title a {
+    color: inherit;
+    text-decoration-color: rgba(185, 144, 69, 0.55);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+}
+
+.local-uckk-mediatheque-card__title a:hover,
+.local-uckk-mediatheque-card__title a:focus {
+    color: var(--uckk-petrol-dark);
+    text-decoration-color: var(--uckk-petrol);
+}
+
+.local-uckk-mediatheque-card__summary {
+    margin: 0;
+    color: var(--uckk-ink-soft);
+    font-size: 0.96rem;
+    line-height: 1.55;
+}
+
+.local-uckk-mediatheque-explorer [data-region="mediatheque-empty"],
+[data-region="local-uckk-mediatheque-explorer"] [data-region="mediatheque-empty"] {
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border: 1px dashed rgba(30, 104, 100, 0.32);
+    border-radius: var(--uckk-radius);
+    background: rgba(219, 236, 234, 0.22);
+    color: var(--uckk-ink-soft);
+}
+
+.local-uckk-mediatheque-explorer [data-action="mediatheque-load-more"],
+.local-uckk-mediatheque-explorer [data-action="mediatheque-reset"],
+[data-region="local-uckk-mediatheque-explorer"] [data-action="mediatheque-load-more"],
+[data-region="local-uckk-mediatheque-explorer"] [data-action="mediatheque-reset"] {
+    border-radius: 999px;
+}
+
+.local-uckk-mediatheque-explorer [data-action="mediatheque-load-more"][hidden],
+[data-region="local-uckk-mediatheque-explorer"] [data-action="mediatheque-load-more"][hidden] {
+    display: none;
+}
+
+@media (max-width: 991.98px) {
+    .local-uckk-mediatheque-explorer__filters,
+    [data-region="local-uckk-mediatheque-explorer"] .local-uckk-mediatheque-explorer__filters,
+    .local-uckk-mediatheque-explorer [data-region="mediatheque-results"],
+    [data-region="local-uckk-mediatheque-explorer"] [data-region="mediatheque-results"] {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 699.98px) {
+    .local-uckk-mediatheque-explorer,
+    [data-region="local-uckk-mediatheque-explorer"] {
+        padding: 0.85rem;
+    }
+
+    .local-uckk-mediatheque-explorer__filters,
+    [data-region="local-uckk-mediatheque-explorer"] .local-uckk-mediatheque-explorer__filters,
+    .local-uckk-mediatheque-explorer [data-region="mediatheque-results"],
+    [data-region="local-uckk-mediatheque-explorer"] [data-region="mediatheque-results"] {
+        grid-template-columns: 1fr;
+    }
+
+    .local-uckk-mediatheque-explorer__actions,
+    [data-region="local-uckk-mediatheque-explorer"] .local-uckk-mediatheque-explorer__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .local-uckk-mediatheque-explorer__actions .btn,
+    [data-region="local-uckk-mediatheque-explorer"] .local-uckk-mediatheque-explorer__actions .btn {
+        width: 100%;
+    }
+}
+
+@media print {
+    .local-uckk-mediatheque-explorer [data-region="mediatheque-search-form"],
+    [data-region="local-uckk-mediatheque-explorer"] [data-region="mediatheque-search-form"],
+    .local-uckk-mediatheque-explorer [data-action="mediatheque-load-more"],
+    .local-uckk-mediatheque-explorer [data-action="mediatheque-reset"],
+    [data-region="local-uckk-mediatheque-explorer"] [data-action="mediatheque-load-more"],
+    [data-region="local-uckk-mediatheque-explorer"] [data-action="mediatheque-reset"] {
+        display: none !important;
+    }
+
+    .local-uckk-mediatheque-explorer,
+    [data-region="local-uckk-mediatheque-explorer"],
+    .local-uckk-mediatheque-card {
+        border-color: #999999;
+        background: #ffffff;
+        box-shadow: none;
+    }
+
+    .local-uckk-mediatheque-explorer [data-region="mediatheque-results"],
+    [data-region="local-uckk-mediatheque-explorer"] [data-region="mediatheque-results"] {
+        grid-template-columns: 1fr;
+    }
+}

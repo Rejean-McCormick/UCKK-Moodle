@@ -87,6 +87,16 @@ final class renderer extends plugin_renderer_base {
     }
 
     /**
+     * Render the unified media-library editor.
+     *
+     * @param media_library_editor $editor Media-library editor renderable.
+     * @return string HTML.
+     */
+    public function render_media_library_editor(media_library_editor $editor): string {
+        return $this->render_templatable($editor, 'mod_uckkarchive/media_library_editor');
+    }
+
+    /**
      * Render one media card.
      *
      * @param media_card $card Media card renderable.

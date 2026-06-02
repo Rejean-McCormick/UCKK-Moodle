@@ -146,13 +146,13 @@ $string['programshortnameexists'] = 'Ce nom court de programme UCKK existe déj�
 
 $string['programtype_tronccommun'] = 'Tronc commun';
 $string['programtype_baccalaureat'] = 'Voie UCKK — Niveau visé : Puissance opératoire';
-$string['programtype_mineure'] = 'Mineure interne';
+$string['programtype_mineure'] = 'Voie UCKK — Niveau visé : Initiation';
 $string['programtype_lab'] = 'Laboratoire';
 $string['programtype_seminar'] = 'Séminaire';
 $string['programtype_transversal'] = 'Programme transversal';
 
 $string['program_tronccommun'] = 'Tronc commun obligatoire';
-$string['program_grand_jeu_social'] = 'Baccalauréat du Grand Jeu social';
+$string['program_grand_jeu_social'] = 'Voie du Grand Jeu social';
 $string['program_koa_digital'] = 'Voie de l’Architecture de l’écosystème digital kOA';
 $string['program_sociotechnique'] = 'Voie de l’Architecture sociotechnique';
 $string['program_sciences_politiques'] = 'Voie des Sciences politiques';
@@ -162,7 +162,7 @@ $string['program_metaphysique'] = 'Voie de la Métaphysique';
 $string['program_ia_gouvernable'] = 'Voie de l’Intelligence artificielle gouvernable';
 $string['program_linguistique'] = 'Voie de la Linguistique et de l’architecture du sens';
 $string['program_intervention_sociale'] = 'Voie de l’Intervention sociale et des systèmes humains';
-$string['program_medias_vivants'] = 'Mineure Médias vivants et théâtre public responsable';
+$string['program_medias_vivants'] = 'Voie des Médias vivants et du théâtre public responsable';
 $string['program_laboratoires'] = 'Séminaires avancés et laboratoires';
 
 // Pathways.
@@ -858,9 +858,9 @@ $string['program:status'] = 'Statut du programme';
 $string['program:structure'] = 'Structure';
 $string['program:type'] = 'Type de programme';
 $string['program:type_baccalaureat'] = 'Voie UCKK — Niveau visé : Puissance opératoire';
-$string['program:type_certificat'] = 'Certificat interne';
+$string['program:type_certificat'] = 'Reconnaissance interne — Initiation';
 $string['program:type_laboratoire'] = 'Laboratoire';
-$string['program:type_mineure'] = 'Mineure interne';
+$string['program:type_mineure'] = 'Voie UCKK — Niveau visé : Initiation';
 $string['program:type_seminaire'] = 'Séminaire';
 $string['program:type_tronccommun'] = 'Tronc commun';
 $string['program:visibility'] = 'Visibilité du programme';
@@ -873,6 +873,73 @@ $string['local/uckk:viewreports'] = 'Voir les rapports UCKK';
 $string['local/uckk:exportdata'] = 'Exporter les données UCKK';
 $string['local/uckk:viewrestricted'] = 'Voir les informations restreintes UCKK';
 $string['local/uckk:manageintegrations'] = 'Gérer les intégrations UCKK';
+
+// Public Médiathèque.
+$string['nav_mediatheque'] = 'Médiathèque';
+
+$string['mediatheque_title'] = 'Médiathèque UCKK';
+$string['mediatheque_eyebrow'] = 'Archives publiques';
+$string['mediatheque_summary'] = 'Explorer les médias, collections, œuvres externes et passages documentés de l’archive UCKK.';
+$string['mediatheque_boundarynotice'] = 'La Médiathèque publique affiche seulement les contenus que les politiques de l’archive autorisent à exposer publiquement. Certains médias, passages ou détails peuvent être masqués selon les droits, avis de contenu et protocoles culturels.';
+
+$string['mediatheque_explorer_title'] = 'Explorateur Médiathèque';
+$string['mediatheque_explorer_summary'] = 'Rechercher, filtrer et parcourir les médias publics de l’archive UCKK.';
+$string['mediatheque_explorer_loading'] = 'Chargement de la Médiathèque…';
+$string['mediatheque_explorer_error'] = 'La Médiathèque n’a pas pu être chargée.';
+$string['mediatheque_explorer_empty'] = 'Aucun média public ne correspond aux filtres.';
+$string['mediatheque_explorer_results'] = 'Résultats de la Médiathèque';
+
+$string['mediatheque_search_label'] = 'Recherche';
+$string['mediatheque_search_placeholder'] = 'Rechercher dans la médiathèque';
+$string['mediatheque_search_button'] = 'Rechercher';
+$string['mediatheque_filters_title'] = 'Filtres';
+$string['mediatheque_apply_filters'] = 'Appliquer les filtres';
+$string['mediatheque_clear_filters'] = 'Réinitialiser les filtres';
+
+$string['mediatheque_filter_type'] = 'Type';
+$string['mediatheque_filter_mediatype'] = 'Format';
+$string['mediatheque_filter_collection'] = 'Collection';
+$string['mediatheque_filter_tag'] = 'Mot-clé';
+$string['mediatheque_filter_source'] = 'Source';
+$string['mediatheque_filter_advisory'] = 'Avis de contenu';
+$string['mediatheque_filter_cultural'] = 'Protocole culturel';
+$string['mediatheque_filter_audience'] = 'Public';
+$string['mediatheque_filter_language'] = 'Langue';
+$string['mediatheque_filter_validation'] = 'Validation';
+$string['mediatheque_filter_sort'] = 'Tri';
+
+$string['mediatheque_sort_relevance'] = 'Pertinence';
+$string['mediatheque_sort_newest'] = 'Plus récents';
+$string['mediatheque_sort_title'] = 'Titre';
+$string['mediatheque_sort_type'] = 'Type';
+$string['mediatheque_sort_collection'] = 'Collection';
+$string['mediatheque_sort_validated'] = 'Validation';
+
+$string['mediatheque_type_all'] = 'Tous';
+$string['mediatheque_type_media'] = 'Médias';
+$string['mediatheque_type_collection'] = 'Collections';
+$string['mediatheque_type_external_work'] = 'Œuvres externes';
+$string['mediatheque_type_archive_item'] = 'Objets d’archive';
+$string['mediatheque_type_content_marker'] = 'Passages ciblés';
+
+$string['mediatheque_sitewide'] = 'Recherche publique globale';
+$string['mediatheque_archive_scoped'] = 'Recherche limitée à une archive';
+$string['mediatheque_module_scoped'] = 'Recherche limitée à une activité archive';
+
+$string['mediatheque_notice_public_only'] = 'Seuls les contenus publics autorisés sont affichés.';
+$string['mediatheque_notice_policy_filtered'] = 'Les résultats sont filtrés par les politiques de mod_uckkarchive.';
+$string['mediatheque_notice_no_direct_files'] = 'Les fichiers originaux ne sont pas exposés directement depuis cette page.';
+
+$string['mediatheque_action_open'] = 'Ouvrir';
+$string['mediatheque_action_view_details'] = 'Voir les détails';
+$string['mediatheque_action_view_file'] = 'Voir le fichier autorisé';
+$string['mediatheque_action_download_disabled'] = 'Téléchargement non disponible publiquement';
+
+$string['mediatheque_metadata_surface'] = 'Surface publique';
+$string['mediatheque_metadata_policy_owner'] = 'Données et politiques';
+$string['mediatheque_metadata_surface_value'] = 'local_uckk';
+$string['mediatheque_metadata_policy_owner_value'] = 'mod_uckkarchive';
+
 
 // Diagnostics.
 $string['diagnostics'] = 'Diagnostics UCKK';

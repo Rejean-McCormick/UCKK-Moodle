@@ -139,19 +139,24 @@ Boundary rules:
 mod_uckkarchive does not own grades.
 mod_uckkarchive does not own transcripts.
 mod_uckkarchive does not own enrolment authority.
-mod_uckkarchive does not own administrative registry records.
-mod_uckkarchive does not own challenge workflow state.
-mod_uckkarchive does not own Assembly decision authority.
-mod_uckkarchive does not own integrity case authority.
-mod_uckkarchive does not own institutional reporting authority.
+mod_uckkarchive does not own administrative academic registry authority.
+mod_uckkarchive may reference challenge ids, assembly ids, integrity case ids, course ids, and competency ids.
+mod_uckkarchive must degrade gracefully when optional owner plugins are not installed.
 ```
 
-Integrity dependency rule:
+Optional integration variables:
 
 ```text
-tool_uckkintegrity = optional integration
-ordinary archive/media/content-advisory operation must not require tool_uckkintegrity
-integrity-specific features must be hidden, disabled, or fail closed when tool_uckkintegrity is absent
+OPTIONAL_CHALLENGE_COMPONENT = mod_uckkchallenge
+OPTIONAL_ASSEMBLY_COMPONENT = mod_uckkassembly
+OPTIONAL_INTEGRITY_COMPONENT = tool_uckkintegrity
+OPTIONAL_REPORT_COMPONENT = report_uckk
+```
+
+No hard dependency rule:
+
+```text
+No install-time hard dependency on mod_uckkchallenge, mod_uckkassembly, tool_uckkintegrity, or report_uckk.
 ```
 
 ---
@@ -186,6 +191,7 @@ docs/21_testing_strategy.md
 docs/22_installation.md
 docs/23_upgrade.md
 docs/24_release_spec.md
+docs/25_mediatheque_public_explorer.md
 ```
 
 Do not generate these old/process files:
@@ -199,77 +205,79 @@ docs/26_release_notes.md
 docs/27_file_architecture_manifest.md
 ```
 
+Documentation-set rule:
+
+```text
+docs/25_mediatheque_public_explorer.md defines the public Médiathèque façade.
+It does not define a second internal media-library engine.
+```
+
 ---
 
 ## 6. Root file architecture
 
-Canonical root tree:
+Required root files:
 
 ```text
-mod/uckkarchive/
-├── add.php
-├── export.php
-├── index.php
-├── item.php
-├── lib.php
-├── locallib.php
-├── media.php
-├── mod_form.php
-├── settings.php
-├── styles.css
-├── validate.php
-├── version.php
-├── view.php
-├── amd/
-├── backup/
-├── classes/
-├── db/
-├── docs/
-├── lang/
-├── pix/
-├── templates/
-└── tests/
+version.php
+lib.php
+locallib.php
+mod_form.php
+view.php
+index.php
+media.php
+export.php
+item.php
+styles.css
+settings.php
+README.md
 ```
 
-Root controller rule:
+Root rule:
 
 ```text
-Root PHP files coordinate requests only.
-Business policy belongs in classes/local.
-Service contracts belong in classes/external.
-Renderable data belongs in classes/output.
-Templates render only.
-AMD modules are UI-only.
+Root PHP files are controllers, integration hooks, or Moodle entry points.
+Domain logic belongs in classes/local.
+Output shaping belongs in classes/output.
+AJAX/external contracts belong in classes/external.
 ```
 
 ---
 
 ## 7. Database tables
 
-Required archive tables:
+Canonical table prefix:
+
+```text
+TABLE_PREFIX = uckkarchive_
+```
+
+Required core tables:
 
 ```text
 uckkarchive
 uckkarchive_item
 uckkarchive_proof
+uckkarchive_revision
+uckkarchive_validation
 uckkarchive_kristal
-uckkarchive_prov
-uckkarchive_rev
 uckkarchive_export
 ```
 
-Required media library tables:
+Required media tables:
 
 ```text
 uckkarchive_media
 uckkarchive_media_version
-uckkarchive_media_relation
-uckkarchive_media_tag
+uckkarchive_media_file
 uckkarchive_media_collection
 uckkarchive_media_collection_item
+uckkarchive_media_relation
+uckkarchive_media_tag
+uckkarchive_media_source
 ```
 
-Required content advisory and external-work tables:
+Required content advisory tables:
 
 ```text
 uckkarchive_content_tag
@@ -277,14 +285,15 @@ uckkarchive_content_tag_set
 uckkarchive_content_marker
 uckkarchive_content_review
 uckkarchive_external_work
-uckkarchive_media_source
 ```
 
-Identifier rule:
+Database rules:
 
 ```text
-id = local Moodle database primary key
-uuid = stable portable object identity
+All tables must have id as primary key.
+All portable objects must have uuid where applicable.
+All human-created mutable tables must have timecreated and timemodified.
+All user-authored tables must have userid or createdby/modifiedby where relevant.
 ```
 
 UUID rule:
@@ -815,6 +824,106 @@ The archive must not imply ownership over third-party works.
 
 ---
 
+## 18.1 Public Médiathèque surface
+
+Canonical public surface variables:
+
+```text
+PUBLIC_MEDIATHEQUE_PAGE_NAME = Médiathèque
+PUBLIC_MEDIATHEQUE_PAGE_KEY = mediatheque
+PUBLIC_MEDIATHEQUE_EXPLORER_NAME = Explorateur Médiathèque
+PUBLIC_MEDIATHEQUE_EXPLORER_KEY = mediatheque_explorer
+PUBLIC_MEDIATHEQUE_ROUTE = /local/uckk/mediatheque.php
+PUBLIC_MEDIATHEQUE_SURFACE_COMPONENT = local_uckk
+PUBLIC_MEDIATHEQUE_DATA_COMPONENT = mod_uckkarchive
+PUBLIC_MEDIATHEQUE_SERVICE = mod_uckkarchive_search_mediatheque
+PUBLIC_MEDIATHEQUE_SITEWIDE_ARCHIVEID = 0
+PUBLIC_MEDIATHEQUE_SITEWIDE_CMID = 0
+```
+
+Canonical architecture rule:
+
+```text
+Médiathèque = public page.
+Explorateur Médiathèque = public search/filter/navigation component.
+mod_uckkarchive = media data owner and policy authority.
+local_uckk = public shell, route, page rendering and navigation.
+```
+
+Canonical runtime flow:
+
+```text
+local/uckk/mediatheque.php
+→ local_uckk public page shell
+→ local/uckk/amd/src/mediatheque_explorer.js
+→ mod_uckkarchive_search_mediatheque
+→ classes/local/public_mediatheque_service.php
+→ classes/local/public_mediatheque_repository.php
+→ existing media tables and policies
+```
+
+Public scope rule:
+
+```text
+cmid > 0 = module-scoped public search.
+archiveid > 0 = archive-scoped public search.
+cmid = 0 and archiveid = 0 = site-wide public search.
+```
+
+Public DTO envelope:
+
+```text
+context
+filters
+facets
+items
+pagination
+notices
+warnings
+empty
+```
+
+Public item DTO:
+
+```text
+uuid
+objecttype
+title
+subtitle
+summary
+mediatype
+mimetype
+language
+thumbnailurl
+detailurl
+source
+rights
+status
+visibility
+validation
+badges
+advisories
+culturalprotocol
+relations
+actions
+```
+
+Public safety rule:
+
+```text
+The public Médiathèque never exposes original files, private notes, cultural protocol notes, raw metadata, review rationale, provenance hashes, integrity case ids, or internal database identifiers.
+```
+
+Public reuse rule:
+
+```text
+Do not create a second media-library engine.
+Do not create mediatheque_card.mustache, mediatheque_detail.mustache, mediatheque_marker.mustache, get_mediatheque_item.php, get_mediatheque_filters.php, or get_mediatheque_collection.php unless the public contract explicitly changes.
+Reuse the existing media library domain, templates, cards, advisories, collections and policies.
+```
+
+---
+
 ## 19. Export manifest
 
 Canonical manifest filename:
@@ -893,6 +1002,8 @@ classes/local/media_version.php
 classes/local/metadata_validator.php
 classes/local/proof.php
 classes/local/provenance.php
+classes/local/public_mediatheque_repository.php
+classes/local/public_mediatheque_service.php
 classes/local/revision.php
 classes/local/uuid.php
 ```
@@ -901,6 +1012,7 @@ Local rule:
 
 ```text
 classes/local is the authority layer for archive/media/content-advisory behavior.
+public_mediatheque_repository.php and public_mediatheque_service.php are public façade adapters, not a second media engine.
 ```
 
 ---
@@ -919,12 +1031,15 @@ classes/external/get_external_works.php
 classes/external/get_external_work.php
 classes/external/add_external_work.php
 classes/external/update_external_work.php
+classes/external/search_mediatheque.php
 ```
 
 Service rule:
 
 ```text
 Content advisory services must check context, capability, visibility, cultural protocol restrictions, review state, and redaction rules.
+search_mediatheque.php is the single public Médiathèque AJAX endpoint.
+search_mediatheque.php delegates to public_mediatheque_service.php and does not implement media search logic directly.
 ```
 
 ---
@@ -1111,6 +1226,9 @@ tests/lib_test.php
 tests/media_library_test.php
 tests/privacy_provider_test.php
 tests/services_test.php
+tests/public_mediatheque_repository_test.php
+tests/public_mediatheque_service_test.php
+tests/external/search_mediatheque_test.php
 tests/behat/uckkarchive.feature
 tests/behat/uckkarchive_media.feature
 tests/behat/uckkarchive_content_advisory.feature
@@ -1120,6 +1238,8 @@ Testing rule:
 
 ```text
 Tests verify the final target behavior, not historical transitions.
+Public Médiathèque tests verify the public façade contract only.
+They do not duplicate the internal media-library engine tests.
 ```
 
 ---
@@ -1144,6 +1264,9 @@ use consistent plugin boundaries
 use content advisory terminology consistently
 include cultural protocol handling where relevant
 include external/foreign media handling where relevant
+distinguish public Médiathèque façade from internal media-library engine
+use search_mediatheque.php only as the public AJAX endpoint
+state that local_uckk renders the public page and mod_uckkarchive owns media data and policies
 ```
 
 Each document must not include:
@@ -1158,6 +1281,10 @@ media as only generic item attachment
 content advisories as only a JSON field
 versionitem capability
 hard dependency on tool_uckkintegrity
+a second Médiathèque media engine
+duplicated mediatheque_card or mediatheque_detail templates
+duplicated get_mediatheque_item, get_mediatheque_filters, or get_mediatheque_collection services
+authorization decisions in AMD or Mustache
 ```
 
 ---

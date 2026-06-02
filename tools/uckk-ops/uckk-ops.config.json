@@ -1,0 +1,82 @@
+{
+  "schema": "uckk.ops.config.v1",
+  "app": {
+    "name": "UCKK Ops Console",
+    "version": "0.1.1",
+    "environment": "dev"
+  },
+  "local": {
+    "sourceRoot": "C:\\mycode\\UCKK\\uckk-moodle",
+    "runtimeRoot": "C:\\mycode\\UCKK\\moodle\\moodle\\public",
+    "phpExe": "php",
+    "localUrl": "http://127.0.0.1:8000",
+    "moodleCliRoot": "C:\\mycode\\UCKK\\moodle\\moodle\\admin\\cli",
+    "moodleRoot": "C:\\mycode\\UCKK\\moodle\\moodle"
+  },
+  "git": {
+    "repoRoot": "C:\\mycode\\UCKK\\uckk-moodle",
+    "remote": "origin",
+    "branch": "main",
+    "defaultCommitMessage": "Update UCKK Moodle ops files"
+  },
+  "server": {
+    "sshTarget": "ubuntu@57.129.115.159",
+    "sourceRoot": "/opt/uckk/uckk-moodle",
+    "runtimeRoot": "/var/www/moodle/public",
+    "moodleRoot": "/var/www/moodle",
+    "moodleDataRoot": "/var/moodledata",
+    "phpFpmService": "php8.3-fpm",
+    "publicUrl": "https://uckk.org",
+    "moodleCliRoot": "/var/www/moodle/admin/cli"
+  },
+  "seed": {
+    "presetPathLocal": "C:\\mycode\\UCKK\\uckk-moodle\\academic_registry_json",
+    "presetPathServer": "/opt/uckk/uckk-moodle/academic_registry_json",
+    "seedCliRelative": "admin/tool/uckkseed/cli/seed.php",
+    "defaultPresets": [
+      "categories",
+      "programs",
+      "pathways",
+      "courses",
+      "cohorts",
+      "competencies",
+      "badges"
+    ]
+  },
+  "components": [
+    "local/uckk",
+    "mod/uckkarchive",
+    "mod/uckkchallenge",
+    "mod/uckkassembly",
+    "theme/uckk",
+    "admin/tool/uckkseed",
+    "admin/tool/uckkintegrity",
+    "course/format/uckk",
+    "ai/provider/uckk",
+    "blocks/uckk_dashboard",
+    "report/uckk"
+  ],
+  "smoke": {
+    "localUrls": [
+      "http://127.0.0.1:8000",
+      "http://127.0.0.1:8000/course/index.php",
+      "http://127.0.0.1:8000/local/uckk/programs.php",
+      "http://127.0.0.1:8000/local/uckk/mediatheque.php"
+    ],
+    "serverUrls": [
+      "https://uckk.org",
+      "https://uckk.org/course/index.php",
+      "https://uckk.org/local/uckk/programs.php"
+    ]
+  },
+  "safety": {
+    "requireConfirmationForServer": true,
+    "requireConfirmationForSeedApply": true,
+    "requireGitCleanBeforeServerDeploy": true,
+    "forbidSecretsInConfig": true
+  },
+  "logs": {
+    "directory": "tools/uckk-ops/logs",
+    "keepLast": 20
+  }
+}

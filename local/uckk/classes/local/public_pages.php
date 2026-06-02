@@ -46,6 +46,7 @@ final class public_pages {
     private const KEY_ASSEMBLIES = 'assemblies';
     private const KEY_INTEGRITY = 'integrity';
     private const KEY_ARCHIVES = 'archives';
+    private const KEY_MEDIATHEQUE = 'mediatheque';
     private const KEY_NEWS = 'news';
     private const KEY_CONTACT = 'contact';
 
@@ -159,6 +160,10 @@ final class public_pages {
             'notices' => [],
             'metadata' => [],
             'cta' => [],
+            'has_mediatheque_explorer' => false,
+            'mediatheque_explorer_id' => '',
+            'mediatheque_initial_state' => [],
+            'mediatheque' => [],
         ];
     }
 
@@ -560,6 +565,122 @@ final class public_pages {
                 ],
             ],
 
+            self::KEY_MEDIATHEQUE => [
+                'layout' => 'wide',
+                'typography' => 'institutional',
+                'eyebrow' => 'Archives publiques',
+                'title' => 'Médiathèque UCKK',
+                'subtitle' => 'Explorer les médias, collections, œuvres externes et passages documentés.',
+                'summary' => 'La Médiathèque donne accès aux médias publics, collections, œuvres externes et passages documentés de l’archive UCKK, avec filtrage par droits, avis de contenu et protocoles culturels.',
+                'cardsheading' => 'Explorer la Médiathèque',
+                'has_mediatheque_explorer' => true,
+                'mediatheque_explorer_id' => 'local-uckk-mediatheque-explorer',
+                'mediatheque_initial_state' => [
+                    'rootId' => 'local-uckk-mediatheque-explorer',
+                    'service' => 'mod_uckkarchive_search_mediatheque',
+                    'cmid' => 0,
+                    'archiveid' => 0,
+                    'query' => '',
+                    'filters' => [
+                        'type' => 'all',
+                        'mediatype' => 'all',
+                        'collection' => '',
+                        'tag' => '',
+                        'source' => '',
+                        'advisory' => 'all',
+                        'cultural' => 'all',
+                        'audience' => 'all',
+                        'lang' => '',
+                        'validation' => 'all',
+                    ],
+                    'page' => 1,
+                    'perpage' => 12,
+                    'sort' => 'relevance',
+                    'sitewide' => true,
+                ],
+                'mediatheque' => [
+                    'explorer' => [
+                        'key' => 'mediatheque_explorer',
+                        'title' => 'Explorateur Médiathèque',
+                        'service' => 'mod_uckkarchive_search_mediatheque',
+                        'surface' => 'local_uckk',
+                        'dataowner' => 'mod_uckkarchive',
+                    ],
+                ],
+                'quicklinks' => [
+                    [
+                        'label' => 'Rechercher',
+                        'description' => 'Chercher dans les médias publics et les collections accessibles.',
+                        'url' => '/local/uckk/mediatheque.php',
+                    ],
+                    [
+                        'label' => 'Archives',
+                        'description' => 'Revenir aux repères généraux d’archive publique.',
+                        'url' => '/local/uckk/archives.php',
+                    ],
+                ],
+                'sections' => [
+                    [
+                        'type' => 'orientation',
+                        'eyebrow' => 'Exploration',
+                        'title' => 'Naviguer dans les médias publics',
+                        'body' => 'L’explorateur permet de chercher, filtrer et ouvrir les fiches publiques sans exposer les fichiers originaux ni les métadonnées privées.',
+                        'items' => [
+                            'Recherche par texte, format, source, collection et mot-clé.',
+                            'Affichage des médias publics seulement.',
+                            'Respect des droits, avis de contenu et protocoles culturels.',
+                        ],
+                    ],
+                    [
+                        'type' => 'boundary',
+                        'eyebrow' => 'Responsabilité',
+                        'title' => 'Ce que la Médiathèque ne publie pas',
+                        'body' => 'Les médias restreints, brouillons, notes internes, protocoles culturels privés, fichiers originaux non autorisés et métadonnées sensibles restent contrôlés par mod_uckkarchive.',
+                    ],
+                ],
+                'cards' => [
+                    [
+                        'title' => 'Médias',
+                        'body' => 'Voir les vidéos, sons, images, documents et livres publics filtrés.',
+                        'type' => 'media',
+                    ],
+                    [
+                        'title' => 'Collections',
+                        'body' => 'Parcourir les regroupements publics sans dupliquer le moteur média interne.',
+                        'type' => 'collection',
+                    ],
+                    [
+                        'title' => 'Passages documentés',
+                        'body' => 'Pointer vers des moments, pages ou segments quand ils peuvent être exposés publiquement.',
+                        'type' => 'marker',
+                    ],
+                ],
+                'notices' => [
+                    [
+                        'title' => 'Données et politiques',
+                        'body' => 'La page publique appartient à local_uckk, mais les médias, droits, avis de contenu et protocoles culturels sont filtrés par mod_uckkarchive.',
+                        'type' => 'institutional',
+                    ],
+                    [
+                        'title' => 'Accès responsable',
+                        'body' => 'Certains contenus peuvent être masqués ou résumés selon les droits, les avis de contenu et les protocoles culturels.',
+                        'type' => 'light',
+                    ],
+                ],
+                'metadata' => [
+                    ['label' => 'Surface publique', 'value' => 'local_uckk'],
+                    ['label' => 'Données et politiques', 'value' => 'mod_uckkarchive'],
+                    ['label' => 'Service AJAX', 'value' => 'mod_uckkarchive_search_mediatheque'],
+                    ['label' => 'Portée par défaut', 'value' => 'site-wide public'],
+                ],
+                'cta' => [
+                    'title' => 'Explorer les médias publics',
+                    'body' => 'Lance une recherche ou filtre la Médiathèque selon le format, la source, les collections et les avis publics.',
+                    'url' => '/local/uckk/mediatheque.php',
+                    'label' => 'Ouvrir la Médiathèque',
+                ],
+            ],
+
             self::KEY_NEWS => [
                 'layout' => 'standard',
                 'typography' => 'institutional',
@@ -861,6 +982,7 @@ final class public_pages {
             ['key' => self::KEY_ASSEMBLIES, 'label' => 'Assemblées', 'url' => '/local/uckk/assemblies.php'],
             ['key' => self::KEY_INTEGRITY, 'label' => 'Intégrité', 'url' => '/local/uckk/integrity.php'],
             ['key' => self::KEY_ARCHIVES, 'label' => 'Archives', 'url' => '/local/uckk/archives.php'],
+            ['key' => self::KEY_MEDIATHEQUE, 'label' => 'Médiathèque', 'url' => '/local/uckk/mediatheque.php'],
             ['key' => self::KEY_NEWS, 'label' => 'Actualités', 'url' => '/local/uckk/news.php'],
             ['key' => self::KEY_CONTACT, 'label' => 'Contact', 'url' => '/local/uckk/contact.php'],
         ];
@@ -911,6 +1033,7 @@ final class public_pages {
             self::KEY_ASSEMBLIES,
             self::KEY_INTEGRITY,
             self::KEY_ARCHIVES,
+            self::KEY_MEDIATHEQUE,
             self::KEY_NEWS,
             self::KEY_CONTACT,
         ];
@@ -970,6 +1093,7 @@ final class public_pages {
             self::KEY_ASSEMBLIES => 'Assemblées UCKK',
             self::KEY_INTEGRITY => 'Intégrité UCKK',
             self::KEY_ARCHIVES => 'Archives UCKK',
+            self::KEY_MEDIATHEQUE => 'Médiathèque UCKK',
             self::KEY_NEWS => 'Actualités UCKK',
             self::KEY_CONTACT => 'Contact UCKK',
         ];
@@ -983,6 +1107,7 @@ final class public_pages {
             self::KEY_ASSEMBLIES => 'public_assemblies_title',
             self::KEY_INTEGRITY => 'public_integrity_title',
             self::KEY_ARCHIVES => 'public_archives_title',
+            self::KEY_MEDIATHEQUE => 'public_mediatheque_title',
             self::KEY_NEWS => 'public_news_title',
             self::KEY_CONTACT => 'public_contact_title',
         ];

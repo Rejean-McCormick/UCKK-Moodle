@@ -135,7 +135,7 @@
     },
     {
       "key": "program_tronc_commun",
-      "name": "Programme — Tronc commun obligatoire",
+      "name": "Tronc commun — Obligatoire",
       "idnumber": "UCKK-COHORT-PROGRAM-TC",
       "context": "system",
       "description": "Cohorte des Joueurs engagés dans le tronc commun UCKK.",
@@ -156,12 +156,13 @@
           "UCKK-TC106",
           "UCKK-TC107",
           "UCKK-TC108"
-        ]
+        ],
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_grand_jeu_social",
-      "name": "Programme — Grand Jeu social",
+      "name": "Voie — Grand Jeu social",
       "idnumber": "UCKK-COHORT-PROGRAM-GJS",
       "context": "system",
       "description": "Cohorte de la Voie du Grand Jeu social.",
@@ -172,12 +173,17 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "grand_jeu_social",
-        "program_type": "baccalaureat"
+        "program_type": "voie_puissance_operatoire",
+        "voie": "grand_jeu_social",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_koa_digital",
-      "name": "Programme — Architecture écosystème digital kOA",
+      "name": "Voie — Architecture de l’écosystème digital kOA",
       "idnumber": "UCKK-COHORT-PROGRAM-KOA-DIGITAL",
       "context": "system",
       "description": "Cohorte de la Voie de l’Architecture de l’écosystème digital kOA.",
@@ -188,12 +194,17 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "architecture_ecosysteme_digital_koa",
-        "program_type": "baccalaureat"
+        "program_type": "voie_puissance_operatoire",
+        "voie": "architecture_ecosysteme_digital_koa",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_sociotech",
-      "name": "Programme — Architecture sociotechnique",
+      "name": "Voie — Architecture sociotechnique",
       "idnumber": "UCKK-COHORT-PROGRAM-SOCIOTECH",
       "context": "system",
       "description": "Cohorte de la Voie de l’Architecture sociotechnique.",
@@ -204,12 +215,17 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "architecture_sociotechnique",
-        "program_type": "baccalaureat"
+        "program_type": "voie_puissance_operatoire",
+        "voie": "architecture_sociotechnique",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_politics",
-      "name": "Programme — Sciences politiques",
+      "name": "Voie — Sciences politiques",
       "idnumber": "UCKK-COHORT-PROGRAM-POLITICS",
       "context": "system",
       "description": "Cohorte de la Voie des Sciences politiques.",
@@ -220,12 +236,17 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "sciences_politiques",
-        "program_type": "baccalaureat"
+        "program_type": "voie_puissance_operatoire",
+        "voie": "sciences_politiques",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_economy",
-      "name": "Programme — Économie",
+      "name": "Voie — Économie",
       "idnumber": "UCKK-COHORT-PROGRAM-ECONOMY",
       "context": "system",
       "description": "Cohorte de la Voie de l’Économie.",
@@ -236,12 +257,17 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "economie",
-        "program_type": "baccalaureat"
+        "program_type": "voie_puissance_operatoire",
+        "voie": "economie",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_ecology",
-      "name": "Programme — Écologie",
+      "name": "Voie — Écologie",
       "idnumber": "UCKK-COHORT-PROGRAM-ECOLOGY",
       "context": "system",
       "description": "Cohorte de la Voie de l’Écologie.",
@@ -252,12 +278,17 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "ecologie",
-        "program_type": "baccalaureat"
+        "program_type": "voie_puissance_operatoire",
+        "voie": "ecologie",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_metaphysics",
-      "name": "Programme — Métaphysique",
+      "name": "Voie — Métaphysique",
       "idnumber": "UCKK-COHORT-PROGRAM-METAPHYSICS",
       "context": "system",
       "description": "Cohorte de la Voie de la Métaphysique.",
@@ -268,12 +299,17 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "metaphysique",
-        "program_type": "baccalaureat"
+        "program_type": "voie_puissance_operatoire",
+        "voie": "metaphysique",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_ai",
-      "name": "Programme — Intelligence artificielle gouvernable",
+      "name": "Voie — Intelligence artificielle gouvernable",
       "idnumber": "UCKK-COHORT-PROGRAM-AI",
       "context": "system",
       "description": "Cohorte de la Voie de l’Intelligence artificielle gouvernable.",
@@ -284,16 +320,21 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "intelligence_artificielle_gouvernable",
-        "program_type": "baccalaureat",
+        "program_type": "voie_puissance_operatoire",
         "ai_policy": {
           "non_sovereign": true,
           "human_validation_required": true
-        }
+        },
+        "voie": "intelligence_artificielle_gouvernable",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_linguistics",
-      "name": "Programme — Linguistique et architecture du sens",
+      "name": "Voie — Linguistique et architecture du sens",
       "idnumber": "UCKK-COHORT-PROGRAM-LINGUISTICS",
       "context": "system",
       "description": "Cohorte de la Voie de la Linguistique et de l’architecture du sens.",
@@ -304,12 +345,17 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "linguistique_architecture_du_sens",
-        "program_type": "baccalaureat"
+        "program_type": "voie_puissance_operatoire",
+        "voie": "linguistique_architecture_du_sens",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_social_intervention",
-      "name": "Programme — Intervention sociale",
+      "name": "Voie — Intervention sociale et systèmes humains",
       "idnumber": "UCKK-COHORT-PROGRAM-SOCIAL-INTERVENTION",
       "context": "system",
       "description": "Cohorte de la Voie de l’Intervention sociale et des systèmes humains.",
@@ -320,15 +366,20 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "intervention_sociale",
-        "program_type": "baccalaureat"
+        "program_type": "voie_puissance_operatoire",
+        "voie": "intervention_sociale",
+        "niveau_vise": "Puissance opératoire",
+        "titre_interne": "Mage UCKK",
+        "parchemin_uckk": "Parchemin de Puissance opératoire",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_living_media",
-      "name": "Programme — Médias vivants et théâtre public",
+      "name": "Voie — Médias vivants et théâtre public",
       "idnumber": "UCKK-COHORT-PROGRAM-LIVING-MEDIA",
       "context": "system",
-      "description": "Cohorte de la mineure interne Médias vivants et théâtre public.",
+      "description": "Cohorte de la Voie des Médias vivants et du théâtre public.",
       "visible": true,
       "status": "active",
       "visibility": "institution",
@@ -336,15 +387,20 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "medias_vivants_theatre_public",
-        "program_type": "mineure"
+        "program_type": "voie_initiation",
+        "voie": "medias_vivants_theatre_public",
+        "niveau_vise": "Initiation",
+        "titre_interne": "Initié UCKK",
+        "parchemin_uckk": "Parchemin d’Initiation",
+        "public_accreditation_claim": false
       }
     },
     {
       "key": "program_advanced_labs",
-      "name": "Programme — Séminaires avancés et laboratoires",
+      "name": "Laboratoires — Avancés et chantiers",
       "idnumber": "UCKK-COHORT-PROGRAM-ADVANCED-LABS",
       "context": "system",
-      "description": "Cohorte des séminaires avancés et laboratoires UCKK.",
+      "description": "Cohorte des laboratoires avancés, chantiers, prototypes et expérimentations encadrées UCKK.",
       "visible": true,
       "status": "active",
       "visibility": "institution",
@@ -352,7 +408,8 @@
         "managedby": "tool_uckkseed",
         "type": "program",
         "program": "seminaires_avances_laboratoires",
-        "program_type": "seminaire"
+        "program_type": "laboratoire_chantier",
+        "public_accreditation_claim": false
       }
     },
     {
@@ -539,4 +596,3 @@
     }
   ]
 }
-

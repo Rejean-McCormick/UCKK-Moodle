@@ -17,7 +17,7 @@
 
     This template is the single visual contract for the public UCKK pages:
     Accueil, À propos, Voies, Cours, Défis, Assemblées, Intégrité,
-    Archives, Actualités and Contact.
+    Archives, Médiathèque, Actualités and Contact.
 
     It is intentionally render-only.
 
@@ -40,17 +40,29 @@
         "classes": "local-uckk local-uckk-public-page local-uckk-public-page--about local-uckk-public-page--layout-wide local-uckk-public-page--with-aside",
         "layout": "wide",
         "navigationlayout": "singleline",
-        "layoutclasses": "local-uckk-public-layout local-uckk-public-layout--wide local-uckk-public-layout--with-aside",
+        "layoutclasses": "local-uckk-public-layout local-uckk-public-layout--wide",
+        "shellclasses": "local-uckk-public-shell local-uckk-public-shell--wide",
         "bodyclasses": "local-uckk-public-body local-uckk-public-body--wide local-uckk-public-body--with-aside",
         "mainclasses": "local-uckk-public-main local-uckk-public-main--wide local-uckk-public-main--with-aside",
         "asideclasses": "local-uckk-public-aside local-uckk-public-aside--wide",
         "hasaside": true,
 
-        "eyebrow": "Univers-Cité King Klown",
-        "title": "À propos",
-        "subtitle": "Cité-école expérimentale du mouvement kOA.",
-        "summary": "UCKK forme, rassemble, documente, défie, vérifie et archive.",
-        "boundarynotice": "kOA est le mouvement. UCKK est l’école. Le kOA Digital Ecosystem est l’infrastructure. King Klown est la figure narrative. L’Inquisiteur protège l’intégrité.",
+        "railclasses": "local-uckk-public-rail local-uckk-public-rail--wide",
+        "headerclasses": "local-uckk-public-header local-uckk-public-header--wide",
+        "heroclasses": "local-uckk-public-hero local-uckk-public-hero--wide local-uckk-public-hero--with-aside",
+        "contentclasses": "local-uckk-public-content local-uckk-public-content--wide local-uckk-public-content--with-aside",
+        "asideinnerclasses": "local-uckk-public-aside__inner local-uckk-public-aside__inner--wide",
+        "typographyclasses": "local-uckk-public-typography local-uckk-public-typography--institutional",
+        "sectiongridclasses": "local-uckk-public-section-grid local-uckk-public-section-grid--wide",
+        "cardgridclasses": "local-uckk-public-card-grid local-uckk-public-card-grid--wide",
+        "designversion": "2026-layout-v2",
+        "fontstrategy": "libre-baskerville-primary-eb-garamond-accent",
+
+        "eyebrow": "Cité-école expérimentale",
+        "title": "Univers-Cité King Klown",
+        "subtitle": "Campus Moodle public",
+        "summary": "Présentation publique d’UCKK.",
+        "boundarynotice": "Les reconnaissances UCKK ne sont pas des diplômes publics reconnus par l’État.",
 
         "hasnavigation": true,
         "navigationclasses": "local-uckk-public-nav local-uckk-public-nav--singleline",
@@ -59,46 +71,41 @@
                 "key": "home",
                 "label": "Accueil",
                 "url": "https://example.test/local/uckk/index.php",
-                "active": false,
-                "classes": "local-uckk-public-nav__link",
-                "itemclasses": "local-uckk-public-nav__item",
-                "ariacurrent": "",
-                "hasariacurrent": false
+                "active": true,
+                "classes": "local-uckk-public-nav__link is-active",
+                "itemclasses": "local-uckk-public-nav__item local-uckk-public-nav__item--active",
+                "ariacurrent": "page",
+                "hasariacurrent": true
             }
         ],
 
         "hasquicklinks": true,
         "quicklinks": [
             {
-                "label": "Explorer les Voies",
+                "label": "Voies",
+                "description": "Explorer les parcours UCKK.",
                 "url": "https://example.test/local/uckk/programs.php",
-                "description": "Voir le Tronc commun, les Voies fondatrices et les reconnaissances internes."
+                "hasdescription": true,
+                "hasurl": true
             }
         ],
 
         "hassections": true,
         "sections": [
             {
-                "title": "Mission",
-                "eyebrow": "Former",
-                "body": "Comprendre le jeu. Jouer avec lucidité. Changer les règles.",
-                "hasitems": true,
-                "items": [
-                    {
-                        "title": "Voies",
-                        "body": "Parcours de formation et d’expérimentation.",
-                        "url": "https://example.test/local/uckk/programs.php",
-                        "actionlabel": "Voir",
-                        "hasaction": true
-                    }
-                ]
+                "eyebrow": "Repère",
+                "title": "Pourquoi cette page existe",
+                "body": "Clarifier le rôle public de la cité-école.",
+                "hasitems": false,
+                "hascards": false,
+                "classes": "local-uckk-public-section"
             }
         ],
 
         "hascards": true,
+        "cardsheading": "Repères publics",
         "cards": [
             {
-                "eyebrow": "Défis",
                 "title": "Défis King Klown",
                 "body": "Épreuves publiques ou internes orientées vers preuves, apprentissage et archive.",
                 "url": "https://example.test/local/uckk/challenges.php",
@@ -106,6 +113,10 @@
                 "hasaction": true
             }
         ],
+
+        "has_mediatheque_explorer": true,
+        "mediatheque_explorer_id": "local-uckk-mediatheque-explorer-abc123",
+        "mediatheque_initial_state_json": "{\"cmid\":0,\"archiveid\":0,\"query\":\"\",\"filters\":{},\"page\":1,\"perpage\":12,\"sort\":\"relevance\"}",
 
         "hasnotices": true,
         "notices": [
@@ -322,6 +333,156 @@
                     {{/sections}}
                 {{/hassections}}
 
+                {{#has_mediatheque_explorer}}
+                    <section
+                        class="local-uckk-public-section local-uckk-public-section--mediatheque local-uckk-mediatheque"
+                        aria-labelledby="{{uniqid}}-mediatheque-title"
+                        data-region="local-uckk-public-mediatheque"
+                    >
+                        <div class="local-uckk-mediatheque__header">
+                            <p class="local-uckk-public-section__eyebrow">
+                                Archives publiques
+                            </p>
+
+                            <h2 id="{{uniqid}}-mediatheque-title" class="local-uckk-public-section__title">
+                                <span class="local-uckk-public-section__title-text">
+                                    Explorateur Médiathèque
+                                </span>
+                            </h2>
+
+                            <p class="local-uckk-public-section__body">
+                                Rechercher dans les médias publics, collections, références externes et passages documentés.
+                            </p>
+                        </div>
+
+                        <div
+                            id="{{mediatheque_explorer_id}}"
+                            class="local-uckk-mediatheque-explorer"
+                            data-region="local-uckk-mediatheque-explorer"
+                            data-method="mod_uckkarchive_search_mediatheque"
+                            data-autoload="1"
+                            data-initial-state="{{mediatheque_initial_state_json}}"
+                        >
+                            <form
+                                class="local-uckk-mediatheque-search"
+                                data-region="mediatheque-search-form"
+                                action="/local/uckk/mediatheque.php"
+                                method="get"
+                            >
+                                <div class="local-uckk-mediatheque-search__primary">
+                                    <label class="local-uckk-mediatheque-search__label" for="{{mediatheque_explorer_id}}-q">
+                                        Rechercher dans la médiathèque
+                                    </label>
+
+                                    <div class="local-uckk-mediatheque-search__row">
+                                        <input
+                                            id="{{mediatheque_explorer_id}}-q"
+                                            class="local-uckk-mediatheque-search__input"
+                                            type="search"
+                                            name="q"
+                                            data-live-search="1"
+                                            autocomplete="off"
+                                            placeholder="Rechercher dans la médiathèque"
+                                        >
+
+                                        <button class="local-uckk-mediatheque-search__submit" type="submit">
+                                            Rechercher
+                                        </button>
+
+                                        <button
+                                            class="local-uckk-mediatheque-search__reset"
+                                            type="button"
+                                            data-action="mediatheque-reset"
+                                            data-keep-enabled="1"
+                                        >
+                                            Réinitialiser
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="local-uckk-mediatheque-filters" data-region="mediatheque-filters">
+                                    <div class="local-uckk-mediatheque-filter">
+                                        <label for="{{mediatheque_explorer_id}}-mediatype">
+                                            Format
+                                        </label>
+                                        <select id="{{mediatheque_explorer_id}}-mediatype" name="mediatype">
+                                            <option value="all">Tous les formats</option>
+                                            <option value="video">Vidéo</option>
+                                            <option value="audio">Audio</option>
+                                            <option value="image">Image</option>
+                                            <option value="pdf">PDF</option>
+                                            <option value="document">Document</option>
+                                            <option value="book">Livre</option>
+                                            <option value="external_reference">Référence externe</option>
+                                            <option value="other">Autre</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="local-uckk-mediatheque-filter">
+                                        <label for="{{mediatheque_explorer_id}}-sort">
+                                            Tri
+                                        </label>
+                                        <select id="{{mediatheque_explorer_id}}-sort" name="sort">
+                                            <option value="relevance">Pertinence</option>
+                                            <option value="newest">Plus récent</option>
+                                            <option value="title">Titre</option>
+                                            <option value="type">Type</option>
+                                        </select>
+                                    </div>
+
+                                    <input type="hidden" name="type" value="all">
+                                    <input type="hidden" name="collection" value="">
+                                    <input type="hidden" name="tag" value="">
+                                    <input type="hidden" name="source" value="">
+                                    <input type="hidden" name="advisory" value="all">
+                                    <input type="hidden" name="cultural" value="all">
+                                    <input type="hidden" name="audience" value="all">
+                                    <input type="hidden" name="lang" value="">
+                                    <input type="hidden" name="validation" value="all">
+                                    <input type="hidden" name="page" value="1">
+                                    <input type="hidden" name="perpage" value="12">
+                                </div>
+                            </form>
+
+                            <div class="local-uckk-mediatheque-statusbar">
+                                <p class="local-uckk-mediatheque-status" data-region="mediatheque-status" aria-live="polite">
+                                    Chargement de la médiathèque…
+                                </p>
+
+                                <p class="local-uckk-mediatheque-count">
+                                    <span data-region="mediatheque-count">0</span>
+                                    résultat(s)
+                                </p>
+                            </div>
+
+                            <div
+                                class="local-uckk-mediatheque-results"
+                                data-region="mediatheque-results"
+                                aria-live="polite"
+                            ></div>
+
+                            <div
+                                class="local-uckk-mediatheque-empty"
+                                data-region="mediatheque-empty"
+                                hidden
+                            >
+                                Aucun média public ne correspond aux filtres.
+                            </div>
+
+                            <p class="local-uckk-mediatheque-pagination">
+                                <button
+                                    class="local-uckk-mediatheque-load-more"
+                                    type="button"
+                                    data-action="mediatheque-load-more"
+                                    hidden
+                                >
+                                    Charger plus de résultats
+                                </button>
+                            </p>
+                        </div>
+                    </section>
+                {{/has_mediatheque_explorer}}
+
                 {{#hascards}}
                     <section
                         class="local-uckk-public-section local-uckk-public-section--cards"
@@ -477,5 +638,3 @@
         </div>
     </div>
 </div>
-
-

@@ -347,7 +347,6 @@ $string['itemtype:reflection'] = 'Reflection';
 $string['itemtype:portfolio_item'] = 'Portfolio item';
 $string['itemtype:version_record'] = 'Version record';
 $string['itemtype:archive_item'] = 'Archive item';
-
 // -----------------------------------------------------------------------------
 // Kristal types.
 // -----------------------------------------------------------------------------
@@ -1659,3 +1658,139 @@ $string['uckkarchive:addexternalworks'] = 'Add external works';
 $string['uckkarchive:deleteexternalworks'] = 'Delete external works';
 $string['uckkarchive:editexternalworks'] = 'Edit external works';
 $string['uckkarchive:viewexternalworks'] = 'View external works';
+
+// -----------------------------------------------------------------------------
+// Media-library editor.
+// -----------------------------------------------------------------------------
+
+$string['medialibraryeditor'] = 'Media library editor';
+$string['medialibraryeditor_desc'] = 'Qualify, contextualise, relate, govern, and validate archive media.';
+$string['backtomedialibrary'] = 'Back to media library';
+$string['mediaeditorpreview'] = 'Media preview';
+$string['mediaeditorworkflow'] = 'Workflow';
+$string['mediaeditorgovernance'] = 'Governance';
+$string['mediaeditoractions'] = 'Editor actions';
+$string['mediaeditorform'] = 'Media qualification form';
+$string['mediaeditorform_desc'] = 'Edit the media identity, source, rights, visibility, audience suitability, advisory hints, and metadata.';
+$string['mediaeditorstep_reception'] = 'Reception';
+$string['mediaeditorstep_identification'] = 'Identification';
+$string['mediaeditorstep_qualification'] = 'Qualification';
+$string['mediaeditorstep_markers'] = 'Passage markers';
+$string['mediaeditorstep_advisories'] = 'Advisories and protocols';
+$string['mediaeditorstep_relations'] = 'Relations';
+$string['mediaeditorstep_validation'] = 'Validation';
+$string['newmediarecord'] = 'New media record';
+$string['passagemarkers'] = 'Passage markers';
+$string['passagemarkers_desc'] = 'Point to a specific passage in a video, audio recording, book, PDF, website, or external work.';
+$string['managepassagemarkers'] = 'Manage passage markers';
+$string['mediaeditoradvisories_desc'] = 'Review content warnings, cultural advisories, cultural protocols, and audience-suitability conditions.';
+$string['mediaeditorrelations_desc'] = 'Connect this media to collections, archive items, versions, external works, proofs, or other media.';
+$string['mediaeditorvalidation_desc'] = 'Track review state, publication readiness, restrictions, and contestability.';
+$string['mediaeditorprovenance_desc'] = 'Provenance and audit information remain governed by the server-side archive services.';
+$string['mediacreated'] = 'Media created.';
+$string['mediaupdated'] = 'Media updated.';
+
+// -----------------------------------------------------------------------------
+// Public Médiathèque / Explorer.
+// -----------------------------------------------------------------------------
+
+$string['mediatheque'] = 'Médiathèque';
+$string['mediatheque_title'] = 'UCKK Médiathèque';
+$string['mediatheque_eyebrow'] = 'Public archives';
+$string['mediatheque_summary'] = 'Explore public media, collections, external works, and documented passages from the UCKK archive.';
+$string['mediatheque_explorer'] = 'Médiathèque Explorer';
+$string['mediatheque_explorer_title'] = 'Médiathèque Explorer';
+$string['mediatheque_explorer_desc'] = 'Search and filter the public Médiathèque. Results are filtered by visibility, rights, content advisories, cultural protocols, and archive policies.';
+$string['mediatheque_search'] = 'Search the Médiathèque';
+$string['mediatheque_search_placeholder'] = 'Search by title, description, source, tag, collection, or passage';
+$string['mediatheque_search_button'] = 'Search';
+$string['mediatheque_reset_filters'] = 'Reset filters';
+$string['mediatheque_apply_filters'] = 'Apply filters';
+$string['mediatheque_load_more'] = 'Load more';
+$string['mediatheque_loading'] = 'Loading Médiathèque results…';
+$string['mediatheque_loading_failed'] = 'Médiathèque results could not be loaded.';
+$string['mediatheque_empty'] = 'No public media match these filters.';
+$string['mediatheque_empty_title'] = 'No results';
+$string['mediatheque_empty_desc'] = 'Try another search term or remove some filters.';
+$string['mediatheque_results'] = 'Médiathèque results';
+$string['mediatheque_result_count'] = '{$a} result(s)';
+$string['mediatheque_page'] = 'Page';
+$string['mediatheque_perpage'] = 'Results per page';
+$string['mediatheque_sort'] = 'Sort';
+$string['mediatheque_sort_relevance'] = 'Relevance';
+$string['mediatheque_sort_newest'] = 'Newest';
+$string['mediatheque_sort_title'] = 'Title';
+$string['mediatheque_sort_type'] = 'Type';
+
+$string['mediatheque_filter_type'] = 'Object type';
+$string['mediatheque_filter_mediatype'] = 'Media type';
+$string['mediatheque_filter_collection'] = 'Collection';
+$string['mediatheque_filter_tag'] = 'Tag';
+$string['mediatheque_filter_source'] = 'Source';
+$string['mediatheque_filter_advisory'] = 'Content advisory';
+$string['mediatheque_filter_cultural'] = 'Cultural protocol';
+$string['mediatheque_filter_audience'] = 'Audience';
+$string['mediatheque_filter_language'] = 'Language';
+$string['mediatheque_filter_validation'] = 'Validation';
+
+$string['mediatheque_filter_all'] = 'All';
+$string['mediatheque_filter_none'] = 'None';
+$string['mediatheque_filter_has_advisory'] = 'With advisory';
+$string['mediatheque_filter_has_public_advisory'] = 'With public advisory';
+$string['mediatheque_filter_has_public_protocol'] = 'With public protocol';
+
+$string['mediatheque_object_media'] = 'Media';
+$string['mediatheque_object_collection'] = 'Collection';
+$string['mediatheque_object_external_work'] = 'External work';
+$string['mediatheque_object_archive_item'] = 'Linked archive item';
+$string['mediatheque_object_content_marker'] = 'Passage marker';
+
+$string['mediatheque_mediatype_video'] = 'Video';
+$string['mediatheque_mediatype_audio'] = 'Audio';
+$string['mediatheque_mediatype_image'] = 'Image';
+$string['mediatheque_mediatype_pdf'] = 'PDF';
+$string['mediatheque_mediatype_document'] = 'Document';
+$string['mediatheque_mediatype_book'] = 'Book';
+$string['mediatheque_mediatype_external_reference'] = 'External reference';
+$string['mediatheque_mediatype_other'] = 'Other';
+
+$string['mediatheque_source_produced_by_uckk'] = 'Produced by UCKK';
+$string['mediatheque_source_submitted_to_uckk'] = 'Submitted to UCKK';
+$string['mediatheque_source_imported'] = 'Imported';
+$string['mediatheque_source_external_reference_only'] = 'External reference only';
+$string['mediatheque_source_unknown'] = 'Unknown source';
+
+$string['mediatheque_audience_general'] = 'General';
+$string['mediatheque_audience_guided'] = 'Guided';
+$string['mediatheque_audience_mature'] = 'Mature';
+$string['mediatheque_audience_restricted'] = 'Restricted';
+
+$string['mediatheque_validation_unverified'] = 'Unverified';
+$string['mediatheque_validation_human_reviewed'] = 'Human reviewed';
+$string['mediatheque_validation_verified'] = 'Verified';
+$string['mediatheque_validation_archived'] = 'Archived';
+
+$string['mediatheque_public_notice'] = 'The Médiathèque only shows public, policy-filtered records.';
+$string['mediatheque_restricted_notice'] = 'Some content is hidden or summarized according to rights, content advisories, cultural protocols, and archive policies.';
+$string['mediatheque_policy_filtered_notice'] = 'Results are filtered by server-side archive policies.';
+$string['mediatheque_no_download_notice'] = 'This public card does not grant access to the original file.';
+$string['mediatheque_external_reference_notice'] = 'This record references an external work. UCKK does not claim ownership of the external content.';
+
+$string['mediatheque_action_view_detail'] = 'View details';
+$string['mediatheque_action_view_file'] = 'View file';
+$string['mediatheque_action_download'] = 'Download';
+$string['mediatheque_action_open_external'] = 'Open external reference';
+
+$string['mediatheque_badge_public'] = 'Public';
+$string['mediatheque_badge_restricted'] = 'Restricted';
+$string['mediatheque_badge_advisory'] = 'Advisory';
+$string['mediatheque_badge_cultural_protocol'] = 'Cultural protocol';
+$string['mediatheque_badge_external_work'] = 'External work';
+$string['mediatheque_badge_passage_marker'] = 'Passage marker';
+
+$string['mediatheque_service_search'] = 'Search the public Médiathèque';
+$string['mediatheque_service_error_invalidscope'] = 'Invalid Médiathèque search scope.';
+$string['mediatheque_service_error_invalidfilters'] = 'Invalid Médiathèque filters.';
+$string['mediatheque_service_error_unavailable'] = 'The Médiathèque search service is currently unavailable.';
+$string['mediatheque_service_warning_policyfiltered'] = 'Some results may be hidden by archive policies.';
+$string['mediatheque_service_warning_restrictedhidden'] = 'Restricted content was hidden from the public response.';

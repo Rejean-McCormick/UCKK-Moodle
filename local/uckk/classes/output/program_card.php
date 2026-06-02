@@ -34,6 +34,7 @@
 namespace local_uckk\output;
 
 use coding_exception;
+use core_text;
 use moodle_url;
 use named_templatable;
 use renderable;
@@ -71,10 +72,18 @@ final class program_card implements renderable, templatable, named_templatable {
     /** Program type: tronc commun. */
     public const TYPE_TRONC_COMMUN = 'tronc_commun';
 
-    /** Program type: baccalauréat. */
+    /**
+     * Program type: legacy technical key for a UCKK Voie-level program.
+     *
+     * Keep this value for DB compatibility; do not expose it as a public label.
+     */
     public const TYPE_BACCALAUREAT = 'baccalaureat';
 
-    /** Program type: mineure. */
+    /**
+     * Program type: legacy technical key for a UCKK initiation-level Voie.
+     *
+     * Keep this value for DB compatibility; do not expose it as a public label.
+     */
     public const TYPE_MINEURE = 'mineure';
 
     /** Program type: séminaire. */
@@ -638,6 +647,21 @@ final class program_card implements renderable, templatable, named_templatable {
      * @return string
      */
     private static function get_program_type_label(string $type): string {
+        $type = self::normalise_program_type($type);
+
+        // Public-facing UCKK nomenclature override.
+        //
+        // The DB may still contain legacy technical keys such as "baccalaureat"
+        // and "mineure". Those keys are preserved for compatibility, but the
+        // rendered interface must not expose controlled university-style labels.
+        switch ($type) {
+            case self::TYPE_BACCALAUREAT:
+                return 'Voie UCKK — Niveau visé : Puissance opératoire';
+
+            case self::TYPE_MINEURE:
+                return 'Voie UCKK — Niveau visé : Initiation';
+        }
+
         $stringkey = 'programtype_' . $type;
 
         if (get_string_manager()->string_exists($stringkey, 'local_uckk')) {

@@ -364,6 +364,9 @@ function local_uckk_get_symbolic_roles(): array {
  * @return array<string, array<string, string>>
  */
 function local_uckk_get_program_registry(): array {
+    // NOTE: the internal `type` values below are technical compatibility keys.
+    // They must not be displayed as public diploma labels. Public labels are
+    // carried by `fullname` and must follow the UCKK Voie/Niveau nomenclature.
     return [
         'tronc_commun' => [
             'shortname' => 'tronc_commun',
@@ -374,7 +377,7 @@ function local_uckk_get_program_registry(): array {
         'grand_jeu_social' => [
             'shortname' => 'grand_jeu_social',
             'idnumber' => 'UCKK-PROG-GJS',
-            'fullname' => 'Baccalauréat du Grand Jeu social',
+            'fullname' => 'Voie du Grand Jeu social',
             'type' => 'baccalaureat',
         ],
         'architecture_ecosysteme_digital_koa' => [
@@ -434,13 +437,13 @@ function local_uckk_get_program_registry(): array {
         'medias_vivants_theatre_public' => [
             'shortname' => 'medias_vivants_theatre_public',
             'idnumber' => 'UCKK-PROG-MV',
-            'fullname' => 'Mineure Médias vivants et théâtre public responsable',
+            'fullname' => 'Voie des Médias vivants et du théâtre public',
             'type' => 'mineure',
         ],
         'seminaires_avances_laboratoires' => [
             'shortname' => 'seminaires_avances_laboratoires',
             'idnumber' => 'UCKK-PROG-LABS',
-            'fullname' => 'Séminaires avancés et laboratoires',
+            'fullname' => 'Laboratoires avancés et chantiers',
             'type' => 'laboratoire',
         ],
     ];

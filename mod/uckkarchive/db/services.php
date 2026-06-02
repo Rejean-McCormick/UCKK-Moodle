@@ -276,6 +276,16 @@ $functions = [
         ],
     ],
 
+    'mod_uckkarchive_search_mediatheque' => [
+        'classname' => 'mod_uckkarchive\external\search_mediatheque',
+        'methodname' => 'execute',
+        'classpath' => '',
+        'description' => 'Search public UCKK Médiathèque media for the public local_uckk explorer.',
+        'type' => 'read',
+        'ajax' => true,
+        'loginrequired' => false,
+    ],
+
     'mod_uckkarchive_get_media_item' => [
         'classname' => 'mod_uckkarchive\external\get_media_item',
         'methodname' => 'execute',
@@ -766,6 +776,7 @@ $services = [
             // Media library services.
             'mod_uckkarchive_get_media',
             'mod_uckkarchive_search_media',
+            'mod_uckkarchive_search_mediatheque',
             'mod_uckkarchive_get_media_item',
             'mod_uckkarchive_get_media_card',
             'mod_uckkarchive_add_media',

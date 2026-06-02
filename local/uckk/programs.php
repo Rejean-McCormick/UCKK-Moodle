@@ -211,19 +211,33 @@ function local_uckk_public_programs_public_title(string $fullname, string $short
     }
 
     $title = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $title = local_uckk_public_programs_normalise_visible_nomenclature($title);
     $title = preg_replace('/\s+/u', ' ', $title) ?? $title;
     $title = trim($title);
 
-    // Remove suffix such as "— Niveau de Puissance opératoire".
+    // Remove old and current level suffixes from public cards.
     $title = preg_replace(
-        '/\s*[—–-]\s*Niveau\s+de\s+Magie\s+op[ée]rable\s*$/iu',
+        '/\s*[—–-]\s*Niveau\s+de\s+(?:Magie\s+op[ée]rable|Puissance\s+op[ée]ratoire)\s*$/iu',
         '',
         $title
     ) ?? $title;
 
-    // Special case: "Voie de Puissance opératoire en Architecture..."
+    // Special cases: old and current forms such as "Voie de Puissance opératoire en Architecture...".
     $title = preg_replace(
-        '/^Voie\s+de\s+Magie\s+op[ée]rable\s+en\s+/iu',
+        '/^Voie\s+de\s+(?:Magie\s+op[ée]rable|Puissance\s+op[ée]ratoire)\s+en\s+/iu',
+        '',
+        $title
+    ) ?? $title;
+
+    // Remove legacy controlled public prefixes if still stored in DB.
+    $title = preg_replace(
+        '/^Baccalaur[ée]at\s+(?:UCKK\s*[—–-]\s*)?(?:du|de\s+la|de\s+l[’\']|des|en)?\s*/iu',
+        '',
+        $title
+    ) ?? $title;
+
+    $title = preg_replace(
+        '/^Mineure\s+(?:UCKK\s*[—–-]\s*)?/iu',
         '',
         $title
     ) ?? $title;
@@ -248,9 +262,46 @@ function local_uckk_public_programs_public_title(string $fullname, string $short
     return trim($title);
 }
 
+/**
+ * Normalise legacy or controlled nomenclature for visible public text only.
+ *
+ * Technical DB values such as baccalaureat or mineure may remain in storage
+ * until a controlled migration is performed. This helper prevents controlled
+ * labels from leaking into the public programs page.
+ *
+ * @param string $text Visible text.
+ * @return string Normalised visible text.
+ */
+function local_uckk_public_programs_normalise_visible_nomenclature(string $text): string {
+    $text = trim($text);
 
+    if ($text === '') {
+        return '';
+    }
 
+    $replacements = [
+        '/\bBaccalaur[ée]at\s+UCKK\s*[—–-]\s*/iu' => 'Voie ',
+        '/\bBaccalaur[ée]at\s+en\s+/iu' => 'Voie de ',
+        '/\bBaccalaur[ée]at\s+du\s+/iu' => 'Voie du ',
+        '/\bBaccalaur[ée]at\s+de\s+la\s+/iu' => 'Voie de la ',
+        '/\bBaccalaur[ée]at\s+de\s+l[’\']/iu' => 'Voie de l’',
+        '/\bBaccalaur[ée]at\s+des\s+/iu' => 'Voie des ',
+        '/\bBaccalaur[ée]at\s+/iu' => 'Voie ',
+        '/\bMineure\s+UCKK\s*[—–-]\s*/iu' => 'Voie ',
+        '/\bMineure\s+/iu' => 'Voie ',
+        '/\bPalier\b/u' => 'Niveau',
+        '/\bPaliers\b/u' => 'Niveaux',
+        '/\bMagie\s+op[ée]rable\b/iu' => 'Puissance opératoire',
+    ];
 
+    foreach ($replacements as $pattern => $replacement) {
+        $text = preg_replace($pattern, $replacement, $text) ?? $text;
+    }
+
+    $text = preg_replace('/\s+/u', ' ', $text) ?? $text;
+
+    return trim($text);
+}
 
 /**
  * Convert a program description to plain public text without shortening it.
@@ -267,6 +318,7 @@ function local_uckk_public_programs_plain_description(string $description): stri
 
     $description = strip_tags($description);
     $description = html_entity_decode($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $description = local_uckk_public_programs_normalise_visible_nomenclature($description);
     $description = preg_replace('/\s+/u', ' ', $description) ?? $description;
 
     return trim($description);
@@ -289,11 +341,12 @@ function local_uckk_public_programs_default_description(string $shortname, strin
         'AS' => 'Voie formant des personnes capables de comprendre, concevoir, déployer et auditer des systèmes combinant humains, technologies, institutions, données, règles, plateformes, workflows, décisions et boucles de mémoire.',
         'SP' => 'Voie formant des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.',
         'EC' => 'Voie formant des personnes capables de lire l’économie comme une architecture de règles, ressources, flux, incitatifs, intermédiaires, dépendances, captures et opportunités, afin de concevoir des modèles viables et des systèmes plus justes de circulation de valeur.',
-        'ECO' => 'Voie formant des personnes capables de lire l’économie comme une architecture de règles, ressources, flux, incitatifs, intermédiaires, dépendances, captures et opportunités, afin de concevoir des modèles viables et des systèmes plus justes de circulation de valeur.',
+        'ECO' => 'Voie consacrée aux systèmes vivants, aux milieux, aux interdépendances écologiques et aux responsabilités collectives.',
         'M' => 'Voie consacrée aux cadres de sens, aux hypothèses fondamentales, aux limites de l’explication, aux croyances, aux symboles et aux récits qui orientent l’action humaine.',
         'IA' => 'Voie formant des personnes capables d’utiliser, critiquer, auditer et gouverner l’intelligence artificielle comme outil d’assistance non souverain, en maintenant la responsabilité humaine, la preuve et l’intégrité.',
         'LI' => 'Voie consacrée au langage, aux signes, aux récits, à l’interprétation, à la clarté, à la manipulation et à la conception sémantique des systèmes humains et numériques.',
         'IS' => 'Voie consacrée à l’intervention sociale, aux systèmes humains, aux vulnérabilités, aux réseaux d’aide, aux conflits, aux milieux de vie et aux transformations situées.',
+        'MV' => 'Voie consacrée aux médias vivants, au théâtre public, à la performance et à la responsabilité de l’expression publique.',
     ];
 
     if (isset($descriptions[$key])) {
@@ -316,11 +369,13 @@ function local_uckk_public_programs_default_description(string $shortname, strin
 function local_uckk_public_programs_type_label(string $programtype): string {
     $labels = [
         'tronc_commun' => 'Tronc commun',
+        'tronccommun' => 'Tronc commun',
         'voie_uckk' => 'Voie UCKK',
         'voie_secondaire' => 'Voie secondaire',
-        'baccalaureat' => 'Baccalauréat',
-        'mineure' => 'Mineure',
-        'seminaire' => 'Séminaire',
+        'baccalaureat' => 'Voie UCKK — Niveau visé : Puissance opératoire',
+        'baccalauréat' => 'Voie UCKK — Niveau visé : Puissance opératoire',
+        'mineure' => 'Voie UCKK — Niveau visé : Initiation',
+        'seminaire' => 'Séminaire / laboratoire',
         'laboratoire' => 'Laboratoire',
     ];
 
@@ -330,6 +385,7 @@ function local_uckk_public_programs_type_label(string $programtype): string {
 
     $label = str_replace('_', ' ', $programtype);
     $label = trim($label);
+    $label = local_uckk_public_programs_normalise_visible_nomenclature($label);
 
     return $label !== '' ? ucfirst($label) : '';
 }

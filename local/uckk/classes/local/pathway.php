@@ -77,10 +77,20 @@ final class pathway {
     /** Pathway type: tronc commun. */
     public const TYPE_TRONC_COMMUN = 'tronc_commun';
 
-    /** Pathway type: baccalauréat. */
+    /**
+     * Legacy technical pathway type kept for database compatibility.
+     *
+     * Do not use this value as a public label. Public exports map it to
+     * the UCKK nomenclature: "Voie UCKK — Niveau visé : Puissance opératoire".
+     */
     public const TYPE_BACCALAUREAT = 'baccalaureat';
 
-    /** Pathway type: mineure. */
+    /**
+     * Legacy technical pathway type kept for database compatibility.
+     *
+     * Do not use this value as a public label. Public exports map it to
+     * the UCKK nomenclature: "Voie UCKK — Niveau visé : Initiation".
+     */
     public const TYPE_MINEURE = 'mineure';
 
     /** Pathway type: séminaire. */
@@ -387,7 +397,7 @@ final class pathway {
             [
                 'shortname' => 'grand_jeu_social',
                 'idnumber' => 'UCKK-PATH-GJS',
-                'fullname' => 'Voie UCKK — Niveau visé : Puissance opératoire du Grand Jeu social',
+                'fullname' => 'Voie du Grand Jeu social',
                 'pathwaytype' => self::TYPE_BACCALAUREAT,
                 'description' => 'Parcours interne pour apprendre à lire le Grand Jeu social, ses règles visibles et invisibles, ses institutions, ses récits, ses flux et ses possibilités de réparation.',
                 'requiredcompetencies' => [
@@ -412,7 +422,7 @@ final class pathway {
             [
                 'shortname' => 'architecture_ecosysteme_digital_koa',
                 'idnumber' => 'UCKK-PATH-KOA-DIGITAL',
-                'fullname' => 'Voie UCKK — Niveau visé : Puissance opératoire en Architecture de l’écosystème digital kOA',
+                'fullname' => 'Voie de l’Architecture de l’écosystème digital kOA',
                 'pathwaytype' => self::TYPE_BACCALAUREAT,
                 'description' => 'Parcours interne pour comprendre, concevoir et gouverner le kOA Digital Ecosystem comme infrastructure numérique opérable, sans confondre l’école UCKK avec toute l’infrastructure kOA.',
                 'requiredcompetencies' => [
@@ -436,7 +446,7 @@ final class pathway {
             [
                 'shortname' => 'medias_vivants_theatre_public_responsable',
                 'idnumber' => 'UCKK-PATH-MV',
-                'fullname' => 'Mineure interne Médias vivants et théâtre public responsable',
+                'fullname' => 'Voie des Médias vivants et du théâtre public responsable',
                 'pathwaytype' => self::TYPE_MINEURE,
                 'description' => 'Parcours interne sur la scène, le récit, la satire, King Klown, les défis publics, la diffusion courte et les limites éthiques de la performance.',
                 'requiredcompetencies' => [
@@ -562,6 +572,9 @@ final class pathway {
         $data->fullname = format_string($this->fullname);
         $data->rawfullname = $this->fullname;
         $data->pathwaytype = $this->pathwaytype;
+        $data->pathwaytypelegacy = $this->pathwaytype;
+        $data->pathwaytypelabel = self::get_pathwaytype_display_label($this->pathwaytype);
+        $data->pathwaytypepubliclabel = $data->pathwaytypelabel;
         $data->description = $this->description;
         $data->descriptionformat = $this->descriptionformat;
         $data->status = $this->status;
@@ -833,6 +846,18 @@ final class pathway {
     }
 
     /**
+     * Get public display label for the pathway type.
+     *
+     * This is the nomenclature-safe label to use in templates and reports.
+     * The raw type may remain a legacy technical value for DB compatibility.
+     *
+     * @return string
+     */
+    public function get_pathwaytype_display_label(): string {
+        return self::get_pathwaytype_display_label($this->pathwaytype);
+    }
+
+    /**
      * Get status.
      *
      * @return string
@@ -965,6 +990,39 @@ final class pathway {
     }
 
     /**
+     * Return a nomenclature-safe public display label for a pathway type.
+     *
+     * Legacy DB values such as "baccalaureat" and "mineure" are accepted here
+     * only as technical keys. They must not be shown directly in public UI.
+     *
+     * @param string $pathwaytype Raw pathway type.
+     * @return string
+     */
+    public static function get_pathwaytype_display_label(string $pathwaytype): string {
+        $pathwaytype = self::normalise_shortname($pathwaytype);
+
+        switch ($pathwaytype) {
+            case self::TYPE_TRONC_COMMUN:
+                return 'Tronc commun UCKK';
+
+            case self::TYPE_BACCALAUREAT:
+                return 'Voie UCKK — Niveau visé : Puissance opératoire';
+
+            case self::TYPE_MINEURE:
+                return 'Voie UCKK — Niveau visé : Initiation';
+
+            case self::TYPE_SEMINAIRE:
+                return 'Laboratoire avancé ou chantier';
+
+            case self::TYPE_LABORATOIRE:
+                return 'Laboratoire UCKK';
+
+            default:
+                return 'Voie UCKK';
+        }
+    }
+
+    /**
      * Return allowed recognition types.
      *
      * @return string[]
@@ -999,6 +1057,20 @@ final class pathway {
      */
     private static function clean_pathway_type($value): string {
         $value = self::normalise_shortname($value);
+
+        // Accept a few historical/legacy inputs, but keep canonical DB keys stable.
+        $aliases = [
+            'baccalaurat' => self::TYPE_BACCALAUREAT,
+            'bachelor' => self::TYPE_BACCALAUREAT,
+            'mineur' => self::TYPE_MINEURE,
+            'minor' => self::TYPE_MINEURE,
+            'voie' => self::TYPE_BACCALAUREAT,
+            'voie_uckk' => self::TYPE_BACCALAUREAT,
+        ];
+
+        if (array_key_exists($value, $aliases)) {
+            $value = $aliases[$value];
+        }
 
         if (!in_array($value, self::get_allowed_pathway_types(), true)) {
             throw new invalid_parameter_exception('Invalid UCKK pathway type.');

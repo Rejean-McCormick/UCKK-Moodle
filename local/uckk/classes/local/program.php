@@ -13,8 +13,8 @@
  * Program value object for the UCKK institutional core plugin.
  *
  * A UCKK program is an internal academic structure of the Univers-Cité
- * King Klown. It can represent the tronc commun, an internal baccalauréat,
- * a mineure, a seminar, a laboratory or a transversal learning structure.
+ * King Klown. It can represent the tronc commun, a voie UCKK,
+ * a seminar, a laboratory or a transversal learning structure.
  *
  * This class is intentionally a local domain object:
  *
@@ -54,11 +54,17 @@ final class program {
     /** Program type: tronc commun. */
     public const TYPE_TRONC_COMMUN = 'tronccommun';
 
-    /** Program type: internal baccalauréat. */
+    /** Program type: voie UCKK, target level Puissance opératoire. Legacy technical value kept for compatibility. */
     public const TYPE_BACCALAUREAT = 'baccalaureat';
 
-    /** Program type: internal mineure. */
+    /** Program type: voie UCKK, target level Initiation. Legacy technical value kept for compatibility. */
     public const TYPE_MINEURE = 'mineure';
+
+    /** Program type alias: voie UCKK, target level Puissance opératoire. */
+    public const TYPE_VOIE_PUISSANCE_OPERATOIRE = 'baccalaureat';
+
+    /** Program type alias: voie UCKK, target level Initiation. */
+    public const TYPE_VOIE_INITIATION = 'mineure';
 
     /** Program type: laboratory. */
     public const TYPE_LAB = 'lab';
@@ -456,7 +462,9 @@ final class program {
     }
 
     /**
-     * Whether this is an internal baccalauréat.
+     * Whether this is a voie UCKK with target level Puissance opératoire.
+     *
+     * Kept with its legacy method name for backward compatibility.
      *
      * @return bool
      */
@@ -465,12 +473,41 @@ final class program {
     }
 
     /**
-     * Whether this is an internal mineure.
+     * Whether this is a voie UCKK with target level Initiation.
+     *
+     * Kept with its legacy method name for backward compatibility.
      *
      * @return bool
      */
     public function is_mineure(): bool {
         return $this->programtype === self::TYPE_MINEURE;
+    }
+
+    /**
+     * Whether this is a voie UCKK with target level Puissance opératoire.
+     *
+     * @return bool
+     */
+    public function is_voie_puissance_operatoire(): bool {
+        return $this->programtype === self::TYPE_VOIE_PUISSANCE_OPERATOIRE;
+    }
+
+    /**
+     * Whether this is a voie UCKK with target level Initiation.
+     *
+     * @return bool
+     */
+    public function is_voie_initiation(): bool {
+        return $this->programtype === self::TYPE_VOIE_INITIATION;
+    }
+
+    /**
+     * Whether this is one of the legacy UCKK voie program types.
+     *
+     * @return bool
+     */
+    public function is_voie_uckk(): bool {
+        return $this->is_voie_puissance_operatoire() || $this->is_voie_initiation();
     }
 
     /**
@@ -618,6 +655,9 @@ final class program {
             'istronccommun' => $this->is_tronc_commun(),
             'isbaccalaureat' => $this->is_baccalaureat(),
             'ismineure' => $this->is_mineure(),
+            'isvoiepuissanceoperatoire' => $this->is_voie_puissance_operatoire(),
+            'isvoieinitiation' => $this->is_voie_initiation(),
+            'isvoieuckk' => $this->is_voie_uckk(),
             'islab' => $this->is_lab(),
             'isseminar' => $this->is_seminar(),
             'istransversal' => $this->is_transversal(),
@@ -790,6 +830,11 @@ final class program {
             return '';
         }
 
+        $displayoverrides = self::get_programtype_display_overrides();
+        if (array_key_exists($programtype, $displayoverrides)) {
+            return $displayoverrides[$programtype];
+        }
+
         $stringkey = 'programtype_' . $programtype;
 
         if (get_string_manager()->string_exists($stringkey, self::COMPONENT)) {
@@ -797,6 +842,21 @@ final class program {
         }
 
         return ucfirst(str_replace('_', ' ', $programtype));
+    }
+
+    /**
+     * Get UCKK nomenclature display overrides for legacy technical program types.
+     *
+     * These values deliberately keep the database/API identifiers stable while
+     * preventing controlled academic appellations from appearing in the UI.
+     *
+     * @return array<string, string>
+     */
+    public static function get_programtype_display_overrides(): array {
+        return [
+            self::TYPE_BACCALAUREAT => 'Voie UCKK — Niveau visé : Puissance opératoire',
+            self::TYPE_MINEURE => 'Voie UCKK — Niveau visé : Initiation',
+        ];
     }
 
     /**

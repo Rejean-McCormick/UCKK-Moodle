@@ -17,6 +17,8 @@ The documentation defines the final target behavior for a self-contained Moodle 
 ```text
 archive memory
 media library management
+public Médiathèque façade
+public Médiathèque explorer
 content advisory governance
 cultural sensitivity tagging
 external/foreign media references
@@ -130,6 +132,8 @@ database tables
 capabilities
 file areas
 media lifecycle
+public Médiathèque façade
+public Médiathèque explorer
 archive lifecycle
 validation states
 visibility values
@@ -182,6 +186,7 @@ docs/21_testing_strategy.md
 docs/22_installation.md
 docs/23_upgrade.md
 docs/24_release_spec.md
+docs/25_mediatheque_public_explorer.md
 ```
 
 ---
@@ -217,6 +222,7 @@ Use this order when generating documents in separate conversations:
 24. docs/22_installation.md
 25. docs/23_upgrade.md
 26. docs/24_release_spec.md
+27. docs/25_mediatheque_public_explorer.md
 ```
 
 ---
@@ -241,6 +247,7 @@ media_database_division -> docs/05_media_library.md
 didactic_material_workflows -> docs/08_archive_workflows.md and docs/09_media_workflows.md
 acceptance_checklist -> docs/24_release_spec.md
 known_gaps_and_corrections -> not replaced
+25_mediatheque_public_explorer -> active public Médiathèque specification
 release_notes -> docs/24_release_spec.md
 file_architecture_manifest -> docs/03_file_architecture.md
 ```
@@ -477,6 +484,16 @@ This document is a release specification, not a release note and not an acceptan
 
 ---
 
+### `docs/25_mediatheque_public_explorer.md`
+
+Defines the public Médiathèque page and public Médiathèque Explorer.
+
+It covers the relationship between `local_uckk` and `mod_uckkarchive`, the public search façade, the `mod_uckkarchive_search_mediatheque` AJAX contract, public DTOs, filters, cards, targeted passages, visibility rules, cultural-protocol boundaries, content-advisory display, reusable media-library assets, and anti-duplication rules.
+
+This document is the public-surface contract for exposing a policy-filtered subset of the existing media library. It does not create a second media engine.
+
+---
+
 ## 10. Canonical internal ownership list
 
 `mod_uckkarchive` owns:
@@ -506,6 +523,9 @@ content reviews
 external works
 foreign media references
 media source records
+public Médiathèque search façade
+public Médiathèque repository/service
+public media DTO filtering
 audience suitability rules
 export packages
 export manifests
@@ -526,13 +546,15 @@ challenge workflow state
 Assembly decision authority
 integrity case authority
 institutional reporting authority
+public page shell ownership
+public navigation shell ownership
 ```
 
 External ownership map:
 
 ```text
 Moodle gradebook = grades
-local_uckk = shared UCKK registry and institutional configuration
+local_uckk = shared UCKK registry, institutional configuration, public page shell, and public navigation shell
 mod_uckkchallenge = challenge workflow
 mod_uckkassembly = assembly workflow and decisions
 tool_uckkintegrity = integrity procedures and case records
@@ -879,6 +901,10 @@ provenance values
 content advisory terminology
 external work terminology
 export manifest terminology
+public Médiathèque terminology
+public Médiathèque Explorer terminology
+local_uckk public shell boundary
+mod_uckkarchive public data/policy boundary
 ```
 
 Every document must avoid:
@@ -891,6 +917,9 @@ release notes
 old architecture debate
 media as only generic item attachment
 content advisories as only a JSON field
+duplicating the media-library engine for the public Médiathèque
+creating separate Médiathèque card/detail/marker templates when existing media templates suffice
+placing media access decisions in local_uckk, AMD, or Mustache
 versionitem capability
 hard dependency on tool_uckkintegrity
 ```
@@ -909,11 +938,13 @@ Moodle callbacks
 database schema
 upgrade steps
 external services
+public service façades
 events
 forms
 output classes
 templates
 AMD modules
+public controllers
 privacy provider
 backup/restore steps
 tests
@@ -926,5 +957,5 @@ package structure
 ## 21. Final rule
 
 ```text
-This documentation set defines the final target behavior for implementation. Code, tests, services, UI, backup/restore, privacy, content advisory governance, and packaging must conform to these specifications.
+This documentation set defines the final target behavior for implementation. Code, tests, services, UI, public Médiathèque surfaces, backup/restore, privacy, content advisory governance, and packaging must conform to these specifications.
 ```
