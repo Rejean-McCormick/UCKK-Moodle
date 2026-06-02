@@ -131,14 +131,14 @@ function Assert-UckkLocalComponentTargetSafe {
         throw "Component vide dans la config."
     }
     if ($Component -match '(^|[\/])\.\.([\/]|$)' -or [System.IO.Path]::IsPathRooted($Component)) {
-        throw "Component non sécuritaire dans la config : $Component"
+        throw "Component non securitaire dans la config : $Component"
     }
 }
 
 function Invoke-UckkCheckedNative {
     param(
         [Parameter(Mandatory = $true)][scriptblock]$ScriptBlock,
-        [string]$ErrorMessage = "Commande échouée."
+        [string]$ErrorMessage = "Commande echouee."
     )
 
     # Some native tools, especially git push/pull over HTTPS/SSH, write normal
@@ -219,12 +219,12 @@ function Clear-UckkLocalCaches {
     $purge = Get-UckkLocalMoodleCliScript -ScriptName "purge_caches.php"
 
     if (-not $purge) {
-        throw "Purge CLI introuvable. Chemins vérifiés : $Script:LocalMoodleCliRoot, $Script:LocalRuntimeRoot\admin\cli, $Script:LocalMoodleRoot\admin\cli"
+        throw "Purge CLI introuvable. Chemins verifies : $Script:LocalMoodleCliRoot, $Script:LocalRuntimeRoot\admin\cli, $Script:LocalMoodleRoot\admin\cli"
     }
 
     Push-Location (Split-Path -Parent $purge)
     try {
-        Invoke-UckkCheckedNative { & $Script:LocalPhpExe $purge } "Purge caches local échoué."
+        Invoke-UckkCheckedNative { & $Script:LocalPhpExe $purge } "Purge caches local echoue."
     }
     finally {
         Pop-Location
@@ -298,26 +298,10 @@ function Sync-UckkServerSourceToRuntime {
         $source = "$Script:ServerSourceRoot/$component"
         $target = "$Script:ServerRuntimeRoot/$component"
 
-        # Build the remote bash script as a single-quoted PowerShell here-string.
-        # This prevents StrictMode from trying to expand the bash variables $src and $dst locally.
-        $bashTemplate = @'
-set -e
-src='{0}'
-dst='{1}'
-
-if [ -e "$src" ]; then
-  mkdir -p "$(dirname "$dst")"
-  rsync -a --delete "$src/" "$dst/"
-  chown -R www-data:www-data "$dst"
-  echo "synced: {2}"
-else
-  echo "missing source: {0}"
-fi
-'@
-
-        $bashScript = $bashTemplate -f $source, $target, $component
-        $encoded = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($bashScript))
-        $cmd = "echo $encoded | base64 -d | sudo bash"
+        # Keep the remote command on one physical line. This avoids CRLF/newline issues
+        # when PowerShell on Windows sends the command through SSH to Linux bash.
+        $cmdTemplate = 'if [ -e "{0}" ]; then sudo mkdir -p "$(dirname "{1}")" && sudo rsync -a --delete "{0}/" "{1}/" && sudo chown -R www-data:www-data "{1}" && echo "synced: {2}"; else echo "missing source: {0}"; fi'
+        $cmd = $cmdTemplate -f $source, $target, $component
         Invoke-UckkSshCommand $cmd
     }
 }
@@ -337,7 +321,7 @@ function Invoke-UckkSeedLocal {
 
     Push-Location $Script:LocalRuntimeRoot
     try {
-        Invoke-UckkCheckedNative { & $Script:LocalPhpExe $seedCli "--presetpath=$Script:SeedPresetPathLocal" "--preset=$Preset" $mode } "Seed local échoué."
+        Invoke-UckkCheckedNative { & $Script:LocalPhpExe $seedCli "--presetpath=$Script:SeedPresetPathLocal" "--preset=$Preset" $mode } "Seed local echoue."
     }
     finally {
         Pop-Location
@@ -435,12 +419,12 @@ function Invoke-UckkGuiAction {
             )
 
             if ($result -ne [System.Windows.Forms.DialogResult]::Yes) {
-                Write-UckkGuiLog "Annulé : $Title"
+                Write-UckkGuiLog "Annule : $Title"
                 return
             }
         }
 
-        Write-UckkGuiLog "Début : $Title"
+        Write-UckkGuiLog "Debut : $Title"
 
         & $Action 2>&1 | ForEach-Object {
             if ($null -ne $_) {
@@ -448,7 +432,7 @@ function Invoke-UckkGuiAction {
             }
         }
 
-        Write-UckkGuiLog "Terminé : $Title"
+        Write-UckkGuiLog "Termine : $Title"
     }
     catch {
         Write-UckkGuiLog "ERREUR : $Title"
@@ -485,7 +469,7 @@ function Invoke-UckkNormalWorkflowMinimal {
     Invoke-UckkServerPull
     Sync-UckkServerSourceToRuntime
 
-    "Workflow normal minimal terminé."
+    "Workflow normal minimal termine."
 }
 
 $form = New-Object System.Windows.Forms.Form
@@ -578,13 +562,13 @@ $tabSimple.Controls.Add((New-UckkButton "Trigger OVH sync" 560 225 {
 $tabLocal = New-Object System.Windows.Forms.TabPage
 $tabLocal.Text = "Local Dev"
 
-$tabLocal.Controls.Add((New-UckkButton "Vérifier chemins" 20 30 {
-    Invoke-UckkGuiAction "Vérifier chemins locaux" {
+$tabLocal.Controls.Add((New-UckkButton "Verifier chemins" 20 30 {
+    Invoke-UckkGuiAction "Verifier chemins locaux" {
         Test-UckkOpsPaths
     }
 }))
 
-$tabLocal.Controls.Add((New-UckkButton "Sync source → Moodle local" 20 80 {
+$tabLocal.Controls.Add((New-UckkButton "Sync source -> Moodle local" 20 80 {
     Invoke-UckkGuiAction "Sync source vers runtime local" {
         Sync-UckkLocalSourceToRuntime
     }
@@ -664,7 +648,7 @@ $tabServer.Controls.Add((New-UckkButton "Pull serveur" 20 80 {
     } -Confirm
 }))
 
-$tabServer.Controls.Add((New-UckkButton "Sync source → runtime" 20 130 {
+$tabServer.Controls.Add((New-UckkButton "Sync source -> runtime" 20 130 {
     Invoke-UckkGuiAction "Sync serveur source vers runtime" {
         Sync-UckkServerSourceToRuntime
     } -Confirm
@@ -780,7 +764,7 @@ $tabs.TabPages.Add($tabDiag)
 $form.Controls.Add($tabs)
 $form.Controls.Add($Script:LogBox)
 
-Write-UckkGuiLog "UCKK Ops Console chargé."
+Write-UckkGuiLog "UCKK Ops Console charge."
 Write-UckkGuiLog "Config : $Script:ConfigPath"
 Write-UckkGuiLog "Source locale : $Script:LocalSourceRoot"
 Write-UckkGuiLog "Runtime local : $Script:LocalRuntimeRoot"
