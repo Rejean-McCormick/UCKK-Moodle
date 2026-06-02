@@ -298,23 +298,24 @@ function Sync-UckkServerSourceToRuntime {
         $source = "$Script:ServerSourceRoot/$component"
         $target = "$Script:ServerRuntimeRoot/$component"
 
-        # Build the remote bash script as plain text, then send it through base64.
-        # This avoids fragile PowerShell parsing around $, quotes, dirname, and rsync paths.
-        $bashScript = @"
+        # Build the remote bash script as a single-quoted PowerShell here-string.
+        # This prevents StrictMode from trying to expand the bash variables $src and $dst locally.
+        $bashTemplate = @'
 set -e
-src='$source'
-dst='$target'
+src='{0}'
+dst='{1}'
 
 if [ -e "$src" ]; then
   mkdir -p "$(dirname "$dst")"
   rsync -a --delete "$src/" "$dst/"
   chown -R www-data:www-data "$dst"
-  echo "synced: $component"
+  echo "synced: {2}"
 else
-  echo "missing source: $source"
+  echo "missing source: {0}"
 fi
-"@
+'@
 
+        $bashScript = $bashTemplate -f $source, $target, $component
         $encoded = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($bashScript))
         $cmd = "echo $encoded | base64 -d | sudo bash"
         Invoke-UckkSshCommand $cmd
@@ -414,6 +415,7 @@ function Write-UckkGuiLog {
     $Script:LogBox.AppendText("[$timestamp] $Message`r`n")
     $Script:LogBox.SelectionStart = $Script:LogBox.Text.Length
     $Script:LogBox.ScrollToCaret()
+    [System.Windows.Forms.Application]::DoEvents()
 }
 
 function Invoke-UckkGuiAction {
@@ -440,11 +442,9 @@ function Invoke-UckkGuiAction {
 
         Write-UckkGuiLog "Début : $Title"
 
-        $output = & $Action 2>&1
-
-        if ($null -ne $output) {
-            foreach ($line in $output) {
-                Write-UckkGuiLog ([string]$line)
+        & $Action 2>&1 | ForEach-Object {
+            if ($null -ne $_) {
+                Write-UckkGuiLog ([string]$_)
             }
         }
 
