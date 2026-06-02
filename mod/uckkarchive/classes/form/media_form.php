@@ -28,6 +28,8 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->libdir . '/filelib.php');
+require_once($CFG->dirroot . '/repository/lib.php');
 
 use context_module;
 use moodleform;
@@ -476,7 +478,7 @@ final class media_form extends moodleform {
             'maxbytes' => $maxbytes,
             'maxfiles' => (int)($this->_customdata['maxfiles'] ?? 10),
             'accepted_types' => $this->_customdata['accepted_types'] ?? '*',
-            'return_types' => FILE_INTERNAL,
+            'return_types' => \FILE_INTERNAL,
             'context' => $context,
         ];
     }

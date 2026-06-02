@@ -20,6 +20,9 @@ namespace mod_uckkarchive\local;
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
+require_once($CFG->dirroot . '/repository/lib.php');
+
 /**
  * Central registry for all File API areas owned by mod_uckkarchive.
  *
@@ -826,7 +829,7 @@ final class file_area_registry {
             'maxbytes' => 0,
             'maxfiles' => self::default_maxfiles($filearea),
             'accepted_types' => self::default_accepted_types($filearea),
-            'return_types' => FILE_INTERNAL,
+            'return_types' => \FILE_INTERNAL,
         ];
 
         return array_merge($options, $overrides);

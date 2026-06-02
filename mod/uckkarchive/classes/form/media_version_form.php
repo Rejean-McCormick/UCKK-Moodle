@@ -22,6 +22,8 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->libdir . '/filelib.php');
+require_once($CFG->dirroot . '/repository/lib.php');
 
 use mod_uckkarchive\local\media_file;
 use mod_uckkarchive\local\media_version;
@@ -387,7 +389,7 @@ final class media_version_form extends \moodleform {
             'maxbytes' => $maxbytes,
             'maxfiles' => 1,
             'accepted_types' => '*',
-            'return_types' => FILE_INTERNAL,
+            'return_types' => \FILE_INTERNAL,
         ];
     }
 
@@ -443,4 +445,3 @@ final class media_version_form extends \moodleform {
         return $fallback ?? $identifier;
     }
 }
-

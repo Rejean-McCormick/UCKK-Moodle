@@ -22,6 +22,8 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->libdir . '/filelib.php');
+require_once($CFG->dirroot . '/repository/lib.php');
 
 use context_module;
 use context_user;
@@ -595,7 +597,7 @@ final class archive_item_form extends moodleform {
             'maxbytes' => get_max_upload_file_size(),
             'maxfiles' => 20,
             'accepted_types' => '*',
-            'return_types' => FILE_INTERNAL | FILE_EXTERNAL,
+            'return_types' => \FILE_INTERNAL | \FILE_EXTERNAL,
         ];
     }
 }

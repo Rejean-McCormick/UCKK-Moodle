@@ -30,6 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->dirroot . '/repository/lib.php');
 
 use context_module;
 use external_api;
@@ -382,7 +383,7 @@ final class add_media_version extends external_api {
                     'subdirs' => false,
                     'maxbytes' => 0,
                     'maxfiles' => 1,
-                    'return_types' => FILE_INTERNAL,
+                    'return_types' => \FILE_INTERNAL,
                 ]
             );
 

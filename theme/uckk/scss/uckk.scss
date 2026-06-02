@@ -1001,17 +1001,17 @@ h3,
 /* Links.
  *
  * Keep UCKK brand colour on normal text links only. Do not apply visited-link
- * colour to buttons, drawers, course index items, menus, or role=button links:
- * those components must keep their own contrast states.
+ * colour to buttons, drawers, course index items, menus, local public nav items,
+ * or role=button links: those components must keep their own contrast states.
  */
-a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]),
-a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):visited,
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link),
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):visited,
 .btn-link {
     color: var(--uckk-petrol) !important;
 }
 
-a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):hover,
-a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):focus,
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):hover,
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):focus,
 .btn-link:hover,
 .btn-link:focus {
     color: var(--uckk-petrol-dark) !important;
@@ -1020,18 +1020,27 @@ a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="
 /* Buttons.
  *
  * Anchor buttons may be visited links. Force button text contrast on button
- * states instead of relying on generic a:visited rules.
+ * states instead of relying on generic a:visited rules. Keep filled actions
+ * readable on petrol backgrounds, including public-page CTA links.
  */
 .btn-primary,
-.btn-primary:visited,
+a.btn-primary:link,
+a.btn-primary:visited,
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-secondary,
-.btn-secondary:visited,
+a.btn-secondary:link,
+a.btn-secondary:visited,
 .btn-secondary:hover,
 .btn-secondary:focus,
 .btn-secondary:active,
+.btn-success,
+a.btn-success:link,
+a.btn-success:visited,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
 .btn-outline-primary:hover,
 .btn-outline-primary:focus,
 .btn-outline-primary:active,
@@ -1042,7 +1051,10 @@ input[type="submit"]:active,
 button[type="submit"],
 button[type="submit"]:hover,
 button[type="submit"]:focus,
-button[type="submit"]:active {
+button[type="submit"]:active,
+.local-uckk a.btn,
+.local-uckk a.btn:link,
+.local-uckk a.btn:visited {
     background-image: none !important;
     background-color: var(--uckk-petrol) !important;
     border-color: var(--uckk-petrol-dark) !important;
@@ -1056,14 +1068,28 @@ button[type="submit"]:active {
 .btn-secondary:hover,
 .btn-secondary:focus,
 .btn-secondary:active,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
 input[type="submit"]:hover,
 input[type="submit"]:focus,
 input[type="submit"]:active,
 button[type="submit"]:hover,
 button[type="submit"]:focus,
-button[type="submit"]:active {
+button[type="submit"]:active,
+.local-uckk a.btn:hover,
+.local-uckk a.btn:focus,
+.local-uckk a.btn:active {
     background-color: var(--uckk-petrol-dark) !important;
     border-color: var(--uckk-gold) !important;
+    color: var(--uckk-paper-soft) !important;
+}
+
+.btn-primary *,
+.btn-secondary *,
+.btn-success *,
+.local-uckk a.btn * {
+    color: inherit !important;
 }
 
 /* Cards, admin boxes, course category panels. */
@@ -1871,9 +1897,11 @@ body.path-my #page-header::after {
     box-shadow: none !important;
 }
 
-/* Public local_uckk nav: never inherit theme-generated underlines. */
+/* Public local_uckk nav: never inherit theme-generated underlines or generic link colours. */
 body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link,
 body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link:link,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link:link,
 body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link:visited,
 body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link:visited,
 body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link:hover,
@@ -1898,6 +1926,48 @@ body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link::afte
     content: none !important;
     background: none !important;
     box-shadow: none !important;
+}
+
+/* Public active nav: petrol pill with readable parchment text. */
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link.is-active,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link.is-active:link,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link.is-active:visited,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link.active,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link.active:link,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link.active:visited,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link[aria-current="page"],
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link[aria-current="page"]:link,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link[aria-current="page"]:visited,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link:link,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link:visited,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.is-active,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.is-active:link,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.is-active:visited,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.active,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.active:link,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.active:visited,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link[aria-current="page"],
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link[aria-current="page"]:link,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link[aria-current="page"]:visited,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link:link,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link:visited {
+    background: var(--uckk-petrol) !important;
+    background-color: var(--uckk-petrol) !important;
+    border-color: var(--uckk-gold) !important;
+    color: var(--uckk-paper-soft) !important;
+}
+
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link.is-active *,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link.active *,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link[aria-current="page"] *,
+body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link *,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.is-active *,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.active *,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link[aria-current="page"] *,
+body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link * {
+    color: inherit !important;
 }
 
 /* Right-side controls: never wrap, keep vertical alignment. */

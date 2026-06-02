@@ -22,6 +22,8 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->libdir . '/filelib.php');
+require_once($CFG->dirroot . '/repository/lib.php');
 
 use mod_uckkarchive\local\content_review;
 use stdClass;
@@ -61,7 +63,7 @@ final class content_review_form extends \moodleform {
         'maxfiles' => -1,
         'maxbytes' => 0,
         'accepted_types' => '*',
-        'return_types' => FILE_INTERNAL,
+        'return_types' => \FILE_INTERNAL,
     ];
 
     /**

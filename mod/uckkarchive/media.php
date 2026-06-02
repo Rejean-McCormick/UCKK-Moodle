@@ -929,6 +929,22 @@ $filters = mod_uckkarchive_media_build_filters($mediaid, $collectionid, $externa
 require_login($course, false, $cm);
 mod_uckkarchive_media_require_action_capabilities($context, $action, $filters, $media, $collection);
 
+$pageurl = mod_uckkarchive_media_build_page_url((int)$cm->id, $filters);
+$viewurl = new moodle_url('/mod/uckkarchive/view.php', ['id' => (int)$cm->id]);
+$return = $returnurl !== '' ? new moodle_url($returnurl) : $viewurl;
+
+$PAGE->set_url($pageurl);
+$PAGE->set_course($course);
+$PAGE->set_cm($cm);
+$PAGE->set_context($context);
+$PAGE->set_pagelayout('incourse');
+$PAGE->set_title(format_string($archive->name) . ': ' . mod_uckkarchive_media_string('medialibrary', 'Media library'));
+$PAGE->set_heading(format_string($course->fullname));
+
+$PAGE->navbar->add(format_string($archive->name), $viewurl);
+$PAGE->navbar->add(mod_uckkarchive_media_string('medialibrary', 'Media library'), $pageurl);
+
+
 $editorform = null;
 if (mod_uckkarchive_media_is_editor_action($action)) {
     $formurl = mod_uckkarchive_media_editor_form_url((int)$cm->id, $action, $mediaid);
@@ -979,21 +995,6 @@ if (mod_uckkarchive_media_is_editor_action($action)) {
         );
     }
 }
-
-$pageurl = mod_uckkarchive_media_build_page_url((int)$cm->id, $filters);
-$viewurl = new moodle_url('/mod/uckkarchive/view.php', ['id' => (int)$cm->id]);
-$return = $returnurl !== '' ? new moodle_url($returnurl) : $viewurl;
-
-$PAGE->set_url($pageurl);
-$PAGE->set_course($course);
-$PAGE->set_cm($cm);
-$PAGE->set_context($context);
-$PAGE->set_pagelayout('incourse');
-$PAGE->set_title(format_string($archive->name) . ': ' . mod_uckkarchive_media_string('medialibrary', 'Media library'));
-$PAGE->set_heading(format_string($course->fullname));
-
-$PAGE->navbar->add(format_string($archive->name), $viewurl);
-$PAGE->navbar->add(mod_uckkarchive_media_string('medialibrary', 'Media library'), $pageurl);
 
 $PAGE->requires->js_call_amd('mod_uckkarchive/media', 'init', [[
     'root' => 'uckkarchive-media-library',

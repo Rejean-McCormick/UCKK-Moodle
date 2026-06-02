@@ -30,6 +30,9 @@ use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
+require_once($CFG->dirroot . '/repository/lib.php');
+
 /**
  * Coordinates Moodle File API work for media-owned file areas.
  *
@@ -208,7 +211,7 @@ final class media_file {
             'maxbytes' => self::DEFAULT_MAXBYTES,
             'maxfiles' => self::get_default_maxfiles($filearea),
             'accepted_types' => self::get_default_accepted_types($filearea),
-            'return_types' => FILE_INTERNAL,
+            'return_types' => \FILE_INTERNAL,
         ];
 
         return array_merge($options, $overrides);

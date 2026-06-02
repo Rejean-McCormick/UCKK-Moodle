@@ -599,7 +599,7 @@ function theme_uckk_get_extra_scss(theme_config $theme): string {
         $scss[] = 'body#page-login-index .login-layout-left,';
         $scss[] = 'body#page-login-index #page .login-layout-left {';
         $scss[] = '    background-image: var(--theme-uckk-login-background-fallback, var(--theme-uckk-login-background-night, var(--theme-uckk-login-background-day))) !important;';
-        $scss[] = '    background-position: center center !important;';
+        $scss[] = '    background-position: right center !important;';
         $scss[] = '    background-size: cover !important;';
         $scss[] = '    background-repeat: no-repeat !important;';
         $scss[] = '    background-color: transparent !important;';

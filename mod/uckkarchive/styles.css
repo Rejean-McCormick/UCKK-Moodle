@@ -1774,6 +1774,7 @@
 .path-mod-uckkarchive .uckkarchive-media-library-editor__governance,
 .path-mod-uckkarchive .uckkarchive-media-library-editor__panel,
 .path-mod-uckkarchive .uckkarchive-media-library-editor__side-panel {
+    min-width: 0;
     padding: 1rem;
 }
 
@@ -1920,26 +1921,180 @@
 }
 
 @media (max-width: 1200px) {
-    .path-mod-uckkarchive .uckkarchive-media-library-editor__layout {
-        grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr);
-    }
-
-    .path-mod-uckkarchive .uckkarchive-media-library-editor__governance {
-        grid-column: 1 / -1;
-    }
-}
-
-@media (max-width: 768px) {
-    .path-mod-uckkarchive .uckkarchive-media-library-editor__layout {
-        grid-template-columns: 1fr;
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__header {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
     .path-mod-uckkarchive .uckkarchive-media-library-editor__topactions {
         justify-content: flex-start;
+        width: 100%;
     }
 
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__preview,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__main,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__governance {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__workflow-nav {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    }
+
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform fieldset,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .fcontainer,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .form-group,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .fitem,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .felement {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .form-group.row {
+        display: block;
+    }
+
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .col-md-3,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .col-md-4,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .col-md-8,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .col-md-9,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .fitemtitle,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .felement {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .fitemtitle,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform label {
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform input[type="text"],
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform input[type="url"],
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform input[type="number"],
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform input[type="email"],
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform select,
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform textarea {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__statusbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__workflow-nav,
     .path-mod-uckkarchive .uckkarchive-media-library-editor__metadata-list,
     .path-mod-uckkarchive .uckkarchive-media-library-editor__governance-list {
         grid-template-columns: 1fr;
     }
+}
+
+
+
+/* Media library editor: do not force 3 columns inside Moodle drawers. */
+.path-mod-uckkarchive .uckkarchive-media-library-editor {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Default: one usable column. Moodle course drawer reduces available width. */
+.path-mod-uckkarchive .uckkarchive-media-library-editor__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Ensure every editor region can use the available width. */
+.path-mod-uckkarchive .uckkarchive-media-library-editor__aside,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__summary {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+/* Moodle mform rows must not keep Bootstrap horizontal label columns here. */
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .form-group.row {
+    display: block !important;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .form-group.row > .col-form-label,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .form-group.row > .felement,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .form-group.row > .col-md-3,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .form-group.row > .col-md-9,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .form-group.row > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Prevent labels from collapsing letter by letter. */
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .col-form-label,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform label {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+/* Make controls use normal form width. */
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform input[type="text"],
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform input[type="url"],
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform textarea,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform select,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel .mform .form-control {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Only use 3 columns when the full viewport is really wide. */
+@media (min-width: 1600px) {
+    .path-mod-uckkarchive .uckkarchive-media-library-editor__layout {
+        grid-template-columns: minmax(240px, 0.8fr) minmax(560px, 1.8fr) minmax(260px, 0.9fr) !important;
+    }
+}
+
+
+/* Final override: media editor must stay readable inside Moodle course drawers. */
+.path-mod-uckkarchive .uckkarchive-media-library-editor__layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 2rem !important;
+}
+
+.path-mod-uckkarchive .uckkarchive-media-library-editor__aside,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel,
+.path-mod-uckkarchive .uckkarchive-media-library-editor__summary {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+}
+
+.path-mod-uckkarchive .uckkarchive-media-library-editor__panel {
+    max-width: 960px !important;
+}
+
+.path-mod-uckkarchive .uckkarchive-media-library-editor__summary {
+    max-width: 720px !important;
 }

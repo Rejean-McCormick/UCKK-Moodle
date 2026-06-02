@@ -256,7 +256,7 @@ body:has(.local-uckk-public-page) [role="main"] {
         linear-gradient(135deg, rgba(246, 240, 223, 0.98), rgba(219, 236, 234, 0.58));
 }
 
-.local-uckk-public-page a {
+.local-uckk-public-page a:not(.btn):not(.local-uckk-public-nav__link):not(.local-uckk-public-cta__link) {
     color: var(--uckk-petrol-dark);
     text-decoration-color: rgba(30, 104, 100, 0.35);
     text-underline-offset: 0.16em;
@@ -268,8 +268,8 @@ body:has(.local-uckk-public-page) [role="main"] {
         transform 160ms ease;
 }
 
-.local-uckk-public-page a:hover,
-.local-uckk-public-page a:focus {
+.local-uckk-public-page a:not(.btn):not(.local-uckk-public-nav__link):not(.local-uckk-public-cta__link):hover,
+.local-uckk-public-page a:not(.btn):not(.local-uckk-public-nav__link):not(.local-uckk-public-cta__link):focus {
     color: var(--uckk-ink);
     text-decoration-color: var(--uckk-gold);
 }
@@ -422,21 +422,23 @@ body:has(.local-uckk-public-page) [role="main"] {
 }
 
 .local-uckk .local-uckk-public-nav__link,
+.local-uckk .local-uckk-public-nav__link:link,
 .local-uckk .local-uckk-public-nav__link:visited {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 2.32rem;
     padding: 0.52rem clamp(0.58rem, 0.86vw, 0.92rem) 0.48rem;
-    border: 1px solid transparent;
+    border: 1px solid transparent !important;
     border-radius: var(--uckk-radius-pill);
     overflow: visible;
-    color: #0f5651;
+    color: #0f5651 !important;
     font-family: var(--uckk-font-sans);
     font-size: clamp(0.74rem, 0.7rem + 0.12vw, 0.84rem);
     font-weight: 900;
     letter-spacing: 0.055em;
     line-height: 1.32;
+    background: transparent !important;
     background-image: none !important;
     box-decoration-break: clone;
     text-decoration: none !important;
@@ -454,9 +456,9 @@ body:has(.local-uckk-public-page) [role="main"] {
 
 .local-uckk .local-uckk-public-nav__link:hover,
 .local-uckk .local-uckk-public-nav__link:focus {
-    border-color: rgba(185, 144, 69, 0.55);
-    background: rgba(185, 144, 69, 0.16);
-    color: #102724;
+    border-color: rgba(185, 144, 69, 0.55) !important;
+    background: rgba(185, 144, 69, 0.16) !important;
+    color: #102724 !important;
     background-image: none !important;
     text-decoration: none !important;
     text-decoration-line: none !important;
@@ -466,13 +468,17 @@ body:has(.local-uckk-public-page) [role="main"] {
 .local-uckk .local-uckk-public-nav__link[aria-current="page"],
 .local-uckk .local-uckk-public-nav__link.active,
 .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link,
+.local-uckk .local-uckk-public-nav__link.is-active:link,
+.local-uckk .local-uckk-public-nav__link[aria-current="page"]:link,
+.local-uckk .local-uckk-public-nav__link.active:link,
+.local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link:link,
 .local-uckk .local-uckk-public-nav__link.is-active:visited,
 .local-uckk .local-uckk-public-nav__link[aria-current="page"]:visited,
 .local-uckk .local-uckk-public-nav__link.active:visited,
 .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link:visited {
-    border-color: #b99045;
-    background: #06332f;
-    color: #fffaf0;
+    border-color: #b99045 !important;
+    background: #06332f !important;
+    color: #fffaf0 !important;
     background-image: none !important;
     box-shadow: 0 7px 16px rgba(23, 35, 33, 0.25);
     text-decoration: none !important;
@@ -488,10 +494,10 @@ body:has(.local-uckk-public-page) [role="main"] {
 .local-uckk .local-uckk-public-nav__link.active:focus,
 .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link:hover,
 .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link:focus {
-    border-color: #d8b85a;
-    background: #041f1d;
+    border-color: #d8b85a !important;
+    background: #041f1d !important;
     background-image: none !important;
-    color: #ffffff;
+    color: #ffffff !important;
     text-decoration: none !important;
     text-decoration-line: none !important;
 }
@@ -500,7 +506,7 @@ body:has(.local-uckk-public-page) [role="main"] {
 .local-uckk .local-uckk-public-nav__link[aria-current="page"] *,
 .local-uckk .local-uckk-public-nav__link.active *,
 .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link * {
-    color: inherit;
+    color: inherit !important;
 }
 
 /* ==========================================================================
@@ -925,41 +931,80 @@ body:has(.local-uckk-public-page) [role="main"] {
     text-transform: uppercase;
 }
 
-.local-uckk .btn-primary {
-    border-color: var(--uckk-petrol-dark);
-    background-color: var(--uckk-petrol);
-    color: #ffffff;
+.local-uckk .btn-primary,
+.local-uckk .btn-primary:link,
+.local-uckk .btn-primary:visited,
+.local-uckk .btn-secondary,
+.local-uckk .btn-secondary:link,
+.local-uckk .btn-secondary:visited,
+.local-uckk .btn-success,
+.local-uckk .btn-success:link,
+.local-uckk .btn-success:visited,
+.local-uckk input[type="submit"],
+.local-uckk button[type="submit"] {
+    border-color: var(--uckk-petrol-dark) !important;
+    background-color: var(--uckk-petrol) !important;
+    color: var(--uckk-parchment-light, #fbf7eb) !important;
 }
 
 .local-uckk .btn-primary:hover,
-.local-uckk .btn-primary:focus {
-    border-color: var(--uckk-gold);
-    background-color: var(--uckk-petrol-dark);
-    color: #ffffff;
+.local-uckk .btn-primary:focus,
+.local-uckk .btn-primary:active,
+.local-uckk .btn-secondary:hover,
+.local-uckk .btn-secondary:focus,
+.local-uckk .btn-secondary:active,
+.local-uckk .btn-success:hover,
+.local-uckk .btn-success:focus,
+.local-uckk .btn-success:active,
+.local-uckk input[type="submit"]:hover,
+.local-uckk input[type="submit"]:focus,
+.local-uckk input[type="submit"]:active,
+.local-uckk button[type="submit"]:hover,
+.local-uckk button[type="submit"]:focus,
+.local-uckk button[type="submit"]:active {
+    border-color: var(--uckk-gold) !important;
+    background-color: var(--uckk-petrol-dark) !important;
+    color: #ffffff !important;
 }
 
-.local-uckk .btn-outline-primary {
-    border-color: var(--uckk-petrol);
-    color: var(--uckk-petrol-dark);
+.local-uckk .btn-primary *,
+.local-uckk .btn-secondary *,
+.local-uckk .btn-success *,
+.local-uckk input[type="submit"] *,
+.local-uckk button[type="submit"] * {
+    color: inherit !important;
+}
+
+.local-uckk .btn-outline-primary,
+.local-uckk .btn-outline-primary:link,
+.local-uckk .btn-outline-primary:visited {
+    border-color: var(--uckk-petrol) !important;
+    color: var(--uckk-petrol-dark) !important;
+    background: transparent !important;
 }
 
 .local-uckk .btn-outline-primary:hover,
-.local-uckk .btn-outline-primary:focus {
-    border-color: var(--uckk-petrol-dark);
-    background-color: var(--uckk-petrol);
-    color: var(--uckk-parchment-light);
+.local-uckk .btn-outline-primary:focus,
+.local-uckk .btn-outline-primary:active {
+    border-color: var(--uckk-petrol-dark) !important;
+    background-color: var(--uckk-petrol) !important;
+    color: var(--uckk-parchment-light) !important;
 }
 
-.local-uckk .btn-outline-secondary {
-    border-color: var(--uckk-bluegrey);
-    color: var(--uckk-ink-soft);
+.local-uckk .btn-outline-secondary,
+.local-uckk .btn-outline-secondary:link,
+.local-uckk .btn-outline-secondary:visited {
+    border-color: var(--uckk-bluegrey) !important;
+    color: var(--uckk-ink-soft) !important;
+    background: transparent !important;
 }
 
 .local-uckk .btn-outline-secondary:hover,
-.local-uckk .btn-outline-secondary:focus {
-    border-color: var(--uckk-petrol-dark);
-    background-color: var(--uckk-petrol-soft);
-    color: var(--uckk-petrol-dark);
+.local-uckk .btn-outline-secondary:focus,
+.local-uckk .btn-outline-secondary:active {
+    border-color: var(--uckk-petrol-dark) !important;
+    background-color: var(--uckk-petrol-soft) !important;
+    color: var(--uckk-petrol-dark) !important;
 }
 
 .local-uckk .local-uckk-public-cta__action .btn,
@@ -998,7 +1043,9 @@ body:has(.local-uckk-public-page) [role="main"] {
 }
 
 .local-uckk .local-uckk-public-cta__action .btn *,
-.local-uckk .local-uckk-public-cta__link * {
+.local-uckk .local-uckk-public-cta__link *,
+.local-uckk .btn-outline-primary *,
+.local-uckk .btn-outline-secondary * {
     color: inherit !important;
 }
 
