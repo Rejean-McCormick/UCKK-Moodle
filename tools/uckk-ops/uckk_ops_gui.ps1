@@ -72,6 +72,7 @@ $Script:LocalUrl = [string](Get-UckkConfigValue $Script:OpsConfig "local.localUr
 $Script:GitRepoRoot = [string](Get-UckkConfigValue $Script:OpsConfig "git.repoRoot" $Script:LocalSourceRoot)
 $Script:GitRemote = [string](Get-UckkConfigValue $Script:OpsConfig "git.remote" "origin")
 $Script:GitBranch = [string](Get-UckkConfigValue $Script:OpsConfig "git.branch" "main")
+$Script:DefaultCommitMessage = [string](Get-UckkConfigValue $Script:OpsConfig "git.defaultCommitMessage" "Update UCKK ops")
 
 $Script:ServerSshTarget = [string](Get-UckkConfigValue $Script:OpsConfig "server.sshTarget" "ubuntu@57.129.115.159")
 $Script:ServerSourceRoot = [string](Get-UckkConfigValue $Script:OpsConfig "server.sourceRoot" "/opt/uckk/uckk-moodle")
@@ -262,11 +263,13 @@ function Invoke-UckkGitCommitPush {
 
     $status = & git -C $Script:GitRepoRoot status --porcelain 2>&1
     if ([string]::IsNullOrWhiteSpace(($status -join "`n"))) {
-        return "No local changes to commit."
+        "No local changes to commit."
+    }
+    else {
+        Invoke-UckkGitCommand @("add", "-A")
+        Invoke-UckkGitCommand @("commit", "-m", $Message)
     }
 
-    Invoke-UckkGitCommand @("add", "-A")
-    Invoke-UckkGitCommand @("commit", "-m", $Message)
     Invoke-UckkGitCommand @("push", $Script:GitRemote, $Script:GitBranch)
 }
 
@@ -276,7 +279,7 @@ function Invoke-UckkSshCommand {
 }
 
 function Test-UckkServerSsh { Invoke-UckkSshCommand "hostname && whoami && pwd" }
-function Invoke-UckkServerPull { Invoke-UckkSshCommand "cd '$Script:ServerSourceRoot' && git status --short && git pull" }
+function Invoke-UckkServerPull { Invoke-UckkSshCommand "cd '$Script:ServerSourceRoot' && git pull" }
 
 function Sync-UckkServerSourceToRuntime {
     foreach ($component in $Script:UckkComponents) {
@@ -448,6 +451,31 @@ function Invoke-UckkGuiAction {
     }
 }
 
+function Invoke-UckkNormalWorkflowMinimal {
+    param(
+        [string]$CommitMessage
+    )
+
+    "Workflow normal minimal : Sync local -> Launch local -> GitHub -> OVH"
+
+    "1/4 Sync local -> Moodle local"
+    Sync-UckkLocalSourceToRuntime
+
+    "2/4 Launch Moodle local"
+    Start-UckkLocalMoodle
+    Start-Process $Script:LocalUrl | Out-Null
+    "opened: $Script:LocalUrl"
+
+    "3/4 Sync GitHub"
+    Invoke-UckkGitCommitPush -Message $CommitMessage
+
+    "4/4 Trigger sync OVH"
+    Invoke-UckkServerPull
+    Sync-UckkServerSourceToRuntime
+
+    "Workflow normal minimal terminé."
+}
+
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "$Script:AppName $Script:AppVersion"
 $form.Size = New-Object System.Drawing.Size(920, 720)
@@ -464,6 +492,72 @@ $Script:LogBox.ReadOnly = $true
 $Script:LogBox.Location = New-Object System.Drawing.Point(10, 440)
 $Script:LogBox.Size = New-Object System.Drawing.Size(880, 220)
 $Script:LogBox.Font = New-Object System.Drawing.Font("Consolas", 9)
+
+# -----------------------------
+# Simple
+# -----------------------------
+
+$tabSimple = New-Object System.Windows.Forms.TabPage
+$tabSimple.Text = "Simple"
+
+$simpleTitle = New-Object System.Windows.Forms.Label
+$simpleTitle.Text = "Workflow normal minimal"
+$simpleTitle.Location = New-Object System.Drawing.Point(20, 25)
+$simpleTitle.Size = New-Object System.Drawing.Size(500, 24)
+$tabSimple.Controls.Add($simpleTitle)
+
+$simpleDescription = New-Object System.Windows.Forms.Label
+$simpleDescription.Text = "Sync local -> Launch local -> GitHub -> OVH"
+$simpleDescription.Location = New-Object System.Drawing.Point(20, 50)
+$simpleDescription.Size = New-Object System.Drawing.Size(700, 24)
+$tabSimple.Controls.Add($simpleDescription)
+
+$simpleCommitLabel = New-Object System.Windows.Forms.Label
+$simpleCommitLabel.Text = "Message de commit"
+$simpleCommitLabel.Location = New-Object System.Drawing.Point(20, 95)
+$simpleCommitLabel.Size = New-Object System.Drawing.Size(180, 24)
+$tabSimple.Controls.Add($simpleCommitLabel)
+
+$Script:SimpleCommitMessageBox = New-Object System.Windows.Forms.TextBox
+$Script:SimpleCommitMessageBox.Location = New-Object System.Drawing.Point(20, 120)
+$Script:SimpleCommitMessageBox.Size = New-Object System.Drawing.Size(520, 26)
+$Script:SimpleCommitMessageBox.Text = $Script:DefaultCommitMessage
+$tabSimple.Controls.Add($Script:SimpleCommitMessageBox)
+
+$runNormalButton = New-UckkButton "Run normal workflow" 20 175 {
+    Invoke-UckkGuiAction "Workflow normal minimal" {
+        Invoke-UckkNormalWorkflowMinimal -CommitMessage $Script:SimpleCommitMessageBox.Text
+    }
+}
+$runNormalButton.Size = New-Object System.Drawing.Size(260, 48)
+$tabSimple.Controls.Add($runNormalButton)
+
+$tabSimple.Controls.Add((New-UckkButton "Sync local" 320 175 {
+    Invoke-UckkGuiAction "Sync local -> Moodle local" {
+        Sync-UckkLocalSourceToRuntime
+    }
+}))
+
+$tabSimple.Controls.Add((New-UckkButton "Launch local" 320 225 {
+    Invoke-UckkGuiAction "Launch Moodle local" {
+        Start-UckkLocalMoodle
+        Start-Process $Script:LocalUrl | Out-Null
+        "opened: $Script:LocalUrl"
+    }
+}))
+
+$tabSimple.Controls.Add((New-UckkButton "Sync GitHub" 560 175 {
+    Invoke-UckkGuiAction "Sync GitHub" {
+        Invoke-UckkGitCommitPush -Message $Script:SimpleCommitMessageBox.Text
+    }
+}))
+
+$tabSimple.Controls.Add((New-UckkButton "Trigger OVH sync" 560 225 {
+    Invoke-UckkGuiAction "Trigger sync OVH" {
+        Invoke-UckkServerPull
+        Sync-UckkServerSourceToRuntime
+    }
+}))
 
 # -----------------------------
 # Local Dev
@@ -518,7 +612,7 @@ $tabGit.Controls.Add($commitLabel)
 $Script:CommitMessageBox = New-Object System.Windows.Forms.TextBox
 $Script:CommitMessageBox.Location = New-Object System.Drawing.Point(20, 55)
 $Script:CommitMessageBox.Size = New-Object System.Drawing.Size(520, 26)
-$Script:CommitMessageBox.Text = "Update UCKK ops"
+$Script:CommitMessageBox.Text = $Script:DefaultCommitMessage
 $tabGit.Controls.Add($Script:CommitMessageBox)
 
 $tabGit.Controls.Add((New-UckkButton "Git status" 20 105 {
@@ -663,6 +757,7 @@ $tabDiag.Controls.Add((New-UckkButton "Ouvrir runtime local" 20 180 {
     }
 }))
 
+$tabs.TabPages.Add($tabSimple)
 $tabs.TabPages.Add($tabLocal)
 $tabs.TabPages.Add($tabGit)
 $tabs.TabPages.Add($tabServer)
