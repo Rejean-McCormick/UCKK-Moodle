@@ -1,0 +1,23 @@
+# Windows shortcuts / local desktop artifacts
+*.lnk
+
+# Temporary backups created during manual server/theme edits
+*.bak
+*.bak-*
+*.backup
+*.orig
+
+# UCKK Ops generated logs
+tools/uckk-ops/logs/
+tools/uckk-ops/*.log
+
+# Local runtime / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Patch/temp files
+*.patch
+*.rej
+*.tmp
+*.temp
