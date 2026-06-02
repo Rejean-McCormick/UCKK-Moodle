@@ -1000,21 +1000,47 @@ h3,
 
 /* Links.
  *
- * Keep UCKK brand colour on normal text links only. Do not apply visited-link
- * colour to buttons, drawers, course index items, menus, local public nav items,
- * or role=button links: those components must keep their own contrast states.
+ * Brand colour applies only to normal text links.
+ * Do not take ownership of buttons, Moodle navigation, course index,
+ * public CTA links, menus, or role=button controls.
  */
-a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link),
-a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):visited,
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):not(.local-uckk-public-cta__link):not(.courseindex-link),
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):not(.local-uckk-public-cta__link):not(.courseindex-link):visited,
 .btn-link {
     color: var(--uckk-petrol) !important;
 }
 
-a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):hover,
-a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):focus,
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):not(.local-uckk-public-cta__link):not(.courseindex-link):hover,
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item):not([role="button"]):not(.local-uckk-public-nav__link):not(.local-uckk-public-cta__link):not(.courseindex-link):focus,
 .btn-link:hover,
 .btn-link:focus {
     color: var(--uckk-petrol-dark) !important;
+}
+
+/* Moodle course index active item: contrast belongs to navigation, not generic links.
+   Boost renders the course index drawer outside #page. */
+#theme_boost-drawers-courseindex .courseindex-item.pageitem,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem:hover,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem:focus,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem:focus-within {
+    background-color: var(--uckk-petrol) !important;
+    border-color: var(--uckk-petrol-dark) !important;
+    color: var(--uckk-paper-soft) !important;
+}
+
+#theme_boost-drawers-courseindex .courseindex-item.pageitem .courseindex-link,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem .courseindex-link:link,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem .courseindex-link:visited,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem .courseindex-link:hover,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem .courseindex-link:focus,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem .text-truncate,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem .icon {
+    color: var(--uckk-paper-soft) !important;
+}
+
+#theme_boost-drawers-courseindex .courseindex-item.pageitem .courseindex-link *,
+#theme_boost-drawers-courseindex .courseindex-item.pageitem .courseindex-link:visited * {
+    color: inherit !important;
 }
 
 /* Buttons.
