@@ -92,6 +92,7 @@ $functions = [
         'description' => 'Searches visible public UCKK courses for the public course explorer.',
         'type' => 'read',
         'ajax' => true,
+        'loginrequired' => false,
     ],
 ];
 

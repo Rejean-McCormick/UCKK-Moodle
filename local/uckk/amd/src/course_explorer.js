@@ -670,14 +670,16 @@ const fetchCourses = (root, state) => {
         perpage: toPositiveInteger(state.perpage, DEFAULT_STATE.perpage),
     };
 
-    if (state.contextid) {
-        args.contextid = toPositiveInteger(state.contextid, 0);
+    const contextid = toPositiveInteger(state.contextid, 0);
+
+    if (contextid > 0) {
+        args.contextid = contextid;
     }
 
     return Ajax.call([{
         methodname,
         args,
-    }])[0];
+    }], true, false)[0];
 };
 
 /**

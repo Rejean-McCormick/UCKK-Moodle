@@ -66,7 +66,7 @@ final class search_public_courses extends external_api {
     private const SORT_CATEGORY = 'category';
 
     /**
-     * Define input parameters.
+     * Define parameters.
      *
      * @return external_function_parameters
      */
@@ -109,14 +109,23 @@ final class search_public_courses extends external_api {
             'contextid' => $contextid,
         ]);
 
-        $context = $params['contextid'] > 0
-            ? context::instance_by_id($params['contextid'])
-            : context_system::instance();
+        $context = context_system::instance();
 
-        self::validate_context($context);
+        if ($params['contextid'] > 0) {
+            $candidate = context::instance_by_id((int)$params['contextid'], IGNORE_MISSING);
+
+            if ($candidate instanceof context) {
+                $context = $candidate;
+            }
+        }
+
+        // This endpoint powers a public page. Do not force login for guests.
+        if (isloggedin() && !isguestuser()) {
+            self::validate_context($context);
+        }
 
         $query = trim((string)$params['q']);
-        $categorykey = self::normalise_key((string)$params['category']);
+        $categorykey = self::normalise_category_key((string)$params['category']);
         $sortmode = self::normalise_sort((string)$params['sort']);
         $page = max(1, (int)$params['page']);
         $perpage = min(self::MAX_PER_PAGE, max(1, (int)$params['perpage']));
@@ -148,7 +157,7 @@ final class search_public_courses extends external_api {
 
         return [
             'query' => $query,
-            'category' => $categorykey,
+            'category' => $categorykey === '' ? 'all' : $categorykey,
             'sort' => $sortmode,
             'page' => $page,
             'perpage' => $perpage,
@@ -295,7 +304,7 @@ final class search_public_courses extends external_api {
     private static function build_category_filters(array $records, string $activekey): array {
         $filters = [
             [
-                'key' => '',
+                'key' => 'all',
                 'label' => 'Tous les cours',
                 'count' => count($records),
                 'active' => $activekey === '',
@@ -534,6 +543,22 @@ final class search_public_courses extends external_api {
         }
 
         return $text;
+    }
+
+    /**
+     * Normalise category key.
+     *
+     * @param string $value Raw value.
+     * @return string
+     */
+    private static function normalise_category_key(string $value): string {
+        $key = self::normalise_key($value);
+
+        if ($key === 'all') {
+            return '';
+        }
+
+        return $key;
     }
 
     /**
