@@ -27,8 +27,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$sitecontext = context_course::instance(SITEID);
-
 $skipurl = new moodle_url('/local/uckk/courses.php');
 
 $bodyclasses = [
@@ -69,24 +67,26 @@ echo $OUTPUT->doctype();
                     </p>
 
                     <h1 id="theme-uckk-login-title">
-                        Campus UCKK
+                        Lire le Grand Jeu social
                     </h1>
 
                     <p class="login-layout-left__summary">
-                        Accédez à vos parcours, consultez les cours ouverts et
-                        retrouvez les espaces de participation institutionnelle.
+                        UCKK est une cité-école expérimentale du mouvement kOA.
+                        Elle forme des joueurs lucides capables de comprendre
+                        les systèmes, d’agir avec intégrité et de transformer
+                        les règles.
                     </p>
 
-                    <div class="login-layout-stats" aria-label="Repères de connexion">
+                    <div class="login-layout-stats" aria-label="Repères UCKK">
                         <p>
-                            <strong>Connexion.</strong>
-                            Utilisez votre compte pour accéder à vos cours,
-                            preuves, suivis et espaces réservés.
+                            <strong>Comprendre.</strong>
+                            Lire les règles, institutions, récits et pouvoirs
+                            qui structurent le monde social.
                         </p>
                         <p>
-                            <strong>Accès public.</strong>
-                            Explorez les cours ouverts sans compte lorsque
-                            l’accès visiteur est disponible.
+                            <strong>Agir.</strong>
+                            Apprendre par l’enquête, la preuve, les assemblées,
+                            les défis et la mémoire.
                         </p>
                     </div>
 

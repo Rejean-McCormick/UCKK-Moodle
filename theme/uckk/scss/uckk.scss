@@ -2416,3 +2416,49 @@ body#page-login-index.theme-uckk-login-layout #guestlogin #loginguestbtn:focus {
         color: var(--uckk-petrol-deep);
     }
 }
+
+/* Keep the stable skip link inside the left text card.
+   It must not overlap the UCKK presentation copy. */
+body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip-wrap,
+body#page-login-index.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip-wrap {
+    display: block !important;
+    margin: 1rem 0 0 !important;
+    padding: 0 !important;
+}
+
+body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip,
+body#page-login-index.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip {
+    position: static !important;
+    inset: auto !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.7rem;
+    margin: 0 !important;
+    padding: .72rem 1rem !important;
+    border: 1px solid var(--uckk-gold) !important;
+    border-radius: var(--uckk-radius-small);
+    background: var(--uckk-petrol) !important;
+    color: #ffffff !important;
+    font-family: var(--uckk-font-body);
+    font-size: .84rem;
+    font-weight: 900;
+    letter-spacing: .055em;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none !important;
+    text-shadow: none !important;
+    text-transform: uppercase;
+    box-shadow: 0 .55rem 1.2rem rgba(0, 0, 0, .22);
+}
+
+body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip:hover,
+body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip:focus,
+body#page-login-index.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip:hover,
+body#page-login-index.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip:focus {
+    background: var(--uckk-petrol-dark) !important;
+    border-color: var(--uckk-gold-light) !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
