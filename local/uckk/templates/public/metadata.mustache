@@ -1,0 +1,52 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/public/metadata
+
+    Public page metadata block for local_uckk.
+
+    Context:
+    {
+        "uniqid": "local-uckk-public-page-abc123",
+        "metadata": [
+            {
+                "label": "Statut",
+                "value": "Page publique"
+            }
+        ]
+    }
+}}
+
+<section
+    class="local-uckk-public-section local-uckk-public-section--metadata"
+    aria-labelledby="{{uniqid}}-metadata-title"
+>
+    <h2 id="{{uniqid}}-metadata-title" class="local-uckk-public-section__title">
+        <span class="local-uckk-public-section__title-text">
+            Statut de la page
+        </span>
+    </h2>
+
+    <dl class="local-uckk-public-meta">
+        {{#metadata}}
+            <div class="local-uckk-public-meta__item">
+                <dt class="local-uckk-public-meta__label">
+                    {{label}}
+                </dt>
+                <dd class="local-uckk-public-meta__value">
+                    {{value}}
+                </dd>
+            </div>
+        {{/metadata}}
+    </dl>
+</section>

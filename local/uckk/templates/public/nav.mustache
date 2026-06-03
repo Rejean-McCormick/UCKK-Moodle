@@ -1,0 +1,62 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/public/nav
+
+    Public navigation partial for local_uckk public institutional pages.
+
+    This partial is render-only.
+
+    Expected context:
+    {
+        "navigationclasses": "local-uckk-public-nav local-uckk-public-nav--singleline",
+        "navigation": [
+            {
+                "key": "home",
+                "label": "Accueil",
+                "url": "https://example.test/local/uckk/index.php",
+                "active": true,
+                "classes": "local-uckk-public-nav__link is-active",
+                "itemclasses": "local-uckk-public-nav__item local-uckk-public-nav__item--active",
+                "ariacurrent": "page",
+                "hasariacurrent": true
+            }
+        ]
+    }
+}}
+
+<nav
+    class="{{navigationclasses}}"
+    aria-label="Navigation publique UCKK"
+    data-region="local-uckk-public-navigation"
+>
+    <div class="local-uckk-public-nav__viewport">
+        <ul class="local-uckk-public-nav__list" role="list">
+            {{#navigation}}
+                <li class="{{itemclasses}}">
+                    <a
+                        class="{{classes}}"
+                        href="{{url}}"
+                        data-nav-key="{{key}}"
+                        data-nav-active="{{#active}}true{{/active}}{{^active}}false{{/active}}"
+                        {{#hasariacurrent}}aria-current="{{ariacurrent}}"{{/hasariacurrent}}
+                    >
+                        <span class="local-uckk-public-nav__label">
+                            {{label}}
+                        </span>
+                    </a>
+                </li>
+            {{/navigation}}
+        </ul>
+    </div>
+</nav>

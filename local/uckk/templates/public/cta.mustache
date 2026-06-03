@@ -1,0 +1,68 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/public/cta
+
+    Public page call-to-action block for local_uckk.
+
+    Context:
+    {
+        "cta": {
+            "title": "Participer",
+            "body": "Rejoindre une voie ou explorer les archives.",
+            "url": "https://example.test/local/uckk/programs.php",
+            "label": "Explorer",
+            "actionlabel": "Explorer les voies",
+            "classes": "btn btn-primary local-uckk-public-cta__link"
+        }
+    }
+}}
+
+{{#cta}}
+    <section class="local-uckk-public-cta">
+        {{#title}}
+            <h2 class="local-uckk-public-cta__title">
+                {{title}}
+            </h2>
+        {{/title}}
+
+        {{#body}}
+            <p class="local-uckk-public-cta__body">
+                {{body}}
+            </p>
+        {{/body}}
+
+        {{#url}}
+            <p class="local-uckk-public-cta__action">
+                <a
+                    class="{{#classes}}{{classes}}{{/classes}}{{^classes}}btn btn-primary local-uckk-public-cta__link{{/classes}}"
+                    href="{{url}}"
+                >
+                    <span class="local-uckk-public-cta__link-label">
+                        {{#actionlabel}}
+                            {{actionlabel}}
+                        {{/actionlabel}}
+                        {{^actionlabel}}
+                            {{#label}}
+                                {{label}}
+                            {{/label}}
+                            {{^label}}
+                                Continuer
+                            {{/label}}
+                        {{/actionlabel}}
+                    </span>
+                </a>
+            </p>
+        {{/url}}
+    </section>
+{{/cta}}

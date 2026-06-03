@@ -1,0 +1,175 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/pages/home_feature
+
+    Page-specific feature block for the public UCKK home page.
+
+    This template is render-only.
+
+    Important:
+    - field names are intentionally prefixed to avoid accidental Mustache
+      fallback to the parent public_page context;
+    - this partial must only be called from public_page.mustache inside
+      {{#has_home_feature}}.
+
+    Expected context:
+    {
+        "uniqid": "local-uckk-public-page-abc123",
+        "home_feature": {
+            "featureclasses": "local-uckk-home-feature",
+            "hasfeatureeyebrow": true,
+            "featureeyebrow": "Accueil",
+            "hasfeaturetitle": true,
+            "featuretitle": "Univers-Cité King Klown",
+            "hasfeaturebody": true,
+            "featurebody": "Texte principal.",
+            "hasfeaturesummary": true,
+            "featuresummary": "Texte complémentaire.",
+            "hasfeatureitems": true,
+            "featureitems": [
+                {
+                    "itemclasses": "local-uckk-home-feature__item local-uckk-public-card",
+                    "hasitemeyebrow": true,
+                    "itemeyebrow": "Voie",
+                    "hasitemtitle": true,
+                    "itemtitle": "Titre de carte",
+                    "hasitembody": true,
+                    "itembody": "Description.",
+                    "hasitemurl": true,
+                    "itemurl": "https://example.test/local/uckk/programs.php",
+                    "hasitemaction": true,
+                    "itemactionlabel": "Explorer"
+                }
+            ],
+            "hasfeaturecta": true,
+            "featurecta": {
+                "ctaclasses": "local-uckk-home-feature__cta local-uckk-public-cta",
+                "hasctatitle": true,
+                "ctatitle": "Appel à l’action",
+                "hasctabody": true,
+                "ctabody": "Description.",
+                "hasctaurl": true,
+                "ctaurl": "https://example.test/local/uckk/contact.php",
+                "ctalabel": "Continuer"
+            }
+        }
+    }
+}}
+
+{{#home_feature}}
+    <section
+        class="{{featureclasses}}"
+        data-region="local-uckk-home-feature"
+        {{#hasfeaturetitle}}aria-labelledby="{{uniqid}}-home-feature-title"{{/hasfeaturetitle}}
+    >
+        <div class="local-uckk-home-feature__header">
+            {{#hasfeatureeyebrow}}
+                <p class="local-uckk-home-feature__eyebrow">
+                    {{featureeyebrow}}
+                </p>
+            {{/hasfeatureeyebrow}}
+
+            {{#hasfeaturetitle}}
+                <h2 id="{{uniqid}}-home-feature-title" class="local-uckk-home-feature__title">
+                    <span class="local-uckk-home-feature__title-text">
+                        {{featuretitle}}
+                    </span>
+                </h2>
+            {{/hasfeaturetitle}}
+
+            {{#hasfeaturebody}}
+                <p class="local-uckk-home-feature__body">
+                    {{featurebody}}
+                </p>
+            {{/hasfeaturebody}}
+
+            {{#hasfeaturesummary}}
+                <p class="local-uckk-home-feature__summary">
+                    {{featuresummary}}
+                </p>
+            {{/hasfeaturesummary}}
+        </div>
+
+        {{#hasfeatureitems}}
+            <div class="local-uckk-home-feature__items local-uckk-public-card-grid">
+                {{#featureitems}}
+                    <article class="{{itemclasses}}">
+                        <div class="local-uckk-public-card__content">
+                            {{#hasitemeyebrow}}
+                                <p class="local-uckk-public-card__eyebrow">
+                                    {{itemeyebrow}}
+                                </p>
+                            {{/hasitemeyebrow}}
+
+                            {{#hasitemtitle}}
+                                <h3 class="local-uckk-public-card__title">
+                                    {{#hasitemurl}}
+                                        <a class="local-uckk-public-card__title-link" href="{{itemurl}}">
+                                            {{itemtitle}}
+                                        </a>
+                                    {{/hasitemurl}}
+                                    {{^hasitemurl}}
+                                        {{itemtitle}}
+                                    {{/hasitemurl}}
+                                </h3>
+                            {{/hasitemtitle}}
+
+                            {{#hasitembody}}
+                                <p class="local-uckk-public-card__body">
+                                    {{itembody}}
+                                </p>
+                            {{/hasitembody}}
+                        </div>
+
+                        {{#hasitemaction}}
+                            {{#hasitemurl}}
+                                <p class="local-uckk-public-card__action">
+                                    <a class="local-uckk-public-card__action-link" href="{{itemurl}}">
+                                        {{itemactionlabel}}
+                                    </a>
+                                </p>
+                            {{/hasitemurl}}
+                        {{/hasitemaction}}
+                    </article>
+                {{/featureitems}}
+            </div>
+        {{/hasfeatureitems}}
+
+        {{#hasfeaturecta}}
+            {{#featurecta}}
+                <div class="{{ctaclasses}}">
+                    {{#hasctatitle}}
+                        <h3 class="local-uckk-public-cta__title">
+                            {{ctatitle}}
+                        </h3>
+                    {{/hasctatitle}}
+
+                    {{#hasctabody}}
+                        <p class="local-uckk-public-cta__body">
+                            {{ctabody}}
+                        </p>
+                    {{/hasctabody}}
+
+                    {{#hasctaurl}}
+                        <p class="local-uckk-public-cta__action">
+                            <a class="local-uckk-public-cta__link" href="{{ctaurl}}">
+                                {{ctalabel}}
+                            </a>
+                        </p>
+                    {{/hasctaurl}}
+                </div>
+            {{/featurecta}}
+        {{/hasfeaturecta}}
+    </section>
+{{/home_feature}}

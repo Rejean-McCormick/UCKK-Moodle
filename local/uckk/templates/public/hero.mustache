@@ -1,0 +1,58 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/public/hero
+
+    Public hero partial for local_uckk public institutional pages.
+
+    This partial is render-only.
+
+    Expected context:
+    {
+        "uniqid": "local-uckk-public-about-abc123",
+        "eyebrow": "Cité-école expérimentale",
+        "title": "Univers-Cité King Klown",
+        "subtitle": "Campus Moodle public",
+        "summary": "Présentation publique d’UCKK."
+    }
+}}
+
+<header
+    class="local-uckk-public-hero"
+    data-region="local-uckk-public-hero"
+    aria-labelledby="{{uniqid}}-title"
+>
+    <div class="local-uckk-public-hero__content">
+        {{#eyebrow}}
+            <p class="local-uckk-public-eyebrow">
+                {{eyebrow}}
+            </p>
+        {{/eyebrow}}
+
+        <h1 id="{{uniqid}}-title" class="local-uckk-public-title">
+            {{title}}
+        </h1>
+
+        {{#subtitle}}
+            <p class="local-uckk-public-subtitle">
+                {{subtitle}}
+            </p>
+        {{/subtitle}}
+
+        {{#summary}}
+            <p class="local-uckk-public-summary">
+                {{summary}}
+            </p>
+        {{/summary}}
+    </div>
+</header>

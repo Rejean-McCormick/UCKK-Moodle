@@ -1,0 +1,111 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/public/sections
+
+    Generic content sections for public UCKK pages.
+
+    Context variables required:
+    {
+        "sections": [
+            {
+                "classes": "local-uckk-public-section",
+                "eyebrow": "Repère",
+                "title": "Section title",
+                "body": "Section body.",
+                "hasitems": true,
+                "items": [
+                    {
+                        "classes": "local-uckk-public-card",
+                        "eyebrow": "Type",
+                        "title": "Item title",
+                        "body": "Item body.",
+                        "url": "https://example.test/local/uckk/example.php",
+                        "actionlabel": "Consulter",
+                        "hasaction": true
+                    }
+                ]
+            }
+        ]
+    }
+}}
+
+{{#sections}}
+    <section
+        class="{{classes}}"
+        data-region="local-uckk-public-section"
+    >
+        {{#eyebrow}}
+            <p class="local-uckk-public-section__eyebrow">
+                {{eyebrow}}
+            </p>
+        {{/eyebrow}}
+
+        {{#title}}
+            <h2 class="local-uckk-public-section__title">
+                <span class="local-uckk-public-section__title-text">
+                    {{title}}
+                </span>
+            </h2>
+        {{/title}}
+
+        {{#body}}
+            <p class="local-uckk-public-section__body">
+                {{body}}
+            </p>
+        {{/body}}
+
+        {{#hasitems}}
+            <div class="local-uckk-public-card-grid local-uckk-public-section__items">
+                {{#items}}
+                    <article class="{{classes}}">
+                        <div class="local-uckk-public-card__content">
+                            {{#eyebrow}}
+                                <p class="local-uckk-public-card__eyebrow">
+                                    {{eyebrow}}
+                                </p>
+                            {{/eyebrow}}
+
+                            {{#title}}
+                                <h3 class="local-uckk-public-card__title">
+                                    {{#url}}
+                                        <a class="local-uckk-public-card__title-link" href="{{url}}">
+                                            {{title}}
+                                        </a>
+                                    {{/url}}
+                                    {{^url}}
+                                        {{title}}
+                                    {{/url}}
+                                </h3>
+                            {{/title}}
+
+                            {{#body}}
+                                <p class="local-uckk-public-card__body">
+                                    {{body}}
+                                </p>
+                            {{/body}}
+                        </div>
+
+                        {{#hasaction}}
+                            <p class="local-uckk-public-card__action">
+                                <a class="local-uckk-public-card__action-link" href="{{url}}">
+                                    {{actionlabel}}
+                                </a>
+                            </p>
+                        {{/hasaction}}
+                    </article>
+                {{/items}}
+            </div>
+        {{/hasitems}}
+    </section>
+{{/sections}}

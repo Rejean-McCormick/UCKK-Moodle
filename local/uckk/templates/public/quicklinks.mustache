@@ -1,0 +1,57 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/public/quicklinks
+
+    Quick links section for public UCKK pages.
+
+    Context variables required:
+    {
+        "uniqid": "local-uckk-public-page-abc123",
+        "quicklinks": [
+            {
+                "label": "Voies",
+                "description": "Explorer les parcours publics.",
+                "url": "https://example.test/local/uckk/programs.php"
+            }
+        ]
+    }
+}}
+
+<section
+    class="local-uckk-public-section local-uckk-public-section--quicklinks"
+    aria-labelledby="{{uniqid}}-quicklinks-title"
+    data-region="local-uckk-public-quicklinks"
+>
+    <h2 id="{{uniqid}}-quicklinks-title" class="local-uckk-public-section__title">
+        <span class="local-uckk-public-section__title-text">
+            Repères rapides
+        </span>
+    </h2>
+
+    <div class="local-uckk-public-card-grid local-uckk-public-card-grid--quicklinks">
+        {{#quicklinks}}
+            <a class="local-uckk-public-card local-uckk-public-card--quicklink" href="{{url}}">
+                <span class="local-uckk-public-card__title">
+                    {{label}}
+                </span>
+
+                {{#description}}
+                    <span class="local-uckk-public-card__body">
+                        {{description}}
+                    </span>
+                {{/description}}
+            </a>
+        {{/quicklinks}}
+    </div>
+</section>

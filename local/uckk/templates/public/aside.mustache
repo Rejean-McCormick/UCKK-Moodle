@@ -1,0 +1,47 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/public/aside
+
+    Public aside region for local_uckk institutional pages.
+
+    This template renders the public aside shell extracted from
+    local_uckk/public_page.
+
+    It is intentionally render-only.
+
+    Context variables required for this template:
+    * asideclasses - Safe CSS classes for the aside element.
+    * hasmetadata - Whether metadata should be rendered.
+    * hascta - Whether the call to action should be rendered.
+
+    Included partials:
+    * local_uckk/public/metadata
+    * local_uckk/public/cta
+}}
+
+<aside
+    class="{{asideclasses}}"
+    data-region="local-uckk-public-aside"
+    aria-label="Repères institutionnels"
+>
+    <div class="local-uckk-public-aside__inner">
+        {{#hasmetadata}}
+            {{> local_uckk/public/metadata }}
+        {{/hasmetadata}}
+
+        {{#hascta}}
+            {{> local_uckk/public/cta }}
+        {{/hascta}}
+    </div>
+</aside>
