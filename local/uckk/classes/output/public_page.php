@@ -702,6 +702,7 @@ final class public_page implements renderable, templatable {
 
         foreach ($cards as $index => $card) {
             $card = (array)$card;
+
             $title = self::clean_string($card['title'] ?? '');
             $body = self::clean_string($card['body'] ?? $card['summary'] ?? '');
             $eyebrow = self::clean_string($card['eyebrow'] ?? '');
@@ -713,18 +714,37 @@ final class public_page implements renderable, templatable {
                 continue;
             }
 
+            $metadata = self::export_metadata(self::array_value($card, 'metadata'));
+
             $obj = new stdClass();
+
+            $obj->id = isset($card['id']) && is_numeric($card['id']) ? (int)$card['id'] : 0;
             $obj->eyebrow = $eyebrow;
             $obj->title = $title;
             $obj->body = $body;
             $obj->url = $url;
             $obj->actionlabel = $actionlabel;
+
             $obj->haseyebrow = $eyebrow !== '';
             $obj->hasbody = $body !== '';
             $obj->hasurl = $url !== '';
             $obj->hasaction = $url !== '' && $actionlabel !== '';
+
+            /*
+             * Important:
+             * Always define card-level metadata flags.
+             *
+             * Without these properties, Mustache can resolve {{hasmetadata}}
+             * and {{metadata}} from the parent page context inside nested
+             * course cards. That is what causes the page-level
+             * "Cours affichés 114 / 114" metadata to appear on every course.
+             */
+            $obj->metadata = $metadata;
+            $obj->hasmetadata = !empty($metadata);
+
             $obj->position = $index + 1;
             $obj->isfirst = $index === 0;
+
             $obj->classes = self::join_classes([
                 'local-uckk-public-card',
                 $type !== '' ? 'local-uckk-public-card--' . $type : null,

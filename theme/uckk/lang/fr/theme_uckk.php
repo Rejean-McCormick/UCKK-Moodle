@@ -22,7 +22,7 @@ defined('MOODLE_INTERNAL') || die();
 // Required Moodle theme strings.
 $string['pluginname'] = 'UCKK';
 $string['configtitle'] = 'UCKK';
-$string['choosereadme'] = 'Thème officiel de l’Univers-Cité King Klown. Il transforme Moodle en campus pédagogique UCKK : cours, défis, assemblées, archives, preuves, badges, portfolios et intégrité méthodologique.';
+$string['choosereadme'] = 'Thème officiel de l’Univers-Cité King Klown. Il transforme Moodle en campus pédagogique UCKK : cours, défis, assemblées, archives, preuves, Parchemins UCKK, portfolios et intégrité méthodologique.';
 
 // General identity.
 $string['uckk'] = 'UCKK';
@@ -35,7 +35,7 @@ $string['uckkshorttagline'] = 'Former les joueurs lucides.';
 $string['uckkdescription'] = 'UCKK-Moodle est le campus pédagogique de l’Univers-Cité King Klown.';
 $string['uckknotaccredited'] = 'Reconnaissance interne UCKK — ne constitue pas un diplôme public accrédité.';
 $string['uckkinternalrecognition'] = 'Reconnaissance interne UCKK';
-$string['uckkexperimentalcampus'] = 'Cité-école expérimentale';
+$string['uckkexperimentalcampus'] = 'Cité d’apprentissage public émergente';
 
 // Canonical hierarchy.
 $string['koa'] = 'kOA';
@@ -70,12 +70,12 @@ $string['nav_home'] = 'Accueil';
 $string['nav_mypath'] = 'Mon parcours';
 $string['nav_courses'] = 'Cours';
 $string['nav_tronccommun'] = 'Tronc commun';
-$string['nav_programs'] = 'Programmes';
+$string['nav_programs'] = 'Voies';
 $string['nav_challenges'] = 'Défis';
 $string['nav_assemblies'] = 'Assemblées';
 $string['nav_archives'] = 'Archives';
 $string['nav_portfolio'] = 'Portfolio';
-$string['nav_badges'] = 'Badges';
+$string['nav_badges'] = 'Parchemins';
 $string['nav_competencies'] = 'Compétences';
 $string['nav_integrity'] = 'Inquisiteur';
 $string['nav_glossary'] = 'Glossaire';
@@ -90,7 +90,7 @@ $string['nav_profile'] = 'Profil UCKK';
 // Frontpage.
 $string['frontpage_title'] = 'Bienvenue dans l’Univers-Cité King Klown';
 $string['frontpage_subtitle'] = 'Le campus Moodle de l’UCKK';
-$string['frontpage_intro'] = 'Entrez dans une cité-école expérimentale consacrée au Grand Jeu social : comprendre les règles visibles et invisibles, produire des preuves, participer aux assemblées, répondre aux défis et construire une mémoire collective.';
+$string['frontpage_intro'] = 'Entrez dans une cité d’apprentissage public consacrée au Grand Jeu social : comprendre les règles visibles et invisibles, produire des preuves, participer aux assemblées, répondre aux défis et construire une mémoire collective.';
 $string['frontpage_cta_enter'] = 'Entrer dans le campus';
 $string['frontpage_cta_mypath'] = 'Voir mon parcours';
 $string['frontpage_cta_tronccommun'] = 'Commencer le tronc commun';
@@ -115,7 +115,7 @@ $string['dashboard_proofs'] = 'Preuves à déposer';
 $string['dashboard_feedback'] = 'Rétroactions';
 $string['dashboard_integrity'] = 'Suivi d’intégrité';
 $string['dashboard_archives'] = 'Archives récentes';
-$string['dashboard_badges'] = 'Badges obtenus';
+$string['dashboard_badges'] = 'Parchemins obtenus';
 $string['dashboard_competencies'] = 'Compétences';
 $string['dashboard_portfolio'] = 'Portfolio';
 $string['dashboard_deadlines'] = 'Échéances';
@@ -153,10 +153,10 @@ $string['tc106'] = 'UCKK-TC106 — Mobilisation multi-corridor et coopération p
 $string['tc107'] = 'UCKK-TC107 — Introduction à kOA : connaissance, décision, action, mémoire';
 $string['tc108'] = 'UCKK-TC108 — Éthique, intégrité et Inquisiteur méthodologique';
 
-// Programs.
-$string['programs'] = 'Programmes';
+// Voies.
+$string['programs'] = 'Voies';
 $string['program_tronccommun'] = 'Tronc commun';
-$string['program_gjs'] = 'Baccalauréat du Grand Jeu social';
+$string['program_gjs'] = 'Voie du Grand Jeu social';
 $string['program_koa_digital'] = 'Voie de l’Architecture de l’écosystème digital kOA';
 $string['program_sociotech'] = 'Voie de l’Architecture sociotechnique';
 $string['program_politics'] = 'Voie des Sciences politiques';
@@ -166,7 +166,7 @@ $string['program_metaphysics'] = 'Voie de la Métaphysique';
 $string['program_ai'] = 'Voie de l’Intelligence artificielle gouvernable';
 $string['program_linguistics'] = 'Voie de la Linguistique et de l’architecture du sens';
 $string['program_socialintervention'] = 'Voie de l’Intervention sociale et systèmes humains';
-$string['program_livingmedia'] = 'Mineure Médias vivants et théâtre public responsable';
+$string['program_livingmedia'] = 'Atelier Médias vivants et théâtre public responsable';
 $string['program_labs'] = 'Séminaires avancés et laboratoires';
 
 // Challenges.
@@ -298,32 +298,32 @@ $string['visibility_cohort'] = 'Cohorte';
 $string['visibility_institution'] = 'Institution';
 $string['visibility_public'] = 'Public';
 
-// Badges and competencies.
-$string['badges'] = 'Badges';
-$string['badge'] = 'Badge';
+// Parchemins and competencies.
+$string['badges'] = 'Parchemins';
+$string['badge'] = 'Parchemin';
 $string['competencies'] = 'Compétences';
 $string['competency'] = 'Compétence';
 $string['competency_framework'] = 'Référentiel de compétences UCKK';
-$string['badge_joueurinitie'] = 'Joueur initié';
-$string['badge_joueurlucide'] = 'Joueur lucide';
-$string['badge_cartographe'] = 'Cartographe de systèmes';
-$string['badge_gardienpreuve'] = 'Gardien de la preuve';
-$string['badge_participantassemblee'] = 'Participant d’Assemblée';
-$string['badge_batisseurprototype'] = 'Bâtisseur de prototype';
-$string['badge_archivistedecision'] = 'Archiviste de décision';
-$string['badge_defikingklown'] = 'Défi King Klown validé';
-$string['badge_inquisitionmethodologique'] = 'Inquisition méthodologique réussie';
+$string['badge_joueurinitie'] = 'Parchemin — Joueur initié';
+$string['badge_joueurlucide'] = 'Parchemin — Joueur lucide';
+$string['badge_cartographe'] = 'Parchemin — Cartographe de systèmes';
+$string['badge_gardienpreuve'] = 'Parchemin — Gardien de la preuve';
+$string['badge_participantassemblee'] = 'Parchemin — Participant d’Assemblée';
+$string['badge_batisseurprototype'] = 'Parchemin — Bâtisseur de prototype';
+$string['badge_archivistedecision'] = 'Parchemin — Archiviste de décision';
+$string['badge_defikingklown'] = 'Parchemin — Défi King Klown validé';
+$string['badge_inquisitionmethodologique'] = 'Parchemin — Inquisition méthodologique réussie';
 
 // Reports.
 $string['reports'] = 'Rapports';
 $string['report_playerprogress'] = 'Progression des Joueurs';
 $string['report_cohortprogress'] = 'Progression des cohortes';
-$string['report_programprogress'] = 'Progression des programmes';
+$string['report_programprogress'] = 'Progression des voies';
 $string['report_challenges'] = 'Rapport des défis';
 $string['report_assemblies'] = 'Rapport des assemblées';
 $string['report_archives'] = 'Rapport des archives';
 $string['report_integrity'] = 'Rapport d’intégrité';
-$string['report_badges'] = 'Rapport des badges';
+$string['report_badges'] = 'Rapport des parchemins';
 $string['report_competencies'] = 'Rapport des compétences';
 
 // Theme settings.
@@ -345,7 +345,7 @@ $string['setting_showaccreditationnotice_desc'] = 'Affiche un rappel indiquant q
 $string['setting_frontpagehero'] = 'Bannière d’accueil';
 $string['setting_frontpagehero_desc'] = 'Contrôle l’affichage de la bannière principale UCKK.';
 $string['setting_dashboardcards'] = 'Cartes du tableau de bord';
-$string['setting_dashboardcards_desc'] = 'Active les cartes UCKK : parcours, défis, assemblées, archives, badges, compétences et intégrité.';
+$string['setting_dashboardcards_desc'] = 'Active les cartes UCKK : parcours, défis, assemblées, archives, Parchemins UCKK, compétences et intégrité.';
 $string['setting_publicarchives'] = 'Archives publiques';
 $string['setting_publicarchives_desc'] = 'Active les liens visuels vers les archives publiques lorsque les permissions le permettent.';
 $string['setting_integritynotice'] = 'Avis d’intégrité';
@@ -417,7 +417,7 @@ $string['footertext'] = 'Texte du pied de page';
 $string['footertext_desc'] = 'Texte affiché dans le pied de page du thème UCKK.';
 $string['frontpageactioncourses'] = 'Explorer les cours';
 $string['frontpageactiondashboard'] = 'Ouvrir le tableau de bord';
-$string['frontpageactionprograms'] = 'Voir les programmes';
+$string['frontpageactionprograms'] = 'Voir les voies';
 $string['frontpagearchivetext'] = 'Préserver les preuves, décisions, contestations et mémoires utiles à l’UCKK.';
 $string['frontpageassemblytext'] = 'Délibérer, proposer, voter, contester et publier des décisions auditables.';
 $string['frontpagebackground'] = 'Image d’arrière-plan de la page d’accueil';
@@ -455,13 +455,13 @@ $string['frontpagecardchallengeboundary'] = 'Les défis exigent des preuves et u
 $string['frontpagecardchallengesubtitle'] = 'Action, preuve et apprentissage';
 $string['frontpagecardchallengetitle'] = 'Défis King Klown';
 $string['frontpagecardpathwaysaction'] = 'Voir les parcours';
-$string['frontpagecardpathwaysbody'] = 'Suivre votre progression dans les cours, compétences, badges et reconnaissances internes.';
+$string['frontpagecardpathwaysbody'] = 'Suivre votre progression dans les cours, compétences, Niveaux, Parchemins UCKK et reconnaissances internes.';
 $string['frontpagecardpathwayssubtitle'] = 'Progression et orientation';
 $string['frontpagecardpathwaystitle'] = 'Parcours';
-$string['frontpagecardprogramsaction'] = 'Voir les programmes';
-$string['frontpagecardprogramsbody'] = 'Explorer les structures pédagogiques internes, leurs exigences et leurs limites de reconnaissance.';
-$string['frontpagecardprogramssubtitle'] = 'Structures pédagogiques';
-$string['frontpagecardprogramstitle'] = 'Programmes';
+$string['frontpagecardprogramsaction'] = 'Voir les voies';
+$string['frontpagecardprogramsbody'] = 'Explorer les voies UCKK, leurs cours, leurs exigences internes et leurs limites de reconnaissance.';
+$string['frontpagecardprogramssubtitle'] = 'Voies et progression';
+$string['frontpagecardprogramstitle'] = 'Voies';
 $string['frontpagefooterformula'] = 'King Klown attire. L’Inquisiteur vérifie. Les Assemblées légitiment. Les Bâtisseurs réalisent. L’Archiviste se souvient.';
 $string['frontpagefooterreports'] = 'Rapports institutionnels';
 $string['frontpageheading'] = 'Page d’accueil';
@@ -489,7 +489,7 @@ $string['frontpageprimarybuttonurl_desc'] = 'Destination du bouton principal de 
 $string['frontpagesecondarybuttontext'] = 'Texte du bouton secondaire';
 $string['frontpagesecondarybuttontext_desc'] = 'Libellé du bouton secondaire de la page d’accueil.';
 $string['frontpagesecondarybuttonurl'] = 'URL du bouton secondaire';
-$string['frontpagesecondarybuttonurl_desc'] = 'Destination du bouton secondaire de la page d’accueil.';
+$string['frontpagesecondarybuttonurl_desc'] = 'Destination du bouton secondaire.';
 $string['identityheading'] = 'Identité';
 $string['identityheading_desc'] = 'Nom, slogan, marque et positionnement institutionnel du thème UCKK.';
 $string['institutionalstatement'] = 'Déclaration institutionnelle';
@@ -529,7 +529,7 @@ $string['quickintegritysummary'] = 'Garde-fous, révisions et contestabilité.';
 $string['quicklinks'] = 'Liens rapides';
 $string['quicklinks_desc'] = 'Liens rapides affichés sur les pages du thème UCKK.';
 $string['quickpathway'] = 'Parcours';
-$string['quickpathwaysummary'] = 'Cours, compétences, badges et progression.';
+$string['quickpathwaysummary'] = 'Cours, compétences, Niveaux et Parchemins UCKK.';
 $string['rawscss'] = 'SCSS brut';
 $string['rawscss_desc'] = 'SCSS ajouté après les styles principaux du thème.';
 $string['rawscsspre'] = 'SCSS brut initial';

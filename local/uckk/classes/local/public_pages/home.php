@@ -36,87 +36,158 @@ final class home {
         return [
             'layout' => 'wide',
             'typography' => 'display',
-            'eyebrow' => 'Cité-école expérimentale',
+
+            'eyebrow' => 'Cité d’apprentissage public',
             'title' => 'Univers-Cité King Klown',
-            'subtitle' => 'Un campus Moodle pour apprendre, prouver, délibérer et archiver.',
-            'summary' => 'UCKK-Moodle organise les parcours, cours, défis, assemblées, traces et archives publiques de l’Univers-Cité King Klown.',
+            'subtitle' => 'Comprendre le jeu. Jouer avec lucidité. Changer les règles.',
+            'summary' => 'UCKK-Moodle est le campus pédagogique de l’Univers-Cité King Klown. Il relie les voies, les cours, les défis, les assemblées, l’intégrité et les archives pour former des joueurs lucides du Grand Jeu social.',
+
             'quicklinks' => [
                 [
-                    'label' => 'Explorer les voies',
-                    'description' => 'Voir les parcours publics et les structures pédagogiques UCKK.',
-                    'url' => '/local/uckk/programs.php',
-                ],
-                [
-                    'label' => 'Voir les cours',
-                    'description' => 'Accéder aux espaces d’apprentissage disponibles.',
+                    'label' => 'Explorer les cours',
+                    'description' => 'Entrer dans les espaces Moodle où les apprentissages sont organisés.',
                     'url' => '/local/uckk/courses.php',
                 ],
                 [
-                    'label' => 'Consulter les archives',
-                    'description' => 'Lire les traces publiques et la mémoire institutionnelle.',
+                    'label' => 'Situer les voies',
+                    'description' => 'Comprendre les grands parcours de formation et d’engagement UCKK.',
+                    'url' => '/local/uckk/programs.php',
+                ],
+                [
+                    'label' => 'Lire les archives',
+                    'description' => 'Retrouver les traces publiques, les preuves, les décisions et la mémoire.',
                     'url' => '/local/uckk/archives.php',
                 ],
             ],
+
             'sections' => [
                 [
-                    'type' => 'orientation',
-                    'eyebrow' => 'Orientation',
-                    'title' => 'Une cité-école structurée',
-                    'body' => 'Le campus relie les apprentissages, les défis, les preuves, les assemblées et les archives dans un même espace Moodle.',
+                    'type' => 'positioning',
+                    'eyebrow' => 'Position',
+                    'title' => 'Former des joueurs lucides',
+                    'body' => 'La société fonctionne déjà comme un jeu de règles, de récits, d’institutions, d’algorithmes, de statuts, de réputations, de preuves et de mémoires. L’Univers-Cité King Klown existe pour rendre ce jeu lisible et pour former des personnes capables d’y agir avec méthode, panache et intégrité.',
                     'items' => [
-                        'Former par des parcours et des cours.',
-                        'Mettre les apprentissages à l’épreuve par des défis.',
-                        'Documenter les traces utiles à la mémoire collective.',
-                        'Encadrer les décisions publiques par des assemblées.',
+                        'Comprendre les règles visibles et invisibles qui organisent la vie collective.',
+                        'Jouer avec lucidité, sans naïveté, sans cynisme et sans perte d’intégrité.',
+                        'Changer les règles lorsque le jeu devient injuste, opaque ou destructeur.',
+                    ],
+                ],
+                [
+                    'type' => 'architecture',
+                    'eyebrow' => 'Architecture',
+                    'title' => 'Une branche éducative du mouvement kOA',
+                    'body' => 'UCKK forme. kOA mobilise. Le kOA Digital Ecosystem opère. King Klown attire. L’Inquisiteur protège. Les Assemblées légitiment. Les Archives se souviennent.',
+                    'items' => [
+                        'Les voies structurent les grands domaines d’apprentissage.',
+                        'Les cours organisent les notions, pratiques et activités.',
+                        'Les défis transforment une question en action vérifiable.',
+                        'Les assemblées donnent une forme collective à l’évaluation et à l’orientation.',
+                        'Les archives conservent les traces, preuves, décisions et leçons apprises.',
+                    ],
+                ],
+                [
+                    'type' => 'method',
+                    'eyebrow' => 'Méthode',
+                    'title' => 'Connaître, choisir, agir, se souvenir',
+                    'body' => 'Le campus relie les apprentissages, les défis, les assemblées, les preuves et les archives pour transformer l’attention en apprentissage, l’apprentissage en action, puis l’action en mémoire transmissible.',
+                    'items' => [
+                        'Connaître le jeu : observer, enquêter, cartographier et nommer.',
+                        'Choisir ses coups : situer les options, les risques, les alliances et les limites.',
+                        'Agir avec méthode : produire, tester, documenter, corriger.',
+                        'Se souvenir : conserver les preuves, les décisions, les versions et les leçons apprises.',
                     ],
                 ],
                 [
                     'type' => 'boundary',
                     'eyebrow' => 'Limite publique',
-                    'title' => 'Ce que la page publique montre',
-                    'body' => 'Les pages publiques donnent une vue institutionnelle. Elles ne remplacent pas les espaces privés, les rôles Moodle, les permissions ou les dossiers internes.',
+                    'title' => 'Clarté institutionnelle',
+                    'body' => 'UCKK est une cité d’apprentissage public émergente. Ses Niveaux, Parchemins UCKK, dossiers de passage, portfolios et reconnaissances internes ne doivent pas être présentés comme des diplômes publics accrédités, des grades universitaires ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.',
                 ],
             ],
-            'cardsheading' => 'Portes d’entrée',
+
+            'cardsheading' => 'Entrées principales',
             'cards' => [
                 [
+                    'title' => 'Cours',
+                    'body' => 'Les espaces Moodle où les apprentissages, ressources, activités et évaluations sont organisés.',
+                    'url' => '/local/uckk/courses.php',
+                    'actionlabel' => 'Explorer les cours',
+                    'type' => 'courses',
+                ],
+                [
                     'title' => 'Voies',
-                    'body' => 'Les chemins de formation et d’engagement proposés dans la cité-école.',
+                    'body' => 'Les parcours qui relient domaines, cours, défis, preuves, Niveaux et Parchemins UCKK.',
                     'url' => '/local/uckk/programs.php',
                     'actionlabel' => 'Voir les voies',
                     'type' => 'programs',
                 ],
                 [
                     'title' => 'Défis',
-                    'body' => 'Les mises à l’épreuve pédagogiques et symboliques qui produisent des traces.',
+                    'body' => 'Les épreuves publiques ou internes qui transforment une question en action, preuve et apprentissage.',
                     'url' => '/local/uckk/challenges.php',
                     'actionlabel' => 'Voir les défis',
                     'type' => 'challenges',
                 ],
                 [
                     'title' => 'Assemblées',
-                    'body' => 'Les espaces de délibération, d’orientation et de décision collective.',
+                    'body' => 'Les lieux de discussion, d’évaluation, de contestation, d’orientation et de légitimité collective.',
                     'url' => '/local/uckk/assemblies.php',
                     'actionlabel' => 'Voir les assemblées',
                     'type' => 'assemblies',
                 ],
-            ],
-            'notices' => [
                 [
-                    'title' => 'Statut expérimental',
-                    'body' => 'UCKK-Moodle est un campus expérimental et pédagogique. Les contenus publics doivent rester clairs sur leur statut.',
-                    'type' => 'institutional',
+                    'title' => 'Intégrité',
+                    'body' => 'Le cadre qui protège la vérité des faits, la dignité des personnes, la qualité des preuves et la clarté des règles.',
+                    'url' => '/local/uckk/integrity.php',
+                    'actionlabel' => 'Voir le cadre',
+                    'type' => 'integrity',
+                ],
+                [
+                    'title' => 'Archives',
+                    'body' => 'La mémoire des traces publiques, décisions, versions, preuves, corrections et apprentissages.',
+                    'url' => '/local/uckk/archives.php',
+                    'actionlabel' => 'Consulter les archives',
+                    'type' => 'archives',
                 ],
             ],
-            'metadata' => [
-                ['label' => 'Composant Moodle', 'value' => 'local_uckk'],
-                ['label' => 'Type de page', 'value' => 'Page publique institutionnelle'],
+
+            'notices' => [
+                [
+                    'title' => 'Reconnaissance interne',
+                    'body' => 'Les reconnaissances UCKK attestent une progression de compétence, de pratique, de recherche ou de contribution dans la cité d’apprentissage. Elles ne remplacent pas des diplômes publics accrédités.',
+                    'type' => 'institutional',
+                ],
+                [
+                    'title' => 'Fiction pédagogique et faits',
+                    'body' => 'King Klown peut rendre le projet visible, mémorable et spectaculaire. Les faits, preuves, règles, résultats et décisions doivent rester vérifiables.',
+                    'type' => 'light',
+                ],
             ],
+
+            'metadata' => [
+                [
+                    'label' => 'Composant Moodle',
+                    'value' => 'local_uckk',
+                ],
+                [
+                    'label' => 'Type de page',
+                    'value' => 'Page publique institutionnelle',
+                ],
+                [
+                    'label' => 'Cadre canonique',
+                    'value' => 'Cité d’apprentissage public émergente',
+                ],
+                [
+                    'label' => 'Rôle',
+                    'value' => 'Branche éducative du mouvement kOA',
+                ],
+            ],
+
             'cta' => [
-                'title' => 'Entrer dans le campus',
-                'body' => 'Commencer par les cours, les voies ou les archives publiques.',
+                'title' => 'Entrer dans l’apprentissage',
+                'body' => 'Commencer par les cours, situer les voies, puis relier les apprentissages aux défis, aux assemblées et aux archives.',
                 'url' => '/local/uckk/courses.php',
-                'label' => 'Voir les cours',
+                'label' => 'Explorer les cours',
             ],
         ];
     }

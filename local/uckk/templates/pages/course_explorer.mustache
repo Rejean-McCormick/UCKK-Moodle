@@ -31,24 +31,31 @@
     {
         "uniqid": "local-uckk-public-page-abc123",
         "course_explorer": {
-            "id": "local-uckk-course-explorer-abc123",
+            "id": "local-uckk-course-explorer",
+            "actionurl": "/local/uckk/courses.php",
+            "pageurl": "/local/uckk/courses.php",
             "query": "",
-            "category": "all",
+            "category": "",
             "sort": "pedagogical",
-            "total": 12,
-            "total_label": "12 cours",
+            "page": 1,
+            "perpage": 12,
+            "total": 114,
+            "visiblecount": 114,
+            "resultscountlabel": "114 cours publics.",
+            "total_label": "114 cours publics.",
             "service": "local_uckk_search_public_courses",
+            "initialstatejson": "{}",
             "initial_state_json": "{}",
             "hasresults": true,
             "hasfilters": true,
             "filters": [
                 {
-                    "value": "all",
+                    "value": "",
                     "label": "Tous les cours",
                     "selected": true
                 }
             ],
-            "sorts": [
+            "sortoptions": [
                 {
                     "value": "pedagogical",
                     "label": "Ordre pédagogique",
@@ -61,16 +68,17 @@
                     "eyebrow": "01 — Tronc commun",
                     "title": "Nom du cours",
                     "body": "Résumé public du cours.",
-                    "url": "https://example.test/course/view.php?id=11",
+                    "url": "/course/view.php?id=11",
                     "metadata": [
                         {
                             "label": "Code",
-                            "value": "UCKK-CORE-001"
+                            "value": "UCKK-TC101"
                         }
                     ],
                     "hasmetadata": true
                 }
-            ]
+            ],
+            "hasmore": false
         }
     }
 }}
@@ -82,7 +90,7 @@
         aria-labelledby="{{uniqid}}-course-explorer-title"
         data-region="local-uckk-course-explorer"
         data-service="{{service}}"
-        data-initial-state="{{initial_state_json}}"
+        data-initial-state="{{#initialstatejson}}{{initialstatejson}}{{/initialstatejson}}{{^initialstatejson}}{{initial_state_json}}{{/initialstatejson}}"
     >
         <div class="local-uckk-course-explorer__header">
             <p class="local-uckk-public-section__eyebrow">
@@ -102,7 +110,7 @@
 
         <form
             class="local-uckk-course-explorer__form"
-            action="{{pageurl}}"
+            action="{{#actionurl}}{{actionurl}}{{/actionurl}}{{^actionurl}}{{pageurl}}{{/actionurl}}"
             method="get"
             data-region="course-search-form"
         >
@@ -136,7 +144,11 @@
                         data-region="course-category"
                     >
                         {{#filters}}
-                            <option value="{{value}}"{{#selected}} selected{{/selected}}>
+                            <option
+                                value="{{value}}"
+                                {{#selected}}selected{{/selected}}
+                                {{^selected}}{{#active}}selected{{/active}}{{/selected}}
+                            >
                                 {{label}}
                             </option>
                         {{/filters}}
@@ -154,11 +166,27 @@
                         name="sort"
                         data-region="course-sort"
                     >
-                        {{#sorts}}
-                            <option value="{{value}}"{{#selected}} selected{{/selected}}>
+                        {{#sortoptions}}
+                            <option
+                                value="{{value}}"
+                                {{#selected}}selected{{/selected}}
+                                {{^selected}}{{#active}}selected{{/active}}{{/selected}}
+                            >
                                 {{label}}
                             </option>
-                        {{/sorts}}
+                        {{/sortoptions}}
+
+                        {{^sortoptions}}
+                            {{#sorts}}
+                                <option
+                                    value="{{value}}"
+                                    {{#selected}}selected{{/selected}}
+                                    {{^selected}}{{#active}}selected{{/active}}{{/selected}}
+                                >
+                                    {{label}}
+                                </option>
+                            {{/sorts}}
+                        {{/sortoptions}}
                     </select>
                 </div>
 
@@ -173,7 +201,7 @@
 
                     <a
                         class="local-uckk-course-explorer__reset"
-                        href="{{pageurl}}"
+                        href="{{#actionurl}}{{actionurl}}{{/actionurl}}{{^actionurl}}{{pageurl}}{{/actionurl}}"
                         data-action="course-reset"
                     >
                         Réinitialiser
@@ -191,7 +219,12 @@
                 data-region="course-status"
                 aria-live="polite"
             >
-                {{total_label}}
+                {{#resultscountlabel}}
+                    {{resultscountlabel}}
+                {{/resultscountlabel}}
+                {{^resultscountlabel}}
+                    {{total_label}}
+                {{/resultscountlabel}}
             </p>
         </div>
 

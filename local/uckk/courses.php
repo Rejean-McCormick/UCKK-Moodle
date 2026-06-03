@@ -267,10 +267,6 @@ function local_uckk_public_courses_get_cards(): array {
                     'label' => 'Code',
                     'value' => $shortname,
                 ],
-                [
-                    'label' => 'Catégorie',
-                    'value' => $categorylabel,
-                ],
             ],
         ];
     }
