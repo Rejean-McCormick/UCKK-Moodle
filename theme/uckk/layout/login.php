@@ -29,12 +29,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $sitecontext = context_course::instance(SITEID);
 
-$sitename = format_string(
-    $SITE->fullname,
-    true,
-    ['context' => $sitecontext]
-);
-
 $skipurl = new moodle_url('/local/uckk/courses.php');
 
 $bodyclasses = [
@@ -69,37 +63,41 @@ echo $OUTPUT->doctype();
             >
                 <div class="login-layout-left__overlay" aria-hidden="true"></div>
 
-                <a
-                    class="theme-uckk-login-skip"
-                    href="<?php echo $skipurl->out(false); ?>"
-                >
-                    Explorer sans connexion
-                </a>
-
                 <div class="login-layout-left-content">
                     <p class="theme-uckk-eyebrow">
                         Univers-Cité King Klown
                     </p>
 
                     <h1 id="theme-uckk-login-title">
-                        <?php echo $sitename; ?>
+                        Campus UCKK
                     </h1>
 
                     <p class="login-layout-left__summary">
-                        Campus pédagogique UCKK — espace de parcours, de cours,
-                        de preuves et de participation institutionnelle.
+                        Accédez à vos parcours, consultez les cours ouverts et
+                        retrouvez les espaces de participation institutionnelle.
                     </p>
 
-                    <div class="login-layout-stats" aria-label="Repères institutionnels">
+                    <div class="login-layout-stats" aria-label="Repères de connexion">
                         <p>
-                            <strong>Rigueur.</strong>
-                            Parcours documentés, traces conservées, reconnaissances internes.
+                            <strong>Connexion.</strong>
+                            Utilisez votre compte pour accéder à vos cours,
+                            preuves, suivis et espaces réservés.
                         </p>
                         <p>
                             <strong>Accès public.</strong>
-                            Certains cours peuvent être ouverts aux visiteurs anonymes.
+                            Explorez les cours ouverts sans compte lorsque
+                            l’accès visiteur est disponible.
                         </p>
                     </div>
+
+                    <p class="theme-uckk-login-skip-wrap">
+                        <a
+                            class="theme-uckk-login-skip"
+                            href="<?php echo $skipurl->out(false); ?>"
+                        >
+                            Explorer sans connexion
+                        </a>
+                    </p>
                 </div>
             </aside>
 
