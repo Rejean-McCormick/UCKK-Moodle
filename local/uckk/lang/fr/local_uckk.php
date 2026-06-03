@@ -874,6 +874,7 @@ $string['local/uckk:exportdata'] = 'Exporter les données UCKK';
 $string['local/uckk:viewrestricted'] = 'Voir les informations restreintes UCKK';
 $string['local/uckk:manageintegrations'] = 'Gérer les intégrations UCKK';
 
+
 // Public Médiathèque.
 $string['nav_mediatheque'] = 'Médiathèque';
 
@@ -883,13 +884,15 @@ $string['mediatheque_summary'] = 'Explorer les médias, collections, œuvres ext
 $string['mediatheque_boundarynotice'] = 'La Médiathèque publique affiche seulement les contenus que les politiques de l’archive autorisent à exposer publiquement. Certains médias, passages ou détails peuvent être masqués selon les droits, avis de contenu et protocoles culturels.';
 
 $string['mediatheque_explorer_title'] = 'Explorateur Médiathèque';
-$string['mediatheque_explorer_summary'] = 'Rechercher, filtrer et parcourir les médias publics de l’archive UCKK.';
+$string['mediatheque_explorer_summary'] = 'Rechercher dans les médias publics, collections, références externes et passages documentés.';
 $string['mediatheque_explorer_loading'] = 'Chargement de la Médiathèque…';
 $string['mediatheque_explorer_error'] = 'La Médiathèque n’a pas pu être chargée.';
 $string['mediatheque_explorer_empty'] = 'Aucun média public ne correspond aux filtres.';
 $string['mediatheque_explorer_results'] = 'Résultats de la Médiathèque';
+$string['mediatheque_explorer_result_count_suffix'] = 'résultat(s)';
+$string['mediatheque_explorer_load_more'] = 'Charger plus de résultats';
 
-$string['mediatheque_search_label'] = 'Recherche';
+$string['mediatheque_search_label'] = 'Rechercher dans la médiathèque';
 $string['mediatheque_search_placeholder'] = 'Rechercher dans la médiathèque';
 $string['mediatheque_search_button'] = 'Rechercher';
 $string['mediatheque_filters_title'] = 'Filtres';
@@ -908,8 +911,18 @@ $string['mediatheque_filter_language'] = 'Langue';
 $string['mediatheque_filter_validation'] = 'Validation';
 $string['mediatheque_filter_sort'] = 'Tri';
 
+$string['mediatheque_mediatype_all'] = 'Tous les formats';
+$string['mediatheque_mediatype_video'] = 'Vidéo';
+$string['mediatheque_mediatype_audio'] = 'Audio';
+$string['mediatheque_mediatype_image'] = 'Image';
+$string['mediatheque_mediatype_pdf'] = 'PDF';
+$string['mediatheque_mediatype_document'] = 'Document';
+$string['mediatheque_mediatype_book'] = 'Livre';
+$string['mediatheque_mediatype_external_reference'] = 'Référence externe';
+$string['mediatheque_mediatype_other'] = 'Autre';
+
 $string['mediatheque_sort_relevance'] = 'Pertinence';
-$string['mediatheque_sort_newest'] = 'Plus récents';
+$string['mediatheque_sort_newest'] = 'Plus récent';
 $string['mediatheque_sort_title'] = 'Titre';
 $string['mediatheque_sort_type'] = 'Type';
 $string['mediatheque_sort_collection'] = 'Collection';
