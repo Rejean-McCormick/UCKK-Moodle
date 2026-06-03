@@ -781,6 +781,119 @@ function Invoke-UckkNormalWorkflowMinimal {
     "Workflow normal minimal termine."
 }
 
+
+function Invoke-UckkLocalAmdBuild {
+    $moodleRoot = $Script:LocalMoodleRoot
+    $componentRoot = "public/local/uckk"
+
+    if (-not (Test-Path -LiteralPath $moodleRoot)) {
+        throw "Moodle root local introuvable : $moodleRoot"
+    }
+
+    Push-Location $moodleRoot
+    try {
+        Invoke-UckkCheckedNative {
+            & npx grunt amd "--root=$componentRoot" "--no-color"
+        } "Build AMD echoue."
+    }
+    finally {
+        Pop-Location
+    }
+}
+
+function Invoke-UckkLocalMoodleUpgrade {
+    param([switch]$AllowUnstable)
+
+    $upgrade = Get-UckkLocalMoodleCliScript -ScriptName "upgrade.php"
+
+    if (-not $upgrade) {
+        throw "Upgrade CLI introuvable. Chemins verifies : $Script:LocalMoodleCliRoot, $Script:LocalRuntimeRoot\admin\cli, $Script:LocalMoodleRoot\admin\cli"
+    }
+
+    $arguments = @($upgrade, "--non-interactive")
+    if ($AllowUnstable) {
+        $arguments += "--allow-unstable"
+    }
+
+    Push-Location $Script:LocalMoodleRoot
+    try {
+        Invoke-UckkCheckedNative {
+            & $Script:LocalPhpExe @arguments
+        } "Upgrade Moodle local echoue."
+    }
+    finally {
+        Pop-Location
+    }
+}
+
+function Invoke-UckkSimpleScanUpdatePlan {
+    $plan = Get-UckkOpsUpdatePlan
+    $Script:LastUpdatePlan = $plan
+
+    Update-UckkSimplePlanUi -Plan $plan
+
+    return Format-UckkOpsUpdatePlan -Plan $plan
+}
+
+function Update-UckkSimplePlanUi {
+    param([Parameter(Mandatory = $true)][object]$Plan)
+
+    if ($null -eq $Script:SimplePlanStatusLabel) {
+        return
+    }
+
+    if (-not $Plan.HasChanges) {
+        $Script:SimplePlanStatusLabel.Text = "Aucun changement detecte. Rien a publier."
+    }
+    elseif (
+        -not $Plan.NeedsLocalSync -and
+        -not $Plan.NeedsAmdBuild -and
+        -not $Plan.NeedsMoodleUpgrade -and
+        -not $Plan.NeedsPurgeCaches -and
+        -not $Plan.NeedsSmokeTests -and
+        -not $Plan.NeedsSeedApply
+    ) {
+        $Script:SimplePlanStatusLabel.Text = "Changements outil seulement. Etapes recommandees : GitHub, puis OVH si necessaire."
+    }
+    else {
+        $Script:SimplePlanStatusLabel.Text = "Changements Moodle detectes. Suivre les actions speciales avant GitHub/OVH."
+    }
+
+    $specialLines = @()
+
+    if ($Plan.NeedsAmdBuild) {
+        $specialLines += "AMD build requis : lancer Build AMD avant Sync local."
+    }
+    if ($Plan.NeedsLocalSync) {
+        $specialLines += "Sync local requis : copier source -> runtime local."
+    }
+    if ($Plan.NeedsMoodleUpgrade) {
+        $specialLines += "Upgrade Moodle requis : lancer apres Sync local."
+    }
+    if ($Plan.NeedsPurgeCaches) {
+        $specialLines += "Purge caches requise : lancer avant validation navigateur."
+    }
+    if ($Plan.NeedsSmokeTests) {
+        $specialLines += "Smoke local recommande : lancer apres Launch local."
+    }
+    if ($Plan.NeedsSeedApply) {
+        $specialLines += "Seed detecte : faire un dry-run, pas d'apply automatique."
+    }
+
+    if ($specialLines.Count -eq 0) {
+        $specialLines += "Aucune action Moodle speciale requise."
+    }
+
+    $Script:SimpleSpecialInstructions.Text = ($specialLines -join [Environment]::NewLine)
+
+    $Script:SimpleBuildAmdButton.Visible = [bool]$Plan.NeedsAmdBuild
+    $Script:SimpleUpgradeButton.Visible = [bool]$Plan.NeedsMoodleUpgrade
+    $Script:SimplePurgeButton.Visible = [bool]$Plan.NeedsPurgeCaches
+    $Script:SimpleSmokeButton.Visible = [bool]$Plan.NeedsSmokeTests
+    $Script:SimpleSeedDryRunButton.Visible = [bool]$Plan.NeedsSeedApply
+}
+
+
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "$Script:AppName $Script:AppVersion"
 $form.Size = New-Object System.Drawing.Size(920, 720)
@@ -806,44 +919,56 @@ $tabSimple = New-Object System.Windows.Forms.TabPage
 $tabSimple.Text = "Simple"
 
 $simpleTitle = New-Object System.Windows.Forms.Label
-$simpleTitle.Text = "Workflow normal minimal"
-$simpleTitle.Location = New-Object System.Drawing.Point(20, 25)
-$simpleTitle.Size = New-Object System.Drawing.Size(500, 24)
+$simpleTitle.Text = "Workflow simple en 3 etapes"
+$simpleTitle.Location = New-Object System.Drawing.Point(20, 20)
+$simpleTitle.Size = New-Object System.Drawing.Size(520, 24)
 $tabSimple.Controls.Add($simpleTitle)
 
 $simpleDescription = New-Object System.Windows.Forms.Label
-$simpleDescription.Text = "Sync local -> Launch local -> GitHub -> OVH"
-$simpleDescription.Location = New-Object System.Drawing.Point(20, 50)
-$simpleDescription.Size = New-Object System.Drawing.Size(700, 24)
+$simpleDescription.Text = "1. Preparer local -> 2. Publier GitHub -> 3. Publier OVH"
+$simpleDescription.Location = New-Object System.Drawing.Point(20, 45)
+$simpleDescription.Size = New-Object System.Drawing.Size(720, 24)
 $tabSimple.Controls.Add($simpleDescription)
 
 $simpleCommitLabel = New-Object System.Windows.Forms.Label
 $simpleCommitLabel.Text = "Message de commit"
-$simpleCommitLabel.Location = New-Object System.Drawing.Point(20, 95)
+$simpleCommitLabel.Location = New-Object System.Drawing.Point(20, 82)
 $simpleCommitLabel.Size = New-Object System.Drawing.Size(180, 24)
 $tabSimple.Controls.Add($simpleCommitLabel)
 
 $Script:SimpleCommitMessageBox = New-Object System.Windows.Forms.TextBox
-$Script:SimpleCommitMessageBox.Location = New-Object System.Drawing.Point(20, 120)
+$Script:SimpleCommitMessageBox.Location = New-Object System.Drawing.Point(20, 106)
 $Script:SimpleCommitMessageBox.Size = New-Object System.Drawing.Size(520, 26)
 $Script:SimpleCommitMessageBox.Text = $Script:DefaultCommitMessage
 $tabSimple.Controls.Add($Script:SimpleCommitMessageBox)
 
-$runNormalButton = New-UckkButton "Run normal workflow" 20 175 {
-    Invoke-UckkGuiAction "Workflow normal minimal" {
-        Invoke-UckkNormalWorkflowMinimal -CommitMessage $Script:SimpleCommitMessageBox.Text
+$Script:SimplePlanStatusLabel = New-Object System.Windows.Forms.Label
+$Script:SimplePlanStatusLabel.Text = "Lancer Scan changes avant de publier."
+$Script:SimplePlanStatusLabel.Location = New-Object System.Drawing.Point(260, 150)
+$Script:SimplePlanStatusLabel.Size = New-Object System.Drawing.Size(570, 42)
+$tabSimple.Controls.Add($Script:SimplePlanStatusLabel)
+
+$scanChangesButton = New-UckkButton "1. Scan changes" 20 150 {
+    Invoke-UckkGuiAction "Scan update plan" {
+        Invoke-UckkSimpleScanUpdatePlan
     }
 }
-$runNormalButton.Size = New-Object System.Drawing.Size(260, 48)
-$tabSimple.Controls.Add($runNormalButton)
+$scanChangesButton.Size = New-Object System.Drawing.Size(220, 42)
+$tabSimple.Controls.Add($scanChangesButton)
 
-$tabSimple.Controls.Add((New-UckkButton "Sync local" 320 175 {
+$stepLocalLabel = New-Object System.Windows.Forms.Label
+$stepLocalLabel.Text = "Etape 1 - Preparer et valider localement"
+$stepLocalLabel.Location = New-Object System.Drawing.Point(20, 208)
+$stepLocalLabel.Size = New-Object System.Drawing.Size(360, 22)
+$tabSimple.Controls.Add($stepLocalLabel)
+
+$tabSimple.Controls.Add((New-UckkButton "2. Sync local" 20 235 {
     Invoke-UckkGuiAction "Sync local -> Moodle local" {
         Sync-UckkLocalSourceToRuntime
     }
 }))
 
-$tabSimple.Controls.Add((New-UckkButton "Launch local" 320 225 {
+$tabSimple.Controls.Add((New-UckkButton "3. Launch local" 260 235 {
     Invoke-UckkGuiAction "Launch Moodle local" {
         Start-UckkLocalMoodle
         Start-Process $Script:LocalUrl | Out-Null
@@ -851,18 +976,87 @@ $tabSimple.Controls.Add((New-UckkButton "Launch local" 320 225 {
     }
 }))
 
-$tabSimple.Controls.Add((New-UckkButton "Sync GitHub" 560 175 {
+$stepGitLabel = New-Object System.Windows.Forms.Label
+$stepGitLabel.Text = "Etape 2 - Publier le code"
+$stepGitLabel.Location = New-Object System.Drawing.Point(20, 292)
+$stepGitLabel.Size = New-Object System.Drawing.Size(300, 22)
+$tabSimple.Controls.Add($stepGitLabel)
+
+$tabSimple.Controls.Add((New-UckkButton "4. Sync GitHub" 20 318 {
     Invoke-UckkGuiAction "Sync GitHub" {
         Invoke-UckkGitCommitPush -Message $Script:SimpleCommitMessageBox.Text
-    }
+    } -Confirm
 }))
 
-$tabSimple.Controls.Add((New-UckkButton "Trigger OVH sync" 560 225 {
+$stepServerLabel = New-Object System.Windows.Forms.Label
+$stepServerLabel.Text = "Etape 3 - Publier en ligne"
+$stepServerLabel.Location = New-Object System.Drawing.Point(260, 292)
+$stepServerLabel.Size = New-Object System.Drawing.Size(300, 22)
+$tabSimple.Controls.Add($stepServerLabel)
+
+$tabSimple.Controls.Add((New-UckkButton "5. Trigger OVH sync" 260 318 {
     Invoke-UckkGuiAction "Trigger sync OVH" {
         Invoke-UckkServerPull
         Sync-UckkServerSourceToRuntime
-    }
+    } -Confirm
 }))
+
+$specialTitle = New-Object System.Windows.Forms.Label
+$specialTitle.Text = "Actions speciales apres scan"
+$specialTitle.Location = New-Object System.Drawing.Point(520, 208)
+$specialTitle.Size = New-Object System.Drawing.Size(320, 22)
+$tabSimple.Controls.Add($specialTitle)
+
+$Script:SimpleSpecialInstructions = New-Object System.Windows.Forms.Label
+$Script:SimpleSpecialInstructions.Text = "Aucune analyse lancee."
+$Script:SimpleSpecialInstructions.Location = New-Object System.Drawing.Point(520, 235)
+$Script:SimpleSpecialInstructions.Size = New-Object System.Drawing.Size(330, 92)
+$tabSimple.Controls.Add($Script:SimpleSpecialInstructions)
+
+$Script:SimpleBuildAmdButton = New-UckkButton "Build AMD" 520 318 {
+    Invoke-UckkGuiAction "Build AMD local" {
+        Invoke-UckkLocalAmdBuild
+    }
+}
+$Script:SimpleBuildAmdButton.Size = New-Object System.Drawing.Size(150, 36)
+$Script:SimpleBuildAmdButton.Visible = $false
+$tabSimple.Controls.Add($Script:SimpleBuildAmdButton)
+
+$Script:SimpleUpgradeButton = New-UckkButton "Upgrade local" 700 318 {
+    Invoke-UckkGuiAction "Upgrade Moodle local" {
+        Invoke-UckkLocalMoodleUpgrade -AllowUnstable
+    } -Confirm
+}
+$Script:SimpleUpgradeButton.Size = New-Object System.Drawing.Size(150, 36)
+$Script:SimpleUpgradeButton.Visible = $false
+$tabSimple.Controls.Add($Script:SimpleUpgradeButton)
+
+$Script:SimplePurgeButton = New-UckkButton "Purge caches" 520 360 {
+    Invoke-UckkGuiAction "Purge caches Moodle local" {
+        Clear-UckkLocalCaches
+    }
+}
+$Script:SimplePurgeButton.Size = New-Object System.Drawing.Size(150, 36)
+$Script:SimplePurgeButton.Visible = $false
+$tabSimple.Controls.Add($Script:SimplePurgeButton)
+
+$Script:SimpleSmokeButton = New-UckkButton "Smoke local" 700 360 {
+    Invoke-UckkGuiAction "Smoke local" {
+        Test-UckkSmokeLocal
+    }
+}
+$Script:SimpleSmokeButton.Size = New-Object System.Drawing.Size(150, 36)
+$Script:SimpleSmokeButton.Visible = $false
+$tabSimple.Controls.Add($Script:SimpleSmokeButton)
+
+$Script:SimpleSeedDryRunButton = New-UckkButton "Seed dry-run" 520 402 {
+    Invoke-UckkGuiAction "Seed dry-run local" {
+        Invoke-UckkSeedLocal -Preset "courses" -DryRun
+    } -Confirm
+}
+$Script:SimpleSeedDryRunButton.Size = New-Object System.Drawing.Size(150, 36)
+$Script:SimpleSeedDryRunButton.Visible = $false
+$tabSimple.Controls.Add($Script:SimpleSeedDryRunButton)
 
 # -----------------------------
 # Local Dev

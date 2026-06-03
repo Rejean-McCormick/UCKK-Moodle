@@ -20,7 +20,8 @@ defined('MOODLE_INTERNAL') || die();
  * - renderer overrides;
  * - public visual polish;
  * - the Moodle root layout adapter that prevents the native course-list
- *   frontpage from being exposed at /.
+ *   frontpage from being exposed at /;
+ * - the login layout shell around Moodle's standard login form.
  *
  * It must not contain grading logic, permission logic, workflow logic,
  * archive logic, integrity logic or data ownership.
@@ -95,6 +96,16 @@ $uckkfrontpage = [
     ],
 ];
 
+$uckklogin = [
+    'theme' => 'uckk',
+    'file' => 'login.php',
+    'regions' => [],
+    'options' => [
+        'langmenu' => true,
+        'nonavbar' => true,
+    ],
+];
+
 $THEME->layouts = [
     'base' => $uckkdrawersnoregions,
 
@@ -151,14 +162,15 @@ $THEME->layouts = [
 
     'report' => $uckkdrawers,
 
-    'login' => [
-        'theme' => 'boost',
-        'file' => 'login.php',
-        'regions' => [],
-        'options' => [
-            'langmenu' => true,
-        ],
-    ],
+    /*
+     * Moodle login page.
+     *
+     * UCKK owns only the visual shell around Moodle's standard login content.
+     * The login form, guest login flow, tokens and authentication behaviour
+     * remain owned by Moodle core / Boost and are rendered via main_content()
+     * inside theme/uckk/layout/login.php.
+     */
+    'login' => $uckklogin,
 
     'popup' => $uckkcolumns1 + [
         'options' => [
@@ -211,4 +223,11 @@ $THEME->layouts = [
     ],
 ];
 
-unset($uckkdrawers, $uckkdrawersnoregions, $uckkcolumns1, $uckkpublic, $uckkfrontpage);
+unset(
+    $uckkdrawers,
+    $uckkdrawersnoregions,
+    $uckkcolumns1,
+    $uckkpublic,
+    $uckkfrontpage,
+    $uckklogin
+);

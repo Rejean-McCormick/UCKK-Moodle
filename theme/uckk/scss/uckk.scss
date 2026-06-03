@@ -2092,15 +2092,20 @@ body:has(.local-uckk-public-page) .local-uckk {
     }
 }
 
-/* ========================================================================== 
-   UCKK login page — spacing and contrast
+/* ==========================================================================
+   UCKK login page — two-panel theme shell
    ========================================================================== */
 
 /*
  * Login belongs to theme_uckk, not local_uckk.
  *
- * The login background image is emitted without a gradient from lib.php.
- * This block only handles spacing, text contrast and form rhythm.
+ * This layer styles the UCKK-owned login layout shell only:
+ * - .theme-uckk-login-shell
+ * - .login-layout-left
+ * - .login-layout-right
+ *
+ * Moodle/Boost still owns the login form itself through $OUTPUT->main_content().
+ * Do not move these rules to local_uckk/styles.css.
  */
 
 body#page-login-index,
@@ -2116,26 +2121,86 @@ body.pagelayout-login {
     --theme-uckk-login-copy-color: #fffaf0;
     --theme-uckk-login-title-shadow: 0 2px 10px rgba(0, 0, 0, .72);
     --theme-uckk-login-copy-shadow: 0 2px 8px rgba(0, 0, 0, .68);
+    --theme-uckk-login-ground: #071514;
+    --theme-uckk-login-panel: #f7f1df;
+    --theme-uckk-login-card: rgba(255, 250, 240, .96);
+
+    min-height: 100vh;
+    background: var(--theme-uckk-login-ground) !important;
 }
 
-/* Left visual panel: spacing only. Do not tint the background image. */
+/*
+ * Neutralise only the login host wrappers. The normal Moodle shell remains
+ * owned by Boost on every non-login page.
+ */
+body#page-login-index #page-wrapper,
+body#page-login-index #page,
+body#page-login-index #page-content,
+body#page-login-index #region-main-box,
+body.pagelayout-login #page-wrapper,
+body.pagelayout-login #page,
+body.pagelayout-login #page-content,
+body.pagelayout-login #region-main-box {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100vh;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+body#page-login-index #page,
+body.pagelayout-login #page {
+    display: block;
+}
+
+/* Two-panel UCKK login shell emitted by theme/uckk/layout/login.php. */
+body#page-login-index .theme-uckk-login-shell,
+body.pagelayout-login .theme-uckk-login-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(24rem, .92fr);
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: var(--theme-uckk-login-panel);
+}
+
+/* Left visual panel: the time-aware AMD module applies the active image here. */
+body#page-login-index .theme-uckk-login-shell .login-layout-left,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-left,
 body#page-login-index #page .login-layout-left,
 body.pagelayout-login #page .login-layout-left {
     position: relative;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
     overflow: hidden;
     opacity: 1 !important;
     filter: none !important;
     mix-blend-mode: normal !important;
+    background-color: var(--theme-uckk-login-ground) !important;
+    background-position: right center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
     background-blend-mode: normal !important;
     padding:
         var(--theme-uckk-login-left-padding-y)
         var(--theme-uckk-login-left-padding-x) !important;
 }
 
-/* Defensive reset only; the real shade fix belongs in theme_uckk/lib.php. */
+/*
+ * Defensive reset only.
+ * The login background must be shown as the selected stored image without
+ * extra pseudo-overlay tints.
+ */
+body#page-login-index .theme-uckk-login-shell .login-layout-left::before,
+body#page-login-index .theme-uckk-login-shell .login-layout-left::after,
 body#page-login-index #page .login-layout-left::before,
 body#page-login-index #page .login-layout-left::after,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-left::before,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-left::after,
 body.pagelayout-login #page .login-layout-left::before,
 body.pagelayout-login #page .login-layout-left::after {
     display: none !important;
@@ -2151,7 +2216,9 @@ body.pagelayout-login #page .login-layout-left::after {
 }
 
 /* Copy block inside the left visual panel. */
+body#page-login-index .theme-uckk-login-shell .login-layout-left .login-layout-left-content,
 body#page-login-index #page .login-layout-left .login-layout-left-content,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-left .login-layout-left-content,
 body.pagelayout-login #page .login-layout-left .login-layout-left-content {
     position: relative;
     z-index: 1;
@@ -2161,8 +2228,12 @@ body.pagelayout-login #page .login-layout-left .login-layout-left-content {
     color: var(--theme-uckk-login-copy-color) !important;
 }
 
+body#page-login-index .theme-uckk-login-shell .login-layout-left .login-layout-left-content > h1,
+body#page-login-index .theme-uckk-login-shell .login-layout-left .login-layout-left-content > h1.mb-3,
 body#page-login-index #page .login-layout-left .login-layout-left-content > h1,
 body#page-login-index #page .login-layout-left .login-layout-left-content > h1.mb-3,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-left .login-layout-left-content > h1,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-left .login-layout-left-content > h1.mb-3,
 body.pagelayout-login #page .login-layout-left .login-layout-left-content > h1,
 body.pagelayout-login #page .login-layout-left .login-layout-left-content > h1.mb-3 {
     overflow: visible;
@@ -2174,9 +2245,15 @@ body.pagelayout-login #page .login-layout-left .login-layout-left-content > h1.m
     text-shadow: var(--theme-uckk-login-title-shadow);
 }
 
+body#page-login-index .theme-uckk-login-shell .login-layout-left .login-layout-left-content p,
+body#page-login-index .theme-uckk-login-shell .login-layout-left .login-layout-left-content .login-layout-stats,
+body#page-login-index .theme-uckk-login-shell .login-layout-left .login-layout-left-content .login-layout-stats *,
 body#page-login-index #page .login-layout-left .login-layout-left-content p,
 body#page-login-index #page .login-layout-left .login-layout-left-content .login-layout-stats,
 body#page-login-index #page .login-layout-left .login-layout-left-content .login-layout-stats *,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-left .login-layout-left-content p,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-left .login-layout-left-content .login-layout-stats,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-left .login-layout-left-content .login-layout-stats *,
 body.pagelayout-login #page .login-layout-left .login-layout-left-content p,
 body.pagelayout-login #page .login-layout-left .login-layout-left-content .login-layout-stats,
 body.pagelayout-login #page .login-layout-left .login-layout-left-content .login-layout-stats * {
@@ -2184,31 +2261,51 @@ body.pagelayout-login #page .login-layout-left .login-layout-left-content .login
     text-shadow: var(--theme-uckk-login-copy-shadow);
 }
 
-/* Right login panel spacing. */
+/* Right login panel. */
+body#page-login-index .theme-uckk-login-shell .login-layout-right,
 body#page-login-index #region-main.login-layout-right,
+body.pagelayout-login .theme-uckk-login-shell .login-layout-right,
 body.pagelayout-login #region-main.login-layout-right {
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
     overflow: visible;
     padding:
         var(--theme-uckk-login-right-padding-y)
         var(--theme-uckk-login-right-padding-x) !important;
+    background:
+        radial-gradient(circle at top right, rgba(185, 144, 69, .14), transparent 34%),
+        linear-gradient(180deg, #fffaf0, var(--theme-uckk-login-panel));
+}
+
+/* Boost login host wrappers inside the right panel. */
+body#page-login-index #region-main.login-layout-right .login-wrapper,
+body#page-login-index #region-main.login-layout-right .login-container,
+body.pagelayout-login #region-main.login-layout-right .login-wrapper,
+body.pagelayout-login #region-main.login-layout-right .login-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--theme-uckk-login-form-width);
+    margin-inline: auto;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
 /* Login box itself. */
-body#page-login-index #region-main.login-layout-right .login-container,
-body#page-login-index #region-main.login-layout-right .login-wrapper,
 body#page-login-index #region-main.login-layout-right .loginform,
 body#page-login-index #region-main.login-layout-right .card,
-body.pagelayout-login #region-main.login-layout-right .login-container,
-body.pagelayout-login #region-main.login-layout-right .login-wrapper,
 body.pagelayout-login #region-main.login-layout-right .loginform,
 body.pagelayout-login #region-main.login-layout-right .card {
     box-sizing: border-box;
-    width: min(100%, var(--theme-uckk-login-form-width));
+    width: 100%;
     padding: var(--theme-uckk-login-form-padding) !important;
+    border: 1px solid rgba(23, 35, 33, .14);
+    border-radius: 1rem;
+    background: var(--theme-uckk-login-card) !important;
+    box-shadow: 0 18px 42px rgba(23, 35, 33, .14);
 }
 
 /* Form rhythm. */
@@ -2219,10 +2316,61 @@ body.pagelayout-login #region-main.login-layout-right .form-control {
     margin-bottom: 1rem;
 }
 
+body#page-login-index #region-main.login-layout-right .login-heading,
+body#page-login-index #region-main.login-layout-right h1,
+body#page-login-index #region-main.login-layout-right h2,
+body.pagelayout-login #region-main.login-layout-right .login-heading,
+body.pagelayout-login #region-main.login-layout-right h1,
+body.pagelayout-login #region-main.login-layout-right h2 {
+    overflow: visible;
+    color: var(--theme-uckk-petrol-dark, #164c49);
+    font-family: var(--theme-uckk-font-title, Georgia, "Times New Roman", serif);
+    font-weight: 800;
+}
+
 body#page-login-index #region-main.login-layout-right .btn,
 body.pagelayout-login #region-main.login-layout-right .btn {
     min-height: 2.65rem;
     margin-top: .75rem;
+}
+
+body#page-login-index #region-main.login-layout-right .btn-secondary,
+body.pagelayout-login #region-main.login-layout-right .btn-secondary {
+    border-color: var(--theme-uckk-petrol, #1e6864);
+    background-color: var(--theme-uckk-petrol, #1e6864);
+    color: #fffaf0;
+}
+
+body#page-login-index #region-main.login-layout-right .btn-secondary:hover,
+body#page-login-index #region-main.login-layout-right .btn-secondary:focus,
+body.pagelayout-login #region-main.login-layout-right .btn-secondary:hover,
+body.pagelayout-login #region-main.login-layout-right .btn-secondary:focus {
+    border-color: var(--theme-uckk-petrol-dark, #164c49);
+    background-color: var(--theme-uckk-petrol-dark, #164c49);
+    color: #ffffff;
+}
+
+@media (max-width: 991.98px) {
+    body#page-login-index .theme-uckk-login-shell,
+    body.pagelayout-login .theme-uckk-login-shell {
+        grid-template-columns: 1fr;
+    }
+
+    body#page-login-index .theme-uckk-login-shell .login-layout-left,
+    body.pagelayout-login .theme-uckk-login-shell .login-layout-left,
+    body#page-login-index #page .login-layout-left,
+    body.pagelayout-login #page .login-layout-left {
+        min-height: 42vh;
+        align-items: flex-end;
+        background-position: center center !important;
+    }
+
+    body#page-login-index .theme-uckk-login-shell .login-layout-right,
+    body#page-login-index #region-main.login-layout-right,
+    body.pagelayout-login .theme-uckk-login-shell .login-layout-right,
+    body.pagelayout-login #region-main.login-layout-right {
+        min-height: auto;
+    }
 }
 
 @media (max-width: 767.98px) {
@@ -2236,8 +2384,17 @@ body.pagelayout-login #region-main.login-layout-right .btn {
         --theme-uckk-login-copy-width: 100%;
     }
 
+    body#page-login-index .theme-uckk-login-shell .login-layout-left .login-layout-left-content,
     body#page-login-index #page .login-layout-left .login-layout-left-content,
+    body.pagelayout-login .theme-uckk-login-shell .login-layout-left .login-layout-left-content,
     body.pagelayout-login #page .login-layout-left .login-layout-left-content {
         padding-inline: 0;
+    }
+
+    body#page-login-index #region-main.login-layout-right .loginform,
+    body#page-login-index #region-main.login-layout-right .card,
+    body.pagelayout-login #region-main.login-layout-right .loginform,
+    body.pagelayout-login #region-main.login-layout-right .card {
+        border-radius: .8rem;
     }
 }
