@@ -2128,7 +2128,6 @@ body#page-login-index.theme-uckk-login-layout .theme-uckk-login-shell {
         linear-gradient(180deg, var(--uckk-paper-soft), var(--uckk-paper));
 }
 
-/* Left artwork panel. The full image must remain unshaded. */
 body.pagelayout-login.theme-uckk-login-layout .login-layout-left,
 body#page-login-index.theme-uckk-login-layout .login-layout-left {
     position: relative;
@@ -2144,7 +2143,7 @@ body#page-login-index.theme-uckk-login-layout .login-layout-left {
     color: #ffffff;
 }
 
-/* No global veil or pseudo-shadow over the full login artwork. */
+/* No full-image veil, shadow or blur. Keep the artwork intact. */
 body.pagelayout-login.theme-uckk-login-layout .login-layout-left::before,
 body.pagelayout-login.theme-uckk-login-layout .login-layout-left::after,
 body.pagelayout-login.theme-uckk-login-layout .login-layout-left__overlay,
@@ -2156,60 +2155,71 @@ body#page-login-index.theme-uckk-login-layout .login-layout-left__overlay {
     background: none !important;
     opacity: 0 !important;
     box-shadow: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 
-/* Contrast belongs behind the text card only. */
+/* Dark, sharp panel behind the login presentation copy only. */
 body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content,
 body#page-login-index.theme-uckk-login-layout .login-layout-left-content {
     position: relative;
     z-index: 2;
     display: grid;
     gap: 1rem;
-    max-width: min(34rem, 88%);
-    padding: clamp(1.15rem, 2vw, 1.75rem) !important;
-    border: 1px solid rgba(255, 250, 240, .22) !important;
+    max-width: min(42rem, 92%);
+    padding: clamp(1.35rem, 2.4vw, 2.1rem) !important;
+    border: 1px solid rgba(255, 250, 240, .18) !important;
     border-left: .35rem solid var(--uckk-gold) !important;
     border-radius: var(--uckk-radius-lg) !important;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(0, 0, 0, .54),
-            rgba(5, 47, 45, .38)
-        ) !important;
+    background: rgba(0, 0, 0, .62) !important;
     box-shadow:
-        0 1.4rem 3.25rem rgba(0, 0, 0, .42),
-        0 .35rem 1rem rgba(0, 0, 0, .28),
-        inset 0 1px 0 rgba(255, 250, 240, .16) !important;
+        0 1.4rem 3rem rgba(0, 0, 0, .48),
+        0 .35rem 1rem rgba(0, 0, 0, .32),
+        inset 0 1px 0 rgba(255, 250, 240, .12) !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     text-shadow:
         0 .12rem .35rem rgba(0, 0, 0, .72),
         0 .02rem .05rem rgba(0, 0, 0, .9);
-    backdrop-filter: blur(2.5px);
-    -webkit-backdrop-filter: blur(2.5px);
+}
+
+body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content > *,
+body#page-login-index.theme-uckk-login-layout .login-layout-left-content > * {
+    position: relative;
+    z-index: 1;
+}
+
+body.pagelayout-login.theme-uckk-login-layout .theme-uckk-eyebrow,
+body#page-login-index.theme-uckk-login-layout .theme-uckk-eyebrow {
+    margin: 0;
+    color: #ffffff;
+    font-family: var(--uckk-font-body);
+    font-size: .8rem;
+    font-weight: 900;
+    letter-spacing: .14em;
+    line-height: 1.2;
+    text-transform: uppercase;
 }
 
 body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content h1,
 body#page-login-index.theme-uckk-login-layout .login-layout-left-content h1 {
-    margin: 0 0 .5rem;
+    margin: 0;
     color: #ffffff;
     font-family: var(--uckk-font-title);
-    font-size: clamp(2.4rem, 5vw, 5rem);
+    font-size: clamp(2.7rem, 5.35vw, 5.45rem);
     font-weight: 800;
     line-height: .98;
-    letter-spacing: -.04em;
-}
-
-body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content p,
-body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content strong,
-body#page-login-index.theme-uckk-login-layout .login-layout-left-content p,
-body#page-login-index.theme-uckk-login-layout .login-layout-left-content strong {
-    color: #ffffff;
+    letter-spacing: -.045em;
 }
 
 body.pagelayout-login.theme-uckk-login-layout .login-layout-left__summary,
 body#page-login-index.theme-uckk-login-layout .login-layout-left__summary {
     margin: 0;
     color: rgba(255, 255, 255, .96);
-    font-size: clamp(.95rem, 1.25vw, 1.08rem);
+    font-size: clamp(1rem, 1.35vw, 1.18rem);
+    font-weight: 500;
     line-height: 1.55;
 }
 
@@ -2223,16 +2233,24 @@ body#page-login-index.theme-uckk-login-layout .login-layout-stats {
 body.pagelayout-login.theme-uckk-login-layout .login-layout-stats p,
 body#page-login-index.theme-uckk-login-layout .login-layout-stats p {
     margin: 0;
-    padding: .8rem .95rem;
+    padding: .9rem 1rem;
     border: 1px solid rgba(255, 250, 240, .14);
     border-radius: var(--uckk-radius-small);
-    background: rgba(0, 0, 0, .24);
+    background: rgba(0, 0, 0, .36) !important;
+    box-shadow: none !important;
+    color: rgba(255, 255, 255, .96);
+    line-height: 1.5;
 }
 
-/* Public skip-login action.
-   This is a stable public navigation link inside the text card. */
-body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip-wrap,
-body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip-wrap {
+body.pagelayout-login.theme-uckk-login-layout .login-layout-stats strong,
+body#page-login-index.theme-uckk-login-layout .login-layout-stats strong {
+    color: #ffffff;
+    font-weight: 900;
+}
+
+/* Stable public skip link inside the left presentation card. */
+body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip-wrap,
+body#page-login-index.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip-wrap {
     display: block !important;
     margin: .1rem 0 0 !important;
     padding: 0 !important;
@@ -2250,15 +2268,15 @@ body#page-login-index.theme-uckk-login-layout .login-layout-left-content .theme-
     align-items: center !important;
     justify-content: center !important;
     width: 100% !important;
-    min-height: 2.7rem;
+    min-height: 2.8rem;
     margin: 0 !important;
-    padding: .72rem 1rem !important;
+    padding: .75rem 1rem !important;
     border: 1px solid var(--uckk-gold) !important;
     border-radius: var(--uckk-radius-small);
     background: var(--uckk-petrol) !important;
     color: #ffffff !important;
     font-family: var(--uckk-font-body);
-    font-size: .84rem;
+    font-size: .86rem;
     font-weight: 900;
     letter-spacing: .055em;
     line-height: 1.2;
@@ -2266,7 +2284,7 @@ body#page-login-index.theme-uckk-login-layout .login-layout-left-content .theme-
     text-decoration: none !important;
     text-shadow: none !important;
     text-transform: uppercase;
-    box-shadow: 0 .55rem 1.2rem rgba(0, 0, 0, .22);
+    box-shadow: 0 .55rem 1.2rem rgba(0, 0, 0, .28);
 }
 
 body.pagelayout-login.theme-uckk-login-layout .login-layout-left-content .theme-uckk-login-skip:hover,
