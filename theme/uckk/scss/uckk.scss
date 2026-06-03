@@ -2242,6 +2242,61 @@ body#page-login-index.theme-uckk-login-layout .login-layout-right .login-heading
     line-height: 1.1;
 }
 
+/* Public skip login action.
+   This is a stable public navigation link, independent from Moodle's guest form. */
+body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip,
+body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip:link,
+body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip:visited,
+body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip,
+body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip:link,
+body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip:visited {
+    position: absolute;
+    top: clamp(1.5rem, 4vw, 3.5rem);
+    left: clamp(2rem, 6vw, 7rem);
+    z-index: 90;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: min(24rem, 34vw);
+    min-height: 2.75rem;
+    padding: .72rem 1.05rem;
+    border: 1px solid rgba(255, 250, 240, .32);
+    border-left: .35rem solid var(--uckk-gold);
+    border-radius: var(--uckk-radius);
+    background:
+        linear-gradient(135deg, rgba(5, 47, 45, .78), rgba(23, 35, 33, .54));
+    box-shadow: 0 .85rem 1.75rem rgba(0, 0, 0, .22);
+    color: #ffffff !important;
+    font-family: var(--uckk-font-body);
+    font-size: .9rem;
+    font-weight: 900;
+    letter-spacing: .045em;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none !important;
+    text-shadow: 0 .1rem .35rem rgba(0, 0, 0, .5);
+    text-transform: uppercase;
+}
+
+body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip:hover,
+body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip:focus,
+body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip:hover,
+body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip:focus {
+    border-color: rgba(216, 184, 90, .78);
+    border-left-color: var(--uckk-gold-light);
+    background:
+        linear-gradient(135deg, rgba(5, 47, 45, .92), rgba(23, 35, 33, .68));
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transform: translateY(-1px);
+}
+
+body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip:focus-visible,
+body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip:focus-visible {
+    outline: .1875rem solid rgba(216, 184, 90, .72);
+    outline-offset: .1875rem;
+}
+
 /* Guest / skip login button.
    This only styles Moodle's real guest form if Moodle renders it. */
 body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-shell,
@@ -2324,6 +2379,27 @@ body#page-login-index.theme-uckk-login-layout #guestlogin #loginguestbtn:focus {
     body#page-login-index.theme-uckk-login-layout .login-layout-right {
         min-height: auto;
         padding: clamp(1.25rem, 6vw, 2rem);
+    }
+
+    body.pagelayout-login.theme-uckk-login-layout .login-layout-left,
+    body#page-login-index.theme-uckk-login-layout .login-layout-left {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+
+    body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip,
+    body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip:link,
+    body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-skip:visited,
+    body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip,
+    body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip:link,
+    body#page-login-index.theme-uckk-login-layout .theme-uckk-login-skip:visited {
+        position: static;
+        align-self: flex-start;
+        max-width: none;
+        margin: 0 0 .25rem;
+        font-size: .82rem;
     }
 
     body.pagelayout-login.theme-uckk-login-layout #guestlogin,

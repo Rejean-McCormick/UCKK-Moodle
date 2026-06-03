@@ -35,6 +35,8 @@ $sitename = format_string(
     ['context' => $sitecontext]
 );
 
+$skipurl = new moodle_url('/local/uckk/courses.php');
+
 $bodyclasses = [
     'theme-uckk',
     'theme-uckk-login-layout',
@@ -66,6 +68,13 @@ echo $OUTPUT->doctype();
                 aria-labelledby="theme-uckk-login-title"
             >
                 <div class="login-layout-left__overlay" aria-hidden="true"></div>
+
+                <a
+                    class="theme-uckk-login-skip"
+                    href="<?php echo $skipurl->out(false); ?>"
+                >
+                    Explorer sans connexion
+                </a>
 
                 <div class="login-layout-left-content">
                     <p class="theme-uckk-eyebrow">
