@@ -1,0 +1,272 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/pages/course_explorer
+
+    Public course explorer partial for local_uckk.
+
+    This template renders only the public course explorer surface.
+
+    It is intentionally render-only.
+
+    It must not:
+    - query Moodle courses;
+    - decide course visibility;
+    - decide enrolment or permissions;
+    - create or update courses;
+    - validate learning work;
+    - make accreditation claims.
+
+    Expected context:
+    {
+        "uniqid": "local-uckk-public-page-abc123",
+        "course_explorer": {
+            "id": "local-uckk-course-explorer-abc123",
+            "query": "",
+            "category": "all",
+            "sort": "pedagogical",
+            "total": 12,
+            "total_label": "12 cours",
+            "service": "local_uckk_search_public_courses",
+            "initial_state_json": "{}",
+            "hasresults": true,
+            "hasfilters": true,
+            "filters": [
+                {
+                    "value": "all",
+                    "label": "Tous les cours",
+                    "selected": true
+                }
+            ],
+            "sorts": [
+                {
+                    "value": "pedagogical",
+                    "label": "Ordre pédagogique",
+                    "selected": true
+                }
+            ],
+            "results": [
+                {
+                    "classes": "local-uckk-public-card local-uckk-public-card--course",
+                    "eyebrow": "01 — Tronc commun",
+                    "title": "Nom du cours",
+                    "body": "Résumé public du cours.",
+                    "url": "https://example.test/course/view.php?id=11",
+                    "metadata": [
+                        {
+                            "label": "Code",
+                            "value": "UCKK-CORE-001"
+                        }
+                    ],
+                    "hasmetadata": true
+                }
+            ]
+        }
+    }
+}}
+
+{{#course_explorer}}
+    <section
+        id="{{id}}"
+        class="local-uckk-public-section local-uckk-public-section--course-explorer local-uckk-course-explorer"
+        aria-labelledby="{{uniqid}}-course-explorer-title"
+        data-region="local-uckk-course-explorer"
+        data-service="{{service}}"
+        data-initial-state="{{initial_state_json}}"
+    >
+        <div class="local-uckk-course-explorer__header">
+            <p class="local-uckk-public-section__eyebrow">
+                Répertoire public
+            </p>
+
+            <h2 id="{{uniqid}}-course-explorer-title" class="local-uckk-public-section__title">
+                <span class="local-uckk-public-section__title-text">
+                    Explorateur de cours
+                </span>
+            </h2>
+
+            <p class="local-uckk-public-section__body">
+                Parcourir les cours publics du campus UCKK par mot-clé, bloc pédagogique et ordre d’affichage.
+            </p>
+        </div>
+
+        <form
+            class="local-uckk-course-explorer__form"
+            action="{{pageurl}}"
+            method="get"
+            data-region="course-search-form"
+        >
+            <div class="local-uckk-course-explorer__controls">
+                <div class="local-uckk-course-explorer__control local-uckk-course-explorer__control--query">
+                    <label class="local-uckk-course-explorer__label" for="{{uniqid}}-course-query">
+                        Rechercher
+                    </label>
+
+                    <input
+                        id="{{uniqid}}-course-query"
+                        class="local-uckk-course-explorer__input"
+                        type="search"
+                        name="q"
+                        value="{{query}}"
+                        placeholder="Titre, code, thème…"
+                        autocomplete="off"
+                        data-region="course-query"
+                    >
+                </div>
+
+                <div class="local-uckk-course-explorer__control local-uckk-course-explorer__control--category">
+                    <label class="local-uckk-course-explorer__label" for="{{uniqid}}-course-category">
+                        Bloc
+                    </label>
+
+                    <select
+                        id="{{uniqid}}-course-category"
+                        class="local-uckk-course-explorer__select"
+                        name="category"
+                        data-region="course-category"
+                    >
+                        {{#filters}}
+                            <option value="{{value}}"{{#selected}} selected{{/selected}}>
+                                {{label}}
+                            </option>
+                        {{/filters}}
+                    </select>
+                </div>
+
+                <div class="local-uckk-course-explorer__control local-uckk-course-explorer__control--sort">
+                    <label class="local-uckk-course-explorer__label" for="{{uniqid}}-course-sort">
+                        Trier
+                    </label>
+
+                    <select
+                        id="{{uniqid}}-course-sort"
+                        class="local-uckk-course-explorer__select"
+                        name="sort"
+                        data-region="course-sort"
+                    >
+                        {{#sorts}}
+                            <option value="{{value}}"{{#selected}} selected{{/selected}}>
+                                {{label}}
+                            </option>
+                        {{/sorts}}
+                    </select>
+                </div>
+
+                <div class="local-uckk-course-explorer__actions">
+                    <button
+                        class="local-uckk-course-explorer__submit"
+                        type="submit"
+                        data-action="course-search"
+                    >
+                        Appliquer
+                    </button>
+
+                    <a
+                        class="local-uckk-course-explorer__reset"
+                        href="{{pageurl}}"
+                        data-action="course-reset"
+                    >
+                        Réinitialiser
+                    </a>
+                </div>
+            </div>
+
+            <input type="hidden" name="page" value="{{page}}">
+            <input type="hidden" name="perpage" value="{{perpage}}">
+        </form>
+
+        <div class="local-uckk-course-explorer__statusbar">
+            <p
+                class="local-uckk-course-explorer__status"
+                data-region="course-status"
+                aria-live="polite"
+            >
+                {{total_label}}
+            </p>
+        </div>
+
+        <div
+            class="local-uckk-course-explorer__results local-uckk-public-card-grid"
+            data-region="course-results"
+            aria-live="polite"
+        >
+            {{#hasresults}}
+                {{#results}}
+                    <article class="{{classes}}">
+                        <div class="local-uckk-public-card__content">
+                            {{#eyebrow}}
+                                <p class="local-uckk-public-card__eyebrow">
+                                    {{eyebrow}}
+                                </p>
+                            {{/eyebrow}}
+
+                            {{#title}}
+                                <h3 class="local-uckk-public-card__title">
+                                    {{#url}}
+                                        <a class="local-uckk-public-card__title-link" href="{{url}}">
+                                            {{title}}
+                                        </a>
+                                    {{/url}}
+                                    {{^url}}
+                                        {{title}}
+                                    {{/url}}
+                                </h3>
+                            {{/title}}
+
+                            {{#body}}
+                                <p class="local-uckk-public-card__body">
+                                    {{body}}
+                                </p>
+                            {{/body}}
+
+                            {{#hasmetadata}}
+                                <dl class="local-uckk-course-explorer__metadata">
+                                    {{#metadata}}
+                                        <div class="local-uckk-course-explorer__metadata-item">
+                                            <dt class="local-uckk-course-explorer__metadata-label">
+                                                {{label}}
+                                            </dt>
+                                            <dd class="local-uckk-course-explorer__metadata-value">
+                                                {{value}}
+                                            </dd>
+                                        </div>
+                                    {{/metadata}}
+                                </dl>
+                            {{/hasmetadata}}
+                        </div>
+                    </article>
+                {{/results}}
+            {{/hasresults}}
+        </div>
+
+        {{^hasresults}}
+            <div
+                class="local-uckk-course-explorer__empty"
+                data-region="course-empty"
+            >
+                Aucun cours public ne correspond aux filtres.
+            </div>
+        {{/hasresults}}
+
+        <p class="local-uckk-course-explorer__pagination">
+            <button
+                class="local-uckk-course-explorer__load-more"
+                type="button"
+                data-action="course-load-more"
+                {{^hasmore}}hidden{{/hasmore}}
+            >
+                Charger plus de cours
+            </button>
+        </p>
+    </section>
+{{/course_explorer}}

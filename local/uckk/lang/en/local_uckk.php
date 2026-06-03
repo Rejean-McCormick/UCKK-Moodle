@@ -984,3 +984,36 @@ $string['savechanges'] = 'Save changes';
 $string['uckkcourseadmin'] = 'UCKK course administration';
 $string['validation_humanreviewed'] = 'Human reviewed';
 $string['viewprogram'] = 'View program';
+
+
+// Public courses explorer.
+$string['course_explorer_title'] = 'Explore courses';
+$string['course_explorer_summary'] = 'Filter public courses by keyword, category and display order.';
+$string['course_explorer_search_label'] = 'Search courses';
+$string['course_explorer_search_placeholder'] = 'Search for a course, code or topic';
+$string['course_explorer_search_button'] = 'Search';
+$string['course_explorer_filters_title'] = 'Filters';
+$string['course_explorer_filter_category'] = 'Category';
+$string['course_explorer_filter_sort'] = 'Sort';
+$string['course_explorer_filter_all_categories'] = 'All categories';
+$string['course_explorer_sort_pedagogical'] = 'Pedagogical order';
+$string['course_explorer_sort_title'] = 'Title A-Z';
+$string['course_explorer_sort_category'] = 'Category';
+$string['course_explorer_results'] = 'Courses found';
+$string['course_explorer_result_count_suffix'] = 'course(s)';
+$string['course_explorer_empty_title'] = 'No courses found';
+$string['course_explorer_empty_body'] = 'No public course matches the current filters.';
+$string['course_explorer_reset'] = 'Reset';
+$string['course_explorer_loading'] = 'Loading courses…';
+$string['course_explorer_error'] = 'Courses could not be loaded.';
+$string['course_explorer_index_label'] = 'Open Moodle course index';
+$string['course_explorer_public_only_notice'] = 'Only publicly visible courses attached to visible categories are displayed.';
+$string['course_explorer_category_all'] = 'All';
+$string['course_explorer_category_uncategorized'] = 'No public category';
+$string['course_explorer_metadata_total'] = 'Public courses displayed';
+$string['course_explorer_metadata_source'] = 'Source';
+$string['course_explorer_metadata_source_value'] = 'Visible Moodle courses';
+$string['course_explorer_metadata_filter'] = 'Public filter';
+$string['course_explorer_metadata_filter_value'] = 'Courses visible inside visible categories';
+$string['course_explorer_service_name'] = 'Search UCKK public courses';
+$string['course_explorer_service_desc'] = 'External service allowing public UCKK courses to be searched.';

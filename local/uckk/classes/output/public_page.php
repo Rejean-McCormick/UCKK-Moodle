@@ -53,6 +53,8 @@ defined('MOODLE_INTERNAL') || die();
  * - hasnotices, notices;
  * - hasmetadata, metadata;
  * - hascta, cta;
+ * - has_course_explorer, course_explorer_id, course_explorer,
+ *   course_explorer_initial_state, course_explorer_initial_state_json;
  * - has_mediatheque_explorer, mediatheque_explorer_id, mediatheque_initial_state,
  *   mediatheque_initial_state_json.
  *
@@ -201,6 +203,29 @@ final class public_page implements renderable, templatable {
         );
         $data->hascta = !empty((array)$data->cta);
 
+        $data->course_explorer_id = self::dom_id_value(
+            $this->definition,
+            'course_explorer_id',
+            'local-uckk-course-explorer-' . substr(md5($data->uniqid), 0, 8)
+        );
+        $data->course_explorer = self::export_course_explorer(
+            self::array_value($this->definition, 'course_explorer'),
+            $data->course_explorer_id
+        );
+        $data->has_course_explorer = self::bool_value(
+            $this->definition,
+            'has_course_explorer',
+            !empty((array)$data->course_explorer)
+        );
+        $data->course_explorer_initial_state = self::course_explorer_initial_state(
+            self::array_value($this->definition, 'course_explorer_initial_state'),
+            $data->course_explorer
+        );
+        $data->course_explorer_initial_state_json = json_encode(
+            $data->course_explorer_initial_state,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        ) ?: '{}';
+
         $data->has_mediatheque_explorer = self::bool_value($this->definition, 'has_mediatheque_explorer');
         $data->mediatheque_explorer_id = self::dom_id_value(
             $this->definition,
@@ -295,6 +320,10 @@ final class public_page implements renderable, templatable {
             'notices' => [],
             'metadata' => [],
             'cta' => [],
+            'has_course_explorer' => false,
+            'course_explorer_id' => '',
+            'course_explorer' => [],
+            'course_explorer_initial_state' => [],
             'has_mediatheque_explorer' => false,
             'mediatheque_explorer_id' => '',
             'mediatheque_initial_state' => [],
@@ -363,6 +392,8 @@ final class public_page implements renderable, templatable {
             'nav' => 'navigation',
             'actions' => 'quicklinks',
             'meta' => 'metadata',
+            'courseexplorer' => 'course_explorer',
+            'courseexplorerstate' => 'course_explorer_initial_state',
         ];
 
         foreach ($aliases as $old => $new) {
@@ -372,6 +403,152 @@ final class public_page implements renderable, templatable {
         }
 
         return $definition;
+    }
+
+    /**
+     * Export public course explorer context.
+     *
+     * @param array<string, mixed> $explorer Explorer data.
+     * @param string $fallbackid Fallback DOM id.
+     * @return stdClass
+     */
+    private static function export_course_explorer(array $explorer, string $fallbackid): stdClass {
+        $obj = new stdClass();
+
+        if (empty($explorer)) {
+            return $obj;
+        }
+
+        $id = self::clean_string($explorer['id'] ?? '');
+        $query = self::clean_string($explorer['query'] ?? $explorer['q'] ?? '');
+        $category = self::clean_modifier($explorer['category'] ?? 'all');
+        $sort = self::clean_modifier($explorer['sort'] ?? 'pedagogical');
+        $service = self::clean_string($explorer['service'] ?? 'local_uckk_search_public_courses');
+
+        $results = self::export_cards(self::array_value($explorer, 'results'));
+        $filters = self::export_choice_items(
+            self::array_value($explorer, 'filters'),
+            $category,
+            'category'
+        );
+        $sortoptions = self::export_choice_items(
+            self::array_value($explorer, 'sortoptions'),
+            $sort,
+            'sort'
+        );
+
+        $total = isset($explorer['total']) && is_numeric($explorer['total'])
+            ? max(0, (int)$explorer['total'])
+            : count($results);
+
+        $obj->id = $id !== '' ? $id : $fallbackid;
+        $obj->query = $query;
+        $obj->category = $category !== '' ? $category : 'all';
+        $obj->sort = $sort !== '' ? $sort : 'pedagogical';
+        $obj->service = $service;
+        $obj->title = self::clean_string($explorer['title'] ?? 'Explorer les cours');
+        $obj->summary = self::clean_string(
+            $explorer['summary'] ?? 'Rechercher et filtrer les cours publics du campus UCKK.'
+        );
+        $obj->searchlabel = self::clean_string($explorer['searchlabel'] ?? 'Recherche');
+        $obj->searchplaceholder = self::clean_string(
+            $explorer['searchplaceholder'] ?? 'Rechercher un cours, un code ou une notion'
+        );
+        $obj->filterlabel = self::clean_string($explorer['filterlabel'] ?? 'Filtrer');
+        $obj->sortlabel = self::clean_string($explorer['sortlabel'] ?? 'Trier');
+        $obj->resetlabel = self::clean_string($explorer['resetlabel'] ?? 'Réinitialiser');
+        $obj->submitlabel = self::clean_string($explorer['submitlabel'] ?? 'Appliquer');
+        $obj->resultscountlabel = self::clean_string(
+            $explorer['resultscountlabel'] ?? ($total === 1 ? '1 cours affiché' : $total . ' cours affichés')
+        );
+        $obj->emptytitle = self::clean_string($explorer['emptytitle'] ?? 'Aucun cours trouvé');
+        $obj->emptybody = self::clean_string(
+            $explorer['emptybody'] ?? 'Modifier la recherche ou les filtres pour afficher d’autres cours.'
+        );
+        $obj->filters = $filters;
+        $obj->hasfilters = !empty($filters);
+        $obj->sortoptions = $sortoptions;
+        $obj->hassortoptions = !empty($sortoptions);
+        $obj->results = $results;
+        $obj->hasresults = !empty($results);
+        $obj->total = $total;
+        $obj->hasquery = $query !== '';
+        $obj->classes = self::join_classes([
+            'local-uckk-course-explorer',
+            $obj->hasresults ? 'local-uckk-course-explorer--has-results' : 'local-uckk-course-explorer--empty',
+        ]);
+
+        return $obj;
+    }
+
+    /**
+     * Build AMD-safe initial state for the course explorer.
+     *
+     * @param array<string, mixed> $state Explicit state.
+     * @param stdClass $explorer Exported explorer context.
+     * @return array<string, mixed>
+     */
+    private static function course_explorer_initial_state(array $state, stdClass $explorer): array {
+        if (!empty($state)) {
+            return $state;
+        }
+
+        if (empty((array)$explorer)) {
+            return [];
+        }
+
+        return [
+            'rootId' => self::clean_string($explorer->id ?? ''),
+            'service' => self::clean_string($explorer->service ?? 'local_uckk_search_public_courses'),
+            'query' => self::clean_string($explorer->query ?? ''),
+            'category' => self::clean_string($explorer->category ?? 'all'),
+            'sort' => self::clean_string($explorer->sort ?? 'pedagogical'),
+            'total' => isset($explorer->total) ? (int)$explorer->total : 0,
+        ];
+    }
+
+    /**
+     * Export choice/filter items.
+     *
+     * @param array<int, array<string, mixed>|stdClass> $items Choice items.
+     * @param string $active Active value.
+     * @param string $param Query parameter name.
+     * @return array<int, stdClass>
+     */
+    private static function export_choice_items(array $items, string $active, string $param): array {
+        $out = [];
+
+        foreach ($items as $item) {
+            $item = (array)$item;
+            $value = self::clean_modifier($item['value'] ?? $item['key'] ?? '');
+            $label = self::clean_string($item['label'] ?? $item['title'] ?? '');
+
+            if ($value === '' || $label === '') {
+                continue;
+            }
+
+            $url = self::url_value($item, 'url');
+            $isactive = $value === $active || !empty($item['active']);
+
+            $obj = new stdClass();
+            $obj->value = $value;
+            $obj->key = $value;
+            $obj->label = $label;
+            $obj->url = $url;
+            $obj->param = $param;
+            $obj->active = $isactive;
+            $obj->checked = $isactive;
+            $obj->ariacurrent = $isactive ? 'true' : '';
+            $obj->hasariacurrent = $isactive;
+            $obj->classes = self::join_classes([
+                'local-uckk-course-explorer__choice',
+                $isactive ? 'is-active' : null,
+            ]);
+
+            $out[] = $obj;
+        }
+
+        return $out;
     }
 
     /**

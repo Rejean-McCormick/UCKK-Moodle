@@ -1585,3 +1585,357 @@ body:has(.local-uckk-public-page) [role="main"] {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* ==========================================================================
+   Public course explorer
+   ========================================================================== */
+
+.local-uckk-public-page--courses .local-uckk-public-hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.local-uckk-public-page--courses .local-uckk-public-hero::after {
+    content: "";
+    position: absolute;
+    right: clamp(1rem, 4vw, 3rem);
+    bottom: clamp(1rem, 4vw, 2.5rem);
+    width: clamp(8rem, 18vw, 15rem);
+    height: clamp(8rem, 18vw, 15rem);
+    border: 1px solid rgba(185, 144, 69, 0.22);
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 35% 35%, rgba(185, 144, 69, 0.16), transparent 0.35rem),
+        radial-gradient(circle at 65% 40%, rgba(30, 104, 100, 0.16), transparent 0.45rem),
+        radial-gradient(circle at 48% 68%, rgba(23, 35, 33, 0.12), transparent 0.35rem);
+    opacity: 0.68;
+    pointer-events: none;
+}
+
+.local-uckk-course-explorer,
+[data-region="local-uckk-course-explorer"] {
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    margin-block: clamp(1.25rem, 3vw, 2.25rem);
+    padding: clamp(1rem, 2.4vw, 1.5rem);
+    border: 1px solid var(--uckk-line);
+    border-radius: var(--uckk-radius);
+    background:
+        linear-gradient(135deg, rgba(255, 250, 240, 0.96), rgba(246, 240, 223, 0.9)),
+        radial-gradient(circle at top right, rgba(30, 104, 100, 0.08), transparent 45%);
+    box-shadow: var(--uckk-shadow-soft);
+}
+
+.local-uckk-course-explorer.is-loading,
+[data-region="local-uckk-course-explorer"].is-loading {
+    cursor: progress;
+}
+
+.local-uckk-course-explorer.is-loading [data-region="course-results"],
+[data-region="local-uckk-course-explorer"].is-loading [data-region="course-results"] {
+    opacity: 0.58;
+}
+
+.local-uckk-course-explorer__header {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.local-uckk-course-explorer__title {
+    margin: 0;
+    color: var(--uckk-ink);
+    font-family: var(--uckk-font-serif);
+    font-size: clamp(1.45rem, 2vw, 1.95rem);
+    font-weight: 800;
+    line-height: 1.22;
+    letter-spacing: -0.012em;
+}
+
+.local-uckk-course-explorer__intro {
+    max-width: 56rem;
+    margin: 0;
+    color: var(--uckk-ink-soft);
+}
+
+.local-uckk-course-explorer__form,
+[data-region="local-uckk-course-explorer"] [data-region="course-search-form"] {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(0.85rem, 2vw, 1.25rem);
+    border: 1px solid rgba(30, 104, 100, 0.18);
+    border-radius: var(--uckk-radius);
+    background: rgba(219, 236, 234, 0.32);
+}
+
+.local-uckk-course-explorer__controls {
+    display: grid;
+    grid-template-columns: minmax(14rem, 1fr) minmax(10rem, 14rem);
+    gap: 0.85rem;
+    align-items: end;
+}
+
+.local-uckk-course-explorer__field {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.local-uckk-course-explorer__label {
+    color: var(--uckk-bluegrey);
+    font-family: var(--uckk-font-sans);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.055em;
+    line-height: 1.28;
+    text-transform: uppercase;
+}
+
+.local-uckk-course-explorer input[type="search"],
+.local-uckk-course-explorer select,
+[data-region="local-uckk-course-explorer"] input[type="search"],
+[data-region="local-uckk-course-explorer"] select {
+    width: 100%;
+    min-height: 2.75rem;
+    border: 1px solid rgba(23, 35, 33, 0.2);
+    border-radius: var(--uckk-radius-small);
+    background: rgba(255, 250, 240, 0.92);
+    color: var(--uckk-ink);
+}
+
+.local-uckk-course-explorer input[type="search"]:focus,
+.local-uckk-course-explorer select:focus,
+[data-region="local-uckk-course-explorer"] input[type="search"]:focus,
+[data-region="local-uckk-course-explorer"] select:focus {
+    border-color: var(--uckk-petrol);
+    box-shadow: 0 0 0 0.18rem rgba(30, 104, 100, 0.14);
+    outline: 0;
+}
+
+.local-uckk-course-explorer__filters,
+[data-region="local-uckk-course-explorer"] [data-region="course-filters"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.local-uckk-course-explorer__filter,
+.local-uckk-course-explorer [data-filter],
+[data-region="local-uckk-course-explorer"] [data-filter] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    padding: 0.35rem 0.72rem;
+    border: 1px solid rgba(30, 104, 100, 0.24);
+    border-radius: var(--uckk-radius-pill);
+    background: rgba(255, 250, 240, 0.76);
+    color: var(--uckk-petrol-dark);
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.035em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.local-uckk-course-explorer__filter:hover,
+.local-uckk-course-explorer__filter:focus,
+.local-uckk-course-explorer [data-filter]:hover,
+.local-uckk-course-explorer [data-filter]:focus,
+[data-region="local-uckk-course-explorer"] [data-filter]:hover,
+[data-region="local-uckk-course-explorer"] [data-filter]:focus {
+    border-color: rgba(185, 144, 69, 0.58);
+    background: rgba(185, 144, 69, 0.16);
+    color: var(--uckk-ink);
+    text-decoration: none;
+}
+
+.local-uckk-course-explorer__filter.is-active,
+.local-uckk-course-explorer [data-filter].is-active,
+[data-region="local-uckk-course-explorer"] [data-filter].is-active {
+    border-color: var(--uckk-gold);
+    background: var(--uckk-petrol-dark);
+    color: var(--uckk-parchment-light);
+}
+
+.local-uckk-course-explorer__status,
+[data-region="local-uckk-course-explorer"] [data-region="course-status"] {
+    min-height: 1.4rem;
+    color: var(--uckk-ink-muted);
+    font-size: 0.95rem;
+}
+
+.local-uckk-course-explorer__count,
+[data-region="local-uckk-course-explorer"] [data-region="course-count"] {
+    font-variant-numeric: tabular-nums;
+    color: var(--uckk-petrol-dark);
+    font-weight: 800;
+}
+
+.local-uckk-course-explorer__results,
+[data-region="local-uckk-course-explorer"] [data-region="course-results"] {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--uckk-card-gap);
+    transition: opacity 160ms ease-in-out;
+}
+
+.local-uckk-course-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: clamp(1rem, 1.7vw, 1.35rem);
+    border: 1px solid rgba(23, 35, 33, 0.15);
+    border-radius: 0.75rem;
+    background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(246, 240, 223, 0.92));
+    box-shadow: 0 8px 18px rgba(23, 35, 33, 0.07);
+}
+
+.local-uckk-course-card:hover {
+    border-color: rgba(185, 144, 69, 0.48);
+    box-shadow: var(--uckk-shadow);
+    transform: translateY(-1px);
+}
+
+.local-uckk-course-card__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 1.72rem;
+    margin: 0 0 0.65rem;
+    padding: 0.28rem 0.62rem 0.25rem;
+    border: 1px solid rgba(185, 144, 69, 0.46);
+    border-radius: var(--uckk-radius-pill);
+    background: var(--uckk-gold-wash);
+    color: var(--uckk-gold-dark);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.055em;
+    line-height: 1.28;
+    text-transform: uppercase;
+}
+
+.local-uckk-course-card__title {
+    margin: 0 0 0.42rem;
+    color: var(--uckk-petrol-dark);
+    font-family: var(--uckk-font-serif);
+    font-size: clamp(1.08rem, 1.35vw, 1.28rem);
+    font-weight: 800;
+    line-height: 1.26;
+    letter-spacing: -0.01em;
+}
+
+.local-uckk-course-card__title a {
+    color: inherit;
+    text-decoration-color: rgba(30, 104, 100, 0.28);
+    text-underline-offset: 0.16em;
+}
+
+.local-uckk-course-card__title a:hover,
+.local-uckk-course-card__title a:focus {
+    color: var(--uckk-ink);
+    text-decoration-color: var(--uckk-gold);
+}
+
+.local-uckk-course-card__summary {
+    flex: 1 1 auto;
+    margin: 0;
+    color: var(--uckk-ink-soft);
+    font-size: 0.96rem;
+    line-height: 1.58;
+}
+
+.local-uckk-course-card__metadata {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0.85rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.local-uckk-course-card__metadata-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    color: var(--uckk-ink-soft);
+    font-size: 0.88rem;
+}
+
+.local-uckk-course-card__metadata-label {
+    color: var(--uckk-bluegrey);
+    font-weight: 900;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+}
+
+.local-uckk-course-explorer__empty,
+[data-region="local-uckk-course-explorer"] [data-region="course-empty"] {
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border: 1px dashed rgba(30, 104, 100, 0.32);
+    border-radius: var(--uckk-radius);
+    background: rgba(219, 236, 234, 0.22);
+    color: var(--uckk-ink-soft);
+}
+
+.local-uckk-course-explorer__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.local-uckk-course-explorer [data-action="course-load-more"][hidden],
+[data-region="local-uckk-course-explorer"] [data-action="course-load-more"][hidden] {
+    display: none;
+}
+
+@media (max-width: 991.98px) {
+    .local-uckk-course-explorer__controls {
+        grid-template-columns: 1fr;
+    }
+
+    .local-uckk-course-explorer__results,
+    [data-region="local-uckk-course-explorer"] [data-region="course-results"] {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 699.98px) {
+    .local-uckk-course-explorer,
+    [data-region="local-uckk-course-explorer"] {
+        padding: 0.85rem;
+    }
+
+    .local-uckk-course-explorer__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .local-uckk-course-explorer__actions .btn {
+        width: 100%;
+    }
+}
+
+@media print {
+    .local-uckk-course-explorer__form,
+    [data-region="local-uckk-course-explorer"] [data-region="course-search-form"],
+    .local-uckk-course-explorer__actions,
+    .local-uckk-course-explorer [data-action="course-load-more"],
+    [data-region="local-uckk-course-explorer"] [data-action="course-load-more"] {
+        display: none !important;
+    }
+
+    .local-uckk-course-explorer,
+    [data-region="local-uckk-course-explorer"],
+    .local-uckk-course-card {
+        border-color: #999999;
+        background: #ffffff;
+        box-shadow: none;
+    }
+
+    .local-uckk-course-explorer__results,
+    [data-region="local-uckk-course-explorer"] [data-region="course-results"] {
+        grid-template-columns: 1fr;
+    }
+}

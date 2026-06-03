@@ -86,6 +86,13 @@ $functions = [
         'ajax' => true,
         'capabilities' => 'local/uckk:viewcampus',
     ],
+
+    'local_uckk_search_public_courses' => [
+        'classname' => 'local_uckk\external\search_public_courses',
+        'description' => 'Searches visible public UCKK courses for the public course explorer.',
+        'type' => 'read',
+        'ajax' => true,
+    ],
 ];
 
 $services = [
@@ -98,6 +105,7 @@ $services = [
             'local_uckk_get_player_profile',
             'local_uckk_get_canon_items',
             'local_uckk_get_status_options',
+            'local_uckk_search_public_courses',
         ],
         'requiredcapability' => 'local/uckk:manageintegrations',
         'restrictedusers' => 1,

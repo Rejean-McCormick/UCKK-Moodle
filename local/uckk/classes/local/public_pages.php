@@ -122,66 +122,75 @@ final class public_pages {
 
         return $definition;
     }
-/**
- * Base definition shared by all public pages.
- *
- * @param string $slug Page slug.
- * @return array<string, mixed>
- */
-private static function base_definition(string $slug): array {
-    return [
-        'slug' => $slug,
-        'eyebrow' => '',
-        'title' => self::page_title($slug),
-        'subtitle' => '',
-        'summary' => '',
-        'boundarynotice' => 'UCKK-Moodle présente une cité-école expérimentale. Les reconnaissances UCKK ne doivent pas être présentées comme des diplômes publics accrédités.',
+    /**
+     * Base definition shared by all public pages.
+     *
+     * @param string $slug Page slug.
+     * @return array<string, mixed>
+     */
+    private static function base_definition(string $slug): array {
+        return [
+            'slug' => $slug,
+            'eyebrow' => '',
+            'title' => self::page_title($slug),
+            'subtitle' => '',
+            'summary' => '',
+            'boundarynotice' => 'UCKK-Moodle présente une cité-école expérimentale. Les reconnaissances UCKK ne doivent pas être présentées comme des diplômes publics accrédités.',
 
-        /*
-         * Public visual contract.
-         *
-         * These keys are consumed by local_uckk\output\public_page and
-         * local_uckk/templates/public_page.mustache. They are deliberately
-         * data-only: layout and typography choices stay here, while HTML
-         * structure and CSS remain outside this registry.
-         */
-        'layout' => 'wide',
-        'navigationlayout' => 'singleline',
-        'typography' => 'institutional',
-        'visualstyle' => 'civic-encyclopedic-retrofuturism',
-        'fontstrategy' => 'libre-baskerville-primary-eb-garamond-accent',
+            /*
+             * Public visual contract.
+             *
+             * These keys are consumed by local_uckk\output\public_page and
+             * local_uckk/templates/public_page.mustache. They are deliberately
+             * data-only: layout and typography choices stay here, while HTML
+             * structure and CSS remain outside this registry.
+             */
+            'layout' => 'wide',
+            'navigationlayout' => 'singleline',
+            'typography' => 'institutional',
+            'visualstyle' => 'civic-encyclopedic-retrofuturism',
+            'fontstrategy' => 'libre-baskerville-primary-eb-garamond-accent',
 
-        'navigation' => self::default_navigation(),
-        'quicklinks' => [],
-        'sections' => [],
-        'cards' => [],
-        'cardsheading' => 'Repères publics',
-        'notices' => [],
-        'metadata' => [],
-        'cta' => [],
+            'navigation' => self::default_navigation(),
+            'quicklinks' => [],
+            'sections' => [],
+            'cards' => [],
+            'cardsheading' => 'Repères publics',
+            'notices' => [],
+            'metadata' => [],
+            'cta' => [],
 
-        /*
-         * Page-specific optional blocks.
-         *
-         * These are intentionally declared here so the renderer and templates
-         * can rely on stable keys before the page registry is split into
-         * classes/local/public_pages/*.php.
-         */
-        'has_home_feature' => false,
-        'home_feature' => [],
+            /*
+             * Page-specific optional blocks.
+             *
+             * These keys stay stable even when a page does not use the block.
+             * The renderer can therefore export a predictable Mustache context.
+             */
+            'has_home_feature' => false,
+            'home_feature' => [],
 
-        /*
-         * Public Médiathèque explorer.
-         *
-         * local_uckk owns only the public surface. Media search, permissions,
-         * access filters and archive ownership stay in mod_uckkarchive.
-         */
-        'has_mediatheque_explorer' => false,
-        'mediatheque_explorer_id' => '',
-        'mediatheque_initial_state' => [],
-        'mediatheque' => [],
-    ];
-}
+            /*
+             * Public courses explorer.
+             *
+             * The static page registry defines the page-level contract only.
+             * The live course list, filters and counts are injected by courses.php.
+             */
+            'has_course_explorer' => false,
+            'course_explorer' => [],
+
+            /*
+             * Public Médiathèque explorer.
+             *
+             * local_uckk owns only the public surface. Media search, permissions,
+             * access filters and archive ownership stay in mod_uckkarchive.
+             */
+            'has_mediatheque_explorer' => false,
+            'mediatheque_explorer_id' => '',
+            'mediatheque_initial_state' => [],
+            'mediatheque' => [],
+        ];
+    }
+
     /**
      * Central public page content registry.
      *
@@ -381,15 +390,39 @@ private static function base_definition(string $slug): array {
                         'body' => 'Certains cours peuvent être visibles publiquement. D’autres demandent une connexion, une inscription ou un rôle Moodle.',
                     ],
                 ],
-                'cardsheading' => 'Accès aux cours',
-                'cards' => [
+                'cardsheading' => '',
+                'cards' => [],
+                'has_course_explorer' => true,
+                'course_explorer' => [
+                    'title' => 'Explorer les cours',
+                    'summary' => 'Filtrer les cours publics par mot-clé, catégorie et ordre d’affichage.',
+                    'query' => '',
+                    'category' => 'all',
+                    'sort' => 'pedagogical',
+                    'filters' => [],
+                    'sorts' => [],
+                    'results' => [],
+                    'total' => 0,
+                    'emptytitle' => 'Aucun cours trouvé',
+                    'emptybody' => 'Aucun cours public ne correspond aux filtres actuels.',
+                    'indexurl' => '/course/index.php',
+                    'indexlabel' => 'Ouvrir l’index Moodle',
+                ],
+                'metadata' => [
                     [
-                        'title' => 'Explorer',
-                        'body' => 'Voir les cours disponibles dans le campus.',
-                        'url' => '/course/index.php',
-                        'actionlabel' => 'Catalogue Moodle',
-                        'type' => 'course',
+                        'label' => 'Source',
+                        'value' => 'Cours Moodle visibles',
                     ],
+                    [
+                        'label' => 'Filtre public',
+                        'value' => 'Cours visibles dans des catégories visibles',
+                    ],
+                ],
+                'cta' => [
+                    'title' => 'Index Moodle des cours',
+                    'body' => 'L’index Moodle permet aussi de parcourir les catégories de cours.',
+                    'url' => '/course/index.php',
+                    'label' => 'Ouvrir l’index',
                 ],
             ],
 

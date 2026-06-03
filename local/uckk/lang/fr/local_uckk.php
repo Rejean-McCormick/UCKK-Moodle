@@ -964,3 +964,36 @@ $string['diagnostics_privacy'] = 'Confidentialité UCKK';
 $string['diagnostics_ok'] = 'Diagnostic UCKK réussi.';
 $string['diagnostics_warning'] = 'Diagnostic UCKK avec avertissements.';
 $string['diagnostics_error'] = 'Diagnostic UCKK en erreur.';
+
+
+// Public courses explorer.
+$string['course_explorer_title'] = 'Explorer les cours';
+$string['course_explorer_summary'] = 'Filtrer les cours publics par mot-clé, catégorie et ordre d’affichage.';
+$string['course_explorer_search_label'] = 'Rechercher dans les cours';
+$string['course_explorer_search_placeholder'] = 'Rechercher un cours, un code ou un thème';
+$string['course_explorer_search_button'] = 'Rechercher';
+$string['course_explorer_filters_title'] = 'Filtres';
+$string['course_explorer_filter_category'] = 'Catégorie';
+$string['course_explorer_filter_sort'] = 'Tri';
+$string['course_explorer_filter_all_categories'] = 'Toutes les catégories';
+$string['course_explorer_sort_pedagogical'] = 'Ordre pédagogique';
+$string['course_explorer_sort_title'] = 'Titre A-Z';
+$string['course_explorer_sort_category'] = 'Catégorie';
+$string['course_explorer_results'] = 'Cours trouvés';
+$string['course_explorer_result_count_suffix'] = 'cours';
+$string['course_explorer_empty_title'] = 'Aucun cours trouvé';
+$string['course_explorer_empty_body'] = 'Aucun cours public ne correspond aux filtres actuels.';
+$string['course_explorer_reset'] = 'Réinitialiser';
+$string['course_explorer_loading'] = 'Chargement des cours…';
+$string['course_explorer_error'] = 'Les cours n’ont pas pu être chargés.';
+$string['course_explorer_index_label'] = 'Ouvrir l’index Moodle';
+$string['course_explorer_public_only_notice'] = 'Seuls les cours visibles publiquement et rattachés à des catégories visibles sont affichés.';
+$string['course_explorer_category_all'] = 'Toutes';
+$string['course_explorer_category_uncategorized'] = 'Sans catégorie publique';
+$string['course_explorer_metadata_total'] = 'Cours publics affichés';
+$string['course_explorer_metadata_source'] = 'Source';
+$string['course_explorer_metadata_source_value'] = 'Cours Moodle visibles';
+$string['course_explorer_metadata_filter'] = 'Filtre public';
+$string['course_explorer_metadata_filter_value'] = 'Cours visibles dans des catégories visibles';
+$string['course_explorer_service_name'] = 'Rechercher les cours publics UCKK';
+$string['course_explorer_service_desc'] = 'Service externe permettant de rechercher les cours publics UCKK.';
