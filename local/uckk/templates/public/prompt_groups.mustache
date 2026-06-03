@@ -1,0 +1,157 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    @template local_uckk/public_prompt_groups
+
+    Guided public exploration prompts.
+
+    This partial is used by public pages that need invite zones after their main
+    tool/content area. It does not query data or decide visibility.
+}}
+
+<div
+    class="local-uckk-public-prompt-groups local-uckk-mediatheque-prompts"
+    data-region="local-uckk-public-prompt-groups"
+>
+    <section
+        class="local-uckk-public-section local-uckk-public-section--prompt-group local-uckk-public-section--prompt-formats"
+        aria-labelledby="{{uniqid}}-prompt-formats-title"
+    >
+        <p class="local-uckk-public-section__eyebrow">
+            Explorer par format
+        </p>
+
+        <h2 id="{{uniqid}}-prompt-formats-title" class="local-uckk-public-section__title">
+            <span class="local-uckk-public-section__title-text">
+                Choisir un type de média
+            </span>
+        </h2>
+
+        <div class="local-uckk-public-card-grid local-uckk-public-card-grid--prompts">
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?mediatype=video">
+                <span class="local-uckk-public-card__title">
+                    Vidéos
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Capsules, captations, archives filmées et références vidéo.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?mediatype=audio">
+                <span class="local-uckk-public-card__title">
+                    Audios
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Entretiens, traces orales, captations sonores et écoutes guidées.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?mediatype=image">
+                <span class="local-uckk-public-card__title">
+                    Images
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Affiches, iconographie, traces graphiques et documents visuels.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?mediatype=pdf">
+                <span class="local-uckk-public-card__title">
+                    PDF
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Dossiers, textes, fiches, supports pédagogiques et documents publics.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?mediatype=document">
+                <span class="local-uckk-public-card__title">
+                    Documents
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Notes, fichiers de travail, ressources et archives documentaires.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?mediatype=external_reference">
+                <span class="local-uckk-public-card__title">
+                    Références externes
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Sources, œuvres tierces, liens publics et médias non hébergés.
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <section
+        class="local-uckk-public-section local-uckk-public-section--prompt-group local-uckk-public-section--prompt-themes"
+        aria-labelledby="{{uniqid}}-prompt-themes-title"
+    >
+        <p class="local-uckk-public-section__eyebrow">
+            Explorer par thème
+        </p>
+
+        <h2 id="{{uniqid}}-prompt-themes-title" class="local-uckk-public-section__title">
+            <span class="local-uckk-public-section__title-text">
+                Entrer par une intention
+            </span>
+        </h2>
+
+        <div class="local-uckk-public-card-grid local-uckk-public-card-grid--prompts">
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?q=d%C3%A9fi">
+                <span class="local-uckk-public-card__title">
+                    Défis
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Productions, preuves, parcours et médias liés aux défis King Klown.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?q=assembl%C3%A9e">
+                <span class="local-uckk-public-card__title">
+                    Assemblées
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Traces collectives, décisions, comptes rendus et mémoire commune.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?q=cours">
+                <span class="local-uckk-public-card__title">
+                    Cours
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Supports d’apprentissage, références pédagogiques et ressources de cours.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?q=archive">
+                <span class="local-uckk-public-card__title">
+                    Archives publiques
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Mémoire institutionnelle, documents publiables et traces ouvertes.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?q=int%C3%A9grit%C3%A9">
+                <span class="local-uckk-public-card__title">
+                    Intégrité
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Contexte, responsabilité, correction, sources et preuves documentées.
+                </span>
+            </a>
+
+            <a class="local-uckk-public-card local-uckk-public-card--prompt" href="/local/uckk/mediatheque.php?q=provenance">
+                <span class="local-uckk-public-card__title">
+                    Provenance
+                </span>
+                <span class="local-uckk-public-card__body">
+                    Origine, source, version, validation et traçabilité des médias.
+                </span>
+            </a>
+        </div>
+    </section>
+</div>

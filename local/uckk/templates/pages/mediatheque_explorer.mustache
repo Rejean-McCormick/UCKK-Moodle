@@ -1,0 +1,160 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    @template local_uckk/mediatheque_explorer
+
+    Médiathèque public explorer partial.
+
+    This template renders only the public media explorer section for local_uckk.
+    It is intentionally render-only. Search behavior belongs to AMD/AJAX code and
+    server-side services.
+}}
+
+<section
+    class="local-uckk-public-section local-uckk-public-section--mediatheque local-uckk-mediatheque"
+    aria-labelledby="{{uniqid}}-mediatheque-title"
+    data-region="local-uckk-public-mediatheque"
+>
+    <div class="local-uckk-mediatheque__header">
+        <p class="local-uckk-public-section__eyebrow">
+            Archives publiques
+        </p>
+
+        <h2 id="{{uniqid}}-mediatheque-title" class="local-uckk-public-section__title">
+            <span class="local-uckk-public-section__title-text">
+                Explorateur Médiathèque
+            </span>
+        </h2>
+
+        <p class="local-uckk-public-section__body">
+            Rechercher dans les médias publics, collections, références externes et passages documentés.
+        </p>
+    </div>
+
+    <div
+        id="{{mediatheque_explorer_id}}"
+        class="local-uckk-mediatheque-explorer"
+        data-region="local-uckk-mediatheque-explorer"
+        data-method="mod_uckkarchive_search_mediatheque"
+        data-autoload="1"
+        data-initial-state="{{mediatheque_initial_state_json}}"
+    >
+        <form
+            class="local-uckk-mediatheque-search"
+            data-region="mediatheque-search-form"
+            action="/local/uckk/mediatheque.php"
+            method="get"
+        >
+            <div class="local-uckk-mediatheque-search__primary">
+                <label class="local-uckk-mediatheque-search__label" for="{{mediatheque_explorer_id}}-q">
+                    Rechercher dans la médiathèque
+                </label>
+
+                <div class="local-uckk-mediatheque-search__row">
+                    <input
+                        id="{{mediatheque_explorer_id}}-q"
+                        class="local-uckk-mediatheque-search__input"
+                        type="search"
+                        name="q"
+                        data-live-search="1"
+                        autocomplete="off"
+                        placeholder="Rechercher dans la médiathèque"
+                    >
+
+                    <button class="local-uckk-mediatheque-search__submit" type="submit">
+                        Rechercher
+                    </button>
+
+                    <button
+                        class="local-uckk-mediatheque-search__reset"
+                        type="button"
+                        data-action="mediatheque-reset"
+                        data-keep-enabled="1"
+                    >
+                        Réinitialiser
+                    </button>
+                </div>
+            </div>
+
+            <div class="local-uckk-mediatheque-filters" data-region="mediatheque-filters">
+                <div class="local-uckk-mediatheque-filter">
+                    <label for="{{mediatheque_explorer_id}}-mediatype">
+                        Format
+                    </label>
+                    <select id="{{mediatheque_explorer_id}}-mediatype" name="mediatype">
+                        <option value="all">Tous les formats</option>
+                        <option value="video">Vidéo</option>
+                        <option value="audio">Audio</option>
+                        <option value="image">Image</option>
+                        <option value="pdf">PDF</option>
+                        <option value="document">Document</option>
+                        <option value="book">Livre</option>
+                        <option value="external_reference">Référence externe</option>
+                        <option value="other">Autre</option>
+                    </select>
+                </div>
+
+                <div class="local-uckk-mediatheque-filter">
+                    <label for="{{mediatheque_explorer_id}}-sort">
+                        Tri
+                    </label>
+                    <select id="{{mediatheque_explorer_id}}-sort" name="sort">
+                        <option value="relevance">Pertinence</option>
+                        <option value="newest">Plus récent</option>
+                        <option value="title">Titre</option>
+                        <option value="type">Type</option>
+                    </select>
+                </div>
+
+                <input type="hidden" name="type" value="all">
+                <input type="hidden" name="collection" value="">
+                <input type="hidden" name="tag" value="">
+                <input type="hidden" name="source" value="">
+                <input type="hidden" name="advisory" value="all">
+                <input type="hidden" name="cultural" value="all">
+                <input type="hidden" name="audience" value="all">
+                <input type="hidden" name="lang" value="">
+                <input type="hidden" name="validation" value="all">
+                <input type="hidden" name="page" value="1">
+                <input type="hidden" name="perpage" value="12">
+            </div>
+        </form>
+
+        <div class="local-uckk-mediatheque-statusbar">
+            <p class="local-uckk-mediatheque-status" data-region="mediatheque-status" aria-live="polite">
+                Chargement de la médiathèque…
+            </p>
+
+            <p class="local-uckk-mediatheque-count">
+                <span data-region="mediatheque-count">0</span>
+                résultat(s)
+            </p>
+        </div>
+
+        <div
+            class="local-uckk-mediatheque-results"
+            data-region="mediatheque-results"
+            aria-live="polite"
+        ></div>
+
+        <div
+            class="local-uckk-mediatheque-empty"
+            data-region="mediatheque-empty"
+            hidden
+        >
+            Aucun média public ne correspond aux filtres.
+        </div>
+
+        <p class="local-uckk-mediatheque-pagination">
+            <button
+                class="local-uckk-mediatheque-load-more"
+                type="button"
+                data-action="mediatheque-load-more"
+                hidden
+            >
+                Charger plus de résultats
+            </button>
+        </p>
+    </div>
+    {{> local_uckk/public_prompt_groups }}
+</section>
