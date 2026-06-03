@@ -8,11 +8,13 @@ Import-Module $CommonPath -Force -DisableNameChecking
 function Get-UckkLocalSourceRoot { Get-UckkOpsVar "LocalSourceRoot" }
 function Get-UckkLocalRuntimeRoot { Get-UckkOpsVar "LocalRuntimeRoot" }
 function Get-UckkLocalMoodleRoot { Get-UckkOpsVar "LocalMoodleRoot" -Default (Split-Path -Parent (Get-UckkLocalRuntimeRoot)) }
+
 function Get-UckkLocalMoodleCliRoot {
     $configured = Get-UckkOpsVar "LocalMoodleCliRoot" -Default ""
     if (-not [string]::IsNullOrWhiteSpace($configured)) { return $configured }
     return Join-Path (Get-UckkLocalMoodleRoot) "admin/cli"
 }
+
 function Get-UckkLocalPhpExe { Get-UckkOpsVar "LocalPhpExe" -Default "php" }
 function Get-UckkLocalUrl { Get-UckkOpsVar "LocalUrl" -Default "http://127.0.0.1:8000" }
 function Get-UckkLocalComponents { @((Get-UckkOpsVar "UckkComponents" -Default @())) }
@@ -25,21 +27,172 @@ function Resolve-UckkLocalPath {
     return Join-UckkPath -Root $Root -Child $RelativePath
 }
 
+function ConvertTo-UckkLocalForwardSlashPath {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    return ($Path -replace "\\", "/")
+}
+
+function Get-UckkLocalRelativePath {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    $rootFull = [System.IO.Path]::GetFullPath($Root).TrimEnd([char[]]@("\", "/"))
+    $pathFull = [System.IO.Path]::GetFullPath($Path).TrimEnd([char[]]@("\", "/"))
+
+    if ($pathFull.Equals($rootFull, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return "."
+    }
+
+    $rootPrefix = "$rootFull$([System.IO.Path]::DirectorySeparatorChar)"
+
+    if (-not $pathFull.StartsWith($rootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Path is not inside root. Root: $rootFull Path: $pathFull"
+    }
+
+    $relative = $pathFull.Substring($rootPrefix.Length)
+    return ConvertTo-UckkLocalForwardSlashPath -Path $relative
+}
+
+function Assert-UckkLocalComponentPathSafe {
+    param(
+        [Parameter(Mandatory = $true)][string]$Component
+    )
+
+    if (
+        [string]::IsNullOrWhiteSpace($Component) -or
+        $Component -match '(^|[\/])\.\.([\/]|$)' -or
+        [System.IO.Path]::IsPathRooted($Component)
+    ) {
+        throw "Unsafe component path: $Component"
+    }
+
+    return $true
+}
+
 function Get-UckkExistingLocalPath {
     param([Parameter(Mandatory = $true)][string[]]$Paths)
+
     foreach ($path in $Paths) {
-        if (-not [string]::IsNullOrWhiteSpace($path) -and (Test-Path -LiteralPath $path)) { return $path }
+        if (-not [string]::IsNullOrWhiteSpace($path) -and (Test-Path -LiteralPath $path)) {
+            return $path
+        }
     }
+
     return $null
 }
 
 function Get-UckkLocalMoodleCliScript {
     param([Parameter(Mandatory = $true)][string]$ScriptName)
+
     return Get-UckkExistingLocalPath @(
         (Join-Path (Get-UckkLocalMoodleCliRoot) $ScriptName),
         (Join-Path (Get-UckkLocalRuntimeRoot) "admin/cli/$ScriptName"),
         (Join-Path (Get-UckkLocalMoodleRoot) "admin/cli/$ScriptName")
     )
+}
+
+function Get-UckkLocalRuntimeComponentRoot {
+    param(
+        [Parameter(Mandatory = $true)][string]$Component
+    )
+
+    Assert-UckkLocalComponentPathSafe -Component $Component | Out-Null
+
+    $moodleRoot = Get-UckkLocalMoodleRoot
+    $runtimeRoot = Get-UckkLocalRuntimeRoot
+    $componentRuntimePath = Resolve-UckkLocalPath -Root $runtimeRoot -RelativePath $Component
+
+    return Get-UckkLocalRelativePath -Root $moodleRoot -Path $componentRuntimePath
+}
+
+function Get-UckkLocalAmdBuildRoot {
+    param(
+        [string]$Component = "local/uckk"
+    )
+
+    return Get-UckkLocalRuntimeComponentRoot -Component $Component
+}
+
+function Get-UckkLocalAmdBuildCommandPreview {
+    param(
+        [string]$Component = "local/uckk"
+    )
+
+    $root = Get-UckkLocalAmdBuildRoot -Component $Component
+    $workingDirectory = Get-UckkLocalMoodleRoot
+    $arguments = @("grunt", "amd", "--root=$root", "--no-color")
+
+    [pscustomobject]@{
+        Action           = "Build AMD"
+        Component        = $Component
+        WorkingDirectory = $workingDirectory
+        Command          = "npx"
+        Arguments        = $arguments
+        DisplayCommand   = "npx $($arguments -join ' ')"
+        Executes         = $false
+    }
+}
+
+function Get-UckkLocalUpgradeCommandPreview {
+    param(
+        [switch]$AllowUnstable
+    )
+
+    $phpExe = Get-UckkLocalPhpExe
+    $moodleRoot = Get-UckkLocalMoodleRoot
+    $script = Get-UckkLocalMoodleCliScript -ScriptName "upgrade.php"
+
+    if (-not $script) {
+        throw "Local upgrade CLI not found. Checked LocalMoodleCliRoot, LocalRuntimeRoot/admin/cli, and LocalMoodleRoot/admin/cli."
+    }
+
+    $displayScript = Get-UckkLocalRelativePath -Root $moodleRoot -Path $script
+    $arguments = @($script, "--non-interactive")
+
+    if ($AllowUnstable) {
+        $arguments += "--allow-unstable"
+    }
+
+    $displayArguments = @($displayScript, "--non-interactive")
+
+    if ($AllowUnstable) {
+        $displayArguments += "--allow-unstable"
+    }
+
+    [pscustomobject]@{
+        Action           = "Run Moodle upgrade"
+        WorkingDirectory = $moodleRoot
+        Command          = $phpExe
+        Arguments        = $arguments
+        DisplayCommand   = "$phpExe $($displayArguments -join ' ')"
+        Executes         = $false
+    }
+}
+
+function Get-UckkLocalPurgeCommandPreview {
+    $phpExe = Get-UckkLocalPhpExe
+    $moodleRoot = Get-UckkLocalMoodleRoot
+    $script = Get-UckkLocalMoodleCliScript -ScriptName "purge_caches.php"
+
+    if (-not $script) {
+        throw "Local purge CLI not found. Checked LocalMoodleCliRoot, LocalRuntimeRoot/admin/cli, and LocalMoodleRoot/admin/cli."
+    }
+
+    $displayScript = Get-UckkLocalRelativePath -Root $moodleRoot -Path $script
+
+    [pscustomobject]@{
+        Action           = "Purge Moodle caches"
+        WorkingDirectory = $moodleRoot
+        Command          = $phpExe
+        Arguments        = @($script)
+        DisplayCommand   = "$phpExe $displayScript"
+        Executes         = $false
+    }
 }
 
 function Test-UckkLocalPaths {
@@ -52,23 +205,25 @@ function Test-UckkLocalPaths {
     $upgrade = Get-UckkLocalMoodleCliScript -ScriptName "upgrade.php"
 
     @(
-        [pscustomobject]@{ Name = "Local source root";          Path = $sourceRoot;  Exists = (Test-Path -LiteralPath $sourceRoot) },
+        [pscustomobject]@{ Name = "Local source root"; Path = $sourceRoot; Exists = (Test-Path -LiteralPath $sourceRoot) },
         [pscustomobject]@{ Name = "Local Moodle runtime/web root"; Path = $runtimeRoot; Exists = (Test-Path -LiteralPath $runtimeRoot) },
         [pscustomobject]@{ Name = "Local Moodle root"; Path = $moodleRoot; Exists = (Test-Path -LiteralPath $moodleRoot) },
         [pscustomobject]@{ Name = "Local Moodle CLI root"; Path = $cliRoot; Exists = (Test-Path -LiteralPath $cliRoot) },
-        [pscustomobject]@{ Name = "Moodle config.php";         Path = (Join-Path $runtimeRoot "config.php"); Exists = (Test-Path -LiteralPath (Join-Path $runtimeRoot "config.php")) },
-        [pscustomobject]@{ Name = "Moodle purge_caches.php";   Path = $purge; Exists = [bool]$purge },
-        [pscustomobject]@{ Name = "Moodle upgrade.php";        Path = $upgrade; Exists = [bool]$upgrade },
-        [pscustomobject]@{ Name = "PHP executable";            Path = $phpExe; Exists = [bool](Get-Command $phpExe -ErrorAction SilentlyContinue) }
+        [pscustomobject]@{ Name = "Moodle config.php"; Path = (Join-Path $runtimeRoot "config.php"); Exists = (Test-Path -LiteralPath (Join-Path $runtimeRoot "config.php")) },
+        [pscustomobject]@{ Name = "Moodle purge_caches.php"; Path = $purge; Exists = [bool]$purge },
+        [pscustomobject]@{ Name = "Moodle upgrade.php"; Path = $upgrade; Exists = [bool]$upgrade },
+        [pscustomobject]@{ Name = "PHP executable"; Path = $phpExe; Exists = [bool](Get-Command $phpExe -ErrorAction SilentlyContinue) }
     )
 }
 
 function Assert-UckkLocalReady {
     $failed = @(Test-UckkLocalPaths | Where-Object { -not $_.Exists })
+
     if ($failed.Count -gt 0) {
         $message = ($failed | ForEach-Object { "$($_.Name): $($_.Path)" }) -join "`n"
         throw "Local environment is not ready:`n$message"
     }
+
     return $true
 }
 
@@ -78,10 +233,7 @@ function Sync-UckkLocalComponent {
     )
 
     Assert-UckkLocalReady | Out-Null
-
-    if ([string]::IsNullOrWhiteSpace($Component) -or $Component -match '(^|[\/])\.\.([\/]|$)' -or [System.IO.Path]::IsPathRooted($Component)) {
-        throw "Unsafe component path: $Component"
-    }
+    Assert-UckkLocalComponentPathSafe -Component $Component | Out-Null
 
     $sourcePath = Resolve-UckkLocalPath -Root (Get-UckkLocalSourceRoot) -RelativePath $Component
     $targetPath = Resolve-UckkLocalPath -Root (Get-UckkLocalRuntimeRoot) -RelativePath $Component
@@ -111,7 +263,9 @@ function Sync-UckkLocalComponent {
 
 function Sync-UckkLocalAll {
     Assert-UckkLocalReady | Out-Null
+
     $results = @()
+
     foreach ($component in (Get-UckkLocalComponents)) {
         try {
             $results += Sync-UckkLocalComponent -Component $component
@@ -126,13 +280,17 @@ function Sync-UckkLocalAll {
             }
         }
     }
+
     return $results
 }
 
-function Sync-UckkLocalSourceToRuntime { Sync-UckkLocalAll }
+function Sync-UckkLocalSourceToRuntime {
+    Sync-UckkLocalAll
+}
 
 function Invoke-UckkLocalPurgeCaches {
     Assert-UckkLocalReady | Out-Null
+
     $phpExe = Get-UckkLocalPhpExe
     $script = Get-UckkLocalMoodleCliScript -ScriptName "purge_caches.php"
 
@@ -154,12 +312,15 @@ function Invoke-UckkLocalPurgeCaches {
     "Local Moodle caches purged."
 }
 
-function Clear-UckkLocalCaches { Invoke-UckkLocalPurgeCaches }
+function Clear-UckkLocalCaches {
+    Invoke-UckkLocalPurgeCaches
+}
 
 function Start-UckkLocalMoodleServer {
     param([int]$Port = 8000)
 
     Assert-UckkLocalReady | Out-Null
+
     $runtimeRoot = Get-UckkLocalRuntimeRoot
     $phpExe = Get-UckkLocalPhpExe
 
@@ -173,24 +334,30 @@ function Start-UckkLocalMoodleServer {
     }
 }
 
-function Start-UckkLocalMoodle { Start-UckkLocalMoodleServer }
+function Start-UckkLocalMoodle {
+    Start-UckkLocalMoodleServer
+}
 
 function Stop-UckkLocalMoodleServer {
     param([int]$Port = 8000)
 
     $connections = Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue
+
     if (-not $connections) {
         return "No local Moodle server found on port $Port."
     }
 
     $processIds = $connections | Select-Object -ExpandProperty OwningProcess -Unique
+
     foreach ($pidValue in $processIds) {
         Stop-Process -Id $pidValue -Force
         "Stopped local process $pidValue on port $Port."
     }
 }
 
-function Stop-UckkLocalMoodle { Stop-UckkLocalMoodleServer }
+function Stop-UckkLocalMoodle {
+    Stop-UckkLocalMoodleServer
+}
 
 function Invoke-UckkLocalFullSync {
     $sync = Sync-UckkLocalAll
@@ -226,8 +393,15 @@ Export-ModuleMember -Function `
     Get-UckkLocalUrl, `
     Get-UckkLocalComponents, `
     Resolve-UckkLocalPath, `
+    ConvertTo-UckkLocalForwardSlashPath, `
+    Get-UckkLocalRelativePath, `
     Get-UckkExistingLocalPath, `
     Get-UckkLocalMoodleCliScript, `
+    Get-UckkLocalRuntimeComponentRoot, `
+    Get-UckkLocalAmdBuildRoot, `
+    Get-UckkLocalAmdBuildCommandPreview, `
+    Get-UckkLocalUpgradeCommandPreview, `
+    Get-UckkLocalPurgeCommandPreview, `
     Test-UckkLocalPaths, `
     Assert-UckkLocalReady, `
     Sync-UckkLocalComponent, `

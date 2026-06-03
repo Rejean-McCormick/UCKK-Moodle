@@ -2,7 +2,7 @@
   "schema": "uckk.ops.config.v1",
   "app": {
     "name": "UCKK Ops Console",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "environment": "dev"
   },
   "local": {
@@ -56,17 +56,105 @@
     "blocks/uckk_dashboard",
     "report/uckk"
   ],
+  "updatePlan": {
+    "enabled": true,
+    "gitStatusMode": "porcelain-v1",
+    "dryRunOnly": true,
+    "actions": {
+      "amdBuild": {
+        "enabled": true,
+        "patterns": [
+          "*/amd/src/*.js"
+        ]
+      },
+      "moodleUpgrade": {
+        "enabled": true,
+        "patterns": [
+          "*/db/*.php",
+          "*/db/install.xml",
+          "*/version.php"
+        ]
+      },
+      "purgeCaches": {
+        "enabled": true,
+        "patterns": [
+          "*/lang/*.php",
+          "*/templates/*.mustache",
+          "*/styles.css",
+          "theme/uckk/**",
+          "*/db/*.php",
+          "*/db/install.xml",
+          "*/version.php"
+        ]
+      },
+      "smokeTests": {
+        "enabled": true,
+        "patterns": [
+          "*/amd/src/*.js",
+          "*/amd/build/*.js",
+          "*/amd/build/*.map",
+          "*/templates/*.mustache",
+          "*/styles.css",
+          "theme/uckk/**",
+          "*/db/*.php",
+          "*/db/install.xml",
+          "*/version.php",
+          "academic_registry_json/*.json"
+        ]
+      },
+      "seedApply": {
+        "enabled": true,
+        "patterns": [
+          "academic_registry_json/*.json"
+        ]
+      },
+      "localSync": {
+        "enabled": true,
+        "patterns": [
+          "local/uckk/**",
+          "mod/uckkarchive/**",
+          "mod/uckkchallenge/**",
+          "mod/uckkassembly/**",
+          "theme/uckk/**",
+          "admin/tool/uckkseed/**",
+          "admin/tool/uckkintegrity/**",
+          "course/format/uckk/**",
+          "ai/provider/uckk/**",
+          "blocks/uckk_dashboard/**",
+          "report/uckk/**",
+          "academic_registry_json/*.json"
+        ],
+        "excludePatterns": [
+          "tools/uckk-ops/**",
+          "docs/**"
+        ]
+      }
+    },
+    "recommendedOrder": [
+      "Validate source",
+      "Build AMD",
+      "Sync source to local runtime",
+      "Run Moodle upgrade",
+      "Purge local caches",
+      "Run local smoke tests",
+      "Review Git diff/status",
+      "Commit",
+      "Push"
+    ]
+  },
   "smoke": {
     "localUrls": [
       "http://127.0.0.1:8000",
       "http://127.0.0.1:8000/course/index.php",
       "http://127.0.0.1:8000/local/uckk/programs.php",
+      "http://127.0.0.1:8000/local/uckk/courses.php",
       "http://127.0.0.1:8000/local/uckk/mediatheque.php"
     ],
     "serverUrls": [
       "https://uckk.org",
       "https://uckk.org/course/index.php",
-      "https://uckk.org/local/uckk/programs.php"
+      "https://uckk.org/local/uckk/programs.php",
+      "https://uckk.org/local/uckk/courses.php"
     ]
   },
   "safety": {

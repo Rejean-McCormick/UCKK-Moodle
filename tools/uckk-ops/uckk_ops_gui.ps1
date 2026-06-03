@@ -266,6 +266,8 @@ function Invoke-UckkGitCommand {
 
 function Get-UckkGitStatus { Invoke-UckkGitCommand @("status", "--short", "--branch") }
 function Get-UckkGitDiff { Invoke-UckkGitCommand @("diff", "--stat") }
+function Get-UckkGitPorcelainStatus { Invoke-UckkGitCommand @("status", "--porcelain=v1") }
+
 function Invoke-UckkGitCommitPush {
     param([string]$Message)
 
@@ -369,6 +371,313 @@ function Get-UckkOpsConfigSummary {
         SeedPresetPathLocal = $Script:SeedPresetPathLocal
         Components          = ($Script:UckkComponents -join ", ")
     }
+}
+
+function ConvertTo-UckkOpsRelativePath {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    $clean = $Path.Trim()
+
+    if ($clean -match "\s->\s") {
+        $parts = $clean -split "\s->\s"
+        $clean = $parts[-1].Trim()
+    }
+
+    $clean = $clean -replace "\\", "/"
+
+    while ($clean.StartsWith("./")) {
+        $clean = $clean.Substring(2)
+    }
+
+    return $clean
+}
+
+function Resolve-UckkOpsChangedComponent {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    $normalPath = ($Path -replace "\\", "/").Trim().ToLowerInvariant()
+    $components = @($Script:UckkComponents | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
+
+    foreach ($component in ($components | Sort-Object { ([string]$_).Length } -Descending)) {
+        $normalComponent = ([string]$component -replace "\\", "/").Trim().ToLowerInvariant()
+
+        if ($normalPath -eq $normalComponent -or $normalPath.StartsWith("$normalComponent/")) {
+            return [string]$component
+        }
+    }
+
+    if ($normalPath -eq "academic_registry_json" -or $normalPath.StartsWith("academic_registry_json/")) {
+        return "academic_registry_json"
+    }
+
+    if ($normalPath -eq "tools/uckk-ops" -or $normalPath.StartsWith("tools/uckk-ops/")) {
+        return "tools/uckk-ops"
+    }
+
+    if ($normalPath -eq "docs" -or $normalPath.StartsWith("docs/")) {
+        return "docs"
+    }
+
+    return "(outside configured components)"
+}
+
+function Get-UckkOpsChangedFiles {
+    $statusLines = @(Get-UckkGitPorcelainStatus)
+    $items = @()
+
+    foreach ($line in $statusLines) {
+        $text = [string]$line
+
+        if ([string]::IsNullOrWhiteSpace($text) -or $text.Length -lt 4) {
+            continue
+        }
+
+        $status = $text.Substring(0, 2)
+        $path = ConvertTo-UckkOpsRelativePath ($text.Substring(3))
+
+        if ([string]::IsNullOrWhiteSpace($path)) {
+            continue
+        }
+
+        $items += [pscustomobject]@{
+            Status    = $status
+            Path      = $path
+            Component = Resolve-UckkOpsChangedComponent -Path $path
+        }
+    }
+
+    return $items
+}
+
+function Test-UckkOpsPathMatch {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$Pattern
+    )
+
+    $normalPath = ($Path -replace "\\", "/").Trim().ToLowerInvariant()
+    return ($normalPath -match $Pattern)
+}
+
+function Resolve-UckkOpsRecommendedOrder {
+    param(
+        [Parameter(Mandatory = $true)][object]$Plan
+    )
+
+    $steps = @()
+
+    if (-not $Plan.HasChanges) {
+        return @("No changes detected")
+    }
+
+    $steps += "Validate source"
+
+    if ($Plan.NeedsAmdBuild) {
+        $steps += "Build AMD"
+    }
+
+    if ($Plan.NeedsLocalSync) {
+        $steps += "Sync source to local runtime"
+    }
+
+    if ($Plan.NeedsMoodleUpgrade) {
+        $steps += "Run local Moodle upgrade"
+    }
+
+    if ($Plan.NeedsPurgeCaches) {
+        $steps += "Purge local caches"
+    }
+
+    if ($Plan.NeedsSeedApply) {
+        $steps += "Run seed dry-run/apply manually"
+    }
+
+    if ($Plan.NeedsSmokeTests) {
+        $steps += "Run local smoke tests"
+    }
+
+    $steps += "Review Git diff/status"
+    $steps += "Commit"
+    $steps += "Push"
+
+    return $steps
+}
+
+function Get-UckkOpsUpdatePlan {
+    $changedFiles = @(Get-UckkOpsChangedFiles)
+    $hasChanges = ($changedFiles.Count -gt 0)
+
+    $needsLocalSync = $false
+    $needsAmdBuild = $false
+    $needsMoodleUpgrade = $false
+    $needsPurgeCaches = $false
+    $needsSmokeTests = $false
+    $needsSeedApply = $false
+    $warnings = @()
+
+    foreach ($file in $changedFiles) {
+        $path = [string]$file.Path
+        $component = [string]$file.Component
+
+        if ($component -ne "tools/uckk-ops" -and $component -ne "docs" -and $component -ne "(outside configured components)") {
+            $needsLocalSync = $true
+        }
+
+        if (Test-UckkOpsPathMatch -Path $path -Pattern '(^|/)amd/src/.*\.js$') {
+            $needsAmdBuild = $true
+            $needsLocalSync = $true
+            $needsPurgeCaches = $true
+            $needsSmokeTests = $true
+        }
+
+        if (Test-UckkOpsPathMatch -Path $path -Pattern '(^|/)amd/build/.*\.(js|map)$') {
+            $needsLocalSync = $true
+            $needsSmokeTests = $true
+        }
+
+        if (
+            (Test-UckkOpsPathMatch -Path $path -Pattern '(^|/)db/.*\.php$') -or
+            (Test-UckkOpsPathMatch -Path $path -Pattern '(^|/)db/install\.xml$') -or
+            (Test-UckkOpsPathMatch -Path $path -Pattern '(^|/)version\.php$')
+        ) {
+            $needsMoodleUpgrade = $true
+            $needsLocalSync = $true
+            $needsPurgeCaches = $true
+        }
+
+        if (Test-UckkOpsPathMatch -Path $path -Pattern '(^|/)lang/.*\.php$') {
+            $needsLocalSync = $true
+            $needsPurgeCaches = $true
+        }
+
+        if (
+            (Test-UckkOpsPathMatch -Path $path -Pattern '(^|/)templates/.*\.mustache$') -or
+            (Test-UckkOpsPathMatch -Path $path -Pattern '(^|/)styles\.css$') -or
+            (Test-UckkOpsPathMatch -Path $path -Pattern '^theme/uckk/')
+        ) {
+            $needsLocalSync = $true
+            $needsPurgeCaches = $true
+            $needsSmokeTests = $true
+        }
+
+        if (Test-UckkOpsPathMatch -Path $path -Pattern '^academic_registry_json/.*\.json$') {
+            $needsSeedApply = $true
+            $needsPurgeCaches = $true
+            $needsSmokeTests = $true
+        }
+
+        if ($component -eq "(outside configured components)") {
+            $warnings += "Unmapped path: $path"
+        }
+    }
+
+    if ($needsAmdBuild) {
+        $hasBuildOutput = @($changedFiles | Where-Object {
+            Test-UckkOpsPathMatch -Path ([string]$_.Path) -Pattern '(^|/)amd/build/.*\.(js|map)$'
+        }).Count -gt 0
+
+        if (-not $hasBuildOutput) {
+            $warnings += "AMD source changed but no AMD build output is currently changed."
+        }
+    }
+
+    if ($needsMoodleUpgrade) {
+        $warnings += "Moodle upgrade may require --allow-unstable on dev builds."
+    }
+
+    $changedComponents = @(
+        $changedFiles |
+            Select-Object -ExpandProperty Component -Unique |
+            Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } |
+            Sort-Object
+    )
+
+    $plan = [pscustomobject]@{
+        HasChanges         = $hasChanges
+        ChangedFiles       = $changedFiles
+        ChangedComponents  = $changedComponents
+        NeedsLocalSync     = $needsLocalSync
+        NeedsAmdBuild      = $needsAmdBuild
+        NeedsMoodleUpgrade = $needsMoodleUpgrade
+        NeedsPurgeCaches   = $needsPurgeCaches
+        NeedsSmokeTests    = $needsSmokeTests
+        NeedsSeedApply     = $needsSeedApply
+        Warnings           = @($warnings | Select-Object -Unique)
+        RecommendedOrder   = @()
+    }
+
+    $plan.RecommendedOrder = @(Resolve-UckkOpsRecommendedOrder -Plan $plan)
+
+    return $plan
+}
+
+function Format-UckkOpsUpdatePlan {
+    param([Parameter(Mandatory = $true)][object]$Plan)
+
+    $lines = @()
+
+    $lines += "Update plan"
+    $lines += "==========="
+    $lines += "Has changes: $($Plan.HasChanges)"
+
+    if (-not $Plan.HasChanges) {
+        $lines += ""
+        $lines += "No local changes detected."
+        return $lines
+    }
+
+    $lines += ""
+    $lines += "Changed components:"
+    foreach ($component in @($Plan.ChangedComponents)) {
+        $lines += "- $component"
+    }
+
+    $lines += ""
+    $lines += "Changed files:"
+    foreach ($file in @($Plan.ChangedFiles)) {
+        $lines += "- $($file.Status) $($file.Path) [$($file.Component)]"
+    }
+
+    $lines += ""
+    $lines += "Required actions:"
+    $lines += "- Local sync: $($Plan.NeedsLocalSync)"
+    $lines += "- AMD build: $($Plan.NeedsAmdBuild)"
+    $lines += "- Moodle upgrade: $($Plan.NeedsMoodleUpgrade)"
+    $lines += "- Purge caches: $($Plan.NeedsPurgeCaches)"
+    $lines += "- Smoke tests: $($Plan.NeedsSmokeTests)"
+    $lines += "- Seed apply: $($Plan.NeedsSeedApply)"
+
+    if (@($Plan.Warnings).Count -gt 0) {
+        $lines += ""
+        $lines += "Warnings:"
+        foreach ($warning in @($Plan.Warnings)) {
+            $lines += "- $warning"
+        }
+    }
+
+    $lines += ""
+    $lines += "Recommended order:"
+    $index = 1
+    foreach ($step in @($Plan.RecommendedOrder)) {
+        $lines += "$index. $step"
+        $index++
+    }
+
+    if ($Plan.NeedsAmdBuild) {
+        $lines += ""
+        $lines += "AMD command:"
+        $lines += "cd `"$Script:LocalMoodleRoot`""
+        $lines += "npx grunt amd --root=public/local/uckk --no-color"
+    }
+
+    if ($Plan.NeedsMoodleUpgrade) {
+        $lines += ""
+        $lines += "Upgrade command:"
+        $lines += "cd `"$Script:LocalMoodleRoot`""
+        $lines += "$Script:LocalPhpExe admin\cli\upgrade.php --non-interactive --allow-unstable"
+    }
+
+    return $lines
 }
 
 Add-Type -AssemblyName System.Windows.Forms
@@ -565,6 +874,12 @@ $tabLocal.Text = "Local Dev"
 $tabLocal.Controls.Add((New-UckkButton "Verifier chemins" 20 30 {
     Invoke-UckkGuiAction "Verifier chemins locaux" {
         Test-UckkOpsPaths
+    }
+}))
+
+$tabLocal.Controls.Add((New-UckkButton "Scan update plan" 320 30 {
+    Invoke-UckkGuiAction "Scan update plan" {
+        Format-UckkOpsUpdatePlan -Plan (Get-UckkOpsUpdatePlan)
     }
 }))
 
@@ -773,3 +1088,4 @@ Write-UckkGuiLog "CLI local : $Script:LocalMoodleCliRoot"
 Write-UckkGuiLog "Serveur : $Script:ServerSshTarget"
 
 [void]$form.ShowDialog()
+
