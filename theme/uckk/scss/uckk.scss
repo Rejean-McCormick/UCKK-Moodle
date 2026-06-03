@@ -2244,38 +2244,58 @@ body#page-login-index.theme-uckk-login-layout .login-layout-right .login-heading
 
 /* Guest / skip login button.
    This only styles Moodle's real guest form if Moodle renders it. */
+body.pagelayout-login.theme-uckk-login-layout .theme-uckk-login-shell,
+body#page-login-index.theme-uckk-login-layout .theme-uckk-login-shell {
+    position: relative;
+}
+
 body.pagelayout-login.theme-uckk-login-layout #guestlogin,
 body#page-login-index.theme-uckk-login-layout #guestlogin {
-    position: fixed;
-    left: clamp(2rem, 6vw, 7rem);
-    bottom: clamp(1.5rem, 5vh, 4rem);
-    z-index: 30;
-    max-width: min(23rem, 34vw);
+    position: absolute !important;
+    left: clamp(4rem, 7vw, 8rem);
+    bottom: clamp(2rem, 6vh, 4.5rem);
+    z-index: 80;
+    display: block !important;
+    width: min(24rem, 32vw);
+    max-width: calc(42vw - 4rem);
     margin: 0 !important;
-    padding: .85rem 1rem;
-    border: 1px solid rgba(255, 250, 240, .25);
+    padding: 1rem;
+    border: 1px solid rgba(255, 250, 240, .28);
+    border-left: .35rem solid var(--uckk-gold);
     border-radius: var(--uckk-radius);
-    background: rgba(5, 47, 45, .68);
+    background:
+        linear-gradient(135deg, rgba(5, 47, 45, .74), rgba(23, 35, 33, .52));
     box-shadow: 0 .85rem 1.75rem rgba(0, 0, 0, .22);
+    color: #ffffff;
+    text-shadow: 0 .1rem .35rem rgba(0, 0, 0, .5);
 }
 
 body.pagelayout-login.theme-uckk-login-layout #guestlogin .login-heading,
 body#page-login-index.theme-uckk-login-layout #guestlogin .login-heading {
-    margin: 0 0 .6rem;
+    margin: 0 0 .65rem;
     color: #ffffff;
     font-family: var(--uckk-font-body);
-    font-size: .88rem;
-    font-weight: 800;
-    letter-spacing: .04em;
+    font-size: .82rem;
+    font-weight: 900;
+    letter-spacing: .055em;
+    line-height: 1.25;
     text-transform: uppercase;
 }
 
 body.pagelayout-login.theme-uckk-login-layout #guestlogin #loginguestbtn,
 body#page-login-index.theme-uckk-login-layout #guestlogin #loginguestbtn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    min-height: 2.6rem;
     border-color: var(--uckk-gold) !important;
+    border-radius: var(--uckk-radius-small);
     background: var(--uckk-petrol) !important;
     color: #ffffff !important;
+    font-weight: 900;
+    text-decoration: none !important;
+    text-shadow: none;
 }
 
 body.pagelayout-login.theme-uckk-login-layout #guestlogin #loginguestbtn:hover,
@@ -2284,6 +2304,7 @@ body#page-login-index.theme-uckk-login-layout #guestlogin #loginguestbtn:hover,
 body#page-login-index.theme-uckk-login-layout #guestlogin #loginguestbtn:focus {
     background: var(--uckk-petrol-dark) !important;
     border-color: var(--uckk-gold-light) !important;
+    color: #ffffff !important;
 }
 
 /* Mobile: do not fixed-position the guest button. */
@@ -2307,11 +2328,14 @@ body#page-login-index.theme-uckk-login-layout #guestlogin #loginguestbtn:focus {
 
     body.pagelayout-login.theme-uckk-login-layout #guestlogin,
     body#page-login-index.theme-uckk-login-layout #guestlogin {
-        position: static;
+        position: static !important;
+        width: 100%;
         max-width: none;
         margin-top: 1rem !important;
         background: rgba(5, 47, 45, .08);
         box-shadow: none;
+        color: var(--uckk-petrol-deep);
+        text-shadow: none;
     }
 
     body.pagelayout-login.theme-uckk-login-layout #guestlogin .login-heading,
