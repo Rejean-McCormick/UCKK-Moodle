@@ -89,6 +89,7 @@ $Script:SeedCliRelative = [string](Get-UckkConfigValue $Script:OpsConfig "seed.s
 $Script:UckkComponents = @((Get-UckkConfigValue $Script:OpsConfig "components" @()))
 $Script:SmokeLocalUrls = @((Get-UckkConfigValue $Script:OpsConfig "smoke.localUrls" @($Script:LocalUrl, "$Script:LocalUrl/course/index.php", "$Script:LocalUrl/local/uckk/programs.php")))
 $Script:SmokeServerUrls = @((Get-UckkConfigValue $Script:OpsConfig "smoke.serverUrls" @($Script:ServerPublicUrl, "$Script:ServerPublicUrl/course/index.php", "$Script:ServerPublicUrl/local/uckk/programs.php")))
+$Script:LastUpdatePlan = $null
 
 function Resolve-UckkLocalPath {
     param([string]$Root, [string]$RelativePath)
@@ -312,6 +313,83 @@ function Invoke-UckkServerMoodleUpgrade { Invoke-UckkSshCommand "cd '$Script:Ser
 function Clear-UckkServerCaches { Invoke-UckkSshCommand "cd '$Script:ServerMoodleRoot' && sudo -u www-data php '$Script:ServerMoodleCliRoot/purge_caches.php'" }
 function Restart-UckkServerPhpFpm { Invoke-UckkSshCommand "sudo systemctl reload '$Script:ServerPhpFpmService'" }
 
+function Test-UckkPlanFlag {
+    param(
+        [object]$Plan,
+        [Parameter(Mandatory = $true)][string]$PropertyName
+    )
+
+    if ($null -eq $Plan) {
+        return $false
+    }
+
+    if ($Plan.PSObject.Properties.Name -notcontains $PropertyName) {
+        return $false
+    }
+
+    return [bool]$Plan.$PropertyName
+}
+
+function Invoke-UckkServerDeployPlanned {
+    param(
+        [object]$Plan = $null,
+        [switch]$SafeWhenNoPlan
+    )
+
+    $hasPlan = ($null -ne $Plan)
+
+    if ($hasPlan) {
+        "Server deploy uses scanned update plan."
+    }
+    elseif ($SafeWhenNoPlan) {
+        "No scanned update plan available. Server deploy will run safe purge and smoke after sync."
+    }
+    else {
+        "No scanned update plan available. Server deploy will run pull and sync only."
+    }
+
+    "1/5 Git pull serveur"
+    Invoke-UckkServerPull
+
+    "2/5 Sync source -> runtime serveur"
+    Sync-UckkServerSourceToRuntime
+
+    $needsUpgrade = Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsMoodleUpgrade"
+    $needsPurge = (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsPurgeCaches") -or $needsUpgrade
+    $needsSmoke = (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsSmokeTests") -or $needsPurge
+
+    if (-not $hasPlan -and $SafeWhenNoPlan) {
+        $needsPurge = $true
+        $needsSmoke = $true
+    }
+
+    if ($needsUpgrade) {
+        "3/5 Upgrade Moodle serveur"
+        Invoke-UckkServerMoodleUpgrade
+    }
+    else {
+        "3/5 Upgrade Moodle serveur : skipped"
+    }
+
+    if ($needsPurge) {
+        "4/5 Purge caches serveur"
+        Clear-UckkServerCaches
+    }
+    else {
+        "4/5 Purge caches serveur : skipped"
+    }
+
+    if ($needsSmoke) {
+        "5/5 Smoke tests serveur"
+        Test-UckkSmokeServer
+    }
+    else {
+        "5/5 Smoke tests serveur : skipped"
+    }
+
+    "Server deploy planned termine."
+}
+
 function Invoke-UckkSeedLocal {
     param([string]$Preset = "categories", [switch]$DryRun, [switch]$Apply)
 
@@ -499,6 +577,19 @@ function Resolve-UckkOpsRecommendedOrder {
     $steps += "Review Git diff/status"
     $steps += "Commit"
     $steps += "Push"
+    $steps += "Deploy server source to runtime"
+
+    if ($Plan.NeedsMoodleUpgrade) {
+        $steps += "Run server Moodle upgrade"
+    }
+
+    if ($Plan.NeedsPurgeCaches -or $Plan.NeedsMoodleUpgrade) {
+        $steps += "Purge server caches"
+    }
+
+    if ($Plan.NeedsSmokeTests -or $Plan.NeedsPurgeCaches -or $Plan.NeedsMoodleUpgrade) {
+        $steps += "Run server smoke tests"
+    }
 
     return $steps
 }
@@ -646,6 +737,12 @@ function Format-UckkOpsUpdatePlan {
     $lines += "- Purge caches: $($Plan.NeedsPurgeCaches)"
     $lines += "- Smoke tests: $($Plan.NeedsSmokeTests)"
     $lines += "- Seed apply: $($Plan.NeedsSeedApply)"
+    $lines += ""
+    $lines += "Server actions after push:"
+    $lines += "- Server deploy: True"
+    $lines += "- Server upgrade: $($Plan.NeedsMoodleUpgrade)"
+    $lines += "- Server purge caches: $(($Plan.NeedsPurgeCaches -or $Plan.NeedsMoodleUpgrade))"
+    $lines += "- Server smoke tests: $(($Plan.NeedsSmokeTests -or $Plan.NeedsPurgeCaches -or $Plan.NeedsMoodleUpgrade))"
 
     if (@($Plan.Warnings).Count -gt 0) {
         $lines += ""
@@ -775,8 +872,7 @@ function Invoke-UckkNormalWorkflowMinimal {
     Invoke-UckkGitCommitPush -Message $CommitMessage
 
     "4/4 Trigger sync OVH"
-    Invoke-UckkServerPull
-    Sync-UckkServerSourceToRuntime
+    Invoke-UckkServerDeployPlanned -Plan $Script:LastUpdatePlan -SafeWhenNoPlan
 
     "Workflow normal minimal termine."
 }
@@ -871,10 +967,10 @@ function Update-UckkSimplePlanUi {
         $specialLines += "Upgrade Moodle requis : lancer apres Sync local."
     }
     if ($Plan.NeedsPurgeCaches) {
-        $specialLines += "Purge caches requise : lancer avant validation navigateur."
+        $specialLines += "Purge caches requise : local avant validation, serveur apres OVH sync."
     }
     if ($Plan.NeedsSmokeTests) {
-        $specialLines += "Smoke local recommande : lancer apres Launch local."
+        $specialLines += "Smoke recommande : local apres Launch local, serveur apres OVH sync."
     }
     if ($Plan.NeedsSeedApply) {
         $specialLines += "Seed detecte : faire un dry-run, pas d'apply automatique."
@@ -995,9 +1091,8 @@ $stepServerLabel.Size = New-Object System.Drawing.Size(300, 22)
 $tabSimple.Controls.Add($stepServerLabel)
 
 $tabSimple.Controls.Add((New-UckkButton "5. Trigger OVH sync" 260 318 {
-    Invoke-UckkGuiAction "Trigger sync OVH" {
-        Invoke-UckkServerPull
-        Sync-UckkServerSourceToRuntime
+    Invoke-UckkGuiAction "Trigger sync OVH + server follow-up" {
+        Invoke-UckkServerDeployPlanned -Plan $Script:LastUpdatePlan -SafeWhenNoPlan
     } -Confirm
 }))
 
@@ -1178,6 +1273,12 @@ $tabServer.Controls.Add((New-UckkButton "Purger caches serveur" 20 230 {
 $tabServer.Controls.Add((New-UckkButton "Reload PHP-FPM" 20 280 {
     Invoke-UckkGuiAction "Reload PHP-FPM" {
         Restart-UckkServerPhpFpm
+    } -Confirm
+}))
+
+$tabServer.Controls.Add((New-UckkButton "Deploy planned server" 320 30 {
+    Invoke-UckkGuiAction "Deploy serveur avec plan" {
+        Invoke-UckkServerDeployPlanned -Plan $Script:LastUpdatePlan -SafeWhenNoPlan
     } -Confirm
 }))
 

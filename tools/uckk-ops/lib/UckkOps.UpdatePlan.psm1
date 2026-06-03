@@ -230,21 +230,32 @@ function Test-UckkOpsActionMatch {
     return Test-UckkOpsPathLike -Path $Path -Patterns $patterns
 }
 
+function New-UckkOpsActionState {
+    [pscustomobject]@{
+        NeedsLocalSync     = $false
+        NeedsAmdBuild      = $false
+        NeedsMoodleUpgrade = $false
+        NeedsPurgeCaches   = $false
+        NeedsSmokeTests    = $false
+        NeedsSeedApply     = $false
+
+        NeedsServerSync    = $false
+        NeedsServerUpgrade = $false
+        NeedsServerPurge   = $false
+        NeedsServerSmoke   = $false
+
+        Reasons            = @()
+        Warnings           = @()
+    }
+}
+
 function Resolve-UckkOpsRequiredActions {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)][object[]]$ChangedFiles
     )
 
-    $needsLocalSync = $false
-    $needsAmdBuild = $false
-    $needsMoodleUpgrade = $false
-    $needsPurgeCaches = $false
-    $needsSmokeTests = $false
-    $needsSeedApply = $false
-
-    $reasons = @()
-    $warnings = @()
+    $state = New-UckkOpsActionState
 
     foreach ($file in @($ChangedFiles)) {
         $path = [string]$file.Path
@@ -255,65 +266,82 @@ function Resolve-UckkOpsRequiredActions {
         }
 
         if ($component -eq "tools/uckk-ops") {
-            $reasons += "Ops tooling changed: $path"
+            $state.Reasons += "Ops tooling changed: $path"
             continue
         }
 
         if ($component -eq "docs") {
-            $reasons += "Documentation changed: $path"
+            $state.Reasons += "Documentation changed: $path"
             continue
         }
 
         if ([string]::IsNullOrWhiteSpace($component)) {
-            $warnings += "Unmapped changed path: $path"
+            $state.Warnings += "Unmapped changed path: $path"
         }
 
         if (Test-UckkOpsActionMatch -Path $path -ActionName "amdBuild" -FallbackPatterns @("*/amd/src/*.js")) {
-            $needsAmdBuild = $true
-            $needsLocalSync = $true
-            $needsPurgeCaches = $true
-            $needsSmokeTests = $true
-            $reasons += "AMD source changed: $path"
+            $state.NeedsAmdBuild = $true
+            $state.NeedsLocalSync = $true
+            $state.NeedsPurgeCaches = $true
+            $state.NeedsSmokeTests = $true
+            $state.NeedsServerSync = $true
+            $state.NeedsServerPurge = $true
+            $state.NeedsServerSmoke = $true
+            $state.Reasons += "AMD source changed: $path"
             continue
         }
 
         if (Test-UckkOpsPathLike -Path $path -Patterns @("*/amd/build/*.js", "*/amd/build/*.map")) {
-            $needsLocalSync = $true
-            $needsSmokeTests = $true
-            $reasons += "AMD build artifact changed: $path"
+            $state.NeedsLocalSync = $true
+            $state.NeedsSmokeTests = $true
+            $state.NeedsServerSync = $true
+            $state.NeedsServerSmoke = $true
+            $state.Reasons += "AMD build artifact changed: $path"
             continue
         }
 
         if (Test-UckkOpsActionMatch -Path $path -ActionName "moodleUpgrade" -FallbackPatterns @("*/db/*.php", "*/db/install.xml", "*/version.php")) {
-            $needsMoodleUpgrade = $true
-            $needsLocalSync = $true
-            $needsPurgeCaches = $true
-            $needsSmokeTests = $true
-            $reasons += "Moodle upgrade-sensitive file changed: $path"
+            $state.NeedsMoodleUpgrade = $true
+            $state.NeedsLocalSync = $true
+            $state.NeedsPurgeCaches = $true
+            $state.NeedsSmokeTests = $true
+            $state.NeedsServerSync = $true
+            $state.NeedsServerUpgrade = $true
+            $state.NeedsServerPurge = $true
+            $state.NeedsServerSmoke = $true
+            $state.Reasons += "Moodle upgrade-sensitive file changed: $path"
             continue
         }
 
         if (Test-UckkOpsPathLike -Path $path -Patterns @("*/lang/*.php")) {
-            $needsLocalSync = $true
-            $needsPurgeCaches = $true
-            $reasons += "Language file changed: $path"
+            $state.NeedsLocalSync = $true
+            $state.NeedsPurgeCaches = $true
+            $state.NeedsServerSync = $true
+            $state.NeedsServerPurge = $true
+            $state.Reasons += "Language file changed: $path"
             continue
         }
 
         if (Test-UckkOpsPathLike -Path $path -Patterns @("*/templates/*.mustache", "*/styles.css", "theme/uckk/*", "theme/uckk/**")) {
-            $needsLocalSync = $true
-            $needsPurgeCaches = $true
-            $needsSmokeTests = $true
-            $reasons += "Template/style/theme file changed: $path"
+            $state.NeedsLocalSync = $true
+            $state.NeedsPurgeCaches = $true
+            $state.NeedsSmokeTests = $true
+            $state.NeedsServerSync = $true
+            $state.NeedsServerPurge = $true
+            $state.NeedsServerSmoke = $true
+            $state.Reasons += "Template/style/theme file changed: $path"
             continue
         }
 
         if (Test-UckkOpsActionMatch -Path $path -ActionName "seedApply" -FallbackPatterns @("academic_registry_json/*.json")) {
-            $needsLocalSync = $true
-            $needsSeedApply = $true
-            $needsPurgeCaches = $true
-            $needsSmokeTests = $true
-            $reasons += "Academic registry preset changed: $path"
+            $state.NeedsLocalSync = $true
+            $state.NeedsSeedApply = $true
+            $state.NeedsPurgeCaches = $true
+            $state.NeedsSmokeTests = $true
+            $state.NeedsServerSync = $true
+            $state.NeedsServerPurge = $true
+            $state.NeedsServerSmoke = $true
+            $state.Reasons += "Academic registry preset changed: $path"
             continue
         }
 
@@ -331,20 +359,24 @@ function Resolve-UckkOpsRequiredActions {
             "report/uckk/**",
             "academic_registry_json/*.json"
         )) {
-            $needsLocalSync = $true
-            $needsPurgeCaches = $true
-            $reasons += "Moodle component file changed: $path"
+            $state.NeedsLocalSync = $true
+            $state.NeedsPurgeCaches = $true
+            $state.NeedsServerSync = $true
+            $state.NeedsServerPurge = $true
+            $state.Reasons += "Moodle component file changed: $path"
             continue
         }
 
         if (-not [string]::IsNullOrWhiteSpace($component) -and $component -notin @("tools/uckk-ops", "docs")) {
-            $needsLocalSync = $true
-            $needsPurgeCaches = $true
-            $reasons += "Component file changed: $path"
+            $state.NeedsLocalSync = $true
+            $state.NeedsPurgeCaches = $true
+            $state.NeedsServerSync = $true
+            $state.NeedsServerPurge = $true
+            $state.Reasons += "Component file changed: $path"
         }
     }
 
-    if ($needsAmdBuild) {
+    if ($state.NeedsAmdBuild) {
         $hasBuildOutput = @(
             $ChangedFiles | Where-Object {
                 Test-UckkOpsPathLike -Path ([string]$_.Path) -Patterns @("*/amd/build/*.js", "*/amd/build/*.map")
@@ -352,27 +384,33 @@ function Resolve-UckkOpsRequiredActions {
         ).Count -gt 0
 
         if (-not $hasBuildOutput) {
-            $warnings += "AMD source changed but no AMD build output is currently changed. Build AMD before committing."
+            $state.Warnings += "AMD source changed but no AMD build output is currently changed. Build AMD before committing."
         }
     }
 
-    if ($needsMoodleUpgrade) {
-        $warnings += "Moodle upgrade may require --allow-unstable on dev builds."
+    if ($state.NeedsMoodleUpgrade) {
+        $state.Warnings += "Moodle upgrade may require --allow-unstable on dev builds."
     }
 
     [pscustomobject]@{
-        NeedsLocalSync     = $needsLocalSync
-        NeedsAmdBuild      = $needsAmdBuild
-        NeedsMoodleUpgrade = $needsMoodleUpgrade
-        NeedsPurgeCaches   = $needsPurgeCaches
-        NeedsSmokeTests    = $needsSmokeTests
-        NeedsSeedApply     = $needsSeedApply
-        Reasons            = @($reasons | Select-Object -Unique)
-        Warnings           = @($warnings | Select-Object -Unique)
+        NeedsLocalSync     = [bool]$state.NeedsLocalSync
+        NeedsAmdBuild      = [bool]$state.NeedsAmdBuild
+        NeedsMoodleUpgrade = [bool]$state.NeedsMoodleUpgrade
+        NeedsPurgeCaches   = [bool]$state.NeedsPurgeCaches
+        NeedsSmokeTests    = [bool]$state.NeedsSmokeTests
+        NeedsSeedApply     = [bool]$state.NeedsSeedApply
+
+        NeedsServerSync    = [bool]$state.NeedsServerSync
+        NeedsServerUpgrade = [bool]$state.NeedsServerUpgrade
+        NeedsServerPurge   = [bool]$state.NeedsServerPurge
+        NeedsServerSmoke   = [bool]$state.NeedsServerSmoke
+
+        Reasons            = @($state.Reasons | Select-Object -Unique)
+        Warnings           = @($state.Warnings | Select-Object -Unique)
     }
 }
 
-function Test-UckkOpsPlanNeedsMoodleAction {
+function Test-UckkOpsPlanNeedsLocalAction {
     param(
         [Parameter(Mandatory = $true)][object]$Actions
     )
@@ -387,6 +425,30 @@ function Test-UckkOpsPlanNeedsMoodleAction {
     )
 }
 
+function Test-UckkOpsPlanNeedsServerAction {
+    param(
+        [Parameter(Mandatory = $true)][object]$Actions
+    )
+
+    return (
+        [bool]$Actions.NeedsServerSync -or
+        [bool]$Actions.NeedsServerUpgrade -or
+        [bool]$Actions.NeedsServerPurge -or
+        [bool]$Actions.NeedsServerSmoke
+    )
+}
+
+function Test-UckkOpsPlanNeedsMoodleAction {
+    param(
+        [Parameter(Mandatory = $true)][object]$Actions
+    )
+
+    return (
+        (Test-UckkOpsPlanNeedsLocalAction -Actions $Actions) -or
+        (Test-UckkOpsPlanNeedsServerAction -Actions $Actions)
+    )
+}
+
 function Get-UckkOpsRecommendedOrder {
     param(
         [Parameter(Mandatory = $true)][object]$Actions,
@@ -398,9 +460,10 @@ function Get-UckkOpsRecommendedOrder {
     }
 
     $order = @()
-    $hasMoodleAction = Test-UckkOpsPlanNeedsMoodleAction -Actions $Actions
+    $hasLocalAction = Test-UckkOpsPlanNeedsLocalAction -Actions $Actions
+    $hasServerAction = Test-UckkOpsPlanNeedsServerAction -Actions $Actions
 
-    if ($hasMoodleAction) {
+    if ($hasLocalAction) {
         $order += "Validate source"
     }
 
@@ -413,7 +476,7 @@ function Get-UckkOpsRecommendedOrder {
     }
 
     if ($Actions.NeedsMoodleUpgrade) {
-        $order += "Run Moodle upgrade"
+        $order += "Run Moodle upgrade local"
     }
 
     if ($Actions.NeedsSeedApply) {
@@ -431,6 +494,22 @@ function Get-UckkOpsRecommendedOrder {
     $order += "Review Git diff/status"
     $order += "Commit"
     $order += "Push"
+
+    if ($hasServerAction) {
+        $order += "Deploy server"
+    }
+
+    if ($Actions.NeedsServerUpgrade) {
+        $order += "Run Moodle upgrade server"
+    }
+
+    if ($Actions.NeedsServerPurge) {
+        $order += "Purge server caches"
+    }
+
+    if ($Actions.NeedsServerSmoke) {
+        $order += "Run server smoke tests"
+    }
 
     return $order
 }
@@ -537,10 +616,17 @@ function Get-UckkOpsCommandPreview {
         $commands += "Test-UckkSmokeLocal"
     }
 
+    if ($Actions.NeedsServerSync) {
+        $commands += "Invoke-UckkServerDeployPlanned -Plan `$Script:LastUpdatePlan"
+    }
+    elseif ($Actions.NeedsServerPurge -or $Actions.NeedsServerSmoke) {
+        $commands += "Invoke-UckkServerDeployPlanned -Plan `$Script:LastUpdatePlan -ForcePurge -ForceSmoke"
+    }
+
     return $commands
 }
 
-function Get-UckkOpsSuggestedSmokeUrls {
+function Get-UckkOpsSuggestedLocalSmokeUrls {
     param(
         [Parameter(Mandatory = $true)][object[]]$ChangedFiles
     )
@@ -558,6 +644,10 @@ function Get-UckkOpsSuggestedSmokeUrls {
     foreach ($file in @($ChangedFiles)) {
         $path = [string]$file.Path
 
+        if (Test-UckkOpsPathLike -Path $path -Patterns @("theme/uckk/*", "theme/uckk/**")) {
+            $urls += "$localUrl/login/index.php"
+        }
+
         if (Test-UckkOpsPathLike -Path $path -Patterns @("local/uckk/courses.php", "local/uckk/templates/pages/course_explorer.mustache", "local/uckk/amd/src/course_explorer.js")) {
             $urls += "$localUrl/local/uckk/courses.php"
         }
@@ -574,6 +664,51 @@ function Get-UckkOpsSuggestedSmokeUrls {
     }
 
     return @($urls | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique)
+}
+
+function Get-UckkOpsSuggestedServerSmokeUrls {
+    param(
+        [Parameter(Mandatory = $true)][object[]]$ChangedFiles
+    )
+
+    $urls = @()
+    $serverUrl = [string](Get-UckkOpsVar "ServerPublicUrl" -Default "https://uckk.org")
+    $configuredUrls = @((Get-UckkOpsVar "SmokeServerUrls" -Default @()))
+
+    foreach ($url in $configuredUrls) {
+        if (-not [string]::IsNullOrWhiteSpace([string]$url)) {
+            $urls += [string]$url
+        }
+    }
+
+    foreach ($file in @($ChangedFiles)) {
+        $path = [string]$file.Path
+
+        if (Test-UckkOpsPathLike -Path $path -Patterns @("theme/uckk/*", "theme/uckk/**")) {
+            $urls += "$serverUrl/login/index.php"
+        }
+
+        if (Test-UckkOpsPathLike -Path $path -Patterns @("local/uckk/courses.php", "local/uckk/templates/pages/course_explorer.mustache", "local/uckk/amd/src/course_explorer.js")) {
+            $urls += "$serverUrl/local/uckk/courses.php"
+        }
+
+        if (Test-UckkOpsPathLike -Path $path -Patterns @("local/uckk/mediatheque.php", "local/uckk/amd/src/mediatheque_explorer.js", "local/uckk/templates/pages/mediatheque_explorer.mustache")) {
+            $urls += "$serverUrl/local/uckk/mediatheque.php"
+        }
+    }
+
+    return @($urls | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique)
+}
+
+function Get-UckkOpsSuggestedSmokeUrls {
+    param(
+        [Parameter(Mandatory = $true)][object[]]$ChangedFiles
+    )
+
+    return @(
+        Get-UckkOpsSuggestedLocalSmokeUrls -ChangedFiles $ChangedFiles
+        Get-UckkOpsSuggestedServerSmokeUrls -ChangedFiles $ChangedFiles
+    ) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique
 }
 
 function Get-UckkOpsSimpleStatus {
@@ -608,11 +743,11 @@ function Get-UckkOpsSpecialInstructions {
     }
 
     if ($Plan.NeedsMoodleUpgrade) {
-        $lines += "Upgrade Moodle requis : lancer apres Sync local."
+        $lines += "Upgrade Moodle local requis : lancer apres Sync local."
     }
 
     if ($Plan.NeedsPurgeCaches) {
-        $lines += "Purge caches requise : lancer avant validation navigateur."
+        $lines += "Purge caches locale requise : lancer avant validation navigateur."
     }
 
     if ($Plan.NeedsSmokeTests) {
@@ -621,6 +756,22 @@ function Get-UckkOpsSpecialInstructions {
 
     if ($Plan.NeedsSeedApply) {
         $lines += "Seed detecte : faire un dry-run, pas d'apply automatique."
+    }
+
+    if ($Plan.NeedsServerSync) {
+        $lines += "Deploy serveur requis : Trigger OVH sync apres GitHub."
+    }
+
+    if ($Plan.NeedsServerUpgrade) {
+        $lines += "Upgrade Moodle serveur requis apres sync OVH."
+    }
+
+    if ($Plan.NeedsServerPurge) {
+        $lines += "Purge caches serveur requise apres sync OVH."
+    }
+
+    if ($Plan.NeedsServerSmoke) {
+        $lines += "Smoke serveur recommande apres purge serveur."
     }
 
     if ($lines.Count -eq 0) {
@@ -660,7 +811,7 @@ function Format-UckkOpsUpdatePlan {
         $lines += "- $component"
     }
 
-    if ($Plan.UnmappedFiles.Count -gt 0) {
+    if (@($Plan.UnmappedFiles).Count -gt 0) {
         $lines += ""
         $lines += "Unmapped files:"
         foreach ($file in @($Plan.UnmappedFiles)) {
@@ -675,15 +826,22 @@ function Format-UckkOpsUpdatePlan {
     }
 
     $lines += ""
-    $lines += "Required actions:"
+    $lines += "Required local actions:"
     $lines += "- AMD build: $($Plan.NeedsAmdBuild)"
     $lines += "- Local sync: $($Plan.NeedsLocalSync)"
-    $lines += "- Moodle upgrade: $($Plan.NeedsMoodleUpgrade)"
-    $lines += "- Purge caches: $($Plan.NeedsPurgeCaches)"
-    $lines += "- Smoke tests: $($Plan.NeedsSmokeTests)"
-    $lines += "- Seed apply: $($Plan.NeedsSeedApply)"
+    $lines += "- Moodle upgrade local: $($Plan.NeedsMoodleUpgrade)"
+    $lines += "- Purge local caches: $($Plan.NeedsPurgeCaches)"
+    $lines += "- Smoke local: $($Plan.NeedsSmokeTests)"
+    $lines += "- Seed dry-run: $($Plan.NeedsSeedApply)"
 
-    if ($Plan.SpecialInstructions.Count -gt 0) {
+    $lines += ""
+    $lines += "Required server actions:"
+    $lines += "- Server sync: $($Plan.NeedsServerSync)"
+    $lines += "- Moodle upgrade server: $($Plan.NeedsServerUpgrade)"
+    $lines += "- Purge server caches: $($Plan.NeedsServerPurge)"
+    $lines += "- Smoke server: $($Plan.NeedsServerSmoke)"
+
+    if (@($Plan.SpecialInstructions).Count -gt 0) {
         $lines += ""
         $lines += "Simple instructions:"
         foreach ($instruction in @($Plan.SpecialInstructions)) {
@@ -691,7 +849,7 @@ function Format-UckkOpsUpdatePlan {
         }
     }
 
-    if ($Plan.Reasons.Count -gt 0) {
+    if (@($Plan.Reasons).Count -gt 0) {
         $lines += ""
         $lines += "Reasons:"
         foreach ($reason in @($Plan.Reasons)) {
@@ -699,7 +857,7 @@ function Format-UckkOpsUpdatePlan {
         }
     }
 
-    if ($Plan.Warnings.Count -gt 0) {
+    if (@($Plan.Warnings).Count -gt 0) {
         $lines += ""
         $lines += "Warnings:"
         foreach ($warning in @($Plan.Warnings)) {
@@ -707,7 +865,7 @@ function Format-UckkOpsUpdatePlan {
         }
     }
 
-    if ($Plan.RecommendedOrder.Count -gt 0) {
+    if (@($Plan.RecommendedOrder).Count -gt 0) {
         $lines += ""
         $lines += "Recommended order:"
         $index = 1
@@ -717,7 +875,7 @@ function Format-UckkOpsUpdatePlan {
         }
     }
 
-    if ($Plan.CommandPreview.Count -gt 0) {
+    if (@($Plan.CommandPreview).Count -gt 0) {
         $lines += ""
         $lines += "Command preview:"
         foreach ($command in @($Plan.CommandPreview)) {
@@ -725,10 +883,18 @@ function Format-UckkOpsUpdatePlan {
         }
     }
 
-    if ($Plan.SuggestedSmokeUrls.Count -gt 0) {
+    if (@($Plan.SuggestedLocalSmokeUrls).Count -gt 0) {
         $lines += ""
-        $lines += "Suggested smoke URLs:"
-        foreach ($url in @($Plan.SuggestedSmokeUrls)) {
+        $lines += "Suggested local smoke URLs:"
+        foreach ($url in @($Plan.SuggestedLocalSmokeUrls)) {
+            $lines += "- $url"
+        }
+    }
+
+    if (@($Plan.SuggestedServerSmokeUrls).Count -gt 0) {
+        $lines += ""
+        $lines += "Suggested server smoke URLs:"
+        foreach ($url in @($Plan.SuggestedServerSmokeUrls)) {
             $lines += "- $url"
         }
     }
@@ -767,42 +933,61 @@ function Get-UckkOpsUpdatePlan {
     $hasMoodleChanges = Test-UckkOpsPlanNeedsMoodleAction -Actions $actions
     $recommendedOrder = @(Get-UckkOpsRecommendedOrder -Actions $actions -HasChanges:$hasChanges)
     $commandPreview = @(Get-UckkOpsCommandPreview -Actions $actions -ChangedFiles $changedFiles)
+    $suggestedLocalSmokeUrls = @(Get-UckkOpsSuggestedLocalSmokeUrls -ChangedFiles $changedFiles)
+    $suggestedServerSmokeUrls = @(Get-UckkOpsSuggestedServerSmokeUrls -ChangedFiles $changedFiles)
     $suggestedSmokeUrls = @(Get-UckkOpsSuggestedSmokeUrls -ChangedFiles $changedFiles)
 
     if (-not $hasChanges) {
         $recommendedOrder = @()
         $commandPreview = @()
+        $suggestedLocalSmokeUrls = @()
+        $suggestedServerSmokeUrls = @()
         $suggestedSmokeUrls = @()
         $hasMoodleChanges = $false
     }
 
     $plan = [pscustomobject]@{
-        HasChanges          = $hasChanges
-        HasMoodleChanges    = $hasMoodleChanges
-        IsOpsOnly           = ($hasChanges -and -not $hasMoodleChanges)
-        ChangedFiles        = $changedFiles
-        ChangedComponents   = $changedComponents
-        UnmappedFiles       = $unmappedFiles
-        NeedsLocalSync      = [bool]$actions.NeedsLocalSync
-        NeedsAmdBuild       = [bool]$actions.NeedsAmdBuild
-        NeedsMoodleUpgrade  = [bool]$actions.NeedsMoodleUpgrade
-        NeedsPurgeCaches    = [bool]$actions.NeedsPurgeCaches
-        NeedsSmokeTests     = [bool]$actions.NeedsSmokeTests
-        NeedsSeedApply      = [bool]$actions.NeedsSeedApply
-        Reasons             = @($actions.Reasons)
-        Warnings            = @($actions.Warnings)
-        RecommendedOrder    = $recommendedOrder
-        CommandPreview      = $commandPreview
-        SuggestedSmokeUrls  = $suggestedSmokeUrls
-        VisibleActions      = [pscustomobject]@{
-            BuildAmd      = [bool]$actions.NeedsAmdBuild
-            MoodleUpgrade = [bool]$actions.NeedsMoodleUpgrade
-            PurgeCaches   = [bool]$actions.NeedsPurgeCaches
-            SmokeLocal    = [bool]$actions.NeedsSmokeTests
-            SeedDryRun    = [bool]$actions.NeedsSeedApply
+        HasChanges              = $hasChanges
+        HasMoodleChanges        = $hasMoodleChanges
+        IsOpsOnly               = ($hasChanges -and -not $hasMoodleChanges)
+        ChangedFiles            = $changedFiles
+        ChangedComponents       = $changedComponents
+        UnmappedFiles           = $unmappedFiles
+
+        NeedsLocalSync          = [bool]$actions.NeedsLocalSync
+        NeedsAmdBuild           = [bool]$actions.NeedsAmdBuild
+        NeedsMoodleUpgrade      = [bool]$actions.NeedsMoodleUpgrade
+        NeedsPurgeCaches        = [bool]$actions.NeedsPurgeCaches
+        NeedsSmokeTests         = [bool]$actions.NeedsSmokeTests
+        NeedsSeedApply          = [bool]$actions.NeedsSeedApply
+
+        NeedsServerSync         = [bool]$actions.NeedsServerSync
+        NeedsServerUpgrade      = [bool]$actions.NeedsServerUpgrade
+        NeedsServerPurge        = [bool]$actions.NeedsServerPurge
+        NeedsServerSmoke        = [bool]$actions.NeedsServerSmoke
+
+        Reasons                 = @($actions.Reasons)
+        Warnings                = @($actions.Warnings)
+        RecommendedOrder        = $recommendedOrder
+        CommandPreview          = $commandPreview
+        SuggestedSmokeUrls      = $suggestedSmokeUrls
+        SuggestedLocalSmokeUrls = $suggestedLocalSmokeUrls
+        SuggestedServerSmokeUrls = $suggestedServerSmokeUrls
+
+        VisibleActions          = [pscustomobject]@{
+            BuildAmd          = [bool]$actions.NeedsAmdBuild
+            MoodleUpgrade     = [bool]$actions.NeedsMoodleUpgrade
+            PurgeCaches       = [bool]$actions.NeedsPurgeCaches
+            SmokeLocal        = [bool]$actions.NeedsSmokeTests
+            SeedDryRun        = [bool]$actions.NeedsSeedApply
+            ServerDeploy      = [bool]$actions.NeedsServerSync
+            ServerUpgrade     = [bool]$actions.NeedsServerUpgrade
+            ServerPurgeCaches = [bool]$actions.NeedsServerPurge
+            ServerSmoke       = [bool]$actions.NeedsServerSmoke
         }
-        SimpleStatus        = ""
-        SpecialInstructions = @()
+
+        SimpleStatus            = ""
+        SpecialInstructions     = @()
     }
 
     $plan.SimpleStatus = Get-UckkOpsSimpleStatus -Plan $plan
