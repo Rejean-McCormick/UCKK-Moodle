@@ -27,24 +27,20 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$sitecontext = context_course::instance(SITEID);
+
+$sitename = format_string(
+    $SITE->fullname,
+    true,
+    ['context' => $sitecontext]
+);
+
 $bodyclasses = [
     'theme-uckk',
     'theme-uckk-login-layout',
 ];
 
 $bodyattributes = $OUTPUT->body_attributes($bodyclasses);
-
-$sitename = format_string(
-    $SITE->fullname,
-    true,
-    ['context' => context_course::instance(SITEID)]
-);
-
-$shortname = format_string(
-    $SITE->shortname,
-    true,
-    ['context' => context_course::instance(SITEID)]
-);
 
 echo $OUTPUT->doctype();
 ?>
@@ -61,22 +57,26 @@ echo $OUTPUT->doctype();
 
 <div id="page-wrapper" class="theme-uckk-login-page-wrapper">
     <div id="page" class="theme-uckk-login-page">
-        <main id="page-content" class="theme-uckk-login-shell">
+        <div id="page-content" class="theme-uckk-login-shell">
 
-            <section
+            <aside
+                id="theme-uckk-login-visual"
                 class="login-layout-left"
-                aria-label="<?php echo s($sitename); ?>"
+                data-region="theme-uckk-login-visual"
+                aria-labelledby="theme-uckk-login-title"
             >
+                <div class="login-layout-left__overlay" aria-hidden="true"></div>
+
                 <div class="login-layout-left-content">
                     <p class="theme-uckk-eyebrow">
                         Univers-Cité King Klown
                     </p>
 
-                    <h1 class="mb-3">
+                    <h1 id="theme-uckk-login-title">
                         <?php echo $sitename; ?>
                     </h1>
 
-                    <p>
+                    <p class="login-layout-left__summary">
                         Campus pédagogique UCKK — espace de parcours, de cours,
                         de preuves et de participation institutionnelle.
                     </p>
@@ -92,18 +92,20 @@ echo $OUTPUT->doctype();
                         </p>
                     </div>
                 </div>
-            </section>
+            </aside>
 
-            <section
+            <main
                 id="region-main"
                 class="login-layout-right"
-                role="main"
+                data-region="theme-uckk-login-main"
                 aria-label="<?php echo s(get_string('login')); ?>"
             >
-                <?php echo $OUTPUT->main_content(); ?>
-            </section>
+                <div class="login-layout-right__inner">
+                    <?php echo $OUTPUT->main_content(); ?>
+                </div>
+            </main>
 
-        </main>
+        </div>
     </div>
 </div>
 
