@@ -934,45 +934,6 @@ body,
     box-shadow: 0 .75rem 2rem rgba(5, 47, 45, .08);
 }
 
-/* Top navbar: flat petrol, poster-like, no gradient. */
-.navbar.fixed-top,
-.navbar-light,
-.moremenu,
-.secondary-navigation,
-.activity-navigation {
-    background-image: none !important;
-    background-color: var(--uckk-petrol-deep) !important;
-    border-bottom: 4px solid var(--uckk-gold);
-    color: var(--uckk-paper-soft);
-}
-
-.navbar.fixed-top .navbar-brand,
-.navbar.fixed-top .nav-link,
-.navbar.fixed-top .login,
-.navbar.fixed-top a,
-.navbar.fixed-top .usertext,
-.moremenu .nav-link,
-.secondary-navigation .nav-link,
-.activity-navigation .nav-link {
-    color: var(--uckk-paper-soft) !important;
-}
-
-.navbar.fixed-top .nav-link.active,
-.moremenu .nav-link.active,
-.secondary-navigation .nav-link.active,
-.activity-navigation .nav-link.active {
-    background: rgba(196, 154, 58, .18) !important;
-    color: var(--uckk-paper-soft) !important;
-    border-bottom-color: var(--uckk-gold) !important;
-}
-
-/* Keep avatar/menu readable on petrol nav. */
-.navbar.fixed-top .userinitials,
-.navbar.fixed-top .popover-region-toggle,
-.navbar.fixed-top .icon {
-    color: var(--uckk-paper-soft) !important;
-}
-
 /* Page header: parchment, not white. */
 #page-header,
 .page-context-header,
@@ -1265,137 +1226,375 @@ hr,
     border-top-color: var(--uckk-gold-soft) !important;
 }
 
-
 /* ==========================================================================
-   UCKK dashboard and navbar refinement
-   Fixes:
-   - remove the pale wrapper slabs behind dashboard blocks
-   - remove the filled "More" active rectangle
-   - use clean mixed-case institutional brand text
-   - avoid cheap-looking tiny logo on the dark navbar
+   UCKK top navbar — canonical brand, menu and user controls
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   Navbar brand: text-first, mixed case, no tiny logo plaque.
-   The full logo remains available for front page/watermarks, but the navbar
-   should behave like institutional signage.
-   -------------------------------------------------------------------------- */
-
+/* This is the single source of truth for the fixed Moodle top bar.
+ * .navbar-brand::before renders the UCKK mark.
+ * .navbar-brand::after renders the textual site name.
+ */
 .navbar.fixed-top {
-    min-height: 4.25rem;
-}
-
-.navbar.fixed-top .navbar-brand {
-    display: inline-flex !important;
-    align-items: center;
-    min-width: 18rem;
-    min-height: 4.25rem;
-    margin: 0;
-    padding: 0 1.4rem;
+    display: flex !important;
+    align-items: center !important;
+    min-height: 3.75rem !important;
+    height: 3.75rem !important;
+    padding: 0 1.35rem !important;
     color: var(--uckk-paper-soft) !important;
-    font-family: $theme-uckk-font-body;
-    font-size: 0 !important;
-    font-weight: 600;
-    line-height: 1;
-    text-decoration: none;
-    text-transform: none !important;
-    letter-spacing: 0;
-}
-
-/* Hide Moodle logo image and older pseudo-logo treatments. */
-.navbar.fixed-top .navbar-brand img,
-.navbar.fixed-top .navbar-brand picture,
-.navbar.fixed-top .navbar-brand::before {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-}
-
-/* Deliberate brand text, not uppercase/small-caps. */
-.navbar.fixed-top .navbar-brand::after {
-    content: "Univers-Cité King Klown";
-    display: inline-block;
-    color: var(--uckk-paper-soft);
-    font-family: $theme-uckk-font-body;
-    font-size: 1.08rem;
-    font-weight: 650;
-    font-variant: normal;
-    letter-spacing: .005em;
-    line-height: 1.15;
-    text-transform: none !important;
-    white-space: nowrap;
-    text-shadow: none;
-}
-
-.navbar.fixed-top .navbar-brand:hover::after,
-.navbar.fixed-top .navbar-brand:focus::after {
-    color: var(--uckk-gold-soft);
-}
-
-/* Optional subtle institutional mark: thin gold rule before the brand. */
-.navbar.fixed-top .navbar-brand {
-    border-left: 3px solid var(--uckk-gold);
-}
-
-/* --------------------------------------------------------------------------
-   Navbar menu: active item should be an underline, not a filled block.
-   -------------------------------------------------------------------------- */
-
-.navbar.fixed-top .moremenu,
-.navbar.fixed-top .primary-navigation,
-.navbar.fixed-top .secondary-navigation {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-}
-
-.navbar.fixed-top .moremenu .nav-link,
-.navbar.fixed-top .primary-navigation .nav-link,
-.navbar.fixed-top .secondary-navigation .nav-link,
-.navbar.fixed-top .nav-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 4.25rem;
-    padding: 0 1rem;
-    color: var(--uckk-paper-soft) !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    font-family: $theme-uckk-font-body;
-    font-size: .98rem;
-    font-weight: 600;
-    letter-spacing: .01em;
-    text-transform: none !important;
-}
-
-.navbar.fixed-top .moremenu .nav-link.active,
-.navbar.fixed-top .primary-navigation .nav-link.active,
-.navbar.fixed-top .secondary-navigation .nav-link.active,
-.navbar.fixed-top .nav-link.active,
-.navbar.fixed-top .nav-item.show > .nav-link,
-.navbar.fixed-top .nav-link[aria-current="page"] {
-    color: var(--uckk-gold-soft) !important;
-    background: transparent !important;
-    background-color: transparent !important;
+    background: var(--uckk-petrol-deep) !important;
+    background-color: var(--uckk-petrol-deep) !important;
     background-image: none !important;
     border-bottom: 4px solid var(--uckk-gold) !important;
     box-shadow: none !important;
 }
 
-.navbar.fixed-top .moremenu .nav-link:hover,
-.navbar.fixed-top .primary-navigation .nav-link:hover,
-.navbar.fixed-top .secondary-navigation .nav-link:hover,
-.navbar.fixed-top .nav-link:hover {
-    color: var(--uckk-gold-soft) !important;
-    background: rgba(255, 250, 240, .05) !important;
+.navbar.fixed-top > .container-fluid {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 1rem !important;
+    min-height: 3.75rem !important;
+    height: 3.75rem !important;
+    padding: 0 !important;
 }
 
-/* --------------------------------------------------------------------------
-   Dashboard page shell: keep one page sheet only.
-   -------------------------------------------------------------------------- */
+.navbar.fixed-top .navbar-brand {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
+    gap: .65rem !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: auto !important;
+    min-height: 3.75rem !important;
+    height: 3.75rem !important;
+    margin: 0 2.25rem 0 0 !important;
+    padding: 0 1rem 0 .85rem !important;
+    color: transparent !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+    box-shadow: inset 3px 0 0 var(--uckk-gold) !important;
+}
+
+.navbar.fixed-top .navbar-brand::before {
+    content: "" !important;
+    display: inline-block !important;
+    flex: 0 0 2rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    background-image: url([[pix:theme_uckk|LogoUCKK_64px]]) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+}
+
+.navbar.fixed-top .navbar-brand::after {
+    content: "Univers-Cité King Klown" !important;
+    display: inline-block !important;
+    color: var(--uckk-paper-soft) !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 650 !important;
+    font-variant: normal !important;
+    letter-spacing: .005em !important;
+    line-height: 1 !important;
+    text-shadow: none !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+}
+
+/* Hide raw Moodle brand images; the controlled UCKK mark is ::before above. */
+.navbar.fixed-top .navbar-brand img,
+.navbar.fixed-top .navbar-brand picture,
+.navbar.fixed-top .navbar-brand .logo,
+.navbar.fixed-top .navbar-brand .site-name {
+    display: none !important;
+}
+
+.navbar.fixed-top .moremenu,
+.navbar.fixed-top .primary-navigation {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+.navbar.fixed-top .nav-link,
+.navbar.fixed-top .moremenu .nav-link,
+.navbar.fixed-top .primary-navigation .nav-link,
+.navbar.fixed-top .login,
+.navbar.fixed-top .dropdown-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    min-height: 3.75rem !important;
+    height: 3.75rem !important;
+    padding: 0 .9rem !important;
+    color: var(--uckk-paper-soft) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-bottom: 4px solid transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif !important;
+    font-size: .96rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+}
+
+.navbar.fixed-top .nav-link.active,
+.navbar.fixed-top .moremenu .nav-link.active,
+.navbar.fixed-top .primary-navigation .nav-link.active,
+.navbar.fixed-top .nav-link[aria-current="page"],
+.navbar.fixed-top .nav-link[aria-current="true"],
+.navbar.fixed-top .nav-item.show > .nav-link {
+    color: var(--uckk-gold-soft) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border-bottom-color: var(--uckk-gold) !important;
+    box-shadow: none !important;
+}
+
+.navbar.fixed-top .nav-link:hover,
+.navbar.fixed-top .moremenu .nav-link:hover,
+.navbar.fixed-top .primary-navigation .nav-link:hover,
+.navbar.fixed-top .nav-link:focus,
+.navbar.fixed-top .dropdown-toggle:hover,
+.navbar.fixed-top .dropdown-toggle:focus {
+    color: var(--uckk-gold-soft) !important;
+    background: rgba(255, 250, 240, .05) !important;
+    border-bottom-color: rgba(196, 154, 58, .55) !important;
+}
+
+/* Keep only one active marker. navigation.scss can add generated underlines. */
+.navbar.fixed-top .primary-navigation .nav-link.active::before,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="page"]::before,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="true"]::before,
+.navbar.fixed-top .moremenu .nav-link.active::before,
+.navbar.fixed-top .moremenu .nav-link[aria-current="page"]::before,
+.navbar.fixed-top .moremenu .nav-link[aria-current="true"]::before,
+.navbar.fixed-top .primary-navigation .nav-link.active:not(.dropdown-toggle)::after,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="page"]:not(.dropdown-toggle)::after,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="true"]:not(.dropdown-toggle)::after,
+.navbar.fixed-top .moremenu .nav-link.active:not(.dropdown-toggle)::after,
+.navbar.fixed-top .moremenu .nav-link[aria-current="page"]:not(.dropdown-toggle)::after,
+.navbar.fixed-top .moremenu .nav-link[aria-current="true"]:not(.dropdown-toggle)::after {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    content: none !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Right-side controls: never wrap, keep vertical alignment. */
+.navbar.fixed-top #usernavigation,
+.navbar.fixed-top .navbar-nav,
+.navbar.fixed-top .usermenu,
+.navbar.fixed-top .popover-region,
+.navbar.fixed-top .editmode-switch-form,
+.navbar.fixed-top .editmode-switch-form label,
+.navbar.fixed-top .form-check,
+.navbar.fixed-top .form-switch,
+.navbar.fixed-top .simplesearchform,
+.navbar.fixed-top .divider {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+}
+
+.navbar.fixed-top #usernavigation,
+.navbar.fixed-top .navbar-nav {
+    gap: .65rem !important;
+    margin-left: auto !important;
+}
+
+.navbar.fixed-top .editmode-switch-form {
+    min-width: max-content !important;
+    margin: 0 !important;
+}
+
+.navbar.fixed-top .editmode-switch-form label,
+.navbar.fixed-top .form-check-label {
+    margin: 0 .45rem 0 0 !important;
+    color: var(--uckk-paper-soft) !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+}
+
+.navbar.fixed-top .form-switch,
+.navbar.fixed-top .form-check,
+.navbar.fixed-top .popover-region,
+.navbar.fixed-top .usermenu {
+    min-height: 3.75rem !important;
+    margin: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.navbar.fixed-top .popover-region-toggle,
+.navbar.fixed-top .icon,
+.navbar.fixed-top .usertext {
+    color: var(--uckk-paper-soft) !important;
+}
+
+.navbar.fixed-top .userinitials,
+.navbar.fixed-top .userinitials.size-35,
+.navbar.fixed-top .usermenu .userbutton .avatars .avatar.current .userinitials {
+    margin-left: .5rem !important;
+    color: var(--uckk-petrol-deep) !important;
+    background-color: var(--uckk-paper-soft) !important;
+    border: 2px solid var(--uckk-gold) !important;
+    box-shadow: none !important;
+    font-weight: 800 !important;
+    text-shadow: none !important;
+}
+
+.navbar.fixed-top .avatars {
+    margin-left: .5rem !important;
+}
+
+.navbar.fixed-top .usermenu .dropdown-toggle::after {
+    color: var(--uckk-paper-soft) !important;
+    border-top-color: var(--uckk-paper-soft) !important;
+}
+
+@media (max-width: 767.98px) {
+    .navbar.fixed-top {
+        padding-inline: .85rem !important;
+    }
+
+    .navbar.fixed-top .navbar-brand {
+        margin-right: .75rem !important;
+        padding-left: .65rem !important;
+        padding-right: .5rem !important;
+    }
+
+    .navbar.fixed-top .navbar-brand::after {
+        content: "UCKK" !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* ==========================================================================
+   UCKK secondary navigation correction
+   Admin/course tab navigation must stay parchment, not dark navbar.
+   Only .navbar.fixed-top should use the dark petrol treatment.
+   ========================================================================== */
+
+/* Reset Moodle secondary navigation away from the top navbar treatment. */
+#page .secondary-navigation,
+#page .secondary-navigation .navigation,
+#page .secondary-navigation .moremenu,
+#page .secondary-navigation .nav-tabs,
+#page .secondary-navigation .nav,
+#page .activity-navigation,
+#page .activity-navigation .navigation,
+#page .activity-navigation .moremenu,
+#page .activity-navigation .nav {
+    background: var(--uckk-paper-soft) !important;
+    background-color: var(--uckk-paper-soft) !important;
+    background-image: none !important;
+    border-top: 0 !important;
+    border-bottom: 2px solid var(--uckk-rule-gold, rgba(196, 154, 58, .48)) !important;
+    box-shadow: none !important;
+    color: var(--uckk-ink) !important;
+}
+
+/* Secondary nav wrapper spacing. */
+#page .secondary-navigation {
+    margin-top: 0;
+    border-top: 2px solid var(--uckk-rule-gold-soft, rgba(196, 154, 58, .32)) !important;
+}
+
+/* Secondary nav links: parchment tabs, petrol text. */
+#page .secondary-navigation .nav-link,
+#page .secondary-navigation .moremenu .nav-link,
+#page .activity-navigation .nav-link,
+#page .activity-navigation .moremenu .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3.25rem !important;
+    padding: .85rem 1.25rem !important;
+    color: var(--uckk-petrol) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-bottom: 4px solid transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-family: $theme-uckk-font-body;
+    font-size: .98rem;
+    font-weight: 650;
+    letter-spacing: .015em;
+    text-transform: none !important;
+}
+
+/* Active secondary nav tab. */
+#page .secondary-navigation .nav-link.active,
+#page .secondary-navigation .moremenu .nav-link.active,
+#page .secondary-navigation .nav-item.show > .nav-link,
+#page .secondary-navigation .nav-link[aria-current="page"],
+#page .activity-navigation .nav-link.active,
+#page .activity-navigation .moremenu .nav-link.active,
+#page .activity-navigation .nav-item.show > .nav-link,
+#page .activity-navigation .nav-link[aria-current="page"] {
+    color: var(--uckk-ink) !important;
+    background: var(--uckk-paper) !important;
+    background-color: var(--uckk-paper) !important;
+    background-image: none !important;
+    border-bottom-color: var(--uckk-petrol) !important;
+    box-shadow: none !important;
+}
+
+/* Hover state. */
+#page .secondary-navigation .nav-link:hover,
+#page .secondary-navigation .moremenu .nav-link:hover,
+#page .activity-navigation .nav-link:hover,
+#page .activity-navigation .moremenu .nav-link:hover {
+    color: var(--uckk-petrol-dark) !important;
+    background: rgba(30, 104, 100, .06) !important;
+    border-bottom-color: var(--uckk-gold) !important;
+}
+
+/* More dropdown from secondary nav should also be parchment. */
+#page .secondary-navigation .dropdown-menu,
+#page .activity-navigation .dropdown-menu {
+    background: var(--uckk-paper-soft) !important;
+    background-color: var(--uckk-paper-soft) !important;
+    background-image: none !important;
+    border: 2px solid var(--uckk-rule-gold, rgba(196, 154, 58, .48)) !important;
+    box-shadow: 0 .75rem 1.5rem rgba(16, 39, 36, .12) !important;
+}
+
+#page .secondary-navigation .dropdown-item,
+#page .activity-navigation .dropdown-item {
+    color: var(--uckk-petrol) !important;
+    background: transparent !important;
+}
+
+#page .secondary-navigation .dropdown-item:hover,
+#page .secondary-navigation .dropdown-item:focus,
+#page .activity-navigation .dropdown-item:hover,
+#page .activity-navigation .dropdown-item:focus {
+    color: var(--uckk-ink) !important;
+    background: rgba(30, 104, 100, .08) !important;
+}
+
+/* ==========================================================================
+   UCKK dashboard page refinement
+   ========================================================================== */
+
+/* Dashboard page shell: keep one page sheet only. */
 
 body.path-my #page,
 body.path-my #page-wrapper,
@@ -1580,18 +1779,7 @@ body.path-my #page-header::after {
     background-size: contain;
 }
 
-/* Small screens: keep brand compact and avoid watermark clutter. */
 @media (max-width: 767.98px) {
-    .navbar.fixed-top .navbar-brand {
-        min-width: auto;
-        padding-inline: .75rem;
-    }
-
-    .navbar.fixed-top .navbar-brand::after {
-        content: "UCKK";
-        font-size: 1rem;
-    }
-
     body.path-my #page-header::after {
         display: none !important;
     }
@@ -1602,328 +1790,10 @@ body.path-my #page-header::after {
     }
 }
 
-/* ==========================================================================
-   UCKK secondary navigation correction
-   Admin/course tab navigation must stay parchment, not dark navbar.
-   Only .navbar.fixed-top should use the dark petrol treatment.
+/* ========================================================================== 
+   UCKK public local navigation guard
    ========================================================================== */
 
-/* Reset Moodle secondary navigation away from the top navbar treatment. */
-#page .secondary-navigation,
-#page .secondary-navigation .navigation,
-#page .secondary-navigation .moremenu,
-#page .secondary-navigation .nav-tabs,
-#page .secondary-navigation .nav,
-#page .activity-navigation,
-#page .activity-navigation .navigation,
-#page .activity-navigation .moremenu,
-#page .activity-navigation .nav {
-    background: var(--uckk-paper-soft) !important;
-    background-color: var(--uckk-paper-soft) !important;
-    background-image: none !important;
-    border-top: 0 !important;
-    border-bottom: 2px solid var(--uckk-rule-gold, rgba(196, 154, 58, .48)) !important;
-    box-shadow: none !important;
-    color: var(--uckk-ink) !important;
-}
-
-/* Secondary nav wrapper spacing. */
-#page .secondary-navigation {
-    margin-top: 0;
-    border-top: 2px solid var(--uckk-rule-gold-soft, rgba(196, 154, 58, .32)) !important;
-}
-
-/* Secondary nav links: parchment tabs, petrol text. */
-#page .secondary-navigation .nav-link,
-#page .secondary-navigation .moremenu .nav-link,
-#page .activity-navigation .nav-link,
-#page .activity-navigation .moremenu .nav-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 3.25rem !important;
-    padding: .85rem 1.25rem !important;
-    color: var(--uckk-petrol) !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-    border: 0 !important;
-    border-bottom: 4px solid transparent !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    font-family: $theme-uckk-font-body;
-    font-size: .98rem;
-    font-weight: 650;
-    letter-spacing: .015em;
-    text-transform: none !important;
-}
-
-/* Active secondary nav tab. */
-#page .secondary-navigation .nav-link.active,
-#page .secondary-navigation .moremenu .nav-link.active,
-#page .secondary-navigation .nav-item.show > .nav-link,
-#page .secondary-navigation .nav-link[aria-current="page"],
-#page .activity-navigation .nav-link.active,
-#page .activity-navigation .moremenu .nav-link.active,
-#page .activity-navigation .nav-item.show > .nav-link,
-#page .activity-navigation .nav-link[aria-current="page"] {
-    color: var(--uckk-ink) !important;
-    background: var(--uckk-paper) !important;
-    background-color: var(--uckk-paper) !important;
-    background-image: none !important;
-    border-bottom-color: var(--uckk-petrol) !important;
-    box-shadow: none !important;
-}
-
-/* Hover state. */
-#page .secondary-navigation .nav-link:hover,
-#page .secondary-navigation .moremenu .nav-link:hover,
-#page .activity-navigation .nav-link:hover,
-#page .activity-navigation .moremenu .nav-link:hover {
-    color: var(--uckk-petrol-dark) !important;
-    background: rgba(30, 104, 100, .06) !important;
-    border-bottom-color: var(--uckk-gold) !important;
-}
-
-/* More dropdown from secondary nav should also be parchment. */
-#page .secondary-navigation .dropdown-menu,
-#page .activity-navigation .dropdown-menu {
-    background: var(--uckk-paper-soft) !important;
-    background-color: var(--uckk-paper-soft) !important;
-    background-image: none !important;
-    border: 2px solid var(--uckk-rule-gold, rgba(196, 154, 58, .48)) !important;
-    box-shadow: 0 .75rem 1.5rem rgba(16, 39, 36, .12) !important;
-}
-
-#page .secondary-navigation .dropdown-item,
-#page .activity-navigation .dropdown-item {
-    color: var(--uckk-petrol) !important;
-    background: transparent !important;
-}
-
-#page .secondary-navigation .dropdown-item:hover,
-#page .secondary-navigation .dropdown-item:focus,
-#page .activity-navigation .dropdown-item:hover,
-#page .activity-navigation .dropdown-item:focus {
-    color: var(--uckk-ink) !important;
-    background: rgba(30, 104, 100, .08) !important;
-}
-
-/* Keep the real top navbar dark after the secondary-navigation reset. */
-.navbar.fixed-top {
-    background: var(--uckk-petrol-deep) !important;
-    background-color: var(--uckk-petrol-deep) !important;
-    background-image: none !important;
-    border-bottom: 4px solid var(--uckk-gold) !important;
-}
-
-/* But do not let the top-navbar rules leak into page-level tabs. */
-#page .secondary-navigation .moremenu .nav-link.active,
-#page .activity-navigation .moremenu .nav-link.active {
-    background-color: var(--uckk-paper) !important;
-}
-
-/* ==========================================================================
-   UCKK final top navbar correction
-   Compact, balanced, non-wrapping institutional top bar.
-   This overrides earlier broad Boost/navbar rules.
-   ========================================================================== */
-
-.navbar.fixed-top {
-    min-height: 3.75rem !important;
-    height: 3.75rem !important;
-    padding: 0 1.35rem !important;
-    display: flex !important;
-    align-items: center !important;
-    background: var(--uckk-petrol-deep) !important;
-    background-color: var(--uckk-petrol-deep) !important;
-    background-image: none !important;
-    border-bottom: 4px solid var(--uckk-gold) !important;
-    box-shadow: none !important;
-}
-
-/* Moodle usually puts the navbar content inside .container-fluid. */
-.navbar.fixed-top > .container-fluid {
-    min-height: 3.75rem !important;
-    height: 3.75rem !important;
-    padding: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-    gap: 1rem;
-}
-
-/* Brand area: text-only for now; the detailed logo belongs in hero/frontpage. */
-.navbar.fixed-top .navbar-brand {
-    display: inline-flex !important;
-    align-items: center !important;
-    flex: 0 0 auto !important;
-    min-width: auto !important;
-    width: auto !important;
-    max-width: none !important;
-    min-height: 3.75rem !important;
-    height: 3.75rem !important;
-    margin: 0 2.25rem 0 0 !important;
-    padding: 0 1rem 0 0 !important;
-    border: 0 !important;
-    color: transparent !important;
-    font-size: 0 !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
-    text-decoration: none !important;
-    text-transform: none !important;
-}
-
-/* Hide prior logo/pseudo-logo treatments in the top bar only. */
-.navbar.fixed-top .navbar-brand::before,
-.navbar.fixed-top .navbar-brand img,
-.navbar.fixed-top .navbar-brand picture,
-.navbar.fixed-top .navbar-brand .logo,
-.navbar.fixed-top .navbar-brand .site-name {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-}
-
-/* Clean brand text: mixed case, calmer weight, no fake small caps. */
-.navbar.fixed-top .navbar-brand::after {
-    content: "Univers-Cité King Klown";
-    display: inline-block !important;
-    color: var(--uckk-paper-soft) !important;
-    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif !important;
-    font-size: 1rem !important;
-    font-weight: 650 !important;
-    font-variant: normal !important;
-    letter-spacing: .005em !important;
-    line-height: 1 !important;
-    text-transform: none !important;
-    white-space: nowrap !important;
-    text-shadow: none !important;
-}
-
-/* Subtle institutional mark beside the brand without using the low-res logo. */
-.navbar.fixed-top .navbar-brand {
-    box-shadow: inset 3px 0 0 var(--uckk-gold);
-    padding-left: .85rem !important;
-}
-
-/* Top navbar links: underline active state, no filled block. */
-.navbar.fixed-top .nav-link,
-.navbar.fixed-top .moremenu .nav-link,
-.navbar.fixed-top .primary-navigation .nav-link,
-.navbar.fixed-top .secondary-navigation .nav-link {
-    min-height: 3.75rem !important;
-    height: 3.75rem !important;
-    padding: 0 .9rem !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    white-space: nowrap !important;
-    color: var(--uckk-paper-soft) !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-    border: 0 !important;
-    border-bottom: 4px solid transparent !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif !important;
-    font-size: .96rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0 !important;
-    text-transform: none !important;
-}
-
-.navbar.fixed-top .nav-link.active,
-.navbar.fixed-top .moremenu .nav-link.active,
-.navbar.fixed-top .primary-navigation .nav-link.active,
-.navbar.fixed-top .secondary-navigation .nav-link.active,
-.navbar.fixed-top .nav-link[aria-current="page"],
-.navbar.fixed-top .nav-item.show > .nav-link {
-    color: var(--uckk-gold-soft) !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-    border-bottom-color: var(--uckk-gold) !important;
-    box-shadow: none !important;
-}
-
-.navbar.fixed-top .nav-link:hover,
-.navbar.fixed-top .moremenu .nav-link:hover,
-.navbar.fixed-top .primary-navigation .nav-link:hover,
-.navbar.fixed-top .secondary-navigation .nav-link:hover,
-.navbar.fixed-top .nav-link:focus {
-    color: var(--uckk-gold-soft) !important;
-    background: rgba(255, 250, 240, .05) !important;
-    border-bottom-color: rgba(196, 154, 58, .55) !important;
-}
-
-/* ==========================================================================
-   UCKK active navigation underline guard
-   ========================================================================== */
-
-/*
- * Prevent active navigation markers from stacking.
- *
- * theme_uckk/scss/navigation.scss is inlined after this file, so these rules
- * use higher specificity and !important only on the visual reset points.
- * They do not replace Moodle navigation; they only remove duplicate active
- * indicators created by border + box-shadow + generated ::after underlines.
- */
-
-/* Top Moodle navbar: keep one active marker only. */
-.navbar.fixed-top .nav-link,
-.navbar.fixed-top .nav-link:visited,
-.navbar.fixed-top .nav-link:hover,
-.navbar.fixed-top .nav-link:focus,
-.navbar.fixed-top .nav-link.active,
-.navbar.fixed-top .nav-link[aria-current="page"],
-.navbar.fixed-top .nav-link[aria-current="true"],
-.navbar.fixed-top .nav-item.show > .nav-link {
-    text-decoration: none !important;
-}
-
-.navbar.fixed-top .nav-link.active,
-.navbar.fixed-top .moremenu .nav-link.active,
-.navbar.fixed-top .primary-navigation .nav-link.active,
-.navbar.fixed-top .secondary-navigation .nav-link.active,
-.navbar.fixed-top .nav-link[aria-current="page"],
-.navbar.fixed-top .nav-link[aria-current="true"],
-.navbar.fixed-top .nav-item.show > .nav-link {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-    border-bottom-color: var(--uckk-gold) !important;
-    box-shadow: none !important;
-}
-
-/*
- * navigation.scss adds a generated underline to active primary-navigation
- * links. The fixed top navbar already uses border-bottom for its single active
- * marker, so generated underline layers must be suppressed there.
- *
- * Do not suppress .dropdown-toggle::after globally; Bootstrap uses it for the
- * dropdown caret.
- */
-.navbar.fixed-top .primary-navigation .nav-link.active::before,
-.navbar.fixed-top .primary-navigation .nav-link[aria-current="page"]::before,
-.navbar.fixed-top .primary-navigation .nav-link[aria-current="true"]::before,
-.navbar.fixed-top .moremenu .nav-link.active::before,
-.navbar.fixed-top .moremenu .nav-link[aria-current="page"]::before,
-.navbar.fixed-top .moremenu .nav-link[aria-current="true"]::before,
-.navbar.fixed-top .primary-navigation .nav-link.active:not(.dropdown-toggle)::after,
-.navbar.fixed-top .primary-navigation .nav-link[aria-current="page"]:not(.dropdown-toggle)::after,
-.navbar.fixed-top .primary-navigation .nav-link[aria-current="true"]:not(.dropdown-toggle)::after,
-.navbar.fixed-top .moremenu .nav-link.active:not(.dropdown-toggle)::after,
-.navbar.fixed-top .moremenu .nav-link[aria-current="page"]:not(.dropdown-toggle)::after,
-.navbar.fixed-top .moremenu .nav-link[aria-current="true"]:not(.dropdown-toggle)::after {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    content: none !important;
-    background: none !important;
-    box-shadow: none !important;
-}
-
-/* Public local_uckk nav: never inherit theme-generated underlines or generic link colours. */
 body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link,
 body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link,
 body.pagelayout-local_uckk_public .local-uckk .local-uckk-public-nav__link:link,
@@ -1994,88 +1864,6 @@ body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link.activ
 body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__link[aria-current="page"] *,
 body:has(.local-uckk-public-page) .local-uckk .local-uckk-public-nav__item.active > .local-uckk-public-nav__link * {
     color: inherit !important;
-}
-
-/* Right-side controls: never wrap, keep vertical alignment. */
-.navbar.fixed-top .navbar-nav,
-.navbar.fixed-top .usermenu,
-.navbar.fixed-top .popover-region,
-.navbar.fixed-top .editmode-switch-form,
-.navbar.fixed-top .editmode-switch-form label,
-.navbar.fixed-top .form-check,
-.navbar.fixed-top .form-switch,
-.navbar.fixed-top .simplesearchform,
-.navbar.fixed-top .divider {
-    display: inline-flex !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-    white-space: nowrap !important;
-}
-
-.navbar.fixed-top .navbar-nav {
-    gap: .65rem !important;
-    margin-left: auto !important;
-}
-
-/* Fix Edit mode label wrapping and vertical offset. */
-.navbar.fixed-top .editmode-switch-form {
-    min-width: max-content !important;
-    margin: 0 !important;
-}
-
-.navbar.fixed-top .editmode-switch-form label,
-.navbar.fixed-top .form-check-label {
-    white-space: nowrap !important;
-    line-height: 1 !important;
-    margin: 0 .45rem 0 0 !important;
-    color: var(--uckk-paper-soft) !important;
-}
-
-.navbar.fixed-top .form-switch,
-.navbar.fixed-top .form-check {
-    min-height: 3.75rem !important;
-    margin: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-/* Notification and message icons. */
-.navbar.fixed-top .popover-region-toggle,
-.navbar.fixed-top .icon,
-.navbar.fixed-top .usertext {
-    color: var(--uckk-paper-soft) !important;
-}
-
-.navbar.fixed-top .popover-region {
-    min-height: 3.75rem !important;
-}
-
-/* User avatar alignment. */
-.navbar.fixed-top .usermenu {
-    min-height: 3.75rem !important;
-}
-
-.navbar.fixed-top .userinitials,
-.navbar.fixed-top .avatars {
-    margin-left: .5rem !important;
-}
-
-/* Small screens: use short brand label to protect the right controls. */
-@media (max-width: 767.98px) {
-    .navbar.fixed-top {
-        padding-inline: .85rem !important;
-    }
-
-    .navbar.fixed-top .navbar-brand {
-        margin-right: .75rem !important;
-        padding-left: .65rem !important;
-        padding-right: .5rem !important;
-    }
-
-    .navbar.fixed-top .navbar-brand::after {
-        content: "UCKK";
-        font-size: 1rem !important;
-    }
 }
 
 /* ========================================================================== 
@@ -2292,50 +2080,6 @@ body:has(.local-uckk-public-page) .local-uckk {
     padding-top: .65rem !important;
 }
 
-/* Top bar rhythm on public pages: compact, non-clipping, accent-safe. */
-body.pagelayout-local_uckk_public .navbar.fixed-top,
-body:has(.local-uckk-public-page) .navbar.fixed-top,
-body.notloggedin .navbar.fixed-top {
-    height: auto !important;
-    min-height: 3.35rem !important;
-    overflow: visible !important;
-}
-
-body.pagelayout-local_uckk_public .navbar.fixed-top > .container-fluid,
-body:has(.local-uckk-public-page) .navbar.fixed-top > .container-fluid,
-body.notloggedin .navbar.fixed-top > .container-fluid {
-    height: auto !important;
-    min-height: 3.35rem !important;
-}
-
-body.pagelayout-local_uckk_public .navbar.fixed-top .navbar-brand,
-body.pagelayout-local_uckk_public .navbar.fixed-top .nav-link,
-body.pagelayout-local_uckk_public .navbar.fixed-top .moremenu .nav-link,
-body.pagelayout-local_uckk_public .navbar.fixed-top .primary-navigation .nav-link,
-body:has(.local-uckk-public-page) .navbar.fixed-top .navbar-brand,
-body:has(.local-uckk-public-page) .navbar.fixed-top .nav-link,
-body:has(.local-uckk-public-page) .navbar.fixed-top .moremenu .nav-link,
-body:has(.local-uckk-public-page) .navbar.fixed-top .primary-navigation .nav-link,
-body.notloggedin .navbar.fixed-top .navbar-brand,
-body.notloggedin .navbar.fixed-top .nav-link,
-body.notloggedin .navbar.fixed-top .login,
-body.notloggedin .navbar.fixed-top .langmenu,
-body.notloggedin .navbar.fixed-top .dropdown-toggle {
-    height: auto !important;
-    min-height: 3.35rem !important;
-    line-height: 1.32 !important;
-    overflow: visible !important;
-}
-
-body.pagelayout-local_uckk_public .navbar.fixed-top .nav-link,
-body:has(.local-uckk-public-page) .navbar.fixed-top .nav-link,
-body.notloggedin .navbar.fixed-top .nav-link,
-body.notloggedin .navbar.fixed-top .login,
-body.notloggedin .navbar.fixed-top .langmenu,
-body.notloggedin .navbar.fixed-top .dropdown-toggle {
-    font-size: .94rem !important;
-}
-
 @media (max-width: 767.98px) {
     body.pagelayout-local_uckk_public,
     body:has(.local-uckk-public-page) {
@@ -2497,4 +2241,3 @@ body.pagelayout-login #region-main.login-layout-right .btn {
         padding-inline: 0;
     }
 }
-
