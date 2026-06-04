@@ -10,7 +10,7 @@
 // Univers-Cité King Klown.
 
 /**
- * Public archives page definition for local_uckk.
+ * Public registrar page definition for local_uckk.
  *
  * @package    local_uckk
  * @copyright  2026 Univers-Cité King Klown
@@ -22,7 +22,10 @@ namespace local_uckk\local\public_pages;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Public archives page definition.
+ * Public registrar page definition.
+ *
+ * The class name remains "archives" because the internal route and legacy
+ * code path still use archives.php. Public-facing labels must use Registraire.
  *
  * @package local_uckk
  */
@@ -36,25 +39,25 @@ final class archives {
         return [
             'layout' => 'standard',
             'typography' => 'institutional',
-            'eyebrow' => 'Conserver les traces publiques',
-            'title' => 'Archives UCKK',
+            'eyebrow' => 'Registre public institutionnel',
+            'title' => 'Registraire UCKK',
             'subtitle' => 'Mémoire institutionnelle, preuves publiques, décisions et corrections.',
-            'summary' => 'Les archives conservent les traces publiques utiles à la compréhension du campus, de ses décisions et de ses transformations.',
+            'summary' => 'Le registraire conserve les traces publiques utiles à la compréhension du campus, de ses décisions et de ses transformations.',
             'sections' => [
                 [
-                    'title' => 'Ce que les archives conservent',
-                    'body' => 'Les archives peuvent conserver des versions publiques du canon, des décisions, des modèles, des corrections, des appels, des travaux publics et des traces institutionnelles.',
+                    'title' => 'Ce que le registraire conserve',
+                    'body' => 'Le registraire peut conserver des versions publiques du canon, des décisions, des modèles, des corrections, des appels, des travaux publics et des traces institutionnelles.',
                 ],
                 [
-                    'title' => 'Ce que les archives ne doivent pas exposer',
-                    'body' => 'Elles ne doivent pas publier de données personnelles, dossiers sensibles, preuves privées ou informations réservées à des rôles Moodle.',
+                    'title' => 'Ce que le registraire ne doit pas exposer',
+                    'body' => 'Il ne doit pas publier de données personnelles, dossiers sensibles, preuves privées ou informations réservées à des rôles Moodle.',
                 ],
                 [
                     'title' => 'Usage',
-                    'body' => 'Les archives servent à comprendre, vérifier, relier et corriger. Elles ne sont pas un simple dépôt de fichiers.',
+                    'body' => 'Le registraire sert à comprendre, vérifier, relier et corriger. Il n’est pas un simple dépôt de fichiers.',
                 ],
             ],
-            'cardsheading' => 'Repères d’archive',
+            'cardsheading' => 'Repères du registraire',
             'cards' => [
                 [
                     'title' => 'Mémoire',
@@ -74,8 +77,8 @@ final class archives {
             ],
             'notices' => [
                 [
-                    'title' => 'Archives publiques',
-                    'body' => 'Les contenus d’archives visibles ici doivent respecter la confidentialité et les limites institutionnelles.',
+                    'title' => 'Registraire public',
+                    'body' => 'Les contenus visibles ici doivent respecter la confidentialité et les limites institutionnelles.',
                     'type' => 'warning',
                 ],
             ],

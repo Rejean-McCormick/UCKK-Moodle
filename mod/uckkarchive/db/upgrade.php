@@ -70,6 +70,15 @@ function xmldb_uckkarchive_upgrade($oldversion): bool {
         upgrade_mod_savepoint(true, 2026052702, 'uckkarchive');
     }
 
+    if ($oldversion < 2026052703) {
+        // Add canonical media source and rights fields introduced after the
+        // first media-library upgrade snapshot. Existing records are backfilled
+        // from legacy source and metadata values where possible.
+        uckkarchive_upgrade_extend_media_source_record_fields();
+
+        upgrade_mod_savepoint(true, 2026052703, 'uckkarchive');
+    }
+
     return true;
 }
 
@@ -100,6 +109,12 @@ function uckkarchive_upgrade_create_media_advisory_external_tables(): void {
         uckkarchive_upgrade_field('visibility', XMLDB_TYPE_CHAR, '50', true, false, 'course'),
         uckkarchive_upgrade_field('audiencesuitability', XMLDB_TYPE_CHAR, '50', true, false, 'guided'),
         uckkarchive_upgrade_field('source', XMLDB_TYPE_CHAR, '50', true, false, ''),
+        uckkarchive_upgrade_field('sourcetype', XMLDB_TYPE_CHAR, '64', false),
+        uckkarchive_upgrade_field('sourceurl', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('license', XMLDB_TYPE_CHAR, '128', false),
+        uckkarchive_upgrade_field('licensekey', XMLDB_TYPE_CHAR, '128', false),
+        uckkarchive_upgrade_field('rightsstatement', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('rightsstatus', XMLDB_TYPE_CHAR, '64', true, false, 'unknown'),
         uckkarchive_upgrade_field('title', XMLDB_TYPE_CHAR, '255', true, false, ''),
         uckkarchive_upgrade_field('summary', XMLDB_TYPE_TEXT),
         uckkarchive_upgrade_field('description', XMLDB_TYPE_TEXT),
@@ -505,6 +520,146 @@ function uckkarchive_upgrade_extend_export_table(): void {
     foreach ($fields as $field) {
         uckkarchive_upgrade_add_field_if_missing('uckkarchive_export', $field);
     }
+}
+
+/**
+ * Add canonical source and rights fields directly to media records.
+ *
+ * Early development upgrades created uckkarchive_media with only the legacy
+ * source column. The media form and controller now persist sourcetype,
+ * sourceurl, license, licensekey, rightsstatement, and rightsstatus directly on
+ * uckkarchive_media. Without these columns, those submitted values are filtered
+ * out before database insertion.
+ *
+ * @return void
+ */
+function uckkarchive_upgrade_extend_media_source_record_fields(): void {
+    global $DB;
+
+    $tablename = 'uckkarchive_media';
+
+    $fields = [
+        uckkarchive_upgrade_field('sourcetype', XMLDB_TYPE_CHAR, '64', false),
+        uckkarchive_upgrade_field('sourceurl', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('license', XMLDB_TYPE_CHAR, '128', false),
+        uckkarchive_upgrade_field('licensekey', XMLDB_TYPE_CHAR, '128', false),
+        uckkarchive_upgrade_field('rightsstatement', XMLDB_TYPE_TEXT),
+        uckkarchive_upgrade_field('rightsstatus', XMLDB_TYPE_CHAR, '64', true, false, 'unknown'),
+    ];
+
+    foreach ($fields as $field) {
+        uckkarchive_upgrade_add_field_if_missing($tablename, $field);
+    }
+
+    if (!uckkarchive_upgrade_table_has_fields($tablename, ['source', 'sourcetype'])) {
+        return;
+    }
+
+    $DB->execute(
+        "UPDATE {uckkarchive_media}
+            SET sourcetype = source
+          WHERE (sourcetype IS NULL OR sourcetype = '')
+            AND source IS NOT NULL
+            AND source <> ''"
+    );
+
+    $DB->execute(
+        "UPDATE {uckkarchive_media}
+            SET source = sourcetype
+          WHERE (source IS NULL OR source = '')
+            AND sourcetype IS NOT NULL
+            AND sourcetype <> ''"
+    );
+
+    if (uckkarchive_upgrade_table_has_fields($tablename, ['license', 'licensekey'])) {
+        $DB->execute(
+            "UPDATE {uckkarchive_media}
+                SET licensekey = license
+              WHERE (licensekey IS NULL OR licensekey = '')
+                AND license IS NOT NULL
+                AND license <> ''"
+        );
+    }
+
+    if (uckkarchive_upgrade_table_has_fields($tablename, ['rightsstatus'])) {
+        $DB->execute(
+            "UPDATE {uckkarchive_media}
+                SET rightsstatus = 'unknown'
+              WHERE rightsstatus IS NULL
+                 OR rightsstatus = ''"
+        );
+    }
+
+    if (uckkarchive_upgrade_table_has_fields($tablename, ['sourceurl', 'metadata'])) {
+        uckkarchive_upgrade_backfill_media_sourceurls_from_metadata();
+    }
+}
+
+/**
+ * Backfill media source URLs from structured metadata when available.
+ *
+ * @return void
+ */
+function uckkarchive_upgrade_backfill_media_sourceurls_from_metadata(): void {
+    global $DB;
+
+    $recordset = $DB->get_recordset('uckkarchive_media', null, '', 'id, sourceurl, metadata');
+
+    foreach ($recordset as $record) {
+        if (!empty($record->sourceurl)) {
+            continue;
+        }
+
+        if (empty($record->metadata) || !is_string($record->metadata)) {
+            continue;
+        }
+
+        $metadata = json_decode($record->metadata, true);
+        if (json_last_error() !== JSON_ERROR_NONE || !is_array($metadata)) {
+            continue;
+        }
+
+        $sourceurl = uckkarchive_upgrade_extract_media_sourceurl_from_metadata($metadata);
+        if ($sourceurl === '') {
+            continue;
+        }
+
+        $DB->set_field('uckkarchive_media', 'sourceurl', $sourceurl, ['id' => (int)$record->id]);
+    }
+
+    $recordset->close();
+}
+
+/**
+ * Extract a source URL from legacy media metadata.
+ *
+ * @param array<string,mixed> $metadata Metadata array.
+ * @return string
+ */
+function uckkarchive_upgrade_extract_media_sourceurl_from_metadata(array $metadata): string {
+    foreach (['sourceurl', 'externalurl', 'url'] as $field) {
+        if (!empty($metadata[$field]) && is_string($metadata[$field])) {
+            $url = clean_param((string)$metadata[$field], PARAM_URL);
+            if ($url !== '') {
+                return $url;
+            }
+        }
+    }
+
+    foreach (['citation', 'externalworkidentifier', 'externalworknote', 'notes_raw'] as $field) {
+        if (empty($metadata[$field]) || !is_string($metadata[$field])) {
+            continue;
+        }
+
+        if (preg_match('~https?://[^\s<>"\']+~u', (string)$metadata[$field], $matches)) {
+            $url = clean_param($matches[0], PARAM_URL);
+            if ($url !== '') {
+                return $url;
+            }
+        }
+    }
+
+    return '';
 }
 
 /**

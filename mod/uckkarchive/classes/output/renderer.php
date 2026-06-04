@@ -97,6 +97,16 @@ final class renderer extends plugin_renderer_base {
     }
 
     /**
+     * Render a media detail page.
+     *
+     * @param media_detail $detail Media detail renderable.
+     * @return string HTML.
+     */
+    public function render_media_detail(media_detail $detail): string {
+        return $this->render_templatable($detail, 'mod_uckkarchive/media_detail');
+    }
+
+    /**
      * Render one media card.
      *
      * @param media_card $card Media card renderable.
@@ -367,13 +377,15 @@ final class renderer extends plugin_renderer_base {
             'class' => 'btn btn-' . $style . ' uckkarchive-action',
         ], $this->clean_attributes($attributes));
 
-        if ($disabled) {
+        if ($disabled || trim($url) === '') {
             $attributes['aria-disabled'] = 'true';
             $attributes['tabindex'] = '-1';
             $attributes['class'] .= ' disabled';
+
+            return \html_writer::tag('span', s($label), $attributes);
         }
 
-        return \html_writer::link($url, $label, $attributes);
+        return \html_writer::link($url, s($label), $attributes);
     }
 
     /**
@@ -463,7 +475,7 @@ final class renderer extends plugin_renderer_base {
             $html .= \html_writer::end_div();
         }
 
-        $html .= \html_writer::tag('button', $label, [
+        $html .= \html_writer::tag('button', s($label), [
             'type' => 'submit',
             'class' => 'btn btn-' . $style,
         ]);
@@ -502,7 +514,7 @@ final class renderer extends plugin_renderer_base {
             }
 
             if ($url === '') {
-                $html .= \html_writer::tag('button', $label, [
+                $html .= \html_writer::tag('button', s($label), [
                     'type' => 'button',
                     'class' => 'btn btn-' . $this->normalise_button_style($style),
                     'disabled' => $disabled ? 'disabled' : null,
@@ -533,7 +545,7 @@ final class renderer extends plugin_renderer_base {
             'class' => 'badge badge-' . $style . ' uckkarchive-badge',
         ], $this->clean_attributes($attributes));
 
-        return \html_writer::tag('span', $label, $attributes);
+        return \html_writer::tag('span', s($label), $attributes);
     }
 
     /**

@@ -13,11 +13,14 @@
 
     Expected context is produced by \mod_uckkarchive\output\media_library.
 
+    This template only renders pre-filtered data. It must not decide access,
+    expose private file URLs, bypass media policy, or infer authority.
+
     Context variables:
     {
         "archive": {
             "id": 1,
-            "name": "Archive",
+            "name": "Médiathèque centrale",
             "intro": "<p>Intro</p>",
             "hasintro": true
         },
@@ -272,7 +275,9 @@
                     >
                         <div class="uckkarchive-media-library__collection-main">
                             <h4 class="uckkarchive-media-library__collection-title">
-                                <a href="{{url}}">{{title}}</a>
+                                <a href="{{url}}" data-action="view-collection" data-collection-id="{{id}}">
+                                    {{title}}
+                                </a>
                             </h4>
 
                             {{#hasdescription}}
@@ -303,17 +308,41 @@
                         </div>
 
                         <div class="uckkarchive-media-library__collection-actions">
-                            <a class="btn btn-sm btn-outline-secondary" href="{{url}}">
-                                {{#strings.view}}{{strings.view}}{{/strings.view}}
-                                {{^strings.view}}{{#str}} view {{/str}}{{/strings.view}}
-                            </a>
+                            {{#canview}}
+                                <a
+                                    class="btn btn-sm btn-outline-secondary"
+                                    href="{{url}}"
+                                    data-action="view-collection"
+                                    data-collection-id="{{id}}"
+                                >
+                                    {{#strings.view}}{{strings.view}}{{/strings.view}}
+                                    {{^strings.view}}{{#str}} view {{/str}}{{/strings.view}}
+                                </a>
+                            {{/canview}}
 
                             {{#canmanage}}
-                                <a class="btn btn-sm btn-outline-secondary" href="{{editurl}}" data-action="edit-collection">
+                                <a
+                                    class="btn btn-sm btn-outline-secondary"
+                                    href="{{editurl}}"
+                                    data-action="edit-collection"
+                                    data-collection-id="{{id}}"
+                                >
                                     {{#strings.edit}}{{strings.edit}}{{/strings.edit}}
                                     {{^strings.edit}}{{#str}} edit {{/str}}{{/strings.edit}}
                                 </a>
                             {{/canmanage}}
+
+                            {{#canexport}}
+                                <a
+                                    class="btn btn-sm btn-outline-secondary"
+                                    href="{{exporturl}}"
+                                    data-action="export-collection"
+                                    data-collection-id="{{id}}"
+                                >
+                                    {{#strings.export}}{{strings.export}}{{/strings.export}}
+                                    {{^strings.export}}{{#str}} export {{/str}}{{/strings.export}}
+                                </a>
+                            {{/canexport}}
                         </div>
                     </article>
                 {{/collections}}
@@ -342,12 +371,17 @@
             <div class="uckkarchive-media-library__grid">
                 {{#media}}
                     <article
-                        class="uckkarchive-media-library__card uckkarchive-media-library__card--{{mediatype}}"
+                        class="uckkarchive-media-library__card uckkarchive-media-library__card--{{mediatype}} {{#isexternalreference}}uckkarchive-media-library__card--external{{/isexternalreference}}"
                         data-region="media-card"
                         data-media-id="{{id}}"
                         data-media-uuid="{{uuid}}"
                     >
-                        <a class="uckkarchive-media-library__thumbnail" href="{{url}}">
+                        <a
+                            class="uckkarchive-media-library__thumbnail"
+                            href="{{url}}"
+                            data-action="view-media"
+                            data-media-id="{{id}}"
+                        >
                             {{#hasthumbnail}}
                                 <img src="{{thumbnailurl}}" alt="{{title}}">
                             {{/hasthumbnail}}
@@ -369,7 +403,13 @@
 
                         <div class="uckkarchive-media-library__card-body">
                             <h4 class="uckkarchive-media-library__card-title">
-                                <a href="{{url}}">{{title}}</a>
+                                <a
+                                    href="{{url}}"
+                                    data-action="view-media"
+                                    data-media-id="{{id}}"
+                                >
+                                    {{title}}
+                                </a>
                             </h4>
 
                             {{#hasdescription}}
@@ -378,11 +418,39 @@
                                 </div>
                             {{/hasdescription}}
 
+                            {{#canopenexternal}}
+                                <div class="uckkarchive-media-library__external-reference">
+                                    <span class="uckkarchive-media-library__external-label">
+                                        {{#strings.externalreference}}{{strings.externalreference}}{{/strings.externalreference}}
+                                        {{^strings.externalreference}}{{#str}} externalreference, mod_uckkarchive {{/str}}{{/strings.externalreference}}
+                                    </span>
+
+                                    <a
+                                        class="uckkarchive-media-library__external-url"
+                                        href="{{externalurl}}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        data-action="open-external-reference"
+                                        data-media-id="{{id}}"
+                                    >
+                                        {{#strings.openexternal}}{{strings.openexternal}}{{/strings.openexternal}}
+                                        {{^strings.openexternal}}{{#str}} openexternal, mod_uckkarchive {{/str}}{{/strings.openexternal}}
+                                    </a>
+                                </div>
+                            {{/canopenexternal}}
+
                             <div class="uckkarchive-media-library__badges">
                                 <span class="badge badge-light">{{mediatypelabel}}</span>
                                 <span class="badge badge-light">{{statuslabel}}</span>
                                 <span class="badge badge-light">{{visibilitylabel}}</span>
                                 <span class="badge badge-light">{{audiencesuitabilitylabel}}</span>
+
+                                {{#isexternalreference}}
+                                    <span class="badge badge-info">
+                                        {{#strings.externalreference}}{{strings.externalreference}}{{/strings.externalreference}}
+                                        {{^strings.externalreference}}{{#str}} externalreference, mod_uckkarchive {{/str}}{{/strings.externalreference}}
+                                    </span>
+                                {{/isexternalreference}}
 
                                 {{#isrestricted}}
                                     <span class="badge badge-warning">
@@ -413,21 +481,50 @@
 
                         <div class="uckkarchive-media-library__card-actions">
                             {{#canview}}
-                                <a class="btn btn-sm btn-outline-secondary" href="{{url}}">
+                                <a
+                                    class="btn btn-sm btn-outline-secondary"
+                                    href="{{url}}"
+                                    data-action="view-media"
+                                    data-media-id="{{id}}"
+                                >
                                     {{#strings.view}}{{strings.view}}{{/strings.view}}
                                     {{^strings.view}}{{#str}} view {{/str}}{{/strings.view}}
                                 </a>
                             {{/canview}}
 
+                            {{#canopenexternal}}
+                                <a
+                                    class="btn btn-sm btn-primary"
+                                    href="{{externalurl}}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    data-action="open-external-reference"
+                                    data-media-id="{{id}}"
+                                >
+                                    {{#strings.openexternal}}{{strings.openexternal}}{{/strings.openexternal}}
+                                    {{^strings.openexternal}}{{#str}} openexternal, mod_uckkarchive {{/str}}{{/strings.openexternal}}
+                                </a>
+                            {{/canopenexternal}}
+
                             {{#canedit}}
-                                <a class="btn btn-sm btn-outline-secondary" href="{{editurl}}" data-action="edit-media">
+                                <a
+                                    class="btn btn-sm btn-outline-secondary"
+                                    href="{{editurl}}"
+                                    data-action="edit-media"
+                                    data-media-id="{{id}}"
+                                >
                                     {{#strings.edit}}{{strings.edit}}{{/strings.edit}}
                                     {{^strings.edit}}{{#str}} edit {{/str}}{{/strings.edit}}
                                 </a>
                             {{/canedit}}
 
                             {{#candownload}}
-                                <a class="btn btn-sm btn-outline-secondary" href="{{downloadurl}}" data-action="download-media">
+                                <a
+                                    class="btn btn-sm btn-outline-secondary"
+                                    href="{{downloadurl}}"
+                                    data-action="download-media"
+                                    data-media-id="{{id}}"
+                                >
                                     {{#strings.download}}{{strings.download}}{{/strings.download}}
                                     {{^strings.download}}{{#str}} download {{/str}}{{/strings.download}}
                                 </a>
@@ -440,9 +537,22 @@
                                     data-action="version-media"
                                     data-media-id="{{id}}"
                                 >
-                                    {{#str}} versions, mod_uckkarchive {{/str}}
+                                    {{#strings.versions}}{{strings.versions}}{{/strings.versions}}
+                                    {{^strings.versions}}{{#str}} versions, mod_uckkarchive {{/str}}{{/strings.versions}}
                                 </a>
                             {{/canversion}}
+
+                            {{#canexport}}
+                                <a
+                                    class="btn btn-sm btn-outline-secondary"
+                                    href="{{exporturl}}"
+                                    data-action="export-media"
+                                    data-media-id="{{id}}"
+                                >
+                                    {{#strings.export}}{{strings.export}}{{/strings.export}}
+                                    {{^strings.export}}{{#str}} export {{/str}}{{/strings.export}}
+                                </a>
+                            {{/canexport}}
                         </div>
                     </article>
                 {{/media}}

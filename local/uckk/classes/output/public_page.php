@@ -294,8 +294,8 @@ final class public_page implements renderable, templatable {
             self::KEY_CHALLENGES => ['Défis', 'Mettre la lucidité à l’épreuve'],
             self::KEY_ASSEMBLIES => ['Assemblées', 'Délibérer, vérifier, orienter'],
             self::KEY_INTEGRITY => ['Intégrité', 'Protéger la preuve et la dignité'],
-            self::KEY_ARCHIVES => ['Archives', 'Conserver les traces publiques'],
-            self::KEY_MEDIATHEQUE => ['Médiathèque UCKK', 'Archives publiques'],
+            self::KEY_ARCHIVES => ['Registraire UCKK', 'Tenir le registre public'],
+            self::KEY_MEDIATHEQUE => ['Médiathèque UCKK', 'Médiathèque publique'],
             self::KEY_NEWS => ['Actualités', 'Nouvelles et appels'],
             self::KEY_CONTACT => ['Contact', 'Entrer en relation'],
         ];
@@ -345,7 +345,7 @@ final class public_page implements renderable, templatable {
             self::KEY_CHALLENGES => 'Repères pour les défis',
             self::KEY_ASSEMBLIES => 'Repères d’assemblée',
             self::KEY_INTEGRITY => 'Repères d’intégrité',
-            self::KEY_ARCHIVES => 'Repères d’archive',
+            self::KEY_ARCHIVES => 'Repères du registraire',
             self::KEY_MEDIATHEQUE => 'Explorer la Médiathèque',
             self::KEY_NEWS => 'Repères d’actualité',
             self::KEY_CONTACT => 'Repères de contact',
@@ -368,7 +368,6 @@ final class public_page implements renderable, templatable {
             ['key' => self::KEY_CHALLENGES, 'label' => 'Défis', 'url' => '/local/uckk/challenges.php'],
             ['key' => self::KEY_ASSEMBLIES, 'label' => 'Assemblées', 'url' => '/local/uckk/assemblies.php'],
             ['key' => self::KEY_INTEGRITY, 'label' => 'Intégrité', 'url' => '/local/uckk/integrity.php'],
-            ['key' => self::KEY_ARCHIVES, 'label' => 'Archives', 'url' => '/local/uckk/archives.php'],
             ['key' => self::KEY_MEDIATHEQUE, 'label' => 'Médiathèque', 'url' => '/local/uckk/mediatheque.php'],
             ['key' => self::KEY_NEWS, 'label' => 'Actualités', 'url' => '/local/uckk/news.php'],
             ['key' => self::KEY_CONTACT, 'label' => 'Contact', 'url' => '/local/uckk/contact.php'],
@@ -1492,3 +1491,4 @@ final class public_page implements renderable, templatable {
         return trim((string)$value);
     }
 }
+

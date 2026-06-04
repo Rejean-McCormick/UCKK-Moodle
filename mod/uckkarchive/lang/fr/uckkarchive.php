@@ -9,7 +9,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Chaînes françaises du module d’activité Archives UCKK.
+ * Chaînes françaises du module d’activité Registraire UCKK.
  *
  * @package    mod_uckkarchive
  * @copyright  2026 Univers-Cité King Klown
@@ -20,20 +20,20 @@ defined('MOODLE_INTERNAL') || die();
 // Identité du plugin.
 // -----------------------------------------------------------------------------
 
-$string['pluginname'] = 'Archive UCKK';
-$string['pluginadministration'] = 'Administration de l’Archive UCKK';
-$string['modulename'] = 'Archive UCKK';
-$string['modulenameplural'] = 'Archives UCKK';
-$string['modulename_help'] = 'L’activité Archive UCKK conserve les preuves, décisions, travaux de cours, Kristals, éléments de portfolio, synthèses d’intégrité, versions et paquets exportables avec provenance, visibilité, validation et historique de révision.';
+$string['pluginname'] = 'Registraire UCKK';
+$string['pluginadministration'] = 'Administration du Registraire UCKK';
+$string['modulename'] = 'Registraire UCKK';
+$string['modulenameplural'] = 'Registres UCKK';
+$string['modulename_help'] = 'L’activité Registraire UCKK conserve les preuves, décisions, travaux de cours, Kristals, éléments de portfolio, synthèses d’intégrité, versions et paquets exportables avec provenance, visibilité, validation et historique de révision.';
 $string['modulename_link'] = 'mod/uckkarchive/view';
-$string['uckkarchive:addinstance'] = 'Ajouter une nouvelle activité Archive UCKK';
-$string['uckkarchive:view'] = 'Voir l’Archive UCKK';
-$string['uckkarchive:additem'] = 'Ajouter un élément d’archive';
-$string['uckkarchive:validateitem'] = 'Valider un élément d’archive';
-$string['uckkarchive:reviseitem'] = 'Réviser un élément d’archive';
-$string['uckkarchive:versionitem'] = 'Versionner un élément d’archive';
-$string['uckkarchive:viewrestricted'] = 'Voir les éléments d’archive restreints';
-$string['uckkarchive:export'] = 'Exporter des paquets d’archive';
+$string['uckkarchive:addinstance'] = 'Ajouter une nouvelle activité Registraire UCKK';
+$string['uckkarchive:view'] = 'Voir le Registraire UCKK';
+$string['uckkarchive:additem'] = 'Ajouter un élément de registre';
+$string['uckkarchive:validateitem'] = 'Valider un élément de registre';
+$string['uckkarchive:reviseitem'] = 'Réviser un élément de registre';
+$string['uckkarchive:versionitem'] = 'Versionner un élément de registre';
+$string['uckkarchive:viewrestricted'] = 'Voir les éléments de registre restreints';
+$string['uckkarchive:export'] = 'Exporter des paquets d’export';
 
 // -----------------------------------------------------------------------------
 // Libellés généraux.
@@ -42,17 +42,17 @@ $string['uckkarchive:export'] = 'Exporter des paquets d’archive';
 $string['activity'] = 'Activité';
 $string['actions'] = 'Actions';
 $string['add'] = 'Ajouter';
-$string['additem'] = 'Ajouter un élément d’archive';
-$string['archive'] = 'Archive';
-$string['archiveactivity'] = 'Activité d’archive';
-$string['archiveitem'] = 'Élément d’archive';
-$string['archiveitems'] = 'Éléments d’archive';
-$string['archiveitemdetails'] = 'Détails de l’élément d’archive';
-$string['archiveoverview'] = 'Vue d’ensemble de l’archive';
-$string['archivepolicy'] = 'Politique d’archive';
-$string['archives'] = 'Archives';
-$string['backtoarchive'] = 'Retour à l’archive';
-$string['backtoarchives'] = 'Retour aux archives';
+$string['additem'] = 'Ajouter un élément de registre';
+$string['archive'] = 'Registre';
+$string['archiveactivity'] = 'Activité du registre';
+$string['archiveitem'] = 'Élément de registre';
+$string['archiveitems'] = 'Éléments de registre';
+$string['archiveitemdetails'] = 'Détails de l’élément de registre';
+$string['archiveoverview'] = 'Vue d’ensemble du registre';
+$string['archivepolicy'] = 'Politique de registre';
+$string['archives'] = 'Registres';
+$string['backtoarchive'] = 'Retour au registre';
+$string['backtoarchives'] = 'Retour aux registres';
 $string['cancel'] = 'Annuler';
 $string['close'] = 'Fermer';
 $string['confirm'] = 'Confirmer';
@@ -105,55 +105,55 @@ $string['viewdetails'] = 'Voir les détails';
 // Formulaire d’instance d’activité.
 // -----------------------------------------------------------------------------
 
-$string['archivename'] = 'Nom de l’archive';
-$string['archivename_help'] = 'Nom de cette activité Archive UCKK.';
-$string['archiveintro'] = 'Introduction de l’archive';
-$string['archivecode'] = 'Code de l’archive';
-$string['archivecode_help'] = 'Code interne stable pour cette archive. Utilisez uniquement des lettres, chiffres, traits de soulignement ou traits d’union.';
-$string['archivecontext'] = 'Contexte de l’archive';
-$string['archivecontext_help'] = 'Décrivez ce que cette archive doit préserver et qui peut l’utiliser.';
-$string['archivepurpose'] = 'Finalité de l’archive';
-$string['archivepurpose_help'] = 'Expliquez pourquoi cette archive existe : preuves, décisions, portfolio, mémoire de cours, Kristals, synthèses d’intégrité ou mémoire institutionnelle.';
+$string['archivename'] = 'Nom du registre';
+$string['archivename_help'] = 'Nom de cette activité Registraire UCKK.';
+$string['archiveintro'] = 'Introduction du registre';
+$string['archivecode'] = 'Code du registre';
+$string['archivecode_help'] = 'Code interne stable pour ce registre. Utilisez uniquement des lettres, chiffres, traits de soulignement ou traits d’union.';
+$string['archivecontext'] = 'Contexte du registre';
+$string['archivecontext_help'] = 'Décrivez ce que ce registre doit préserver et qui peut l’utiliser.';
+$string['archivepurpose'] = 'Finalité du registre';
+$string['archivepurpose_help'] = 'Expliquez pourquoi ce registre existe : preuves, décisions, portfolio, mémoire de cours, Kristals, synthèses d’intégrité ou mémoire institutionnelle.';
 $string['defaultvisibility'] = 'Visibilité par défaut';
 $string['defaultvisibility_help'] = 'Visibilité appliquée par défaut aux nouveaux éléments, sauf remplacement dans le formulaire de l’élément.';
 $string['allowpublicitems'] = 'Autoriser les éléments publics';
-$string['allowpublicitems_help'] = 'Autoriser les éléments d’archive validés manuellement à devenir publics.';
+$string['allowpublicitems_help'] = 'Autoriser les éléments de registre validés manuellement à devenir publics.';
 $string['requirevalidation'] = 'Exiger la validation avant publication';
-$string['requirevalidation_help'] = 'Exiger qu’un Archiviste ou une personne autorisée valide les éléments avant qu’ils soient considérés comme vérifiés ou publics.';
+$string['requirevalidation_help'] = 'Exiger qu’une personne autorisée valide les éléments avant qu’ils soient considérés comme vérifiés ou publics.';
 $string['allowkristals'] = 'Autoriser les Kristals';
-$string['allowkristals_help'] = 'Autoriser cette archive à stocker des Kristals : fragments distillés d’apprentissage, décision, preuve ou mémoire.';
+$string['allowkristals_help'] = 'Autoriser ce registre à stocker des Kristals : fragments distillés d’apprentissage, décision, preuve ou mémoire.';
 $string['allowexports'] = 'Autoriser les exports';
-$string['allowexports_help'] = 'Autoriser les personnes habilitées à exporter des paquets d’archive.';
-$string['completionrequirevalidateditem'] = 'L’étudiant doit avoir un élément d’archive validé';
-$string['completionrequireitem'] = 'L’étudiant doit ajouter un élément d’archive';
+$string['allowexports_help'] = 'Autoriser les personnes habilitées à exporter des paquets d’export.';
+$string['completionrequirevalidateditem'] = 'L’étudiant doit avoir un élément de registre validé';
+$string['completionrequireitem'] = 'L’étudiant doit ajouter un élément de registre';
 $string['completionrequirekristal'] = 'L’étudiant doit créer un Kristal';
 
 // -----------------------------------------------------------------------------
 // Paramètres.
 // -----------------------------------------------------------------------------
 
-$string['settings:general'] = 'Paramètres généraux des archives';
-$string['settings:general_desc'] = 'Configurer les valeurs par défaut des Archives UCKK.';
-$string['settings:defaultvisibility'] = 'Visibilité d’archive par défaut';
-$string['settings:defaultvisibility_desc'] = 'Visibilité utilisée par défaut lorsqu’un nouvel élément d’archive ne précise pas sa visibilité.';
+$string['settings:general'] = 'Paramètres généraux des registres';
+$string['settings:general_desc'] = 'Configurer les valeurs par défaut des Registres UCKK.';
+$string['settings:defaultvisibility'] = 'Visibilité de registre par défaut';
+$string['settings:defaultvisibility_desc'] = 'Visibilité utilisée par défaut lorsqu’un nouvel élément de registre ne précise pas sa visibilité.';
 $string['settings:requirevalidation'] = 'Exiger la validation';
-$string['settings:requirevalidation_desc'] = 'Exiger une validation avant que les éléments d’archive deviennent vérifiés ou publics.';
-$string['settings:allowpublicarchives'] = 'Autoriser les éléments d’archive publics';
-$string['settings:allowpublicarchives_desc'] = 'Autoriser les éléments d’archive à devenir publics après validation manuelle.';
-$string['settings:allowrestrictedintegrity'] = 'Autoriser les archives restreintes à l’intégrité';
-$string['settings:allowrestrictedintegrity_desc'] = 'Autoriser les éléments d’archive à être marqués comme restreints aux personnes disposant de capacités d’intégrité ou d’archive restreinte.';
+$string['settings:requirevalidation_desc'] = 'Exiger une validation avant que les éléments de registre deviennent vérifiés ou publics.';
+$string['settings:allowpublicarchives'] = 'Autoriser les éléments de registre publics';
+$string['settings:allowpublicarchives_desc'] = 'Autoriser les éléments de registre à devenir publics après validation manuelle.';
+$string['settings:allowrestrictedintegrity'] = 'Autoriser les registres restreints à l’intégrité';
+$string['settings:allowrestrictedintegrity_desc'] = 'Autoriser les éléments de registre à être marqués comme restreints aux personnes disposant de capacités d’intégrité ou de registre restreint.';
 $string['settings:enablekristals'] = 'Activer les Kristals';
-$string['settings:enablekristals_desc'] = 'Activer la création et l’affichage de Kristals dans les Archives UCKK.';
+$string['settings:enablekristals_desc'] = 'Activer la création et l’affichage de Kristals dans les Registres UCKK.';
 $string['settings:enableexports'] = 'Activer les paquets d’export';
 $string['settings:enableexports_desc'] = 'Autoriser les personnes habilitées à générer des paquets d’export.';
 $string['settings:retentiondays'] = 'Durée de conservation par défaut';
 $string['settings:retentiondays_desc'] = 'Durée de conservation par défaut en jours. Utiliser 0 pour aucune expiration automatique.';
 $string['settings:maxexportitems'] = 'Nombre maximal d’éléments par export';
-$string['settings:maxexportitems_desc'] = 'Nombre maximal d’éléments d’archive inclus dans un paquet d’export.';
+$string['settings:maxexportitems_desc'] = 'Nombre maximal d’éléments de registre inclus dans un paquet d’export.';
 $string['settings:provenance'] = 'Paramètres de provenance';
-$string['settings:provenance_desc'] = 'Configurer la provenance et le comportement de validation des archives.';
+$string['settings:provenance_desc'] = 'Configurer la provenance et le comportement de validation des registres.';
 $string['settings:requireprovenance'] = 'Exiger la provenance';
-$string['settings:requireprovenance_desc'] = 'Exiger une déclaration de provenance pour chaque élément d’archive.';
+$string['settings:requireprovenance_desc'] = 'Exiger une déclaration de provenance pour chaque élément de registre.';
 $string['settings:requirevalidationnotes'] = 'Exiger des notes de validation';
 $string['settings:requirevalidationnotes_desc'] = 'Exiger que les validateurs fournissent des notes lors de la validation, du rejet ou de l’invalidation d’un élément.';
 
@@ -161,22 +161,22 @@ $string['settings:requirevalidationnotes_desc'] = 'Exiger que les validateurs fo
 // Formulaire d’élément.
 // -----------------------------------------------------------------------------
 
-$string['archiveitemform'] = 'Formulaire d’élément d’archive';
+$string['archiveitemform'] = 'Formulaire d’élément de registre';
 $string['itemtitle'] = 'Titre de l’élément';
-$string['itemtitle_help'] = 'Titre clair pour l’élément d’archive.';
+$string['itemtitle_help'] = 'Titre clair pour l’élément de registre.';
 $string['itemsummary'] = 'Résumé de l’élément';
 $string['itemsummary_help'] = 'Résumé court et sûr pour le niveau de visibilité choisi.';
 $string['itemcontent'] = 'Contenu de l’élément';
-$string['itemcontent_help'] = 'Contenu principal de l’archive. N’incluez pas de détails restreints sauf si la visibilité de l’élément le permet.';
+$string['itemcontent_help'] = 'Contenu principal du registre. N’incluez pas de détails restreints sauf si la visibilité de l’élément le permet.';
 $string['itemtype'] = 'Type d’élément';
-$string['itemtype_help'] = 'Choisissez le type qui décrit le mieux l’élément d’archive.';
+$string['itemtype_help'] = 'Choisissez le type qui décrit le mieux l’élément de registre.';
 $string['itemstatus'] = 'Statut de l’élément';
 $string['itemvisibility'] = 'Visibilité de l’élément';
-$string['itemvisibility_help'] = 'Contrôle qui peut voir cet élément d’archive. Les éléments restreints à l’intégrité exigent une capacité explicite.';
+$string['itemvisibility_help'] = 'Contrôle qui peut voir cet élément de registre. Les éléments restreints à l’intégrité exigent une capacité explicite.';
 $string['itemprovenance'] = 'Provenance de l’élément';
 $string['itemprovenance_help'] = 'Expliquez d’où vient l’élément, qui l’a produit, ce qui a été transformé et ce qui peut être vérifié.';
 $string['itemsource'] = 'Source';
-$string['itemsource_help'] = 'Source originale, système, activité, personne, archive ou référence externe de cet élément.';
+$string['itemsource_help'] = 'Source originale, système, activité, personne, registre ou référence externe de cet élément.';
 $string['sourcecomponent'] = 'Composant source';
 $string['sourcecomponent_help'] = 'Composant Moodle ayant généré l’élément, si connu.';
 $string['sourceid'] = 'ID source';
@@ -184,32 +184,32 @@ $string['sourceid_help'] = 'ID de l’enregistrement dans le composant source, s
 $string['sourceurl'] = 'URL source';
 $string['sourceurl_help'] = 'URL optionnelle pointant vers la source.';
 $string['sourceauthor'] = 'Source ou auteur';
-$string['sourceauthor_help'] = 'Personne, groupe, système, activité ou source d’archive derrière l’élément.';
+$string['sourceauthor_help'] = 'Personne, groupe, système, activité ou source de registre derrière l’élément.';
 $string['sourcedate'] = 'Date de la source';
 $string['sourcedate_help'] = 'Date associée à la source originale.';
 $string['license'] = 'Licence';
 $string['license_help'] = 'Licence ou condition de réutilisation attachée à l’élément, le cas échéant.';
 $string['tags'] = 'Étiquettes';
 $string['tags_help'] = 'Étiquettes optionnelles séparées par des virgules pour le filtrage et les rapports.';
-$string['files_help'] = 'Fichiers attachés à cet élément d’archive. Les fichiers héritent de la visibilité de l’élément sauf si un service applique une règle plus stricte.';
+$string['files_help'] = 'Fichiers attachés à cet élément de registre. Les fichiers héritent de la visibilité de l’élément sauf si un service applique une règle plus stricte.';
 $string['prooffiles'] = 'Fichiers de preuve';
 $string['decisionattachments'] = 'Pièces jointes de décision';
 $string['minutesfiles'] = 'Fichiers de procès-verbal';
 $string['kristalfiles'] = 'Fichiers de Kristal';
 $string['portfoliofiles'] = 'Fichiers de portfolio';
 $string['integrityexports'] = 'Exports d’intégrité';
-$string['addarchiveitem'] = 'Ajouter un élément d’archive';
-$string['editarchiveitem'] = 'Modifier l’élément d’archive';
-$string['archiveitemsaved'] = 'Élément d’archive enregistré.';
-$string['archiveitemcreated'] = 'Élément d’archive créé.';
-$string['archiveitemupdated'] = 'Élément d’archive mis à jour.';
-$string['cannotadditem'] = 'Vous ne pouvez pas ajouter d’éléments d’archive ici.';
-$string['cannotedititem'] = 'Vous ne pouvez pas modifier cet élément d’archive.';
-$string['cannotviewitem'] = 'Vous ne pouvez pas voir cet élément d’archive.';
-$string['missingarchiveitem'] = 'Élément d’archive introuvable.';
-$string['invaliditemtype'] = 'Type d’élément d’archive invalide.';
-$string['invaliditemstatus'] = 'Statut d’élément d’archive invalide.';
-$string['invaliditemvisibility'] = 'Visibilité d’élément d’archive invalide.';
+$string['addarchiveitem'] = 'Ajouter un élément de registre';
+$string['editarchiveitem'] = 'Modifier l’élément de registre';
+$string['archiveitemsaved'] = 'Élément de registre enregistré.';
+$string['archiveitemcreated'] = 'Élément de registre créé.';
+$string['archiveitemupdated'] = 'Élément de registre mis à jour.';
+$string['cannotadditem'] = 'Vous ne pouvez pas ajouter d’éléments de registre ici.';
+$string['cannotedititem'] = 'Vous ne pouvez pas modifier cet élément de registre.';
+$string['cannotviewitem'] = 'Vous ne pouvez pas voir cet élément de registre.';
+$string['missingarchiveitem'] = 'Élément de registre introuvable.';
+$string['invaliditemtype'] = 'Type d’élément de registre invalide.';
+$string['invaliditemstatus'] = 'Statut d’élément de registre invalide.';
+$string['invaliditemvisibility'] = 'Visibilité d’élément de registre invalide.';
 $string['provenancerequired'] = 'Une déclaration de provenance est requise.';
 $string['contentorsourcefilesrequired'] = 'Ajoutez du contenu, une URL source ou au moins un fichier.';
 
@@ -245,25 +245,25 @@ $string['invalidkristaltype'] = 'Type de Kristal invalide.';
 // -----------------------------------------------------------------------------
 
 $string['validate'] = 'Valider';
-$string['validateitem'] = 'Valider l’élément d’archive';
+$string['validateitem'] = 'Valider l’élément de registre';
 $string['validationform'] = 'Formulaire de validation';
 $string['validationstate'] = 'État de validation';
 $string['validationnotes'] = 'Notes de validation';
 $string['validationnotes_help'] = 'Expliquez la décision de validation, l’incertitude, les corrections requises ou la raison du rejet.';
 $string['validationdecision'] = 'Décision de validation';
-$string['validationdecision_help'] = 'Choisissez comment cet élément d’archive doit être traité après revue.';
+$string['validationdecision_help'] = 'Choisissez comment cet élément de registre doit être traité après revue.';
 $string['validatedby'] = 'Validé par';
 $string['timevalidated'] = 'Moment de validation';
-$string['archiveitemvalidated'] = 'Élément d’archive validé.';
-$string['archiveitemrejected'] = 'Élément d’archive rejeté.';
-$string['archiveiteminvalidated'] = 'Élément d’archive invalidé.';
-$string['archiveitemcorrectionrequired'] = 'Correction requise pour l’élément d’archive.';
-$string['archiveitemcontested'] = 'Élément d’archive contesté.';
-$string['cannotvalidateitem'] = 'Vous ne pouvez pas valider cet élément d’archive.';
+$string['archiveitemvalidated'] = 'Élément de registre validé.';
+$string['archiveitemrejected'] = 'Élément de registre rejeté.';
+$string['archiveiteminvalidated'] = 'Élément de registre invalidé.';
+$string['archiveitemcorrectionrequired'] = 'Correction requise pour l’élément de registre.';
+$string['archiveitemcontested'] = 'Élément de registre contesté.';
+$string['cannotvalidateitem'] = 'Vous ne pouvez pas valider cet élément de registre.';
 $string['validationrequiresnotes'] = 'Des notes de validation sont requises pour cette décision.';
 $string['manualvalidationrequired'] = 'Validation manuelle requise';
-$string['publicvalidationrequired'] = 'Les éléments d’archive publics doivent être validés manuellement.';
-$string['restrictedvalidationrequired'] = 'Les éléments d’archive restreints à l’intégrité exigent une validation explicite.';
+$string['publicvalidationrequired'] = 'Les éléments de registre publics doivent être validés manuellement.';
+$string['restrictedvalidationrequired'] = 'Les éléments de registre restreints à l’intégrité exigent une validation explicite.';
 
 $string['validationdecision:validate'] = 'Valider';
 $string['validationdecision:reject'] = 'Rejeter';
@@ -276,27 +276,27 @@ $string['validationdecision:invalidate'] = 'Invalider';
 // -----------------------------------------------------------------------------
 
 $string['revise'] = 'Réviser';
-$string['reviseitem'] = 'Réviser l’élément d’archive';
+$string['reviseitem'] = 'Réviser l’élément de registre';
 $string['revisionform'] = 'Formulaire de révision';
 $string['revisionreason'] = 'Raison de la révision';
-$string['revisionreason_help'] = 'Expliquez pourquoi cette révision est nécessaire. L’historique d’archive doit rester traçable.';
+$string['revisionreason_help'] = 'Expliquez pourquoi cette révision est nécessaire. L’historique du registre doit rester traçable.';
 $string['revisionnotes'] = 'Notes de révision';
 $string['revisioncreated'] = 'Révision créée.';
-$string['archiveitemrevised'] = 'Élément d’archive révisé.';
+$string['archiveitemrevised'] = 'Élément de registre révisé.';
 $string['previousversion'] = 'Version précédente';
 $string['currentversion'] = 'Version actuelle';
 $string['versionhistory'] = 'Historique des versions';
 $string['versionrecord'] = 'Trace de version';
-$string['cannotreviseitem'] = 'Vous ne pouvez pas réviser cet élément d’archive.';
+$string['cannotreviseitem'] = 'Vous ne pouvez pas réviser cet élément de registre.';
 $string['cannotversionitem'] = 'Vous ne pouvez pas créer de trace de version pour cet élément.';
 $string['revisionrequiresreason'] = 'Une raison de révision est requise.';
-$string['revisionnonsovereignnotice'] = 'Une révision préserve l’historique d’archive. Elle ne doit pas effacer silencieusement les preuves ou la provenance.';
+$string['revisionnonsovereignnotice'] = 'Une révision préserve l’historique du registre. Elle ne doit pas effacer silencieusement les preuves ou la provenance.';
 
 // -----------------------------------------------------------------------------
 // Export.
 // -----------------------------------------------------------------------------
 
-$string['exportarchive'] = 'Exporter l’archive';
+$string['exportarchive'] = 'Exporter le registre';
 $string['exportform'] = 'Formulaire d’export';
 $string['exportpackage'] = 'Paquet d’export';
 $string['exportpackages'] = 'Paquets d’export';
@@ -304,17 +304,17 @@ $string['exportformat'] = 'Format d’export';
 $string['exportscope'] = 'Portée de l’export';
 $string['exportvisibility'] = 'Visibilité de l’export';
 $string['exportreason'] = 'Raison de l’export';
-$string['exportreason_help'] = 'Expliquez pourquoi cet export d’archive est nécessaire.';
+$string['exportreason_help'] = 'Expliquez pourquoi cet export du registre est nécessaire.';
 $string['exportincludeproofs'] = 'Inclure les fichiers de preuve';
 $string['exportincludeprovenance'] = 'Inclure la provenance';
 $string['exportincludehistory'] = 'Inclure l’historique des révisions';
 $string['exportincludeintegrity'] = 'Inclure les synthèses d’intégrité';
 $string['exportredactrestricted'] = 'Caviarder les détails restreints';
 $string['exportredactrestricted_help'] = 'Retirer ou résumer les détails restreints d’intégrité dans le paquet d’export, sauf si la personne dispose d’une permission explicite.';
-$string['exportgenerated'] = 'Export d’archive généré.';
-$string['archiveitemexported'] = 'Élément d’archive exporté.';
-$string['cannotexportarchive'] = 'Vous ne pouvez pas exporter cette archive.';
-$string['cannotexportitem'] = 'Vous ne pouvez pas exporter cet élément d’archive.';
+$string['exportgenerated'] = 'Export généré.';
+$string['archiveitemexported'] = 'Élément de registre exporté.';
+$string['cannotexportarchive'] = 'Vous ne pouvez pas exporter ce registre.';
+$string['cannotexportitem'] = 'Vous ne pouvez pas exporter cet élément de registre.';
 $string['exportrequiresreason'] = 'Une raison d’export est requise.';
 $string['exportempty'] = 'Aucun paquet d’export disponible.';
 $string['downloadexport'] = 'Télécharger l’export';
@@ -327,10 +327,10 @@ $string['exportformat:zip'] = 'Paquet ZIP';
 $string['exportformat:csv'] = 'CSV';
 $string['exportformat:pdf'] = 'Résumé PDF';
 $string['exportscope:item'] = 'Élément unique';
-$string['exportscope:archive'] = 'Archive complète';
-$string['exportscope:course'] = 'Archive de cours';
-$string['exportscope:user'] = 'Archive de portfolio utilisateur';
-$string['exportscope:integrity'] = 'Archive d’intégrité';
+$string['exportscope:archive'] = 'Registre complet';
+$string['exportscope:course'] = 'Registre de cours';
+$string['exportscope:user'] = 'Registre de portfolio utilisateur';
+$string['exportscope:integrity'] = 'Registre d’intégrité';
 
 // -----------------------------------------------------------------------------
 // Types d’éléments.
@@ -346,7 +346,7 @@ $string['itemtype:kristal'] = 'Kristal';
 $string['itemtype:reflection'] = 'Réflexion';
 $string['itemtype:portfolio_item'] = 'Élément de portfolio';
 $string['itemtype:version_record'] = 'Trace de version';
-$string['itemtype:archive_item'] = 'Élément d’archive';
+$string['itemtype:archive_item'] = 'Élément de registre';
 // -----------------------------------------------------------------------------
 // Types de Kristals.
 // -----------------------------------------------------------------------------
@@ -375,7 +375,7 @@ $string['prooftype:testimony'] = 'Témoignage';
 $string['prooftype:observation'] = 'Observation';
 $string['prooftype:ai_log'] = 'Journal IA';
 $string['prooftype:decision_record'] = 'Compte rendu de décision';
-$string['prooftype:archive_item'] = 'Élément d’archive';
+$string['prooftype:archive_item'] = 'Élément de registre';
 
 // -----------------------------------------------------------------------------
 // Statuts.
@@ -392,7 +392,7 @@ $string['status:correction_required'] = 'Correction requise';
 $string['status:contested'] = 'Contesté';
 $string['status:invalidated'] = 'Invalidé';
 $string['status:closed'] = 'Fermé';
-$string['status:archived'] = 'Archivé';
+$string['status:archived'] = 'Classé';
 $string['status:cancelled'] = 'Annulé';
 
 $string['statuslabel:draft'] = 'Brouillon';
@@ -406,7 +406,7 @@ $string['statuslabel:correctionrequired'] = 'Correction requise';
 $string['statuslabel:contested'] = 'Contesté';
 $string['statuslabel:invalidated'] = 'Invalidé';
 $string['statuslabel:closed'] = 'Fermé';
-$string['statuslabel:archived'] = 'Archivé';
+$string['statuslabel:archived'] = 'Classé';
 $string['statuslabel:cancelled'] = 'Annulé';
 
 // -----------------------------------------------------------------------------
@@ -425,14 +425,14 @@ $string['visibility:public'] = 'Publique';
 $string['visibility:restricted'] = 'Restreinte';
 $string['visibility:restricted_integrity'] = 'Restreinte à l’intégrité';
 $string['visibility:hidden'] = 'Masquée';
-$string['visibility:archived'] = 'Archivée';
+$string['visibility:archived'] = 'Classée';
 
 $string['visibility_help:private'] = 'Visible uniquement par les propriétaires et réviseurs autorisés.';
 $string['visibility_help:course'] = 'Visible dans le contexte du cours pour les personnes autorisées.';
 $string['visibility_help:program'] = 'Visible dans le programme UCKK lié.';
 $string['visibility_help:institution'] = 'Visible aux personnes institutionnelles autorisées.';
 $string['visibility_help:public'] = 'Publique uniquement après validation manuelle.';
-$string['visibility_help:restricted_integrity'] = 'Visible uniquement par les personnes disposant des permissions d’intégrité ou d’archive restreinte.';
+$string['visibility_help:restricted_integrity'] = 'Visible uniquement par les personnes disposant des permissions d’intégrité ou de registre restreint.';
 
 // -----------------------------------------------------------------------------
 // Provenance.
@@ -442,7 +442,7 @@ $string['provenance:human'] = 'Humaine';
 $string['provenance:ai_assisted'] = 'Assistée par IA';
 $string['provenance:imported'] = 'Importée';
 $string['provenance:system'] = 'Système';
-$string['provenance:archive'] = 'Archive';
+$string['provenance:archive'] = 'Registre';
 $string['provenance:assembly'] = 'Assemblée';
 $string['provenance:challenge'] = 'Défi';
 $string['provenance:integrity'] = 'Intégrité';
@@ -466,125 +466,125 @@ $string['validationstate:human_reviewed'] = 'Revu humainement';
 $string['validationstate:verified'] = 'Vérifié';
 $string['validationstate:contested'] = 'Contesté';
 $string['validationstate:invalidated'] = 'Invalidé';
-$string['validationstate:archived'] = 'Archivé';
+$string['validationstate:archived'] = 'Classé';
 
 $string['validation:unverified'] = 'Non vérifié';
 $string['validation:human_reviewed'] = 'Revu humainement';
 $string['validation:verified'] = 'Vérifié';
 $string['validation:contested'] = 'Contesté';
 $string['validation:invalidated'] = 'Invalidé';
-$string['validation:archived'] = 'Archivé';
+$string['validation:archived'] = 'Classé';
 
 // -----------------------------------------------------------------------------
-// Politiques d’archive.
+// Politiques de registre.
 // -----------------------------------------------------------------------------
 
-$string['archivepolicy:none'] = 'Aucune politique d’archive';
-$string['archivepolicy:summary'] = 'Archive synthétique';
-$string['archivepolicy:full'] = 'Archive complète';
-$string['archivepolicy:restricted_integrity'] = 'Archive restreinte à l’intégrité';
-$string['archivepolicy:portfolio'] = 'Archive de portfolio';
+$string['archivepolicy:none'] = 'Aucune politique de registre';
+$string['archivepolicy:summary'] = 'Registre synthétique';
+$string['archivepolicy:full'] = 'Registre complet';
+$string['archivepolicy:restricted_integrity'] = 'Registre restreint à l’intégrité';
+$string['archivepolicy:portfolio'] = 'Registre de portfolio';
 $string['archivepolicy:institutional_memory'] = 'Mémoire institutionnelle';
 
 // -----------------------------------------------------------------------------
 // Pages et panneaux.
 // -----------------------------------------------------------------------------
 
-$string['archiveview'] = 'Vue de l’archive';
-$string['archiveviewempty'] = 'Aucun élément d’archive n’est disponible pour cette vue.';
-$string['archiveitemcard'] = 'Carte d’élément d’archive';
+$string['archiveview'] = 'Vue du registre';
+$string['archiveviewempty'] = 'Aucun élément de registre n’est disponible pour cette vue.';
+$string['archiveitemcard'] = 'Carte d’élément de registre';
 $string['kristalcard'] = 'Carte de Kristal';
 $string['proofcard'] = 'Carte de preuve';
 $string['validationpanel'] = 'Panneau de validation';
-$string['archiveactions'] = 'Actions d’archive';
+$string['archiveactions'] = 'Actions de registre';
 $string['itemactions'] = 'Actions de l’élément';
 $string['kristalactions'] = 'Actions du Kristal';
 $string['validationactions'] = 'Actions de validation';
 $string['exportactions'] = 'Actions d’export';
-$string['viewarchiveitem'] = 'Voir l’élément d’archive';
+$string['viewarchiveitem'] = 'Voir l’élément de registre';
 $string['viewkristal'] = 'Voir le Kristal';
 $string['viewprovenance'] = 'Voir la provenance';
 $string['viewrevisionhistory'] = 'Voir l’historique des révisions';
 $string['viewvalidation'] = 'Voir la validation';
 $string['viewexport'] = 'Voir l’export';
-$string['emptyarchive'] = 'Cette archive ne contient aucun élément visible.';
-$string['emptykristals'] = 'Cette archive ne contient aucun Kristal visible.';
+$string['emptyarchive'] = 'Ce registre ne contient aucun élément visible.';
+$string['emptykristals'] = 'Ce registre ne contient aucun Kristal visible.';
 $string['emptyproofs'] = 'Aucune trace de preuve disponible.';
 $string['emptyrevisions'] = 'Aucune révision disponible.';
 $string['emptyexports'] = 'Aucun export disponible.';
-$string['restrictednotice'] = 'Cet élément contient des données d’archive restreintes.';
-$string['publicnotice'] = 'La visibilité publique d’une archive exige une validation manuelle.';
-$string['archivenonsovereignnotice'] = 'Les traces d’archive préservent la mémoire et les preuves. La validation, les décisions d’intégrité, la visibilité publique et les exports exigent une revue humaine autorisée.';
-$string['archivegovernancenotice'] = 'L’Archive UCKK préserve les preuves, décisions, Kristals, portfolios et historiques de version. Elle ne doit pas servir à effacer silencieusement des preuves ou à contourner la revue d’intégrité.';
+$string['restrictednotice'] = 'Cet élément contient des données de registre restreintes.';
+$string['publicnotice'] = 'La visibilité publique d’un élément exige une validation manuelle.';
+$string['archivenonsovereignnotice'] = 'Les traces de registre préservent la mémoire et les preuves. La validation, les décisions d’intégrité, la visibilité publique et les exports exigent une revue humaine autorisée.';
+$string['archivegovernancenotice'] = 'Le Registraire UCKK préserve les preuves, décisions, Kristals, portfolios et historiques de version. Elle ne doit pas servir à effacer silencieusement des preuves ou à contourner la revue d’intégrité.';
 
 // -----------------------------------------------------------------------------
 // Messages de contrôleurs.
 // -----------------------------------------------------------------------------
 
-$string['invalidarchiveaction'] = 'Action d’archive invalide.';
+$string['invalidarchiveaction'] = 'Action de registre invalide.';
 $string['invalidvalidationaction'] = 'Action de validation invalide.';
 $string['invalidexportaction'] = 'Action d’export invalide.';
 $string['invalidrevisionaction'] = 'Action de révision invalide.';
 $string['invalidvisibility'] = 'Visibilité invalide.';
 $string['invalidstatus'] = 'Statut invalide.';
 $string['invalidprovenance'] = 'Provenance invalide.';
-$string['cannotviewarchive'] = 'Vous ne pouvez pas voir cette archive.';
-$string['cannotviewrestricted'] = 'Vous ne pouvez pas voir les données d’archive restreintes.';
-$string['cannotmanagearchive'] = 'Vous ne pouvez pas gérer cette archive.';
-$string['cannotdeleteitem'] = 'Vous ne pouvez pas supprimer cet élément d’archive.';
-$string['deleteitemnotallowed'] = 'Les éléments d’archive doivent être révisés ou invalidés, et non supprimés silencieusement.';
-$string['itemnotfound'] = 'Élément d’archive introuvable.';
-$string['archivenotfound'] = 'Archive introuvable.';
+$string['cannotviewarchive'] = 'Vous ne pouvez pas voir ce registre.';
+$string['cannotviewrestricted'] = 'Vous ne pouvez pas voir les données de registre restreintes.';
+$string['cannotmanagearchive'] = 'Vous ne pouvez pas gérer ce registre.';
+$string['cannotdeleteitem'] = 'Vous ne pouvez pas supprimer cet élément de registre.';
+$string['deleteitemnotallowed'] = 'Les éléments de registre doivent être révisés ou invalidés, et non supprimés silencieusement.';
+$string['itemnotfound'] = 'Élément de registre introuvable.';
+$string['archivenotfound'] = 'Registre introuvable.';
 $string['kristalnotfound'] = 'Kristal introuvable.';
 $string['exportnotfound'] = 'Paquet d’export introuvable.';
-$string['nopermission'] = 'Vous n’avez pas la permission d’effectuer cette action d’archive.';
+$string['nopermission'] = 'Vous n’avez pas la permission d’effectuer cette action de registre.';
 
 // -----------------------------------------------------------------------------
 // Événements.
 // -----------------------------------------------------------------------------
 
-$string['eventarchiveitemcreated'] = 'Élément d’archive créé';
-$string['eventarchiveitemvalidated'] = 'Élément d’archive validé';
-$string['eventarchiveitemrevised'] = 'Élément d’archive révisé';
-$string['eventarchiveitemexported'] = 'Élément d’archive exporté';
+$string['eventarchiveitemcreated'] = 'Élément de registre créé';
+$string['eventarchiveitemvalidated'] = 'Élément de registre validé';
+$string['eventarchiveitemrevised'] = 'Élément de registre révisé';
+$string['eventarchiveitemexported'] = 'Élément de registre exporté';
 $string['eventkristalcreated'] = 'Kristal créé';
 $string['eventkristalupdated'] = 'Kristal mis à jour';
-$string['eventarchiveviewed'] = 'Archive consultée';
-$string['eventarchiveitemviewed'] = 'Élément d’archive consulté';
-$string['eventexportgenerated'] = 'Export d’archive généré';
+$string['eventarchiveviewed'] = 'Registre consulté';
+$string['eventarchiveitemviewed'] = 'Élément de registre consulté';
+$string['eventexportgenerated'] = 'Export généré';
 
 // -----------------------------------------------------------------------------
 // Tâches planifiées.
 // -----------------------------------------------------------------------------
 
-$string['task:validate_pending_items'] = 'Valider les éléments d’archive en attente';
-$string['task:generate_archive_exports'] = 'Générer les exports d’archive';
-$string['task:cleanup_expired_exports'] = 'Nettoyer les exports d’archive expirés';
+$string['task:validate_pending_items'] = 'Valider les éléments de registre en attente';
+$string['task:generate_archive_exports'] = 'Générer les exports du registre';
+$string['task:cleanup_expired_exports'] = 'Nettoyer les exports du registre expirés';
 
 // -----------------------------------------------------------------------------
 // Services externes et Ajax.
 // -----------------------------------------------------------------------------
 
-$string['service:get_archive_view'] = 'Obtenir la vue d’archive';
-$string['service:get_archive_item'] = 'Obtenir l’élément d’archive';
-$string['service:save_archive_item'] = 'Enregistrer l’élément d’archive';
-$string['service:validate_archive_item'] = 'Valider l’élément d’archive';
-$string['service:revise_archive_item'] = 'Réviser l’élément d’archive';
+$string['service:get_archive_view'] = 'Obtenir la vue de registre';
+$string['service:get_archive_item'] = 'Obtenir l’élément de registre';
+$string['service:save_archive_item'] = 'Enregistrer l’élément de registre';
+$string['service:validate_archive_item'] = 'Valider l’élément de registre';
+$string['service:revise_archive_item'] = 'Réviser l’élément de registre';
 $string['service:create_kristal'] = 'Créer un Kristal';
-$string['service:generate_export'] = 'Générer un export d’archive';
+$string['service:generate_export'] = 'Générer un export du registre';
 
-$string['archive:refreshing'] = 'Actualisation de l’archive…';
-$string['archive:refreshed'] = 'Archive actualisée.';
-$string['archive:refreshfailed'] = 'Impossible d’actualiser l’archive.';
-$string['archive:saving'] = 'Enregistrement de l’élément d’archive…';
-$string['archive:saved'] = 'Élément d’archive enregistré.';
-$string['archive:savefailed'] = 'Impossible d’enregistrer l’élément d’archive.';
-$string['archive:validating'] = 'Validation de l’élément d’archive…';
-$string['archive:validated'] = 'Élément d’archive validé.';
-$string['archive:validationfailed'] = 'Impossible de valider l’élément d’archive.';
-$string['archive:exporting'] = 'Génération de l’export d’archive…';
-$string['archive:exported'] = 'Export d’archive généré.';
-$string['archive:exportfailed'] = 'Impossible de générer l’export d’archive.';
+$string['archive:refreshing'] = 'Actualisation du registre…';
+$string['archive:refreshed'] = 'Registre actualisé.';
+$string['archive:refreshfailed'] = 'Impossible d’actualiser le registre.';
+$string['archive:saving'] = 'Enregistrement de l’élément de registre…';
+$string['archive:saved'] = 'Élément de registre enregistré.';
+$string['archive:savefailed'] = 'Impossible d’enregistrer l’élément de registre.';
+$string['archive:validating'] = 'Validation de l’élément de registre…';
+$string['archive:validated'] = 'Élément de registre validé.';
+$string['archive:validationfailed'] = 'Impossible de valider l’élément de registre.';
+$string['archive:exporting'] = 'Génération de l’export du registre…';
+$string['archive:exported'] = 'Export généré.';
+$string['archive:exportfailed'] = 'Impossible de générer l’export du registre.';
 
 $string['kristal:refreshing'] = 'Actualisation du Kristal…';
 $string['kristal:refreshed'] = 'Kristal actualisé.';
@@ -597,70 +597,70 @@ $string['kristal:savefailed'] = 'Impossible d’enregistrer le Kristal.';
 // Achèvement.
 // -----------------------------------------------------------------------------
 
-$string['completiondetail:items'] = 'Ajouter un élément d’archive';
-$string['completiondetail:validateditems'] = 'Avoir un élément d’archive validé';
+$string['completiondetail:items'] = 'Ajouter un élément de registre';
+$string['completiondetail:validateditems'] = 'Avoir un élément de registre validé';
 $string['completiondetail:kristals'] = 'Créer un Kristal';
-$string['completionitems'] = 'Éléments d’archive requis';
-$string['completionvalidateditems'] = 'Éléments d’archive validés requis';
+$string['completionitems'] = 'Éléments de registre requis';
+$string['completionvalidateditems'] = 'Éléments de registre validés requis';
 $string['completionkristals'] = 'Kristals requis';
 
 // -----------------------------------------------------------------------------
 // Confidentialité.
 // -----------------------------------------------------------------------------
 
-$string['privacy:metadata'] = 'L’activité Archive UCKK stocke des traces d’archive, preuves, provenances, décisions de validation, révisions, Kristals et traces d’export.';
-$string['privacy:metadata:uckkarchive'] = 'Paramètres de l’instance d’activité Archive.';
-$string['privacy:metadata:uckkarchive_item'] = 'Éléments d’archive créés ou validés par des utilisateurs.';
-$string['privacy:metadata:uckkarchive_item:userid'] = 'L’utilisateur associé à l’élément d’archive.';
-$string['privacy:metadata:uckkarchive_item:createdby'] = 'L’utilisateur qui a créé l’élément d’archive.';
-$string['privacy:metadata:uckkarchive_item:modifiedby'] = 'L’utilisateur qui a modifié l’élément d’archive en dernier.';
-$string['privacy:metadata:uckkarchive_item:title'] = 'Le titre de l’élément d’archive.';
-$string['privacy:metadata:uckkarchive_item:summary'] = 'Le résumé de l’élément d’archive.';
-$string['privacy:metadata:uckkarchive_item:content'] = 'Le contenu de l’élément d’archive.';
-$string['privacy:metadata:uckkarchive_item:status'] = 'Le statut de l’élément d’archive.';
-$string['privacy:metadata:uckkarchive_item:visibility'] = 'La visibilité de l’élément d’archive.';
-$string['privacy:metadata:uckkarchive_item:metadata'] = 'Les métadonnées supplémentaires de l’élément d’archive.';
-$string['privacy:metadata:uckkarchive_kristal'] = 'Traces de Kristals créées à partir d’éléments d’archive ou de preuves d’apprentissage.';
-$string['privacy:metadata:uckkarchive_proof'] = 'Traces de preuve associées aux éléments d’archive.';
-$string['privacy:metadata:uckkarchive_prov'] = 'Traces de provenance associées aux éléments d’archive.';
-$string['privacy:metadata:uckkarchive_rev'] = 'Traces de révision associées aux éléments d’archive.';
+$string['privacy:metadata'] = 'L’activité Registraire UCKK stocke des traces de registre, preuves, provenances, décisions de validation, révisions, Kristals et traces d’export.';
+$string['privacy:metadata:uckkarchive'] = 'Paramètres de l’instance d’activité Registraire.';
+$string['privacy:metadata:uckkarchive_item'] = 'Éléments de registre créés ou validés par des utilisateurs.';
+$string['privacy:metadata:uckkarchive_item:userid'] = 'L’utilisateur associé à l’élément de registre.';
+$string['privacy:metadata:uckkarchive_item:createdby'] = 'L’utilisateur qui a créé l’élément de registre.';
+$string['privacy:metadata:uckkarchive_item:modifiedby'] = 'L’utilisateur qui a modifié l’élément de registre en dernier.';
+$string['privacy:metadata:uckkarchive_item:title'] = 'Le titre de l’élément de registre.';
+$string['privacy:metadata:uckkarchive_item:summary'] = 'Le résumé de l’élément de registre.';
+$string['privacy:metadata:uckkarchive_item:content'] = 'Le contenu de l’élément de registre.';
+$string['privacy:metadata:uckkarchive_item:status'] = 'Le statut de l’élément de registre.';
+$string['privacy:metadata:uckkarchive_item:visibility'] = 'La visibilité de l’élément de registre.';
+$string['privacy:metadata:uckkarchive_item:metadata'] = 'Les métadonnées supplémentaires de l’élément de registre.';
+$string['privacy:metadata:uckkarchive_kristal'] = 'Traces de Kristals créées à partir d’éléments de registre ou de preuves d’apprentissage.';
+$string['privacy:metadata:uckkarchive_proof'] = 'Traces de preuve associées aux éléments de registre.';
+$string['privacy:metadata:uckkarchive_prov'] = 'Traces de provenance associées aux éléments de registre.';
+$string['privacy:metadata:uckkarchive_rev'] = 'Traces de révision associées aux éléments de registre.';
 $string['privacy:metadata:uckkarchive_export'] = 'Traces de paquets d’export.';
-$string['privacy:metadata:files'] = 'Fichiers attachés aux éléments d’archive, preuves, décisions, procès-verbaux, Kristals, portfolios ou exports d’intégrité.';
-$string['privacy:path:archives'] = 'Traces d’archive UCKK';
-$string['privacy:path:kristals'] = 'Kristals d’archive UCKK';
-$string['privacy:path:proofs'] = 'Preuves d’archive UCKK';
-$string['privacy:path:revisions'] = 'Révisions d’archive UCKK';
-$string['privacy:path:exports'] = 'Exports d’archive UCKK';
+$string['privacy:metadata:files'] = 'Fichiers attachés aux éléments de registre, preuves, décisions, procès-verbaux, Kristals, portfolios ou exports d’intégrité.';
+$string['privacy:path:archives'] = 'Traces du Registraire UCKK';
+$string['privacy:path:kristals'] = 'Kristals du Registraire UCKK';
+$string['privacy:path:proofs'] = 'Preuves du Registraire UCKK';
+$string['privacy:path:revisions'] = 'Révisions du Registraire UCKK';
+$string['privacy:path:exports'] = 'Exports du Registraire UCKK';
 
 // -----------------------------------------------------------------------------
 // Sauvegarde et restauration.
 // -----------------------------------------------------------------------------
 
-$string['backupincludeitems'] = 'Inclure les éléments d’archive';
+$string['backupincludeitems'] = 'Inclure les éléments de registre';
 $string['backupincludeproofs'] = 'Inclure les fichiers de preuve';
 $string['backupincludekristals'] = 'Inclure les Kristals';
 $string['backupincludeprovenance'] = 'Inclure la provenance';
 $string['backupincluderevisions'] = 'Inclure l’historique des révisions';
-$string['restorearchiveitems'] = 'Restaurer les éléments d’archive';
+$string['restorearchiveitems'] = 'Restaurer les éléments de registre';
 
 // -----------------------------------------------------------------------------
 // Erreurs.
 // -----------------------------------------------------------------------------
 
-$string['error:missingcontext'] = 'Contexte d’archive manquant.';
+$string['error:missingcontext'] = 'Contexte de registre manquant.';
 $string['error:missingcourse'] = 'Cours manquant.';
 $string['error:missingcm'] = 'Module de cours manquant.';
-$string['error:missingitem'] = 'Élément d’archive manquant.';
-$string['error:missingarchive'] = 'Archive manquante.';
+$string['error:missingitem'] = 'Élément de registre manquant.';
+$string['error:missingarchive'] = 'Registre manquant.';
 $string['error:missingkristal'] = 'Kristal manquant.';
 $string['error:missingexport'] = 'Paquet d’export manquant.';
 $string['error:invalidjson'] = 'Métadonnées JSON invalides.';
 $string['error:invalidsource'] = 'Référence source invalide.';
-$string['error:invalidfilearea'] = 'Zone de fichiers d’archive invalide.';
-$string['error:restricted'] = 'Cet élément d’archive est restreint.';
-$string['error:publicrequiresvalidation'] = 'Les éléments d’archive publics exigent une validation manuelle.';
-$string['error:cannotautomatevalidation'] = 'La validation d’archive ne peut pas être automatisée.';
-$string['error:cannotdeletehistory'] = 'L’historique d’archive ne peut pas être supprimé silencieusement.';
+$string['error:invalidfilearea'] = 'Zone de fichiers de registre invalide.';
+$string['error:restricted'] = 'Cet élément de registre est restreint.';
+$string['error:publicrequiresvalidation'] = 'Les éléments de registre publics exigent une validation manuelle.';
+$string['error:cannotautomatevalidation'] = 'La validation de registre ne peut pas être automatisée.';
+$string['error:cannotdeletehistory'] = 'L’historique du registre ne peut pas être supprimé silencieusement.';
 $string['error:exporttoolarge'] = 'Ce paquet d’export est trop volumineux.';
 $string['error:nothingtoexport'] = 'Il n’y a rien à exporter.';
 
@@ -674,7 +674,7 @@ $string['filearea:minutes_files'] = 'Fichiers de procès-verbal';
 $string['filearea:kristal_files'] = 'Fichiers de Kristal';
 $string['filearea:portfolio_files'] = 'Fichiers de portfolio';
 $string['filearea:integrity_exports'] = 'Exports d’intégrité';
-$string['filearea:item_content'] = 'Contenu d’élément d’archive';
+$string['filearea:item_content'] = 'Contenu d’élément de registre';
 $string['filearea:export_packages'] = 'Paquets d’export';
 
 // -----------------------------------------------------------------------------
@@ -689,7 +689,7 @@ $string['filter:provenance'] = 'Filtrer par provenance';
 $string['filter:createdby'] = 'Filtrer par créateur';
 $string['filter:datefrom'] = 'Date de début';
 $string['filter:dateto'] = 'Date de fin';
-$string['report:archiveproduction'] = 'Production d’archives';
+$string['report:archiveproduction'] = 'Production de registres';
 $string['report:validateditems'] = 'Éléments validés';
 $string['report:pendingitems'] = 'Éléments en attente';
 $string['report:restricteditems'] = 'Éléments restreints';
@@ -699,12 +699,12 @@ $string['report:exports'] = 'Exports';
 // UI divers.
 // -----------------------------------------------------------------------------
 
-$string['confirmvalidate'] = 'Valider cet élément d’archive ?';
-$string['confirmreject'] = 'Rejeter cet élément d’archive ?';
-$string['confirminvalidate'] = 'Invalider cet élément d’archive ?';
-$string['confirmrevision'] = 'Créer une nouvelle révision pour cet élément d’archive ?';
-$string['confirmexport'] = 'Générer cet export d’archive ?';
-$string['confirmpublicvisibility'] = 'Rendre cet élément d’archive public après validation ?';
+$string['confirmvalidate'] = 'Valider cet élément de registre ?';
+$string['confirmreject'] = 'Rejeter cet élément de registre ?';
+$string['confirminvalidate'] = 'Invalider cet élément de registre ?';
+$string['confirmrevision'] = 'Créer une nouvelle révision pour cet élément de registre ?';
+$string['confirmexport'] = 'Générer cet export du registre ?';
+$string['confirmpublicvisibility'] = 'Rendre cet élément de registre public après validation ?';
 $string['yesvalidate'] = 'Oui, valider';
 $string['yesreject'] = 'Oui, rejeter';
 $string['yesinvalidate'] = 'Oui, invalider';
@@ -729,28 +729,28 @@ $string['ainonsovereignnotice'] = 'L’IA fournit une aide non souveraine : elle
 $string['aipolicy'] = 'Politique d’utilisation de l’IA';
 $string['all'] = 'Tous';
 $string['allowailogs'] = 'Autoriser les journaux IA';
-$string['allowarchiveitems'] = 'Autoriser les éléments d’archive';
+$string['allowarchiveitems'] = 'Autoriser les éléments de registre';
 $string['allowcontestation'] = 'Autoriser la contestation';
 $string['allowportfolioitems'] = 'Autoriser les éléments de portfolio';
 $string['allowproofs'] = 'Autoriser les preuves';
-$string['archivistnotes'] = 'Notes de l’archiviste';
-$string['atleastonearchivetypeenabled'] = 'Au moins un type d’archive doit être activé.';
-$string['backtoarchiveitem'] = 'Retour à l’élément d’archive';
+$string['archivistnotes'] = 'Notes du responsable du registre';
+$string['atleastonearchivetypeenabled'] = 'Au moins un type de registre doit être activé.';
+$string['backtoarchiveitem'] = 'Retour à l’élément de registre';
 $string['badgekeys'] = 'Clés de badges';
 $string['cancelexport'] = 'Annuler l’export';
-$string['cancelexportbody'] = 'Voulez-vous annuler cet export d’archive ?';
+$string['cancelexportbody'] = 'Voulez-vous annuler cet export du registre ?';
 $string['canonref'] = 'Référence canonique';
 $string['canonreference'] = 'Référence canonique';
 $string['competencycodes'] = 'Codes de compétences';
-$string['completionarchiveexported_desc'] = 'L’étudiant doit exporter une archive.';
-$string['completionarchivestate_desc'] = 'L’étudiant doit atteindre l’état d’archive requis.';
-$string['completionarchivevalidated_desc'] = 'L’étudiant doit faire valider une archive.';
-$string['completionitemadded_desc'] = 'L’étudiant doit ajouter un élément d’archive.';
-$string['completionitemvalidated_desc'] = 'L’étudiant doit faire valider un élément d’archive.';
+$string['completionarchiveexported_desc'] = 'L’étudiant doit exporter un registre.';
+$string['completionarchivestate_desc'] = 'L’étudiant doit atteindre l’état de registre requis.';
+$string['completionarchivevalidated_desc'] = 'L’étudiant doit faire valider un registre.';
+$string['completionitemadded_desc'] = 'L’étudiant doit ajouter un élément de registre.';
+$string['completionitemvalidated_desc'] = 'L’étudiant doit faire valider un élément de registre.';
 $string['completionkristalcreated_desc'] = 'L’étudiant doit créer un Kristal.';
-$string['confirmarchiveaction'] = 'Confirmer l’action d’archive';
-$string['confirmarchiveactionbody'] = 'Voulez-vous vraiment effectuer cette action sur l’archive ?';
-$string['confirmexportbody'] = 'Voulez-vous générer cet export d’archive ?';
+$string['confirmarchiveaction'] = 'Confirmer l’action de registre';
+$string['confirmarchiveactionbody'] = 'Voulez-vous vraiment effectuer cette action sur le registre ?';
+$string['confirmexportbody'] = 'Voulez-vous générer cet export du registre ?';
 $string['confirmkristalsubmit'] = 'Soumettre le Kristal';
 $string['confirmkristalsubmitbody'] = 'Voulez-vous soumettre ce Kristal pour enregistrement ou validation ?';
 $string['confirmrestrictedexportbody'] = 'Cet export peut inclure des données restreintes. Confirmez que vous êtes autorisé à le générer.';
@@ -783,7 +783,7 @@ $string['integrityrequired'] = 'Intégrité requise';
 $string['integrityreview'] = 'Révision d’intégrité';
 $string['integritysummary'] = 'Résumé d’intégrité';
 $string['integritysummaryrequired'] = 'Le résumé d’intégrité est requis.';
-$string['invalidarchivecode'] = 'Code d’archive invalide.';
+$string['invalidarchivecode'] = 'Code de registre invalide.';
 $string['invalidexportformat'] = 'Format d’export invalide.';
 $string['invalidexportmode'] = 'Mode d’export invalide.';
 $string['invalidexportscope'] = 'Portée d’export invalide.';
@@ -799,7 +799,7 @@ $string['itemtype:minutes'] = 'Procès-verbal';
 $string['itemtype:public_summary'] = 'Résumé public';
 $string['itemvalidated'] = 'Élément validé';
 $string['metadatajson'] = 'Métadonnées JSON';
-$string['nouserarchiveitems'] = 'Aucun élément d’archive utilisateur.';
+$string['nouserarchiveitems'] = 'Aucun élément de registre utilisateur.';
 $string['originarea'] = 'Zone d’origine';
 $string['origincomponent'] = 'Composant d’origine';
 $string['originid'] = 'ID d’origine';
@@ -833,12 +833,12 @@ $string['requestvalidation'] = 'Demander une validation';
 $string['required'] = 'Requis';
 $string['requiresintegritycase'] = 'Exige un dossier d’intégrité';
 $string['requiresrevision'] = 'Exige une révision';
-$string['resetarchivespreserved'] = 'Les archives existantes ont été conservées pendant la réinitialisation.';
+$string['resetarchivespreserved'] = 'Les registres existants ont été conservés pendant la réinitialisation.';
 $string['restrictednotes'] = 'Notes restreintes';
 $string['restrictednotesrequired'] = 'Les notes restreintes sont requises.';
 $string['restrictedvisibletoyou'] = 'Des éléments restreints sont visibles pour vous en raison de vos permissions.';
-$string['revisearchiveitem'] = 'Réviser l’élément d’archive';
-$string['savearchiveitem'] = 'Enregistrer l’élément d’archive';
+$string['revisearchiveitem'] = 'Réviser l’élément de registre';
+$string['savearchiveitem'] = 'Enregistrer l’élément de registre';
 $string['savekristaldraft'] = 'Enregistrer le brouillon de Kristal';
 $string['savevalidationdraft'] = 'Enregistrer le brouillon de validation';
 $string['scope'] = 'Portée';
@@ -851,7 +851,7 @@ $string['submitvalidation'] = 'Soumettre la validation';
 $string['timecreated'] = 'Date de création';
 $string['uncertaintynotes'] = 'Notes d’incertitude';
 $string['updatepreview'] = 'Mettre à jour l’aperçu';
-$string['useroutline'] = 'Résumé des archives utilisateur';
+$string['useroutline'] = 'Résumé des registres utilisateur';
 $string['versionnumber'] = 'Numéro de version';
 $string['versionx'] = 'Version {$a}';
 $string['visibilityandreview'] = 'Visibilité et révision';
@@ -860,41 +860,41 @@ $string['visibilitymustbeconfirmed'] = 'La visibilité doit être confirmée.';
 $string['visibilitynotes'] = 'Notes de visibilité';
 $string['visibilityreview'] = 'Révision de la visibilité';
 
-// Archives ajoutées depuis l’audit.
-$string['archiveaddnotice'] = 'Ajoutez un élément d’archive avec une provenance claire, une visibilité appropriée et les preuves nécessaires.';
-$string['archiveexport'] = 'Export d’archive';
-$string['archiveexportqueued'] = 'L’export d’archive a été placé en file d’attente.';
-$string['archivegovernance'] = 'Gouvernance de l’archive';
-$string['archiveitem:loaded'] = 'Élément d’archive chargé.';
-$string['archiveitem:loadfailed'] = 'Impossible de charger l’élément d’archive.';
-$string['archiveitem:loading'] = 'Chargement de l’élément d’archive…';
-$string['archiveitemactions'] = 'Actions sur l’élément d’archive';
-$string['archiveitembody'] = 'Corps de l’élément d’archive';
-$string['archiveitemcontent'] = 'Contenu de l’élément d’archive';
-$string['archiveitemfiles'] = 'Fichiers de l’élément d’archive';
-$string['archiveitemgovernancenotice'] = 'La modification d’un élément d’archive doit conserver la provenance, respecter la visibilité et préserver l’historique de révision.';
-$string['archiveitemidentity'] = 'Identité de l’élément d’archive';
-$string['archiveitempolicy'] = 'Politique des éléments d’archive';
-$string['archiveitemrequirescontent'] = 'L’élément d’archive doit contenir un contenu, un résumé ou un fichier.';
-$string['archiveitems:none'] = 'Aucun élément d’archive à afficher.';
-$string['archiveitemtitle'] = 'Titre de l’élément d’archive';
-$string['archiveitemtype'] = 'Type d’élément d’archive';
-$string['archivememorynotice'] = 'Cette archive conserve une mémoire vérifiable des éléments, preuves, révisions et décisions associés.';
-$string['archivemissingidentifiers'] = 'Identifiants d’archive manquants.';
-$string['archivereason'] = 'Raison d’archivage';
-$string['archivescope'] = 'Portée de l’archive';
-$string['archivescopefield'] = 'Champ de portée de l’archive';
-$string['archivesource'] = 'Source de l’archive';
-$string['archivestatus'] = 'Statut de l’archive';
-$string['archivetype'] = 'Type d’archive';
+// Registraire ajouté depuis l’audit.
+$string['archiveaddnotice'] = 'Ajoutez un élément de registre avec une provenance claire, une visibilité appropriée et les preuves nécessaires.';
+$string['archiveexport'] = 'Export du registre';
+$string['archiveexportqueued'] = 'L’export du registre a été placé en file d’attente.';
+$string['archivegovernance'] = 'Gouvernance du registre';
+$string['archiveitem:loaded'] = 'Élément de registre chargé.';
+$string['archiveitem:loadfailed'] = 'Impossible de charger l’élément de registre.';
+$string['archiveitem:loading'] = 'Chargement de l’élément de registre…';
+$string['archiveitemactions'] = 'Actions sur l’élément de registre';
+$string['archiveitembody'] = 'Corps de l’élément de registre';
+$string['archiveitemcontent'] = 'Contenu de l’élément de registre';
+$string['archiveitemfiles'] = 'Fichiers de l’élément de registre';
+$string['archiveitemgovernancenotice'] = 'La modification d’un élément de registre doit conserver la provenance, respecter la visibilité et préserver l’historique de révision.';
+$string['archiveitemidentity'] = 'Identité de l’élément de registre';
+$string['archiveitempolicy'] = 'Politique des éléments de registre';
+$string['archiveitemrequirescontent'] = 'L’élément de registre doit contenir un contenu, un résumé ou un fichier.';
+$string['archiveitems:none'] = 'Aucun élément de registre à afficher.';
+$string['archiveitemtitle'] = 'Titre de l’élément de registre';
+$string['archiveitemtype'] = 'Type d’élément de registre';
+$string['archivememorynotice'] = 'Ce registre conserve une mémoire vérifiable des éléments, preuves, révisions et décisions associés.';
+$string['archivemissingidentifiers'] = 'Identifiants de registre manquants.';
+$string['archivereason'] = 'Raison de classement';
+$string['archivescope'] = 'Portée du registre';
+$string['archivescopefield'] = 'Champ de portée du registre';
+$string['archivesource'] = 'Source du registre';
+$string['archivestatus'] = 'Statut du registre';
+$string['archivetype'] = 'Type de registre';
 $string['archivetype:assembly_memory'] = 'Mémoire d’assemblée';
 $string['archivetype:challenge_output'] = 'Production de défi';
 $string['archivetype:course_memory'] = 'Mémoire de cours';
 $string['archivetype:integrity_memory'] = 'Mémoire d’intégrité';
 $string['archivetype:kristal_library'] = 'Bibliothèque de Kristals';
-$string['archivetype:portfolio_archive'] = 'Archive de portfolio';
+$string['archivetype:portfolio_archive'] = 'Registre de portfolio';
 $string['archivetype:proof_repository'] = 'Dépôt de preuves';
-$string['archivevalidation'] = 'Validation de l’archive';
+$string['archivevalidation'] = 'Validation du registre';
 
 // Kristals ajoutés depuis l’audit.
 $string['kristalalignment'] = 'Alignement du Kristal';
@@ -943,7 +943,7 @@ $string['revisionpolicy:none'] = 'Aucune révision automatique';
 $string['revisionpolicy:version_every_edit'] = 'Versionner chaque modification';
 $string['revisionpolicy:version_on_change'] = 'Versionner lors d’un changement significatif';
 $string['revisionpolicy:version_on_validation'] = 'Versionner lors de la validation';
-$string['validatearchiveitems'] = 'Valider les éléments d’archive';
+$string['validatearchiveitems'] = 'Valider les éléments de registre';
 $string['validateditemneedsreviewstate'] = 'Un élément validé doit utiliser un état de validation de révision.';
 $string['validationcriteria'] = 'Critères de validation';
 $string['validationgovernancenotice'] = 'La validation doit rester humaine, traçable et appuyée par une provenance vérifiable.';
@@ -953,7 +953,7 @@ $string['validationrequested'] = 'Validation demandée.';
 $string['validationstatement'] = 'Déclaration de validation';
 $string['validationstatementrequired'] = 'La déclaration de validation est requise.';
 $string['validationworkflow'] = 'Flux de validation';
-$string['validationworkflow:archivist_review'] = 'Révision par archiviste';
+$string['validationworkflow:archivist_review'] = 'Révision par responsable du registre';
 $string['validationworkflow:human_review'] = 'Révision humaine';
 $string['validationworkflow:integrity_review'] = 'Révision d’intégrité';
 $string['validationworkflow:none'] = 'Aucun flux de validation';
@@ -967,7 +967,7 @@ $string['export:previewloaded'] = 'Aperçu de l’export chargé.';
 $string['export:previewloading'] = 'Chargement de l’aperçu de l’export…';
 $string['export:started'] = 'Export démarré.';
 $string['export:starting'] = 'Démarrage de l’export…';
-$string['exportarchiveitem'] = 'Exporter l’élément d’archive';
+$string['exportarchiveitem'] = 'Exporter l’élément de registre';
 $string['exportauditnote'] = 'Note d’audit de l’export';
 $string['exportcancelfailed'] = 'Impossible d’annuler l’export.';
 $string['exportcancelled'] = 'Export annulé.';
@@ -975,7 +975,7 @@ $string['exportconfirmpolicy'] = 'Je confirme que cet export respecte la politiq
 $string['exportconfirmpolicyrequired'] = 'Vous devez confirmer la politique d’export.';
 $string['exportdescription'] = 'Description de l’export';
 $string['exporterror'] = 'Erreur d’export';
-$string['exporterror:missingarchive'] = 'Archive manquante pour la génération de l’export.';
+$string['exporterror:missingarchive'] = 'Registre manquant pour la génération de l’export.';
 $string['exportformat:html'] = 'HTML';
 $string['exportformat:mbz_manifest'] = 'Manifeste MBZ';
 $string['exportgovernance'] = 'Gouvernance de l’export';
@@ -1032,13 +1032,13 @@ $string['exportunredactednotallowed'] = 'L’export non masqué n’est pas auto
 
 // Paramètres ajoutés depuis l’audit.
 $string['settings:ai'] = 'IA';
-$string['settings:ai_desc'] = 'Configurer les règles d’assistance IA, de journalisation et d’incertitude pour les archives.';
+$string['settings:ai_desc'] = 'Configurer les règles d’assistance IA, de journalisation et d’incertitude pour les registres.';
 $string['settings:allowaiassistance'] = 'Autoriser l’assistance IA';
-$string['settings:allowaiassistance_desc'] = 'Autoriser la déclaration et l’utilisation encadrée d’une assistance IA dans les éléments d’archive et les Kristals.';
+$string['settings:allowaiassistance_desc'] = 'Autoriser la déclaration et l’utilisation encadrée d’une assistance IA dans les éléments de registre et les Kristals.';
 $string['settings:allowaivalidation'] = 'Autoriser l’aide IA à la validation';
 $string['settings:allowaivalidation_desc'] = 'Autoriser l’IA à soutenir la validation sans remplacer la décision humaine.';
 $string['settings:allowpublicitems'] = 'Autoriser les éléments publics';
-$string['settings:allowpublicitems_desc'] = 'Autoriser les éléments d’archive à devenir publics après validation et vérification de la visibilité.';
+$string['settings:allowpublicitems_desc'] = 'Autoriser les éléments de registre à devenir publics après validation et vérification de la visibilité.';
 $string['settings:blockrestrictedexports'] = 'Bloquer les exports restreints';
 $string['settings:blockrestrictedexports_desc'] = 'Empêcher les exports contenant des éléments restreints sauf autorisation explicite.';
 $string['settings:defaultexportformat'] = 'Format d’export par défaut';
@@ -1046,21 +1046,21 @@ $string['settings:defaultexportformat_desc'] = 'Format utilisé par défaut pour
 $string['settings:defaultprovenance'] = 'Provenance par défaut';
 $string['settings:defaultprovenance_desc'] = 'Provenance appliquée par défaut aux nouveaux éléments lorsque l’utilisateur n’en indique pas une.';
 $string['settings:defaultvalidationstate'] = 'État de validation par défaut';
-$string['settings:defaultvalidationstate_desc'] = 'État de validation initial appliqué aux nouveaux éléments d’archive.';
-$string['settings:enabled'] = 'Activer les Archives UCKK';
-$string['settings:enabled_desc'] = 'Activer les fonctionnalités du module d’activité Archives UCKK.';
+$string['settings:defaultvalidationstate_desc'] = 'État de validation initial appliqué aux nouveaux éléments de registre.';
+$string['settings:enabled'] = 'Activer les Registres UCKK';
+$string['settings:enabled_desc'] = 'Activer les fonctionnalités du module d’activité Registraire UCKK.';
 $string['settings:enablerevisions'] = 'Activer les révisions';
-$string['settings:enablerevisions_desc'] = 'Conserver un historique de révision pour les éléments d’archive.';
+$string['settings:enablerevisions_desc'] = 'Conserver un historique de révision pour les éléments de registre.';
 $string['settings:enablevalidation'] = 'Activer la validation';
-$string['settings:enablevalidation_desc'] = 'Permettre la validation, le rejet et l’invalidation des éléments d’archive.';
+$string['settings:enablevalidation_desc'] = 'Permettre la validation, le rejet et l’invalidation des éléments de registre.';
 $string['settings:export'] = 'Export';
-$string['settings:export_desc'] = 'Configurer les formats, restrictions et politiques d’export des archives.';
+$string['settings:export_desc'] = 'Configurer les formats, restrictions et politiques d’export des registres.';
 $string['settings:generateexports'] = 'Générer les exports';
 $string['settings:generateexports_desc'] = 'Autoriser la tâche planifiée à générer les exports en file d’attente.';
 $string['settings:includefilesinexports'] = 'Inclure les fichiers dans les exports';
 $string['settings:includefilesinexports_desc'] = 'Inclure les fichiers attachés lorsque la politique d’export l’autorise.';
 $string['settings:itempolicy'] = 'Politique des éléments';
-$string['settings:itempolicy_desc'] = 'Configurer les règles de création, visibilité, provenance et protection des éléments d’archive.';
+$string['settings:itempolicy_desc'] = 'Configurer les règles de création, visibilité, provenance et protection des éléments de registre.';
 $string['settings:kristal'] = 'Kristals';
 $string['settings:kristal_desc'] = 'Configurer la création, la validation et le nombre maximal de Kristals.';
 $string['settings:kristalsrequirevalidation'] = 'Exiger la validation des Kristals';
@@ -1068,9 +1068,9 @@ $string['settings:kristalsrequirevalidation_desc'] = 'Exiger une validation huma
 $string['settings:lockvalidateditems'] = 'Verrouiller les éléments validés';
 $string['settings:lockvalidateditems_desc'] = 'Empêcher la modification directe des éléments validés sans révision ou changement d’état.';
 $string['settings:logaiuse'] = 'Journaliser l’usage de l’IA';
-$string['settings:logaiuse_desc'] = 'Conserver les traces déclarées d’assistance IA, de prompts, de réponses ou de métadonnées selon la politique de l’archive.';
+$string['settings:logaiuse_desc'] = 'Conserver les traces déclarées d’assistance IA, de prompts, de réponses ou de métadonnées selon la politique du registre.';
 $string['settings:maxkristalitems'] = 'Nombre maximal de Kristals';
-$string['settings:maxkristalitems_desc'] = 'Nombre maximal de Kristals pouvant être associés à une archive ou à un élément.';
+$string['settings:maxkristalitems_desc'] = 'Nombre maximal de Kristals pouvant être associés à un registre ou à un élément.';
 $string['settings:pausevalidationonintegritycase'] = 'Suspendre la validation en cas de dossier d’intégrité';
 $string['settings:pausevalidationonintegritycase_desc'] = 'Empêcher la validation finale lorsqu’un dossier d’intégrité actif concerne l’élément.';
 $string['settings:protectrestricteditems'] = 'Protéger les éléments restreints';
@@ -1080,13 +1080,13 @@ $string['settings:requireaiuncertaintylabel_desc'] = 'Exiger une mention des lim
 $string['settings:requirechangereason'] = 'Exiger une raison de changement';
 $string['settings:requirechangereason_desc'] = 'Exiger une justification lors d’une révision, invalidation ou modification d’un élément validé.';
 $string['settings:requirecontext'] = 'Exiger le contexte';
-$string['settings:requirecontext_desc'] = 'Exiger que les éléments d’archive décrivent leur contexte d’origine.';
+$string['settings:requirecontext_desc'] = 'Exiger que les éléments de registre décrivent leur contexte d’origine.';
 $string['settings:requirehumanvalidation'] = 'Exiger une validation humaine';
 $string['settings:requirehumanvalidation_desc'] = 'Exiger une décision humaine pour valider, rejeter ou invalider un élément.';
 $string['settings:requirevisibility'] = 'Exiger la visibilité';
 $string['settings:requirevisibility_desc'] = 'Exiger qu’un niveau de visibilité explicite soit défini pour chaque élément.';
 $string['settings:taskbatchsize'] = 'Taille des lots de tâche';
-$string['settings:taskbatchsize_desc'] = 'Nombre maximal d’éléments traités par lot dans les tâches planifiées d’archive.';
+$string['settings:taskbatchsize_desc'] = 'Nombre maximal d’éléments traités par lot dans les tâches planifiées de registre.';
 $string['settings:tasks'] = 'Tâches planifiées';
 $string['settings:tasks_desc'] = 'Configurer les tâches planifiées de validation, d’export et de nettoyage.';
 $string['settings:validatependingitems'] = 'Valider les éléments en attente';
@@ -1101,7 +1101,7 @@ $string['badge:invalidated'] = 'Invalidé';
 $string['badge:restricted'] = 'Restreint';
 $string['badge:validated'] = 'Validé';
 $string['notice:aiassisted'] = 'Cet élément indique une assistance par IA.';
-$string['notice:archiveitem'] = 'Cet élément fait partie de l’archive UCKK.';
+$string['notice:archiveitem'] = 'Cet élément fait partie de le Registraire UCKK.';
 $string['notice:restricted'] = 'Cet élément contient des données restreintes.';
 
 // Tâches et calendrier ajoutés depuis l’audit.
@@ -1109,10 +1109,10 @@ $string['calendarevent:closes'] = '{$a} se ferme';
 $string['calendarevent:opens'] = '{$a} s’ouvre';
 $string['task:validation_correction_reason'] = 'Correction requise par la tâche de validation.';
 $string['task:validation_ready_reason'] = 'Élément prêt pour la validation automatique programmée.';
-$string['task_generate_archive_exports'] = 'Générer les exports d’archive';
+$string['task_generate_archive_exports'] = 'Générer les exports du registre';
 
 // Confidentialité ajoutée depuis l’audit.
-$string['privacy:deleted'] = 'Les données d’archive supprimées ne sont plus disponibles dans cette activité.';
+$string['privacy:deleted'] = 'Les données de registre supprimées ne sont plus disponibles dans cette activité.';
 
 // -----------------------------------------------------------------------------
 // Médias, avis de contenu, œuvres externes et intégrations Moodle ajoutés.
@@ -1135,10 +1135,10 @@ $string['aiassistancedisclosed'] = 'Assistance IA déclarée';
 $string['aiprovencenotice'] = 'L’assistance IA doit rester traçable, déclarée et vérifiable.';
 $string['allstatuses'] = 'Tous les statuts';
 $string['allvalidationstates'] = 'Tous les états de validation';
-$string['archived'] = 'Archivé';
-$string['archivefilters'] = 'Filtres d’archive';
-$string['archivestats'] = 'Statistiques d’archive';
-$string['archivesummary'] = 'Résumé de l’archive';
+$string['archived'] = 'Classé';
+$string['archivefilters'] = 'Filtres de registre';
+$string['archivestats'] = 'Statistiques de registre';
+$string['archivesummary'] = 'Résumé du registre';
 $string['attentionrequired'] = 'Attention requise';
 $string['audience'] = 'Public';
 $string['audience:general'] = 'Général';
@@ -1211,7 +1211,7 @@ $string['culturalprotocols'] = 'Protocoles culturels';
 $string['delete'] = 'Supprimer';
 $string['deleted'] = 'Supprimé';
 $string['document'] = 'Document';
-$string['event:archiveviewed'] = 'Archive consultée';
+$string['event:archiveviewed'] = 'Registre consulté';
 $string['event:contentmarkercreated'] = 'Marqueur de contenu créé';
 $string['event:contentmarkerreviewed'] = 'Marqueur de contenu revu';
 $string['event:externalworkcreated'] = 'Œuvre externe créée';
@@ -1228,6 +1228,12 @@ $string['eventmediaupdated'] = 'Média mis à jour';
 $string['eventmediaversioncreated'] = 'Version de média créée';
 $string['exportmedia'] = 'Exporter le média';
 $string['externalreference'] = 'Référence externe';
+$string['externalurl'] = 'URL externe';
+$string['openexternal'] = 'Ouvrir la référence externe';
+$string['openexternal_help'] = 'Ouvre l’URL source externe dans un nouvel onglet. La fiche média reste gouvernée par les métadonnées UCKK, les droits, la visibilité, les avis de contenu et les protocoles culturels.';
+$string['mediaexternalreference'] = 'Référence externe';
+$string['mediaexternalurl'] = 'URL externe';
+$string['mediaopenexternal'] = 'Ouvrir la référence externe';
 $string['externalwork'] = 'Œuvre externe';
 $string['externalworkcitation'] = 'Citation de l’œuvre externe';
 $string['externalworkcreator'] = 'Créateur de l’œuvre externe';
@@ -1266,7 +1272,7 @@ $string['externalworktype:external_video'] = 'Vidéo externe';
 $string['externalworktype:film'] = 'Film';
 $string['externalworktype:other'] = 'Autre';
 $string['externalworktype:podcast'] = 'Podcast';
-$string['externalworktype:public_archive_item'] = 'Élément d’archive public';
+$string['externalworktype:public_archive_item'] = 'Élément de registre public';
 $string['externalworktype:third_party_pdf'] = 'PDF tiers';
 $string['externalworktype:website'] = 'Site web';
 $string['externalworkyear'] = 'Année de l’œuvre externe';
@@ -1282,7 +1288,7 @@ $string['filename'] = 'Nom de fichier';
 $string['filesize'] = 'Taille du fichier';
 $string['identifier'] = 'Identifiant';
 $string['identifiertype:accession_number'] = 'Numéro d’acquisition';
-$string['identifiertype:archive_identifier'] = 'Identifiant d’archive';
+$string['identifiertype:archive_identifier'] = 'Identifiant de registre';
 $string['identifiertype:catalogue_number'] = 'Numéro de catalogue';
 $string['identifiertype:doi'] = 'DOI';
 $string['identifiertype:isbn'] = 'ISBN';
@@ -1341,7 +1347,7 @@ $string['mediaid'] = 'ID du média';
 $string['mediaidentity'] = 'Identité du média';
 $string['mediaitems'] = 'Mediaitems';
 $string['medialanguage'] = 'Medialanguage';
-$string['medialibrary'] = 'Bibliothèque média';
+$string['medialibrary'] = 'Médiathèque';
 $string['medialibraryerror'] = 'Medialibraryerror';
 $string['medialicense'] = 'Medialicense';
 $string['mediarelation'] = 'Relation de média';
@@ -1350,7 +1356,7 @@ $string['mediarelationfromtype'] = 'Mediarelationfromtype';
 $string['mediarelationidentity'] = 'Mediarelationidentity';
 $string['mediarelationinvalidtargettype'] = 'Mediarelationinvalidtargettype';
 $string['mediarelationnote'] = 'Mediarelationnote';
-$string['mediarelationobject:archive_item'] = 'Archive item';
+$string['mediarelationobject:archive_item'] = 'Élément de registre';
 $string['mediarelationobject:content_marker'] = 'Contenu marqueur';
 $string['mediarelationobject:external_work'] = 'Externe œuvre';
 $string['mediarelationobject:kristal'] = 'Kristal';
@@ -1394,7 +1400,7 @@ $string['mediasourcetype'] = 'Mediasourcetype';
 $string['mediasourceurl'] = 'Mediasourceurl';
 $string['mediastatus'] = 'Mediastatus';
 $string['mediastatus_active'] = 'Actif';
-$string['mediastatus_archived'] = 'Archivé';
+$string['mediastatus_archived'] = 'Classé';
 $string['mediastatus_deleted_soft'] = 'Supprimé logiquement';
 $string['mediastatus_draft'] = 'Brouillon';
 $string['mediastatus_restricted'] = 'Restreint';
@@ -1456,7 +1462,7 @@ $string['primarysource'] = 'Source primaire';
 $string['proofcontent'] = 'Contenu de preuve';
 $string['proofgovernance'] = 'Gouvernance des preuves';
 $string['provenance_ai_assisted'] = 'Assisté par IA';
-$string['provenance_archive'] = 'Archive';
+$string['provenance_archive'] = 'Registre';
 $string['provenance_assembly'] = 'Assemblée';
 $string['provenance_challenge'] = 'Défi';
 $string['provenance_human'] = 'Humain';
@@ -1470,7 +1476,7 @@ $string['purpose'] = 'Finalité';
 $string['rebuildcontentmarkerindex'] = 'Reconstruire l’index des marqueurs de contenu';
 $string['recordsvisible'] = 'Traces visibles';
 $string['redacted'] = 'Caviardé';
-$string['refresharchive'] = 'Actualiser l’archive';
+$string['refresharchive'] = 'Actualiser le registre';
 $string['relatedrecords'] = 'Traces liées';
 $string['relations'] = 'Relations';
 $string['relationtype'] = 'Type de relation';
@@ -1501,8 +1507,8 @@ $string['rightsstatus:unknown'] = 'Inconnu';
 $string['saveexternalwork'] = 'Enregistrer l’œuvre externe';
 $string['savemedia'] = 'Enregistrer le média';
 $string['savemediarelation'] = 'Enregistrer la relation de média';
-$string['searcharchive'] = 'Rechercher dans l’archive';
-$string['searcharchiveplaceholder'] = 'Rechercher dans l’archive…';
+$string['searcharchive'] = 'Rechercher dans le registre';
+$string['searcharchiveplaceholder'] = 'Rechercher dans le registre…';
 $string['sortorder'] = 'Ordre de tri';
 $string['sourcenote'] = 'Note de source';
 $string['sourceownership:external_reference'] = 'Référence externe';
@@ -1520,7 +1526,7 @@ $string['status:restricted'] = 'Restreint';
 $string['status:submitted'] = 'Soumis';
 $string['status:superseded'] = 'Remplacé';
 $string['status_active'] = 'Actif';
-$string['status_archived'] = 'Archivé';
+$string['status_archived'] = 'Classé';
 $string['status_contested'] = 'Contesté';
 $string['status_deleted_soft'] = 'Supprimé logiquement';
 $string['status_draft'] = 'Brouillon';
@@ -1556,12 +1562,12 @@ $string['uckkarchive:reviewadvisories'] = 'Réviser les avis de contenu';
 $string['uckkarchive:versionmedia'] = 'Versionner les médias';
 $string['uckkarchive:viewadvisories'] = 'Voir les avis de contenu';
 $string['uckkarchive:viewculturallyrestricted'] = 'Voir les contenus culturellement restreints';
-$string['uckkarchive:viewmedia'] = 'Voir la bibliothèque média';
+$string['uckkarchive:viewmedia'] = 'Voir la Médiathèque';
 $string['uckkarchive:viewrestrictedmedia'] = 'Voir les médias restreints';
 $string['validationchecks'] = 'Vérifications de validation';
 $string['validationevidence'] = 'Preuve de validation';
 $string['validationreason'] = 'Raison de validation';
-$string['validationstate_archived'] = 'Archivé';
+$string['validationstate_archived'] = 'Classé';
 $string['validationstate_contested'] = 'Contesté';
 $string['validationstate_human_reviewed'] = 'Revu humainement';
 $string['validationstate_invalidated'] = 'Invalidé';
@@ -1627,7 +1633,7 @@ $string['uckkarchive:deleteexternalworks'] = 'Supprimer les œuvres externes';
 // -----------------------------------------------------------------------------
 
 $string['medialibraryeditor'] = 'Éditeur de médiathèque';
-$string['medialibraryeditor_desc'] = 'Qualifier, contextualiser, relier, gouverner et valider les médias d’archive.';
+$string['medialibraryeditor_desc'] = 'Qualifier, contextualiser, relier, gouverner et valider les médias de la Médiathèque.';
 $string['backtomedialibrary'] = 'Retour à la médiathèque';
 $string['mediaeditorpreview'] = 'Aperçu du média';
 $string['mediaeditorworkflow'] = 'Workflow';
@@ -1647,9 +1653,9 @@ $string['passagemarkers'] = 'Repères de passage';
 $string['passagemarkers_desc'] = 'Pointer vers un passage précis d’une vidéo, d’un audio, d’un livre, d’un PDF, d’un site ou d’une œuvre externe.';
 $string['managepassagemarkers'] = 'Gérer les repères de passage';
 $string['mediaeditoradvisories_desc'] = 'Réviser les avertissements, avis culturels, protocoles culturels et conditions d’adéquation au public.';
-$string['mediaeditorrelations_desc'] = 'Relier ce média à des collections, items d’archive, versions, œuvres externes, preuves ou autres médias.';
+$string['mediaeditorrelations_desc'] = 'Relier ce média à des collections, éléments de registre, versions, œuvres externes, preuves ou autres médias.';
 $string['mediaeditorvalidation_desc'] = 'Suivre l’état de révision, la préparation à la publication, les restrictions et la contestabilité.';
-$string['mediaeditorprovenance_desc'] = 'La provenance et l’audit restent gouvernés par les services serveur de l’archive.';
+$string['mediaeditorprovenance_desc'] = 'La provenance et l’audit restent gouvernés par les services serveur du Registraire.';
 $string['mediacreated'] = 'Média créé.';
 $string['mediaupdated'] = 'Média mis à jour.';
 
@@ -1659,12 +1665,12 @@ $string['mediaupdated'] = 'Média mis à jour.';
 
 $string['mediatheque'] = 'Médiathèque';
 $string['mediatheque_title'] = 'Médiathèque UCKK';
-$string['mediatheque_eyebrow'] = 'Archives publiques';
-$string['mediatheque_summary'] = 'Explorer les médias publics, collections, œuvres externes et passages documentés de l’archive UCKK.';
+$string['mediatheque_eyebrow'] = 'Médiathèque publique';
+$string['mediatheque_summary'] = 'Explorer les médias publics, collections, œuvres externes et passages documentés de la Médiathèque UCKK.';
 
 $string['mediatheque_explorer'] = 'Explorateur Médiathèque';
 $string['mediatheque_explorer_title'] = 'Explorateur Médiathèque';
-$string['mediatheque_explorer_desc'] = 'Rechercher et filtrer la Médiathèque publique. Les résultats sont filtrés selon la visibilité, les droits, les avis de contenu, les protocoles culturels et les politiques d’archive.';
+$string['mediatheque_explorer_desc'] = 'Rechercher et filtrer la Médiathèque publique. Les résultats sont filtrés selon la visibilité, les droits, les avis de contenu, les protocoles culturels et les politiques de publication et d’accès.';
 
 $string['mediatheque_search'] = 'Rechercher dans la Médiathèque';
 $string['mediatheque_search_placeholder'] = 'Rechercher par titre, description, source, mot-clé, collection ou passage';
@@ -1710,7 +1716,7 @@ $string['mediatheque_filter_has_public_protocol'] = 'Avec protocole public';
 $string['mediatheque_object_media'] = 'Média';
 $string['mediatheque_object_collection'] = 'Collection';
 $string['mediatheque_object_external_work'] = 'Œuvre externe';
-$string['mediatheque_object_archive_item'] = 'Élément d’archive lié';
+$string['mediatheque_object_archive_item'] = 'Élément de registre lié';
 $string['mediatheque_object_content_marker'] = 'Repère de passage';
 
 $string['mediatheque_mediatype_video'] = 'Vidéo';
@@ -1736,11 +1742,11 @@ $string['mediatheque_audience_restricted'] = 'Restreint';
 $string['mediatheque_validation_unverified'] = 'Non vérifié';
 $string['mediatheque_validation_human_reviewed'] = 'Révisé humainement';
 $string['mediatheque_validation_verified'] = 'Vérifié';
-$string['mediatheque_validation_archived'] = 'Archivé';
+$string['mediatheque_validation_archived'] = 'Classé';
 
 $string['mediatheque_public_notice'] = 'La Médiathèque affiche seulement les notices publiques filtrées par les politiques d’accès.';
-$string['mediatheque_restricted_notice'] = 'Certains contenus sont masqués ou résumés selon les droits, les avis de contenu, les protocoles culturels et les politiques d’archive.';
-$string['mediatheque_policy_filtered_notice'] = 'Les résultats sont filtrés côté serveur par les politiques d’archive.';
+$string['mediatheque_restricted_notice'] = 'Certains contenus sont masqués ou résumés selon les droits, les avis de contenu, les protocoles culturels et les politiques de publication et d’accès.';
+$string['mediatheque_policy_filtered_notice'] = 'Les résultats sont filtrés côté serveur par les politiques de publication et d’accès.';
 $string['mediatheque_no_download_notice'] = 'Cette carte publique ne donne pas accès au fichier original.';
 $string['mediatheque_external_reference_notice'] = 'Cette notice référence une œuvre externe. UCKK ne revendique pas la propriété du contenu externe.';
 
@@ -1760,5 +1766,5 @@ $string['mediatheque_service_search'] = 'Rechercher dans la Médiathèque publiq
 $string['mediatheque_service_error_invalidscope'] = 'Portée de recherche Médiathèque invalide.';
 $string['mediatheque_service_error_invalidfilters'] = 'Filtres Médiathèque invalides.';
 $string['mediatheque_service_error_unavailable'] = 'Le service de recherche de la Médiathèque est temporairement indisponible.';
-$string['mediatheque_service_warning_policyfiltered'] = 'Certains résultats peuvent être masqués par les politiques d’archive.';
+$string['mediatheque_service_warning_policyfiltered'] = 'Certains résultats peuvent être masqués par les politiques de publication et d’accès.';
 $string['mediatheque_service_warning_restrictedhidden'] = 'Le contenu restreint a été masqué de la réponse publique.';

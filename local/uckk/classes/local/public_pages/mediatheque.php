@@ -10,15 +10,15 @@
 // Univers-Cité King Klown.
 
 /**
- * Public Médiathèque page definition for local_uckk.
+ * Public catalogue page definition for local_uckk.
  *
- * This class owns the public Médiathèque page content definition.
+ * This class owns the public page content definition for the UCKK Médiathèque.
  * Media records, permissions, public filtering, rights, content advisories
  * and cultural protocol decisions remain owned by mod_uckkarchive.
  *
  * It must not:
  * - query media tables;
- * - expose private archive fields;
+ * - expose private internal fields;
  * - decide access rights;
  * - bypass content advisories;
  * - bypass cultural protocols;
@@ -35,7 +35,7 @@ namespace local_uckk\local\public_pages;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Public Médiathèque page definition.
+ * Public catalogue page definition.
  *
  * @package local_uckk
  */
@@ -51,7 +51,7 @@ final class mediatheque {
     private const SEARCH_SERVICE = 'mod_uckkarchive_search_mediatheque';
 
     /**
-     * Return the public Médiathèque page definition.
+     * Return the public catalogue page definition.
      *
      * @return array<string, mixed>
      */
@@ -59,11 +59,12 @@ final class mediatheque {
         return [
             'layout' => 'wide',
             'typography' => 'institutional',
-            'eyebrow' => 'Archives publiques',
+
+            'eyebrow' => 'Catalogue public',
             'title' => 'Médiathèque UCKK',
-            'subtitle' => 'Explorer les médias, collections, œuvres externes et passages documentés.',
-            'summary' => 'La Médiathèque donne accès aux médias publics, collections, œuvres externes et passages documentés de l’archive UCKK, avec filtrage par droits, avis de contenu et protocoles culturels.',
-            'cardsheading' => 'Explorer la Médiathèque',
+            'subtitle' => 'Explorer les médias, collections, références externes et passages documentés.',
+            'summary' => 'Le catalogue donne accès aux contenus publics autorisés : vidéos, sons, images, documents, collections, références externes et extraits contextualisés. Les résultats sont filtrés selon les droits, les avis de contenu, la visibilité et les protocoles culturels.',
+            'cardsheading' => 'Parcourir',
 
             'has_mediatheque_explorer' => true,
             'mediatheque_explorer_id' => self::EXPLORER_ID,
@@ -84,6 +85,7 @@ final class mediatheque {
                     'audience' => 'all',
                     'lang' => '',
                     'validation' => 'all',
+                    'item' => '',
                 ],
                 'page' => 1,
                 'perpage' => 12,
@@ -94,7 +96,7 @@ final class mediatheque {
             'mediatheque' => [
                 'explorer' => [
                     'key' => 'mediatheque_explorer',
-                    'title' => 'Explorateur Médiathèque',
+                    'title' => 'Recherche publique',
                     'service' => self::SEARCH_SERVICE,
                     'surface' => 'local_uckk',
                     'dataowner' => 'mod_uckkarchive',
@@ -104,13 +106,8 @@ final class mediatheque {
             'quicklinks' => [
                 [
                     'label' => 'Rechercher',
-                    'description' => 'Chercher dans les médias publics et les collections accessibles.',
+                    'description' => 'Trouver des médias publics, collections accessibles, références externes et passages documentés.',
                     'url' => '/local/uckk/mediatheque.php',
-                ],
-                [
-                    'label' => 'Archives',
-                    'description' => 'Revenir aux repères généraux d’archive publique.',
-                    'url' => '/local/uckk/archives.php',
                 ],
             ],
 
@@ -118,36 +115,36 @@ final class mediatheque {
                 [
                     'type' => 'orientation',
                     'eyebrow' => 'Exploration',
-                    'title' => 'Naviguer dans les médias publics',
-                    'body' => 'L’explorateur permet de chercher, filtrer et ouvrir les fiches publiques sans exposer les fichiers originaux ni les métadonnées privées.',
+                    'title' => 'Naviguer dans les contenus publics',
+                    'body' => 'L’explorateur permet de chercher, filtrer et ouvrir les fiches publiques sans exposer les fichiers originaux, les brouillons, les notes internes ni les métadonnées privées.',
                     'items' => [
                         'Recherche par texte, format, source, collection et mot-clé.',
-                        'Affichage des médias publics seulement.',
+                        'Affichage limité aux contenus publiables.',
                         'Respect des droits, avis de contenu et protocoles culturels.',
                     ],
                 ],
                 [
                     'type' => 'boundary',
                     'eyebrow' => 'Responsabilité',
-                    'title' => 'Ce que la Médiathèque ne publie pas',
-                    'body' => 'Les médias restreints, brouillons, notes internes, protocoles culturels privés, fichiers originaux non autorisés et métadonnées sensibles restent contrôlés par mod_uckkarchive.',
+                    'title' => 'Ce qui reste protégé',
+                    'body' => 'Les médias restreints, brouillons, notes internes, protocoles culturels privés, fichiers originaux non autorisés et métadonnées sensibles restent contrôlés par le moteur média institutionnel.',
                 ],
             ],
 
             'cards' => [
                 [
                     'title' => 'Médias',
-                    'body' => 'Voir les vidéos, sons, images, documents et livres publics filtrés.',
+                    'body' => 'Voir les vidéos, sons, images, documents et références publiques filtrées.',
                     'type' => 'media',
                 ],
                 [
                     'title' => 'Collections',
-                    'body' => 'Parcourir les regroupements publics sans dupliquer le moteur média interne.',
+                    'body' => 'Explorer les regroupements publics sans dupliquer le moteur média institutionnel.',
                     'type' => 'collection',
                 ],
                 [
                     'title' => 'Passages documentés',
-                    'body' => 'Pointer vers des moments, pages ou segments quand ils peuvent être exposés publiquement.',
+                    'body' => 'Accéder à des moments, pages ou segments lorsque leur exposition publique est autorisée.',
                     'type' => 'marker',
                 ],
             ],
@@ -155,12 +152,12 @@ final class mediatheque {
             'notices' => [
                 [
                     'title' => 'Données et politiques',
-                    'body' => 'La page publique appartient à local_uckk, mais les médias, droits, avis de contenu et protocoles culturels sont filtrés par mod_uckkarchive.',
+                    'body' => 'Cette page est une surface publique de local_uckk. Les médias, droits, avis de contenu, protocoles culturels et règles de visibilité sont filtrés par le moteur média institutionnel.',
                     'type' => 'institutional',
                 ],
                 [
                     'title' => 'Accès responsable',
-                    'body' => 'Certains contenus peuvent être masqués ou résumés selon les droits, les avis de contenu et les protocoles culturels.',
+                    'body' => 'Certains contenus peuvent être masqués, résumés ou limités selon les droits, les avis de contenu, les protocoles culturels et les permissions disponibles.',
                     'type' => 'light',
                 ],
             ],
@@ -172,23 +169,23 @@ final class mediatheque {
                 ],
                 [
                     'label' => 'Données et politiques',
-                    'value' => 'mod_uckkarchive',
+                    'value' => 'Moteur média institutionnel',
                 ],
                 [
-                    'label' => 'Service AJAX',
-                    'value' => self::SEARCH_SERVICE,
+                    'label' => 'Service',
+                    'value' => 'Recherche du catalogue public',
                 ],
                 [
                     'label' => 'Portée par défaut',
-                    'value' => 'site-wide public',
+                    'value' => 'Contenus publics du site',
                 ],
             ],
 
             'cta' => [
-                'title' => 'Explorer les médias publics',
-                'body' => 'Lance une recherche ou filtre la Médiathèque selon le format, la source, les collections et les avis publics.',
+                'title' => 'Explorer les contenus publics',
+                'body' => 'Lance une recherche ou applique un filtre pour explorer les contenus publics selon le format, la source, la collection, les droits et les avis disponibles.',
                 'url' => '/local/uckk/mediatheque.php',
-                'label' => 'Ouvrir la Médiathèque',
+                'label' => 'Ouvrir la recherche',
             ],
         ];
     }

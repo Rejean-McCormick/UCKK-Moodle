@@ -19,7 +19,7 @@
  * - no grading logic;
  * - no enrolment logic;
  * - no integrity decision logic;
- * - no archive validation logic;
+ * - no registry validation logic;
  * - no challenge or assembly workflow logic.
  *
  * @package    format_uckk
@@ -156,7 +156,7 @@ class content extends core_content {
             'formula' => $this->safe_get_string(
                 'formula_governance',
                 'theme_uckk',
-                'King Klown attire. L’Inquisiteur vérifie. Les Assemblées légitiment. Les Bâtisseurs réalisent. L’Archiviste se souvient.'
+                'King Klown attire. L’Inquisiteur vérifie. Les Assemblées légitiment. Les Bâtisseurs réalisent. Le Registraire se souvient.'
             ),
             'boundarynotice' => $this->safe_get_string(
                 'footer_canonicalwarning',
@@ -484,7 +484,7 @@ class content extends core_content {
             'archive' => $this->safe_get_string(
                 'course_archive',
                 'theme_uckk',
-                'Archive'
+                'Registraire'
             ),
         ];
 

@@ -12,7 +12,9 @@
  * This controller is intentionally thin:
  * - it owns the public route `/local/uckk/mediatheque.php`;
  * - it uses the shared `local_uckk` public page shell;
+ * - it uses the centralized public page definition registry;
  * - it passes initial explorer state to AMD;
+ * - it adds authenticated shortcut links without exposing private controls to guests;
  * - it does not query media tables directly;
  * - it does not decide access, visibility, cultural protocol, file access, or export rights.
  *
@@ -135,11 +137,38 @@ $PAGE->requires->js_call_amd('local_uckk/mediatheque_explorer', 'init', [$initia
 echo $OUTPUT->header();
 
 if (class_exists('\local_uckk\output\public_page')) {
-    echo $OUTPUT->render(new \local_uckk\output\public_page($pagekey, [
-        'mediatheque_explorer_id' => $explorerid,
-        'mediatheque_initial_state' => $initialstate,
-        'has_mediatheque_explorer' => true,
-    ]));
+    if (class_exists('\local_uckk\local\public_pages')) {
+        $definition = \local_uckk\local\public_pages::definition($pagekey);
+    } else {
+        $definition = [];
+    }
+
+    // Keep the centralized page definition as the source of truth.
+    // Only the runtime explorer state is overridden here.
+    $definition['mediatheque_explorer_id'] = $explorerid;
+    $definition['mediatheque_initial_state'] = $initialstate;
+    $definition['has_mediatheque_explorer'] = true;
+
+    /*
+     * Add authenticated Médiathèque shortcuts without adding private controls
+     * to the static public page definition.
+     *
+     * The target route performs the real course/module resolution and checks
+     * mod/uckkarchive:addmedia before redirecting to the canonical media editor.
+     */
+    if (isloggedin() && !isguestuser()) {
+        if (!isset($definition['quicklinks']) || !is_array($definition['quicklinks'])) {
+            $definition['quicklinks'] = [];
+        }
+
+        $definition['quicklinks'][] = [
+            'label' => 'Ajouter un média',
+            'description' => 'Ajouter directement un média à la Médiathèque centrale UCKK.',
+            'url' => '/local/uckk/mediatheque_add.php',
+        ];
+    }
+
+    echo $OUTPUT->render(new \local_uckk\output\public_page($pagekey, $definition));
 } else {
     echo html_writer::start_div('local-uckk local-uckk-public-page local-uckk-public-page--mediatheque');
 
@@ -154,6 +183,16 @@ if (class_exists('\local_uckk\output\public_page')) {
     echo html_writer::tag('p', get_string('mediatheque_summary', 'local_uckk'), [
         'class' => 'local-uckk-public-summary',
     ]);
+
+    if (isloggedin() && !isguestuser()) {
+        echo html_writer::link(
+            new moodle_url('/local/uckk/mediatheque_add.php'),
+            'Ajouter un média',
+            [
+                'class' => 'btn btn-primary local-uckk-mediatheque-add',
+            ]
+        );
+    }
 
     echo html_writer::div('', 'local-uckk-mediatheque-explorer', [
         'id' => $explorerid,

@@ -326,18 +326,17 @@
     },
     {
       "id": "92_archives_et_portfolios",
-      "name": "92 — Portfolios étudiants",
+      "name": "92 — Registraire et portfolios",
       "idnumber": "UCKK-CAT-92-ARCHIVES-PORTFOLIOS",
-      "path": "UCKK / 92 — Portfolios étudiants",
+      "path": "UCKK / 92 — Registraire et portfolios",
       "parent_idnumber": "UCKK",
-      "description": "Espace des travaux étudiants, preuves personnelles, productions, portfolios, révisions et exports liés aux parcours d’apprentissage.",
+      "description": "Espace du Registraire, des preuves, Kristaux, portfolios, traces validées, révisions et exports.",
       "sortorder": 920,
       "visible": 1,
       "metadata": {
-        "type": "portfolio_space",
+        "type": "archive_space",
         "component": "mod_uckkarchive",
-        "language": "fr",
-        "surface": "portfolio"
+        "language": "fr"
       }
     },
     {
@@ -354,22 +353,6 @@
         "component": "tool_uckkintegrity",
         "visibility": "restricted_integrity",
         "formula": "Même le Roi-Clown peut être interrogé.",
-        "language": "fr"
-      }
-    },
-    {
-      "id": "93_mediatheque",
-      "name": "93 — Médiathèque",
-      "idnumber": "UCKK-CAT-93-MEDIATHEQUE",
-      "path": "UCKK / 93 — Médiathèque",
-      "parent_idnumber": "UCKK",
-      "description": "Espace de la Médiathèque UCKK : contenus institutionnels, médias, collections, références externes, passages documentés et avis publics.",
-      "sortorder": 930,
-      "visible": 1,
-      "metadata": {
-        "type": "media_library",
-        "component": "mod_uckkarchive",
-        "surface": "mediatheque",
         "language": "fr"
       }
     }

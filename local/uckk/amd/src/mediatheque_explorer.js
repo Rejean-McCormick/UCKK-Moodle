@@ -1,5 +1,10 @@
 /**
- * Public Médiathèque explorer interactions for local_uckk.
+ * Public catalogue explorer interactions for local_uckk.
+ *
+ * Technical selectors, AMD module name, query keys and service method names keep
+ * the mediatheque identifiers because they are part of the existing integration
+ * contract. Public-facing wording should describe the interface as the catalogue
+ * or public explorer to avoid repeating "Médiathèque" throughout the page.
  *
  * This module is UI-only:
  * - reads public search/filter controls;
@@ -147,7 +152,10 @@ const debounce = (callback, delay = DEBOUNCE_DELAY) => {
 };
 
 /**
- * Get the service method for this explorer instance.
+ * Resolve the Moodle external service method for this explorer instance.
+ *
+ * The default method name remains "mod_uckkarchive_search_mediatheque" because
+ * it is a technical contract, not a public label.
  *
  * @param {HTMLElement} root Root element.
  * @returns {string}
@@ -363,6 +371,31 @@ const setCount = (root, pagination = {}) => {
 };
 
 /**
+ * Get a catalogue result-count message.
+ *
+ * Prefer catalogue_* string identifiers for the public wording. Fall back to
+ * legacy mediatheque_* identifiers so older language packs keep working.
+ *
+ * @param {number} total Total result count.
+ * @returns {Promise<string>}
+ */
+const getResultCountMessage = async total => {
+    const catalogueKey = total === 1 ? 'catalogue_result_count_one' : 'catalogue_result_count_many';
+    const legacyKey = total === 1 ? 'mediatheque_result_count_one' : 'mediatheque_result_count_many';
+    const fallback = `${total} résultat(s)`;
+
+    try {
+        return await getString(catalogueKey, COMPONENT, total);
+    } catch (catalogueError) {
+        try {
+            return await getString(legacyKey, COMPONENT, total);
+        } catch (legacyError) {
+            return fallback;
+        }
+    }
+};
+
+/**
  * Render a fallback public card when the service returns structured items
  * without rendered HTML.
  *
@@ -461,9 +494,7 @@ const applyResponse = async(root, response, append) => {
         setStatus(root, response.statusmessage);
     } else {
         const total = toNonNegativeInt(pagination.total, 0);
-        const key = total === 1 ? 'mediatheque_result_count_one' : 'mediatheque_result_count_many';
-        const message = await getString(key, COMPONENT, total).catch(() => `${total} résultat(s)`);
-        setStatus(root, message);
+        setStatus(root, await getResultCountMessage(total));
     }
 };
 
@@ -606,7 +637,10 @@ const initRoot = (root, options = {}) => {
 };
 
 /**
- * Initialize public Médiathèque explorer.
+ * Initialize public catalogue explorer.
+ *
+ * The exported AMD name remains local_uckk/mediatheque_explorer for backwards
+ * compatibility with existing templates and Moodle build output.
  *
  * @param {string|HTMLElement} rootSelector Root selector or element.
  * @param {Object} options Init options.

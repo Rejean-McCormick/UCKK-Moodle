@@ -122,6 +122,7 @@ final class public_pages {
 
         return $definition;
     }
+
     /**
      * Base definition shared by all public pages.
      *
@@ -182,7 +183,7 @@ final class public_pages {
              * Public Médiathèque explorer.
              *
              * local_uckk owns only the public surface. Media search, permissions,
-             * access filters and archive ownership stay in mod_uckkarchive.
+             * access filters and media ownership stay in mod_uckkarchive.
              */
             'has_mediatheque_explorer' => false,
             'mediatheque_explorer_id' => '',
@@ -203,8 +204,8 @@ final class public_pages {
                 'typography' => 'display',
                 'eyebrow' => 'Cité-école expérimentale',
                 'title' => 'Univers-Cité King Klown',
-                'subtitle' => 'Un campus Moodle pour apprendre, prouver, délibérer et archiver.',
-                'summary' => 'UCKK-Moodle organise les parcours, cours, défis, assemblées, traces et archives publiques de l’Univers-Cité King Klown.',
+                'subtitle' => 'Un campus Moodle pour apprendre, prouver, délibérer et tenir registre.',
+                'summary' => 'UCKK-Moodle organise les parcours, cours, défis, assemblées, traces et registres publics de l’Univers-Cité King Klown.',
                 'quicklinks' => [
                     [
                         'label' => 'Explorer les voies',
@@ -217,9 +218,9 @@ final class public_pages {
                         'url' => '/local/uckk/courses.php',
                     ],
                     [
-                        'label' => 'Consulter les archives',
-                        'description' => 'Lire les traces publiques et la mémoire institutionnelle.',
-                        'url' => '/local/uckk/archives.php',
+                        'label' => 'Explorer le catalogue',
+                        'description' => 'Consulter les médias, collections et références publiques UCKK.',
+                        'url' => '/local/uckk/mediatheque.php',
                     ],
                 ],
                 'sections' => [
@@ -227,7 +228,7 @@ final class public_pages {
                         'type' => 'orientation',
                         'eyebrow' => 'Orientation',
                         'title' => 'Une cité-école structurée',
-                        'body' => 'Le campus relie les apprentissages, les défis, les preuves, les assemblées et les archives dans un même espace Moodle.',
+                        'body' => 'Le campus relie les apprentissages, les défis, les preuves, les assemblées, les portfolios et la Médiathèque dans un même espace Moodle.',
                         'items' => [
                             'Former par des parcours et des cours.',
                             'Mettre les apprentissages à l’épreuve par des défis.',
@@ -279,7 +280,7 @@ final class public_pages {
                 ],
                 'cta' => [
                     'title' => 'Entrer dans le campus',
-                    'body' => 'Commencer par les cours, les voies ou les archives publiques.',
+                    'body' => 'Commencer par les cours, les voies ou le catalogue public.',
                     'url' => '/local/uckk/courses.php',
                     'label' => 'Voir les cours',
                 ],
@@ -295,7 +296,7 @@ final class public_pages {
                 'sections' => [
                     [
                         'title' => 'Ce qu’est UCKK-Moodle',
-                        'body' => 'UCKK-Moodle est une adaptation de Moodle pour soutenir une cité-école : parcours, apprentissages, défis, assemblées, preuves, archives et gouvernance pédagogique.',
+                        'body' => 'UCKK-Moodle est une adaptation de Moodle pour soutenir une cité-école : parcours, apprentissages, défis, assemblées, preuves, portfolios, Médiathèque et gouvernance pédagogique.',
                     ],
                     [
                         'title' => 'Ce que ce n’est pas',
@@ -319,11 +320,11 @@ final class public_pages {
                         'type' => 'canon',
                     ],
                     [
-                        'title' => 'Archives',
-                        'body' => 'Une mémoire structurée des traces publiques et des corrections.',
-                        'url' => '/local/uckk/archives.php',
-                        'actionlabel' => 'Consulter',
-                        'type' => 'archives',
+                        'title' => 'Médiathèque',
+                        'body' => 'Un espace public pour consulter les contenus, médias et collections UCKK.',
+                        'url' => '/local/uckk/mediatheque.php',
+                        'actionlabel' => 'Explorer',
+                        'type' => 'media',
                     ],
                 ],
                 'notices' => [
@@ -345,7 +346,7 @@ final class public_pages {
                     [
                         'type' => 'role',
                         'title' => 'Rôle des voies',
-                        'body' => 'Une voie aide à situer un parcours d’apprentissage dans la cité-école. Elle peut relier des cours, des compétences, des défis, des preuves et des archives.',
+                        'body' => 'Une voie aide à situer un parcours d’apprentissage dans la cité-école. Elle peut relier des cours, des compétences, des défis, des preuves et des portfolios.',
                     ],
                     [
                         'type' => 'registry',
@@ -440,13 +441,13 @@ final class public_pages {
                     ],
                     [
                         'title' => 'Cycle général',
-                        'body' => 'Un défi peut être proposé, accepté, réalisé, soumis, révisé, validé, contesté ou archivé selon les règles du contexte.',
+                        'body' => 'Un défi peut être proposé, accepté, réalisé, soumis, révisé, validé, contesté ou conservé selon les règles du contexte.',
                         'items' => [
                             'Comprendre la consigne.',
                             'Produire une trace.',
                             'Soumettre une preuve.',
                             'Recevoir une révision.',
-                            'Archiver ce qui doit rester vérifiable.',
+                            'Conserver ce qui doit rester vérifiable.',
                         ],
                     ],
                 ],
@@ -502,11 +503,9 @@ final class public_pages {
                         'type' => 'decision',
                     ],
                     [
-                        'title' => 'Archive',
-                        'body' => 'Conserver les traces utiles à la mémoire institutionnelle.',
-                        'url' => '/local/uckk/archives.php',
-                        'actionlabel' => 'Voir les archives',
-                        'type' => 'archive',
+                        'title' => 'Mémoire institutionnelle',
+                        'body' => 'Conserver les traces utiles sans exposer les informations privées.',
+                        'type' => 'memory',
                     ],
                 ],
                 'notices' => [
@@ -568,25 +567,25 @@ final class public_pages {
             self::KEY_ARCHIVES => [
                 'layout' => 'standard',
                 'typography' => 'institutional',
-                'eyebrow' => 'Conserver les traces publiques',
-                'title' => 'Archives UCKK',
-                'subtitle' => 'Mémoire institutionnelle, preuves publiques, décisions et corrections.',
-                'summary' => 'Les archives conservent les traces publiques utiles à la compréhension du campus, de ses décisions et de ses transformations.',
+                'eyebrow' => 'Tenir le registre public',
+                'title' => 'Registraire UCKK',
+                'subtitle' => 'Registre institutionnel, preuves publiques, décisions et corrections.',
+                'summary' => 'Le registraire organise les traces publiques utiles à la compréhension du campus, de ses décisions et de ses transformations.',
                 'sections' => [
                     [
-                        'title' => 'Ce que les archives conservent',
-                        'body' => 'Les archives peuvent conserver des versions publiques du canon, des décisions, des modèles, des corrections, des appels, des travaux publics et des traces institutionnelles.',
+                        'title' => 'Ce que le registraire conserve',
+                        'body' => 'Le registraire peut conserver des versions publiques du canon, des décisions, des modèles, des corrections, des appels, des travaux publics et des traces institutionnelles.',
                     ],
                     [
-                        'title' => 'Ce que les archives ne doivent pas exposer',
-                        'body' => 'Elles ne doivent pas publier de données personnelles, dossiers sensibles, preuves privées ou informations réservées à des rôles Moodle.',
+                        'title' => 'Ce que le registraire ne doit pas exposer',
+                        'body' => 'Il ne doit pas publier de données personnelles, dossiers sensibles, preuves privées ou informations réservées à des rôles Moodle.',
                     ],
                     [
                         'title' => 'Usage',
-                        'body' => 'Les archives servent à comprendre, vérifier, relier et corriger. Elles ne sont pas un simple dépôt de fichiers.',
+                        'body' => 'Le registraire sert à comprendre, vérifier, relier et corriger. Il n’est pas un simple dépôt de fichiers.',
                     ],
                 ],
-                'cardsheading' => 'Repères d’archive',
+                'cardsheading' => 'Repères du registraire',
                 'cards' => [
                     [
                         'title' => 'Mémoire',
@@ -606,8 +605,8 @@ final class public_pages {
                 ],
                 'notices' => [
                     [
-                        'title' => 'Archives publiques',
-                        'body' => 'Les contenus d’archives visibles ici doivent respecter la confidentialité et les limites institutionnelles.',
+                        'title' => 'Registraire public',
+                        'body' => 'Les contenus visibles ici doivent respecter la confidentialité et les limites institutionnelles.',
                         'type' => 'warning',
                     ],
                 ],
@@ -616,11 +615,11 @@ final class public_pages {
             self::KEY_MEDIATHEQUE => [
                 'layout' => 'wide',
                 'typography' => 'institutional',
-                'eyebrow' => 'Archives publiques',
+                'eyebrow' => 'Catalogue public',
                 'title' => 'Médiathèque UCKK',
-                'subtitle' => 'Explorer les médias, collections, œuvres externes et passages documentés.',
-                'summary' => 'La Médiathèque donne accès aux médias publics, collections, œuvres externes et passages documentés de l’archive UCKK, avec filtrage par droits, avis de contenu et protocoles culturels.',
-                'cardsheading' => 'Explorer la Médiathèque',
+                'subtitle' => 'Explorer les médias, collections, références externes et passages documentés.',
+                'summary' => 'Le catalogue donne accès aux contenus publics autorisés : vidéos, sons, images, documents, collections, références externes et extraits contextualisés. Les résultats sont filtrés selon les droits, les avis de contenu, la visibilité et les protocoles culturels.',
+                'cardsheading' => 'Parcourir',
                 'has_mediatheque_explorer' => true,
                 'mediatheque_explorer_id' => 'local-uckk-mediatheque-explorer',
                 'mediatheque_initial_state' => [
@@ -640,6 +639,7 @@ final class public_pages {
                         'audience' => 'all',
                         'lang' => '',
                         'validation' => 'all',
+                        'item' => '',
                     ],
                     'page' => 1,
                     'perpage' => 12,
@@ -649,7 +649,7 @@ final class public_pages {
                 'mediatheque' => [
                     'explorer' => [
                         'key' => 'mediatheque_explorer',
-                        'title' => 'Explorateur Médiathèque',
+                        'title' => 'Recherche publique',
                         'service' => 'mod_uckkarchive_search_mediatheque',
                         'surface' => 'local_uckk',
                         'dataowner' => 'mod_uckkarchive',
@@ -658,74 +658,69 @@ final class public_pages {
                 'quicklinks' => [
                     [
                         'label' => 'Rechercher',
-                        'description' => 'Chercher dans les médias publics et les collections accessibles.',
+                        'description' => 'Trouver des médias publics, collections accessibles, références externes et passages documentés.',
                         'url' => '/local/uckk/mediatheque.php',
-                    ],
-                    [
-                        'label' => 'Archives',
-                        'description' => 'Revenir aux repères généraux d’archive publique.',
-                        'url' => '/local/uckk/archives.php',
                     ],
                 ],
                 'sections' => [
                     [
                         'type' => 'orientation',
                         'eyebrow' => 'Exploration',
-                        'title' => 'Naviguer dans les médias publics',
-                        'body' => 'L’explorateur permet de chercher, filtrer et ouvrir les fiches publiques sans exposer les fichiers originaux ni les métadonnées privées.',
+                        'title' => 'Naviguer dans les contenus publics',
+                        'body' => 'L’explorateur permet de chercher, filtrer et ouvrir les fiches publiques sans exposer les fichiers originaux, les brouillons, les notes internes ni les métadonnées privées.',
                         'items' => [
                             'Recherche par texte, format, source, collection et mot-clé.',
-                            'Affichage des médias publics seulement.',
+                            'Affichage limité aux contenus publiables.',
                             'Respect des droits, avis de contenu et protocoles culturels.',
                         ],
                     ],
                     [
                         'type' => 'boundary',
                         'eyebrow' => 'Responsabilité',
-                        'title' => 'Ce que la Médiathèque ne publie pas',
-                        'body' => 'Les médias restreints, brouillons, notes internes, protocoles culturels privés, fichiers originaux non autorisés et métadonnées sensibles restent contrôlés par mod_uckkarchive.',
+                        'title' => 'Ce qui reste protégé',
+                        'body' => 'Les médias restreints, brouillons, notes internes, protocoles culturels privés, fichiers originaux non autorisés et métadonnées sensibles restent contrôlés par le moteur média institutionnel.',
                     ],
                 ],
                 'cards' => [
                     [
                         'title' => 'Médias',
-                        'body' => 'Voir les vidéos, sons, images, documents et livres publics filtrés.',
+                        'body' => 'Voir les vidéos, sons, images, documents et références publiques filtrées.',
                         'type' => 'media',
                     ],
                     [
                         'title' => 'Collections',
-                        'body' => 'Parcourir les regroupements publics sans dupliquer le moteur média interne.',
+                        'body' => 'Explorer les regroupements publics sans dupliquer le moteur média institutionnel.',
                         'type' => 'collection',
                     ],
                     [
                         'title' => 'Passages documentés',
-                        'body' => 'Pointer vers des moments, pages ou segments quand ils peuvent être exposés publiquement.',
+                        'body' => 'Accéder à des moments, pages ou segments lorsque leur exposition publique est autorisée.',
                         'type' => 'marker',
                     ],
                 ],
                 'notices' => [
                     [
                         'title' => 'Données et politiques',
-                        'body' => 'La page publique appartient à local_uckk, mais les médias, droits, avis de contenu et protocoles culturels sont filtrés par mod_uckkarchive.',
+                        'body' => 'Cette page est une surface publique de local_uckk. Les médias, droits, avis de contenu, protocoles culturels et règles de visibilité sont filtrés par le moteur média institutionnel.',
                         'type' => 'institutional',
                     ],
                     [
                         'title' => 'Accès responsable',
-                        'body' => 'Certains contenus peuvent être masqués ou résumés selon les droits, les avis de contenu et les protocoles culturels.',
+                        'body' => 'Certains contenus peuvent être masqués, résumés ou limités selon les droits, les avis de contenu, les protocoles culturels et les permissions disponibles.',
                         'type' => 'light',
                     ],
                 ],
                 'metadata' => [
                     ['label' => 'Surface publique', 'value' => 'local_uckk'],
-                    ['label' => 'Données et politiques', 'value' => 'mod_uckkarchive'],
-                    ['label' => 'Service AJAX', 'value' => 'mod_uckkarchive_search_mediatheque'],
-                    ['label' => 'Portée par défaut', 'value' => 'site-wide public'],
+                    ['label' => 'Données et politiques', 'value' => 'Moteur média institutionnel'],
+                    ['label' => 'Service', 'value' => 'Recherche du catalogue public'],
+                    ['label' => 'Portée par défaut', 'value' => 'Contenus publics du site'],
                 ],
                 'cta' => [
-                    'title' => 'Explorer les médias publics',
-                    'body' => 'Lance une recherche ou filtre la Médiathèque selon le format, la source, les collections et les avis publics.',
+                    'title' => 'Explorer les contenus publics',
+                    'body' => 'Lance une recherche ou applique un filtre pour explorer les contenus publics selon le format, la source, la collection, les droits et les avis disponibles.',
                     'url' => '/local/uckk/mediatheque.php',
-                    'label' => 'Ouvrir la Médiathèque',
+                    'label' => 'Ouvrir la recherche',
                 ],
             ],
 
@@ -782,7 +777,7 @@ final class public_pages {
                 'sections' => [
                     [
                         'title' => 'Demandes générales',
-                        'body' => 'Les demandes publiques peuvent concerner l’orientation, la compréhension du campus, les voies, les cours ou les archives.',
+                        'body' => 'Les demandes publiques peuvent concerner l’orientation, la compréhension du campus, les voies, les cours, les portfolios ou la Médiathèque.',
                     ],
                     [
                         'title' => 'Demandes privées',
@@ -799,11 +794,11 @@ final class public_pages {
                         'type' => 'courses',
                     ],
                     [
-                        'title' => 'Archives',
-                        'body' => 'Consulter les traces publiques disponibles.',
-                        'url' => '/local/uckk/archives.php',
-                        'actionlabel' => 'Voir les archives',
-                        'type' => 'archives',
+                        'title' => 'Médiathèque',
+                        'body' => 'Consulter les contenus, médias et collections publics disponibles.',
+                        'url' => '/local/uckk/mediatheque.php',
+                        'actionlabel' => 'Ouvrir le catalogue',
+                        'type' => 'media',
                     ],
                 ],
                 'cta' => [
@@ -1029,7 +1024,6 @@ final class public_pages {
             ['key' => self::KEY_CHALLENGES, 'label' => 'Défis', 'url' => '/local/uckk/challenges.php'],
             ['key' => self::KEY_ASSEMBLIES, 'label' => 'Assemblées', 'url' => '/local/uckk/assemblies.php'],
             ['key' => self::KEY_INTEGRITY, 'label' => 'Intégrité', 'url' => '/local/uckk/integrity.php'],
-            ['key' => self::KEY_ARCHIVES, 'label' => 'Archives', 'url' => '/local/uckk/archives.php'],
             ['key' => self::KEY_MEDIATHEQUE, 'label' => 'Médiathèque', 'url' => '/local/uckk/mediatheque.php'],
             ['key' => self::KEY_NEWS, 'label' => 'Actualités', 'url' => '/local/uckk/news.php'],
             ['key' => self::KEY_CONTACT, 'label' => 'Contact', 'url' => '/local/uckk/contact.php'],
@@ -1140,7 +1134,7 @@ final class public_pages {
             self::KEY_CHALLENGES => 'Défis UCKK',
             self::KEY_ASSEMBLIES => 'Assemblées UCKK',
             self::KEY_INTEGRITY => 'Intégrité UCKK',
-            self::KEY_ARCHIVES => 'Archives UCKK',
+            self::KEY_ARCHIVES => 'Registraire UCKK',
             self::KEY_MEDIATHEQUE => 'Médiathèque UCKK',
             self::KEY_NEWS => 'Actualités UCKK',
             self::KEY_CONTACT => 'Contact UCKK',
@@ -1154,7 +1148,7 @@ final class public_pages {
             self::KEY_CHALLENGES => 'public_challenges_title',
             self::KEY_ASSEMBLIES => 'public_assemblies_title',
             self::KEY_INTEGRITY => 'public_integrity_title',
-            self::KEY_ARCHIVES => 'public_archives_title',
+            self::KEY_ARCHIVES => 'public_registrar_title',
             self::KEY_MEDIATHEQUE => 'public_mediatheque_title',
             self::KEY_NEWS => 'public_news_title',
             self::KEY_CONTACT => 'public_contact_title',

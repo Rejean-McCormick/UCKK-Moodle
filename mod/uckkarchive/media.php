@@ -60,10 +60,6 @@ use mod_uckkarchive\output\media_library_editor;
 /**
  * Get a component string with fallback.
  *
- * The legacy codebase has used both `uckkarchive` and `mod_uckkarchive`
- * as string components. This helper keeps this controller tolerant while
- * language files are being consolidated.
- *
  * @param string $identifier String identifier.
  * @param string $fallback Fallback value.
  * @return string
@@ -90,24 +86,6 @@ function mod_uckkarchive_media_table_exists(string $table): bool {
     global $DB;
 
     return $DB->get_manager()->table_exists(new xmldb_table($table));
-}
-
-/**
- * Return the first non-empty field value from a record.
- *
- * @param stdClass $record Record to inspect.
- * @param string[] $fields Candidate fields.
- * @param mixed $default Default value.
- * @return mixed
- */
-function mod_uckkarchive_media_first_field(stdClass $record, array $fields, mixed $default = null): mixed {
-    foreach ($fields as $field) {
-        if (property_exists($record, $field) && $record->{$field} !== null && $record->{$field} !== '') {
-            return $record->{$field};
-        }
-    }
-
-    return $default;
 }
 
 /**
@@ -167,13 +145,9 @@ function mod_uckkarchive_media_normalise_action(string $action): string {
  * Resolve the archive activity, course module, course, context, and optional
  * target record from the request.
  *
- * Resolution order:
- * - course module id (`id`);
- * - archive instance id (`a`);
- * - media id (`mediaid`);
- * - media collection id (`collectionid`);
- * - external work id (`externalworkid`);
- * - content marker id (`contentmarkerid`).
+ * Target records must take precedence over the course module id. Otherwise URLs
+ * like `/mod/uckkarchive/media.php?id=33&mediaid=1&action=view` resolve only
+ * the activity shell and leave the selected media record unavailable.
  *
  * @param int $id Course module id.
  * @param int $a Archive instance id.
@@ -191,14 +165,6 @@ function mod_uckkarchive_media_resolve_request(
     int $externalworkid,
     int $contentmarkerid
 ): stdClass {
-    if ($id > 0) {
-        return context_resolver::from_cmid($id);
-    }
-
-    if ($a > 0) {
-        return context_resolver::from_archive($a);
-    }
-
     if ($mediaid > 0) {
         return context_resolver::from_media($mediaid);
     }
@@ -213,6 +179,14 @@ function mod_uckkarchive_media_resolve_request(
 
     if ($contentmarkerid > 0) {
         return context_resolver::from_content_marker($contentmarkerid);
+    }
+
+    if ($id > 0) {
+        return context_resolver::from_cmid($id);
+    }
+
+    if ($a > 0) {
+        return context_resolver::from_archive($a);
     }
 
     throw new moodle_exception('missingparam', 'error', '', 'id');
@@ -350,6 +324,7 @@ function mod_uckkarchive_media_build_filters(
         'external',
         'unknown',
     ];
+
     $q = optional_param('q', '', PARAM_NOTAGS);
     if ($q === '') {
         $q = optional_param('search', '', PARAM_NOTAGS);
@@ -406,7 +381,6 @@ function mod_uckkarchive_media_build_filters(
         'include_restricted' => $includerestricted ? 1 : 0,
     ];
 
-    // Keep a compatibility alias for older templates/JS using `audience`.
     $filters['audience'] = $filters['audiencesuitability'];
 
     return $filters;
@@ -448,10 +422,19 @@ function mod_uckkarchive_media_require_action_capabilities(
         require_capability('mod/uckkarchive:managemediacollections', $context);
     }
 
+    if ($action === 'view') {
+        if ($media === null) {
+            throw new moodle_exception('missingparam', 'error', '', 'mediaid');
+        }
+
+        media_policy::require_view_media($context, $media);
+    }
+
     if ($action === 'edit') {
         if ($media === null) {
             throw new moodle_exception('missingparam', 'error', '', 'mediaid');
         }
+
         media_policy::require_edit_media($context, $media);
     }
 
@@ -459,6 +442,7 @@ function mod_uckkarchive_media_require_action_capabilities(
         if ($media === null) {
             throw new moodle_exception('missingparam', 'error', '', 'mediaid');
         }
+
         media_policy::require_version_media($context, $media);
     }
 
@@ -555,6 +539,16 @@ function mod_uckkarchive_media_is_editor_action(string $action): bool {
 }
 
 /**
+ * Return whether the current action opens the media detail view.
+ *
+ * @param string $action Current action.
+ * @return bool
+ */
+function mod_uckkarchive_media_is_detail_action(string $action): bool {
+    return $action === 'view';
+}
+
+/**
  * Build a Moodle form URL for the media-library editor.
  *
  * @param int $cmid Course module id.
@@ -577,9 +571,6 @@ function mod_uckkarchive_media_editor_form_url(int $cmid, string $action, int $m
 
 /**
  * Prepare a media record for the existing media form.
- *
- * The form is the canonical field collector. This adapter maps storage fields
- * and older aliases back into the form field names without deciding policy.
  *
  * @param stdClass $media Media record.
  * @param stdClass $course Course record.
@@ -930,20 +921,30 @@ require_login($course, false, $cm);
 mod_uckkarchive_media_require_action_capabilities($context, $action, $filters, $media, $collection);
 
 $pageurl = mod_uckkarchive_media_build_page_url((int)$cm->id, $filters);
+$libraryurl = new moodle_url('/mod/uckkarchive/media.php', ['id' => (int)$cm->id]);
 $viewurl = new moodle_url('/mod/uckkarchive/view.php', ['id' => (int)$cm->id]);
-$return = $returnurl !== '' ? new moodle_url($returnurl) : $viewurl;
+$return = $returnurl !== '' ? new moodle_url($returnurl) : $libraryurl;
 
 $PAGE->set_url($pageurl);
 $PAGE->set_course($course);
 $PAGE->set_cm($cm);
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('incourse');
-$PAGE->set_title(format_string($archive->name) . ': ' . mod_uckkarchive_media_string('medialibrary', 'Media library'));
+
+$pagetitle = format_string($archive->name) . ': ' . mod_uckkarchive_media_string('medialibrary', 'Media library');
+if (mod_uckkarchive_media_is_detail_action($action) && $media !== null) {
+    $pagetitle = format_string($archive->name) . ': ' . format_string((string)($media->title ?? ''));
+}
+
+$PAGE->set_title($pagetitle);
 $PAGE->set_heading(format_string($course->fullname));
 
 $PAGE->navbar->add(format_string($archive->name), $viewurl);
-$PAGE->navbar->add(mod_uckkarchive_media_string('medialibrary', 'Media library'), $pageurl);
+$PAGE->navbar->add(mod_uckkarchive_media_string('medialibrary', 'Media library'), $libraryurl);
 
+if (mod_uckkarchive_media_is_detail_action($action) && $media !== null) {
+    $PAGE->navbar->add(format_string((string)($media->title ?? '')), $pageurl);
+}
 
 $editorform = null;
 if (mod_uckkarchive_media_is_editor_action($action)) {
@@ -957,7 +958,7 @@ if (mod_uckkarchive_media_is_editor_action($action)) {
         'courseid' => (int)$course->id,
         'cmid' => (int)$cm->id,
         'contextid' => (int)$context->id,
-        'returnurl' => (new moodle_url('/mod/uckkarchive/media.php', ['id' => (int)$cm->id]))->out(false),
+        'returnurl' => $libraryurl->out(false),
     ]);
 
     if ($media !== null) {
@@ -965,7 +966,7 @@ if (mod_uckkarchive_media_is_editor_action($action)) {
     }
 
     if ($editorform->is_cancelled()) {
-        redirect(new moodle_url('/mod/uckkarchive/media.php', ['id' => (int)$cm->id]));
+        redirect($libraryurl);
     }
 
     if (($formdata = $editorform->get_data()) !== null) {
@@ -1068,8 +1069,25 @@ try {
     $collections = mod_uckkarchive_media_load_collections((int)$archive->id, $filters);
 
     $renderer = $PAGE->get_renderer('mod_uckkarchive');
+    $detailclass = '\\mod_uckkarchive\\output\\media_detail';
 
-    if (mod_uckkarchive_media_is_editor_action($action) && $editorform !== null) {
+    if (mod_uckkarchive_media_is_detail_action($action)
+            && $media !== null
+            && class_exists($detailclass)
+            && method_exists($renderer, 'render_media_detail')) {
+        $renderable = new $detailclass(
+            $context,
+            $course,
+            $cm,
+            $archive,
+            $media,
+            $filters,
+            $notificationmessage,
+            $notificationtype
+        );
+
+        echo $renderer->render($renderable);
+    } else if (mod_uckkarchive_media_is_editor_action($action) && $editorform !== null) {
         ob_start();
         $editorform->display();
         $formhtml = (string)ob_get_clean();
@@ -1088,6 +1106,13 @@ try {
 
         echo $renderer->render($renderable);
     } else {
+        if (mod_uckkarchive_media_is_detail_action($action) && $media !== null) {
+            $mediaresult->items = [$media];
+            $mediaresult->total = 1;
+            $mediaresult->page = 0;
+            $collections = [];
+        }
+
         $renderable = new media_library(
             $context,
             $course,

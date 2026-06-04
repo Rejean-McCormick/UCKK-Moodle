@@ -297,7 +297,7 @@ final class archive_view implements renderable, templatable {
         $data->title = format_string((string)($data->title ?? ''));
 
         if (!isset($data->heading)) {
-            $data->heading = $this->get_component_string('archiveview', 'Archive');
+            $data->heading = $this->get_component_string('archiveview', 'Registraire');
         }
 
         if (!isset($data->introhtml) && isset($data->intro)) {
@@ -1567,41 +1567,65 @@ final class archive_view implements renderable, templatable {
     /**
      * Get status label.
      *
+     * Internal status keys may keep legacy archive vocabulary for
+     * database/API stability. Public fallbacks must not display "archive".
+     *
      * @param string $status Status.
      * @return string
      */
     private function get_status_label(string $status): string {
-        return $this->get_component_string('status:' . $status, ucfirst(str_replace('_', ' ', $status)));
+        return $this->get_component_string(
+            'status:' . $status,
+            $this->display_fallback_label($status)
+        );
     }
 
     /**
      * Get visibility label.
      *
+     * Internal visibility keys may keep legacy archive vocabulary for
+     * database/API stability. Public fallbacks must not display "archive".
+     *
      * @param string $visibility Visibility.
      * @return string
      */
     private function get_visibility_label(string $visibility): string {
-        return $this->get_component_string('visibility:' . $visibility, ucfirst(str_replace('_', ' ', $visibility)));
+        return $this->get_component_string(
+            'visibility:' . $visibility,
+            $this->display_fallback_label($visibility)
+        );
     }
 
     /**
      * Get validation state label.
      *
+     * Internal validation keys may keep legacy archive vocabulary for
+     * database/API stability. Public fallbacks must not display "archive".
+     *
      * @param string $state Validation state.
      * @return string
      */
     private function get_validation_state_label(string $state): string {
-        return $this->get_component_string('validation:' . $state, ucfirst(str_replace('_', ' ', $state)));
+        return $this->get_component_string(
+            'validation:' . $state,
+            $this->display_fallback_label($state)
+        );
     }
 
     /**
-     * Get archive item type label.
+     * Get registry item type label.
+     *
+     * Internal item type keys may keep legacy archive vocabulary for
+     * database/API stability. Public fallbacks must not display "archive".
      *
      * @param string $type Item type.
      * @return string
      */
     private function get_item_type_label(string $type): string {
-        return $this->get_component_string('itemtype:' . $type, ucfirst(str_replace('_', ' ', $type)));
+        return $this->get_component_string(
+            'itemtype:' . $type,
+            $this->display_fallback_label($type)
+        );
     }
 
     /**
@@ -1611,7 +1635,10 @@ final class archive_view implements renderable, templatable {
      * @return string
      */
     private function get_kristal_type_label(string $type): string {
-        return $this->get_component_string('kristaltype:' . $type, ucfirst(str_replace('_', ' ', $type)));
+        return $this->get_component_string(
+            'kristaltype:' . $type,
+            $this->display_fallback_label($type)
+        );
     }
 
     /**
@@ -1621,7 +1648,10 @@ final class archive_view implements renderable, templatable {
      * @return string
      */
     private function get_proof_type_label(string $type): string {
-        return $this->get_component_string('prooftype:' . $type, ucfirst(str_replace('_', ' ', $type)));
+        return $this->get_component_string(
+            'prooftype:' . $type,
+            $this->display_fallback_label($type)
+        );
     }
 
     /**
@@ -1631,7 +1661,10 @@ final class archive_view implements renderable, templatable {
      * @return string
      */
     private function get_export_type_label(string $type): string {
-        return $this->get_component_string('exporttype:' . $type, ucfirst(str_replace('_', ' ', $type)));
+        return $this->get_component_string(
+            'exporttype:' . $type,
+            $this->display_fallback_label($type)
+        );
     }
 
     /**
@@ -1641,7 +1674,10 @@ final class archive_view implements renderable, templatable {
      * @return string
      */
     private function get_media_type_label(string $type): string {
-        return $this->get_component_string('mediatype:' . $type, ucfirst(str_replace('_', ' ', $type)));
+        return $this->get_component_string(
+            'mediatype:' . $type,
+            $this->display_fallback_label($type)
+        );
     }
 
     /**
@@ -1651,7 +1687,10 @@ final class archive_view implements renderable, templatable {
      * @return string
      */
     private function get_external_work_type_label(string $type): string {
-        return $this->get_component_string('externalworktype:' . $type, ucfirst(str_replace('_', ' ', $type)));
+        return $this->get_component_string(
+            'externalworktype:' . $type,
+            $this->display_fallback_label($type)
+        );
     }
 
     /**
@@ -1661,7 +1700,10 @@ final class archive_view implements renderable, templatable {
      * @return string
      */
     private function get_rights_status_label(string $status): string {
-        return $this->get_component_string('rightsstatus:' . $status, ucfirst(str_replace('_', ' ', $status)));
+        return $this->get_component_string(
+            'rightsstatus:' . $status,
+            $this->display_fallback_label($status)
+        );
     }
 
     /**
@@ -1671,21 +1713,23 @@ final class archive_view implements renderable, templatable {
      * @return string
      */
     private function get_content_tag_label(string $tagkey): string {
-        if ($tagkey === '') {
-            return '';
-        }
-
-        return $this->get_component_string('contenttag:' . $tagkey, ucfirst(str_replace('_', ' ', $tagkey)));
+        return $this->get_component_string(
+            'contenttag:' . $tagkey,
+            $this->display_fallback_label($tagkey)
+        );
     }
 
     /**
      * Get severity label.
      *
-     * @param string $severity Severity.
+     * @param string $severity Severity key.
      * @return string
      */
     private function get_severity_label(string $severity): string {
-        return $this->get_component_string('severity:' . $severity, ucfirst(str_replace('_', ' ', $severity)));
+        return $this->get_component_string(
+            'severity:' . $severity,
+            $this->display_fallback_label($severity)
+        );
     }
 
     /**
@@ -1695,11 +1739,46 @@ final class archive_view implements renderable, templatable {
      * @return string
      */
     private function get_action_label(string $key): string {
-        if ($key === '') {
-            return get_string('view');
+        return $this->get_component_string(
+            'action:' . $key,
+            $this->display_fallback_label($key)
+        );
+    }
+
+    /**
+     * Build a safe public fallback label from an internal key.
+     *
+     * Internal keys and constants may keep legacy archive vocabulary for
+     * database/API stability. This method prevents those internal names from
+     * leaking into the rendered interface when a language string is missing.
+     *
+     * @param string $key Internal key.
+     * @return string Safe display fallback.
+     */
+    private function display_fallback_label(string $key): string {
+        $label = trim(str_replace('_', ' ', $key));
+
+        if ($label === '') {
+            return '';
         }
 
-        return $this->get_component_string('action:' . $key, ucfirst(str_replace('_', ' ', $key)));
+        $replacements = [
+            'archived' => 'preserved',
+            'archive items' => 'registry items',
+            'archive item' => 'registry item',
+            'archives' => 'registries',
+            'archive' => 'registry',
+        ];
+
+        foreach ($replacements as $search => $replace) {
+            $label = preg_replace(
+                '/\b' . preg_quote($search, '/') . '\b/i',
+                $replace,
+                $label
+            ) ?? $label;
+        }
+
+        return ucfirst($label);
     }
 
     /**

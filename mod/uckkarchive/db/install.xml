@@ -446,6 +446,8 @@
                 <FIELD NAME="sourcecomponent" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" COMMENT="Origin Moodle component."/>
                 <FIELD NAME="sourceobjectid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Origin object id."/>
                 <FIELD NAME="license" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="License."/>
+                <FIELD NAME="licensekey" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="License key."/>
+                <FIELD NAME="rightsstatement" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Rights statement."/>
                 <FIELD NAME="rightsstatus" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="unknown" SEQUENCE="false" COMMENT="Rights status."/>
                 <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="draft" SEQUENCE="false" COMMENT="Lifecycle status."/>
                 <FIELD NAME="visibility" TYPE="char" LENGTH="64" NOTNULL="true" DEFAULT="course" SEQUENCE="false" COMMENT="Visibility."/>

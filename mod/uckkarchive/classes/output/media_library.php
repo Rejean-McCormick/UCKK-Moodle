@@ -212,6 +212,7 @@ final class media_library implements renderable, templatable {
      */
     private function export_media_item($item): stdClass {
         $item = (object)$item;
+        $metadata = $this->extract_metadata($item);
 
         $media = new stdClass();
         $media->id = (int)($item->id ?? $item->mediaid ?? 0);
@@ -236,6 +237,38 @@ final class media_library implements renderable, templatable {
         $media->mediatypelabel = $this->get_media_type_label($media->mediatype);
         $media->mediatypeclass = $this->css_class('media-type', $media->mediatype);
 
+        $media->sourcetype = $this->normalise_key($this->first_value($item, $metadata, [
+            'sourcetype',
+            'source',
+            'source_type',
+        ], ''));
+        $media->sourcetypelabel = $media->sourcetype !== ''
+            ? $this->get_source_type_label($media->sourcetype)
+            : '';
+        $media->hassourcetype = $media->sourcetype !== '';
+        $media->sourcetypeclass = $media->sourcetype !== ''
+            ? $this->css_class('source-type', $media->sourcetype)
+            : '';
+
+        $media->sourceownership = $this->normalise_key($this->first_value($item, $metadata, [
+            'sourceownership',
+            'source_ownership',
+            'ownership',
+        ], ''));
+        $media->sourceownershiplabel = $media->sourceownership !== ''
+            ? $this->get_source_ownership_label($media->sourceownership)
+            : '';
+        $media->hassourceownership = $media->sourceownership !== '';
+
+        $media->sourceurl = $this->clean_external_url($this->extract_source_url($item, $metadata));
+        $media->externalurl = $media->sourceurl;
+        $media->hasexternalurl = $media->externalurl !== '';
+        $media->isexternalreference = $this->is_external_source_type($media->sourcetype)
+            || in_array($media->mediatype, ['external', 'external_reference'], true)
+            || $media->hasexternalurl;
+        $media->externalreferencelabel = $this->get_component_string('externalreference', 'External reference');
+        $media->openexternallabel = $this->get_component_string('openexternal', 'Open external reference');
+
         $media->status = $this->normalise_key((string)($item->status ?? 'draft'));
         $media->statuslabel = $this->get_status_label($media->status);
         $media->statusclass = $this->css_class('status', $media->status);
@@ -259,6 +292,12 @@ final class media_library implements renderable, templatable {
         $media->filesize = (int)($item->filesize ?? 0);
         $media->filesizeformatted = $media->filesize > 0 ? display_size($media->filesize) : '';
         $media->hasfilesize = $media->filesize > 0;
+
+        $media->haslocalfile = $media->hasfilename
+            || $media->hasfilesize
+            || $media->hasmimetype
+            || !empty($item->fileid)
+            || !empty($item->storedfileid);
 
         $media->isrestricted = $this->is_restricted_visibility($media->visibility)
             || $media->status === 'restricted'
@@ -306,6 +345,7 @@ final class media_library implements renderable, templatable {
         $media->url = $this->url('/mod/uckkarchive/media.php', [
             'id' => $this->cm->id,
             'mediaid' => $media->id,
+            'action' => 'view',
         ]);
 
         $media->editurl = $this->url('/mod/uckkarchive/media.php', [
@@ -347,10 +387,12 @@ final class media_library implements renderable, templatable {
         $media->canview = $this->has_capability('mod/uckkarchive:viewmedia', 'mod/uckkarchive:view');
         $media->canedit = $this->has_capability('mod/uckkarchive:editmedia', 'mod/uckkarchive:manage');
         $media->candelete = $this->has_capability('mod/uckkarchive:deletemedia', 'mod/uckkarchive:manage');
-        $media->candownload = $this->has_capability('mod/uckkarchive:downloadmedia', 'mod/uckkarchive:viewmedia');
+        $media->candownload = $media->haslocalfile
+            && $this->has_capability('mod/uckkarchive:downloadmedia', 'mod/uckkarchive:viewmedia');
         $media->canversion = $this->has_capability('mod/uckkarchive:versionmedia', 'mod/uckkarchive:manage');
         $media->canexport = $this->has_capability('mod/uckkarchive:exportmedia', 'mod/uckkarchive:export');
         $media->canmanageadvisories = $this->has_capability('mod/uckkarchive:manageadvisories', 'mod/uckkarchive:manage');
+        $media->canopenexternal = $media->canview && $media->hasexternalurl;
 
         $media->actions = $this->export_media_actions($media);
         $media->hasactions = !empty($media->actions);
@@ -454,6 +496,8 @@ final class media_library implements renderable, templatable {
         $filters = new stdClass();
         $filters->search = clean_param((string)($this->filters['search'] ?? $this->filters['q'] ?? ''), PARAM_TEXT);
         $filters->mediatype = $this->normalise_key((string)($this->filters['mediatype'] ?? ''));
+        $filters->sourcetype = $this->normalise_key((string)($this->filters['sourcetype'] ?? ''));
+        $filters->sourceownership = $this->normalise_key((string)($this->filters['sourceownership'] ?? ''));
         $filters->status = $this->normalise_key((string)($this->filters['status'] ?? ''));
         $filters->visibility = $this->normalise_key((string)($this->filters['visibility'] ?? ''));
         $filters->audiencesuitability = $this->normalise_key((string)($this->filters['audiencesuitability'] ?? ''));
@@ -462,6 +506,8 @@ final class media_library implements renderable, templatable {
         $filters->hasadvisories = !empty($this->filters['hasadvisories']);
         $filters->hasactivefilters = $filters->search !== ''
             || $filters->mediatype !== ''
+            || $filters->sourcetype !== ''
+            || $filters->sourceownership !== ''
             || $filters->status !== ''
             || $filters->visibility !== ''
             || $filters->audiencesuitability !== ''
@@ -489,8 +535,29 @@ final class media_library implements renderable, templatable {
             'text',
             'dataset',
             'external_reference',
+            'external',
             'other',
         ], $filters->mediatype, 'get_media_type_label');
+
+        $options->sourcetypes = $this->build_options([
+            'produced_by_uckk',
+            'submitted_to_uckk',
+            'imported',
+            'external_reference_only',
+            'licensed_external',
+            'public_domain',
+            'fair_use_reference',
+            'restricted_reference',
+        ], $filters->sourcetype, 'get_source_type_label');
+
+        $options->sourceownerships = $this->build_options([
+            'uckk',
+            'student',
+            'teacher',
+            'partner',
+            'external',
+            'unknown',
+        ], $filters->sourceownership, 'get_source_ownership_label');
 
         $options->statuses = $this->build_options([
             'draft',
@@ -704,6 +771,16 @@ final class media_library implements renderable, templatable {
             $actions[] = $this->action('view', $this->get_component_string('view', 'View'), $media->url);
         }
 
+        if ($media->canopenexternal) {
+            $actions[] = $this->action(
+                'openexternal',
+                $media->openexternallabel,
+                $media->externalurl,
+                false,
+                true
+            );
+        }
+
         if ($media->canedit) {
             $actions[] = $this->action('edit', $this->get_component_string('edit', 'Edit'), $media->editurl);
         }
@@ -754,16 +831,20 @@ final class media_library implements renderable, templatable {
      * @param string $label Label.
      * @param string $url URL.
      * @param bool $primary Primary action.
+     * @param bool $external External action.
      * @return stdClass
      */
-    private function action(string $key, string $label, string $url, bool $primary = false): stdClass {
+    private function action(string $key, string $label, string $url, bool $primary = false, bool $external = false): stdClass {
         $action = new stdClass();
         $action->key = $key;
         $action->label = $label;
         $action->url = $url;
         $action->primary = $primary;
+        $action->external = $external;
         $action->class = $this->css_class('action', $key);
         $action->disabled = false;
+        $action->target = $external ? '_blank' : '';
+        $action->rel = $external ? 'noopener noreferrer' : '';
 
         return $action;
     }
@@ -786,6 +867,11 @@ final class media_library implements renderable, templatable {
             'filter',
             'clearfilters',
             'mediatype',
+            'sourcetype',
+            'sourceownership',
+            'externalreference',
+            'externalurl',
+            'openexternal',
             'status',
             'visibility',
             'audiencesuitability',
@@ -844,6 +930,26 @@ final class media_library implements renderable, templatable {
      */
     private function get_media_type_label(string $type): string {
         return $this->get_component_string('mediatype_' . $type, $type);
+    }
+
+    /**
+     * Get source type label.
+     *
+     * @param string $type Source type.
+     * @return string
+     */
+    private function get_source_type_label(string $type): string {
+        return $this->get_component_string('sourcetype_' . $type, $type);
+    }
+
+    /**
+     * Get source ownership label.
+     *
+     * @param string $ownership Source ownership.
+     * @return string
+     */
+    private function get_source_ownership_label(string $ownership): string {
+        return $this->get_component_string('sourceownership_' . $ownership, $ownership);
     }
 
     /**
@@ -1008,6 +1114,159 @@ final class media_library implements renderable, templatable {
             'restricted_integrity',
             'restricted_cultural',
         ], true);
+    }
+
+    /**
+     * Return whether a source type points to an external reference.
+     *
+     * @param string $sourcetype Source type.
+     * @return bool
+     */
+    private function is_external_source_type(string $sourcetype): bool {
+        return in_array($this->normalise_key($sourcetype), [
+            'external',
+            'external_reference',
+            'external_reference_only',
+            'licensed_external',
+            'public_domain',
+            'fair_use_reference',
+            'restricted_reference',
+        ], true);
+    }
+
+    /**
+     * Extract source URL from known fields and metadata.
+     *
+     * @param stdClass $item Media record.
+     * @param array<string,mixed> $metadata Decoded metadata.
+     * @return string
+     */
+    private function extract_source_url(stdClass $item, array $metadata): string {
+        $url = $this->first_value($item, $metadata, [
+            'sourceurl',
+            'externalurl',
+            'referenceurl',
+            'source_url',
+            'external_url',
+            'reference_url',
+            'urlsource',
+            'citationurl',
+            'citation_url',
+        ], '');
+
+        if ($url !== '') {
+            return $url;
+        }
+
+        foreach (['citation', 'rightsnote', 'externalworkidentifier', 'externalworknote'] as $field) {
+            $text = $this->first_value($item, $metadata, [$field], '');
+            $found = $this->first_url_from_text($text);
+
+            if ($found !== '') {
+                return $found;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Return the first non-empty value from record fields or metadata keys.
+     *
+     * @param stdClass $item Record.
+     * @param array<string,mixed> $metadata Metadata.
+     * @param string[] $keys Candidate keys.
+     * @param string $default Default value.
+     * @return string
+     */
+    private function first_value(stdClass $item, array $metadata, array $keys, string $default = ''): string {
+        foreach ($keys as $key) {
+            if (property_exists($item, $key) && trim((string)$item->{$key}) !== '') {
+                return trim((string)$item->{$key});
+            }
+        }
+
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $metadata) && trim((string)$metadata[$key]) !== '') {
+                return trim((string)$metadata[$key]);
+            }
+        }
+
+        return $default;
+    }
+
+    /**
+     * Decode metadata from a media record.
+     *
+     * @param stdClass $item Media record.
+     * @return array<string,mixed>
+     */
+    private function extract_metadata(stdClass $item): array {
+        if (!property_exists($item, 'metadata')) {
+            return [];
+        }
+
+        if (is_array($item->metadata)) {
+            return $item->metadata;
+        }
+
+        if (is_object($item->metadata)) {
+            return (array)$item->metadata;
+        }
+
+        if (!is_string($item->metadata) || trim($item->metadata) === '') {
+            return [];
+        }
+
+        $decoded = json_decode($item->metadata, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE || !is_array($decoded)) {
+            return [];
+        }
+
+        return $decoded;
+    }
+
+    /**
+     * Clean an external URL for display.
+     *
+     * Only absolute HTTP(S) URLs are exposed as external references.
+     *
+     * @param string $url Raw URL.
+     * @return string
+     */
+    private function clean_external_url(string $url): string {
+        $url = trim($url);
+
+        if ($url === '') {
+            return '';
+        }
+
+        $url = clean_param($url, PARAM_URL);
+
+        if (!preg_match('/^https?:\/\//i', $url)) {
+            return '';
+        }
+
+        return $url;
+    }
+
+    /**
+     * Extract the first HTTP(S) URL from free text.
+     *
+     * @param string $text Source text.
+     * @return string
+     */
+    private function first_url_from_text(string $text): string {
+        if ($text === '') {
+            return '';
+        }
+
+        if (!preg_match('/https?:\/\/[^\s<>"\']+/i', $text, $matches)) {
+            return '';
+        }
+
+        return rtrim((string)$matches[0], ".,;:)]}");
     }
 }
 

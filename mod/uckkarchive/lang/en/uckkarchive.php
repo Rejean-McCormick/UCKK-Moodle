@@ -9,7 +9,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * English language strings for the UCKK Archive activity module.
+ * English language strings for the UCKK Registrar activity module.
  *
  * @package    mod_uckkarchive
  * @copyright  2026 Univers-Cité King Klown
@@ -20,20 +20,20 @@ defined('MOODLE_INTERNAL') || die();
 // Plugin identity.
 // -----------------------------------------------------------------------------
 
-$string['pluginname'] = 'UCKK Archive';
-$string['pluginadministration'] = 'UCKK Archive administration';
-$string['modulename'] = 'UCKK Archive';
-$string['modulenameplural'] = 'UCKK Archives';
-$string['modulename_help'] = 'The UCKK Archive activity stores evidence, decisions, course work, Kristals, portfolio items, integrity summaries, version records, and exportable archive packages with provenance, visibility, validation, and revision history.';
+$string['pluginname'] = 'UCKK Registrar';
+$string['pluginadministration'] = 'UCKK Registrar administration';
+$string['modulename'] = 'UCKK Registrar';
+$string['modulenameplural'] = 'UCKK Registrar activities';
+$string['modulename_help'] = 'The UCKK Registrar activity stores registry records, evidence, decisions, course work, Kristals, portfolio items, integrity summaries, version records, and exportable registry packages with provenance, visibility, validation, and revision history.';
 $string['modulename_link'] = 'mod/uckkarchive/view';
-$string['uckkarchive:addinstance'] = 'Add a new UCKK Archive activity';
-$string['uckkarchive:view'] = 'View UCKK Archive';
-$string['uckkarchive:additem'] = 'Add archive item';
-$string['uckkarchive:validateitem'] = 'Validate archive item';
-$string['uckkarchive:reviseitem'] = 'Revise archive item';
-$string['uckkarchive:versionitem'] = 'Version archive item';
-$string['uckkarchive:viewrestricted'] = 'View restricted archive items';
-$string['uckkarchive:export'] = 'Export archive packages';
+$string['uckkarchive:addinstance'] = 'Add a new UCKK Registrar activity';
+$string['uckkarchive:view'] = 'View UCKK Registrar';
+$string['uckkarchive:additem'] = 'Add registry item';
+$string['uckkarchive:validateitem'] = 'Validate registry item';
+$string['uckkarchive:reviseitem'] = 'Revise registry item';
+$string['uckkarchive:versionitem'] = 'Version registry item';
+$string['uckkarchive:viewrestricted'] = 'View restricted registry items';
+$string['uckkarchive:export'] = 'Export registry packages';
 
 // -----------------------------------------------------------------------------
 // General labels.
@@ -42,17 +42,17 @@ $string['uckkarchive:export'] = 'Export archive packages';
 $string['activity'] = 'Activity';
 $string['actions'] = 'Actions';
 $string['add'] = 'Add';
-$string['additem'] = 'Add archive item';
-$string['archive'] = 'Archive';
-$string['archiveactivity'] = 'Archive activity';
-$string['archiveitem'] = 'Archive item';
-$string['archiveitems'] = 'Archive items';
-$string['archiveitemdetails'] = 'Archive item details';
-$string['archiveoverview'] = 'Archive overview';
-$string['archivepolicy'] = 'Archive policy';
-$string['archives'] = 'Archives';
-$string['backtoarchive'] = 'Back to archive';
-$string['backtoarchives'] = 'Back to archives';
+$string['additem'] = 'Add registry item';
+$string['archive'] = 'Registry';
+$string['archiveactivity'] = 'Registrar activity';
+$string['archiveitem'] = 'Registry item';
+$string['archiveitems'] = 'Registry items';
+$string['archiveitemdetails'] = 'Registry item details';
+$string['archiveoverview'] = 'Registrar overview';
+$string['archivepolicy'] = 'Registry policy';
+$string['archives'] = 'Registries';
+$string['backtoarchive'] = 'Back to registry';
+$string['backtoarchives'] = 'Back to registries';
 $string['cancel'] = 'Cancel';
 $string['close'] = 'Close';
 $string['confirm'] = 'Confirm';
@@ -77,6 +77,8 @@ $string['name'] = 'Name';
 $string['none'] = 'None';
 $string['notes'] = 'Notes';
 $string['open'] = 'Open';
+$string['openexternal'] = 'Open external reference';
+$string['openexternal_help'] = 'Open the external source URL in a new tab. The media record remains governed by UCKK metadata, rights, visibility, advisories, and cultural protocols.';
 $string['owner'] = 'Owner';
 $string['preview'] = 'Preview';
 $string['provenance'] = 'Provenance';
@@ -105,55 +107,55 @@ $string['viewdetails'] = 'View details';
 // Activity instance form.
 // -----------------------------------------------------------------------------
 
-$string['archivename'] = 'Archive name';
-$string['archivename_help'] = 'Name of this UCKK Archive activity.';
-$string['archiveintro'] = 'Archive introduction';
-$string['archivecode'] = 'Archive code';
-$string['archivecode_help'] = 'Stable internal code for this archive. Use letters, numbers, underscores, or hyphens.';
-$string['archivecontext'] = 'Archive context';
-$string['archivecontext_help'] = 'Describe what this archive is meant to preserve and who may use it.';
-$string['archivepurpose'] = 'Archive purpose';
-$string['archivepurpose_help'] = 'Explain why this archive exists: evidence, decisions, portfolio, course memory, Kristals, integrity summaries, or institutional memory.';
+$string['archivename'] = 'Registry name';
+$string['archivename_help'] = 'Name of this UCKK Registrar activity.';
+$string['archiveintro'] = 'Registry introduction';
+$string['archivecode'] = 'Registry code';
+$string['archivecode_help'] = 'Stable internal code for this registry. Use letters, numbers, underscores, or hyphens.';
+$string['archivecontext'] = 'Registry context';
+$string['archivecontext_help'] = 'Describe what this registry is meant to preserve and who may use it.';
+$string['archivepurpose'] = 'Registry purpose';
+$string['archivepurpose_help'] = 'Explain why this registry exists: evidence, decisions, portfolio, course memory, Kristals, integrity summaries, or institutional memory.';
 $string['defaultvisibility'] = 'Default visibility';
 $string['defaultvisibility_help'] = 'Default visibility applied to new items unless the item form overrides it.';
 $string['allowpublicitems'] = 'Allow public items';
-$string['allowpublicitems_help'] = 'Allow manually validated archive items to be made public.';
+$string['allowpublicitems_help'] = 'Allow manually validated registry items to be made public.';
 $string['requirevalidation'] = 'Require validation before publication';
-$string['requirevalidation_help'] = 'Require an Archiviste or authorised reviewer to validate items before they are treated as verified or public.';
+$string['requirevalidation_help'] = 'Require a Registrar or authorised reviewer to validate items before they are treated as verified or public.';
 $string['allowkristals'] = 'Allow Kristals';
-$string['allowkristals_help'] = 'Allow this archive to store Kristal records: distilled learning, decision, proof, or memory fragments.';
+$string['allowkristals_help'] = 'Allow this registry to store Kristal records: distilled learning, decision, proof, or memory fragments.';
 $string['allowexports'] = 'Allow exports';
-$string['allowexports_help'] = 'Allow authorised users to export archive packages.';
-$string['completionrequirevalidateditem'] = 'Student must have a validated archive item';
-$string['completionrequireitem'] = 'Student must add an archive item';
+$string['allowexports_help'] = 'Allow authorised users to export registry packages.';
+$string['completionrequirevalidateditem'] = 'Student must have a validated registry item';
+$string['completionrequireitem'] = 'Student must add a registry item';
 $string['completionrequirekristal'] = 'Student must create a Kristal';
 
 // -----------------------------------------------------------------------------
 // Settings.
 // -----------------------------------------------------------------------------
 
-$string['settings:general'] = 'General archive settings';
-$string['settings:general_desc'] = 'Configure UCKK Archive defaults.';
-$string['settings:defaultvisibility'] = 'Default archive visibility';
-$string['settings:defaultvisibility_desc'] = 'Default visibility used when a new archive item does not specify a visibility.';
+$string['settings:general'] = 'General registry settings';
+$string['settings:general_desc'] = 'Configure UCKK Registrar defaults.';
+$string['settings:defaultvisibility'] = 'Default registry visibility';
+$string['settings:defaultvisibility_desc'] = 'Default visibility used when a new registry item does not specify a visibility.';
 $string['settings:requirevalidation'] = 'Require validation';
-$string['settings:requirevalidation_desc'] = 'Require validation before archive items become verified or public.';
-$string['settings:allowpublicarchives'] = 'Allow public archive items';
-$string['settings:allowpublicarchives_desc'] = 'Allow archive items to become publicly visible after manual validation.';
-$string['settings:allowrestrictedintegrity'] = 'Allow restricted integrity archives';
-$string['settings:allowrestrictedintegrity_desc'] = 'Allow archive items to be marked as restricted to users with integrity or restricted archive capabilities.';
+$string['settings:requirevalidation_desc'] = 'Require validation before registry items become verified or public.';
+$string['settings:allowpublicarchives'] = 'Allow public registry items';
+$string['settings:allowpublicarchives_desc'] = 'Allow registry items to become publicly visible after manual validation.';
+$string['settings:allowrestrictedintegrity'] = 'Allow restricted integrity registries';
+$string['settings:allowrestrictedintegrity_desc'] = 'Allow registry items to be marked as restricted to users with integrity or restricted registry capabilities.';
 $string['settings:enablekristals'] = 'Enable Kristals';
-$string['settings:enablekristals_desc'] = 'Enable Kristal creation and display in UCKK Archives.';
+$string['settings:enablekristals_desc'] = 'Enable Kristal creation and display in UCKK Registrar.';
 $string['settings:enableexports'] = 'Enable export packages';
 $string['settings:enableexports_desc'] = 'Allow authorised users to generate export packages.';
 $string['settings:retentiondays'] = 'Default retention period';
 $string['settings:retentiondays_desc'] = 'Default retention period in days. Use 0 for no automatic expiry.';
 $string['settings:maxexportitems'] = 'Maximum items per export';
-$string['settings:maxexportitems_desc'] = 'Maximum number of archive items included in one export package.';
+$string['settings:maxexportitems_desc'] = 'Maximum number of registry items included in one export package.';
 $string['settings:provenance'] = 'Provenance settings';
-$string['settings:provenance_desc'] = 'Configure archive provenance and validation behaviour.';
+$string['settings:provenance_desc'] = 'Configure registry provenance and validation behaviour.';
 $string['settings:requireprovenance'] = 'Require provenance';
-$string['settings:requireprovenance_desc'] = 'Require a provenance statement for every archive item.';
+$string['settings:requireprovenance_desc'] = 'Require a provenance statement for every registry item.';
 $string['settings:requirevalidationnotes'] = 'Require validation notes';
 $string['settings:requirevalidationnotes_desc'] = 'Require validators to provide notes when validating, rejecting, or invalidating an item.';
 
@@ -161,55 +163,56 @@ $string['settings:requirevalidationnotes_desc'] = 'Require validators to provide
 // Item form.
 // -----------------------------------------------------------------------------
 
-$string['archiveitemform'] = 'Archive item form';
+$string['archiveitemform'] = 'Registry item form';
 $string['itemtitle'] = 'Item title';
-$string['itemtitle_help'] = 'Clear title for the archive item.';
+$string['itemtitle_help'] = 'Clear title for the registry item.';
 $string['itemsummary'] = 'Item summary';
 $string['itemsummary_help'] = 'Short summary safe for the selected visibility level.';
 $string['itemcontent'] = 'Item content';
-$string['itemcontent_help'] = 'Main archive content. Do not include restricted details unless the item visibility allows it.';
+$string['itemcontent_help'] = 'Main registry content. Do not include restricted details unless the item visibility allows it.';
 $string['itemtype'] = 'Item type';
-$string['itemtype_help'] = 'Choose the type that best describes the archive item.';
+$string['itemtype_help'] = 'Choose the type that best describes the registry item.';
 $string['itemstatus'] = 'Item status';
 $string['itemvisibility'] = 'Item visibility';
-$string['itemvisibility_help'] = 'Controls who may see this archive item. Restricted integrity items require explicit capability.';
+$string['itemvisibility_help'] = 'Controls who may see this registry item. Restricted integrity items require explicit capability.';
 $string['itemprovenance'] = 'Item provenance';
 $string['itemprovenance_help'] = 'Explain where the item comes from, who produced it, what was transformed, and what can be verified.';
 $string['itemsource'] = 'Source';
-$string['itemsource_help'] = 'Original source, system, activity, person, archive, or external reference for this item.';
+$string['itemsource_help'] = 'Original source, system, activity, person, registry, or external reference for this item.';
 $string['sourcecomponent'] = 'Source component';
 $string['sourcecomponent_help'] = 'Moodle component that originated the item, when known.';
 $string['sourceid'] = 'Source ID';
 $string['sourceid_help'] = 'Record ID in the source component, when known.';
 $string['sourceurl'] = 'Source URL';
 $string['sourceurl_help'] = 'Optional URL pointing to the source.';
+$string['externalurl'] = 'External URL';
 $string['sourceauthor'] = 'Source or author';
-$string['sourceauthor_help'] = 'Person, group, system, activity, or archive source behind the item.';
+$string['sourceauthor_help'] = 'Person, group, system, activity, or registry source behind the item.';
 $string['sourcedate'] = 'Source date';
 $string['sourcedate_help'] = 'Date associated with the original source.';
 $string['license'] = 'Licence';
 $string['license_help'] = 'Licence or reuse condition attached to the item, when applicable.';
 $string['tags'] = 'Tags';
 $string['tags_help'] = 'Optional comma-separated tags for filtering and reporting.';
-$string['files_help'] = 'Files attached to this archive item. Files inherit the item visibility unless a service applies a stricter rule.';
+$string['files_help'] = 'Files attached to this registry item. Files inherit the item visibility unless a service applies a stricter rule.';
 $string['prooffiles'] = 'Proof files';
 $string['decisionattachments'] = 'Decision attachments';
 $string['minutesfiles'] = 'Minutes files';
 $string['kristalfiles'] = 'Kristal files';
 $string['portfoliofiles'] = 'Portfolio files';
 $string['integrityexports'] = 'Integrity exports';
-$string['addarchiveitem'] = 'Add archive item';
-$string['editarchiveitem'] = 'Edit archive item';
-$string['archiveitemsaved'] = 'Archive item saved.';
-$string['archiveitemcreated'] = 'Archive item created.';
-$string['archiveitemupdated'] = 'Archive item updated.';
-$string['cannotadditem'] = 'You cannot add archive items here.';
-$string['cannotedititem'] = 'You cannot edit this archive item.';
-$string['cannotviewitem'] = 'You cannot view this archive item.';
-$string['missingarchiveitem'] = 'Archive item not found.';
-$string['invaliditemtype'] = 'Invalid archive item type.';
-$string['invaliditemstatus'] = 'Invalid archive item status.';
-$string['invaliditemvisibility'] = 'Invalid archive item visibility.';
+$string['addarchiveitem'] = 'Add registry item';
+$string['editarchiveitem'] = 'Edit registry item';
+$string['archiveitemsaved'] = 'Registry item saved.';
+$string['archiveitemcreated'] = 'Registry item created.';
+$string['archiveitemupdated'] = 'Registry item updated.';
+$string['cannotadditem'] = 'You cannot add registry items here.';
+$string['cannotedititem'] = 'You cannot edit this registry item.';
+$string['cannotviewitem'] = 'You cannot view this registry item.';
+$string['missingarchiveitem'] = 'Registry item not found.';
+$string['invaliditemtype'] = 'Invalid registry item type.';
+$string['invaliditemstatus'] = 'Invalid registry item status.';
+$string['invaliditemvisibility'] = 'Invalid registry item visibility.';
 $string['provenancerequired'] = 'A provenance statement is required.';
 $string['contentorsourcefilesrequired'] = 'Add content, a source URL, or at least one file.';
 
@@ -245,25 +248,25 @@ $string['invalidkristaltype'] = 'Invalid Kristal type.';
 // -----------------------------------------------------------------------------
 
 $string['validate'] = 'Validate';
-$string['validateitem'] = 'Validate archive item';
+$string['validateitem'] = 'Validate registry item';
 $string['validationform'] = 'Validation form';
 $string['validationstate'] = 'Validation state';
 $string['validationnotes'] = 'Validation notes';
 $string['validationnotes_help'] = 'Explain the validation decision, uncertainty, corrections required, or reason for rejection.';
 $string['validationdecision'] = 'Validation decision';
-$string['validationdecision_help'] = 'Choose how this archive item should be treated after review.';
+$string['validationdecision_help'] = 'Choose how this registry item should be treated after review.';
 $string['validatedby'] = 'Validated by';
 $string['timevalidated'] = 'Validation time';
-$string['archiveitemvalidated'] = 'Archive item validated.';
-$string['archiveitemrejected'] = 'Archive item rejected.';
-$string['archiveiteminvalidated'] = 'Archive item invalidated.';
-$string['archiveitemcorrectionrequired'] = 'Correction required for archive item.';
-$string['archiveitemcontested'] = 'Archive item contested.';
-$string['cannotvalidateitem'] = 'You cannot validate this archive item.';
+$string['archiveitemvalidated'] = 'Registry item validated.';
+$string['archiveitemrejected'] = 'Registry item rejected.';
+$string['archiveiteminvalidated'] = 'Registry item invalidated.';
+$string['archiveitemcorrectionrequired'] = 'Correction required for registry item.';
+$string['archiveitemcontested'] = 'Registry item contested.';
+$string['cannotvalidateitem'] = 'You cannot validate this registry item.';
 $string['validationrequiresnotes'] = 'Validation notes are required for this decision.';
 $string['manualvalidationrequired'] = 'Manual validation required';
-$string['publicvalidationrequired'] = 'Public archive items must be manually validated.';
-$string['restrictedvalidationrequired'] = 'Restricted integrity archive items require explicit validation.';
+$string['publicvalidationrequired'] = 'Public registry items must be manually validated.';
+$string['restrictedvalidationrequired'] = 'Restricted integrity registry items require explicit validation.';
 
 $string['validationdecision:validate'] = 'Validate';
 $string['validationdecision:reject'] = 'Reject';
@@ -276,27 +279,27 @@ $string['validationdecision:invalidate'] = 'Invalidate';
 // -----------------------------------------------------------------------------
 
 $string['revise'] = 'Revise';
-$string['reviseitem'] = 'Revise archive item';
+$string['reviseitem'] = 'Revise registry item';
 $string['revisionform'] = 'Revision form';
 $string['revisionreason'] = 'Revision reason';
-$string['revisionreason_help'] = 'Explain why this revision is needed. Archive history must remain traceable.';
+$string['revisionreason_help'] = 'Explain why this revision is needed. Registry history must remain traceable.';
 $string['revisionnotes'] = 'Revision notes';
 $string['revisioncreated'] = 'Revision created.';
-$string['archiveitemrevised'] = 'Archive item revised.';
+$string['archiveitemrevised'] = 'Registry item revised.';
 $string['previousversion'] = 'Previous version';
 $string['currentversion'] = 'Current version';
 $string['versionhistory'] = 'Version history';
 $string['versionrecord'] = 'Version record';
-$string['cannotreviseitem'] = 'You cannot revise this archive item.';
+$string['cannotreviseitem'] = 'You cannot revise this registry item.';
 $string['cannotversionitem'] = 'You cannot create a version record for this item.';
 $string['revisionrequiresreason'] = 'A revision reason is required.';
-$string['revisionnonsovereignnotice'] = 'A revision preserves archive history. It must not silently erase evidence or provenance.';
+$string['revisionnonsovereignnotice'] = 'A revision preserves registry history. It must not silently erase evidence or provenance.';
 
 // -----------------------------------------------------------------------------
 // Export.
 // -----------------------------------------------------------------------------
 
-$string['exportarchive'] = 'Export archive';
+$string['exportarchive'] = 'Export registry';
 $string['exportform'] = 'Export form';
 $string['exportpackage'] = 'Export package';
 $string['exportpackages'] = 'Export packages';
@@ -304,17 +307,17 @@ $string['exportformat'] = 'Export format';
 $string['exportscope'] = 'Export scope';
 $string['exportvisibility'] = 'Export visibility';
 $string['exportreason'] = 'Export reason';
-$string['exportreason_help'] = 'Explain why this archive export is needed.';
+$string['exportreason_help'] = 'Explain why this registry export is needed.';
 $string['exportincludeproofs'] = 'Include proof files';
 $string['exportincludeprovenance'] = 'Include provenance';
 $string['exportincludehistory'] = 'Include revision history';
 $string['exportincludeintegrity'] = 'Include integrity summaries';
 $string['exportredactrestricted'] = 'Redact restricted details';
 $string['exportredactrestricted_help'] = 'Remove or summarize restricted integrity details from the export package unless the viewer has explicit permission.';
-$string['exportgenerated'] = 'Archive export generated.';
-$string['archiveitemexported'] = 'Archive item exported.';
-$string['cannotexportarchive'] = 'You cannot export this archive.';
-$string['cannotexportitem'] = 'You cannot export this archive item.';
+$string['exportgenerated'] = 'Registry export generated.';
+$string['archiveitemexported'] = 'Registry item exported.';
+$string['cannotexportarchive'] = 'You cannot export this registry.';
+$string['cannotexportitem'] = 'You cannot export this registry item.';
 $string['exportrequiresreason'] = 'An export reason is required.';
 $string['exportempty'] = 'No export packages are available.';
 $string['downloadexport'] = 'Download export';
@@ -327,10 +330,10 @@ $string['exportformat:zip'] = 'ZIP package';
 $string['exportformat:csv'] = 'CSV';
 $string['exportformat:pdf'] = 'PDF summary';
 $string['exportscope:item'] = 'Single item';
-$string['exportscope:archive'] = 'Whole archive';
-$string['exportscope:course'] = 'Course archive';
-$string['exportscope:user'] = 'User portfolio archive';
-$string['exportscope:integrity'] = 'Integrity archive';
+$string['exportscope:archive'] = 'Whole registry';
+$string['exportscope:course'] = 'Course registry';
+$string['exportscope:user'] = 'User portfolio registry';
+$string['exportscope:integrity'] = 'Integrity registry';
 
 // -----------------------------------------------------------------------------
 // Item types.
@@ -346,7 +349,7 @@ $string['itemtype:kristal'] = 'Kristal';
 $string['itemtype:reflection'] = 'Reflection';
 $string['itemtype:portfolio_item'] = 'Portfolio item';
 $string['itemtype:version_record'] = 'Version record';
-$string['itemtype:archive_item'] = 'Archive item';
+$string['itemtype:archive_item'] = 'Registry item';
 // -----------------------------------------------------------------------------
 // Kristal types.
 // -----------------------------------------------------------------------------
@@ -375,7 +378,7 @@ $string['prooftype:testimony'] = 'Testimony';
 $string['prooftype:observation'] = 'Observation';
 $string['prooftype:ai_log'] = 'AI log';
 $string['prooftype:decision_record'] = 'Decision record';
-$string['prooftype:archive_item'] = 'Archive item';
+$string['prooftype:archive_item'] = 'Registry item';
 
 // -----------------------------------------------------------------------------
 // Statuses.
@@ -392,7 +395,7 @@ $string['status:correction_required'] = 'Correction required';
 $string['status:contested'] = 'Contested';
 $string['status:invalidated'] = 'Invalidated';
 $string['status:closed'] = 'Closed';
-$string['status:archived'] = 'Archived';
+$string['status:archived'] = 'Preserved';
 $string['status:cancelled'] = 'Cancelled';
 
 $string['statuslabel:draft'] = 'Draft';
@@ -406,7 +409,7 @@ $string['statuslabel:correctionrequired'] = 'Correction required';
 $string['statuslabel:contested'] = 'Contested';
 $string['statuslabel:invalidated'] = 'Invalidated';
 $string['statuslabel:closed'] = 'Closed';
-$string['statuslabel:archived'] = 'Archived';
+$string['statuslabel:archived'] = 'Preserved';
 $string['statuslabel:cancelled'] = 'Cancelled';
 
 // -----------------------------------------------------------------------------
@@ -425,14 +428,14 @@ $string['visibility:public'] = 'Public';
 $string['visibility:restricted'] = 'Restricted';
 $string['visibility:restricted_integrity'] = 'Restricted integrity';
 $string['visibility:hidden'] = 'Hidden';
-$string['visibility:archived'] = 'Archived';
+$string['visibility:archived'] = 'Preserved';
 
 $string['visibility_help:private'] = 'Visible only to authorised owners and reviewers.';
 $string['visibility_help:course'] = 'Visible within the course context to users with permission.';
 $string['visibility_help:program'] = 'Visible within the related UCKK program.';
 $string['visibility_help:institution'] = 'Visible to authorised institutional viewers.';
 $string['visibility_help:public'] = 'Public only after manual validation.';
-$string['visibility_help:restricted_integrity'] = 'Visible only to users with restricted archive or integrity permissions.';
+$string['visibility_help:restricted_integrity'] = 'Visible only to users with restricted registry or integrity permissions.';
 
 // -----------------------------------------------------------------------------
 // Provenance.
@@ -442,7 +445,7 @@ $string['provenance:human'] = 'Human';
 $string['provenance:ai_assisted'] = 'AI-assisted';
 $string['provenance:imported'] = 'Imported';
 $string['provenance:system'] = 'System';
-$string['provenance:archive'] = 'Archive';
+$string['provenance:archive'] = 'Registry';
 $string['provenance:assembly'] = 'Assembly';
 $string['provenance:challenge'] = 'Challenge';
 $string['provenance:integrity'] = 'Integrity';
@@ -466,125 +469,125 @@ $string['validationstate:human_reviewed'] = 'Human reviewed';
 $string['validationstate:verified'] = 'Verified';
 $string['validationstate:contested'] = 'Contested';
 $string['validationstate:invalidated'] = 'Invalidated';
-$string['validationstate:archived'] = 'Archived';
+$string['validationstate:archived'] = 'Preserved';
 
 $string['validation:unverified'] = 'Unverified';
 $string['validation:human_reviewed'] = 'Human reviewed';
 $string['validation:verified'] = 'Verified';
 $string['validation:contested'] = 'Contested';
 $string['validation:invalidated'] = 'Invalidated';
-$string['validation:archived'] = 'Archived';
+$string['validation:archived'] = 'Preserved';
 
 // -----------------------------------------------------------------------------
 // Archive policies.
 // -----------------------------------------------------------------------------
 
-$string['archivepolicy:none'] = 'No archive policy';
-$string['archivepolicy:summary'] = 'Summary archive';
-$string['archivepolicy:full'] = 'Full archive';
-$string['archivepolicy:restricted_integrity'] = 'Restricted integrity archive';
-$string['archivepolicy:portfolio'] = 'Portfolio archive';
+$string['archivepolicy:none'] = 'No registry policy';
+$string['archivepolicy:summary'] = 'Summary registry';
+$string['archivepolicy:full'] = 'Full registry';
+$string['archivepolicy:restricted_integrity'] = 'Restricted integrity registry';
+$string['archivepolicy:portfolio'] = 'Portfolio registry';
 $string['archivepolicy:institutional_memory'] = 'Institutional memory';
 
 // -----------------------------------------------------------------------------
 // Pages and panels.
 // -----------------------------------------------------------------------------
 
-$string['archiveview'] = 'Archive view';
-$string['archiveviewempty'] = 'No archive items are available for this view.';
-$string['archiveitemcard'] = 'Archive item card';
+$string['archiveview'] = 'Registrar view';
+$string['archiveviewempty'] = 'No registry items are available for this view.';
+$string['archiveitemcard'] = 'Registry item card';
 $string['kristalcard'] = 'Kristal card';
 $string['proofcard'] = 'Proof card';
 $string['validationpanel'] = 'Validation panel';
-$string['archiveactions'] = 'Archive actions';
+$string['archiveactions'] = 'Registry actions';
 $string['itemactions'] = 'Item actions';
 $string['kristalactions'] = 'Kristal actions';
 $string['validationactions'] = 'Validation actions';
 $string['exportactions'] = 'Export actions';
-$string['viewarchiveitem'] = 'View archive item';
+$string['viewarchiveitem'] = 'View registry item';
 $string['viewkristal'] = 'View Kristal';
 $string['viewprovenance'] = 'View provenance';
 $string['viewrevisionhistory'] = 'View revision history';
 $string['viewvalidation'] = 'View validation';
 $string['viewexport'] = 'View export';
-$string['emptyarchive'] = 'This archive has no visible items.';
-$string['emptykristals'] = 'This archive has no visible Kristals.';
+$string['emptyarchive'] = 'This registry has no visible items.';
+$string['emptykristals'] = 'This registry has no visible Kristals.';
 $string['emptyproofs'] = 'No proof records are available.';
 $string['emptyrevisions'] = 'No revisions are available.';
 $string['emptyexports'] = 'No exports are available.';
-$string['restrictednotice'] = 'This item contains restricted archive data.';
-$string['publicnotice'] = 'Public archive visibility requires manual validation.';
-$string['archivenonsovereignnotice'] = 'Archive records preserve memory and evidence. Validation, integrity decisions, public visibility, and exports require authorised human review.';
-$string['archivegovernancenotice'] = 'The UCKK Archive preserves evidence, decisions, Kristals, portfolios, and version history. It must not be used to silently erase evidence or bypass integrity review.';
+$string['restrictednotice'] = 'This item contains restricted registry data.';
+$string['publicnotice'] = 'Public registry visibility requires manual validation.';
+$string['archivenonsovereignnotice'] = 'Registry records preserve memory and evidence. Validation, integrity decisions, public visibility, and exports require authorised human review.';
+$string['archivegovernancenotice'] = 'The UCKK Registrar preserves evidence, decisions, Kristals, portfolios, and version history. It must not be used to silently erase evidence or bypass integrity review.';
 
 // -----------------------------------------------------------------------------
 // Controller messages.
 // -----------------------------------------------------------------------------
 
-$string['invalidarchiveaction'] = 'Invalid archive action.';
+$string['invalidarchiveaction'] = 'Invalid registry action.';
 $string['invalidvalidationaction'] = 'Invalid validation action.';
 $string['invalidexportaction'] = 'Invalid export action.';
 $string['invalidrevisionaction'] = 'Invalid revision action.';
 $string['invalidvisibility'] = 'Invalid visibility.';
 $string['invalidstatus'] = 'Invalid status.';
 $string['invalidprovenance'] = 'Invalid provenance.';
-$string['cannotviewarchive'] = 'You cannot view this archive.';
-$string['cannotviewrestricted'] = 'You cannot view restricted archive data.';
-$string['cannotmanagearchive'] = 'You cannot manage this archive.';
-$string['cannotdeleteitem'] = 'You cannot delete this archive item.';
-$string['deleteitemnotallowed'] = 'Archive items must be revised or invalidated, not silently deleted.';
-$string['itemnotfound'] = 'Archive item not found.';
-$string['archivenotfound'] = 'Archive not found.';
+$string['cannotviewarchive'] = 'You cannot view this registry.';
+$string['cannotviewrestricted'] = 'You cannot view restricted registry data.';
+$string['cannotmanagearchive'] = 'You cannot manage this registry.';
+$string['cannotdeleteitem'] = 'You cannot delete this registry item.';
+$string['deleteitemnotallowed'] = 'Registry items must be revised or invalidated, not silently deleted.';
+$string['itemnotfound'] = 'Registry item not found.';
+$string['archivenotfound'] = 'Registry not found.';
 $string['kristalnotfound'] = 'Kristal not found.';
 $string['exportnotfound'] = 'Export package not found.';
-$string['nopermission'] = 'You do not have permission to perform this archive action.';
+$string['nopermission'] = 'You do not have permission to perform this registry action.';
 
 // -----------------------------------------------------------------------------
 // Events.
 // -----------------------------------------------------------------------------
 
-$string['eventarchiveitemcreated'] = 'Archive item created';
-$string['eventarchiveitemvalidated'] = 'Archive item validated';
-$string['eventarchiveitemrevised'] = 'Archive item revised';
-$string['eventarchiveitemexported'] = 'Archive item exported';
+$string['eventarchiveitemcreated'] = 'Registry item created';
+$string['eventarchiveitemvalidated'] = 'Registry item validated';
+$string['eventarchiveitemrevised'] = 'Registry item revised';
+$string['eventarchiveitemexported'] = 'Registry item exported';
 $string['eventkristalcreated'] = 'Kristal created';
 $string['eventkristalupdated'] = 'Kristal updated';
-$string['eventarchiveviewed'] = 'Archive viewed';
-$string['eventarchiveitemviewed'] = 'Archive item viewed';
-$string['eventexportgenerated'] = 'Archive export generated';
+$string['eventarchiveviewed'] = 'Registrar viewed';
+$string['eventarchiveitemviewed'] = 'Registry item viewed';
+$string['eventexportgenerated'] = 'Registry export generated';
 
 // -----------------------------------------------------------------------------
 // Scheduled tasks.
 // -----------------------------------------------------------------------------
 
-$string['task:validate_pending_items'] = 'Validate pending archive items';
-$string['task:generate_archive_exports'] = 'Generate archive exports';
-$string['task:cleanup_expired_exports'] = 'Clean up expired archive exports';
+$string['task:validate_pending_items'] = 'Validate pending registry items';
+$string['task:generate_archive_exports'] = 'Generate registry exports';
+$string['task:cleanup_expired_exports'] = 'Clean up expired registry exports';
 
 // -----------------------------------------------------------------------------
 // External services and Ajax.
 // -----------------------------------------------------------------------------
 
-$string['service:get_archive_view'] = 'Get archive view';
-$string['service:get_archive_item'] = 'Get archive item';
-$string['service:save_archive_item'] = 'Save archive item';
-$string['service:validate_archive_item'] = 'Validate archive item';
-$string['service:revise_archive_item'] = 'Revise archive item';
+$string['service:get_archive_view'] = 'Get registrar view';
+$string['service:get_archive_item'] = 'Get registry item';
+$string['service:save_archive_item'] = 'Save registry item';
+$string['service:validate_archive_item'] = 'Validate registry item';
+$string['service:revise_archive_item'] = 'Revise registry item';
 $string['service:create_kristal'] = 'Create Kristal';
-$string['service:generate_export'] = 'Generate archive export';
+$string['service:generate_export'] = 'Generate registry export';
 
-$string['archive:refreshing'] = 'Refreshing archive…';
-$string['archive:refreshed'] = 'Archive refreshed.';
-$string['archive:refreshfailed'] = 'Unable to refresh archive.';
-$string['archive:saving'] = 'Saving archive item…';
-$string['archive:saved'] = 'Archive item saved.';
-$string['archive:savefailed'] = 'Unable to save archive item.';
-$string['archive:validating'] = 'Validating archive item…';
-$string['archive:validated'] = 'Archive item validated.';
-$string['archive:validationfailed'] = 'Unable to validate archive item.';
-$string['archive:exporting'] = 'Generating archive export…';
-$string['archive:exported'] = 'Archive export generated.';
-$string['archive:exportfailed'] = 'Unable to generate archive export.';
+$string['archive:refreshing'] = 'Refreshing registry…';
+$string['archive:refreshed'] = 'Registry refreshed.';
+$string['archive:refreshfailed'] = 'Unable to refresh registry.';
+$string['archive:saving'] = 'Saving registry item…';
+$string['archive:saved'] = 'Registry item saved.';
+$string['archive:savefailed'] = 'Unable to save registry item.';
+$string['archive:validating'] = 'Validating registry item…';
+$string['archive:validated'] = 'Registry item validated.';
+$string['archive:validationfailed'] = 'Unable to validate registry item.';
+$string['archive:exporting'] = 'Generating registry export…';
+$string['archive:exported'] = 'Registry export generated.';
+$string['archive:exportfailed'] = 'Unable to generate registry export.';
 
 $string['kristal:refreshing'] = 'Refreshing Kristal…';
 $string['kristal:refreshed'] = 'Kristal refreshed.';
@@ -597,70 +600,70 @@ $string['kristal:savefailed'] = 'Unable to save Kristal.';
 // Completion.
 // -----------------------------------------------------------------------------
 
-$string['completiondetail:items'] = 'Add archive item';
-$string['completiondetail:validateditems'] = 'Have validated archive item';
+$string['completiondetail:items'] = 'Add registry item';
+$string['completiondetail:validateditems'] = 'Have validated registry item';
 $string['completiondetail:kristals'] = 'Create Kristal';
-$string['completionitems'] = 'Archive items required';
-$string['completionvalidateditems'] = 'Validated archive items required';
+$string['completionitems'] = 'Registry items required';
+$string['completionvalidateditems'] = 'Validated registry items required';
 $string['completionkristals'] = 'Kristals required';
 
 // -----------------------------------------------------------------------------
 // Privacy.
 // -----------------------------------------------------------------------------
 
-$string['privacy:metadata'] = 'The UCKK Archive activity stores archive records, evidence, provenance, validation decisions, revisions, Kristals, and export records.';
-$string['privacy:metadata:uckkarchive'] = 'Archive activity instance settings.';
-$string['privacy:metadata:uckkarchive_item'] = 'Archive items created or validated by users.';
-$string['privacy:metadata:uckkarchive_item:userid'] = 'The user associated with the archive item.';
-$string['privacy:metadata:uckkarchive_item:createdby'] = 'The user who created the archive item.';
-$string['privacy:metadata:uckkarchive_item:modifiedby'] = 'The user who last modified the archive item.';
-$string['privacy:metadata:uckkarchive_item:title'] = 'The archive item title.';
-$string['privacy:metadata:uckkarchive_item:summary'] = 'The archive item summary.';
-$string['privacy:metadata:uckkarchive_item:content'] = 'The archive item content.';
-$string['privacy:metadata:uckkarchive_item:status'] = 'The archive item status.';
-$string['privacy:metadata:uckkarchive_item:visibility'] = 'The archive item visibility.';
-$string['privacy:metadata:uckkarchive_item:metadata'] = 'Additional archive item metadata.';
-$string['privacy:metadata:uckkarchive_kristal'] = 'Kristal records created from archive items or learning evidence.';
-$string['privacy:metadata:uckkarchive_proof'] = 'Proof records associated with archive items.';
-$string['privacy:metadata:uckkarchive_prov'] = 'Provenance records associated with archive items.';
-$string['privacy:metadata:uckkarchive_rev'] = 'Revision records associated with archive items.';
+$string['privacy:metadata'] = 'The UCKK Registrar activity stores registry records, evidence, provenance, validation decisions, revisions, Kristals, and export records.';
+$string['privacy:metadata:uckkarchive'] = 'Registrar activity instance settings.';
+$string['privacy:metadata:uckkarchive_item'] = 'Registry items created or validated by users.';
+$string['privacy:metadata:uckkarchive_item:userid'] = 'The user associated with the registry item.';
+$string['privacy:metadata:uckkarchive_item:createdby'] = 'The user who created the registry item.';
+$string['privacy:metadata:uckkarchive_item:modifiedby'] = 'The user who last modified the registry item.';
+$string['privacy:metadata:uckkarchive_item:title'] = 'The registry item title.';
+$string['privacy:metadata:uckkarchive_item:summary'] = 'The registry item summary.';
+$string['privacy:metadata:uckkarchive_item:content'] = 'The registry item content.';
+$string['privacy:metadata:uckkarchive_item:status'] = 'The registry item status.';
+$string['privacy:metadata:uckkarchive_item:visibility'] = 'The registry item visibility.';
+$string['privacy:metadata:uckkarchive_item:metadata'] = 'Additional registry item metadata.';
+$string['privacy:metadata:uckkarchive_kristal'] = 'Kristal records created from registry items or learning evidence.';
+$string['privacy:metadata:uckkarchive_proof'] = 'Proof records associated with registry items.';
+$string['privacy:metadata:uckkarchive_prov'] = 'Provenance records associated with registry items.';
+$string['privacy:metadata:uckkarchive_rev'] = 'Revision records associated with registry items.';
 $string['privacy:metadata:uckkarchive_export'] = 'Export package records.';
-$string['privacy:metadata:files'] = 'Files attached to archive items, proofs, decisions, minutes, Kristals, portfolios, or integrity exports.';
-$string['privacy:path:archives'] = 'UCKK archive records';
-$string['privacy:path:kristals'] = 'UCKK archive Kristals';
-$string['privacy:path:proofs'] = 'UCKK archive proofs';
-$string['privacy:path:revisions'] = 'UCKK archive revisions';
-$string['privacy:path:exports'] = 'UCKK archive exports';
+$string['privacy:metadata:files'] = 'Files attached to registry items, proofs, decisions, minutes, Kristals, portfolios, or integrity exports.';
+$string['privacy:path:archives'] = 'UCKK registry records';
+$string['privacy:path:kristals'] = 'UCKK registry Kristals';
+$string['privacy:path:proofs'] = 'UCKK registry proofs';
+$string['privacy:path:revisions'] = 'UCKK registry revisions';
+$string['privacy:path:exports'] = 'UCKK registry exports';
 
 // -----------------------------------------------------------------------------
 // Backup and restore.
 // -----------------------------------------------------------------------------
 
-$string['backupincludeitems'] = 'Include archive items';
+$string['backupincludeitems'] = 'Include registry items';
 $string['backupincludeproofs'] = 'Include proof files';
 $string['backupincludekristals'] = 'Include Kristals';
 $string['backupincludeprovenance'] = 'Include provenance';
 $string['backupincluderevisions'] = 'Include revision history';
-$string['restorearchiveitems'] = 'Restore archive items';
+$string['restorearchiveitems'] = 'Restore registry items';
 
 // -----------------------------------------------------------------------------
 // Errors.
 // -----------------------------------------------------------------------------
 
-$string['error:missingcontext'] = 'Missing archive context.';
+$string['error:missingcontext'] = 'Missing registry context.';
 $string['error:missingcourse'] = 'Missing course.';
 $string['error:missingcm'] = 'Missing course module.';
-$string['error:missingitem'] = 'Missing archive item.';
-$string['error:missingarchive'] = 'Missing archive.';
+$string['error:missingitem'] = 'Missing registry item.';
+$string['error:missingarchive'] = 'Missing registry.';
 $string['error:missingkristal'] = 'Missing Kristal.';
 $string['error:missingexport'] = 'Missing export package.';
 $string['error:invalidjson'] = 'Invalid JSON metadata.';
 $string['error:invalidsource'] = 'Invalid source reference.';
-$string['error:invalidfilearea'] = 'Invalid archive file area.';
-$string['error:restricted'] = 'This archive item is restricted.';
-$string['error:publicrequiresvalidation'] = 'Public archive items require manual validation.';
-$string['error:cannotautomatevalidation'] = 'Archive validation cannot be automated.';
-$string['error:cannotdeletehistory'] = 'Archive history cannot be silently deleted.';
+$string['error:invalidfilearea'] = 'Invalid registry file area.';
+$string['error:restricted'] = 'This registry item is restricted.';
+$string['error:publicrequiresvalidation'] = 'Public registry items require manual validation.';
+$string['error:cannotautomatevalidation'] = 'Registry validation cannot be automated.';
+$string['error:cannotdeletehistory'] = 'Registry history cannot be silently deleted.';
 $string['error:exporttoolarge'] = 'This export package is too large.';
 $string['error:nothingtoexport'] = 'There is nothing to export.';
 
@@ -674,7 +677,7 @@ $string['filearea:minutes_files'] = 'Minutes files';
 $string['filearea:kristal_files'] = 'Kristal files';
 $string['filearea:portfolio_files'] = 'Portfolio files';
 $string['filearea:integrity_exports'] = 'Integrity exports';
-$string['filearea:item_content'] = 'Archive item content';
+$string['filearea:item_content'] = 'Registry item content';
 $string['filearea:export_packages'] = 'Export packages';
 
 // -----------------------------------------------------------------------------
@@ -689,7 +692,7 @@ $string['filter:provenance'] = 'Filter by provenance';
 $string['filter:createdby'] = 'Filter by creator';
 $string['filter:datefrom'] = 'Date from';
 $string['filter:dateto'] = 'Date to';
-$string['report:archiveproduction'] = 'Archive production';
+$string['report:archiveproduction'] = 'Registry production';
 $string['report:validateditems'] = 'Validated items';
 $string['report:pendingitems'] = 'Pending items';
 $string['report:restricteditems'] = 'Restricted items';
@@ -699,12 +702,12 @@ $string['report:exports'] = 'Exports';
 // Misc UI.
 // -----------------------------------------------------------------------------
 
-$string['confirmvalidate'] = 'Validate this archive item?';
-$string['confirmreject'] = 'Reject this archive item?';
-$string['confirminvalidate'] = 'Invalidate this archive item?';
-$string['confirmrevision'] = 'Create a new revision for this archive item?';
-$string['confirmexport'] = 'Generate this archive export?';
-$string['confirmpublicvisibility'] = 'Make this archive item public after validation?';
+$string['confirmvalidate'] = 'Validate this registry item?';
+$string['confirmreject'] = 'Reject this registry item?';
+$string['confirminvalidate'] = 'Invalidate this registry item?';
+$string['confirmrevision'] = 'Create a new revision for this registry item?';
+$string['confirmexport'] = 'Generate this registry export?';
+$string['confirmpublicvisibility'] = 'Make this registry item public after validation?';
 $string['yesvalidate'] = 'Yes, validate';
 $string['yesreject'] = 'Yes, reject';
 $string['yesinvalidate'] = 'Yes, invalidate';
@@ -724,31 +727,31 @@ $string['aigovernance'] = 'AI governance';
 $string['ailog'] = 'AI log';
 $string['ailogrequired'] = 'An AI log is required.';
 $string['aimetadatarequired'] = 'AI metadata is required.';
-$string['ainonsovereignnotice'] = 'AI assistance is non-authoritative. Archive and validation decisions require authorised human review.';
+$string['ainonsovereignnotice'] = 'AI assistance is non-authoritative. Registry and validation decisions require authorised human review.';
 $string['aipolicy'] = 'AI policy';
 $string['all'] = 'All';
 $string['allowailogs'] = 'Allow AI logs';
-$string['allowarchiveitems'] = 'Allow archive items';
+$string['allowarchiveitems'] = 'Allow registry items';
 $string['allowcontestation'] = 'Allow contestation';
 $string['allowportfolioitems'] = 'Allow portfolio items';
 $string['allowproofs'] = 'Allow proofs';
-$string['archivistnotes'] = 'Archivist notes';
-$string['atleastonearchivetypeenabled'] = 'At least one archive type must be enabled.';
-$string['backtoarchiveitem'] = 'Back to archive item';
+$string['archivistnotes'] = 'Registrar notes';
+$string['atleastonearchivetypeenabled'] = 'At least one registry type must be enabled.';
+$string['backtoarchiveitem'] = 'Back to registry item';
 $string['badgekeys'] = 'Badge keys';
 $string['calendarevent:closes'] = '{$a} closes';
 $string['calendarevent:opens'] = '{$a} opens';
 $string['cancelexport'] = 'Cancel export';
-$string['cancelexportbody'] = 'Cancel this archive export request?';
+$string['cancelexportbody'] = 'Cancel this registry export request?';
 $string['canonref'] = 'Canon reference';
 $string['canonreference'] = 'Canon reference';
 $string['competencycodes'] = 'Competency codes';
-$string['confirmarchiveaction'] = 'Confirm archive action';
-$string['confirmarchiveactionbody'] = 'Confirm that you want to perform this archive action.';
-$string['confirmexportbody'] = 'Generate this archive export package?';
+$string['confirmarchiveaction'] = 'Confirm registry action';
+$string['confirmarchiveactionbody'] = 'Confirm that you want to perform this registry action.';
+$string['confirmexportbody'] = 'Generate this registry export package?';
 $string['confirmkristalsubmit'] = 'Submit Kristal?';
-$string['confirmkristalsubmitbody'] = 'Submit this Kristal for the configured archive workflow?';
-$string['confirmrestrictedexportbody'] = 'This export may contain restricted archive data. Confirm that you are authorised to continue.';
+$string['confirmkristalsubmitbody'] = 'Submit this Kristal for the configured registry workflow?';
+$string['confirmrestrictedexportbody'] = 'This export may contain restricted registry data. Confirm that you are authorised to continue.';
 $string['content'] = 'Content';
 $string['contestabilitydays'] = 'Contestability period';
 $string['contestabilitydaysinvalid'] = 'The contestability period must be zero or more days.';
@@ -777,7 +780,7 @@ $string['integrityrequired'] = 'Integrity review is required.';
 $string['integrityreview'] = 'Integrity review';
 $string['integritysummary'] = 'Integrity summary';
 $string['integritysummaryrequired'] = 'An integrity summary is required.';
-$string['invalidarchivecode'] = 'Invalid archive code.';
+$string['invalidarchivecode'] = 'Invalid registry code.';
 $string['invalidexportformat'] = 'Invalid export format.';
 $string['invalidexportmode'] = 'Invalid export mode.';
 $string['invalidexportscope'] = 'Invalid export scope.';
@@ -793,7 +796,7 @@ $string['itemtype:minutes'] = 'Minutes';
 $string['itemtype:public_summary'] = 'Public summary';
 $string['itemvalidated'] = 'Item validated';
 $string['metadatajson'] = 'Metadata JSON';
-$string['nouserarchiveitems'] = 'No user archive items are available.';
+$string['nouserarchiveitems'] = 'No user registry items are available.';
 $string['originarea'] = 'Origin area';
 $string['origincomponent'] = 'Origin component';
 $string['originid'] = 'Origin ID';
@@ -824,7 +827,7 @@ $string['retentionpolicy:course_lifetime'] = 'Course lifetime';
 $string['retentionpolicy:institutional_memory'] = 'Institutional memory';
 $string['retentionpolicy:program_lifetime'] = 'Program lifetime';
 $string['retentionpolicy:restricted_integrity'] = 'Restricted integrity retention';
-$string['revisearchiveitem'] = 'Revise archive item';
+$string['revisearchiveitem'] = 'Revise registry item';
 $string['revisionandmemory'] = 'Revision and memory';
 $string['revisionandretention'] = 'Revision and retention';
 $string['revisionhistory'] = 'Revision history';
@@ -835,7 +838,7 @@ $string['revisionpolicy:none'] = 'No revision policy';
 $string['revisionpolicy:version_every_edit'] = 'Version every edit';
 $string['revisionpolicy:version_on_change'] = 'Version on change';
 $string['revisionpolicy:version_on_validation'] = 'Version on validation';
-$string['savearchiveitem'] = 'Save archive item';
+$string['savearchiveitem'] = 'Save registry item';
 $string['savekristaldraft'] = 'Save Kristal draft';
 $string['savevalidationdraft'] = 'Save validation draft';
 $string['scope'] = 'Scope';
@@ -848,7 +851,7 @@ $string['timecreated'] = 'Time created';
 $string['timemodified'] = 'Time modified';
 $string['uncertaintynotes'] = 'Uncertainty notes';
 $string['updatepreview'] = 'Update preview';
-$string['validatearchiveitems'] = 'Validate archive items';
+$string['validatearchiveitems'] = 'Validate registry items';
 $string['validateditemneedsreviewstate'] = 'Validated items must use a reviewed validation state.';
 $string['versionnumber'] = 'Version number';
 $string['versionx'] = 'Version {$a}';
@@ -859,48 +862,48 @@ $string['visibilitynotes'] = 'Visibility notes';
 $string['visibilityreview'] = 'Visibility review';
 
 // Archive item and governance additions.
-$string['archiveaddnotice'] = 'Add archive records only when provenance, visibility, and review requirements are clear.';
-$string['archiveexport'] = 'Archive export';
-$string['archiveexportqueued'] = 'Archive export queued.';
-$string['archivegovernance'] = 'Archive governance';
-$string['archiveitem:loaded'] = 'Archive item loaded.';
-$string['archiveitem:loadfailed'] = 'Unable to load archive item.';
-$string['archiveitem:loading'] = 'Loading archive item…';
-$string['archiveitemactions'] = 'Archive item actions';
-$string['archiveitembody'] = 'Archive item body';
-$string['archiveitemcontent'] = 'Archive item content';
-$string['archiveitemfiles'] = 'Archive item files';
-$string['archiveitemgovernancenotice'] = 'Archive items must preserve provenance, visibility, validation state, and revision history.';
-$string['archiveitemidentity'] = 'Archive item identity';
-$string['archiveitempolicy'] = 'Archive item policy';
-$string['archiveitemrequirescontent'] = 'Archive item content is required.';
-$string['archiveitems:none'] = 'No archive items are available.';
-$string['archiveitemtitle'] = 'Archive item title';
-$string['archiveitemtype'] = 'Archive item type';
-$string['archivememorynotice'] = 'Archive memory preserves evidence and decisions; it must not replace review or consent.';
-$string['archivemissingidentifiers'] = 'Archive identifiers are missing.';
-$string['archivereason'] = 'Archive reason';
-$string['archivescope'] = 'Archive scope';
-$string['archivescopefield'] = 'Archive scope field';
-$string['archivesource'] = 'Archive source';
-$string['archivestatus'] = 'Archive status';
-$string['archivetype'] = 'Archive type';
+$string['archiveaddnotice'] = 'Add registry records only when provenance, visibility, and review requirements are clear.';
+$string['archiveexport'] = 'Registry export';
+$string['archiveexportqueued'] = 'Registry export queued.';
+$string['archivegovernance'] = 'Registry governance';
+$string['archiveitem:loaded'] = 'Registry item loaded.';
+$string['archiveitem:loadfailed'] = 'Unable to load registry item.';
+$string['archiveitem:loading'] = 'Loading registry item…';
+$string['archiveitemactions'] = 'Registry item actions';
+$string['archiveitembody'] = 'Registry item body';
+$string['archiveitemcontent'] = 'Registry item content';
+$string['archiveitemfiles'] = 'Registry item files';
+$string['archiveitemgovernancenotice'] = 'Registry items must preserve provenance, visibility, validation state, and revision history.';
+$string['archiveitemidentity'] = 'Registry item identity';
+$string['archiveitempolicy'] = 'Registry item policy';
+$string['archiveitemrequirescontent'] = 'Registry item content is required.';
+$string['archiveitems:none'] = 'No registry items are available.';
+$string['archiveitemtitle'] = 'Registry item title';
+$string['archiveitemtype'] = 'Registry item type';
+$string['archivememorynotice'] = 'Registry memory preserves evidence and decisions; it must not replace review or consent.';
+$string['archivemissingidentifiers'] = 'Registry identifiers are missing.';
+$string['archivereason'] = 'Registry reason';
+$string['archivescope'] = 'Registry scope';
+$string['archivescopefield'] = 'Registry scope field';
+$string['archivesource'] = 'Registry source';
+$string['archivestatus'] = 'Registry status';
+$string['archivetype'] = 'Registry type';
 $string['archivetype:assembly_memory'] = 'Assembly memory';
 $string['archivetype:challenge_output'] = 'Challenge output';
 $string['archivetype:course_memory'] = 'Course memory';
 $string['archivetype:integrity_memory'] = 'Integrity memory';
 $string['archivetype:kristal_library'] = 'Kristal library';
-$string['archivetype:portfolio_archive'] = 'Portfolio archive';
+$string['archivetype:portfolio_archive'] = 'Portfolio registry';
 $string['archivetype:proof_repository'] = 'Proof repository';
-$string['archivevalidation'] = 'Archive validation';
+$string['archivevalidation'] = 'Registry validation';
 $string['badge:aiassisted'] = 'AI assisted';
 $string['badge:contested'] = 'Contested';
 $string['badge:invalidated'] = 'Invalidated';
 $string['badge:restricted'] = 'Restricted';
 $string['badge:validated'] = 'Validated';
 $string['notice:aiassisted'] = 'AI assistance was used. Treat this as non-authoritative until reviewed.';
-$string['notice:archiveitem'] = 'Archive item notice';
-$string['notice:restricted'] = 'This archive record contains restricted information.';
+$string['notice:archiveitem'] = 'Registry item notice';
+$string['notice:restricted'] = 'This registry record contains restricted information.';
 
 // Kristal additions.
 $string['kristalalignment'] = 'Kristal alignment';
@@ -949,28 +952,28 @@ $string['provenancestatementrequired'] = 'A provenance statement is required.';
 $string['provenancevalidation'] = 'Provenance validation';
 $string['sourceverified'] = 'Source verified';
 $string['validationcriteria'] = 'Validation criteria';
-$string['validationgovernancenotice'] = 'Validation decisions must be traceable, human-reviewable, and separate from archive storage.';
+$string['validationgovernancenotice'] = 'Validation decisions must be traceable, human-reviewable, and separate from registry storage.';
 $string['validationgrade'] = 'Validation grade';
 $string['validationgrademustbeinrange'] = 'The validation grade must be within the allowed range.';
 $string['validationrequested'] = 'Validation requested.';
 $string['validationstatement'] = 'Validation statement';
 $string['validationstatementrequired'] = 'A validation statement is required.';
 $string['validationworkflow'] = 'Validation workflow';
-$string['validationworkflow:archivist_review'] = 'Archivist review';
+$string['validationworkflow:archivist_review'] = 'Registrar review';
 $string['validationworkflow:human_review'] = 'Human review';
 $string['validationworkflow:integrity_review'] = 'Integrity review';
 $string['validationworkflow:none'] = 'No validation workflow';
 
 // Export additions.
 $string['export:failed'] = 'Export failed.';
-$string['export:noitems:body'] = 'There are no archive items available for this export.';
+$string['export:noitems:body'] = 'There are no registry items available for this export.';
 $string['export:noitems:title'] = 'No items to export';
 $string['export:previewfailed'] = 'Unable to load export preview.';
 $string['export:previewloaded'] = 'Export preview loaded.';
 $string['export:previewloading'] = 'Loading export preview…';
 $string['export:started'] = 'Export started.';
 $string['export:starting'] = 'Starting export…';
-$string['exportarchiveitem'] = 'Export archive item';
+$string['exportarchiveitem'] = 'Export registry item';
 $string['exportauditnote'] = 'Export audit note';
 $string['exportcancelfailed'] = 'Unable to cancel export.';
 $string['exportcancelled'] = 'Export cancelled.';
@@ -978,7 +981,7 @@ $string['exportconfirmpolicy'] = 'Confirm export policy';
 $string['exportconfirmpolicyrequired'] = 'You must confirm the export policy.';
 $string['exportdescription'] = 'Export description';
 $string['exporterror'] = 'Export error';
-$string['exporterror:missingarchive'] = 'The archive for this export could not be found.';
+$string['exporterror:missingarchive'] = 'The registry for this export could not be found.';
 $string['exportformat:html'] = 'HTML';
 $string['exportformat:mbz_manifest'] = 'Moodle backup manifest';
 $string['exportgovernance'] = 'Export governance';
@@ -991,13 +994,13 @@ $string['exportincludemetadata'] = 'Include metadata';
 $string['exportincludeprivatefields'] = 'Include private fields';
 $string['exportincludeversions'] = 'Include versions';
 $string['exportitemids'] = 'Export item IDs';
-$string['exportitemidsrequired'] = 'Select at least one archive item to export.';
+$string['exportitemidsrequired'] = 'Select at least one registry item to export.';
 $string['exportmissingidentifiers'] = 'Export identifiers are missing.';
 $string['exportmode'] = 'Export mode';
 $string['exportmode:immediate'] = 'Immediate';
 $string['exportmode:queued'] = 'Queued';
 $string['exportnotice'] = 'Export notice';
-$string['exportnotice_desc'] = 'Explain how archive exports should be reviewed, redacted, and used.';
+$string['exportnotice_desc'] = 'Explain how registry exports should be reviewed, redacted, and used.';
 $string['exportoptions'] = 'Export options';
 $string['exportpackagename'] = 'Export package name';
 $string['exportpolicy'] = 'Export policy';
@@ -1017,7 +1020,7 @@ $string['exportredactpersonaldata'] = 'Redact personal data';
 $string['exportrefreshed'] = 'Export refreshed.';
 $string['exportrefreshfailed'] = 'Unable to refresh export.';
 $string['exportrefreshing'] = 'Refreshing export…';
-$string['exportrestrictednotallowed'] = 'Restricted archive data cannot be included in this export.';
+$string['exportrestrictednotallowed'] = 'Restricted registry data cannot be included in this export.';
 $string['exports'] = 'Exports';
 $string['exports:none'] = 'No exports are available.';
 $string['exportscope:portfolio'] = 'Portfolio';
@@ -1031,85 +1034,85 @@ $string['exporttimefrom'] = 'Export time from';
 $string['exporttimeto'] = 'Export time to';
 $string['exporttimetomustbeafterfrom'] = 'The export end time must be after the start time.';
 $string['exporttypefilter'] = 'Export type filter';
-$string['exportunredactednotallowed'] = 'Unredacted restricted archive data cannot be exported.';
+$string['exportunredactednotallowed'] = 'Unredacted restricted registry data cannot be exported.';
 
 // Settings additions.
 $string['settings:ai'] = 'AI settings';
 $string['settings:ai_desc'] = 'Configure AI assistance, AI validation boundaries, uncertainty labels, and AI-use logging.';
 $string['settings:allowaiassistance'] = 'Allow AI assistance';
-$string['settings:allowaiassistance_desc'] = 'Allow AI assistance in archive workflows while keeping final authority with authorised users.';
+$string['settings:allowaiassistance_desc'] = 'Allow AI assistance in registry workflows while keeping final authority with authorised users.';
 $string['settings:allowaivalidation'] = 'Allow AI validation support';
 $string['settings:allowaivalidation_desc'] = 'Allow AI to support validation review without making authoritative decisions.';
-$string['settings:allowpublicitems'] = 'Allow public archive items';
-$string['settings:allowpublicitems_desc'] = 'Allow archive items to become public when validation and visibility requirements are met.';
+$string['settings:allowpublicitems'] = 'Allow public registry items';
+$string['settings:allowpublicitems_desc'] = 'Allow registry items to become public when validation and visibility requirements are met.';
 $string['settings:blockrestrictedexports'] = 'Block restricted exports';
-$string['settings:blockrestrictedexports_desc'] = 'Prevent exports from including restricted archive data unless explicitly allowed.';
+$string['settings:blockrestrictedexports_desc'] = 'Prevent exports from including restricted registry data unless explicitly allowed.';
 $string['settings:defaultexportformat'] = 'Default export format';
-$string['settings:defaultexportformat_desc'] = 'Default format used for new archive export requests.';
+$string['settings:defaultexportformat_desc'] = 'Default format used for new registry export requests.';
 $string['settings:defaultprovenance'] = 'Default provenance';
-$string['settings:defaultprovenance_desc'] = 'Default provenance assigned to new archive records when no specific value is provided.';
+$string['settings:defaultprovenance_desc'] = 'Default provenance assigned to new registry records when no specific value is provided.';
 $string['settings:defaultvalidationstate'] = 'Default validation state';
-$string['settings:defaultvalidationstate_desc'] = 'Default validation state assigned to new archive records.';
-$string['settings:enabled'] = 'Enable UCKK Archive';
-$string['settings:enabled_desc'] = 'Enable UCKK Archive activity features.';
+$string['settings:defaultvalidationstate_desc'] = 'Default validation state assigned to new registry records.';
+$string['settings:enabled'] = 'Enable UCKK Registrar';
+$string['settings:enabled_desc'] = 'Enable UCKK Registrar activity features.';
 $string['settings:enablerevisions'] = 'Enable revisions';
-$string['settings:enablerevisions_desc'] = 'Allow archive items and Kristals to keep revision history.';
+$string['settings:enablerevisions_desc'] = 'Allow registry items and Kristals to keep revision history.';
 $string['settings:enablevalidation'] = 'Enable validation';
-$string['settings:enablevalidation_desc'] = 'Enable validation workflows for archive records.';
+$string['settings:enablevalidation_desc'] = 'Enable validation workflows for registry records.';
 $string['settings:export'] = 'Export settings';
-$string['settings:export_desc'] = 'Configure archive export behaviour and limits.';
+$string['settings:export_desc'] = 'Configure registry export behaviour and limits.';
 $string['settings:generateexports'] = 'Generate exports';
-$string['settings:generateexports_desc'] = 'Allow queued archive export packages to be generated by scheduled tasks.';
+$string['settings:generateexports_desc'] = 'Allow queued registry export packages to be generated by scheduled tasks.';
 $string['settings:includefilesinexports'] = 'Include files in exports';
-$string['settings:includefilesinexports_desc'] = 'Include attached files in archive export packages when permitted.';
+$string['settings:includefilesinexports_desc'] = 'Include attached files in registry export packages when permitted.';
 $string['settings:itempolicy'] = 'Item policy';
-$string['settings:itempolicy_desc'] = 'Configure archive item creation, protection, visibility, and revision rules.';
+$string['settings:itempolicy_desc'] = 'Configure registry item creation, protection, visibility, and revision rules.';
 $string['settings:kristal'] = 'Kristal settings';
 $string['settings:kristal_desc'] = 'Configure Kristal creation, validation, and limits.';
 $string['settings:kristalsrequirevalidation'] = 'Kristals require validation';
-$string['settings:kristalsrequirevalidation_desc'] = 'Require Kristals to be validated before they are treated as verified archive records.';
+$string['settings:kristalsrequirevalidation_desc'] = 'Require Kristals to be validated before they are treated as verified registry records.';
 $string['settings:lockvalidateditems'] = 'Lock validated items';
-$string['settings:lockvalidateditems_desc'] = 'Prevent direct editing of validated archive items unless a revision workflow is used.';
+$string['settings:lockvalidateditems_desc'] = 'Prevent direct editing of validated registry items unless a revision workflow is used.';
 $string['settings:logaiuse'] = 'Log AI use';
-$string['settings:logaiuse_desc'] = 'Record AI assistance metadata for archive transparency and review.';
+$string['settings:logaiuse_desc'] = 'Record AI assistance metadata for registry transparency and review.';
 $string['settings:maxkristalitems'] = 'Maximum Kristals';
-$string['settings:maxkristalitems_desc'] = 'Maximum number of Kristals that can be created for one archive context.';
+$string['settings:maxkristalitems_desc'] = 'Maximum number of Kristals that can be created for one registry context.';
 $string['settings:pausevalidationonintegritycase'] = 'Pause validation during integrity cases';
-$string['settings:pausevalidationonintegritycase_desc'] = 'Pause archive validation when an associated integrity case is open.';
+$string['settings:pausevalidationonintegritycase_desc'] = 'Pause registry validation when an associated integrity case is open.';
 $string['settings:protectrestricteditems'] = 'Protect restricted items';
-$string['settings:protectrestricteditems_desc'] = 'Apply additional safeguards to restricted archive items.';
+$string['settings:protectrestricteditems_desc'] = 'Apply additional safeguards to restricted registry items.';
 $string['settings:requireaiuncertaintylabel'] = 'Require AI uncertainty label';
 $string['settings:requireaiuncertaintylabel_desc'] = 'Require AI-assisted outputs to disclose uncertainty and non-authority boundaries.';
 $string['settings:requirechangereason'] = 'Require change reason';
-$string['settings:requirechangereason_desc'] = 'Require users to explain changes to archive records.';
+$string['settings:requirechangereason_desc'] = 'Require users to explain changes to registry records.';
 $string['settings:requirecontext'] = 'Require context';
-$string['settings:requirecontext_desc'] = 'Require contextual information for archive records and Kristals.';
+$string['settings:requirecontext_desc'] = 'Require contextual information for registry records and Kristals.';
 $string['settings:requirehumanvalidation'] = 'Require human validation';
-$string['settings:requirehumanvalidation_desc'] = 'Require authorised human review before archive records are treated as validated.';
+$string['settings:requirehumanvalidation_desc'] = 'Require authorised human review before registry records are treated as validated.';
 $string['settings:requirevisibility'] = 'Require visibility selection';
-$string['settings:requirevisibility_desc'] = 'Require users to select an explicit visibility level for archive records.';
+$string['settings:requirevisibility_desc'] = 'Require users to select an explicit visibility level for registry records.';
 $string['settings:taskbatchsize'] = 'Task batch size';
-$string['settings:taskbatchsize_desc'] = 'Maximum number of archive records processed by each scheduled task run.';
+$string['settings:taskbatchsize_desc'] = 'Maximum number of registry records processed by each scheduled task run.';
 $string['settings:tasks'] = 'Scheduled tasks';
-$string['settings:tasks_desc'] = 'Configure scheduled archive maintenance, validation, and export tasks.';
+$string['settings:tasks_desc'] = 'Configure scheduled registry maintenance, validation, and export tasks.';
 $string['settings:validatependingitems'] = 'Validate pending items';
-$string['settings:validatependingitems_desc'] = 'Allow scheduled tasks to prepare pending archive items for validation review.';
+$string['settings:validatependingitems_desc'] = 'Allow scheduled tasks to prepare pending registry items for validation review.';
 $string['settings:validation'] = 'Validation settings';
-$string['settings:validation_desc'] = 'Configure archive validation workflow, review requirements, and safeguards.';
+$string['settings:validation_desc'] = 'Configure registry validation workflow, review requirements, and safeguards.';
 
 // Completion, privacy, and task additions.
-$string['completionarchiveexported_desc'] = 'Require the student to export an archive package.';
-$string['completionarchivestate_desc'] = 'Require the archive to reach the selected state.';
-$string['completionarchivevalidated_desc'] = 'Require the archive to contain a validated item.';
-$string['completionitemadded_desc'] = 'Require the student to add an archive item.';
-$string['completionitemvalidated_desc'] = 'Require the student to have an archive item validated.';
+$string['completionarchiveexported_desc'] = 'Require the student to export a registry package.';
+$string['completionarchivestate_desc'] = 'Require the registry to reach the selected state.';
+$string['completionarchivevalidated_desc'] = 'Require the registry to contain a validated item.';
+$string['completionitemadded_desc'] = 'Require the student to add a registry item.';
+$string['completionitemvalidated_desc'] = 'Require the student to have a registry item validated.';
 $string['completionkristalcreated_desc'] = 'Require the student to create a Kristal.';
-$string['privacy:deleted'] = 'This archive record has been deleted.';
-$string['resetarchivespreserved'] = 'Archive records are preserved during reset.';
+$string['privacy:deleted'] = 'This registry record has been deleted.';
+$string['resetarchivespreserved'] = 'Registry records are preserved during reset.';
 $string['task:validation_correction_reason'] = 'Automatic validation marked this item as requiring correction.';
 $string['task:validation_ready_reason'] = 'Automatic validation marked this item as ready for review.';
-$string['task_generate_archive_exports'] = 'Generate archive exports';
-$string['useroutline'] = 'Archive activity contribution';
+$string['task_generate_archive_exports'] = 'Generate registry exports';
+$string['useroutline'] = 'Registrar activity contribution';
 
 // -----------------------------------------------------------------------------
 // Media, content advisory, external work, and service additions.
@@ -1131,10 +1134,10 @@ $string['aiassistancedisclosed'] = 'AI assistance disclosed';
 $string['aiprovencenotice'] = 'AI assistance must not replace provenance review.';
 $string['allstatuses'] = 'All statuses';
 $string['allvalidationstates'] = 'All validation states';
-$string['archived'] = 'Archived';
-$string['archivefilters'] = 'Archive filters';
-$string['archivestats'] = 'Archive statistics';
-$string['archivesummary'] = 'Archive summary';
+$string['archived'] = 'Preserved';
+$string['archivefilters'] = 'Registry filters';
+$string['archivestats'] = 'Registry statistics';
+$string['archivesummary'] = 'Registry summary';
 $string['attentionrequired'] = 'Attention required';
 $string['audience'] = 'Audience';
 $string['audience:general'] = 'General';
@@ -1209,7 +1212,7 @@ $string['culturalprotocols'] = 'Cultural protocols';
 $string['delete'] = 'Delete';
 $string['deleted'] = 'Deleted';
 $string['document'] = 'Document';
-$string['event:archiveviewed'] = 'Archive viewed';
+$string['event:archiveviewed'] = 'Registrar viewed';
 $string['event:contentmarkercreated'] = 'Content marker created';
 $string['event:contentmarkerreviewed'] = 'Content marker reviewed';
 $string['event:externalworkcreated'] = 'External work created';
@@ -1226,6 +1229,9 @@ $string['eventmediaupdated'] = 'Media updated';
 $string['eventmediaversioncreated'] = 'Media version created';
 $string['exportmedia'] = 'Export media';
 $string['externalreference'] = 'External reference';
+$string['mediaexternalreference'] = 'External reference';
+$string['mediaexternalurl'] = 'External URL';
+$string['mediaopenexternal'] = 'Open external reference';
 $string['externalwork'] = 'External work';
 $string['externalworkcitation'] = 'Citation';
 $string['externalworkcreator'] = 'Creator';
@@ -1264,7 +1270,7 @@ $string['externalworktype:external_video'] = 'External video';
 $string['externalworktype:film'] = 'Film';
 $string['externalworktype:other'] = 'Other';
 $string['externalworktype:podcast'] = 'Podcast';
-$string['externalworktype:public_archive_item'] = 'Public archive item';
+$string['externalworktype:public_archive_item'] = 'Public registry item';
 $string['externalworktype:third_party_pdf'] = 'Third party pdf';
 $string['externalworktype:website'] = 'Website';
 $string['externalworkyear'] = 'External work year';
@@ -1280,7 +1286,7 @@ $string['filename'] = 'Filename';
 $string['filesize'] = 'File size';
 $string['identifier'] = 'Identifier';
 $string['identifiertype:accession_number'] = 'Accession number';
-$string['identifiertype:archive_identifier'] = 'Archive identifier';
+$string['identifiertype:archive_identifier'] = 'Registry identifier';
 $string['identifiertype:catalogue_number'] = 'Catalogue number';
 $string['identifiertype:doi'] = 'Doi';
 $string['identifiertype:isbn'] = 'Isbn';
@@ -1339,7 +1345,7 @@ $string['mediarelationfromtype'] = 'Mediarelationfromtype';
 $string['mediarelationidentity'] = 'Mediarelationidentity';
 $string['mediarelationinvalidtargettype'] = 'Mediarelationinvalidtargettype';
 $string['mediarelationnote'] = 'Mediarelationnote';
-$string['mediarelationobject:archive_item'] = 'Archive item';
+$string['mediarelationobject:archive_item'] = 'Registry item';
 $string['mediarelationobject:content_marker'] = 'Content marker';
 $string['mediarelationobject:external_work'] = 'External work';
 $string['mediarelationobject:kristal'] = 'Kristal';
@@ -1442,7 +1448,7 @@ $string['purpose'] = 'Purpose';
 $string['rebuildcontentmarkerindex'] = 'Rebuild content marker index';
 $string['recordsvisible'] = 'Records visible';
 $string['redacted'] = 'Redacted';
-$string['refresharchive'] = 'Refresh archive';
+$string['refresharchive'] = 'Refresh registry';
 $string['relatedrecords'] = 'Related records';
 $string['relationcount'] = 'Relation count: {$a}';
 $string['relations'] = 'Relations';
@@ -1474,8 +1480,8 @@ $string['rightsstatus:unknown'] = 'Unknown';
 $string['saveexternalwork'] = 'Save external work';
 $string['savemedia'] = 'Save media';
 $string['savemediarelation'] = 'Save media relation';
-$string['searcharchive'] = 'Search archive';
-$string['searcharchiveplaceholder'] = 'Search archive records';
+$string['searcharchive'] = 'Search registry';
+$string['searcharchiveplaceholder'] = 'Search registry records';
 $string['service:add_content_marker'] = 'Add content marker';
 $string['service:add_external_work'] = 'Add external work';
 $string['service:add_media'] = 'Add media';
@@ -1537,17 +1543,17 @@ $string['teachingcontext'] = 'Teaching context';
 $string['teachingnote'] = 'Teaching note';
 $string['time'] = 'Time';
 $string['toggledetails'] = 'Toggle details';
-$string['uckkarchive:addmedia'] = 'Add archive media';
-$string['uckkarchive:deletemedia'] = 'Delete archive media';
-$string['uckkarchive:editmedia'] = 'Edit archive media';
-$string['uckkarchive:exportmedia'] = 'Export archive media';
+$string['uckkarchive:addmedia'] = 'Add Médiathèque media';
+$string['uckkarchive:deletemedia'] = 'Delete Médiathèque media';
+$string['uckkarchive:editmedia'] = 'Edit Médiathèque media';
+$string['uckkarchive:exportmedia'] = 'Export Médiathèque media';
 $string['uckkarchive:manageadvisories'] = 'Manage content advisories';
 $string['uckkarchive:manageexternalworks'] = 'Manage external works';
 $string['uckkarchive:managemediacollections'] = 'Manage media collections';
 $string['uckkarchive:reviewadvisories'] = 'Review content advisories';
 $string['uckkarchive:versionmedia'] = 'Create media versions';
 $string['uckkarchive:viewadvisories'] = 'View content advisories';
-$string['uckkarchive:viewmedia'] = 'View archive media';
+$string['uckkarchive:viewmedia'] = 'View Médiathèque media';
 $string['validationchecks'] = 'Validation checks';
 $string['validationevidence'] = 'Validation evidence';
 $string['validationreason'] = 'Validation reason';
@@ -1571,7 +1577,7 @@ $string['itemtype_portfolio_item'] = 'Portfolio item';
 $string['itemtype_proof'] = 'Proof';
 $string['itemtype_public_summary'] = 'Public summary';
 $string['mediastatus_active'] = 'Active';
-$string['mediastatus_archived'] = 'Archived';
+$string['mediastatus_archived'] = 'Preserved';
 $string['mediastatus_deleted_soft'] = 'Soft deleted';
 $string['mediastatus_draft'] = 'Draft';
 $string['mediastatus_restricted'] = 'Restricted';
@@ -1582,7 +1588,7 @@ $string['mediatype_link'] = 'Link';
 $string['mediatype_other'] = 'Other';
 $string['mediatype_video'] = 'Video';
 $string['provenance_ai_assisted'] = 'AI-assisted';
-$string['provenance_archive'] = 'Archive';
+$string['provenance_archive'] = 'Registry';
 $string['provenance_assembly'] = 'Assembly';
 $string['provenance_challenge'] = 'Challenge';
 $string['provenance_human'] = 'Human';
@@ -1590,7 +1596,7 @@ $string['provenance_imported'] = 'Imported';
 $string['provenance_integrity'] = 'Integrity';
 $string['provenance_system'] = 'System';
 $string['status_active'] = 'Active';
-$string['status_archived'] = 'Archived';
+$string['status_archived'] = 'Preserved';
 $string['status_contested'] = 'Contested';
 $string['status_deleted_soft'] = 'Soft deleted';
 $string['status_draft'] = 'Draft';
@@ -1601,11 +1607,11 @@ $string['status_submitted'] = 'Submitted';
 $string['status_superseded'] = 'Superseded';
 $string['status_under_review'] = 'Under review';
 $string['status_validated'] = 'Validated';
-$string['uckkarchive:downloadmedia'] = 'Download archive media';
+$string['uckkarchive:downloadmedia'] = 'Download Médiathèque media';
 $string['uckkarchive:managecontentadvisories'] = 'Manage content advisories';
 $string['uckkarchive:viewculturallyrestricted'] = 'View culturally restricted content';
-$string['uckkarchive:viewrestrictedmedia'] = 'View restricted archive media';
-$string['validationstate_archived'] = 'Archived';
+$string['uckkarchive:viewrestrictedmedia'] = 'View restricted Médiathèque media';
+$string['validationstate_archived'] = 'Preserved';
 $string['validationstate_contested'] = 'Contested';
 $string['validationstate_human_reviewed'] = 'Human reviewed';
 $string['validationstate_invalidated'] = 'Invalidated';
@@ -1664,7 +1670,7 @@ $string['uckkarchive:viewexternalworks'] = 'View external works';
 // -----------------------------------------------------------------------------
 
 $string['medialibraryeditor'] = 'Media library editor';
-$string['medialibraryeditor_desc'] = 'Qualify, contextualise, relate, govern, and validate archive media.';
+$string['medialibraryeditor_desc'] = 'Qualify, contextualise, relate, govern, and validate Médiathèque media.';
 $string['backtomedialibrary'] = 'Back to media library';
 $string['mediaeditorpreview'] = 'Media preview';
 $string['mediaeditorworkflow'] = 'Workflow';
@@ -1684,9 +1690,9 @@ $string['passagemarkers'] = 'Passage markers';
 $string['passagemarkers_desc'] = 'Point to a specific passage in a video, audio recording, book, PDF, website, or external work.';
 $string['managepassagemarkers'] = 'Manage passage markers';
 $string['mediaeditoradvisories_desc'] = 'Review content warnings, cultural advisories, cultural protocols, and audience-suitability conditions.';
-$string['mediaeditorrelations_desc'] = 'Connect this media to collections, archive items, versions, external works, proofs, or other media.';
+$string['mediaeditorrelations_desc'] = 'Connect this media to collections, registry items, versions, external works, proofs, or other media.';
 $string['mediaeditorvalidation_desc'] = 'Track review state, publication readiness, restrictions, and contestability.';
-$string['mediaeditorprovenance_desc'] = 'Provenance and audit information remain governed by the server-side archive services.';
+$string['mediaeditorprovenance_desc'] = 'Provenance and audit information remain governed by the server-side registry services.';
 $string['mediacreated'] = 'Media created.';
 $string['mediaupdated'] = 'Media updated.';
 
@@ -1696,11 +1702,11 @@ $string['mediaupdated'] = 'Media updated.';
 
 $string['mediatheque'] = 'Médiathèque';
 $string['mediatheque_title'] = 'UCKK Médiathèque';
-$string['mediatheque_eyebrow'] = 'Public archives';
-$string['mediatheque_summary'] = 'Explore public media, collections, external works, and documented passages from the UCKK archive.';
+$string['mediatheque_eyebrow'] = 'Public Médiathèque';
+$string['mediatheque_summary'] = 'Explore public media, collections, external works, and documented passages from the UCKK Médiathèque.';
 $string['mediatheque_explorer'] = 'Médiathèque Explorer';
 $string['mediatheque_explorer_title'] = 'Médiathèque Explorer';
-$string['mediatheque_explorer_desc'] = 'Search and filter the public Médiathèque. Results are filtered by visibility, rights, content advisories, cultural protocols, and archive policies.';
+$string['mediatheque_explorer_desc'] = 'Search and filter the public Médiathèque. Results are filtered by visibility, rights, content advisories, cultural protocols, and publication and access policies.';
 $string['mediatheque_search'] = 'Search the Médiathèque';
 $string['mediatheque_search_placeholder'] = 'Search by title, description, source, tag, collection, or passage';
 $string['mediatheque_search_button'] = 'Search';
@@ -1742,7 +1748,7 @@ $string['mediatheque_filter_has_public_protocol'] = 'With public protocol';
 $string['mediatheque_object_media'] = 'Media';
 $string['mediatheque_object_collection'] = 'Collection';
 $string['mediatheque_object_external_work'] = 'External work';
-$string['mediatheque_object_archive_item'] = 'Linked archive item';
+$string['mediatheque_object_archive_item'] = 'Linked registry item';
 $string['mediatheque_object_content_marker'] = 'Passage marker';
 
 $string['mediatheque_mediatype_video'] = 'Video';
@@ -1768,11 +1774,11 @@ $string['mediatheque_audience_restricted'] = 'Restricted';
 $string['mediatheque_validation_unverified'] = 'Unverified';
 $string['mediatheque_validation_human_reviewed'] = 'Human reviewed';
 $string['mediatheque_validation_verified'] = 'Verified';
-$string['mediatheque_validation_archived'] = 'Archived';
+$string['mediatheque_validation_archived'] = 'Preserved';
 
 $string['mediatheque_public_notice'] = 'The Médiathèque only shows public, policy-filtered records.';
-$string['mediatheque_restricted_notice'] = 'Some content is hidden or summarized according to rights, content advisories, cultural protocols, and archive policies.';
-$string['mediatheque_policy_filtered_notice'] = 'Results are filtered by server-side archive policies.';
+$string['mediatheque_restricted_notice'] = 'Some content is hidden or summarized according to rights, content advisories, cultural protocols, and publication and access policies.';
+$string['mediatheque_policy_filtered_notice'] = 'Results are filtered by server-side publication and access policies.';
 $string['mediatheque_no_download_notice'] = 'This public card does not grant access to the original file.';
 $string['mediatheque_external_reference_notice'] = 'This record references an external work. UCKK does not claim ownership of the external content.';
 
@@ -1792,5 +1798,6 @@ $string['mediatheque_service_search'] = 'Search the public Médiathèque';
 $string['mediatheque_service_error_invalidscope'] = 'Invalid Médiathèque search scope.';
 $string['mediatheque_service_error_invalidfilters'] = 'Invalid Médiathèque filters.';
 $string['mediatheque_service_error_unavailable'] = 'The Médiathèque search service is currently unavailable.';
-$string['mediatheque_service_warning_policyfiltered'] = 'Some results may be hidden by archive policies.';
+$string['mediatheque_service_warning_policyfiltered'] = 'Some results may be hidden by publication and access policies.';
 $string['mediatheque_service_warning_restrictedhidden'] = 'Restricted content was hidden from the public response.';
+

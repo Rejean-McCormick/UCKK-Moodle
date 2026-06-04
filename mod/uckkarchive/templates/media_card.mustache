@@ -16,25 +16,32 @@
         "uuid": "a4f0b43a-cc51-4f28-9f46-83e2d504f2ff",
         "title": "Interview excerpt",
         "summary": "Short description.",
+        "description": "Longer description.",
         "mediatype": "video",
         "mimetype": "video/mp4",
         "status": "active",
         "visibility": "course",
         "audiencesuitability": "guided",
         "source": "produced_by_uckk",
+        "sourcetype": "external_reference_only",
+        "sourceurl": "https://example.test/external/source",
+        "externalurl": "https://example.test/external/source",
+        "hasexternalurl": true,
+        "canopenexternal": true,
+        "openexternallabel": "Ouvrir la référence externe",
         "thumbnailurl": "https://example.test/pluginfile.php/1/mod_uckkarchive/media_thumbnail/42/thumb.jpg",
         "previewurl": "https://example.test/pluginfile.php/1/mod_uckkarchive/media_preview/42/preview.mp4",
-        "viewurl": "https://example.test/mod/uckkarchive/media.php?id=12&mediaid=42",
-        "editurl": "https://example.test/mod/uckkarchive/media.php?id=12&action=editmedia&mediaid=42",
+        "viewurl": "https://example.test/mod/uckkarchive/media.php?id=12&mediaid=42&action=view",
+        "editurl": "https://example.test/mod/uckkarchive/media.php?id=12&mediaid=42&action=edit",
         "downloadurl": "https://example.test/pluginfile.php/1/mod_uckkarchive/media_original/42/file.mp4",
-        "versionurl": "https://example.test/mod/uckkarchive/media.php?id=12&action=versionmedia&mediaid=42",
-        "exporturl": "https://example.test/mod/uckkarchive/media.php?id=12&action=exportmedia&mediaid=42",
+        "versionurl": "https://example.test/mod/uckkarchive/media.php?id=12&mediaid=42&action=versions",
+        "exporturl": "https://example.test/mod/uckkarchive/media.php?id=12&mediaid=42&action=exportmedia",
         "hasthumbnail": true,
         "haspreview": true,
         "hasadvisory": true,
         "isrestricted": false,
         "isculturallyrestricted": false,
-        "isexternalreference": false,
+        "isexternalreference": true,
         "isimage": false,
         "isvideo": true,
         "isaudio": false,
@@ -56,13 +63,14 @@
 }}
 
 <article
-    class="uckkarchive-media-card card mb-3 {{#isrestricted}}uckkarchive-media-card--restricted{{/isrestricted}} {{#isculturallyrestricted}}uckkarchive-media-card--cultural{{/isculturallyrestricted}}"
+    class="uckkarchive-media-card card mb-3 {{#isrestricted}}uckkarchive-media-card--restricted{{/isrestricted}} {{#isculturallyrestricted}}uckkarchive-media-card--cultural{{/isculturallyrestricted}} {{#isexternalreference}}uckkarchive-media-card--external-reference{{/isexternalreference}}"
     data-region="uckkarchive-media-card"
     data-mediaid="{{id}}"
     data-mediauuid="{{uuid}}"
     data-mediatype="{{mediatype}}"
     data-status="{{status}}"
     data-visibility="{{visibility}}"
+    {{#sourcetype}}data-sourcetype="{{sourcetype}}"{{/sourcetype}}
 >
     <div class="card-body">
         <div class="d-flex align-items-start">
@@ -197,6 +205,26 @@
                         <dd class="col-sm-9">{{source}}</dd>
                     {{/source}}
 
+                    {{#sourcetype}}
+                        <dt class="col-sm-3">{{#str}} sourcetype, mod_uckkarchive {{/str}}</dt>
+                        <dd class="col-sm-9">{{sourcetype}}</dd>
+                    {{/sourcetype}}
+
+                    {{#hasexternalurl}}
+                        <dt class="col-sm-3">URL externe</dt>
+                        <dd class="col-sm-9">
+                            <a
+                                href="{{externalurl}}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                data-action="uckkarchive-open-external-reference"
+                                data-mediaid="{{id}}"
+                            >
+                                {{externalurl}}
+                            </a>
+                        </dd>
+                    {{/hasexternalurl}}
+
                     {{#ownername}}
                         <dt class="col-sm-3">{{#str}} owner, mod_uckkarchive {{/str}}</dt>
                         <dd class="col-sm-9">{{ownername}}</dd>
@@ -270,6 +298,26 @@
                             {{#str}} view, mod_uckkarchive {{/str}}
                         </a>
                     {{/canview}}
+
+                    {{#canopenexternal}}
+                        {{#externalurl}}
+                            <a
+                                href="{{externalurl}}"
+                                class="btn btn-outline-primary btn-sm"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                data-action="uckkarchive-open-external-reference"
+                                data-mediaid="{{id}}"
+                            >
+                                {{#openexternallabel}}
+                                    {{openexternallabel}}
+                                {{/openexternallabel}}
+                                {{^openexternallabel}}
+                                    Ouvrir la référence externe
+                                {{/openexternallabel}}
+                            </a>
+                        {{/externalurl}}
+                    {{/canopenexternal}}
 
                     {{#haspreview}}
                         <a
