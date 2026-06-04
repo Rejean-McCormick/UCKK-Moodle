@@ -2336,21 +2336,13 @@ body#page-login-index.theme-uckk-login-layout .login-layout-right .login-heading
     line-height: 1.1;
 }
 
-/* Moodle guest form, if Moodle renders it, remains secondary to the stable
-   public skip link. It is kept in normal flow to avoid overlap. */
+/* Hide Moodle's native guest login button.
+   UCKK already provides the public route through "Explorer sans connexion". */
 body.pagelayout-login.theme-uckk-login-layout #guestlogin,
-body#page-login-index.theme-uckk-login-layout #guestlogin {
-    position: static !important;
-    width: 100%;
-    max-width: none;
-    margin-top: 1rem !important;
-    padding: .85rem 1rem;
-    border: 1px solid rgba(23, 35, 33, .12);
-    border-radius: var(--uckk-radius-small);
-    background: rgba(5, 47, 45, .06);
-    box-shadow: none;
-    color: var(--uckk-petrol-deep);
-    text-shadow: none;
+body.pagelayout-login.theme-uckk-login-layout #loginguestbtn,
+body#page-login-index.theme-uckk-login-layout #guestlogin,
+body#page-login-index.theme-uckk-login-layout #loginguestbtn {
+    display: none !important;
 }
 
 /* Mobile/tablet login layout. */

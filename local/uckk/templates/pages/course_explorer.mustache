@@ -14,73 +14,6 @@
     @template local_uckk/pages/course_explorer
 
     Public course explorer partial for local_uckk.
-
-    This template renders only the public course explorer surface.
-
-    It is intentionally render-only.
-
-    It must not:
-    - query Moodle courses;
-    - decide course visibility;
-    - decide enrolment or permissions;
-    - create or update courses;
-    - validate learning work;
-    - make accreditation claims.
-
-    Expected context:
-    {
-        "uniqid": "local-uckk-public-page-abc123",
-        "course_explorer": {
-            "id": "local-uckk-course-explorer",
-            "actionurl": "/local/uckk/courses.php",
-            "pageurl": "/local/uckk/courses.php",
-            "query": "",
-            "category": "",
-            "sort": "pedagogical",
-            "page": 1,
-            "perpage": 12,
-            "total": 114,
-            "visiblecount": 114,
-            "resultscountlabel": "114 cours publics.",
-            "total_label": "114 cours publics.",
-            "service": "local_uckk_search_public_courses",
-            "initialstatejson": "{}",
-            "initial_state_json": "{}",
-            "hasresults": true,
-            "hasfilters": true,
-            "filters": [
-                {
-                    "value": "",
-                    "label": "Tous les cours",
-                    "selected": true
-                }
-            ],
-            "sortoptions": [
-                {
-                    "value": "pedagogical",
-                    "label": "Ordre pédagogique",
-                    "selected": true
-                }
-            ],
-            "results": [
-                {
-                    "classes": "local-uckk-public-card local-uckk-public-card--course",
-                    "eyebrow": "01 — Tronc commun",
-                    "title": "Nom du cours",
-                    "body": "Résumé public du cours.",
-                    "url": "/course/view.php?id=11",
-                    "metadata": [
-                        {
-                            "label": "Code",
-                            "value": "UCKK-TC101"
-                        }
-                    ],
-                    "hasmetadata": true
-                }
-            ],
-            "hasmore": false
-        }
-    }
 }}
 
 {{#course_explorer}}
@@ -237,12 +170,6 @@
                 {{#results}}
                     <article class="{{classes}}">
                         <div class="local-uckk-public-card__content">
-                            {{#eyebrow}}
-                                <p class="local-uckk-public-card__eyebrow">
-                                    {{eyebrow}}
-                                </p>
-                            {{/eyebrow}}
-
                             {{#title}}
                                 <h3 class="local-uckk-public-card__title">
                                     {{#url}}
@@ -256,26 +183,24 @@
                                 </h3>
                             {{/title}}
 
+                            <p class="local-uckk-public-card__eyebrow local-uckk-course-card__subline">
+                                {{#shortname}}
+                                    <span class="local-uckk-course-card__code">{{shortname}}</span>
+                                {{/shortname}}
+
+                                {{#eyebrow}}
+                                    {{#shortname}}
+                                        <span class="local-uckk-course-card__separator" aria-hidden="true"> · </span>
+                                    {{/shortname}}
+                                    <span class="local-uckk-course-card__pathway">{{eyebrow}}</span>
+                                {{/eyebrow}}
+                            </p>
+
                             {{#body}}
                                 <p class="local-uckk-public-card__body">
                                     {{body}}
                                 </p>
                             {{/body}}
-
-                            {{#hasmetadata}}
-                                <dl class="local-uckk-course-explorer__metadata">
-                                    {{#metadata}}
-                                        <div class="local-uckk-course-explorer__metadata-item">
-                                            <dt class="local-uckk-course-explorer__metadata-label">
-                                                {{label}}
-                                            </dt>
-                                            <dd class="local-uckk-course-explorer__metadata-value">
-                                                {{value}}
-                                            </dd>
-                                        </div>
-                                    {{/metadata}}
-                                </dl>
-                            {{/hasmetadata}}
                         </div>
                     </article>
                 {{/results}}

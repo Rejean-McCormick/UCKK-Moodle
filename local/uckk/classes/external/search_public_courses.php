@@ -43,10 +43,6 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Search public UCKK courses.
  *
- * This class can be exposed in local/uckk/db/services.php as:
- *
- * local_uckk_search_public_courses
- *
  * @package local_uckk
  */
 final class search_public_courses extends external_api {
@@ -73,8 +69,8 @@ final class search_public_courses extends external_api {
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'q' => new external_value(PARAM_TEXT, 'Search query', VALUE_DEFAULT, ''),
-            'category' => new external_value(PARAM_ALPHANUMEXT, 'Public category key', VALUE_DEFAULT, ''),
-            'sort' => new external_value(PARAM_ALPHANUMEXT, 'Sort mode', VALUE_DEFAULT, self::SORT_PEDAGOGICAL),
+            'category' => new external_value(PARAM_TEXT, 'Public category key', VALUE_DEFAULT, ''),
+            'sort' => new external_value(PARAM_TEXT, 'Sort mode', VALUE_DEFAULT, self::SORT_PEDAGOGICAL),
             'page' => new external_value(PARAM_INT, 'Page number, starting at 1', VALUE_DEFAULT, 1),
             'perpage' => new external_value(PARAM_INT, 'Results per page', VALUE_DEFAULT, self::DEFAULT_PER_PAGE),
             'contextid' => new external_value(PARAM_INT, 'Context id', VALUE_DEFAULT, 0),
@@ -124,7 +120,7 @@ final class search_public_courses extends external_api {
             self::validate_context($context);
         }
 
-        $query = trim((string)$params['q']);
+        $query = self::safe_param_text((string)$params['q']);
         $categorykey = self::normalise_category_key((string)$params['category']);
         $sortmode = self::normalise_sort((string)$params['sort']);
         $page = max(1, (int)$params['page']);
@@ -135,7 +131,7 @@ final class search_public_courses extends external_api {
 
         if ($categorykey !== '') {
             $records = array_values(array_filter($records, static function(stdClass $record) use ($categorykey): bool {
-                return self::course_category_key($record) === $categorykey;
+                return in_array($categorykey, self::course_category_keys($record), true);
             }));
         }
 
@@ -177,14 +173,14 @@ final class search_public_courses extends external_api {
      */
     public static function execute_returns(): external_single_structure {
         $filterstructure = new external_single_structure([
-            'key' => new external_value(PARAM_ALPHANUMEXT, 'Filter key'),
+            'key' => new external_value(PARAM_TEXT, 'Filter key'),
             'label' => new external_value(PARAM_TEXT, 'Filter label'),
             'count' => new external_value(PARAM_INT, 'Number of matching courses'),
             'active' => new external_value(PARAM_BOOL, 'Whether the filter is active'),
         ]);
 
         $sortstructure = new external_single_structure([
-            'key' => new external_value(PARAM_ALPHANUMEXT, 'Sort key'),
+            'key' => new external_value(PARAM_TEXT, 'Sort key'),
             'label' => new external_value(PARAM_TEXT, 'Sort label'),
             'active' => new external_value(PARAM_BOOL, 'Whether the sort is active'),
         ]);
@@ -200,19 +196,19 @@ final class search_public_courses extends external_api {
             'fullname' => new external_value(PARAM_TEXT, 'Course full name'),
             'title' => new external_value(PARAM_TEXT, 'Public course title'),
             'summary' => new external_value(PARAM_TEXT, 'Plain public summary'),
-            'url' => new external_value(PARAM_URL, 'Course URL'),
-            'categorykey' => new external_value(PARAM_ALPHANUMEXT, 'Public category key'),
+            'url' => new external_value(PARAM_TEXT, 'Course URL'),
+            'categorykey' => new external_value(PARAM_TEXT, 'Public category key'),
             'categorylabel' => new external_value(PARAM_TEXT, 'Public category label'),
             'categoryname' => new external_value(PARAM_TEXT, 'Original Moodle category name'),
             'categoryidnumber' => new external_value(PARAM_TEXT, 'Original Moodle category idnumber'),
-            'type' => new external_value(PARAM_ALPHANUMEXT, 'Result type'),
+            'type' => new external_value(PARAM_TEXT, 'Result type'),
             'metadata' => new external_multiple_structure($metadatastructure),
         ]);
 
         return new external_single_structure([
             'query' => new external_value(PARAM_TEXT, 'Search query'),
-            'category' => new external_value(PARAM_ALPHANUMEXT, 'Active category key'),
-            'sort' => new external_value(PARAM_ALPHANUMEXT, 'Active sort mode'),
+            'category' => new external_value(PARAM_TEXT, 'Active category key'),
+            'sort' => new external_value(PARAM_TEXT, 'Active sort mode'),
             'page' => new external_value(PARAM_INT, 'Current page'),
             'perpage' => new external_value(PARAM_INT, 'Results per page'),
             'total' => new external_value(PARAM_INT, 'Total matching courses'),
@@ -252,16 +248,16 @@ final class search_public_courses extends external_api {
         ];
 
         if ($query !== '') {
-            $needle = '%' . $DB->sql_like_escape(core_text::strtolower($query)) . '%';
+            $needle = '%' . $DB->sql_like_escape($query) . '%';
 
             $conditions[] = '('
-                . $DB->sql_like($DB->sql_lower('c.shortname'), ':qshortname', false, false)
+                . $DB->sql_like('c.shortname', ':qshortname', false, false)
                 . ' OR '
-                . $DB->sql_like($DB->sql_lower('c.fullname'), ':qfullname', false, false)
+                . $DB->sql_like('c.fullname', ':qfullname', false, false)
                 . ' OR '
-                . $DB->sql_like($DB->sql_lower('c.summary'), ':qsummary', false, false)
+                . $DB->sql_like('c.summary', ':qsummary', false, false)
                 . ' OR '
-                . $DB->sql_like($DB->sql_lower('cc.name'), ':qcategoryname', false, false)
+                . $DB->sql_like('cc.name', ':qcategoryname', false, false)
                 . ')';
 
             $params['qshortname'] = $needle;
@@ -305,7 +301,7 @@ final class search_public_courses extends external_api {
         $filters = [
             [
                 'key' => 'all',
-                'label' => 'Tous les cours',
+                'label' => 'Toutes les voies',
                 'count' => count($records),
                 'active' => $activekey === '',
             ],
@@ -315,6 +311,7 @@ final class search_public_courses extends external_api {
 
         foreach ($records as $record) {
             $key = self::course_category_key($record);
+            $keys = self::course_category_keys($record);
             $label = self::public_category_label(
                 trim((string)($record->categoryname ?? '')),
                 trim((string)($record->categoryidnumber ?? ''))
@@ -329,7 +326,7 @@ final class search_public_courses extends external_api {
                     'key' => $key,
                     'label' => $label,
                     'count' => 0,
-                    'active' => $activekey === $key,
+                    'active' => in_array($activekey, $keys, true),
                     '_sortorder' => (int)($record->categorysortorder ?? 0),
                 ];
             }
@@ -363,10 +360,10 @@ final class search_public_courses extends external_api {
      */
     private static function course_record_to_result(stdClass $record): array {
         $courseid = (int)$record->id;
-        $shortname = trim((string)$record->shortname);
-        $fullname = trim((string)$record->fullname);
-        $categoryname = trim((string)($record->categoryname ?? ''));
-        $categoryidnumber = trim((string)($record->categoryidnumber ?? ''));
+        $shortname = self::safe_param_text((string)$record->shortname);
+        $fullname = self::safe_param_text((string)$record->fullname);
+        $categoryname = self::safe_param_text((string)($record->categoryname ?? ''));
+        $categoryidnumber = self::safe_param_text((string)($record->categoryidnumber ?? ''));
         $categorylabel = self::public_category_label($categoryname, $categoryidnumber);
 
         $summary = self::plain_summary($record);
@@ -393,7 +390,7 @@ final class search_public_courses extends external_api {
                     'value' => $shortname,
                 ],
                 [
-                    'label' => 'Catégorie',
+                    'label' => 'Voie',
                     'value' => $categorylabel,
                 ],
             ],
@@ -435,7 +432,7 @@ final class search_public_courses extends external_api {
         $options = [
             self::SORT_PEDAGOGICAL => 'Ordre pédagogique',
             self::SORT_TITLE => 'Titre A-Z',
-            self::SORT_CATEGORY => 'Catégorie',
+            self::SORT_CATEGORY => 'Voie',
         ];
 
         $items = [];
@@ -452,24 +449,56 @@ final class search_public_courses extends external_api {
     }
 
     /**
-     * Return the public category key for a course record.
+     * Return the primary public category key for a course record.
      *
      * @param stdClass $record Course record.
      * @return string
      */
     private static function course_category_key(stdClass $record): string {
-        $categoryname = trim((string)($record->categoryname ?? ''));
-        $categoryidnumber = trim((string)($record->categoryidnumber ?? ''));
+        $keys = self::course_category_keys($record);
 
-        $source = $categoryidnumber !== '' ? $categoryidnumber : $categoryname;
-
-        $key = self::normalise_key($source);
-
-        if ($key === '') {
-            $key = 'category_' . (int)($record->category ?? 0);
+        if (!empty($keys)) {
+            return $keys[0];
         }
 
-        return $key;
+        return 'category-' . (int)($record->category ?? 0);
+    }
+
+    /**
+     * Return all accepted public category keys for a course record.
+     *
+     * The public page may send either a visible category-name slug
+     * or an idnumber-derived slug such as "koa".
+     *
+     * @param stdClass $record Course record.
+     * @return array<int, string>
+     */
+    private static function course_category_keys(stdClass $record): array {
+        $categoryname = trim((string)($record->categoryname ?? ''));
+        $categoryidnumber = trim((string)($record->categoryidnumber ?? ''));
+        $publiclabel = self::public_category_label($categoryname, $categoryidnumber);
+
+        $sources = [
+            $publiclabel,
+            $categoryname,
+            $categoryidnumber,
+        ];
+
+        $keys = [];
+
+        foreach ($sources as $source) {
+            $key = self::normalise_key($source);
+
+            if ($key !== '' && !in_array($key, $keys, true)) {
+                $keys[] = $key;
+            }
+        }
+
+        if (empty($keys)) {
+            $keys[] = 'category-' . (int)($record->category ?? 0);
+        }
+
+        return $keys;
     }
 
     /**
@@ -488,10 +517,6 @@ final class search_public_courses extends external_api {
     /**
      * Return a public-facing course category label.
      *
-     * Moodle category names may include internal operational markers such as
-     * "obligatoire". The public courses explorer exposes the academic block
-     * label, not the internal requirement status.
-     *
      * @param string $categoryname Moodle category name.
      * @param string $categoryidnumber Moodle category idnumber.
      * @return string
@@ -506,7 +531,7 @@ final class search_public_courses extends external_api {
         $label = preg_replace('/\s+obligatoire\b/iu', '', $label);
         $label = preg_replace('/\s{2,}/u', ' ', (string)$label);
 
-        return trim((string)$label);
+        return self::safe_param_text((string)$label);
     }
 
     /**
@@ -537,12 +562,52 @@ final class search_public_courses extends external_api {
         }
 
         $text = trim(preg_replace('/\s+/', ' ', strip_tags((string)$html)) ?: '');
+        $text = self::safe_param_text($text);
 
         if (core_text::strlen($text) > 420) {
             $text = core_text::substr($text, 0, 417) . '…';
         }
 
-        return $text;
+        return self::safe_param_text($text);
+    }
+
+    /**
+     * Make text safe for PARAM_TEXT external return validation.
+     *
+     * @param string $value Raw value.
+     * @return string
+     */
+    private static function safe_param_text(string $value): string {
+        $value = trim($value);
+
+        if ($value === '') {
+            return '';
+        }
+
+        if (!preg_match('//u', $value)) {
+            $cleaned = function_exists('iconv') ? @iconv('UTF-8', 'UTF-8//IGNORE', $value) : '';
+
+            if (is_string($cleaned)) {
+                $value = $cleaned;
+            } else {
+                $value = '';
+            }
+        }
+
+        // Remove Unicode replacement characters.
+        $value = str_replace("\xEF\xBF\xBD", '', $value);
+        $value = str_replace('�', '', $value);
+
+        // Remove control characters.
+        $value = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', $value) ?: '';
+
+        if ($value === '') {
+            return '';
+        }
+
+        $value = preg_replace('/\s+/u', ' ', $value) ?: $value;
+
+        return trim((string)clean_param($value, PARAM_TEXT));
     }
 
     /**
@@ -568,18 +633,77 @@ final class search_public_courses extends external_api {
      * @return string
      */
     private static function normalise_key(string $value): string {
+        $value = self::safe_utf8($value);
+
+        if ($value === '') {
+            return '';
+        }
+
+        // Stable UTF-8 transliteration for French labels.
+        // Avoid iconv ASCII transliteration because it produced broken slugs
+        // such as "ecosyst-eme", "m-etaphysique", "m-edias" and "th-e-atre".
+        $value = strtr($value, [
+            'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A',
+            'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a',
+            'Æ' => 'AE', 'æ' => 'ae',
+            'Ç' => 'C', 'ç' => 'c',
+            'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E',
+            'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+            'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I',
+            'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i',
+            'Ñ' => 'N', 'ñ' => 'n',
+            'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O',
+            'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o',
+            'Œ' => 'OE', 'œ' => 'oe',
+            'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U',
+            'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u',
+            'Ý' => 'Y', 'Ÿ' => 'Y',
+            'ý' => 'y', 'ÿ' => 'y',
+            '’' => "'", '‘' => "'", 'ʼ' => "'", '`' => "'", '´' => "'",
+            '—' => '-', '–' => '-',
+        ]);
+
         $value = trim(core_text::strtolower($value));
 
         if ($value === '') {
             return '';
         }
 
-        $value = preg_replace('/\bobligatoire\b/iu', '', $value);
-        $value = preg_replace('/^uckk[\s\-_]*/iu', '', (string)$value);
-        $value = preg_replace('/[^a-z0-9]+/u', '_', (string)$value);
-        $value = trim((string)$value, '_');
+        $value = preg_replace('/\bobligatoire\b/i', '', $value);
+        $value = preg_replace('/^uckk[\s\-_]*/i', '', (string)$value);
+        $value = preg_replace('/[^a-z0-9]+/i', '-', (string)$value);
+        $value = trim((string)$value, '-');
 
         return clean_param($value, PARAM_ALPHANUMEXT);
+    }
+
+    /**
+     * Make a string valid UTF-8 without applying PARAM_TEXT semantics.
+     *
+     * @param string $value Raw value.
+     * @return string
+     */
+    private static function safe_utf8(string $value): string {
+        $value = trim($value);
+
+        if ($value === '') {
+            return '';
+        }
+
+        if (!preg_match('//u', $value)) {
+            $cleaned = function_exists('iconv') ? @iconv('UTF-8', 'UTF-8//IGNORE', $value) : '';
+
+            if (is_string($cleaned)) {
+                $value = $cleaned;
+            } else {
+                return '';
+            }
+        }
+
+        $value = str_replace("\xEF\xBF\xBD", '', $value);
+        $value = str_replace('�', '', $value);
+
+        return trim($value);
     }
 
     /**
@@ -589,7 +713,7 @@ final class search_public_courses extends external_api {
      * @return string
      */
     private static function normalise_sort(string $sort): string {
-        $sort = clean_param($sort, PARAM_ALPHANUMEXT);
+        $sort = self::normalise_key($sort);
 
         $allowed = [
             self::SORT_PEDAGOGICAL,

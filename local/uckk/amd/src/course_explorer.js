@@ -1,17 +1,6 @@
 /**
  * Public course explorer interactions for local_uckk.
  *
- * This module is UI-only:
- * - reads public search/filter controls;
- * - calls the declared public course search service;
- * - updates result regions, pagination and accessible status messages;
- * - keeps the query string in sync with the current filters.
- *
- * It must not authorize access, infer permissions, reveal hidden courses,
- * enrol users, decide completion, award recognitions, validate work,
- * or make accreditation claims. All visibility and filtering decisions
- * must happen server-side.
- *
  * @module     local_uckk/course_explorer
  * @copyright  2026 Univers-Cité King Klown
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -22,7 +11,6 @@ import Notification from 'core/notification';
 import {getString} from 'core/str';
 
 const COMPONENT = 'local_uckk';
-
 const DEFAULT_METHOD = 'local_uckk_search_public_courses';
 
 const SELECTORS = {
@@ -61,30 +49,9 @@ const URL_STATE_KEYS = [
     'perpage',
 ];
 
-/**
- * Return the first matching child element.
- *
- * @param {Element} root Root element.
- * @param {String} selector CSS selector.
- * @returns {Element|null}
- */
 const find = (root, selector) => root ? root.querySelector(selector) : null;
-
-/**
- * Return all matching child elements.
- *
- * @param {Element} root Root element.
- * @param {String} selector CSS selector.
- * @returns {Element[]}
- */
 const findAll = (root, selector) => root ? Array.from(root.querySelectorAll(selector)) : [];
 
-/**
- * Return a safe string value.
- *
- * @param {*} value Source value.
- * @returns {String}
- */
 const toString = value => {
     if (value === null || typeof value === 'undefined') {
         return '';
@@ -93,13 +60,6 @@ const toString = value => {
     return String(value);
 };
 
-/**
- * Return a safe positive integer.
- *
- * @param {*} value Source value.
- * @param {Number} fallback Fallback value.
- * @returns {Number}
- */
 const toPositiveInteger = (value, fallback) => {
     const parsed = window.parseInt(value, 10);
 
@@ -110,33 +70,14 @@ const toPositiveInteger = (value, fallback) => {
     return parsed;
 };
 
-/**
- * Normalize category state.
- *
- * The UI may use "all" as a friendly value. The external service expects an
- * empty category to mean "all categories".
- *
- * @param {String} category Category key.
- * @returns {String}
- */
 const categoryForService = category => {
     const value = toString(category).trim();
 
     return value === 'all' ? '' : value;
 };
 
-/**
- * Return the current URL search params.
- *
- * @returns {URLSearchParams}
- */
 const getUrlParams = () => new URLSearchParams(window.location.search);
 
-/**
- * Read state from URL query params.
- *
- * @returns {Object}
- */
 const getUrlState = () => {
     const params = getUrlParams();
     const state = {};
@@ -158,12 +99,6 @@ const getUrlState = () => {
     return state;
 };
 
-/**
- * Read state from root data attributes.
- *
- * @param {Element} root Explorer root.
- * @returns {Object}
- */
 const getDatasetState = root => {
     if (!root) {
         return {};
@@ -202,13 +137,6 @@ const getDatasetState = root => {
     return state;
 };
 
-/**
- * Merge initial state.
- *
- * @param {Element} root Explorer root.
- * @param {Object} initialState State passed from PHP.
- * @returns {Object}
- */
 const buildInitialState = (root, initialState) => {
     return Object.assign(
         {},
@@ -219,13 +147,6 @@ const buildInitialState = (root, initialState) => {
     );
 };
 
-/**
- * Get the service method name.
- *
- * @param {Element} root Explorer root.
- * @param {Object} state Current state.
- * @returns {String}
- */
 const getServiceMethod = (root, state) => {
     if (state && state.service) {
         return state.service;
@@ -238,12 +159,6 @@ const getServiceMethod = (root, state) => {
     return DEFAULT_METHOD;
 };
 
-/**
- * Set explorer status text.
- *
- * @param {Element} root Explorer root.
- * @param {String} message Status message.
- */
 const setStatus = (root, message) => {
     const status = find(root, SELECTORS.status);
 
@@ -252,12 +167,6 @@ const setStatus = (root, message) => {
     }
 };
 
-/**
- * Set loading state.
- *
- * @param {Element} root Explorer root.
- * @param {Boolean} loading Loading state.
- */
 const setLoading = (root, loading) => {
     if (!root) {
         return;
@@ -270,17 +179,12 @@ const setLoading = (root, loading) => {
     });
 
     const loadMore = find(root, SELECTORS.loadMore);
+
     if (loadMore) {
         loadMore.disabled = loading;
     }
 };
 
-/**
- * Set empty state.
- *
- * @param {Element} root Explorer root.
- * @param {Boolean} empty Empty state.
- */
 const setEmpty = (root, empty) => {
     if (!root) {
         return;
@@ -289,18 +193,13 @@ const setEmpty = (root, empty) => {
     root.classList.toggle(CLASSES.empty, empty);
 
     const emptyRegion = find(root, SELECTORS.empty);
+
     if (emptyRegion) {
         emptyRegion.hidden = !empty;
         emptyRegion.classList.toggle(CLASSES.hidden, !empty);
     }
 };
 
-/**
- * Set error state.
- *
- * @param {Element} root Explorer root.
- * @param {Boolean} error Error state.
- */
 const setError = (root, error) => {
     if (!root) {
         return;
@@ -309,12 +208,6 @@ const setError = (root, error) => {
     root.classList.toggle(CLASSES.error, error);
 };
 
-/**
- * Read form values.
- *
- * @param {Element} root Explorer root.
- * @returns {Object}
- */
 const readFormState = root => {
     const form = find(root, SELECTORS.form);
 
@@ -331,12 +224,6 @@ const readFormState = root => {
     };
 };
 
-/**
- * Write state values into form controls.
- *
- * @param {Element} root Explorer root.
- * @param {Object} state Current state.
- */
 const writeFormState = (root, state) => {
     const form = find(root, SELECTORS.form);
 
@@ -353,11 +240,6 @@ const writeFormState = (root, state) => {
     });
 };
 
-/**
- * Update URL query string without reloading.
- *
- * @param {Object} state Current state.
- */
 const updateUrl = state => {
     if (!window.history || !window.history.replaceState) {
         return;
@@ -388,14 +270,6 @@ const updateUrl = state => {
     window.history.replaceState({}, document.title, nextUrl);
 };
 
-/**
- * Create a text element.
- *
- * @param {String} tagName Tag name.
- * @param {String} className CSS class.
- * @param {String} text Text content.
- * @returns {HTMLElement}
- */
 const createTextElement = (tagName, className, text) => {
     const element = document.createElement(tagName);
 
@@ -408,14 +282,6 @@ const createTextElement = (tagName, className, text) => {
     return element;
 };
 
-/**
- * Create an anchor.
- *
- * @param {String} className CSS class.
- * @param {String} href URL.
- * @param {String} text Link text.
- * @returns {HTMLAnchorElement}
- */
 const createLink = (className, href, text) => {
     const link = document.createElement('a');
 
@@ -426,163 +292,124 @@ const createLink = (className, href, text) => {
     return link;
 };
 
-/**
- * Normalize a course result DTO.
- *
- * @param {Object} course Raw course DTO.
- * @returns {Object}
- */
-const normalizeCourse = course => {
-    const safe = course || {};
-
-    return {
-        title: toString(safe.title || safe.fullname || safe.shortname || ''),
-        url: toString(safe.url || ''),
-        summary: toString(safe.summary || safe.body || ''),
-        shortname: toString(safe.shortname || safe.code || ''),
-        category: toString(safe.categorylabel || safe.category || safe.eyebrow || ''),
-        metadata: Array.isArray(safe.metadata) ? safe.metadata : [],
-    };
-};
-
-/**
- * Create metadata item.
- *
- * @param {String} label Metadata label.
- * @param {String} value Metadata value.
- * @returns {HTMLLIElement}
- */
-const createMetadataItem = (label, value) => {
-    const item = document.createElement('li');
-    item.className = 'local-uckk-course-card__metadata-item';
-
-    item.appendChild(createTextElement(
-        'span',
-        'local-uckk-course-card__metadata-label',
-        label
-    ));
-
-    item.appendChild(createTextElement(
-        'span',
-        'local-uckk-course-card__metadata-value',
-        value
-    ));
-
-    return item;
-};
-
-/**
- * Normalize metadata without duplicates.
- *
- * @param {Object} course Normalized course.
- * @returns {Object[]}
- */
-const normalizeMetadata = course => {
-    const metadata = [];
-    const seen = new Set();
-
-    const add = (label, value) => {
-        const safeLabel = toString(label).trim();
-        const safeValue = toString(value).trim();
-        const key = `${safeLabel.toLowerCase()}::${safeValue.toLowerCase()}`;
-
-        if (safeLabel === '' || safeValue === '' || seen.has(key)) {
-            return;
-        }
-
-        seen.add(key);
-
-        metadata.push({
-            label: safeLabel,
-            value: safeValue,
-        });
-    };
-
-    course.metadata.forEach(item => {
-        if (item) {
-            add(item.label, item.value);
-        }
-    });
-
-    if (metadata.length === 0) {
-        add('Code', course.shortname);
-        add('Catégorie', course.category);
+const metadataValue = (metadata, labels) => {
+    if (!Array.isArray(metadata)) {
+        return '';
     }
 
-    return metadata;
+    const wanted = labels.map(label => label.toLowerCase());
+
+    const match = metadata.find(item => {
+        const label = toString(item && item.label).trim().toLowerCase();
+
+        return wanted.includes(label);
+    });
+
+    return match ? toString(match.value).trim() : '';
 };
 
-/**
- * Create one public course card from a server DTO.
- *
- * Expected DTO fields:
- * - title
- * - url
- * - summary or body
- * - categorylabel, category or eyebrow
- * - metadata
- *
- * @param {Object} rawCourse Course DTO.
- * @returns {HTMLElement}
- */
-const createCourseCard = rawCourse => {
-    const course = normalizeCourse(rawCourse);
+const normalizeCourse = course => {
+    const safe = course || {};
+    const metadata = Array.isArray(safe.metadata) ? safe.metadata : [];
 
-    const card = document.createElement('article');
-    card.className = 'local-uckk-course-card';
+    const shortname = toString(
+        safe.shortname
+        || safe.code
+        || metadataValue(metadata, ['Code', 'Numéro', 'Numero'])
+        || ''
+    ).trim();
+
+    const category = toString(
+        safe.categorylabel
+        || safe.category
+        || safe.eyebrow
+        || metadataValue(metadata, ['Voie', 'Catégorie', 'Categorie'])
+        || ''
+    ).trim();
+
+    return {
+        title: toString(safe.title || safe.fullname || shortname || ''),
+        url: toString(safe.url || ''),
+        summary: toString(safe.summary || safe.body || ''),
+        shortname,
+        category,
+    };
+};
+
+const createCourseSubline = course => {
+    const subline = document.createElement('p');
+    subline.className = 'local-uckk-public-card__eyebrow local-uckk-course-card__subline';
+
+    if (course.shortname !== '') {
+        subline.appendChild(createTextElement(
+            'span',
+            'local-uckk-course-card__code',
+            course.shortname
+        ));
+    }
 
     if (course.category !== '') {
-        card.appendChild(createTextElement(
-            'p',
-            'local-uckk-course-card__eyebrow',
+        if (course.shortname !== '') {
+            subline.appendChild(createTextElement(
+                'span',
+                'local-uckk-course-card__separator',
+                ' · '
+            ));
+        }
+
+        subline.appendChild(createTextElement(
+            'span',
+            'local-uckk-course-card__pathway',
             course.category
         ));
     }
 
+    return subline;
+};
+
+const createCourseCard = rawCourse => {
+    const course = normalizeCourse(rawCourse);
+
+    const card = document.createElement('article');
+    card.className = 'local-uckk-public-card local-uckk-public-card--course local-uckk-course-card';
+
+    const content = document.createElement('div');
+    content.className = 'local-uckk-public-card__content';
+
     if (course.title !== '') {
         const heading = document.createElement('h3');
-        heading.className = 'local-uckk-course-card__title';
+        heading.className = 'local-uckk-public-card__title';
 
         if (course.url !== '') {
-            heading.appendChild(createLink('', course.url, course.title));
+            heading.appendChild(createLink(
+                'local-uckk-public-card__title-link',
+                course.url,
+                course.title
+            ));
         } else {
             heading.textContent = course.title;
         }
 
-        card.appendChild(heading);
+        content.appendChild(heading);
+    }
+
+    if (course.shortname !== '' || course.category !== '') {
+        content.appendChild(createCourseSubline(course));
     }
 
     if (course.summary !== '') {
-        card.appendChild(createTextElement(
+        content.appendChild(createTextElement(
             'p',
-            'local-uckk-course-card__summary',
+            'local-uckk-public-card__body',
             course.summary
         ));
     }
 
-    const metadata = normalizeMetadata(course);
-
-    if (metadata.length > 0) {
-        const list = document.createElement('ul');
-        list.className = 'local-uckk-course-card__metadata';
-
-        metadata.forEach(item => {
-            list.appendChild(createMetadataItem(item.label, item.value));
-        });
-
-        card.appendChild(list);
-    }
+    card.appendChild(content);
 
     return card;
 };
 
-/**
- * Render result cards.
- *
- * @param {Element} root Explorer root.
- * @param {Object[]} courses Course DTOs.
- * @param {Boolean} append Append instead of replacing.
- */
 const renderCourses = (root, courses, append) => {
     const results = find(root, SELECTORS.results);
 
@@ -599,12 +426,6 @@ const renderCourses = (root, courses, append) => {
     });
 };
 
-/**
- * Update result count.
- *
- * @param {Element} root Explorer root.
- * @param {Number} total Total result count.
- */
 const updateCount = (root, total) => {
     const count = find(root, SELECTORS.count);
 
@@ -613,13 +434,6 @@ const updateCount = (root, total) => {
     }
 };
 
-/**
- * Update load-more button.
- *
- * @param {Element} root Explorer root.
- * @param {Object} response Service response.
- * @param {Object} state Current state.
- */
 const updateLoadMore = (root, response, state) => {
     const loadMore = find(root, SELECTORS.loadMore);
 
@@ -633,12 +447,6 @@ const updateLoadMore = (root, response, state) => {
     loadMore.dataset.nextPage = String((state.page || DEFAULT_STATE.page) + 1);
 };
 
-/**
- * Normalize service response.
- *
- * @param {Object} response Raw service response.
- * @returns {Object}
- */
 const normalizeResponse = response => {
     const safe = response || {};
 
@@ -652,13 +460,6 @@ const normalizeResponse = response => {
     };
 };
 
-/**
- * Fetch courses from the Moodle external service.
- *
- * @param {Element} root Explorer root.
- * @param {Object} state Current state.
- * @returns {Promise<Object>}
- */
 const fetchCourses = (root, state) => {
     const methodname = getServiceMethod(root, state);
 
@@ -682,14 +483,6 @@ const fetchCourses = (root, state) => {
     }], true, false)[0];
 };
 
-/**
- * Run a search and update the explorer.
- *
- * @param {Element} root Explorer root.
- * @param {Object} state Current state.
- * @param {Boolean} append Append mode.
- * @returns {Promise<void>}
- */
 const search = async(root, state, append = false) => {
     setLoading(root, true);
     setError(root, false);
@@ -724,12 +517,6 @@ const search = async(root, state, append = false) => {
     }
 };
 
-/**
- * Reset explorer filters.
- *
- * @param {Element} root Explorer root.
- * @param {Object} state Current state.
- */
 const resetExplorer = (root, state) => {
     const nextState = Object.assign({}, state, DEFAULT_STATE);
 
@@ -743,12 +530,6 @@ const resetExplorer = (root, state) => {
     search(root, state, false);
 };
 
-/**
- * Bind explorer events.
- *
- * @param {Element} root Explorer root.
- * @param {Object} state Current state.
- */
 const bindEvents = (root, state) => {
     const form = find(root, SELECTORS.form);
 
@@ -789,6 +570,7 @@ const bindEvents = (root, state) => {
     }
 
     const reset = find(root, SELECTORS.reset);
+
     if (reset) {
         reset.addEventListener('click', event => {
             event.preventDefault();
@@ -797,6 +579,7 @@ const bindEvents = (root, state) => {
     }
 
     const loadMore = find(root, SELECTORS.loadMore);
+
     if (loadMore) {
         loadMore.addEventListener('click', event => {
             event.preventDefault();
@@ -808,12 +591,6 @@ const bindEvents = (root, state) => {
     }
 };
 
-/**
- * Resolve explorer roots from an init argument.
- *
- * @param {Object|String|null} initialState Initial state or root id.
- * @returns {Element[]}
- */
 const resolveRoots = initialState => {
     if (typeof initialState === 'string' && initialState !== '') {
         const rootById = document.getElementById(initialState);
@@ -828,12 +605,6 @@ const resolveRoots = initialState => {
     return Array.from(document.querySelectorAll(SELECTORS.root));
 };
 
-/**
- * Initialise one explorer root.
- *
- * @param {Element} root Explorer root.
- * @param {Object} initialState Initial state.
- */
 const initRoot = (root, initialState) => {
     if (!root || root.dataset.courseExplorerInitialised === 'true') {
         return;
@@ -851,11 +622,6 @@ const initRoot = (root, initialState) => {
     }
 };
 
-/**
- * Initialise public course explorer instances.
- *
- * @param {Object|String|null} initialState Initial state object or root id.
- */
 export const init = initialState => {
     const roots = resolveRoots(initialState || {});
 
