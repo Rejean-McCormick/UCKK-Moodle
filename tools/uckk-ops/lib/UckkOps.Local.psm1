@@ -19,6 +19,49 @@ function Get-UckkLocalPhpExe { Get-UckkOpsVar "LocalPhpExe" -Default "php" }
 function Get-UckkLocalUrl { Get-UckkOpsVar "LocalUrl" -Default "http://127.0.0.1:8000" }
 function Get-UckkLocalComponents { @((Get-UckkOpsVar "UckkComponents" -Default @())) }
 
+function Get-UckkLocalSiteProfile {
+    $config = Get-UckkOpsConfig
+
+    $siteConfig = Get-UckkConfigProperty $config "siteProfile.config" $null
+    $configItems = [ordered]@{}
+
+    if ($null -ne $siteConfig) {
+        foreach ($property in $siteConfig.PSObject.Properties) {
+            $configItems[$property.Name] = $property.Value
+        }
+    }
+    else {
+        $configItems["autologinguests"] = 0
+        $configItems["guestloginbutton"] = 0
+    }
+
+    [pscustomobject]@{
+        Fullname  = Get-UckkConfigProperty $config "siteProfile.fullname" "Univers-Cité King Klown"
+        Shortname = Get-UckkConfigProperty $config "siteProfile.shortname" "UCKK"
+        Config    = $configItems
+    }
+}
+
+function Get-UckkLocalSiteProfileCommandPreview {
+    $phpExe = Get-UckkLocalPhpExe
+    $moodleRoot = Get-UckkLocalMoodleRoot
+    $profile = Get-UckkLocalSiteProfile
+    $configSummary = @($profile.Config.Keys | ForEach-Object { "$($_)=$($profile.Config[$_])" }) -join "; "
+
+    [pscustomobject]@{
+        Action           = "Apply UCKK site profile"
+        WorkingDirectory = $moodleRoot
+        Command          = $phpExe
+        Arguments        = @(".uckk_site_profile_tmp.php", ".uckk_site_profile_tmp.json")
+        DisplayCommand   = "$phpExe .uckk_site_profile_tmp.php .uckk_site_profile_tmp.json"
+        Fullname         = $profile.Fullname
+        Shortname        = $profile.Shortname
+        Config           = $configSummary
+        Executes         = $false
+    }
+}
+
+
 function Resolve-UckkLocalPath {
     param(
         [Parameter(Mandatory = $true)][string]$Root,
@@ -316,6 +359,117 @@ function Clear-UckkLocalCaches {
     Invoke-UckkLocalPurgeCaches
 }
 
+
+function Invoke-UckkLocalApplySiteProfile {
+    Assert-UckkLocalReady | Out-Null
+
+    $phpExe = Get-UckkLocalPhpExe
+    $moodleRoot = Get-UckkLocalMoodleRoot
+    $profile = Get-UckkLocalSiteProfile
+
+    $payloadConfig = [ordered]@{}
+    foreach ($key in $profile.Config.Keys) {
+        $payloadConfig[$key] = $profile.Config[$key]
+    }
+
+    $payload = [ordered]@{
+        fullname  = $profile.Fullname
+        shortname = $profile.Shortname
+        config    = $payloadConfig
+    }
+
+    $jsonPath = Join-Path $moodleRoot ".uckk_site_profile_tmp.json"
+    $phpPath = Join-Path $moodleRoot ".uckk_site_profile_tmp.php"
+
+    $phpScript = @'
+<?php
+define('CLI_SCRIPT', true);
+require_once(__DIR__ . '/config.php');
+global $DB;
+
+if ($argc < 2) {
+    fwrite(STDERR, "Missing site profile JSON path.\n");
+    exit(1);
+}
+
+$json = file_get_contents($argv[1]);
+$payload = json_decode($json, true);
+
+if (!is_array($payload)) {
+    fwrite(STDERR, "Invalid site profile JSON.\n");
+    exit(1);
+}
+
+if (isset($payload['config']) && is_array($payload['config'])) {
+    foreach ($payload['config'] as $name => $value) {
+        set_config((string)$name, $value);
+    }
+}
+
+$site = get_site();
+$changedsite = false;
+
+if (array_key_exists('fullname', $payload) && trim((string)$payload['fullname']) !== '') {
+    $site->fullname = (string)$payload['fullname'];
+    $changedsite = true;
+}
+
+if (array_key_exists('shortname', $payload) && trim((string)$payload['shortname']) !== '') {
+    $site->shortname = (string)$payload['shortname'];
+    $changedsite = true;
+}
+
+if ($changedsite) {
+    $site->timemodified = time();
+    $DB->update_record('course', $site);
+}
+
+purge_all_caches();
+
+echo "UCKK site profile applied.\n";
+echo "fullname=" . $site->fullname . "\n";
+echo "shortname=" . $site->shortname . "\n";
+
+if (isset($payload['config']) && is_array($payload['config'])) {
+    foreach ($payload['config'] as $name => $value) {
+        echo $name . "=" . $value . "\n";
+    }
+}
+'@
+
+    try {
+        $payload | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $jsonPath -Encoding UTF8
+        Set-Content -LiteralPath $phpPath -Value $phpScript -Encoding UTF8
+
+        Push-Location $moodleRoot
+        try {
+            & $phpExe $phpPath $jsonPath
+            if ($LASTEXITCODE -ne 0) {
+                throw "UCKK local site profile failed with exit code $LASTEXITCODE"
+            }
+        }
+        finally {
+            Pop-Location
+        }
+    }
+    finally {
+        if (Test-Path -LiteralPath $jsonPath) {
+            Remove-Item -LiteralPath $jsonPath -Force
+        }
+        if (Test-Path -LiteralPath $phpPath) {
+            Remove-Item -LiteralPath $phpPath -Force
+        }
+    }
+
+    [pscustomobject]@{
+        Status    = "completed"
+        Fullname  = $profile.Fullname
+        Shortname = $profile.Shortname
+        Config    = $payloadConfig
+    }
+}
+
+
 function Start-UckkLocalMoodleServer {
     param([int]$Port = 8000)
 
@@ -361,13 +515,15 @@ function Stop-UckkLocalMoodle {
 
 function Invoke-UckkLocalFullSync {
     $sync = Sync-UckkLocalAll
+    $profile = Invoke-UckkLocalApplySiteProfile
     Invoke-UckkLocalPurgeCaches | Out-Null
 
     [pscustomobject]@{
-        Status     = "completed"
-        Synced     = @($sync | Where-Object { $_.Status -eq "synced" }).Count
-        Failed     = @($sync | Where-Object { $_.Status -eq "failed" }).Count
-        Components = $sync
+        Status      = "completed"
+        Synced      = @($sync | Where-Object { $_.Status -eq "synced" }).Count
+        Failed      = @($sync | Where-Object { $_.Status -eq "failed" }).Count
+        SiteProfile = $profile
+        Components  = $sync
     }
 }
 
@@ -378,9 +534,10 @@ function Get-UckkLocalStatus {
         MoodleRoot  = Get-UckkLocalMoodleRoot
         CliRoot     = Get-UckkLocalMoodleCliRoot
         PhpExe      = Get-UckkLocalPhpExe
-        LocalUrl    = Get-UckkLocalUrl
-        Components  = Get-UckkLocalComponents
-        Checks      = Test-UckkLocalPaths
+        LocalUrl     = Get-UckkLocalUrl
+        SiteProfile  = Get-UckkLocalSiteProfile
+        Components   = Get-UckkLocalComponents
+        Checks       = Test-UckkLocalPaths
     }
 }
 
@@ -392,6 +549,8 @@ Export-ModuleMember -Function `
     Get-UckkLocalPhpExe, `
     Get-UckkLocalUrl, `
     Get-UckkLocalComponents, `
+    Get-UckkLocalSiteProfile, `
+    Get-UckkLocalSiteProfileCommandPreview, `
     Resolve-UckkLocalPath, `
     ConvertTo-UckkLocalForwardSlashPath, `
     Get-UckkLocalRelativePath, `
@@ -409,6 +568,7 @@ Export-ModuleMember -Function `
     Sync-UckkLocalSourceToRuntime, `
     Invoke-UckkLocalPurgeCaches, `
     Clear-UckkLocalCaches, `
+    Invoke-UckkLocalApplySiteProfile, `
     Start-UckkLocalMoodleServer, `
     Start-UckkLocalMoodle, `
     Stop-UckkLocalMoodleServer, `

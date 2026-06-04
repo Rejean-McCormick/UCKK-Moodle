@@ -2,7 +2,7 @@
   "schema": "uckk.ops.config.v1",
   "app": {
     "name": "UCKK Ops Console",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "environment": "dev"
   },
   "local": {
@@ -43,6 +43,28 @@
       "badges"
     ]
   },
+  "siteProfile": {
+    "enabled": true,
+    "applyMode": "idempotent",
+    "fullname": "Univers-Cité King Klown",
+    "shortname": "UCKK",
+    "config": {
+      "autologinguests": 0,
+      "guestloginbutton": 0
+    }
+  },
+  "simpleWorkflow": {
+    "enabled": true,
+    "buttons": {
+      "scan": "1. Scanner",
+      "prepareLocal": "2. Préparer local",
+      "publishGitHub": "3. Publier GitHub",
+      "publishServer": "4. Publier OVH",
+      "openLocal": "Ouvrir local"
+    },
+    "summaryTitle": "Résumé du plan",
+    "showAdvancedActionsInSimpleTab": false
+  },
   "components": [
     "local/uckk",
     "mod/uckkarchive",
@@ -74,6 +96,12 @@
           "*/db/install.xml",
           "*/version.php"
         ]
+      },
+      "siteProfile": {
+        "enabled": true,
+        "mode": "idempotent",
+        "applyLocalDuringPrepare": true,
+        "applyServerDuringDeploy": true
       },
       "purgeCaches": {
         "enabled": true,
@@ -133,15 +161,17 @@
     "deployment": {
       "serverSyncAlwaysRequiredAfterPush": true,
       "serverMoodleUpgradeWhenPlanned": true,
+      "serverApplySiteProfileAfterSync": true,
       "serverPurgeCachesWhenPlanned": true,
       "serverSmokeTestsWhenPlanned": true,
       "serverPurgeCachesAfterThemeSync": true
     },
     "recommendedOrder": [
       "Validate source",
-      "Build AMD",
+      "Build AMD when planned",
       "Sync source to local runtime",
-      "Run local Moodle upgrade",
+      "Run local Moodle upgrade when planned",
+      "Apply local site profile",
       "Purge local caches",
       "Run local smoke tests",
       "Review Git diff/status",
@@ -149,6 +179,7 @@
       "Push",
       "Deploy server",
       "Run server Moodle upgrade when planned",
+      "Apply server site profile",
       "Purge server caches when planned",
       "Run server smoke tests when planned"
     ]
@@ -184,4 +215,3 @@
     "keepLast": 20
   }
 }
-

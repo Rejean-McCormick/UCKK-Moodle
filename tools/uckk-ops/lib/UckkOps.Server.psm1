@@ -66,6 +66,148 @@ function Get-UckkObjectBooleanFlag {
     return [bool]$property.Value
 }
 
+
+function Get-UckkServerSiteProfile {
+    $config = Get-UckkOpsConfig
+
+    $fullname = Get-UckkConfigProperty `
+        -Object $config `
+        -Path "siteProfile.fullname" `
+        -Default "Univers-Cité King Klown"
+
+    $shortname = Get-UckkConfigProperty `
+        -Object $config `
+        -Path "siteProfile.shortname" `
+        -Default "UCKK"
+
+    $rawConfig = Get-UckkConfigProperty `
+        -Object $config `
+        -Path "siteProfile.config" `
+        -Default $null
+
+    $siteConfig = [ordered]@{}
+
+    if ($null -ne $rawConfig) {
+        if ($rawConfig -is [System.Collections.IDictionary]) {
+            foreach ($key in $rawConfig.Keys) {
+                $value = $rawConfig[$key]
+                if ($value -is [bool]) {
+                    $value = [int]$value
+                }
+                $siteConfig[[string]$key] = $value
+            }
+        }
+        else {
+            foreach ($property in $rawConfig.PSObject.Properties) {
+                $value = $property.Value
+                if ($value -is [bool]) {
+                    $value = [int]$value
+                }
+                $siteConfig[[string]$property.Name] = $value
+            }
+        }
+    }
+
+    if (-not $siteConfig.Contains("autologinguests")) {
+        $siteConfig["autologinguests"] = 0
+    }
+
+    if (-not $siteConfig.Contains("guestloginbutton")) {
+        $siteConfig["guestloginbutton"] = 0
+    }
+
+    [pscustomobject]@{
+        Fullname  = [string]$fullname
+        Shortname = [string]$shortname
+        Config    = $siteConfig
+    }
+}
+
+function Invoke-UckkServerApplySiteProfile {
+    $settings = Get-UckkServerSettings
+
+    $workRoot = if ([string]::IsNullOrWhiteSpace([string]$settings.MoodleRoot)) {
+        $settings.RuntimeRoot
+    } else {
+        $settings.MoodleRoot
+    }
+
+    if ([string]::IsNullOrWhiteSpace([string]$workRoot)) {
+        throw "Missing server Moodle root: ServerMoodleRoot or ServerRuntimeRoot"
+    }
+
+    $profile = Get-UckkServerSiteProfile
+
+    $payload = [ordered]@{
+        fullname  = $profile.Fullname
+        shortname = $profile.Shortname
+        config    = $profile.Config
+    }
+
+    $payloadJson = $payload | ConvertTo-Json -Depth 20 -Compress
+    $payload64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($payloadJson))
+
+    $php = @"
+<?php
+define('CLI_SCRIPT', true);
+require_once(getcwd() . '/config.php');
+global `$DB;
+
+`$payload = base64_decode('$payload64', true);
+if (`$payload === false) {
+    fwrite(STDERR, "Invalid UCKK site profile payload base64.\n");
+    exit(1);
+}
+
+`$profile = json_decode(`$payload, true);
+if (!is_array(`$profile)) {
+    fwrite(STDERR, "Invalid UCKK site profile JSON.\n");
+    exit(1);
+}
+
+if (!empty(`$profile['config']) && is_array(`$profile['config'])) {
+    foreach (`$profile['config'] as `$name => `$value) {
+        if (is_bool(`$value)) {
+            `$value = `$value ? 1 : 0;
+        }
+        set_config((string)`$name, `$value);
+        echo 'config: ' . `$name . '=' . (is_scalar(`$value) ? (string)`$value : json_encode(`$value)) . PHP_EOL;
+    }
+}
+
+`$site = get_site();
+`$changed = false;
+
+if (isset(`$profile['fullname']) && (string)`$site->fullname !== (string)`$profile['fullname']) {
+    `$site->fullname = (string)`$profile['fullname'];
+    `$changed = true;
+}
+
+if (isset(`$profile['shortname']) && (string)`$site->shortname !== (string)`$profile['shortname']) {
+    `$site->shortname = (string)`$profile['shortname'];
+    `$changed = true;
+}
+
+if (`$changed) {
+    `$site->timemodified = time();
+    `$DB->update_record('course', `$site);
+    echo 'site: fullname=' . `$site->fullname . PHP_EOL;
+    echo 'site: shortname=' . `$site->shortname . PHP_EOL;
+} else {
+    echo "site: unchanged\n";
+}
+
+echo "UCKK site profile applied.\n";
+"@
+
+    $encoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($php))
+    $tmp = "/tmp/uckk_site_profile_$([Guid]::NewGuid().ToString('N')).php"
+
+    Invoke-UckkServerCommand `
+        -Command "cd '$workRoot' && printf %s '$encoded' | base64 -d > '$tmp' && chmod 0644 '$tmp' && sudo -u www-data php '$tmp'; rc=`$?; rm -f '$tmp'; exit `$rc" `
+        -RequireSuccess
+}
+
 function Invoke-UckkServerCommand {
     param(
         [Parameter(Mandatory = $true)][string]$Command,
@@ -266,10 +408,12 @@ function Invoke-UckkServerDeployPlanned {
         [switch]$AlwaysUpgrade,
         [switch]$AlwaysPurge,
         [switch]$AlwaysSmoke,
+        [switch]$SkipSiteProfile,
         [switch]$ReloadPhpFpm
     )
 
     $hasPlan = ($null -ne $Plan)
+    $needsSiteProfile = (-not $SkipSiteProfile.IsPresent)
 
     $needsUpgrade = $AlwaysUpgrade.IsPresent -or (
         $hasPlan -and (Get-UckkObjectBooleanFlag -Object $Plan -Name "NeedsMoodleUpgrade")
@@ -278,6 +422,8 @@ function Invoke-UckkServerDeployPlanned {
     # Safe default: if no plan is supplied, purge server caches after deploy.
     # This prevents mixed states such as new PHP/templates with old compiled CSS.
     $needsPurge = $AlwaysPurge.IsPresent -or (
+        $needsSiteProfile
+    ) -or (
         -not $hasPlan
     ) -or (
         $hasPlan -and (Get-UckkObjectBooleanFlag -Object $Plan -Name "NeedsPurgeCaches")
@@ -294,6 +440,7 @@ function Invoke-UckkServerDeployPlanned {
     "- Pull source: $(-not $SkipPull.IsPresent)"
     "- Sync runtime: $(-not $SkipSync.IsPresent)"
     "- Moodle upgrade: $needsUpgrade"
+    "- Apply UCKK site profile: $needsSiteProfile"
     "- Purge server caches: $needsPurge"
     "- Reload PHP-FPM: $($ReloadPhpFpm.IsPresent)"
     "- Smoke server: $needsSmoke"
@@ -311,6 +458,11 @@ function Invoke-UckkServerDeployPlanned {
     if ($needsUpgrade) {
         "Server step: Moodle upgrade"
         Invoke-UckkServerMoodleUpgrade
+    }
+
+    if ($needsSiteProfile) {
+        "Server step: apply UCKK site profile"
+        Invoke-UckkServerApplySiteProfile
     }
 
     if ($needsPurge) {
@@ -343,6 +495,8 @@ Export-ModuleMember -Function `
     Get-UckkServerSettings, `
     Assert-UckkOpsServerConfig, `
     Get-UckkObjectBooleanFlag, `
+    Get-UckkServerSiteProfile, `
+    Invoke-UckkServerApplySiteProfile, `
     Invoke-UckkServerCommand, `
     Test-UckkServerSsh, `
     Update-UckkServerSource, `

@@ -315,7 +315,7 @@ const normalizeCourse = course => {
     const shortname = toString(
         safe.shortname
         || safe.code
-        || metadataValue(metadata, ['Code', 'Numéro', 'Numero'])
+        || metadataValue(metadata, ['Numéro de cours', 'Code', 'Numéro', 'Numero'])
         || ''
     ).trim();
 
@@ -336,35 +336,46 @@ const normalizeCourse = course => {
     };
 };
 
-const createCourseSubline = course => {
-    const subline = document.createElement('p');
-    subline.className = 'local-uckk-public-card__eyebrow local-uckk-course-card__subline';
+const createCourseMetaLine = (label, value, valueClass) => {
+    const line = document.createElement('p');
+    line.className = 'local-uckk-public-card__eyebrow local-uckk-course-card__meta-line';
 
-    if (course.shortname !== '') {
-        subline.appendChild(createTextElement(
-            'span',
-            'local-uckk-course-card__code',
-            course.shortname
-        ));
-    }
+    line.appendChild(createTextElement(
+        'span',
+        'local-uckk-course-card__meta-label',
+        label
+    ));
+
+    line.appendChild(createTextElement(
+        'span',
+        valueClass,
+        value
+    ));
+
+    return line;
+};
+
+const createCourseMetadata = course => {
+    const meta = document.createElement('div');
+    meta.className = 'local-uckk-course-card__meta';
 
     if (course.category !== '') {
-        if (course.shortname !== '') {
-            subline.appendChild(createTextElement(
-                'span',
-                'local-uckk-course-card__separator',
-                ' · '
-            ));
-        }
-
-        subline.appendChild(createTextElement(
-            'span',
-            'local-uckk-course-card__pathway',
-            course.category
+        meta.appendChild(createCourseMetaLine(
+            'Voie',
+            course.category,
+            'local-uckk-course-card__pathway'
         ));
     }
 
-    return subline;
+    if (course.shortname !== '') {
+        meta.appendChild(createCourseMetaLine(
+            'Numéro de cours',
+            course.shortname,
+            'local-uckk-course-card__code'
+        ));
+    }
+
+    return meta;
 };
 
 const createCourseCard = rawCourse => {
@@ -393,16 +404,16 @@ const createCourseCard = rawCourse => {
         content.appendChild(heading);
     }
 
-    if (course.shortname !== '' || course.category !== '') {
-        content.appendChild(createCourseSubline(course));
-    }
-
     if (course.summary !== '') {
         content.appendChild(createTextElement(
             'p',
             'local-uckk-public-card__body',
             course.summary
         ));
+    }
+
+    if (course.category !== '' || course.shortname !== '') {
+        content.appendChild(createCourseMetadata(course));
     }
 
     card.appendChild(content);

@@ -183,24 +183,38 @@
                                 </h3>
                             {{/title}}
 
-                            <p class="local-uckk-public-card__eyebrow local-uckk-course-card__subline">
-                                {{#shortname}}
-                                    <span class="local-uckk-course-card__code">{{shortname}}</span>
-                                {{/shortname}}
-
-                                {{#eyebrow}}
-                                    {{#shortname}}
-                                        <span class="local-uckk-course-card__separator" aria-hidden="true"> · </span>
-                                    {{/shortname}}
-                                    <span class="local-uckk-course-card__pathway">{{eyebrow}}</span>
-                                {{/eyebrow}}
-                            </p>
-
                             {{#body}}
                                 <p class="local-uckk-public-card__body">
                                     {{body}}
                                 </p>
                             {{/body}}
+
+                            <div class="local-uckk-course-card__meta">
+                                {{#eyebrow}}
+                                    <p class="local-uckk-public-card__eyebrow local-uckk-course-card__meta-line local-uckk-course-card__meta-line--pathway">
+                                        <span class="local-uckk-course-card__meta-label">Voie</span>
+                                        <span class="local-uckk-course-card__pathway">{{eyebrow}}</span>
+                                    </p>
+                                {{/eyebrow}}
+
+                                {{#shortname}}
+                                    <p class="local-uckk-public-card__eyebrow local-uckk-course-card__meta-line local-uckk-course-card__meta-line--code">
+                                        <span class="local-uckk-course-card__meta-label">Numéro de cours</span>
+                                        <span class="local-uckk-course-card__code">{{shortname}}</span>
+                                    </p>
+                                {{/shortname}}
+
+                                {{^shortname}}
+                                    {{#metadata}}
+                                        {{#value}}
+                                            <p class="local-uckk-public-card__eyebrow local-uckk-course-card__meta-line local-uckk-course-card__meta-line--code">
+                                                <span class="local-uckk-course-card__meta-label">Numéro de cours</span>
+                                                <span class="local-uckk-course-card__code">{{value}}</span>
+                                            </p>
+                                        {{/value}}
+                                    {{/metadata}}
+                                {{/shortname}}
+                            </div>
                         </div>
                     </article>
                 {{/results}}

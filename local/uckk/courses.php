@@ -57,9 +57,9 @@ echo $OUTPUT->footer();
  * @return array{q: string, category: string, sort: string}
  */
 function local_uckk_public_courses_request_state(): array {
-    $q = trim(optional_param('q', '', PARAM_TEXT));
-    $category = trim(optional_param('category', '', PARAM_ALPHANUMEXT));
-    $sort = trim(optional_param('sort', 'pedagogical', PARAM_ALPHANUMEXT));
+    $q = local_uckk_public_courses_safe_param_text(optional_param('q', '', PARAM_TEXT));
+    $category = local_uckk_public_courses_normalise_category_key(optional_param('category', '', PARAM_TEXT));
+    $sort = local_uckk_public_courses_slug(optional_param('sort', 'pedagogical', PARAM_TEXT));
 
     if (!in_array($sort, ['pedagogical', 'title', 'category'], true)) {
         $sort = 'pedagogical';
@@ -150,6 +150,8 @@ function local_uckk_public_courses_explorer_context(array $state, array $filters
     $hascategory = $state['category'] !== '';
     $hassort = $state['sort'] !== 'pedagogical';
     $hasactivefilters = $hasquery || $hascategory || $hassort;
+    $visiblecount = count($cards);
+    $resultsummary = local_uckk_public_courses_result_summary($visiblecount, $total);
 
     $initialstate = [
         'rootId' => 'local-uckk-course-explorer',
@@ -162,23 +164,29 @@ function local_uckk_public_courses_explorer_context(array $state, array $filters
         'page' => 1,
         'perpage' => 12,
         'total' => $total,
-        'visible' => count($cards),
+        'visible' => $visiblecount,
     ];
 
     return [
         'id' => 'local-uckk-course-explorer',
         'actionurl' => $actionurl,
+        'pageurl' => $actionurl,
         'query' => $state['q'],
         'category' => $state['category'],
         'sort' => $state['sort'],
+        'page' => 1,
+        'perpage' => 12,
         'total' => $total,
-        'visiblecount' => count($cards),
-        'resultsummary' => local_uckk_public_courses_result_summary(count($cards), $total),
+        'visiblecount' => $visiblecount,
+        'resultsummary' => $resultsummary,
+        'resultscountlabel' => $resultsummary,
+        'total_label' => $resultsummary,
         'hasquery' => $hasquery,
         'hascategory' => $hascategory,
         'hassort' => $hassort,
         'hasactivefilters' => $hasactivefilters,
         'hasresults' => !empty($cards),
+        'hasmore' => false,
         'emptytitle' => 'Aucun cours trouvé',
         'emptybody' => 'Aucun cours public ne correspond aux filtres actuels.',
         'filters' => $filters,
@@ -186,6 +194,8 @@ function local_uckk_public_courses_explorer_context(array $state, array $filters
         'results' => array_values($cards),
         'initialstate' => $initialstate,
         'initialstatejson' => json_encode($initialstate, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+        'initial_state_json' => json_encode($initialstate, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+        'service' => 'local_uckk_search_public_courses',
     ];
 }
 
@@ -234,10 +244,10 @@ function local_uckk_public_courses_get_cards(): array {
 
     foreach ($records as $record) {
         $courseid = (int)$record->id;
-        $shortname = trim((string)$record->shortname);
-        $fullname = trim((string)$record->fullname);
-        $categoryname = trim((string)($record->categoryname ?? ''));
-        $categoryidnumber = trim((string)($record->categoryidnumber ?? ''));
+        $shortname = local_uckk_public_courses_safe_param_text((string)$record->shortname);
+        $fullname = local_uckk_public_courses_safe_param_text((string)$record->fullname);
+        $categoryname = local_uckk_public_courses_safe_param_text((string)($record->categoryname ?? ''));
+        $categoryidnumber = local_uckk_public_courses_safe_param_text((string)($record->categoryidnumber ?? ''));
         $categorylabel = local_uckk_public_courses_public_category_label($categoryname, $categoryidnumber);
         $categorykey = local_uckk_public_courses_slug($categorylabel !== '' ? $categorylabel : $categoryidnumber);
 
@@ -248,23 +258,36 @@ function local_uckk_public_courses_get_cards(): array {
         }
 
         $title = $fullname !== '' ? $fullname : $shortname;
+        $searchtext = local_uckk_public_courses_safe_param_text(trim($title . ' ' . $shortname . ' ' . $categorylabel . ' ' . $summary));
 
         $cards[] = [
             'id' => $courseid,
+            'classes' => 'local-uckk-public-card local-uckk-public-card--course local-uckk-course-card',
             'eyebrow' => $categorylabel,
+            'category' => $categorylabel,
+            'categorylabel' => $categorylabel,
+            'categorykey' => $categorykey,
+            'categoryname' => $categoryname,
+            'categoryidnumber' => $categoryidnumber,
             'title' => $title,
             'body' => $summary,
+            'summary' => $summary,
+            'description' => $summary,
             'url' => (new moodle_url('/course/view.php', ['id' => $courseid]))->out(false),
             'type' => 'course',
-            'categorykey' => $categorykey,
-            'categorylabel' => $categorylabel,
             'shortname' => $shortname,
+            'code' => $shortname,
             'sorttitle' => core_text::strtolower($title),
             'sortcategory' => core_text::strtolower($categorylabel),
-            'searchtext' => core_text::strtolower(trim($title . ' ' . $shortname . ' ' . $categorylabel . ' ' . $summary)),
+            'searchtext' => core_text::strtolower($searchtext),
+            'hasmetadata' => true,
             'metadata' => [
                 [
-                    'label' => 'Code',
+                    'label' => 'Voie',
+                    'value' => $categorylabel,
+                ],
+                [
+                    'label' => 'Numéro de cours',
                     'value' => $shortname,
                 ],
             ],
@@ -282,11 +305,11 @@ function local_uckk_public_courses_get_cards(): array {
  * @return array<int, array<string, mixed>>
  */
 function local_uckk_public_courses_filter_cards(array $cards, array $state): array {
-    $query = core_text::strtolower(trim($state['q']));
-    $category = trim($state['category']);
+    $query = core_text::strtolower(local_uckk_public_courses_safe_param_text($state['q']));
+    $category = local_uckk_public_courses_normalise_category_key($state['category']);
 
     return array_values(array_filter($cards, static function(array $card) use ($query, $category): bool {
-        if ($category !== '' && (string)($card['categorykey'] ?? '') !== $category) {
+        if ($category !== '' && local_uckk_public_courses_normalise_category_key((string)($card['categorykey'] ?? '')) !== $category) {
             return false;
         }
 
@@ -339,10 +362,11 @@ function local_uckk_public_courses_sort_cards(array $cards, string $sort): array
 function local_uckk_public_courses_category_filters(array $cards, string $activekey): array {
     $counts = [];
     $labels = [];
+    $activekey = local_uckk_public_courses_normalise_category_key($activekey);
 
     foreach ($cards as $card) {
-        $key = (string)($card['categorykey'] ?? '');
-        $label = (string)($card['categorylabel'] ?? '');
+        $key = local_uckk_public_courses_normalise_category_key((string)($card['categorykey'] ?? ''));
+        $label = local_uckk_public_courses_safe_param_text((string)($card['categorylabel'] ?? ''));
 
         if ($key === '' || $label === '') {
             continue;
@@ -357,18 +381,24 @@ function local_uckk_public_courses_category_filters(array $cards, string $active
     $filters = [
         [
             'key' => '',
+            'value' => '',
             'label' => 'Tous les cours',
             'count' => count($cards),
             'active' => $activekey === '',
+            'selected' => $activekey === '',
         ],
     ];
 
     foreach ($labels as $key => $label) {
+        $active = $activekey === $key;
+
         $filters[] = [
             'key' => $key,
+            'value' => $key,
             'label' => $label,
             'count' => $counts[$key] ?? 0,
-            'active' => $activekey === $key,
+            'active' => $active,
+            'selected' => $active,
         ];
     }
 
@@ -383,8 +413,10 @@ function local_uckk_public_courses_category_filters(array $cards, string $active
  * @return bool
  */
 function local_uckk_public_courses_filter_exists(array $filters, string $key): bool {
+    $key = local_uckk_public_courses_normalise_category_key($key);
+
     foreach ($filters as $filter) {
-        if ((string)($filter['key'] ?? '') === $key) {
+        if (local_uckk_public_courses_normalise_category_key((string)($filter['key'] ?? '')) === $key) {
             return true;
         }
     }
@@ -402,16 +434,20 @@ function local_uckk_public_courses_sort_options(string $active): array {
     $options = [
         'pedagogical' => 'Ordre pédagogique',
         'title' => 'Titre A-Z',
-        'category' => 'Catégorie',
+        'category' => 'Voie',
     ];
 
     $sortoptions = [];
 
     foreach ($options as $key => $label) {
+        $selected = $active === $key;
+
         $sortoptions[] = [
             'key' => $key,
+            'value' => $key,
             'label' => $label,
-            'active' => $active === $key,
+            'active' => $selected,
+            'selected' => $selected,
         ];
     }
 
@@ -439,7 +475,7 @@ function local_uckk_public_courses_public_category_label(string $categoryname, s
     $label = preg_replace('/\s+obligatoire\b/iu', '', $label);
     $label = preg_replace('/\s{2,}/u', ' ', (string)$label);
 
-    return trim((string)$label);
+    return local_uckk_public_courses_safe_param_text((string)$label);
 }
 
 /**
@@ -462,28 +498,67 @@ function local_uckk_public_courses_result_summary(int $visible, int $total): str
 }
 
 /**
+ * Normalise category key.
+ *
+ * @param string $value Raw value.
+ * @return string
+ */
+function local_uckk_public_courses_normalise_category_key(string $value): string {
+    $value = trim(local_uckk_public_courses_safe_utf8($value));
+
+    if ($value === '' || $value === 'all') {
+        return '';
+    }
+
+    return local_uckk_public_courses_slug($value);
+}
+
+/**
  * Create a stable ASCII-ish slug for public filters.
  *
  * @param string $value Raw value.
  * @return string
  */
 function local_uckk_public_courses_slug(string $value): string {
-    $value = core_text::strtolower(trim($value));
+    $value = local_uckk_public_courses_safe_utf8($value);
+
+    if ($value === '') {
+        return '';
+    }
+
     $value = strtr($value, [
-        'à' => 'a', 'á' => 'a', 'â' => 'a', 'ä' => 'a', 'ã' => 'a', 'å' => 'a',
-        'ç' => 'c',
+        'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A',
+        'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a',
+        'Æ' => 'AE', 'æ' => 'ae',
+        'Ç' => 'C', 'ç' => 'c',
+        'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E',
         'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+        'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I',
         'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i',
-        'ñ' => 'n',
-        'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'ö' => 'o', 'õ' => 'o',
+        'Ñ' => 'N', 'ñ' => 'n',
+        'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O',
+        'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o',
+        'Œ' => 'OE', 'œ' => 'oe',
+        'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U',
         'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u',
+        'Ý' => 'Y', 'Ÿ' => 'Y',
         'ý' => 'y', 'ÿ' => 'y',
-        'œ' => 'oe', 'æ' => 'ae',
+        '’' => "'", '‘' => "'", 'ʼ' => "'", '`' => "'", '´' => "'",
+        '—' => '-', '–' => '-',
     ]);
-    $value = preg_replace('/[^a-z0-9]+/u', '-', $value);
+
+    $value = trim(core_text::strtolower($value));
+
+    if ($value === '') {
+        return '';
+    }
+
+    $value = preg_replace('/\bobligatoire\b/i', '', $value);
+    $value = preg_replace('/^uckk[\s\-_]*/i', '', (string)$value);
+    $value = preg_replace('/[^a-z0-9]+/i', '-', (string)$value);
     $value = trim((string)$value, '-');
 
-    return $value !== '' ? $value : 'category';
+    return clean_param($value, PARAM_ALPHANUMEXT);
 }
 
 /**
@@ -514,10 +589,79 @@ function local_uckk_public_courses_plain_summary(stdClass $record): string {
     }
 
     $text = trim(preg_replace('/\s+/', ' ', strip_tags((string)$html)) ?: '');
+    $text = local_uckk_public_courses_safe_param_text($text);
 
     if (core_text::strlen($text) > 420) {
         $text = core_text::substr($text, 0, 417) . '…';
     }
 
-    return $text;
+    return local_uckk_public_courses_safe_param_text($text);
+}
+
+/**
+ * Make text safe for PARAM_TEXT-style rendering.
+ *
+ * @param string $value Raw value.
+ * @return string
+ */
+function local_uckk_public_courses_safe_param_text(string $value): string {
+    $value = trim($value);
+
+    if ($value === '') {
+        return '';
+    }
+
+    if (!preg_match('//u', $value)) {
+        $cleaned = function_exists('iconv') ? @iconv('UTF-8', 'UTF-8//IGNORE', $value) : '';
+
+        if (is_string($cleaned)) {
+            $value = $cleaned;
+        } else {
+            $value = '';
+        }
+    }
+
+    // Remove Unicode replacement characters.
+    $value = str_replace("\xEF\xBF\xBD", '', $value);
+    $value = str_replace('�', '', $value);
+
+    // Remove control characters.
+    $value = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', $value) ?: '';
+
+    if ($value === '') {
+        return '';
+    }
+
+    $value = preg_replace('/\s+/u', ' ', $value) ?: $value;
+
+    return trim((string)clean_param($value, PARAM_TEXT));
+}
+
+/**
+ * Make a string valid UTF-8 without applying PARAM_TEXT semantics.
+ *
+ * @param string $value Raw value.
+ * @return string
+ */
+function local_uckk_public_courses_safe_utf8(string $value): string {
+    $value = trim($value);
+
+    if ($value === '') {
+        return '';
+    }
+
+    if (!preg_match('//u', $value)) {
+        $cleaned = function_exists('iconv') ? @iconv('UTF-8', 'UTF-8//IGNORE', $value) : '';
+
+        if (is_string($cleaned)) {
+            $value = $cleaned;
+        } else {
+            return '';
+        }
+    }
+
+    $value = str_replace("\xEF\xBF\xBD", '', $value);
+    $value = str_replace('�', '', $value);
+
+    return trim($value);
 }
