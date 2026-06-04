@@ -716,14 +716,57 @@ final class public_page implements renderable, templatable {
 
             $metadata = self::export_metadata(self::array_value($card, 'metadata'));
 
+            $shortname = self::clean_string($card['shortname'] ?? '');
+            $code = self::clean_string($card['code'] ?? '');
+            $category = self::clean_string($card['category'] ?? '');
+            $categorylabel = self::clean_string($card['categorylabel'] ?? '');
+
+            if ($shortname === '') {
+                $shortname = self::metadata_value($metadata, ['Numéro de cours', 'Code', 'Course code']);
+            }
+
+            if ($code === '') {
+                $code = $shortname;
+            }
+
+            if ($categorylabel === '') {
+                $categorylabel = self::metadata_value($metadata, ['Voie', 'Catégorie', 'Category']);
+            }
+
+            if ($category === '') {
+                $category = $categorylabel !== '' ? $categorylabel : $eyebrow;
+            }
+
             $obj = new stdClass();
 
             $obj->id = isset($card['id']) && is_numeric($card['id']) ? (int)$card['id'] : 0;
             $obj->eyebrow = $eyebrow;
             $obj->title = $title;
             $obj->body = $body;
+            $obj->summary = $body;
+            $obj->description = self::clean_string($card['description'] ?? $body);
             $obj->url = $url;
             $obj->actionlabel = $actionlabel;
+            $obj->type = $type;
+
+            /*
+             * Course cards use these explicit fields in course_explorer.mustache.
+             * Keep them on the exported card instead of forcing the template to
+             * recover them from generic metadata. Otherwise the initial server-side
+             * render can display the category metadata as an extra course number,
+             * while the AJAX render appears correct because JavaScript preserves
+             * the course-specific fields.
+             */
+            $obj->shortname = $shortname;
+            $obj->code = $code;
+            $obj->category = $category;
+            $obj->categorylabel = $categorylabel;
+            $obj->categorykey = self::clean_modifier($card['categorykey'] ?? '');
+            $obj->categoryname = self::clean_string($card['categoryname'] ?? '');
+            $obj->categoryidnumber = self::clean_string($card['categoryidnumber'] ?? '');
+            $obj->hascategory = $category !== '' || $categorylabel !== '';
+            $obj->hasshortname = $shortname !== '';
+            $obj->hascode = $code !== '';
 
             $obj->haseyebrow = $eyebrow !== '';
             $obj->hasbody = $body !== '';
@@ -756,6 +799,31 @@ final class public_page implements renderable, templatable {
         }
 
         return $out;
+    }
+
+    /**
+     * Return a metadata value by label.
+     *
+     * @param array<int, stdClass> $metadata Exported metadata items.
+     * @param array<int, string> $labels Accepted labels.
+     * @return string
+     */
+    private static function metadata_value(array $metadata, array $labels): string {
+        $wanted = [];
+
+        foreach ($labels as $label) {
+            $wanted[] = \core_text::strtolower(self::clean_string($label));
+        }
+
+        foreach ($metadata as $item) {
+            $label = \core_text::strtolower(self::clean_string($item->label ?? ''));
+
+            if ($label !== '' && in_array($label, $wanted, true)) {
+                return self::clean_string($item->value ?? '');
+            }
+        }
+
+        return '';
     }
 
     /**

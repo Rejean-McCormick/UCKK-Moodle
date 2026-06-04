@@ -61,12 +61,12 @@ function Get-UckkLocalSiteProfileCommandPreview {
     }
 }
 
-
 function Resolve-UckkLocalPath {
     param(
         [Parameter(Mandatory = $true)][string]$Root,
         [Parameter(Mandatory = $true)][string]$RelativePath
     )
+
     return Join-UckkPath -Root $Root -Child $RelativePath
 }
 
@@ -238,6 +238,65 @@ function Get-UckkLocalPurgeCommandPreview {
     }
 }
 
+function Test-UckkLocalPlanFlag {
+    param(
+        [AllowNull()][object]$Plan,
+        [Parameter(Mandatory = $true)][string]$PropertyName,
+        [bool]$Default = $false
+    )
+
+    if ($null -eq $Plan) {
+        return $Default
+    }
+
+    if ($Plan.PSObject.Properties.Name -notcontains $PropertyName) {
+        return $Default
+    }
+
+    return [bool]$Plan.$PropertyName
+}
+
+function Stop-UckkLocalAmdBuildProcesses {
+    param(
+        [int]$GraceSeconds = 1
+    )
+
+    $results = @()
+    $names = @("node", "grunt", "rollup")
+
+    foreach ($name in $names) {
+        $processes = @(Get-Process -Name $name -ErrorAction SilentlyContinue)
+
+        foreach ($process in $processes) {
+            try {
+                $id = $process.Id
+                $processName = $process.ProcessName
+                Stop-Process -Id $id -Force -ErrorAction Stop
+
+                $results += [pscustomobject]@{
+                    Name   = $processName
+                    Id     = $id
+                    Status = "stopped"
+                }
+            }
+            catch {
+                $results += [pscustomobject]@{
+                    Name   = $name
+                    Id     = $process.Id
+                    Status = "failed"
+                    Error  = $_.Exception.Message
+                }
+            }
+        }
+    }
+
+    if ($GraceSeconds -gt 0 -and $results.Count -gt 0) {
+        Start-Sleep -Seconds $GraceSeconds
+    }
+
+    return $results
+}
+
 function Test-UckkLocalPaths {
     $sourceRoot = Get-UckkLocalSourceRoot
     $runtimeRoot = Get-UckkLocalRuntimeRoot
@@ -268,6 +327,100 @@ function Assert-UckkLocalReady {
     }
 
     return $true
+}
+
+function Invoke-UckkLocalAmdBuild {
+    param(
+        [string]$Component = "local/uckk",
+        [int]$Retries = 1,
+        [switch]$SkipProcessCleanup
+    )
+
+    Assert-UckkLocalReady | Out-Null
+    Assert-UckkLocalComponentPathSafe -Component $Component | Out-Null
+
+    if (-not (Get-Command "npx" -ErrorAction SilentlyContinue)) {
+        throw "npx introuvable. Installe Node.js/npm ou lance depuis un environnement où npx est disponible."
+    }
+
+    $preview = Get-UckkLocalAmdBuildCommandPreview -Component $Component
+    $attempt = 0
+    $maxAttempts = [Math]::Max(1, $Retries + 1)
+    $lastExitCode = $null
+
+    while ($attempt -lt $maxAttempts) {
+        $attempt++
+
+        if (-not $SkipProcessCleanup.IsPresent) {
+            Stop-UckkLocalAmdBuildProcesses | Out-Null
+        }
+
+        $arguments = @($preview.Arguments)
+
+        Push-Location $preview.WorkingDirectory
+        try {
+            & $preview.Command @arguments
+            $lastExitCode = $LASTEXITCODE
+        }
+        finally {
+            Pop-Location
+        }
+
+        if ($lastExitCode -eq 0) {
+            return [pscustomobject]@{
+                Status           = "completed"
+                Component        = $Component
+                Attempts         = $attempt
+                WorkingDirectory = $preview.WorkingDirectory
+                Command          = $preview.DisplayCommand
+            }
+        }
+
+        if ($attempt -lt $maxAttempts) {
+            Start-Sleep -Seconds 2
+        }
+    }
+
+    throw "Build AMD echoue pour $Component. Exit code: $lastExitCode"
+}
+
+function Invoke-UckkLocalMoodleUpgrade {
+    param(
+        [switch]$AllowUnstable
+    )
+
+    Assert-UckkLocalReady | Out-Null
+
+    $phpExe = Get-UckkLocalPhpExe
+    $script = Get-UckkLocalMoodleCliScript -ScriptName "upgrade.php"
+    $moodleRoot = Get-UckkLocalMoodleRoot
+
+    if (-not $script) {
+        throw "Local upgrade CLI not found. Checked LocalMoodleCliRoot, LocalRuntimeRoot/admin/cli, and LocalMoodleRoot/admin/cli."
+    }
+
+    $arguments = @($script, "--non-interactive")
+
+    if ($AllowUnstable) {
+        $arguments += "--allow-unstable"
+    }
+
+    Push-Location $moodleRoot
+    try {
+        & $phpExe @arguments
+        if ($LASTEXITCODE -ne 0) {
+            throw "upgrade.php failed with exit code $LASTEXITCODE"
+        }
+    }
+    finally {
+        Pop-Location
+    }
+
+    [pscustomobject]@{
+        Status        = "completed"
+        Script        = $script
+        AllowUnstable = [bool]$AllowUnstable
+    }
 }
 
 function Sync-UckkLocalComponent {
@@ -358,7 +511,6 @@ function Invoke-UckkLocalPurgeCaches {
 function Clear-UckkLocalCaches {
     Invoke-UckkLocalPurgeCaches
 }
-
 
 function Invoke-UckkLocalApplySiteProfile {
     Assert-UckkLocalReady | Out-Null
@@ -469,7 +621,6 @@ if (isset($payload['config']) && is_array($payload['config'])) {
     }
 }
 
-
 function Start-UckkLocalMoodleServer {
     param([int]$Port = 8000)
 
@@ -513,6 +664,74 @@ function Stop-UckkLocalMoodle {
     Stop-UckkLocalMoodleServer
 }
 
+function Invoke-UckkLocalPrepare {
+    param(
+        [AllowNull()][object]$Plan = $null,
+        [string[]]$AmdComponents = @("local/uckk"),
+        [switch]$SkipSiteProfile,
+        [switch]$AllowUnstable
+    )
+
+    Assert-UckkLocalReady | Out-Null
+
+    $hasPlan = ($null -ne $Plan)
+    $needsLocalSync = Test-UckkLocalPlanFlag -Plan $Plan -PropertyName "NeedsLocalSync" -Default (-not $hasPlan)
+    $needsAmdBuild = Test-UckkLocalPlanFlag -Plan $Plan -PropertyName "NeedsAmdBuild" -Default $false
+    $needsMoodleUpgrade = Test-UckkLocalPlanFlag -Plan $Plan -PropertyName "NeedsMoodleUpgrade" -Default $false
+    $needsPurgeCaches = Test-UckkLocalPlanFlag -Plan $Plan -PropertyName "NeedsPurgeCaches" -Default (-not $hasPlan)
+
+    if ($needsAmdBuild) {
+        $needsPurgeCaches = $true
+    }
+
+    if ($needsMoodleUpgrade) {
+        $needsPurgeCaches = $true
+    }
+
+    $syncResults = @()
+    $amdResults = @()
+    $upgradeResult = $null
+    $siteProfileResult = $null
+    $purgeResult = $null
+
+    if ($needsLocalSync) {
+        $syncResults = @(Sync-UckkLocalSourceToRuntime)
+    }
+
+    if ($needsAmdBuild) {
+        foreach ($component in $AmdComponents) {
+            $amdResults += Invoke-UckkLocalAmdBuild -Component $component
+        }
+    }
+
+    if ($needsMoodleUpgrade) {
+        $upgradeResult = Invoke-UckkLocalMoodleUpgrade -AllowUnstable:$AllowUnstable
+    }
+
+    if (-not $SkipSiteProfile.IsPresent) {
+        $siteProfileResult = Invoke-UckkLocalApplySiteProfile
+    }
+
+    if ($needsPurgeCaches) {
+        $purgeResult = Invoke-UckkLocalPurgeCaches
+    }
+
+    [pscustomobject]@{
+        Status              = "completed"
+        NeedsLocalSync      = $needsLocalSync
+        NeedsAmdBuild       = $needsAmdBuild
+        NeedsMoodleUpgrade  = $needsMoodleUpgrade
+        NeedsPurgeCaches    = $needsPurgeCaches
+        Synced              = @($syncResults | Where-Object { $_.Status -eq "synced" }).Count
+        FailedSync          = @($syncResults | Where-Object { $_.Status -eq "failed" }).Count
+        SyncResults         = $syncResults
+        AmdBuildResults     = $amdResults
+        MoodleUpgrade       = $upgradeResult
+        SiteProfile         = $siteProfileResult
+        PurgeCaches         = $purgeResult
+    }
+}
+
 function Invoke-UckkLocalFullSync {
     $sync = Sync-UckkLocalAll
     $profile = Invoke-UckkLocalApplySiteProfile
@@ -529,11 +748,11 @@ function Invoke-UckkLocalFullSync {
 
 function Get-UckkLocalStatus {
     [pscustomobject]@{
-        SourceRoot  = Get-UckkLocalSourceRoot
-        RuntimeRoot = Get-UckkLocalRuntimeRoot
-        MoodleRoot  = Get-UckkLocalMoodleRoot
-        CliRoot     = Get-UckkLocalMoodleCliRoot
-        PhpExe      = Get-UckkLocalPhpExe
+        SourceRoot   = Get-UckkLocalSourceRoot
+        RuntimeRoot  = Get-UckkLocalRuntimeRoot
+        MoodleRoot   = Get-UckkLocalMoodleRoot
+        CliRoot      = Get-UckkLocalMoodleCliRoot
+        PhpExe       = Get-UckkLocalPhpExe
         LocalUrl     = Get-UckkLocalUrl
         SiteProfile  = Get-UckkLocalSiteProfile
         Components   = Get-UckkLocalComponents
@@ -561,8 +780,12 @@ Export-ModuleMember -Function `
     Get-UckkLocalAmdBuildCommandPreview, `
     Get-UckkLocalUpgradeCommandPreview, `
     Get-UckkLocalPurgeCommandPreview, `
+    Test-UckkLocalPlanFlag, `
+    Stop-UckkLocalAmdBuildProcesses, `
     Test-UckkLocalPaths, `
     Assert-UckkLocalReady, `
+    Invoke-UckkLocalAmdBuild, `
+    Invoke-UckkLocalMoodleUpgrade, `
     Sync-UckkLocalComponent, `
     Sync-UckkLocalAll, `
     Sync-UckkLocalSourceToRuntime, `
@@ -573,5 +796,6 @@ Export-ModuleMember -Function `
     Start-UckkLocalMoodle, `
     Stop-UckkLocalMoodleServer, `
     Stop-UckkLocalMoodle, `
+    Invoke-UckkLocalPrepare, `
     Invoke-UckkLocalFullSync, `
     Get-UckkLocalStatus

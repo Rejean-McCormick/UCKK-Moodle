@@ -66,6 +66,54 @@ function Get-UckkObjectBooleanFlag {
     return [bool]$property.Value
 }
 
+function Get-UckkObjectBooleanAnyFlag {
+    param(
+        [AllowNull()][object]$Object,
+        [Parameter(Mandatory = $true)][string[]]$Names,
+        [bool]$Default = $false
+    )
+
+    if ($null -eq $Object) {
+        return $Default
+    }
+
+    foreach ($name in $Names) {
+        if (Get-UckkObjectBooleanFlag -Object $Object -Name $name -Default $false) {
+            return $true
+        }
+    }
+
+    return $Default
+}
+
+function Get-UckkServerMoodlePaths {
+    $settings = Get-UckkServerSettings
+
+    $workRoot = if ([string]::IsNullOrWhiteSpace([string]$settings.MoodleRoot)) {
+        $settings.RuntimeRoot
+    } else {
+        $settings.MoodleRoot
+    }
+
+    $cliRoot = if ([string]::IsNullOrWhiteSpace([string]$settings.MoodleCliRoot)) {
+        "$($settings.RuntimeRoot)/admin/cli"
+    } else {
+        $settings.MoodleCliRoot
+    }
+
+    if ([string]::IsNullOrWhiteSpace([string]$workRoot)) {
+        throw "Missing server Moodle root: ServerMoodleRoot or ServerRuntimeRoot"
+    }
+
+    if ([string]::IsNullOrWhiteSpace([string]$cliRoot)) {
+        throw "Missing server Moodle CLI root: ServerMoodleCliRoot or ServerRuntimeRoot/admin/cli"
+    }
+
+    [pscustomobject]@{
+        WorkRoot = ([string]$workRoot).TrimEnd('/')
+        CliRoot  = ([string]$cliRoot).TrimEnd('/')
+    }
+}
 
 function Get-UckkServerSiteProfile {
     $config = Get-UckkOpsConfig
@@ -295,42 +343,18 @@ function Sync-UckkServerSourceToRuntime {
 }
 
 function Invoke-UckkServerMoodleUpgrade {
-    $settings = Get-UckkServerSettings
-
-    $cliRoot = if ([string]::IsNullOrWhiteSpace([string]$settings.MoodleCliRoot)) {
-        "$($settings.RuntimeRoot)/admin/cli"
-    } else {
-        $settings.MoodleCliRoot
-    }
-
-    $workRoot = if ([string]::IsNullOrWhiteSpace([string]$settings.MoodleRoot)) {
-        $settings.RuntimeRoot
-    } else {
-        $settings.MoodleRoot
-    }
+    $paths = Get-UckkServerMoodlePaths
 
     Invoke-UckkServerCommand `
-        -Command "cd '$workRoot' && sudo -u www-data php '$cliRoot/upgrade.php' --non-interactive" `
+        -Command "cd '$($paths.WorkRoot)' && sudo -u www-data php '$($paths.CliRoot)/upgrade.php' --non-interactive" `
         -RequireSuccess
 }
 
 function Clear-UckkServerMoodleCaches {
-    $settings = Get-UckkServerSettings
-
-    $cliRoot = if ([string]::IsNullOrWhiteSpace([string]$settings.MoodleCliRoot)) {
-        "$($settings.RuntimeRoot)/admin/cli"
-    } else {
-        $settings.MoodleCliRoot
-    }
-
-    $workRoot = if ([string]::IsNullOrWhiteSpace([string]$settings.MoodleRoot)) {
-        $settings.RuntimeRoot
-    } else {
-        $settings.MoodleRoot
-    }
+    $paths = Get-UckkServerMoodlePaths
 
     Invoke-UckkServerCommand `
-        -Command "cd '$workRoot' && sudo -u www-data php '$cliRoot/purge_caches.php'" `
+        -Command "cd '$($paths.WorkRoot)' && sudo -u www-data php '$($paths.CliRoot)/purge_caches.php'" `
         -RequireSuccess
 }
 
@@ -417,36 +441,47 @@ function Invoke-UckkServerDeployPlanned {
         [AllowNull()][object]$Plan = $null,
         [switch]$SkipPull,
         [switch]$SkipSync,
-        [switch]$AlwaysUpgrade,
-        [switch]$AlwaysPurge,
-        [switch]$AlwaysSmoke,
+        [Alias("ForceUpgrade")][switch]$AlwaysUpgrade,
+        [Alias("ForcePurge")][switch]$AlwaysPurge,
+        [Alias("ForceSmoke")][switch]$AlwaysSmoke,
         [switch]$SkipSiteProfile,
-        [switch]$ReloadPhpFpm
+        [switch]$ReloadPhpFpm,
+        [switch]$SafeWhenNoPlan
     )
 
     $hasPlan = ($null -ne $Plan)
     $needsSiteProfile = (-not $SkipSiteProfile.IsPresent)
 
-    $needsUpgrade = $AlwaysUpgrade.IsPresent -or (
-        $hasPlan -and (Get-UckkObjectBooleanFlag -Object $Plan -Name "NeedsMoodleUpgrade")
-    )
+    $planNeedsUpgrade = $hasPlan -and (Get-UckkObjectBooleanAnyFlag `
+        -Object $Plan `
+        -Names @("NeedsServerUpgrade", "NeedsMoodleUpgrade"))
+
+    $planNeedsPurge = $hasPlan -and (Get-UckkObjectBooleanAnyFlag `
+        -Object $Plan `
+        -Names @("NeedsServerPurge", "NeedsPurgeCaches"))
+
+    $planNeedsSmoke = $hasPlan -and (Get-UckkObjectBooleanAnyFlag `
+        -Object $Plan `
+        -Names @("NeedsServerSmoke", "NeedsSmokeTests"))
+
+    $needsUpgrade = $AlwaysUpgrade.IsPresent -or $planNeedsUpgrade
 
     # Safe default: if no plan is supplied, purge server caches after deploy.
-    # This prevents mixed states such as new PHP/templates with old compiled CSS.
-    $needsPurge = $AlwaysPurge.IsPresent -or (
-        $needsSiteProfile
-    ) -or (
-        -not $hasPlan
-    ) -or (
-        $hasPlan -and (Get-UckkObjectBooleanFlag -Object $Plan -Name "NeedsPurgeCaches")
-    )
+    # This prevents mixed states such as new PHP/templates with old Moodle caches.
+    $needsPurge = $AlwaysPurge.IsPresent -or `
+        $needsSiteProfile -or `
+        $needsUpgrade -or `
+        $planNeedsPurge -or `
+        (-not $hasPlan) -or `
+        ($SafeWhenNoPlan.IsPresent -and -not $hasPlan)
 
-    # Safe default: if no plan is supplied, smoke test after deploy.
-    $needsSmoke = $AlwaysSmoke.IsPresent -or (
-        -not $hasPlan
-    ) -or (
-        $hasPlan -and (Get-UckkObjectBooleanFlag -Object $Plan -Name "NeedsSmokeTests")
-    )
+    # Smoke after purge/upgrade by default, because deploy verification should test
+    # the state users will actually hit after server cache invalidation.
+    $needsSmoke = $AlwaysSmoke.IsPresent -or `
+        $needsPurge -or `
+        $planNeedsSmoke -or `
+        (-not $hasPlan) -or `
+        ($SafeWhenNoPlan.IsPresent -and -not $hasPlan)
 
     "Server deploy planned:"
     "- Pull source: $(-not $SkipPull.IsPresent)"
@@ -507,6 +542,8 @@ Export-ModuleMember -Function `
     Get-UckkServerSettings, `
     Assert-UckkOpsServerConfig, `
     Get-UckkObjectBooleanFlag, `
+    Get-UckkObjectBooleanAnyFlag, `
+    Get-UckkServerMoodlePaths, `
     Get-UckkServerSiteProfile, `
     Invoke-UckkServerApplySiteProfile, `
     Invoke-UckkServerCommand, `

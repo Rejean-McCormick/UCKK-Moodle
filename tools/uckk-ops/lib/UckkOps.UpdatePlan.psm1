@@ -429,7 +429,7 @@ function Resolve-UckkOpsRequiredActions {
         ).Count -gt 0
 
         if (-not $hasBuildOutput) {
-            $state.Warnings += "AMD source changed but no AMD build output is currently changed. Build AMD before committing."
+            $state.Warnings += "AMD source changed but no AMD build output is currently changed. Sync source to local runtime, then build AMD before committing."
         }
     }
 
@@ -516,12 +516,14 @@ function Get-UckkOpsRecommendedOrder {
         $order += "Validate source"
     }
 
-    if ($Actions.NeedsAmdBuild) {
-        $order += "Build AMD"
-    }
-
+    # AMD builds run against the local runtime component root. Therefore the
+    # source repository must be synced to the runtime before invoking grunt.
     if ($Actions.NeedsLocalSync) {
         $order += "Sync source to local runtime"
+    }
+
+    if ($Actions.NeedsAmdBuild) {
+        $order += "Build AMD from local runtime"
     }
 
     if ($Actions.NeedsMoodleUpgrade) {
@@ -550,6 +552,10 @@ function Get-UckkOpsRecommendedOrder {
 
     if ($hasServerAction) {
         $order += "Deploy server"
+    }
+
+    if ($Actions.NeedsServerSync) {
+        $order += "Sync server source to runtime"
     }
 
     if ($Actions.NeedsServerUpgrade) {
@@ -639,16 +645,17 @@ function Get-UckkOpsCommandPreview {
 
     $commands = @()
 
+    if ($Actions.NeedsLocalSync) {
+        $commands += "Sync-UckkLocalSourceToRuntime"
+    }
+
     if ($Actions.NeedsAmdBuild) {
         foreach ($component in @(Get-UckkOpsAmdBuildComponents -ChangedFiles $ChangedFiles)) {
             $amdRoot = Get-UckkOpsRuntimeComponentRoot -Component $component
             $commands += "cd `"$localMoodleRoot`""
+            $commands += "Get-Process node, rollup, grunt -ErrorAction SilentlyContinue | Stop-Process -Force"
             $commands += "npx grunt amd --root=$amdRoot --no-color"
         }
-    }
-
-    if ($Actions.NeedsLocalSync) {
-        $commands += "Sync-UckkLocalSourceToRuntime"
     }
 
     if ($Actions.NeedsMoodleUpgrade) {
@@ -681,7 +688,7 @@ function Get-UckkOpsCommandPreview {
         $commands += "Invoke-UckkServerDeployPlanned -Plan `$Script:LastUpdatePlan"
     }
     elseif ($Actions.NeedsServerPurge -or $Actions.NeedsServerSmoke) {
-        $commands += "Invoke-UckkServerDeployPlanned -Plan `$Script:LastUpdatePlan -ForcePurge -ForceSmoke"
+        $commands += "Invoke-UckkServerDeployPlanned -Plan `$Script:LastUpdatePlan -SkipPull -SkipSync -AlwaysPurge -AlwaysSmoke"
     }
 
     return $commands
@@ -797,12 +804,12 @@ function Get-UckkOpsSpecialInstructions {
     $prepare = @()
     $publishOvh = @()
 
-    if ($Plan.NeedsAmdBuild) {
-        $prepare += "build AMD"
-    }
-
     if ($Plan.NeedsLocalSync) {
         $prepare += "sync source -> runtime local"
+    }
+
+    if ($Plan.NeedsAmdBuild) {
+        $prepare += "build AMD depuis runtime local"
     }
 
     if ($Plan.NeedsMoodleUpgrade) {
@@ -830,7 +837,7 @@ function Get-UckkOpsSpecialInstructions {
     }
 
     if ($Plan.HasChanges) {
-        $lines += "Publier GitHub fera : commit + push du code." 
+        $lines += "Publier GitHub fera : commit + push du code."
     }
 
     if ($Plan.NeedsServerSync) {
@@ -914,8 +921,8 @@ function Format-UckkOpsUpdatePlan {
 
     $lines += ""
     $lines += "Required local actions:"
-    $lines += "- AMD build: $($Plan.NeedsAmdBuild)"
     $lines += "- Local sync: $($Plan.NeedsLocalSync)"
+    $lines += "- AMD build: $($Plan.NeedsAmdBuild)"
     $lines += "- Moodle upgrade local: $($Plan.NeedsMoodleUpgrade)"
     $lines += "- Purge local caches: $($Plan.NeedsPurgeCaches)"
     $lines += "- Smoke local: $($Plan.NeedsSmokeTests)"

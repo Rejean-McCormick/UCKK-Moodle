@@ -67,7 +67,7 @@
 
                 <div class="local-uckk-course-explorer__control local-uckk-course-explorer__control--category">
                     <label class="local-uckk-course-explorer__label" for="{{uniqid}}-course-category">
-                        Bloc
+                        Voie (programme d'études)
                     </label>
 
                     <select
@@ -190,29 +190,40 @@
                             {{/body}}
 
                             <div class="local-uckk-course-card__meta">
-                                {{#eyebrow}}
+                                {{#category}}
                                     <p class="local-uckk-public-card__eyebrow local-uckk-course-card__meta-line local-uckk-course-card__meta-line--pathway">
-                                        <span class="local-uckk-course-card__meta-label">Voie</span>
-                                        <span class="local-uckk-course-card__pathway">{{eyebrow}}</span>
+                                        <span class="local-uckk-course-card__pathway">{{category}}</span>
                                     </p>
-                                {{/eyebrow}}
+                                {{/category}}
+
+                                {{^category}}
+                                    {{#categorylabel}}
+                                        <p class="local-uckk-public-card__eyebrow local-uckk-course-card__meta-line local-uckk-course-card__meta-line--pathway">
+                                            <span class="local-uckk-course-card__pathway">{{categorylabel}}</span>
+                                        </p>
+                                    {{/categorylabel}}
+
+                                    {{^categorylabel}}
+                                        {{#eyebrow}}
+                                            <p class="local-uckk-public-card__eyebrow local-uckk-course-card__meta-line local-uckk-course-card__meta-line--pathway">
+                                                <span class="local-uckk-course-card__pathway">{{eyebrow}}</span>
+                                            </p>
+                                        {{/eyebrow}}
+                                    {{/categorylabel}}
+                                {{/category}}
 
                                 {{#shortname}}
                                     <p class="local-uckk-public-card__eyebrow local-uckk-course-card__meta-line local-uckk-course-card__meta-line--code">
-                                        <span class="local-uckk-course-card__meta-label">Numéro de cours</span>
                                         <span class="local-uckk-course-card__code">{{shortname}}</span>
                                     </p>
                                 {{/shortname}}
 
                                 {{^shortname}}
-                                    {{#metadata}}
-                                        {{#value}}
-                                            <p class="local-uckk-public-card__eyebrow local-uckk-course-card__meta-line local-uckk-course-card__meta-line--code">
-                                                <span class="local-uckk-course-card__meta-label">Numéro de cours</span>
-                                                <span class="local-uckk-course-card__code">{{value}}</span>
-                                            </p>
-                                        {{/value}}
-                                    {{/metadata}}
+                                    {{#code}}
+                                        <p class="local-uckk-public-card__eyebrow local-uckk-course-card__meta-line local-uckk-course-card__meta-line--code">
+                                            <span class="local-uckk-course-card__code">{{code}}</span>
+                                        </p>
+                                    {{/code}}
                                 {{/shortname}}
                             </div>
                         </div>

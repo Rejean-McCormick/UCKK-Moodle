@@ -320,8 +320,8 @@ const normalizeCourse = course => {
     ).trim();
 
     const category = toString(
-        safe.categorylabel
-        || safe.category
+        safe.category
+        || safe.categorylabel
         || safe.eyebrow
         || metadataValue(metadata, ['Voie', 'Catégorie', 'Categorie'])
         || ''
@@ -336,15 +336,11 @@ const normalizeCourse = course => {
     };
 };
 
-const createCourseMetaLine = (label, value, valueClass) => {
+const createCourseMetaLine = (value, valueClass, modifier) => {
     const line = document.createElement('p');
-    line.className = 'local-uckk-public-card__eyebrow local-uckk-course-card__meta-line';
 
-    line.appendChild(createTextElement(
-        'span',
-        'local-uckk-course-card__meta-label',
-        label
-    ));
+    line.className = 'local-uckk-public-card__eyebrow local-uckk-course-card__meta-line'
+        + (modifier ? ` local-uckk-course-card__meta-line--${modifier}` : '');
 
     line.appendChild(createTextElement(
         'span',
@@ -357,21 +353,22 @@ const createCourseMetaLine = (label, value, valueClass) => {
 
 const createCourseMetadata = course => {
     const meta = document.createElement('div');
+
     meta.className = 'local-uckk-course-card__meta';
 
     if (course.category !== '') {
         meta.appendChild(createCourseMetaLine(
-            'Voie',
             course.category,
-            'local-uckk-course-card__pathway'
+            'local-uckk-course-card__pathway',
+            'pathway'
         ));
     }
 
     if (course.shortname !== '') {
         meta.appendChild(createCourseMetaLine(
-            'Numéro de cours',
             course.shortname,
-            'local-uckk-course-card__code'
+            'local-uckk-course-card__code',
+            'code'
         ));
     }
 
@@ -453,6 +450,7 @@ const updateLoadMore = (root, response, state) => {
     }
 
     const hasMore = Boolean(response.hasmore || response.has_more);
+
     loadMore.hidden = !hasMore;
     loadMore.classList.toggle(CLASSES.hidden, !hasMore);
     loadMore.dataset.nextPage = String((state.page || DEFAULT_STATE.page) + 1);
@@ -508,6 +506,7 @@ const search = async(root, state, append = false) => {
         updateLoadMore(root, response, state);
 
         const empty = response.courses.length === 0 && !append;
+
         setEmpty(root, empty);
 
         if (response.message !== '') {
@@ -605,11 +604,13 @@ const bindEvents = (root, state) => {
 const resolveRoots = initialState => {
     if (typeof initialState === 'string' && initialState !== '') {
         const rootById = document.getElementById(initialState);
+
         return rootById ? [rootById] : [];
     }
 
     if (initialState && initialState.rootId) {
         const rootByStateId = document.getElementById(initialState.rootId);
+
         return rootByStateId ? [rootByStateId] : [];
     }
 

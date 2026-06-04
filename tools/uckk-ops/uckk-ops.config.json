@@ -2,7 +2,7 @@
   "schema": "uckk.ops.config.v1",
   "app": {
     "name": "UCKK Ops Console",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "environment": "dev"
   },
   "local": {
@@ -63,7 +63,16 @@
       "openLocal": "Ouvrir local"
     },
     "summaryTitle": "Résumé du plan",
-    "showAdvancedActionsInSimpleTab": false
+    "showAdvancedActionsInSimpleTab": false,
+    "prepareLocalOrder": [
+      "syncLocal",
+      "buildAmd",
+      "syncAmdBuildOutputBackToSource",
+      "moodleUpgrade",
+      "applySiteProfile",
+      "purgeCaches",
+      "smokeTests"
+    ]
   },
   "components": [
     "local/uckk",
@@ -87,6 +96,25 @@
         "enabled": true,
         "patterns": [
           "*/amd/src/*.js"
+        ],
+        "buildRoot": "runtime",
+        "runAfterLocalSync": true,
+        "syncBuildOutputBackToSource": true,
+        "buildOutputPatterns": [
+          "*/amd/build/*.js",
+          "*/amd/build/*.map"
+        ],
+        "stopProcessesBeforeBuild": [
+          "node",
+          "rollup",
+          "grunt"
+        ],
+        "retryOnFailure": true,
+        "maxRetries": 1,
+        "retryDelaySeconds": 2,
+        "retryErrorPatterns": [
+          "kill EPERM",
+          "EPERM"
         ]
       },
       "moodleUpgrade": {
@@ -106,6 +134,9 @@
       "purgeCaches": {
         "enabled": true,
         "patterns": [
+          "*/amd/src/*.js",
+          "*/amd/build/*.js",
+          "*/amd/build/*.map",
           "*/lang/*.php",
           "*/templates/*.mustache",
           "*/styles.css",
@@ -164,12 +195,16 @@
       "serverApplySiteProfileAfterSync": true,
       "serverPurgeCachesWhenPlanned": true,
       "serverSmokeTestsWhenPlanned": true,
-      "serverPurgeCachesAfterThemeSync": true
+      "serverPurgeCachesAfterThemeSync": true,
+      "serverPurgeCachesAfterAmdSync": true,
+      "serverRequiresAmdBuildOutput": true,
+      "serverBuildAmd": false
     },
     "recommendedOrder": [
       "Validate source",
-      "Build AMD when planned",
       "Sync source to local runtime",
+      "Build AMD when planned",
+      "Sync AMD build output back to source when planned",
       "Run local Moodle upgrade when planned",
       "Apply local site profile",
       "Purge local caches",

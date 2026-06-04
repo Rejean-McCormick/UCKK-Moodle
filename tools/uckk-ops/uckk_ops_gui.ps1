@@ -361,9 +361,9 @@ function Invoke-UckkServerDeployPlanned {
     "2/6 Sync source -> runtime serveur"
     Sync-UckkServerSourceToRuntime
 
-    $needsUpgrade = Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsMoodleUpgrade"
-    $needsPurge = (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsPurgeCaches") -or $needsUpgrade
-    $needsSmoke = (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsSmokeTests") -or $needsPurge
+    $needsUpgrade = (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsServerUpgrade") -or (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsMoodleUpgrade")
+    $needsPurge = (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsServerPurge") -or (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsPurgeCaches") -or $needsUpgrade
+    $needsSmoke = (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsServerSmoke") -or (Test-UckkPlanFlag -Plan $Plan -PropertyName "NeedsSmokeTests") -or $needsPurge
 
     if (-not $hasPlan -and $SafeWhenNoPlan) {
         $needsPurge = $true
@@ -561,12 +561,12 @@ function Resolve-UckkOpsRecommendedOrder {
     $steps += "Scan changes"
     $steps += "Prepare local"
 
-    if ($Plan.NeedsAmdBuild) {
-        $steps += "  - Build AMD"
-    }
-
     if ($Plan.NeedsLocalSync) {
         $steps += "  - Sync source to local runtime"
+    }
+
+    if ($Plan.NeedsAmdBuild) {
+        $steps += "  - Build AMD in local runtime"
     }
 
     if ($Plan.NeedsMoodleUpgrade) {
@@ -643,6 +643,7 @@ function Get-UckkOpsUpdatePlan {
             $needsMoodleUpgrade = $true
             $needsLocalSync = $true
             $needsPurgeCaches = $true
+            $needsSmokeTests = $true
         }
 
         if (Test-UckkOpsPathMatch -Path $path -Pattern '(^|/)lang/.*\.php$') {
@@ -661,6 +662,7 @@ function Get-UckkOpsUpdatePlan {
         }
 
         if (Test-UckkOpsPathMatch -Path $path -Pattern '^academic_registry_json/.*\.json$') {
+            $needsLocalSync = $true
             $needsSeedApply = $true
             $needsPurgeCaches = $true
             $needsSmokeTests = $true
@@ -677,7 +679,7 @@ function Get-UckkOpsUpdatePlan {
         }).Count -gt 0
 
         if (-not $hasBuildOutput) {
-            $warnings += "AMD source changed but no AMD build output is currently changed."
+            $warnings += "AMD source changed but no AMD build output is currently changed. Prepare local will build AMD in runtime and copy amd/build back to source."
         }
     }
 
@@ -692,8 +694,16 @@ function Get-UckkOpsUpdatePlan {
             Sort-Object
     )
 
+    $hasMoodleChanges = $needsLocalSync -or $needsAmdBuild -or $needsMoodleUpgrade -or $needsPurgeCaches -or $needsSmokeTests -or $needsSeedApply
+    $needsServerSync = $hasMoodleChanges
+    $needsServerUpgrade = $needsMoodleUpgrade
+    $needsServerPurge = $needsPurgeCaches -or $needsMoodleUpgrade
+    $needsServerSmoke = $needsSmokeTests -or $needsPurgeCaches -or $needsMoodleUpgrade
+
     $plan = [pscustomobject]@{
         HasChanges         = $hasChanges
+        HasMoodleChanges   = $hasMoodleChanges
+        IsOpsOnly          = $hasChanges -and (-not $hasMoodleChanges)
         ChangedFiles       = $changedFiles
         ChangedComponents  = $changedComponents
         NeedsLocalSync     = $needsLocalSync
@@ -702,6 +712,10 @@ function Get-UckkOpsUpdatePlan {
         NeedsPurgeCaches   = $needsPurgeCaches
         NeedsSmokeTests    = $needsSmokeTests
         NeedsSeedApply     = $needsSeedApply
+        NeedsServerSync    = $needsServerSync
+        NeedsServerUpgrade = $needsServerUpgrade
+        NeedsServerPurge   = $needsServerPurge
+        NeedsServerSmoke   = $needsServerSmoke
         Warnings           = @($warnings | Select-Object -Unique)
         RecommendedOrder   = @()
     }
@@ -748,10 +762,11 @@ function Format-UckkOpsUpdatePlan {
     $lines += "- Seed apply: $($Plan.NeedsSeedApply)"
     $lines += ""
     $lines += "Server actions after push:"
-    $lines += "- Server deploy: True"
-    $lines += "- Server upgrade: $($Plan.NeedsMoodleUpgrade)"
-    $lines += "- Server purge caches: $(($Plan.NeedsPurgeCaches -or $Plan.NeedsMoodleUpgrade))"
-    $lines += "- Server smoke tests: $(($Plan.NeedsSmokeTests -or $Plan.NeedsPurgeCaches -or $Plan.NeedsMoodleUpgrade))"
+    $lines += "- Server deploy: $($Plan.HasMoodleChanges)"
+    $lines += "- Server sync: $($Plan.NeedsServerSync)"
+    $lines += "- Server upgrade: $($Plan.NeedsServerUpgrade)"
+    $lines += "- Server purge caches: $($Plan.NeedsServerPurge)"
+    $lines += "- Server smoke tests: $($Plan.NeedsServerSmoke)"
 
     if (@($Plan.Warnings).Count -gt 0) {
         $lines += ""
@@ -771,7 +786,7 @@ function Format-UckkOpsUpdatePlan {
 
     if ($Plan.NeedsAmdBuild) {
         $lines += ""
-        $lines += "AMD command:"
+        $lines += "AMD command after local sync:"
         $lines += "cd `"$Script:LocalMoodleRoot`""
         $lines += "npx grunt amd --root=public/local/uckk --no-color"
     }
@@ -785,9 +800,6 @@ function Format-UckkOpsUpdatePlan {
 
     return $lines
 }
-
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type -AssemblyName System.Drawing
 
 function New-UckkButton {
     param(
@@ -894,11 +906,34 @@ function ConvertTo-UckkPhpLiteral {
 }
 
 function New-UckkSiteProfilePhpCode {
+    param(
+        [Parameter(Mandatory = $true)][string]$MoodleRoot
+    )
+
+    $normalizedMoodleRoot = ([string]$MoodleRoot).Trim()
+
+    if ([string]::IsNullOrWhiteSpace($normalizedMoodleRoot)) {
+        throw "MoodleRoot requis pour generer le site profile PHP."
+    }
+
+    while ($normalizedMoodleRoot.Length -gt 1 -and ($normalizedMoodleRoot.EndsWith("/") -or $normalizedMoodleRoot.EndsWith("\"))) {
+        $normalizedMoodleRoot = $normalizedMoodleRoot.Substring(0, $normalizedMoodleRoot.Length - 1)
+    }
+
+    $moodleRootLiteral = ConvertTo-UckkPhpSingleQuotedString -Value $normalizedMoodleRoot
+    $configSuffixLiteral = ConvertTo-UckkPhpSingleQuotedString -Value "/config.php"
+
     $lines = @()
 
     $lines += "<?php"
     $lines += "define('CLI_SCRIPT', true);"
-    $lines += "require_once(__DIR__ . '/config.php');"
+    $lines += '$moodleroot = ' + $moodleRootLiteral + ';'
+    $lines += '$configfile = $moodleroot . ' + $configSuffixLiteral + ';'
+    $lines += 'if (!is_readable($configfile)) {'
+    $lines += '    fwrite(STDERR, "Moodle config.php not found: " . $configfile . PHP_EOL);'
+    $lines += '    exit(1);'
+    $lines += '}'
+    $lines += 'require_once($configfile);'
     $lines += 'global $DB;'
     $lines += ""
 
@@ -914,10 +949,25 @@ function New-UckkSiteProfilePhpCode {
 
     $lines += ""
     $lines += '$site = get_site();'
-    $lines += '$site->fullname = ' + (ConvertTo-UckkPhpSingleQuotedString -Value $Script:SiteProfileFullname) + ';'
-    $lines += '$site->shortname = ' + (ConvertTo-UckkPhpSingleQuotedString -Value $Script:SiteProfileShortname) + ';'
-    $lines += '$site->timemodified = time();'
-    $lines += '$DB->update_record(' + (ConvertTo-UckkPhpSingleQuotedString -Value 'course') + ', $site);'
+    $lines += '$changed = false;'
+    $lines += '$targetfullname = ' + (ConvertTo-UckkPhpSingleQuotedString -Value $Script:SiteProfileFullname) + ';'
+    $lines += '$targetshortname = ' + (ConvertTo-UckkPhpSingleQuotedString -Value $Script:SiteProfileShortname) + ';'
+    $lines += 'if ((string)$site->fullname !== (string)$targetfullname) {'
+    $lines += '    $site->fullname = $targetfullname;'
+    $lines += '    $changed = true;'
+    $lines += '}'
+    $lines += 'if ((string)$site->shortname !== (string)$targetshortname) {'
+    $lines += '    $site->shortname = $targetshortname;'
+    $lines += '    $changed = true;'
+    $lines += '}'
+    $lines += 'if ($changed) {'
+    $lines += '    $site->timemodified = time();'
+    $lines += '    $DB->update_record(' + (ConvertTo-UckkPhpSingleQuotedString -Value 'course') + ', $site);'
+    $lines += '    echo "site: fullname=" . $site->fullname . PHP_EOL;'
+    $lines += '    echo "site: shortname=" . $site->shortname . PHP_EOL;'
+    $lines += '} else {'
+    $lines += '    echo "site: unchanged" . PHP_EOL;'
+    $lines += '}'
     $lines += ""
     $lines += "purge_all_caches();"
     $lines += 'echo "UCKK site profile applied\n";'
@@ -934,7 +984,7 @@ function Invoke-UckkLocalApplySiteProfile {
 
     $moodleRoot = Split-Path -Parent $configPath
     $tmp = Join-Path $moodleRoot "uckk_site_profile_tmp.php"
-    $script = New-UckkSiteProfilePhpCode
+    $script = New-UckkSiteProfilePhpCode -MoodleRoot $moodleRoot
 
     try {
         Set-Content -LiteralPath $tmp -Value $script -Encoding UTF8
@@ -954,10 +1004,14 @@ function Invoke-UckkLocalApplySiteProfile {
 }
 
 function Invoke-UckkServerApplySiteProfile {
-    $script = New-UckkSiteProfilePhpCode
+    if ([string]::IsNullOrWhiteSpace($Script:ServerMoodleRoot)) {
+        throw "Server Moodle root manquant dans la config."
+    }
+
+    $script = New-UckkSiteProfilePhpCode -MoodleRoot $Script:ServerMoodleRoot
     $encoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($script))
-    $remoteTmp = "/tmp/uckk_site_profile.php"
-    $cmd = "cd '$Script:ServerMoodleRoot' && printf '%s' '$encoded' | base64 -d | sudo tee '$remoteTmp' >/dev/null && sudo -u www-data php '$remoteTmp' && sudo rm -f '$remoteTmp'"
+    $remoteTmp = "/tmp/uckk_site_profile_$([Guid]::NewGuid().ToString('N')).php"
+    $cmd = "cd '$Script:ServerMoodleRoot' && printf '%s' '$encoded' | base64 -d | sudo tee '$remoteTmp' >/dev/null && sudo chmod 0644 '$remoteTmp' && sudo -u www-data php '$remoteTmp'; rc=`$?; sudo rm -f '$remoteTmp'; exit `$rc"
 
     Invoke-UckkSshCommand $cmd
 }
@@ -1012,8 +1066,8 @@ function Format-UckkSimplePlanSummary {
     $lines += ""
     $lines += "Preparer local fera :"
 
-    if ($Plan.NeedsAmdBuild) { $lines += "- build AMD" }
     if ($Plan.NeedsLocalSync) { $lines += "- sync source -> runtime local" }
+    if ($Plan.NeedsAmdBuild) { $lines += "- build AMD dans le runtime local" }
     if ($Plan.NeedsMoodleUpgrade) { $lines += "- upgrade Moodle local" }
     $lines += "- apply UCKK site profile local"
     $lines += "- purge caches local"
@@ -1028,7 +1082,7 @@ function Format-UckkSimplePlanSummary {
     if ($Plan.NeedsMoodleUpgrade) { $lines += "- upgrade Moodle serveur" }
     $lines += "- apply UCKK site profile serveur"
     $lines += "- purge caches serveur"
-    if ($Plan.NeedsSmokeTests -or $Plan.NeedsPurgeCaches -or $Plan.NeedsMoodleUpgrade) { $lines += "- smoke serveur" }
+    if ($Plan.NeedsServerSmoke) { $lines += "- smoke serveur" }
 
     if (@($Plan.Warnings).Count -gt 0) {
         $lines += ""
@@ -1050,17 +1104,20 @@ function Invoke-UckkSimplePrepareLocal {
 
     $plan = $Script:LastUpdatePlan
 
-    if ($plan.NeedsAmdBuild) {
-        "Build AMD local"
-        Invoke-UckkLocalAmdBuild
-    }
-
-    if ($plan.NeedsLocalSync -or $plan.HasChanges) {
+    if ($plan.NeedsLocalSync -or $plan.HasMoodleChanges) {
         "Sync source -> runtime local"
         Sync-UckkLocalSourceToRuntime
     }
     else {
         "Sync local : skipped"
+    }
+
+    if ($plan.NeedsAmdBuild) {
+        "Build AMD local"
+        Invoke-UckkLocalAmdBuild
+    }
+    else {
+        "Build AMD local : skipped"
     }
 
     if ($plan.NeedsMoodleUpgrade) {
@@ -1073,6 +1130,14 @@ function Invoke-UckkSimplePrepareLocal {
 
     "Apply UCKK site profile local"
     Invoke-UckkLocalApplySiteProfile
+
+    if ($plan.NeedsPurgeCaches -or $plan.NeedsAmdBuild -or $plan.NeedsMoodleUpgrade) {
+        "Purge caches local"
+        Clear-UckkLocalCaches
+    }
+    else {
+        "Purge caches local : skipped"
+    }
 
     "Launch/open Moodle local"
     Start-UckkLocalMoodleIfNeeded
@@ -1113,25 +1178,47 @@ function Invoke-UckkNormalWorkflowMinimal {
         [string]$CommitMessage
     )
 
-    "Workflow normal minimal : Sync local -> Launch local -> GitHub -> OVH"
+    "Workflow normal minimal : Scan -> Prepare local -> GitHub -> OVH"
 
-    "1/4 Sync local -> Moodle local"
-    Sync-UckkLocalSourceToRuntime
+    if ($null -eq $Script:LastUpdatePlan) {
+        "0/4 Scan update plan"
+        $Script:LastUpdatePlan = Get-UckkOpsUpdatePlan
+    }
 
-    "2/4 Launch Moodle local"
-    Start-UckkLocalMoodle
-    Start-Process $Script:LocalUrl | Out-Null
-    "opened: $Script:LocalUrl"
+    "1/4 Prepare local"
+    Invoke-UckkSimplePrepareLocal
 
-    "3/4 Sync GitHub"
+    "2/4 Sync GitHub"
     Invoke-UckkGitCommitPush -Message $CommitMessage
 
-    "4/4 Trigger sync OVH"
+    "3/4 Trigger sync OVH"
     Invoke-UckkServerDeployPlanned -Plan $Script:LastUpdatePlan -SafeWhenNoPlan
 
     "Workflow normal minimal termine."
 }
 
+function Stop-UckkLocalAmdBuildProcesses {
+    foreach ($name in @("node", "rollup", "grunt")) {
+        Get-Process $name -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+    }
+}
+
+function Copy-UckkLocalAmdBuildOutputToSource {
+    $runtimeBuild = Join-Path $Script:LocalRuntimeRoot "local\uckk\amd\build"
+    $sourceBuild = Join-Path $Script:LocalSourceRoot "local\uckk\amd\build"
+
+    if (-not (Test-Path -LiteralPath $runtimeBuild)) {
+        "AMD build output not found in runtime: $runtimeBuild"
+        return
+    }
+
+    if (-not (Test-Path -LiteralPath $sourceBuild)) {
+        New-Item -ItemType Directory -Path $sourceBuild -Force | Out-Null
+    }
+
+    Copy-Item -Path (Join-Path $runtimeBuild "*") -Destination $sourceBuild -Force
+    "synced AMD build output back to source: local/uckk/amd/build"
+}
 
 function Invoke-UckkLocalAmdBuild {
     $moodleRoot = $Script:LocalMoodleRoot
@@ -1141,14 +1228,35 @@ function Invoke-UckkLocalAmdBuild {
         throw "Moodle root local introuvable : $moodleRoot"
     }
 
-    Push-Location $moodleRoot
-    try {
-        Invoke-UckkCheckedNative {
-            & npx grunt amd "--root=$componentRoot" "--no-color"
-        } "Build AMD echoue."
-    }
-    finally {
-        Pop-Location
+    Stop-UckkLocalAmdBuildProcesses
+
+    $maxAttempts = 2
+    $attempt = 1
+
+    while ($attempt -le $maxAttempts) {
+        Push-Location $moodleRoot
+        try {
+            "AMD build attempt $attempt/$maxAttempts"
+            Invoke-UckkCheckedNative {
+                & npx grunt amd "--root=$componentRoot" "--no-color"
+            } "Build AMD echoue."
+
+            Copy-UckkLocalAmdBuildOutputToSource
+            return
+        }
+        catch {
+            if ($attempt -ge $maxAttempts) {
+                throw
+            }
+
+            "Build AMD failed on attempt $attempt. Cleaning node/rollup/grunt processes and retrying."
+            Stop-UckkLocalAmdBuildProcesses
+            Start-Sleep -Seconds 2
+            $attempt++
+        }
+        finally {
+            Pop-Location
+        }
     }
 }
 
