@@ -138,6 +138,10 @@ function Invoke-UckkServerApplySiteProfile {
 
     $profile = Get-UckkServerSiteProfile
 
+    $moodleRootForPhp = ([string]$workRoot).TrimEnd("/")
+    $moodleRootForPhp = $moodleRootForPhp.Replace("\", "/")
+    $moodleRootForPhpEscaped = $moodleRootForPhp.Replace("'", "\'")
+
     $payload = [ordered]@{
         fullname  = $profile.Fullname
         shortname = $profile.Shortname
@@ -150,7 +154,15 @@ function Invoke-UckkServerApplySiteProfile {
     $php = @"
 <?php
 define('CLI_SCRIPT', true);
-require_once(getcwd() . '/config.php');
+`$moodleroot = '$moodleRootForPhpEscaped';
+`$configfile = `$moodleroot . '/config.php';
+
+if (!is_readable(`$configfile)) {
+    fwrite(STDERR, "Moodle config.php not found or not readable: " . `$configfile . "\n");
+    exit(1);
+}
+
+require_once(`$configfile);
 global `$DB;
 
 `$payload = base64_decode('$payload64', true);
