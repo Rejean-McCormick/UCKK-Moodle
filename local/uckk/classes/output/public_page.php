@@ -56,7 +56,10 @@ defined('MOODLE_INTERNAL') || die();
  * - has_course_explorer, course_explorer_id, course_explorer,
  *   course_explorer_initial_state, course_explorer_initial_state_json;
  * - has_mediatheque_explorer, mediatheque_explorer_id, mediatheque_initial_state,
- *   mediatheque_initial_state_json.
+ *   mediatheque_initial_state_json;
+ * - has_mediatheque_item, mediatheque_item, mediatheque_item_payload,
+ *   has_mediatheque_item_error, mediatheque_item_error, mediatheque_item_back_url,
+ *   mediatheque_item_requested_uuid, mediatheque_item_requested_type.
  *
  * @package local_uckk
  */
@@ -238,6 +241,23 @@ final class public_page implements renderable, templatable {
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
         ) ?: '{}';
 
+        $data->mediatheque_item = self::array_value($this->definition, 'mediatheque_item');
+        $data->mediatheque_item_payload = self::array_value($this->definition, 'mediatheque_item_payload');
+        $data->has_mediatheque_item = self::bool_value(
+            $this->definition,
+            'has_mediatheque_item',
+            !empty($data->mediatheque_item)
+        );
+        $data->mediatheque_item_error = self::value($this->definition, 'mediatheque_item_error');
+        $data->has_mediatheque_item_error = self::bool_value(
+            $this->definition,
+            'has_mediatheque_item_error',
+            $data->mediatheque_item_error !== ''
+        );
+        $data->mediatheque_item_back_url = self::url_value($this->definition, 'mediatheque_item_back_url');
+        $data->mediatheque_item_requested_uuid = self::value($this->definition, 'mediatheque_item_requested_uuid');
+        $data->mediatheque_item_requested_type = self::value($this->definition, 'mediatheque_item_requested_type');
+
         $data->hasaside = $data->hasnotices || $data->hasmetadata || $data->hascta;
         $data->rootclasses = self::page_classes($this->slug, $layout, $data->hasaside);
         $data->classes = $data->rootclasses;
@@ -327,6 +347,14 @@ final class public_page implements renderable, templatable {
             'has_mediatheque_explorer' => false,
             'mediatheque_explorer_id' => '',
             'mediatheque_initial_state' => [],
+            'has_mediatheque_item' => false,
+            'mediatheque_item' => [],
+            'mediatheque_item_payload' => [],
+            'has_mediatheque_item_error' => false,
+            'mediatheque_item_error' => '',
+            'mediatheque_item_back_url' => '',
+            'mediatheque_item_requested_uuid' => '',
+            'mediatheque_item_requested_type' => '',
         ];
     }
 

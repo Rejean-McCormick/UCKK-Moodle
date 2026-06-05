@@ -107,7 +107,7 @@ final class mediatheque_page_test extends advanced_testcase {
         $this->assertStringContainsString("'query' => \$urlparams['q']", $source);
 
         $this->assertStringContainsString("'filters' => \$filters", $source);
-        $this->assertStringContainsString("'type' => \$urlparams['type']", $source);
+        $this->assertStringContainsString("'type' => \$detailtype", $source);
         $this->assertStringContainsString("'mediatype' => \$urlparams['mediatype']", $source);
         $this->assertStringContainsString("'collection' => \$urlparams['collection']", $source);
         $this->assertStringContainsString("'tag' => \$urlparams['tag']", $source);
@@ -125,6 +125,44 @@ final class mediatheque_page_test extends advanced_testcase {
         $this->assertStringContainsString("'perpage' => \$perpage", $source);
         $this->assertStringContainsString("'sort' => \$urlparams['sort']", $source);
         $this->assertStringContainsString("'sitewide' => \$cmid <= 0 && \$archiveid <= 0", $source);
+    }
+
+    /**
+     * The public controller must route item requests to the public detail DTO service.
+     *
+     * @return void
+     */
+    public function test_mediatheque_controller_routes_item_requests_to_public_detail_service(): void {
+        global $CFG;
+
+        $path = $CFG->dirroot . '/local/uckk/mediatheque.php';
+
+        $this->assertFileExists($path);
+
+        $source = file_get_contents($path);
+        $this->assertIsString($source);
+
+        $this->assertStringContainsString("optional_param('item', '', PARAM_ALPHANUMEXT)", $source);
+        $this->assertStringContainsString("\$isitemrequest = \$urlparams['item'] !== '';", $source);
+        $this->assertStringContainsString('\\mod_uckkarchive\\local\\public_mediatheque_service', $source);
+        $this->assertStringContainsString("method_exists(\$service, 'get_item')", $source);
+        $this->assertStringContainsString('$service->get_item($detailrequest', $source);
+        $this->assertStringContainsString("'uuid' => \$urlparams['item']", $source);
+        $this->assertStringContainsString("'type' => \$detailtype", $source);
+
+        $this->assertStringContainsString("'has_mediatheque_item'", $source);
+        $this->assertStringContainsString("'mediatheque_item'", $source);
+        $this->assertStringContainsString("'has_mediatheque_item_error'", $source);
+        $this->assertStringContainsString("'mediatheque_item_error'", $source);
+        $this->assertStringContainsString("'mediatheque_item_back_url'", $source);
+        $this->assertStringContainsString("'has_mediatheque_explorer'", $source);
+        $this->assertStringContainsString('!$isitemrequest', $source);
+
+        // The detail route must stay thin and delegate media ownership to mod_uckkarchive.
+        $this->assertStringNotContainsString('uckkarchive_media', $source);
+        $this->assertStringNotContainsString('$DB->', $source);
+        $this->assertStringNotContainsString('get_records_sql', $source);
+        $this->assertStringNotContainsString('require_capability(', $source);
     }
 
     /**
@@ -281,6 +319,95 @@ final class mediatheque_page_test extends advanced_testcase {
     }
 
     /**
+     * The renderable must export the optional Médiathèque item detail contract.
+     *
+     * @return void
+     */
+    public function test_public_page_renderable_exports_mediatheque_item_context(): void {
+        global $PAGE;
+
+        $item = [
+            'uuid' => '622fb3c1-0958-424f-bf30-a7ea71c9f90e',
+            'objecttype' => 'media',
+            'title' => 'Média public de test',
+            'subtitle' => '',
+            'summary' => 'Résumé public de test.',
+            'mediatype' => 'video',
+            'mimetype' => '',
+            'language' => 'fr',
+            'thumbnailurl' => '',
+            'detailurl' => '/local/uckk/mediatheque.php?item=622fb3c1-0958-424f-bf30-a7ea71c9f90e&type=media',
+            'source' => [
+                'value' => 'external_reference_only',
+                'label' => 'Référence externe',
+            ],
+            'rights' => [
+                'license' => '',
+                'rightsstatement' => '',
+                'copyallowed' => false,
+            ],
+            'status' => [
+                'value' => 'active',
+                'label' => 'active',
+            ],
+            'visibility' => [
+                'value' => 'public',
+                'label' => 'public',
+            ],
+            'validation' => [
+                'value' => '',
+                'label' => '',
+            ],
+            'badges' => [],
+            'advisories' => [
+                'haspublicadvisory' => false,
+                'summary' => '',
+            ],
+            'culturalprotocol' => [
+                'haspublicprotocol' => false,
+                'summary' => '',
+            ],
+            'relations' => [
+                'collectioncount' => 0,
+                'markercount' => 0,
+                'externalworkcount' => 0,
+            ],
+            'actions' => [
+                'canviewdetail' => true,
+                'canviewfile' => false,
+                'candownload' => false,
+                'canexport' => false,
+            ],
+        ];
+
+        $page = new public_page('mediatheque', [
+            'has_mediatheque_item' => true,
+            'mediatheque_item' => $item,
+            'mediatheque_item_payload' => [
+                'item' => $item,
+            ],
+            'has_mediatheque_item_error' => false,
+            'mediatheque_item_error' => '',
+            'mediatheque_item_back_url' => '/local/uckk/mediatheque.php',
+            'mediatheque_item_requested_uuid' => '622fb3c1-0958-424f-bf30-a7ea71c9f90e',
+            'mediatheque_item_requested_type' => 'media',
+            'has_mediatheque_explorer' => false,
+        ]);
+
+        $data = $page->export_for_template($PAGE->get_renderer('core'));
+
+        $this->assertSame('mediatheque', $data->slug);
+        $this->assertTrue((bool)$data->has_mediatheque_item);
+        $this->assertFalse((bool)$data->has_mediatheque_item_error);
+        $this->assertFalse((bool)$data->has_mediatheque_explorer);
+        $this->assertSame($item, $data->mediatheque_item);
+        $this->assertSame('Média public de test', $data->mediatheque_item['title']);
+        $this->assertSame('/local/uckk/mediatheque.php', $data->mediatheque_item_back_url);
+        $this->assertSame('622fb3c1-0958-424f-bf30-a7ea71c9f90e', $data->mediatheque_item_requested_uuid);
+        $this->assertSame('media', $data->mediatheque_item_requested_type);
+    }
+
+    /**
      * The renderable must keep ordinary public pages free of the Médiathèque explorer.
      *
      * @return void
@@ -296,6 +423,62 @@ final class mediatheque_page_test extends advanced_testcase {
         $this->assertIsString($data->mediatheque_explorer_id);
         $this->assertSame([], $data->mediatheque_initial_state);
         $this->assertSame('[]', $data->mediatheque_initial_state_json);
+
+        $this->assertFalse((bool)$data->has_mediatheque_item);
+        $this->assertSame([], $data->mediatheque_item);
+        $this->assertSame([], $data->mediatheque_item_payload);
+        $this->assertFalse((bool)$data->has_mediatheque_item_error);
+        $this->assertSame('', $data->mediatheque_item_error);
+        $this->assertSame('/local/uckk/mediatheque.php', $data->mediatheque_item_back_url);
+        $this->assertSame('', $data->mediatheque_item_requested_uuid);
+        $this->assertSame('media', $data->mediatheque_item_requested_type);
+    }
+
+    /**
+     * The public page shell must mount the item detail partial before the explorer.
+     *
+     * @return void
+     */
+    public function test_public_page_template_mounts_mediatheque_item_before_explorer(): void {
+        global $CFG;
+
+        $path = $CFG->dirroot . '/local/uckk/templates/public_page.mustache';
+
+        $this->assertFileExists($path);
+
+        $template = file_get_contents($path);
+        $this->assertIsString($template);
+
+        $itempos = strpos($template, '{{> local_uckk/pages/mediatheque_item }}');
+        $explorerpos = strpos($template, '{{> local_uckk/pages/mediatheque_explorer }}');
+
+        $this->assertNotFalse($itempos);
+        $this->assertNotFalse($explorerpos);
+        $this->assertLessThan($explorerpos, $itempos);
+        $this->assertStringContainsString('{{#has_mediatheque_item}}', $template);
+        $this->assertStringContainsString('{{#has_mediatheque_item_error}}', $template);
+        $this->assertStringContainsString('{{^has_mediatheque_item}}', $template);
+    }
+
+    /**
+     * The public page must include the dedicated Médiathèque item partial file.
+     *
+     * @return void
+     */
+    public function test_mediatheque_item_partial_exists(): void {
+        global $CFG;
+
+        $path = $CFG->dirroot . '/local/uckk/templates/pages/mediatheque_item.mustache';
+
+        $this->assertFileExists($path);
+
+        $template = file_get_contents($path);
+        $this->assertIsString($template);
+
+        $this->assertStringContainsString('@template local_uckk/pages/mediatheque_item', $template);
+        $this->assertStringContainsString('mediatheque_item', $template);
+        $this->assertStringContainsString('mediatheque_item_back_url', $template);
+        $this->assertStringContainsString('Retour à la recherche', $template);
     }
 
     /**

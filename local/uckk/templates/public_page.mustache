@@ -118,6 +118,14 @@
         "has_mediatheque_explorer": true,
         "mediatheque_explorer_id": "local-uckk-mediatheque-explorer-abc123",
         "mediatheque_initial_state_json": "{\"cmid\":0,\"archiveid\":0,\"query\":\"\",\"filters\":{},\"page\":1,\"perpage\":12,\"sort\":\"relevance\"}",
+        "has_mediatheque_item": false,
+        "mediatheque_item": {},
+        "mediatheque_item_payload": {},
+        "has_mediatheque_item_error": false,
+        "mediatheque_item_error": "",
+        "mediatheque_item_back_url": "/local/uckk/mediatheque.php",
+        "mediatheque_item_requested_uuid": "",
+        "mediatheque_item_requested_type": "media",
 
         "hasmetadata": true,
         "metadata": [
@@ -319,9 +327,21 @@
                     {{> local_uckk/pages/course_explorer }}
                 {{/has_course_explorer}}
 
-                {{#has_mediatheque_explorer}}
-                    {{> local_uckk/pages/mediatheque_explorer }}
-                {{/has_mediatheque_explorer}}
+                {{#has_mediatheque_item}}
+                    {{> local_uckk/pages/mediatheque_item }}
+                {{/has_mediatheque_item}}
+
+                {{#has_mediatheque_item_error}}
+                    {{> local_uckk/pages/mediatheque_item }}
+                {{/has_mediatheque_item_error}}
+
+                {{^has_mediatheque_item}}
+                    {{^has_mediatheque_item_error}}
+                        {{#has_mediatheque_explorer}}
+                            {{> local_uckk/pages/mediatheque_explorer }}
+                        {{/has_mediatheque_explorer}}
+                    {{/has_mediatheque_item_error}}
+                {{/has_mediatheque_item}}
 
                 {{#hascards}}
                     <section

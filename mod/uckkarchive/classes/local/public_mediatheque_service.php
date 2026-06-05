@@ -163,6 +163,91 @@ final class public_mediatheque_service {
     }
 
     /**
+     * Build a public item detail payload.
+     *
+     * Expected request keys:
+     *
+     * - cmid
+     * - archiveid
+     * - item or uuid
+     * - type
+     *
+     * archiveid = 0 and cmid = 0 means site-wide public discovery.
+     *
+     * The first implemented public detail object is media. Other public object
+     * types are intentionally returned fail-closed until their repository
+     * lookup methods exist.
+     *
+     * @param array<string,mixed> $request Raw request.
+     * @param context_module|null $context Optional module context.
+     * @param stdClass|null $user Optional acting user.
+     * @return array<string,mixed> Public item detail DTO.
+     */
+    public function get_item(array $request = [], ?context_module $context = null, ?stdClass $user = null): array {
+        [$archiveid, $context] = $this->resolve_scope($request, $context);
+
+        $type = $this->allow(
+            $request['type'] ?? self::OBJECT_MEDIA,
+            $this->allowed_object_types(false),
+            self::OBJECT_MEDIA
+        );
+
+        $uuid = $this->clean_optional_key($request['uuid'] ?? $request['item'] ?? null) ?? '';
+
+        $warnings = [];
+        $item = [];
+
+        if ($uuid === '') {
+            $warnings[] = [
+                'item' => 'mediatheque',
+                'itemid' => '0',
+                'warningcode' => 'missing_public_item_uuid',
+                'message' => 'Missing public item UUID.',
+            ];
+        } else if ($type !== self::OBJECT_MEDIA) {
+            $warnings[] = [
+                'item' => 'mediatheque',
+                'itemid' => '0',
+                'warningcode' => 'unsupported_public_item_type',
+                'message' => 'This public item type is not yet available for detail rendering.',
+            ];
+        } else {
+            $record = $this->repository->get_media_by_uuid($archiveid, $context, $uuid);
+
+            if ($record) {
+                $item = $this->normalise_item($record);
+            }
+        }
+
+        return [
+            'context' => [
+                'component' => self::COMPONENT,
+                'surface' => self::SURFACE,
+                'page' => self::PAGE_KEY,
+                'explorer' => self::EXPLORER_KEY,
+                'anonymous' => empty($user) || empty($user->id),
+                'policyfiltered' => true,
+            ],
+            'request' => [
+                'cmid' => max(0, (int)($request['cmid'] ?? 0)),
+                'archiveid' => max(0, (int)($request['archiveid'] ?? 0)),
+                'item' => $uuid,
+                'uuid' => $uuid,
+                'type' => $type,
+            ],
+            'item' => $item,
+            'notices' => $this->build_notices([]),
+            'warnings' => $this->build_warnings($warnings),
+            'empty' => [
+                'isempty' => empty($item),
+                'message' => empty($item)
+                    ? get_string('mediatheque_empty', 'mod_uckkarchive')
+                    : '',
+            ],
+        ];
+    }
+
+    /**
      * Resolve public search scope.
      *
      * archiveid = 0 and cmid = 0 means site-wide public discovery.
@@ -388,6 +473,9 @@ final class public_mediatheque_service {
             $culturalprotocolsummary = $this->get_nullable_string_value($culturalprotocol, 'summary');
         }
 
+        $externalurl = $this->external_url($item, $source, $actions);
+        $hasexternalurl = $externalurl !== '';
+
         return [
             'uuid' => $uuid,
             'objecttype' => $objecttype,
@@ -399,9 +487,14 @@ final class public_mediatheque_service {
             'language' => $this->get_string_value($item, 'language'),
             'thumbnailurl' => $this->get_string_value($item, 'thumbnailurl'),
             'detailurl' => $this->detail_url($uuid, $objecttype),
+            'externalurl' => $externalurl,
+            'hasexternalurl' => $hasexternalurl,
+            'externalactionlabel' => $this->external_action_label(),
             'source' => [
                 'value' => $sourcevalue,
                 'label' => $sourcelabel,
+                'url' => $externalurl,
+                'hasurl' => $hasexternalurl,
             ],
             'rights' => [
                 'license' => $license ?? '',
@@ -445,6 +538,7 @@ final class public_mediatheque_service {
                     || $this->get_bool_value($actions, 'canviewfile'),
                 'candownload' => $this->get_bool_value($item, 'candownload')
                     || $this->get_bool_value($actions, 'candownload'),
+                'canopenexternal' => $hasexternalurl,
                 'canexport' => false,
             ],
         ];
@@ -621,6 +715,62 @@ final class public_mediatheque_service {
         }
 
         return $normalised;
+    }
+
+    /**
+     * Resolve a public external media URL from the repository DTO.
+     *
+     * The repository remains responsible for exposing only public-safe source
+     * URLs. This service only normalises values that are already present in the
+     * public DTO, for example media source URLs such as SoundCloud, YouTube,
+     * article URLs or public code repository URLs.
+     *
+     * @param array<string,mixed>|stdClass $item Raw item.
+     * @param array<string,mixed>|stdClass $source Source payload.
+     * @param array<string,mixed>|stdClass $actions Action payload.
+     * @return string Public external URL, or empty string.
+     */
+    private function external_url($item, $source, $actions): string {
+        $candidates = [
+            [$item, ['externalurl', 'sourceurl', 'canonicalurl', 'publicurl', 'remoteurl', 'url']],
+            [$source, ['externalurl', 'sourceurl', 'canonicalurl', 'publicurl', 'remoteurl', 'url']],
+            [$actions, ['externalurl', 'sourceurl', 'canonicalurl', 'publicurl', 'remoteurl', 'url']],
+        ];
+
+        foreach ($candidates as [$payload, $keys]) {
+            foreach ($keys as $key) {
+                $url = $this->get_nullable_string_value($payload, $key);
+
+                if ($url === null) {
+                    continue;
+                }
+
+                $url = trim(clean_param($url, PARAM_URL));
+
+                if ($url === '') {
+                    continue;
+                }
+
+                if (!preg_match('#^https?://#i', $url)) {
+                    continue;
+                }
+
+                return $url;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Public label for an external media action.
+     *
+     * @return string Action label.
+     */
+    private function external_action_label(): string {
+        return get_string_manager()->string_exists('mediatheque_action_open_external', 'mod_uckkarchive')
+            ? get_string('mediatheque_action_open_external', 'mod_uckkarchive')
+            : 'Ouvrir la référence externe';
     }
 
     /**

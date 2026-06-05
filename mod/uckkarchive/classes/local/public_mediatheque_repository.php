@@ -50,6 +50,7 @@ final class public_mediatheque_repository {
 
     /** Canonical table names. */
     private const TABLE_MEDIA = 'uckkarchive_media';
+    private const TABLE_MEDIA_SOURCE = 'uckkarchive_media_source';
     private const TABLE_MEDIA_TAG = 'uckkarchive_media_tag';
     private const TABLE_COLLECTION = 'uckkarchive_media_collection';
     private const TABLE_COLLECTION_ITEM = 'uckkarchive_media_collection_item';
@@ -300,6 +301,8 @@ final class public_mediatheque_repository {
         $thumbnailurl = $this->get_public_thumbnail_url($context, $media);
         $summary = $this->get_public_summary($media);
         $sourcevalue = (string)($media->source ?? $media->sourcetype ?? '');
+        $externalsource = $this->get_public_external_source($media);
+        $externalurl = (string)$externalsource->url;
 
         return (object)[
             'uuid' => (string)$media->uuid,
@@ -314,6 +317,12 @@ final class public_mediatheque_repository {
 
             'sourcevalue' => $sourcevalue,
             'sourcelabel' => $this->label($sourcevalue),
+
+            'externalurl' => $externalurl,
+            'hasexternalurl' => $externalurl !== '',
+            'externalsourcetitle' => (string)$externalsource->title,
+            'externalcitation' => (string)$externalsource->citation,
+            'externalsourcetype' => (string)$externalsource->sourcetype,
 
             'license' => (string)($media->license ?? $media->licensekey ?? ''),
             'rightsstatement' => (string)($media->rightsstatement ?? $media->rightsstatus ?? ''),
@@ -663,6 +672,159 @@ final class public_mediatheque_repository {
                 'collectionaudience' => self::PUBLIC_AUDIENCE,
             ]
         );
+    }
+
+    /**
+     * Return a public external source object for a media record.
+     *
+     * The public Médiathèque may reference third-party media without copying the
+     * original file into Moodle. This method exposes only a safe http(s) URL and
+     * non-private citation metadata. It never serves original Moodle files.
+     *
+     * Lookup order:
+     * - media.sourceurl when present;
+     * - linked media source through media.sourceid;
+     * - latest media source linked by mediaid.
+     *
+     * @param stdClass $media Media record.
+     * @return stdClass Public external source DTO.
+     */
+    private function get_public_external_source(stdClass $media): stdClass {
+        $empty = (object)[
+            'url' => '',
+            'title' => '',
+            'citation' => '',
+            'sourcetype' => '',
+        ];
+
+        $directurl = $this->clean_public_external_url((string)($media->sourceurl ?? ''));
+        if ($directurl !== '') {
+            return (object)[
+                'url' => $directurl,
+                'title' => (string)($media->title ?? ''),
+                'citation' => '',
+                'sourcetype' => (string)($media->sourcetype ?? $media->source ?? ''),
+            ];
+        }
+
+        if (!$this->table_exists(self::TABLE_MEDIA_SOURCE)) {
+            return $empty;
+        }
+
+        $source = null;
+
+        if (!empty($media->sourceid)) {
+            $source = $this->get_public_media_source_by_id((int)$media->sourceid, (int)$media->id);
+        }
+
+        if (!$source && !empty($media->id)) {
+            $source = $this->get_latest_public_media_source((int)$media->id);
+        }
+
+        if (!$source) {
+            return $empty;
+        }
+
+        $url = $this->clean_public_external_url((string)($source->sourceurl ?? ''));
+        if ($url === '') {
+            return $empty;
+        }
+
+        return (object)[
+            'url' => $url,
+            'title' => (string)($source->title ?? ''),
+            'citation' => (string)($source->citation ?? ''),
+            'sourcetype' => (string)($source->sourcetype ?? ''),
+        ];
+    }
+
+    /**
+     * Return a public media source by id when it belongs to the media record.
+     *
+     * @param int $sourceid Source id.
+     * @param int $mediaid Media id.
+     * @return stdClass|null Source record.
+     */
+    private function get_public_media_source_by_id(int $sourceid, int $mediaid): ?stdClass {
+        global $DB;
+
+        if ($sourceid <= 0 || $mediaid <= 0) {
+            return null;
+        }
+
+        $source = $DB->get_record(
+            self::TABLE_MEDIA_SOURCE,
+            ['id' => $sourceid],
+            'id, mediaid, sourcetype, sourceurl, title, citation, rightsstatus',
+            IGNORE_MISSING
+        );
+
+        if (!$source || (int)($source->mediaid ?? 0) !== $mediaid) {
+            return null;
+        }
+
+        return $source;
+    }
+
+    /**
+     * Return latest public media source linked by media id.
+     *
+     * @param int $mediaid Media id.
+     * @return stdClass|null Source record.
+     */
+    private function get_latest_public_media_source(int $mediaid): ?stdClass {
+        global $DB;
+
+        if ($mediaid <= 0) {
+            return null;
+        }
+
+        $records = $DB->get_records_select(
+            self::TABLE_MEDIA_SOURCE,
+            "mediaid = :mediaid AND sourceurl IS NOT NULL AND sourceurl <> ''",
+            ['mediaid' => $mediaid],
+            'timemodified DESC, id DESC',
+            'id, mediaid, sourcetype, sourceurl, title, citation, rightsstatus',
+            0,
+            1
+        );
+
+        if (!$records) {
+            return null;
+        }
+
+        return reset($records) ?: null;
+    }
+
+    /**
+     * Clean and validate a public external URL.
+     *
+     * Only absolute http(s) URLs are exposed. This prevents accidental exposure
+     * of local plugin routes, file URLs, JavaScript URLs, or malformed values.
+     *
+     * @param string $url Raw URL.
+     * @return string Public URL, or empty string.
+     */
+    private function clean_public_external_url(string $url): string {
+        $url = trim(clean_param($url, PARAM_URL));
+
+        if ($url === '') {
+            return '';
+        }
+
+        $parts = parse_url($url);
+        if (!is_array($parts)) {
+            return '';
+        }
+
+        $scheme = strtolower((string)($parts['scheme'] ?? ''));
+        $host = trim((string)($parts['host'] ?? ''));
+
+        if (!in_array($scheme, ['http', 'https'], true) || $host === '') {
+            return '';
+        }
+
+        return $url;
     }
 
     /**

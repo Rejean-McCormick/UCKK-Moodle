@@ -1,0 +1,342 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    @template local_uckk/pages/mediatheque_item
+
+    Public catalogue detail partial for one Médiathèque item.
+
+    This template renders only public, policy-filtered DTO fields produced by
+    mod_uckkarchive. It must not decide access, reveal private notes, construct
+    private file URLs, or bypass cultural/advisory filtering.
+}}
+
+<section
+    class="local-uckk-public-section local-uckk-public-section--mediatheque-item local-uckk-mediatheque-item"
+    aria-labelledby="{{uniqid}}-mediatheque-item-title"
+    data-region="local-uckk-mediatheque-item"
+>
+    <div class="local-uckk-mediatheque-item__nav">
+        <a class="local-uckk-mediatheque-item__back" href="{{mediatheque_item_back_url}}">
+            ← Retour à la recherche
+        </a>
+    </div>
+
+    {{#has_mediatheque_item_error}}
+        <div class="local-uckk-public-notice local-uckk-public-notice--warning" role="alert">
+            <h2 class="local-uckk-public-notice__title">
+                Contenu indisponible
+            </h2>
+
+            <p class="local-uckk-public-notice__body">
+                {{mediatheque_item_error}}
+            </p>
+
+            {{#mediatheque_item_requested_uuid}}
+                <p class="local-uckk-public-notice__meta">
+                    Référence demandée : <code>{{mediatheque_item_requested_uuid}}</code>
+                </p>
+            {{/mediatheque_item_requested_uuid}}
+        </div>
+    {{/has_mediatheque_item_error}}
+
+    {{#has_mediatheque_item}}
+        {{#mediatheque_item}}
+            <article class="local-uckk-mediatheque-item__article">
+                <header class="local-uckk-mediatheque-item__header">
+                    <p class="local-uckk-public-section__eyebrow">
+                        Détail public
+                    </p>
+
+                    <h2 id="{{uniqid}}-mediatheque-item-title" class="local-uckk-public-section__title">
+                        <span class="local-uckk-public-section__title-text">
+                            {{title}}
+                        </span>
+                    </h2>
+
+                    {{#subtitle}}
+                        <p class="local-uckk-mediatheque-item__subtitle">
+                            {{subtitle}}
+                        </p>
+                    {{/subtitle}}
+
+                    <div class="local-uckk-mediatheque-item__badges" aria-label="Repères publics">
+                        {{#mediatype}}
+                            <span class="local-uckk-mediatheque-item__badge local-uckk-mediatheque-item__badge--format">
+                                {{mediatype}}
+                            </span>
+                        {{/mediatype}}
+
+                        {{#objecttype}}
+                            <span class="local-uckk-mediatheque-item__badge local-uckk-mediatheque-item__badge--type">
+                                {{objecttype}}
+                            </span>
+                        {{/objecttype}}
+
+                        {{#language}}
+                            <span class="local-uckk-mediatheque-item__badge local-uckk-mediatheque-item__badge--language">
+                                {{language}}
+                            </span>
+                        {{/language}}
+
+                        {{#badges}}
+                            <span class="local-uckk-mediatheque-item__badge local-uckk-mediatheque-item__badge--{{type}}">
+                                {{label}}
+                            </span>
+                        {{/badges}}
+                    </div>
+
+                    {{#hasexternalurl}}
+                        <p class="local-uckk-mediatheque-item__external-action">
+                            <a
+                                class="btn btn-primary local-uckk-mediatheque-item__external-link"
+                                href="{{externalurl}}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {{#externalactionlabel}}
+                                    {{externalactionlabel}}
+                                {{/externalactionlabel}}
+                                {{^externalactionlabel}}
+                                    Ouvrir la référence externe
+                                {{/externalactionlabel}}
+                            </a>
+                        </p>
+                    {{/hasexternalurl}}
+                </header>
+
+                <div class="local-uckk-mediatheque-item__layout">
+                    {{#thumbnailurl}}
+                        <figure class="local-uckk-mediatheque-item__media">
+                            <img
+                                class="local-uckk-mediatheque-item__thumbnail"
+                                src="{{thumbnailurl}}"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </figure>
+                    {{/thumbnailurl}}
+
+                    <div class="local-uckk-mediatheque-item__content">
+                        {{#summary}}
+                            <section class="local-uckk-mediatheque-item__section">
+                                <h3 class="local-uckk-mediatheque-item__section-title">
+                                    Résumé
+                                </h3>
+
+                                <p class="local-uckk-mediatheque-item__summary">
+                                    {{summary}}
+                                </p>
+                            </section>
+                        {{/summary}}
+
+                        <section class="local-uckk-mediatheque-item__section">
+                            <h3 class="local-uckk-mediatheque-item__section-title">
+                                Informations publiques
+                            </h3>
+
+                            <dl class="local-uckk-mediatheque-item__facts">
+                                {{#uuid}}
+                                    <div class="local-uckk-mediatheque-item__fact">
+                                        <dt>Identifiant public</dt>
+                                        <dd><code>{{uuid}}</code></dd>
+                                    </div>
+                                {{/uuid}}
+
+                                {{#mediatype}}
+                                    <div class="local-uckk-mediatheque-item__fact">
+                                        <dt>Format</dt>
+                                        <dd>{{mediatype}}</dd>
+                                    </div>
+                                {{/mediatype}}
+
+                                {{#mimetype}}
+                                    <div class="local-uckk-mediatheque-item__fact">
+                                        <dt>Type MIME</dt>
+                                        <dd>{{mimetype}}</dd>
+                                    </div>
+                                {{/mimetype}}
+
+                                {{#source}}
+                                    {{#label}}
+                                        <div class="local-uckk-mediatheque-item__fact">
+                                            <dt>Source</dt>
+                                            <dd>{{label}}</dd>
+                                        </div>
+                                    {{/label}}
+                                {{/source}}
+
+                                {{#hasexternalurl}}
+                                    <div class="local-uckk-mediatheque-item__fact">
+                                        <dt>Référence externe</dt>
+                                        <dd>
+                                            <a
+                                                class="local-uckk-mediatheque-item__source-link"
+                                                href="{{externalurl}}"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {{#externalactionlabel}}
+                                                    {{externalactionlabel}}
+                                                {{/externalactionlabel}}
+                                                {{^externalactionlabel}}
+                                                    Ouvrir la référence externe
+                                                {{/externalactionlabel}}
+                                            </a>
+                                        </dd>
+                                    </div>
+                                {{/hasexternalurl}}
+
+                                {{#status}}
+                                    {{#label}}
+                                        <div class="local-uckk-mediatheque-item__fact">
+                                            <dt>Statut</dt>
+                                            <dd>{{label}}</dd>
+                                        </div>
+                                    {{/label}}
+                                {{/status}}
+
+                                {{#visibility}}
+                                    {{#label}}
+                                        <div class="local-uckk-mediatheque-item__fact">
+                                            <dt>Visibilité</dt>
+                                            <dd>{{label}}</dd>
+                                        </div>
+                                    {{/label}}
+                                {{/visibility}}
+
+                                {{#validation}}
+                                    {{#label}}
+                                        <div class="local-uckk-mediatheque-item__fact">
+                                            <dt>Validation</dt>
+                                            <dd>{{label}}</dd>
+                                        </div>
+                                    {{/label}}
+                                {{/validation}}
+                            </dl>
+                        </section>
+
+                        {{#rights}}
+                            <section class="local-uckk-mediatheque-item__section">
+                                <h3 class="local-uckk-mediatheque-item__section-title">
+                                    Droits
+                                </h3>
+
+                                <dl class="local-uckk-mediatheque-item__facts">
+                                    {{#license}}
+                                        <div class="local-uckk-mediatheque-item__fact">
+                                            <dt>Licence</dt>
+                                            <dd>{{license}}</dd>
+                                        </div>
+                                    {{/license}}
+
+                                    {{#rightsstatement}}
+                                        <div class="local-uckk-mediatheque-item__fact">
+                                            <dt>Mention de droits</dt>
+                                            <dd>{{rightsstatement}}</dd>
+                                        </div>
+                                    {{/rightsstatement}}
+
+                                    <div class="local-uckk-mediatheque-item__fact">
+                                        <dt>Copie publique</dt>
+                                        <dd>
+                                            {{#copyallowed}}Autorisée{{/copyallowed}}
+                                            {{^copyallowed}}Non autorisée{{/copyallowed}}
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </section>
+                        {{/rights}}
+
+                        {{#advisories}}
+                            {{#haspublicadvisory}}
+                                <section class="local-uckk-mediatheque-item__section local-uckk-mediatheque-item__section--advisory">
+                                    <h3 class="local-uckk-mediatheque-item__section-title">
+                                        Avis public
+                                    </h3>
+
+                                    {{#summary}}
+                                        <p class="local-uckk-mediatheque-item__notice">
+                                            {{summary}}
+                                        </p>
+                                    {{/summary}}
+                                </section>
+                            {{/haspublicadvisory}}
+                        {{/advisories}}
+
+                        {{#culturalprotocol}}
+                            {{#haspublicprotocol}}
+                                <section class="local-uckk-mediatheque-item__section local-uckk-mediatheque-item__section--protocol">
+                                    <h3 class="local-uckk-mediatheque-item__section-title">
+                                        Protocole culturel public
+                                    </h3>
+
+                                    {{#summary}}
+                                        <p class="local-uckk-mediatheque-item__notice">
+                                            {{summary}}
+                                        </p>
+                                    {{/summary}}
+                                </section>
+                            {{/haspublicprotocol}}
+                        {{/culturalprotocol}}
+
+                        {{#relations}}
+                            <section class="local-uckk-mediatheque-item__section">
+                                <h3 class="local-uckk-mediatheque-item__section-title">
+                                    Relations publiques
+                                </h3>
+
+                                <dl class="local-uckk-mediatheque-item__facts">
+                                    <div class="local-uckk-mediatheque-item__fact">
+                                        <dt>Collections</dt>
+                                        <dd>{{collectioncount}}</dd>
+                                    </div>
+
+                                    <div class="local-uckk-mediatheque-item__fact">
+                                        <dt>Repères documentés</dt>
+                                        <dd>{{markercount}}</dd>
+                                    </div>
+
+                                    <div class="local-uckk-mediatheque-item__fact">
+                                        <dt>Œuvres externes liées</dt>
+                                        <dd>{{externalworkcount}}</dd>
+                                    </div>
+                                </dl>
+                            </section>
+                        {{/relations}}
+
+                        {{#actions}}
+                            <section class="local-uckk-mediatheque-item__section local-uckk-mediatheque-item__section--actions">
+                                <h3 class="local-uckk-mediatheque-item__section-title">
+                                    Accès
+                                </h3>
+
+                                <ul class="local-uckk-mediatheque-item__access-list">
+                                    <li>
+                                        Détail public :
+                                        {{#canviewdetail}}disponible{{/canviewdetail}}
+                                        {{^canviewdetail}}non disponible{{/canviewdetail}}
+                                    </li>
+                                    <li>
+                                        Fichier public :
+                                        {{#canviewfile}}disponible{{/canviewfile}}
+                                        {{^canviewfile}}non disponible{{/canviewfile}}
+                                    </li>
+                                    <li>
+                                        Référence externe :
+                                        {{#hasexternalurl}}disponible{{/hasexternalurl}}
+                                        {{^hasexternalurl}}non disponible{{/hasexternalurl}}
+                                    </li>
+                                    <li>
+                                        Téléchargement :
+                                        {{#candownload}}autorisé{{/candownload}}
+                                        {{^candownload}}non autorisé{{/candownload}}
+                                    </li>
+                                </ul>
+                            </section>
+                        {{/actions}}
+                    </div>
+                </div>
+            </article>
+        {{/mediatheque_item}}
+    {{/has_mediatheque_item}}
+</section>
