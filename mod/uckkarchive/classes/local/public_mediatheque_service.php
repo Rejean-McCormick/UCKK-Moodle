@@ -238,7 +238,19 @@ final class public_mediatheque_service {
             ),
             'mediatype' => $this->allow(
                 $request['mediatype'] ?? 'all',
-                ['all', 'video', 'audio', 'image', 'pdf', 'document', 'book', 'external_reference', 'other'],
+                [
+                    'all',
+                    'video',
+                    'audio',
+                    'text',
+                    'code',
+                    'image',
+                    'pdf',
+                    'document',
+                    'book',
+                    'external_reference',
+                    'other',
+                ],
                 'all'
             ),
             'collection' => $this->clean_optional_key($request['collection'] ?? null) ?? '',

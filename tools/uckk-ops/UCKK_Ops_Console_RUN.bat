@@ -3,7 +3,7 @@ setlocal
 
 REM UCKK Ops Console launcher.
 REM Runs the PowerShell GUI from this folder.
-REM Prefers PowerShell 7+ when available, falls back to Windows PowerShell.
+REM Prefer Windows PowerShell for this WinForms GUI, then fall back to PowerShell 7+.
 
 set "APP_DIR=%~dp0"
 set "APP_PS1=%APP_DIR%uckk_ops_gui.ps1"
@@ -23,21 +23,22 @@ if not exist "%CONFIG_JSON%" (
     exit /b 1
 )
 
-where pwsh.exe >nul 2>nul
+where powershell.exe >nul 2>nul
 if "%ERRORLEVEL%"=="0" (
-    set "PS_EXE=pwsh.exe"
+    set "PS_EXE=powershell.exe"
 ) else (
-    where powershell.exe >nul 2>nul
+    where pwsh.exe >nul 2>nul
     if errorlevel 1 (
-        echo [ERROR] Neither pwsh.exe nor powershell.exe was found.
+        echo [ERROR] Neither powershell.exe nor pwsh.exe was found.
         pause
         exit /b 1
     )
-    set "PS_EXE=powershell.exe"
+    set "PS_EXE=pwsh.exe"
 )
 
 "%PS_EXE%" ^
   -NoProfile ^
+  -STA ^
   -ExecutionPolicy Bypass ^
   -File "%APP_PS1%" ^
   -ConfigPath "%CONFIG_JSON%" %*

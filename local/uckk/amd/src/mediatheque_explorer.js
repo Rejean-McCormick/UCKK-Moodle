@@ -642,10 +642,44 @@ const initRoot = (root, options = {}) => {
  * The exported AMD name remains local_uckk/mediatheque_explorer for backwards
  * compatibility with existing templates and Moodle build output.
  *
- * @param {string|HTMLElement} rootSelector Root selector or element.
+ * Moodle js_call_amd calls this module as:
+ *
+ *     amd.init(initialState)
+ *
+ * In that case the first argument is a plain configuration object, not a DOM
+ * root. This initializer also keeps support for the older forms:
+ *
+ *     init()
+ *     init(selector, options)
+ *     init(element, options)
+ *
+ * @param {string|HTMLElement|Object} rootSelector Root selector, element, or Moodle initial state.
  * @param {Object} options Init options.
  */
 export const init = (rootSelector = SELECTORS.root, options = {}) => {
+    if (
+        rootSelector &&
+        typeof rootSelector === 'object' &&
+        typeof rootSelector.querySelector !== 'function'
+    ) {
+        const initialState = rootSelector;
+        const root = initialState.rootId ? document.getElementById(initialState.rootId) : null;
+        const initOptions = {
+            method: initialState.service || initialState.method || DEFAULT_METHOD,
+            cmid: initialState.cmid,
+            archiveid: initialState.archiveid,
+            initialState,
+        };
+
+        if (root) {
+            initRoot(root, initOptions);
+            return;
+        }
+
+        document.querySelectorAll(SELECTORS.root).forEach(element => initRoot(element, initOptions));
+        return;
+    }
+
     if (typeof rootSelector === 'string') {
         document.querySelectorAll(rootSelector).forEach(root => initRoot(root, options));
         return;

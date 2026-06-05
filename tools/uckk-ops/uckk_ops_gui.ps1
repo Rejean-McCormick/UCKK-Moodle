@@ -6,6 +6,27 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
+# -----------------------------------------------------------------------------
+# Windows Forms prerequisites
+# -----------------------------------------------------------------------------
+# The GUI needs Windows Forms and a single-threaded apartment (STA).
+# These assemblies are not always auto-loaded, especially when the launcher uses
+# PowerShell 7 (pwsh.exe). Load them explicitly before creating any controls.
+$isWindowsRuntime = $true
+if ($PSVersionTable.PSEdition -eq "Core") {
+    $isWindowsRuntime = [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform(
+        [System.Runtime.InteropServices.OSPlatform]::Windows
+    )
+}
+
+if (-not $isWindowsRuntime) {
+    throw "UCKK Ops Console GUI requires Windows because it uses System.Windows.Forms."
+}
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+[System.Windows.Forms.Application]::EnableVisualStyles()
+
 $Script:OpsRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Script:LibRoot = Join-Path $Script:OpsRoot "lib"
 

@@ -79,6 +79,23 @@ function xmldb_uckkarchive_upgrade($oldversion): bool {
         upgrade_mod_savepoint(true, 2026052703, 'uckkarchive');
     }
 
+    if ($oldversion < 2026060400) {
+        // Add the public-search exposure flag used by the public mediatheque
+        // repository. Older development databases may have public media rows
+        // without this column, which causes the public explorer SQL to fail.
+        uckkarchive_upgrade_add_media_searchable_field();
+
+        upgrade_mod_savepoint(true, 2026060400, 'uckkarchive');
+    }
+
+    if ($oldversion < 2026060401) {
+        // Add audience suitability to media collections for the public
+        // mediatheque repository collection-count query.
+        uckkarchive_upgrade_add_media_collection_audience_field();
+
+        upgrade_mod_savepoint(true, 2026060401, 'uckkarchive');
+    }
+
     return true;
 }
 
@@ -108,6 +125,7 @@ function uckkarchive_upgrade_create_media_advisory_external_tables(): void {
         uckkarchive_upgrade_field('status', XMLDB_TYPE_CHAR, '50', true, false, 'draft'),
         uckkarchive_upgrade_field('visibility', XMLDB_TYPE_CHAR, '50', true, false, 'course'),
         uckkarchive_upgrade_field('audiencesuitability', XMLDB_TYPE_CHAR, '50', true, false, 'guided'),
+        uckkarchive_upgrade_field('searchable', XMLDB_TYPE_INTEGER, '1', true, false, 1),
         uckkarchive_upgrade_field('source', XMLDB_TYPE_CHAR, '50', true, false, ''),
         uckkarchive_upgrade_field('sourcetype', XMLDB_TYPE_CHAR, '64', false),
         uckkarchive_upgrade_field('sourceurl', XMLDB_TYPE_TEXT),
@@ -209,6 +227,7 @@ function uckkarchive_upgrade_create_media_advisory_external_tables(): void {
         uckkarchive_upgrade_field('description', XMLDB_TYPE_TEXT),
         uckkarchive_upgrade_field('status', XMLDB_TYPE_CHAR, '50', true, false, 'active'),
         uckkarchive_upgrade_field('visibility', XMLDB_TYPE_CHAR, '50', true, false, 'course'),
+        uckkarchive_upgrade_field('audiencesuitability', XMLDB_TYPE_CHAR, '64', true, false, 'guided'),
         uckkarchive_upgrade_field('sortorder', XMLDB_TYPE_INTEGER, '10', true, false, 0),
         uckkarchive_upgrade_field('metadata', XMLDB_TYPE_TEXT),
         uckkarchive_upgrade_field('timecreated', XMLDB_TYPE_INTEGER, '10', true, false, 0),
@@ -593,6 +612,84 @@ function uckkarchive_upgrade_extend_media_source_record_fields(): void {
     if (uckkarchive_upgrade_table_has_fields($tablename, ['sourceurl', 'metadata'])) {
         uckkarchive_upgrade_backfill_media_sourceurls_from_metadata();
     }
+}
+
+/**
+ * Add the public-search exposure flag to media records.
+ *
+ * The public mediatheque repository filters media rows with:
+ *
+ *     (searchable IS NULL OR searchable = 1)
+ *
+ * Development databases created before the public explorer contract may be
+ * missing this column, causing a DML read exception before any items can be
+ * returned.
+ *
+ * @return void
+ */
+function uckkarchive_upgrade_add_media_searchable_field(): void {
+    global $DB;
+
+    $tablename = 'uckkarchive_media';
+
+    uckkarchive_upgrade_add_field_if_missing(
+        $tablename,
+        uckkarchive_upgrade_field('searchable', XMLDB_TYPE_INTEGER, '1', true, false, 1)
+    );
+
+    if (!uckkarchive_upgrade_table_has_fields($tablename, ['searchable'])) {
+        return;
+    }
+
+    $DB->execute(
+        "UPDATE {uckkarchive_media}
+            SET searchable = 1
+          WHERE searchable IS NULL"
+    );
+}
+
+/**
+ * Add audience suitability to media collections.
+ *
+ * The public mediatheque repository filters media collections with:
+ *
+ *     c.audiencesuitability = 'general'
+ *
+ * Development databases created before the public explorer contract may be
+ * missing this column, causing a DML read exception while building media cards.
+ *
+ * @return void
+ */
+function uckkarchive_upgrade_add_media_collection_audience_field(): void {
+    global $DB;
+
+    $tablename = 'uckkarchive_media_collection';
+
+    uckkarchive_upgrade_add_field_if_missing(
+        $tablename,
+        uckkarchive_upgrade_field('audiencesuitability', XMLDB_TYPE_CHAR, '64', true, false, 'guided')
+    );
+
+    if (!uckkarchive_upgrade_table_has_fields($tablename, ['audiencesuitability'])) {
+        return;
+    }
+
+    $DB->execute(
+        "UPDATE {uckkarchive_media_collection}
+            SET audiencesuitability = ?
+          WHERE status = ?
+            AND visibility = ?
+            AND (audiencesuitability IS NULL OR audiencesuitability = '' OR audiencesuitability = ?)",
+        ['general', 'active', 'public', 'guided']
+    );
+
+    $DB->execute(
+        "UPDATE {uckkarchive_media_collection}
+            SET audiencesuitability = ?
+          WHERE audiencesuitability IS NULL
+             OR audiencesuitability = ''",
+        ['guided']
+    );
 }
 
 /**
