@@ -2370,3 +2370,46 @@ body#page-login-index.theme-uckk-login-layout #loginguestbtn {
     }
 }
 
+/* ==========================================================================
+   Mobile background guard
+   ========================================================================== */
+
+/**
+ * On phone layouts, remove the decorative tiled coat-of-arms background from
+ * the global Moodle page shell. This does not hide the navbar brand text, cards,
+ * hero content, or local_uckk public-page components; it only neutralises the
+ * body/page rail background layer that can bleed into the centre column on
+ * narrow screens.
+ */
+@media (max-width: 767.98px) {
+    body:not(.pagelayout-login),
+    body:not(.pagelayout-login) #page-wrapper,
+    body:not(.pagelayout-login) #page,
+    body:not(.pagelayout-login) #page.drawers,
+    body:not(.pagelayout-login) #page-content,
+    body:not(.pagelayout-login) .main-inner {
+        background-image: none !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;
+    }
+
+    body:not(.pagelayout-login)::before,
+    body:not(.pagelayout-login)::after,
+    body:not(.pagelayout-login) #page-wrapper::before,
+    body:not(.pagelayout-login) #page-wrapper::after,
+    body:not(.pagelayout-login) #page::before,
+    body:not(.pagelayout-login) #page::after,
+    body:not(.pagelayout-login) #page.drawers::before,
+    body:not(.pagelayout-login) #page.drawers::after,
+    body:not(.pagelayout-login) .main-inner::before,
+    body:not(.pagelayout-login) .main-inner::after {
+        display: none !important;
+        visibility: hidden !important;
+        content: none !important;
+        background: none !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+}
