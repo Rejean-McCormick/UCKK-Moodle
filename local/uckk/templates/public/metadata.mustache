@@ -18,10 +18,11 @@
     Context:
     {
         "uniqid": "local-uckk-public-page-abc123",
+        "metadataheading": "Repères publics",
         "metadata": [
             {
-                "label": "Statut",
-                "value": "Page publique"
+                "label": "Nature",
+                "value": "Cité d’apprentissage public émergente"
             }
         ]
     }
@@ -33,7 +34,12 @@
 >
     <h2 id="{{uniqid}}-metadata-title" class="local-uckk-public-section__title">
         <span class="local-uckk-public-section__title-text">
-            Statut de la page
+            {{#metadataheading}}
+                {{metadataheading}}
+            {{/metadataheading}}
+            {{^metadataheading}}
+                Repères publics
+            {{/metadataheading}}
         </span>
     </h2>
 

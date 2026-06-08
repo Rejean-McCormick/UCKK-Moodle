@@ -61,15 +61,15 @@ function local_uckk_public_programs_enrich_definition(array $definition): array 
 
     $definition['sections'] = [
         [
-            'eyebrow' => 'Rôle des voies',
-            'title' => 'S’orienter dans la cité-école',
-            'body' => 'Les voies UCKK organisent les apprentissages autour de domaines d’action. Elles relient cours, compétences, défis, preuves, archives et formes de reconnaissance interne.',
+            'eyebrow' => 'Orientation canonique',
+            'title' => 'Choisir une voie dans la cité d’apprentissage',
+            'body' => 'Les Voies UCKK sont des structures internes de formation, de pratique et de reconnaissance. Elles relient les cours, les compétences, les défis, les preuves, les portfolios, les Assemblées et les passages de Niveau. Une voie n’est pas seulement une liste de cours : c’est un chemin qui aide à situer une personne dans un domaine d’action, à produire des traces vérifiables et à construire progressivement un dossier de passage.',
             'type' => 'intro',
         ],
         [
-            'eyebrow' => 'Répertoire public',
-            'title' => 'Voies et programmes actifs',
-            'body' => 'Chaque carte présente la description publique complète de la voie et donne accès aux cours disponibles lorsque la catégorie Moodle liée est publiée.',
+            'eyebrow' => 'Voies publiques',
+            'title' => 'Tronc commun et voies actives',
+            'body' => 'Chaque carte présente une voie ou un bloc de formation visible publiquement. Elle peut ouvrir vers les espaces de cours associés lorsque ceux-ci sont publiés. Les voies peuvent mener à des Niveaux et Parchemins UCKK internes ; ces reconnaissances ne constituent pas des diplômes publics accrédités.',
             'cards' => $cards,
             'type' => 'programs',
         ],
@@ -79,19 +79,20 @@ function local_uckk_public_programs_enrich_definition(array $definition): array 
     // level creates a second generic card section under the page content.
     $definition['cards'] = [];
     $definition['cardsheading'] = 'Repères publics';
+    $definition['metadataheading'] = 'État du registre';
 
     $definition['metadata'] = [
         [
-            'label' => 'Programmes actifs affichés',
+            'label' => 'Voies actives publiées',
             'value' => (string)count($cards),
         ],
     ];
 
     $definition['cta'] = [
-        'title' => 'Explorer les cours',
-        'body' => 'Les catégories Moodle liées aux voies regroupent les cours et unités d’apprentissage disponibles.',
+        'title' => 'Passer des voies aux apprentissages',
+        'body' => 'Ouvre les cours associés pour consulter les modules, activités, ressources, preuves attendues et repères de progression.',
         'url' => '/local/uckk/courses.php',
-        'label' => 'Voir les cours',
+        'label' => 'Voir les cours associés',
     ];
 
     if (empty($cards)) {
@@ -101,8 +102,8 @@ function local_uckk_public_programs_enrich_definition(array $definition): array 
 
         $definition['notices'][] = [
             'type' => 'warning',
-            'title' => 'Aucun programme actif',
-            'body' => 'Aucun programme actif n’est actuellement disponible dans le registre UCKK.',
+            'title' => 'Aucune voie active publiée',
+            'body' => 'Aucune voie ou bloc de formation n’est actuellement visible dans le registre public UCKK.',
         ];
     }
 
@@ -177,7 +178,7 @@ function local_uckk_public_programs_get_cards(string $status = 'active'): array 
 
         if ($categoryid > 0 && $categoryvisible === 1) {
             $url = (new moodle_url('/course/index.php', ['categoryid' => $categoryid]))->out(false);
-            $actionlabel = 'Explorer les cours';
+            $actionlabel = 'Voir les cours associés';
         }
 
         $cards[] = [
@@ -335,8 +336,8 @@ function local_uckk_public_programs_default_description(string $shortname, strin
     $key = strtoupper(trim($shortname));
 
     $descriptions = [
-        'TC' => 'Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, pour comprendre la cité-école, documenter son parcours et produire des preuves d’apprentissage.',
-        'GJS' => 'Voie transversale principale de l’Univers-Cité King Klown. Elle forme des personnes capables de lire la société comme un système composé de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes visibles.',
+        'TC' => 'Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, pour comprendre la cité d’apprentissage, documenter son parcours et produire des preuves.',
+        'GJS' => 'Voie transversale principale de l’Univers-Cité King Klown. Elle forme des personnes capables de lire la société comme un système composé de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.',
         'KOA' => 'Voie formant des architectes sociotechniques capables de comprendre, documenter, opérer, adapter, auditer et déployer l’écosystème digital kOA comme infrastructure de connaissance, de délibération, de décision, d’exécution et de mémoire.',
         'AS' => 'Voie formant des personnes capables de comprendre, concevoir, déployer et auditer des systèmes combinant humains, technologies, institutions, données, règles, plateformes, workflows, décisions et boucles de mémoire.',
         'SP' => 'Voie formant des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.',
@@ -354,7 +355,7 @@ function local_uckk_public_programs_default_description(string $shortname, strin
     }
 
     if ($programtype === 'tronc_commun' || $programtype === 'tronccommun') {
-        return 'Socle commun de préparation aux voies UCKK : comprendre, choisir, agir, documenter et archiver.';
+        return 'Socle commun de préparation aux voies UCKK : comprendre, choisir, agir, documenter, corriger et transmettre.';
     }
 
     return 'Voie UCKK structurée autour de cours, compétences, preuves, archives et reconnaissance interne.';

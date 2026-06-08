@@ -51,7 +51,7 @@ defined('MOODLE_INTERNAL') || die();
  * - hassections, sections;
  * - hascards, cards, cardsheading;
  * - hasnotices, notices;
- * - hasmetadata, metadata;
+ * - hasmetadata, metadata, metadataheading;
  * - hascta, cta;
  * - has_course_explorer, course_explorer_id, course_explorer,
  *   course_explorer_initial_state, course_explorer_initial_state_json;
@@ -200,6 +200,11 @@ final class public_page implements renderable, templatable {
             self::array_value($this->definition, 'metadata')
         );
         $data->hasmetadata = !empty($data->metadata);
+        $data->metadataheading = self::value($this->definition, 'metadataheading');
+
+        if ($data->metadataheading === '') {
+            $data->metadataheading = self::default_metadata_heading($this->slug);
+        }
 
         $data->cta = self::export_cta(
             self::array_value($this->definition, 'cta')
@@ -339,6 +344,7 @@ final class public_page implements renderable, templatable {
             'cardsheading' => self::default_cards_heading($slug),
             'notices' => [],
             'metadata' => [],
+            'metadataheading' => self::default_metadata_heading($slug),
             'cta' => [],
             'has_course_explorer' => false,
             'course_explorer_id' => '',
@@ -375,6 +381,34 @@ final class public_page implements renderable, templatable {
             self::KEY_INTEGRITY => 'Repères d’intégrité',
             self::KEY_ARCHIVES => 'Repères du registraire',
             self::KEY_MEDIATHEQUE => 'Explorer la Médiathèque',
+            self::KEY_NEWS => 'Repères d’actualité',
+            self::KEY_CONTACT => 'Repères de contact',
+        ];
+
+        return $headings[$slug] ?? 'Repères publics';
+    }
+
+    /**
+     * Default heading for page-level metadata.
+     *
+     * This avoids hard-coded generic labels in Mustache while keeping a safe
+     * fallback for existing page definitions. Page definitions may override the
+     * value with the `metadataheading` key.
+     *
+     * @param string $slug Page slug.
+     * @return string
+     */
+    private static function default_metadata_heading(string $slug): string {
+        $headings = [
+            self::KEY_HOME => 'Repères publics',
+            self::KEY_ABOUT => 'Repères institutionnels',
+            self::KEY_PROGRAMS => 'État du registre',
+            self::KEY_COURSES => 'Repères des cours',
+            self::KEY_CHALLENGES => 'Repères des défis',
+            self::KEY_ASSEMBLIES => 'Repères d’assemblée',
+            self::KEY_INTEGRITY => 'Repères d’intégrité',
+            self::KEY_ARCHIVES => 'Repères du registraire',
+            self::KEY_MEDIATHEQUE => 'Repères de la médiathèque',
             self::KEY_NEWS => 'Repères d’actualité',
             self::KEY_CONTACT => 'Repères de contact',
         ];

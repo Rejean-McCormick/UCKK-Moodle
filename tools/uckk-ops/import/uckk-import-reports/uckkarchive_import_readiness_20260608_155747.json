@@ -1,0 +1,3910 @@
+{
+  "generated_at": "2026-06-08T15:57:47-04:00",
+  "ok": false,
+  "summary": {
+    "error_count": 4,
+    "warning_count": 0,
+    "archive_target_count": 115,
+    "inventory_file_count": 64,
+    "inventory_missing_file_count": 0,
+    "selected_cmid": 0,
+    "selected_archiveid": 0,
+    "ready_for_dryrun": false,
+    "ready_for_apply": false
+  },
+  "issues": [
+    {
+      "severity": "error",
+      "stage": "schema_contract",
+      "code": "IMPORT_REQUIRED_COLUMNS_MISSING",
+      "message": "uckkarchive_media_version is missing required import columns: archiveid, contextid.",
+      "fix": "Upgrade the plugin schema or adapt importer mappings."
+    },
+    {
+      "severity": "error",
+      "stage": "schema_contract",
+      "code": "IMPORT_REQUIRED_COLUMNS_MISSING",
+      "message": "uckkarchive_media_source is missing required import columns: contextid.",
+      "fix": "Upgrade the plugin schema or adapt importer mappings."
+    },
+    {
+      "severity": "error",
+      "stage": "schema_contract",
+      "code": "IMPORT_REQUIRED_COLUMNS_MISSING",
+      "message": "uckkarchive_media_tag is missing required import columns: contextid.",
+      "fix": "Upgrade the plugin schema or adapt importer mappings."
+    },
+    {
+      "severity": "error",
+      "stage": "schema_contract",
+      "code": "IMPORT_REQUIRED_COLUMNS_MISSING",
+      "message": "uckkarchive_media_relation is missing required import columns: contextid.",
+      "fix": "Upgrade the plugin schema or adapt importer mappings."
+    }
+  ],
+  "paths": {
+    "moodle_root": "C:\\mycode\\UCKK\\moodle\\moodle",
+    "uckk_repo": "C:\\mycode\\UCKK\\uckk-moodle",
+    "inventory_path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\uckk_inventory.json",
+    "originals_dir": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals"
+  },
+  "moodle": {
+    "cfg_dirroot": "C:\\mycode\\UCKK\\moodle\\moodle\\public",
+    "cfg_dataroot": "C:\\moodledata",
+    "wwwroot": "http://127.0.0.1:8000",
+    "release": null,
+    "version": "2026050100",
+    "dbtype": "mariadb",
+    "dbname": "moodle",
+    "dbhost": "127.0.0.1",
+    "prefix": "mdl_"
+  },
+  "component_presence": [
+    {
+      "key": "mod_uckkarchive_version",
+      "path": "C:\\mycode\\UCKK\\moodle\\moodle\\public/mod/uckkarchive/version.php",
+      "exists": true
+    },
+    {
+      "key": "mod_uckkarchive_lib",
+      "path": "C:\\mycode\\UCKK\\moodle\\moodle\\public/mod/uckkarchive/lib.php",
+      "exists": true
+    },
+    {
+      "key": "mod_uckkarchive_locallib",
+      "path": "C:\\mycode\\UCKK\\moodle\\moodle\\public/mod/uckkarchive/locallib.php",
+      "exists": true
+    },
+    {
+      "key": "local_uckk_mediatheque_page",
+      "path": "C:\\mycode\\UCKK\\moodle\\moodle\\public/local/uckk/mediatheque.php",
+      "exists": true
+    },
+    {
+      "key": "local_uckk_mediatheque_explorer_amd",
+      "path": "C:\\mycode\\UCKK\\moodle\\moodle\\public/local/uckk/amd/src/mediatheque_explorer.js",
+      "exists": true
+    },
+    {
+      "key": "mod_uckkarchive_search_mediatheque_external",
+      "path": "C:\\mycode\\UCKK\\moodle\\moodle\\public/mod/uckkarchive/classes/external/search_mediatheque.php",
+      "exists": true
+    },
+    {
+      "key": "mod_uckkarchive_public_mediatheque_repository",
+      "path": "C:\\mycode\\UCKK\\moodle\\moodle\\public/mod/uckkarchive/classes/local/public_mediatheque_repository.php",
+      "exists": true
+    },
+    {
+      "key": "mod_uckkarchive_public_mediatheque_service",
+      "path": "C:\\mycode\\UCKK\\moodle\\moodle\\public/mod/uckkarchive/classes/local/public_mediatheque_service.php",
+      "exists": true
+    }
+  ],
+  "table_presence": [
+    {
+      "table": "uckkarchive",
+      "required": true,
+      "purpose": "Archive activity instance table.",
+      "exists": true,
+      "row_count": 115,
+      "column_count": 22
+    },
+    {
+      "table": "uckkarchive_media",
+      "required": true,
+      "purpose": "Media records imported from inventory.",
+      "exists": true,
+      "row_count": 129,
+      "column_count": 34
+    },
+    {
+      "table": "uckkarchive_media_version",
+      "required": true,
+      "purpose": "File/version records used as File API itemid anchor.",
+      "exists": true,
+      "row_count": 0,
+      "column_count": 19
+    },
+    {
+      "table": "uckkarchive_media_source",
+      "required": true,
+      "purpose": "Source/provenance metadata.",
+      "exists": true,
+      "row_count": 128,
+      "column_count": 17
+    },
+    {
+      "table": "uckkarchive_media_tag",
+      "required": true,
+      "purpose": "Inventory tags.",
+      "exists": true,
+      "row_count": 1029,
+      "column_count": 13
+    },
+    {
+      "table": "uckkarchive_content_marker",
+      "required": false,
+      "purpose": "Content advisories when inventory has advisories.",
+      "exists": true,
+      "row_count": 0,
+      "column_count": 37
+    },
+    {
+      "table": "uckkarchive_content_tag",
+      "required": false,
+      "purpose": "Content advisory taxonomy.",
+      "exists": true,
+      "row_count": 0,
+      "column_count": 22
+    },
+    {
+      "table": "uckkarchive_content_review",
+      "required": false,
+      "purpose": "Review state for advisories.",
+      "exists": true,
+      "row_count": 0,
+      "column_count": 21
+    },
+    {
+      "table": "uckkarchive_media_relation",
+      "required": false,
+      "purpose": "Relations if inventory has relations.",
+      "exists": true,
+      "row_count": 0,
+      "column_count": 17
+    },
+    {
+      "table": "uckkarchive_media_collection",
+      "required": false,
+      "purpose": "Collections/facets.",
+      "exists": true,
+      "row_count": 20,
+      "column_count": 19
+    },
+    {
+      "table": "uckkarchive_media_collection_item",
+      "required": false,
+      "purpose": "Collection membership.",
+      "exists": true,
+      "row_count": 199,
+      "column_count": 6
+    },
+    {
+      "table": "uckkarchive_external_work",
+      "required": false,
+      "purpose": "External works referenced by media.",
+      "exists": true,
+      "row_count": 128,
+      "column_count": 34
+    }
+  ],
+  "columns": {
+    "uckkarchive": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "course",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "name",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "intro",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "introformat",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archivecode",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archivetype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archivepolicy",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "defaultvisibility",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "requirevalidation",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "allowpublicitems",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "allowexports",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "completionrequireitem",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "completionrequirevalidation",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "status",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "visibility",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "versionno",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_media": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archiveid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "courseid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "cmid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "contextid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "userid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "ownerid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "currentversionid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "externalworkid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourceid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "mediatype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "mimetype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "status",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "visibility",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "audiencesuitability",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "source",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "title",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "summary",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "description",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "restricted",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "culturalprotocol",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourcetype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourceurl",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "license",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "licensekey",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "rightsstatement",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "rightsstatus",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "searchable",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_media_version": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "mediaid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "versionnumber",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "versionno",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "label",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "status",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "filearea",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "filepath",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "filename",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "filesize",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "mimetype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "contenthash",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "iscurrent",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_media_source": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archiveid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "mediaid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "externalworkid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourcecomponent",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourceitemid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourcetype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourceurl",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "title",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "citation",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "rightsstatus",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_media_tag": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archiveid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "mediaid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "tag",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "tagkey",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "name",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "rawname",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "tagtype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "type",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_content_marker": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archiveid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "courseid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "cmid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "contextid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "mediaid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "externalworkid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "targettype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "targetid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "userid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "tagkey",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "tag",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "contenttag",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "advisorytag",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "tagcategory",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "severity",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "audiencesuitability",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "reviewstate",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "visibility",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "locatortype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "locator",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "locatorvalue",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "locatorstart",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "locatorend",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "locatorlabel",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "description",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "note",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "culturalprotocol",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "restricted",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "requirescontext",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "redacted",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_content_tag": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "tagsetid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "tagkey",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "label",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "category",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "description",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "defaultseverity",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "severity",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "defaultaudiencesuitability",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "audiencesuitability",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "defaultreviewstate",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "iscultural",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "restrictsbydefault",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "requiresreview",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "status",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sortorder",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_content_review": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archiveid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "courseid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "cmid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "contextid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "markerid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "reviewerid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "userid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "state",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "severity",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "audiencesuitability",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "rationale",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "reviewnote",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "culturalprotocol",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "restricted",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_media_relation": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archiveid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "mediaid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourcemediaid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "targetmediaid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "targetid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "targettype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "relationtype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "type",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "status",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "note",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_media_collection": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archiveid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "courseid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "cmid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "contextid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "ownerid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "title",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "summary",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "description",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "status",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "visibility",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sortorder",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "audiencesuitability",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_media_collection_item": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "collectionid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "mediaid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sortorder",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "addedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ],
+    "uckkarchive_external_work": [
+      {
+        "name": "id",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "uuid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "archiveid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "courseid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "cmid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "contextid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "ownerid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "createdby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "modifiedby",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "worktype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "status",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "visibility",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "audiencesuitability",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "rightsstatus",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "title",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "subtitle",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "creator",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "publisher",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "publicationyear",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "language",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourceurl",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "identifier",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "identifiertype",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "citation",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "rightsstatement",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "licensekey",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "sourcenote",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "teachingnote",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "culturalprotocolnote",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "description",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "provenanceid",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "metadata",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timecreated",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      },
+      {
+        "name": "timemodified",
+        "type": "",
+        "max_length": "",
+        "not_null": "",
+        "default_value": "",
+        "has_default": ""
+      }
+    ]
+  },
+  "schema_contract": [
+    {
+      "table": "uckkarchive_media",
+      "exists": true,
+      "required_ok": true,
+      "missing_required": "",
+      "missing_recommended": "language, retentionclass, redactionstate"
+    },
+    {
+      "table": "uckkarchive_media_version",
+      "exists": true,
+      "required_ok": false,
+      "missing_required": "archiveid, contextid",
+      "missing_recommended": "courseid, cmid, visibility"
+    },
+    {
+      "table": "uckkarchive_media_source",
+      "exists": true,
+      "required_ok": false,
+      "missing_required": "contextid",
+      "missing_recommended": "courseid, cmid, sourceownership, sourceauthor, attribution"
+    },
+    {
+      "table": "uckkarchive_media_tag",
+      "exists": true,
+      "required_ok": false,
+      "missing_required": "contextid",
+      "missing_recommended": "courseid, cmid, status, visibility, modifiedby, metadata"
+    },
+    {
+      "table": "uckkarchive_content_marker",
+      "exists": true,
+      "required_ok": true,
+      "missing_required": "",
+      "missing_recommended": ""
+    },
+    {
+      "table": "uckkarchive_media_relation",
+      "exists": true,
+      "required_ok": false,
+      "missing_required": "contextid",
+      "missing_recommended": "courseid, cmid, description, visibility"
+    }
+  ],
+  "archive_targets": [
+    {
+      "cmid": 160,
+      "archiveid": 52,
+      "courseid": 53,
+      "contextid": 310,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-AS252",
+      "coursename": "Agitation institutionnelle et mesure de lÔÇÖutilit├® r├®elle",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 14,
+      "archiveid": 3,
+      "courseid": 4,
+      "contextid": 164,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC103",
+      "coursename": "Agitation institutionnelle et mesure de lÔÇÖutilit├® r├®elle",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 326,
+      "archiveid": 110,
+      "courseid": 111,
+      "contextid": 476,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IS203",
+      "coursename": "Agitation institutionnelle et utilit├® r├®elle",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 56,
+      "archiveid": 17,
+      "courseid": 18,
+      "contextid": 206,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-GJS107",
+      "coursename": "Architecture dÔÇÖopportunit├®s",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 239,
+      "archiveid": 80,
+      "courseid": 81,
+      "contextid": 389,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ME306",
+      "coursename": "Architecture de la r├®sonance : intuition, motifs et discernement",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 115,
+      "archiveid": 37,
+      "courseid": 38,
+      "contextid": 265,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA303",
+      "coursename": "Archives vivantes, post-mortems et mise ├á jour du canon",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 35,
+      "archiveid": 10,
+      "courseid": 11,
+      "contextid": 185,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC110",
+      "coursename": "Assembl├®es, d├®lib├®ration et m├®moire collective",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 178,
+      "archiveid": 58,
+      "courseid": 59,
+      "contextid": 328,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP206",
+      "coursename": "Assembl├®es, r├¿gles et d├®cisions collectives",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 301,
+      "archiveid": 101,
+      "courseid": 102,
+      "contextid": 451,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA307",
+      "coursename": "Atelier de conception dÔÇÖoutil IA",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 277,
+      "archiveid": 93,
+      "courseid": 94,
+      "contextid": 427,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA207",
+      "coursename": "Automatisation sans domination",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 157,
+      "archiveid": 51,
+      "courseid": 52,
+      "contextid": 307,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-AS251",
+      "coursename": "Boucles de r├®troaction clinique et apprentissage institutionnel",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 320,
+      "archiveid": 108,
+      "courseid": 109,
+      "contextid": 470,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IS201",
+      "coursename": "Boucles de r├®troaction clinique et apprentissage institutionnel",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 200,
+      "archiveid": 66,
+      "courseid": 67,
+      "contextid": 350,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-EC202",
+      "coursename": "Capitalisme, extraction et contre-pouvoirs",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 259,
+      "archiveid": 87,
+      "courseid": 88,
+      "contextid": 409,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA201",
+      "coursename": "Cartographie des id├®es avec lÔÇÖIA",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 8,
+      "archiveid": 1,
+      "courseid": 2,
+      "contextid": 158,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC101",
+      "coursename": "Cartographie des id├®es avec lÔÇÖIA",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 38,
+      "archiveid": 11,
+      "courseid": 12,
+      "contextid": 188,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-GJS101",
+      "coursename": "Cartographie du Grand Jeu",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 58,
+      "archiveid": 18,
+      "courseid": 19,
+      "contextid": 208,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-GJS108",
+      "coursename": "Changer les r├¿gles",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 218,
+      "archiveid": 72,
+      "courseid": 73,
+      "contextid": 368,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ECO204",
+      "coursename": "Communaut├®s et r├®silience",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 215,
+      "archiveid": 71,
+      "courseid": 72,
+      "contextid": 365,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ECO203",
+      "coursename": "Crises environnementales",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 32,
+      "archiveid": 9,
+      "courseid": 10,
+      "contextid": 182,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC109",
+      "coursename": "D├®fis publics et th├®├ótre responsable",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 133,
+      "archiveid": 43,
+      "courseid": 44,
+      "contextid": 283,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA309",
+      "coursename": "D├®ploiement local-global : du pilote communautaire au r├®seau f├®d├®r├®",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 130,
+      "archiveid": 42,
+      "courseid": 43,
+      "contextid": 280,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA308",
+      "coursename": "Design dÔÇÖun ├®cosyst├¿me de syst├¿mes",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 148,
+      "archiveid": 48,
+      "courseid": 49,
+      "contextid": 298,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-AS204",
+      "coursename": "D├®veloppement doc-first avec IA",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 265,
+      "archiveid": 89,
+      "courseid": 90,
+      "contextid": 415,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA203",
+      "coursename": "D├®veloppement doc-first avec IA",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 256,
+      "archiveid": 86,
+      "courseid": 87,
+      "contextid": 406,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA105",
+      "coursename": "Donn├®es, mod├¿les, biais et hallucinations",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 195,
+      "archiveid": 64,
+      "courseid": 65,
+      "contextid": 345,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP399",
+      "coursename": "Dossier de passage : r├®forme du Grand Jeu politique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 304,
+      "archiveid": 102,
+      "courseid": 103,
+      "contextid": 454,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA399",
+      "coursename": "Dossier de passage : workflow ou outil dÔÇÖIA gouvernable",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 224,
+      "archiveid": 74,
+      "courseid": 75,
+      "contextid": 374,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ECO206",
+      "coursename": "├ëcologie politique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 209,
+      "archiveid": 69,
+      "courseid": 70,
+      "contextid": 359,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ECO201",
+      "coursename": "├ëcologie syst├®mique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 151,
+      "archiveid": 49,
+      "courseid": 50,
+      "contextid": 301,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-AS205",
+      "coursename": "├ëcosyst├¿me num├®rique kOA : de la connaissance ├á lÔÇÖaction",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 206,
+      "archiveid": 68,
+      "courseid": 69,
+      "contextid": 356,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-EC251",
+      "coursename": "├ëducation ouverte, certification et l├®gitimit├® sociale",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 323,
+      "archiveid": 109,
+      "courseid": 110,
+      "contextid": 473,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IS202",
+      "coursename": "├ëducation ouverte, certification et l├®gitimit├® sociale",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 94,
+      "archiveid": 30,
+      "courseid": 31,
+      "contextid": 244,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA207",
+      "coursename": "EkoH : expertise, ├®thique et cr├®dibilit├® situ├®e",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 221,
+      "archiveid": 73,
+      "courseid": 74,
+      "contextid": 371,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ECO205",
+      "coursename": "├ënergie, alimentation et infrastructures",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 47,
+      "archiveid": 14,
+      "courseid": 15,
+      "contextid": 197,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-GJS104",
+      "coursename": "Enqu├¬te inquisitoriale",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 91,
+      "archiveid": 29,
+      "courseid": 30,
+      "contextid": 241,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA206",
+      "coursename": "ethiKos : d├®lib├®ration structur├®e et d├®cision civique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 29,
+      "archiveid": 8,
+      "courseid": 9,
+      "contextid": 179,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC108",
+      "coursename": "├ëthique, int├®grit├® et Inquisiteur m├®thodologique",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 312,
+      "archiveid": 105,
+      "courseid": 106,
+      "contextid": 462,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-LI203",
+      "coursename": "Fiction fondatrice et v├®rit├® morale",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 232,
+      "archiveid": 77,
+      "courseid": 78,
+      "contextid": 382,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ME202",
+      "coursename": "Fiction fondatrice, v├®rit├® morale et r├®cits symboliques",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 331,
+      "archiveid": 112,
+      "courseid": 113,
+      "contextid": 481,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-MV202",
+      "coursename": "Fiction fondatrice, v├®rit├® morale et r├®cits symboliques",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 20,
+      "archiveid": 5,
+      "courseid": 6,
+      "contextid": 170,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC105",
+      "coursename": "Fiction fondatrice, v├®rit├® morale et r├®cits symboliques",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 244,
+      "archiveid": 82,
+      "courseid": 83,
+      "contextid": 394,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA101",
+      "coursename": "Fondements de lÔÇÖintelligence artificielle",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 189,
+      "archiveid": 62,
+      "courseid": 63,
+      "contextid": 339,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP253",
+      "coursename": "Gouvernance des plateformes",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 236,
+      "archiveid": 79,
+      "courseid": 80,
+      "contextid": 386,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ME204",
+      "coursename": "Grammaires symboliques : Sephiroth, ¤Ç et architecture kOA",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 309,
+      "archiveid": 104,
+      "courseid": 105,
+      "contextid": 459,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-LI202",
+      "coursename": "Grammaires symboliques : Sephiroth, ¤Ç et architecture kOA",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 274,
+      "archiveid": 92,
+      "courseid": 93,
+      "contextid": 424,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA206",
+      "coursename": "Graphes de connaissance, s├®mantique et IA",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 172,
+      "archiveid": 56,
+      "courseid": 57,
+      "contextid": 322,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP204",
+      "coursename": "Guerre, gouvernance et diplomatie dÔÇÖex├®cution",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 315,
+      "archiveid": 106,
+      "courseid": 107,
+      "contextid": 465,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-LI204",
+      "coursename": "Histoire des r├®seaux de connaissance : parole, ├®criture, web et s├®mantique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 73,
+      "archiveid": 23,
+      "courseid": 24,
+      "contextid": 223,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA105",
+      "coursename": "IA comme outil dÔÇÖanalyse, jamais comme autorit├® finale",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 289,
+      "archiveid": 97,
+      "courseid": 98,
+      "contextid": 439,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA303",
+      "coursename": "IA dans le kOA Digital Ecosystem",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 283,
+      "archiveid": 95,
+      "courseid": 96,
+      "contextid": 433,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA301",
+      "coursename": "IA et gouvernance des d├®cisions",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 295,
+      "archiveid": 99,
+      "courseid": 100,
+      "contextid": 445,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA305",
+      "coursename": "IA et m├®dias vivants",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 247,
+      "archiveid": 83,
+      "courseid": 84,
+      "contextid": 397,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA102",
+      "coursename": "IA et soci├®t├®",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 203,
+      "archiveid": 67,
+      "courseid": 68,
+      "contextid": 353,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-EC203",
+      "coursename": "IA, erreurs, emploi et moyens de production",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 262,
+      "archiveid": 88,
+      "courseid": 89,
+      "contextid": 412,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA202",
+      "coursename": "IA, erreurs, emploi et moyens de production",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 286,
+      "archiveid": 96,
+      "courseid": 97,
+      "contextid": 436,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA302",
+      "coursename": "IA, Smart Vote, EkoH et lectures multiples",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 298,
+      "archiveid": 100,
+      "courseid": 101,
+      "contextid": 448,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA306",
+      "coursename": "IA, traduction et souverainet├® s├®mantique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 124,
+      "archiveid": 40,
+      "courseid": 41,
+      "contextid": 274,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA306",
+      "coursename": "Infrastructure distribu├®e et Kristal Farms",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 175,
+      "archiveid": 57,
+      "courseid": 58,
+      "contextid": 325,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP205",
+      "coursename": "Institutions politiques et Grand Jeu social",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 50,
+      "archiveid": 15,
+      "courseid": 16,
+      "contextid": 200,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-GJS105",
+      "coursename": "Intelligence collective et assembl├®es",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 169,
+      "archiveid": 55,
+      "courseid": 56,
+      "contextid": 319,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP203",
+      "coursename": "Intelligence collective, expertise situ├®e et d├®cision l├®gitime",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 11,
+      "archiveid": 2,
+      "courseid": 3,
+      "contextid": 161,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC102",
+      "coursename": "Intelligence collective, expertise situ├®e et d├®cision l├®gitime",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 26,
+      "archiveid": 7,
+      "courseid": 8,
+      "contextid": 176,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC107",
+      "coursename": "Introduction ├á kOA : connaissance, d├®cision, action, m├®moire",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 61,
+      "archiveid": 19,
+      "courseid": 20,
+      "contextid": 211,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA101",
+      "coursename": "Introduction ├á lÔÇÖ├®cosyst├¿me digital kOA",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 88,
+      "archiveid": 28,
+      "courseid": 29,
+      "contextid": 238,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA205",
+      "coursename": "Konnaxion : espace public de contribution et collaboration",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 76,
+      "archiveid": 24,
+      "courseid": 25,
+      "contextid": 226,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA201",
+      "coursename": "Kristals : connaissance v├®rifiable et artefacts s├®mantiques",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 142,
+      "archiveid": 46,
+      "courseid": 47,
+      "contextid": 292,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-AS202",
+      "coursename": "Kristals : connaissance v├®rifiable et artefacts s├®mantiques",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 307,
+      "archiveid": 103,
+      "courseid": 104,
+      "contextid": 457,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-LI201",
+      "coursename": "Kristals : connaissance v├®rifiable et artefacts s├®mantiques",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 271,
+      "archiveid": 91,
+      "courseid": 92,
+      "contextid": 421,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA205",
+      "coursename": "Kristals et connaissance v├®rifiable",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 183,
+      "archiveid": 60,
+      "courseid": 61,
+      "contextid": 333,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP251",
+      "coursename": "Le Bouffon, le Roi et la critique symbolique du pouvoir",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 234,
+      "archiveid": 78,
+      "courseid": 79,
+      "contextid": 384,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ME203",
+      "coursename": "Le Bouffon, le Roi et la critique symbolique du pouvoir",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 328,
+      "archiveid": 111,
+      "courseid": 112,
+      "contextid": 478,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-MV201",
+      "coursename": "Le Bouffon, le Roi et la critique symbolique du pouvoir",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 317,
+      "archiveid": 107,
+      "courseid": 108,
+      "contextid": 467,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-LI305",
+      "coursename": "Logos, donn├®es s├®mantiques et architecture du sens",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 339,
+      "archiveid": 115,
+      "courseid": 116,
+      "contextid": 491,
+      "coursevisible": 0,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-MEDIA-CENTRALE",
+      "coursename": "M├®diath├¿que centrale UCKK",
+      "archivename": "Registraire ÔÇö M├®diath├¿que centrale"
+    },
+    {
+      "cmid": 109,
+      "archiveid": 35,
+      "courseid": 36,
+      "contextid": 259,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA301",
+      "coursename": "M├®moire institutionnelle et apprentissage r├®utilisable",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 229,
+      "archiveid": 76,
+      "courseid": 77,
+      "contextid": 379,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ME201",
+      "coursename": "M├®taphysique comme science future",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 127,
+      "archiveid": 41,
+      "courseid": 42,
+      "contextid": 277,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA307",
+      "coursename": "Mimic vs Annex : int├®gration sans contamination",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 186,
+      "archiveid": 61,
+      "courseid": 62,
+      "contextid": 336,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP252",
+      "coursename": "Mobilisation multi-corridor et coop├®ration pratique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 334,
+      "archiveid": 113,
+      "courseid": 114,
+      "contextid": 484,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-MV203",
+      "coursename": "Mobilisation multi-corridor et coop├®ration pratique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 23,
+      "archiveid": 6,
+      "courseid": 7,
+      "contextid": 173,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC106",
+      "coursename": "Mobilisation multi-corridor et coop├®ration pratique",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 192,
+      "archiveid": 63,
+      "courseid": 64,
+      "contextid": 342,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP254",
+      "coursename": "Non-domination, transparence et vie priv├®e",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 100,
+      "archiveid": 32,
+      "courseid": 33,
+      "contextid": 250,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA209",
+      "coursename": "Orgo : t├óches, cases, responsabilit├®s et ex├®cution gouvern├®e",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 253,
+      "archiveid": 85,
+      "courseid": 86,
+      "contextid": 403,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA104",
+      "coursename": "Pens├®e critique face aux sorties g├®n├®r├®es",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 44,
+      "archiveid": 13,
+      "courseid": 14,
+      "contextid": 194,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-GJS103",
+      "coursename": "Performance strat├®gique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 67,
+      "archiveid": 21,
+      "courseid": 22,
+      "contextid": 217,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA103",
+      "coursename": "Plateformes, r├┤les, permissions et gouvernance",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 163,
+      "archiveid": 53,
+      "courseid": 54,
+      "contextid": 313,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP201",
+      "coursename": "Pouvoirs diffus : ├ëtat, m├®dias, r├®seaux, code et religion",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 136,
+      "archiveid": 44,
+      "courseid": 45,
+      "contextid": 286,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA399",
+      "coursename": "Projet int├®grateur : d├®ployer un mini-├®cosyst├¿me kOA",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 250,
+      "archiveid": 84,
+      "courseid": 85,
+      "contextid": 400,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA103",
+      "coursename": "Prompting, contraintes et points dÔÇÖancrage",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 227,
+      "archiveid": 75,
+      "courseid": 76,
+      "contextid": 377,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ECO207",
+      "coursename": "Prototypes de transition",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 85,
+      "archiveid": 27,
+      "courseid": 28,
+      "contextid": 235,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA204",
+      "coursename": "Provenance, preuve, contexte et tra├ºabilit├®",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 181,
+      "archiveid": 59,
+      "courseid": 60,
+      "contextid": 331,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP207",
+      "coursename": "R├®forme des r├¿gles du jeu",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 139,
+      "archiveid": 45,
+      "courseid": 46,
+      "contextid": 289,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-AS201",
+      "coursename": "R├®silience et efficacit├® des syst├¿mes sociotechniques",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 118,
+      "archiveid": 38,
+      "courseid": 39,
+      "contextid": 268,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA304",
+      "coursename": "R├®silience hors ligne, fail-closed integrity et souverainet├® num├®rique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 41,
+      "archiveid": 12,
+      "courseid": 13,
+      "contextid": 191,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-GJS102",
+      "coursename": "Rouages de la soci├®t├®",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 112,
+      "archiveid": 36,
+      "courseid": 37,
+      "contextid": 262,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA302",
+      "coursename": "Runtime Packs, Kristal Exchange et distribution hors ligne",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 121,
+      "archiveid": 39,
+      "courseid": 40,
+      "contextid": 271,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA305",
+      "coursename": "S├®curit├®, auditabilit├® et non-domination",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 292,
+      "archiveid": 98,
+      "courseid": 99,
+      "contextid": 442,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA304",
+      "coursename": "S├®curit├®, vie priv├®e et non-domination algorithmique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 79,
+      "archiveid": 25,
+      "courseid": 26,
+      "contextid": 229,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA202",
+      "coursename": "SemantiK Architect : architecture du sens",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 70,
+      "archiveid": 22,
+      "courseid": 23,
+      "contextid": 220,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA104",
+      "coursename": "S├®mantique, graphes de connaissance et sens structur├®",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 82,
+      "archiveid": 26,
+      "courseid": 27,
+      "contextid": 232,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA203",
+      "coursename": "SenTient : ambigu├»t├®, propositions incertaines et validation",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 97,
+      "archiveid": 31,
+      "courseid": 32,
+      "contextid": 247,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA208",
+      "coursename": "Smart Vote : lectures brutes, pond├®r├®es et comparables",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 166,
+      "archiveid": 54,
+      "courseid": 55,
+      "contextid": 316,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-SP202",
+      "coursename": "SmartVote, EkoH et gouvernance pond├®r├®e",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 198,
+      "archiveid": 65,
+      "courseid": 66,
+      "contextid": 348,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-EC201",
+      "coursename": "Soci├®t├® des flux : argent, information et pouvoir",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 17,
+      "archiveid": 4,
+      "courseid": 5,
+      "contextid": 167,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-TC104",
+      "coursename": "Soci├®t├® des flux : argent, information et pouvoir",
+      "archivename": "Archive du tronc commun"
+    },
+    {
+      "cmid": 106,
+      "archiveid": 34,
+      "courseid": 35,
+      "contextid": 256,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA211",
+      "coursename": "SwarmCraft : coordination distribu├®e humains-agents-outils",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 154,
+      "archiveid": 50,
+      "courseid": 51,
+      "contextid": 304,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-AS206",
+      "coursename": "Syst├¿mes dÔÇÖexploitation sociotechniques",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 145,
+      "archiveid": 47,
+      "courseid": 48,
+      "contextid": 295,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-AS203",
+      "coursename": "Syst├¿mes d├®terministes et IA g├®n├®rative",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 268,
+      "archiveid": 90,
+      "courseid": 91,
+      "contextid": 418,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA204",
+      "coursename": "Syst├¿mes d├®terministes et IA g├®n├®rative",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 64,
+      "archiveid": 20,
+      "courseid": 21,
+      "contextid": 214,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA102",
+      "coursename": "Syst├¿mes sociotechniques et Grand Jeu num├®rique",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 212,
+      "archiveid": 70,
+      "courseid": 71,
+      "contextid": 362,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ECO202",
+      "coursename": "Territoires et ressources",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 280,
+      "archiveid": 94,
+      "courseid": 95,
+      "contextid": 430,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-IA208",
+      "coursename": "Tests, logs, validation et audit de sorties IA",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 53,
+      "archiveid": 16,
+      "courseid": 17,
+      "contextid": 203,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-GJS106",
+      "coursename": "Th├®├ótre public et m├®dias vivants",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 337,
+      "archiveid": 114,
+      "courseid": 115,
+      "contextid": 487,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-MV204",
+      "coursename": "Th├®├ótre public, satire et responsabilit├®",
+      "archivename": "Archive du cours"
+    },
+    {
+      "cmid": 241,
+      "archiveid": 81,
+      "courseid": 82,
+      "contextid": 391,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-ME307",
+      "coursename": "Th├®orie de ¤Ç : herm├®neutique math├®matique et cosmogonie symbolique",
+      "archivename": "Archive du s├®minaire"
+    },
+    {
+      "cmid": 103,
+      "archiveid": 33,
+      "courseid": 34,
+      "contextid": 253,
+      "coursevisible": 1,
+      "cmvisible": 1,
+      "courseshortname": "UCKK-KOA210",
+      "coursename": "Workflows, gates, escalades et cl├┤ture",
+      "archivename": "Archive du cours"
+    }
+  ],
+  "selected_target": null,
+  "distinct_values": {
+    "uckkarchive_media": {
+      "mediatype": [
+        "audio",
+        "code",
+        "text",
+        "video"
+      ],
+      "status": [
+        "active"
+      ],
+      "visibility": [
+        "public"
+      ],
+      "audiencesuitability": [
+        "general"
+      ],
+      "language": [],
+      "retentionclass": [],
+      "redactionstate": []
+    },
+    "uckkarchive_media_version": {
+      "filearea": [],
+      "status": [],
+      "visibility": [],
+      "mimetype": []
+    },
+    "uckkarchive_media_source": {
+      "sourcetype": [
+        "external_reference_only"
+      ],
+      "sourceownership": []
+    },
+    "uckkarchive_media_tag": {
+      "tagkey": [
+        "abuse_of_power",
+        "academic_paper_and_article",
+        "agrippa",
+        "amazon",
+        "amazon_book",
+        "art_creativity",
+        "audio_book",
+        "bureaucracy",
+        "christianity",
+        "collective_resources",
+        "coordination_systems",
+        "corporate_power",
+        "critical_thinking",
+        "data_sovereignty",
+        "democracy",
+        "economic_inequality",
+        "ekoh_smart_vote_merit_weighted_voting",
+        "empath",
+        "empathy",
+        "ether",
+        "ethics",
+        "free_will",
+        "github",
+        "github_wiki",
+        "governance",
+        "healing",
+        "health_reform",
+        "healthcare",
+        "human_centered_automation",
+        "information_architecture",
+        "infrastructure",
+        "inspiration",
+        "institutional_reform",
+        "jesus",
+        "king_klown",
+        "knowledge_management",
+        "konnaxion",
+        "kristal_farms_green_ai",
+        "kristal_semantic_data",
+        "medical_diagnosis",
+        "medium",
+        "medium_article",
+        "metaphysics",
+        "mind_control",
+        "music_and_videos",
+        "mythology",
+        "natural_language_generation",
+        "operational_efficiency",
+        "orgo",
+        "peace_and_efficiency"
+      ],
+      "tagtype": [
+        "platform",
+        "topic",
+        "type"
+      ],
+      "status": [],
+      "visibility": []
+    },
+    "uckkarchive_content_marker": {
+      "tagkey": [],
+      "severity": [],
+      "visibility": [],
+      "reviewstate": [],
+      "locatortype": []
+    }
+  },
+  "external_functions": [
+    {
+      "name": "mod_uckkarchive_search_mediatheque",
+      "declared_in_db": true,
+      "enabled": null
+    },
+    {
+      "name": "mod_uckkarchive_get_media",
+      "declared_in_db": true,
+      "enabled": null
+    },
+    {
+      "name": "mod_uckkarchive_get_media_versions",
+      "declared_in_db": true,
+      "enabled": null
+    }
+  ],
+  "inventory": {
+    "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\uckk_inventory.json",
+    "exists": true,
+    "parse_ok": true,
+    "file_count": 64,
+    "missing_files": [],
+    "duplicates": [],
+    "extension_counts": {
+      "docx": 63,
+      "pdf": 1
+    },
+    "mimetype_counts": {
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document": 63,
+      "application/pdf": 1
+    },
+    "action_counts": {
+      "import_to_media_library": 64
+    },
+    "sample_files": [
+      {
+        "index": 1,
+        "original_filename": "Analyse Strat├®gique et Socio-Technique _ La Mutation de la V├®rit├® et le Capital ├ëpist├®mique.docx",
+        "proposed_filename": "analyse_socio_technique_mutation_verite_capital_epistemique_provenance.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\analyse_socio_technique_mutation_verite_capital_epistemique_provenance.docx",
+        "size": 301667
+      },
+      {
+        "index": 2,
+        "original_filename": "R├┤les sociaux de la religion.docx",
+        "proposed_filename": "recherche_roles_sociaux_religion_complexe_institutionnel_quebec_ia.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\recherche_roles_sociaux_religion_complexe_institutionnel_quebec_ia.docx",
+        "size": 1457986
+      },
+      {
+        "index": 3,
+        "original_filename": "The kOA Digital Ecosystem (Sociotechnical OS) FR.docx",
+        "proposed_filename": "digital_ecosystem_sociotechnical_operating_system_control_plan_fr.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\digital_ecosystem_sociotechnical_operating_system_control_plan_fr.docx",
+        "size": 178351
+      },
+      {
+        "index": 4,
+        "original_filename": "Semantic Sovereignty and Non-Domination_ Toward an Offline, Governable Knowledge Infrastructure.docx",
+        "proposed_filename": "semantic_sovereignty_non_domination_offline_governable_knowledge_infrastructure.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\semantic_sovereignty_non_domination_offline_governable_knowledge_infrastructure.docx",
+        "size": 590505
+      },
+      {
+        "index": 5,
+        "original_filename": "11_kOA ÔÇö Viabilit├®, autonomie et logique de financement.docx",
+        "proposed_filename": "viabilite_autonomie_logique_financement_modele_affaires_non_extractif.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\viabilite_autonomie_logique_financement_modele_affaires_non_extractif.docx",
+        "size": 1431373
+      },
+      {
+        "index": 6,
+        "original_filename": "Pr├®sence en ligne - Chaos comme porte du Divin.docx",
+        "proposed_filename": "architecture_presence_ligne_chaos_porte_divin_machine_synchronicite.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\architecture_presence_ligne_chaos_porte_divin_machine_synchronicite.docx",
+        "size": 133710
+      },
+      {
+        "index": 7,
+        "original_filename": "Konnaxion is not a merge of technologies.docx",
+        "proposed_filename": "konnaxion_coordination_backbone_spine_architecture_orchestration_technologique.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\konnaxion_coordination_backbone_spine_architecture_orchestration_technologique.docx",
+        "size": 206334
+      },
+      {
+        "index": 8,
+        "original_filename": "Repenser lÔÇÖuniversit├® ├á lÔÇÖ├óge o├╣ le savoir nÔÇÖappartient plus aux temples.docx",
+        "proposed_filename": "repenser_universite_age_savoir_sorti_temple_monopole_legitimite.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\repenser_universite_age_savoir_sorti_temple_monopole_legitimite.docx",
+        "size": 1437058
+      },
+      {
+        "index": 9,
+        "original_filename": "Projet de r├®seau dÔÇÖateliers et de commerces solidaires.docx",
+        "proposed_filename": "projet_reseau_ateliers_commerces_solidaires_economie_cooperative_autonomie.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\projet_reseau_ateliers_commerces_solidaires_economie_cooperative_autonomie.docx",
+        "size": 40112
+      },
+      {
+        "index": 10,
+        "original_filename": "Kabbalah Tree Reference (v1.docx",
+        "proposed_filename": "technical_reference_kabbalah_tree_sefirot_paths_correspondences_v1.docx",
+        "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "exists": true,
+        "path": "C:\\mycode\\UCKK\\uckk-import\\uckkarchive\\originals\\technical_reference_kabbalah_tree_sefirot_paths_correspondences_v1.docx",
+        "size": 1651664
+      }
+    ]
+  },
+  "recommended_commands": [
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 160 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Agitation institutionnelle et mesure de lÔÇÖutilit├® r├®elle / Archive du cours"
+    },
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 14 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Agitation institutionnelle et mesure de lÔÇÖutilit├® r├®elle / Archive du tronc commun"
+    },
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 326 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Agitation institutionnelle et utilit├® r├®elle / Archive du cours"
+    },
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 56 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Architecture dÔÇÖopportunit├®s / Archive du cours"
+    },
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 239 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Architecture de la r├®sonance : intuition, motifs et discernement / Archive du cours"
+    },
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 115 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Archives vivantes, post-mortems et mise ├á jour du canon / Archive du cours"
+    },
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 35 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Assembl├®es, d├®lib├®ration et m├®moire collective / Archive du tronc commun"
+    },
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 178 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Assembl├®es, r├¿gles et d├®cisions collectives / Archive du cours"
+    },
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 301 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Atelier de conception dÔÇÖoutil IA / Archive du cours"
+    },
+    {
+      "purpose": "dryrun",
+      "command": "Run-UckkArchiveImport.bat dryrun 277 \"C:\\mycode\\UCKK\\moodle\\moodle\"",
+      "target": "Automatisation sans domination / Archive du cours"
+    }
+  ]
+}

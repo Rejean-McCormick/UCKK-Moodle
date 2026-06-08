@@ -136,7 +136,7 @@ final class public_pages {
             'title' => self::page_title($slug),
             'subtitle' => '',
             'summary' => '',
-            'boundarynotice' => 'UCKK-Moodle présente une cité-école expérimentale. Les reconnaissances UCKK ne doivent pas être présentées comme des diplômes publics accrédités.',
+            'boundarynotice' => 'L’UCKK est une cité d’apprentissage public émergente. Ses reconnaissances internes ne doivent pas être présentées comme des diplômes publics accrédités.',
 
             /*
              * Public visual contract.
@@ -202,24 +202,24 @@ final class public_pages {
             self::KEY_HOME => [
                 'layout' => 'wide',
                 'typography' => 'display',
-                'eyebrow' => 'Cité-école expérimentale',
+                'eyebrow' => 'Cité d’apprentissage public émergente',
                 'title' => 'Univers-Cité King Klown',
-                'subtitle' => 'Un campus Moodle pour apprendre, prouver, délibérer et tenir registre.',
-                'summary' => 'UCKK-Moodle organise les parcours, cours, défis, assemblées, traces et registres publics de l’Univers-Cité King Klown.',
+                'subtitle' => 'Comprendre le jeu. Jouer avec lucidité. Changer les règles.',
+                'summary' => 'L’UCKK relie cours, voies, défis, preuves, assemblées, archives et médiathèque pour former des personnes capables de lire les systèmes, produire des traces, délibérer et agir avec méthode.',
                 'quicklinks' => [
                     [
                         'label' => 'Explorer les voies',
-                        'description' => 'Voir les parcours publics et les structures pédagogiques UCKK.',
+                        'description' => 'Situer les grands chemins de formation, les domaines d’action et les progressions possibles.',
                         'url' => '/local/uckk/programs.php',
                     ],
                     [
                         'label' => 'Voir les cours',
-                        'description' => 'Accéder aux espaces d’apprentissage disponibles.',
+                        'description' => 'Accéder aux espaces d’apprentissage, aux ressources, aux activités et aux évaluations disponibles.',
                         'url' => '/local/uckk/courses.php',
                     ],
                     [
-                        'label' => 'Explorer le catalogue',
-                        'description' => 'Consulter les médias, collections et références publiques UCKK.',
+                        'label' => 'Consulter la médiathèque',
+                        'description' => 'Parcourir les contenus publics, collections, références et traces documentées.',
                         'url' => '/local/uckk/mediatheque.php',
                     ],
                 ],
@@ -227,150 +227,202 @@ final class public_pages {
                     [
                         'type' => 'orientation',
                         'eyebrow' => 'Orientation',
-                        'title' => 'Une cité-école structurée',
-                        'body' => 'Le campus relie les apprentissages, les défis, les preuves, les assemblées, les portfolios et la Médiathèque dans un même espace Moodle.',
+                        'title' => 'Une cité d’apprentissage pour lire, agir et se souvenir',
+                        'body' => 'L’Univers-Cité King Klown organise l’apprentissage comme un cycle complet : connaître, choisir, agir, documenter, corriger et transmettre.',
                         'items' => [
-                            'Former par des parcours et des cours.',
-                            'Mettre les apprentissages à l’épreuve par des défis.',
-                            'Documenter les traces utiles à la mémoire collective.',
-                            'Encadrer les décisions publiques par des assemblées.',
+                            'Observer les règles, récits, institutions, technologies et pouvoirs qui structurent le monde social.',
+                            'Choisir des chemins d’apprentissage reliés à des voies, des cours, des défis et des preuves.',
+                            'Agir avec méthode par des productions, enquêtes, prototypes, interventions ou contributions.',
+                            'Conserver les traces utiles dans des portfolios, archives, assemblées et unités de mémoire.',
                         ],
                     ],
                     [
                         'type' => 'boundary',
-                        'eyebrow' => 'Limite publique',
+                        'eyebrow' => 'Clarté institutionnelle',
                         'title' => 'Ce que la page publique montre',
-                        'body' => 'Les pages publiques donnent une vue institutionnelle. Elles ne remplacent pas les espaces privés, les rôles Moodle, les permissions ou les dossiers internes.',
+                        'body' => 'Les pages publiques donnent une vue claire de l’UCKK : ses voies, ses cours, ses défis, ses assemblées, sa médiathèque, ses archives et ses repères d’intégrité. Elles ne remplacent pas les espaces privés, les inscriptions, les rôles, les permissions ou les dossiers internes.',
                     ],
                 ],
                 'cardsheading' => 'Portes d’entrée',
                 'cards' => [
                     [
                         'title' => 'Voies',
-                        'body' => 'Les chemins de formation et d’engagement proposés dans la cité-école.',
+                        'body' => 'Les chemins qui relient domaines, cours, défis, preuves, niveaux et Parchemins UCKK.',
                         'url' => '/local/uckk/programs.php',
                         'actionlabel' => 'Voir les voies',
                         'type' => 'programs',
                     ],
                     [
+                        'title' => 'Cours',
+                        'body' => 'Les espaces où les apprentissages, ressources, activités et évaluations sont organisés.',
+                        'url' => '/local/uckk/courses.php',
+                        'actionlabel' => 'Explorer les cours',
+                        'type' => 'courses',
+                    ],
+                    [
                         'title' => 'Défis',
-                        'body' => 'Les mises à l’épreuve pédagogiques et symboliques qui produisent des traces.',
+                        'body' => 'Les épreuves qui transforment une question en action, production, preuve et apprentissage.',
                         'url' => '/local/uckk/challenges.php',
                         'actionlabel' => 'Voir les défis',
                         'type' => 'challenges',
                     ],
                     [
                         'title' => 'Assemblées',
-                        'body' => 'Les espaces de délibération, d’orientation et de décision collective.',
+                        'body' => 'Les lieux de discussion, d’orientation, de contestation, d’arbitrage et de légitimité collective.',
                         'url' => '/local/uckk/assemblies.php',
                         'actionlabel' => 'Voir les assemblées',
                         'type' => 'assemblies',
                     ],
+                    [
+                        'title' => 'Médiathèque',
+                        'body' => 'Les contenus publics, collections, références, médias et traces consultables.',
+                        'url' => '/local/uckk/mediatheque.php',
+                        'actionlabel' => 'Explorer la médiathèque',
+                        'type' => 'media',
+                    ],
+                    [
+                        'title' => 'Intégrité',
+                        'body' => 'Le cadre qui protège la vérité des faits, la dignité des personnes et la qualité des preuves.',
+                        'url' => '/local/uckk/integrity.php',
+                        'actionlabel' => 'Voir le cadre',
+                        'type' => 'integrity',
+                    ],
                 ],
                 'notices' => [
                     [
-                        'title' => 'Statut expérimental',
-                        'body' => 'UCKK-Moodle est un campus expérimental et pédagogique. Les contenus publics doivent rester clairs sur leur statut.',
+                        'title' => 'Limite publique',
+                        'body' => 'L’UCKK est une cité d’apprentissage public émergente. Ses Niveaux, Parchemins UCKK, portfolios, dossiers de passage et reconnaissances internes attestent une progression dans l’écosystème UCKK. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.',
                         'type' => 'institutional',
                     ],
                 ],
                 'metadata' => [
-                    ['label' => 'Composant Moodle', 'value' => 'local_uckk'],
-                    ['label' => 'Type de page', 'value' => 'Page publique institutionnelle'],
+                    ['label' => 'Nature', 'value' => 'Cité d’apprentissage public émergente'],
+                    ['label' => 'Rôle', 'value' => 'Branche éducative du mouvement kOA'],
+                    ['label' => 'Reconnaissance', 'value' => 'Niveaux, portfolios, dossiers de passage et Parchemins UCKK internes'],
                 ],
                 'cta' => [
-                    'title' => 'Entrer dans le campus',
-                    'body' => 'Commencer par les cours, les voies ou le catalogue public.',
+                    'title' => 'Entrer dans l’apprentissage',
+                    'body' => 'Commencer par les voies, ouvrir les cours associés, puis relier les apprentissages aux défis, aux assemblées, aux portfolios et aux archives.',
                     'url' => '/local/uckk/courses.php',
-                    'label' => 'Voir les cours',
+                    'label' => 'Explorer les cours',
                 ],
             ],
 
             self::KEY_ABOUT => [
                 'layout' => 'standard',
                 'typography' => 'editorial',
-                'eyebrow' => 'Clarifier UCKK',
+                'eyebrow' => 'Situer l’UCKK',
                 'title' => 'À propos',
-                'subtitle' => 'UCKK-Moodle adapte Moodle comme campus pédagogique de l’Univers-Cité King Klown.',
-                'summary' => 'Cette page présente le rôle du campus, ses limites publiques et son organisation générale.',
+                'subtitle' => 'L’Univers-Cité King Klown est la branche éducative du mouvement kOA.',
+                'summary' => 'L’UCKK est une cité d’apprentissage public émergente. Elle forme, documente, met en scène, vérifie et transmet des savoirs liés au Grand Jeu social, aux systèmes humains, aux technologies, aux preuves et à la gouvernance collective.',
                 'sections' => [
                     [
-                        'title' => 'Ce qu’est UCKK-Moodle',
-                        'body' => 'UCKK-Moodle est une adaptation de Moodle pour soutenir une cité-école : parcours, apprentissages, défis, assemblées, preuves, portfolios, Médiathèque et gouvernance pédagogique.',
+                        'title' => 'Ce qu’est l’UCKK',
+                        'body' => 'L’Univers-Cité King Klown est une institution d’apprentissage en émergence. Elle rassemble des cours, des voies, des défis, des assemblées, des archives, des portfolios, des preuves et des formes de reconnaissance interne.',
                     ],
                     [
-                        'title' => 'Ce que ce n’est pas',
-                        'body' => 'Le campus public ne doit pas présenter les reconnaissances UCKK comme des diplômes publics accrédités. Les espaces privés et les permissions Moodle restent nécessaires pour les opérations internes.',
+                        'title' => 'Ce que fait le campus',
+                        'body' => 'Le campus public donne accès aux repères institutionnels de l’UCKK : voies, cours, défis, assemblées, médiathèque, archives, règles d’intégrité et informations publiques. Les espaces internes, inscriptions, rôles, permissions, validations et dossiers privés restent gérés dans les espaces appropriés. La page publique ne remplace pas les procédures internes.',
                     ],
                     [
-                        'title' => 'Organisation',
-                        'body' => 'Les contenus publics sont séparés du rendu visuel. Les définitions de page vivent dans public_pages.php, le rendu dans public_page.php, la structure HTML dans Mustache et l’apparence dans CSS.',
+                        'title' => 'Ce que l’UCKK n’est pas',
+                        'body' => 'L’UCKK n’est pas une université publique accréditée par l’État. Ses Niveaux, Parchemins UCKK, portfolios, dossiers de passage et reconnaissances internes ne doivent pas être présentés comme des diplômes publics accrédités, des grades universitaires ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.',
+                    ],
+                    [
+                        'title' => 'King Klown, Inquisiteur, Assemblées et Archives',
+                        'body' => 'King Klown ouvre la scène pédagogique et rend les systèmes visibles. Il attire l’attention, rend les situations mémorables et invite à apprendre par le théâtre public, sans devenir l’autorité finale. L’Inquisiteur protège l’intégrité du jeu : il interroge les faits, les preuves, les limites et les risques de confusion. Les Assemblées donnent une forme collective à l’orientation, à la contestation, à l’arbitrage et aux décisions. Les Archives conservent les traces utiles, les versions, les preuves, les décisions et les corrections.',
                     ],
                 ],
                 'cardsheading' => 'Repères institutionnels',
                 'cards' => [
                     [
-                        'title' => 'Campus',
-                        'body' => 'Un espace Moodle pour organiser la formation et les traces.',
-                        'type' => 'campus',
+                        'title' => 'kOA',
+                        'body' => 'Le mouvement large : vision, culture, principes, stratégie et transformation des règles.',
+                        'type' => 'koa',
                     ],
                     [
-                        'title' => 'Canon',
-                        'body' => 'Un cadre de vocabulaire, de limites et de cohérence institutionnelle.',
-                        'type' => 'canon',
+                        'title' => 'UCKK',
+                        'body' => 'La branche éducative : apprentissages, voies, niveaux, Parchemins, défis, preuves et assemblées.',
+                        'type' => 'uckk',
                     ],
                     [
-                        'title' => 'Médiathèque',
-                        'body' => 'Un espace public pour consulter les contenus, médias et collections UCKK.',
-                        'url' => '/local/uckk/mediatheque.php',
-                        'actionlabel' => 'Explorer',
-                        'type' => 'media',
+                        'title' => 'King Klown',
+                        'body' => 'La figure narrative : il attire l’attention, rend les systèmes mémorables et ouvre des scènes d’apprentissage.',
+                        'type' => 'king-klown',
+                    ],
+                    [
+                        'title' => 'Inquisiteur',
+                        'body' => 'Le garde-fou éthique : il protège la preuve, la dignité, la clarté et la critique.',
+                        'type' => 'inquisiteur',
+                    ],
+                    [
+                        'title' => 'Assemblées',
+                        'body' => 'La légitimité collective : discussion, arbitrage, décisions, contestations et mémoire institutionnelle.',
+                        'url' => '/local/uckk/assemblies.php',
+                        'actionlabel' => 'Voir les assemblées',
+                        'type' => 'assemblies',
+                    ],
+                    [
+                        'title' => 'Archives',
+                        'body' => 'La mémoire : conservation des traces, versions, preuves, corrections et apprentissages.',
+                        'url' => '/local/uckk/archives.php',
+                        'actionlabel' => 'Voir les archives',
+                        'type' => 'archives',
                     ],
                 ],
                 'notices' => [
                     [
-                        'body' => 'Cette page est informative. Les règles de permissions, d’inscription et de validation restent gérées par Moodle et les composants UCKK appropriés.',
-                        'type' => 'light',
+                        'title' => 'Clarté publique',
+                        'body' => 'Les informations publiques doivent rester claires sur le statut de l’UCKK : les reconnaissances sont internes à la cité d’apprentissage et ne remplacent pas des diplômes publics accrédités.',
+                        'type' => 'institutional',
                     ],
+                ],
+                'cta' => [
+                    'title' => 'Comprendre l’architecture UCKK',
+                    'body' => 'Commencer par les voies, puis explorer les cours, les défis, les assemblées et la médiathèque.',
+                    'url' => '/local/uckk/programs.php',
+                    'label' => 'Voir les voies',
                 ],
             ],
 
             self::KEY_PROGRAMS => [
                 'layout' => 'wide',
                 'typography' => 'institutional',
-                'eyebrow' => 'Former par les voies',
+                'eyebrow' => 'Cartographie des voies',
                 'title' => 'Voies UCKK',
-                'subtitle' => 'Parcours publics, orientations pédagogiques et structures d’engagement.',
-                'summary' => 'Les voies organisent les intentions de formation, les trajectoires et les grands ensembles d’apprentissage.',
+                'subtitle' => 'Choisir un chemin de formation, produire des preuves et avancer vers les Niveaux et Parchemins UCKK.',
+                'summary' => 'Les Voies UCKK structurent les apprentissages de l’Univers-Cité King Klown : tronc commun, domaines fondateurs, cours, défis, portfolios, assemblées, archives et reconnaissances internes.',
                 'sections' => [
                     [
-                        'type' => 'role',
-                        'title' => 'Rôle des voies',
-                        'body' => 'Une voie aide à situer un parcours d’apprentissage dans la cité-école. Elle peut relier des cours, des compétences, des défis, des preuves et des portfolios.',
+                        'type' => 'orientation',
+                        'eyebrow' => 'Orientation canonique',
+                        'title' => 'Choisir une voie dans la cité d’apprentissage',
+                        'body' => 'Les Voies UCKK sont des structures internes de formation, de pratique et de reconnaissance. Elles relient les cours, les compétences, les défis, les preuves, les portfolios, les Assemblées et les passages de Niveau. Une voie n’est pas seulement une liste de cours : c’est un chemin d’apprentissage qui aide à situer une personne dans un domaine d’action, à produire des traces vérifiables et à construire progressivement un dossier de passage.',
                     ],
                     [
                         'type' => 'registry',
-                        'eyebrow' => 'Répertoire public',
-                        'title' => 'Voies et programmes actifs',
-                        'body' => 'Les cartes ci-dessous sont générées depuis le registre Moodle UCKK des programmes actifs. Les éléments en brouillon, cachés ou archivés ne sont pas affichés publiquement.',
+                        'eyebrow' => 'Voies publiques',
+                        'title' => 'Tronc commun et voies actives',
+                        'body' => 'Chaque carte présente une voie ou un bloc de formation visible publiquement. Elle peut ouvrir vers les espaces de cours associés lorsque ceux-ci sont publiés. Les voies peuvent mener à des Niveaux et Parchemins UCKK internes. Ces reconnaissances attestent une progression de compétence, de pratique, de recherche ou de contribution dans la cité d’apprentissage. Elles ne constituent pas des diplômes publics accrédités.',
                     ],
                 ],
                 'cards' => [],
                 'notices' => [
                     [
-                        'body' => 'Les voies décrivent des structures pédagogiques internes à UCKK. Elles ne constituent pas des diplômes publics accrédités.',
+                        'title' => 'Reconnaissance interne',
+                        'body' => 'Les voies décrivent des structures pédagogiques internes à l’UCKK. Les Niveaux et Parchemins UCKK ne constituent pas des diplômes publics accrédités.',
                         'type' => 'institutional',
                     ],
                 ],
                 'metadata' => [
-                    ['label' => 'Source', 'value' => 'Registre local_uckk_program'],
-                    ['label' => 'Filtre public', 'value' => 'status = active'],
+                    ['label' => 'Registre', 'value' => 'Voies et blocs de formation publics'],
+                    ['label' => 'Filtre public', 'value' => 'Voies actives et publiables'],
                 ],
                 'cta' => [
-                    'title' => 'Explorer les cours',
-                    'body' => 'Les catégories Moodle liées aux voies regroupent les cours et unités d’apprentissage disponibles.',
+                    'title' => 'Passer des voies aux apprentissages',
+                    'body' => 'Ouvre les cours associés pour consulter les modules, activités, ressources, preuves attendues et repères de progression.',
                     'url' => '/local/uckk/courses.php',
-                    'label' => 'Voir les cours',
+                    'label' => 'Voir les cours associés',
                 ],
             ],
 
@@ -844,7 +896,7 @@ final class public_pages {
             $title = (string)($section['title'] ?? '');
             $eyebrow = (string)($section['eyebrow'] ?? '');
 
-            if ($title === 'Répertoire public' || $title === 'Voies et programmes actifs' || $eyebrow === 'Répertoire public') {
+            if ($title === 'Tronc commun et voies actives' || $title === 'Répertoire public' || $title === 'Voies et programmes actifs' || $eyebrow === 'Voies publiques' || $eyebrow === 'Répertoire public') {
                 $definition['sections'][$index]['cards'] = $cards;
                 $attached = true;
                 break;
@@ -854,9 +906,9 @@ final class public_pages {
         if (!$attached) {
             $definition['sections'][] = [
                 'type' => 'registry',
-                'eyebrow' => 'Répertoire public',
-                'title' => 'Voies et programmes actifs',
-                'body' => 'Ces cartes proviennent du registre UCKK des programmes actifs. Les éléments en brouillon ou non publiés ne sont pas affichés ici.',
+                'eyebrow' => 'Voies publiques',
+                'title' => 'Tronc commun et voies actives',
+                'body' => 'Ces cartes proviennent du registre UCKK des voies et blocs de formation actifs. Les éléments en brouillon ou non publiés ne sont pas affichés ici.',
                 'cards' => $cards,
             ];
         }
@@ -866,7 +918,7 @@ final class public_pages {
         }
 
         $definition['metadata'][] = [
-            'label' => 'Programmes actifs affichés',
+            'label' => 'Voies actives publiées',
             'value' => (string)count($cards),
         ];
 
@@ -876,8 +928,8 @@ final class public_pages {
             }
 
             $definition['notices'][] = [
-                'title' => 'Aucun programme actif',
-                'body' => 'Aucun programme actif n’est actuellement disponible dans le registre public UCKK.',
+                'title' => 'Aucune voie active',
+                'body' => 'Aucune voie active n’est actuellement disponible dans le registre public UCKK.',
                 'type' => 'warning',
             ];
         }
@@ -911,6 +963,7 @@ final class public_pages {
                 p.id,
                 p.shortname,
                 p.fullname,
+                p.description,
                 p.programtype,
                 p.status,
                 p.visibility,
@@ -931,6 +984,7 @@ final class public_pages {
         foreach ($records as $record) {
             $shortname = trim((string)($record->shortname ?? ''));
             $fullname = trim((string)($record->fullname ?? ''));
+            $description = trim((string)($record->description ?? ''));
             $programtype = trim((string)($record->programtype ?? ''));
             $categoryname = trim((string)($record->categoryname ?? ''));
             $categoryvisible = (int)($record->categoryvisible ?? 0);
@@ -945,18 +999,18 @@ final class public_pages {
 
             $bodyparts = [];
 
-            if ($shortname !== '') {
-                $bodyparts[] = 'Code : ' . $shortname . '.';
-            }
-
-            if ($typelabel !== '') {
-                $bodyparts[] = 'Type : ' . $typelabel . '.';
+            if ($description !== '') {
+                $bodyparts[] = $description;
+            } else if ($typelabel !== '') {
+                $bodyparts[] = 'Structure publique de type ' . strtolower($typelabel) . ' dans la cité d’apprentissage UCKK.';
+            } else {
+                $bodyparts[] = 'Structure publique de formation dans la cité d’apprentissage UCKK.';
             }
 
             if ($categoryname !== '') {
-                $bodyparts[] = 'Catégorie Moodle : ' . $categoryname . '.';
+                $bodyparts[] = 'Espace de cours associé : ' . $categoryname . '.';
             } else {
-                $bodyparts[] = 'Aucune catégorie Moodle liée.';
+                $bodyparts[] = 'Aucun espace de cours public associé pour le moment.';
             }
 
             $url = '';
@@ -964,7 +1018,7 @@ final class public_pages {
 
             if ($categoryid > 0 && $categoryvisible === 1) {
                 $url = (new moodle_url('/course/index.php', ['categoryid' => $categoryid]))->out(false);
-                $actionlabel = 'Voir les cours';
+                $actionlabel = 'Voir les cours associés';
             }
 
             $cards[] = [
