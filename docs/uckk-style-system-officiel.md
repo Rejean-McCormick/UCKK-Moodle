@@ -4,8 +4,8 @@
 **Composant :** `local_uckk`  
 **Portée :** Pages institutionnelles publiques UCKK dans Moodle  
 **Statut :** Référence d’implémentation  
-**Version :** 1.0.0  
-**Date :** 2026-05-23
+**Version :** 1.1.0  
+**Date :** 2026-06-08
 
 ---
 
@@ -322,28 +322,39 @@ Les tokens doivent être définis dans la racine `.local-uckk`.
 
 ```css
 .local-uckk {
-    --uckk-ink: #172321;
-    --uckk-ink-soft: #2f3f3b;
-    --uckk-petrol: #1e6864;
-    --uckk-petrol-dark: #164c49;
-    --uckk-petrol-soft: #dbecea;
-    --uckk-parchment: #f6f0df;
-    --uckk-parchment-light: #fbf7eb;
-    --uckk-parchment-deep: #e6dcc2;
-    --uckk-gold: #b99045;
-    --uckk-gold-dark: #7f642f;
-    --uckk-bronze: #9b7441;
-    --uckk-bluegrey: #5f7876;
-    --uckk-card: #fffaf0;
-    --uckk-line: rgba(23, 35, 33, 0.16);
-    --uckk-line-strong: rgba(23, 35, 33, 0.28);
-    --uckk-shadow: 0 18px 42px rgba(23, 35, 33, 0.12);
-    --uckk-shadow-soft: 0 8px 20px rgba(23, 35, 33, 0.08);
-    --uckk-radius: 0.9rem;
-    --uckk-radius-small: 0.55rem;
-    --uckk-max-width: 1180px;
+    --uckk-ink: var(--theme-uckk-ink, #172321);
+    --uckk-ink-soft: var(--theme-uckk-ink-soft, #2f3f3b);
+    --uckk-ink-muted: var(--theme-uckk-ink-muted, #52625e);
+
+    --uckk-petrol: var(--theme-uckk-petrol, #1e6864);
+    --uckk-petrol-dark: var(--theme-uckk-petrol-dark, #164c49);
+    --uckk-petrol-soft: var(--theme-uckk-petrol-soft, #dbecea);
+    --uckk-petrol-wash: var(--theme-uckk-petrol-wash, rgba(30, 104, 100, 0.08));
+
+    --uckk-parchment: var(--theme-uckk-parchment, #f6f0df);
+    --uckk-parchment-light: var(--theme-uckk-parchment-light, #fbf7eb);
+    --uckk-parchment-deep: var(--theme-uckk-parchment-deep, #e6dcc2);
+
+    --uckk-gold: var(--theme-uckk-gold, #b99045);
+    --uckk-gold-dark: var(--theme-uckk-gold-dark, #7f642f);
+    --uckk-gold-wash: var(--theme-uckk-gold-wash, rgba(185, 144, 69, 0.12));
+
+    --uckk-card: var(--theme-uckk-card, #fffaf0);
+    --uckk-line: var(--theme-uckk-line, rgba(23, 35, 33, 0.16));
+    --uckk-shadow: var(--theme-uckk-shadow, 0 16px 36px rgba(23, 35, 33, 0.11));
+    --uckk-shadow-soft: var(--theme-uckk-shadow-soft, 0 7px 18px rgba(23, 35, 33, 0.075));
+
+    --uckk-radius: var(--theme-uckk-radius, 0.9rem);
+    --uckk-radius-small: var(--theme-uckk-radius-small, 0.55rem);
+
+    --uckk-public-base-width: var(--theme-uckk-public-max-width, 1420px);
+    --uckk-public-max-width: min(calc(var(--uckk-public-base-width) + 3.5rem), 1480px);
+    --uckk-public-gutter: clamp(0.75rem, 1.5vw, 1.55rem);
+    --uckk-public-content-inset: var(--theme-uckk-public-content-inset, clamp(1rem, 2vw, 1.75rem));
 }
 ```
+
+Les tokens de largeur actuels ne sont plus limités à `1180px` pour toutes les pages. Le rail public peut aller jusqu’à environ `1480px` selon le layout, avec des variantes standard, wide ou full.
 
 ---
 
@@ -362,6 +373,64 @@ Les tokens doivent être définis dans la racine `.local-uckk`.
 | Bronze | `--uckk-bronze` | `#9b7441` |
 | Bleu-gris | `--uckk-bluegrey` | `#5f7876` |
 | Carte | `--uckk-card` | `#fffaf0` |
+
+---
+
+## 12.1 Canvas public, rail et motif héraldique
+
+Le style public utilise un canvas décoratif limité aux pages publiques `local_uckk`.
+
+Le canvas officiel est porté par :
+
+```text
+body.pagelayout-local_uckk_public
+body:has(.local-uckk-public-page)
+#page
+#page.drawers
+```
+
+Il sert à poser :
+
+```text
+- le fond parchemin général ;
+- le rail central de contenu ;
+- le motif héraldique latéral sur grand écran.
+```
+
+Le motif héraldique est défini par :
+
+```css
+--uckk-side-motif-url: var(
+    --theme-uckk-side-motif-url,
+    url("/local/uckk/pix/heraldic-mosaic.gif")
+);
+```
+
+Sur desktop, ce motif peut être répété autour du rail central. Il ne doit jamais nuire à la lecture du contenu central.
+
+Sur mobile, le motif héraldique doit être désactivé complètement. Il ne doit pas apparaître sous forme de tranche, de bande latérale, de reste de tile ou de fragment derrière le centre de la page.
+
+Règle officielle mobile :
+
+```css
+@media (max-width: 767.98px) {
+    body.pagelayout-local_uckk_public,
+    body:has(.local-uckk-public-page),
+    body.pagelayout-local_uckk_public #page,
+    body:has(.local-uckk-public-page) #page,
+    body.pagelayout-local_uckk_public #page.drawers,
+    body:has(.local-uckk-public-page) #page.drawers {
+        background-color: var(--uckk-page-ground) !important;
+        background-image: none !important;
+        background-repeat: no-repeat !important;
+        background-size: auto !important;
+        background-position: 0 0 !important;
+        background-attachment: scroll !important;
+    }
+}
+```
+
+Cette règle appartient à `local/uckk/styles.css`, parce qu’elle concerne le canvas des pages publiques `local_uckk`. Elle ne doit pas être déplacée dans `theme/uckk/scss/navigation.scss` ni traitée comme un problème de logo ou de barre de navigation.
 
 ---
 
@@ -539,23 +608,35 @@ Parchemin UCKK
 
 ### Desktop
 
-- largeur maximale : `1180px`;
-- grilles en 12 colonnes;
-- cartes souvent en 2 colonnes;
-- aside possible à droite.
+- rail public centré jusqu’à environ `1480px` selon le layout ;
+- largeur standard possible autour de `1180px` pour les pages non larges ;
+- grilles sobres, souvent en 2 colonnes pour les cartes ;
+- aside possible à droite ;
+- motif héraldique latéral autorisé comme canvas décoratif, hors du contenu central.
 
 ### Tablette
 
-- navigation flexible;
-- cartes en 1 ou 2 colonnes selon espace;
-- marges réduites.
+- navigation flexible ;
+- cartes en 1 ou 2 colonnes selon l’espace ;
+- aside replié sous le contenu ou en grille ;
+- marges et gouttières réduites ;
+- motif décoratif toléré seulement s’il ne nuit pas au rail central.
 
 ### Mobile
 
-- navigation en grille 2 colonnes ou liste;
-- tableaux en scroll horizontal;
-- cartes pleine largeur;
-- titres légèrement réduits.
+- navigation scrollable ou liste compacte ;
+- tableaux en scroll horizontal ;
+- cartes pleine largeur ;
+- titres réduits mais lisibles ;
+- aside pleine largeur ;
+- motif héraldique latéral interdit ;
+- aucune image répétée, tranche d’armoiries ou tile décoratif ne doit apparaître derrière le contenu.
+
+### Règle mobile obligatoire
+
+Sur les écrans `max-width: 767.98px`, les fonds décoratifs de `body`, `#page` et `#page.drawers` doivent être neutralisés pour les pages publiques `local_uckk`.
+
+La règle doit rester dans `local/uckk/styles.css`, non dans le thème global, car elle corrige le canvas propre au contrat public `local_uckk`.
 
 ---
 
@@ -648,6 +729,15 @@ theme_uckk/scss/*.scss
 Le plugin local ne doit pas corriger le header global Moodle.  
 Le thème ne doit pas contenir la logique des pages publiques.
 
+Exception importante : le canvas public `body/#page/#page.drawers` utilisé uniquement par les pages `local_uckk` appartient à `local/uckk/styles.css`. Le motif héraldique latéral, même s’il participe à l’identité visuelle globale, est appliqué par le style public et doit donc être corrigé dans `local_uckk` lorsqu’il affecte les pages publiques.
+
+Règle de décision :
+
+```text
+Logo, navbar, menu utilisateur, Boost chrome -> theme_uckk.
+Rail public, hero, cartes, notices, métadonnées, motif latéral local_uckk -> local/uckk/styles.css.
+```
+
 ---
 
 ## 23. Interdictions
@@ -664,6 +754,9 @@ CSS global non scopé
 prise de contrôle des pages Moodle core
 patch en bas de fichier sans refactor
 mélange de plusieurs conventions de classes
+motif héraldique visible sur smartphone
+correction du canvas public dans navigation.scss
+confusion entre logo de navbar et background décoratif de page
 ```
 
 ---
@@ -730,6 +823,9 @@ titres cohérents
 notices sobres
 mobile acceptable
 tableaux scrollables
+aucun motif héraldique visible sur smartphone
+aucune tranche de background décoratif derrière le contenu central
+fond public mobile uniforme après purge des caches
 ```
 
 ---
@@ -788,7 +884,10 @@ Un seul registre de pages.
 Des contrôleurs minces.
 Des classes cohérentes.
 Des tokens centralisés.
-Aucun patch local.
+Un canvas public documenté.
+Un motif héraldique autorisé sur desktop.
+Aucun motif héraldique sur smartphone.
+Aucun patch local non documenté.
 Aucune prise de contrôle de Moodle core.
 ```
 

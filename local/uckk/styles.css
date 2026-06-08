@@ -1235,6 +1235,29 @@ body:has(.local-uckk-public-page) [role="main"] {
     body:has(.local-uckk-public-page) {
         --uckk-rail-gutter: clamp(0.75rem, 3vw, 1.1rem);
         --theme-uckk-public-content-inset: clamp(0.5rem, 2vw, 0.85rem);
+        --uckk-side-motif-url: none;
+    }
+
+    /**
+     * Phone canvas guard.
+     *
+     * The heraldic side motif is allowed on desktop rails, but it must not be
+     * present on phone layouts. On narrow screens the repeated tile can bleed
+     * into the centred content column as a thin visible slice, especially in a
+     * fresh/private browser session where cached CSS is not masking the issue.
+     */
+    body.pagelayout-local_uckk_public,
+    body:has(.local-uckk-public-page),
+    body.pagelayout-local_uckk_public #page,
+    body:has(.local-uckk-public-page) #page,
+    body.pagelayout-local_uckk_public #page.drawers,
+    body:has(.local-uckk-public-page) #page.drawers {
+        background-color: var(--uckk-page-ground) !important;
+        background-image: linear-gradient(var(--uckk-page-ground), var(--uckk-page-ground)) !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% 100% !important;
+        background-position: 0 0 !important;
+        background-attachment: scroll !important;
     }
 
     .local-uckk-public-title {
