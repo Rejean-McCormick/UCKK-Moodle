@@ -838,6 +838,29 @@ body.pagelayout-secure {
    ========================================================================== */
 
 @media (max-width: 767.98px) {
+    /**
+     * On phone layouts, hide the theme coat-of-arms/logo completely.
+     * A partially clipped mark can otherwise remain visible above the
+     * centred page content. Keep the site name available as text.
+     */
+    .navbar-brand .logo,
+    .navbar-brand .navbar-brand-logo,
+    .navbar-brand img.logo,
+    .navbar-brand img.navbar-brand-logo,
+    .navbar-brand .navbar-brand-logo img {
+        display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        max-width: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+
     .navbar-brand .site-name,
     .navbar-brand .sitename {
         max-width: 12rem;
