@@ -510,13 +510,12 @@ templates/public/
 | `quicklinks.mustache` | `local_uckk/public/quicklinks` | Repères rapides |
 | `sections.mustache` | `local_uckk/public/sections` | Boucle des sections de page |
 | `cards.mustache` | `local_uckk/public/cards` | Cartes de page génériques |
-| `aside.mustache` | `local_uckk/public/aside` | Colonne latérale et appels de sous-partials |
-| `notices.mustache` | `local_uckk/public/notices` | Notices exportées par `public_page.php` |
+| `aside.mustache` | `local_uckk/public/aside` | Colonne latérale ; rend uniquement metadata et CTA |
 | `metadata.mustache` | `local_uckk/public/metadata` | Liste metadata |
 | `cta.mustache` | `local_uckk/public/cta` | Bloc CTA |
 | `prompt_groups.mustache` | `local_uckk/public/prompt_groups` | Groupes d’invites réutilisables |
 
-Note contractuelle : `notices` et `hasnotices` existent déjà dans le contexte exporté. Le refactor doit soit rendre les notices via `public/notices.mustache`, soit documenter explicitement leur non-rendu. La cible retenue est de les rendre dans l’aside.
+Note contractuelle : `notices` et `hasnotices` existent dans le contexte exporté par `public_page.php`, mais l’état courant documenté ne crée pas de partial `public/notices.mustache` et ne rend pas les notices dans l’aside. `aside.mustache` rend uniquement les sous-partials `metadata` et `cta`.
 
 ### 12.3 Templates spécialisés par page
 
@@ -720,7 +719,7 @@ classes
 hasaction
 ```
 
-### 15.5 `notices[]`
+### 15.5 `notices[]` — exporté, non rendu dans l’état courant
 
 ```text
 title
@@ -738,6 +737,8 @@ integrity
 warning
 light
 ```
+
+Règle de rendu : dans l’état courant, aucune partial `templates/public/notices.mustache` n’est créée et aucune inclusion `local_uckk/public/notices` n’est attendue. Les notices restent dans le contrat de données pour compatibilité avec `public_page.php`, mais leur non-rendu est intentionnellement documenté.
 
 ### 15.6 `metadata[]`
 
@@ -834,7 +835,6 @@ local-uckk-public-card-
 local-uckk-public-aside-
 local-uckk-public-meta-
 local-uckk-public-cta-
-local-uckk-public-notice-
 local-uckk-public-prompt-
 local-uckk-home-
 local-uckk-mediatheque-
@@ -850,7 +850,6 @@ Organisation cible dans `styles.css` :
 /* Public sections */
 /* Public cards */
 /* Public aside */
-/* Public notices */
 /* Public metadata */
 /* Public CTA */
 /* Public prompt groups */
@@ -978,7 +977,6 @@ local/uckk/
 │   │   ├── sections.mustache
 │   │   ├── cards.mustache
 │   │   ├── aside.mustache
-│   │   ├── notices.mustache
 │   │   ├── metadata.mustache
 │   │   ├── cta.mustache
 │   │   └── prompt_groups.mustache
@@ -1009,7 +1007,6 @@ templates/public/quicklinks.mustache
 templates/public/sections.mustache
 templates/public/cards.mustache
 templates/public/aside.mustache
-templates/public/notices.mustache
 templates/public/metadata.mustache
 templates/public/cta.mustache
 templates/public/prompt_groups.mustache
@@ -1093,11 +1090,10 @@ Coder un fichier à la fois, en copiant d’abord le HTML existant depuis `publi
 2.3 templates/public/quicklinks.mustache
 2.4 templates/public/sections.mustache
 2.5 templates/public/cards.mustache
-2.6 templates/public/notices.mustache
-2.7 templates/public/metadata.mustache
-2.8 templates/public/cta.mustache
-2.9 templates/public/aside.mustache
-2.10 templates/public/prompt_groups.mustache
+2.6 templates/public/metadata.mustache
+2.7 templates/public/cta.mustache
+2.8 templates/public/aside.mustache
+2.9 templates/public/prompt_groups.mustache
 ```
 
 Validation après chaque fichier Mustache :
@@ -1379,7 +1375,7 @@ DÉCISION 8
 styles.css reste unique.
 
 DÉCISION 9
-Les notices exportées doivent avoir une cible de rendu documentée.
+Les notices exportées restent dans le contrat de données, mais l’état courant documente explicitement leur non-rendu : aucun `templates/public/notices.mustache` n’est créé et `aside.mustache` rend seulement `metadata` et `cta`.
 
 DÉCISION 10
 Toute nouvelle variable doit être ajoutée à ce contrat avant d’être utilisée.

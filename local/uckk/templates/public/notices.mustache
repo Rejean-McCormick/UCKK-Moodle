@@ -1,0 +1,68 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+}}
+
+{{!
+    @template local_uckk/public/notices
+
+    Public notices block for local_uckk institutional pages.
+
+    This partial is render-only.
+
+    Expected context:
+    {
+        "uniqid": "local-uckk-public-page-abc123",
+        "notices": [
+            {
+                "title": "Aucun cours public",
+                "body": "Aucun cours visible n’est actuellement disponible dans le campus UCKK.",
+                "type": "warning",
+                "hastitle": true,
+                "hasbody": true,
+                "classes": "local-uckk-public-notice local-uckk-public-notice--warning"
+            }
+        ]
+    }
+}}
+
+<section
+    class="local-uckk-public-section local-uckk-public-section--notices"
+    aria-labelledby="{{uniqid}}-notices-title"
+    data-region="local-uckk-public-notices"
+>
+    <h2 id="{{uniqid}}-notices-title" class="local-uckk-public-section__title">
+        <span class="local-uckk-public-section__title-text">
+            Avis publics
+        </span>
+    </h2>
+
+    <div class="local-uckk-public-notices" role="list">
+        {{#notices}}
+            <article
+                class="{{#classes}}{{classes}}{{/classes}}{{^classes}}local-uckk-public-notice{{/classes}}"
+                data-notice-type="{{type}}"
+                role="listitem"
+            >
+                {{#hastitle}}
+                    <h3 class="local-uckk-public-notice__title">
+                        {{title}}
+                    </h3>
+                {{/hastitle}}
+
+                {{#hasbody}}
+                    <p class="local-uckk-public-notice__body">
+                        {{body}}
+                    </p>
+                {{/hasbody}}
+            </article>
+        {{/notices}}
+    </div>
+</section>

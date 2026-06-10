@@ -20,6 +20,12 @@
 
     It is intentionally render-only.
 
+    Current aside contract:
+    * The aside renders metadata when hasmetadata is true.
+    * The aside renders a call to action when hascta is true.
+    * The aside does not render notices.
+    * No local_uckk/public/notices partial is part of the current template set.
+
     Context variables required for this template:
     * asideclasses - Safe CSS classes for the aside element.
     * hasmetadata - Whether metadata should be rendered.

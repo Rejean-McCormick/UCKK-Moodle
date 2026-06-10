@@ -16,7 +16,12 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Public courses page definition.
  *
- * This class owns only the static public courses page definition.
+ * This class owns only the static public courses page definition:
+ * page layout, hero copy and institutional framing.
+ *
+ * The live course directory, filters, metadata, empty-state notice and Moodle
+ * course cards are assembled by /local/uckk/courses.php.
+ *
  * It must not read Moodle courses, enrol users, mutate Moodle data,
  * award recognitions, validate work, or make accreditation claims.
  *
@@ -38,26 +43,9 @@ final class courses {
             'title' => 'Cours UCKK',
             'subtitle' => 'Espaces Moodle publics ou accessibles selon les rôles.',
             'summary' => 'Les cours contiennent les activités, ressources et évaluations pédagogiques du campus.',
-            'sections' => [
-                [
-                    'title' => 'Fonction des cours',
-                    'body' => 'Les cours structurent les apprentissages concrets. Ils peuvent être liés aux voies, défis, compétences, badges et preuves.',
-                ],
-                [
-                    'title' => 'Accès',
-                    'body' => 'Certains cours peuvent être visibles publiquement. D’autres demandent une connexion, une inscription ou un rôle Moodle.',
-                ],
-            ],
-            'cardsheading' => 'Accès aux cours',
-            'cards' => [
-                [
-                    'title' => 'Explorer',
-                    'body' => 'Voir les cours disponibles dans le campus.',
-                    'url' => '/course/index.php',
-                    'actionlabel' => 'Catalogue Moodle',
-                    'type' => 'course',
-                ],
-            ],
+            'sections' => [],
+            'cardsheading' => '',
+            'cards' => [],
         ];
     }
 }

@@ -10,25 +10,43 @@
 // Univers-Cité King Klown.
 
 /**
- * Public UCKK courses page.
- *
- * Thin public controller.
- *
- * Page setup, navigation, visual structure and rendering are owned by:
- *
- * - \local_uckk\local\public_pages
- * - \local_uckk\output\public_page
- * - local_uckk/public_page.mustache
- * - local_uckk/styles.css
- *
- * This controller reads visible Moodle courses for public display only.
- * It does not create courses, enrol users, award recognitions, validate work,
- * or make accreditation claims.
- *
- * @package    local_uckk
- * @copyright  2026 Univers-Cité King Klown
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+
+* Public UCKK courses page.
+*
+* Public controller for the Moodle-backed courses explorer.
+*
+* Static page identity, navigation, hero content, rendering contract and public
+* chrome are owned by:
+*
+* * \local_uckk\local\public_pages
+* * \local_uckk\output\public_page
+* * local_uckk/public_page.mustache
+* * local_uckk/styles.css
+*
+* This controller owns the live courses page enrichment:
+*
+* * reads public request filters;
+* * reads visible Moodle courses matching UCKK public course conventions;
+* * builds course cards, category filters and sort options;
+* * injects the public courses intro section;
+* * prepares the course explorer context for Mustache and AMD;
+* * adds course-page metadata and CTA content;
+* * adds an empty-state notice when no public course is available.
+*
+* The notice data may exist in the page definition, but the current public
+* template set does not include local_uckk/public/notices.mustache. Until that
+* partial is implemented, notices are part of the exported context only and are
+* not rendered by the public aside.
+*
+* This controller does not create courses, enrol users, award recognitions,
+* validate work, mutate Moodle course records, bypass Moodle visibility, or
+* make accreditation claims.
+*
+* @package    local_uckk
+* @copyright  2026 Univers-Cité King Klown
+* @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+  */
+
 
 require_once(__DIR__ . '/../../config.php');
 
