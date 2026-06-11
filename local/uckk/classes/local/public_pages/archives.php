@@ -6,7 +6,7 @@
 // the Free Software Foundation, either version 3 of the License, or
 // any later version.
 //
-// UCKK-Moodle adapts Moodle as the pedagogical campus of the
+// UCKK-Moodle adapts Moodle as the technical foundation of the
 // Univers-Cité King Klown.
 
 /**
@@ -42,15 +42,15 @@ final class archives {
             'eyebrow' => 'Registre public institutionnel',
             'title' => 'Registraire UCKK',
             'subtitle' => 'Mémoire institutionnelle, preuves publiques, décisions et corrections.',
-            'summary' => 'Le registraire conserve les traces publiques utiles à la compréhension du campus, de ses décisions et de ses transformations.',
+            'summary' => 'Le registraire conserve les traces publiques utiles à la compréhension de l’UCKK, de ses décisions et de ses transformations.',
             'sections' => [
                 [
                     'title' => 'Ce que le registraire conserve',
-                    'body' => 'Le registraire peut conserver des versions publiques du canon, des décisions, des modèles, des corrections, des appels, des travaux publics et des traces institutionnelles.',
+                    'body' => 'Le registraire peut conserver des versions publiques du canon, des décisions, des modèles, des corrections, des appels, des productions publiques et des traces institutionnelles.',
                 ],
                 [
                     'title' => 'Ce que le registraire ne doit pas exposer',
-                    'body' => 'Il ne doit pas publier de données personnelles, dossiers sensibles, preuves privées ou informations réservées à des rôles Moodle.',
+                    'body' => 'Il ne doit pas publier de données personnelles, de dossiers sensibles, de preuves privées ou d’informations réservées à des rôles autorisés.',
                 ],
                 [
                     'title' => 'Usage',
@@ -78,7 +78,7 @@ final class archives {
             'notices' => [
                 [
                     'title' => 'Registraire public',
-                    'body' => 'Les contenus visibles ici doivent respecter la confidentialité et les limites institutionnelles.',
+                    'body' => 'Les contenus visibles ici doivent respecter la confidentialité, les permissions, la provenance et les limites institutionnelles de l’UCKK.',
                     'type' => 'warning',
                 ],
             ],

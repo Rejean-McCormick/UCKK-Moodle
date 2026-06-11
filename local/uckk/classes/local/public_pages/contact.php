@@ -6,7 +6,7 @@
 // the Free Software Foundation, either version 3 of the License, or
 // any later version.
 //
-// UCKK-Moodle adapts Moodle as the pedagogical campus of the
+// UCKK-Moodle supports the technical Moodle implementation of the
 // Univers-Cité King Klown.
 
 namespace local_uckk\local\public_pages;
@@ -32,16 +32,16 @@ final class contact {
             'typography' => 'editorial',
             'eyebrow' => 'Entrer en relation',
             'title' => 'Contact',
-            'subtitle' => 'Orientation publique pour contacter ou rejoindre le campus UCKK.',
+            'subtitle' => 'Orientation publique pour contacter ou rejoindre l’Univers-Cité King Klown.',
             'summary' => 'Cette page indique les voies générales de contact et rappelle les limites des demandes publiques.',
             'sections' => [
                 [
                     'title' => 'Demandes générales',
-                    'body' => 'Les demandes publiques peuvent concerner l’orientation, la compréhension du campus, les voies, les cours ou les archives.',
+                    'body' => 'Les demandes publiques peuvent concerner l’orientation, la compréhension de l’UCKK, les voies, les cours, la médiathèque ou le Registraire.',
                 ],
                 [
                     'title' => 'Demandes privées',
-                    'body' => 'Les questions liées à un dossier personnel, une preuve, une inscription ou une décision doivent passer par les espaces Moodle appropriés.',
+                    'body' => 'Les questions liées à un dossier personnel, une preuve, une inscription ou une décision doivent passer par les espaces UCKK appropriés.',
                 ],
             ],
             'cardsheading' => 'Repères de contact',
@@ -54,16 +54,16 @@ final class contact {
                     'type' => 'courses',
                 ],
                 [
-                    'title' => 'Archives',
-                    'body' => 'Consulter les traces publiques disponibles.',
+                    'title' => 'Registraire',
+                    'body' => 'Consulter les traces publiques, preuves, décisions et corrections disponibles.',
                     'url' => '/local/uckk/archives.php',
-                    'actionlabel' => 'Voir les archives',
+                    'actionlabel' => 'Voir le Registraire',
                     'type' => 'archives',
                 ],
             ],
             'cta' => [
                 'title' => 'Besoin d’orientation?',
-                'body' => 'Commence par les pages publiques, puis connecte-toi à Moodle si ta demande concerne un espace ou un rôle spécifique.',
+                'body' => 'Commence par les pages publiques, puis connecte-toi à ton espace UCKK si ta demande concerne un dossier, un espace ou un rôle spécifique.',
                 'url' => '/login/index.php',
                 'label' => 'Se connecter',
             ],

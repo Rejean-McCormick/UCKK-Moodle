@@ -6,7 +6,7 @@
 // the Free Software Foundation, either version 3 of the License, or
 // any later version.
 //
-// UCKK-Moodle adapts Moodle as the pedagogical campus of the
+// UCKK-Moodle supports the technical course spaces of the
 // Univers-Cité King Klown.
 
 namespace local_uckk\local\public_pages;
@@ -19,8 +19,8 @@ defined('MOODLE_INTERNAL') || die();
  * This class owns only the static public courses page definition:
  * page layout, hero copy and institutional framing.
  *
- * The live course directory, filters, metadata, empty-state notice and Moodle
- * course cards are assembled by /local/uckk/courses.php.
+ * The live course directory, filters, metadata, empty-state notice and course
+ * cards are assembled by /local/uckk/courses.php.
  *
  * It must not read Moodle courses, enrol users, mutate Moodle data,
  * award recognitions, validate work, or make accreditation claims.
@@ -39,10 +39,10 @@ final class courses {
         return [
             'layout' => 'standard',
             'typography' => 'institutional',
-            'eyebrow' => 'Entrer dans les apprentissages',
+            'eyebrow' => 'Explorer les cours',
             'title' => 'Cours UCKK',
-            'subtitle' => 'Espaces Moodle publics ou accessibles selon les rôles.',
-            'summary' => 'Les cours contiennent les activités, ressources et évaluations pédagogiques du campus.',
+            'subtitle' => 'Cours publics, Voies associées et preuves de progression.',
+            'summary' => 'Les cours structurent les activités, ressources et repères de progression de l’UCKK.',
             'sections' => [],
             'cardsheading' => '',
             'cards' => [],

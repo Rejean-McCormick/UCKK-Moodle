@@ -6,7 +6,7 @@
 // the Free Software Foundation, either version 3 of the License, or
 // any later version.
 //
-// UCKK-Moodle adapts Moodle as the pedagogical campus of the
+// UCKK-Moodle supports the technical Moodle implementation of the
 // Univers-Cité King Klown.
 
 /**
@@ -15,7 +15,7 @@
  * This class owns the public page definition for the Voies UCKK page.
  * It may read active public program records for display only.
  *
- * It must not create programs, mutate pathways, enrol users, award badges,
+ * It must not create programs, mutate pathways, enrol users, award recognitions,
  * validate competencies, or make accreditation claims.
  *
  * @package    local_uckk
@@ -44,39 +44,39 @@ final class programs {
         return self::with_program_cards([
             'layout' => 'wide',
             'typography' => 'institutional',
-            'eyebrow' => 'Former par les voies',
+            'eyebrow' => 'Cartographie des voies',
             'title' => 'Voies UCKK',
-            'subtitle' => 'Parcours publics, orientations pédagogiques et structures d’engagement.',
-            'summary' => 'Les voies organisent les intentions de formation, les trajectoires et les grands ensembles d’apprentissage.',
+            'subtitle' => 'Parcours publics, domaines d’action et structures de progression.',
+            'summary' => 'Les Voies UCKK organisent les parcours, les pratiques, les preuves et la progression des Joueurs dans le Grand Jeu social.',
             'sections' => [
                 [
                     'type' => 'role',
                     'title' => 'Rôle des voies',
-                    'body' => 'Une voie aide à situer un parcours d’apprentissage dans la cité-école. Elle peut relier des cours, des compétences, des défis, des preuves et des archives.',
+                    'body' => 'Une voie aide à situer une progression au sein de l’UCKK. Elle relie des cours, des compétences, des défis, des preuves, des portfolios, des Assemblées et le Registraire.',
                 ],
                 [
                     'type' => 'registry',
                     'eyebrow' => 'Répertoire public',
-                    'title' => 'Voies et programmes actifs',
-                    'body' => 'Les cartes ci-dessous sont générées depuis le registre Moodle UCKK des programmes actifs. Les éléments en brouillon, cachés ou archivés ne sont pas affichés publiquement.',
+                    'title' => 'Voies actives',
+                    'body' => 'Les cartes ci-dessous sont générées depuis le registre UCKK des voies actives. Les éléments en brouillon, cachés ou archivés ne sont pas affichés publiquement.',
                 ],
             ],
             'cards' => [],
             'notices' => [
                 [
-                    'body' => 'Les voies décrivent des structures pédagogiques internes à UCKK. Elles ne constituent pas des diplômes publics accrédités.',
+                    'body' => 'Les voies décrivent des structures internes de formation, de pratique et de reconnaissance. Elles ne constituent pas des diplômes publics accrédités.',
                     'type' => 'institutional',
                 ],
             ],
             'metadata' => [
-                ['label' => 'Source', 'value' => 'Registre local_uckk_program'],
-                ['label' => 'Filtre public', 'value' => 'status = active'],
+                ['label' => 'Source', 'value' => 'Registre UCKK des voies'],
+                ['label' => 'Filtre public', 'value' => 'Voies actives seulement'],
             ],
             'cta' => [
                 'title' => 'Explorer les cours',
-                'body' => 'Les catégories Moodle liées aux voies regroupent les cours et unités d’apprentissage disponibles.',
+                'body' => 'Les espaces de cours associés aux Voies regroupent les cours et repères de progression disponibles.',
                 'url' => '/local/uckk/courses.php',
-                'label' => 'Voir les cours',
+                'label' => 'Voir les cours associés',
             ],
         ]);
     }
@@ -109,7 +109,12 @@ final class programs {
             $title = (string)($section['title'] ?? '');
             $eyebrow = (string)($section['eyebrow'] ?? '');
 
-            if ($title === 'Répertoire public' || $title === 'Voies et programmes actifs' || $eyebrow === 'Répertoire public') {
+            if (
+                $title === 'Répertoire public'
+                || $title === 'Voies actives'
+                || $title === 'Voies et programmes actifs'
+                || $eyebrow === 'Répertoire public'
+            ) {
                 $definition['sections'][$index]['cards'] = $cards;
                 $attached = true;
                 break;
@@ -120,8 +125,8 @@ final class programs {
             $definition['sections'][] = [
                 'type' => 'registry',
                 'eyebrow' => 'Répertoire public',
-                'title' => 'Voies et programmes actifs',
-                'body' => 'Ces cartes proviennent du registre UCKK des programmes actifs. Les éléments en brouillon ou non publiés ne sont pas affichés ici.',
+                'title' => 'Voies actives',
+                'body' => 'Ces cartes proviennent du registre UCKK des voies actives. Les éléments en brouillon ou non publiés ne sont pas affichés ici.',
                 'cards' => $cards,
             ];
         }
@@ -131,7 +136,7 @@ final class programs {
         }
 
         $definition['metadata'][] = [
-            'label' => 'Programmes actifs affichés',
+            'label' => 'Voies actives affichées',
             'value' => (string)count($cards),
         ];
 
@@ -141,8 +146,8 @@ final class programs {
             }
 
             $definition['notices'][] = [
-                'title' => 'Aucun programme actif',
-                'body' => 'Aucun programme actif n’est actuellement disponible dans le registre public UCKK.',
+                'title' => 'Aucune voie active',
+                'body' => 'Aucune voie active n’est actuellement disponible dans le registre public UCKK.',
                 'type' => 'warning',
             ];
         }
@@ -219,9 +224,9 @@ final class programs {
             }
 
             if ($categoryname !== '') {
-                $bodyparts[] = 'Catégorie Moodle : ' . $categoryname . '.';
+                $bodyparts[] = 'Espace de cours associé : ' . $categoryname . '.';
             } else {
-                $bodyparts[] = 'Aucune catégorie Moodle liée.';
+                $bodyparts[] = 'Aucun espace de cours associé.';
             }
 
             $url = '';
@@ -229,7 +234,7 @@ final class programs {
 
             if ($categoryid > 0 && $categoryvisible === 1) {
                 $url = (new moodle_url('/course/index.php', ['categoryid' => $categoryid]))->out(false);
-                $actionlabel = 'Voir les cours';
+                $actionlabel = 'Voir les cours associés';
             }
 
             $cards[] = [
@@ -256,9 +261,10 @@ final class programs {
             'tronc_commun' => 'Tronc commun',
             'voie_uckk' => 'Voie UCKK',
             'voie_secondaire' => 'Voie secondaire',
-            'baccalaureat' => 'Baccalauréat',
-            'baccalauréat' => 'Baccalauréat',
-            'mineure' => 'Mineure',
+            'baccalaureat' => 'Voie UCKK — Puissance opératoire',
+            'baccalauréat' => 'Voie UCKK — Puissance opératoire',
+            'certificat' => 'Reconnaissance interne — Initiation',
+            'mineure' => 'Voie UCKK — Initiation',
             'seminaire' => 'Séminaire',
             'séminaire' => 'Séminaire',
             'laboratoire' => 'Laboratoire',

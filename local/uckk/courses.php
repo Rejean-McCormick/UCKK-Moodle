@@ -10,43 +10,41 @@
 // Univers-Cité King Klown.
 
 /**
-
-* Public UCKK courses page.
-*
-* Public controller for the Moodle-backed courses explorer.
-*
-* Static page identity, navigation, hero content, rendering contract and public
-* chrome are owned by:
-*
-* * \local_uckk\local\public_pages
-* * \local_uckk\output\public_page
-* * local_uckk/public_page.mustache
-* * local_uckk/styles.css
-*
-* This controller owns the live courses page enrichment:
-*
-* * reads public request filters;
-* * reads visible Moodle courses matching UCKK public course conventions;
-* * builds course cards, category filters and sort options;
-* * injects the public courses intro section;
-* * prepares the course explorer context for Mustache and AMD;
-* * adds course-page metadata and CTA content;
-* * adds an empty-state notice when no public course is available.
-*
-* The notice data may exist in the page definition, but the current public
-* template set does not include local_uckk/public/notices.mustache. Until that
-* partial is implemented, notices are part of the exported context only and are
-* not rendered by the public aside.
-*
-* This controller does not create courses, enrol users, award recognitions,
-* validate work, mutate Moodle course records, bypass Moodle visibility, or
-* make accreditation claims.
-*
-* @package    local_uckk
-* @copyright  2026 Univers-Cité King Klown
-* @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-  */
-
+ * Public UCKK courses page.
+ *
+ * Public controller for the course explorer.
+ *
+ * Static page identity, navigation, hero content, rendering contract and public
+ * chrome are owned by:
+ *
+ * * \local_uckk\local\public_pages
+ * * \local_uckk\output\public_page
+ * * local_uckk/public_page.mustache
+ * * local_uckk/styles.css
+ *
+ * This controller owns the live courses page enrichment:
+ *
+ * * reads public request filters;
+ * * reads visible Moodle courses matching UCKK public course conventions;
+ * * builds course cards, category filters and sort options;
+ * * injects the public courses intro section;
+ * * prepares the course explorer context for Mustache and AMD;
+ * * adds course-page metadata and CTA content;
+ * * adds an empty-state notice when no public course is available.
+ *
+ * The notice data may exist in the page definition, but the current public
+ * template set does not include local_uckk/public/notices.mustache. Until that
+ * partial is implemented, notices are part of the exported context only and are
+ * not rendered by the public aside.
+ *
+ * This controller does not create courses, enrol users, award recognitions,
+ * validate work, mutate Moodle course records, bypass Moodle visibility, or
+ * make accreditation claims.
+ *
+ * @package    local_uckk
+ * @copyright  2026 Univers-Cité King Klown
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 require_once(__DIR__ . '/../../config.php');
 
@@ -113,7 +111,7 @@ function local_uckk_public_courses_enrich_definition(array $definition, array $s
         [
             'eyebrow' => 'Répertoire public',
             'title' => 'Explorer les cours',
-            'body' => 'Les cours ci-dessous sont visibles publiquement et accessibles en consultation. Ils constituent les unités d’apprentissage du campus UCKK.',
+            'body' => 'Les cours ci-dessous sont visibles publiquement et accessibles en consultation. Ils structurent les Voies, les preuves de progression et la puissance opératoire des Joueurs de l’UCKK.',
             'type' => 'courses-intro',
         ],
     ];
@@ -132,8 +130,8 @@ function local_uckk_public_courses_enrich_definition(array $definition, array $s
     ];
 
     $definition['cta'] = [
-        'title' => 'Index Moodle des cours',
-        'body' => 'L’index Moodle permet aussi de parcourir les catégories de cours.',
+        'title' => 'Index des cours',
+        'body' => 'L’index permet aussi de parcourir les espaces de cours.',
         'url' => '/course/index.php',
         'label' => 'Ouvrir l’index',
     ];
@@ -146,7 +144,7 @@ function local_uckk_public_courses_enrich_definition(array $definition, array $s
         $definition['notices'][] = [
             'type' => 'warning',
             'title' => 'Aucun cours public',
-            'body' => 'Aucun cours visible n’est actuellement disponible dans le campus UCKK.',
+            'body' => 'Aucun cours visible n’est actuellement disponible dans le répertoire public UCKK.',
         ];
     }
 
@@ -272,7 +270,7 @@ function local_uckk_public_courses_get_cards(): array {
         $summary = local_uckk_public_courses_plain_summary($record);
 
         if ($summary === '') {
-            $summary = 'Cours public UCKK disponible en consultation dans le campus Moodle.';
+            $summary = 'Cours public UCKK disponible en consultation.';
         }
 
         $title = $fullname !== '' ? $fullname : $shortname;
@@ -450,7 +448,7 @@ function local_uckk_public_courses_filter_exists(array $filters, string $key): b
  */
 function local_uckk_public_courses_sort_options(string $active): array {
     $options = [
-        'pedagogical' => 'Ordre pédagogique',
+        'pedagogical' => 'Ordre d’affichage',
         'title' => 'Titre A-Z',
         'category' => 'Voie',
     ];
@@ -476,7 +474,7 @@ function local_uckk_public_courses_sort_options(string $active): array {
  * Return a public-facing course category label.
  *
  * Moodle category names may include internal operational markers such as
- * "obligatoire". The public courses page exposes the academic block label,
+ * "obligatoire". The public courses page exposes the course-space label,
  * not the internal requirement status.
  *
  * @param string $categoryname Moodle category name.

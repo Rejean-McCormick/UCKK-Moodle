@@ -36,24 +36,24 @@ final class challenges {
         return [
             'layout' => 'standard',
             'typography' => 'institutional',
-            'eyebrow' => 'Mettre la lucidité à l’épreuve',
+            'eyebrow' => 'Mettre la puissance opératoire à l’épreuve',
             'title' => 'Défis UCKK',
-            'subtitle' => 'Épreuves pédagogiques, traces, productions et révisions.',
-            'summary' => 'Les défis servent à produire des traces, vérifier des apprentissages et rendre visibles des efforts structurés.',
+            'subtitle' => 'Épreuves d’action, traces, productions, preuves et révisions.',
+            'summary' => 'Les défis servent à transformer une question du Grand Jeu social en action observable, preuve vérifiable et progression documentée.',
             'sections' => [
                 [
                     'title' => 'Pourquoi des défis',
-                    'body' => 'Un défi transforme une intention d’apprentissage en action observable. Il peut demander une production, une preuve, une réflexion ou une validation.',
+                    'body' => 'Un défi met une intention à l’épreuve du réel. Il peut demander une production, une preuve, une réflexion située, une correction ou une validation selon les règles du contexte.',
                 ],
                 [
                     'title' => 'Cycle général',
-                    'body' => 'Un défi peut être proposé, accepté, réalisé, soumis, révisé, validé, contesté ou archivé selon les règles du contexte.',
+                    'body' => 'Un défi peut être proposé, accepté, réalisé, soumis, révisé, validé, contesté ou inscrit au Registraire lorsque sa trace doit rester vérifiable.',
                     'items' => [
                         'Comprendre la consigne.',
                         'Produire une trace.',
                         'Soumettre une preuve.',
                         'Recevoir une révision.',
-                        'Archiver ce qui doit rester vérifiable.',
+                        'Conserver ce qui doit rester vérifiable.',
                     ],
                 ],
             ],
@@ -61,12 +61,12 @@ final class challenges {
             'cards' => [
                 [
                     'title' => 'Défis publics',
-                    'body' => 'Présentation des défis visibles sans exposer les données privées.',
+                    'body' => 'Présentation des défis visibles sans exposer les données privées, les dossiers internes ou les preuves restreintes.',
                     'type' => 'public',
                 ],
                 [
                     'title' => 'Révision',
-                    'body' => 'Les validations et contestations suivent les permissions et les rôles Moodle.',
+                    'body' => 'Les validations, corrections et contestations suivent les permissions, les rôles autorisés et les règles d’intégrité UCKK.',
                     'type' => 'review',
                 ],
             ],

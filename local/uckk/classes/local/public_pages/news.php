@@ -6,7 +6,7 @@
 // the Free Software Foundation, either version 3 of the License, or
 // any later version.
 //
-// UCKK-Moodle adapts Moodle as the pedagogical campus of the
+// UCKK-Moodle provides the technical Moodle implementation for the
 // Univers-Cité King Klown.
 
 /**
@@ -39,11 +39,11 @@ final class news {
             'eyebrow' => 'Nouvelles et appels',
             'title' => 'Actualités UCKK',
             'subtitle' => 'Informations publiques, appels, jalons et annonces institutionnelles.',
-            'summary' => 'Les actualités présentent les informations publiques utiles au suivi de la cité-école.',
+            'summary' => 'Les actualités présentent les informations publiques utiles au suivi de l’UCKK, de ses appels, de ses jalons et de ses corrections.',
             'sections' => [
                 [
                     'title' => 'Fonction',
-                    'body' => 'Les actualités servent à annoncer des jalons, appels, corrections, publications ou événements publics.',
+                    'body' => 'Les actualités servent à annoncer des jalons, appels, corrections, publications ou événements publics liés à l’UCKK.',
                 ],
                 [
                     'title' => 'Sobriété',
@@ -54,23 +54,23 @@ final class news {
             'cards' => [
                 [
                     'title' => 'Appels',
-                    'body' => 'Invitations publiques à participer, contribuer ou consulter.',
+                    'body' => 'Invitations publiques à participer, contribuer, consulter ou répondre à une demande ouverte.',
                     'type' => 'calls',
                 ],
                 [
                     'title' => 'Jalons',
-                    'body' => 'Moments importants du développement du campus.',
+                    'body' => 'Moments importants du développement de l’établissement, de ses Voies, de ses outils ou de ses repères publics.',
                     'type' => 'milestones',
                 ],
                 [
                     'title' => 'Corrections',
-                    'body' => 'Informations sur les ajustements publics importants.',
+                    'body' => 'Informations sur les ajustements publics importants, les clarifications et les changements de version.',
                     'type' => 'corrections',
                 ],
             ],
             'notices' => [
                 [
-                    'body' => 'Les actualités publiques ne doivent pas exposer de données personnelles ou de décisions internes non publiées.',
+                    'body' => 'Les actualités publiques ne doivent pas exposer de données personnelles, de dossiers privés ou de décisions internes non publiées.',
                     'type' => 'light',
                 ],
             ],

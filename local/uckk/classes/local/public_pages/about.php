@@ -6,7 +6,7 @@
 // the Free Software Foundation, either version 3 of the License, or
 // any later version.
 //
-// UCKK-Moodle adapts Moodle as the pedagogical campus of the
+// UCKK-Moodle provides the technical Moodle implementation for the
 // Univers-Cité King Klown.
 
 /**
@@ -36,39 +36,39 @@ final class about {
         return [
             'layout' => 'standard',
             'typography' => 'editorial',
-            'eyebrow' => 'Clarifier UCKK',
+            'eyebrow' => 'Situer l’UCKK',
             'title' => 'À propos',
-            'subtitle' => 'UCKK-Moodle adapte Moodle comme campus pédagogique de l’Univers-Cité King Klown.',
-            'summary' => 'Cette page présente le rôle du campus, ses limites publiques et son organisation générale.',
+            'subtitle' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire consacré au Grand Jeu social.',
+            'summary' => 'Cette page présente l’identité publique de l’UCKK, son rôle, ses limites et son organisation générale.',
             'sections' => [
                 [
-                    'title' => 'Ce qu’est UCKK-Moodle',
-                    'body' => 'UCKK-Moodle est une adaptation de Moodle pour soutenir une cité-école : parcours, apprentissages, défis, assemblées, preuves, archives et gouvernance pédagogique.',
+                    'title' => 'Ce qu’est l’UCKK',
+                    'body' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire. Il rassemble des Voies, des cours, des défis, des preuves, des Assemblées, un Registraire, des portfolios et des formes de reconnaissance interne pour former des Joueurs capables de comprendre le Grand Jeu social, d’agir avec lucidité et de documenter leur progression.',
                 ],
                 [
-                    'title' => 'Ce que ce n’est pas',
-                    'body' => 'Le campus public ne doit pas présenter les reconnaissances UCKK comme des diplômes publics accrédités. Les espaces privés et les permissions Moodle restent nécessaires pour les opérations internes.',
+                    'title' => 'Ce que l’UCKK n’est pas',
+                    'body' => 'L’UCKK n’est pas une université publique accréditée par l’État. Ses Niveaux, Parchemins UCKK, portfolios, dossiers de passage et reconnaissances internes ne doivent pas être présentés comme des diplômes publics accrédités, des grades universitaires ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.',
                 ],
                 [
                     'title' => 'Organisation',
-                    'body' => 'Les contenus publics sont séparés du rendu visuel. Les définitions de page vivent dans des classes dédiées sous classes/local/public_pages, le rendu dans public_page.php, la structure HTML dans Mustache et l’apparence dans CSS.',
+                    'body' => 'Les pages publiques donnent accès aux repères institutionnels de l’UCKK : Voies, cours, défis, Assemblées, Médiathèque, Registraire, intégrité et informations générales. Les espaces internes, inscriptions, rôles, permissions, validations et dossiers privés restent gérés dans les espaces appropriés.',
                 ],
             ],
             'cardsheading' => 'Repères institutionnels',
             'cards' => [
                 [
-                    'title' => 'Campus',
-                    'body' => 'Un espace Moodle pour organiser la formation et les traces.',
-                    'type' => 'campus',
+                    'title' => 'Établissement',
+                    'body' => 'Un établissement virtuel de puissance opératoire pour lire les systèmes, produire des preuves, agir avec méthode et transformer les règles du Grand Jeu social.',
+                    'type' => 'institution',
                 ],
                 [
                     'title' => 'Canon',
-                    'body' => 'Un cadre de vocabulaire, de limites et de cohérence institutionnelle.',
+                    'body' => 'Un cadre de vocabulaire, de limites et de cohérence institutionnelle pour stabiliser l’identité, les règles et les repères UCKK.',
                     'type' => 'canon',
                 ],
                 [
-                    'title' => 'Archives',
-                    'body' => 'Une mémoire structurée des traces publiques et des corrections.',
+                    'title' => 'Registraire',
+                    'body' => 'Une mémoire structurée des traces publiques, décisions, preuves, corrections et versions utiles à la compréhension de l’UCKK.',
                     'url' => '/local/uckk/archives.php',
                     'actionlabel' => 'Consulter',
                     'type' => 'archives',
@@ -76,7 +76,7 @@ final class about {
             ],
             'notices' => [
                 [
-                    'body' => 'Cette page est informative. Les règles de permissions, d’inscription et de validation restent gérées par Moodle et les composants UCKK appropriés.',
+                    'body' => 'Cette page est informative. Les règles de permissions, d’inscription, de validation et de reconnaissance restent gérées par les composants UCKK appropriés.',
                     'type' => 'light',
                 ],
             ],

@@ -6,7 +6,7 @@
 // the Free Software Foundation, either version 3 of the License, or
 // any later version.
 //
-// UCKK-Moodle adapts Moodle as the pedagogical campus of the
+// UCKK-Moodle provides the technical Moodle implementation for the
 // Univers-Cité King Klown.
 
 /**
@@ -136,7 +136,7 @@ final class public_pages {
             'title' => self::page_title($slug),
             'subtitle' => '',
             'summary' => '',
-            'boundarynotice' => 'L’UCKK est une cité d’apprentissage public émergente. Ses reconnaissances internes ne doivent pas être présentées comme des diplômes publics accrédités.',
+            'boundarynotice' => 'L’UCKK est un établissement virtuel de puissance opératoire. Ses reconnaissances internes ne doivent pas être présentées comme des diplômes publics accrédités.',
 
             /*
              * Public visual contract.
@@ -202,19 +202,19 @@ final class public_pages {
             self::KEY_HOME => [
                 'layout' => 'wide',
                 'typography' => 'display',
-                'eyebrow' => 'Cité d’apprentissage public émergente',
+                'eyebrow' => 'Établissement virtuel de puissance opératoire',
                 'title' => 'Univers-Cité King Klown',
                 'subtitle' => 'Comprendre le jeu. Jouer avec lucidité. Changer les règles.',
-                'summary' => 'L’UCKK relie cours, voies, défis, preuves, assemblées, archives et médiathèque pour former des personnes capables de lire les systèmes, produire des traces, délibérer et agir avec méthode.',
+                'summary' => 'L’UCKK relie cours, voies, défis, preuves, assemblées, Registraire et médiathèque pour former des Joueurs capables de lire les systèmes, produire des traces, délibérer et agir avec méthode dans le Grand Jeu social.',
                 'quicklinks' => [
                     [
-                        'label' => 'Explorer les voies',
-                        'description' => 'Situer les grands chemins de formation, les domaines d’action et les progressions possibles.',
+                        'label' => 'Explorer les Voies',
+                        'description' => 'Situer les grandes Voies, les domaines d’action et les progressions possibles.',
                         'url' => '/local/uckk/programs.php',
                     ],
                     [
                         'label' => 'Voir les cours',
-                        'description' => 'Accéder aux espaces d’apprentissage, aux ressources, aux activités et aux évaluations disponibles.',
+                        'description' => 'Accéder aux espaces de cours, aux ressources, aux activités et aux repères de progression disponibles.',
                         'url' => '/local/uckk/courses.php',
                     ],
                     [
@@ -227,20 +227,20 @@ final class public_pages {
                     [
                         'type' => 'orientation',
                         'eyebrow' => 'Orientation',
-                        'title' => 'Une cité d’apprentissage pour lire, agir et se souvenir',
-                        'body' => 'L’Univers-Cité King Klown organise l’apprentissage comme un cycle complet : connaître, choisir, agir, documenter, corriger et transmettre.',
+                        'title' => 'Un établissement virtuel pour lire, agir et se souvenir',
+                        'body' => 'L’Univers-Cité King Klown organise la progression comme un cycle complet : connaître, choisir, agir, documenter, corriger et transmettre.',
                         'items' => [
                             'Observer les règles, récits, institutions, technologies et pouvoirs qui structurent le monde social.',
-                            'Choisir des chemins d’apprentissage reliés à des voies, des cours, des défis et des preuves.',
+                            'Choisir des Voies reliées à des cours, des défis, des preuves et des dossiers de progression.',
                             'Agir avec méthode par des productions, enquêtes, prototypes, interventions ou contributions.',
-                            'Conserver les traces utiles dans des portfolios, archives, assemblées et unités de mémoire.',
+                            'Conserver les traces utiles dans des portfolios, Registraire, Assemblées et unités de mémoire.',
                         ],
                     ],
                     [
                         'type' => 'boundary',
                         'eyebrow' => 'Clarté institutionnelle',
                         'title' => 'Ce que la page publique montre',
-                        'body' => 'Les pages publiques donnent une vue claire de l’UCKK : ses voies, ses cours, ses défis, ses assemblées, sa médiathèque, ses archives et ses repères d’intégrité. Elles ne remplacent pas les espaces privés, les inscriptions, les rôles, les permissions ou les dossiers internes.',
+                        'body' => 'Les pages publiques donnent une vue claire de l’UCKK : ses Voies, ses cours, ses défis, ses Assemblées, sa médiathèque, son Registraire et ses repères d’intégrité. Elles ne remplacent pas les espaces privés, les inscriptions, les rôles, les permissions ou les dossiers internes.',
                     ],
                 ],
                 'cardsheading' => 'Portes d’entrée',
@@ -249,19 +249,19 @@ final class public_pages {
                         'title' => 'Voies',
                         'body' => 'Les chemins qui relient domaines, cours, défis, preuves, niveaux et Parchemins UCKK.',
                         'url' => '/local/uckk/programs.php',
-                        'actionlabel' => 'Voir les voies',
+                        'actionlabel' => 'Voir les Voies',
                         'type' => 'programs',
                     ],
                     [
                         'title' => 'Cours',
-                        'body' => 'Les espaces où les apprentissages, ressources, activités et évaluations sont organisés.',
+                        'body' => 'Les espaces où les cours, ressources, activités et repères de progression sont organisés.',
                         'url' => '/local/uckk/courses.php',
                         'actionlabel' => 'Explorer les cours',
                         'type' => 'courses',
                     ],
                     [
                         'title' => 'Défis',
-                        'body' => 'Les épreuves qui transforment une question en action, production, preuve et apprentissage.',
+                        'body' => 'Les épreuves qui transforment une question en action, production, preuve et progression.',
                         'url' => '/local/uckk/challenges.php',
                         'actionlabel' => 'Voir les défis',
                         'type' => 'challenges',
@@ -270,7 +270,7 @@ final class public_pages {
                         'title' => 'Assemblées',
                         'body' => 'Les lieux de discussion, d’orientation, de contestation, d’arbitrage et de légitimité collective.',
                         'url' => '/local/uckk/assemblies.php',
-                        'actionlabel' => 'Voir les assemblées',
+                        'actionlabel' => 'Voir les Assemblées',
                         'type' => 'assemblies',
                     ],
                     [
@@ -291,18 +291,18 @@ final class public_pages {
                 'notices' => [
                     [
                         'title' => 'Limite publique',
-                        'body' => 'L’UCKK est une cité d’apprentissage public émergente. Ses Niveaux, Parchemins UCKK, portfolios, dossiers de passage et reconnaissances internes attestent une progression dans l’écosystème UCKK. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.',
+                        'body' => 'L’UCKK est un établissement virtuel de puissance opératoire. Ses Niveaux, Parchemins UCKK, portfolios, dossiers de passage et reconnaissances internes attestent une progression dans l’écosystème de l’Univers-Cité King Klown. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.',
                         'type' => 'institutional',
                     ],
                 ],
                 'metadata' => [
-                    ['label' => 'Nature', 'value' => 'Cité d’apprentissage public émergente'],
+                    ['label' => 'Nature', 'value' => 'Établissement virtuel de puissance opératoire'],
                     ['label' => 'Rôle', 'value' => 'Branche éducative du mouvement kOA'],
                     ['label' => 'Reconnaissance', 'value' => 'Niveaux, portfolios, dossiers de passage et Parchemins UCKK internes'],
                 ],
                 'cta' => [
-                    'title' => 'Entrer dans l’apprentissage',
-                    'body' => 'Commencer par les voies, ouvrir les cours associés, puis relier les apprentissages aux défis, aux assemblées, aux portfolios et aux archives.',
+                    'title' => 'Entrer dans le Grand Jeu social',
+                    'body' => 'Commencer par les Voies, ouvrir les cours associés, puis relier la progression aux défis, aux Assemblées, aux portfolios et au Registraire.',
                     'url' => '/local/uckk/courses.php',
                     'label' => 'Explorer les cours',
                 ],
@@ -314,23 +314,23 @@ final class public_pages {
                 'eyebrow' => 'Situer l’UCKK',
                 'title' => 'À propos',
                 'subtitle' => 'L’Univers-Cité King Klown est la branche éducative du mouvement kOA.',
-                'summary' => 'L’UCKK est une cité d’apprentissage public émergente. Elle forme, documente, met en scène, vérifie et transmet des savoirs liés au Grand Jeu social, aux systèmes humains, aux technologies, aux preuves et à la gouvernance collective.',
+                'summary' => 'L’UCKK est un établissement virtuel de puissance opératoire. Elle forme, documente, met en scène, vérifie et transmet des savoirs liés au Grand Jeu social, aux systèmes humains, aux technologies, aux preuves et à la gouvernance collective.',
                 'sections' => [
                     [
                         'title' => 'Ce qu’est l’UCKK',
-                        'body' => 'L’Univers-Cité King Klown est une institution d’apprentissage en émergence. Elle rassemble des cours, des voies, des défis, des assemblées, des archives, des portfolios, des preuves et des formes de reconnaissance interne.',
+                        'body' => 'L’Univers-Cité King Klown est un établissement virtuel en émergence. Elle rassemble des cours, des Voies, des défis, des Assemblées, le Registraire, des portfolios, des preuves et des formes de reconnaissance interne.',
                     ],
                     [
-                        'title' => 'Ce que fait le campus',
-                        'body' => 'Le campus public donne accès aux repères institutionnels de l’UCKK : voies, cours, défis, assemblées, médiathèque, archives, règles d’intégrité et informations publiques. Les espaces internes, inscriptions, rôles, permissions, validations et dossiers privés restent gérés dans les espaces appropriés. La page publique ne remplace pas les procédures internes.',
+                        'title' => 'Ce que montre l’interface publique',
+                        'body' => 'L’interface publique donne accès aux repères institutionnels de l’UCKK : Voies, cours, défis, Assemblées, médiathèque, Registraire, règles d’intégrité et informations publiques. Les espaces internes, inscriptions, rôles, permissions, validations et dossiers privés restent gérés dans les espaces appropriés. La page publique ne remplace pas les procédures internes.',
                     ],
                     [
                         'title' => 'Ce que l’UCKK n’est pas',
                         'body' => 'L’UCKK n’est pas une université publique accréditée par l’État. Ses Niveaux, Parchemins UCKK, portfolios, dossiers de passage et reconnaissances internes ne doivent pas être présentés comme des diplômes publics accrédités, des grades universitaires ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.',
                     ],
                     [
-                        'title' => 'King Klown, Inquisiteur, Assemblées et Archives',
-                        'body' => 'King Klown ouvre la scène pédagogique et rend les systèmes visibles. Il attire l’attention, rend les situations mémorables et invite à apprendre par le théâtre public, sans devenir l’autorité finale. L’Inquisiteur protège l’intégrité du jeu : il interroge les faits, les preuves, les limites et les risques de confusion. Les Assemblées donnent une forme collective à l’orientation, à la contestation, à l’arbitrage et aux décisions. Les Archives conservent les traces utiles, les versions, les preuves, les décisions et les corrections.',
+                        'title' => 'King Klown, Inquisiteur, Assemblées et Registraire',
+                        'body' => 'King Klown ouvre la scène publique et rend les systèmes visibles. Il attire l’attention, rend les situations mémorables et invite à lire le Grand Jeu social par le théâtre public, sans devenir l’autorité finale. L’Inquisiteur protège l’intégrité du jeu : il interroge les faits, les preuves, les limites et les risques de confusion. Les Assemblées donnent une forme collective à l’orientation, à la contestation, à l’arbitrage et aux décisions. Le Registraire conserve les traces utiles, les versions, les preuves, les décisions et les corrections.',
                     ],
                 ],
                 'cardsheading' => 'Repères institutionnels',
@@ -342,12 +342,12 @@ final class public_pages {
                     ],
                     [
                         'title' => 'UCKK',
-                        'body' => 'La branche éducative : apprentissages, voies, niveaux, Parchemins, défis, preuves et assemblées.',
+                        'body' => 'La branche éducative : Voies, cours, Niveaux, Parchemins, défis, preuves et Assemblées.',
                         'type' => 'uckk',
                     ],
                     [
                         'title' => 'King Klown',
-                        'body' => 'La figure narrative : il attire l’attention, rend les systèmes mémorables et ouvre des scènes d’apprentissage.',
+                        'body' => 'La figure narrative : il attire l’attention, rend les systèmes mémorables et ouvre des scènes de lucidité.',
                         'type' => 'king-klown',
                     ],
                     [
@@ -359,29 +359,29 @@ final class public_pages {
                         'title' => 'Assemblées',
                         'body' => 'La légitimité collective : discussion, arbitrage, décisions, contestations et mémoire institutionnelle.',
                         'url' => '/local/uckk/assemblies.php',
-                        'actionlabel' => 'Voir les assemblées',
+                        'actionlabel' => 'Voir les Assemblées',
                         'type' => 'assemblies',
                     ],
                     [
-                        'title' => 'Archives',
-                        'body' => 'La mémoire : conservation des traces, versions, preuves, corrections et apprentissages.',
+                        'title' => 'Registraire',
+                        'body' => 'La mémoire : conservation des traces, versions, preuves, corrections et décisions.',
                         'url' => '/local/uckk/archives.php',
-                        'actionlabel' => 'Voir les archives',
+                        'actionlabel' => 'Voir le Registraire',
                         'type' => 'archives',
                     ],
                 ],
                 'notices' => [
                     [
                         'title' => 'Clarté publique',
-                        'body' => 'Les informations publiques doivent rester claires sur le statut de l’UCKK : les reconnaissances sont internes à la cité d’apprentissage et ne remplacent pas des diplômes publics accrédités.',
+                        'body' => 'Les informations publiques doivent rester claires sur le statut de l’UCKK : les reconnaissances sont internes à l’Univers-Cité King Klown et ne remplacent pas des diplômes publics accrédités.',
                         'type' => 'institutional',
                     ],
                 ],
                 'cta' => [
                     'title' => 'Comprendre l’architecture UCKK',
-                    'body' => 'Commencer par les voies, puis explorer les cours, les défis, les assemblées et la médiathèque.',
+                    'body' => 'Commencer par les Voies, puis explorer les cours, les défis, les Assemblées et la médiathèque.',
                     'url' => '/local/uckk/programs.php',
-                    'label' => 'Voir les voies',
+                    'label' => 'Voir les Voies',
                 ],
             ],
 
@@ -391,26 +391,26 @@ final class public_pages {
                 'eyebrow' => 'Cartographie des voies',
                 'title' => 'Voies UCKK',
                 'subtitle' => 'Choisir un chemin de formation, produire des preuves et avancer vers les Niveaux et Parchemins UCKK.',
-                'summary' => 'Les Voies UCKK structurent les apprentissages de l’Univers-Cité King Klown : tronc commun, domaines fondateurs, cours, défis, portfolios, assemblées, archives et reconnaissances internes.',
+                'summary' => 'Les Voies UCKK structurent la formation de l’Univers-Cité King Klown : tronc commun, domaines fondateurs, cours, défis, portfolios, Assemblées, Registraire et reconnaissances internes.',
                 'sections' => [
                     [
                         'type' => 'orientation',
                         'eyebrow' => 'Orientation canonique',
-                        'title' => 'Choisir une voie dans la cité d’apprentissage',
-                        'body' => 'Les Voies UCKK sont des structures internes de formation, de pratique et de reconnaissance. Elles relient les cours, les compétences, les défis, les preuves, les portfolios, les Assemblées et les passages de Niveau. Une voie n’est pas seulement une liste de cours : c’est un chemin d’apprentissage qui aide à situer une personne dans un domaine d’action, à produire des traces vérifiables et à construire progressivement un dossier de passage.',
+                        'title' => 'Choisir une Voie dans l’Univers-Cité King Klown',
+                        'body' => 'Les Voies UCKK sont des structures internes de formation, de pratique et de reconnaissance. Elles relient les cours, les compétences, les défis, les preuves, les portfolios, les Assemblées et les passages de Niveau. Une Voie n’est pas seulement une liste de cours : c’est un parcours de puissance opératoire qui aide à situer une personne dans un domaine d’action, à produire des traces vérifiables et à construire progressivement un dossier de passage.',
                     ],
                     [
                         'type' => 'registry',
                         'eyebrow' => 'Voies publiques',
                         'title' => 'Tronc commun et voies actives',
-                        'body' => 'Chaque carte présente une voie ou un bloc de formation visible publiquement. Elle peut ouvrir vers les espaces de cours associés lorsque ceux-ci sont publiés. Les voies peuvent mener à des Niveaux et Parchemins UCKK internes. Ces reconnaissances attestent une progression de compétence, de pratique, de recherche ou de contribution dans la cité d’apprentissage. Elles ne constituent pas des diplômes publics accrédités.',
+                        'body' => 'Chaque carte présente une Voie ou un bloc de formation visible publiquement. Elle peut ouvrir vers les espaces de cours associés lorsque ceux-ci sont publiés. Les Voies peuvent mener à des Niveaux et Parchemins UCKK internes. Ces reconnaissances attestent une progression de compétence, de pratique, de recherche ou de contribution dans l’Univers-Cité King Klown. Elles ne constituent pas des diplômes publics accrédités.',
                     ],
                 ],
                 'cards' => [],
                 'notices' => [
                     [
                         'title' => 'Reconnaissance interne',
-                        'body' => 'Les voies décrivent des structures pédagogiques internes à l’UCKK. Les Niveaux et Parchemins UCKK ne constituent pas des diplômes publics accrédités.',
+                        'body' => 'Les Voies décrivent des structures pédagogiques internes à l’UCKK. Les Niveaux et Parchemins UCKK ne constituent pas des diplômes publics accrédités.',
                         'type' => 'institutional',
                     ],
                 ],
@@ -419,7 +419,7 @@ final class public_pages {
                     ['label' => 'Filtre public', 'value' => 'Voies actives et publiables'],
                 ],
                 'cta' => [
-                    'title' => 'Passer des voies aux apprentissages',
+                    'title' => 'Passer des Voies aux cours',
                     'body' => 'Ouvre les cours associés pour consulter les modules, activités, ressources, preuves attendues et repères de progression.',
                     'url' => '/local/uckk/courses.php',
                     'label' => 'Voir les cours associés',
@@ -429,18 +429,18 @@ final class public_pages {
             self::KEY_COURSES => [
                 'layout' => 'standard',
                 'typography' => 'institutional',
-                'eyebrow' => 'Entrer dans les apprentissages',
+                'eyebrow' => 'Explorer les cours',
                 'title' => 'Cours UCKK',
-                'subtitle' => 'Espaces Moodle publics ou accessibles selon les rôles.',
-                'summary' => 'Les cours contiennent les activités, ressources et évaluations pédagogiques du campus.',
+                'subtitle' => 'Cours publics, Voies associées et preuves de progression.',
+                'summary' => 'Les cours contiennent les activités, ressources et repères de progression de l’UCKK.',
                 'sections' => [
                     [
                         'title' => 'Fonction des cours',
-                        'body' => 'Les cours structurent les apprentissages concrets. Ils peuvent être liés aux voies, défis, compétences, badges et preuves.',
+                        'body' => 'Les cours structurent les activités concrètes. Ils peuvent être liés aux Voies, défis, compétences, Parchemins et preuves.',
                     ],
                     [
                         'title' => 'Accès',
-                        'body' => 'Certains cours peuvent être visibles publiquement. D’autres demandent une connexion, une inscription ou un rôle Moodle.',
+                        'body' => 'Certains cours peuvent être visibles publiquement. D’autres demandent une connexion, une inscription ou un rôle autorisé dans l’UCKK.',
                     ],
                 ],
                 'cardsheading' => '',
@@ -448,7 +448,7 @@ final class public_pages {
                 'has_course_explorer' => true,
                 'course_explorer' => [
                     'title' => 'Explorer les cours',
-                    'summary' => 'Filtrer les cours publics par mot-clé, catégorie et ordre d’affichage.',
+                    'summary' => 'Filtrer les cours publics par mot-clé, Voie associée et ordre d’affichage.',
                     'query' => '',
                     'category' => 'all',
                     'sort' => 'pedagogical',
@@ -459,12 +459,12 @@ final class public_pages {
                     'emptytitle' => 'Aucun cours trouvé',
                     'emptybody' => 'Aucun cours public ne correspond aux filtres actuels.',
                     'indexurl' => '/course/index.php',
-                    'indexlabel' => 'Ouvrir l’index Moodle',
+                    'indexlabel' => 'Ouvrir l’index des cours',
                 ],
                 'metadata' => [
                     [
                         'label' => 'Source',
-                        'value' => 'Cours Moodle visibles',
+                        'value' => 'Cours visibles de l’UCKK',
                     ],
                     [
                         'label' => 'Filtre public',
@@ -472,8 +472,8 @@ final class public_pages {
                     ],
                 ],
                 'cta' => [
-                    'title' => 'Index Moodle des cours',
-                    'body' => 'L’index Moodle permet aussi de parcourir les catégories de cours.',
+                    'title' => 'Index des cours',
+                    'body' => 'L’index des cours permet aussi de parcourir les catégories et espaces de cours.',
                     'url' => '/course/index.php',
                     'label' => 'Ouvrir l’index',
                 ],
@@ -485,11 +485,11 @@ final class public_pages {
                 'eyebrow' => 'Mettre la lucidité à l’épreuve',
                 'title' => 'Défis UCKK',
                 'subtitle' => 'Épreuves pédagogiques, traces, productions et révisions.',
-                'summary' => 'Les défis servent à produire des traces, vérifier des apprentissages et rendre visibles des efforts structurés.',
+                'summary' => 'Les défis servent à produire des traces, vérifier des preuves et rendre visibles des efforts structurés.',
                 'sections' => [
                     [
                         'title' => 'Pourquoi des défis',
-                        'body' => 'Un défi transforme une intention d’apprentissage en action observable. Il peut demander une production, une preuve, une réflexion ou une validation.',
+                        'body' => 'Un défi transforme une intention en action observable. Il peut demander une production, une preuve, une réflexion ou une validation.',
                     ],
                     [
                         'title' => 'Cycle général',
@@ -512,7 +512,7 @@ final class public_pages {
                     ],
                     [
                         'title' => 'Révision',
-                        'body' => 'Les validations et contestations suivent les permissions et les rôles Moodle.',
+                        'body' => 'Les validations et contestations suivent les permissions et les rôles autorisés de l’UCKK.',
                         'type' => 'review',
                     ],
                 ],
@@ -531,10 +531,10 @@ final class public_pages {
                 'eyebrow' => 'Délibérer, vérifier, orienter',
                 'title' => 'Assemblées UCKK',
                 'subtitle' => 'Espaces de discussion, décision, orientation et mémoire collective.',
-                'summary' => 'Les assemblées organisent les moments où la cité-école discute, arbitre, documente et rend certaines décisions traçables.',
+                'summary' => 'Les assemblées organisent les moments où l’UCKK discute, arbitre, documente et rend certaines décisions traçables.',
                 'sections' => [
                     [
-                        'title' => 'Rôle des assemblées',
+                        'title' => 'Rôle des Assemblées',
                         'body' => 'Une assemblée peut soutenir une délibération, une décision, une orientation pédagogique ou une vérification collective.',
                     ],
                     [
@@ -562,7 +562,7 @@ final class public_pages {
                 ],
                 'notices' => [
                     [
-                        'body' => 'Les assemblées publiques ne remplacent pas les espaces internes de gouvernance ou les permissions Moodle.',
+                        'body' => 'Les assemblées publiques ne remplacent pas les espaces internes de gouvernance ou les permissions de l’UCKK.',
                         'type' => 'institutional',
                     ],
                 ],
@@ -582,7 +582,7 @@ final class public_pages {
                     ],
                     [
                         'title' => 'Visibilité',
-                        'body' => 'Ce qui est visible publiquement doit être intentionnel, utile, vérifiable et compatible avec les permissions Moodle.',
+                        'body' => 'Ce qui est visible publiquement doit être intentionnel, utile, vérifiable et compatible avec les permissions de l’UCKK.',
                     ],
                     [
                         'title' => 'Corrections',
@@ -622,7 +622,7 @@ final class public_pages {
                 'eyebrow' => 'Tenir le registre public',
                 'title' => 'Registraire UCKK',
                 'subtitle' => 'Registre institutionnel, preuves publiques, décisions et corrections.',
-                'summary' => 'Le registraire organise les traces publiques utiles à la compréhension du campus, de ses décisions et de ses transformations.',
+                'summary' => 'Le registraire organise les traces publiques utiles à la compréhension de l’UCKK, de ses décisions et de ses transformations.',
                 'sections' => [
                     [
                         'title' => 'Ce que le registraire conserve',
@@ -630,7 +630,7 @@ final class public_pages {
                     ],
                     [
                         'title' => 'Ce que le registraire ne doit pas exposer',
-                        'body' => 'Il ne doit pas publier de données personnelles, dossiers sensibles, preuves privées ou informations réservées à des rôles Moodle.',
+                        'body' => 'Il ne doit pas publier de données personnelles, dossiers sensibles, preuves privées ou informations réservées à certains rôles autorisés de l’UCKK.',
                     ],
                     [
                         'title' => 'Usage',
@@ -782,7 +782,7 @@ final class public_pages {
                 'eyebrow' => 'Nouvelles et appels',
                 'title' => 'Actualités UCKK',
                 'subtitle' => 'Informations publiques, appels, jalons et annonces institutionnelles.',
-                'summary' => 'Les actualités présentent les informations publiques utiles au suivi de la cité-école.',
+                'summary' => 'Les actualités présentent les informations publiques utiles au suivi de l’UCKK.',
                 'sections' => [
                     [
                         'title' => 'Fonction',
@@ -802,7 +802,7 @@ final class public_pages {
                     ],
                     [
                         'title' => 'Jalons',
-                        'body' => 'Moments importants du développement du campus.',
+                        'body' => 'Moments importants du développement de l’établissement.',
                         'type' => 'milestones',
                     ],
                     [
@@ -824,16 +824,16 @@ final class public_pages {
                 'typography' => 'editorial',
                 'eyebrow' => 'Entrer en relation',
                 'title' => 'Contact',
-                'subtitle' => 'Orientation publique pour contacter ou rejoindre le campus UCKK.',
+                'subtitle' => 'Orientation publique pour contacter ou rejoindre l’UCKK.',
                 'summary' => 'Cette page indique les voies générales de contact et rappelle les limites des demandes publiques.',
                 'sections' => [
                     [
                         'title' => 'Demandes générales',
-                        'body' => 'Les demandes publiques peuvent concerner l’orientation, la compréhension du campus, les voies, les cours, les portfolios ou la Médiathèque.',
+                        'body' => 'Les demandes publiques peuvent concerner l’orientation, la compréhension de l’UCKK, les Voies, les cours, les portfolios ou la Médiathèque.',
                     ],
                     [
                         'title' => 'Demandes privées',
-                        'body' => 'Les questions liées à un dossier personnel, une preuve, une inscription ou une décision doivent passer par les espaces Moodle appropriés.',
+                        'body' => 'Les questions liées à un dossier personnel, une preuve, une inscription ou une décision doivent passer par les espaces appropriés de l’UCKK.',
                     ],
                 ],
                 'cardsheading' => 'Repères de contact',
@@ -855,7 +855,7 @@ final class public_pages {
                 ],
                 'cta' => [
                     'title' => 'Besoin d’orientation?',
-                    'body' => 'Commence par les pages publiques, puis connecte-toi à Moodle si ta demande concerne un espace ou un rôle spécifique.',
+                    'body' => 'Commence par les pages publiques, puis connecte-toi si ta demande concerne un espace ou un rôle spécifique.',
                     'url' => '/login/index.php',
                     'label' => 'Se connecter',
                 ],
@@ -1002,9 +1002,9 @@ final class public_pages {
             if ($description !== '') {
                 $bodyparts[] = $description;
             } else if ($typelabel !== '') {
-                $bodyparts[] = 'Structure publique de type ' . strtolower($typelabel) . ' dans la cité d’apprentissage UCKK.';
+                $bodyparts[] = 'Structure publique de type ' . strtolower($typelabel) . ' dans l’UCKK.';
             } else {
-                $bodyparts[] = 'Structure publique de formation dans la cité d’apprentissage UCKK.';
+                $bodyparts[] = 'Structure publique de formation dans l’UCKK.';
             }
 
             if ($categoryname !== '') {
@@ -1238,4 +1238,3 @@ final class public_pages {
         return $fallback;
     }
 }
-

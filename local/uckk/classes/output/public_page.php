@@ -312,10 +312,10 @@ final class public_page implements renderable, templatable {
      */
     private static function page_defaults(string $slug): array {
         $titles = [
-            self::KEY_HOME => ['Accueil', 'Cité-école expérimentale'],
+            self::KEY_HOME => ['Accueil', 'Établissement virtuel de puissance opératoire'],
             self::KEY_ABOUT => ['À propos', 'Clarifier UCKK'],
             self::KEY_PROGRAMS => ['Voies UCKK', 'Former par les Voies'],
-            self::KEY_COURSES => ['Cours', 'Entrer dans les apprentissages'],
+            self::KEY_COURSES => ['Cours', 'Explorer les cours'],
             self::KEY_CHALLENGES => ['Défis', 'Mettre la lucidité à l’épreuve'],
             self::KEY_ASSEMBLIES => ['Assemblées', 'Délibérer, vérifier, orienter'],
             self::KEY_INTEGRITY => ['Intégrité', 'Protéger la preuve et la dignité'],
@@ -509,7 +509,7 @@ final class public_page implements renderable, templatable {
         $obj->service = $service;
         $obj->title = self::clean_string($explorer['title'] ?? 'Explorer les cours');
         $obj->summary = self::clean_string(
-            $explorer['summary'] ?? 'Rechercher et filtrer les cours publics du campus UCKK.'
+            $explorer['summary'] ?? 'Rechercher et filtrer les cours publics de l’UCKK.'
         );
         $obj->searchlabel = self::clean_string($explorer['searchlabel'] ?? 'Recherche');
         $obj->searchplaceholder = self::clean_string(
@@ -1553,4 +1553,3 @@ final class public_page implements renderable, templatable {
         return trim((string)$value);
     }
 }
-
