@@ -175,7 +175,7 @@ final class constants {
     }
 
     public static function normalise_key(string $value): string {
-        $value = trim(core_text::strtolower($value));
+        $value = trim(\core_text::strtolower($value));
         $value = str_replace([' ', '-', '.', '/', '\\'], '_', $value);
         $value = preg_replace('/[^a-z0-9_]/', '', $value);
         $value = preg_replace('/_+/', '_', $value);

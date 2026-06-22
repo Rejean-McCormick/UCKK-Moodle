@@ -1,0 +1,57 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+
+    @template local_uckk/faculty_notice
+
+    Public faculty notice partial.
+
+    Context:
+    {
+        "title": "",
+        "body": "",
+        "type": "institutional"
+    }
+
+    Allowed type values:
+    - institutional
+    - integrity
+    - warning
+    - light
+    - notice
+    - ethics
+
+    This template must not:
+    - query Moodle data;
+    - decide permissions;
+    - create fallback notices;
+    - expose private user data;
+    - expose notes, feedback, participants, enrolments, completion, grades, submissions, votes, integrity cases, or Konnaxion personal data;
+    - present UCKK internal recognitions as public accredited degrees;
+    - introduce undocumented variables.
+}}
+
+<article
+    class="local-uckk-faculty-notice local-uckk-faculty-notice--{{type}}"
+    data-region="local-uckk-faculty-notice"
+    data-notice-type="{{type}}"
+>
+    {{#title}}
+        <h3 class="local-uckk-faculty-notice__title">
+            {{title}}
+        </h3>
+    {{/title}}
+
+    {{#body}}
+        <div class="local-uckk-faculty-notice__body">
+            {{body}}
+        </div>
+    {{/body}}
+</article>

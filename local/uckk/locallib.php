@@ -630,7 +630,7 @@ function local_uckk_get_badge_registry(): array {
  * @return string
  */
 function local_uckk_normalise_key(string $value): string {
-    $value = trim(core_text::strtolower($value));
+    $value = trim(\core_text::strtolower($value));
     $value = str_replace([' ', '-', '.', '/', '\\'], '_', $value);
     $value = preg_replace('/[^a-z0-9_]/', '', $value);
     $value = preg_replace('/_+/', '_', $value);

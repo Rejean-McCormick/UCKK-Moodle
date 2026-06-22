@@ -1,0 +1,206 @@
+{
+  "schema_version": "UCKK-FACULTY-0.1",
+  "faculty_id": "faculty_ecosysteme_digital_koa",
+  "voie_id": "voie_ecosysteme_digital_koa",
+  "slug": "ecosysteme-digital-koa",
+  "status": "published",
+  "visibility": "public",
+  "source_atlas": {
+    "file": "voie_ecosysteme_digital_koa.json",
+    "schema_version_expected": "UCKK-ATLAS-0.2-draft",
+    "sync_mode": "read_only"
+  },
+  "moodle": {
+    "category_id": null,
+    "category_idnumber": "UCKK-KOA",
+    "course_prefix": "KOA",
+    "public_course_listing": true,
+    "enrolment_visibility": "public_info_only",
+    "hub_course_idnumber": "KOA-HUB"
+  },
+  "identity": {
+    "eyebrow": "Voie fondatrice UCKK",
+    "name": "Voie de l’Architecture de l’écosystème digital kOA",
+    "short_name": "Écosystème digital kOA",
+    "title_symbolique": "Architecte de l’écosystème digital kOA",
+    "domain": "Infrastructure opératoire",
+    "level": "Puissance opératoire",
+    "faculty_role": "Voie consacrée à la conception, au déploiement, à l’audit et à la gouvernance d’une infrastructure numérique sociotechnique orientée vers la connaissance, la décision, l’action et la mémoire.",
+    "one_sentence": "Transformer une communauté, un groupe ou une institution en organisation capable de connaître, choisir, agir et se souvenir avec méthode, légitimité, auditabilité et résilience."
+  },
+  "seo": {
+    "title": "Voie de l’Architecture de l’écosystème digital kOA — UCKK",
+    "description": "La Voie de l’Architecture de l’écosystème digital kOA forme à concevoir, relier, déployer, auditer et gouverner les modules d’une infrastructure numérique sociotechnique orientée vers la connaissance, la décision, l’action et la mémoire.",
+    "keywords": [
+      "UCKK",
+      "kOA",
+      "écosystème digital",
+      "infrastructure numérique",
+      "architecture sociotechnique",
+      "gouvernance numérique",
+      "auditabilité",
+      "mémoire institutionnelle",
+      "décision collective",
+      "résilience opérationnelle"
+    ]
+  },
+  "hero": {
+    "title": "Voie de l’Architecture de l’écosystème digital kOA",
+    "subtitle": "Relier connaissance, décision, action et mémoire dans une infrastructure gouvernable.",
+    "summary": "Cette faculté apprend à concevoir et gouverner l’écosystème digital kOA comme infrastructure sociotechnique : des contributions deviennent des connaissances vérifiables, les connaissances soutiennent des décisions légitimes, les décisions deviennent des actions coordonnées, et les actions produisent une mémoire réutilisable.",
+    "primary_cta": {
+      "label": "Explorer les cours",
+      "target": "#cours"
+    },
+    "secondary_cta": {
+      "label": "Voir l’Atlas des Voies",
+      "target": "/local/uckk/programs.php"
+    }
+  },
+  "navigation": [
+    {
+      "label": "Présentation",
+      "target": "#presentation"
+    },
+    {
+      "label": "Infrastructure",
+      "target": "#infrastructure"
+    },
+    {
+      "label": "Programme",
+      "target": "#programme"
+    },
+    {
+      "label": "Cours",
+      "target": "#cours"
+    },
+    {
+      "label": "Projet final",
+      "target": "#projet-final"
+    },
+    {
+      "label": "Annonces",
+      "target": "#annonces"
+    }
+  ],
+  "sections": [
+    {
+      "id": "presentation",
+      "type": "text",
+      "title": "Une faculté pour architecturer l’écosystème digital kOA",
+      "body": "La Voie de l’Architecture de l’écosystème digital kOA forme à penser l’infrastructure numérique comme un système sociotechnique complet : outils, règles, contributions, preuves, décisions, actions, archives, interfaces et responsabilités doivent rester reliés."
+    },
+    {
+      "id": "infrastructure",
+      "type": "principle",
+      "title": "Principe d’infrastructure gouvernable",
+      "body": "Une infrastructure numérique n’est pas seulement un empilement d’outils. Elle doit rendre visibles les flux de connaissance, les responsabilités, les décisions, les traces, les dépendances, les erreurs possibles et les mécanismes de correction."
+    },
+    {
+      "id": "usage-public",
+      "type": "notice",
+      "title": "Usage public de cette faculté",
+      "body": "Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité."
+    }
+  ],
+  "atlas_projection": {
+    "show_definition_courte": true,
+    "show_angle_fondamental": true,
+    "show_competence_centrale": true,
+    "show_seuils_progression": true,
+    "show_courses": true,
+    "show_course_codes": true,
+    "show_concept_maitre": true,
+    "show_concepts_associes": false,
+    "show_artefacts": true,
+    "show_criteres_passage": false,
+    "show_projet_final": true,
+    "show_limites_ethiques": true,
+    "show_relations_intervoies": true,
+    "show_tags": false
+  },
+  "dynamic_blocks": [
+    {
+      "id": "annonces",
+      "type": "announcements",
+      "title": "Annonces de la faculté",
+      "source": {
+        "provider": "moodle_forum",
+        "course_idnumber": "KOA-HUB",
+        "forum_name": "Annonces"
+      },
+      "limit": 5,
+      "visibility": "public",
+      "empty_state": "Aucune annonce publique pour le moment."
+    },
+    {
+      "id": "cours-moodle",
+      "type": "moodle_course_list",
+      "title": "Cours associés",
+      "source": {
+        "provider": "moodle_category",
+        "category_idnumber": "UCKK-KOA"
+      },
+      "limit": 20,
+      "visibility": "public",
+      "empty_state": "Les cours Moodle associés seront affichés ici lorsqu’ils seront disponibles."
+    }
+  ],
+  "featured_blocks": [
+    {
+      "type": "principle",
+      "title": "Principe central",
+      "body": "Le kOA Digital Ecosystem doit aider une organisation à connaître, choisir, agir et se souvenir sans perdre la traçabilité, la responsabilité et la capacité de correction."
+    },
+    {
+      "type": "ethics",
+      "title": "Garde-fou éthique",
+      "body": "Ne pas confondre intégration technique, efficacité opérationnelle ou automatisation avec légitimité, consentement, sécurité, justice ou gouvernance réelle."
+    },
+    {
+      "type": "notice",
+      "title": "Reconnaissance interne",
+      "body": "Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Cette Voie porte-t-elle sur le mouvement kOA ou sur son infrastructure numérique?",
+      "answer": "Elle porte sur l’architecture de l’écosystème digital kOA comme infrastructure numérique sociotechnique. Elle ne remplace pas la doctrine du mouvement, mais apprend à concevoir les outils, flux, traces et mécanismes de gouvernance qui le rendent opérable."
+    },
+    {
+      "question": "Cette Voie est-elle seulement technique?",
+      "answer": "Non. Elle traite les systèmes numériques comme des systèmes sociotechniques : architecture, sécurité, usages, règles, rôles, gouvernance, auditabilité, mémoire et effets humains doivent être pensés ensemble."
+    },
+    {
+      "question": "Est-ce un diplôme reconnu?",
+      "answer": "Non. Il s’agit d’une reconnaissance interne UCKK, sauf reconnaissance officielle future."
+    }
+  ],
+  "contact": {
+    "label": "Contact",
+    "body": "Pour toute question sur cette Voie, consultez les annonces publiques ou les espaces Moodle associés.",
+    "email": "",
+    "cta": {
+      "label": "Voir les annonces",
+      "target": "#annonces"
+    }
+  },
+  "governance": {
+    "owner": "local_uckk",
+    "editorial_status": "approved",
+    "last_reviewed": null,
+    "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
+    "public_claims_guardrails": [
+      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
+      "Ne pas afficher de progression, notes ou données privées d’étudiants.",
+      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
+      "Ne pas confondre kOA, UCKK, King Klown et le kOA Digital Ecosystem.",
+      "Ne pas présenter une architecture technique comme garantie automatique de légitimité, sécurité, justice ou gouvernance."
+    ]
+  },
+  "cache": {
+    "enabled": true,
+    "ttl_seconds": 3600
+  }
+}

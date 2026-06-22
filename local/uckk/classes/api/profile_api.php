@@ -820,7 +820,7 @@ final class profile_api {
      * @return string
      */
     private static function normalise_symbolic_role(string $role): string {
-        $role = clean_param(core_text::strtolower(trim($role)), PARAM_ALPHANUMEXT);
+        $role = clean_param(\core_text::strtolower(trim($role)), PARAM_ALPHANUMEXT);
 
         if (!in_array($role, self::VALID_SYMBOLIC_ROLES, true)) {
             throw new invalid_parameter_exception('Invalid UCKK symbolic role: ' . $role);
@@ -836,7 +836,7 @@ final class profile_api {
      * @return string
      */
     private static function normalise_visibility($visibility): string {
-        $visibility = clean_param(core_text::strtolower(trim((string)$visibility)), PARAM_ALPHANUMEXT);
+        $visibility = clean_param(\core_text::strtolower(trim((string)$visibility)), PARAM_ALPHANUMEXT);
 
         if (!in_array($visibility, self::VALID_VISIBILITIES, true)) {
             throw new invalid_parameter_exception('Invalid UCKK visibility: ' . $visibility);
@@ -867,7 +867,7 @@ final class profile_api {
      * @return string
      */
     private static function clean_status($status): string {
-        $status = clean_param(core_text::strtolower(trim((string)$status)), PARAM_ALPHANUMEXT);
+        $status = clean_param(\core_text::strtolower(trim((string)$status)), PARAM_ALPHANUMEXT);
 
         if ($status === '') {
             return self::STATUS_ACTIVE;

@@ -1049,6 +1049,21 @@ $string['mediatheque_metadata_policy_owner'] = 'Données et politiques';
 $string['mediatheque_metadata_surface_value'] = 'local_uckk';
 $string['mediatheque_metadata_policy_owner_value'] = 'Moteur média interne';
 
+// Faculty public pages.
+$string['faculty'] = 'Faculté';
+$string['facultyprofile'] = 'Profil de la faculté';
+$string['facultyatlasprogram'] = 'Programme Atlas';
+$string['facultycourses'] = 'Cours';
+$string['facultyprojectfinal'] = 'Projet final';
+$string['facultyethicallimits'] = 'Limites éthiques';
+$string['facultyrelations'] = 'Relations inter-voies';
+$string['title'] = 'Titre';
+$string['level'] = 'Niveau';
+$string['category'] = 'Catégorie';
+$string['navigation'] = 'Navigation';
+$string['role'] = 'Rôle';
+
+
 // Diagnostics.
 $string['diagnostics'] = 'Diagnostics UCKK';
 $string['diagnostics_tables'] = 'Tables UCKK';
@@ -1099,3 +1114,59 @@ $string['courseexplorerready'] = 'Liste des cours mise à jour.';
 $string['courseexplorerempty'] = 'Aucun cours ne correspond aux filtres actuels.';
 $string['courseexplorererror'] = 'Impossible de mettre à jour la liste des cours.';
 
+// Public Faculty page generic labels.
+$string['announcements'] = 'Annonces';
+$string['highlights'] = 'Points saillants';
+$string['faq'] = 'Questions fréquentes';
+
+// Public Faculty pages — DOC_12 public labels.
+$string['faculties'] = 'Facultés';
+$string['facultyannouncements'] = 'Annonces de la faculté';
+$string['facultyevents'] = 'Événements publics';
+$string['facultypublicpage'] = 'Page publique de faculté';
+$string['facultypublicpages'] = 'Pages publiques de facultés';
+$string['facultyoverview'] = 'Présentation de la faculté';
+$string['facultyidentity'] = 'Identité de la faculté';
+$string['facultysections'] = 'Sections de la faculté';
+$string['facultyfeaturedblocks'] = 'Repères importants';
+$string['facultydynamicblocks'] = 'Actualités et espaces associés';
+$string['facultyfaq'] = 'Questions et réponses';
+$string['facultycontact'] = 'Contact';
+$string['facultynotices'] = 'Avis publics';
+$string['facultymetadata'] = 'Métadonnées';
+$string['facultyemptycourses'] = 'Aucun cours public n’est actuellement associé à cette faculté.';
+$string['facultyemptyannouncements'] = 'Aucune annonce publique n’est disponible pour cette faculté pour le moment.';
+$string['facultyemptyevents'] = 'Aucun événement public n’est disponible pour cette faculté pour le moment.';
+$string['facultyemptyrelations'] = 'Aucune relation inter-voie publique n’est disponible pour cette faculté pour le moment.';
+$string['facultyemptyfaq'] = 'Aucune question-réponse publique n’est disponible pour cette faculté pour le moment.';
+$string['facultyreadmore'] = 'Lire la suite';
+$string['facultyviewcourses'] = 'Voir les cours';
+$string['facultyviewprogram'] = 'Voir le programme';
+$string['facultyviewannouncements'] = 'Voir les annonces';
+$string['facultyviewevents'] = 'Voir les événements';
+$string['facultybacktofaculties'] = 'Retour aux facultés';
+$string['facultyrestricted'] = 'Cette page publique de faculté est réservée aux utilisateurs UCKK authentifiés.';
+$string['facultyhidden'] = 'Cette page de faculté est actuellement masquée.';
+$string['facultydraft'] = 'Cette page de faculté est actuellement en brouillon.';
+$string['facultynotfound'] = 'Page de faculté introuvable.';
+$string['facultyinvalidslug'] = 'Slug de faculté invalide.';
+$string['facultycanonicalsource'] = 'Source canonique';
+$string['facultyatlasprojection'] = 'Projection Atlas';
+$string['facultycoursecode'] = 'Code du cours';
+$string['facultyconcept'] = 'Concept central';
+$string['facultyartefact'] = 'Artefact';
+$string['facultyartefacts'] = 'Artefacts';
+$string['facultycompetency'] = 'Compétence centrale';
+$string['facultyprogression'] = 'Seuils de progression';
+$string['facultydefinition'] = 'Définition courte';
+$string['facultyangle'] = 'Angle fondamental';
+$string['facultyguardrails'] = 'Garde-fous publics';
+$string['facultysourceatlas'] = 'Fichier Atlas source';
+$string['facultysourceprofile'] = 'Profil faculté source';
+$string['coreconcept'] = 'Concept central';
+$string['featuredblocks'] = 'Repères importants';
+$string['questionsandanswers'] = 'Questions et réponses';
+$string['publicnotices'] = 'Avis publics';
+$string['finalproject'] = 'Projet final';
+$string['ethicallimits'] = 'Limites éthiques';
+$string['intervoierelations'] = 'Relations inter-voies';

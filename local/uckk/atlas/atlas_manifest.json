@@ -1,0 +1,96 @@
+{
+  "schema_version": "UCKK-ATLAS-MANIFEST-0.1",
+  "atlas_schema_version": "UCKK-ATLAS-0.2-draft",
+  "items": [
+    {
+      "voie_id": "voie_grand_jeu_social",
+      "code": "GJS",
+      "nom": "Voie du Grand Jeu social",
+      "file": "voie_grand_jeu_social.json",
+      "course_prefix": "GJS",
+      "category_idnumber": "UCKK-GJS",
+      "sortorder": 1
+    },
+    {
+      "voie_id": "voie_economie",
+      "code": "EC",
+      "nom": "Voie d’Économie",
+      "file": "voie_economie.json",
+      "course_prefix": "EC",
+      "category_idnumber": "UCKK-EC",
+      "sortorder": 2
+    },
+    {
+      "voie_id": "voie_ecologie",
+      "code": "ECL",
+      "nom": "Voie d’Écologie",
+      "file": "voie_ecologie.json",
+      "course_prefix": "ECL",
+      "category_idnumber": "UCKK-ECL",
+      "sortorder": 3
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "code": "SP",
+      "nom": "Voie des Sciences politiques",
+      "file": "voie_sciences_politiques.json",
+      "course_prefix": "SP",
+      "category_idnumber": "UCKK-SP",
+      "sortorder": 4
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "code": "LI",
+      "nom": "Voie de la Linguistique et de l’architecture du sens",
+      "file": "voie_linguistique_architecture_du_sens.json",
+      "course_prefix": "LI",
+      "category_idnumber": "UCKK-LI",
+      "sortorder": 5
+    },
+    {
+      "voie_id": "voie_metaphysique",
+      "code": "ME",
+      "nom": "Voie de la Métaphysique",
+      "file": "voie_metaphysique.json",
+      "course_prefix": "ME",
+      "category_idnumber": "UCKK-ME",
+      "sortorder": 6
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "code": "IA",
+      "nom": "Voie de l’Intelligence artificielle gouvernable",
+      "file": "voie_ia_gouvernable.json",
+      "course_prefix": "IA",
+      "category_idnumber": "UCKK-IA",
+      "sortorder": 7
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "code": "IS",
+      "nom": "Voie de l’Intervention sociale et des systèmes humains",
+      "file": "voie_intervention_sociale_systemes_humains.json",
+      "course_prefix": "IS",
+      "category_idnumber": "UCKK-IS",
+      "sortorder": 8
+    },
+    {
+      "voie_id": "voie_architecture_sociotechnique",
+      "code": "AS",
+      "nom": "Voie d’Architecture sociotechnique",
+      "file": "voie_architecture_sociotechnique.json",
+      "course_prefix": "AS",
+      "category_idnumber": "UCKK-AS",
+      "sortorder": 9
+    },
+    {
+      "voie_id": "voie_ecosysteme_digital_koa",
+      "code": "KOA",
+      "nom": "Voie de l’Architecture de l’écosystème digital kOA",
+      "file": "voie_ecosysteme_digital_koa.json",
+      "course_prefix": "KOA",
+      "category_idnumber": "UCKK-KOA",
+      "sortorder": 10
+    }
+  ]
+}

@@ -805,12 +805,12 @@ final class canon_api {
      * @return array<int, array<string, mixed>>
      */
     public static function search(string $query, ?string $category = null, bool $onlyactive = true): array {
-        $query = trim(core_text::strtolower($query));
+        $query = trim(\core_text::strtolower($query));
         $records = $category === null ? self::get_records($onlyactive) : self::get_records_by_category($category, $onlyactive);
         $results = [];
 
         foreach ($records as $record) {
-            $haystack = core_text::strtolower(
+            $haystack = \core_text::strtolower(
                 implode(' ', [
                     $record->canonkey ?? '',
                     $record->title ?? '',
@@ -937,7 +937,7 @@ final class canon_api {
      */
     public static function detect_boundary_warnings(string $text): array {
         $warnings = [];
-        $normalised = core_text::strtolower($text);
+        $normalised = \core_text::strtolower($text);
 
         $patterns = [
             [

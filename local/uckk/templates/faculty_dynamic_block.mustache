@@ -1,0 +1,228 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+
+    @template local_uckk/faculty_dynamic_block
+
+    Public faculty dynamic block partial.
+
+    Context:
+    {
+        "id": "",
+        "type": "",
+        "title": "",
+        "items": [],
+        "has_items": false,
+        "empty_state": "",
+        "visibility": "public"
+    }
+
+    Supported item fields, depending on block type:
+    {
+        "title": "",
+        "fullname": "",
+        "name": "",
+        "summary": "",
+        "body": "",
+        "date": "",
+        "date_start": "",
+        "date_end": "",
+        "location": "",
+        "url": "",
+        "source_label": "",
+        "cours_id": "",
+        "availability_label": "",
+        "faculty_id": "",
+        "slug": "",
+        "relation": ""
+    }
+
+    This template must not:
+    - query Moodle data;
+    - decide permissions;
+    - call providers;
+    - create fallback dynamic content;
+    - expose private forum posts;
+    - expose private calendar events;
+    - expose notes, feedback, participants, enrolments, completion, grades, submissions, votes, integrity cases, or Konnaxion personal data;
+    - expose technical identifiers as public labels;
+    - introduce undocumented variables.
+}}
+
+<section
+    id="{{id}}"
+    class="local-uckk-faculty-dynamic-block local-uckk-faculty-dynamic-block--{{type}}"
+    data-region="local-uckk-faculty-dynamic-block"
+    data-block-id="{{id}}"
+    data-block-type="{{type}}"
+    data-block-visibility="{{visibility}}"
+    aria-labelledby="local-uckk-faculty-dynamic-block-title-{{id}}"
+>
+    <div class="local-uckk-faculty-dynamic-block__inner">
+        {{#title}}
+            <header class="local-uckk-faculty-dynamic-block__header">
+                <h2
+                    id="local-uckk-faculty-dynamic-block-title-{{id}}"
+                    class="local-uckk-faculty-dynamic-block__title"
+                >
+                    {{title}}
+                </h2>
+            </header>
+        {{/title}}
+
+        {{#has_items}}
+            <div class="local-uckk-faculty-dynamic-block__items">
+                {{#items}}
+                    <article class="local-uckk-faculty-dynamic-block__item">
+                        <header class="local-uckk-faculty-dynamic-block__item-header">
+                            {{#title}}
+                                <h3 class="local-uckk-faculty-dynamic-block__item-title">
+                                    {{#url}}
+                                        <a
+                                            class="local-uckk-faculty-dynamic-block__item-link"
+                                            href="{{url}}"
+                                        >
+                                            {{title}}
+                                        </a>
+                                    {{/url}}
+                                    {{^url}}
+                                        {{title}}
+                                    {{/url}}
+                                </h3>
+                            {{/title}}
+
+                            {{^title}}
+                                {{#fullname}}
+                                    <h3 class="local-uckk-faculty-dynamic-block__item-title">
+                                        {{#url}}
+                                            <a
+                                                class="local-uckk-faculty-dynamic-block__item-link"
+                                                href="{{url}}"
+                                            >
+                                                {{fullname}}
+                                            </a>
+                                        {{/url}}
+                                        {{^url}}
+                                            {{fullname}}
+                                        {{/url}}
+                                    </h3>
+                                {{/fullname}}
+                            {{/title}}
+
+                            {{^title}}
+                                {{^fullname}}
+                                    {{#name}}
+                                        <h3 class="local-uckk-faculty-dynamic-block__item-title">
+                                            {{#url}}
+                                                <a
+                                                    class="local-uckk-faculty-dynamic-block__item-link"
+                                                    href="{{url}}"
+                                                >
+                                                    {{name}}
+                                                </a>
+                                            {{/url}}
+                                            {{^url}}
+                                                {{name}}
+                                            {{/url}}
+                                        </h3>
+                                    {{/name}}
+                                {{/fullname}}
+                            {{/title}}
+
+                            <div class="local-uckk-faculty-dynamic-block__item-meta">
+                                {{#cours_id}}
+                                    <span class="local-uckk-faculty-dynamic-block__item-code">
+                                        {{cours_id}}
+                                    </span>
+                                {{/cours_id}}
+
+                                {{#date}}
+                                    <time class="local-uckk-faculty-dynamic-block__item-date">
+                                        {{date}}
+                                    </time>
+                                {{/date}}
+
+                                {{#date_start}}
+                                    <time class="local-uckk-faculty-dynamic-block__item-date-start">
+                                        {{date_start}}
+                                    </time>
+                                {{/date_start}}
+
+                                {{#date_end}}
+                                    <time class="local-uckk-faculty-dynamic-block__item-date-end">
+                                        {{date_end}}
+                                    </time>
+                                {{/date_end}}
+
+                                {{#location}}
+                                    <span class="local-uckk-faculty-dynamic-block__item-location">
+                                        {{location}}
+                                    </span>
+                                {{/location}}
+
+                                {{#availability_label}}
+                                    <span class="local-uckk-faculty-dynamic-block__item-availability">
+                                        {{availability_label}}
+                                    </span>
+                                {{/availability_label}}
+
+                                {{#source_label}}
+                                    <span class="local-uckk-faculty-dynamic-block__item-source">
+                                        {{source_label}}
+                                    </span>
+                                {{/source_label}}
+                            </div>
+                        </header>
+
+                        {{#summary}}
+                            <div class="local-uckk-faculty-dynamic-block__item-summary">
+                                {{summary}}
+                            </div>
+                        {{/summary}}
+
+                        {{#body}}
+                            <div class="local-uckk-faculty-dynamic-block__item-body">
+                                {{body}}
+                            </div>
+                        {{/body}}
+
+                        {{#relation}}
+                            <div class="local-uckk-faculty-dynamic-block__item-relation">
+                                {{relation}}
+                            </div>
+                        {{/relation}}
+
+                        {{#faculty_id}}
+                            <span
+                                class="local-uckk-faculty-dynamic-block__item-faculty-id"
+                                data-faculty-id="{{faculty_id}}"
+                            ></span>
+                        {{/faculty_id}}
+
+                        {{#slug}}
+                            <span
+                                class="local-uckk-faculty-dynamic-block__item-slug"
+                                data-faculty-slug="{{slug}}"
+                            ></span>
+                        {{/slug}}
+                    </article>
+                {{/items}}
+            </div>
+        {{/has_items}}
+
+        {{^has_items}}
+            {{#empty_state}}
+                <p class="local-uckk-faculty-dynamic-block__empty">
+                    {{empty_state}}
+                </p>
+            {{/empty_state}}
+        {{/has_items}}
+    </div>
+</section>

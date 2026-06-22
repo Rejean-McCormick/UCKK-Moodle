@@ -1,0 +1,1455 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_intervention_sociale_systemes_humains",
+  "code": "IS",
+  "nom": "Voie de l’Intervention sociale et des systèmes humains",
+  "domaine_operatoire": "Lien humain",
+  "niveau_vise": "Puissance opératoire",
+  "titre_symbolique": "Gardien de la dignité située",
+  "parchemin": "Parchemin de Puissance opératoire — Voie de l’Intervention sociale et des systèmes humains",
+  "definition_courte": "La Voie de l’Intervention sociale et des systèmes humains forme des personnes capables de lire des situations humaines dans leurs contextes relationnels, institutionnels, matériels et symboliques, afin de protéger la dignité, réparer les liens et améliorer les systèmes d’aide sans se substituer aux professions réglementées.",
+  "angle_fondamental": "Comprendre les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, famille, communauté, institutions, aide, dignité et réparation.",
+  "competence_centrale": "Transformer une situation humaine complexe en cartographie systémique, réponse responsable, dossier traçable et apprentissage institutionnel, avec consentement, confidentialité, prudence, non-domination et limites professionnelles explicites.",
+  "seuils_progression": [
+    {
+      "seuil_id": "lecture_systemique",
+      "nom": "Lecture systémique",
+      "fonction": "Comprendre une personne, une famille ou un groupe dans ses contextes relationnels, matériels, institutionnels et symboliques."
+    },
+    {
+      "seuil_id": "relation_ethique",
+      "nom": "Relation éthique",
+      "fonction": "Intervenir sans domination, avec écoute, consentement, prudence, respect du rythme et protection de la dignité."
+    },
+    {
+      "seuil_id": "reparation_transformation",
+      "nom": "Réparation et transformation",
+      "fonction": "Concevoir des réponses collectives, documentées, contestables et capables d’améliorer les systèmes d’aide."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "IS101",
+      "ordre": 1,
+      "nom": "Humains dans les systèmes",
+      "concept_maitre": {
+        "concept_id": "is_situation_humaine_systemique",
+        "nom": "Situation humaine systémique",
+        "type": "concept_maitre",
+        "definition_courte": "Lecture d’une personne ou d’un groupe comme trajectoire située dans des relations, institutions, contraintes matérielles, récits et règles visibles ou invisibles.",
+        "fonction_pedagogique": "Apprendre à lire une situation humaine sans réduire la personne à son problème."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_personne",
+          "nom": "Personne",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_trajectoire_de_vie",
+          "nom": "Trajectoire de vie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_situation_humaine",
+          "nom": "Situation humaine",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_systeme_humain",
+          "nom": "Système humain",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_contexte_social",
+          "nom": "Contexte social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_contexte_relationnel",
+          "nom": "Contexte relationnel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_contexte_institutionnel",
+          "nom": "Contexte institutionnel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_contexte_economique",
+          "nom": "Contexte économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_recit_social",
+          "nom": "Récit social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_regle_visible",
+          "nom": "Règle visible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_regle_invisible",
+          "nom": "Règle invisible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_rapport_pouvoir",
+          "nom": "Rapport de pouvoir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_blocage_systemique",
+          "nom": "Blocage systémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_reparation_possible",
+          "nom": "Réparation possible",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_systemique",
+        "nom": "Carte systémique d’une situation humaine",
+        "description": "Représenter les acteurs, contraintes, ressources, règles, institutions, récits et marges de réparation d’une situation humaine."
+      },
+      "criteres_passage": [
+        "L’Aspirant distingue la personne du problème.",
+        "L’Aspirant identifie les contextes multiples d’une situation.",
+        "L’Aspirant repère les règles visibles et invisibles qui structurent la trajectoire."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IS102",
+      "ordre": 2,
+      "nom": "Vulnérabilité, dignité et pouvoir d’agir",
+      "concept_maitre": {
+        "concept_id": "is_dignite_sous_contrainte",
+        "nom": "Dignité sous contrainte",
+        "type": "concept_maitre",
+        "definition_courte": "Comprendre comment la dignité, l’autonomie et le pouvoir d’agir peuvent être réduits par des contraintes sociales, matérielles, symboliques ou institutionnelles.",
+        "fonction_pedagogique": "Apprendre à distinguer vulnérabilité personnelle, vulnérabilisation systémique et protection non paternaliste."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_vulnerabilite",
+          "nom": "Vulnérabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_vulnerabilisation_systemique",
+          "nom": "Vulnérabilisation systémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_dignite",
+          "nom": "Dignité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_autonomie",
+          "nom": "Autonomie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_capacite_agir",
+          "nom": "Capacité d’agir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_reconnaissance",
+          "nom": "Reconnaissance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_exclusion",
+          "nom": "Exclusion",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_marginalisation",
+          "nom": "Marginalisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_stigmatisation",
+          "nom": "Stigmatisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_discrimination",
+          "nom": "Discrimination",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_humiliation",
+          "nom": "Humiliation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_invisibilisation",
+          "nom": "Invisibilisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_dependance_institutionnelle",
+          "nom": "Dépendance institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_acces_ressources",
+          "nom": "Accès aux ressources",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_pouvoir_se_faire_entendre",
+          "nom": "Pouvoir de se faire entendre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_protection_personne",
+          "nom": "Protection de la personne",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_de_vulnerabilisation",
+        "nom": "Analyse d’une situation de vulnérabilisation",
+        "description": "Identifier les facteurs qui réduisent le pouvoir d’agir d’une personne et les conditions qui peuvent protéger sa dignité."
+      },
+      "criteres_passage": [
+        "L’Aspirant distingue vulnérabilité personnelle et vulnérabilisation systémique.",
+        "L’Aspirant repère les atteintes à la dignité.",
+        "L’Aspirant propose des conditions de protection non paternalistes."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IS103",
+      "ordre": 3,
+      "nom": "Pauvreté, précarité et contraintes matérielles",
+      "concept_maitre": {
+        "concept_id": "is_contrainte_materielle",
+        "nom": "Contrainte matérielle",
+        "type": "concept_maitre",
+        "definition_courte": "Ensemble des limites économiques, temporelles, administratives, numériques et territoriales qui réduisent concrètement le pouvoir d’agir.",
+        "fonction_pedagogique": "Apprendre à lire les conditions matérielles sans moraliser la pauvreté."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_pauvrete",
+          "nom": "Pauvreté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_precarite",
+          "nom": "Précarité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_revenu_insuffisant",
+          "nom": "Revenu insuffisant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_logement",
+          "nom": "Logement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_itinerance",
+          "nom": "Itinérance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_insecurite_alimentaire",
+          "nom": "Insécurité alimentaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_dette",
+          "nom": "Dette",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_emploi_precaire",
+          "nom": "Emploi précaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_chomage",
+          "nom": "Chômage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_transport",
+          "nom": "Transport",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_fracture_numerique",
+          "nom": "Fracture numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_fatigue_administrative",
+          "nom": "Fatigue administrative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_manque_temps",
+          "nom": "Manque de temps",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_acces_services",
+          "nom": "Accès aux services",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_cercle_contraintes",
+          "nom": "Cercle de contraintes",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_des_contraintes",
+        "nom": "Carte des contraintes matérielles",
+        "description": "Cartographier les contraintes économiques, temporelles, administratives, numériques et territoriales qui pèsent sur une trajectoire."
+      },
+      "criteres_passage": [
+        "L’Aspirant relie pauvreté, temps, transport, logement, dette et accès aux services.",
+        "L’Aspirant évite les explications moralistes de la pauvreté.",
+        "L’Aspirant identifie des leviers concrets de réduction des contraintes."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IS104",
+      "ordre": 4,
+      "nom": "Trauma, crise et continuité de vie",
+      "concept_maitre": {
+        "concept_id": "is_rupture_biographique",
+        "nom": "Rupture biographique",
+        "type": "concept_maitre",
+        "definition_courte": "Moment ou série d’événements qui brise une continuité de vie, affecte la sécurité intérieure ou relationnelle et exige des conditions prudentes de reconstruction.",
+        "fonction_pedagogique": "Apprendre à reconnaître les ruptures et crises sans poser de diagnostic clinique."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_trauma",
+          "nom": "Trauma",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_crise",
+          "nom": "Crise",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_rupture",
+          "nom": "Rupture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_choc_biographique",
+          "nom": "Choc biographique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_perte",
+          "nom": "Perte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_deuil",
+          "nom": "Deuil",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_violence_vecue",
+          "nom": "Violence vécue",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_negligence",
+          "nom": "Négligence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_peur",
+          "nom": "Peur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_hypervigilance",
+          "nom": "Hypervigilance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_memoire_blessee",
+          "nom": "Mémoire blessée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_securite_psychologique",
+          "nom": "Sécurité psychologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_resilience",
+          "nom": "Résilience",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_reconstruction_confiance",
+          "nom": "Reconstruction de confiance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_temporalite_reparation",
+          "nom": "Temporalité de réparation",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "ligne_de_continuite",
+        "nom": "Ligne de continuité et de rupture",
+        "description": "Représenter les ruptures, pertes, appuis, périodes de crise et conditions de reconstruction d’une trajectoire."
+      },
+      "criteres_passage": [
+        "L’Aspirant comprend les effets possibles d’une rupture sans poser de diagnostic clinique.",
+        "L’Aspirant distingue crise immédiate, mémoire blessée et reconstruction.",
+        "L’Aspirant respecte la temporalité propre de la réparation."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IS105",
+      "ordre": 5,
+      "nom": "Écoute, présence et relation d’aide non dominante",
+      "concept_maitre": {
+        "concept_id": "is_relation_aide_ethique",
+        "nom": "Relation d’aide éthique",
+        "type": "concept_maitre",
+        "definition_courte": "Relation d’accompagnement qui protège la dignité, le consentement, la confidentialité et l’autonomie de la personne sans domination ni posture de sauveur.",
+        "fonction_pedagogique": "Former une posture relationnelle prudente, limitée, consentie et non captatrice."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_ecoute",
+          "nom": "Écoute",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_presence",
+          "nom": "Présence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_posture_aide",
+          "nom": "Posture d’aide",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_non_domination",
+          "nom": "Non-domination",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_asymetrie_relationnelle",
+          "nom": "Asymétrie relationnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_pouvoir_aider",
+          "nom": "Pouvoir d’aider",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_posture_sauveur",
+          "nom": "Posture de sauveur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_consentement",
+          "nom": "Consentement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_confiance",
+          "nom": "Confiance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_confidentialite",
+          "nom": "Confidentialité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_respect_rythme",
+          "nom": "Respect du rythme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_reformulation",
+          "nom": "Reformulation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_distance_juste",
+          "nom": "Distance juste",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_capture_affective",
+          "nom": "Capture affective",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_ethique_relationnelle",
+          "nom": "Éthique relationnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_limite_competence",
+          "nom": "Limite de compétence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_orientation_ressources_competentes",
+          "nom": "Orientation vers ressources compétentes",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "protocole_relation_aide",
+        "nom": "Protocole de relation d’aide non dominante",
+        "description": "Définir une posture, des limites, des règles de consentement et des mécanismes de protection dans une relation d’accompagnement."
+      },
+      "criteres_passage": [
+        "L’Aspirant identifie les risques de domination, de sauvetage et de capture affective dans une relation d’aide.",
+        "L’Aspirant distingue accompagnement, écoute, conseil, contrôle, médiation et intervention professionnelle réglementée.",
+        "L’Aspirant établit des limites relationnelles, informationnelles et professionnelles claires.",
+        "L’Aspirant sait reconnaître une situation qui exige une orientation vers des ressources compétentes."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IS106",
+      "ordre": 6,
+      "nom": "Famille, communauté et milieux de vie",
+      "concept_maitre": {
+        "concept_id": "is_reseau_soutien_contrainte",
+        "nom": "Réseau de soutien et de contrainte",
+        "type": "concept_maitre",
+        "definition_courte": "Ensemble des relations, lieux, groupes et institutions proches qui peuvent soutenir, contraindre, exposer ou protéger une trajectoire humaine.",
+        "fonction_pedagogique": "Apprendre à cartographier les milieux de vie sans idéaliser la famille ou la communauté."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_famille",
+          "nom": "Famille",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_parentalite",
+          "nom": "Parentalité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_enfance",
+          "nom": "Enfance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_adolescence",
+          "nom": "Adolescence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_vieillissement",
+          "nom": "Vieillissement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_couple",
+          "nom": "Couple",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_proche_aidance",
+          "nom": "Proche aidance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_voisinage",
+          "nom": "Voisinage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_communaute",
+          "nom": "Communauté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_groupe_appartenance",
+          "nom": "Groupe d’appartenance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_reseau_soutien",
+          "nom": "Réseau de soutien",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_solidarite_locale",
+          "nom": "Solidarité locale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_ecole",
+          "nom": "École",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_travail",
+          "nom": "Travail",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_milieu_toxique",
+          "nom": "Milieu toxique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_lieu_sur",
+          "nom": "Lieu sûr",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_ancrage_territorial",
+          "nom": "Ancrage territorial",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "cartographie_reseau",
+        "nom": "Cartographie du réseau humain et territorial",
+        "description": "Représenter les relations, lieux, groupes, soutiens, conflits et risques présents dans le milieu de vie d’une personne ou d’un groupe."
+      },
+      "criteres_passage": [
+        "L’Aspirant distingue soutien, contrainte et risque dans un réseau proche.",
+        "L’Aspirant repère les lieux sûrs et les milieux toxiques.",
+        "L’Aspirant relie famille, communauté et territoire."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IS107",
+      "ordre": 7,
+      "nom": "Institutions d’aide, bureaucratie et accès",
+      "concept_maitre": {
+        "concept_id": "is_systeme_aide",
+        "nom": "Système d’aide",
+        "type": "concept_maitre",
+        "definition_courte": "Ensemble des institutions, guichets, règles d’admissibilité, dossiers, délais et pratiques qui organisent l’accès à l’aide.",
+        "fonction_pedagogique": "Apprendre à lire les effets humains des institutions d’aide, y compris leurs angles morts et leurs ruptures de continuité."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_institution_aide",
+          "nom": "Institution d’aide",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_service_social",
+          "nom": "Service social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_organisme_communautaire",
+          "nom": "Organisme communautaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_hopital",
+          "nom": "Hôpital",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_ecole_institutionnelle",
+          "nom": "École institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_justice",
+          "nom": "Justice",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_administration_publique",
+          "nom": "Administration publique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_guichet_acces",
+          "nom": "Guichet d’accès",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_formulaire",
+          "nom": "Formulaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_admissibilite",
+          "nom": "Admissibilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_dossier",
+          "nom": "Dossier",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_preuve_administrative",
+          "nom": "Preuve administrative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_attente",
+          "nom": "Attente",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_refus",
+          "nom": "Refus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_orientation",
+          "nom": "Orientation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_fragmentation_services",
+          "nom": "Fragmentation des services",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_angle_mort_bureaucratique",
+          "nom": "Angle mort bureaucratique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_processus_humiliant",
+          "nom": "Processus humiliant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_continuite_service",
+          "nom": "Continuité de service",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "cartographie_institutionnelle",
+        "nom": "Cartographie institutionnelle d’une situation",
+        "description": "Cartographier les institutions, guichets, dossiers, critères, délais, refus et ruptures de continuité autour d’une personne ou d’un groupe."
+      },
+      "criteres_passage": [
+        "L’Aspirant identifie les règles d’accès et d’exclusion d’un système d’aide.",
+        "L’Aspirant repère les effets humains de la bureaucratie.",
+        "L’Aspirant propose une amélioration de continuité de service."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IS108",
+      "ordre": 8,
+      "nom": "Médiation, conflit, protection et réparation",
+      "concept_maitre": {
+        "concept_id": "is_reparation_responsable",
+        "nom": "Réparation responsable",
+        "type": "concept_maitre",
+        "definition_courte": "Processus prudent visant à reconnaître un tort, protéger les personnes, clarifier les responsabilités et créer des conditions de réparation sans revictimisation.",
+        "fonction_pedagogique": "Apprendre à distinguer médiation, plainte, signalement, protection et réparation."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_conflit_interpersonnel",
+          "nom": "Conflit interpersonnel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_conflit_institutionnel",
+          "nom": "Conflit institutionnel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_mediation",
+          "nom": "Médiation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_dialogue_encadre",
+          "nom": "Dialogue encadré",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_plainte",
+          "nom": "Plainte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_tort_cause",
+          "nom": "Tort causé",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_responsabilite",
+          "nom": "Responsabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_reconnaissance_prejudice",
+          "nom": "Reconnaissance du préjudice",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_reparation",
+          "nom": "Réparation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_justice_reparatrice",
+          "nom": "Justice réparatrice",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_excuse",
+          "nom": "Excuse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_restitution",
+          "nom": "Restitution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_protection",
+          "nom": "Protection",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_devoir_prudence",
+          "nom": "Devoir de prudence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_signalement",
+          "nom": "Signalement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_securite",
+          "nom": "Sécurité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_rapport_force",
+          "nom": "Rapport de force",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_non_revictimisation",
+          "nom": "Non-revictimisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_abus_autorite",
+          "nom": "Abus d’autorité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_integrite_processus",
+          "nom": "Intégrité du processus",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "scenario_reparation",
+        "nom": "Scénario de médiation ou de réparation encadrée",
+        "description": "Construire un scénario qui identifie les torts, protections nécessaires, responsabilités, limites et conditions de réparation."
+      },
+      "criteres_passage": [
+        "L’Aspirant distingue médiation, plainte, signalement, protection et réparation.",
+        "L’Aspirant identifie les rapports de force, les risques d’abus d’autorité et les conditions de sécurité.",
+        "L’Aspirant évite les dispositifs qui exposent une personne à la revictimisation.",
+        "L’Aspirant peut concevoir un processus de réparation contestable, prudent et non coercitif."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IS109",
+      "ordre": 9,
+      "nom": "Réponses communautaires et transformation institutionnelle",
+      "concept_maitre": {
+        "concept_id": "is_reponse_collective_adaptee",
+        "nom": "Réponse collective adaptée",
+        "type": "concept_maitre",
+        "definition_courte": "Réponse située qui mobilise les ressources du milieu, coordonne les rôles, crée du suivi et transforme les règles qui produisent les blocages.",
+        "fonction_pedagogique": "Apprendre à passer d’un cas individuel à une réponse collective sans effacer la singularité des personnes."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_reponse_communautaire",
+          "nom": "Réponse communautaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_ressource_locale",
+          "nom": "Ressource locale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_intervention_proximite",
+          "nom": "Intervention de proximité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_pair_aidance",
+          "nom": "Pair-aidance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_groupe_soutien",
+          "nom": "Groupe de soutien",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_coalition_locale",
+          "nom": "Coalition locale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_partenariat",
+          "nom": "Partenariat",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_coordination",
+          "nom": "Coordination",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_plan_action",
+          "nom": "Plan d’action",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_suivi",
+          "nom": "Suivi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_gouvernance_partagee",
+          "nom": "Gouvernance partagée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_indicateur_utilite_humaine",
+          "nom": "Indicateur d’utilité humaine",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_boucle_retroaction",
+          "nom": "Boucle de rétroaction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_apprentissage_institutionnel",
+          "nom": "Apprentissage institutionnel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_reforme_institutionnelle",
+          "nom": "Réforme institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_transformation_regles",
+          "nom": "Transformation des règles",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "plan_reponse_collective",
+        "nom": "Plan de réponse communautaire ou institutionnelle",
+        "description": "Concevoir une réponse coordonnée qui mobilise les ressources du milieu, prévoit un suivi et permet d’améliorer les règles existantes."
+      },
+      "criteres_passage": [
+        "L’Aspirant conçoit une réponse située plutôt qu’un modèle abstrait.",
+        "L’Aspirant définit les rôles, suivis et responsabilités.",
+        "L’Aspirant prévoit une boucle de rétroaction et d’apprentissage."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IS110",
+      "ordre": 10,
+      "nom": "Dossier d’intervention systémique, confidentialité et IA prudente",
+      "concept_maitre": {
+        "concept_id": "is_intervention_tracable_contestable",
+        "nom": "Intervention traçable et contestable",
+        "type": "concept_maitre",
+        "definition_courte": "Capacité de documenter, coordonner et réviser une intervention systémique sans exposer inutilement les personnes, sans déléguer le jugement à une IA et sans dépasser ses limites professionnelles.",
+        "fonction_pedagogique": "Synthétiser la Voie dans un dossier responsable, vérifiable, prudent, contestable et révisable."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "is_cartographie_situation",
+          "nom": "Cartographie de situation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_dossier_intervention_systemique",
+          "nom": "Dossier d’intervention systémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_documentation_responsable",
+          "nom": "Documentation responsable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_preuve_situee",
+          "nom": "Preuve située",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_tracabilite",
+          "nom": "Traçabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_confidentialite_numerique",
+          "nom": "Confidentialité numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_consentement_numerique",
+          "nom": "Consentement numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_ia_outil_analyse",
+          "nom": "IA comme outil d’analyse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_biais_algorithmique",
+          "nom": "Biais algorithmique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_jugement_humain_final",
+          "nom": "Jugement humain final",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_coordination_numerique",
+          "nom": "Coordination numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_escalade_responsable",
+          "nom": "Escalade responsable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_assemblee_reparation",
+          "nom": "Assemblée de réparation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_deliberation",
+          "nom": "Délibération",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_contestabilite",
+          "nom": "Contestabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_memoire_institutionnelle",
+          "nom": "Mémoire institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_rapport_intervention",
+          "nom": "Rapport d’intervention",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_plan_action_responsable",
+          "nom": "Plan d’action responsable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_indicateur_utilite_reelle",
+          "nom": "Indicateur d’utilité réelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_apprentissage_collectif",
+          "nom": "Apprentissage collectif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_anonymisation",
+          "nom": "Anonymisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_minimisation_donnees",
+          "nom": "Minimisation des données",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_droit_retrait",
+          "nom": "Droit de retrait",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_clause_non_substitution",
+          "nom": "Clause de non-substitution professionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "is_protocole_escalade",
+          "nom": "Protocole d’escalade",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "dossier_final_intervention_systemique",
+        "nom": "Dossier final d’intervention systémique",
+        "description": "Produire un dossier complet comprenant cartographie, preuves situées, limites, responsabilités, plan d’action, indicateurs d’utilité et mécanisme d’apprentissage collectif."
+      },
+      "criteres_passage": [
+        "L’Aspirant documente sans exposer inutilement les personnes ni accumuler des informations sensibles non nécessaires.",
+        "L’Aspirant utilise l’IA comme outil d’analyse ou de structuration, jamais comme juge final.",
+        "L’Aspirant produit un dossier contestable, traçable, révisable et respectueux du consentement.",
+        "L’Aspirant indique clairement les limites professionnelles et les conditions d’escalade vers des ressources compétentes."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "type": "dossier_intervention_systemique",
+    "nom": "Dossier d’intervention systémique, responsable et contestable",
+    "description": "L’Aspirant doit produire un dossier complet à partir d’une situation humaine complexe réelle, fictive ou anonymisée. Le dossier doit inclure une cartographie systémique, une lecture des vulnérabilités, une analyse institutionnelle, une posture relationnelle, une proposition de réparation ou de réponse collective, des critères de suivi, des limites professionnelles explicites, un protocole de confidentialité et un mécanisme de contestation.",
+    "livrables": [
+      "carte systémique de la situation",
+      "analyse des vulnérabilités et contraintes matérielles",
+      "cartographie des institutions et ressources",
+      "protocole relationnel",
+      "plan de réponse ou de réparation",
+      "critères de sécurité et de confidentialité",
+      "indicateurs d’utilité humaine",
+      "rapport final traçable et contestable",
+      "clause de non-substitution professionnelle",
+      "protocole de consentement, confidentialité et minimisation des données",
+      "protocole d’escalade vers ressources compétentes",
+      "mécanisme de contestation, correction ou retrait lorsque possible"
+    ]
+  },
+  "limites_ethiques": [
+    "Ne pas se présenter comme travailleur social, psychologue, thérapeute, clinicien, médiateur accrédité ou professionnel reconnu si ce statut n’existe pas légalement.",
+    "Ne pas poser de diagnostic clinique.",
+    "Ne pas remplacer les services d’urgence, de santé, de protection, de justice ou les professions réglementées.",
+    "Ne pas intervenir seul dans une situation de danger immédiat ou de risque sérieux.",
+    "Ne pas adopter une posture de sauveur.",
+    "Ne pas utiliser la vulnérabilité d’une personne comme matériau de spectacle ou de légitimation.",
+    "Ne pas documenter une situation sensible sans consentement, nécessité, anonymisation ou protection adéquate.",
+    "Ne pas conserver plus d’informations personnelles que nécessaire.",
+    "Ne pas forcer une médiation lorsqu’il existe un rapport de force, un risque d’intimidation ou un danger de revictimisation.",
+    "Ne pas déléguer le jugement humain à une IA.",
+    "Ne pas confondre réparation symbolique et sécurité réelle.",
+    "Ne pas confondre écoute, accompagnement, intervention professionnelle et prise en charge clinique."
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_grand_jeu_social",
+      "relation": "La Voie d’Intervention sociale applique la lecture du Grand Jeu aux trajectoires humaines concrètes."
+    },
+    {
+      "voie_id": "voie_economie",
+      "relation": "La pauvreté, la précarité, l’exclusion et la dépendance institutionnelle ont toujours une dimension économique."
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "relation": "Les droits, institutions, politiques publiques, systèmes d’aide et mécanismes de protection déterminent les conditions de réparation sociale."
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "relation": "Les mots utilisés pour nommer les personnes, les problèmes et les vulnérabilités peuvent protéger, stigmatiser ou invisibiliser."
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "relation": "L’IA peut soutenir la cartographie, la documentation et la coordination, mais ne doit jamais remplacer le jugement humain, le consentement ou la prudence relationnelle."
+    },
+    {
+      "voie_id": "voie_architecture_sociotechnique",
+      "relation": "Les systèmes d’aide sont des systèmes sociotechniques faits de formulaires, workflows, règles, dossiers, plateformes, guichets et décisions."
+    },
+    {
+      "voie_id": "voie_ecologie",
+      "relation": "Les milieux de vie, territoires, crises environnementales et conditions matérielles affectent directement les trajectoires humaines."
+    },
+    {
+      "voie_id": "voie_metaphysique",
+      "relation": "La dignité, la souffrance, la réparation, le sens, la faute, la responsabilité et la reconnaissance impliquent des structures invisibles qui doivent être interprétées avec prudence."
+    },
+    {
+      "voie_id": "voie_ecosysteme_digital_koa",
+      "relation": "Le kOA Digital Ecosystem peut fournir des outils de mémoire, coordination, documentation, assemblée et apprentissage institutionnel pour les systèmes d’aide."
+    }
+  ],
+  "tags": [
+    "intervention_sociale",
+    "systemes_humains",
+    "dignite",
+    "vulnerabilite",
+    "non_domination",
+    "trauma",
+    "pauvreté",
+    "bureaucratie",
+    "reparation",
+    "confidentialite",
+    "consentement",
+    "ia_prudente",
+    "puissance_operatoire"
+  ],
+  "statut": "Voie fondatrice UCKK",
+  "clause_de_non_substitution": {
+    "nom": "Clause de non-substitution professionnelle",
+    "description": "La Voie forme à la lecture systémique, à la documentation responsable, à l’éthique relationnelle et à la coordination de réponses humaines. Elle ne remplace pas les professions réglementées, les services d’urgence, les soins de santé, la psychologie, le travail social, la protection de la jeunesse, la justice ou toute intervention clinique accréditée.",
+    "regle": "L’Aspirant doit reconnaître ses limites, orienter vers les ressources compétentes lorsque nécessaire, et ne jamais se présenter comme professionnel accrédité si ce statut n’existe pas légalement."
+  },
+  "principes_relationnels": [
+    "Dignité avant efficacité.",
+    "Consentement avant documentation.",
+    "Confidentialité par défaut.",
+    "Minimisation des informations sensibles.",
+    "Non-domination dans la relation d’aide.",
+    "Prudence face au trauma.",
+    "Reconnaissance des limites de compétence.",
+    "Orientation vers les services compétents en cas de danger, de crise ou de besoin clinique.",
+    "Jugement humain final dans tout usage d’IA.",
+    "Possibilité de contestation, retrait ou correction lorsque la situation le permet."
+  ],
+  "protocoles_escalade": [
+    {
+      "situation": "Danger immédiat ou risque sérieux",
+      "principe": "Prioriser la sécurité réelle sur la réparation symbolique ou la médiation.",
+      "orientation": "Référer aux services d’urgence, de protection, de santé, de justice ou aux professionnels compétents selon le contexte."
+    },
+    {
+      "situation": "Trauma, crise psychologique ou besoin clinique",
+      "principe": "Ne pas poser de diagnostic et ne pas improviser une prise en charge thérapeutique.",
+      "orientation": "Diriger vers des personnes ou services qualifiés."
+    },
+    {
+      "situation": "Conflit avec rapport de force important",
+      "principe": "Ne pas forcer la médiation si elle expose une personne à la revictimisation.",
+      "orientation": "Prévoir protection, accompagnement, consentement explicite et possibilité de retrait."
+    },
+    {
+      "situation": "Usage de données sensibles ou d’IA",
+      "principe": "Minimiser, anonymiser et documenter les limites.",
+      "orientation": "Ne jamais déléguer la décision finale à une IA."
+    }
+  ]
+}

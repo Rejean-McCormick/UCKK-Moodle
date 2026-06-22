@@ -797,7 +797,7 @@ final class program_api {
      */
     private static function normalise_shortname($shortname): string {
         $shortname = trim((string)$shortname);
-        $shortname = core_text::strtolower($shortname);
+        $shortname = \core_text::strtolower($shortname);
         $shortname = str_replace([' ', '-', '.'], '_', $shortname);
         $shortname = clean_param($shortname, PARAM_ALPHANUMEXT);
         $shortname = preg_replace('/_+/', '_', $shortname) ?? '';

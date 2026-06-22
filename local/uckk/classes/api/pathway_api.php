@@ -858,7 +858,7 @@ final class pathway_api {
      * @return string
      */
     private static function normalise_shortname(string $shortname): string {
-        $shortname = trim(core_text::strtolower($shortname));
+        $shortname = trim(\core_text::strtolower($shortname));
         $shortname = str_replace(' ', '_', $shortname);
         $shortname = clean_param($shortname, PARAM_ALPHANUMEXT);
 
@@ -873,7 +873,7 @@ final class pathway_api {
      * @throws invalid_parameter_exception
      */
     private static function normalise_status(string $status): string {
-        $status = clean_param(trim(core_text::strtolower($status)), PARAM_ALPHANUMEXT);
+        $status = clean_param(trim(\core_text::strtolower($status)), PARAM_ALPHANUMEXT);
 
         if (!in_array($status, self::get_supported_statuses(), true)) {
             throw new invalid_parameter_exception('Invalid UCKK pathway status.');

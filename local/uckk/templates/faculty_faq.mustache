@@ -1,0 +1,48 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+
+    @template local_uckk/faculty_faq
+
+    Public faculty FAQ entry partial.
+
+    Context:
+    {
+        "question": "",
+        "answer": ""
+    }
+
+    This template must not:
+    - query Moodle data;
+    - decide permissions;
+    - create fallback FAQ entries;
+    - expose private user data;
+    - expose notes, feedback, participants, enrolments, completion, grades, submissions, votes, integrity cases, or Konnaxion personal data;
+    - answer questions about individual learner progression;
+    - present UCKK internal recognitions as public accredited degrees;
+    - introduce undocumented variables.
+}}
+
+<article
+    class="local-uckk-faculty-faq__item"
+    data-region="local-uckk-faculty-faq-item"
+>
+    {{#question}}
+        <h3 class="local-uckk-faculty-faq__question">
+            {{question}}
+        </h3>
+    {{/question}}
+
+    {{#answer}}
+        <div class="local-uckk-faculty-faq__answer">
+            {{answer}}
+        </div>
+    {{/answer}}
+</article>

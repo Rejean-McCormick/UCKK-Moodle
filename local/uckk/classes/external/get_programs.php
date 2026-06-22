@@ -476,7 +476,7 @@ final class get_programs extends external_api {
      * @return string
      */
     private static function normalise_optional_alphanumext($value): string {
-        $value = trim(core_text::strtolower((string)$value));
+        $value = trim(\core_text::strtolower((string)$value));
 
         if ($value === '') {
             return '';

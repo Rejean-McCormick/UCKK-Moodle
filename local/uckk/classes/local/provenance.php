@@ -688,7 +688,7 @@ final class provenance {
      * @return string
      */
     private static function clean_key($key, string $field): string {
-        $key = clean_param(core_text::strtolower(trim((string)$key)), PARAM_ALPHANUMEXT);
+        $key = clean_param(\core_text::strtolower(trim((string)$key)), PARAM_ALPHANUMEXT);
 
         if ($key === '') {
             throw new invalid_parameter_exception('Invalid provenance ' . $field . '.');
@@ -787,8 +787,8 @@ final class provenance {
     private static function clean_source_text($value): string {
         $value = clean_param(trim((string)$value), PARAM_TEXT);
 
-        if (core_text::strlen($value) > self::MAX_SOURCE_TEXT_LENGTH) {
-            $value = core_text::substr($value, 0, self::MAX_SOURCE_TEXT_LENGTH);
+        if (\core_text::strlen($value) > self::MAX_SOURCE_TEXT_LENGTH) {
+            $value = \core_text::substr($value, 0, self::MAX_SOURCE_TEXT_LENGTH);
         }
 
         return $value;
@@ -803,8 +803,8 @@ final class provenance {
     private static function clean_hash($hash): string {
         $hash = clean_param(trim((string)$hash), PARAM_ALPHANUMEXT);
 
-        if (core_text::strlen($hash) > self::MAX_HASH_LENGTH) {
-            $hash = core_text::substr($hash, 0, self::MAX_HASH_LENGTH);
+        if (\core_text::strlen($hash) > self::MAX_HASH_LENGTH) {
+            $hash = \core_text::substr($hash, 0, self::MAX_HASH_LENGTH);
         }
 
         return $hash;

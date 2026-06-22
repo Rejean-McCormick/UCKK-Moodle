@@ -760,7 +760,7 @@ final class sync_pathway_progress extends scheduled_task {
      */
     private function normalise_key($value): string {
         $value = trim((string)$value);
-        $value = core_text::strtolower($value);
+        $value = \core_text::strtolower($value);
         $value = str_replace([' ', '-', '.', '/', '\\'], '_', $value);
         $value = clean_param($value, PARAM_ALPHANUMEXT);
         $value = preg_replace('/_+/', '_', $value) ?? '';

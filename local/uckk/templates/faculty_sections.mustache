@@ -1,0 +1,77 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+
+    @template local_uckk/faculty_sections
+
+    Public faculty editorial sections partial.
+
+    Context:
+    {
+        "sections": [
+            {
+                "id": "presentation",
+                "type": "text",
+                "title": "",
+                "body": ""
+            }
+        ]
+    }
+
+    Allowed section.type values:
+    - text
+    - markdown
+    - quote
+    - principle
+    - notice
+    - cards
+    - callout
+    - two_column
+
+    This template must not:
+    - query Moodle data;
+    - decide permissions;
+    - create fallback content;
+    - validate anchors;
+    - duplicate Atlas course content;
+    - expose private user data;
+    - expose completion, grades, notes, participants, enrolments, or submissions;
+    - present UCKK internal recognitions as public accredited degrees;
+    - introduce undocumented variables.
+}}
+
+{{#sections}}
+    <section
+        id="{{id}}"
+        class="local-uckk-faculty-section local-uckk-faculty-section--{{type}}"
+        data-region="local-uckk-faculty-section"
+        data-section-type="{{type}}"
+        aria-labelledby="local-uckk-faculty-section-title-{{id}}"
+    >
+        <div class="local-uckk-faculty-section__inner">
+            {{#title}}
+                <header class="local-uckk-faculty-section__header">
+                    <h2
+                        id="local-uckk-faculty-section-title-{{id}}"
+                        class="local-uckk-faculty-section__title"
+                    >
+                        {{title}}
+                    </h2>
+                </header>
+            {{/title}}
+
+            {{#body}}
+                <div class="local-uckk-faculty-section__body">
+                    {{body}}
+                </div>
+            {{/body}}
+        </div>
+    </section>
+{{/sections}}

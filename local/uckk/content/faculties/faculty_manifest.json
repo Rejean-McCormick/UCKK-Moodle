@@ -1,0 +1,126 @@
+{
+"schema_version": "UCKK-FACULTY-MANIFEST-0.1",
+"generated_from": "manual",
+"items": [
+{
+"faculty_id": "faculty_grand_jeu_social",
+"voie_id": "voie_grand_jeu_social",
+"slug": "grand-jeu-social",
+"faculty_file": "grand-jeu-social.faculty.json",
+"atlas_file": "voie_grand_jeu_social.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-GJS",
+"course_prefix": "GJS",
+"sortorder": 1
+},
+{
+"faculty_id": "faculty_economie",
+"voie_id": "voie_economie",
+"slug": "economie",
+"faculty_file": "economie.faculty.json",
+"atlas_file": "voie_economie.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-EC",
+"course_prefix": "EC",
+"sortorder": 2
+},
+{
+"faculty_id": "faculty_ecologie",
+"voie_id": "voie_ecologie",
+"slug": "ecologie",
+"faculty_file": "ecologie.faculty.json",
+"atlas_file": "voie_ecologie.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-ECL",
+"course_prefix": "ECL",
+"sortorder": 3
+},
+{
+"faculty_id": "faculty_sciences_politiques",
+"voie_id": "voie_sciences_politiques",
+"slug": "sciences-politiques",
+"faculty_file": "sciences-politiques.faculty.json",
+"atlas_file": "voie_sciences_politiques.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-SP",
+"course_prefix": "SP",
+"sortorder": 4
+},
+{
+"faculty_id": "faculty_linguistique_architecture_du_sens",
+"voie_id": "voie_linguistique_architecture_du_sens",
+"slug": "linguistique-architecture-du-sens",
+"faculty_file": "linguistique-architecture-du-sens.faculty.json",
+"atlas_file": "voie_linguistique_architecture_du_sens.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-LI",
+"course_prefix": "LI",
+"sortorder": 5
+},
+{
+"faculty_id": "faculty_metaphysique",
+"voie_id": "voie_metaphysique",
+"slug": "metaphysique",
+"faculty_file": "metaphysique.faculty.json",
+"atlas_file": "voie_metaphysique.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-ME",
+"course_prefix": "ME",
+"sortorder": 6
+},
+{
+"faculty_id": "faculty_ia_gouvernable",
+"voie_id": "voie_ia_gouvernable",
+"slug": "ia-gouvernable",
+"faculty_file": "ia-gouvernable.faculty.json",
+"atlas_file": "voie_ia_gouvernable.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-IA",
+"course_prefix": "IA",
+"sortorder": 7
+},
+{
+"faculty_id": "faculty_intervention_sociale_systemes_humains",
+"voie_id": "voie_intervention_sociale_systemes_humains",
+"slug": "intervention-sociale-systemes-humains",
+"faculty_file": "intervention-sociale-systemes-humains.faculty.json",
+"atlas_file": "voie_intervention_sociale_systemes_humains.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-IS",
+"course_prefix": "IS",
+"sortorder": 8
+},
+{
+"faculty_id": "faculty_architecture_sociotechnique",
+"voie_id": "voie_architecture_sociotechnique",
+"slug": "architecture-sociotechnique",
+"faculty_file": "architecture-sociotechnique.faculty.json",
+"atlas_file": "voie_architecture_sociotechnique.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-AS",
+"course_prefix": "AS",
+"sortorder": 9
+},
+{
+"faculty_id": "faculty_ecosysteme_digital_koa",
+"voie_id": "voie_ecosysteme_digital_koa",
+"slug": "ecosysteme-digital-koa",
+"faculty_file": "ecosysteme-digital-koa.faculty.json",
+"atlas_file": "voie_ecosysteme_digital_koa.json",
+"status": "published",
+"visibility": "public",
+"category_idnumber": "UCKK-KOA",
+"course_prefix": "KOA",
+"sortorder": 10
+}
+]
+}

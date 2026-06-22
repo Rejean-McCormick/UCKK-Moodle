@@ -1,0 +1,1546 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_metaphysique",
+  "code": "ME",
+  "nom": "Voie de la Métaphysique",
+  "domaine_operatoire": "Structures invisibles",
+  "niveau_vise": "Puissance opératoire",
+  "titre_symbolique": "Cartographe des structures invisibles",
+  "parchemin": "Parchemin de Puissance opératoire — Voie de la Métaphysique",
+  "statut": "Voie fondatrice UCKK",
+  "definition_courte": "La Voie de la Métaphysique forme des Aspirants capables de lire, distinguer et cartographier les structures invisibles qui organisent le réel, le sens, la vérité, la conscience, la liberté, le pouvoir, le récit et les symboles.",
+  "angle_fondamental": "Étudier les structures invisibles sans les transformer en dogme : vérité, être, sens, conscience, liberté, ordre, chaos, pouvoir symbolique, résonance et interprétation.",
+  "competence_centrale": "Interpréter des phénomènes complexes avec rigueur, prudence et responsabilité, en distinguant faits, symboles, hypothèses, croyances, projections et structures opérantes.",
+  "seuils_progression": [
+    {
+      "seuil_id": "fondations_ontologiques",
+      "nom": "Fondations ontologiques",
+      "fonction": "Comprendre le réel, l’être, la vérité, le langage, la conscience et la connaissance."
+    },
+    {
+      "seuil_id": "structures_symboliques",
+      "nom": "Structures symboliques",
+      "fonction": "Analyser mythes, récits, figures, pouvoir symbolique, ordre, chaos, signes et résonances."
+    },
+    {
+      "seuil_id": "interpretation_responsable",
+      "nom": "Interprétation responsable",
+      "fonction": "Produire une cartographie métaphysique rigoureuse, contestable et non dogmatique."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "ME101",
+      "ordre": 1,
+      "nom": "Ontologie du réel et des structures invisibles",
+      "concept_maitre": {
+        "concept_id": "me_reel_operatoire",
+        "nom": "Réel opératoire",
+        "definition_courte": "Ce qui existe ou agit dans un système, même lorsque son action n’est pas immédiatement visible.",
+        "fonction_pedagogique": "Apprendre à distinguer ce qui est réel, apparent, structurel, relationnel, manifeste ou invisible.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_reel",
+          "nom": "Réel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_etre",
+          "nom": "Être",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_existence",
+          "nom": "Existence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_essence",
+          "nom": "Essence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_substance",
+          "nom": "Substance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_forme",
+          "nom": "Forme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_matiere",
+          "nom": "Matière",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_structure",
+          "nom": "Structure",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_relation",
+          "nom": "Relation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_totalite",
+          "nom": "Totalité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_partie",
+          "nom": "Partie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_unite",
+          "nom": "Unité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_multiplicite",
+          "nom": "Multiplicité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_identite",
+          "nom": "Identité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_difference",
+          "nom": "Différence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_continuite",
+          "nom": "Continuité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_rupture",
+          "nom": "Rupture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_manifestation",
+          "nom": "Manifestation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_invisibilite_operante",
+          "nom": "Invisibilité opérante",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_causalite",
+          "nom": "Causalité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_emergence",
+          "nom": "Émergence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_monde",
+          "nom": "Monde",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "cartographie",
+        "nom": "Cartographie d’une structure invisible",
+        "description": "Représenter une structure invisible qui agit dans un phénomène réel, en distinguant acteurs, relations, causes, effets et niveaux d’invisibilité."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer réel, apparence, structure, relation, manifestation et invisibilité opérante.",
+        "L’Aspirant peut cartographier une structure invisible sans la présenter comme une cause unique ou absolue.",
+        "L’Aspirant peut séparer ce qui est observé, inféré, interprété et hypothétique dans un phénomène réel."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ME102",
+      "ordre": 2,
+      "nom": "Vérité, connaissance et limites du savoir",
+      "concept_maitre": {
+        "concept_id": "me_discernement_du_vrai",
+        "nom": "Discernement du vrai",
+        "definition_courte": "Capacité de distinguer vérité, croyance, savoir, preuve, intuition, hypothèse et interprétation.",
+        "fonction_pedagogique": "Empêcher la confusion entre ce qui est su, cru, ressenti, interprété ou démontré.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_verite",
+          "nom": "Vérité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_connaissance",
+          "nom": "Connaissance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_croyance",
+          "nom": "Croyance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_foi",
+          "nom": "Foi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_raison",
+          "nom": "Raison",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_preuve",
+          "nom": "Preuve",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_hypothese",
+          "nom": "Hypothèse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_interpretation",
+          "nom": "Interprétation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_certitude",
+          "nom": "Certitude",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_doute",
+          "nom": "Doute",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_verification",
+          "nom": "Vérification",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_falsifiabilite",
+          "nom": "Falsifiabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_coherence",
+          "nom": "Cohérence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_correspondance",
+          "nom": "Correspondance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_revelation",
+          "nom": "Révélation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_intuition",
+          "nom": "Intuition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_experience",
+          "nom": "Expérience",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_temoignage",
+          "nom": "Témoignage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_autorite_cognitive",
+          "nom": "Autorité cognitive",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_limite_savoir",
+          "nom": "Limite du savoir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_erreur",
+          "nom": "Erreur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_humilite_epistemique",
+          "nom": "Humilité épistémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "grille_distinction",
+        "nom": "Grille fait-croyance-symbole-hypothèse-interprétation",
+        "description": "Construire une grille permettant de distinguer les statuts de vérité d’un ensemble d’énoncés ou de récits."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer fait, croyance, savoir, preuve, hypothèse, intuition et interprétation.",
+        "L’Aspirant peut évaluer le degré de certitude d’un énoncé et expliciter ses limites.",
+        "L’Aspirant peut construire une grille de discernement sans transformer une croyance en preuve."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ME103",
+      "ordre": 3,
+      "nom": "Logos, langage et architecture du sens",
+      "concept_maitre": {
+        "concept_id": "me_logos",
+        "nom": "Logos",
+        "definition_courte": "Principe d’intelligibilité par lequel le réel devient lisible, ordonné, nommé et transmissible.",
+        "fonction_pedagogique": "Comprendre comment les mots, concepts, catégories, récits et symboles structurent notre accès au réel.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_intelligibilite",
+          "nom": "Intelligibilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_sens",
+          "nom": "Sens",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_signification",
+          "nom": "Signification",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_langage",
+          "nom": "Langage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_mot",
+          "nom": "Mot",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_concept",
+          "nom": "Concept",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_definition",
+          "nom": "Définition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_categorie",
+          "nom": "Catégorie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_analogie",
+          "nom": "Analogie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_metaphore",
+          "nom": "Métaphore",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_symbole",
+          "nom": "Symbole",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_signe",
+          "nom": "Signe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_discours",
+          "nom": "Discours",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_recit",
+          "nom": "Récit",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_grammaire",
+          "nom": "Grammaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_syntaxe_sens",
+          "nom": "Syntaxe du sens",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_semantique",
+          "nom": "Sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_ambiguite",
+          "nom": "Ambiguïté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_traduction",
+          "nom": "Traduction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_architecture_sens",
+          "nom": "Architecture du sens",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_pouvoir_des_mots",
+          "nom": "Pouvoir des mots",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_conceptuelle",
+        "nom": "Analyse d’un concept difficile",
+        "description": "Analyser un concept selon ses définitions, usages, ambiguïtés, tensions et effets sociaux."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut analyser comment un concept, un mot ou une catégorie rend le réel lisible ou invisible.",
+        "L’Aspirant peut distinguer sens, signe, symbole, analogie, métaphore, définition et récit.",
+        "L’Aspirant peut clarifier un concept difficile en exposant ses usages, ambiguïtés, tensions et effets sociaux."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ME104",
+      "ordre": 4,
+      "nom": "Conscience, perception et intériorité",
+      "concept_maitre": {
+        "concept_id": "me_sujet_percevant",
+        "nom": "Sujet percevant",
+        "definition_courte": "L’humain comme lieu d’expérience, de perception, de projection, de mémoire et de discernement.",
+        "fonction_pedagogique": "Étudier comment l’expérience intérieure transforme le rapport au réel et aux symboles.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_conscience",
+          "nom": "Conscience",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_subjectivite",
+          "nom": "Subjectivité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_perception",
+          "nom": "Perception",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_attention",
+          "nom": "Attention",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_intentionnalite",
+          "nom": "Intentionnalité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_memoire",
+          "nom": "Mémoire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_imagination",
+          "nom": "Imagination",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_reve",
+          "nom": "Rêve",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_emotion",
+          "nom": "Émotion",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_affect",
+          "nom": "Affect",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_desir",
+          "nom": "Désir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_volonte",
+          "nom": "Volonté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_ego",
+          "nom": "Ego",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_soi",
+          "nom": "Soi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_ame",
+          "nom": "Âme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_esprit",
+          "nom": "Esprit",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_presence",
+          "nom": "Présence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_interiorite",
+          "nom": "Intériorité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_lucidite",
+          "nom": "Lucidité",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_experience",
+        "nom": "Analyse d’une expérience intérieure",
+        "description": "Distinguer perception, émotion, projection, souvenir, symbole et interprétation dans une expérience intérieure."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer perception, mémoire, émotion, imagination, projection et interprétation.",
+        "L’Aspirant peut analyser une expérience intérieure sans en faire une preuve universelle.",
+        "L’Aspirant peut identifier les risques de projection, d’ego narratif et de confusion entre vécu et réel partagé."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ME105",
+      "ordre": 5,
+      "nom": "Liberté, destin et puissance d’agir",
+      "concept_maitre": {
+        "concept_id": "me_liberte_situee",
+        "nom": "Liberté située",
+        "definition_courte": "Liberté comprise dans ses conditions réelles : contraintes, déterminations, possibilités, appels et responsabilités.",
+        "fonction_pedagogique": "Penser la tension entre choix, destin, contrainte, vocation et puissance d’agir.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_liberte",
+          "nom": "Liberté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_libre_arbitre",
+          "nom": "Libre arbitre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_determinisme",
+          "nom": "Déterminisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_destin",
+          "nom": "Destin",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_necessite",
+          "nom": "Nécessité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_contingence",
+          "nom": "Contingence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_possibilite",
+          "nom": "Possibilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_choix",
+          "nom": "Choix",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_decision",
+          "nom": "Décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_responsabilite",
+          "nom": "Responsabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_faute",
+          "nom": "Faute",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_merite",
+          "nom": "Mérite",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_vocation",
+          "nom": "Vocation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_appel",
+          "nom": "Appel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_promesse",
+          "nom": "Promesse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_engagement",
+          "nom": "Engagement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_contrainte",
+          "nom": "Contrainte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_puissance_agir",
+          "nom": "Puissance d’agir",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "etude_dilemme",
+        "nom": "Étude d’un dilemme réel",
+        "description": "Analyser ce qui est choisi, subi, hérité, possible, impossible ou responsable dans une situation donnée."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer liberté, contrainte, déterminisme, contingence, responsabilité et puissance d’agir.",
+        "L’Aspirant peut analyser un dilemme en séparant ce qui est choisi, subi, hérité, possible et responsable.",
+        "L’Aspirant peut éviter les lectures fatalistes ou culpabilisantes d’une situation humaine complexe."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ME106",
+      "ordre": 6,
+      "nom": "Ordre, chaos et transformation",
+      "concept_maitre": {
+        "concept_id": "me_transformation_structures",
+        "nom": "Transformation des structures",
+        "definition_courte": "Processus par lequel un ordre se fragilise, traverse le chaos, atteint un seuil et se recompose.",
+        "fonction_pedagogique": "Lire les crises, ruptures, cycles, tensions et recompositions comme transformations de structures.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_ordre",
+          "nom": "Ordre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_chaos",
+          "nom": "Chaos",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_equilibre",
+          "nom": "Équilibre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_desequilibre",
+          "nom": "Déséquilibre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_polarite",
+          "nom": "Polarité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_dualite",
+          "nom": "Dualité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_tension",
+          "nom": "Tension",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_contradiction",
+          "nom": "Contradiction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_crise",
+          "nom": "Crise",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_seuil",
+          "nom": "Seuil",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_passage",
+          "nom": "Passage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_transformation",
+          "nom": "Transformation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_emergence",
+          "nom": "Émergence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_cycle",
+          "nom": "Cycle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_repetition",
+          "nom": "Répétition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_rupture_creatrice",
+          "nom": "Rupture créatrice",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_entropie_symbolique",
+          "nom": "Entropie symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_regeneration",
+          "nom": "Régénération",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_harmonie",
+          "nom": "Harmonie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_cosmogonie",
+          "nom": "Cosmogonie",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_transformation",
+        "nom": "Carte d’une transformation",
+        "description": "Décrire un ancien ordre, sa crise, son seuil, son passage chaotique et sa recomposition possible."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut décrire un ordre, sa crise, ses tensions, ses seuils et ses possibilités de recomposition.",
+        "L’Aspirant peut distinguer chaos, déséquilibre, rupture, passage, émergence et transformation.",
+        "L’Aspirant peut produire une carte de transformation sans confondre cycle symbolique et prédiction certaine."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ME107",
+      "ordre": 7,
+      "nom": "Mythes, récits et figures fondatrices",
+      "concept_maitre": {
+        "concept_id": "me_fiction_fondatrice",
+        "nom": "Fiction fondatrice",
+        "definition_courte": "Récit structurant qui organise des valeurs, des identités, des comportements et des mondes possibles.",
+        "fonction_pedagogique": "Comprendre comment les mythes et récits fondent des ordres symboliques, moraux, sociaux et politiques.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_mythe",
+          "nom": "Mythe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_structure_narrative",
+          "nom": "Structure narrative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_verite_morale",
+          "nom": "Vérité morale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_recit_sacre",
+          "nom": "Récit sacré",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_recit_heroique",
+          "nom": "Récit héroïque",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_archetype",
+          "nom": "Archétype",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_heros",
+          "nom": "Héros",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_anti_heros",
+          "nom": "Anti-héros",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_trickster",
+          "nom": "Trickster",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_roi",
+          "nom": "Roi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_prophete",
+          "nom": "Prophète",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_martyr",
+          "nom": "Martyr",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_sauveur",
+          "nom": "Sauveur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_monstre",
+          "nom": "Monstre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_apocalypse",
+          "nom": "Apocalypse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_creation_monde",
+          "nom": "Création du monde",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_chute",
+          "nom": "Chute",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_redemption",
+          "nom": "Rédemption",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_epreuve_initiatique",
+          "nom": "Épreuve initiatique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_memoire_collective",
+          "nom": "Mémoire collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_recit",
+        "nom": "Analyse d’un récit fondateur",
+        "description": "Analyser ce qu’un récit révèle, masque, autorise, interdit et transmet."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut analyser un mythe ou récit fondateur selon ses figures, valeurs, interdits, promesses et effets sociaux.",
+        "L’Aspirant peut distinguer vérité morale, vérité historique, fiction pédagogique et manipulation narrative.",
+        "L’Aspirant peut montrer ce qu’un récit fondateur révèle, masque, autorise, interdit et transmet."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ME108",
+      "ordre": 8,
+      "nom": "Pouvoir, sacré et critique symbolique",
+      "concept_maitre": {
+        "concept_id": "me_autorite_invisible",
+        "nom": "Autorité invisible",
+        "definition_courte": "Pouvoir qui agit par la légitimité, le sacré, les rites, les figures, les tabous et les symboles.",
+        "fonction_pedagogique": "Analyser les formes de domination, de consécration et de transgression qui passent par l’ordre symbolique.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_pouvoir",
+          "nom": "Pouvoir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_autorite",
+          "nom": "Autorité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_legitimite",
+          "nom": "Légitimité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_hierarchie",
+          "nom": "Hiérarchie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_souverainete",
+          "nom": "Souveraineté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_sacre",
+          "nom": "Sacré",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_profane",
+          "nom": "Profane",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_tabou",
+          "nom": "Tabou",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_rite",
+          "nom": "Rite",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_consecration",
+          "nom": "Consécration",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_idolatrie",
+          "nom": "Idolâtrie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_mythe_politique",
+          "nom": "Mythe politique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_charisme",
+          "nom": "Charisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_figure_royale",
+          "nom": "Figure royale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_bouffon",
+          "nom": "Bouffon",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_fou_sacre",
+          "nom": "Fou sacré",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_critique_symbolique",
+          "nom": "Critique symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_domination_invisible",
+          "nom": "Domination invisible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_transgression",
+          "nom": "Transgression",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_desacralisation",
+          "nom": "Désacralisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "lecture_symbolique",
+        "nom": "Lecture symbolique d’une autorité",
+        "description": "Analyser une institution, une figure publique, un rite ou un symbole de pouvoir selon ses effets de légitimité et de domination."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut identifier les formes de pouvoir qui agissent par le sacré, le rite, le tabou, la consécration ou le symbole.",
+        "L’Aspirant peut distinguer légitimité symbolique, domination invisible, charisme, idolâtrie et critique symbolique.",
+        "L’Aspirant peut analyser une autorité sans sacralisation abusive ni réduction cynique."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ME109",
+      "ordre": 9,
+      "nom": "Résonance, signes et grammaires symboliques",
+      "concept_maitre": {
+        "concept_id": "me_lecture_des_correspondances",
+        "nom": "Lecture des correspondances",
+        "definition_courte": "Lecture prudente des motifs, signes, nombres, formes, analogies et résonances sans les confondre avec des preuves absolues.",
+        "fonction_pedagogique": "Apprendre à lire les correspondances symboliques tout en évitant la surinterprétation et le délire interprétatif.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_resonance",
+          "nom": "Résonance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_motif",
+          "nom": "Motif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_synchronicite",
+          "nom": "Synchronicité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_correspondance_symbolique",
+          "nom": "Correspondance symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_superposition",
+          "nom": "Superposition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_triangulation",
+          "nom": "Triangulation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_grille_lecture",
+          "nom": "Grille de lecture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_grammaire_symbolique",
+          "nom": "Grammaire symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_sephiroth",
+          "nom": "Sephiroth",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_arbre_vie",
+          "nom": "Arbre de vie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_pi",
+          "nom": "π",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_cercle",
+          "nom": "Cercle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_centre",
+          "nom": "Centre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_axe",
+          "nom": "Axe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_miroir",
+          "nom": "Miroir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_seuil_symbolique",
+          "nom": "Seuil symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_nombre",
+          "nom": "Nombre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_proportion",
+          "nom": "Proportion",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_grammaire_symbolique",
+        "nom": "Analyse d’une grammaire symbolique",
+        "description": "Présenter une lecture symbolique avec ses motifs, ses limites, ses garde-fous et ses risques de surinterprétation."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut présenter une lecture de correspondances en explicitant ses motifs, limites et incertitudes.",
+        "L’Aspirant peut distinguer résonance personnelle, motif symbolique, synchronicité, analogie et preuve.",
+        "L’Aspirant peut repérer les risques de surinterprétation, de délire interprétatif et de sélection arbitraire des signes."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ME110",
+      "ordre": 10,
+      "nom": "Méthode métaphysique et garde-fous interprétatifs",
+      "concept_maitre": {
+        "concept_id": "me_responsabilite_hermeneutique",
+        "nom": "Responsabilité herméneutique",
+        "definition_courte": "Responsabilité de l’interprète qui doit distinguer méthode, symbole, hypothèse, projection, preuve et dogme.",
+        "fonction_pedagogique": "Faire de la métaphysique une discipline praticable, contestable, traçable, non dogmatique et non manipulatoire.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "me_methode",
+          "nom": "Méthode",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_enquete",
+          "nom": "Enquête",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_rigueur",
+          "nom": "Rigueur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_prudence_interpretative",
+          "nom": "Prudence interprétative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_projection",
+          "nom": "Projection",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_biais",
+          "nom": "Biais",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_delire_interpretatif",
+          "nom": "Délire interprétatif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_manipulation_symbolique",
+          "nom": "Manipulation symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_dogmatisme",
+          "nom": "Dogmatisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_pluralisme",
+          "nom": "Pluralisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_contestabilite",
+          "nom": "Contestabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_tracabilite",
+          "nom": "Traçabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_distinction_fait_symbole",
+          "nom": "Distinction fait/symbole",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_distinction_hypothese_interpretation",
+          "nom": "Distinction hypothèse/interprétation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_responsabilite_interprete",
+          "nom": "Responsabilité de l’interprète",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_verifiabilite_partielle",
+          "nom": "Vérifiabilité partielle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_assemblee_critique",
+          "nom": "Assemblée critique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_defense_orale",
+          "nom": "Défense orale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_cartographie_structure_invisible",
+          "nom": "Cartographie d’une structure invisible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "me_ethique_interpretation",
+          "nom": "Éthique de l’interprétation",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "dossier_final",
+        "nom": "Dossier de cartographie métaphysique",
+        "description": "Produire une cartographie métaphysique distinguant faits, symboles, hypothèses, interprétations, risques de projection et garde-fous."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut appliquer une méthode métaphysique explicite, traçable, contestable et non dogmatique.",
+        "L’Aspirant peut distinguer fait, symbole, hypothèse, interprétation, projection, croyance et dogme dans un dossier final.",
+        "L’Aspirant peut défendre une cartographie métaphysique devant une assemblée critique en reconnaissant ses limites."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "type": "dossier_final",
+    "nom": "Cartographie d’une structure invisible",
+    "description": "L’Aspirant doit analyser un phénomène réel, symbolique, institutionnel, narratif ou existentiel en distinguant faits, symboles, hypothèses, interprétations, projections et structures invisibles opérantes.",
+    "livrables": [
+      "description du phénomène étudié",
+      "cartographie des structures invisibles",
+      "distinction entre faits, symboles, croyances, hypothèses et interprétations",
+      "analyse des récits, figures et pouvoirs symboliques en jeu",
+      "identification des risques de projection ou de surinterprétation",
+      "méthode de vérification ou de contestation partielle",
+      "défense orale devant une assemblée critique"
+    ]
+  },
+  "limites_ethiques": [
+    "ne pas transformer la métaphysique en dogme obligatoire",
+    "ne pas confondre symbole et preuve",
+    "ne pas imposer une croyance comme vérité institutionnelle",
+    "ne pas utiliser le langage symbolique pour manipuler ou dominer",
+    "ne pas pathologiser une personne à partir d’une interprétation symbolique",
+    "ne pas confondre résonance personnelle et connaissance vérifiée",
+    "ne pas dissimuler une hypothèse sous une apparence de certitude",
+    "ne pas réduire les faits à des signes",
+    "ne pas réduire les signes à des faits",
+    "ne pas supprimer la contestabilité des interprétations"
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_grand_jeu_social",
+      "relation": "La métaphysique aide à lire les règles invisibles, récits, mythes, symboles et structures de sens qui organisent le Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "relation": "La linguistique fournit les outils de clarification conceptuelle nécessaires pour éviter les confusions métaphysiques."
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "relation": "La métaphysique éclaire les formes symboliques de la légitimité, du sacré, de la souveraineté, de l’autorité et du pouvoir."
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "relation": "L’intervention sociale fournit des garde-fous humains face aux questions d’existence, récit de soi, souffrance, projection, dignité et quête de sens."
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "relation": "La métaphysique fournit des garde-fous contre la confusion entre calcul, sens, conscience, vérité et autorité."
+    }
+  ],
+  "tags": [
+    "metaphysique",
+    "structures_invisibles",
+    "verite",
+    "sens",
+    "conscience",
+    "liberte",
+    "ordre",
+    "chaos",
+    "mythe",
+    "symbole",
+    "resonance",
+    "interpretation",
+    "ethique"
+  ]
+}

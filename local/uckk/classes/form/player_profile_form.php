@@ -302,7 +302,7 @@ final class player_profile_form extends \moodleform {
         }
 
         $displaytitle = trim((string)($data['displaytitle'] ?? ''));
-        if ($displaytitle !== '' && core_text::strlen($displaytitle) > self::DISPLAY_TITLE_MAX_LENGTH) {
+        if ($displaytitle !== '' && \core_text::strlen($displaytitle) > self::DISPLAY_TITLE_MAX_LENGTH) {
             $errors['displaytitle'] = get_string('maximumchars', '', self::DISPLAY_TITLE_MAX_LENGTH);
         }
 
@@ -347,7 +347,7 @@ final class player_profile_form extends \moodleform {
         }
 
         $profilenote = trim((string)($data['profilenote'] ?? ''));
-        if ($profilenote !== '' && core_text::strlen($profilenote) > self::PROFILE_NOTE_MAX_LENGTH) {
+        if ($profilenote !== '' && \core_text::strlen($profilenote) > self::PROFILE_NOTE_MAX_LENGTH) {
             $errors['profilenote'] = get_string('maximumchars', '', self::PROFILE_NOTE_MAX_LENGTH);
         }
 

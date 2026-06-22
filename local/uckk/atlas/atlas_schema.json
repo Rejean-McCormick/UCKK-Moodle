@@ -1,0 +1,633 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local/uckk/atlas/atlas_schema.json",
+  "title": "UCKK Atlas Voie Schema",
+  "description": "Schéma canonique des JSON Atlas de Voie UCKK pour local_uckk.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "voie_id",
+    "code",
+    "nom",
+    "domaine_operatoire",
+    "niveau_vise",
+    "titre_symbolique",
+    "parchemin",
+    "statut",
+    "definition_courte",
+    "angle_fondamental",
+    "competence_centrale",
+    "seuils_progression",
+    "cours_conceptuels",
+    "projet_final",
+    "limites_ethiques",
+    "relations_intervoies",
+    "tags"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "UCKK-ATLAS-0.2-draft"
+    },
+    "voie_id": {
+      "type": "string",
+      "enum": [
+        "voie_grand_jeu_social",
+        "voie_economie",
+        "voie_ecologie",
+        "voie_sciences_politiques",
+        "voie_linguistique_architecture_du_sens",
+        "voie_metaphysique",
+        "voie_ia_gouvernable",
+        "voie_intervention_sociale_systemes_humains",
+        "voie_architecture_sociotechnique",
+        "voie_ecosysteme_digital_koa"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "enum": [
+        "GJS",
+        "EC",
+        "ECL",
+        "SP",
+        "LI",
+        "ME",
+        "IA",
+        "IS",
+        "AS",
+        "KOA"
+      ]
+    },
+    "nom": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "domaine_operatoire": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "niveau_vise": {
+      "type": "string",
+      "const": "Puissance opératoire"
+    },
+    "titre_symbolique": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "parchemin": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "statut": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "definition_courte": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "angle_fondamental": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "competence_centrale": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "seuils_progression": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text_or_object"
+      }
+    },
+    "cours_conceptuels": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/cours_conceptuel"
+      }
+    },
+    "projet_final": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "limites_ethiques": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text_or_object"
+      }
+    },
+    "relations_intervoies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation_intervoie"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/non_empty_string"
+      },
+      "uniqueItems": true
+    },
+    "titre_interne_vise": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "role_dans_atlas": {
+      "type": "string"
+    },
+    "principe_fondateur": {
+      "type": "string"
+    },
+    "distinctions_clefs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text_or_object"
+      }
+    },
+    "risques_specifiques": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text_or_object"
+      }
+    },
+    "exigences_gouvernance": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text_or_object"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_grand_jeu_social"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "GJS"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^GJS[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_economie"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "EC"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^EC[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_ecologie"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "ECL"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^ECL[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_sciences_politiques"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "SP"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^SP[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_linguistique_architecture_du_sens"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "LI"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^LI[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_metaphysique"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "ME"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^ME[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_ia_gouvernable"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "IA"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^IA[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_intervention_sociale_systemes_humains"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "IS"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^IS[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_architecture_sociotechnique"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "AS"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^AS[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_ecosysteme_digital_koa"
+          }
+        },
+        "required": [
+          "voie_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "const": "KOA"
+          },
+          "cours_conceptuels": {
+            "items": {
+              "properties": {
+                "cours_id": {
+                  "pattern": "^KOA[0-9]{3}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "non_empty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "text_or_object": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": true
+        }
+      ]
+    },
+    "relation_intervoie": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        {
+          "type": "object",
+          "required": [
+            "voie_id"
+          ],
+          "properties": {
+            "voie_id": {
+              "type": "string",
+              "enum": [
+                "voie_grand_jeu_social",
+                "voie_economie",
+                "voie_ecologie",
+                "voie_sciences_politiques",
+                "voie_linguistique_architecture_du_sens",
+                "voie_metaphysique",
+                "voie_ia_gouvernable",
+                "voie_intervention_sociale_systemes_humains",
+                "voie_architecture_sociotechnique",
+                "voie_ecosysteme_digital_koa"
+              ]
+            },
+            "relation_type": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "cours_conceptuel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cours_id",
+        "ordre",
+        "nom",
+        "concept_maitre",
+        "concepts_associes",
+        "artefact_maitrise",
+        "criteres_passage",
+        "relations"
+      ],
+      "properties": {
+        "cours_id": {
+          "type": "string",
+          "pattern": "^[A-Z]{2,4}[0-9]{3}$"
+        },
+        "ordre": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "nom": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "concept_maitre": {
+          "$ref": "#/$defs/concept_maitre"
+        },
+        "concepts_associes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/concept_associe"
+          }
+        },
+        "artefact_maitrise": {
+          "$ref": "#/$defs/artefact_maitrise"
+        },
+        "criteres_passage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text_or_object"
+          }
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text_or_object"
+          }
+        }
+      }
+    },
+    "concept_maitre": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "concept_id",
+        "nom",
+        "type",
+        "definition_courte",
+        "fonction_pedagogique"
+      ],
+      "properties": {
+        "concept_id": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "nom": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "type": {
+          "type": "string",
+          "const": "concept_maitre"
+        },
+        "definition_courte": {
+          "type": "string"
+        },
+        "fonction_pedagogique": {
+          "type": "string"
+        }
+      }
+    },
+    "concept_associe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "concept_id",
+        "nom",
+        "type",
+        "notions_fines"
+      ],
+      "properties": {
+        "concept_id": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "nom": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "type": {
+          "type": "string",
+          "const": "concept_associe"
+        },
+        "definition_courte": {
+          "type": "string"
+        },
+        "role_dans_le_concept_maitre": {
+          "type": "string"
+        },
+        "notions_fines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text_or_object"
+          }
+        }
+      }
+    },
+    "artefact_maitrise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "nom",
+        "description"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "nom": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

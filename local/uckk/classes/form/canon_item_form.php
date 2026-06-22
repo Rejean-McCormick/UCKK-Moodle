@@ -449,7 +449,7 @@ final class canon_item_form extends \moodleform {
 
         if ($title === '') {
             $errors['title'] = get_string('required');
-        } else if (core_text::strlen($title) > self::MAX_TITLE_LENGTH) {
+        } else if (\core_text::strlen($title) > self::MAX_TITLE_LENGTH) {
             $errors['title'] = get_string('maximumchars', '', self::MAX_TITLE_LENGTH);
         }
 

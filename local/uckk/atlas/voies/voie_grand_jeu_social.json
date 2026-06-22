@@ -1,0 +1,1506 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_grand_jeu_social",
+  "code": "GJS",
+  "nom": "Voie du Grand Jeu social",
+  "domaine_operatoire": "Systèmes sociaux",
+  "niveau_vise": "Puissance opératoire",
+  "titre_interne_vise": "Mage UCKK du Grand Jeu social",
+  "titre_symbolique": "Joueur lucide",
+  "statut": "Voie fondatrice UCKK",
+  "version": "0.2 — normalisation Atlas",
+  "role_dans_atlas": "Voie transversale mère : fournit la grammaire générale de lecture du Grand Jeu social aux autres Voies.",
+  "parchemin": "Parchemin de Puissance opératoire — Voie du Grand Jeu social",
+  "definition_courte": "La Voie du Grand Jeu social forme des personnes capables de lire la société comme un système de règles, d’acteurs, de pouvoirs, de récits, de preuves, de ressources et de transformations possibles.",
+  "angle_fondamental": "Comprendre le Grand Jeu social comme un ensemble de règles visibles et invisibles qui structurent les positions, les accès, les récits, les institutions, les conflits, les alliances et les possibilités d’action.",
+  "competence_centrale": "Cartographier un système social, identifier ses règles, ses pouvoirs, ses récits, ses flux, ses preuves et ses points de transformation, puis agir avec lucidité et intégrité.",
+  "seuils_progression": [
+    {
+      "seuil_id": "fondations",
+      "nom": "Fondations",
+      "fonction": "Apprendre à voir la société comme un système de règles, d’acteurs, de positions et de ressources."
+    },
+    {
+      "seuil_id": "lecture_critique",
+      "nom": "Lecture critique",
+      "fonction": "Analyser les pouvoirs, institutions, récits, langages, preuves et mécanismes de visibilité."
+    },
+    {
+      "seuil_id": "puissance_operatoire",
+      "nom": "Puissance opératoire",
+      "fonction": "Transformer la lecture du jeu en action collective, stratégie responsable, mémoire et transmission."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "GJS101",
+      "ordre": 1,
+      "nom": "Cartographie du Grand Jeu social",
+      "concept_maitre": {
+        "concept_id": "gjs_systeme_jeu_social",
+        "nom": "Système de jeu social",
+        "type": "concept_maitre",
+        "definition_courte": "La société comprise comme un plateau dynamique composé de règles, d’acteurs, de positions, de flux, de contraintes et d’opportunités.",
+        "fonction_pedagogique": "Former la capacité initiale de voir le jeu comme jeu, avant d’en analyser les institutions, pouvoirs, récits et transformations."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_grand_jeu_social",
+          "nom": "Grand Jeu social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_systeme_social",
+          "nom": "Système social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_plateau_social",
+          "nom": "Plateau social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_acteur",
+          "nom": "Acteur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_role_social",
+          "nom": "Rôle social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_position",
+          "nom": "Position",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_piece_du_jeu",
+          "nom": "Pièce du jeu",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_regle_visible",
+          "nom": "Règle visible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_regle_invisible",
+          "nom": "Règle invisible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_contrainte",
+          "nom": "Contrainte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_opportunite",
+          "nom": "Opportunité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_point_entree",
+          "nom": "Point d’entrée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_point_blocage",
+          "nom": "Point de blocage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_trajectoire",
+          "nom": "Trajectoire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_boucle_retroaction",
+          "nom": "Boucle de rétroaction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_effet_systemique",
+          "nom": "Effet systémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_transformation_regles",
+          "nom": "Transformation des règles",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_systemique",
+        "nom": "Carte du Grand Jeu social",
+        "description": "Cartographier un enjeu social réel en identifiant acteurs, règles, positions, contraintes, opportunités, points d’entrée et points de blocage."
+      },
+      "criteres_passage": [
+        "Identifier les règles visibles et invisibles d’un système social.",
+        "Distinguer acteurs, rôles, positions et trajectoires.",
+        "Repérer les contraintes, opportunités et points de transformation."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "GJS102",
+      "ordre": 2,
+      "nom": "Institutions, statuts et légitimité",
+      "concept_maitre": {
+        "concept_id": "gjs_ordre_institutionnel",
+        "nom": "Ordre institutionnel",
+        "type": "concept_maitre",
+        "definition_courte": "L’ensemble des structures qui autorisent, bloquent, reconnaissent, certifient, encadrent ou disqualifient l’action sociale.",
+        "fonction_pedagogique": "Comprendre comment les institutions transforment des règles en statuts, procédures, titres, reconnaissances et contraintes."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_institution",
+          "nom": "Institution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_loi",
+          "nom": "Loi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_norme",
+          "nom": "Norme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_reglement",
+          "nom": "Règlement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_procedure",
+          "nom": "Procédure",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_bureaucratie",
+          "nom": "Bureaucratie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_autorite",
+          "nom": "Autorité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_mandat",
+          "nom": "Mandat",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_juridiction",
+          "nom": "Juridiction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_statut",
+          "nom": "Statut",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_titre",
+          "nom": "Titre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_certification",
+          "nom": "Certification",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_diplome",
+          "nom": "Diplôme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_accreditation",
+          "nom": "Accréditation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_reconnaissance",
+          "nom": "Reconnaissance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_legitimite",
+          "nom": "Légitimité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_conformite",
+          "nom": "Conformité",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_institutionnelle",
+        "nom": "Carte institutionnelle d’un parcours d’accès",
+        "description": "Analyser comment une personne, une idée ou un projet obtient ou perd accès à une reconnaissance institutionnelle."
+      },
+      "criteres_passage": [
+        "Identifier les institutions et procédures qui structurent un enjeu.",
+        "Distinguer autorité, légitimité, reconnaissance et conformité.",
+        "Expliquer comment un statut ou un titre modifie l’accès au jeu."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "GJS103",
+      "ordre": 3,
+      "nom": "Pouvoir, domination et contre-pouvoirs",
+      "concept_maitre": {
+        "concept_id": "gjs_pouvoir_social",
+        "nom": "Pouvoir social",
+        "type": "concept_maitre",
+        "definition_courte": "La capacité d’orienter, contraindre, autoriser, empêcher, rendre visible, rendre invisible ou transformer l’action d’autrui.",
+        "fonction_pedagogique": "Former une lecture lucide des relations de pouvoir sans réduire toute relation sociale à la domination."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_pouvoir",
+          "nom": "Pouvoir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_influence",
+          "nom": "Influence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_domination",
+          "nom": "Domination",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_autorite_symbolique",
+          "nom": "Autorité symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_autorite_institutionnelle",
+          "nom": "Autorité institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_autorite_economique",
+          "nom": "Autorité économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_hierarchie",
+          "nom": "Hiérarchie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_controle",
+          "nom": "Contrôle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_coercition",
+          "nom": "Coercition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_consentement",
+          "nom": "Consentement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_dependance",
+          "nom": "Dépendance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_incitatif",
+          "nom": "Incitatif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_prestige",
+          "nom": "Prestige",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_privilege",
+          "nom": "Privilège",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_exclusion",
+          "nom": "Exclusion",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_capture",
+          "nom": "Capture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_contre_pouvoir",
+          "nom": "Contre-pouvoir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_resistance",
+          "nom": "Résistance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_emancipation",
+          "nom": "Émancipation",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_pouvoirs",
+        "nom": "Carte des pouvoirs et contre-pouvoirs",
+        "description": "Cartographier les autorités, dépendances, privilèges, exclusions, captures et contre-pouvoirs dans un système concret."
+      },
+      "criteres_passage": [
+        "Distinguer pouvoir, influence, domination et autorité.",
+        "Repérer les formes visibles et invisibles de dépendance.",
+        "Identifier des contre-pouvoirs réalistes et responsables."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "GJS104",
+      "ordre": 4,
+      "nom": "Ressources, flux et accès",
+      "concept_maitre": {
+        "concept_id": "gjs_conditions_action",
+        "nom": "Conditions d’action",
+        "type": "concept_maitre",
+        "definition_courte": "L’ensemble des ressources, flux, accès et intermédiaires qui rendent une action possible, difficile, rentable, visible ou impossible.",
+        "fonction_pedagogique": "Relier la lecture sociale aux conditions matérielles, symboliques, informationnelles et relationnelles de l’action."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_ressource",
+          "nom": "Ressource",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_argent",
+          "nom": "Argent",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_temps",
+          "nom": "Temps",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_information",
+          "nom": "Information",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_energie",
+          "nom": "Énergie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_competence",
+          "nom": "Compétence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_relation",
+          "nom": "Relation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_reseau",
+          "nom": "Réseau",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_acces",
+          "nom": "Accès",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_capital_social",
+          "nom": "Capital social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_capital_symbolique",
+          "nom": "Capital symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_capital_economique",
+          "nom": "Capital économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_capital_culturel",
+          "nom": "Capital culturel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_flux",
+          "nom": "Flux",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_circulation",
+          "nom": "Circulation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_intermediaire",
+          "nom": "Intermédiaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_porte_entree",
+          "nom": "Porte d’entrée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_rarete",
+          "nom": "Rareté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_allocation",
+          "nom": "Allocation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_redistribution",
+          "nom": "Redistribution",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_flux_acces",
+        "nom": "Carte des ressources, flux et accès",
+        "description": "Représenter les ressources nécessaires à une action, leurs flux, leurs points d’accès, leurs intermédiaires et leurs blocages."
+      },
+      "criteres_passage": [
+        "Identifier les ressources matérielles, sociales, symboliques et informationnelles d’un système.",
+        "Cartographier les flux et intermédiaires.",
+        "Repérer les points de rareté, d’allocation et de redistribution possible."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "GJS105",
+      "ordre": 5,
+      "nom": "Langage, catégories et pouvoir de nommer",
+      "concept_maitre": {
+        "concept_id": "gjs_architecture_sens_social",
+        "nom": "Architecture du sens social",
+        "type": "concept_maitre",
+        "definition_courte": "La manière dont les mots, catégories, définitions et cadrages organisent ce qu’une société voit, ignore, autorise ou rend pensable.",
+        "fonction_pedagogique": "Former la capacité de clarifier les concepts et de détecter les mots qui cachent, déplacent ou capturent le réel."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_langage",
+          "nom": "Langage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_concept",
+          "nom": "Concept",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_categorie",
+          "nom": "Catégorie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_definition",
+          "nom": "Définition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_cadrage",
+          "nom": "Cadrage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_traduction",
+          "nom": "Traduction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_ambiguite",
+          "nom": "Ambiguïté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_euphemisme",
+          "nom": "Euphémisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_mot_ecran",
+          "nom": "Mot-écran",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_mot_piege",
+          "nom": "Mot-piège",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_vocabulaire_institutionnel",
+          "nom": "Vocabulaire institutionnel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_jargon",
+          "nom": "Jargon",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_recit_dominant",
+          "nom": "Récit dominant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_rhetorique",
+          "nom": "Rhétorique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_conflit_interpretation",
+          "nom": "Conflit d’interprétation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_pouvoir_nommer",
+          "nom": "Pouvoir de nommer",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_invisibilisation_linguistique",
+          "nom": "Invisibilisation linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_clarification_conceptuelle",
+          "nom": "Clarification conceptuelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "fiche_conceptuelle",
+        "nom": "Fiche de clarification conceptuelle",
+        "description": "Choisir un concept social ambigu et produire une clarification : définitions, usages, confusions, tensions, effets politiques et exemples."
+      },
+      "criteres_passage": [
+        "Distinguer mot, concept, catégorie et cadrage.",
+        "Repérer les mots-écrans, mots-pièges et euphémismes.",
+        "Clarifier un concept sans effacer ses tensions réelles."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "GJS106",
+      "ordre": 6,
+      "nom": "Récits, symboles et imaginaires collectifs",
+      "concept_maitre": {
+        "concept_id": "gjs_recit_social",
+        "nom": "Récit social",
+        "type": "concept_maitre",
+        "definition_courte": "L’ensemble des histoires, images, symboles, figures et promesses qui rendent un ordre social lisible, désirable, acceptable ou contestable.",
+        "fonction_pedagogique": "Comprendre comment les récits structurent les appartenances, mobilisent l’attention et orientent les actions collectives."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_recit_public",
+          "nom": "Récit public",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_mythe_social",
+          "nom": "Mythe social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_fiction_fondatrice",
+          "nom": "Fiction fondatrice",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_symbole",
+          "nom": "Symbole",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_image_collective",
+          "nom": "Image collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_slogan",
+          "nom": "Slogan",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_persona",
+          "nom": "Persona",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_masque",
+          "nom": "Masque",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_reputation_narrative",
+          "nom": "Réputation narrative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_memoire_collective",
+          "nom": "Mémoire collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_heros",
+          "nom": "Héros",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_ennemi",
+          "nom": "Ennemi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_victime",
+          "nom": "Victime",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_sauveur",
+          "nom": "Sauveur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_scandale",
+          "nom": "Scandale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_crise_narrative",
+          "nom": "Crise narrative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_panique_morale",
+          "nom": "Panique morale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_promesse_collective",
+          "nom": "Promesse collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_imaginaire_politique",
+          "nom": "Imaginaire politique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_narrative",
+        "nom": "Analyse d’un récit social",
+        "description": "Analyser un récit public ou institutionnel : figures, symboles, promesses, ennemis, victimes, héros, effets de mobilisation et risques de manipulation."
+      },
+      "criteres_passage": [
+        "Identifier les figures narratives d’un récit social.",
+        "Distinguer fiction pédagogique, symbole, mythe et fait.",
+        "Évaluer les effets mobilisateurs et les risques éthiques d’un récit."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "GJS107",
+      "ordre": 7,
+      "nom": "Preuves, enquête et vérité sociale",
+      "concept_maitre": {
+        "concept_id": "gjs_preuve_sociale",
+        "nom": "Preuve sociale",
+        "type": "concept_maitre",
+        "definition_courte": "Ce qui permet de distinguer affirmation, fait, source, trace, témoignage, document, manipulation et connaissance vérifiable dans un système social.",
+        "fonction_pedagogique": "Former la posture d’enquête et d’intégrité nécessaire à toute lecture responsable du Grand Jeu social."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_preuve",
+          "nom": "Preuve",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_source",
+          "nom": "Source",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_fait",
+          "nom": "Fait",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_temoignage",
+          "nom": "Témoignage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_donnee",
+          "nom": "Donnée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_document",
+          "nom": "Document",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_archive",
+          "nom": "Archive",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_trace",
+          "nom": "Trace",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_indice",
+          "nom": "Indice",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_enquete",
+          "nom": "Enquête",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_hypothese",
+          "nom": "Hypothèse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_verification",
+          "nom": "Vérification",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_corroboration",
+          "nom": "Corroboration",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_contradiction",
+          "nom": "Contradiction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_erreur",
+          "nom": "Erreur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_biais",
+          "nom": "Biais",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_manipulation",
+          "nom": "Manipulation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_fabrication_preuve",
+          "nom": "Fabrication de preuve",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_auditabilite",
+          "nom": "Auditabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_integrite",
+          "nom": "Intégrité",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "dossier_enquete",
+        "nom": "Dossier d’enquête vérifiable",
+        "description": "Produire un dossier court distinguant faits, sources, témoignages, hypothèses, incertitudes, contradictions et limites de preuve."
+      },
+      "criteres_passage": [
+        "Distinguer affirmation, fait, preuve, source et témoignage.",
+        "Repérer les erreurs, biais, manipulations et contradictions.",
+        "Construire un dossier auditable et intègre."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "GJS108",
+      "ordre": 8,
+      "nom": "Médias, attention et scène publique",
+      "concept_maitre": {
+        "concept_id": "gjs_visibilite_publique",
+        "nom": "Visibilité publique",
+        "type": "concept_maitre",
+        "definition_courte": "La manière dont une idée, une personne, un conflit ou un événement devient visible, amplifié, cadré, monétisé, ignoré ou invisibilisé.",
+        "fonction_pedagogique": "Former une lecture responsable de l’attention publique, des plateformes, des médias, du théâtre social et des mécanismes d’amplification."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_media",
+          "nom": "Média",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_scene_publique",
+          "nom": "Scène publique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_attention",
+          "nom": "Attention",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_audience",
+          "nom": "Audience",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_visibilite",
+          "nom": "Visibilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_invisibilite",
+          "nom": "Invisibilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_reputation",
+          "nom": "Réputation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_viralite",
+          "nom": "Viralité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_algorithme",
+          "nom": "Algorithme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_plateforme",
+          "nom": "Plateforme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_decouvrabilite",
+          "nom": "Découvrabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_influenceur",
+          "nom": "Influenceur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_gatekeeper",
+          "nom": "Gatekeeper",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_cadrage_mediatique",
+          "nom": "Cadrage médiatique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_agenda_public",
+          "nom": "Agenda public",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_polemique",
+          "nom": "Polémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_satire",
+          "nom": "Satire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_theatre_public",
+          "nom": "Théâtre public",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_performance_sociale",
+          "nom": "Performance sociale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_amplification",
+          "nom": "Amplification",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_visibilite",
+        "nom": "Audit d’un mécanisme de visibilité publique",
+        "description": "Analyser comment une idée, une personne ou un enjeu circule dans les médias, plateformes, algorithmes, récits et scènes publiques."
+      },
+      "criteres_passage": [
+        "Identifier les mécanismes d’attention, de cadrage et d’amplification.",
+        "Distinguer visibilité, réputation, audience et découvrabilité.",
+        "Évaluer les risques éthiques d’une performance publique."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "GJS109",
+      "ordre": 9,
+      "nom": "Comportements, alliances et stratégies de jeu",
+      "concept_maitre": {
+        "concept_id": "gjs_joueur_social",
+        "nom": "Joueur social",
+        "type": "concept_maitre",
+        "definition_courte": "La personne ou le groupe qui agit dans un système social en fonction de motivations, intérêts, peurs, loyautés, contraintes, alliances et stratégies.",
+        "fonction_pedagogique": "Comprendre les comportements humains dans le jeu sans réduire les personnes à des fonctions abstraites."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_comportement",
+          "nom": "Comportement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_motivation",
+          "nom": "Motivation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_interet",
+          "nom": "Intérêt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_peur",
+          "nom": "Peur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_desir",
+          "nom": "Désir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_loyaute",
+          "nom": "Loyauté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_honte",
+          "nom": "Honte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_confiance",
+          "nom": "Confiance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_mefiance",
+          "nom": "Méfiance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_conformisme",
+          "nom": "Conformisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_opportunisme",
+          "nom": "Opportunisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_cooperation",
+          "nom": "Coopération",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_competition",
+          "nom": "Compétition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_trahison",
+          "nom": "Trahison",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_alliance",
+          "nom": "Alliance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_conflit",
+          "nom": "Conflit",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_reputation_personnelle",
+          "nom": "Réputation personnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_strategie_survie",
+          "nom": "Stratégie de survie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_lucidite",
+          "nom": "Lucidité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_integrite_personnelle",
+          "nom": "Intégrité personnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_strategique",
+        "nom": "Analyse d’une configuration de joueurs",
+        "description": "Analyser une situation sociale en identifiant motivations, intérêts, peurs, loyautés, alliances, conflits, stratégies de survie et risques d’intégrité."
+      },
+      "criteres_passage": [
+        "Lire les comportements sans psychologisation abusive.",
+        "Identifier les alliances, conflits, loyautés et intérêts.",
+        "Distinguer lucidité stratégique et opportunisme destructeur."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "GJS110",
+      "ordre": 10,
+      "nom": "Action collective, transformation et mémoire",
+      "concept_maitre": {
+        "concept_id": "gjs_puissance_operatoire_collective",
+        "nom": "Puissance opératoire collective",
+        "type": "concept_maitre",
+        "definition_courte": "La capacité de transformer une lecture du jeu en action responsable, coordonnée, vérifiable, mémorisée et transmissible.",
+        "fonction_pedagogique": "Faire passer l’Aspirant de la compréhension du jeu à la conception d’une intervention ou transformation défendable."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "gjs_action_collective",
+          "nom": "Action collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_mobilisation",
+          "nom": "Mobilisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_assemblee",
+          "nom": "Assemblée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_deliberation",
+          "nom": "Délibération",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_decision",
+          "nom": "Décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_responsabilite",
+          "nom": "Responsabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_projet",
+          "nom": "Projet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_prototype",
+          "nom": "Prototype",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_defi_public",
+          "nom": "Défi public",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_intervention",
+          "nom": "Intervention",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_strategie_changement",
+          "nom": "Stratégie de changement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_reforme",
+          "nom": "Réforme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_reparation",
+          "nom": "Réparation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_experimentation",
+          "nom": "Expérimentation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_apprentissage_collectif",
+          "nom": "Apprentissage collectif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_memoire_institutionnelle",
+          "nom": "Mémoire institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_retour_experience",
+          "nom": "Retour d’expérience",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_transmission",
+          "nom": "Transmission",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_passage_niveau",
+          "nom": "Passage de niveau",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "gjs_puissance_operatoire",
+          "nom": "Puissance opératoire",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "dossier_transformation",
+        "nom": "Dossier d’action et de transformation",
+        "description": "Produire une proposition d’intervention collective : diagnostic, acteurs, ressources, stratégie, preuves, risques éthiques, mémoire et mécanisme de retour d’expérience."
+      },
+      "criteres_passage": [
+        "Transformer une carte du jeu en proposition d’action.",
+        "Intégrer responsabilité, preuve, mémoire et transmission.",
+        "Défendre une intervention sans manipulation, humiliation ni confusion entre fiction et fait."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "type": "dossier_puissance_operatoire",
+    "nom": "Cartographie et transformation d’un Grand Jeu social réel",
+    "description": "L’Aspirant choisit un système social réel, le cartographie, analyse ses règles, institutions, pouvoirs, ressources, récits, preuves, médias, comportements et possibilités de transformation, puis propose une intervention responsable.",
+    "livrables": [
+      "Carte systémique du jeu étudié",
+      "Carte institutionnelle",
+      "Carte des pouvoirs et contre-pouvoirs",
+      "Carte des ressources, flux et accès",
+      "Clarification conceptuelle des mots-clés",
+      "Analyse narrative",
+      "Dossier de preuve",
+      "Audit de visibilité publique",
+      "Analyse des joueurs et alliances",
+      "Proposition d’action, mémoire et transmission"
+    ]
+  },
+  "limites_ethiques": [
+    "Ne pas transformer la lecture stratégique du jeu en manipulation.",
+    "Ne pas humilier les personnes ou groupes étudiés.",
+    "Ne pas confondre fiction pédagogique et fait vérifiable.",
+    "Ne pas fabriquer de preuves.",
+    "Ne pas réduire les humains à des pièces abstraites.",
+    "Ne pas utiliser la scène publique pour harceler ou intimider.",
+    "Ne pas présenter une hypothèse comme une certitude.",
+    "Ne pas confondre visibilité et valeur.",
+    "Ne pas confondre pouvoir et légitimité.",
+    "Ne pas transformer la lucidité en cynisme."
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_economie",
+      "relation": "Les ressources, flux, accès, incitatifs et captures économiques sont une grammaire centrale du Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "relation": "Les institutions, pouvoirs, légitimités, assemblées et décisions collectives structurent le plateau politique du Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "relation": "Les concepts, catégories, récits et pouvoirs de nommer déterminent ce que les joueurs peuvent voir, dire et contester."
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "relation": "Les algorithmes, données, automatisations et outils d’analyse modifient la lecture, la visibilité et l’action dans le Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "relation": "Les vulnérabilités, exclusions, conflits, dignités et réparations montrent les effets humains du Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_ecologie",
+      "relation": "Les territoires, ressources, limites vivantes et dépendances matérielles conditionnent le plateau réel du Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_architecture_sociotechnique",
+      "relation": "Les workflows, plateformes, institutions et systèmes techniques organisent les passages entre règles, acteurs et actions."
+    },
+    {
+      "voie_id": "voie_metaphysique",
+      "relation": "Les visions implicites de la vérité, de la liberté, du destin, de l’ordre et de la dignité soutiennent les règles profondes du Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_ecosysteme_digital_koa",
+      "relation": "Le kOA Digital Ecosystem fournit des outils pour connaître, choisir, agir et se souvenir dans le Grand Jeu social."
+    }
+  ],
+  "tags": [
+    "grand_jeu_social",
+    "systemes_sociaux",
+    "regles",
+    "pouvoir",
+    "institutions",
+    "recits",
+    "preuves",
+    "ressources",
+    "medias",
+    "action_collective",
+    "puissance_operatoire"
+  ]
+}

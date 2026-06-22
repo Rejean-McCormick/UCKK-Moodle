@@ -1,0 +1,53 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+
+    @template local_uckk/faculty_navigation
+
+    Public faculty navigation partial.
+
+    Context:
+    {
+        "navigation": [
+            {
+                "label": "",
+                "target": ""
+            }
+        ]
+    }
+
+    This template must not:
+    - query Moodle data;
+    - decide permissions;
+    - create fallback navigation;
+    - validate anchors;
+    - expose private user data;
+    - expose completion, grades, notes, participants, enrolments, or submissions;
+    - introduce undocumented variables.
+}}
+
+<nav
+    class="local-uckk-public-nav local-uckk-faculty-nav"
+    data-region="local-uckk-faculty-navigation"
+    aria-label="{{#str}} navigation, local_uckk {{/str}}"
+>
+    <ul class="local-uckk-public-nav__list local-uckk-faculty-nav__list">
+        {{#navigation}}
+            <li class="local-uckk-public-nav__item local-uckk-faculty-nav__item">
+                <a
+                    class="local-uckk-public-nav__link local-uckk-faculty-nav__link"
+                    href="{{target}}"
+                >
+                    {{label}}
+                </a>
+            </li>
+        {{/navigation}}
+    </ul>
+</nav>

@@ -576,7 +576,7 @@ final class program_card implements renderable, templatable, named_templatable {
      * @return string
      */
     private static function normalise_program_type($type): string {
-        $type = clean_param(core_text::strtolower(trim((string)$type)), PARAM_ALPHANUMEXT);
+        $type = clean_param(\core_text::strtolower(trim((string)$type)), PARAM_ALPHANUMEXT);
 
         $valid = [
             self::TYPE_TRONC_COMMUN,
@@ -600,7 +600,7 @@ final class program_card implements renderable, templatable, named_templatable {
      * @return string
      */
     private static function normalise_status($status): string {
-        $status = clean_param(core_text::strtolower(trim((string)$status)), PARAM_ALPHANUMEXT);
+        $status = clean_param(\core_text::strtolower(trim((string)$status)), PARAM_ALPHANUMEXT);
 
         $valid = [
             self::STATUS_DRAFT,
@@ -623,7 +623,7 @@ final class program_card implements renderable, templatable, named_templatable {
      * @return string
      */
     private static function normalise_visibility($visibility): string {
-        $visibility = clean_param(core_text::strtolower(trim((string)$visibility)), PARAM_ALPHANUMEXT);
+        $visibility = clean_param(\core_text::strtolower(trim((string)$visibility)), PARAM_ALPHANUMEXT);
 
         $valid = [
             self::VISIBILITY_PRIVATE,

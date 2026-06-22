@@ -1,0 +1,131 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+
+    @template local_uckk/faculty_course_card
+
+    Public faculty course card partial.
+
+    Context:
+    {
+        "cours_id": "",
+        "ordre": 1,
+        "nom": "",
+        "fullname": "",
+        "concept_maitre_nom": "",
+        "concept_maitre_definition": "",
+        "artefact_type": "",
+        "artefact_nom": "",
+        "artefact_description": "",
+        "moodle_url": "",
+        "is_moodle_available": false
+    }
+
+    This template must not:
+    - query Moodle data;
+    - decide permissions;
+    - create course links;
+    - render concepts_associes;
+    - render criteres_passage;
+    - expose notes, participants, enrolments, completion, grades, or submissions;
+    - present UCKK internal recognitions as public accredited degrees;
+    - introduce undocumented variables.
+
+    Public rendering rule:
+    - artefact_type is intentionally not rendered visibly because it is a
+      technical Atlas identifier such as carte_comparative or analyse_chaine_valeur.
+      The public page renders artefact_nom and artefact_description instead.
+}}
+
+<article
+    class="local-uckk-faculty-course-card local-uckk-public-card"
+    data-region="local-uckk-faculty-course-card"
+    data-cours-id="{{cours_id}}"
+    data-course-order="{{ordre}}"
+>
+    <header class="local-uckk-faculty-course-card__header">
+        <div class="local-uckk-faculty-course-card__meta">
+            {{#ordre}}
+                <span class="local-uckk-faculty-course-card__order">
+                    {{ordre}}
+                </span>
+            {{/ordre}}
+
+            {{#cours_id}}
+                <span class="local-uckk-faculty-course-card__code">
+                    {{cours_id}}
+                </span>
+            {{/cours_id}}
+        </div>
+
+        <h3 class="local-uckk-faculty-course-card__title">
+            {{#moodle_url}}
+                <a
+                    class="local-uckk-faculty-course-card__link"
+                    href="{{moodle_url}}"
+                >
+                    {{#fullname}}
+                        {{fullname}}
+                    {{/fullname}}
+                    {{^fullname}}
+                        {{nom}}
+                    {{/fullname}}
+                </a>
+            {{/moodle_url}}
+
+            {{^moodle_url}}
+                <span class="local-uckk-faculty-course-card__title-text">
+                    {{#fullname}}
+                        {{fullname}}
+                    {{/fullname}}
+                    {{^fullname}}
+                        {{nom}}
+                    {{/fullname}}
+                </span>
+            {{/moodle_url}}
+        </h3>
+    </header>
+
+    {{#concept_maitre_nom}}
+        <section class="local-uckk-faculty-course-card__concept">
+            <p class="local-uckk-faculty-course-card__eyebrow">
+                {{#str}} facultyconcept, local_uckk {{/str}}
+            </p>
+
+            <h4 class="local-uckk-faculty-course-card__concept-title">
+                {{concept_maitre_nom}}
+            </h4>
+
+            {{#concept_maitre_definition}}
+                <div class="local-uckk-faculty-course-card__concept-definition">
+                    {{concept_maitre_definition}}
+                </div>
+            {{/concept_maitre_definition}}
+        </section>
+    {{/concept_maitre_nom}}
+
+    {{#artefact_nom}}
+        <section class="local-uckk-faculty-course-card__artefact">
+            <p class="local-uckk-faculty-course-card__eyebrow">
+                {{#str}} facultyartefact, local_uckk {{/str}}
+            </p>
+
+            <h4 class="local-uckk-faculty-course-card__artefact-title">
+                {{artefact_nom}}
+            </h4>
+
+            {{#artefact_description}}
+                <div class="local-uckk-faculty-course-card__artefact-description">
+                    {{artefact_description}}
+                </div>
+            {{/artefact_description}}
+        </section>
+    {{/artefact_nom}}
+</article>

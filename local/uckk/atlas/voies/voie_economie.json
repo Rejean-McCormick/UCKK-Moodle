@@ -1,0 +1,1782 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_economie",
+  "code": "EC",
+  "nom": "Voie d’Économie",
+  "domaine_operatoire": "Ressources",
+  "niveau_vise": "Puissance opératoire",
+  "titre_interne_vise": "Mage UCKK en Économie",
+  "titre_symbolique": "Architecte d’opportunités",
+  "parchemin": "Parchemin de Puissance opératoire — Voie d’Économie",
+  "statut": "Voie fondatrice UCKK",
+  "definition_courte": "La Voie d’Économie forme des Aspirants capables de lire, cartographier et transformer les règles de circulation, de capture et de redistribution de la valeur.",
+  "angle_fondamental": "Comprendre l’argent comme règle du Grand Jeu social : ressources, incitatifs, marchés, philanthropie, subventions, plateformes, travail, valeur, extraction et redistribution.",
+  "competence_centrale": "Concevoir des modèles économiques viables qui soutiennent l’action utile sans devenir des outils d’exploitation.",
+  "seuils_progression": [
+    {
+      "seuil_id": "fondations",
+      "nom": "Fondations",
+      "fonction": "Comprendre les ressources, les flux, les incitatifs, les marchés, la monnaie, le travail et la valeur."
+    },
+    {
+      "seuil_id": "analyse_critique",
+      "nom": "Analyse critique",
+      "fonction": "Diagnostiquer l’extraction, la rente, les plateformes, la dépendance économique et la capture de richesse."
+    },
+    {
+      "seuil_id": "architecture_opportunites",
+      "nom": "Architecture d’opportunités",
+      "fonction": "Concevoir des modèles économiques viables, justes, soutenables et transmissibles."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "EC101",
+      "ordre": 1,
+      "nom": "Théories économiques et Grand Jeu des ressources",
+      "concept_maitre": {
+        "concept_id": "eco_cartes_economiques_reel",
+        "nom": "Cartes économiques du réel",
+        "definition_courte": "Les grands langages théoriques qui permettent de comprendre la richesse, le travail, la valeur, les marchés, l’État, la propriété et les ressources.",
+        "fonction_pedagogique": "Donner les cadres de lecture nécessaires pour comparer, critiquer et utiliser les théories économiques sans les confondre avec le réel lui-même.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_economie",
+          "nom": "Économie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_politique",
+          "nom": "Économie politique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_microeconomie",
+          "nom": "Microéconomie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_macroeconomie",
+          "nom": "Macroéconomie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_theorie_valeur",
+          "nom": "Théorie de la valeur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_classique",
+          "nom": "Économie classique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_neoclassique",
+          "nom": "Économie néoclassique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_keynesienne",
+          "nom": "Économie keynésienne",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_marxiste",
+          "nom": "Économie marxiste",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_institutionnaliste",
+          "nom": "Économie institutionnaliste",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_comportementale",
+          "nom": "Économie comportementale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_feministe",
+          "nom": "Économie féministe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_ecologique",
+          "nom": "Économie écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_solidaire",
+          "nom": "Économie solidaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_communs",
+          "nom": "Économie des communs",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_rationalite_economique",
+          "nom": "Rationalité économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_homo_economicus",
+          "nom": "Homo economicus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_grand_jeu_economique",
+          "nom": "Grand Jeu économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_comparative",
+        "nom": "Carte comparative des théories économiques",
+        "description": "Comparer plusieurs théories économiques selon ce qu’elles voient, ce qu’elles cachent, qui elles servent et ce qu’elles permettent de faire."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer les grandes familles de théories économiques sans les confondre avec le réel lui-même.",
+        "L’Aspirant peut comparer plusieurs cartes économiques selon leur conception de la valeur, du travail, du marché, de l’État et de la propriété.",
+        "L’Aspirant peut mobiliser une théorie économique pour analyser un cas concret en indiquant ce qu’elle révèle et ce qu’elle masque.",
+        "L’Aspirant peut situer une controverse économique dans plusieurs traditions théoriques."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "EC102",
+      "ordre": 2,
+      "nom": "Valeur, travail et production",
+      "concept_maitre": {
+        "concept_id": "eco_formation_valeur",
+        "nom": "Formation de la valeur",
+        "definition_courte": "Processus par lequel la richesse est produite, reconnue, mesurée, rémunérée, invisibilisée ou capturée.",
+        "fonction_pedagogique": "Comprendre comment le travail, les coûts, les moyens de production et les chaînes de valeur transforment des ressources en richesse reconnue.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_valeur",
+          "nom": "Valeur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_valeur_usage",
+          "nom": "Valeur d’usage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_valeur_echange",
+          "nom": "Valeur d’échange",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_valeur_ajoutee",
+          "nom": "Valeur ajoutée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_creation_valeur",
+          "nom": "Création de valeur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_capture_valeur",
+          "nom": "Capture de valeur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_travail",
+          "nom": "Travail",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_travail_salarie",
+          "nom": "Travail salarié",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_travail_autonome",
+          "nom": "Travail autonome",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_travail_invisible",
+          "nom": "Travail invisible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_travail_reproductif",
+          "nom": "Travail reproductif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_travail_productif",
+          "nom": "Travail productif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_salaire",
+          "nom": "Salaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_productivite",
+          "nom": "Productivité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_capital",
+          "nom": "Capital",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_moyens_production",
+          "nom": "Moyens de production",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_chaine_valeur",
+          "nom": "Chaîne de valeur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cout_production",
+          "nom": "Coût de production",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_marge",
+          "nom": "Marge",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_profit",
+          "nom": "Profit",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_surplus",
+          "nom": "Surplus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_dignite_travail",
+          "nom": "Dignité du travail",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_fatigue_economique",
+          "nom": "Fatigue économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_chaine_valeur",
+        "nom": "Analyse d’une chaîne de valeur",
+        "description": "Identifier qui travaille, qui produit, qui paie, qui prend le risque, qui reçoit le revenu et qui capte le surplus."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer valeur d’usage, valeur d’échange, valeur ajoutée, valeur capturée et valeur redistribuée.",
+        "L’Aspirant peut cartographier une chaîne de production en identifiant travail, coûts, prix, marge, profit, surplus et dépendances.",
+        "L’Aspirant peut reconnaître les formes de travail visibles, invisibles, productives et reproductives impliquées dans une activité économique.",
+        "L’Aspirant peut expliquer comment un prix ou une marge peut refléter, masquer ou déplacer une création réelle de valeur."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "EC103",
+      "ordre": 3,
+      "nom": "Ressources, rareté et circularité",
+      "concept_maitre": {
+        "concept_id": "eco_organisation_materielle_ressources",
+        "nom": "Organisation matérielle des ressources",
+        "definition_courte": "Lecture de l’économie comme agencement de ressources, d’infrastructures, de cycles matériels, de limites écologiques et d’accès.",
+        "fonction_pedagogique": "Ancrer l’économie dans le réel matériel : énergie, territoire, alimentation, transport, déchets, réparation et soutenabilité.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_ressource",
+          "nom": "Ressource",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_rarete",
+          "nom": "Rareté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_abondance",
+          "nom": "Abondance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_allocation",
+          "nom": "Allocation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_acces",
+          "nom": "Accès",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_energie",
+          "nom": "Énergie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_matiere_premiere",
+          "nom": "Matière première",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_territoire",
+          "nom": "Territoire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_terre",
+          "nom": "Terre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_eau",
+          "nom": "Eau",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_alimentation",
+          "nom": "Alimentation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_logement",
+          "nom": "Logement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_transport",
+          "nom": "Transport",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_infrastructure",
+          "nom": "Infrastructure",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cycle_vie",
+          "nom": "Cycle de vie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_dechet",
+          "nom": "Déchet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_reparation",
+          "nom": "Réparation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_reemploi",
+          "nom": "Réemploi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_recyclage",
+          "nom": "Recyclage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_externalite_ecologique",
+          "nom": "Externalité écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_limite_planetaire",
+          "nom": "Limite planétaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_resilience_territoriale",
+          "nom": "Résilience territoriale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_circulaire",
+          "nom": "Économie circulaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_soutenabilite_materielle",
+          "nom": "Soutenabilité matérielle",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_cycle_ressources",
+        "nom": "Carte d’un cycle de ressources",
+        "description": "Cartographier les ressources, flux matériels, pertes, déchets, réparations possibles et dépendances territoriales d’un système économique."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut lire une activité économique comme cycle de ressources, de matières, d’énergie, d’usage, de déchets et de récupération.",
+        "L’Aspirant peut distinguer rareté réelle, rareté organisée, abondance, externalité et limite matérielle.",
+        "L’Aspirant peut produire une carte simple des flux matériels d’un produit, service, territoire ou projet.",
+        "L’Aspirant peut proposer une amélioration circulaire réaliste sans confondre recyclage, réparation, sobriété et régénération."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "EC104",
+      "ordre": 4,
+      "nom": "Marchés, prix et incitatifs",
+      "concept_maitre": {
+        "concept_id": "eco_regles_marche_incitatifs",
+        "nom": "Règles de marché et incitatifs",
+        "definition_courte": "Structures de prix, signaux, contraintes et comportements qui orientent les choix individuels et collectifs.",
+        "fonction_pedagogique": "Lire les marchés comme arènes réglées où les prix, informations, pouvoirs et incitatifs orientent l’action.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_marche",
+          "nom": "Marché",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_offre",
+          "nom": "Offre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_demande",
+          "nom": "Demande",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_equilibre",
+          "nom": "Équilibre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_concurrence",
+          "nom": "Concurrence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_monopole",
+          "nom": "Monopole",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_oligopole",
+          "nom": "Oligopole",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_pouvoir_marche",
+          "nom": "Pouvoir de marché",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_barriere_entree",
+          "nom": "Barrière à l’entrée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_prix",
+          "nom": "Prix",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_elasticite",
+          "nom": "Élasticité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_incitatif",
+          "nom": "Incitatif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_arbitrage",
+          "nom": "Arbitrage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cout_opportunite",
+          "nom": "Coût d’opportunité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_preference",
+          "nom": "Préférence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_utilite",
+          "nom": "Utilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_information_imparfaite",
+          "nom": "Information imparfaite",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_asymetrie_information",
+          "nom": "Asymétrie d’information",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_signal_economique",
+          "nom": "Signal économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_selection_adverse",
+          "nom": "Sélection adverse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_alea_moral",
+          "nom": "Aléa moral",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_contrainte_budgetaire",
+          "nom": "Contrainte budgétaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_incitatifs",
+        "nom": "Analyse d’un système d’incitatifs",
+        "description": "Identifier les signaux, contraintes, récompenses, risques et effets pervers qui orientent les comportements dans un système économique."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut expliquer les relations entre marché, offre, demande, prix, concurrence, pouvoir de marché et incitatifs.",
+        "L’Aspirant peut identifier les asymétries d’information, barrières à l’entrée, effets de monopole ou oligopole dans un cas concret.",
+        "L’Aspirant peut analyser comment un incitatif modifie les comportements et peut produire des effets pervers.",
+        "L’Aspirant peut proposer une règle de marché ou un incitatif plus juste, vérifiable et moins capturable."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "EC105",
+      "ordre": 5,
+      "nom": "Monnaie, dette, crédit et finance",
+      "concept_maitre": {
+        "concept_id": "eco_architecture_monetaire_financiere",
+        "nom": "Architecture monétaire et financière",
+        "definition_courte": "Ensemble des règles, institutions et promesses qui organisent la monnaie, le crédit, la dette, la liquidité, l’épargne et l’investissement.",
+        "fonction_pedagogique": "Comprendre comment l’argent, la dette et les institutions financières ouvrent ou ferment des possibilités d’action.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_monnaie",
+          "nom": "Monnaie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_devise",
+          "nom": "Devise",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_unite_compte",
+          "nom": "Unité de compte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_moyen_echange",
+          "nom": "Moyen d’échange",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_reserve_valeur",
+          "nom": "Réserve de valeur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_confiance_monetaire",
+          "nom": "Confiance monétaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_credit",
+          "nom": "Crédit",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_dette",
+          "nom": "Dette",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_interet",
+          "nom": "Intérêt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_taux_interet",
+          "nom": "Taux d’intérêt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_inflation",
+          "nom": "Inflation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_deflation",
+          "nom": "Déflation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_liquidite",
+          "nom": "Liquidité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_banque",
+          "nom": "Banque",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_banque_centrale",
+          "nom": "Banque centrale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_creation_monetaire",
+          "nom": "Création monétaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_epargne",
+          "nom": "Épargne",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_investissement",
+          "nom": "Investissement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_risque_financier",
+          "nom": "Risque financier",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_speculation",
+          "nom": "Spéculation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_dependance_financiere",
+          "nom": "Dépendance financière",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_monnaie_locale",
+          "nom": "Monnaie locale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_credit_mutuel",
+          "nom": "Crédit mutuel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_banque_temps",
+          "nom": "Banque de temps",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_dependance_financiere",
+        "nom": "Carte de dépendance financière",
+        "description": "Cartographier les crédits, dettes, intérêts, obligations, sources de liquidité et points de vulnérabilité d’un projet ou d’une organisation."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer monnaie, devise, crédit, dette, intérêt, liquidité, épargne, investissement, actif et passif.",
+        "L’Aspirant peut cartographier les flux financiers de base d’un ménage, d’une organisation, d’un projet ou d’une institution.",
+        "L’Aspirant peut distinguer solvabilité, liquidité, risque financier, effet de levier et dépendance au crédit.",
+        "L’Aspirant peut évaluer une option de financement en explicitant coûts, risques, obligations, dépendances et marge de manœuvre."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "EC106",
+      "ordre": 6,
+      "nom": "Entreprise, propriété et viabilité",
+      "concept_maitre": {
+        "concept_id": "eco_organisation_propriete_viabilite",
+        "nom": "Organisation, propriété et viabilité",
+        "definition_courte": "Lecture d’une organisation économique selon sa propriété, sa gouvernance, ses coûts, ses revenus, ses risques et sa capacité de durer.",
+        "fonction_pedagogique": "Former la capacité à concevoir ou analyser une organisation viable : qui possède, qui décide, qui travaille, qui récolte et qui supporte le risque.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_entreprise",
+          "nom": "Entreprise",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_firme",
+          "nom": "Firme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_pme",
+          "nom": "PME",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_modele_affaires",
+          "nom": "Modèle d’affaires",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_budget",
+          "nom": "Budget",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cout_fixe",
+          "nom": "Coût fixe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cout_variable",
+          "nom": "Coût variable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_seuil_rentabilite",
+          "nom": "Seuil de rentabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_tresorerie",
+          "nom": "Trésorerie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_propriete_privee",
+          "nom": "Propriété privée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_propriete_publique",
+          "nom": "Propriété publique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_propriete_collective",
+          "nom": "Propriété collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_propriete_intellectuelle",
+          "nom": "Propriété intellectuelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_actionnaire",
+          "nom": "Actionnaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_membre",
+          "nom": "Membre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_dividende",
+          "nom": "Dividende",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_ristourne",
+          "nom": "Ristourne",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_gouvernance_entreprise",
+          "nom": "Gouvernance d’entreprise",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_conseil_administration",
+          "nom": "Conseil d’administration",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_responsabilite_limitee",
+          "nom": "Responsabilité limitée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_mission_sociale",
+          "nom": "Mission sociale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_risque_operationnel",
+          "nom": "Risque opérationnel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_viabilite_economique",
+          "nom": "Viabilité économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_preuve_utilite",
+          "nom": "Preuve d’utilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "modele_viabilite",
+        "nom": "Modèle de viabilité économique",
+        "description": "Produire un modèle d’organisation comprenant budget, coûts, revenus, propriété, gouvernance, risques, utilité et seuil de survie."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut comparer plusieurs formes d’organisation économique selon propriété, gouvernance, responsabilité, mission et distribution des surplus.",
+        "L’Aspirant peut distinguer entreprise, firme, société par actions, PME, coopérative, mutuelle et organisme sans but lucratif.",
+        "L’Aspirant peut analyser la viabilité d’un modèle organisationnel à partir de revenus, coûts, gouvernance, réserves, risques et mission.",
+        "L’Aspirant peut expliquer qui possède, qui décide, qui travaille, qui supporte le risque et qui récolte dans une organisation."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "EC107",
+      "ordre": 7,
+      "nom": "Extraction, rente et capture de richesse",
+      "concept_maitre": {
+        "concept_id": "eco_extraction_capture_richesse",
+        "nom": "Extraction et capture de richesse",
+        "definition_courte": "Processus par lesquels une valeur créée collectivement est prélevée, bloquée, concentrée, siphonnée ou rendue dépendante d’un acteur dominant.",
+        "fonction_pedagogique": "Apprendre à repérer les mécanismes visibles et invisibles de captation abusive de valeur.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_extraction_richesse",
+          "nom": "Extraction de richesse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_captation_valeur",
+          "nom": "Captation de valeur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_rente",
+          "nom": "Rente",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_rente_fonciere",
+          "nom": "Rente foncière",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_rente_financiere",
+          "nom": "Rente financière",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_rente_plateforme",
+          "nom": "Rente de plateforme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_exploitation",
+          "nom": "Exploitation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_precarisation",
+          "nom": "Précarisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_concentration_richesse",
+          "nom": "Concentration de richesse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_accumulation",
+          "nom": "Accumulation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_depossession",
+          "nom": "Dépossession",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_dependance_economique",
+          "nom": "Dépendance économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_intermediaire_abusif",
+          "nom": "Intermédiaire abusif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_commission",
+          "nom": "Commission",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_frais_caches",
+          "nom": "Frais cachés",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_verrouillage",
+          "nom": "Verrouillage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_capture_reglementaire",
+          "nom": "Capture réglementaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_lobbying_economique",
+          "nom": "Lobbying économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_privatisation_gains",
+          "nom": "Privatisation des gains",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_socialisation_pertes",
+          "nom": "Socialisation des pertes",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_siphonnage_economique",
+          "nom": "Siphonnage économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_contre_pouvoir_economique",
+          "nom": "Contre-pouvoir économique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_extraction",
+        "nom": "Audit d’extraction économique",
+        "description": "Identifier les points de captation, les intermédiaires abusifs, les rentes, les dépendances et les contre-pouvoirs possibles dans un secteur concret."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer profit légitime, rente, extraction, capture, exploitation, commission abusive et frais cachés.",
+        "L’Aspirant peut cartographier qui crée la valeur, qui contrôle les passages, qui prend le risque et qui capte le surplus.",
+        "L’Aspirant peut repérer dépendances économiques, verrouillages, plateformes, monopoles, capture réglementaire et privatisation des gains.",
+        "L’Aspirant peut proposer des contre-mécanismes de limitation de la capture ou de redistribution de la valeur."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "EC108",
+      "ordre": 8,
+      "nom": "Redistribution, fiscalité et justice économique",
+      "concept_maitre": {
+        "concept_id": "eco_redistribution_justice",
+        "nom": "Redistribution et justice économique",
+        "definition_courte": "Redessin des flux de richesse, de sécurité et de capacité d’agir par les règles fiscales, sociales, publiques et collectives.",
+        "fonction_pedagogique": "Comprendre comment les sociétés corrigent, compensent ou réorganisent les déséquilibres économiques.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_redistribution",
+          "nom": "Redistribution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_fiscalite",
+          "nom": "Fiscalité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_impot",
+          "nom": "Impôt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_impot_progressif",
+          "nom": "Impôt progressif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_taxe",
+          "nom": "Taxe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_depense_publique",
+          "nom": "Dépense publique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_service_public",
+          "nom": "Service public",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_bien_public",
+          "nom": "Bien public",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_assurance_sociale",
+          "nom": "Assurance sociale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_securite_sociale",
+          "nom": "Sécurité sociale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_revenu_minimum",
+          "nom": "Revenu minimum",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_revenu_garanti",
+          "nom": "Revenu garanti",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_allocation_familiale",
+          "nom": "Allocation familiale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_assurance_chomage",
+          "nom": "Assurance chômage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_retraite",
+          "nom": "Retraite",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_patrimoine",
+          "nom": "Patrimoine",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_inegalite",
+          "nom": "Inégalité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_pauvrete",
+          "nom": "Pauvreté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_mobilite_sociale",
+          "nom": "Mobilité sociale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_justice_fiscale",
+          "nom": "Justice fiscale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_equite_salariale",
+          "nom": "Équité salariale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_solidarite",
+          "nom": "Solidarité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_metiers_essentiels",
+          "nom": "Métiers essentiels",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_utilite_non_rentable",
+          "nom": "Utilité non rentable",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "proposition_redistribution",
+        "nom": "Proposition de mécanisme redistributif",
+        "description": "Concevoir un mécanisme qui précise qui contribue, qui reçoit, selon quelles règles, avec quels risques d’effet pervers et quels indicateurs de justice."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut expliquer les principaux mécanismes de redistribution : fiscalité, impôt progressif, taxes, services publics, transferts et sécurité sociale.",
+        "L’Aspirant peut distinguer égalité, équité, justice fiscale, mobilité sociale, patrimoine, pauvreté et inégalités.",
+        "L’Aspirant peut analyser les effets d’un mécanisme redistributif sur les flux de sécurité, de pouvoir économique et de capacité d’agir.",
+        "L’Aspirant peut proposer un mécanisme de redistribution en indiquant contributeurs, bénéficiaires, règles, risques et limites."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "EC109",
+      "ordre": 9,
+      "nom": "Communs, coopératives et financement collectif",
+      "concept_maitre": {
+        "concept_id": "eco_modeles_non_extractifs",
+        "nom": "Modèles économiques non extractifs",
+        "definition_courte": "Architectures économiques fondées sur les communs, la coopération, la propriété partagée, le financement solidaire et la limitation de la captation abusive.",
+        "fonction_pedagogique": "Former la capacité à concevoir des modèles coopératifs, communs, hybrides ou solidaires capables de durer.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_communs",
+          "nom": "Communs",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_bien_commun",
+          "nom": "Bien commun",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_gouvernance_communs",
+          "nom": "Gouvernance des communs",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_licence_ouverte",
+          "nom": "Licence ouverte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_logiciel_libre",
+          "nom": "Logiciel libre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_open_source",
+          "nom": "Open source",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cooperative",
+          "nom": "Coopérative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cooperative_travail",
+          "nom": "Coopérative de travail",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cooperative_solidarite",
+          "nom": "Coopérative de solidarité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cooperative_financiere",
+          "nom": "Coopérative financière",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_caisse_populaire",
+          "nom": "Caisse populaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_mutuelle",
+          "nom": "Mutuelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_part_sociale",
+          "nom": "Part sociale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_reserve_collective",
+          "nom": "Réserve collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_finance_solidaire",
+          "nom": "Finance solidaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_sociofinancement",
+          "nom": "Sociofinancement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_obligation_communautaire",
+          "nom": "Obligation communautaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_capital_patient",
+          "nom": "Capital patient",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_zero_skim",
+          "nom": "Zéro-skim",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_philanthropie",
+          "nom": "Philanthropie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_mecenat",
+          "nom": "Mécénat",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_fondation",
+          "nom": "Fondation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_appel_projets",
+          "nom": "Appel à projets",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_subvention",
+          "nom": "Subvention",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_dossier_financement",
+          "nom": "Dossier de financement",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "design_modele_collectif",
+        "nom": "Design d’un modèle commun, coopératif ou hybride",
+        "description": "Concevoir un modèle de gouvernance, de financement et de redistribution pour une initiative collective viable."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer commun, bien commun, coopérative, économie sociale, finance solidaire, monnaie locale et capital patient.",
+        "L’Aspirant peut cartographier la gouvernance d’un commun ou d’une coopérative : membres, règles d’accès, décisions, réserves et responsabilités.",
+        "L’Aspirant peut concevoir un mode de financement collectif qui limite l’extraction et soutient la viabilité du projet.",
+        "L’Aspirant peut évaluer les tensions entre idéal coopératif, contraintes économiques, conflits d’usage et soutenabilité."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "EC110",
+      "ordre": 10,
+      "nom": "Plateformes, IA et architecture d’opportunités",
+      "concept_maitre": {
+        "concept_id": "eco_architecture_opportunites_numeriques_sociales",
+        "nom": "Architecture d’opportunités numériques et sociales",
+        "definition_courte": "Conception d’un modèle économique viable dans un monde structuré par les plateformes, les données, l’IA, l’automatisation et les dépendances numériques.",
+        "fonction_pedagogique": "Synthétiser la voie en transformant une idée en modèle économique défendable, mesurable, gouvernable et soutenable.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "eco_plateforme_numerique",
+          "nom": "Plateforme numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_donnee",
+          "nom": "Donnée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_algorithme",
+          "nom": "Algorithme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_economie_attention",
+          "nom": "Économie de l’attention",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_reputation_numerique",
+          "nom": "Réputation numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_decouvrabilite",
+          "nom": "Découvrabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_abonnement",
+          "nom": "Abonnement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_commission_numerique",
+          "nom": "Commission numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_verrouillage_numerique",
+          "nom": "Verrouillage numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_automatisation",
+          "nom": "Automatisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_intelligence_artificielle",
+          "nom": "Intelligence artificielle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_substitution_travail",
+          "nom": "Substitution du travail",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_augmentation_travail",
+          "nom": "Augmentation du travail",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_moyens_production_numeriques",
+          "nom": "Moyens de production numériques",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_infrastructure_cloud",
+          "nom": "Infrastructure cloud",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_dependance_infrastructurelle",
+          "nom": "Dépendance infrastructurelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_effet_reseau",
+          "nom": "Effet de réseau",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_scalabilite",
+          "nom": "Scalabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_cout_marginal_zero",
+          "nom": "Coût marginal zéro",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_souverainete_numerique",
+          "nom": "Souveraineté numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_architecture_opportunites",
+          "nom": "Architecture d’opportunités",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_modele_valeur",
+          "nom": "Modèle de valeur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_parties_prenantes",
+          "nom": "Parties prenantes",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_indicateur_viabilite",
+          "nom": "Indicateur de viabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_indicateur_utilite_reelle",
+          "nom": "Indicateur d’utilité réelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_gouvernance_modele",
+          "nom": "Gouvernance du modèle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_memoire_apprentissage",
+          "nom": "Mémoire d’apprentissage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "eco_strategie_deploiement",
+          "nom": "Stratégie de déploiement",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "modele_economique_complet",
+        "nom": "Architecture d’opportunités",
+        "description": "Produire un modèle économique complet : ressources, flux, financement, risques, gouvernance, indicateurs, utilité réelle, mémoire et stratégie de déploiement."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut analyser comment plateformes, données, algorithmes, IA, attention et effets de réseau transforment la création et la capture de valeur.",
+        "L’Aspirant peut repérer dépendances numériques, coûts cachés, surveillance économique, verrouillage et concentration d’infrastructure.",
+        "L’Aspirant peut concevoir une architecture d’opportunités intégrant besoin réel, modèle de valeur, gouvernance, preuve, risques et soutenabilité.",
+        "L’Aspirant peut produire un projet économique final défendable, vérifiable, non extractif et transmissible."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "nom": "Modèle économique ou financier pour un projet réel",
+    "description": "L’Aspirant produit un modèle économique complet pour un projet réel, fictif ou émergent.",
+    "elements_attendus": [
+      "description du projet",
+      "problème économique traité",
+      "cartographie des ressources",
+      "cartographie des flux d’argent",
+      "cartographie des flux d’information",
+      "acteurs et incitatifs",
+      "sources de financement",
+      "budget prévisionnel",
+      "risques d’extraction ou de dépendance",
+      "mécanismes de redistribution ou de protection",
+      "modèle de gouvernance",
+      "indicateurs de viabilité",
+      "indicateurs d’utilité réelle",
+      "stratégie de déploiement",
+      "mécanisme de mémoire et d’apprentissage"
+    ],
+    "question_directrice": "Comment ce modèle permet-il à une action utile de survivre sans devenir un outil d’exploitation?"
+  },
+  "limites_ethiques": [
+    "ne pas enseigner l’exploitation comme stratégie acceptable",
+    "ne pas réduire la valeur humaine à la productivité",
+    "ne pas glorifier la richesse comme preuve automatique de mérite",
+    "ne pas présenter la pauvreté comme simple échec individuel",
+    "ne pas confondre efficacité et justice",
+    "ne pas confondre visibilité et valeur",
+    "ne pas confondre rentabilité et utilité",
+    "ne pas utiliser l’IA pour justifier la dépossession des travailleurs",
+    "ne pas masquer les intermédiaires qui capturent la valeur"
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_grand_jeu_social",
+      "relation": "L’économie est une grammaire centrale du Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_architecture_sociotechnique",
+      "relation": "Les modèles économiques doivent être intégrés dans des systèmes, workflows et plateformes gouvernables."
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "relation": "L’économie touche la redistribution, les subventions, la fiscalité, les institutions et les choix collectifs."
+    },
+    {
+      "voie_id": "voie_ecologie",
+      "relation": "Les ressources économiques sont ancrées dans l’énergie, l’alimentation, le territoire, les matières, le climat et les milieux."
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "relation": "La pauvreté, l’exclusion, la dépendance, la dignité et les vulnérabilités ont toujours une dimension économique."
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "relation": "L’IA transforme la productivité, l’emploi, la propriété des outils et la distribution de la valeur."
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "relation": "Les mots économiques encadrent ce que la société juge possible, acceptable ou légitime."
+    },
+    {
+      "voie_id": "voie_metaphysique",
+      "relation": "L’économie suppose une vision implicite de l’humain : productif, consommateur, créateur, dépendant, libre, utile ou digne."
+    }
+  ],
+  "tags": [
+    "ressources",
+    "flux",
+    "valeur",
+    "incitatifs",
+    "marches",
+    "monnaie",
+    "dette",
+    "travail",
+    "extraction",
+    "redistribution",
+    "communs",
+    "cooperatives",
+    "plateformes",
+    "ia",
+    "architecture_opportunites"
+  ]
+}

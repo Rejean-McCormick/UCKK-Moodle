@@ -458,7 +458,7 @@ final class submit_reflection extends external_api {
      * @throws invalid_parameter_exception
      */
     private static function normalise_reflection_type(string $type): string {
-        $type = clean_param(trim(core_text::strtolower($type)), PARAM_ALPHANUMEXT);
+        $type = clean_param(trim(\core_text::strtolower($type)), PARAM_ALPHANUMEXT);
 
         $allowed = [
             self::TYPE_GENERAL,
@@ -485,7 +485,7 @@ final class submit_reflection extends external_api {
      * @throws invalid_parameter_exception
      */
     private static function normalise_visibility(string $visibility): string {
-        $visibility = clean_param(trim(core_text::strtolower($visibility)), PARAM_ALPHANUMEXT);
+        $visibility = clean_param(trim(\core_text::strtolower($visibility)), PARAM_ALPHANUMEXT);
 
         $allowed = [
             self::VISIBILITY_PRIVATE,

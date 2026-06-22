@@ -293,9 +293,9 @@ function local_uckk_public_courses_get_cards(): array {
             'type' => 'course',
             'shortname' => $shortname,
             'code' => $shortname,
-            'sorttitle' => core_text::strtolower($title),
-            'sortcategory' => core_text::strtolower($categorylabel),
-            'searchtext' => core_text::strtolower($searchtext),
+            'sorttitle' => \core_text::strtolower($title),
+            'sortcategory' => \core_text::strtolower($categorylabel),
+            'searchtext' => \core_text::strtolower($searchtext),
             'hasmetadata' => true,
             'metadata' => [
                 [
@@ -321,7 +321,7 @@ function local_uckk_public_courses_get_cards(): array {
  * @return array<int, array<string, mixed>>
  */
 function local_uckk_public_courses_filter_cards(array $cards, array $state): array {
-    $query = core_text::strtolower(local_uckk_public_courses_safe_param_text($state['q']));
+    $query = \core_text::strtolower(local_uckk_public_courses_safe_param_text($state['q']));
     $category = local_uckk_public_courses_normalise_category_key($state['category']);
 
     return array_values(array_filter($cards, static function(array $card) use ($query, $category): bool {
@@ -332,7 +332,7 @@ function local_uckk_public_courses_filter_cards(array $cards, array $state): arr
         if ($query !== '') {
             $haystack = (string)($card['searchtext'] ?? '');
 
-            if (core_text::strpos($haystack, $query) === false) {
+            if (\core_text::strpos($haystack, $query) === false) {
                 return false;
             }
         }
@@ -563,7 +563,7 @@ function local_uckk_public_courses_slug(string $value): string {
         '—' => '-', '–' => '-',
     ]);
 
-    $value = trim(core_text::strtolower($value));
+    $value = trim(\core_text::strtolower($value));
 
     if ($value === '') {
         return '';
@@ -607,8 +607,8 @@ function local_uckk_public_courses_plain_summary(stdClass $record): string {
     $text = trim(preg_replace('/\s+/', ' ', strip_tags((string)$html)) ?: '');
     $text = local_uckk_public_courses_safe_param_text($text);
 
-    if (core_text::strlen($text) > 420) {
-        $text = core_text::substr($text, 0, 417) . '…';
+    if (\core_text::strlen($text) > 420) {
+        $text = \core_text::substr($text, 0, 417) . '…';
     }
 
     return local_uckk_public_courses_safe_param_text($text);

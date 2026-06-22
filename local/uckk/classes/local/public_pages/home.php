@@ -44,19 +44,54 @@ final class home {
 
             'quicklinks' => [
                 [
-                    'label' => 'Explorer les cours',
-                    'description' => 'Accéder aux cours, ressources, activités et repères de progression disponibles.',
-                    'url' => '/local/uckk/courses.php',
+                    'label' => 'Voie du Grand Jeu social',
+                    'description' => 'Lire la société comme système de règles, récits, pouvoirs, institutions, flux, preuves et comportements.',
+                    'url' => '/local/uckk/faculty.php?slug=grand-jeu-social',
                 ],
                 [
-                    'label' => 'Situer les Voies',
-                    'description' => 'Comprendre les grands parcours de progression, les domaines d’action et les engagements UCKK.',
-                    'url' => '/local/uckk/programs.php',
+                    'label' => 'Voie d’Économie',
+                    'description' => 'Comprendre les ressources, les flux, les incitatifs, les marchés, le travail, la valeur et les modèles viables.',
+                    'url' => '/local/uckk/faculty.php?slug=economie',
                 ],
                 [
-                    'label' => 'Consulter le Registraire',
-                    'description' => 'Retrouver les traces publiques, les preuves, les décisions et la mémoire.',
-                    'url' => '/local/uckk/archives.php',
+                    'label' => 'Voie d’Écologie',
+                    'description' => 'Comprendre les systèmes vivants, les territoires, les ressources, les dépendances matérielles et la résilience.',
+                    'url' => '/local/uckk/faculty.php?slug=ecologie',
+                ],
+                [
+                    'label' => 'Voie des Sciences politiques',
+                    'description' => 'Analyser le pouvoir, les institutions, les assemblées, les votes, la légitimité et les mécanismes de décision.',
+                    'url' => '/local/uckk/faculty.php?slug=sciences-politiques',
+                ],
+                [
+                    'label' => 'Voie de la Linguistique et de l’architecture du sens',
+                    'description' => 'Étudier les mots, concepts, traductions, catégories, récits, identités et pouvoirs symboliques.',
+                    'url' => '/local/uckk/faculty.php?slug=linguistique-architecture-du-sens',
+                ],
+                [
+                    'label' => 'Voie de la Métaphysique',
+                    'description' => 'Clarifier les structures invisibles : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage et croyance.',
+                    'url' => '/local/uckk/faculty.php?slug=metaphysique',
+                ],
+                [
+                    'label' => 'Voie de l’Intelligence artificielle gouvernable',
+                    'description' => 'Étudier l’IA comme outil de lecture, création, cartographie, simulation et accélération, jamais comme autorité finale.',
+                    'url' => '/local/uckk/faculty.php?slug=ia-gouvernable',
+                ],
+                [
+                    'label' => 'Voie de l’Intervention sociale et systèmes humains',
+                    'description' => 'Comprendre les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, communauté, dignité et réparation.',
+                    'url' => '/local/uckk/faculty.php?slug=intervention-sociale-systemes-humains',
+                ],
+                [
+                    'label' => 'Voie de l’Architecture sociotechnique',
+                    'description' => 'Étudier les systèmes qui combinent humains, technologies, institutions, données, règles et workflows.',
+                    'url' => '/local/uckk/faculty.php?slug=architecture-sociotechnique',
+                ],
+                [
+                    'label' => 'Voie de l’Architecture de l’écosystème digital kOA',
+                    'description' => 'Comprendre, déployer, auditer et gouverner le kOA Digital Ecosystem et ses modules opératoires.',
+                    'url' => '/local/uckk/faculty.php?slug=ecosysteme-digital-koa',
                 ],
             ],
 
@@ -105,35 +140,42 @@ final class home {
                 ],
             ],
 
-            'cardsheading' => 'Entrées principales',
+            'cardsheading' => 'Portes d’entrée publiques',
             'cards' => [
                 [
-                    'title' => 'Cours',
-                    'body' => 'Les cours où les ressources, activités, évaluations et preuves de progression sont organisées.',
-                    'url' => '/local/uckk/courses.php',
-                    'actionlabel' => 'Explorer les cours',
-                    'type' => 'courses',
-                ],
-                [
                     'title' => 'Voies',
-                    'body' => 'Les parcours qui relient domaines, cours, défis, preuves, Niveaux et Parchemins UCKK.',
+                    'body' => 'La cartographie générale des parcours qui relient domaines, cours, défis, preuves, Niveaux et Parchemins UCKK.',
                     'url' => '/local/uckk/programs.php',
                     'actionlabel' => 'Voir les Voies',
                     'type' => 'programs',
                 ],
                 [
+                    'title' => 'Cours',
+                    'body' => 'Les espaces où les cours, ressources, activités et repères de progression sont organisés.',
+                    'url' => '/local/uckk/courses.php',
+                    'actionlabel' => 'Explorer les cours',
+                    'type' => 'courses',
+                ],
+                [
                     'title' => 'Défis',
-                    'body' => 'Les épreuves publiques ou internes qui transforment une question en action, preuve et progression.',
+                    'body' => 'Les épreuves publiques ou internes qui transforment une question en action, production, preuve et progression.',
                     'url' => '/local/uckk/challenges.php',
                     'actionlabel' => 'Voir les Défis',
                     'type' => 'challenges',
                 ],
                 [
                     'title' => 'Assemblées',
-                    'body' => 'Les lieux de discussion, d’évaluation, de contestation, d’orientation et de légitimité collective.',
+                    'body' => 'Les lieux de discussion, d’orientation, de contestation, d’arbitrage et de légitimité collective.',
                     'url' => '/local/uckk/assemblies.php',
                     'actionlabel' => 'Voir les Assemblées',
                     'type' => 'assemblies',
+                ],
+                [
+                    'title' => 'Médiathèque',
+                    'body' => 'Les contenus publics, collections, références, médias et traces consultables.',
+                    'url' => '/local/uckk/mediatheque.php',
+                    'actionlabel' => 'Explorer la médiathèque',
+                    'type' => 'media',
                 ],
                 [
                     'title' => 'Intégrité',
@@ -188,12 +230,11 @@ final class home {
             ],
 
             'cta' => [
-                'title' => 'Entrer dans la progression',
-                'body' => 'Commencer par les cours, situer les Voies, puis relier les preuves aux Défis, aux Assemblées et au Registraire.',
-                'url' => '/local/uckk/courses.php',
-                'label' => 'Explorer les cours',
+                'title' => 'Entrer dans une Voie',
+                'body' => 'Commencer par une Voie fondatrice, puis relier les cours, les preuves, les Défis, les Assemblées et le Registraire.',
+                'url' => '/local/uckk/faculty.php?slug=grand-jeu-social',
+                'label' => 'Commencer par le Grand Jeu social',
             ],
         ];
     }
 }
-```

@@ -1,0 +1,1599 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_sciences_politiques",
+  "code": "SP",
+  "nom": "Voie des Sciences politiques",
+  "domaine_operatoire": "Pouvoir et gouvernance civique",
+  "niveau_vise": "Puissance opératoire",
+  "titre_interne_vise": "Mage UCKK en Sciences politiques",
+  "titre_symbolique": "Stratège civique",
+  "parchemin": "Parchemin de Puissance opératoire — Voie des Sciences politiques",
+  "statut": "Voie fondatrice UCKK",
+  "definition_courte": "La Voie des Sciences politiques forme des personnes capables de lire, analyser et réformer les mécanismes du pouvoir, de la légitimité, de la décision collective et de la gouvernance civique.",
+  "angle_fondamental": "Comprendre le pouvoir comme architecture de règles, d'institutions, de récits, de décisions, de conflits, de contre-pouvoirs et de légitimité dans le Grand Jeu social.",
+  "competence_centrale": "Analyser les systèmes politiques, diagnostiquer leurs dérives et concevoir des mécanismes de décision plus légitimes, auditables et responsables.",
+  "seuils_progression": [
+    {
+      "seuil_id": "fondations_politiques",
+      "nom": "Fondations politiques",
+      "fonction": "Comprendre le pouvoir, l'autorité, la légitimité, l'État, les institutions, les droits et la citoyenneté."
+    },
+    {
+      "seuil_id": "mecanismes_collectifs",
+      "nom": "Mécanismes collectifs",
+      "fonction": "Analyser démocratie, élections, assemblées, acteurs politiques, mouvements sociaux, médias et opinion publique."
+    },
+    {
+      "seuil_id": "reforme_gouvernance",
+      "nom": "Réforme et gouvernance",
+      "fonction": "Diagnostiquer capture, corruption, conflits, infrastructures numériques et concevoir des contre-pouvoirs ou réformes institutionnelles."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "SP101",
+      "ordre": 1,
+      "nom": "Pouvoir, autorité et légitimité",
+      "concept_maitre": {
+        "concept_id": "sp_pouvoir_legitimite",
+        "nom": "Pouvoir et légitimité",
+        "definition_courte": "Les conditions par lesquelles un pouvoir agit, se fait reconnaître, se fait obéir ou se trouve contesté.",
+        "fonction_pedagogique": "Donner les fondations conceptuelles permettant de distinguer pouvoir, autorité, domination, consentement et légitimité.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_pouvoir",
+          "nom": "Pouvoir",
+          "type": "concept_associe",
+          "definition_courte": "Capacité d'orienter, contraindre ou rendre possibles les actions d'autrui.",
+          "role_dans_le_concept_maitre": "Concept central permettant de lire toute relation politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_autorite",
+          "nom": "Autorité",
+          "type": "concept_associe",
+          "definition_courte": "Pouvoir reconnu comme légitime ou acceptable par ceux qui y sont soumis.",
+          "role_dans_le_concept_maitre": "Permet de distinguer commandement reconnu et domination imposée.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_domination",
+          "nom": "Domination",
+          "type": "concept_associe",
+          "definition_courte": "Relation durable d'asymétrie où un acteur ou un groupe impose sa volonté à d'autres.",
+          "role_dans_le_concept_maitre": "Rend visibles les formes stables et structurelles du pouvoir.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_consentement",
+          "nom": "Consentement",
+          "type": "concept_associe",
+          "definition_courte": "Acceptation explicite ou implicite d'une autorité, d'une règle ou d'un ordre politique.",
+          "role_dans_le_concept_maitre": "Permet d'analyser ce qui distingue obéissance libre, contrainte et résignation.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_coercition",
+          "nom": "Coercition",
+          "type": "concept_associe",
+          "definition_courte": "Usage ou menace de la force, de la sanction ou de la contrainte pour obtenir un comportement.",
+          "role_dans_le_concept_maitre": "Montre la limite entre autorité acceptée et contrainte imposée.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_influence",
+          "nom": "Influence",
+          "type": "concept_associe",
+          "definition_courte": "Capacité de modifier les perceptions, préférences ou décisions sans contrainte directe.",
+          "role_dans_le_concept_maitre": "Permet de lire les pouvoirs diffus, symboliques et médiatiques.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_obeissance",
+          "nom": "Obéissance",
+          "type": "concept_associe",
+          "definition_courte": "Fait de se conformer à une règle, un ordre ou une autorité.",
+          "role_dans_le_concept_maitre": "Permet d'étudier pourquoi les individus suivent les règles ou les ordres.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_resistance",
+          "nom": "Résistance",
+          "type": "concept_associe",
+          "definition_courte": "Action de refus, opposition ou contournement d'un pouvoir jugé abusif ou illégitime.",
+          "role_dans_le_concept_maitre": "Montre que le pouvoir produit aussi des contre-forces.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_souverainete",
+          "nom": "Souveraineté",
+          "type": "concept_associe",
+          "definition_courte": "Capacité ultime de décider dans un territoire, une institution ou une communauté politique.",
+          "role_dans_le_concept_maitre": "Permet de comprendre qui détient l'autorité finale dans un ordre politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_mandat",
+          "nom": "Mandat",
+          "type": "concept_associe",
+          "definition_courte": "Autorisation confiée à une personne ou institution pour agir au nom d'un collectif.",
+          "role_dans_le_concept_maitre": "Relie légitimité, représentation et responsabilité politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_confiance_publique",
+          "nom": "Confiance publique",
+          "type": "concept_associe",
+          "definition_courte": "Crédit accordé par une population à ses institutions, dirigeants ou procédures.",
+          "role_dans_le_concept_maitre": "Permet d'évaluer la solidité symbolique et pratique d'un pouvoir.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_crise_legitimite",
+          "nom": "Crise de légitimité",
+          "type": "concept_associe",
+          "definition_courte": "Moment où une autorité continue d'exister mais n'est plus reconnue comme juste, crédible ou acceptable.",
+          "role_dans_le_concept_maitre": "Permet d'étudier les ruptures politiques, institutionnelles et sociales.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_de_pouvoir",
+        "nom": "Carte d'un système de pouvoir",
+        "description": "Cartographier une relation de pouvoir réelle en distinguant autorité, domination, consentement, coercition, résistance et sources de légitimité."
+      },
+      "criteres_passage": [
+        "Distinguer pouvoir, autorité, domination et légitimité.",
+        "Identifier les sources d'obéissance et de résistance.",
+        "Analyser une crise de légitimité à partir d'un cas concret."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "SP102",
+      "ordre": 2,
+      "nom": "État, constitution et institutions publiques",
+      "concept_maitre": {
+        "concept_id": "sp_etat_institutions",
+        "nom": "Architecture institutionnelle du pouvoir",
+        "definition_courte": "Organisation officielle des pouvoirs, règles, fonctions et institutions qui structurent une communauté politique.",
+        "fonction_pedagogique": "Comprendre comment l'État, la constitution et les institutions publiques organisent la décision collective.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_etat",
+          "nom": "État",
+          "type": "concept_associe",
+          "definition_courte": "Institution politique qui revendique l'autorité publique sur un territoire et une population.",
+          "role_dans_le_concept_maitre": "Point d'entrée pour comprendre l'organisation moderne du pouvoir.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_gouvernement",
+          "nom": "Gouvernement",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des personnes et organes qui dirigent l'action publique.",
+          "role_dans_le_concept_maitre": "Permet de distinguer l'État durable du pouvoir exécutif temporaire.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_constitution",
+          "nom": "Constitution",
+          "type": "concept_associe",
+          "definition_courte": "Texte ou ensemble de règles fondamentales organisant les pouvoirs et les droits.",
+          "role_dans_le_concept_maitre": "Définit le cadre supérieur de l'autorité politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_separation_pouvoirs",
+          "nom": "Séparation des pouvoirs",
+          "type": "concept_associe",
+          "definition_courte": "Principe répartissant les fonctions législative, exécutive et judiciaire pour limiter les abus.",
+          "role_dans_le_concept_maitre": "Montre comment l'architecture institutionnelle crée des contrepoids.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_executif",
+          "nom": "Pouvoir exécutif",
+          "type": "concept_associe",
+          "definition_courte": "Pouvoir chargé de gouverner, appliquer les lois et diriger l'administration.",
+          "role_dans_le_concept_maitre": "Permet de comprendre l'action gouvernementale.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_legislatif",
+          "nom": "Pouvoir législatif",
+          "type": "concept_associe",
+          "definition_courte": "Pouvoir chargé de débattre, adopter et contrôler les lois.",
+          "role_dans_le_concept_maitre": "Permet de comprendre la production des règles publiques.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_judiciaire",
+          "nom": "Pouvoir judiciaire",
+          "type": "concept_associe",
+          "definition_courte": "Pouvoir chargé d'interpréter et appliquer le droit dans les litiges.",
+          "role_dans_le_concept_maitre": "Relie institutions, droits, recours et État de droit.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_administration_publique",
+          "nom": "Administration publique",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des services et organismes qui exécutent les politiques publiques.",
+          "role_dans_le_concept_maitre": "Rend visible le pouvoir quotidien des institutions.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_bureaucratie",
+          "nom": "Bureaucratie",
+          "type": "concept_associe",
+          "definition_courte": "Organisation administrative fondée sur règles, procédures, dossiers et hiérarchies.",
+          "role_dans_le_concept_maitre": "Permet d'analyser efficacité, inertie, contrôle et complexité institutionnelle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_federalisme",
+          "nom": "Fédéralisme",
+          "type": "concept_associe",
+          "definition_courte": "Organisation politique partageant les compétences entre plusieurs niveaux de gouvernement.",
+          "role_dans_le_concept_maitre": "Permet d'étudier la distribution territoriale du pouvoir.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_municipalite",
+          "nom": "Municipalité",
+          "type": "concept_associe",
+          "definition_courte": "Institution politique locale chargée de services, règlements et décisions de proximité.",
+          "role_dans_le_concept_maitre": "Ancre les institutions dans le territoire vécu.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_etat_droit",
+          "nom": "État de droit",
+          "type": "concept_associe",
+          "definition_courte": "Principe selon lequel le pouvoir public est soumis à des règles juridiques stables et contrôlables.",
+          "role_dans_le_concept_maitre": "Détermine la limite entre institution légitime et pouvoir arbitraire.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_institution_publique",
+          "nom": "Institution publique",
+          "type": "concept_associe",
+          "definition_courte": "Structure reconnue qui exerce une fonction collective au nom de l'intérêt public.",
+          "role_dans_le_concept_maitre": "Permet de lire les organes concrets du pouvoir institutionnel.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_droit_administratif",
+          "nom": "Droit administratif",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des règles qui encadrent l’action de l’administration publique et les recours contre ses décisions.",
+          "role_dans_le_concept_maitre": "Permet d’analyser comment l’État agit concrètement au-delà des principes constitutionnels.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_politique_publique",
+          "nom": "Politique publique",
+          "type": "concept_associe",
+          "definition_courte": "Orientation, programme ou ensemble d’actions par lesquels une autorité publique tente de répondre à un problème collectif.",
+          "role_dans_le_concept_maitre": "Relie les institutions à leurs effets concrets sur les citoyens, les territoires et les ressources.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_responsabilite_ministerielle",
+          "nom": "Responsabilité ministérielle",
+          "type": "concept_associe",
+          "definition_courte": "Principe selon lequel les responsables politiques doivent répondre publiquement des décisions, erreurs ou dérives de leur administration.",
+          "role_dans_le_concept_maitre": "Fait le lien entre pouvoir exécutif, administration, contrôle démocratique et reddition de comptes.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "schema_institutionnel",
+        "nom": "Schéma institutionnel d'un pouvoir public",
+        "description": "Représenter les fonctions, responsabilités, limites et contrepoids d'un système institutionnel."
+      },
+      "criteres_passage": [
+        "Distinguer État, gouvernement, administration et institutions.",
+        "Expliquer la séparation des pouvoirs.",
+        "Repérer les niveaux de décision dans un système fédéral ou local."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "SP103",
+      "ordre": 3,
+      "nom": "Droits, citoyenneté et justice procédurale",
+      "concept_maitre": {
+        "concept_id": "sp_droits_citoyennete",
+        "nom": "Droits et citoyenneté",
+        "definition_courte": "Cadre qui définit les protections, obligations, recours et statuts des personnes dans l'ordre politique.",
+        "fonction_pedagogique": "Comprendre comment les règles politiques protègent, incluent, excluent ou réparent.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_loi",
+          "nom": "Loi",
+          "type": "concept_associe",
+          "definition_courte": "Règle adoptée par une autorité légitime et applicable à une collectivité.",
+          "role_dans_le_concept_maitre": "Base formelle de l'ordre politique et juridique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_reglement",
+          "nom": "Règlement",
+          "type": "concept_associe",
+          "definition_courte": "Règle administrative ou locale qui précise l'application d'une loi ou d'un pouvoir public.",
+          "role_dans_le_concept_maitre": "Montre comment le droit agit concrètement dans les systèmes.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_citoyennete",
+          "nom": "Citoyenneté",
+          "type": "concept_associe",
+          "definition_courte": "Statut politique donnant accès à des droits, devoirs et formes de participation.",
+          "role_dans_le_concept_maitre": "Relie appartenance politique, droits et participation.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_droits_fondamentaux",
+          "nom": "Droits fondamentaux",
+          "type": "concept_associe",
+          "definition_courte": "Droits considérés comme essentiels à la dignité, liberté et sécurité des personnes.",
+          "role_dans_le_concept_maitre": "Cadre normatif minimal de protection contre l'abus.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_droits_humains",
+          "nom": "Droits humains",
+          "type": "concept_associe",
+          "definition_courte": "Droits reconnus à toute personne du fait de son humanité.",
+          "role_dans_le_concept_maitre": "Élargit le regard au-delà des frontières et statuts nationaux.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_liberte_expression",
+          "nom": "Liberté d'expression",
+          "type": "concept_associe",
+          "definition_courte": "Droit de formuler, diffuser et débattre des idées dans les limites du droit.",
+          "role_dans_le_concept_maitre": "Condition centrale de la vie démocratique et de la contestation.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_liberte_association",
+          "nom": "Liberté d'association",
+          "type": "concept_associe",
+          "definition_courte": "Droit de s'organiser collectivement autour d'intérêts, causes ou projets.",
+          "role_dans_le_concept_maitre": "Relie droits individuels, société civile et mouvements politiques.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_egalite_devant_loi",
+          "nom": "Égalité devant la loi",
+          "type": "concept_associe",
+          "definition_courte": "Principe selon lequel les personnes doivent être traitées également par le droit.",
+          "role_dans_le_concept_maitre": "Critère essentiel pour évaluer la justice institutionnelle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_non_discrimination",
+          "nom": "Non-discrimination",
+          "type": "concept_associe",
+          "definition_courte": "Principe interdisant les traitements injustes fondés sur des caractéristiques protégées ou arbitraires.",
+          "role_dans_le_concept_maitre": "Permet d'analyser inclusion, exclusion et réparation.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_recours",
+          "nom": "Recours",
+          "type": "concept_associe",
+          "definition_courte": "Mécanisme permettant de contester une décision, réparer un tort ou faire valoir un droit.",
+          "role_dans_le_concept_maitre": "Transforme les droits abstraits en protections opératoires.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_protection_minorites",
+          "nom": "Protection des minorités",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble de garanties empêchant la majorité ou l'État d'écraser des groupes minoritaires.",
+          "role_dans_le_concept_maitre": "Montre que la démocratie ne se réduit pas à la règle majoritaire.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_desobeissance_civile",
+          "nom": "Désobéissance civile",
+          "type": "concept_associe",
+          "definition_courte": "Violation publique et assumée d'une règle jugée injuste afin de provoquer un débat ou une réforme.",
+          "role_dans_le_concept_maitre": "Relie droit, conscience, légitimité et contestation.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_justice_procedurale",
+          "nom": "Justice procédurale",
+          "type": "concept_associe",
+          "definition_courte": "Exigence selon laquelle une décision doit être prise selon une procédure claire, équitable, contestable et non arbitraire.",
+          "role_dans_le_concept_maitre": "Permet de juger une décision non seulement par son résultat, mais par la qualité du processus qui l’a produite.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_droit_contestation",
+          "nom": "Droit de contestation",
+          "type": "concept_associe",
+          "definition_courte": "Capacité reconnue aux personnes ou groupes de contester une règle, une décision ou une autorité par des moyens légitimes.",
+          "role_dans_le_concept_maitre": "Relie droits, recours, désobéissance civile et contre-pouvoirs.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_de_recours",
+        "nom": "Analyse d'un conflit de droits",
+        "description": "Étudier un cas où droits, règles, recours et minorités entrent en tension."
+      },
+      "criteres_passage": [
+        "Distinguer loi, règlement, droit et recours.",
+        "Identifier les protections offertes par la citoyenneté.",
+        "Analyser une tension entre règle légale et légitimité politique."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "SP104",
+      "ordre": 4,
+      "nom": "Démocratie, élections et représentation",
+      "concept_maitre": {
+        "concept_id": "sp_democratie_representation",
+        "nom": "Délégation démocratique du pouvoir",
+        "definition_courte": "Mécanismes par lesquels une collectivité choisit, délègue, contrôle et remplace ses représentants.",
+        "fonction_pedagogique": "Comprendre les élections comme mécanismes de légitimation, de représentation et de compétition politique.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_democratie",
+          "nom": "Démocratie",
+          "type": "concept_associe",
+          "definition_courte": "Régime ou méthode où la légitimité politique repose sur la participation du peuple.",
+          "role_dans_le_concept_maitre": "Cadre central pour penser représentation, participation et contrôle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_suffrage_universel",
+          "nom": "Suffrage universel",
+          "type": "concept_associe",
+          "definition_courte": "Principe selon lequel tous les citoyens admissibles disposent du droit de vote.",
+          "role_dans_le_concept_maitre": "Base moderne de la légitimité électorale.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_systeme_electoral",
+          "nom": "Système électoral",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des règles transformant des votes en sièges, mandats ou résultats.",
+          "role_dans_le_concept_maitre": "Montre que le vote dépend d'une architecture de traduction politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_scrutin_majoritaire",
+          "nom": "Scrutin majoritaire",
+          "type": "concept_associe",
+          "definition_courte": "Mode de scrutin où le candidat ou parti ayant le plus de voix remporte le siège ou la décision.",
+          "role_dans_le_concept_maitre": "Permet d'analyser efficacité, distorsion et représentation locale.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_proportionnelle",
+          "nom": "Proportionnelle",
+          "type": "concept_associe",
+          "definition_courte": "Mode de scrutin visant à distribuer les sièges selon la proportion des votes obtenus.",
+          "role_dans_le_concept_maitre": "Permet d'étudier pluralisme, coalitions et représentation plus fine.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_circonscription",
+          "nom": "Circonscription",
+          "type": "concept_associe",
+          "definition_courte": "Découpage territorial ou électoral dans lequel les représentants sont choisis.",
+          "role_dans_le_concept_maitre": "Rend visible la dimension spatiale de la représentation.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_parti_politique",
+          "nom": "Parti politique",
+          "type": "concept_associe",
+          "definition_courte": "Organisation visant à conquérir ou influencer le pouvoir à partir d'un programme ou d'une coalition.",
+          "role_dans_le_concept_maitre": "Structure centrale de la compétition démocratique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_programme_electoral",
+          "nom": "Programme électoral",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble d'engagements, priorités ou orientations proposés aux électeurs.",
+          "role_dans_le_concept_maitre": "Relie promesse, mandat et responsabilité politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_campagne_electorale",
+          "nom": "Campagne électorale",
+          "type": "concept_associe",
+          "definition_courte": "Période et dispositif de mobilisation visant à convaincre les électeurs.",
+          "role_dans_le_concept_maitre": "Montre comment organisation, récit, argent et médias influencent le vote.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_financement_politique",
+          "nom": "Financement politique",
+          "type": "concept_associe",
+          "definition_courte": "Règles et flux de ressources permettant de soutenir partis, campagnes ou activités politiques.",
+          "role_dans_le_concept_maitre": "Relie démocratie, argent, accès et capture potentielle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_abstention",
+          "nom": "Abstention",
+          "type": "concept_associe",
+          "definition_courte": "Fait de ne pas participer au vote malgré l'admissibilité.",
+          "role_dans_le_concept_maitre": "Indicateur possible de désengagement, protestation ou obstacle d'accès.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_vote_strategique",
+          "nom": "Vote stratégique",
+          "type": "concept_associe",
+          "definition_courte": "Vote exprimé non par préférence directe, mais pour influencer le résultat final.",
+          "role_dans_le_concept_maitre": "Montre comment les règles électorales modifient les comportements.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_alternance",
+          "nom": "Alternance politique",
+          "type": "concept_associe",
+          "definition_courte": "Capacité réelle de remplacer pacifiquement les gouvernants par le vote.",
+          "role_dans_le_concept_maitre": "Critère pratique de vitalité démocratique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_participation_citoyenne",
+          "nom": "Participation citoyenne",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des formes par lesquelles les citoyens contribuent à la vie politique au-delà du vote.",
+          "role_dans_le_concept_maitre": "Élargit la démocratie au-delà de la représentation électorale.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_redevabilite_electorale",
+          "nom": "Redevabilité électorale",
+          "type": "concept_associe",
+          "definition_courte": "Mécanisme par lequel les élus peuvent être récompensés, sanctionnés ou remplacés par les électeurs.",
+          "role_dans_le_concept_maitre": "Explique comment la représentation peut rester liée au contrôle populaire.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_electoral",
+        "nom": "Audit d'un système électoral",
+        "description": "Comparer un mode de scrutin, ses effets de représentation, ses incitatifs et ses limites démocratiques."
+      },
+      "criteres_passage": [
+        "Expliquer comment un système électoral transforme les votes en pouvoir.",
+        "Repérer les effets d'un mode de scrutin sur les partis et les électeurs.",
+        "Analyser la relation entre campagne, financement et légitimité."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "SP105",
+      "ordre": 5,
+      "nom": "Assemblées, délibération et décision collective",
+      "concept_maitre": {
+        "concept_id": "sp_assemblees_decision_collective",
+        "nom": "Décision collective légitime",
+        "definition_courte": "Processus par lequel un collectif formule, débat, modifie, adopte, conteste et mémorise une décision.",
+        "fonction_pedagogique": "Former à concevoir et évaluer des assemblées capables de produire des décisions légitimes, traçables et corrigibles.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_assemblee",
+          "nom": "Assemblée",
+          "type": "concept_associe",
+          "definition_courte": "Lieu ou procédure où un collectif se réunit pour discuter, décider, contester ou orienter.",
+          "role_dans_le_concept_maitre": "Institution centrale de la décision collective dans l'UCKK et au-delà.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_deliberation",
+          "nom": "Délibération",
+          "type": "concept_associe",
+          "definition_courte": "Discussion structurée visant à éclairer une décision commune.",
+          "role_dans_le_concept_maitre": "Permet de distinguer décision réfléchie et simple agrégation d'opinions.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_ordre_du_jour",
+          "nom": "Ordre du jour",
+          "type": "concept_associe",
+          "definition_courte": "Liste organisée des sujets à traiter dans une assemblée ou réunion décisionnelle.",
+          "role_dans_le_concept_maitre": "Montre que contrôler l'agenda influence la décision.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_quorum",
+          "nom": "Quorum",
+          "type": "concept_associe",
+          "definition_courte": "Seuil minimal de participation requis pour qu'une décision soit valide.",
+          "role_dans_le_concept_maitre": "Relie participation, validité et légitimité procédurale.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_proposition",
+          "nom": "Proposition",
+          "type": "concept_associe",
+          "definition_courte": "Formulation soumise à discussion ou décision collective.",
+          "role_dans_le_concept_maitre": "Unité de base du travail décisionnel.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_amendement",
+          "nom": "Amendement",
+          "type": "concept_associe",
+          "definition_courte": "Modification proposée à une proposition avant décision.",
+          "role_dans_le_concept_maitre": "Permet de raffiner une décision sans la rejeter entièrement.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_motion",
+          "nom": "Motion",
+          "type": "concept_associe",
+          "definition_courte": "Acte formel introduisant une demande, orientation ou décision à une assemblée.",
+          "role_dans_le_concept_maitre": "Rend la décision manipulable, traçable et procédurale.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_consensus",
+          "nom": "Consensus",
+          "type": "concept_associe",
+          "definition_courte": "Mode de décision cherchant un accord acceptable plutôt qu'une simple majorité.",
+          "role_dans_le_concept_maitre": "Permet d'étudier des décisions plus inclusives mais parfois plus lentes.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_vote",
+          "nom": "Vote",
+          "type": "concept_associe",
+          "definition_courte": "Procédure de choix collectif par expression comptabilisée des préférences ou positions.",
+          "role_dans_le_concept_maitre": "Méthode centrale de clôture ou d'orientation d'une décision collective.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_consultation",
+          "nom": "Consultation",
+          "type": "concept_associe",
+          "definition_courte": "Processus de collecte d'avis avant une décision.",
+          "role_dans_le_concept_maitre": "Montre la différence entre écouter, délibérer et décider.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_facilitation",
+          "nom": "Facilitation",
+          "type": "concept_associe",
+          "definition_courte": "Méthode d'animation visant à rendre la participation plus claire, équitable et productive.",
+          "role_dans_le_concept_maitre": "Protège la qualité du processus collectif.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_mediation",
+          "nom": "Médiation",
+          "type": "concept_associe",
+          "definition_courte": "Intervention visant à résoudre ou transformer un conflit entre parties.",
+          "role_dans_le_concept_maitre": "Permet de traiter les désaccords sans casser le collectif.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_proces_verbal",
+          "nom": "Procès-verbal",
+          "type": "concept_associe",
+          "definition_courte": "Trace écrite officielle des discussions, décisions et responsabilités.",
+          "role_dans_le_concept_maitre": "Assure la mémoire et l'auditabilité de la décision.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_memoire_decisionnelle",
+          "nom": "Mémoire décisionnelle",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des traces permettant de comprendre pourquoi et comment une décision a été prise.",
+          "role_dans_le_concept_maitre": "Concept très UCKK reliant décision, preuve, archive et responsabilité.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_design_institutionnel",
+          "nom": "Design institutionnel",
+          "type": "concept_associe",
+          "definition_courte": "Conception volontaire de règles, rôles, procédures et mécanismes qui organisent la décision collective.",
+          "role_dans_le_concept_maitre": "Transforme l’assemblée en architecture gouvernable plutôt qu’en simple réunion.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_contestabilite_decisionnelle",
+          "nom": "Contestabilité décisionnelle",
+          "type": "concept_associe",
+          "definition_courte": "Possibilité organisée de questionner, réviser ou contester une décision collective.",
+          "role_dans_le_concept_maitre": "Protège la décision collective contre l’arbitraire, la capture ou l’erreur non corrigée.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "design_assemblee",
+        "nom": "Design d'une assemblée décisionnelle",
+        "description": "Concevoir une assemblée avec ordre du jour, règles de décision, rôles, mécanismes de contestation et mémoire décisionnelle."
+      },
+      "criteres_passage": [
+        "Distinguer consultation, délibération et décision.",
+        "Produire une procédure collective claire et auditabile.",
+        "Prévoir des mécanismes de contestation, médiation et mémoire."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "SP106",
+      "ordre": 6,
+      "nom": "Acteurs politiques, mouvements et société civile",
+      "concept_maitre": {
+        "concept_id": "sp_acteurs_mouvements",
+        "nom": "Forces organisées du champ politique",
+        "definition_courte": "Ensemble des acteurs qui influencent, contestent, administrent ou transforment la vie politique.",
+        "fonction_pedagogique": "Comprendre qui agit politiquement, par quelles ressources, alliances, stratégies et contraintes.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_citoyen_organise",
+          "nom": "Citoyen organisé",
+          "type": "concept_associe",
+          "definition_courte": "Citoyen agissant collectivement par association, mobilisation ou participation structurée.",
+          "role_dans_le_concept_maitre": "Point de départ pour comprendre la puissance politique hors institutions formelles.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_militant",
+          "nom": "Militant",
+          "type": "concept_associe",
+          "definition_courte": "Personne engagée activement dans une cause, organisation ou lutte politique.",
+          "role_dans_le_concept_maitre": "Montre l'engagement durable comme ressource politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_activiste",
+          "nom": "Activiste",
+          "type": "concept_associe",
+          "definition_courte": "Acteur qui privilégie l'action directe, publique ou stratégique pour provoquer un changement.",
+          "role_dans_le_concept_maitre": "Permet de lire les formes de mobilisation plus offensives ou créatives.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_groupe_interet",
+          "nom": "Groupe d'intérêt",
+          "type": "concept_associe",
+          "definition_courte": "Organisation cherchant à influencer les décisions publiques selon des intérêts particuliers.",
+          "role_dans_le_concept_maitre": "Relie société civile, lobbying et représentation d'intérêts.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_lobby",
+          "nom": "Lobby",
+          "type": "concept_associe",
+          "definition_courte": "Acteur ou stratégie visant à influencer les décideurs publics.",
+          "role_dans_le_concept_maitre": "Permet de comprendre l'influence organisée sur les règles.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_syndicat",
+          "nom": "Syndicat",
+          "type": "concept_associe",
+          "definition_courte": "Organisation représentant les travailleurs dans les rapports de travail et les débats publics.",
+          "role_dans_le_concept_maitre": "Relie pouvoir économique, mobilisation collective et politique sociale.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_association",
+          "nom": "Association",
+          "type": "concept_associe",
+          "definition_courte": "Organisation volontaire formée autour d'une cause, activité ou intérêt commun.",
+          "role_dans_le_concept_maitre": "Structure de base de la société civile.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_mouvement_social",
+          "nom": "Mouvement social",
+          "type": "concept_associe",
+          "definition_courte": "Mobilisation collective durable visant à transformer des règles, normes ou institutions.",
+          "role_dans_le_concept_maitre": "Montre comment le changement politique peut venir hors des partis et de l'État.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_ong",
+          "nom": "ONG",
+          "type": "concept_associe",
+          "definition_courte": "Organisation non gouvernementale active sur des enjeux sociaux, politiques, humanitaires ou environnementaux.",
+          "role_dans_le_concept_maitre": "Introduit les acteurs civiques non étatiques, locaux ou internationaux.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_coalition",
+          "nom": "Coalition",
+          "type": "concept_associe",
+          "definition_courte": "Alliance temporaire ou durable entre acteurs poursuivant un objectif commun.",
+          "role_dans_le_concept_maitre": "Montre comment les forces politiques s'agrègent pour peser davantage.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_elu",
+          "nom": "Élu",
+          "type": "concept_associe",
+          "definition_courte": "Personne choisie par vote pour représenter ou gouverner.",
+          "role_dans_le_concept_maitre": "Relie représentation, mandat et responsabilité.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_fonctionnaire",
+          "nom": "Fonctionnaire",
+          "type": "concept_associe",
+          "definition_courte": "Agent de l'administration publique chargé d'appliquer ou administrer les politiques publiques.",
+          "role_dans_le_concept_maitre": "Montre que le pouvoir politique passe aussi par l'exécution administrative.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_lanceur_alerte",
+          "nom": "Lanceur d'alerte",
+          "type": "concept_associe",
+          "definition_courte": "Personne révélant des informations d'intérêt public sur des abus, risques ou illégalités.",
+          "role_dans_le_concept_maitre": "Relie intégrité, transparence et protection contre les abus.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_expert_public",
+          "nom": "Expert public",
+          "type": "concept_associe",
+          "definition_courte": "Personne ou institution mobilisant une compétence spécialisée dans un débat ou une décision publique.",
+          "role_dans_le_concept_maitre": "Permet d'analyser le rôle de l'expertise sans tomber dans la technocratie.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_societe_civile",
+          "nom": "Société civile",
+          "type": "concept_associe",
+          "definition_courte": "Espace d’organisations, d’associations, de collectifs et d’initiatives situé entre l’État, le marché et la vie privée.",
+          "role_dans_le_concept_maitre": "Permet de comprendre les forces politiques non étatiques.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "cartographie_acteurs",
+        "nom": "Cartographie d'acteurs politiques",
+        "description": "Identifier les acteurs, ressources, alliances, conflits, stratégies et points d'influence autour d'un enjeu public."
+      },
+      "criteres_passage": [
+        "Identifier les acteurs formels et informels d'un champ politique.",
+        "Cartographier alliances, ressources et stratégies.",
+        "Distinguer mobilisation civique, lobbying et action institutionnelle."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "SP107",
+      "ordre": 7,
+      "nom": "Opinion publique, médias et récits de légitimité",
+      "concept_maitre": {
+        "concept_id": "sp_opinion_medias_recits",
+        "nom": "Bataille du sens politique",
+        "definition_courte": "Processus par lequel médias, récits, cadrages et réputations orientent la perception publique du pouvoir.",
+        "fonction_pedagogique": "Comprendre comment l'attention, le récit et l'information structurent la légitimité politique.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_opinion_publique",
+          "nom": "Opinion publique",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble mouvant de perceptions, jugements et préférences exprimés ou attribués à une population.",
+          "role_dans_le_concept_maitre": "Permet d'étudier la relation entre population, médias et décision politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_espace_public",
+          "nom": "Espace public",
+          "type": "concept_associe",
+          "definition_courte": "Lieu symbolique, médiatique ou institutionnel où les enjeux collectifs sont débattus.",
+          "role_dans_le_concept_maitre": "Cadre dans lequel les récits politiques se rencontrent et s'affrontent.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_media",
+          "nom": "Média",
+          "type": "concept_associe",
+          "definition_courte": "Infrastructure de diffusion, sélection et mise en forme de l'information publique.",
+          "role_dans_le_concept_maitre": "Acteur central de visibilité, cadrage et légitimité.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_agenda_mediatique",
+          "nom": "Agenda médiatique",
+          "type": "concept_associe",
+          "definition_courte": "Hiérarchie des enjeux rendus visibles ou invisibles par les médias.",
+          "role_dans_le_concept_maitre": "Montre que choisir les sujets influence déjà le politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_cadrage",
+          "nom": "Cadrage",
+          "type": "concept_associe",
+          "definition_courte": "Manière de présenter un enjeu qui oriente son interprétation.",
+          "role_dans_le_concept_maitre": "Permet d'analyser comment le même fait peut produire des sens politiques différents.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_narration_politique",
+          "nom": "Narration politique",
+          "type": "concept_associe",
+          "definition_courte": "Récit qui organise les causes, responsables, victimes, héros et solutions d'un problème public.",
+          "role_dans_le_concept_maitre": "Relie langage, pouvoir et légitimité.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_propagande",
+          "nom": "Propagande",
+          "type": "concept_associe",
+          "definition_courte": "Communication organisée visant à orienter massivement les croyances ou comportements politiques.",
+          "role_dans_le_concept_maitre": "Permet d'étudier manipulation, mobilisation et contrôle symbolique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_desinformation",
+          "nom": "Désinformation",
+          "type": "concept_associe",
+          "definition_courte": "Diffusion intentionnelle d'informations fausses ou trompeuses.",
+          "role_dans_le_concept_maitre": "Relie information, pouvoir et atteinte à la décision collective.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_mesinformation",
+          "nom": "Mésinformation",
+          "type": "concept_associe",
+          "definition_courte": "Diffusion d'information fausse ou inexacte sans intention nécessaire de tromper.",
+          "role_dans_le_concept_maitre": "Permet de distinguer erreur, confusion et manipulation.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_polarisation",
+          "nom": "Polarisation",
+          "type": "concept_associe",
+          "definition_courte": "Durcissement des camps et réduction de l'espace commun de discussion.",
+          "role_dans_le_concept_maitre": "Permet d'analyser les blocages démocratiques et médiatiques.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_scandale",
+          "nom": "Scandale",
+          "type": "concept_associe",
+          "definition_courte": "Événement public où une transgression réelle ou perçue menace la légitimité d'un acteur.",
+          "role_dans_le_concept_maitre": "Montre comment réputation, norme et pouvoir interagissent.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_reputation",
+          "nom": "Réputation",
+          "type": "concept_associe",
+          "definition_courte": "Crédit ou discrédit attribué publiquement à un acteur, une institution ou une cause.",
+          "role_dans_le_concept_maitre": "Ressource politique liée à la confiance et à la visibilité.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_sondage",
+          "nom": "Sondage",
+          "type": "concept_associe",
+          "definition_courte": "Instrument de mesure déclarée ou estimée de l'opinion d'une population.",
+          "role_dans_le_concept_maitre": "Permet de questionner mesure, représentation et performativité de l'opinion.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_theatre_politique",
+          "nom": "Théâtre politique",
+          "type": "concept_associe",
+          "definition_courte": "Mise en scène publique du pouvoir, du conflit ou de la légitimité.",
+          "role_dans_le_concept_maitre": "Concept très UCKK reliant spectacle, pédagogie, mobilisation et risque de manipulation.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_ecosysteme_informationnel",
+          "nom": "Écosystème informationnel",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des médias, plateformes, sources, récits, publics et mécanismes d’attention qui structurent la circulation politique de l’information.",
+          "role_dans_le_concept_maitre": "Relie opinion publique, médias, plateformes, désinformation et légitimité.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_recit_politique",
+        "nom": "Analyse d'un récit de légitimité",
+        "description": "Décomposer un enjeu public selon ses cadres, récits, acteurs, médias, réputations et effets de polarisation."
+      },
+      "criteres_passage": [
+        "Identifier les cadres narratifs d'un enjeu public.",
+        "Distinguer désinformation, mésinformation, propagande et cadrage.",
+        "Analyser le rôle des médias dans la formation de la légitimité."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "SP108",
+      "ordre": 8,
+      "nom": "Gouvernance numérique, plateformes et infrastructures civiques",
+      "concept_maitre": {
+        "concept_id": "sp_gouvernance_numerique",
+        "nom": "Pouvoir politique des architectures techniques",
+        "definition_courte": "Pouvoir exercé par les plateformes, algorithmes, données, identités numériques et infrastructures techniques.",
+        "fonction_pedagogique": "Comprendre comment le code, les plateformes et les infrastructures deviennent des règles politiques.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_plateforme_numerique",
+          "nom": "Plateforme numérique",
+          "type": "concept_associe",
+          "definition_courte": "Infrastructure qui organise interactions, visibilité, accès, réputation et données.",
+          "role_dans_le_concept_maitre": "Montre que les plateformes gouvernent des comportements collectifs.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_infrastructure_numerique",
+          "nom": "Infrastructure numérique",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des systèmes techniques qui rendent possible l'action numérique.",
+          "role_dans_le_concept_maitre": "Rend visible le pouvoir des couches techniques souvent invisibles.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_code_comme_regle",
+          "nom": "Code comme règle",
+          "type": "concept_associe",
+          "definition_courte": "Principe selon lequel le code informatique impose ou interdit certains comportements.",
+          "role_dans_le_concept_maitre": "Relie architecture technique et normativité politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_gouvernance_algorithmique",
+          "nom": "Gouvernance algorithmique",
+          "type": "concept_associe",
+          "definition_courte": "Organisation des décisions ou classements par systèmes algorithmiques.",
+          "role_dans_le_concept_maitre": "Permet d'analyser pouvoir automatisé, classement et opacité.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_moderation",
+          "nom": "Modération",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des règles et pratiques qui filtrent ou organisent les contenus et comportements en ligne.",
+          "role_dans_le_concept_maitre": "Montre la dimension politique de la gestion des espaces numériques.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_decouvrabilite",
+          "nom": "Découvrabilité",
+          "type": "concept_associe",
+          "definition_courte": "Capacité d'un contenu, acteur ou enjeu à être trouvé et rendu visible.",
+          "role_dans_le_concept_maitre": "Relie visibilité numérique et pouvoir public.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_identite_numerique",
+          "nom": "Identité numérique",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des traces, comptes, preuves ou identifiants associés à une personne en contexte numérique.",
+          "role_dans_le_concept_maitre": "Permet d'étudier accès, citoyenneté numérique et contrôle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_donnees_civiques",
+          "nom": "Données civiques",
+          "type": "concept_associe",
+          "definition_courte": "Données utilisées pour comprendre, administrer ou orienter la vie collective.",
+          "role_dans_le_concept_maitre": "Relie information, gouvernance et responsabilité publique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_surveillance",
+          "nom": "Surveillance",
+          "type": "concept_associe",
+          "definition_courte": "Collecte, observation ou suivi des comportements par des systèmes institutionnels ou techniques.",
+          "role_dans_le_concept_maitre": "Permet d'analyser sécurité, contrôle, abus et droits.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_transparence_algorithmique",
+          "nom": "Transparence algorithmique",
+          "type": "concept_associe",
+          "definition_courte": "Capacité à comprendre, expliquer ou examiner le fonctionnement d'un système algorithmique.",
+          "role_dans_le_concept_maitre": "Condition de contrôle démocratique des systèmes automatisés.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_auditabilite",
+          "nom": "Auditabilité",
+          "type": "concept_associe",
+          "definition_courte": "Capacité de retracer comment une décision, sortie ou action a été produite.",
+          "role_dans_le_concept_maitre": "Concept UCKK central pour éviter l'autorité opaque.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_souverainete_numerique",
+          "nom": "Souveraineté numérique",
+          "type": "concept_associe",
+          "definition_courte": "Capacité d'une collectivité à contrôler ses infrastructures, données et dépendances numériques.",
+          "role_dans_le_concept_maitre": "Relie autonomie politique et architecture technique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_fracture_numerique",
+          "nom": "Fracture numérique",
+          "type": "concept_associe",
+          "definition_courte": "Inégalité d'accès, d'usage ou de compétence face aux outils numériques.",
+          "role_dans_le_concept_maitre": "Montre que la participation numérique dépend de conditions matérielles.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_donnees_publiques",
+          "nom": "Données publiques",
+          "type": "concept_associe",
+          "definition_courte": "Données produites, détenues ou publiées par des institutions publiques ou civiques.",
+          "role_dans_le_concept_maitre": "Permet d’analyser transparence, accès, souveraineté, auditabilité et risques de surveillance.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_interoperabilite_civique",
+          "nom": "Interopérabilité civique",
+          "type": "concept_associe",
+          "definition_courte": "Capacité des systèmes publics ou civiques à échanger des données, décisions et preuves sans verrouillage abusif.",
+          "role_dans_le_concept_maitre": "Relie infrastructures numériques, souveraineté, auditabilité et accessibilité.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_gouvernance_numerique",
+        "nom": "Audit d'une infrastructure civique numérique",
+        "description": "Analyser une plateforme ou infrastructure selon ses règles, données, algorithmes, risques, dépendances et mécanismes d'audit."
+      },
+      "criteres_passage": [
+        "Expliquer comment une plateforme peut exercer un pouvoir politique.",
+        "Identifier les risques d'opacité, surveillance et dépendance.",
+        "Proposer des garde-fous de transparence et d'auditabilité."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "SP109",
+      "ordre": 9,
+      "nom": "Conflit, sécurité et diplomatie",
+      "concept_maitre": {
+        "concept_id": "sp_conflit_securite_diplomatie",
+        "nom": "Gestion des rapports de force",
+        "definition_courte": "Analyse des conflits internes et externes, de leur escalade, de leur résolution et des institutions qui les encadrent.",
+        "fonction_pedagogique": "Comprendre comment les collectivités gèrent violence, menaces, alliances, négociations et sécurité.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_conflit_politique",
+          "nom": "Conflit politique",
+          "type": "concept_associe",
+          "definition_courte": "Opposition structurée entre acteurs autour d'intérêts, valeurs, pouvoirs ou règles.",
+          "role_dans_le_concept_maitre": "Point de départ pour lire les rapports de force.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_violence_politique",
+          "nom": "Violence politique",
+          "type": "concept_associe",
+          "definition_courte": "Usage de la force ou menace de force pour atteindre un objectif politique.",
+          "role_dans_le_concept_maitre": "Permet d'étudier les ruptures de la compétition politique ordinaire.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_guerre",
+          "nom": "Guerre",
+          "type": "concept_associe",
+          "definition_courte": "Conflit armé organisé entre États, groupes ou entités politiques.",
+          "role_dans_le_concept_maitre": "Forme extrême du rapport de force politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_paix",
+          "nom": "Paix",
+          "type": "concept_associe",
+          "definition_courte": "État ou processus de réduction durable de la violence et d'organisation non violente des conflits.",
+          "role_dans_le_concept_maitre": "Montre que la paix est aussi une architecture institutionnelle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_diplomatie",
+          "nom": "Diplomatie",
+          "type": "concept_associe",
+          "definition_courte": "Pratique de négociation et représentation entre entités politiques.",
+          "role_dans_le_concept_maitre": "Permet de comprendre la gestion non militaire des rapports externes.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_negociation",
+          "nom": "Négociation",
+          "type": "concept_associe",
+          "definition_courte": "Processus par lequel des parties cherchent un accord malgré des intérêts divergents.",
+          "role_dans_le_concept_maitre": "Méthode centrale de désescalade et décision conflictuelle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_traite",
+          "nom": "Traité",
+          "type": "concept_associe",
+          "definition_courte": "Accord formel entre entités politiques ou États.",
+          "role_dans_le_concept_maitre": "Trace juridique des engagements internationaux ou interinstitutionnels.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_alliance",
+          "nom": "Alliance",
+          "type": "concept_associe",
+          "definition_courte": "Entente de coopération entre acteurs pour accroître leur sécurité ou influence.",
+          "role_dans_le_concept_maitre": "Montre comment les rapports de force se structurent collectivement.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_sanction",
+          "nom": "Sanction",
+          "type": "concept_associe",
+          "definition_courte": "Mesure punitive ou restrictive visant à modifier un comportement politique.",
+          "role_dans_le_concept_maitre": "Permet d'étudier la contrainte sans guerre directe.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_dissuasion",
+          "nom": "Dissuasion",
+          "type": "concept_associe",
+          "definition_courte": "Stratégie visant à empêcher une action par la menace de coûts élevés.",
+          "role_dans_le_concept_maitre": "Concept clé des rapports de force sécuritaires.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_securite_nationale",
+          "nom": "Sécurité nationale",
+          "type": "concept_associe",
+          "definition_courte": "Protection des institutions, populations, frontières et intérêts stratégiques d'un État.",
+          "role_dans_le_concept_maitre": "Cadre classique de la sécurité politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_securite_humaine",
+          "nom": "Sécurité humaine",
+          "type": "concept_associe",
+          "definition_courte": "Approche centrée sur la protection concrète des personnes contre violences, précarités et vulnérabilités.",
+          "role_dans_le_concept_maitre": "Élargit la sécurité au-delà de l'État.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_renseignement",
+          "nom": "Renseignement",
+          "type": "concept_associe",
+          "definition_courte": "Collecte et analyse d'information stratégique pour anticiper menaces ou décisions.",
+          "role_dans_le_concept_maitre": "Relie information, pouvoir et sécurité.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_ingerence_etrangere",
+          "nom": "Ingérence étrangère",
+          "type": "concept_associe",
+          "definition_courte": "Intervention d'un acteur externe dans les affaires politiques d'une autre collectivité.",
+          "role_dans_le_concept_maitre": "Permet d'étudier influence, souveraineté et vulnérabilité démocratique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_droit_international",
+          "nom": "Droit international",
+          "type": "concept_associe",
+          "definition_courte": "Ensemble des règles régissant les relations entre États et acteurs internationaux.",
+          "role_dans_le_concept_maitre": "Cadre normatif des rapports internationaux.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_organisation_internationale",
+          "nom": "Organisation internationale",
+          "type": "concept_associe",
+          "definition_courte": "Institution regroupant plusieurs États ou acteurs pour coordonner des enjeux transnationaux.",
+          "role_dans_le_concept_maitre": "Montre les formes de gouvernance au-delà de l'État.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_securite_collective",
+          "nom": "Sécurité collective",
+          "type": "concept_associe",
+          "definition_courte": "Principe selon lequel la sécurité d’un acteur dépend d’accords, institutions ou alliances capables de contenir les menaces communes.",
+          "role_dans_le_concept_maitre": "Permet d’analyser alliances, organisations internationales et mécanismes de paix.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_conflit",
+        "nom": "Carte d'un conflit politique",
+        "description": "Cartographier les acteurs, intérêts, alliances, menaces, mécanismes de négociation et voies de désescalade d'un conflit."
+      },
+      "criteres_passage": [
+        "Identifier les acteurs et intérêts d'un conflit.",
+        "Distinguer sécurité nationale et sécurité humaine.",
+        "Proposer une stratégie de désescalade ou de négociation."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "SP110",
+      "ordre": 10,
+      "nom": "Capture, corruption et réforme institutionnelle",
+      "concept_maitre": {
+        "concept_id": "sp_capture_reforme",
+        "nom": "Réparation des dérives du pouvoir",
+        "definition_courte": "Diagnostic des abus, captures et corruptions du pouvoir, puis conception de contre-pouvoirs et réformes.",
+        "fonction_pedagogique": "Synthétiser la Voie en apprenant à repérer les dérives institutionnelles et à proposer des mécanismes de réparation.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "sp_corruption",
+          "nom": "Corruption",
+          "type": "concept_associe",
+          "definition_courte": "Détournement d'un pouvoir confié à des fins privées, partisanes ou illégitimes.",
+          "role_dans_le_concept_maitre": "Dérive centrale à diagnostiquer et prévenir.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_clientelisme",
+          "nom": "Clientélisme",
+          "type": "concept_associe",
+          "definition_courte": "Échange de faveurs politiques contre loyauté ou soutien.",
+          "role_dans_le_concept_maitre": "Montre comment la représentation peut devenir dépendance personnelle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_patronage",
+          "nom": "Patronage",
+          "type": "concept_associe",
+          "definition_courte": "Distribution de postes, avantages ou ressources pour récompenser des alliés politiques.",
+          "role_dans_le_concept_maitre": "Permet de lire la capture des institutions par réseaux partisans.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_nepotisme",
+          "nom": "Népotisme",
+          "type": "concept_associe",
+          "definition_courte": "Favoritisme accordé à des proches ou relations personnelles dans l'accès aux postes ou ressources.",
+          "role_dans_le_concept_maitre": "Montre la corruption par liens privés plutôt que compétence ou intérêt public.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_conflit_interets",
+          "nom": "Conflit d'intérêts",
+          "type": "concept_associe",
+          "definition_courte": "Situation où un intérêt privé ou secondaire risque d'influencer une responsabilité publique.",
+          "role_dans_le_concept_maitre": "Concept clé pour protéger la décision légitime.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_capture_reglementaire",
+          "nom": "Capture réglementaire",
+          "type": "concept_associe",
+          "definition_courte": "Situation où une autorité de régulation sert les intérêts du secteur qu'elle doit encadrer.",
+          "role_dans_le_concept_maitre": "Relie politique, économie et dérive institutionnelle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_capture_institutionnelle",
+          "nom": "Capture institutionnelle",
+          "type": "concept_associe",
+          "definition_courte": "Prise de contrôle formelle ou informelle d'une institution par des intérêts particuliers.",
+          "role_dans_le_concept_maitre": "Permet de diagnostiquer la perte de fonction publique d'une institution.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_abus_pouvoir",
+          "nom": "Abus de pouvoir",
+          "type": "concept_associe",
+          "definition_courte": "Usage d'une autorité au-delà de sa finalité légitime ou de ses limites reconnues.",
+          "role_dans_le_concept_maitre": "Montre la transformation du mandat en domination.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_autoritarisme",
+          "nom": "Autoritarisme",
+          "type": "concept_associe",
+          "definition_courte": "Concentration du pouvoir avec limitation de la contestation, des droits ou des contre-pouvoirs.",
+          "role_dans_le_concept_maitre": "Permet de lire les dérives systémiques du pouvoir.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_populisme",
+          "nom": "Populisme",
+          "type": "concept_associe",
+          "definition_courte": "Style ou logique politique opposant un peuple supposé homogène à des élites jugées illégitimes.",
+          "role_dans_le_concept_maitre": "Permet d'étudier une forme de légitimation conflictuelle du pouvoir.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_technocratie",
+          "nom": "Technocratie",
+          "type": "concept_associe",
+          "definition_courte": "Gouvernance dominée par l'expertise technique au détriment de la participation démocratique.",
+          "role_dans_le_concept_maitre": "Rappel UCKK que la compétence ne doit pas supprimer la légitimité collective.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_oligarchie",
+          "nom": "Oligarchie",
+          "type": "concept_associe",
+          "definition_courte": "Concentration du pouvoir politique ou économique entre les mains d'un petit nombre.",
+          "role_dans_le_concept_maitre": "Permet d'analyser les concentrations durables d'influence.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_contre_pouvoir",
+          "nom": "Contre-pouvoir",
+          "type": "concept_associe",
+          "definition_courte": "Force, institution ou procédure limitant les abus d'un pouvoir.",
+          "role_dans_le_concept_maitre": "Concept central pour concevoir la réparation institutionnelle.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_transparence",
+          "nom": "Transparence",
+          "type": "concept_associe",
+          "definition_courte": "Capacité pour le public ou des instances compétentes d'observer les décisions, règles et intérêts en jeu.",
+          "role_dans_le_concept_maitre": "Outil de prévention des abus et de restauration de la confiance.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_reddition_comptes",
+          "nom": "Reddition de comptes",
+          "type": "concept_associe",
+          "definition_courte": "Obligation pour les détenteurs de pouvoir d'expliquer, justifier et assumer leurs décisions.",
+          "role_dans_le_concept_maitre": "Transforme la responsabilité politique en mécanisme opératoire.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_reforme_institutionnelle",
+          "nom": "Réforme institutionnelle",
+          "type": "concept_associe",
+          "definition_courte": "Modification des règles, procédures ou institutions afin de corriger leurs effets ou dérives.",
+          "role_dans_le_concept_maitre": "Aboutissement pratique de la Voie des Sciences politiques.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_resilience_democratique",
+          "nom": "Résilience démocratique",
+          "type": "concept_associe",
+          "definition_courte": "Capacité d'un système démocratique à résister aux crises, abus, captures et polarisations.",
+          "role_dans_le_concept_maitre": "Critère final pour évaluer la robustesse politique.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_controle_institutionnel",
+          "nom": "Contrôle institutionnel",
+          "type": "concept_associe",
+          "definition_courte": "Mécanisme formel ou informel permettant de surveiller, limiter ou corriger l’exercice du pouvoir.",
+          "role_dans_le_concept_maitre": "Relie contre-pouvoirs, transparence, reddition de comptes et réforme.",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "sp_protection_lanceurs_alerte",
+          "nom": "Protection des lanceurs d’alerte",
+          "type": "concept_associe",
+          "definition_courte": "Dispositifs qui protègent les personnes signalant des abus, fraudes ou dérives institutionnelles.",
+          "role_dans_le_concept_maitre": "Renforce la capacité d’un système à révéler ses propres captures sans punir ceux qui les exposent.",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "proposition_reforme",
+        "nom": "Proposition de réforme institutionnelle",
+        "description": "Diagnostiquer une dérive du pouvoir et proposer un contre-pouvoir, une procédure ou une réforme avec critères de légitimité, auditabilité et faisabilité."
+      },
+      "criteres_passage": [
+        "Diagnostiquer corruption, capture ou abus de pouvoir.",
+        "Identifier les contre-pouvoirs existants et leurs limites.",
+        "Concevoir une réforme institutionnelle claire, légitime et vérifiable."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "type": "dossier_de_reforme_civique",
+    "nom": "Dossier de réforme ou d'architecture civique",
+    "description": "L'Aspirant doit analyser un système politique, institutionnel, associatif, municipal, numérique ou communautaire, puis proposer une réforme, une assemblée, un mécanisme de décision ou un contre-pouvoir.",
+    "elements_attendus": [
+      "description du système politique étudié",
+      "cartographie des acteurs",
+      "cartographie des pouvoirs formels et informels",
+      "analyse des sources de légitimité",
+      "analyse des droits, règles et recours",
+      "analyse des mécanismes de décision",
+      "analyse des récits publics et médias",
+      "analyse des risques de capture ou d'abus",
+      "proposition de réforme ou de contre-pouvoir",
+      "critères de légitimité",
+      "critères d'auditabilité",
+      "mécanisme de mémoire décisionnelle",
+      "limites éthiques",
+      "stratégie de mise en œuvre"
+    ],
+    "question_directrice": "Comment rendre ce système de pouvoir plus légitime, plus compréhensible, plus contestable et plus responsable?"
+  },
+  "limites_ethiques": [
+    "Ne pas enseigner la manipulation politique comme stratégie acceptable.",
+    "Ne pas confondre efficacité politique et légitimité démocratique.",
+    "Ne pas réduire les citoyens à des cibles d'influence.",
+    "Ne pas glorifier la conquête du pouvoir sans responsabilité.",
+    "Ne pas présenter la technocratie comme substitut à la participation collective.",
+    "Ne pas normaliser la corruption, le clientélisme ou la capture institutionnelle.",
+    "Ne pas confondre spectacle politique et vérité publique.",
+    "Ne pas effacer les minorités au nom d'une majorité abstraite.",
+    "Ne pas utiliser les infrastructures numériques pour rendre le pouvoir opaque.",
+    "Ne pas transformer l'expertise en autorité incontestable.",
+    "Ne pas confondre gouvernance technique et légitimité politique.",
+    "Ne pas présenter une réforme comme neutre lorsqu’elle redistribue du pouvoir."
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_grand_jeu_social",
+      "relation": "Les sciences politiques donnent une grammaire du pouvoir dans le Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_economie",
+      "relation": "Les décisions politiques touchent fiscalité, redistribution, capture économique, subventions et ressources collectives."
+    },
+    {
+      "voie_id": "voie_architecture_sociotechnique",
+      "relation": "Les institutions politiques sont aussi des systèmes humains, techniques, procéduraux et organisationnels."
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "relation": "La gouvernance algorithmique, l'auditabilité et les infrastructures numériques deviennent des enjeux politiques."
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "relation": "Les récits, cadres, mots et catégories structurent la légitimité politique."
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "relation": "Les politiques publiques touchent vulnérabilité, dignité, exclusion, réparation et accès aux institutions."
+    },
+    {
+      "voie_id": "voie_ecologie",
+      "relation": "Les crises écologiques exigent gouvernance collective, arbitrages publics, conflits d'usage et légitimité territoriale."
+    },
+    {
+      "voie_id": "voie_ecosysteme_digital_koa",
+      "relation": "Les assemblées, votes, traces, archives et mécanismes d'audit peuvent être opérés dans le kOA Digital Ecosystem."
+    }
+  ],
+  "tags": [
+    "pouvoir",
+    "gouvernance",
+    "legitimite",
+    "institutions",
+    "democratie",
+    "assemblees",
+    "droits",
+    "medias",
+    "plateformes",
+    "contre-pouvoirs",
+    "reforme"
+  ]
+}

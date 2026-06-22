@@ -897,7 +897,7 @@ final class player_profile {
         }
 
         $displaytitle = trim((string)($data->displaytitle ?? ''));
-        if (core_text::strlen($displaytitle) > 255) {
+        if (\core_text::strlen($displaytitle) > 255) {
             $errors['displaytitle'] = 'Display title must not exceed 255 characters.';
         }
 
@@ -1097,7 +1097,7 @@ final class player_profile {
      * @return string
      */
     private static function normalise_key(string $value): string {
-        $value = trim(core_text::strtolower($value));
+        $value = trim(\core_text::strtolower($value));
         $value = str_replace([' ', '-', '.', '/', '\\'], '_', $value);
         $value = preg_replace('/[^a-z0-9_]/', '', $value);
         $value = preg_replace('/_+/', '_', $value);

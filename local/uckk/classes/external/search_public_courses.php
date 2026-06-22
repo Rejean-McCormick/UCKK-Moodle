@@ -564,8 +564,8 @@ final class search_public_courses extends external_api {
         $text = trim(preg_replace('/\s+/', ' ', strip_tags((string)$html)) ?: '');
         $text = self::safe_param_text($text);
 
-        if (core_text::strlen($text) > 420) {
-            $text = core_text::substr($text, 0, 417) . '…';
+        if (\core_text::strlen($text) > 420) {
+            $text = \core_text::substr($text, 0, 417) . '…';
         }
 
         return self::safe_param_text($text);
@@ -663,7 +663,7 @@ final class search_public_courses extends external_api {
             '—' => '-', '–' => '-',
         ]);
 
-        $value = trim(core_text::strtolower($value));
+        $value = trim(\core_text::strtolower($value));
 
         if ($value === '') {
             return '';

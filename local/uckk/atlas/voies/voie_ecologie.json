@@ -1,0 +1,1553 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_ecologie",
+  "code": "ECL",
+  "nom": "Voie d’Écologie",
+  "domaine_operatoire": "Systèmes vivants",
+  "niveau_vise": "Puissance opératoire",
+  "titre_symbolique": "Gardien des systèmes vivants",
+  "parchemin": "Parchemin de Puissance opératoire — Voie d’Écologie",
+  "statut": "Voie fondatrice UCKK",
+  "definition_courte": "La Voie d’Écologie forme des personnes capables de comprendre les interdépendances du vivant, de lire les territoires, de cartographier les dépendances matérielles et de concevoir des interventions écologiques responsables.",
+  "angle_fondamental": "Comprendre les systèmes vivants, les territoires, les ressources, les cycles naturels, les limites planétaires, les crises climatiques et les liens entre société et environnement.",
+  "competence_centrale": "Diagnostiquer les conditions écologiques d’un territoire ou d’un système, identifier ses vulnérabilités, ses dépendances et ses seuils, puis proposer des interventions sobres, justes, vérifiables et mémorisables.",
+  "seuils_progression": [
+    {
+      "seuil_id": "fondations_vivant",
+      "nom": "Fondations du vivant",
+      "fonction": "Comprendre les systèmes vivants, la biodiversité, les cycles naturels et les interdépendances écologiques."
+    },
+    {
+      "seuil_id": "territoires_crises_dependances",
+      "nom": "Territoires, crises et dépendances",
+      "fonction": "Lire les milieux, les ressources vitales, les risques climatiques, les dépendances matérielles et les impacts des systèmes humains."
+    },
+    {
+      "seuil_id": "intervention_ecologique",
+      "nom": "Intervention écologique",
+      "fonction": "Cartographier, diagnostiquer, gouverner, réparer, restaurer et documenter des systèmes vivants ou des territoires."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "ECL101",
+      "ordre": 1,
+      "nom": "Écologie systémique et pensée du vivant",
+      "concept_maitre": {
+        "concept_id": "ecl_ecologie_systemique",
+        "nom": "Le vivant comme système d’interdépendances",
+        "definition_courte": "Comprendre le vivant comme un ensemble de relations, de rétroactions, de seuils, d’équilibres dynamiques et de vulnérabilités systémiques.",
+        "fonction_pedagogique": "Donner la grammaire générale de la Voie : système, relation, seuil, rétroaction, résilience, fragilité et interdépendance.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_ecologie",
+          "nom": "Écologie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_systeme_vivant",
+          "nom": "Système vivant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_ecosysteme",
+          "nom": "Écosystème",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_biosphere",
+          "nom": "Biosphère",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_milieu",
+          "nom": "Milieu",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_interdependance",
+          "nom": "Interdépendance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_complexite_ecologique",
+          "nom": "Complexité écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_retroaction",
+          "nom": "Rétroaction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_boucle_retroaction",
+          "nom": "Boucle de rétroaction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_equilibre_dynamique",
+          "nom": "Équilibre dynamique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_seuil_ecologique",
+          "nom": "Seuil écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_resilience_ecologique",
+          "nom": "Résilience écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_perturbation",
+          "nom": "Perturbation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_adaptation_ecologique",
+          "nom": "Adaptation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_coevolution",
+          "nom": "Coévolution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_succession_ecologique",
+          "nom": "Succession écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_capacite_charge",
+          "nom": "Capacité de charge",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_homeostasie",
+          "nom": "Homéostasie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_vulnerabilite_systemique",
+          "nom": "Vulnérabilité systémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_robustesse",
+          "nom": "Robustesse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_fragilite_ecologique",
+          "nom": "Fragilité écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_pensee_systemique",
+          "nom": "Pensée systémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_systemique",
+        "nom": "Carte systémique d’un milieu vivant",
+        "description": "Représenter les acteurs vivants et non vivants, les relations, les rétroactions, les vulnérabilités et les seuils d’un système écologique."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut décrire un système vivant comme un ensemble d’interdépendances, de rétroactions et de seuils.",
+        "L’Aspirant peut distinguer résilience, fragilité, perturbation, adaptation et équilibre dynamique.",
+        "L’Aspirant peut produire une carte systémique d’un milieu vivant avec ses relations, vulnérabilités et points de bascule."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ECL102",
+      "ordre": 2,
+      "nom": "Biodiversité, habitats et continuité du vivant",
+      "concept_maitre": {
+        "concept_id": "ecl_biodiversite_continuite_vivant",
+        "nom": "La diversité comme condition de résilience",
+        "definition_courte": "Comprendre la diversité biologique comme condition de stabilité, d’adaptation, de continuité et de régénération des systèmes vivants.",
+        "fonction_pedagogique": "Éviter de réduire l’écologie au climat en ancrant la Voie dans les espèces, habitats, interactions et continuités écologiques.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_biodiversite",
+          "nom": "Biodiversité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_diversite_genetique",
+          "nom": "Diversité génétique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_diversite_specifique",
+          "nom": "Diversité spécifique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_diversite_ecosystemique",
+          "nom": "Diversité écosystémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_espece",
+          "nom": "Espèce",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_population",
+          "nom": "Population",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_communaute_ecologique",
+          "nom": "Communauté écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_habitat",
+          "nom": "Habitat",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_niche_ecologique",
+          "nom": "Niche écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_espece_cle_voute",
+          "nom": "Espèce clé de voûte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_espece_indicatrice",
+          "nom": "Espèce indicatrice",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_espece_invasive",
+          "nom": "Espèce invasive",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_espece_menacee",
+          "nom": "Espèce menacée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_extinction",
+          "nom": "Extinction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_fragmentation_habitats",
+          "nom": "Fragmentation des habitats",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_corridor_ecologique",
+          "nom": "Corridor écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_connectivite_ecologique",
+          "nom": "Connectivité écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_reseau_trophique",
+          "nom": "Réseau trophique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_mutualisme",
+          "nom": "Mutualisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_competition_ecologique",
+          "nom": "Compétition écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_biodiversite",
+        "nom": "Carte de continuité écologique",
+        "description": "Identifier les habitats, espèces, corridors, ruptures et relations écologiques d’un territoire."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut expliquer pourquoi la biodiversité soutient la résilience d’un milieu.",
+        "L’Aspirant peut identifier habitats, espèces, continuités, fragmentations et pressions sur un territoire.",
+        "L’Aspirant peut produire une carte de continuité écologique indiquant les liens, ruptures et possibilités de restauration."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ECL103",
+      "ordre": 3,
+      "nom": "Cycles biogéochimiques, sols et eau",
+      "concept_maitre": {
+        "concept_id": "ecl_cycles_infrastructures_vivant",
+        "nom": "Les cycles comme infrastructures du vivant",
+        "definition_courte": "Comprendre les cycles de l’eau, du carbone, de l’azote, du phosphore et des sols comme infrastructures invisibles de la vie.",
+        "fonction_pedagogique": "Rendre visibles les cycles matériels qui soutiennent les écosystèmes, les territoires, les villes, l’agriculture et les institutions humaines.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_cycle_eau",
+          "nom": "Cycle de l’eau",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_cycle_carbone",
+          "nom": "Cycle du carbone",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_cycle_azote",
+          "nom": "Cycle de l’azote",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_cycle_phosphore",
+          "nom": "Cycle du phosphore",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_cycle_soufre",
+          "nom": "Cycle du soufre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_photosynthese",
+          "nom": "Photosynthèse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_respiration_cellulaire",
+          "nom": "Respiration cellulaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_decomposition",
+          "nom": "Décomposition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_matiere_organique",
+          "nom": "Matière organique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_biomasse",
+          "nom": "Biomasse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_productivite_primaire",
+          "nom": "Productivité primaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_nutriment",
+          "nom": "Nutriment",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_sol_vivant",
+          "nom": "Sol vivant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_fertilite_sols",
+          "nom": "Fertilité des sols",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_erosion_sols",
+          "nom": "Érosion des sols",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_nappe_phreatique",
+          "nom": "Nappe phréatique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_bassin_versant",
+          "nom": "Bassin versant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_recharge_aquiferes",
+          "nom": "Recharge des aquifères",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_qualite_eau",
+          "nom": "Qualité de l’eau",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_eutrophisation",
+          "nom": "Eutrophisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_bioaccumulation",
+          "nom": "Bioaccumulation",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "schema_cycles",
+        "nom": "Schéma des cycles d’un territoire",
+        "description": "Représenter les cycles de l’eau, des sols, du carbone ou des nutriments dans un milieu réel."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut représenter les grands cycles écologiques qui structurent un territoire ou un milieu.",
+        "L’Aspirant peut relier sols, eau, nutriments, matière organique et activités humaines dans un diagnostic cohérent.",
+        "L’Aspirant peut produire un schéma de cycles indiquant entrées, sorties, pertes, dépendances et perturbations."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ECL104",
+      "ordre": 4,
+      "nom": "Territoires, paysages et infrastructures vivantes",
+      "concept_maitre": {
+        "concept_id": "ecl_territoire_systeme_relationnel",
+        "nom": "Le territoire comme système relationnel",
+        "definition_courte": "Comprendre le territoire comme un ensemble de milieux, d’infrastructures vivantes, de paysages, d’usages, de circulations et de dépendances.",
+        "fonction_pedagogique": "Traduire l’écologie en lecture du terrain, des paysages, des milieux et des infrastructures vivantes.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_territoire",
+          "nom": "Territoire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_paysage",
+          "nom": "Paysage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_mosaique_paysagere",
+          "nom": "Mosaïque paysagère",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_foret",
+          "nom": "Forêt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_prairie",
+          "nom": "Prairie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_zone_humide",
+          "nom": "Zone humide",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_riviere",
+          "nom": "Rivière",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_lac",
+          "nom": "Lac",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_littoral",
+          "nom": "Littoral",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_estuaire",
+          "nom": "Estuaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_montagne",
+          "nom": "Montagne",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_habitat_urbain",
+          "nom": "Habitat urbain",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_trame_verte",
+          "nom": "Trame verte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_trame_bleue",
+          "nom": "Trame bleue",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_artificialisation_sols",
+          "nom": "Artificialisation des sols",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_deforestation",
+          "nom": "Déforestation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_restauration_milieux",
+          "nom": "Restauration des milieux",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_infrastructure_verte",
+          "nom": "Infrastructure verte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_infrastructure_bleue",
+          "nom": "Infrastructure bleue",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "diagnostic_territorial",
+        "nom": "Lecture écologique d’un territoire",
+        "description": "Décrire les milieux, usages, continuités, ruptures, pressions et infrastructures vivantes d’un territoire."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut lire un territoire comme un système relationnel entre milieux, usages, infrastructures et vivants.",
+        "L’Aspirant peut distinguer paysage, habitat, corridor, fragmentation, usage du sol et infrastructure vivante.",
+        "L’Aspirant peut produire une lecture écologique d’un territoire avec conflits d’usage, continuités et leviers d’intervention."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ECL105",
+      "ordre": 5,
+      "nom": "Climat, risques et limites planétaires",
+      "concept_maitre": {
+        "concept_id": "ecl_crises_depassements_systemiques",
+        "nom": "Les crises comme dépassements systémiques",
+        "definition_courte": "Comprendre les crises climatiques et écologiques comme effets de dépassements, de rétroactions, de vulnérabilités et de seuils planétaires.",
+        "fonction_pedagogique": "Relier climat, risques, limites planétaires, événements extrêmes et vulnérabilités territoriales.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_climat",
+          "nom": "Climat",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_meteo",
+          "nom": "Météo",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_changement_climatique",
+          "nom": "Changement climatique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_rechauffement_global",
+          "nom": "Réchauffement global",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_gaz_effet_serre",
+          "nom": "Gaz à effet de serre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_effet_serre",
+          "nom": "Effet de serre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_forcage_radiatif",
+          "nom": "Forçage radiatif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_puits_carbone",
+          "nom": "Puits de carbone",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_sequestration_carbone",
+          "nom": "Séquestration du carbone",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_acidification_oceans",
+          "nom": "Acidification des océans",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_montee_niveau_mer",
+          "nom": "Montée du niveau de la mer",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_evenement_extreme",
+          "nom": "Événement extrême",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_secheresse",
+          "nom": "Sécheresse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_inondation",
+          "nom": "Inondation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_canicule",
+          "nom": "Canicule",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_feu_foret",
+          "nom": "Feu de forêt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_limites_planetaires",
+          "nom": "Limites planétaires",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_point_bascule",
+          "nom": "Point de bascule",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_irreversibilite_ecologique",
+          "nom": "Irréversibilité écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_risque_systemique",
+          "nom": "Risque systémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_risque_climatique",
+        "nom": "Analyse de risque climatique et écologique",
+        "description": "Identifier les risques, seuils, vulnérabilités et scénarios d’un territoire ou d’un système face aux crises climatiques et écologiques."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut expliquer les crises climatiques et écologiques comme des dépassements de seuils systémiques.",
+        "L’Aspirant peut identifier risques, vulnérabilités, aléas, exposition, adaptation et limites planétaires dans un cas réel.",
+        "L’Aspirant peut produire une analyse de risque climatique et écologique avec incertitudes, priorités et mesures sobres."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ECL106",
+      "ordre": 6,
+      "nom": "Ressources vitales, alimentation et dépendances matérielles",
+      "concept_maitre": {
+        "concept_id": "ecl_conditions_materielles_vie",
+        "nom": "Les conditions matérielles de la vie",
+        "definition_courte": "Comprendre les ressources vitales, les dépendances matérielles, les systèmes alimentaires et les vulnérabilités d’approvisionnement.",
+        "fonction_pedagogique": "Relier écologie, économie et intervention sociale par l’étude de l’eau, de l’alimentation, du logement, de l’approvisionnement et de l’autonomie locale.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_ressource_vitale",
+          "nom": "Ressource vitale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_eau_potable",
+          "nom": "Eau potable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_alimentation",
+          "nom": "Alimentation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_agriculture",
+          "nom": "Agriculture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_agroecologie",
+          "nom": "Agroécologie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_permaculture",
+          "nom": "Permaculture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_souverainete_alimentaire",
+          "nom": "Souveraineté alimentaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_securite_alimentaire",
+          "nom": "Sécurité alimentaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_resilience_alimentaire",
+          "nom": "Résilience alimentaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_chaine_alimentaire",
+          "nom": "Chaîne alimentaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_circuit_court",
+          "nom": "Circuit court",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_gaspillage_alimentaire",
+          "nom": "Gaspillage alimentaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_logement_ecologique",
+          "nom": "Logement écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_sante_environnementale",
+          "nom": "Santé environnementale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_dependance_materielle",
+          "nom": "Dépendance matérielle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_dependance_territoriale",
+          "nom": "Dépendance territoriale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_approvisionnement",
+          "nom": "Approvisionnement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_chaine_approvisionnement",
+          "nom": "Chaîne d’approvisionnement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_vulnerabilite_approvisionnement",
+          "nom": "Vulnérabilité d’approvisionnement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_relocalisation",
+          "nom": "Relocalisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_autonomie_locale",
+          "nom": "Autonomie locale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_sobriete_materielle",
+          "nom": "Sobriété matérielle",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_dependances",
+        "nom": "Carte des dépendances matérielles",
+        "description": "Cartographier les ressources vitales, chaînes d’approvisionnement, vulnérabilités et marges d’autonomie d’un territoire ou d’un projet."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut cartographier les ressources vitales nécessaires à un système humain ou territorial.",
+        "L’Aspirant peut distinguer besoin, dépendance, vulnérabilité, sécurité matérielle et accès inégal aux ressources.",
+        "L’Aspirant peut produire une carte des dépendances matérielles montrant points critiques, alternatives et risques de rupture."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ECL107",
+      "ordre": 7,
+      "nom": "Énergie, matières et empreintes des systèmes humains",
+      "concept_maitre": {
+        "concept_id": "ecl_societe_metabolisme_materiel",
+        "nom": "La société comme métabolisme matériel",
+        "definition_courte": "Comprendre les sociétés humaines comme des systèmes qui consomment, transforment, transportent et rejettent énergie et matières.",
+        "fonction_pedagogique": "Lire les dépendances énergétiques, minières, logistiques et matérielles des systèmes humains.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_energie",
+          "nom": "Énergie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_energie_fossile",
+          "nom": "Énergie fossile",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_energie_renouvelable",
+          "nom": "Énergie renouvelable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_electricite",
+          "nom": "Électricité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_reseau_electrique",
+          "nom": "Réseau électrique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_efficacite_energetique",
+          "nom": "Efficacité énergétique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_sobriete_energetique",
+          "nom": "Sobriété énergétique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_transition_energetique",
+          "nom": "Transition énergétique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_petrole",
+          "nom": "Pétrole",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_gaz_naturel",
+          "nom": "Gaz naturel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_charbon",
+          "nom": "Charbon",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_biomasse_energetique",
+          "nom": "Biomasse énergétique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_extraction_miniere",
+          "nom": "Extraction minière",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_metaux_critiques",
+          "nom": "Métaux critiques",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_terres_rares",
+          "nom": "Terres rares",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_stockage_energie",
+          "nom": "Stockage d’énergie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_transport",
+          "nom": "Transport",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_empreinte_materielle",
+          "nom": "Empreinte matérielle",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_metabolisme_materiel",
+        "nom": "Audit du métabolisme matériel",
+        "description": "Analyser les flux d’énergie, de matières, de transport, d’extraction et de dépendance d’un système humain."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut décrire une société ou organisation comme un métabolisme de matières, d’énergie et d’infrastructures.",
+        "L’Aspirant peut repérer les principales empreintes, pertes, inefficacités et dépendances énergétiques d’un système.",
+        "L’Aspirant peut produire un audit du métabolisme matériel avec flux, stocks, impacts et pistes de sobriété."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ECL108",
+      "ordre": 8,
+      "nom": "Pollution, déchets et circularité régénérative",
+      "concept_maitre": {
+        "concept_id": "ecl_rejets_systemes_mal_boucles",
+        "nom": "Les rejets comme symptômes de systèmes mal bouclés",
+        "definition_courte": "Comprendre les pollutions, déchets et contaminations comme effets de systèmes qui externalisent leurs coûts et ne bouclent pas leurs cycles.",
+        "fonction_pedagogique": "Relier pollution, déchets, écoconception, réparation, réemploi, recyclage et économie circulaire.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_pollution",
+          "nom": "Pollution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_pollution_atmospherique",
+          "nom": "Pollution atmosphérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_pollution_eau",
+          "nom": "Pollution de l’eau",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_pollution_sols",
+          "nom": "Pollution des sols",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_pollution_plastique",
+          "nom": "Pollution plastique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_microplastique",
+          "nom": "Microplastique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_contamination_chimique",
+          "nom": "Contamination chimique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_pesticide",
+          "nom": "Pesticide",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_perturbateur_endocrinien",
+          "nom": "Perturbateur endocrinien",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_dechet",
+          "nom": "Déchet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_dechet_toxique",
+          "nom": "Déchet toxique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_dechet_electronique",
+          "nom": "Déchet électronique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_compostage",
+          "nom": "Compostage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_recyclage",
+          "nom": "Recyclage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_reemploi",
+          "nom": "Réemploi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_reparation",
+          "nom": "Réparation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_ecoconception",
+          "nom": "Écoconception",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_economie_circulaire",
+          "nom": "Économie circulaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_circularite",
+        "nom": "Audit de pollution et circularité",
+        "description": "Identifier les rejets, pertes, contaminations, externalités et possibilités de réparation ou de circularité dans un système."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut analyser pollution et déchets comme symptômes de cycles mal bouclés.",
+        "L’Aspirant peut distinguer réduction à la source, réemploi, recyclage, circularité, régénération et compensation.",
+        "L’Aspirant peut produire un audit de pollution et circularité avec priorités de réduction, réparation et prévention."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ECL109",
+      "ordre": 9,
+      "nom": "Justice environnementale, gouvernance et communs écologiques",
+      "concept_maitre": {
+        "concept_id": "ecl_ecologie_pouvoir_responsabilite",
+        "nom": "L’écologie comme question de pouvoir et de responsabilité",
+        "definition_courte": "Comprendre l’écologie comme question de justice, de gouvernance, de conflit d’usage, de communs, de responsabilité et de participation collective.",
+        "fonction_pedagogique": "Éviter une écologie abstraite ou seulement naturaliste en reliant milieux, institutions, inégalités, savoirs locaux et décisions collectives.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_ecologie_politique",
+          "nom": "Écologie politique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_justice_environnementale",
+          "nom": "Justice environnementale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_injustice_climatique",
+          "nom": "Injustice climatique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_racisme_environnemental",
+          "nom": "Racisme environnemental",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_vulnerabilite_sociale",
+          "nom": "Vulnérabilité sociale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_vulnerabilite_territoriale",
+          "nom": "Vulnérabilité territoriale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_conflit_usage",
+          "nom": "Conflit d’usage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_acceptabilite_sociale",
+          "nom": "Acceptabilité sociale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_participation_citoyenne",
+          "nom": "Participation citoyenne",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_gouvernance_environnementale",
+          "nom": "Gouvernance environnementale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_reglementation_environnementale",
+          "nom": "Réglementation environnementale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_droit_environnement",
+          "nom": "Droit de l’environnement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_aire_protegee",
+          "nom": "Aire protégée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_commun_ecologique",
+          "nom": "Commun écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_usage_collectif",
+          "nom": "Usage collectif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_savoir_autochtone",
+          "nom": "Savoir autochtone",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_savoir_local",
+          "nom": "Savoir local",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_transition_juste",
+          "nom": "Transition juste",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_responsabilite_intergenerationnelle",
+          "nom": "Responsabilité intergénérationnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_democratie_ecologique",
+          "nom": "Démocratie écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_gouvernance_ecologique",
+        "nom": "Analyse de gouvernance écologique",
+        "description": "Étudier les acteurs, conflits, règles, vulnérabilités, savoirs locaux et responsabilités dans une décision environnementale."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut relier enjeux écologiques, pouvoir, responsabilité, justice et gouvernance des communs.",
+        "L’Aspirant peut identifier les acteurs, droits, conflits d’usage, inégalités d’exposition et mécanismes de décision d’un enjeu écologique.",
+        "L’Aspirant peut produire une analyse de gouvernance écologique proposant des contre-pouvoirs, responsabilités et mécanismes de suivi."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "ECL110",
+      "ordre": 10,
+      "nom": "Diagnostic, intervention et mémoire écologique",
+      "concept_maitre": {
+        "concept_id": "ecl_action_ecologique_responsable",
+        "nom": "L’action écologique responsable",
+        "definition_courte": "Transformer la compréhension écologique en diagnostic, intervention, suivi, restauration, preuve et mémoire collective.",
+        "fonction_pedagogique": "Synthétiser la Voie en une capacité d’observation, de cartographie, de décision, d’intervention, de suivi et de documentation écologique.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ecl_observation_terrain",
+          "nom": "Observation de terrain",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_indicateur_ecologique",
+          "nom": "Indicateur écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_bioindicateur",
+          "nom": "Bioindicateur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_empreinte_ecologique",
+          "nom": "Empreinte écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_empreinte_carbone",
+          "nom": "Empreinte carbone",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_bilan_carbone",
+          "nom": "Bilan carbone",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_cartographie_ecologique",
+          "nom": "Cartographie écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_cartographie_dependances",
+          "nom": "Cartographie des dépendances",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_diagnostic_territorial",
+          "nom": "Diagnostic territorial",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_analyse_risque_ecologique",
+          "nom": "Analyse de risque écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_evaluation_impact",
+          "nom": "Évaluation d’impact",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_principe_precaution",
+          "nom": "Principe de précaution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_scenario_transition",
+          "nom": "Scénario de transition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_mitigation",
+          "nom": "Mitigation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_adaptation_planification",
+          "nom": "Adaptation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_plan_restauration",
+          "nom": "Plan de restauration",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_plan_adaptation",
+          "nom": "Plan d’adaptation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_suivi_environnemental",
+          "nom": "Suivi environnemental",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_audit_soutenabilite",
+          "nom": "Audit de soutenabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ecl_memoire_ecologique",
+          "nom": "Mémoire écologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "dossier_intervention_ecologique",
+        "nom": "Dossier d’intervention écologique",
+        "description": "Produire un diagnostic écologique complet, avec cartographie, risques, indicateurs, scénario d’intervention, suivi et mémoire."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut transformer un diagnostic écologique en proposition d’intervention responsable et documentée.",
+        "L’Aspirant peut intégrer preuves, incertitudes, seuils, parties prenantes, risques éthiques et mémoire de suivi.",
+        "L’Aspirant peut produire un dossier d’intervention écologique sobre, vérifiable, contestable et transmissible."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "type": "dossier_passage",
+    "nom": "Dossier de Gardien des systèmes vivants",
+    "description": "L’Aspirant doit choisir un territoire, un milieu, une ressource ou un système écologique réel, en produire une cartographie, identifier les dépendances, vulnérabilités, risques, acteurs, conflits, cycles et seuils, puis proposer une intervention responsable, sobre, juste et vérifiable.",
+    "elements_attendus": [
+      "description du territoire ou du système étudié",
+      "cartographie des milieux et des acteurs",
+      "cartographie des cycles et dépendances matérielles",
+      "analyse des risques climatiques ou écologiques",
+      "identification des vulnérabilités sociales et territoriales",
+      "diagnostic des pollutions, pertes ou ruptures de cycles",
+      "analyse de gouvernance et des conflits d’usage",
+      "proposition d’intervention ou de restauration",
+      "indicateurs de suivi",
+      "mécanisme de mémoire écologique"
+    ]
+  },
+  "limites_ethiques": [
+    "ne pas réduire l’écologie à une rhétorique morale sans preuve",
+    "ne pas confondre transition écologique et déplacement des dommages",
+    "ne pas invisibiliser les populations vulnérables dans les décisions environnementales",
+    "ne pas présenter une solution technique comme suffisante sans analyse des dépendances matérielles",
+    "ne pas confondre compensation et réparation",
+    "ne pas utiliser l’écologie pour justifier une domination sociale ou technocratique",
+    "ne pas traiter les territoires comme des abstractions sans habitants, usages, histoires et milieux vivants",
+    "ne pas confondre soutenabilité, circularité et greenwashing"
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_economie",
+      "relation": "Les ressources, flux, externalités, dépendances matérielles et modèles de circularité relient directement écologie et économie."
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "relation": "Les décisions écologiques impliquent gouvernance, réglementation, conflits d’usage, légitimité et justice environnementale."
+    },
+    {
+      "voie_id": "voie_architecture_sociotechnique",
+      "relation": "Les interventions écologiques s’inscrivent dans des systèmes mêlant humains, infrastructures, technologies, institutions et territoires."
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "relation": "Les crises écologiques affectent les vulnérabilités, la dignité, l’accès aux ressources vitales, la santé et les communautés."
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "relation": "L’IA peut soutenir la cartographie, la simulation, le diagnostic et le suivi, sans devenir une autorité écologique finale."
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "relation": "Les mots écologiques — nature, ressource, transition, compensation, régénération, limite — structurent ce que la société juge possible ou acceptable."
+    },
+    {
+      "voie_id": "voie_grand_jeu_social",
+      "relation": "L’écologie révèle les règles matérielles du Grand Jeu social : accès aux ressources, risques, territoires, dépendances et responsabilités."
+    }
+  ],
+  "tags": [
+    "ecologie",
+    "systemes_vivants",
+    "territoires",
+    "biodiversite",
+    "climat",
+    "ressources",
+    "cycles",
+    "justice_environnementale",
+    "gouvernance",
+    "intervention_ecologique",
+    "puissance_operatoire"
+  ]
+}

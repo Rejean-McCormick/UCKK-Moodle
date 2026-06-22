@@ -1,0 +1,1628 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_linguistique_architecture_du_sens",
+  "code": "LI",
+  "nom": "Voie de la Linguistique et de l’architecture du sens",
+  "domaine_operatoire": "Sens",
+  "niveau_vise": "Puissance opératoire",
+  "titre_symbolique": "Architecte du sens",
+  "parchemin": "Parchemin de Puissance opératoire — Voie de la Linguistique et de l’architecture du sens",
+  "definition_courte": "La Voie de la Linguistique et de l’architecture du sens forme des personnes capables de lire, structurer, traduire, auditer et gouverner les mots, concepts, récits, catégories et graphes qui organisent le monde social.",
+  "angle_fondamental": "Comprendre les langues comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes et pouvoir symbolique.",
+  "competence_centrale": "Concevoir et gouverner des architectures de sens claires, traçables, traduisibles, discutables et non capturées.",
+  "seuils_progression": [
+    {
+      "seuil_id": "fondations_linguistiques",
+      "nom": "Fondations linguistiques",
+      "fonction": "Comprendre le langage, les signes, les formes, les mots et les structures de base du sens."
+    },
+    {
+      "seuil_id": "interpretation_discours_pouvoir",
+      "nom": "Interprétation, discours et pouvoir",
+      "fonction": "Analyser les contextes, récits, actes de langage, normes, identités et pouvoirs symboliques."
+    },
+    {
+      "seuil_id": "architecture_gouvernance_sens",
+      "nom": "Architecture et gouvernance du sens",
+      "fonction": "Construire des dictionnaires, ontologies, graphes conceptuels et dispositifs de souveraineté sémantique."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "LI101",
+      "ordre": 1,
+      "nom": "Langage, signe et architecture du sens",
+      "concept_maitre": {
+        "concept_id": "lin_langage",
+        "nom": "Langage",
+        "type": "concept_maitre",
+        "definition_courte": "Infrastructure première par laquelle les humains produisent, partagent, stabilisent et transforment le sens.",
+        "fonction_pedagogique": "Poser les fondations de la Voie en distinguant langage, langue, parole, signe, structure et référence."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_langue",
+          "nom": "Langue",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_parole",
+          "nom": "Parole",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_signe",
+          "nom": "Signe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_signifiant",
+          "nom": "Signifiant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_signifie",
+          "nom": "Signifié",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_referent",
+          "nom": "Référent",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_code",
+          "nom": "Code",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_systeme",
+          "nom": "Système",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_structure",
+          "nom": "Structure",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_opposition",
+          "nom": "Opposition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_difference",
+          "nom": "Différence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_arbitraire_du_signe",
+          "nom": "Arbitraire du signe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_motivation_du_signe",
+          "nom": "Motivation du signe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_fonction_du_langage",
+          "nom": "Fonction du langage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_metalangage",
+          "nom": "Métalangage",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_conceptuelle",
+        "nom": "Carte du langage comme système de signes",
+        "description": "Représenter les relations entre signe, signifiant, signifié, référent, code, langue et parole."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer langage, langue, parole, signe, code, structure et référent.",
+        "L’Aspirant peut cartographier les relations entre signifiant, signifié et référent dans un exemple concret.",
+        "L’Aspirant peut expliquer comment un système de signes stabilise ou transforme le sens.",
+        "L’Aspirant peut produire une carte conceptuelle claire du langage comme infrastructure de sens."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "LI102",
+      "ordre": 2,
+      "nom": "Formes du langage : sons, écritures et grammaires",
+      "concept_maitre": {
+        "concept_id": "lin_forme_linguistique",
+        "nom": "Forme linguistique",
+        "type": "concept_maitre",
+        "definition_courte": "Organisation matérielle du langage dans la voix, l’écriture, les unités grammaticales et les structures syntaxiques.",
+        "fonction_pedagogique": "Comprendre comment le sens prend forme dans des sons, graphies, morphèmes, phrases et dépendances."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_phonetique",
+          "nom": "Phonétique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_phonologie",
+          "nom": "Phonologie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_phoneme",
+          "nom": "Phonème",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_prosodie",
+          "nom": "Prosodie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_intonation",
+          "nom": "Intonation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_oralite",
+          "nom": "Oralité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_voix",
+          "nom": "Voix",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_grapheme",
+          "nom": "Graphème",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_orthographe",
+          "nom": "Orthographe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_ponctuation",
+          "nom": "Ponctuation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_typographie",
+          "nom": "Typographie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_systeme_ecriture",
+          "nom": "Système d’écriture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_morpheme",
+          "nom": "Morphème",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_lexeme",
+          "nom": "Lexème",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_derivation",
+          "nom": "Dérivation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_flexion",
+          "nom": "Flexion",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_categorie_grammaticale",
+          "nom": "Catégorie grammaticale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_syntagme",
+          "nom": "Syntagme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_phrase",
+          "nom": "Phrase",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_dependance_syntaxique",
+          "nom": "Dépendance syntaxique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_formelle",
+        "nom": "Analyse d’une forme linguistique",
+        "description": "Décomposer un énoncé selon ses dimensions sonores, écrites, grammaticales et syntaxiques."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut décomposer un énoncé selon ses dimensions sonores, écrites, morphologiques, grammaticales et syntaxiques.",
+        "L’Aspirant peut distinguer phonème, graphème, morphème, syntagme, phrase et dépendance syntaxique.",
+        "L’Aspirant peut repérer comment une forme linguistique influence la compréhension d’un message.",
+        "L’Aspirant peut produire une analyse formelle lisible sans réduire le sens à la seule grammaire."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "LI103",
+      "ordre": 3,
+      "nom": "Mots, concepts et définitions opératoires",
+      "concept_maitre": {
+        "concept_id": "lin_concept",
+        "nom": "Concept",
+        "type": "concept_maitre",
+        "definition_courte": "Unité de pensée stabilisée permettant de nommer, distinguer, relier et gouverner une portion du réel.",
+        "fonction_pedagogique": "Former le cœur du Conceptarium : transformer des mots flottants en concepts opératoires."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_mot",
+          "nom": "Mot",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_terme",
+          "nom": "Terme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_notion",
+          "nom": "Notion",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_definition",
+          "nom": "Définition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_definition_operatoire",
+          "nom": "Définition opératoire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_definition_institutionnelle",
+          "nom": "Définition institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_distinction",
+          "nom": "Distinction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_categorie",
+          "nom": "Catégorie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_taxon",
+          "nom": "Taxon",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_prototype",
+          "nom": "Prototype",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_polysemie",
+          "nom": "Polysémie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_homonymie",
+          "nom": "Homonymie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_synonymie",
+          "nom": "Synonymie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_antonymie",
+          "nom": "Antonymie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_hyperonymie",
+          "nom": "Hyperonymie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_hyponymie",
+          "nom": "Hyponymie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_champ_lexical",
+          "nom": "Champ lexical",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_champ_semantique",
+          "nom": "Champ sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_neologisme",
+          "nom": "Néologisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_emprunt",
+          "nom": "Emprunt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_stabilisation_terminologique",
+          "nom": "Stabilisation terminologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "fiche_conceptuelle",
+        "nom": "Fiche de concept opératoire",
+        "description": "Produire une fiche définissant un concept, ses distinctions, ses risques de confusion et ses liens avec d’autres concepts."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer mot, terme, notion, concept, définition et définition opératoire.",
+        "L’Aspirant peut identifier les ambiguïtés, polysémies, synonymies et risques de confusion d’un concept.",
+        "L’Aspirant peut produire une fiche de concept opératoire avec distinctions, usages, limites et liens conceptuels.",
+        "L’Aspirant peut expliquer comment une terminologie se stabilise ou reste contestable dans un collectif."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "LI104",
+      "ordre": 4,
+      "nom": "Sémantique, contexte et interprétation",
+      "concept_maitre": {
+        "concept_id": "lin_interpretation",
+        "nom": "Interprétation",
+        "type": "concept_maitre",
+        "definition_courte": "Processus par lequel un sens est produit, limité, déplacé ou disputé dans un contexte donné.",
+        "fonction_pedagogique": "Comprendre ambiguïtés, contextes, inférences et cadres de sens."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_semantique",
+          "nom": "Sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_denotation",
+          "nom": "Dénotation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_connotation",
+          "nom": "Connotation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_reference",
+          "nom": "Référence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_extension",
+          "nom": "Extension",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_intension",
+          "nom": "Intension",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_cadre_semantique",
+          "nom": "Cadre sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_script",
+          "nom": "Script",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_contexte",
+          "nom": "Contexte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_cotexte",
+          "nom": "Cotexte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_deixis",
+          "nom": "Deixis",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_presupposition",
+          "nom": "Présupposition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_implicature",
+          "nom": "Implicature",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_inference",
+          "nom": "Inférence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_ambiguite",
+          "nom": "Ambiguïté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_vague",
+          "nom": "Vague",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_modalite",
+          "nom": "Modalité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_conditions_de_verite",
+          "nom": "Conditions de vérité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_surinterpretation",
+          "nom": "Surinterprétation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_malentendu",
+          "nom": "Malentendu",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_desambiguisation",
+          "nom": "Désambiguïsation",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_interpretatif",
+        "nom": "Audit d’ambiguïté et d’interprétation",
+        "description": "Analyser un texte, une règle ou un énoncé en repérant ses ambiguïtés, présupposés, inférences et risques de surinterprétation."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer dénotation, connotation, référence, extension, intension et contexte.",
+        "L’Aspirant peut repérer présuppositions, inférences, implicatures, ambiguïtés et risques de surinterprétation.",
+        "L’Aspirant peut analyser un texte ou une règle en explicitant les conditions de vérité et les cadres sémantiques mobilisés.",
+        "L’Aspirant peut proposer une désambiguïsation prudente sans effacer les interprétations légitimes."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "LI105",
+      "ordre": 5,
+      "nom": "Pragmatique, énonciation et actes de langage",
+      "concept_maitre": {
+        "concept_id": "lin_acte_de_langage",
+        "nom": "Acte de langage",
+        "type": "concept_maitre",
+        "definition_courte": "Action accomplie par le langage dans une situation sociale.",
+        "fonction_pedagogique": "Comprendre comment les mots promettent, ordonnent, reconnaissent, excluent, accusent ou réparent."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_pragmatique",
+          "nom": "Pragmatique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_enonciation",
+          "nom": "Énonciation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_enonce",
+          "nom": "Énoncé",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_locuteur",
+          "nom": "Locuteur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_allocutaire",
+          "nom": "Allocutaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_adresse",
+          "nom": "Adresse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_intention_communicative",
+          "nom": "Intention communicative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_performatif",
+          "nom": "Performatif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_force_illocutoire",
+          "nom": "Force illocutoire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_effet_perlocutoire",
+          "nom": "Effet perlocutoire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_promesse",
+          "nom": "Promesse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_ordre",
+          "nom": "Ordre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_excuse",
+          "nom": "Excuse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_reconnaissance",
+          "nom": "Reconnaissance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_accusation",
+          "nom": "Accusation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_silence",
+          "nom": "Silence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_face",
+          "nom": "Face",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_politesse",
+          "nom": "Politesse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_reparation_conversationnelle",
+          "nom": "Réparation conversationnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_pragmatique",
+        "nom": "Analyse d’actes de langage",
+        "description": "Identifier ce qu’un ensemble d’énoncés fait socialement : promettre, ordonner, reconnaître, exclure, accuser ou réparer."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer énoncé, énonciation, locuteur, allocutaire, intention communicative et contexte d’adresse.",
+        "L’Aspirant peut identifier ce qu’un acte de langage fait socialement : promettre, ordonner, reconnaître, accuser, exclure ou réparer.",
+        "L’Aspirant peut analyser les effets pragmatiques du silence, de la politesse, de la face et de la réparation conversationnelle.",
+        "L’Aspirant peut produire une analyse pragmatique qui distingue contenu explicite, action sociale et effet relationnel."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "LI106",
+      "ordre": 6,
+      "nom": "Discours, récit et pouvoir narratif",
+      "concept_maitre": {
+        "concept_id": "lin_recit",
+        "nom": "Récit",
+        "type": "concept_maitre",
+        "definition_courte": "Architecture narrative qui organise la perception du réel, des acteurs, des causes, des responsabilités et des possibles.",
+        "fonction_pedagogique": "Analyser les cadres, figures, arguments, mythes et récits qui orientent l’action collective."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_discours",
+          "nom": "Discours",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_genre_discursif",
+          "nom": "Genre discursif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_registre",
+          "nom": "Registre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_style",
+          "nom": "Style",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_narration",
+          "nom": "Narration",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_narrateur",
+          "nom": "Narrateur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_intrigue",
+          "nom": "Intrigue",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_personnage",
+          "nom": "Personnage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_point_de_vue",
+          "nom": "Point de vue",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_cadrage",
+          "nom": "Cadrage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_metaphore",
+          "nom": "Métaphore",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_metonimie",
+          "nom": "Métonymie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_analogie",
+          "nom": "Analogie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_symbole",
+          "nom": "Symbole",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_mythe",
+          "nom": "Mythe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_fiction_fondatrice",
+          "nom": "Fiction fondatrice",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_verite_morale",
+          "nom": "Vérité morale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_argument",
+          "nom": "Argument",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_premisse",
+          "nom": "Prémisse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_conclusion",
+          "nom": "Conclusion",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_sophisme",
+          "nom": "Sophisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_rhetorique",
+          "nom": "Rhétorique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_propagande",
+          "nom": "Propagande",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_discursive",
+        "nom": "Carte d’un récit public",
+        "description": "Cartographier un discours public selon ses récits, cadres, métaphores, personnages, arguments et effets de pouvoir."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut cartographier un discours public selon ses récits, cadres, métaphores, personnages, arguments et effets de pouvoir.",
+        "L’Aspirant peut distinguer récit, narration, intrigue, cadrage, argument, rhétorique, sophisme et propagande.",
+        "L’Aspirant peut identifier les figures narratives mobilisées par un discours : héros, victime, ennemi, sauveur, crise ou promesse.",
+        "L’Aspirant peut évaluer les effets de mobilisation, de manipulation ou de clarification d’un récit public."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "LI107",
+      "ordre": 7,
+      "nom": "Sociolinguistique, identité et pouvoir symbolique",
+      "concept_maitre": {
+        "concept_id": "lin_pouvoir_symbolique",
+        "nom": "Pouvoir symbolique",
+        "type": "concept_maitre",
+        "definition_courte": "Pouvoir exercé par les mots, normes, catégories, accents, titres, récits et formes de reconnaissance.",
+        "fonction_pedagogique": "Comprendre comment les langues classent, légitiment, excluent ou reconnaissent les personnes."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_sociolinguistique",
+          "nom": "Sociolinguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_variation_linguistique",
+          "nom": "Variation linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_dialecte",
+          "nom": "Dialecte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_sociolecte",
+          "nom": "Sociolecte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_idiolecte",
+          "nom": "Idiolecte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_accent_social",
+          "nom": "Accent social",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_langue_standard",
+          "nom": "Langue standard",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_norme",
+          "nom": "Norme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_prestige_linguistique",
+          "nom": "Prestige linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_stigmate_linguistique",
+          "nom": "Stigmate linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_insecurite_linguistique",
+          "nom": "Insécurité linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_diglossie",
+          "nom": "Diglossie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_bilinguisme",
+          "nom": "Bilinguisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_multilinguisme",
+          "nom": "Multilinguisme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_langue_minoritaire",
+          "nom": "Langue minoritaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_identite_linguistique",
+          "nom": "Identité linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_communaute_linguistique",
+          "nom": "Communauté linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_politique_linguistique",
+          "nom": "Politique linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_domination_symbolique",
+          "nom": "Domination symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_reconnaissance",
+          "nom": "Reconnaissance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_reputation",
+          "nom": "Réputation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_legitimite_discursive",
+          "nom": "Légitimité discursive",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_violence_symbolique",
+          "nom": "Violence symbolique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_symbolique",
+        "nom": "Audit de pouvoir symbolique",
+        "description": "Analyser comment des mots, catégories, titres, accents ou normes produisent reconnaissance, exclusion, prestige ou stigmate."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut analyser comment langue, accent, registre, norme, statut linguistique et variation produisent reconnaissance ou exclusion.",
+        "L’Aspirant peut distinguer identité linguistique, communauté linguistique, prestige, stigmate et légitimité discursive.",
+        "L’Aspirant peut repérer les formes de domination symbolique et de violence symbolique dans un contexte social donné.",
+        "L’Aspirant peut proposer une réponse qui protège la dignité linguistique sans nier les variations réelles."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "LI108",
+      "ordre": 8,
+      "nom": "Traduction, médiation et dignité linguistique",
+      "concept_maitre": {
+        "concept_id": "lin_traduction",
+        "nom": "Traduction",
+        "type": "concept_maitre",
+        "definition_courte": "Passage d’un système de sens à un autre sans effacer les différences essentielles entre mondes linguistiques.",
+        "fonction_pedagogique": "Relier les langues, cultures et concepts sans écraser les nuances, dignités et souverainetés linguistiques."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_interpretation_orale",
+          "nom": "Interprétation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_equivalence",
+          "nom": "Équivalence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_intraduisible",
+          "nom": "Intraduisible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_adaptation",
+          "nom": "Adaptation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_localisation",
+          "nom": "Localisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_transcreation",
+          "nom": "Transcréation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_faux_ami",
+          "nom": "Faux ami",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_calque",
+          "nom": "Calque",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_terminologie",
+          "nom": "Terminologie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_memoire_de_traduction",
+          "nom": "Mémoire de traduction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_corpus_parallele",
+          "nom": "Corpus parallèle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_intercomprehension",
+          "nom": "Intercompréhension",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_interculturalite",
+          "nom": "Interculturalité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_mediation_linguistique",
+          "nom": "Médiation linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_contact_de_langues",
+          "nom": "Contact de langues",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_alternance_codique",
+          "nom": "Alternance codique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_creolisation",
+          "nom": "Créolisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_pidginisation",
+          "nom": "Pidginisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_perte_de_sens",
+          "nom": "Perte de sens",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_gain_de_sens",
+          "nom": "Gain de sens",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_dignite_linguistique",
+          "nom": "Dignité linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_hospitalite_linguistique",
+          "nom": "Hospitalité linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_souverainete_linguistique",
+          "nom": "Souveraineté linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "dossier_de_mediation",
+        "nom": "Dossier de traduction et médiation",
+        "description": "Comparer plusieurs traductions ou médiations d’un concept en analysant les pertes, gains, intraduisibles et choix de dignité linguistique."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut comparer plusieurs traductions ou médiations d’un concept en identifiant pertes, gains, équivalences et intraduisibles.",
+        "L’Aspirant peut distinguer traduction, interprétation orale, adaptation, localisation, transcréation et médiation interculturelle.",
+        "L’Aspirant peut repérer les faux amis, asymétries linguistiques, hiérarchies de langues et risques d’effacement culturel.",
+        "L’Aspirant peut produire un dossier de médiation linguistique qui respecte la dignité et la souveraineté des locuteurs."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "LI109",
+      "ordre": 9,
+      "nom": "Dictionnaires, ontologies et graphes conceptuels",
+      "concept_maitre": {
+        "concept_id": "lin_graphe_conceptuel",
+        "nom": "Graphe conceptuel",
+        "type": "concept_maitre",
+        "definition_courte": "Infrastructure relationnelle qui relie des concepts, définitions, preuves, sources, catégories et usages.",
+        "fonction_pedagogique": "Construire des glossaires, dictionnaires, taxonomies, ontologies, Kristals et graphes de sens."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_lexicographie",
+          "nom": "Lexicographie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_dictionnaire",
+          "nom": "Dictionnaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_glossaire",
+          "nom": "Glossaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_thesaurus",
+          "nom": "Thésaurus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_taxonomie",
+          "nom": "Taxonomie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_ontologie",
+          "nom": "Ontologie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_graphe_lexical",
+          "nom": "Graphe lexical",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_relation_semantique",
+          "nom": "Relation sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_noeud_conceptuel",
+          "nom": "Nœud conceptuel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_arete_conceptuelle",
+          "nom": "Arête conceptuelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_annotation",
+          "nom": "Annotation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_corpus",
+          "nom": "Corpus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_metadonnee",
+          "nom": "Métadonnée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_provenance",
+          "nom": "Provenance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_preuve",
+          "nom": "Preuve",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_version",
+          "nom": "Version",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_canon",
+          "nom": "Canon",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_kristal",
+          "nom": "Kristal",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_alignement_conceptuel",
+          "nom": "Alignement conceptuel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_audit_semantique",
+          "nom": "Audit sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_desambiguisation_outillee",
+          "nom": "Désambiguïsation outillée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_interoperabilite_semantique",
+          "nom": "Interopérabilité sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_semantik",
+          "nom": "SemantiK",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "graphe_conceptuel",
+        "nom": "Mini-ontologie ou graphe conceptuel",
+        "description": "Construire un graphe reliant concepts, définitions, relations, preuves, sources et ambiguïtés d’un domaine choisi."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer dictionnaire, glossaire, thésaurus, taxonomie, ontologie, graphe lexical et graphe conceptuel.",
+        "L’Aspirant peut construire une mini-ontologie reliant concepts, définitions, relations, sources, preuves et ambiguïtés.",
+        "L’Aspirant peut identifier les enjeux d’alignement conceptuel, de désambiguïsation outillée et d’interopérabilité sémantique.",
+        "L’Aspirant peut produire un graphe conceptuel utilisable dans le Conceptarium ou SemantiK."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "LI110",
+      "ordre": 10,
+      "nom": "Gouvernance du sens, IA et souveraineté sémantique",
+      "concept_maitre": {
+        "concept_id": "lin_gouvernance_du_sens",
+        "nom": "Gouvernance du sens",
+        "type": "concept_maitre",
+        "definition_courte": "Ensemble des pratiques qui rendent les mots, définitions, interprétations, traductions et graphes discutables, traçables, révisables et non capturés.",
+        "fonction_pedagogique": "Synthétiser la Voie en reliant IA, audit, assemblées, ambiguïté, souveraineté sémantique et responsabilité discursive."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "lin_souverainete_semantique",
+          "nom": "Souveraineté sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_autorite_terminologique",
+          "nom": "Autorité terminologique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_conflit_interpretation",
+          "nom": "Conflit d’interprétation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_arbitrage_semantique",
+          "nom": "Arbitrage sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_ambiguite_institutionnelle",
+          "nom": "Ambiguïté institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_hallucination_semantique",
+          "nom": "Hallucination sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_ia_linguistique",
+          "nom": "IA linguistique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_prompt",
+          "nom": "Prompt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_alignement_semantique",
+          "nom": "Alignement sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_tracabilite",
+          "nom": "Traçabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_auditabilite",
+          "nom": "Auditabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_fail_closed_integrity",
+          "nom": "Fail-closed integrity",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_reputation_conceptuelle",
+          "nom": "Réputation conceptuelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_assemblee_semantique",
+          "nom": "Assemblée sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_decision_collective",
+          "nom": "Décision collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_preuve_interpretative",
+          "nom": "Preuve interprétative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_responsabilite_discursive",
+          "nom": "Responsabilité discursive",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_manipulation_langagiere",
+          "nom": "Manipulation langagière",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_capture_du_vocabulaire",
+          "nom": "Capture du vocabulaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_propagande_algorithmique",
+          "nom": "Propagande algorithmique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_memoire_institutionnelle",
+          "nom": "Mémoire institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_reparation_du_sens",
+          "nom": "Réparation du sens",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "lin_architecture_du_sens",
+          "nom": "Architecture du sens",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "protocole_gouvernance",
+        "nom": "Protocole de gouvernance du sens",
+        "description": "Concevoir un protocole pour définir, contester, réviser, traduire, tracer et auditer des concepts dans un système collectif ou institutionnel."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut concevoir un protocole pour définir, contester, réviser, traduire, tracer et auditer des concepts dans un collectif.",
+        "L’Aspirant peut distinguer souveraineté sémantique, autorité terminologique, arbitrage sémantique et capture du vocabulaire.",
+        "L’Aspirant peut identifier les risques liés à l’IA linguistique : hallucination sémantique, alignement forcé, biais terminologique et propagande algorithmique.",
+        "L’Aspirant peut défendre une gouvernance du sens claire, contestable, documentée et non dominatrice."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "type": "architecture_du_sens",
+    "nom": "Système conceptuel gouvernable",
+    "description": "L’Aspirant doit produire un mini-Conceptarium ou graphe conceptuel pour un domaine réel : définitions, relations, ambiguïtés, traductions, sources, preuves, critères d’usage et protocole de révision.",
+    "livrables": [
+      "définition du domaine choisi",
+      "liste des concepts-maîtres",
+      "liste des concepts associés",
+      "définitions opératoires",
+      "cartographie des ambiguïtés",
+      "graphe conceptuel",
+      "protocole de traduction ou médiation",
+      "protocole de gouvernance du sens",
+      "critères d’audit sémantique",
+      "mémoire de révision"
+    ]
+  },
+  "limites_ethiques": [
+    "ne pas utiliser le langage pour manipuler ou humilier",
+    "ne pas présenter une interprétation comme un fait établi sans preuve",
+    "ne pas effacer les langues minoritaires ou les variations légitimes",
+    "ne pas confondre clarté institutionnelle et domination terminologique",
+    "ne pas laisser l’IA devenir autorité finale sur le sens",
+    "ne pas transformer une ambiguïté en certitude sans processus de validation",
+    "ne pas capturer le vocabulaire collectif au profit d’un groupe fermé",
+    "ne pas confondre traduction efficace et effacement culturel"
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_grand_jeu_social",
+      "relation": "Le sens structure les règles, récits, statuts et catégories du Grand Jeu social."
+    },
+    {
+      "voie_id": "voie_economie",
+      "relation": "Les mots économiques comme valeur, coût, dette, mérite, efficacité ou richesse encadrent ce que la société juge possible ou acceptable."
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "relation": "Les institutions politiques dépendent de catégories, récits, définitions légales et conflits d’interprétation."
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "relation": "L’IA manipule, génère et transforme le langage; elle doit être auditée sémantiquement."
+    },
+    {
+      "voie_id": "voie_architecture_sociotechnique",
+      "relation": "Les systèmes sociotechniques nécessitent des ontologies, définitions, workflows et graphes conceptuels partagés."
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "relation": "Les catégories sociales, diagnostics, récits de vulnérabilité et formes de reconnaissance transforment la dignité des personnes."
+    },
+    {
+      "voie_id": "voie_metaphysique",
+      "relation": "Les concepts de vérité, être, liberté, sens, croyance et conscience dépendent d’architectures linguistiques profondes."
+    }
+  ],
+  "tags": [
+    "linguistique",
+    "architecture_du_sens",
+    "conceptarium",
+    "semantik",
+    "traduction",
+    "discours",
+    "sociolinguistique",
+    "ontologie",
+    "graphe_conceptuel",
+    "gouvernance_du_sens"
+  ],
+  "statut": "Voie fondatrice UCKK"
+}

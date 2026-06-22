@@ -1,0 +1,1343 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_architecture_sociotechnique",
+  "code": "AS",
+  "nom": "Voie d’Architecture sociotechnique",
+  "domaine_operatoire": "Systèmes humains-techniques",
+  "niveau_vise": "Puissance opératoire",
+  "titre_symbolique": "Architecte des systèmes d’action",
+  "parchemin": "Parchemin de Puissance opératoire — Voie d’Architecture sociotechnique",
+  "definition_courte": "La Voie d’Architecture sociotechnique forme des personnes capables de concevoir, cartographier, gouverner et améliorer des systèmes combinant humains, technologies, institutions, données, règles, rôles et workflows.",
+  "angle_fondamental": "Transformer des configurations humaines, techniques et institutionnelles confuses en systèmes lisibles, gouvernables, exécutables, vérifiables et révisables.",
+  "competence_centrale": "Concevoir des systèmes d’action capables de passer du désordre informationnel à la structure lisible, puis à la décision, à l’action et à la mémoire.",
+  "seuils_progression": [
+    {
+      "seuil_id": "lecture_systemique",
+      "nom": "Lecture systémique",
+      "fonction": "Comprendre les systèmes sociotechniques, leurs acteurs, leurs règles, leurs flux et leurs interdépendances."
+    },
+    {
+      "seuil_id": "structuration_operationnelle",
+      "nom": "Structuration opérationnelle",
+      "fonction": "Concevoir des rôles, permissions, workflows, infrastructures, interfaces et mémoires institutionnelles."
+    },
+    {
+      "seuil_id": "gouvernance_resilience",
+      "nom": "Gouvernance et résilience",
+      "fonction": "Rendre les systèmes auditables, contestables, résilients et protégés contre les risques de capture."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "AS101",
+      "ordre": 1,
+      "nom": "Lire les systèmes sociotechniques",
+      "concept_maitre": {
+        "concept_id": "as_systeme_sociotechnique",
+        "nom": "Système sociotechnique",
+        "definition_courte": "Un système où humains, technologies, institutions, règles, données, décisions et mémoires agissent ensemble.",
+        "fonction_pedagogique": "Apprendre à voir un système comme un assemblage d’acteurs, d’outils, de règles, de flux et de boucles de rétroaction.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_systeme_complexe",
+          "nom": "Système complexe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_systeme_ouvert",
+          "nom": "Système ouvert",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_system_of_systems",
+          "nom": "System of systems",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_frontiere_systeme",
+          "nom": "Frontière du système",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_environnement_systeme",
+          "nom": "Environnement du système",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_acteur",
+          "nom": "Acteur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_composant",
+          "nom": "Composant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_relation",
+          "nom": "Relation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_interdependance",
+          "nom": "Interdépendance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_retroaction",
+          "nom": "Rétroaction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_emergence",
+          "nom": "Émergence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_point_levier",
+          "nom": "Point de levier",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_effet_bord",
+          "nom": "Effet de bord",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_lisibilite_systemique",
+          "nom": "Lisibilité systémique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_systemique",
+        "nom": "Carte générale d’un système réel",
+        "description": "Représenter les acteurs, composants, relations, dépendances, boucles et points de levier d’un système sociotechnique."
+      },
+      "criteres_passage": [
+        "Identifier les frontières du système.",
+        "Distinguer acteurs, composants, relations et flux.",
+        "Repérer au moins trois interdépendances critiques.",
+        "Expliquer un effet de bord ou une boucle de rétroaction."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "AS102",
+      "ordre": 2,
+      "nom": "Cartographier acteurs, règles et flux",
+      "concept_maitre": {
+        "concept_id": "as_cartographie_sociotechnique",
+        "nom": "Cartographie sociotechnique",
+        "definition_courte": "Méthode de représentation des acteurs, règles, flux, blocages, dépendances et responsabilités d’un système.",
+        "fonction_pedagogique": "Apprendre à représenter qui agit, qui décide, qui bloque, qui subit, ce qui circule et ce qui reste invisible.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_partie_prenante",
+          "nom": "Partie prenante",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_usager",
+          "nom": "Usager",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_beneficiaire",
+          "nom": "Bénéficiaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_institution",
+          "nom": "Institution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_regle",
+          "nom": "Règle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_norme",
+          "nom": "Norme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_mandat",
+          "nom": "Mandat",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_flux_information",
+          "nom": "Flux d’information",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_flux_decision",
+          "nom": "Flux de décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_flux_responsabilite",
+          "nom": "Flux de responsabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_flux_preuve",
+          "nom": "Flux de preuve",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_point_passage",
+          "nom": "Point de passage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_point_blocage",
+          "nom": "Point de blocage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_intermediaire",
+          "nom": "Intermédiaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_dependance",
+          "nom": "Dépendance",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "cartographie_acteurs_regles_flux",
+        "nom": "Cartographie acteurs-règles-flux",
+        "description": "Produire une carte d’un système montrant les acteurs, règles, flux, passages, blocages et dépendances."
+      },
+      "criteres_passage": [
+        "Identifier les acteurs directs et indirects.",
+        "Distinguer règles formelles et règles implicites.",
+        "Cartographier les flux principaux.",
+        "Repérer les points de blocage et les dépendances critiques."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "AS103",
+      "ordre": 3,
+      "nom": "Rôles, permissions et responsabilités",
+      "concept_maitre": {
+        "concept_id": "as_architecture_responsabilites",
+        "nom": "Architecture des responsabilités",
+        "definition_courte": "Organisation explicite des rôles, permissions, autorités, responsabilités et mécanismes de redevabilité.",
+        "fonction_pedagogique": "Éviter que les systèmes deviennent flous, arbitraires ou irresponsables.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_role",
+          "nom": "Rôle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_permission",
+          "nom": "Permission",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_responsabilite",
+          "nom": "Responsabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_redevabilite",
+          "nom": "Redevabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_delegation",
+          "nom": "Délégation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_autorite",
+          "nom": "Autorité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_proprietaire_processus",
+          "nom": "Propriétaire du processus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_administrateur",
+          "nom": "Administrateur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_moderateur",
+          "nom": "Modérateur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_facilitateur",
+          "nom": "Facilitateur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_depositaire",
+          "nom": "Dépositaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_conflit_role",
+          "nom": "Conflit de rôle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_separation_pouvoirs",
+          "nom": "Séparation des pouvoirs",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_matrice_raci",
+          "nom": "Matrice RACI",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "modele_roles_permissions",
+        "nom": "Modèle des rôles et permissions",
+        "description": "Définir les rôles, permissions, responsabilités, limites et mécanismes de redevabilité dans un système."
+      },
+      "criteres_passage": [
+        "Définir les rôles nécessaires.",
+        "Associer chaque rôle à des permissions précises.",
+        "Identifier les responsabilités et les mécanismes de redevabilité.",
+        "Repérer au moins un conflit de rôle ou risque d’abus."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "AS104",
+      "ordre": 4,
+      "nom": "Workflows, processus et exécution gouvernée",
+      "concept_maitre": {
+        "concept_id": "as_workflow_gouvernable",
+        "nom": "Workflow gouvernable",
+        "definition_courte": "Suite d’actions assignées, suivies, vérifiables, clôturables et révisables.",
+        "fonction_pedagogique": "Transformer une intention collective en séquence d’action claire et responsable.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_workflow",
+          "nom": "Workflow",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_processus",
+          "nom": "Processus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_tache",
+          "nom": "Tâche",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_etape",
+          "nom": "Étape",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_entree",
+          "nom": "Entrée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_sortie",
+          "nom": "Sortie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_jalon",
+          "nom": "Jalon",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_livrable",
+          "nom": "Livrable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_blocage",
+          "nom": "Blocage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_file_attente",
+          "nom": "File d’attente",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_assignation",
+          "nom": "Assignation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_escalade",
+          "nom": "Escalade",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_suivi",
+          "nom": "Suivi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_cloture",
+          "nom": "Clôture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_orchestration",
+          "nom": "Orchestration",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_continuite_operationnelle",
+          "nom": "Continuité opérationnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "workflow_complet",
+        "nom": "Workflow complet d’un processus réel",
+        "description": "Modéliser un processus avec entrées, sorties, tâches, rôles, blocages, escalades, suivis et clôtures."
+      },
+      "criteres_passage": [
+        "Décrire les étapes du processus.",
+        "Associer chaque tâche à un responsable.",
+        "Prévoir les blocages et escalades.",
+        "Définir les conditions de clôture."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "AS105",
+      "ordre": 5,
+      "nom": "Données, documents et mémoire institutionnelle",
+      "concept_maitre": {
+        "concept_id": "as_architecture_memoire",
+        "nom": "Architecture de la mémoire",
+        "definition_courte": "Organisation des données, documents, sources, versions et traces permettant à un système d’apprendre et de se souvenir.",
+        "fonction_pedagogique": "Structurer l’information pour qu’elle devienne connaissance réutilisable, preuve, archive et apprentissage.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_donnee",
+          "nom": "Donnée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_information",
+          "nom": "Information",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_connaissance",
+          "nom": "Connaissance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_savoir_situe",
+          "nom": "Savoir situé",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_source",
+          "nom": "Source",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_document",
+          "nom": "Document",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_metadonnee",
+          "nom": "Métadonnée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_taxonomie",
+          "nom": "Taxonomie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_ontologie",
+          "nom": "Ontologie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_graphe_connaissances",
+          "nom": "Graphe de connaissances",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_base_connaissances",
+          "nom": "Base de connaissances",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_documentation_vivante",
+          "nom": "Documentation vivante",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_version",
+          "nom": "Version",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_historique",
+          "nom": "Historique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_memoire_institutionnelle",
+          "nom": "Mémoire institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_tracabilite_informationnelle",
+          "nom": "Traçabilité informationnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_archive",
+          "nom": "Archive",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "architecture_documentaire",
+        "nom": "Architecture documentaire ou base de connaissance minimale",
+        "description": "Concevoir une structure documentaire avec sources, taxonomie, versions, accès, historique et mémoire."
+      },
+      "criteres_passage": [
+        "Distinguer donnée, information, connaissance et preuve.",
+        "Proposer une taxonomie claire.",
+        "Prévoir le versionnement.",
+        "Définir ce qui doit être archivé et pourquoi."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "AS106",
+      "ordre": 6,
+      "nom": "Plateformes, interfaces et infrastructures gouvernables",
+      "concept_maitre": {
+        "concept_id": "as_infrastructure_sociotechnique",
+        "nom": "Infrastructure sociotechnique",
+        "definition_courte": "Ensemble des plateformes, interfaces, bases, règles et dépendances techniques qui permettent à un système d’agir.",
+        "fonction_pedagogique": "Concevoir les lieux techniques où les humains, les règles, les données et les décisions se rencontrent.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_plateforme",
+          "nom": "Plateforme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_interface",
+          "nom": "Interface",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_tableau_bord",
+          "nom": "Tableau de bord",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_formulaire",
+          "nom": "Formulaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_portail",
+          "nom": "Portail",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_api",
+          "nom": "API",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_base_donnees",
+          "nom": "Base de données",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_infrastructure_cloud",
+          "nom": "Infrastructure cloud",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_infrastructure_locale",
+          "nom": "Infrastructure locale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_federation",
+          "nom": "Fédération",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_interoperabilite",
+          "nom": "Interopérabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_modularite",
+          "nom": "Modularité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_connecteur",
+          "nom": "Connecteur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_accessibilite",
+          "nom": "Accessibilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_experience_utilisateur",
+          "nom": "Expérience utilisateur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_souverainete_numerique",
+          "nom": "Souveraineté numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_verrouillage_proprietaire",
+          "nom": "Verrouillage propriétaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "maquette_infrastructure",
+        "nom": "Maquette d’interface ou architecture de plateforme gouvernable",
+        "description": "Décrire une plateforme ou interface avec ses rôles, données, permissions, dépendances, modules et limites."
+      },
+      "criteres_passage": [
+        "Définir les fonctions principales d’une plateforme ou infrastructure sociotechnique.",
+        "Identifier les dépendances techniques, organisationnelles et institutionnelles.",
+        "Prévoir l’interopérabilité, l’accessibilité et la réversibilité.",
+        "Repérer les risques de verrouillage, d’opacité et de capture infrastructurelle."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "AS107",
+      "ordre": 7,
+      "nom": "Délibération, décision et coordination collective",
+      "concept_maitre": {
+        "concept_id": "as_decision_collective_structuree",
+        "nom": "Décision collective structurée",
+        "definition_courte": "Processus par lequel un collectif transforme discussion, information et conflit en décision légitime et exécutable.",
+        "fonction_pedagogique": "Passer de la discussion à une décision documentée, contestable et suivie d’action.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_deliberation",
+          "nom": "Délibération",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_decision",
+          "nom": "Décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_consultation",
+          "nom": "Consultation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_vote",
+          "nom": "Vote",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_consensus",
+          "nom": "Consensus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_consentement",
+          "nom": "Consentement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_arbitrage",
+          "nom": "Arbitrage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_priorisation",
+          "nom": "Priorisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_quorum",
+          "nom": "Quorum",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_expertise_situee",
+          "nom": "Expertise située",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_intelligence_collective",
+          "nom": "Intelligence collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_facilitation",
+          "nom": "Facilitation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_mediation",
+          "nom": "Médiation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_conflit",
+          "nom": "Conflit",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_alignement_collectif",
+          "nom": "Alignement collectif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_contestation",
+          "nom": "Contestation",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "protocole_decision",
+        "nom": "Protocole de décision collective",
+        "description": "Concevoir un protocole de décision pour une assemblée, un comité, une plateforme ou un groupe de travail."
+      },
+      "criteres_passage": [
+        "Définir qui participe à la décision.",
+        "Distinguer consultation, délibération, vote et arbitrage.",
+        "Prévoir les mécanismes de contestation.",
+        "Relier la décision à une action assignable."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "AS108",
+      "ordre": 8,
+      "nom": "Auditabilité, preuve et intégrité",
+      "concept_maitre": {
+        "concept_id": "as_systeme_verifiable",
+        "nom": "Système vérifiable",
+        "definition_courte": "Système dont les décisions, actions, preuves, sources et responsabilités peuvent être retracées, inspectées et contestées.",
+        "fonction_pedagogique": "Rendre les décisions, actions et connaissances traçables, contestables et inspectables.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_auditabilite",
+          "nom": "Auditabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_provenance",
+          "nom": "Provenance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_registre",
+          "nom": "Registre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_journal_evenements",
+          "nom": "Journal d’événements",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_preuve_verifiable",
+          "nom": "Preuve vérifiable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_preuve_action",
+          "nom": "Preuve d’action",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_preuve_decision",
+          "nom": "Preuve de décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_preuve_impact",
+          "nom": "Preuve d’impact",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_validation",
+          "nom": "Validation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_revue_pairs",
+          "nom": "Revue par les pairs",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_chaine_responsabilite",
+          "nom": "Chaîne de responsabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_controle_qualite",
+          "nom": "Contrôle qualité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_transparence",
+          "nom": "Transparence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_opacite_legitime",
+          "nom": "Opacité légitime",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_integrite",
+          "nom": "Intégrité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_fail_closed_integrity",
+          "nom": "Fail-closed integrity",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_garde_fou",
+          "nom": "Garde-fou",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "mecanisme_auditabilite",
+        "nom": "Mécanisme d’auditabilité et de contestation",
+        "description": "Concevoir un dispositif permettant de retracer les sources, décisions, actions, preuves, responsabilités et contestations."
+      },
+      "criteres_passage": [
+        "Définir les preuves nécessaires pour retracer une décision, une action ou une responsabilité.",
+        "Relier chaque décision à une source, une justification ou une trace consultable.",
+        "Prévoir un registre, journal d’événements ou mécanisme d’audit.",
+        "Distinguer transparence nécessaire, confidentialité légitime et surveillance abusive.",
+        "Prévoir un mécanisme de contestation compréhensible par les personnes affectées."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "AS109",
+      "ordre": 9,
+      "nom": "Risques, capture et résilience sociotechnique",
+      "concept_maitre": {
+        "concept_id": "as_resilience_contre_capture",
+        "nom": "Résilience contre la capture",
+        "definition_courte": "Capacité d’un système à résister aux pannes, abus, dépendances, captures, dérives et points de défaillance.",
+        "fonction_pedagogique": "Concevoir des systèmes qui survivent aux pannes, abus, dépendances, captures et dérives institutionnelles.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_risque_sociotechnique",
+          "nom": "Risque sociotechnique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_risque_technique",
+          "nom": "Risque technique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_risque_humain",
+          "nom": "Risque humain",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_risque_institutionnel",
+          "nom": "Risque institutionnel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_risque_usage",
+          "nom": "Risque d’usage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_capture_plateforme",
+          "nom": "Capture de plateforme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_capture_informationnelle",
+          "nom": "Capture informationnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_capture_reglementaire",
+          "nom": "Capture réglementaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_dependance_infrastructurelle",
+          "nom": "Dépendance infrastructurelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_point_defaillance_unique",
+          "nom": "Point de défaillance unique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_vulnerabilite",
+          "nom": "Vulnérabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_incident",
+          "nom": "Incident",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_crise",
+          "nom": "Crise",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_redondance",
+          "nom": "Redondance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_sauvegarde",
+          "nom": "Sauvegarde",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_reversibilite",
+          "nom": "Réversibilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_plan_continuite",
+          "nom": "Plan de continuité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_resilience",
+          "nom": "Résilience",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_risques_resilience",
+        "nom": "Analyse de risques et stratégie de résilience",
+        "description": "Identifier les risques sociotechniques, dépendances, captures, vulnérabilités et mesures de résilience d’un système."
+      },
+      "criteres_passage": [
+        "Identifier les risques humains, techniques et institutionnels.",
+        "Repérer les dépendances critiques.",
+        "Prévoir redondance, sauvegarde ou réversibilité.",
+        "Expliquer un risque de capture et un contrepoids possible."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "AS110",
+      "ordre": 10,
+      "nom": "Projet intégrateur : architecture d’un système d’action",
+      "concept_maitre": {
+        "concept_id": "as_systeme_action_gouvernable",
+        "nom": "Système d’action gouvernable",
+        "definition_courte": "Système complet capable de connaître, décider, agir, vérifier, contester, apprendre et se souvenir.",
+        "fonction_pedagogique": "Synthétiser toute la Voie en concevant un système réel ou semi-réel capable de transformer une situation confuse en action coordonnée.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "as_diagnostic_probleme",
+          "nom": "Diagnostic du problème",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_architecture_cible",
+          "nom": "Architecture cible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_cartographie_acteurs",
+          "nom": "Cartographie des acteurs",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_cartographie_regles",
+          "nom": "Cartographie des règles",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_cartographie_flux",
+          "nom": "Cartographie des flux",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_modele_roles",
+          "nom": "Modèle des rôles",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_workflow_complet",
+          "nom": "Workflow complet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_mecanisme_decision",
+          "nom": "Mécanisme de décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_mecanisme_audit",
+          "nom": "Mécanisme d’audit",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_mecanisme_contestation",
+          "nom": "Mécanisme de contestation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_strategie_resilience",
+          "nom": "Stratégie de résilience",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_documentation_publique",
+          "nom": "Documentation publique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_prototype",
+          "nom": "Prototype",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_demonstration",
+          "nom": "Démonstration",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_post_mortem_reflexif",
+          "nom": "Post-mortem réflexif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_transferabilite",
+          "nom": "Transférabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "as_amelioration_continue",
+          "nom": "Amélioration continue",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "projet_integrateur",
+        "nom": "Architecture complète d’un système d’action",
+        "description": "Produire un dossier complet comprenant diagnostic, cartographies, rôles, workflows, décision, auditabilité, contestation, résilience, prototype, documentation et post-mortem."
+      },
+      "criteres_passage": [
+        "Présenter un problème réel ou semi-réel clairement défini.",
+        "Produire une architecture sociotechnique cohérente.",
+        "Relier acteurs, règles, flux, rôles, workflows et preuves.",
+        "Inclure un mécanisme de décision, d’audit et de contestation.",
+        "Prévoir les risques de capture, de panne et de dépendance.",
+        "Démontrer la transférabilité ou les limites du modèle."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "projet_id": "as_projet_final_systeme_action",
+    "nom": "Architecture d’un système d’action gouvernable",
+    "description": "L’Aspirant doit concevoir un système réel ou semi-réel capable de transformer un désordre humain, informationnel ou institutionnel en structure lisible, décision, action, preuve et mémoire.",
+    "livrables": [
+      "Diagnostic du problème",
+      "Cartographie des acteurs",
+      "Cartographie des règles",
+      "Cartographie des flux",
+      "Modèle des rôles et permissions",
+      "Workflow complet",
+      "Protocole de décision",
+      "Mécanisme d’auditabilité",
+      "Mécanisme de contestation",
+      "Analyse de risques",
+      "Stratégie de résilience",
+      "Documentation publique",
+      "Prototype ou démonstration",
+      "Post-mortem réflexif"
+    ],
+    "question_directrice": "Comment ce système permet-il de connaître, décider, agir et se souvenir sans devenir opaque, capturable ou irresponsable?"
+  },
+  "limites_ethiques": [
+    "Ne pas concevoir de systèmes qui retirent la responsabilité humaine derrière une interface ou un algorithme.",
+    "Ne pas confondre automatisation et gouvernance.",
+    "Ne pas masquer les rapports de pouvoir derrière une architecture technique.",
+    "Ne pas produire de systèmes opaques lorsque la décision affecte des personnes.",
+    "Ne pas utiliser la complexité technique pour empêcher la contestation.",
+    "Ne pas confondre traçabilité et surveillance abusive.",
+    "Ne pas confondre efficacité opérationnelle et justice procédurale.",
+    "Ne pas rendre un groupe dépendant d’une infrastructure impossible à auditer, quitter ou comprendre.",
+    "Ne pas présenter une architecture comme neutre lorsqu’elle encode des choix de pouvoir, d’accès ou de priorité.",
+    "Ne pas rendre la contestation dépendante d’une expertise technique inaccessible aux personnes concernées.",
+    "Ne pas confondre documentation et justification : un système bien documenté peut rester injuste.",
+    "Ne pas déployer un système sociotechnique sans prévoir sortie, réversibilité, maintenance et responsabilité humaine."
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_ecosysteme_digital_koa",
+      "relation": "La Voie d’Architecture sociotechnique fournit la grammaire générale des systèmes humains-techniques; la Voie kOA Digital Ecosystem applique cette grammaire à l’infrastructure kOA."
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "relation": "Les décisions, règles, contestations et mécanismes de légitimité relient directement l’architecture sociotechnique aux sciences politiques."
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "relation": "L’IA peut devenir un composant d’un système sociotechnique, mais ne doit jamais remplacer l’auditabilité, la responsabilité et la décision humaine."
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "relation": "Les taxonomies, ontologies, concepts, graphes et dictionnaires contrôlés relient cette Voie à l’architecture du sens."
+    },
+    {
+      "voie_id": "voie_economie",
+      "relation": "Les infrastructures, plateformes, dépendances et captures ont toujours une dimension économique."
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "relation": "Les systèmes doivent rester sensibles aux vulnérabilités humaines, aux exclusions, aux abus institutionnels et aux besoins de réparation."
+    }
+  ],
+  "tags": [
+    "architecture_sociotechnique",
+    "systemes",
+    "gouvernance",
+    "workflow",
+    "plateformes",
+    "auditabilite",
+    "resilience",
+    "roles",
+    "donnees",
+    "memoire",
+    "decision_collective",
+    "uckk_atlas",
+    "systemes_action",
+    "contestabilite",
+    "reversibilite",
+    "responsabilite_humaine",
+    "non_domination"
+  ],
+  "statut": "Voie fondatrice UCKK"
+}

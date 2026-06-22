@@ -573,7 +573,7 @@ final class pathway {
         $data->rawfullname = $this->fullname;
         $data->pathwaytype = $this->pathwaytype;
         $data->pathwaytypelegacy = $this->pathwaytype;
-        $data->pathwaytypelabel = self::get_pathwaytype_display_label($this->pathwaytype);
+        $data->pathwaytypelabel = self::get_pathwaytype_public_label($this->pathwaytype);
         $data->pathwaytypepubliclabel = $data->pathwaytypelabel;
         $data->description = $this->description;
         $data->descriptionformat = $this->descriptionformat;
@@ -854,7 +854,7 @@ final class pathway {
      * @return string
      */
     public function get_pathwaytype_display_label(): string {
-        return self::get_pathwaytype_display_label($this->pathwaytype);
+        return self::get_pathwaytype_public_label($this->pathwaytype);
     }
 
     /**
@@ -998,7 +998,7 @@ final class pathway {
      * @param string $pathwaytype Raw pathway type.
      * @return string
      */
-    public static function get_pathwaytype_display_label(string $pathwaytype): string {
+    public static function get_pathwaytype_public_label(string $pathwaytype): string {
         $pathwaytype = self::normalise_shortname($pathwaytype);
 
         switch ($pathwaytype) {

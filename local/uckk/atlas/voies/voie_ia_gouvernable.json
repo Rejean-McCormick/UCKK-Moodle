@@ -1,0 +1,1618 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_ia_gouvernable",
+  "code": "IA",
+  "nom": "Voie de l’Intelligence artificielle gouvernable",
+  "domaine_operatoire": "Intelligence outillée",
+  "niveau_vise": "Puissance opératoire",
+  "titre_symbolique": "Cartographe augmenté",
+  "parchemin": "Parchemin de Puissance opératoire — Voie de l’Intelligence artificielle gouvernable",
+  "statut": "Voie fondatrice UCKK",
+  "definition_courte": "La Voie de l’Intelligence artificielle gouvernable forme des personnes capables d’utiliser l’IA pour lire, créer, cartographier, simuler, critiquer et accélérer, tout en maintenant la preuve, la responsabilité, la contestation et l’autorité finale du côté humain.",
+  "angle_fondamental": "Comprendre l’IA comme un outil de puissance opératoire : utile pour produire, classer, simuler, traduire et accélérer, mais toujours vérifiable, contestable, documenté, supervisé et subordonné au jugement humain.",
+  "competence_centrale": "Concevoir, utiliser, évaluer et gouverner des systèmes d’IA utiles, traçables, contestables, sécurisés et humainement supervisés, en distinguant clairement sortie, hypothèse, preuve, décision et responsabilité.",
+  "principe_fondateur": "Toute sortie IA est une proposition ou une hypothèse de travail tant qu’elle n’a pas été vérifiée, contextualisée et assumée par une personne ou une instance responsable.",
+  "distinctions_clefs": [
+    "outil / autorité",
+    "sortie / preuve",
+    "génération / connaissance",
+    "automatisation / responsabilité",
+    "assistance / délégation",
+    "prédiction / décision",
+    "fluidité linguistique / vérité",
+    "performance technique / légitimité sociale",
+    "personnalisation / manipulation",
+    "optimisation / justice"
+  ],
+  "risques_specifiques": [
+    "hallucination",
+    "biais",
+    "erreur de classification",
+    "surconfiance",
+    "automatisation abusive",
+    "déresponsabilisation humaine",
+    "fuite de données",
+    "surveillance",
+    "manipulation",
+    "opacité décisionnelle",
+    "dépendance infrastructurelle",
+    "capture économique",
+    "substitution injuste du travail",
+    "production de fausses preuves",
+    "confusion entre imitation et compréhension"
+  ],
+  "exigences_gouvernance": [
+    "supervision humaine explicite",
+    "sources ou données documentées",
+    "méthode de vérification",
+    "registre des risques",
+    "journal de décisions",
+    "procédure de contestation",
+    "possibilité de retrait ou suspension",
+    "limites d’usage connues",
+    "responsable humain identifié",
+    "mise à jour ou révision prévue"
+  ],
+  "seuils_progression": [
+    {
+      "seuil_id": "fondations",
+      "nom": "Fondations",
+      "fonction": "Comprendre ce qu’est l’IA, comment elle apprend, ce qu’elle peut produire et où se situent ses limites."
+    },
+    {
+      "seuil_id": "verification_et_risques",
+      "nom": "Vérification et risques",
+      "fonction": "Évaluer les sorties, repérer les erreurs, documenter les sources, identifier les biais, vulnérabilités et usages abusifs."
+    },
+    {
+      "seuil_id": "gouvernance_et_integration",
+      "nom": "Gouvernance et intégration",
+      "fonction": "Intégrer l’IA dans des workflows, institutions, systèmes documentaires et prototypes gouvernables."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "IA101",
+      "ordre": 1,
+      "nom": "Fondations de l’intelligence artificielle gouvernable",
+      "concept_maitre": {
+        "concept_id": "ia_outil_non_souverain",
+        "nom": "IA comme outil non souverain",
+        "type": "concept_maitre",
+        "definition_courte": "L’IA est un outil de lecture, production et accélération, mais elle ne doit jamais devenir l’autorité finale.",
+        "fonction_pedagogique": "Établir les bases conceptuelles de l’IA et fixer la limite centrale : la décision finale reste humaine, vérifiable et contestable."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_intelligence_artificielle",
+          "nom": "Intelligence artificielle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_gouvernable",
+          "nom": "IA gouvernable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_systeme_ia",
+          "nom": "Système d’IA",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_modele",
+          "nom": "Modèle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_algorithme",
+          "nom": "Algorithme",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_apprentissage_automatique",
+          "nom": "Apprentissage automatique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_apprentissage_profond",
+          "nom": "Apprentissage profond",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_reseau_neuronal",
+          "nom": "Réseau neuronal",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_inference",
+          "nom": "Inférence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_prediction",
+          "nom": "Prédiction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_classification",
+          "nom": "Classification",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_optimisation",
+          "nom": "Optimisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_generalisation",
+          "nom": "Généralisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_limite_du_modele",
+          "nom": "Limite du modèle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_autorite_finale_humaine",
+          "nom": "Autorité finale humaine",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_responsabilite_humaine",
+          "nom": "Responsabilité humaine",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "carte_capacites_limites",
+        "nom": "Carte des capacités et limites d’un système IA",
+        "description": "Cartographier ce qu’un système IA peut faire, ce qu’il ne peut pas garantir, ce qui doit être vérifié et ce qui doit rester sous responsabilité humaine."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer IA, système IA, modèle, algorithme et automatisation.",
+        "L’Aspirant peut expliquer pourquoi l’IA doit rester un outil non souverain.",
+        "L’Aspirant peut identifier les décisions qui doivent rester humaines, vérifiables et contestables."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IA102",
+      "ordre": 2,
+      "nom": "Données, sources et représentations",
+      "concept_maitre": {
+        "concept_id": "ia_donnee_matiere_gouvernable",
+        "nom": "Donnée comme matière gouvernable",
+        "type": "concept_maitre",
+        "definition_courte": "Les données sont la matière première des systèmes IA; elles doivent être qualifiées, sourcées, documentées et gouvernées.",
+        "fonction_pedagogique": "Comprendre que la qualité, la provenance, les biais et les représentations déterminent fortement les capacités et les risques d’un système IA."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_donnee",
+          "nom": "Donnée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_jeu_de_donnees",
+          "nom": "Jeu de données",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_donnee_structuree",
+          "nom": "Donnée structurée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_donnee_non_structuree",
+          "nom": "Donnée non structurée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_donnee_personnelle",
+          "nom": "Donnée personnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_donnee_sensible",
+          "nom": "Donnée sensible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_metadonnee",
+          "nom": "Métadonnée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_annotation",
+          "nom": "Annotation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_etiquetage",
+          "nom": "Étiquetage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_qualite_des_donnees",
+          "nom": "Qualité des données",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_biais_de_donnees",
+          "nom": "Biais de données",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_provenance",
+          "nom": "Provenance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_tracabilite",
+          "nom": "Traçabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_source_primaire",
+          "nom": "Source primaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_representation",
+          "nom": "Représentation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_embedding",
+          "nom": "Embedding",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_base_de_connaissances",
+          "nom": "Base de connaissances",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_graphe_de_connaissances",
+          "nom": "Graphe de connaissances",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_memoire_externe",
+          "nom": "Mémoire externe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_documentation_des_sources",
+          "nom": "Documentation des sources",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "fiche_critique_corpus",
+        "nom": "Fiche critique d’un corpus de données",
+        "description": "Documenter les sources, la qualité, les limites, les biais, les droits et les usages acceptables d’un corpus."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut cartographier les sources, jeux de données, transformations et limites d’un système IA.",
+        "L’Aspirant peut distinguer donnée brute, donnée nettoyée, annotation, représentation et corpus.",
+        "L’Aspirant peut repérer les risques liés à la provenance, au consentement, à la qualité et à la réutilisation des données."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IA103",
+      "ordre": 3,
+      "nom": "Modèles, apprentissage et limites",
+      "concept_maitre": {
+        "concept_id": "ia_modele_approximation_reel",
+        "nom": "Modèle comme approximation du réel",
+        "type": "concept_maitre",
+        "definition_courte": "Un modèle IA est une approximation entraînée sur des données, utile dans certaines conditions et fragile hors de son domaine de validité.",
+        "fonction_pedagogique": "Comprendre comment les modèles sont entraînés, ajustés, évalués et limités."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_entrainement",
+          "nom": "Entraînement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_pre_entrainement",
+          "nom": "Pré-entraînement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_fine_tuning",
+          "nom": "Fine-tuning",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_apprentissage_supervise",
+          "nom": "Apprentissage supervisé",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_apprentissage_non_supervise",
+          "nom": "Apprentissage non supervisé",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_apprentissage_par_renforcement",
+          "nom": "Apprentissage par renforcement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_apprentissage_auto_supervise",
+          "nom": "Apprentissage auto-supervisé",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_fonction_de_perte",
+          "nom": "Fonction de perte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_parametre",
+          "nom": "Paramètre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_hyperparametre",
+          "nom": "Hyperparamètre",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_ensemble_de_validation",
+          "nom": "Ensemble de validation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_ensemble_de_test",
+          "nom": "Ensemble de test",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_surapprentissage",
+          "nom": "Surapprentissage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_sous_apprentissage",
+          "nom": "Sous-apprentissage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_derive_du_modele",
+          "nom": "Dérive du modèle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_calibration",
+          "nom": "Calibration",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_robustesse",
+          "nom": "Robustesse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_reproductibilite",
+          "nom": "Reproductibilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_de_modele",
+        "nom": "Analyse d’un modèle IA",
+        "description": "Décrire la tâche, les données, la méthode d’apprentissage, les limites, les risques et les conditions acceptables d’usage."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut expliquer qu’un modèle est une approximation et non le réel lui-même.",
+        "L’Aspirant peut distinguer entraînement, inférence, généralisation, surapprentissage et erreur.",
+        "L’Aspirant peut décrire les limites d’un modèle selon son domaine, ses données et son usage."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IA104",
+      "ordre": 4,
+      "nom": "IA générative, langage et multimodalité",
+      "concept_maitre": {
+        "concept_id": "ia_generation_recombinaison_controlee",
+        "nom": "Génération comme recombinaison contrôlée",
+        "type": "concept_maitre",
+        "definition_courte": "L’IA générative produit des sorties plausibles à partir de modèles, contextes et représentations, sans garantie automatique de vérité.",
+        "fonction_pedagogique": "Comprendre les systèmes génératifs, leurs capacités de production et leurs risques de plausibilité trompeuse."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_generative",
+          "nom": "IA générative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_grand_modele_de_langage",
+          "nom": "Grand modèle de langage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_modele_de_fondation",
+          "nom": "Modèle de fondation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_modele_multimodal",
+          "nom": "Modèle multimodal",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_token",
+          "nom": "Token",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_fenetre_de_contexte",
+          "nom": "Fenêtre de contexte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_attention",
+          "nom": "Attention",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_transformer",
+          "nom": "Transformer",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_generation_de_texte",
+          "nom": "Génération de texte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_generation_d_image",
+          "nom": "Génération d’image",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_generation_audio",
+          "nom": "Génération audio",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_generation_video",
+          "nom": "Génération vidéo",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_resume_automatique",
+          "nom": "Résumé automatique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_traduction_automatique",
+          "nom": "Traduction automatique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_transcription",
+          "nom": "Transcription",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_vision_par_ordinateur",
+          "nom": "Vision par ordinateur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_ocr",
+          "nom": "OCR",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_hallucination",
+          "nom": "Hallucination",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_contexte_insuffisant",
+          "nom": "Contexte insuffisant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_sortie_plausible_mais_fausse",
+          "nom": "Sortie plausible mais fausse",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "comparaison_critique_sorties_generatives",
+        "nom": "Comparaison critique de sorties génératives",
+        "description": "Comparer plusieurs sorties IA sur une même tâche et distinguer fluidité, utilité, exactitude, preuve et risque."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut distinguer génération, recombinaison, imitation, synthèse et connaissance.",
+        "L’Aspirant peut évaluer une sortie textuelle, visuelle ou multimodale selon son utilité, ses limites et ses risques.",
+        "L’Aspirant peut documenter les conditions de production d’un contenu généré par IA."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IA105",
+      "ordre": 5,
+      "nom": "Prompting, agents et workflows supervisés",
+      "concept_maitre": {
+        "concept_id": "ia_collaboration_humain_machine",
+        "nom": "Collaboration humain-IA supervisée",
+        "type": "concept_maitre",
+        "definition_courte": "Organisation du travail où l’IA augmente les capacités humaines sans effacer supervision, responsabilité, contexte et droit de reprise.",
+        "fonction_pedagogique": "Former à des pratiques d’usage de l’IA qui augmentent l’action humaine sans remplacer le jugement."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_prompt",
+          "nom": "Prompt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_contexte",
+          "nom": "Contexte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_instruction_systeme",
+          "nom": "Instruction système",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_instruction_utilisateur",
+          "nom": "Instruction utilisateur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_contrainte",
+          "nom": "Contrainte",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_exemple_few_shot",
+          "nom": "Exemple few-shot",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_decomposition_de_tache",
+          "nom": "Décomposition de tâche",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_reformulation",
+          "nom": "Reformulation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_iteration",
+          "nom": "Itération",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_critique_assistee",
+          "nom": "Critique assistée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_comparaison_hypotheses",
+          "nom": "Comparaison d’hypothèses",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_cartographie_idees",
+          "nom": "Cartographie d’idées",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_assistance_decision",
+          "nom": "Assistance à la décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_copilote",
+          "nom": "Copilote",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_agent_ia",
+          "nom": "Agent IA",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_outil_connecte",
+          "nom": "Outil connecté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_workflow_humain_ia",
+          "nom": "Workflow humain-IA",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_supervision_humaine",
+          "nom": "Supervision humaine",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_refus_gouverne",
+          "nom": "Refus gouverné",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_escalade_vers_humain",
+          "nom": "Escalade vers humain",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "protocole_workflow_humain_ia",
+        "nom": "Protocole de workflow humain-IA",
+        "description": "Décrire une tâche réelle, son découpage, les moments d’usage IA, les validations humaines, les refus, les escalades et les traces produites."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut concevoir un workflow humain-IA avec rôles, étapes, responsabilités et points de contrôle.",
+        "L’Aspirant peut distinguer prompt, instruction, contexte, outil, agent et validation humaine.",
+        "L’Aspirant peut prévoir des mécanismes de reprise, correction et arrêt d’un workflow IA."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IA106",
+      "ordre": 6,
+      "nom": "Vérification, évaluation et preuves",
+      "concept_maitre": {
+        "concept_id": "ia_sortie_comme_hypothese",
+        "nom": "Sortie IA comme hypothèse à vérifier",
+        "type": "concept_maitre",
+        "definition_courte": "Une sortie IA doit être traitée comme une proposition provisoire, non comme une preuve ou une vérité automatique.",
+        "fonction_pedagogique": "Former aux pratiques de vérification, d’évaluation, de documentation, de correction et de contestation des productions IA."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_evaluation",
+          "nom": "Évaluation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_benchmark",
+          "nom": "Benchmark",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_metrique",
+          "nom": "Métrique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_exactitude",
+          "nom": "Exactitude",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_precision",
+          "nom": "Précision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_rappel",
+          "nom": "Rappel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_score_f1",
+          "nom": "Score F1",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_verification_factuelle",
+          "nom": "Vérification factuelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_citation",
+          "nom": "Citation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_source_primaire_verification",
+          "nom": "Source primaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_contradiction",
+          "nom": "Contradiction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_incertitude",
+          "nom": "Incertitude",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_audit_de_sortie",
+          "nom": "Audit de sortie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_rapport_erreur",
+          "nom": "Rapport d’erreur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_journal_de_methode",
+          "nom": "Journal de méthode",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_test_utilisateur",
+          "nom": "Test utilisateur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_preuve_de_methode",
+          "nom": "Preuve de méthode",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_contestabilite",
+          "nom": "Contestabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_fail_closed_integrity",
+          "nom": "Fail-closed integrity",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_dossier_de_verification",
+          "nom": "Dossier de vérification",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_production_ia",
+        "nom": "Audit complet d’une production IA",
+        "description": "Produire un dossier comprenant sortie initiale, sources, vérifications, contradictions, erreurs, corrections, incertitudes et conclusion prudente."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut traiter toute sortie IA comme hypothèse à vérifier.",
+        "L’Aspirant peut construire une méthode de vérification adaptée au risque de l’usage.",
+        "L’Aspirant peut distinguer cohérence apparente, source fiable, preuve, corroboration et décision.",
+        "L’Aspirant peut documenter incertitudes, limites et contradictions."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IA107",
+      "ordre": 7,
+      "nom": "Risques, biais et sécurité",
+      "concept_maitre": {
+        "concept_id": "ia_surface_de_defaillance",
+        "nom": "IA comme surface de défaillance",
+        "type": "concept_maitre",
+        "definition_courte": "Un système IA peut échouer, discriminer, fuir des données, être manipulé, contourner des règles ou amplifier des abus.",
+        "fonction_pedagogique": "Identifier les risques techniques, sociaux, informationnels et humains associés aux usages de l’IA."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_biais_algorithmique",
+          "nom": "Biais algorithmique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_discrimination",
+          "nom": "Discrimination",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_equite",
+          "nom": "Équité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_toxicite",
+          "nom": "Toxicité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_stereotype",
+          "nom": "Stéréotype",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_amplification_biais",
+          "nom": "Amplification de biais",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_fuite_de_donnees",
+          "nom": "Fuite de données",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_confidentialite",
+          "nom": "Confidentialité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_injection_de_prompt",
+          "nom": "Injection de prompt",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_jailbreak",
+          "nom": "Jailbreak",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_attaque_adversariale",
+          "nom": "Attaque adversariale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_empoisonnement_donnees",
+          "nom": "Empoisonnement des données",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_extraction_de_modele",
+          "nom": "Extraction de modèle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_inversion_de_modele",
+          "nom": "Inversion de modèle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_cybersecurite_ia",
+          "nom": "Cybersécurité IA",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_securite_des_agents",
+          "nom": "Sécurité des agents",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_usage_abusif",
+          "nom": "Usage abusif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_double_usage",
+          "nom": "Double usage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_manipulation_informationnelle",
+          "nom": "Manipulation informationnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_securite_des_personnes",
+          "nom": "Sécurité des personnes",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "registre_risques_ia",
+        "nom": "Registre de risques d’un système IA",
+        "description": "Identifier les risques, leurs causes, leurs impacts, leurs probabilités, leurs garde-fous et les conditions de suspension du système."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut identifier les principaux risques : hallucination, biais, fuite, manipulation, surveillance et automatisation abusive.",
+        "L’Aspirant peut produire un registre de risques et proposer des garde-fous adaptés.",
+        "L’Aspirant peut distinguer risque technique, risque social, risque institutionnel et risque éthique."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IA108",
+      "ordre": 8,
+      "nom": "Gouvernance, responsabilité et conformité",
+      "concept_maitre": {
+        "concept_id": "ia_systeme_a_encadrer",
+        "nom": "IA comme système à encadrer",
+        "type": "concept_maitre",
+        "definition_courte": "L’IA doit être encadrée par des responsabilités, règles d’usage, registres, audits, mécanismes de contestation et procédures de retrait.",
+        "fonction_pedagogique": "Former à la gouvernance de systèmes IA dans des contextes humains, organisationnels et institutionnels."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_gouvernance_ia",
+          "nom": "Gouvernance de l’IA",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_responsabilite_humaine_gouvernance",
+          "nom": "Responsabilité humaine",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_imputabilite",
+          "nom": "Imputabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_transparence",
+          "nom": "Transparence",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_explicabilite",
+          "nom": "Explicabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_interpretabilite",
+          "nom": "Interprétabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_documentation_technique",
+          "nom": "Documentation technique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_fiche_de_modele",
+          "nom": "Fiche de modèle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_fiche_de_donnees",
+          "nom": "Fiche de données",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_registre_systemes_ia",
+          "nom": "Registre des systèmes IA",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_analyse_impact",
+          "nom": "Analyse d’impact",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_gestion_du_risque",
+          "nom": "Gestion du risque",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_classification_du_risque",
+          "nom": "Classification du risque",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_systeme_haut_risque",
+          "nom": "Système à haut risque",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_supervision_humaine_significative",
+          "nom": "Supervision humaine significative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_droit_explication",
+          "nom": "Droit à l’explication",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_conformite",
+          "nom": "Conformité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_auditabilite",
+          "nom": "Auditabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_politique_usage_ia",
+          "nom": "Politique d’usage IA",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_protocole_retrait_suspension",
+          "nom": "Protocole de retrait ou suspension",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "charte_gouvernance_ia",
+        "nom": "Charte de gouvernance IA",
+        "description": "Définir les usages permis, les usages interdits, les responsabilités, la documentation, les audits, les contestations et les procédures de suspension."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut définir une responsabilité humaine claire pour un système IA.",
+        "L’Aspirant peut concevoir des règles de supervision, contestation, documentation et suspension.",
+        "L’Aspirant peut évaluer si un usage IA est acceptable selon le contexte, les personnes touchées et les recours possibles.",
+        "L’Aspirant peut distinguer conformité minimale et gouvernance responsable."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IA109",
+      "ordre": 9,
+      "nom": "IA, société, économie et pouvoir",
+      "concept_maitre": {
+        "concept_id": "ia_force_du_grand_jeu_social",
+        "nom": "IA comme force du Grand Jeu social",
+        "type": "concept_maitre",
+        "definition_courte": "L’IA transforme le travail, les institutions, les plateformes, la surveillance, la réputation, la production et la distribution du pouvoir.",
+        "fonction_pedagogique": "Lire l’IA comme phénomène social, économique, politique et institutionnel."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_automatisation",
+          "nom": "Automatisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_substitution_travail",
+          "nom": "Substitution du travail",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_augmentation_travail",
+          "nom": "Augmentation du travail",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_productivite",
+          "nom": "Productivité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_moyens_production_numeriques",
+          "nom": "Moyens de production numériques",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_propriete_des_outils",
+          "nom": "Propriété des outils",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_capture_de_valeur",
+          "nom": "Capture de valeur",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_economie_des_plateformes",
+          "nom": "Économie des plateformes",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_concentration_du_pouvoir",
+          "nom": "Concentration du pouvoir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_dependance_infrastructurelle",
+          "nom": "Dépendance infrastructurelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_souverainete_numerique",
+          "nom": "Souveraineté numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_souverainete_des_donnees",
+          "nom": "Souveraineté des données",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_surveillance",
+          "nom": "Surveillance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_reputation_algorithmique",
+          "nom": "Réputation algorithmique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_decision_automatisee",
+          "nom": "Décision automatisée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_bureaucratie_algorithmique",
+          "nom": "Bureaucratie algorithmique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_technocratie",
+          "nom": "Technocratie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_fracture_numerique",
+          "nom": "Fracture numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_acceptabilite_sociale",
+          "nom": "Acceptabilité sociale",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_dignite_humaine",
+          "nom": "Dignité humaine",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_redistribution_gains_automatisation",
+          "nom": "Redistribution des gains d’automatisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_depossession_cognitive",
+          "nom": "Dépossession cognitive",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "analyse_sociopolitique_ia",
+        "nom": "Analyse sociopolitique d’un cas IA",
+        "description": "Analyser un cas d’automatisation ou de décision algorithmique selon les effets sur le travail, le pouvoir, la dignité, la dépendance et la redistribution."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut analyser les effets de l’IA sur travail, pouvoir, visibilité, économie et institutions.",
+        "L’Aspirant peut repérer les mécanismes de capture, dépendance et concentration liés à l’IA.",
+        "L’Aspirant peut proposer des contrepoids sociaux, politiques, économiques ou documentaires."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "IA110",
+      "ordre": 10,
+      "nom": "Atelier de prototype IA gouvernable",
+      "concept_maitre": {
+        "concept_id": "ia_prototype_gouvernable",
+        "nom": "Prototype IA gouvernable",
+        "type": "concept_maitre",
+        "definition_courte": "Système IA réel ou simulé conçu avec objectifs, sources, garde-fous, vérifications, supervision, contestation et mémoire.",
+        "fonction_pedagogique": "Synthétiser la Voie en produisant un prototype réel ou simulé intégrant usage IA, documentation, sources, garde-fous, mémoire et gouvernance."
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "ia_koa_digital_ecosystem",
+          "nom": "kOA Digital Ecosystem",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_cycle_connaitre_choisir_agir_se_souvenir",
+          "nom": "Connaître → Choisir → Agir → Se souvenir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_kristal",
+          "nom": "Kristal",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_runtime_pack",
+          "nom": "Runtime Pack",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_semantik",
+          "nom": "SemantiK",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_sentient",
+          "nom": "SenTient",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_smart_vote",
+          "nom": "Smart Vote",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_ekoh",
+          "nom": "EkoH",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_orgo",
+          "nom": "Orgo",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_konnaxion",
+          "nom": "Konnaxion",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_rag",
+          "nom": "RAG",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_memoire_externe_integration",
+          "nom": "Mémoire externe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_base_documentaire_vivante",
+          "nom": "Base documentaire vivante",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_workflow_doc_first",
+          "nom": "Workflow doc-first",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_prototype_ia",
+          "nom": "Prototype IA",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_garde_fou_ethique",
+          "nom": "Garde-fou éthique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_assemblee_de_contestation",
+          "nom": "Assemblée de contestation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_journalisation",
+          "nom": "Journalisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_dossier_de_passage",
+          "nom": "Dossier de passage",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_portfolio_demonstration",
+          "nom": "Portfolio de démonstration",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_gouvernance_du_prototype",
+          "nom": "Gouvernance du prototype",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "ia_strategie_de_maintenance",
+          "nom": "Stratégie de maintenance",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "prototype_ia_gouvernable",
+        "nom": "Prototype d’IA gouvernable",
+        "description": "Produire un prototype ou design complet avec documentation, sources, garde-fous, journal de méthode, protocole de contestation, maintenance et preuve d’utilité."
+      },
+      "criteres_passage": [
+        "L’Aspirant peut concevoir un prototype ou dossier IA gouvernable complet.",
+        "L’Aspirant peut documenter données, workflow, vérification, risques, supervision, contestation et maintenance.",
+        "L’Aspirant peut démontrer que le système augmente la capacité d’agir sans confisquer jugement, preuve ou responsabilité.",
+        "L’Aspirant peut défendre son prototype devant objections techniques, sociales et éthiques."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "type": "prototype_ia_gouvernable",
+    "nom": "Prototype ou dossier complet d’IA gouvernable",
+    "description": "L’Aspirant conçoit, documente et défend un système IA réel ou simulé qui sert une action utile sans devenir une autorité opaque, une machine de fausse preuve ou un mécanisme de déresponsabilisation.",
+    "exigences": [
+      "Description du problème traité",
+      "Description des utilisateurs et parties prenantes",
+      "Description du système IA utilisé ou proposé",
+      "Cartographie des données et sources",
+      "Analyse de provenance et de qualité des données",
+      "Description du workflow humain-IA",
+      "Méthode de prompting ou d’interaction",
+      "Méthode de vérification des sorties",
+      "Registre des risques",
+      "Analyse des biais possibles",
+      "Garde-fous techniques et humains",
+      "Règles de supervision humaine",
+      "Procédure de contestation",
+      "Procédure de retrait ou suspension",
+      "Journal de méthode",
+      "Indicateurs d’utilité",
+      "Indicateurs de risque",
+      "Stratégie de maintenance",
+      "Documentation finale",
+      "Démonstration ou simulation"
+    ],
+    "question_finale": "Comment ce système IA augmente-t-il la capacité d’agir sans confisquer le jugement, la preuve, la responsabilité ou la possibilité de contestation?",
+    "exigences_non_negociables": [
+      "Un responsable humain est identifié.",
+      "Les sources, données ou limites de provenance sont documentées.",
+      "Les sorties critiques sont vérifiées par une méthode explicite.",
+      "Les risques sont cartographiés et pondérés.",
+      "Une procédure de contestation ou de correction existe.",
+      "Le système peut être suspendu, corrigé ou retiré.",
+      "Les limites de l’outil sont présentées aux utilisateurs.",
+      "Aucune sortie IA n’est présentée comme preuve sans corroboration."
+    ]
+  },
+  "limites_ethiques": [
+    "Ne pas présenter une sortie IA comme preuve sans vérification.",
+    "Ne pas déléguer l’autorité finale à un système IA.",
+    "Ne pas masquer les sources, incertitudes ou limites d’un modèle.",
+    "Ne pas utiliser l’IA pour produire de fausses preuves.",
+    "Ne pas utiliser l’IA pour manipuler, harceler ou déshumaniser.",
+    "Ne pas confondre fluidité linguistique et vérité.",
+    "Ne pas confondre automatisation et justice.",
+    "Ne pas utiliser l’IA pour justifier la dépossession des travailleurs.",
+    "Ne pas intégrer un système IA sans mécanisme de contestation.",
+    "Ne pas cacher une décision humaine derrière une prétendue neutralité algorithmique.",
+    "Ne pas utiliser l’IA comme substitut à une autorité professionnelle réglementée lorsque la situation exige une compétence reconnue.",
+    "Ne pas déployer un système IA à impact humain sans responsable identifié, recours possible et documentation minimale.",
+    "Ne pas confondre personnalisation utile et manipulation comportementale.",
+    "Ne pas transformer l’optimisation en justification automatique d’une décision injuste."
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_grand_jeu_social",
+      "relation": "L’IA modifie les règles du Grand Jeu social en transformant accès, réputation, production, décision et visibilité."
+    },
+    {
+      "voie_id": "voie_architecture_sociotechnique",
+      "relation": "L’IA gouvernable doit être intégrée dans des systèmes humains, techniques, institutionnels et documentaires."
+    },
+    {
+      "voie_id": "voie_ecosysteme_digital_koa",
+      "relation": "La Voie IA gouvernable s’appuie sur les modules du kOA Digital Ecosystem : Kristals, Orgo, Konnaxion, SemantiK, SenTient, EkoH et Smart Vote."
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "relation": "Les modèles IA manipulent le langage, les concepts, les catégories, les récits et les ambiguïtés."
+    },
+    {
+      "voie_id": "voie_economie",
+      "relation": "L’IA transforme le travail, la productivité, les moyens de production numériques, la capture de valeur et la redistribution."
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "relation": "L’IA touche la décision publique, la surveillance, la légitimité, la technocratie, la contestabilité et la gouvernance."
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "relation": "L’IA peut aider ou nuire aux personnes vulnérables selon ses usages, ses biais, ses effets institutionnels et ses mécanismes de recours."
+    },
+    {
+      "voie_id": "voie_metaphysique",
+      "relation": "L’IA oblige à clarifier intelligence, conscience, jugement, liberté, responsabilité, vérité et imitation."
+    }
+  ],
+  "tags": [
+    "ia",
+    "ia_gouvernable",
+    "gouvernance",
+    "auditabilite",
+    "verification",
+    "responsabilite_humaine",
+    "contestabilite",
+    "donnees",
+    "modeles",
+    "agents",
+    "kOA",
+    "UCKK"
+  ]
+}

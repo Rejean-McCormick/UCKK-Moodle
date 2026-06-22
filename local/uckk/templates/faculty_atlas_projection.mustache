@@ -1,0 +1,102 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+
+    @template local_uckk/faculty_atlas_projection
+
+    Public Atlas projection partial.
+
+    Context:
+    {
+        "definition_courte": "",
+        "angle_fondamental": "",
+        "competence_centrale": "",
+        "seuils_progression": [],
+        "show_definition_courte": true,
+        "show_angle_fondamental": true,
+        "show_competence_centrale": true,
+        "show_seuils_progression": true
+    }
+
+    This template must not:
+    - query Moodle data;
+    - decide permissions;
+    - create fallback content;
+    - render full courses;
+    - render concepts_associes;
+    - render criteres_passage;
+    - render notes, participants, enrolments, completion, grades, or submissions;
+    - present UCKK internal recognitions as public accredited degrees;
+    - introduce undocumented variables.
+}}
+
+<section
+    id="programme"
+    class="local-uckk-faculty-section local-uckk-faculty-section--atlas local-uckk-faculty-atlas-projection"
+    data-region="local-uckk-faculty-atlas-projection"
+    aria-labelledby="local-uckk-faculty-atlas-title"
+>
+    <div class="local-uckk-faculty-section__inner local-uckk-faculty-atlas-projection__inner">
+        <header class="local-uckk-faculty-section__header local-uckk-faculty-atlas-projection__header">
+            <h2
+                id="local-uckk-faculty-atlas-title"
+                class="local-uckk-faculty-section__title local-uckk-faculty-atlas-projection__title"
+            >
+                {{#str}} facultyatlasprogram, local_uckk {{/str}}
+            </h2>
+        </header>
+
+        <div class="local-uckk-faculty-atlas-projection__content">
+            {{#show_definition_courte}}
+                {{#definition_courte}}
+                    <div class="local-uckk-faculty-atlas-projection__block local-uckk-faculty-atlas-projection__block--definition">
+                        <div class="local-uckk-faculty-atlas-projection__body">
+                            {{definition_courte}}
+                        </div>
+                    </div>
+                {{/definition_courte}}
+            {{/show_definition_courte}}
+
+            {{#show_angle_fondamental}}
+                {{#angle_fondamental}}
+                    <div class="local-uckk-faculty-atlas-projection__block local-uckk-faculty-atlas-projection__block--angle">
+                        <div class="local-uckk-faculty-atlas-projection__body">
+                            {{angle_fondamental}}
+                        </div>
+                    </div>
+                {{/angle_fondamental}}
+            {{/show_angle_fondamental}}
+
+            {{#show_competence_centrale}}
+                {{#competence_centrale}}
+                    <div class="local-uckk-faculty-atlas-projection__block local-uckk-faculty-atlas-projection__block--competence">
+                        <div class="local-uckk-faculty-atlas-projection__body">
+                            {{competence_centrale}}
+                        </div>
+                    </div>
+                {{/competence_centrale}}
+            {{/show_competence_centrale}}
+
+            {{#show_seuils_progression}}
+                {{#seuils_progression}}
+                    <div class="local-uckk-faculty-atlas-projection__block local-uckk-faculty-atlas-projection__block--progression">
+                        <ul class="local-uckk-faculty-atlas-projection__list">
+                            {{#seuils_progression}}
+                                <li class="local-uckk-faculty-atlas-projection__item">
+                                    {{.}}
+                                </li>
+                            {{/seuils_progression}}
+                        </ul>
+                    </div>
+                {{/seuils_progression}}
+            {{/show_seuils_progression}}
+        </div>
+    </div>
+</section>

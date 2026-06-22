@@ -1,0 +1,84 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+
+    @template local_uckk/faculty_contact
+
+    Public faculty contact partial.
+
+    Context:
+    {
+        "label": "Contact",
+        "body": "",
+        "email": "",
+        "cta": {
+            "label": "",
+            "target": ""
+        }
+    }
+
+    This template must not:
+    - query Moodle data;
+    - decide permissions;
+    - create fallback contact data;
+    - expose private email addresses without upstream consent;
+    - expose private user data;
+    - expose notes, feedback, participants, enrolments, completion, grades, submissions, votes, integrity cases, or Konnaxion personal data;
+    - present UCKK internal recognitions as public accredited degrees;
+    - introduce undocumented variables.
+}}
+
+<section
+    id="contact"
+    class="local-uckk-faculty-section local-uckk-faculty-section--contact local-uckk-faculty-contact"
+    data-region="local-uckk-faculty-contact"
+    {{#label}}aria-labelledby="local-uckk-faculty-contact-title"{{/label}}
+>
+    <div class="local-uckk-faculty-section__inner local-uckk-faculty-contact__inner">
+        {{#label}}
+            <header class="local-uckk-faculty-section__header local-uckk-faculty-contact__header">
+                <h2
+                    id="local-uckk-faculty-contact-title"
+                    class="local-uckk-faculty-section__title local-uckk-faculty-contact__title"
+                >
+                    {{label}}
+                </h2>
+            </header>
+        {{/label}}
+
+        {{#body}}
+            <div class="local-uckk-faculty-contact__body">
+                {{body}}
+            </div>
+        {{/body}}
+
+        <div class="local-uckk-faculty-contact__actions">
+            {{#email}}
+                <a
+                    class="local-uckk-faculty-contact__action local-uckk-faculty-contact__action--email"
+                    href="mailto:{{email}}"
+                >
+                    {{email}}
+                </a>
+            {{/email}}
+
+            {{#cta.target}}
+                {{#cta.label}}
+                    <a
+                        class="local-uckk-faculty-contact__action local-uckk-faculty-contact__action--cta"
+                        href="{{cta.target}}"
+                    >
+                        {{cta.label}}
+                    </a>
+                {{/cta.label}}
+            {{/cta.target}}
+        </div>
+    </div>
+</section>

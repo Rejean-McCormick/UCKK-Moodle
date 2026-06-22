@@ -1,0 +1,431 @@
+{{!
+    This file is part of UCKK-Moodle.
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    UCKK-Moodle adapts Moodle as the pedagogical campus of the
+    Univers-Cité King Klown.
+
+    @template local_uckk/faculty_page
+
+    Main public faculty page shell.
+
+    This template must not:
+    - query Moodle data;
+    - decide permissions;
+    - implement visibility rules;
+    - duplicate Atlas content generation;
+    - expose private user data;
+    - expose completion, grades, notes, participants, enrolments, or submissions;
+    - present UCKK internal recognitions as public accredited degrees;
+    - introduce undocumented variables.
+
+    Top-level context:
+    {
+        "page": {},
+        "hero": {},
+        "navigation": [],
+        "identity": {},
+        "sections": [],
+        "atlas": {},
+        "courses": [],
+        "project_final": {},
+        "limits": [],
+        "relations": [],
+        "dynamic_blocks": [],
+        "featured_blocks": [],
+        "faq": [],
+        "contact": {},
+        "notices": [],
+        "metadata": []
+    }
+}}
+
+<div
+    class="local-uckk local-uckk-public-page local-uckk-faculty local-uckk-faculty--{{page.slug}}"
+    data-region="local-uckk-faculty-page"
+    data-faculty-id="{{page.faculty_id}}"
+    data-voie-id="{{page.voie_id}}"
+    data-faculty-slug="{{page.slug}}"
+>
+    {{#hero}}
+        {{> local_uckk/faculty_hero }}
+    {{/hero}}
+
+    {{> local_uckk/faculty_navigation }}
+
+    <aside
+        class="local-uckk-faculty-notices"
+        data-region="local-uckk-faculty-notices"
+        aria-label="{{#str}} facultynotices, local_uckk {{/str}}"
+    >
+        {{#notices}}
+            {{> local_uckk/faculty_notice }}
+        {{/notices}}
+    </aside>
+
+    <main
+        id="local-uckk-faculty-main-{{page.slug}}"
+        class="local-uckk-public-main local-uckk-faculty-main"
+    >
+        {{#identity}}
+            <section
+                id="presentation"
+                class="local-uckk-faculty-section local-uckk-faculty-section--identity"
+                data-region="local-uckk-faculty-section"
+                aria-labelledby="local-uckk-faculty-identity-title-{{page.slug}}"
+            >
+                <div class="local-uckk-faculty-section__inner">
+                    <header class="local-uckk-faculty-section__header">
+                        <h2
+                            id="local-uckk-faculty-identity-title-{{page.slug}}"
+                            class="local-uckk-faculty-section__title"
+                        >
+                            {{#str}} facultyprofile, local_uckk {{/str}}
+                        </h2>
+
+                        {{#one_sentence}}
+                            <p class="local-uckk-faculty-section__summary">
+                                {{one_sentence}}
+                            </p>
+                        {{/one_sentence}}
+                    </header>
+
+                    <dl class="local-uckk-faculty-identity">
+                        {{#name}}
+                            <div class="local-uckk-faculty-identity__item">
+                                <dt class="local-uckk-faculty-identity__label">
+                                    {{#str}} faculty, local_uckk {{/str}}
+                                </dt>
+                                <dd class="local-uckk-faculty-identity__value">
+                                    {{name}}
+                                </dd>
+                            </div>
+                        {{/name}}
+
+                        {{#short_name}}
+                            <div class="local-uckk-faculty-identity__item">
+                                <dt class="local-uckk-faculty-identity__label">
+                                    {{#str}} shortname, local_uckk {{/str}}
+                                </dt>
+                                <dd class="local-uckk-faculty-identity__value">
+                                    {{short_name}}
+                                </dd>
+                            </div>
+                        {{/short_name}}
+
+                        {{#title_symbolique}}
+                            <div class="local-uckk-faculty-identity__item">
+                                <dt class="local-uckk-faculty-identity__label">
+                                    {{#str}} title, local_uckk {{/str}}
+                                </dt>
+                                <dd class="local-uckk-faculty-identity__value">
+                                    {{title_symbolique}}
+                                </dd>
+                            </div>
+                        {{/title_symbolique}}
+
+                        {{#domain}}
+                            <div class="local-uckk-faculty-identity__item">
+                                <dt class="local-uckk-faculty-identity__label">
+                                    {{#str}} category, local_uckk {{/str}}
+                                </dt>
+                                <dd class="local-uckk-faculty-identity__value">
+                                    {{domain}}
+                                </dd>
+                            </div>
+                        {{/domain}}
+
+                        {{#level}}
+                            <div class="local-uckk-faculty-identity__item">
+                                <dt class="local-uckk-faculty-identity__label">
+                                    {{#str}} level, local_uckk {{/str}}
+                                </dt>
+                                <dd class="local-uckk-faculty-identity__value">
+                                    {{level}}
+                                </dd>
+                            </div>
+                        {{/level}}
+
+                        {{#faculty_role}}
+                            <div class="local-uckk-faculty-identity__item">
+                                <dt class="local-uckk-faculty-identity__label">
+                                    {{#str}} role, local_uckk {{/str}}
+                                </dt>
+                                <dd class="local-uckk-faculty-identity__value">
+                                    {{faculty_role}}
+                                </dd>
+                            </div>
+                        {{/faculty_role}}
+                    </dl>
+                </div>
+            </section>
+        {{/identity}}
+
+        {{> local_uckk/faculty_sections }}
+
+        {{#atlas}}
+            {{> local_uckk/faculty_atlas_projection }}
+        {{/atlas}}
+
+        <section
+            id="cours"
+            class="local-uckk-faculty-section local-uckk-faculty-section--courses"
+            data-region="local-uckk-faculty-section"
+            aria-labelledby="local-uckk-faculty-courses-title-{{page.slug}}"
+        >
+            <div class="local-uckk-faculty-section__inner">
+                <header class="local-uckk-faculty-section__header">
+                    <h2
+                        id="local-uckk-faculty-courses-title-{{page.slug}}"
+                        class="local-uckk-faculty-section__title"
+                    >
+                        {{#str}} facultycourses, local_uckk {{/str}}
+                    </h2>
+                </header>
+
+                <div class="local-uckk-faculty-courses">
+                    {{#courses}}
+                        {{> local_uckk/faculty_course_card }}
+                    {{/courses}}
+                </div>
+            </div>
+        </section>
+
+        {{#project_final}}
+            <section
+                id="projet-final"
+                class="local-uckk-faculty-section local-uckk-faculty-section--project-final"
+                data-region="local-uckk-faculty-section"
+                aria-labelledby="local-uckk-faculty-project-final-title-{{page.slug}}"
+            >
+                <div class="local-uckk-faculty-section__inner">
+                    <header class="local-uckk-faculty-section__header">
+                        <h2
+                            id="local-uckk-faculty-project-final-title-{{page.slug}}"
+                            class="local-uckk-faculty-section__title"
+                        >
+                            {{#str}} facultyprojectfinal, local_uckk {{/str}}
+                        </h2>
+                    </header>
+
+                    <article class="local-uckk-faculty-project-final">
+                        {{#title}}
+                            <h3 class="local-uckk-faculty-project-final__title">
+                                {{title}}
+                            </h3>
+                        {{/title}}
+
+                        {{#artefact_nom}}
+                            <p class="local-uckk-faculty-project-final__artefact">
+                                {{artefact_nom}}
+                            </p>
+                        {{/artefact_nom}}
+
+                        {{#body}}
+                            <div class="local-uckk-faculty-project-final__description">
+                                {{body}}
+                            </div>
+                        {{/body}}
+
+                        {{^body}}
+                            {{#description}}
+                                <div class="local-uckk-faculty-project-final__description">
+                                    {{description}}
+                                </div>
+                            {{/description}}
+                        {{/body}}
+
+                        {{#criteres}}
+                            <div class="local-uckk-faculty-project-final__criteria">
+                                <h4 class="local-uckk-faculty-project-final__criteria-title">
+                                    {{#str}} criteria, local_uckk {{/str}}
+                                </h4>
+
+                                <ul class="local-uckk-faculty-project-final__criteria-list">
+                                    {{#criteres}}
+                                        <li class="local-uckk-faculty-project-final__criteria-item">
+                                            {{.}}
+                                        </li>
+                                    {{/criteres}}
+                                </ul>
+                            </div>
+                        {{/criteres}}
+                    </article>
+                </div>
+            </section>
+        {{/project_final}}
+
+        <section
+            id="ethique"
+            class="local-uckk-faculty-section local-uckk-faculty-section--limits"
+            data-region="local-uckk-faculty-section"
+            aria-labelledby="local-uckk-faculty-limits-title-{{page.slug}}"
+        >
+            <div class="local-uckk-faculty-section__inner">
+                <header class="local-uckk-faculty-section__header">
+                    <h2
+                        id="local-uckk-faculty-limits-title-{{page.slug}}"
+                        class="local-uckk-faculty-section__title"
+                    >
+                        {{#str}} facultyethicallimits, local_uckk {{/str}}
+                    </h2>
+                </header>
+
+                <ul class="local-uckk-faculty-limits">
+                    {{#limits}}
+                        <li class="local-uckk-faculty-limits__item">
+                            {{.}}
+                        </li>
+                    {{/limits}}
+                </ul>
+            </div>
+        </section>
+
+        <section
+            id="relations"
+            class="local-uckk-faculty-section local-uckk-faculty-section--relations"
+            data-region="local-uckk-faculty-section"
+            aria-labelledby="local-uckk-faculty-relations-title-{{page.slug}}"
+        >
+            <div class="local-uckk-faculty-section__inner">
+                <header class="local-uckk-faculty-section__header">
+                    <h2
+                        id="local-uckk-faculty-relations-title-{{page.slug}}"
+                        class="local-uckk-faculty-section__title"
+                    >
+                        {{#str}} facultyrelations, local_uckk {{/str}}
+                    </h2>
+                </header>
+
+                <div class="local-uckk-faculty-relations">
+                    {{#relations}}
+                        <article
+                            class="local-uckk-faculty-relation local-uckk-faculty-relation--{{type}}"
+                            data-voie-id="{{voie_id}}"
+                        >
+                            {{#title}}
+                                <h3 class="local-uckk-faculty-relation__title">
+                                    {{#url}}
+                                        <a class="local-uckk-faculty-relation__link" href="{{url}}">
+                                            {{title}}
+                                        </a>
+                                    {{/url}}
+
+                                    {{^url}}
+                                        {{title}}
+                                    {{/url}}
+                                </h3>
+                            {{/title}}
+
+                            {{#body}}
+                                <p class="local-uckk-faculty-relation__body">
+                                    {{body}}
+                                </p>
+                            {{/body}}
+
+                            {{^body}}
+                                {{#relation}}
+                                    <p class="local-uckk-faculty-relation__body">
+                                        {{relation}}
+                                    </p>
+                                {{/relation}}
+                            {{/body}}
+                        </article>
+                    {{/relations}}
+                </div>
+            </div>
+        </section>
+
+        <section
+            id="annonces"
+            class="local-uckk-faculty-section local-uckk-faculty-section--dynamic-blocks"
+            data-region="local-uckk-faculty-section"
+            aria-labelledby="local-uckk-faculty-dynamic-blocks-title-{{page.slug}}"
+        >
+            <div class="local-uckk-faculty-section__inner">
+                <header class="local-uckk-faculty-section__header">
+                    <h2
+                        id="local-uckk-faculty-dynamic-blocks-title-{{page.slug}}"
+                        class="local-uckk-faculty-section__title"
+                    >
+                        {{#str}} facultyannouncements, local_uckk {{/str}}
+                    </h2>
+                </header>
+
+                <div class="local-uckk-faculty-dynamic-blocks">
+                    {{#dynamic_blocks}}
+                        {{> local_uckk/faculty_dynamic_block }}
+                    {{/dynamic_blocks}}
+                </div>
+            </div>
+        </section>
+
+        <section
+            id="featured-blocks"
+            class="local-uckk-faculty-section local-uckk-faculty-section--featured-blocks"
+            data-region="local-uckk-faculty-section"
+            aria-labelledby="local-uckk-faculty-featured-blocks-title-{{page.slug}}"
+        >
+            <div class="local-uckk-faculty-section__inner">
+                <header class="local-uckk-faculty-section__header">
+                    <h2
+                        id="local-uckk-faculty-featured-blocks-title-{{page.slug}}"
+                        class="local-uckk-faculty-section__title"
+                    >
+                        {{#str}} facultyfeaturedblocks, local_uckk {{/str}}
+                    </h2>
+                </header>
+
+                <div class="local-uckk-faculty-featured-blocks">
+                    {{#featured_blocks}}
+                        <article class="local-uckk-faculty-featured-block local-uckk-faculty-featured-block--{{type}}">
+                            {{#title}}
+                                <h3 class="local-uckk-faculty-featured-block__title">
+                                    {{title}}
+                                </h3>
+                            {{/title}}
+
+                            {{#body}}
+                                <div class="local-uckk-faculty-featured-block__body">
+                                    {{body}}
+                                </div>
+                            {{/body}}
+                        </article>
+                    {{/featured_blocks}}
+                </div>
+            </div>
+        </section>
+
+        <section
+            id="faq"
+            class="local-uckk-faculty-section local-uckk-faculty-section--faq local-uckk-faculty-faq"
+            data-region="local-uckk-faculty-section"
+            aria-labelledby="local-uckk-faculty-faq-title-{{page.slug}}"
+        >
+            <div class="local-uckk-faculty-section__inner">
+                <header class="local-uckk-faculty-section__header">
+                    <h2
+                        id="local-uckk-faculty-faq-title-{{page.slug}}"
+                        class="local-uckk-faculty-section__title"
+                    >
+                        {{#str}} facultyfaq, local_uckk {{/str}}
+                    </h2>
+                </header>
+
+                <div data-region="local-uckk-faculty-faq">
+                    {{#faq}}
+                        {{> local_uckk/faculty_faq }}
+                    {{/faq}}
+                </div>
+            </div>
+        </section>
+
+        {{#contact}}
+            {{> local_uckk/faculty_contact }}
+        {{/contact}}
+    </main>
+</div>

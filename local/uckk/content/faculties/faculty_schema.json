@@ -1,0 +1,1213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local/uckk/content/faculties/faculty_schema.json",
+  "title": "UCKK Faculty Profile Schema",
+  "description": "Schéma canonique des profils publics de faculté UCKK pour local_uckk.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "faculty_id",
+    "voie_id",
+    "slug",
+    "status",
+    "visibility",
+    "source_atlas",
+    "moodle",
+    "identity",
+    "seo",
+    "hero",
+    "navigation",
+    "sections",
+    "atlas_projection",
+    "dynamic_blocks",
+    "featured_blocks",
+    "faq",
+    "contact",
+    "governance",
+    "cache"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "UCKK-FACULTY-0.1"
+    },
+    "faculty_id": {
+      "type": "string",
+      "enum": [
+        "faculty_grand_jeu_social",
+        "faculty_economie",
+        "faculty_ecologie",
+        "faculty_sciences_politiques",
+        "faculty_linguistique_architecture_du_sens",
+        "faculty_metaphysique",
+        "faculty_ia_gouvernable",
+        "faculty_intervention_sociale_systemes_humains",
+        "faculty_architecture_sociotechnique",
+        "faculty_ecosysteme_digital_koa"
+      ]
+    },
+    "voie_id": {
+      "type": "string",
+      "enum": [
+        "voie_grand_jeu_social",
+        "voie_economie",
+        "voie_ecologie",
+        "voie_sciences_politiques",
+        "voie_linguistique_architecture_du_sens",
+        "voie_metaphysique",
+        "voie_ia_gouvernable",
+        "voie_intervention_sociale_systemes_humains",
+        "voie_architecture_sociotechnique",
+        "voie_ecosysteme_digital_koa"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "enum": [
+        "grand-jeu-social",
+        "economie",
+        "ecologie",
+        "sciences-politiques",
+        "linguistique-architecture-du-sens",
+        "metaphysique",
+        "ia-gouvernable",
+        "intervention-sociale-systemes-humains",
+        "architecture-sociotechnique",
+        "ecosysteme-digital-koa"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "archived"
+      ]
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "hidden",
+        "restricted"
+      ]
+    },
+    "source_atlas": {
+      "$ref": "#/$defs/source_atlas"
+    },
+    "moodle": {
+      "$ref": "#/$defs/moodle"
+    },
+    "identity": {
+      "$ref": "#/$defs/identity"
+    },
+    "seo": {
+      "$ref": "#/$defs/seo"
+    },
+    "hero": {
+      "$ref": "#/$defs/hero"
+    },
+    "navigation": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/navigation_item"
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/section"
+      }
+    },
+    "atlas_projection": {
+      "$ref": "#/$defs/atlas_projection"
+    },
+    "dynamic_blocks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dynamic_block"
+      }
+    },
+    "featured_blocks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/featured_block"
+      }
+    },
+    "faq": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/faq_item"
+      }
+    },
+    "contact": {
+      "$ref": "#/$defs/contact"
+    },
+    "governance": {
+      "$ref": "#/$defs/governance"
+    },
+    "cache": {
+      "$ref": "#/$defs/cache"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_grand_jeu_social"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_grand_jeu_social"
+          },
+          "slug": {
+            "const": "grand-jeu-social"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_grand_jeu_social.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-GJS"
+              },
+              "course_prefix": {
+                "const": "GJS"
+              },
+              "hub_course_idnumber": {
+                "const": "GJS-HUB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_economie"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_economie"
+          },
+          "slug": {
+            "const": "economie"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_economie.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-EC"
+              },
+              "course_prefix": {
+                "const": "EC"
+              },
+              "hub_course_idnumber": {
+                "const": "EC-HUB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_ecologie"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_ecologie"
+          },
+          "slug": {
+            "const": "ecologie"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_ecologie.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-ECL"
+              },
+              "course_prefix": {
+                "const": "ECL"
+              },
+              "hub_course_idnumber": {
+                "const": "ECL-HUB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_sciences_politiques"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_sciences_politiques"
+          },
+          "slug": {
+            "const": "sciences-politiques"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_sciences_politiques.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-SP"
+              },
+              "course_prefix": {
+                "const": "SP"
+              },
+              "hub_course_idnumber": {
+                "const": "SP-HUB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_linguistique_architecture_du_sens"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_linguistique_architecture_du_sens"
+          },
+          "slug": {
+            "const": "linguistique-architecture-du-sens"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_linguistique_architecture_du_sens.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-LI"
+              },
+              "course_prefix": {
+                "const": "LI"
+              },
+              "hub_course_idnumber": {
+                "const": "LI-HUB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_metaphysique"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_metaphysique"
+          },
+          "slug": {
+            "const": "metaphysique"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_metaphysique.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-ME"
+              },
+              "course_prefix": {
+                "const": "ME"
+              },
+              "hub_course_idnumber": {
+                "const": "ME-HUB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_ia_gouvernable"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_ia_gouvernable"
+          },
+          "slug": {
+            "const": "ia-gouvernable"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_ia_gouvernable.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-IA"
+              },
+              "course_prefix": {
+                "const": "IA"
+              },
+              "hub_course_idnumber": {
+                "const": "IA-HUB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_intervention_sociale_systemes_humains"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_intervention_sociale_systemes_humains"
+          },
+          "slug": {
+            "const": "intervention-sociale-systemes-humains"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_intervention_sociale_systemes_humains.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-IS"
+              },
+              "course_prefix": {
+                "const": "IS"
+              },
+              "hub_course_idnumber": {
+                "const": "IS-HUB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_architecture_sociotechnique"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_architecture_sociotechnique"
+          },
+          "slug": {
+            "const": "architecture-sociotechnique"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_architecture_sociotechnique.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-AS"
+              },
+              "course_prefix": {
+                "const": "AS"
+              },
+              "hub_course_idnumber": {
+                "const": "AS-HUB"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "faculty_id": {
+            "const": "faculty_ecosysteme_digital_koa"
+          }
+        },
+        "required": [
+          "faculty_id"
+        ]
+      },
+      "then": {
+        "properties": {
+          "voie_id": {
+            "const": "voie_ecosysteme_digital_koa"
+          },
+          "slug": {
+            "const": "ecosysteme-digital-koa"
+          },
+          "source_atlas": {
+            "properties": {
+              "file": {
+                "const": "voie_ecosysteme_digital_koa.json"
+              }
+            }
+          },
+          "moodle": {
+            "properties": {
+              "category_idnumber": {
+                "const": "UCKK-KOA"
+              },
+              "course_prefix": {
+                "const": "KOA"
+              },
+              "hub_course_idnumber": {
+                "const": "KOA-HUB"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "string": {
+      "type": "string"
+    },
+    "non_empty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "anchor_target": {
+      "type": "string",
+      "pattern": "^(#[a-z0-9]+(?:-[a-z0-9]+)*|/local/uckk/[A-Za-z0-9_./?=&%-]+|https://[^\\s]+)$"
+    },
+    "id_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "source_atlas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "schema_version_expected",
+        "sync_mode"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "enum": [
+            "voie_grand_jeu_social.json",
+            "voie_economie.json",
+            "voie_ecologie.json",
+            "voie_sciences_politiques.json",
+            "voie_linguistique_architecture_du_sens.json",
+            "voie_metaphysique.json",
+            "voie_ia_gouvernable.json",
+            "voie_intervention_sociale_systemes_humains.json",
+            "voie_architecture_sociotechnique.json",
+            "voie_ecosysteme_digital_koa.json"
+          ]
+        },
+        "schema_version_expected": {
+          "type": "string",
+          "const": "UCKK-ATLAS-0.2-draft"
+        },
+        "sync_mode": {
+          "type": "string",
+          "enum": [
+            "read_only",
+            "preview_only",
+            "moodle_sync_allowed"
+          ]
+        }
+      }
+    },
+    "moodle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category_id",
+        "category_idnumber",
+        "course_prefix",
+        "public_course_listing",
+        "enrolment_visibility",
+        "hub_course_idnumber"
+      ],
+      "properties": {
+        "category_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "category_idnumber": {
+          "type": "string",
+          "enum": [
+            "UCKK-GJS",
+            "UCKK-EC",
+            "UCKK-ECL",
+            "UCKK-SP",
+            "UCKK-LI",
+            "UCKK-ME",
+            "UCKK-IA",
+            "UCKK-IS",
+            "UCKK-AS",
+            "UCKK-KOA"
+          ]
+        },
+        "course_prefix": {
+          "type": "string",
+          "enum": [
+            "GJS",
+            "EC",
+            "ECL",
+            "SP",
+            "LI",
+            "ME",
+            "IA",
+            "IS",
+            "AS",
+            "KOA"
+          ]
+        },
+        "public_course_listing": {
+          "type": "boolean"
+        },
+        "enrolment_visibility": {
+          "type": "string",
+          "enum": [
+            "hidden",
+            "public_info_only",
+            "login_required",
+            "enrolment_required"
+          ]
+        },
+        "hub_course_idnumber": {
+          "type": "string",
+          "enum": [
+            "GJS-HUB",
+            "EC-HUB",
+            "ECL-HUB",
+            "SP-HUB",
+            "LI-HUB",
+            "ME-HUB",
+            "IA-HUB",
+            "IS-HUB",
+            "AS-HUB",
+            "KOA-HUB"
+          ]
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eyebrow",
+        "name",
+        "short_name",
+        "title_symbolique",
+        "domain",
+        "level",
+        "faculty_role",
+        "one_sentence"
+      ],
+      "properties": {
+        "eyebrow": {
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "short_name": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "title_symbolique": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string"
+        },
+        "faculty_role": {
+          "type": "string"
+        },
+        "one_sentence": {
+          "type": "string"
+        }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "description",
+        "keywords"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "subtitle",
+        "summary",
+        "primary_cta",
+        "secondary_cta"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "primary_cta": {
+          "$ref": "#/$defs/cta"
+        },
+        "secondary_cta": {
+          "$ref": "#/$defs/cta"
+        }
+      }
+    },
+    "cta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "target"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/$defs/anchor_target"
+        }
+      }
+    },
+    "navigation_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "target"
+      ],
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "target": {
+          "$ref": "#/$defs/anchor_target"
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "title",
+        "body"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id_slug"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "text",
+            "markdown",
+            "quote",
+            "principle",
+            "notice",
+            "cards",
+            "callout",
+            "two_column"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/card_item"
+          }
+        },
+        "columns": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/card_item"
+          }
+        }
+      }
+    },
+    "card_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "body"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/$defs/anchor_target"
+        }
+      }
+    },
+    "atlas_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "show_definition_courte",
+        "show_angle_fondamental",
+        "show_competence_centrale",
+        "show_seuils_progression",
+        "show_courses",
+        "show_course_codes",
+        "show_concept_maitre",
+        "show_concepts_associes",
+        "show_artefacts",
+        "show_criteres_passage",
+        "show_projet_final",
+        "show_limites_ethiques",
+        "show_relations_intervoies",
+        "show_tags"
+      ],
+      "properties": {
+        "show_definition_courte": {
+          "type": "boolean"
+        },
+        "show_angle_fondamental": {
+          "type": "boolean"
+        },
+        "show_competence_centrale": {
+          "type": "boolean"
+        },
+        "show_seuils_progression": {
+          "type": "boolean"
+        },
+        "show_courses": {
+          "type": "boolean"
+        },
+        "show_course_codes": {
+          "type": "boolean"
+        },
+        "show_concept_maitre": {
+          "type": "boolean"
+        },
+        "show_concepts_associes": {
+          "type": "boolean"
+        },
+        "show_artefacts": {
+          "type": "boolean"
+        },
+        "show_criteres_passage": {
+          "type": "boolean"
+        },
+        "show_projet_final": {
+          "type": "boolean"
+        },
+        "show_limites_ethiques": {
+          "type": "boolean"
+        },
+        "show_relations_intervoies": {
+          "type": "boolean"
+        },
+        "show_tags": {
+          "type": "boolean"
+        }
+      }
+    },
+    "dynamic_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "title",
+        "source",
+        "limit",
+        "visibility",
+        "empty_state"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id_slug"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "announcements",
+            "events",
+            "moodle_course_list",
+            "featured_courses",
+            "faculty_news",
+            "related_faculties",
+            "public_resources",
+            "cta_panel"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/dynamic_source"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "public",
+            "hidden",
+            "restricted"
+          ]
+        },
+        "empty_state": {
+          "type": "string"
+        }
+      }
+    },
+    "dynamic_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": [
+            "moodle_forum",
+            "moodle_calendar",
+            "moodle_category",
+            "moodle_course_customfield",
+            "local_uckk_news",
+            "local_uckk_manual",
+            "none"
+          ]
+        },
+        "course_idnumber": {
+          "type": "string"
+        },
+        "forum_name": {
+          "type": "string"
+        },
+        "category_idnumber": {
+          "type": "string"
+        },
+        "customfield": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/manual_source_item"
+          }
+        }
+      }
+    },
+    "manual_source_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "url"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "url": {
+          "$ref": "#/$defs/anchor_target"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "featured_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "body"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "principle",
+            "notice",
+            "warning",
+            "quote",
+            "stat",
+            "method",
+            "ethics",
+            "cta"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/$defs/anchor_target"
+        }
+      }
+    },
+    "faq_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question",
+        "answer"
+      ],
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "body",
+        "email",
+        "cta"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "cta": {
+          "$ref": "#/$defs/cta"
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "editorial_status",
+        "last_reviewed",
+        "review_notes",
+        "public_claims_guardrails"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string",
+          "const": "local_uckk"
+        },
+        "editorial_status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "approved",
+            "needs_update",
+            "archived"
+          ]
+        },
+        "last_reviewed": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "review_notes": {
+          "type": "string"
+        },
+        "public_claims_guardrails": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "cache": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "ttl_seconds"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "ttl_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 604800
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1371 @@
+{
+  "schema_version": "UCKK-ATLAS-0.2-draft",
+  "voie_id": "voie_ecosysteme_digital_koa",
+  "code": "KOA",
+  "nom": "Voie de l’Architecture de l’écosystème digital kOA",
+  "domaine_operatoire": "Infrastructure opératoire",
+  "niveau_vise": "Puissance opératoire",
+  "titre_symbolique": "Architecte de l’écosystème digital kOA",
+  "parchemin": "Parchemin de Puissance opératoire — Voie de l’Architecture de l’écosystème digital kOA",
+  "definition_courte": "La Voie de l’Architecture de l’écosystème digital kOA forme des personnes capables de comprendre, déployer, auditer et gouverner une infrastructure numérique sociotechnique orientée vers la connaissance, la décision, l’action et la mémoire.",
+  "angle_fondamental": "Transformer un groupe, une communauté ou une institution en organisation capable de connaître, choisir, agir et se souvenir avec méthode, légitimité, auditabilité et résilience.",
+  "competence_centrale": "Concevoir, relier, déployer et gouverner les modules du kOA Digital Ecosystem afin de transformer des contributions en connaissances vérifiables, des connaissances en décisions légitimes, des décisions en actions coordonnées et des actions en mémoire réutilisable.",
+  "seuils_progression": [
+    {
+      "seuil_id": "architecture_generale",
+      "nom": "Architecture générale",
+      "fonction": "Comprendre le kOA Digital Ecosystem comme système de systèmes sociotechnique."
+    },
+    {
+      "seuil_id": "connaissance_et_decision",
+      "nom": "Connaissance et décision",
+      "fonction": "Structurer la matière collective, le sens, les preuves, l’incertitude et la décision légitime."
+    },
+    {
+      "seuil_id": "execution_memoire_resilience",
+      "nom": "Exécution, mémoire et résilience",
+      "fonction": "Transformer les décisions en actions coordonnées, en mémoire institutionnelle et en infrastructure non dominatrice."
+    }
+  ],
+  "cours_conceptuels": [
+    {
+      "cours_id": "KOA101",
+      "ordre": 1,
+      "nom": "Architecture générale du kOA Digital Ecosystem",
+      "concept_maitre": {
+        "concept_id": "koa_ecosysteme_numerique_sociotechnique",
+        "nom": "Écosystème numérique sociotechnique",
+        "definition_courte": "Architecture qui relie technologie, gouvernance, rôles, workflows, légitimité, mémoire et exécution collective.",
+        "fonction_pedagogique": "Donner une vision d’ensemble du kOA Digital Ecosystem comme infrastructure opératoire non monolithique.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_digital_ecosystem",
+          "nom": "kOA Digital Ecosystem",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_infrastructure_operable",
+          "nom": "Infrastructure opérable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_systeme_exploitation_sociotechnique",
+          "nom": "Système d’exploitation sociotechnique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_system_of_systems",
+          "nom": "System of systems",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_cycle_connaitre_choisir_agir_se_souvenir",
+          "nom": "Connaître → Choisir → Agir → Se souvenir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_modularite",
+          "nom": "Modularité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_interoperabilite",
+          "nom": "Interopérabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_interfaces_explicites",
+          "nom": "Interfaces explicites",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_couches_architecturales",
+          "nom": "Couches architecturales",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_gouvernance_des_passages",
+          "nom": "Gouvernance des passages",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_non_monolithe",
+          "nom": "Non-monolithe",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_capacite_collective",
+          "nom": "Capacité collective",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "schema_architecture",
+        "nom": "Schéma général du kOA Digital Ecosystem",
+        "description": "Représenter les couches, modules, passages, rôles et cycles du système."
+      },
+      "criteres_passage": [
+        "L’Aspirant distingue mouvement kOA, UCKK et kOA Digital Ecosystem.",
+        "L’Aspirant explique le cycle Connaître → Choisir → Agir → Se souvenir.",
+        "L’Aspirant sait lire l’écosystème comme système de systèmes."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "KOA102",
+      "ordre": 2,
+      "nom": "Konnaxion : contribution, espaces et circulation du savoir",
+      "concept_maitre": {
+        "concept_id": "koa_entree_gouvernee_matiere_collective",
+        "nom": "Entrée gouvernée de la matière collective",
+        "definition_courte": "Processus par lequel des contributions humaines deviennent de la matière exploitable, reliée et gouvernable.",
+        "fonction_pedagogique": "Comprendre comment les contributions, profils, espaces et preuves entrent dans l’écosystème sans devenir du bruit ingouvernable.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_konnaxion",
+          "nom": "Konnaxion",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_contribution",
+          "nom": "Contribution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_matiere_brute",
+          "nom": "Matière brute",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_proposition",
+          "nom": "Proposition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_commentaire_structure",
+          "nom": "Commentaire structuré",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_role_contributif",
+          "nom": "Rôle contributif",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_espace_public",
+          "nom": "Espace public",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_espace_prive",
+          "nom": "Espace privé",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_collaboration_structuree",
+          "nom": "Collaboration structurée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_portfolio_preuves",
+          "nom": "Portfolio de preuves",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_routage_du_savoir",
+          "nom": "Routage du savoir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_visibilite_gouvernee",
+          "nom": "Visibilité gouvernée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_contexte_contribution",
+          "nom": "Contexte de contribution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_consentement_contribution",
+          "nom": "Consentement de contribution",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "cartographie_flux_contribution",
+        "nom": "Carte d’entrée de la matière collective",
+        "description": "Décrire comment une contribution entre, circule, est contextualisée, reliée, validée ou rejetée."
+      },
+      "criteres_passage": [
+        "L’Aspirant distingue contribution brute, proposition structurée et preuve utilisable.",
+        "L’Aspirant sait concevoir un espace contributif gouvernable.",
+        "L’Aspirant sait identifier les risques de bruit, de capture ou de visibilité abusive."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "KOA103",
+      "ordre": 3,
+      "nom": "SemantiK : architecture du sens et graphes conceptuels",
+      "concept_maitre": {
+        "concept_id": "koa_structuration_du_sens",
+        "nom": "Structuration du sens",
+        "definition_courte": "Organisation des concepts, définitions, relations et ambiguïtés pour rendre le savoir transmissible et relié.",
+        "fonction_pedagogique": "Former à construire des graphes conceptuels, stabiliser des définitions et gérer les conflits de sens.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_semantik",
+          "nom": "SemantiK",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_concept",
+          "nom": "Concept",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_definition",
+          "nom": "Définition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_relation_semantique",
+          "nom": "Relation sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_graphe_conceptuel",
+          "nom": "Graphe conceptuel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_ontologie",
+          "nom": "Ontologie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_taxonomie",
+          "nom": "Taxonomie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_typologie",
+          "nom": "Typologie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_categorie",
+          "nom": "Catégorie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_desambiguisation",
+          "nom": "Désambiguïsation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_traduction_controlee",
+          "nom": "Traduction contrôlée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_conflit_definition",
+          "nom": "Conflit de définition",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_derive_semantique",
+          "nom": "Dérive sémantique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_version_conceptuelle",
+          "nom": "Version conceptuelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_lexique_canonique",
+          "nom": "Lexique canonique",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "graphe_conceptuel",
+        "nom": "Graphe SemantiK d’un domaine",
+        "description": "Construire un graphe reliant concepts-maîtres, concepts associés, définitions, tensions et dépendances."
+      },
+      "criteres_passage": [
+        "L’Aspirant sait distinguer mot, terme, concept et catégorie.",
+        "L’Aspirant sait représenter des relations sémantiques.",
+        "L’Aspirant sait documenter une ambiguïté plutôt que l’effacer artificiellement."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "KOA104",
+      "ordre": 4,
+      "nom": "Kristals : connaissance vérifiable et provenance",
+      "concept_maitre": {
+        "concept_id": "koa_stabilisation_connaissance_verifiable",
+        "nom": "Stabilisation de la connaissance vérifiable",
+        "definition_courte": "Transformation d’une affirmation ou d’un savoir en unité structurée, traçable, portable et vérifiable.",
+        "fonction_pedagogique": "Apprendre à produire des Kristals qui relient claims, sources, preuves, provenance et statuts de validation.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_kristal",
+          "nom": "Kristal",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_unite_connaissance",
+          "nom": "Unité de connaissance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_claim",
+          "nom": "Claim",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_source",
+          "nom": "Source",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_preuve",
+          "nom": "Preuve",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_provenance",
+          "nom": "Provenance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_tracabilite",
+          "nom": "Traçabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_validation_claim",
+          "nom": "Validation de claim",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_statut_validation",
+          "nom": "Statut de validation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_evidence_mapping",
+          "nom": "Evidence mapping",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_portabilite",
+          "nom": "Portabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_reutilisabilite",
+          "nom": "Réutilisabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_auditabilite_du_savoir",
+          "nom": "Auditabilité du savoir",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_kristal_exchange",
+          "nom": "Kristal Exchange",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_chaine_de_preuve",
+          "nom": "Chaîne de preuve",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "kristal_documente",
+        "nom": "Kristal vérifiable",
+        "description": "Produire une unité de connaissance avec claim, contexte, sources, preuves, provenance, statut et limites."
+      },
+      "criteres_passage": [
+        "L’Aspirant sait distinguer affirmation, preuve, source et validation.",
+        "L’Aspirant sait rendre une connaissance traçable.",
+        "L’Aspirant sait documenter les limites d’un Kristal."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "KOA105",
+      "ordre": 5,
+      "nom": "SenTient : incertitude, interprétation et validation prudente",
+      "concept_maitre": {
+        "concept_id": "koa_traitement_incertain",
+        "nom": "Traitement de l’incertain",
+        "definition_courte": "Méthode permettant de traiter ambiguïtés, hypothèses, contradictions et degrés de confiance sans transformer trop vite l’incertain en certitude.",
+        "fonction_pedagogique": "Former à suspendre, qualifier, comparer et documenter les interprétations avant canonisation.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_sentient",
+          "nom": "SenTient",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_ambiguite",
+          "nom": "Ambiguïté",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_hypothese",
+          "nom": "Hypothèse",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_proposition_incertaine",
+          "nom": "Proposition incertaine",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_nuance",
+          "nom": "Nuance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_contradiction",
+          "nom": "Contradiction",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_desaccord",
+          "nom": "Désaccord",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_degre_confiance",
+          "nom": "Degré de confiance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_seuil_certitude",
+          "nom": "Seuil de certitude",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_suspension_jugement",
+          "nom": "Suspension du jugement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_contexte_manquant",
+          "nom": "Contexte manquant",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_lecture_alternative",
+          "nom": "Lecture alternative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_incertain_non_canonise",
+          "nom": "Incertain non canonisé",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_prudence_canonique",
+          "nom": "Prudence canonique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_validation_differee",
+          "nom": "Validation différée",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "dossier_incertitude",
+        "nom": "Dossier d’interprétation prudente",
+        "description": "Documenter une question ambiguë avec hypothèses, lectures concurrentes, preuves, limites et décision de validation ou de suspension."
+      },
+      "criteres_passage": [
+        "L’Aspirant sait reconnaître ce qui ne doit pas encore être canonisé.",
+        "L’Aspirant sait comparer plusieurs interprétations.",
+        "L’Aspirant sait formuler un seuil de certitude explicite."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "KOA106",
+      "ordre": 6,
+      "nom": "ethiKos, EkoH et Smart Vote : décision légitime",
+      "concept_maitre": {
+        "concept_id": "koa_choix_collectif_gouvernable",
+        "nom": "Choix collectif gouvernable",
+        "definition_courte": "Processus permettant à une communauté de délibérer, comparer, décider, contester et légitimer ses choix sans cacher l’autorité dans un algorithme unique.",
+        "fonction_pedagogique": "Comprendre comment transformer connaissance et désaccord en décisions lisibles, contestables et légitimes.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_ethikos",
+          "nom": "ethiKos",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_deliberation_structuree",
+          "nom": "Délibération structurée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_argument",
+          "nom": "Argument",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_objection",
+          "nom": "Objection",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_critere_decision",
+          "nom": "Critère de décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_consensus",
+          "nom": "Consensus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_dissensus",
+          "nom": "Dissensus",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_smart_vote",
+          "nom": "Smart Vote",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_vote_brut",
+          "nom": "Vote brut",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_vote_pondere",
+          "nom": "Vote pondéré",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_lecture_comparative",
+          "nom": "Lecture comparative",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_competence_situee",
+          "nom": "Compétence située",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_ekoh",
+          "nom": "EkoH",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_credibilite_situee",
+          "nom": "Crédibilité située",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_signal_ethique",
+          "nom": "Signal d’éthique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_signal_contribution",
+          "nom": "Signal de contribution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_non_technocratie",
+          "nom": "Non-technocratie",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_procedure_appel",
+          "nom": "Procédure d’appel",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_decision_contestable",
+          "nom": "Décision contestable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_registre_decision",
+          "nom": "Registre de décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "protocole_decision",
+        "nom": "Protocole de décision légitime",
+        "description": "Concevoir une procédure de décision incluant arguments, objections, critères, votes, signaux de compétence, appels et registre."
+      },
+      "criteres_passage": [
+        "L’Aspirant sait distinguer vote, délibération, expertise située et légitimité collective.",
+        "L’Aspirant sait concevoir une décision contestable.",
+        "L’Aspirant sait éviter la dérive technocratique."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "KOA107",
+      "ordre": 7,
+      "nom": "Orgo et SwarmCraft : exécution coordonnée",
+      "concept_maitre": {
+        "concept_id": "koa_passage_decision_action",
+        "nom": "Passage de la décision à l’action",
+        "definition_courte": "Transformation d’une décision, orientation ou signal en tâches, responsabilités, suivis, clôtures et traces vérifiables.",
+        "fonction_pedagogique": "Former à organiser l’exécution collective sans perdre responsabilité, continuité ni mémoire.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_orgo",
+          "nom": "Orgo",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_tache",
+          "nom": "Tâche",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_case",
+          "nom": "Case",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_responsabilite",
+          "nom": "Responsabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_assignation",
+          "nom": "Assignation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_role_execution",
+          "nom": "Rôle d’exécution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_echeance",
+          "nom": "Échéance",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_dependance_execution",
+          "nom": "Dépendance d’exécution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_escalade",
+          "nom": "Escalade",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_cloture",
+          "nom": "Clôture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_suivi",
+          "nom": "Suivi",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_workflow",
+          "nom": "Workflow",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_tableau_etat",
+          "nom": "Tableau d’état",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_trace_verifiable",
+          "nom": "Trace vérifiable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_swarmcraft",
+          "nom": "SwarmCraft",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_coordination_distribuee",
+          "nom": "Coordination distribuée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_humains_agents_outils",
+          "nom": "Humains-agents-outils",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_synchronisation",
+          "nom": "Synchronisation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_continuite_execution",
+          "nom": "Continuité d’exécution",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "workflow_execution",
+        "nom": "Workflow Orgo complet",
+        "description": "Transformer une décision en tâches, responsabilités, dépendances, échéances, suivis, escalades et clôtures vérifiables."
+      },
+      "criteres_passage": [
+        "L’Aspirant sait transformer une décision en plan d’exécution.",
+        "L’Aspirant sait identifier les dépendances et les points d’escalade.",
+        "L’Aspirant sait produire des traces vérifiables d’action."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "KOA108",
+      "ordre": 8,
+      "nom": "Mémoire institutionnelle, canon et archives vivantes",
+      "concept_maitre": {
+        "concept_id": "koa_transformation_experience_memoire_active",
+        "nom": "Transformation de l’expérience en mémoire active",
+        "definition_courte": "Processus par lequel les actions, décisions, erreurs et apprentissages deviennent archives, canon, versions et savoir réutilisable.",
+        "fonction_pedagogique": "Former à construire une mémoire institutionnelle vivante plutôt qu’une accumulation morte de documents.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_memoire_institutionnelle",
+          "nom": "Mémoire institutionnelle",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_canon",
+          "nom": "Canon",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_archive_vivante",
+          "nom": "Archive vivante",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_post_mortem",
+          "nom": "Post-mortem",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_retour_experience",
+          "nom": "Retour d’expérience",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_feedback_gouverne",
+          "nom": "Feedback gouverné",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_historique_modification",
+          "nom": "Historique de modification",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_version_canonique",
+          "nom": "Version canonique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_journal_audit",
+          "nom": "Journal d’audit",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_mise_a_jour_gouvernee",
+          "nom": "Mise à jour gouvernée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_apprentissage_reutilisable",
+          "nom": "Apprentissage réutilisable",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_oubli_controle",
+          "nom": "Oubli contrôlé",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_rollback",
+          "nom": "Rollback",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_dossier_preuve",
+          "nom": "Dossier de preuve",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_memoire_distribuee",
+          "nom": "Mémoire distribuée",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "protocole_memoire",
+        "nom": "Protocole de mémoire institutionnelle",
+        "description": "Définir comment une organisation archive, versionne, révise, apprend, transmet et gouverne ses traces."
+      },
+      "criteres_passage": [
+        "L’Aspirant sait distinguer archive, mémoire, canon et feedback.",
+        "L’Aspirant sait concevoir un processus de mise à jour gouvernée.",
+        "L’Aspirant sait intégrer l’erreur et le retour d’expérience dans la mémoire."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "KOA109",
+      "ordre": 9,
+      "nom": "Résilience, sécurité et non-domination numérique",
+      "concept_maitre": {
+        "concept_id": "koa_infrastructure_fiable_contestable",
+        "nom": "Infrastructure fiable et contestable",
+        "definition_courte": "Architecture qui protège le système contre la capture, la fragilité, l’opacité, la dépendance excessive et la domination invisible.",
+        "fonction_pedagogique": "Former à concevoir une infrastructure numérique robuste, auditée, exportable, gouvernable et non dominatrice.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_auditabilite",
+          "nom": "Auditabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_fail_closed_integrity",
+          "nom": "Fail-closed integrity",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_securite",
+          "nom": "Sécurité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_resilience",
+          "nom": "Résilience",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_offline_first",
+          "nom": "Offline-first",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_runtime_pack",
+          "nom": "Runtime Pack",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_souverainete_numerique",
+          "nom": "Souveraineté numérique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_dependance_maitrisee",
+          "nom": "Dépendance maîtrisée",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_export_local",
+          "nom": "Export local",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_fonctionnement_hors_ligne",
+          "nom": "Fonctionnement hors ligne",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_conflit_version",
+          "nom": "Conflit de version",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_permission",
+          "nom": "Permission",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_acces",
+          "nom": "Accès",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_garde_fou",
+          "nom": "Garde-fou",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_non_domination",
+          "nom": "Non-domination",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_anti_capture",
+          "nom": "Anti-capture",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_contestabilite",
+          "nom": "Contestabilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_confidentialite",
+          "nom": "Confidentialité",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "audit_resilience",
+        "nom": "Audit de résilience et non-domination",
+        "description": "Évaluer les risques de capture, dépendance, opacité, fragilité, non-exportabilité et domination dans une architecture numérique."
+      },
+      "criteres_passage": [
+        "L’Aspirant sait identifier une dépendance dangereuse.",
+        "L’Aspirant sait concevoir des garde-fous d’auditabilité.",
+        "L’Aspirant sait expliquer pourquoi un système doit parfois refuser une sortie."
+      ],
+      "relations": []
+    },
+    {
+      "cours_id": "KOA110",
+      "ordre": 10,
+      "nom": "Projet intégrateur : déployer un mini-écosystème kOA",
+      "concept_maitre": {
+        "concept_id": "koa_deploiement_systeme_operable",
+        "nom": "Déploiement complet d’un système opérable",
+        "definition_courte": "Conception, documentation et simulation d’un mini-écosystème capable de recevoir des contributions, structurer le sens, valider des connaissances, décider, agir et se souvenir.",
+        "fonction_pedagogique": "Synthétiser la Voie en un projet complet, auditable, gouvernable et transmissible.",
+        "type": "concept_maitre"
+      },
+      "concepts_associes": [
+        {
+          "concept_id": "koa_diagnostic_communautaire",
+          "nom": "Diagnostic communautaire",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_architecture_cible",
+          "nom": "Architecture cible",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_choix_modules",
+          "nom": "Choix des modules",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_flux_contribution",
+          "nom": "Flux de contribution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_graphe_conceptuel_projet",
+          "nom": "Graphe conceptuel de projet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_regles_validation",
+          "nom": "Règles de validation",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_mecanisme_decision",
+          "nom": "Mécanisme de décision",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_workflow_execution_projet",
+          "nom": "Workflow d’exécution",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_memoire_canonique",
+          "nom": "Mémoire canonique",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_gouvernance_projet",
+          "nom": "Gouvernance de projet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_audit_projet",
+          "nom": "Audit de projet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_securite_projet",
+          "nom": "Sécurité du projet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_runtime_pack_projet",
+          "nom": "Runtime Pack de projet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_documentation_deploiement",
+          "nom": "Documentation de déploiement",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_pilote_local",
+          "nom": "Pilote local",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_reseau_federe",
+          "nom": "Réseau fédéré",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_mesure_utilite",
+          "nom": "Mesure d’utilité",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_limites_ethiques_projet",
+          "nom": "Limites éthiques du projet",
+          "type": "concept_associe",
+          "notions_fines": []
+        },
+        {
+          "concept_id": "koa_plan_evolution",
+          "nom": "Plan d’évolution",
+          "type": "concept_associe",
+          "notions_fines": []
+        }
+      ],
+      "artefact_maitrise": {
+        "type": "mini_ecosysteme_koa",
+        "nom": "Mini-écosystème kOA déployable",
+        "description": "Produire l’architecture complète d’un mini-écosystème : contribution, sens, Kristals, validation, décision, exécution, mémoire, audit, sécurité et Runtime Pack."
+      },
+      "criteres_passage": [
+        "L’Aspirant sait relier tous les passages du cycle Connaître → Choisir → Agir → Se souvenir.",
+        "L’Aspirant produit une architecture documentée, auditable et transmissible.",
+        "L’Aspirant identifie les limites, risques et conditions d’évolution du système."
+      ],
+      "relations": []
+    }
+  ],
+  "projet_final": {
+    "nom": "Déploiement d’un mini-écosystème kOA",
+    "description": "L’Aspirant doit concevoir un mini-écosystème kOA pour une communauté, un projet, une assemblée, une voie UCKK ou une organisation fictive. Le projet doit couvrir la contribution, la structuration du sens, la validation des connaissances, la décision, l’exécution, la mémoire, la résilience et l’auditabilité.",
+    "livrables": [
+      "Diagnostic du contexte",
+      "Architecture générale",
+      "Carte des modules utilisés",
+      "Flux de contribution",
+      "Graphe conceptuel",
+      "Exemple de Kristals",
+      "Protocole de traitement de l’incertitude",
+      "Protocole de décision",
+      "Workflow d’exécution",
+      "Protocole de mémoire institutionnelle",
+      "Audit de résilience et de non-domination",
+      "Runtime Pack minimal",
+      "Documentation de déploiement"
+    ],
+    "question_directrice": "Comment ce mini-écosystème permet-il à une communauté de connaître, choisir, agir et se souvenir sans perdre sa légitimité, son auditabilité ni son autonomie?"
+  },
+  "limites_ethiques": [
+    "Ne pas présenter un algorithme comme autorité finale.",
+    "Ne pas cacher la décision humaine derrière une pondération technique.",
+    "Ne pas transformer les signaux de compétence en hiérarchie technocratique absolue.",
+    "Ne pas canoniser une connaissance sans provenance suffisante.",
+    "Ne pas effacer l’incertitude pour produire une fausse clarté.",
+    "Ne pas rendre une communauté dépendante d’un système opaque ou non exportable.",
+    "Ne pas confondre contribution visible et compétence réelle.",
+    "Ne pas confondre mémoire institutionnelle et accumulation documentaire.",
+    "Ne pas sacrifier la contestabilité au nom de l’efficacité.",
+    "Ne pas utiliser l’écosystème pour surveiller, humilier ou manipuler les participants.",
+    "Ne pas présenter un module conceptuel, expérimental ou prototypal comme complet, stable ou déployé.",
+    "Ne pas confondre kOA, UCKK et le kOA Digital Ecosystem.",
+    "Ne pas remplacer la légitimité humaine, collective ou institutionnelle par une automatisation technique.",
+    "Ne pas transformer l’infrastructure numérique en autorité souveraine.",
+    "Ne pas masquer les limites, dépendances, risques ou états réels des modules."
+  ],
+  "relations_intervoies": [
+    {
+      "voie_id": "voie_grand_jeu_social",
+      "relation": "Le kOA Digital Ecosystem rend le Grand Jeu social lisible, opérable, délibérable et mémorisable."
+    },
+    {
+      "voie_id": "voie_architecture_sociotechnique",
+      "relation": "La Voie kOA est un cas avancé d’architecture sociotechnique appliquée."
+    },
+    {
+      "voie_id": "voie_linguistique_architecture_du_sens",
+      "relation": "SemantiK dépend directement de la structuration des concepts, définitions, traductions et graphes de sens."
+    },
+    {
+      "voie_id": "voie_ia_gouvernable",
+      "relation": "L’IA peut soutenir l’analyse, la cartographie, la synthèse et l’exécution, mais ne doit jamais devenir autorité finale."
+    },
+    {
+      "voie_id": "voie_sciences_politiques",
+      "relation": "ethiKos, Smart Vote et EkoH touchent la délibération, la légitimité, le pouvoir et les procédures collectives."
+    },
+    {
+      "voie_id": "voie_economie",
+      "relation": "L’écosystème exige des modèles de ressources, de viabilité, d’accès, de maintenance et de non-capture."
+    },
+    {
+      "voie_id": "voie_intervention_sociale_systemes_humains",
+      "relation": "Les systèmes kOA doivent respecter la dignité, les vulnérabilités, les rôles humains et les limites relationnelles."
+    }
+  ],
+  "tags": [
+    "koa",
+    "ecosysteme-digital",
+    "infrastructure",
+    "systeme-sociotechnique",
+    "semantik",
+    "kristals",
+    "konnaxion",
+    "orgo",
+    "ethikos",
+    "ekoh",
+    "smart-vote",
+    "sentient",
+    "swarmcraft",
+    "auditabilite",
+    "resilience",
+    "memoire-institutionnelle"
+  ],
+  "statut": "Voie fondatrice UCKK",
+  "statut_modules": {
+    "principe": "Les modules nommés dans cette Voie peuvent être conceptuels, prototypés, expérimentaux ou opérables selon leur état réel.",
+    "regle_de_presentation": "Aucun module ne doit être présenté comme complet, stable ou déployé s’il ne l’est pas effectivement.",
+    "etat_possible": [
+      "conceptuel",
+      "prototype",
+      "alpha",
+      "beta",
+      "stable",
+      "deprecie"
+    ],
+    "etat_par_module": []
+  },
+  "frontieres_canoniques": [
+    {
+      "terme": "kOA",
+      "definition": "Mouvement large : vision, principes, culture, méthodes, gouvernance, récits, stratégie et orientation générale."
+    },
+    {
+      "terme": "UCKK",
+      "definition": "Branche éducative et cité d’apprentissage du mouvement kOA."
+    },
+    {
+      "terme": "kOA Digital Ecosystem",
+      "definition": "Infrastructure numérique opérable ou prototypable qui soutient le cycle Connaître → Choisir → Agir → Se souvenir."
+    },
+    {
+      "terme": "King Klown",
+      "definition": "Figure narrative, pédagogique et mobilisatrice; il n’est pas l’autorité suprême de l’écosystème."
+    }
+  ]
+}

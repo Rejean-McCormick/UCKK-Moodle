@@ -881,7 +881,7 @@ final class canon_item {
             $errors['shortname'] = self::string('canon:error:missingshortname', 'Le nom court canonique est requis.');
         }
 
-        if (core_text::strlen($this->shortname) > self::SHORTNAME_MAX_LENGTH) {
+        if (\core_text::strlen($this->shortname) > self::SHORTNAME_MAX_LENGTH) {
             $errors['shortname'] = self::string('canon:error:shortnametoolong', 'Le nom court canonique est trop long.');
         }
 
@@ -889,7 +889,7 @@ final class canon_item {
             $errors['title'] = self::string('canon:error:missingtitle', 'Le titre canonique est requis.');
         }
 
-        if (core_text::strlen($this->title) > self::TITLE_MAX_LENGTH) {
+        if (\core_text::strlen($this->title) > self::TITLE_MAX_LENGTH) {
             $errors['title'] = self::string('canon:error:titletoolong', 'Le titre canonique est trop long.');
         }
 
@@ -905,7 +905,7 @@ final class canon_item {
             $errors['visibility'] = self::string('canon:error:invalidvisibility', 'La visibilité canonique n’est pas valide.');
         }
 
-        if (core_text::strlen($this->sourcepath) > self::SOURCEPATH_MAX_LENGTH) {
+        if (\core_text::strlen($this->sourcepath) > self::SOURCEPATH_MAX_LENGTH) {
             $errors['sourcepath'] = self::string('canon:error:sourcepathtoolong', 'Le chemin source est trop long.');
         }
 
@@ -1021,11 +1021,11 @@ final class canon_item {
      * @return string
      */
     private static function normalise_shortname(string $shortname): string {
-        $shortname = trim(core_text::strtolower($shortname));
+        $shortname = trim(\core_text::strtolower($shortname));
         $shortname = str_replace([' ', '-', '/', '\\', ':'], '_', $shortname);
         $shortname = clean_param($shortname, PARAM_ALPHANUMEXT);
 
-        return core_text::substr($shortname, 0, self::SHORTNAME_MAX_LENGTH);
+        return \core_text::substr($shortname, 0, self::SHORTNAME_MAX_LENGTH);
     }
 
     /**
@@ -1037,7 +1037,7 @@ final class canon_item {
     private static function normalise_title(string $title): string {
         $title = trim(clean_param($title, PARAM_TEXT));
 
-        return core_text::substr($title, 0, self::TITLE_MAX_LENGTH);
+        return \core_text::substr($title, 0, self::TITLE_MAX_LENGTH);
     }
 
     /**
@@ -1047,7 +1047,7 @@ final class canon_item {
      * @return string
      */
     private static function normalise_itemtype(string $itemtype): string {
-        $itemtype = clean_param(core_text::strtolower(trim($itemtype)), PARAM_ALPHANUMEXT);
+        $itemtype = clean_param(\core_text::strtolower(trim($itemtype)), PARAM_ALPHANUMEXT);
 
         if ($itemtype === '') {
             return self::TYPE_PRINCIPLE;
@@ -1063,7 +1063,7 @@ final class canon_item {
      * @return string
      */
     private static function normalise_status(string $status): string {
-        $status = clean_param(core_text::strtolower(trim($status)), PARAM_ALPHANUMEXT);
+        $status = clean_param(\core_text::strtolower(trim($status)), PARAM_ALPHANUMEXT);
 
         if ($status === '') {
             return self::STATUS_DRAFT;
@@ -1079,7 +1079,7 @@ final class canon_item {
      * @return string
      */
     private static function normalise_visibility(string $visibility): string {
-        $visibility = clean_param(core_text::strtolower(trim($visibility)), PARAM_ALPHANUMEXT);
+        $visibility = clean_param(\core_text::strtolower(trim($visibility)), PARAM_ALPHANUMEXT);
 
         if ($visibility === '') {
             return self::VISIBILITY_INSTITUTION;
@@ -1097,7 +1097,7 @@ final class canon_item {
     private static function normalise_sourcepath(string $sourcepath): string {
         $sourcepath = trim(clean_param($sourcepath, PARAM_TEXT));
 
-        return core_text::substr($sourcepath, 0, self::SOURCEPATH_MAX_LENGTH);
+        return \core_text::substr($sourcepath, 0, self::SOURCEPATH_MAX_LENGTH);
     }
 
     /**
@@ -1110,7 +1110,7 @@ final class canon_item {
         $normalised = [];
 
         foreach ($tags as $tag) {
-            $tag = trim(core_text::strtolower((string)$tag));
+            $tag = trim(\core_text::strtolower((string)$tag));
             $tag = str_replace([' ', '-'], '_', $tag);
             $tag = clean_param($tag, PARAM_ALPHANUMEXT);
 
@@ -1240,7 +1240,7 @@ final class canon_item {
             return '';
         }
 
-        return core_text::strtotitle($key);
+        return \core_text::strtotitle($key);
     }
 
     /**

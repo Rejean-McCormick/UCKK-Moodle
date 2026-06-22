@@ -1,0 +1,740 @@
+<?php
+// This file is part of Moodle - https://moodle.org/.
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// any later version.
+
+/**
+ * Admin validation controller for UCKK faculty profiles.
+ *
+ * This page validates the Faculty JSON layer and its safe link to the Atlas
+ * layer. It is intentionally read-only:
+ *
+ * - it never accepts file paths from request parameters;
+ * - it resolves faculty profiles only through the manifest/registry layer;
+ * - it validates profiles through faculty_validator;
+ * - it can validate linked Atlas Voies through voie_validator;
+ * - it writes no Moodle courses, badges, grades, completions, enrolments or JSON files;
+ * - it logs only identifiers, counts, statuses and hashes.
+ *
+ * @package    local_uckk
+ * @copyright  2026 Univers-Cité King Klown
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+declare(strict_types=1);
+
+require_once(__DIR__ . '/../../config.php');
+
+defined('MOODLE_INTERNAL') || die();
+
+global $OUTPUT, $PAGE, $SITE;
+
+use local_uckk\local\atlas\voie_normalizer;
+use local_uckk\local\atlas\voie_repository;
+use local_uckk\local\atlas\voie_validator;
+use local_uckk\local\faculty\faculty_normalizer;
+use local_uckk\local\faculty\faculty_registry;
+use local_uckk\local\faculty\faculty_repository;
+use local_uckk\local\faculty\faculty_validator;
+
+/**
+ * Validate a requested slug without treating it as a filesystem path.
+ *
+ * @param string $slug Raw slug or "all".
+ * @return string Safe slug or "all".
+ */
+function local_uckk_faculty_validate_safe_slug(string $slug): string {
+    $slug = trim(core_text::strtolower($slug));
+
+    if ($slug === '' || $slug === 'all') {
+        return 'all';
+    }
+
+    if (!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $slug)) {
+        throw new moodle_exception('invalidparameter', 'error', '', 'faculty');
+    }
+
+    return $slug;
+}
+
+/**
+ * Check whether a class has an instance method.
+ *
+ * @param object $object Object.
+ * @param string $method Method name.
+ * @return bool
+ */
+function local_uckk_faculty_validate_has_method(object $object, string $method): bool {
+    return method_exists($object, $method) && is_callable([$object, $method]);
+}
+
+/**
+ * Call the first available method on an object.
+ *
+ * This keeps the admin controller thin while allowing repository method names
+ * to remain owned by the repository classes.
+ *
+ * @param object $object Object.
+ * @param array<int, string> $methods Candidate method names.
+ * @param array<int, mixed> $arguments Arguments.
+ * @return mixed
+ */
+function local_uckk_faculty_validate_call_first(object $object, array $methods, array $arguments = []) {
+    foreach ($methods as $method) {
+        if (local_uckk_faculty_validate_has_method($object, $method)) {
+            return $object->{$method}(...$arguments);
+        }
+    }
+
+    throw new coding_exception(
+        'No supported method found on ' . get_class($object) . ': ' . implode(', ', $methods)
+    );
+}
+
+/**
+ * Call the first available static method on a class.
+ *
+ * @param class-string $class Class name.
+ * @param array<int, string> $methods Candidate method names.
+ * @param array<int, mixed> $arguments Arguments.
+ * @return mixed
+ */
+function local_uckk_faculty_validate_call_static_first(string $class, array $methods, array $arguments = []) {
+    foreach ($methods as $method) {
+        if (method_exists($class, $method) && is_callable([$class, $method])) {
+            return $class::{$method}(...$arguments);
+        }
+    }
+
+    throw new coding_exception(
+        'No supported static method found on ' . $class . ': ' . implode(', ', $methods)
+    );
+}
+
+/**
+ * Convert a validation result object or array to a safe report fragment.
+ *
+ * The returned structure intentionally omits raw JSON payloads and long source
+ * documents.
+ *
+ * @param mixed $result Validator result.
+ * @return array<string, mixed>
+ */
+function local_uckk_faculty_validate_result_to_array($result): array {
+    if (is_array($result)) {
+        return [
+            'status' => (string)($result['status'] ?? 'unknown'),
+            'errors' => array_values($result['errors'] ?? []),
+            'warnings' => array_values($result['warnings'] ?? []),
+            'messages' => array_values($result['messages'] ?? []),
+            'summary' => is_array($result['summary'] ?? null) ? $result['summary'] : [],
+            'hash' => (string)($result['hash'] ?? $result['source_hash'] ?? ''),
+        ];
+    }
+
+    if (!is_object($result)) {
+        return [
+            'status' => 'unknown',
+            'errors' => [],
+            'warnings' => [],
+            'messages' => [],
+            'summary' => [],
+            'hash' => '',
+        ];
+    }
+
+    $errors = [];
+    $warnings = [];
+    $messages = [];
+    $summary = [];
+    $hash = '';
+
+    if (method_exists($result, 'get_errors')) {
+        $errors = (array)$result->get_errors();
+    } else if (method_exists($result, 'errors')) {
+        $errors = (array)$result->errors();
+    } else if (property_exists($result, 'errors')) {
+        $errors = (array)$result->errors;
+    }
+
+    if (method_exists($result, 'get_warnings')) {
+        $warnings = (array)$result->get_warnings();
+    } else if (method_exists($result, 'warnings')) {
+        $warnings = (array)$result->warnings();
+    } else if (property_exists($result, 'warnings')) {
+        $warnings = (array)$result->warnings;
+    }
+
+    if (method_exists($result, 'get_messages')) {
+        $messages = (array)$result->get_messages();
+    } else if (method_exists($result, 'messages')) {
+        $messages = (array)$result->messages();
+    } else if (property_exists($result, 'messages')) {
+        $messages = (array)$result->messages;
+    }
+
+    if (method_exists($result, 'get_summary')) {
+        $summary = (array)$result->get_summary();
+    } else if (property_exists($result, 'summary')) {
+        $summary = (array)$result->summary;
+    }
+
+    if (method_exists($result, 'get_hash')) {
+        $hash = (string)$result->get_hash();
+    } else if (property_exists($result, 'hash')) {
+        $hash = (string)$result->hash;
+    } else if (property_exists($result, 'sourcehash')) {
+        $hash = (string)$result->sourcehash;
+    }
+
+    $status = 'unknown';
+
+    if (method_exists($result, 'get_status')) {
+        $status = (string)$result->get_status();
+    } else if (property_exists($result, 'status')) {
+        $status = (string)$result->status;
+    } else if ($errors !== []) {
+        $status = 'failed';
+    } else if ($warnings !== []) {
+        $status = 'warning';
+    } else {
+        $status = 'completed';
+    }
+
+    return [
+        'status' => $status,
+        'errors' => array_values($errors),
+        'warnings' => array_values($warnings),
+        'messages' => array_values($messages),
+        'summary' => $summary,
+        'hash' => $hash,
+    ];
+}
+
+/**
+ * Sanitise a validation message for HTML output and logging.
+ *
+ * @param mixed $message Message.
+ * @return string
+ */
+function local_uckk_faculty_validate_message_to_text($message): string {
+    if (is_scalar($message) || $message === null) {
+        return trim((string)$message);
+    }
+
+    if (is_object($message)) {
+        if (property_exists($message, 'message')) {
+            return trim((string)$message->message);
+        }
+
+        if (method_exists($message, '__toString')) {
+            return trim((string)$message);
+        }
+    }
+
+    if (is_array($message)) {
+        if (isset($message['message'])) {
+            return trim((string)$message['message']);
+        }
+
+        if (isset($message['code'])) {
+            return trim((string)$message['code']);
+        }
+    }
+
+    return 'Validation message';
+}
+
+/**
+ * Compute a stable hash for a normalised source payload.
+ *
+ * @param mixed $data Source data.
+ * @return string
+ */
+function local_uckk_faculty_validate_hash($data): string {
+    $json = json_encode(
+        $data,
+        JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION
+    );
+
+    if ($json === false) {
+        return '';
+    }
+
+    return hash('sha256', $json);
+}
+
+/**
+ * Resolve all manifest items for validation.
+ *
+ * @param string $requestedslug Requested slug or all.
+ * @return array<int, array<string, mixed>>
+ */
+function local_uckk_faculty_validate_resolve_items(string $requestedslug): array {
+    if ($requestedslug !== 'all') {
+        if (!faculty_registry::exists_slug($requestedslug)) {
+            throw new moodle_exception('invalidparameter', 'error', '', 'faculty');
+        }
+
+        return [
+            faculty_registry::get_by_slug($requestedslug),
+        ];
+    }
+
+    $items = local_uckk_faculty_validate_call_static_first(
+        faculty_registry::class,
+        ['get_all', 'all', 'items', 'list_all']
+    );
+
+    if (!is_array($items)) {
+        throw new coding_exception('Faculty registry did not return an array of manifest items.');
+    }
+
+    return array_values($items);
+}
+
+/**
+ * Load a faculty profile by manifest item.
+ *
+ * @param faculty_repository $repository Faculty repository.
+ * @param array<string, mixed> $item Manifest item.
+ * @return array<string, mixed>
+ */
+function local_uckk_faculty_validate_load_profile(faculty_repository $repository, array $item): array {
+    $slug = (string)($item['slug'] ?? '');
+
+    $profile = local_uckk_faculty_validate_call_first(
+        $repository,
+        ['get_by_slug', 'load_by_slug', 'get', 'load'],
+        [$slug]
+    );
+
+    if (!is_array($profile)) {
+        throw new coding_exception('Faculty repository did not return an array profile for slug: ' . $slug);
+    }
+
+    return $profile;
+}
+
+/**
+ * Load an Atlas Voie from a faculty profile.
+ *
+ * @param voie_repository $repository Atlas repository.
+ * @param array<string, mixed> $profile Faculty profile.
+ * @return array<string, mixed>
+ */
+function local_uckk_faculty_validate_load_voie(voie_repository $repository, array $profile): array {
+    $voieid = (string)($profile['voie_id'] ?? '');
+
+    $voie = local_uckk_faculty_validate_call_first(
+        $repository,
+        ['get_by_voie_id', 'load_by_voie_id', 'get_by_id', 'load_by_id', 'get', 'load'],
+        [$voieid]
+    );
+
+    if (!is_array($voie)) {
+        throw new coding_exception('Atlas repository did not return an array Voie for voie_id: ' . $voieid);
+    }
+
+    return $voie;
+}
+
+/**
+ * Validate a single faculty profile and optionally its linked Atlas Voie.
+ *
+ * @param array<string, mixed> $item Manifest item.
+ * @param faculty_repository $facultyrepository Faculty repository.
+ * @param faculty_validator $facultyvalidator Faculty validator.
+ * @param faculty_normalizer $facultynormalizer Faculty normalizer.
+ * @param voie_repository $voierepository Atlas repository.
+ * @param voie_validator $voievalidator Atlas validator.
+ * @param voie_normalizer $voienormalizer Atlas normalizer.
+ * @param bool $includeatlas Whether to validate linked Atlas Voie.
+ * @return array<string, mixed>
+ */
+function local_uckk_faculty_validate_item(
+    array $item,
+    faculty_repository $facultyrepository,
+    faculty_validator $facultyvalidator,
+    faculty_normalizer $facultynormalizer,
+    voie_repository $voierepository,
+    voie_validator $voievalidator,
+    voie_normalizer $voienormalizer,
+    bool $includeatlas
+): array {
+    $slug = (string)($item['slug'] ?? '');
+    $facultyid = (string)($item['faculty_id'] ?? '');
+    $voieid = (string)($item['voie_id'] ?? '');
+
+    $report = [
+        'faculty_id' => $facultyid,
+        'voie_id' => $voieid,
+        'slug' => $slug,
+        'status' => 'unknown',
+        'faculty_status' => 'unknown',
+        'atlas_status' => $includeatlas ? 'unknown' : 'skipped',
+        'faculty_hash' => '',
+        'atlas_hash' => '',
+        'errors' => [],
+        'warnings' => [],
+        'messages' => [],
+    ];
+
+    try {
+        $profile = local_uckk_faculty_validate_load_profile($facultyrepository, $item);
+
+        $facultyresult = local_uckk_faculty_validate_call_first(
+            $facultyvalidator,
+            ['validate', 'validate_profile'],
+            [$profile]
+        );
+
+        $facultyresult = local_uckk_faculty_validate_result_to_array($facultyresult);
+
+        $normalprofile = local_uckk_faculty_validate_call_first(
+            $facultynormalizer,
+            ['normalize', 'normalise'],
+            [$profile]
+        );
+
+        $report['faculty_status'] = $facultyresult['status'];
+        $report['faculty_hash'] = $facultyresult['hash'] !== ''
+            ? $facultyresult['hash']
+            : local_uckk_faculty_validate_hash($normalprofile);
+        $report['errors'] = array_merge($report['errors'], $facultyresult['errors']);
+        $report['warnings'] = array_merge($report['warnings'], $facultyresult['warnings']);
+        $report['messages'] = array_merge($report['messages'], $facultyresult['messages']);
+
+        if ($includeatlas) {
+            $voie = local_uckk_faculty_validate_load_voie($voierepository, $profile);
+
+            $voieresult = local_uckk_faculty_validate_call_first(
+                $voievalidator,
+                ['validate', 'validate_voie'],
+                [$voie]
+            );
+
+            $voieresult = local_uckk_faculty_validate_result_to_array($voieresult);
+
+            $normalvoie = local_uckk_faculty_validate_call_first(
+                $voienormalizer,
+                ['normalize', 'normalise'],
+                [$voie]
+            );
+
+            $report['atlas_status'] = $voieresult['status'];
+            $report['atlas_hash'] = $voieresult['hash'] !== ''
+                ? $voieresult['hash']
+                : local_uckk_faculty_validate_hash($normalvoie);
+            $report['errors'] = array_merge($report['errors'], $voieresult['errors']);
+            $report['warnings'] = array_merge($report['warnings'], $voieresult['warnings']);
+            $report['messages'] = array_merge($report['messages'], $voieresult['messages']);
+
+            $profilevoieid = (string)($profile['voie_id'] ?? '');
+            $atlasvoieid = (string)($voie['voie_id'] ?? '');
+
+            if ($profilevoieid === '' || $atlasvoieid === '' || $profilevoieid !== $atlasvoieid) {
+                $report['errors'][] = 'Faculty profile voie_id does not match linked Atlas voie_id.';
+            }
+        }
+
+        if ($report['errors'] !== []) {
+            $report['status'] = 'failed';
+        } else if ($report['warnings'] !== []) {
+            $report['status'] = 'warning';
+        } else {
+            $report['status'] = 'completed';
+        }
+    } catch (Throwable $exception) {
+        $report['status'] = 'failed';
+        $report['errors'][] = $exception->getMessage();
+    }
+
+    return $report;
+}
+
+/**
+ * Trigger faculty validation event without logging raw JSON.
+ *
+ * @param context_system $context System context.
+ * @param array<string, mixed> $summary Report summary.
+ */
+function local_uckk_faculty_validate_trigger_event(context_system $context, array $summary): void {
+    $eventclass = '\\local_uckk\\event\\faculty_profile_validated';
+
+    if (!class_exists($eventclass)) {
+        return;
+    }
+
+    $event = $eventclass::create([
+        'context' => $context,
+        'other' => [
+            'mode' => 'validate',
+            'faculty_count' => (int)($summary['faculties_total'] ?? 0),
+            'completed_count' => (int)($summary['completed'] ?? 0),
+            'warning_count' => (int)($summary['warnings'] ?? 0),
+            'error_count' => (int)($summary['errors'] ?? 0),
+            'combined_hash' => (string)($summary['combined_hash'] ?? ''),
+        ],
+    ]);
+
+    $event->trigger();
+}
+
+/**
+ * Render a status badge.
+ *
+ * @param string $status Status.
+ * @return string HTML.
+ */
+function local_uckk_faculty_validate_status_badge(string $status): string {
+    $class = 'badge-secondary';
+
+    if ($status === 'completed') {
+        $class = 'badge-success';
+    } else if ($status === 'warning') {
+        $class = 'badge-warning';
+    } else if ($status === 'failed') {
+        $class = 'badge-danger';
+    } else if ($status === 'skipped') {
+        $class = 'badge-light';
+    }
+
+    return html_writer::span(s($status), 'badge ' . $class);
+}
+
+/**
+ * Render validation messages.
+ *
+ * @param array<int, mixed> $messages Messages.
+ * @param string $class CSS class.
+ * @return string HTML.
+ */
+function local_uckk_faculty_validate_render_messages(array $messages, string $class): string {
+    if ($messages === []) {
+        return html_writer::span('—', 'text-muted');
+    }
+
+    $items = [];
+
+    foreach ($messages as $message) {
+        $items[] = html_writer::tag('li', s(local_uckk_faculty_validate_message_to_text($message)));
+    }
+
+    return html_writer::tag('ul', implode('', $items), ['class' => $class]);
+}
+
+/**
+ * Render the HTML validation report.
+ *
+ * @param array<string, mixed> $report Validation report.
+ * @param moodle_url $url Page URL.
+ * @return string HTML.
+ */
+function local_uckk_faculty_validate_render_report(array $report, moodle_url $url): string {
+    $html = '';
+
+    $summary = $report['summary'];
+
+    $html .= $OUTPUT = '';
+    $html .= html_writer::tag('h2', 'Faculty JSON validation');
+    $html .= html_writer::tag(
+        'p',
+        'Read-only validation of Faculty JSON profiles and their linked Atlas Voies. '
+            . 'No Moodle courses, badges, grades, completions, enrolments or JSON files are modified.'
+    );
+
+    $html .= html_writer::start_div('mb-3');
+    $html .= html_writer::link(
+        new moodle_url($url, ['faculty' => 'all', 'includeatlas' => 1]),
+        'Validate all with Atlas',
+        ['class' => 'btn btn-primary mr-2']
+    );
+    $html .= html_writer::link(
+        new moodle_url($url, ['faculty' => 'all', 'includeatlas' => 0]),
+        'Validate Faculty only',
+        ['class' => 'btn btn-secondary']
+    );
+    $html .= html_writer::end_div();
+
+    $summaryrows = [
+        'Status' => local_uckk_faculty_validate_status_badge((string)$summary['status']),
+        'Faculties' => (string)$summary['faculties_total'],
+        'Completed' => (string)$summary['completed'],
+        'Warnings' => (string)$summary['warnings'],
+        'Errors' => (string)$summary['errors'],
+        'Combined hash' => html_writer::tag('code', s((string)$summary['combined_hash'])),
+    ];
+
+    $summarytable = new html_table();
+    $summarytable->attributes['class'] = 'generaltable';
+    $summarytable->head = ['Metric', 'Value'];
+    $summarytable->data = [];
+
+    foreach ($summaryrows as $label => $value) {
+        $summarytable->data[] = [$label, $value];
+    }
+
+    $html .= html_writer::tag('h3', 'Summary');
+    $html .= html_writer::table($summarytable);
+
+    $itemtable = new html_table();
+    $itemtable->attributes['class'] = 'generaltable';
+    $itemtable->head = [
+        'Faculty',
+        'Voie',
+        'Slug',
+        'Status',
+        'Faculty',
+        'Atlas',
+        'Errors',
+        'Warnings',
+        'Hashes',
+    ];
+    $itemtable->data = [];
+
+    foreach ($report['items'] as $item) {
+        $itemtable->data[] = [
+            html_writer::tag('code', s((string)$item['faculty_id'])),
+            html_writer::tag('code', s((string)$item['voie_id'])),
+            html_writer::tag('code', s((string)$item['slug'])),
+            local_uckk_faculty_validate_status_badge((string)$item['status']),
+            local_uckk_faculty_validate_status_badge((string)$item['faculty_status']),
+            local_uckk_faculty_validate_status_badge((string)$item['atlas_status']),
+            local_uckk_faculty_validate_render_messages($item['errors'], 'text-danger'),
+            local_uckk_faculty_validate_render_messages($item['warnings'], 'text-warning'),
+            html_writer::div('Faculty: ' . html_writer::tag('code', s((string)$item['faculty_hash'])))
+                . html_writer::div('Atlas: ' . html_writer::tag('code', s((string)$item['atlas_hash']))),
+        ];
+    }
+
+    $html .= html_writer::tag('h3', 'Items');
+    $html .= html_writer::table($itemtable);
+
+    return $html;
+}
+
+/**
+ * Emit a JSON response without raw source payloads.
+ *
+ * @param array<string, mixed> $report Report.
+ * @return never
+ */
+function local_uckk_faculty_validate_emit_json(array $report): void {
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    exit;
+}
+
+$context = context_system::instance();
+$url = new moodle_url('/local/uckk/faculty_validate.php');
+
+require_login();
+require_capability('local/uckk:managefacultyprofiles', $context);
+
+$requestedfaculty = local_uckk_faculty_validate_safe_slug(
+    optional_param('faculty', 'all', PARAM_ALPHANUMEXT)
+);
+$includeatlas = optional_param('includeatlas', 1, PARAM_BOOL);
+$format = optional_param('format', 'html', PARAM_ALPHA);
+
+if ($includeatlas) {
+    require_capability('local/uckk:validateatlasjson', $context);
+}
+
+if (!in_array($format, ['html', 'json'], true)) {
+    throw new moodle_exception('invalidparameter', 'error', '', 'format');
+}
+
+$PAGE->set_context($context);
+$PAGE->set_url($url, [
+    'faculty' => $requestedfaculty,
+    'includeatlas' => $includeatlas ? 1 : 0,
+    'format' => $format,
+]);
+$PAGE->set_pagelayout('admin');
+$PAGE->set_title('UCKK faculty validation');
+$PAGE->set_heading(format_string($SITE->fullname));
+
+$facultyrepository = new faculty_repository();
+$facultyvalidator = new faculty_validator();
+$facultynormalizer = new faculty_normalizer();
+
+$voierepository = new voie_repository();
+$voievalidator = new voie_validator();
+$voienormalizer = new voie_normalizer();
+
+$items = local_uckk_faculty_validate_resolve_items($requestedfaculty);
+$reports = [];
+
+foreach ($items as $item) {
+    if (!is_array($item)) {
+        continue;
+    }
+
+    $reports[] = local_uckk_faculty_validate_item(
+        $item,
+        $facultyrepository,
+        $facultyvalidator,
+        $facultynormalizer,
+        $voierepository,
+        $voievalidator,
+        $voienormalizer,
+        (bool)$includeatlas
+    );
+}
+
+$completed = 0;
+$warningcount = 0;
+$errorcount = 0;
+$hashparts = [];
+
+foreach ($reports as $itemreport) {
+    if ($itemreport['status'] === 'completed') {
+        $completed++;
+    }
+
+    $warningcount += count($itemreport['warnings']);
+    $errorcount += count($itemreport['errors']);
+
+    if ($itemreport['faculty_hash'] !== '') {
+        $hashparts[] = $itemreport['faculty_hash'];
+    }
+
+    if ($itemreport['atlas_hash'] !== '') {
+        $hashparts[] = $itemreport['atlas_hash'];
+    }
+}
+
+$summary = [
+    'status' => $errorcount > 0 ? 'failed' : ($warningcount > 0 ? 'warning' : 'completed'),
+    'faculties_total' => count($reports),
+    'completed' => $completed,
+    'warnings' => $warningcount,
+    'errors' => $errorcount,
+    'combined_hash' => hash('sha256', implode(':', $hashparts)),
+];
+
+$report = [
+    'schema_version' => 'UCKK-FACULTY-VALIDATION-REPORT-0.1',
+    'component' => 'local_uckk',
+    'mode' => 'validate',
+    'faculty' => $requestedfaculty,
+    'include_atlas' => (bool)$includeatlas,
+    'generated_at' => gmdate('c'),
+    'summary' => $summary,
+    'items' => $reports,
+];
+
+local_uckk_faculty_validate_trigger_event($context, $summary);
+
+if ($format === 'json') {
+    local_uckk_faculty_validate_emit_json($report);
+}
+
+echo $OUTPUT->header();
+echo local_uckk_faculty_validate_render_report($report, $url);
+echo $OUTPUT->footer();

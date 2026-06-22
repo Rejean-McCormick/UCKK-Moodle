@@ -1,0 +1,206 @@
+{
+  "schema_version": "UCKK-FACULTY-0.1",
+  "faculty_id": "faculty_intervention_sociale_systemes_humains",
+  "voie_id": "voie_intervention_sociale_systemes_humains",
+  "slug": "intervention-sociale-systemes-humains",
+  "status": "published",
+  "visibility": "public",
+  "source_atlas": {
+    "file": "voie_intervention_sociale_systemes_humains.json",
+    "schema_version_expected": "UCKK-ATLAS-0.2-draft",
+    "sync_mode": "read_only"
+  },
+  "moodle": {
+    "category_id": null,
+    "category_idnumber": "UCKK-IS",
+    "course_prefix": "IS",
+    "public_course_listing": true,
+    "enrolment_visibility": "public_info_only",
+    "hub_course_idnumber": "IS-HUB"
+  },
+  "identity": {
+    "eyebrow": "Voie fondatrice UCKK",
+    "name": "Voie de l’Intervention sociale et des systèmes humains",
+    "short_name": "Intervention sociale",
+    "title_symbolique": "Gardien de la dignité située",
+    "domain": "Lien humain",
+    "level": "Puissance opératoire",
+    "faculty_role": "Voie consacrée à la lecture des situations humaines complexes, à la protection de la dignité, à la réparation des liens et à l’amélioration prudente des systèmes d’aide.",
+    "one_sentence": "Lire les personnes, familles, groupes et institutions dans leurs contextes relationnels, matériels, symboliques et systémiques afin d’agir sans domination ni substitution aux professions réglementées."
+  },
+  "seo": {
+    "title": "Voie de l’Intervention sociale et des systèmes humains — UCKK",
+    "description": "La Voie de l’Intervention sociale et des systèmes humains forme à la lecture systémique des situations humaines, à la protection de la dignité, à la réparation des liens et à l’amélioration responsable des systèmes d’aide.",
+    "keywords": [
+      "UCKK",
+      "intervention sociale",
+      "systèmes humains",
+      "dignité",
+      "relation éthique",
+      "vulnérabilité",
+      "réparation des liens",
+      "aide",
+      "systèmes d’aide",
+      "cartographie systémique"
+    ]
+  },
+  "hero": {
+    "title": "Voie de l’Intervention sociale et des systèmes humains",
+    "subtitle": "Lire les situations humaines sans réduire les personnes à leurs problèmes.",
+    "summary": "Cette faculté apprend à comprendre les humains dans leurs systèmes de vie, d’aide, de contrainte et de sens, afin de protéger la dignité, réparer les liens et produire des réponses responsables, documentées et contestables.",
+    "primary_cta": {
+      "label": "Explorer les cours",
+      "target": "#cours"
+    },
+    "secondary_cta": {
+      "label": "Voir l’Atlas des Voies",
+      "target": "/local/uckk/programs.php"
+    }
+  },
+  "navigation": [
+    {
+      "label": "Présentation",
+      "target": "#presentation"
+    },
+    {
+      "label": "Éthique de l’intervention",
+      "target": "#ethique-intervention"
+    },
+    {
+      "label": "Programme",
+      "target": "#programme"
+    },
+    {
+      "label": "Cours",
+      "target": "#cours"
+    },
+    {
+      "label": "Projet final",
+      "target": "#projet-final"
+    },
+    {
+      "label": "Annonces",
+      "target": "#annonces"
+    }
+  ],
+  "sections": [
+    {
+      "id": "presentation",
+      "type": "text",
+      "title": "Une faculté pour lire les humains dans leurs systèmes",
+      "body": "La Voie de l’Intervention sociale et des systèmes humains forme à comprendre une personne, une famille, un groupe ou une communauté dans ses contextes relationnels, matériels, institutionnels et symboliques. Elle vise des réponses prudentes, traçables et respectueuses de la dignité."
+    },
+    {
+      "id": "ethique-intervention",
+      "type": "principle",
+      "title": "Principe d’intervention non dominatrice",
+      "body": "Toute intervention doit respecter le consentement, la confidentialité, le rythme des personnes, les limites professionnelles et la distinction entre soutien, accompagnement, diagnostic réglementé et décision institutionnelle."
+    },
+    {
+      "id": "usage-public",
+      "type": "notice",
+      "title": "Usage public de cette faculté",
+      "body": "Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité."
+    }
+  ],
+  "atlas_projection": {
+    "show_definition_courte": true,
+    "show_angle_fondamental": true,
+    "show_competence_centrale": true,
+    "show_seuils_progression": true,
+    "show_courses": true,
+    "show_course_codes": true,
+    "show_concept_maitre": true,
+    "show_concepts_associes": false,
+    "show_artefacts": true,
+    "show_criteres_passage": false,
+    "show_projet_final": true,
+    "show_limites_ethiques": true,
+    "show_relations_intervoies": true,
+    "show_tags": false
+  },
+  "dynamic_blocks": [
+    {
+      "id": "annonces",
+      "type": "announcements",
+      "title": "Annonces de la faculté",
+      "source": {
+        "provider": "moodle_forum",
+        "course_idnumber": "IS-HUB",
+        "forum_name": "Annonces"
+      },
+      "limit": 5,
+      "visibility": "public",
+      "empty_state": "Aucune annonce publique pour le moment."
+    },
+    {
+      "id": "cours-moodle",
+      "type": "moodle_course_list",
+      "title": "Cours associés",
+      "source": {
+        "provider": "moodle_category",
+        "category_idnumber": "UCKK-IS"
+      },
+      "limit": 20,
+      "visibility": "public",
+      "empty_state": "Les cours Moodle associés seront affichés ici lorsqu’ils seront disponibles."
+    }
+  ],
+  "featured_blocks": [
+    {
+      "type": "principle",
+      "title": "Principe central",
+      "body": "Une situation humaine ne se réduit jamais à un symptôme, un dossier, un indicateur ou une catégorie administrative."
+    },
+    {
+      "type": "ethics",
+      "title": "Garde-fou éthique",
+      "body": "Ne pas se substituer aux professions réglementées, ne pas forcer la parole, ne pas exposer les personnes vulnérables et ne pas transformer l’aide en contrôle."
+    },
+    {
+      "type": "notice",
+      "title": "Reconnaissance interne",
+      "body": "Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Cette Voie forme-t-elle à une profession réglementée?",
+      "answer": "Non. Elle forme à une lecture systémique, éthique et institutionnelle des situations humaines. Elle ne remplace pas les formations, autorisations ou responsabilités propres aux professions réglementées."
+    },
+    {
+      "question": "Cette Voie traite-t-elle de vulnérabilité, exclusion, trauma et pauvreté?",
+      "answer": "Oui. Elle aborde ces réalités comme des situations situées dans des relations, institutions, contraintes matérielles, récits et systèmes d’aide."
+    },
+    {
+      "question": "Est-ce un diplôme reconnu?",
+      "answer": "Non. Il s’agit d’une reconnaissance interne UCKK, sauf reconnaissance officielle future."
+    }
+  ],
+  "contact": {
+    "label": "Contact",
+    "body": "Pour toute question sur cette Voie, consultez les annonces publiques ou les espaces Moodle associés.",
+    "email": "",
+    "cta": {
+      "label": "Voir les annonces",
+      "target": "#annonces"
+    }
+  },
+  "governance": {
+    "owner": "local_uckk",
+    "editorial_status": "approved",
+    "last_reviewed": null,
+    "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
+    "public_claims_guardrails": [
+      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
+      "Ne pas afficher de progression, notes ou données privées d’étudiants.",
+      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
+      "Ne pas se substituer aux professions réglementées de l’intervention sociale, de la psychologie, de la santé, du droit ou de la protection.",
+      "Ne pas publier de cas, récits, données ou situations permettant d’identifier une personne vulnérable."
+    ]
+  },
+  "cache": {
+    "enabled": true,
+    "ttl_seconds": 3600
+  }
+}
