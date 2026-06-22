@@ -1,42 +1,45 @@
 {{!
-    This file is part of UCKK-Moodle.
+This file is part of UCKK-Moodle.
 
-    Moodle is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    any later version.
+```
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
 
-    UCKK-Moodle adapts Moodle as the pedagogical campus of the
-    Univers-Cité King Klown.
+UCKK-Moodle adapts Moodle as the pedagogical campus of the
+Univers-Cité King Klown.
 
-    @template local_uckk/faculty_hero
+@template local_uckk/faculty_hero
 
-    Public faculty hero partial.
+Public Voie hero partial.
 
-    Context:
-    {
-        "eyebrow": "",
-        "title": "",
-        "subtitle": "",
-        "summary": "",
-        "primary_cta": {
-            "label": "",
-            "target": ""
-        },
-        "secondary_cta": {
-            "label": "",
-            "target": ""
-        }
+Context:
+{
+    "eyebrow": "",
+    "title": "",
+    "subtitle": "",
+    "summary": "",
+    "primary_cta": {
+        "label": "",
+        "target": ""
+    },
+    "secondary_cta": {
+        "label": "",
+        "target": ""
     }
+}
 
-    This template must not:
-    - query Moodle data;
-    - decide permissions;
-    - create fallback content;
-    - expose private user data;
-    - expose completion, grades, notes, participants, enrolments, or submissions;
-    - present UCKK internal recognitions as public accredited degrees;
-    - introduce undocumented variables.
+This template must not:
+- query Moodle data;
+- decide permissions;
+- create fallback content;
+- expose private user data;
+- expose completion, grades, notes, participants, enrolments, or submissions;
+- present UCKK internal recognitions as public accredited degrees;
+- introduce undocumented variables.
+```
+
 }}
 
 <header
@@ -50,48 +53,64 @@
             </p>
         {{/eyebrow}}
 
-        {{#title}}
-            <h1 class="local-uckk-faculty-hero__title local-uckk-public-title">
-                {{title}}
-            </h1>
-        {{/title}}
+```
+    {{#title}}
+        <h1 class="local-uckk-faculty-hero__title local-uckk-public-title">
+            {{title}}
+        </h1>
+    {{/title}}
 
-        {{#subtitle}}
-            <p class="local-uckk-faculty-hero__subtitle local-uckk-public-subtitle">
-                {{subtitle}}
-            </p>
-        {{/subtitle}}
+    {{#subtitle}}
+        <p class="local-uckk-faculty-hero__subtitle local-uckk-public-subtitle">
+            {{subtitle}}
+        </p>
+    {{/subtitle}}
 
-        {{#summary}}
-            <div class="local-uckk-faculty-hero__summary local-uckk-public-summary">
-                {{summary}}
+    {{#summary}}
+        <div class="local-uckk-faculty-hero__summary local-uckk-public-summary">
+            {{summary}}
+        </div>
+    {{/summary}}
+
+    {{#primary_cta.target}}
+        {{#primary_cta.label}}
+            <div class="local-uckk-faculty-hero__actions">
+                <a
+                    class="local-uckk-faculty-hero__action local-uckk-faculty-hero__action--primary"
+                    href="{{primary_cta.target}}"
+                >
+                    {{primary_cta.label}}
+                </a>
+
+                {{#secondary_cta.target}}
+                    {{#secondary_cta.label}}
+                        <a
+                            class="local-uckk-faculty-hero__action local-uckk-faculty-hero__action--secondary"
+                            href="{{secondary_cta.target}}"
+                        >
+                            {{secondary_cta.label}}
+                        </a>
+                    {{/secondary_cta.label}}
+                {{/secondary_cta.target}}
             </div>
-        {{/summary}}
+        {{/primary_cta.label}}
+    {{/primary_cta.target}}
 
-        <div class="local-uckk-faculty-hero__actions">
-            {{#primary_cta.target}}
-                {{#primary_cta.label}}
-                    <a
-                        class="local-uckk-faculty-hero__action local-uckk-faculty-hero__action--primary"
-                        href="{{primary_cta.target}}"
-                    >
-                        {{primary_cta.label}}
-                    </a>
-                {{/primary_cta.label}}
-            {{/primary_cta.target}}
-
-            {{#secondary_cta.target}}
-                {{#secondary_cta.label}}
+    {{^primary_cta.target}}
+        {{#secondary_cta.target}}
+            {{#secondary_cta.label}}
+                <div class="local-uckk-faculty-hero__actions">
                     <a
                         class="local-uckk-faculty-hero__action local-uckk-faculty-hero__action--secondary"
                         href="{{secondary_cta.target}}"
                     >
                         {{secondary_cta.label}}
                     </a>
-                {{/secondary_cta.label}}
-            {{/secondary_cta.target}}
-        </div>
-    </div>
+                </div>
+            {{/secondary_cta.label}}
+        {{/secondary_cta.target}}
+    {{/primary_cta.target}}
+</div>
+```
 
-    <div class="local-uckk-faculty-hero__boundary local-uckk-public-boundary" aria-hidden="true"></div>
 </header>

@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 
-$skipurl = rtrim($CFG->wwwroot, '/') . '/local/uckk/courses.php';
+$skipurl = rtrim($CFG->wwwroot, '/') . '/local/uckk/index.php';
 
 $bodyclasses = [
     'theme-uckk',

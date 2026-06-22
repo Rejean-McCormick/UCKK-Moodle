@@ -578,6 +578,18 @@ body:has(.local-uckk-public-page) [role="main"] {
     color: var(--uckk-ink-soft);
 }
 
+/*
+ * Empty public boundary guard.
+ *
+ * Some older templates may still render the public boundary container without
+ * text content. The styled container must not reserve visual space when it is
+ * empty.
+ */
+.local-uckk-public-boundary:empty,
+.local-uckk-faculty-hero__boundary:empty {
+    display: none;
+}
+
 /* ==========================================================================
    Main / aside grid
    ========================================================================== */
@@ -2998,4 +3010,3 @@ body:has(.local-uckk-public-page) [role="main"] {
         box-shadow: none;
     }
 }
-
