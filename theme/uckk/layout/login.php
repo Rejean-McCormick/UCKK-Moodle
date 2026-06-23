@@ -14,7 +14,11 @@
  *
  * This layout owns only the visual shell around Moodle's standard login form.
  * It does not override the core login form, guest form, authentication logic,
- * session handling, token handling, redirects or permissions.
+ * session handling, token handling or permissions.
+ *
+ * If a real authenticated user reaches the login page, the layout sends them
+ * back to the public UCKK accueil unless Moodle explicitly requested a new
+ * login attempt through loginagain=1.
  *
  * The left panel is the target for theme_uckk/login_background, which selects
  * the configured day / between / night login image. The right panel renders
@@ -27,9 +31,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-global $CFG;
+$homeurl = new moodle_url('/local/uckk/index.php');
+$loginagain = optional_param('loginagain', 0, PARAM_BOOL);
 
-$skipurl = rtrim($CFG->wwwroot, '/') . '/local/uckk/index.php';
+if (!$loginagain && isloggedin() && !isguestuser()) {
+    redirect($homeurl);
+}
+
+$skipurl = $homeurl->out(false);
 
 $bodyclasses = [
     'theme-uckk',
