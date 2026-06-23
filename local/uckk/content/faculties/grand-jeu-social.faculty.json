@@ -25,36 +25,36 @@
     "title_symbolique": "Joueur lucide",
     "domain": "Systèmes sociaux",
     "level": "Puissance opératoire",
-    "faculty_role": "Voie transversale mère qui ouvre une grammaire publique pour lire la société comme un système de règles, d’acteurs, de pouvoirs, de récits, de preuves, de ressources et de transformations possibles.",
-    "one_sentence": "Cartographier les règles visibles et invisibles d’un système social afin d’agir avec lucidité, responsabilité et puissance opératoire."
+    "faculty_role": "Voie transversale mère qui donne une grammaire publique pour lire la société comme un système de règles, d’acteurs, de pouvoirs, de récits, de preuves, de ressources et de transformations possibles.",
+    "one_sentence": "Apprendre à voir le jeu social avant d’y jouer : cartographier les règles visibles et invisibles d’un système afin d’agir avec lucidité, responsabilité et puissance opératoire."
   },
   "seo": {
     "title": "Voie du Grand Jeu social — UCKK",
-    "description": "La Voie du Grand Jeu social donne accès à des outils pour lire les systèmes sociaux, les institutions, les pouvoirs, les récits, les preuves, les ressources et les possibilités d’action collective.",
+    "description": "La Voie du Grand Jeu social ouvre un parcours public pour comprendre les systèmes sociaux, les institutions, les pouvoirs, les récits, les preuves, les ressources et les possibilités d’action collective.",
     "keywords": [
       "UCKK",
       "Grand Jeu social",
-      "bibliothèque publique",
       "systèmes sociaux",
       "règles sociales",
       "pouvoir",
       "institutions",
       "récits",
       "preuves",
-      "action collective"
+      "action collective",
+      "puissance opératoire"
     ]
   },
   "hero": {
     "title": "Voie du Grand Jeu social",
     "subtitle": "Lire les règles du jeu social, cartographier les forces, agir sans perdre la lucidité.",
-    "summary": "Cette faculté présente la Voie transversale mère de l’Atlas UCKK. Elle ouvre un parcours public pour comprendre les positions, les accès, les récits, les alliances, les conflits, les ressources et les transformations possibles dans un système social.",
+    "summary": "Cette voie est la porte d’entrée transversale de l’UCKK : un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle rassemble des repères, des cours publics, des méthodes et des exercices pour comprendre les positions, les accès, les récits, les alliances, les conflits, les ressources et les transformations possibles dans un système social.",
     "primary_cta": {
-      "label": "Explorer la voie",
+      "label": "Explorer le parcours",
       "target": "#programme"
     },
     "secondary_cta": {
-      "label": "Voir les cours publics",
-      "target": "#cours"
+      "label": "Accéder aux cours",
+      "target": "#cours-moodle"
     }
   },
   "navigation": [
@@ -63,12 +63,12 @@
       "target": "#presentation"
     },
     {
-      "label": "Programme",
+      "label": "Parcours",
       "target": "#programme"
     },
     {
       "label": "Cours",
-      "target": "#cours"
+      "target": "#cours-moodle"
     },
     {
       "label": "Projet final",
@@ -87,32 +87,32 @@
     {
       "id": "presentation",
       "type": "text",
-      "title": "Une voie pour apprendre à voir le jeu avant d’y jouer",
-      "body": "La Voie du Grand Jeu social apprend à cartographier les règles visibles et invisibles qui organisent une situation : acteurs, statuts, institutions, ressources, récits, preuves, médias, alliances, stratégies et points de transformation. Elle sert de porte d’entrée dans la bibliothèque publique UCKK."
+      "title": "Voir le jeu avant de jouer",
+      "body": "La Voie du Grand Jeu social apprend à cartographier les règles visibles et invisibles qui organisent une situation : acteurs, statuts, institutions, ressources, récits, preuves, médias, alliances, stratégies et points de transformation. Elle sert de grammaire commune pour entrer dans les autres Voies UCKK."
     },
     {
       "id": "programme",
       "type": "text",
-      "title": "Programme public généré depuis l’Atlas",
-      "body": "Le programme détaillé de cette faculté est projeté depuis le JSON Atlas Voie du Grand Jeu social. Cette page organise ce qui peut être affiché publiquement afin de rendre le parcours lisible, sans dupliquer les espaces de travail internes."
+      "title": "Parcours de la Voie",
+      "body": "Le parcours aide à lire un système social avant d’y intervenir. Il propose des repères pour comprendre les positions, les contraintes, les récits de légitimité, les rapports de force, les preuves disponibles et les marges d’action responsables."
     },
     {
       "id": "cours",
       "type": "callout",
-      "title": "Cours publics associés",
-      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des cours Moodle visibles associés au préfixe GJS. Leur fonction première est de rendre le savoir accessible, navigable et praticable."
+      "title": "Explorer les cours publics",
+      "body": "Les cours publics sont les principales portes d’entrée dans cette voie. Ils permettent de découvrir les concepts, méthodes, exercices et artefacts d’apprentissage, puis d’ouvrir l’espace de cours correspondant lorsqu’il est disponible."
     },
     {
       "id": "projet-final",
       "type": "text",
       "title": "Projet final",
-      "body": "Le projet final attendu consiste à produire une cartographie opératoire d’un système social réel ou simulé, à identifier ses règles de pouvoir et ses possibilités de transformation, puis à proposer une action responsable, lisible et vérifiable."
+      "body": "Le projet final consiste à produire une cartographie opératoire d’un système social réel ou simulé, à identifier ses règles de pouvoir et ses possibilités de transformation, puis à proposer une action responsable, lisible et vérifiable."
     },
     {
       "id": "ethique",
       "type": "notice",
       "title": "Clarté et responsabilité publiques",
-      "body": "Cette page présente une Voie UCKK comme parcours public de lecture, de méthode et de pratique. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future. Il n’y a pas de projet à court terme d’offrir des certifications, diplômes ou titres formels."
+      "body": "Voir le jeu ne sert pas à manipuler. La puissance opératoire visée par cette voie doit rester lisible, contestable, responsable et compatible avec la dignité des personnes concernées."
     }
   ],
   "atlas_projection": {
@@ -135,7 +135,7 @@
     {
       "id": "annonces",
       "type": "announcements",
-      "title": "Annonces de la faculté",
+      "title": "Annonces de la Voie",
       "source": {
         "provider": "moodle_forum",
         "course_idnumber": "GJS-HUB",
@@ -143,7 +143,7 @@
       },
       "limit": 5,
       "visibility": "public",
-      "empty_state": "Aucune annonce publique pour la faculté du Grand Jeu social pour le moment."
+      "empty_state": "Aucune annonce publique pour la Voie du Grand Jeu social pour le moment."
     },
     {
       "id": "evenements",
@@ -160,14 +160,14 @@
     {
       "id": "cours-moodle",
       "type": "moodle_course_list",
-      "title": "Espaces Moodle associés",
+      "title": "Accéder aux cours",
       "source": {
         "provider": "moodle_category",
         "category_idnumber": "UCKK-GJS"
       },
       "limit": 10,
       "visibility": "public",
-      "empty_state": "Aucun cours Moodle public associé à cette faculté pour le moment."
+      "empty_state": "Les cours publics de cette voie seront affichés ici lorsqu’ils seront disponibles."
     }
   ],
   "featured_blocks": [
@@ -182,33 +182,33 @@
       "body": "La méthode centrale consiste à distinguer acteurs, institutions, accès, dépendances, alliances, médiations, récits publics et points de transformation."
     },
     {
-      "type": "library",
+      "type": "principle",
       "title": "Ouvrir l’accès au savoir",
-      "body": "La Voie du Grand Jeu social fait partie d’une bibliothèque publique vivante : elle sert à rendre les outils de compréhension plus accessibles, plus partageables et plus praticables."
+      "body": "Cette voie participe à la bibliothèque publique vivante de l’UCKK : rendre les outils de compréhension plus accessibles, plus partageables et plus praticables."
     },
     {
       "type": "ethics",
-      "title": "Agir sans confondre puissance et domination",
-      "body": "La puissance opératoire visée par cette Voie doit rester lisible, contestable, responsable et compatible avec l’intégrité des personnes concernées."
+      "title": "Ne pas confondre puissance et domination",
+      "body": "La puissance opératoire n’est pas une permission de dominer. Elle exige lisibilité, responsabilité, contestabilité et attention aux conséquences."
     }
   ],
   "faq": [
     {
-      "question": "À quoi sert cette Voie?",
-      "answer": "Elle sert à apprendre à lire un système social avant d’y agir : repérer les règles, les acteurs, les récits, les ressources, les rapports de force, les preuves disponibles et les possibilités de transformation."
+      "question": "Par où commencer?",
+      "answer": "Commencez par la présentation de la voie, puis ouvrez les cours publics disponibles. Chaque cours sert de porte d’entrée vers une notion, une méthode ou un artefact d’apprentissage."
     },
     {
-      "question": "La page contient-elle toute la matière des cours GJS?",
-      "answer": "Non. La page publique présente la faculté et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+      "question": "Faut-il être inscrit pour apprendre?",
+      "answer": "Les pages publiques donnent accès aux repères essentiels de la voie. Certains espaces de cours peuvent demander une connexion ou une inscription selon leur usage, mais l’orientation générale du savoir reste publique."
     },
     {
       "question": "Que signifie Joueur lucide?",
-      "answer": "C’est le titre symbolique interne associé à la Voie du Grand Jeu social. Il désigne la capacité à comprendre les règles d’un système social avant d’y agir, sans confondre stratégie, manipulation et responsabilité."
+      "answer": "C’est le titre symbolique associé à la Voie du Grand Jeu social. Il désigne la capacité à lire les règles d’un système social avant d’y agir, sans confondre stratégie, manipulation et responsabilité."
     }
   ],
   "contact": {
     "label": "Contact",
-    "body": "Pour toute question sur cette Voie, consultez les annonces publiques ou les espaces Moodle associés.",
+    "body": "Pour suivre cette voie, commencez par les cours publics disponibles et les annonces de la Voie.",
     "email": "",
     "cta": {
       "label": "Voir les annonces",
@@ -219,13 +219,9 @@
     "owner": "local_uckk",
     "editorial_status": "approved",
     "last_reviewed": null,
-    "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
+    "review_notes": "Note éditoriale interne : profil public recentré sur la Voie du Grand Jeu social comme porte d’entrée opératoire dans l’UCKK; retirer les formulations techniques visibles de type Atlas/Moodle/préfixe.",
     "public_claims_guardrails": [
-      "Présenter la Voie comme un parcours public de lecture, de méthode et de pratique.",
-      "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
-      "Ne pas transformer le titre symbolique Joueur lucide en titre professionnel reconnu par l’État.",
-      "Ne pas transformer l’accès au savoir en barrière ou en promesse de statut."
+      "Garder la note de reconnaissance unique, discrète et non centrale; ne pas transformer la page publique en avertissement répété sur les diplômes, certifications ou statuts."
     ]
   },
   "cache": {

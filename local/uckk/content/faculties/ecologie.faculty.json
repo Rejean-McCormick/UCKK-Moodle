@@ -1,229 +1,226 @@
 {
-"schema_version": "UCKK-FACULTY-0.1",
-"faculty_id": "faculty_ecologie",
-"voie_id": "voie_ecologie",
-"slug": "ecologie",
-"status": "published",
-"visibility": "public",
-"source_atlas": {
-"file": "voie_ecologie.json",
-"schema_version_expected": "UCKK-ATLAS-0.2-draft",
-"sync_mode": "read_only"
-},
-"moodle": {
-"category_id": null,
-"category_idnumber": "UCKK-ECL",
-"course_prefix": "ECL",
-"public_course_listing": true,
-"enrolment_visibility": "public_info_only",
-"hub_course_idnumber": "ECL-HUB"
-},
-"identity": {
-"eyebrow": "Voie publique UCKK",
-"name": "Voie d’Écologie",
-"short_name": "Écologie",
-"title_symbolique": "Gardien des systèmes vivants",
-"domain": "Systèmes vivants",
-"level": "Puissance opératoire",
-"faculty_role": "Voie qui ouvre un parcours public pour lire les interdépendances du vivant, les territoires, les ressources, les vulnérabilités écologiques et les conditions d’intervention responsable.",
-"one_sentence": "Comprendre les systèmes vivants, les territoires, les cycles naturels, les limites planétaires et les liens entre société et environnement comme règles vitales du Grand Jeu social."
-},
-"seo": {
-"title": "Voie d’Écologie — UCKK",
-"description": "La Voie d’Écologie propose un parcours public d’apprentissage pour comprendre les interdépendances du vivant, lire les territoires, cartographier les dépendances matérielles et penser des interventions écologiques responsables.",
-"keywords": [
-"UCKK",
-"Écologie",
-"systèmes vivants",
-"territoires",
-"biodiversité",
-"ressources",
-"limites planétaires",
-"intervention écologique",
-"bibliothèque publique",
-"apprentissage ouvert"
-]
-},
-"hero": {
-"title": "Voie d’Écologie",
-"subtitle": "Lire les interdépendances du vivant, diagnostiquer les vulnérabilités, agir avec sobriété.",
-"summary": "Cette voie ouvre un espace public d’apprentissage pour comprendre les systèmes vivants, les territoires, les ressources vitales, les cycles naturels, les crises climatiques, les dépendances matérielles et les interventions écologiques responsables.",
-"primary_cta": {
-"label": "Explorer la voie",
-"target": "#programme"
-},
-"secondary_cta": {
-"label": "Voir les cours publics",
-"target": "#cours"
-}
-},
-"navigation": [
-{
-"label": "Présentation",
-"target": "#presentation"
-},
-{
-"label": "Parcours",
-"target": "#programme"
-},
-{
-"label": "Cours",
-"target": "#cours"
-},
-{
-"label": "Exercice final",
-"target": "#projet-final"
-},
-{
-"label": "Éthique",
-"target": "#ethique"
-},
-{
-"label": "Annonces",
-"target": "#annonces"
-}
-],
-"sections": [
-{
-"id": "presentation",
-"type": "text",
-"title": "Une voie pour apprendre à penser avec le vivant",
-"body": "La Voie d’Écologie étudie les interdépendances du vivant, les territoires, les ressources, les cycles naturels, les seuils, les vulnérabilités, les crises climatiques et les liens entre systèmes humains et milieux écologiques. Elle fonctionne comme une porte d’entrée publique vers des connaissances organisées, accessibles et praticables."
-},
-{
-"id": "programme",
-"type": "text",
-"title": "Parcours public issu de l’Atlas",
-"body": "Le parcours public de cette voie est projeté depuis le JSON Atlas de la Voie d’Écologie. Cette page rend visibles les repères utiles : orientation générale, cours associés, concepts centraux, artefacts publics, relations entre voies et horizon d’exercice."
-},
-{
-"id": "cours",
-"type": "callout",
-"title": "Cours publics associés",
-"body": "Les cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des espaces Moodle visibles associés au préfixe ECL. Ils servent d’entrées dans une bibliothèque vivante plutôt que de barrière d’accès au savoir."
-},
-{
-"id": "projet-final",
-"type": "text",
-"title": "Exercice final",
-"body": "L’horizon d’exercice consiste à produire un diagnostic écologique situé et une proposition d’intervention sobre, juste, vérifiable et mémorisable, en tenant compte des dépendances matérielles, des seuils, des acteurs concernés et des risques de déplacement du problème."
-},
-{
-"id": "ethique",
-"type": "notice",
-"title": "Cadre d’apprentissage ouvert",
-"body": "Cette page présente une voie publique de l’Univers-Cité King Klown consacrée à la diffusion du savoir écologique dans un cadre d’apprentissage familier, modernisé et ouvert. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
-}
-],
-"atlas_projection": {
-"show_definition_courte": true,
-"show_angle_fondamental": true,
-"show_competence_centrale": true,
-"show_seuils_progression": true,
-"show_courses": true,
-"show_course_codes": true,
-"show_concept_maitre": true,
-"show_concepts_associes": false,
-"show_artefacts": true,
-"show_criteres_passage": false,
-"show_projet_final": true,
-"show_limites_ethiques": true,
-"show_relations_intervoies": true,
-"show_tags": false
-},
-"dynamic_blocks": [
-{
-"id": "annonces",
-"type": "announcements",
-"title": "Annonces de la voie",
-"source": {
-"provider": "moodle_forum",
-"course_idnumber": "ECL-HUB",
-"forum_name": "Annonces"
-},
-"limit": 5,
-"visibility": "public",
-"empty_state": "Aucune annonce publique pour la Voie d’Écologie pour le moment."
-},
-{
-"id": "evenements",
-"type": "events",
-"title": "Événements publics",
-"source": {
-"provider": "moodle_calendar",
-"category_idnumber": "UCKK-ECL"
-},
-"limit": 5,
-"visibility": "public",
-"empty_state": "Aucun événement public annoncé pour le moment."
-},
-{
-"id": "cours-moodle",
-"type": "moodle_course_list",
-"title": "Espaces Moodle associés",
-"source": {
-"provider": "moodle_category",
-"category_idnumber": "UCKK-ECL"
-},
-"limit": 10,
-"visibility": "public",
-"empty_state": "Aucun cours Moodle public associé à cette voie pour le moment."
-}
-],
-"featured_blocks": [
-{
-"type": "principle",
-"title": "Le vivant est relation",
-"body": "Aucune intervention écologique ne doit isoler un élément de ses interdépendances, de ses cycles, de ses seuils et des communautés humaines ou non humaines concernées."
-},
-{
-"type": "method",
-"title": "Diagnostiquer avant d’agir",
-"body": "La méthode centrale consiste à cartographier les dépendances, vulnérabilités, ressources, seuils et effets indirects avant de proposer une action."
-},
-{
-"type": "ethics",
-"title": "Ne pas déplacer le dommage",
-"body": "Une solution écologique doit éviter de rendre invisible le coût écologique ou social qu’elle prétend résoudre ailleurs, plus tard ou pour d’autres groupes."
-}
-],
-"faq": [
-{
-"question": "À quoi sert cette voie publique?",
-"answer": "Elle sert à rendre accessibles des repères, cours, concepts et exercices pour comprendre les systèmes vivants, les territoires et les crises écologiques. Elle organise le savoir dans un cadre d’apprentissage ouvert plutôt que derrière un paywall."
-},
-{
-"question": "La page contient-elle toute la matière des cours ECL?",
-"answer": "Non. La page publique présente la voie et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
-},
-{
-"question": "Que signifie Gardien des systèmes vivants?",
-"answer": "C’est le titre symbolique interne associé à la Voie d’Écologie. Il désigne la capacité à protéger, comprendre, réparer et gouverner des systèmes vivants sans les réduire à de simples ressources exploitables."
-}
-],
-"contact": {
-"label": "Contact",
-"body": "Pour toute question sur cette voie, consultez les annonces publiques ou les espaces Moodle associés.",
-"email": "",
-"cta": {
-"label": "Voir les annonces",
-"target": "#annonces"
-}
-},
-"governance": {
-"owner": "local_uckk",
-"editorial_status": "approved",
-"last_reviewed": null,
-"review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
-"public_claims_guardrails": [
-"Présenter la voie comme un parcours public d’apprentissage et de diffusion du savoir.",
-"Ne pas afficher de progression, notes ou données privées d’étudiants.",
-"Ne pas transformer une voie expérimentale en promesse institutionnelle externe.",
-"Ne pas transformer le titre symbolique Gardien des systèmes vivants en qualification professionnelle."
-]
-},
-"cache": {
-"enabled": true,
-"ttl_seconds": 3600
-}
+  "schema_version": "UCKK-FACULTY-0.1",
+  "faculty_id": "faculty_ecologie",
+  "voie_id": "voie_ecologie",
+  "slug": "ecologie",
+  "status": "published",
+  "visibility": "public",
+  "source_atlas": {
+    "file": "voie_ecologie.json",
+    "schema_version_expected": "UCKK-ATLAS-0.2-draft",
+    "sync_mode": "read_only"
+  },
+  "moodle": {
+    "category_id": null,
+    "category_idnumber": "UCKK-ECL",
+    "course_prefix": "ECL",
+    "public_course_listing": true,
+    "enrolment_visibility": "public_info_only",
+    "hub_course_idnumber": "ECL-HUB"
+  },
+  "identity": {
+    "eyebrow": "Voie UCKK",
+    "name": "Voie d’Écologie",
+    "short_name": "Écologie",
+    "title_symbolique": "Gardien des systèmes vivants",
+    "domain": "Systèmes vivants",
+    "level": "Puissance opératoire",
+    "faculty_role": "Voie qui apprend à lire les interdépendances du vivant, les territoires, les ressources, les vulnérabilités écologiques et les conditions d’une intervention responsable.",
+    "one_sentence": "Comprendre les systèmes vivants, les territoires, les cycles naturels, les limites planétaires et les liens entre société et environnement comme règles vitales du Grand Jeu social."
+  },
+  "seo": {
+    "title": "Voie d’Écologie — UCKK",
+    "description": "La Voie d’Écologie ouvre un parcours public pour comprendre les interdépendances du vivant, lire les territoires, cartographier les dépendances matérielles et agir avec sobriété.",
+    "keywords": [
+      "UCKK",
+      "Écologie",
+      "systèmes vivants",
+      "territoires",
+      "biodiversité",
+      "ressources",
+      "limites planétaires",
+      "sobriété",
+      "intervention écologique",
+      "Grand Jeu social"
+    ]
+  },
+  "hero": {
+    "title": "Voie d’Écologie",
+    "subtitle": "Lire les interdépendances du vivant, diagnostiquer les vulnérabilités, agir avec sobriété.",
+    "summary": "Cette voie fait partie de l’Univers-Cité King Klown : un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle rassemble des cours publics, des repères, des méthodes et des exercices pour apprendre à penser avec le vivant.",
+    "primary_cta": {
+      "label": "Explorer la voie",
+      "target": "#programme"
+    },
+    "secondary_cta": {
+      "label": "Accéder aux cours",
+      "target": "#cours-moodle"
+    }
+  },
+  "navigation": [
+    {
+      "label": "Présentation",
+      "target": "#presentation"
+    },
+    {
+      "label": "Parcours",
+      "target": "#programme"
+    },
+    {
+      "label": "Cours",
+      "target": "#cours-moodle"
+    },
+    {
+      "label": "Exercice final",
+      "target": "#projet-final"
+    },
+    {
+      "label": "Éthique",
+      "target": "#ethique"
+    },
+    {
+      "label": "Annonces",
+      "target": "#annonces"
+    }
+  ],
+  "sections": [
+    {
+      "id": "presentation",
+      "type": "text",
+      "title": "Une voie pour apprendre à penser avec le vivant",
+      "body": "La Voie d’Écologie apprend à lire les interdépendances du vivant : territoires, ressources, cycles naturels, seuils, vulnérabilités, crises climatiques et liens entre systèmes humains et milieux écologiques. Elle sert de porte d’entrée publique vers des connaissances organisées, accessibles et praticables."
+    },
+    {
+      "id": "programme",
+      "type": "text",
+      "title": "Parcours de la Voie",
+      "body": "Cette voie organise un parcours public de lecture, de méthode et de pratique. Elle aide à comprendre les règles vitales du Grand Jeu social : ce qui nourrit, relie, limite, fragilise ou soutient les systèmes vivants."
+    },
+    {
+      "id": "cours",
+      "type": "callout",
+      "title": "Explorer les cours publics",
+      "body": "Les cours publics sont les principales portes d’entrée dans cette voie. Ils permettent de découvrir les concepts, méthodes, exercices et artefacts d’apprentissage, puis d’ouvrir l’espace de cours correspondant lorsqu’il est disponible."
+    },
+    {
+      "id": "projet-final",
+      "type": "text",
+      "title": "Exercice final",
+      "body": "L’horizon d’exercice consiste à produire un diagnostic écologique situé et une proposition d’intervention sobre, juste, vérifiable et mémorisable, en tenant compte des dépendances matérielles, des seuils, des acteurs concernés et des risques de déplacement du problème."
+    },
+    {
+      "id": "ethique",
+      "type": "notice",
+      "title": "Éthique du vivant",
+      "body": "Penser avec le vivant exige de regarder les relations plutôt que les éléments isolés. Une action écologique responsable doit rendre visibles ses effets, ses limites, ses dépendances et les dommages qu’elle risque de déplacer ailleurs, plus tard ou vers d’autres groupes."
+    }
+  ],
+  "atlas_projection": {
+    "show_definition_courte": true,
+    "show_angle_fondamental": true,
+    "show_competence_centrale": true,
+    "show_seuils_progression": true,
+    "show_courses": true,
+    "show_course_codes": true,
+    "show_concept_maitre": true,
+    "show_concepts_associes": false,
+    "show_artefacts": true,
+    "show_criteres_passage": false,
+    "show_projet_final": true,
+    "show_limites_ethiques": true,
+    "show_relations_intervoies": true,
+    "show_tags": false
+  },
+  "dynamic_blocks": [
+    {
+      "id": "annonces",
+      "type": "announcements",
+      "title": "Annonces de la voie",
+      "source": {
+        "provider": "moodle_forum",
+        "course_idnumber": "ECL-HUB",
+        "forum_name": "Annonces"
+      },
+      "limit": 5,
+      "visibility": "public",
+      "empty_state": "Aucune annonce publique pour cette voie pour le moment."
+    },
+    {
+      "id": "evenements",
+      "type": "events",
+      "title": "Événements publics",
+      "source": {
+        "provider": "moodle_calendar",
+        "category_idnumber": "UCKK-ECL"
+      },
+      "limit": 5,
+      "visibility": "public",
+      "empty_state": "Aucun événement public annoncé pour le moment."
+    },
+    {
+      "id": "cours-moodle",
+      "type": "moodle_course_list",
+      "title": "Accéder aux cours",
+      "source": {
+        "provider": "moodle_category",
+        "category_idnumber": "UCKK-ECL"
+      },
+      "limit": 10,
+      "visibility": "public",
+      "empty_state": "Les cours publics de cette voie seront affichés ici lorsqu’ils seront disponibles."
+    }
+  ],
+  "featured_blocks": [
+    {
+      "type": "principle",
+      "title": "Le vivant est relation",
+      "body": "Aucune intervention écologique ne doit isoler un élément de ses interdépendances, de ses cycles, de ses seuils et des communautés humaines ou non humaines concernées."
+    },
+    {
+      "type": "method",
+      "title": "Diagnostiquer avant d’agir",
+      "body": "La méthode centrale consiste à cartographier les dépendances, vulnérabilités, ressources, seuils et effets indirects avant de proposer une action."
+    },
+    {
+      "type": "ethics",
+      "title": "Ne pas déplacer le dommage",
+      "body": "Une solution écologique doit éviter de rendre invisible le coût écologique ou social qu’elle prétend résoudre ailleurs, plus tard ou pour d’autres groupes."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Par où commencer?",
+      "answer": "Commencez par la présentation de la voie, puis ouvrez les cours publics disponibles. Chaque cours sert de porte d’entrée vers une notion, une méthode ou un artefact d’apprentissage."
+    },
+    {
+      "question": "Faut-il être inscrit pour apprendre?",
+      "answer": "Les pages publiques donnent accès aux repères essentiels de la voie. Certains espaces de cours peuvent demander une connexion ou une inscription selon leur usage, mais l’orientation générale du savoir reste publique."
+    },
+    {
+      "question": "Que signifie Gardien des systèmes vivants?",
+      "answer": "C’est le titre symbolique associé à la Voie d’Écologie. Il nomme une posture d’apprentissage : protéger, comprendre, réparer et gouverner des systèmes vivants sans les réduire à de simples ressources exploitables."
+    }
+  ],
+  "contact": {
+    "label": "Contact",
+    "body": "Pour commencer, ouvrez les cours publics disponibles ou consultez les annonces de la voie.",
+    "email": "",
+    "cta": {
+      "label": "Accéder aux cours",
+      "target": "#cours-moodle"
+    }
+  },
+  "governance": {
+    "owner": "local_uckk",
+    "editorial_status": "approved",
+    "last_reviewed": null,
+    "review_notes": "Note éditoriale interne : profil public recentré sur la Voie d’Écologie comme porte d’entrée canonique vers l’Univers-Cité King Klown, les cours publics et la lecture opératoire du vivant.",
+    "public_claims_guardrails": [
+      "Garder la page centrée sur l’accès public au savoir, les cours, les méthodes et la lecture écologique du Grand Jeu social; ne pas transformer la voie en promesse de statut, de certification ou de qualification professionnelle."
+    ]
+  },
+  "cache": {
+    "enabled": true,
+    "ttl_seconds": 3600
+  }
 }

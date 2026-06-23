@@ -1,201 +1,218 @@
 {
-  "schema_version": "UCKK-FACULTY-0.1",
-  "faculty_id": "faculty_ia_gouvernable",
-  "voie_id": "voie_ia_gouvernable",
-  "slug": "ia-gouvernable",
-  "status": "published",
-  "visibility": "public",
-  "source_atlas": {
-    "file": "voie_ia_gouvernable.json",
-    "schema_version_expected": "UCKK-ATLAS-0.2-draft",
-    "sync_mode": "read_only"
-  },
-  "moodle": {
-    "category_id": null,
-    "category_idnumber": "UCKK-IA",
-    "course_prefix": "IA",
-    "public_course_listing": true,
-    "enrolment_visibility": "public_info_only",
-    "hub_course_idnumber": "IA-HUB"
-  },
-  "identity": {
-    "eyebrow": "Voie ouverte UCKK",
-    "name": "Voie de l’Intelligence artificielle gouvernable",
-    "short_name": "IA gouvernable",
-    "title_symbolique": "Cartographe augmenté",
-    "domain": "Intelligence outillée",
-    "level": "Puissance opératoire",
-    "faculty_role": "Voie consacrée à l’usage public, à l’évaluation critique et à la gouvernance responsable des systèmes d’intelligence artificielle.",
-    "one_sentence": "Utiliser l’IA pour lire, créer, cartographier, simuler et accélérer sans déplacer l’autorité finale hors du jugement humain."
-  },
-  "seo": {
-    "title": "Voie de l’Intelligence artificielle gouvernable — UCKK",
-    "description": "La Voie de l’Intelligence artificielle gouvernable ouvre un parcours public pour utiliser, vérifier et gouverner l’IA comme outil de puissance opératoire, sans confusion entre sortie, preuve, décision et responsabilité.",
-    "keywords": [
-      "UCKK",
-      "IA gouvernable",
-      "intelligence artificielle",
-      "gouvernance",
-      "auditabilité",
-      "responsabilité humaine",
-      "vérification",
-      "contestabilité",
-      "cartographie augmentée"
-    ]
-  },
-  "hero": {
-    "title": "Voie de l’Intelligence artificielle gouvernable",
-    "subtitle": "Utiliser l’IA comme outil, jamais comme autorité finale.",
-    "summary": "Cette voie ouvre un parcours public pour comprendre, utiliser, vérifier et gouverner des systèmes d’IA utiles, traçables, contestables, sécurisés et humainement supervisés.",
-    "primary_cta": {
-      "label": "Explorer les cours",
-      "target": "#cours"
-    },
-    "secondary_cta": {
-      "label": "Voir les Voies UCKK",
-      "target": "/local/uckk/programs.php"
-    }
-  },
-  "navigation": [
-    {
-      "label": "Présentation",
-      "target": "#presentation"
-    },
-    {
-      "label": "Parcours",
-      "target": "#programme"
-    },
-    {
-      "label": "Cours",
-      "target": "#cours"
-    },
-    {
-      "label": "Projet final",
-      "target": "#projet-final"
-    },
-    {
-      "label": "Annonces",
-      "target": "#annonces"
-    }
-  ],
-  "sections": [
-    {
-      "id": "presentation",
-      "type": "text",
-      "title": "Une voie pour rendre l’IA utile, vérifiable et gouvernable",
-      "body": "La Voie de l’Intelligence artificielle gouvernable aborde l’IA comme une puissance d’assistance, de cartographie, de simulation et d’accélération. Elle apprend à distinguer sortie, hypothèse, preuve, décision et responsabilité, afin que l’IA reste un outil de lecture et d’action plutôt qu’une autorité de substitution."
-    },
-    {
-      "id": "responsabilite",
-      "type": "principle",
-      "title": "Principe de responsabilité humaine",
-      "body": "Toute sortie IA reste une proposition de travail tant qu’elle n’a pas été vérifiée, contextualisée et assumée par une personne ou une instance responsable."
-    },
-    {
-      "id": "usage-public",
-      "type": "notice",
-      "title": "Usage public de cette voie",
-      "body": "Cette page présente une voie ouverte de la bibliothèque publique UCKK. Elle sert à diffuser des savoirs, des repères et des pratiques dans un cadre d’apprentissage familier, modernisé et accessible."
-    }
-  ],
-  "atlas_projection": {
-    "show_definition_courte": true,
-    "show_angle_fondamental": true,
-    "show_competence_centrale": true,
-    "show_seuils_progression": true,
-    "show_courses": true,
-    "show_course_codes": true,
-    "show_concept_maitre": true,
-    "show_concepts_associes": false,
-    "show_artefacts": true,
-    "show_criteres_passage": false,
-    "show_projet_final": true,
-    "show_limites_ethiques": true,
-    "show_relations_intervoies": true,
-    "show_tags": false
-  },
-  "dynamic_blocks": [
-    {
-      "id": "annonces",
-      "type": "announcements",
-      "title": "Annonces de la voie",
-      "source": {
-        "provider": "moodle_forum",
-        "course_idnumber": "IA-HUB",
-        "forum_name": "Annonces"
-      },
-      "limit": 5,
-      "visibility": "public",
-      "empty_state": "Aucune annonce publique pour le moment."
-    },
-    {
-      "id": "cours-moodle",
-      "type": "moodle_course_list",
-      "title": "Cours ouverts associés",
-      "source": {
-        "provider": "moodle_category",
-        "category_idnumber": "UCKK-IA"
-      },
-      "limit": 20,
-      "visibility": "public",
-      "empty_state": "Les cours associés seront affichés ici lorsqu’ils seront disponibles."
-    }
-  ],
-  "featured_blocks": [
-    {
-      "type": "principle",
-      "title": "Principe central",
-      "body": "L’IA peut accélérer le travail intellectuel, mais elle ne remplace ni la preuve, ni la délibération, ni la responsabilité humaine."
-    },
-    {
-      "type": "ethics",
-      "title": "Garde-fou éthique",
-      "body": "Ne pas confondre fluidité linguistique, performance technique ou prédiction statistique avec vérité, légitimité ou décision institutionnelle."
-    },
-    {
-      "type": "notice",
-      "title": "Note institutionnelle",
-      "body": "Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
-    }
-  ],
-  "faq": [
-    {
-      "question": "Cette Voie apprend-elle à remplacer le jugement humain par l’IA?",
-      "answer": "Non. Elle apprend à utiliser l’IA comme outil d’assistance, de cartographie, de simulation et de vérification, tout en maintenant l’autorité finale du côté humain."
-    },
-    {
-      "question": "Cette Voie traite-t-elle des risques de l’IA?",
-      "answer": "Oui. Elle traite notamment des hallucinations, biais, erreurs de classification, fuites de données, manipulations, dépendances infrastructurelles et confusions entre imitation et compréhension."
-    },
-    {
-      "question": "Quel est le but immédiat de cette Voie?",
-      "answer": "Diffuser des connaissances praticables sur l’IA gouvernable dans un cadre d’apprentissage ouvert : comprendre les outils, apprendre à les vérifier, documenter leurs limites et les utiliser sans déléguer la responsabilité humaine."
-    }
-  ],
-  "contact": {
-    "label": "Contact",
-    "body": "Pour toute question sur cette Voie, consultez les annonces publiques ou les espaces Moodle associés.",
-    "email": "",
-    "cta": {
-      "label": "Voir les annonces",
-      "target": "#annonces"
-    }
-  },
-  "governance": {
-    "owner": "local_uckk",
-    "editorial_status": "approved",
-    "last_reviewed": null,
-    "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
-    "public_claims_guardrails": [
-      "Ne pas transformer les repères UCKK en promesse de certification.",
-      "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
-      "Ne pas présenter une sortie IA comme preuve, décision ou autorité finale.",
-      "Ne pas confondre assistance IA et délégation institutionnelle."
-    ]
-  },
-  "cache": {
-    "enabled": true,
-    "ttl_seconds": 3600
-  }
+"schema_version": "UCKK-FACULTY-0.1",
+"faculty_id": "faculty_ia_gouvernable",
+"voie_id": "voie_ia_gouvernable",
+"slug": "ia-gouvernable",
+"status": "published",
+"visibility": "public",
+"source_atlas": {
+"file": "voie_ia_gouvernable.json",
+"schema_version_expected": "UCKK-ATLAS-0.2-draft",
+"sync_mode": "read_only"
+},
+"moodle": {
+"category_id": null,
+"category_idnumber": "UCKK-IA",
+"course_prefix": "IA",
+"public_course_listing": true,
+"enrolment_visibility": "public_info_only",
+"hub_course_idnumber": "IA-HUB"
+},
+"identity": {
+"eyebrow": "Voie ouverte UCKK",
+"name": "Voie de l’Intelligence artificielle gouvernable",
+"short_name": "IA gouvernable",
+"title_symbolique": "Cartographe augmenté",
+"domain": "Intelligence outillée",
+"level": "Puissance opératoire",
+"faculty_role": "Voie consacrée à l’usage public, à l’évaluation critique et à la gouvernance responsable des systèmes d’intelligence artificielle.",
+"one_sentence": "Utiliser l’IA pour lire, créer, cartographier, simuler et accélérer sans déplacer l’autorité finale hors du jugement humain."
+},
+"seo": {
+"title": "IA gouvernable — UCKK",
+"description": "La Voie de l’Intelligence artificielle gouvernable ouvre un parcours public pour apprendre à utiliser, vérifier, documenter et gouverner l’IA comme outil de puissance opératoire, sans confondre sortie, preuve, décision et responsabilité.",
+"keywords": [
+"UCKK",
+"IA gouvernable",
+"intelligence artificielle",
+"gouvernance de l’IA",
+"auditabilité",
+"responsabilité humaine",
+"vérification",
+"contestabilité",
+"cartographie augmentée",
+"Grand Jeu social"
+]
+},
+"hero": {
+"title": "Voie de l’Intelligence artificielle gouvernable",
+"subtitle": "Utiliser l’IA comme outil, jamais comme autorité finale.",
+"summary": "Cette voie fait de l’IA un instrument de lecture, de création, de cartographie et de vérification. Elle apprend à travailler plus vite sans abandonner la preuve, le contexte, la délibération ni la responsabilité humaine.",
+"primary_cta": {
+"label": "Accéder aux cours",
+"target": "#cours-moodle"
+},
+"secondary_cta": {
+"label": "Explorer les Voies UCKK",
+"target": "/local/uckk/programs.php"
+}
+},
+"navigation": [
+{
+"label": "Présentation",
+"target": "#presentation"
+},
+{
+"label": "Parcours",
+"target": "#programme"
+},
+{
+"label": "Cours",
+"target": "#cours-moodle"
+},
+{
+"label": "Projet final",
+"target": "#projet-final"
+},
+{
+"label": "Éthique",
+"target": "#ethique"
+},
+{
+"label": "Annonces",
+"target": "#annonces"
+}
+],
+"sections": [
+{
+"id": "presentation",
+"type": "text",
+"title": "Une voie pour rendre l’IA utile, vérifiable et gouvernable",
+"body": "La Voie de l’Intelligence artificielle gouvernable aborde l’IA comme une puissance d’assistance, de cartographie, de simulation et d’accélération. Elle apprend à distinguer sortie, hypothèse, preuve, décision et responsabilité, afin que l’IA reste un outil de lecture et d’action plutôt qu’une autorité de substitution."
+},
+{
+"id": "programme",
+"type": "text",
+"title": "Parcours de la Voie",
+"body": "Le parcours aide à comprendre comment les systèmes d’IA produisent des réponses, où ils peuvent échouer, comment vérifier leurs sorties, comment documenter leurs limites et comment les intégrer dans des pratiques humaines responsables. Il relie l’usage concret des outils à la prudence, à l’auditabilité, à la contestabilité et à la gouvernance."
+},
+{
+"id": "cours",
+"type": "callout",
+"title": "Explorer les cours publics",
+"body": "Les cours publics sont les principales portes d’entrée dans cette voie. Ils permettent de découvrir les concepts, méthodes, exercices et artefacts d’apprentissage, puis d’ouvrir l’espace de cours correspondant lorsqu’il est disponible."
+},
+{
+"id": "projet-final",
+"type": "text",
+"title": "Projet final",
+"body": "Le projet final consiste à concevoir, tester et documenter un usage d’IA gouvernable : objectif clair, contexte d’usage, risques identifiés, protocole de vérification, limites déclarées, traces conservées et responsabilité humaine explicitement située."
+},
+{
+"id": "ethique",
+"type": "notice",
+"title": "Éthique de l’IA gouvernable",
+"body": "Une IA utile n’est pas seulement performante. Elle doit rester vérifiable, contestable, proportionnée, traçable et subordonnée à une responsabilité humaine identifiable."
+}
+],
+"atlas_projection": {
+"show_definition_courte": true,
+"show_angle_fondamental": true,
+"show_competence_centrale": true,
+"show_seuils_progression": true,
+"show_courses": true,
+"show_course_codes": true,
+"show_concept_maitre": true,
+"show_concepts_associes": false,
+"show_artefacts": true,
+"show_criteres_passage": false,
+"show_projet_final": true,
+"show_limites_ethiques": true,
+"show_relations_intervoies": true,
+"show_tags": false
+},
+"dynamic_blocks": [
+{
+"id": "annonces",
+"type": "announcements",
+"title": "Annonces de la voie",
+"source": {
+"provider": "moodle_forum",
+"course_idnumber": "IA-HUB",
+"forum_name": "Annonces"
+},
+"limit": 5,
+"visibility": "public",
+"empty_state": "Aucune annonce publique pour cette voie pour le moment."
+},
+{
+"id": "cours-moodle",
+"type": "moodle_course_list",
+"title": "Accéder aux cours",
+"source": {
+"provider": "moodle_category",
+"category_idnumber": "UCKK-IA"
+},
+"limit": 10,
+"visibility": "public",
+"empty_state": "Les cours publics de cette voie seront affichés ici lorsqu’ils seront disponibles."
+}
+],
+"featured_blocks": [
+{
+"type": "principle",
+"title": "L’IA assiste, l’humain répond",
+"body": "Une sortie d’IA peut accélérer le travail intellectuel, mais elle ne remplace ni la preuve, ni la délibération, ni la responsabilité humaine."
+},
+{
+"type": "method",
+"title": "Vérifier avant d’agir",
+"body": "Toute sortie importante doit être relue, contextualisée, comparée à des sources ou à des traces, puis assumée par une personne ou une instance responsable."
+},
+{
+"type": "ethics",
+"title": "Ne pas confondre fluidité et vérité",
+"body": "Une réponse claire, rapide ou convaincante peut rester fausse, incomplète ou mal située. La qualité d’un usage IA dépend de la vérification, du contexte et des limites déclarées."
+}
+],
+"faq": [
+{
+"question": "Par où commencer?",
+"answer": "Commencez par la présentation de la voie, puis ouvrez les cours publics disponibles. Chaque cours sert de porte d’entrée vers une notion, une méthode ou un artefact d’apprentissage lié à l’IA gouvernable."
+},
+{
+"question": "Cette Voie apprend-elle à remplacer le jugement humain par l’IA?",
+"answer": "Non. Elle apprend à utiliser l’IA comme outil d’assistance, de cartographie, de simulation et de vérification, tout en maintenant l’autorité finale du côté humain."
+},
+{
+"question": "Quels risques sont étudiés?",
+"answer": "La voie traite notamment des hallucinations, biais, erreurs de classification, fuites de données, manipulations, dépendances infrastructurelles, automatisations abusives et confusions entre imitation, compréhension, preuve et décision."
+},
+{
+"question": "Quel est le but immédiat de cette Voie?",
+"answer": "Le but immédiat est de diffuser des connaissances praticables sur l’IA gouvernable dans un cadre d’apprentissage ouvert : comprendre les outils, apprendre à les vérifier, documenter leurs limites et les utiliser sans déléguer la responsabilité humaine. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
+}
+],
+"contact": {
+"label": "Contact",
+"body": "Pour suivre cette voie, commencez par les cours publics disponibles et consultez les annonces pour les nouvelles ressources, rencontres ou ouvertures d’espaces d’apprentissage.",
+"email": "",
+"cta": {
+"label": "Voir les annonces",
+"target": "#annonces"
+}
+},
+"governance": {
+"owner": "local_uckk",
+"editorial_status": "approved",
+"last_reviewed": null,
+"review_notes": "Note éditoriale interne : profil public recentré sur l’accès aux cours, la diffusion ouverte du savoir, la vérification des sorties IA et la responsabilité humaine.",
+"public_claims_guardrails": [
+"Garder la note de reconnaissance unique et discrète; ne pas présenter une sortie IA comme preuve, décision ou autorité finale; ne pas afficher de progression, notes ou données privées d’étudiants."
+]
+},
+"cache": {
+"enabled": true,
+"ttl_seconds": 3600
+}
 }

@@ -1,226 +1,227 @@
 {
-  "schema_version": "UCKK-FACULTY-0.1",
-  "faculty_id": "faculty_sciences_politiques",
-  "voie_id": "voie_sciences_politiques",
-  "slug": "sciences-politiques",
-  "status": "published",
-  "visibility": "public",
-  "source_atlas": {
-    "file": "voie_sciences_politiques.json",
-    "schema_version_expected": "UCKK-ATLAS-0.2-draft",
-    "sync_mode": "read_only"
-  },
-  "moodle": {
-    "category_id": null,
-    "category_idnumber": "UCKK-SP",
-    "course_prefix": "SP",
-    "public_course_listing": true,
-    "enrolment_visibility": "public_info_only",
-    "hub_course_idnumber": "SP-HUB"
-  },
-  "identity": {
-    "eyebrow": "Voie fondatrice UCKK",
-    "name": "Voie des Sciences politiques",
-    "short_name": "Sciences politiques",
-    "title_symbolique": "Stratège civique",
-    "domain": "Pouvoir et gouvernance civique",
-    "level": "Puissance opératoire",
-    "faculty_role": "Voie qui apprend à lire, comprendre, critiquer et transformer les mécanismes du pouvoir dans le Grand Jeu social.",
-    "one_sentence": "Une voie ouverte pour comprendre les institutions, médias, plateformes, réseaux, assemblées, votes, récits de légitimité et contre-pouvoirs comme règles politiques du Grand Jeu social."
-  },
-  "seo": {
-    "title": "Sciences politiques — UCKK",
-    "description": "La Voie des Sciences politiques ouvre un cadre public d’apprentissage pour comprendre le pouvoir, la gouvernance civique, les assemblées, les votes, les institutions, les médias, les plateformes et les contre-pouvoirs.",
-    "keywords": [
-      "UCKK",
-      "Sciences politiques",
-      "bibliothèque publique",
-      "pouvoir",
-      "gouvernance",
-      "institutions",
-      "assemblées",
-      "votes",
-      "contre-pouvoirs",
-      "légitimité"
-    ]
-  },
-  "hero": {
-    "title": "Voie des Sciences politiques",
-    "subtitle": "Lire le pouvoir, organiser la décision, protéger les contre-pouvoirs.",
-    "summary": "Cette voie ouvre une bibliothèque publique et un cadre d’apprentissage pour comprendre les mécanismes politiques visibles et invisibles : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité, réforme des règles et contre-pouvoirs.",
-    "primary_cta": {
-      "label": "Explorer la voie",
-      "target": "#programme"
-    },
-    "secondary_cta": {
-      "label": "Voir les cours publics",
-      "target": "#cours"
-    }
-  },
-  "navigation": [
-    {
-      "label": "Présentation",
-      "target": "#presentation"
-    },
-    {
-      "label": "Programme",
-      "target": "#programme"
-    },
-    {
-      "label": "Cours",
-      "target": "#cours"
-    },
-    {
-      "label": "Projet final",
-      "target": "#projet-final"
-    },
-    {
-      "label": "Éthique",
-      "target": "#ethique"
-    },
-    {
-      "label": "Annonces",
-      "target": "#annonces"
-    }
-  ],
-  "sections": [
-    {
-      "id": "presentation",
-      "type": "text",
-      "title": "Une voie pour comprendre les règles du pouvoir",
-      "body": "La Voie des Sciences politiques rassemble des repères publics pour lire les institutions, les assemblées, les médias, les plateformes, les réseaux, le code, les votes, les récits de légitimité, les contre-pouvoirs et les formes de réforme des règles collectives."
-    },
-    {
-      "id": "programme",
-      "type": "text",
-      "title": "Un programme ouvert depuis l’Atlas",
-      "body": "Le programme de cette voie est projeté depuis l’Atlas UCKK. La page publique sert à rendre le parcours lisible : concepts, seuils de progression, cours publics, artefacts et relations avec les autres voies."
-    },
-    {
-      "id": "cours",
-      "type": "callout",
-      "title": "Cours publics associés",
-      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des espaces Moodle visibles associés au préfixe SP."
-    },
-    {
-      "id": "projet-final",
-      "type": "text",
-      "title": "Projet final",
-      "body": "Le projet final attendu consiste à produire une analyse politique située et une proposition de réforme praticable, en rendant visibles les acteurs, les règles, les droits de parole, les mécanismes de légitimation, les risques de capture et les conditions de contestation."
-    },
-    {
-      "id": "ethique",
-      "type": "notice",
-      "title": "Éthique publique",
-      "body": "La lecture du pouvoir doit rester contestable, située et responsable. Une analyse politique utile ne sert pas seulement à gagner une position : elle aide à comprendre les règles, à rendre les décisions lisibles et à protéger les contre-pouvoirs."
-    }
-  ],
-  "atlas_projection": {
-    "show_definition_courte": true,
-    "show_angle_fondamental": true,
-    "show_competence_centrale": true,
-    "show_seuils_progression": true,
-    "show_courses": true,
-    "show_course_codes": true,
-    "show_concept_maitre": true,
-    "show_concepts_associes": false,
-    "show_artefacts": true,
-    "show_criteres_passage": false,
-    "show_projet_final": true,
-    "show_limites_ethiques": true,
-    "show_relations_intervoies": true,
-    "show_tags": false
-  },
-  "dynamic_blocks": [
-    {
-      "id": "annonces",
-      "type": "announcements",
-      "title": "Annonces de la voie",
-      "source": {
-        "provider": "moodle_forum",
-        "course_idnumber": "SP-HUB",
-        "forum_name": "Annonces"
-      },
-      "limit": 5,
-      "visibility": "public",
-      "empty_state": "Aucune annonce publique pour la Voie des Sciences politiques pour le moment."
-    },
-    {
-      "id": "evenements",
-      "type": "events",
-      "title": "Événements publics",
-      "source": {
-        "provider": "moodle_calendar",
-        "category_idnumber": "UCKK-SP"
-      },
-      "limit": 5,
-      "visibility": "public",
-      "empty_state": "Aucun événement public annoncé pour le moment."
-    },
-    {
-      "id": "cours-moodle",
-      "type": "moodle_course_list",
-      "title": "Espaces Moodle associés",
-      "source": {
-        "provider": "moodle_category",
-        "category_idnumber": "UCKK-SP"
-      },
-      "limit": 10,
-      "visibility": "public",
-      "empty_state": "Aucun cours Moodle public associé à cette voie pour le moment."
-    }
-  ],
-  "featured_blocks": [
-    {
-      "type": "principle",
-      "title": "Le pouvoir doit rester lisible",
-      "body": "Toute architecture politique doit rendre visibles ses règles, ses lieux de décision, ses responsabilités, ses mécanismes de contestation et ses risques de capture."
-    },
-    {
-      "type": "method",
-      "title": "Cartographier avant de réformer",
-      "body": "La méthode centrale consiste à identifier les acteurs, les droits de parole, les règles explicites, les règles implicites, les récits de légitimité et les contre-pouvoirs avant de proposer une réforme."
-    },
-    {
-      "type": "ethics",
-      "title": "Ne pas confondre efficacité et légitimité",
-      "body": "Une décision rapide n’est pas nécessairement juste. Une réforme politique doit pouvoir être expliquée, contestée, révisée et mémorisée collectivement."
-    }
-  ],
-  "faq": [
-    {
-      "question": "Quel est le but immédiat de cette voie?",
-      "answer": "Le but immédiat est la diffusion publique du savoir dans un cadre d’apprentissage familier, modernisé et ouvert. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
-    },
-    {
-      "question": "La page contient-elle toute la matière des cours SP?",
-      "answer": "Non. La page publique présente la voie et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
-    },
-    {
-      "question": "Que signifie Stratège civique?",
-      "answer": "C’est le titre symbolique interne associé à la Voie des Sciences politiques. Il désigne la capacité à lire les rapports de pouvoir, organiser des décisions collectives, protéger les contre-pouvoirs et proposer des réformes praticables."
-    }
-  ],
-  "contact": {
-    "label": "Contact",
-    "body": "Pour toute question sur cette voie, consultez les annonces publiques ou les espaces Moodle associés.",
-    "email": "",
-    "cta": {
-      "label": "Voir les annonces",
-      "target": "#annonces"
-    }
-  },
-  "governance": {
-    "owner": "local_uckk",
-    "editorial_status": "approved",
-    "last_reviewed": null,
-    "review_notes": "Note éditoriale interne : profil public recentré sur la diffusion ouverte du savoir, la bibliothèque publique UCKK et la projection Faculty/Atlas.",
-    "public_claims_guardrails": [
-      "Garder la note de reconnaissance unique, discrète et non centrale; ne pas transformer la page publique en avertissement répété sur les diplômes ou statuts."
-    ]
-  },
-  "cache": {
-    "enabled": true,
-    "ttl_seconds": 3600
-  }
+"schema_version": "UCKK-FACULTY-0.1",
+"faculty_id": "faculty_sciences_politiques",
+"voie_id": "voie_sciences_politiques",
+"slug": "sciences-politiques",
+"status": "published",
+"visibility": "public",
+"source_atlas": {
+"file": "voie_sciences_politiques.json",
+"schema_version_expected": "UCKK-ATLAS-0.2-draft",
+"sync_mode": "read_only"
+},
+"moodle": {
+"category_id": null,
+"category_idnumber": "UCKK-SP",
+"course_prefix": "SP",
+"public_course_listing": true,
+"enrolment_visibility": "public_info_only",
+"hub_course_idnumber": "SP-HUB"
+},
+"identity": {
+"eyebrow": "Voie fondatrice UCKK",
+"name": "Voie des Sciences politiques",
+"short_name": "Sciences politiques",
+"title_symbolique": "Stratège civique",
+"domain": "Pouvoir et gouvernance civique",
+"level": "Puissance opératoire",
+"faculty_role": "Voie qui apprend à lire, comprendre, critiquer et transformer les mécanismes du pouvoir dans le Grand Jeu social.",
+"one_sentence": "Lire les institutions, médias, plateformes, assemblées, votes, récits de légitimité et contre-pouvoirs comme règles politiques du Grand Jeu social."
+},
+"seo": {
+"title": "Sciences politiques — UCKK",
+"description": "La Voie des Sciences politiques propose un parcours public pour comprendre le pouvoir, lire les institutions, organiser la décision collective et protéger les contre-pouvoirs.",
+"keywords": [
+"UCKK",
+"Sciences politiques",
+"Grand Jeu social",
+"pouvoir",
+"gouvernance",
+"institutions",
+"assemblées",
+"votes",
+"contre-pouvoirs",
+"légitimité",
+"décision collective"
+]
+},
+"hero": {
+"title": "Voie des Sciences politiques",
+"subtitle": "Lire le pouvoir, organiser la décision, protéger les contre-pouvoirs.",
+"summary": "Cette voie fait partie de l’Univers-Cité King Klown, un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle rassemble des repères, des cours publics, des méthodes et des exercices pour comprendre les règles du pouvoir, rendre les décisions lisibles et agir avec lucidité dans les systèmes politiques.",
+"primary_cta": {
+"label": "Comprendre la voie",
+"target": "#presentation"
+},
+"secondary_cta": {
+"label": "Accéder aux cours",
+"target": "#cours-moodle"
+}
+},
+"navigation": [
+{
+"label": "Présentation",
+"target": "#presentation"
+},
+{
+"label": "Parcours",
+"target": "#programme"
+},
+{
+"label": "Cours",
+"target": "#cours-moodle"
+},
+{
+"label": "Projet final",
+"target": "#projet-final"
+},
+{
+"label": "Éthique",
+"target": "#ethique"
+},
+{
+"label": "Annonces",
+"target": "#annonces"
+}
+],
+"sections": [
+{
+"id": "presentation",
+"type": "text",
+"title": "Une voie pour comprendre les règles du pouvoir",
+"body": "Les sciences politiques UCKK servent à lire le pouvoir comme un ensemble de règles, de scènes, d’acteurs, de récits, de votes, d’institutions et de contre-pouvoirs. Elles permettent de comprendre comment une décision devient légitime, contestable, exécutable ou capturée."
+},
+{
+"id": "programme",
+"type": "text",
+"title": "Parcours de la Voie",
+"body": "Cette voie organise un parcours public de lecture, de méthode et de pratique. Elle aide à reconnaître les formes du pouvoir, à cartographier les institutions, à comprendre les mécanismes de légitimation et à imaginer des réformes qui restent explicables, contestables et révisables."
+},
+{
+"id": "cours",
+"type": "callout",
+"title": "Explorer les cours publics",
+"body": "Les cours publics sont les principales portes d’entrée dans cette voie. Ils permettent de découvrir les concepts, méthodes, exercices et artefacts d’apprentissage, puis d’ouvrir l’espace de cours correspondant lorsqu’il est disponible."
+},
+{
+"id": "projet-final",
+"type": "text",
+"title": "Projet final",
+"body": "Le projet final consiste à produire une analyse politique située et une proposition de réforme praticable. Il doit rendre visibles les acteurs, les règles, les droits de parole, les mécanismes de légitimation, les risques de capture et les conditions de contestation."
+},
+{
+"id": "ethique",
+"type": "notice",
+"title": "Éthique publique",
+"body": "Lire le pouvoir ne sert pas à manipuler une scène politique. Une analyse utile doit aider à comprendre les règles, à rendre les décisions lisibles, à protéger les contre-pouvoirs et à ouvrir des possibilités de réforme responsables."
+}
+],
+"atlas_projection": {
+"show_definition_courte": true,
+"show_angle_fondamental": true,
+"show_competence_centrale": true,
+"show_seuils_progression": true,
+"show_courses": true,
+"show_course_codes": true,
+"show_concept_maitre": true,
+"show_concepts_associes": false,
+"show_artefacts": true,
+"show_criteres_passage": false,
+"show_projet_final": true,
+"show_limites_ethiques": true,
+"show_relations_intervoies": true,
+"show_tags": false
+},
+"dynamic_blocks": [
+{
+"id": "annonces",
+"type": "announcements",
+"title": "Annonces de la voie",
+"source": {
+"provider": "moodle_forum",
+"course_idnumber": "SP-HUB",
+"forum_name": "Annonces"
+},
+"limit": 5,
+"visibility": "public",
+"empty_state": "Aucune annonce publique pour la Voie des Sciences politiques pour le moment."
+},
+{
+"id": "evenements",
+"type": "events",
+"title": "Événements publics",
+"source": {
+"provider": "moodle_calendar",
+"category_idnumber": "UCKK-SP"
+},
+"limit": 5,
+"visibility": "public",
+"empty_state": "Aucun événement public annoncé pour le moment."
+},
+{
+"id": "cours-moodle",
+"type": "moodle_course_list",
+"title": "Accéder aux cours",
+"source": {
+"provider": "moodle_category",
+"category_idnumber": "UCKK-SP"
+},
+"limit": 10,
+"visibility": "public",
+"empty_state": "Les cours publics de cette voie seront affichés ici lorsqu’ils seront disponibles."
+}
+],
+"featured_blocks": [
+{
+"type": "principle",
+"title": "Le pouvoir doit rester lisible",
+"body": "Toute architecture politique doit rendre visibles ses règles, ses lieux de décision, ses responsabilités, ses mécanismes de contestation et ses risques de capture."
+},
+{
+"type": "method",
+"title": "Cartographier avant de réformer",
+"body": "La méthode centrale consiste à identifier les acteurs, les droits de parole, les règles explicites, les règles implicites, les récits de légitimité et les contre-pouvoirs avant de proposer une réforme."
+},
+{
+"type": "ethics",
+"title": "Ne pas confondre efficacité et légitimité",
+"body": "Une décision rapide n’est pas nécessairement juste. Une réforme politique doit pouvoir être expliquée, contestée, révisée et mémorisée collectivement."
+}
+],
+"faq": [
+{
+"question": "Par où commencer?",
+"answer": "Commencez par la présentation de la voie, puis ouvrez les cours publics disponibles. Chaque cours sert de porte d’entrée vers une notion, une méthode ou un artefact d’apprentissage."
+},
+{
+"question": "Faut-il être inscrit pour apprendre?",
+"answer": "Les pages publiques donnent accès aux repères essentiels de la voie. Certains espaces de cours peuvent demander une connexion ou une inscription selon leur usage, mais l’orientation générale du savoir reste publique."
+},
+{
+"question": "Que signifie Stratège civique?",
+"answer": "C’est le titre symbolique associé à cette voie. Il désigne la capacité à lire les rapports de pouvoir, organiser des décisions collectives, protéger les contre-pouvoirs et proposer des réformes praticables."
+}
+],
+"contact": {
+"label": "Continuer l’exploration",
+"body": "Pour avancer dans cette voie, commencez par les cours publics disponibles ou consultez les annonces de la voie.",
+"email": "",
+"cta": {
+"label": "Accéder aux cours",
+"target": "#cours-moodle"
+}
+},
+"governance": {
+"owner": "local_uckk",
+"editorial_status": "approved",
+"last_reviewed": null,
+"review_notes": "Note éditoriale interne : profil public recentré sur la Voie, les cours publics, la lecture du pouvoir et l’accès ouvert au savoir. Éviter les formulations techniques visibles sur Atlas, préfixe Moodle ou pipeline de synchronisation.",
+"public_claims_guardrails": [
+"Garder la note de reconnaissance unique, discrète et non centrale; ne pas transformer la page publique en avertissement répété sur les diplômes ou statuts."
+]
+},
+"cache": {
+"enabled": true,
+"ttl_seconds": 3600
+}
 }
