@@ -1,224 +1,228 @@
 {
-"schema_version": "UCKK-FACULTY-0.1",
-"faculty_id": "faculty_ia_gouvernable",
-"voie_id": "voie_ia_gouvernable",
-"slug": "ia-gouvernable",
-"status": "published",
-"visibility": "public",
-"source_atlas": {
-"file": "voie_ia_gouvernable.json",
-"schema_version_expected": "UCKK-ATLAS-0.2-draft",
-"sync_mode": "read_only"
-},
-"moodle": {
-"category_id": null,
-"category_idnumber": "UCKK-IA",
-"course_prefix": "IA",
-"public_course_listing": true,
-"enrolment_visibility": "public_info_only",
-"hub_course_idnumber": "IA-HUB"
-},
-"identity": {
-"eyebrow": "Voie ouverte UCKK",
-"name": "Voie Construire avec l’IA",
-"short_name": "Construire avec l’IA",
-"title_symbolique": "Bâtisseur augmenté",
-"domain": "Construction outillée",
-"level": "Puissance opératoire",
-"faculty_role": "Voie consacrée à l’usage de l’intelligence artificielle comme outil de construction, de recherche, de prototypage, de cartographie, de rédaction, de vérification et d’accélération du travail humain.",
-"one_sentence": "Utiliser l’IA pour construire plus vite, mieux documenter, mieux vérifier et mieux relier les idées, sans lui déléguer la décision, la responsabilité ou l’autorité finale."
-},
-"seo": {
-"title": "Construire avec l’IA — UCKK",
-"description": "La Voie Construire avec l’IA ouvre un parcours public pour utiliser l’intelligence artificielle comme outil de construction, de prototypage, de recherche, de cartographie, de rédaction, de vérification et de création responsable.",
-"keywords": [
-"UCKK",
-"Construire avec l’IA",
-"intelligence artificielle",
-"IA comme outil",
-"construction augmentée",
-"prototypage",
-"cartographie",
-"rédaction assistée",
-"vérification",
-"responsabilité humaine",
-"Grand Jeu social"
-]
-},
-"hero": {
-"title": "Construire avec l’IA",
-"subtitle": "Utiliser l’IA comme outil de construction, jamais comme autorité.",
-"summary": "Cette voie fait partie de l’Univers-Cité King Klown : un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle apprend à utiliser l’IA pour chercher, structurer, écrire, coder, cartographier, prototyper, vérifier et construire, tout en gardant la décision, la responsabilité et le jugement du côté humain.",
-"primary_cta": {
-"label": "Comprendre la voie",
-"target": "#programme"
-},
-"secondary_cta": {
-"label": "Accéder aux cours",
-"target": "#cours-moodle"
-}
-},
-"navigation": [
-{
-"label": "Présentation",
-"target": "#presentation"
-},
-{
-"label": "Parcours",
-"target": "#programme"
-},
-{
-"label": "Cours",
-"target": "#cours-moodle"
-},
-{
-"label": "Projet final",
-"target": "#projet-final"
-},
-{
-"label": "Éthique",
-"target": "#ethique"
-},
-{
-"label": "Annonces",
-"target": "#annonces"
-}
-],
-"sections": [
-{
-"id": "presentation",
-"type": "text",
-"title": "Une voie pour construire avec l’IA",
-"body": "La Voie Construire avec l’IA aborde l’intelligence artificielle comme un atelier outillé. Elle sert à accélérer la recherche, clarifier les idées, produire des brouillons, générer des prototypes, cartographier des systèmes, écrire du code, comparer des options et vérifier des hypothèses. L’IA n’y remplace pas le jugement humain : elle augmente la capacité de construire."
-},
-{
-"id": "programme",
-"type": "text",
-"title": "Un parcours de construction augmentée",
-"body": "Cette voie organise un parcours public de méthode et de pratique. Elle apprend à formuler une intention, préparer un contexte, dialoguer avec un modèle, transformer une sortie en matériau de travail, vérifier les résultats, documenter les limites et intégrer l’IA dans un processus de construction responsable."
-},
-{
-"id": "cours",
-"type": "callout",
-"title": "Explorer les cours publics",
-"body": "Les cours publics sont les principales portes d’entrée dans cette voie. Ils permettent d’apprendre à utiliser l’IA pour chercher, structurer, écrire, coder, concevoir, corriger, comparer, documenter et prototyper, puis d’ouvrir l’espace de cours correspondant lorsqu’il est disponible."
-},
-{
-"id": "projet-final",
-"type": "text",
-"title": "Projet final",
-"body": "Le projet final consiste à construire un objet utile avec l’IA : carte, outil, prototype, dossier, méthode, assistant, analyse, interface, parcours d’apprentissage ou système documentaire. Le résultat doit montrer l’intention humaine, les choix effectués, les vérifications réalisées, les limites reconnues et la manière dont l’IA a été utilisée sans devenir l’autorité finale."
-},
-{
-"id": "ethique",
-"type": "notice",
-"title": "Responsabilité humaine",
-"body": "Une sortie d’IA n’est pas une preuve, une décision ou une vérité finale. Elle devient un matériau de travail seulement lorsqu’elle est située, vérifiée, corrigée, documentée et assumée par une personne ou une instance responsable."
-}
-],
-"atlas_projection": {
-"show_definition_courte": true,
-"show_angle_fondamental": true,
-"show_competence_centrale": true,
-"show_seuils_progression": true,
-"show_courses": true,
-"show_course_codes": true,
-"show_concept_maitre": true,
-"show_concepts_associes": false,
-"show_artefacts": true,
-"show_criteres_passage": false,
-"show_projet_final": true,
-"show_limites_ethiques": true,
-"show_relations_intervoies": true,
-"show_tags": false
-},
-"dynamic_blocks": [
-{
-"id": "annonces",
-"type": "announcements",
-"title": "Annonces de la voie",
-"source": {
-"provider": "moodle_forum",
-"course_idnumber": "IA-HUB",
-"forum_name": "Annonces"
-},
-"limit": 5,
-"visibility": "public",
-"empty_state": "Aucune annonce publique pour le moment."
-},
-{
-"id": "cours-moodle",
-"type": "moodle_course_list",
-"title": "Accéder aux cours",
-"source": {
-"provider": "moodle_category",
-"category_idnumber": "UCKK-IA"
-},
-"limit": 10,
-"visibility": "public",
-"empty_state": "Les cours publics de cette voie seront affichés ici lorsqu’ils seront disponibles."
-}
-],
-"featured_blocks": [
-{
-"type": "principle",
-"title": "L’IA comme outil",
-"body": "L’IA sert à construire, explorer, reformuler, comparer, simuler, coder et documenter. Elle ne reçoit pas le contrôle du système, de la décision ou de la responsabilité."
-},
-{
-"type": "method",
-"title": "Passer de la sortie au matériau",
-"body": "Une réponse d’IA n’est qu’un point de départ. La méthode consiste à la relire, la tester, la corriger, la situer, la comparer et l’intégrer dans un travail humain vérifiable."
-},
-{
-"type": "ethics",
-"title": "Ne pas déléguer l’autorité",
-"body": "kOA n’utilise pas l’IA pour remplacer le jugement humain. L’IA peut accélérer la construction, mais la responsabilité, la décision et l’interprétation demeurent humaines."
-},
-{
-"type": "principle",
-"title": "Construire des preuves de travail",
-"body": "Un bon usage de l’IA laisse des traces : intention, contexte, prompts, choix, corrections, vérifications, sources, limites et décisions humaines."
-}
-],
-"faq": [
-{
-"question": "Cette voie apprend-elle à donner le contrôle à l’IA?",
-"answer": "Non. Cette voie apprend à utiliser l’IA comme outil de construction. Elle aide à chercher, écrire, coder, cartographier, prototyper et vérifier, sans déplacer l’autorité finale hors du jugement humain."
-},
-{
-"question": "Que peut-on construire avec l’IA?",
-"answer": "On peut construire des cartes, brouillons, analyses, prototypes, assistants, scripts, parcours d’apprentissage, systèmes documentaires, méthodes de vérification et outils de travail. Chaque production doit être relue, testée, corrigée et assumée humainement."
-},
-{
-"question": "Par où commencer?",
-"answer": "Commencez par les cours publics disponibles. Ils donnent des méthodes pour formuler une intention, préparer un contexte, interroger un modèle, transformer une sortie en matériau de travail et vérifier ce qui doit l’être."
-},
-{
-"question": "Que signifie Bâtisseur augmenté?",
-"answer": "C’est le titre symbolique associé à cette voie. Il désigne une posture d’apprentissage : savoir construire avec des outils d’IA tout en gardant la lucidité, la responsabilité et la capacité de vérification. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
-}
-],
-"contact": {
-"label": "Contact",
-"body": "Pour suivre cette voie, commencez par les cours disponibles, puis consultez les annonces publiques pour les nouvelles, rencontres et ouvertures d’espaces d’apprentissage.",
-"email": "",
-"cta": {
-"label": "Voir les annonces",
-"target": "#annonces"
-}
-},
-"governance": {
-"owner": "local_uckk",
-"editorial_status": "approved",
-"last_reviewed": null,
-"review_notes": "Note éditoriale interne : renommage public de la voie vers Construire avec l’IA. Les identifiants techniques faculty_ia_gouvernable, voie_ia_gouvernable et ia-gouvernable sont conservés pour compatibilité Atlas/Moodle. Ne pas afficher publiquement.",
-"public_claims_guardrails": [
-"Présenter l’IA comme outil de construction, jamais comme autorité finale, sujet de gouvernance autonome ou instance de contrôle."
-]
-},
-"cache": {
-"enabled": true,
-"ttl_seconds": 3600
-}
+  "schema_version": "UCKK-FACULTY-0.1",
+  "faculty_id": "faculty_ia_gouvernable",
+  "voie_id": "voie_ia_gouvernable",
+  "slug": "ia-gouvernable",
+  "status": "published",
+  "visibility": "public",
+  "source_atlas": {
+    "file": "voie_ia_gouvernable.json",
+    "schema_version_expected": "UCKK-ATLAS-0.2-draft",
+    "sync_mode": "read_only"
+  },
+  "moodle": {
+    "category_id": null,
+    "category_idnumber": "UCKK-IA",
+    "course_prefix": "IA",
+    "public_course_listing": true,
+    "enrolment_visibility": "public_info_only",
+    "hub_course_idnumber": "IA-HUB"
+  },
+  "identity": {
+    "eyebrow": "Voie ouverte UCKK",
+    "name": "Voie de la Production augmentée par l’IA",
+    "short_name": "Production IA",
+    "title_symbolique": "Maître d’œuvre augmenté",
+    "domain": "Production outillée",
+    "level": "Puissance opératoire",
+    "faculty_role": "Voie consacrée à l’usage productif de l’intelligence artificielle pour écrire, concevoir, coder, documenter, créer des images, structurer des outils, préparer des supports d’accompagnement et produire des œuvres ou systèmes vérifiables.",
+    "one_sentence": "Utiliser l’IA comme atelier de production pour créer des livres, images, programmes, documents, méthodes et outils utiles, sans lui déléguer la décision, la responsabilité ou l’autorité finale."
+  },
+  "seo": {
+    "title": "Voie de la Production augmentée par l’IA — UCKK",
+    "description": "La Voie de la Production augmentée par l’IA ouvre un parcours public pour utiliser l’intelligence artificielle comme atelier de production : écriture, graphisme, code, documentation institutionnelle, prototypage, accompagnement, vérification et création responsable.",
+    "keywords": [
+      "UCKK",
+      "Production IA",
+      "Production augmentée par l’IA",
+      "intelligence artificielle",
+      "IA comme outil",
+      "production augmentée",
+      "ingénierie augmentée",
+      "écriture assistée",
+      "graphisme assisté",
+      "code assisté par IA",
+      "documentation institutionnelle",
+      "prototypage",
+      "vérification",
+      "responsabilité humaine",
+      "Grand Jeu social"
+    ]
+  },
+  "hero": {
+    "title": "Production IA",
+    "subtitle": "Utiliser l’IA pour produire des œuvres, outils, documents et systèmes vérifiables.",
+    "summary": "Cette voie fait partie de l’Univers-Cité King Klown : un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle apprend à utiliser l’IA comme atelier de production pour écrire, concevoir, coder, documenter, illustrer, prototyper, structurer et vérifier, tout en gardant la décision, la responsabilité et le jugement du côté humain.",
+    "primary_cta": {
+      "label": "Comprendre la voie",
+      "target": "#programme"
+    },
+    "secondary_cta": {
+      "label": "Accéder aux cours",
+      "target": "#cours-moodle"
+    }
+  },
+  "navigation": [
+    {
+      "label": "Présentation",
+      "target": "#presentation"
+    },
+    {
+      "label": "Parcours",
+      "target": "#programme"
+    },
+    {
+      "label": "Cours",
+      "target": "#cours-moodle"
+    },
+    {
+      "label": "Projet final",
+      "target": "#projet-final"
+    },
+    {
+      "label": "Éthique",
+      "target": "#ethique"
+    },
+    {
+      "label": "Annonces",
+      "target": "#annonces"
+    }
+  ],
+  "sections": [
+    {
+      "id": "presentation",
+      "type": "text",
+      "title": "Une voie pour produire avec l’IA",
+      "body": "La Voie de la Production augmentée par l’IA aborde l’intelligence artificielle comme un atelier outillé. Elle sert à écrire des livres, produire du graphisme, coder des programmes, structurer de la documentation institutionnelle, préparer des supports d’accompagnement, générer des prototypes, cartographier des systèmes, comparer des options et vérifier des hypothèses. L’IA n’y remplace pas le jugement humain : elle augmente la capacité de produire."
+    },
+    {
+      "id": "programme",
+      "type": "text",
+      "title": "Un parcours de production augmentée",
+      "body": "Cette voie organise un parcours public de méthode et de pratique. Elle apprend à formuler une intention, préparer un contexte, dialoguer avec un modèle, transformer une sortie en matériau de travail, produire un livrable, vérifier les résultats, documenter les limites et intégrer l’IA dans un processus de production responsable."
+    },
+    {
+      "id": "cours",
+      "type": "callout",
+      "title": "Explorer les cours publics",
+      "body": "Les cours publics sont les principales portes d’entrée dans cette voie. Ils permettent d’apprendre à utiliser l’IA pour écrire, concevoir, coder, illustrer, documenter, corriger, comparer, prototyper et produire, puis d’ouvrir l’espace de cours correspondant lorsqu’il est disponible."
+    },
+    {
+      "id": "projet-final",
+      "type": "text",
+      "title": "Projet final",
+      "body": "Le projet final consiste à produire un objet utile avec l’IA : livre, image, identité graphique, programme, script, prototype, dossier, documentation institutionnelle, méthode d’accompagnement, assistant, analyse, interface, parcours d’apprentissage ou système documentaire. Le résultat doit montrer l’intention humaine, les choix effectués, les vérifications réalisées, les limites reconnues et la manière dont l’IA a été utilisée sans devenir l’autorité finale."
+    },
+    {
+      "id": "ethique",
+      "type": "notice",
+      "title": "Responsabilité humaine",
+      "body": "Une sortie d’IA n’est pas une preuve, une décision ou une vérité finale. Elle devient un matériau de production seulement lorsqu’elle est située, vérifiée, corrigée, documentée et assumée par une personne ou une instance responsable."
+    }
+  ],
+  "atlas_projection": {
+    "show_definition_courte": true,
+    "show_angle_fondamental": true,
+    "show_competence_centrale": true,
+    "show_seuils_progression": true,
+    "show_courses": true,
+    "show_course_codes": true,
+    "show_concept_maitre": true,
+    "show_concepts_associes": false,
+    "show_artefacts": true,
+    "show_criteres_passage": false,
+    "show_projet_final": true,
+    "show_limites_ethiques": true,
+    "show_relations_intervoies": true,
+    "show_tags": false
+  },
+  "dynamic_blocks": [
+    {
+      "id": "annonces",
+      "type": "announcements",
+      "title": "Annonces de la voie",
+      "source": {
+        "provider": "moodle_forum",
+        "course_idnumber": "IA-HUB",
+        "forum_name": "Annonces"
+      },
+      "limit": 5,
+      "visibility": "public",
+      "empty_state": "Aucune annonce publique pour le moment."
+    },
+    {
+      "id": "cours-moodle",
+      "type": "moodle_course_list",
+      "title": "Accéder aux cours",
+      "source": {
+        "provider": "moodle_category",
+        "category_idnumber": "UCKK-IA"
+      },
+      "limit": 10,
+      "visibility": "public",
+      "empty_state": "Les cours publics de cette voie seront affichés ici lorsqu’ils seront disponibles."
+    }
+  ],
+  "featured_blocks": [
+    {
+      "type": "principle",
+      "title": "L’IA comme atelier",
+      "body": "L’IA sert à écrire, concevoir, illustrer, coder, documenter, reformuler, comparer, simuler, prototyper et produire. Elle ne reçoit pas le contrôle du système, de la décision ou de la responsabilité."
+    },
+    {
+      "type": "method",
+      "title": "Passer de la sortie au livrable",
+      "body": "Une réponse d’IA n’est qu’un matériau brut. La méthode consiste à la relire, la tester, la corriger, la situer, la comparer, l’intégrer et la transformer en production humaine vérifiable."
+    },
+    {
+      "type": "ethics",
+      "title": "Ne pas déléguer l’autorité",
+      "body": "kOA n’utilise pas l’IA pour remplacer le jugement humain. L’IA peut accélérer la production, mais la responsabilité, la décision et l’interprétation demeurent humaines."
+    },
+    {
+      "type": "principle",
+      "title": "Produire des preuves de travail",
+      "body": "Un bon usage de l’IA laisse des traces : intention, contexte, prompts, choix, corrections, vérifications, sources, limites, versions et décisions humaines."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Cette voie apprend-elle à donner le contrôle à l’IA?",
+      "answer": "Non. Cette voie apprend à utiliser l’IA comme outil de production. Elle aide à écrire, concevoir, coder, illustrer, documenter, prototyper et vérifier, sans déplacer l’autorité finale hors du jugement humain."
+    },
+    {
+      "question": "Que peut-on produire avec l’IA?",
+      "answer": "On peut produire des livres, images, maquettes, analyses, prototypes, assistants, scripts, parcours d’apprentissage, systèmes documentaires, méthodes de vérification, supports d’accompagnement et outils de travail. Chaque production doit être relue, testée, corrigée et assumée humainement."
+    },
+    {
+      "question": "Par où commencer?",
+      "answer": "Commencez par les cours publics disponibles. Ils donnent des méthodes pour formuler une intention, préparer un contexte, interroger un modèle, transformer une sortie en matériau de production et vérifier ce qui doit l’être."
+    },
+    {
+      "question": "Que signifie Maître d’œuvre augmenté?",
+      "answer": "C’est le titre symbolique associé à cette voie. Il désigne une posture d’apprentissage : savoir coordonner une production avec des outils d’IA tout en gardant la lucidité, la responsabilité, la méthode et la capacité de vérification."
+    }
+  ],
+  "contact": {
+    "label": "Contact",
+    "body": "Pour suivre cette voie, commencez par les cours disponibles, puis consultez les annonces publiques pour les nouvelles, rencontres et ouvertures d’espaces d’apprentissage.",
+    "email": "",
+    "cta": {
+      "label": "Voir les annonces",
+      "target": "#annonces"
+    }
+  },
+  "governance": {
+    "owner": "local_uckk",
+    "editorial_status": "approved",
+    "last_reviewed": null,
+    "review_notes": "Note éditoriale interne : renommage public de la voie vers Voie de la Production augmentée par l’IA. Les identifiants techniques faculty_ia_gouvernable, voie_ia_gouvernable et ia-gouvernable sont conservés pour compatibilité Atlas/Moodle. Ne pas afficher publiquement.",
+    "public_claims_guardrails": [
+      "Présenter l’IA comme outil de production, jamais comme autorité finale, sujet de gouvernance autonome ou instance de contrôle."
+    ]
+  },
+  "cache": {
+    "enabled": true,
+    "ttl_seconds": 3600
+  }
 }
