@@ -1088,8 +1088,8 @@
       "id": "badge:parchemin-intelligence-artificielle-gouvernable-magie-operable",
       "object_type": "badge",
       "idnumber": "UCKK-BADGE-IA-COMPLETION",
-      "title": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
-      "short_title": "IA gouvernable",
+      "title": "Parchemin de Puissance opératoire en Production augmentée par l’IA",
+      "short_title": "Production IA",
       "badge_type": "parchemin_uckk",
       "status": "active",
       "program_id": "program:intelligence-artificielle-gouvernable-magie-operable",
@@ -1131,14 +1131,14 @@
       ],
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
-        "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
-        "symbolic_title": "Cartographe augmenté",
+        "title": "Parchemin de Puissance opératoire en Production augmentée par l’IA",
+        "internal_title": "Mage UCKK de la Production augmentée par l’IA",
+        "symbolic_title": "Maître d’œuvre augmenté",
         "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
-        "name": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
-        "description": "Badge interne UCKK lié à Voie de l’Intelligence artificielle gouvernable.",
+        "name": "Parchemin de Puissance opératoire en Production augmentée par l’IA",
+        "description": "Badge interne UCKK lié à Voie de la Production augmentée par l’IA.",
         "idnumber": "UCKK-BADGE-IA-COMPLETION",
         "visible": false,
         "enabled": true,
@@ -1148,7 +1148,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de l’Intelligence artificielle gouvernable. Il repère une progression interne UCKK.",
+        "summary_for_retrieval": "Badge interne associé à Voie de la Production augmentée par l’IA. Il repère une progression interne UCKK.",
         "tags": [
           "ia",
           "machines-pensantes",
@@ -1164,8 +1164,8 @@
         "source_version": "0.2"
       },
       "key": "ia_gouvernable",
-      "name": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
-      "description": "Badge interne UCKK lié à Voie de l’Intelligence artificielle gouvernable.",
+      "name": "Parchemin de Puissance opératoire en Production augmentée par l’IA",
+      "description": "Badge interne UCKK lié à Voie de la Production augmentée par l’IA.",
       "visible": 0,
       "enabled": 1,
       "issuer": {

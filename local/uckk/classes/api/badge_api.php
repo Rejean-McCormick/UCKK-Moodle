@@ -98,7 +98,7 @@ final class badge_api {
     /** Badge key: Gardien des systèmes vivants. */
     public const BADGE_GARDIEN_SYSTEMES_VIVANTS = 'gardien_systemes_vivants';
 
-    /** Badge key: IA gouvernable. */
+    /** Badge key: Production IA. */
     public const BADGE_IA_GOUVERNABLE = 'ia_gouvernable';
 
     /** Badge key: Grand Jeu social. */
@@ -398,7 +398,7 @@ final class badge_api {
             self::BADGE_IA_GOUVERNABLE => [
                 'key' => self::BADGE_IA_GOUVERNABLE,
                 'idnumber' => self::get_idnumber(self::BADGE_IA_GOUVERNABLE),
-                'name' => 'IA gouvernable',
+                'name' => 'Production IA',
                 'description' => 'Reconnaît l’usage de l’IA comme outil non souverain, avec journal humain-IA, incertitudes explicites et validation humaine.',
                 'level' => self::LEVEL_PROGRAM,
                 'symbolicrole' => 'ia_gouvernable',

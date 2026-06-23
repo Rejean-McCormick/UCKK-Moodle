@@ -285,7 +285,7 @@ final class programs {
             || $uppercategory === 'UCKK-IA'
             || strpos($haystack, 'voie_ia_gouvernable') !== false
             || strpos($haystack, 'ia-gouvernable') !== false
-            || strpos($haystack, 'intelligence artificielle gouvernable') !== false
+            || strpos($haystack, 'production augmentée par l’IA') !== false
             || strpos($haystack, 'production augment') !== false
             || strpos($haystack, 'production ia') !== false;
 

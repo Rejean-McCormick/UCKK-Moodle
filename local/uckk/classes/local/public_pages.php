@@ -240,7 +240,7 @@ final class public_pages {
                         'url' => '/local/uckk/faculty.php?slug=metaphysique',
                     ],
                     [
-                        'label' => 'Voie de l’Intelligence artificielle gouvernable',
+                        'label' => 'Voie de la Production augmentée par l’IA',
                         'description' => 'Étudier l’IA comme outil de lecture, création, cartographie, simulation et accélération, jamais comme autorité finale.',
                         'url' => '/local/uckk/faculty.php?slug=ia-gouvernable',
                     ],

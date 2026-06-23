@@ -309,10 +309,10 @@
     },
     {
       "key": "program_ai",
-      "name": "Voie — Intelligence artificielle gouvernable",
+      "name": "Voie — Production augmentée par l’IA",
       "idnumber": "UCKK-COHORT-PROGRAM-AI",
       "context": "system",
-      "description": "Cohorte de la Voie de l’Intelligence artificielle gouvernable.",
+      "description": "Cohorte de la Voie de la Production augmentée par l’IA.",
       "visible": true,
       "status": "active",
       "visibility": "institution",

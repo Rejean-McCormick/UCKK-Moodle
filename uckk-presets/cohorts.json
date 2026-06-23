@@ -189,8 +189,8 @@
     },
     {
       "idnumber": "UCKK-COHORT-BACC-IA-GOUVERNABLE",
-      "name": "Voie de l’Intelligence artificielle gouvernable",
-      "description": "Learners following the internal IA gouvernable pathway.",
+      "name": "Voie de la Production augmentée par l’IA",
+      "description": "Learners following the internal Production IA pathway.",
       "context": "system",
       "visible": true,
       "program": "ia_gouvernable",

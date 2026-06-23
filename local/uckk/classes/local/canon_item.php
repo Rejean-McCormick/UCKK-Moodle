@@ -938,7 +938,7 @@ final class canon_item {
             self::TYPE_ASSEMBLY => self::string('canon:itemtype:assembly', 'Assemblée'),
             self::TYPE_ARCHIVE => self::string('canon:itemtype:archive', 'Archive'),
             self::TYPE_INTEGRITY => self::string('canon:itemtype:integrity', 'Intégrité'),
-            self::TYPE_AI => self::string('canon:itemtype:ai', 'IA gouvernable'),
+            self::TYPE_AI => self::string('canon:itemtype:ai', 'Production IA'),
         ];
     }
 

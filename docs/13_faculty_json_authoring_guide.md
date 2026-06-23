@@ -1574,7 +1574,7 @@ espaces Moodle associés.
 Pour la Voie IA, éviter :
 
 ```text
-IA gouvernable comme nom public principal;
+Production IA comme nom public principal;
 donner le contrôle à l’IA;
 gouvernance autonome de l’IA;
 IA comme décideur;
@@ -2107,8 +2107,8 @@ Les cours publics de cette voie seront affichés ici lorsqu’ils seront disponi
 À éviter :
 
 ```text
-Voie de l’Intelligence artificielle gouvernable.
-IA gouvernable.
+Voie de la Production augmentée par l’IA.
+Production IA.
 Bâtisseur augmenté.
 Donner le contrôle à l’IA.
 Gouvernance autonome des systèmes d’IA.

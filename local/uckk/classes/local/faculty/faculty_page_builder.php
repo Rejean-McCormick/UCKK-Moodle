@@ -998,7 +998,7 @@ final class faculty_page_builder {
             'voie_sciences_politiques' => 'Voie des Sciences politiques',
             'voie_linguistique_architecture_du_sens' => 'Voie de la Linguistique et de l’architecture du sens',
             'voie_metaphysique' => 'Voie de la Métaphysique',
-            'voie_ia_gouvernable' => 'Voie de l’Intelligence artificielle gouvernable',
+            'voie_ia_gouvernable' => 'Voie de la Production augmentée par l’IA',
             'voie_intervention_sociale_systemes_humains' => 'Voie de l’Intervention sociale et des systèmes humains',
             'voie_architecture_sociotechnique' => 'Voie d’Architecture sociotechnique',
             'voie_ecosysteme_digital_koa' => 'Voie de l’Architecture de l’écosystème digital kOA',

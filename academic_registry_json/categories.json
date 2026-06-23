@@ -195,11 +195,11 @@
     },
     {
       "id": "09_baccalaureat_ia_gouvernable",
-      "name": "09 — Voie de l’Intelligence artificielle gouvernable",
+      "name": "09 — Voie de la Production augmentée par l’IA",
       "idnumber": "UCKK-IA",
-      "path": "UCKK / 09 — Voie de l’Intelligence artificielle gouvernable",
+      "path": "UCKK / 09 — Voie de la Production augmentée par l’IA",
       "parent_idnumber": "UCKK",
-      "description": "Voie consacrée à l’intelligence artificielle gouvernable, non souveraine, documentée et soumise à validation humaine.",
+      "description": "Voie consacrée à la production augmentée par l’IA, non souveraine, documentée et soumise à validation humaine.",
       "sortorder": 100,
       "visible": 1,
       "metadata": {

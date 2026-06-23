@@ -453,8 +453,8 @@
     {
       "id": "program:intelligence-artificielle-gouvernable-magie-operable",
       "code": "IA",
-      "title": "Voie de l’Intelligence artificielle gouvernable",
-      "short_title": "Intelligence artificielle gouvernable",
+      "title": "Voie de la Production augmentée par l’IA",
+      "short_title": "Production augmentée par l’IA",
       "program_type": "voie_uckk",
       "domain": {
         "id": "machines-pensantes",
@@ -467,14 +467,14 @@
       "recognition": {
         "type": "parchemin_uckk",
         "title": "Repère interne de progression UCKK",
-        "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
-        "symbolic_title": "Cartographe augmenté"
+        "internal_title": "Mage UCKK de la Production augmentée par l’IA",
+        "symbolic_title": "Maître d’œuvre augmenté"
       },
       "status": "active",
       "summary": "Voie qui rend publics des repères pour utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans lui déléguer l’autorité finale.",
       "moodle": {
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "visible": true
       },
       "source": {
@@ -490,12 +490,12 @@
         "magie-operable"
       ],
       "key": "ia",
-      "name": "Voie de l’Intelligence artificielle gouvernable",
+      "name": "Voie de la Production augmentée par l’IA",
       "shortname": "IA",
-      "fullname": "Voie de l’Intelligence artificielle gouvernable",
+      "fullname": "Voie de la Production augmentée par l’IA",
       "idnumber": "UCKK-PROG-IA",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "visible": 1,
       "description": "Voie qui rend publics des repères pour utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans lui déléguer l’autorité finale.",
       "category": "UCKK-IA",

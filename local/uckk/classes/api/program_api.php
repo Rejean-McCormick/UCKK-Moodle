@@ -231,7 +231,7 @@ final class program_api {
             [
                 'shortname' => 'intelligence_artificielle_gouvernable',
                 'idnumber' => 'UCKK-PROG-IA',
-                'fullname' => 'Voie de l’Intelligence artificielle gouvernable',
+                'fullname' => 'Voie de la Production augmentée par l’IA',
                 'programtype' => self::TYPE_BACCALAUREAT,
                 'summary' => 'Programme interne sur l’IA comme outil de lecture, création, cartographie, simulation et accélération, jamais comme autorité finale.',
                 'status' => self::STATUS_ACTIVE,

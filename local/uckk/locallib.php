@@ -419,7 +419,7 @@ function local_uckk_get_program_registry(): array {
         'intelligence_artificielle_gouvernable' => [
             'shortname' => 'intelligence_artificielle_gouvernable',
             'idnumber' => 'UCKK-PROG-IA',
-            'fullname' => 'Voie de l’Intelligence artificielle gouvernable',
+            'fullname' => 'Voie de la Production augmentée par l’IA',
             'type' => 'baccalaureat',
         ],
         'linguistique_architecture_du_sens' => [
@@ -617,7 +617,7 @@ function local_uckk_get_badge_registry(): array {
         'architecte_sens' => 'Architecte du sens',
         'architecte_opportunites' => 'Architecte d’opportunités',
         'gardien_systemes_vivants' => 'Gardien des systèmes vivants',
-        'ia_gouvernable' => 'IA gouvernable',
+        'ia_gouvernable' => 'Production IA',
         'grand_jeu_social' => 'Grand Jeu social',
         'koa_digital_ecosystem' => 'kOA Digital Ecosystem',
     ];

@@ -493,7 +493,7 @@ final class canon_api {
             '40_baccalaureat_ia_gouvernable' => [
                 'key' => '40_baccalaureat_ia_gouvernable',
                 'path' => 'UCKK_Canon/40_baccalaureat-intelligence-artificielle-gouvernable.md',
-                'title' => 'Voie de l’Intelligence artificielle gouvernable',
+                'title' => 'Voie de la Production augmentée par l’IA',
                 'category' => self::CATEGORY_PROGRAM,
                 'programkey' => 'intelligence_artificielle_gouvernable',
                 'sortorder' => 400,

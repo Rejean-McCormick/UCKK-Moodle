@@ -97,7 +97,7 @@ final class symbolic_role {
     /** Symbolic role key: Stratège civique. */
     public const ROLE_STRATEGE_CIVIQUE = 'stratege_civique';
 
-    /** Symbolic role key: Cartographe augmenté. */
+    /** Symbolic role key: Maître d’œuvre augmenté. */
     public const ROLE_CARTOGRAPHE_AUGMENTE = 'cartographe_augmente';
 
     /** Symbolic role key: Designer d’assemblées. */
@@ -492,7 +492,7 @@ final class symbolic_role {
             ],
             self::ROLE_CARTOGRAPHE_AUGMENTE => [
                 'key' => self::ROLE_CARTOGRAPHE_AUGMENTE,
-                'name' => 'Cartographe augmenté',
+                'name' => 'Maître d’œuvre augmenté',
                 'description' => 'Personne qui utilise l’IA comme outil de cartographie, clarification et accélération sans lui déléguer l’autorité finale.',
                 'family' => self::FAMILY_METHOD,
                 'badgekey' => 'ia_gouvernable',

@@ -12803,7 +12803,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Introduction aux concepts de base : modèles, données, apprentissage, génération, classification, prédiction, limites, incertitude et risques.",
       "learning_outcomes": [],
@@ -12813,7 +12813,7 @@
         "fullname": "Fondements de l’intelligence artificielle",
         "idnumber": "UCKK-IA101",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -12845,7 +12845,7 @@
       "fullname": "Fondements de l’intelligence artificielle",
       "idnumber": "UCKK-IA101",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -12867,7 +12867,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -12906,7 +12906,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Étude de l’IA comme force sociale : travail, pouvoir, plateformes, automatisation, accès, dépendance, concentration des moyens de production et effets institutionnels.",
       "learning_outcomes": [],
@@ -12916,7 +12916,7 @@
         "fullname": "IA et société",
         "idnumber": "UCKK-IA102",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -12948,7 +12948,7 @@
       "fullname": "IA et société",
       "idnumber": "UCKK-IA102",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -12970,7 +12970,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -13009,7 +13009,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Apprentissage des méthodes de formulation : intentions, contraintes, critères, exemples, contre-exemples, rôles, formats, itérations, garde-fous.",
       "learning_outcomes": [],
@@ -13019,7 +13019,7 @@
         "fullname": "Prompting, contraintes et points d’ancrage",
         "idnumber": "UCKK-IA103",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -13054,7 +13054,7 @@
       "fullname": "Prompting, contraintes et points d’ancrage",
       "idnumber": "UCKK-IA103",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -13076,7 +13076,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -13118,7 +13118,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Méthodes pour repérer erreurs, hallucinations, omissions, fausses symétries, analogies séduisantes, catégories faibles et glissements de sens.",
       "learning_outcomes": [],
@@ -13128,7 +13128,7 @@
         "fullname": "Pensée critique face aux sorties générées",
         "idnumber": "UCKK-IA104",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -13165,7 +13165,7 @@
       "fullname": "Pensée critique face aux sorties générées",
       "idnumber": "UCKK-IA104",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -13187,7 +13187,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -13231,7 +13231,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Étude des sources de biais, limites de données, distorsions statistiques, problèmes de représentation, hallucinations et confiance excessive.",
       "learning_outcomes": [],
@@ -13241,7 +13241,7 @@
         "fullname": "Données, modèles, biais et hallucinations",
         "idnumber": "UCKK-IA105",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -13276,7 +13276,7 @@
       "fullname": "Données, modèles, biais et hallucinations",
       "idnumber": "UCKK-IA105",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -13298,7 +13298,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -13340,7 +13340,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Version avancée du tronc commun sur l’IA comme partenaire de cartographie intellectuelle.",
       "learning_outcomes": [
@@ -13376,7 +13376,7 @@
         "fullname": "Cartographie des idées avec l’IA",
         "idnumber": "UCKK-IA201",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -13415,7 +13415,7 @@
       "fullname": "Cartographie des idées avec l’IA",
       "idnumber": "UCKK-IA201",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -13437,7 +13437,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [
           "structurer un prompt complexe",
@@ -13509,7 +13509,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Étudier les critiques de l’IA : erreurs, vérification, automatisation, propriété et pouvoir.",
       "learning_outcomes": [
@@ -13545,7 +13545,7 @@
         "fullname": "IA, erreurs, emploi et moyens de production",
         "idnumber": "UCKK-IA202",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -13586,7 +13586,7 @@
       "fullname": "IA, erreurs, emploi et moyens de production",
       "idnumber": "UCKK-IA202",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -13608,7 +13608,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [
           "analyser les erreurs",
@@ -13682,7 +13682,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Méthode doc-first pour maintenir la cohérence dans des projets assistés par IA.",
       "learning_outcomes": [
@@ -13718,7 +13718,7 @@
         "fullname": "Développement doc-first avec IA",
         "idnumber": "UCKK-IA203",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -13758,7 +13758,7 @@
       "fullname": "Développement doc-first avec IA",
       "idnumber": "UCKK-IA203",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -13780,7 +13780,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [
           "rédiger un document maître",
@@ -13853,7 +13853,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Distinguer ce qui doit rester déterministe de ce qui peut être assisté par génération probabiliste.",
       "learning_outcomes": [
@@ -13889,7 +13889,7 @@
         "fullname": "Systèmes déterministes et IA générative",
         "idnumber": "UCKK-IA204",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -13929,7 +13929,7 @@
       "fullname": "Systèmes déterministes et IA générative",
       "idnumber": "UCKK-IA204",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -13951,7 +13951,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [
           "choisir l’architecture appropriée",
@@ -14024,7 +14024,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Relier IA, sémantique, preuve, provenance et artefacts vérifiables.",
       "learning_outcomes": [
@@ -14060,7 +14060,7 @@
         "fullname": "Kristals et connaissance vérifiable",
         "idnumber": "UCKK-IA205",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -14101,7 +14101,7 @@
       "fullname": "Kristals et connaissance vérifiable",
       "idnumber": "UCKK-IA205",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -14123,7 +14123,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [
           "structurer un claim",
@@ -14197,9 +14197,9 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
-      "summary": "Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de l’IA gouvernable.",
+      "summary": "Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de la Production IA.",
       "learning_outcomes": [],
       "assessment": [],
       "moodle": {
@@ -14207,14 +14207,14 @@
         "fullname": "Graphes de connaissance, sémantique et IA",
         "idnumber": "UCKK-IA206",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
         "enablecompletion": true
       },
       "ai_metadata": {
-        "summary_for_retrieval": "UCKK-IA206 — Graphes de connaissance, sémantique et IA. Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de l’IA gouvernable.",
+        "summary_for_retrieval": "UCKK-IA206 — Graphes de connaissance, sémantique et IA. Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de la Production IA.",
         "keywords": [
           "Graphes",
           "connaissance",
@@ -14242,7 +14242,7 @@
       "fullname": "Graphes de connaissance, sémantique et IA",
       "idnumber": "UCKK-IA206",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -14264,12 +14264,12 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
         "ai_metadata": {
-          "summary_for_retrieval": "UCKK-IA206 — Graphes de connaissance, sémantique et IA. Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de l’IA gouvernable.",
+          "summary_for_retrieval": "UCKK-IA206 — Graphes de connaissance, sémantique et IA. Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de la Production IA.",
           "keywords": [
             "Graphes",
             "connaissance",
@@ -14306,7 +14306,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Conception d’automatisations qui réduisent le travail inutile sans concentrer abusivement la valeur, le pouvoir ou la décision.",
       "learning_outcomes": [],
@@ -14316,7 +14316,7 @@
         "fullname": "Automatisation sans domination",
         "idnumber": "UCKK-IA207",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -14350,7 +14350,7 @@
       "fullname": "Automatisation sans domination",
       "idnumber": "UCKK-IA207",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -14372,7 +14372,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -14413,7 +14413,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Méthodes pratiques : tests, logs, exigences, vérifications croisées, preuves, reproduction d’erreurs, validation humaine et rapports d’audit.",
       "learning_outcomes": [],
@@ -14423,7 +14423,7 @@
         "fullname": "Tests, logs, validation et audit de sorties IA",
         "idnumber": "UCKK-IA208",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -14459,7 +14459,7 @@
       "fullname": "Tests, logs, validation et audit de sorties IA",
       "idnumber": "UCKK-IA208",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -14481,7 +14481,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -14524,7 +14524,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Rôle de l’IA dans les processus collectifs : synthèse, classification, détection de conflits, aide à la délibération, mais sans décision invisible.",
       "learning_outcomes": [],
@@ -14534,7 +14534,7 @@
         "fullname": "IA et gouvernance des décisions",
         "idnumber": "UCKK-IA301",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -14567,7 +14567,7 @@
       "fullname": "IA et gouvernance des décisions",
       "idnumber": "UCKK-IA301",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -14589,7 +14589,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -14629,7 +14629,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Étude des lectures brutes et pondérées, de l’expertise située, de l’éthique, de l’explicabilité et du refus d’un score caché unique.",
       "learning_outcomes": [],
@@ -14639,7 +14639,7 @@
         "fullname": "IA, Smart Vote, EkoH et lectures multiples",
         "idnumber": "UCKK-IA302",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -14675,7 +14675,7 @@
       "fullname": "IA, Smart Vote, EkoH et lectures multiples",
       "idnumber": "UCKK-IA302",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -14697,7 +14697,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -14740,7 +14740,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Rôle de l’IA dans le cycle connaître, choisir, agir, se souvenir : extraction, résumé, traduction, routage, validation, workflows et mémoire.",
       "learning_outcomes": [],
@@ -14750,7 +14750,7 @@
         "fullname": "IA dans le kOA Digital Ecosystem",
         "idnumber": "UCKK-IA303",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -14785,7 +14785,7 @@
       "fullname": "IA dans le kOA Digital Ecosystem",
       "idnumber": "UCKK-IA303",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -14807,7 +14807,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -14849,7 +14849,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Protection contre surveillance, dépendance à des plateformes, boîte noire, capture sémantique, biais invisibles et verrouillage technique.",
       "learning_outcomes": [],
@@ -14859,7 +14859,7 @@
         "fullname": "Sécurité, vie privée et non-domination algorithmique",
         "idnumber": "UCKK-IA304",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -14896,7 +14896,7 @@
       "fullname": "Sécurité, vie privée et non-domination algorithmique",
       "idnumber": "UCKK-IA304",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -14918,7 +14918,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -14962,7 +14962,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Usage de l’IA dans les vidéos, récits, scènes, défis et formats pédagogiques, avec distinction stricte entre fiction, fait et manipulation.",
       "learning_outcomes": [],
@@ -14972,7 +14972,7 @@
         "fullname": "IA et médias vivants",
         "idnumber": "UCKK-IA305",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -15006,7 +15006,7 @@
       "fullname": "IA et médias vivants",
       "idnumber": "UCKK-IA305",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -15028,7 +15028,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -15069,7 +15069,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Étude de la traduction conceptuelle, des termes intraduisibles, du multilinguisme, des graphes de concepts et de la souveraineté du sens.",
       "learning_outcomes": [],
@@ -15079,7 +15079,7 @@
         "fullname": "IA, traduction et souveraineté sémantique",
         "idnumber": "UCKK-IA306",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -15114,7 +15114,7 @@
       "fullname": "IA, traduction et souveraineté sémantique",
       "idnumber": "UCKK-IA306",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -15136,7 +15136,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -15178,7 +15178,7 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Atelier pratique où l’Aspirant conçoit un outil ou workflow d’IA, le documente, le teste, l’audite et en décrit les limites.",
       "learning_outcomes": [],
@@ -15188,7 +15188,7 @@
         "fullname": "Atelier de conception d’outil IA",
         "idnumber": "UCKK-IA307",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
@@ -15222,7 +15222,7 @@
       "fullname": "Atelier de conception d’outil IA",
       "idnumber": "UCKK-IA307",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -15244,7 +15244,7 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
@@ -15276,8 +15276,8 @@
     {
       "id": "course:uckk-ia399",
       "code": "UCKK-IA399",
-      "title": "Dossier de passage : workflow ou outil d’IA gouvernable",
-      "short_title": "Dossier de passage : workflow ou outil d’IA gouvernable",
+      "title": "Dossier de passage : workflow ou outil de Production IA",
+      "short_title": "Dossier de passage : workflow ou outil de Production IA",
       "course_type": "dossier_de_passage",
       "course_type_label": "Dossier de passage",
       "status": "active",
@@ -15285,24 +15285,24 @@
       "catalog_status_label": "Obligatoire",
       "academic_block": {
         "id": "ia",
-        "title": "Voie de l’Intelligence artificielle gouvernable"
+        "title": "Voie de la Production augmentée par l’IA"
       },
       "summary": "Dossier de passage final obligatoire.",
       "learning_outcomes": [],
       "assessment": [],
       "moodle": {
         "shortname": "UCKK-IA399",
-        "fullname": "Dossier de passage : workflow ou outil d’IA gouvernable",
+        "fullname": "Dossier de passage : workflow ou outil de Production IA",
         "idnumber": "UCKK-IA399",
         "category_idnumber": "UCKK-IA",
-        "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+        "category_path": "UCKK / Voies / Production augmentée par l’IA",
         "format": "uckk",
         "visible": false,
         "lang": "fr",
         "enablecompletion": true
       },
       "ai_metadata": {
-        "summary_for_retrieval": "UCKK-IA399 — Dossier de passage : workflow ou outil d’IA gouvernable. Dossier de passage final obligatoire.",
+        "summary_for_retrieval": "UCKK-IA399 — Dossier de passage : workflow ou outil de Production IA. Dossier de passage final obligatoire.",
         "keywords": [
           "Dossier",
           "passage",
@@ -15322,21 +15322,21 @@
       },
       "source": {
         "canonical_path": "UCKK_Canon/40_voie-intelligence-artificielle-gouvernable.md",
-        "section": "UCKK-IA399 — Dossier de passage : workflow ou outil d’IA gouvernable",
+        "section": "UCKK-IA399 — Dossier de passage : workflow ou outil de Production IA",
         "completeness": "short_description"
       },
       "source_additional": [
         {
           "canonical_path": "UCKK_Canon/40_voie-intelligence-artificielle-gouvernable.md",
-          "section": "UCKK-IA399 — Dossier de passage : workflow ou outil d’IA gouvernable"
+          "section": "UCKK-IA399 — Dossier de passage : workflow ou outil de Production IA"
         }
       ],
       "key": "uckk_ia399",
       "shortname": "UCKK-IA399",
-      "fullname": "Dossier de passage : workflow ou outil d’IA gouvernable",
+      "fullname": "Dossier de passage : workflow ou outil de Production IA",
       "idnumber": "UCKK-IA399",
       "category_idnumber": "UCKK-IA",
-      "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
+      "category_path": "UCKK / Voies / Production augmentée par l’IA",
       "format": "uckk",
       "visible": false,
       "lang": "fr",
@@ -15358,12 +15358,12 @@
         "catalog_status_label": "Obligatoire",
         "academic_block": {
           "id": "ia",
-          "title": "Voie de l’Intelligence artificielle gouvernable"
+          "title": "Voie de la Production augmentée par l’IA"
         },
         "learning_outcomes": [],
         "assessment": [],
         "ai_metadata": {
-          "summary_for_retrieval": "UCKK-IA399 — Dossier de passage : workflow ou outil d’IA gouvernable. Dossier de passage final obligatoire.",
+          "summary_for_retrieval": "UCKK-IA399 — Dossier de passage : workflow ou outil de Production IA. Dossier de passage final obligatoire.",
           "keywords": [
             "Dossier",
             "passage",
@@ -15383,13 +15383,13 @@
         },
         "source": {
           "canonical_path": "UCKK_Canon/40_voie-intelligence-artificielle-gouvernable.md",
-          "section": "UCKK-IA399 — Dossier de passage : workflow ou outil d’IA gouvernable",
+          "section": "UCKK-IA399 — Dossier de passage : workflow ou outil de Production IA",
           "completeness": "short_description"
         },
         "source_additional": [
           {
             "canonical_path": "UCKK_Canon/40_voie-intelligence-artificielle-gouvernable.md",
-            "section": "UCKK-IA399 — Dossier de passage : workflow ou outil d’IA gouvernable"
+            "section": "UCKK-IA399 — Dossier de passage : workflow ou outil de Production IA"
           }
         ]
       }

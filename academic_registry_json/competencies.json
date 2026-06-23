@@ -596,8 +596,8 @@
       "id": "competency:intelligence-artificielle-gouvernable-magie-operable:synthesis",
       "object_type": "program_competency",
       "idnumber": "UCKK-COMP-IA-SYNTHESIS",
-      "title": "Compétence synthèse — IA gouvernable",
-      "short_title": "IA gouvernable",
+      "title": "Compétence synthèse — Production IA",
+      "short_title": "Production IA",
       "competency_type": "program_synthesis",
       "status": "active",
       "framework_id": "competency_framework:uckk-academic",
@@ -613,9 +613,9 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
-        "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
-        "symbolic_title": "Cartographe augmenté"
+        "title": "Parchemin de Puissance opératoire en Production augmentée par l’IA",
+        "internal_title": "Mage UCKK de la Production augmentée par l’IA",
+        "symbolic_title": "Maître d’œuvre augmenté"
       },
       "description": "Voie formant des Aspirants capables d’utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans jamais lui déléguer l’autorité finale.",
       "evidence_expectation": [
@@ -631,7 +631,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Compétence synthèse associée à Voie de l’Intelligence artificielle gouvernable. Voie formant des Aspirants capables d’utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans jamais lui déléguer l’autorité finale.",
+        "summary_for_retrieval": "Compétence synthèse associée à Voie de la Production augmentée par l’IA. Voie formant des Aspirants capables d’utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans jamais lui déléguer l’autorité finale.",
         "tags": [
           "ia",
           "machines-pensantes",
@@ -647,9 +647,9 @@
         "source_version": "0.2"
       },
       "key": "uckk_comp_ia_synthesis",
-      "name": "Compétence synthèse — IA gouvernable",
-      "shortname": "IA gouvernable",
-      "fullname": "Compétence synthèse — IA gouvernable",
+      "name": "Compétence synthèse — Production IA",
+      "shortname": "Production IA",
+      "fullname": "Compétence synthèse — Production IA",
       "parent_idnumber": "UCKK-COMP-FRAMEWORK",
       "visible": 0,
       "descriptionformat": 1,
@@ -7718,7 +7718,7 @@
         "program:intelligence-artificielle-gouvernable-magie-operable"
       ],
       "pathway_refs": [],
-      "description": "Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de l’IA gouvernable.",
+      "description": "Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de la Production IA.",
       "learning_outcomes": [],
       "evidence_expectation": [
         "portfolio_artifact",
@@ -7730,7 +7730,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "UCKK-IA206 — Graphes de connaissance, sémantique et IA. Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de l’IA gouvernable.",
+        "summary_for_retrieval": "UCKK-IA206 — Graphes de connaissance, sémantique et IA. Étude des concepts, entités, relations, ontologies, traductions, définitions, références et graphes sémantiques comme base de la Production IA.",
         "keywords": [
           "Graphes",
           "connaissance",
@@ -8374,8 +8374,8 @@
       "id": "competency:ia399",
       "object_type": "course_competency",
       "idnumber": "UCKK-COMP-IA399",
-      "title": "Compétence — Dossier de passage : workflow ou outil d’IA gouvernable",
-      "short_title": "Dossier de passage : workflow ou outil d’IA gouvernable",
+      "title": "Compétence — Dossier de passage : workflow ou outil de Production IA",
+      "short_title": "Dossier de passage : workflow ou outil de Production IA",
       "competency_type": "course_competency",
       "status": "active",
       "framework_id": "competency_framework:uckk-academic",
@@ -8399,7 +8399,7 @@
         "visible": false
       },
       "ai_metadata": {
-        "summary_for_retrieval": "UCKK-IA399 — Dossier de passage : workflow ou outil d’IA gouvernable. Dossier de passage final obligatoire.",
+        "summary_for_retrieval": "UCKK-IA399 — Dossier de passage : workflow ou outil de Production IA. Dossier de passage final obligatoire.",
         "keywords": [
           "Dossier",
           "passage",
@@ -8419,13 +8419,13 @@
       },
       "source": {
         "canonical_path": "UCKK_Canon/40_voie-intelligence-artificielle-gouvernable.md",
-        "section": "UCKK-IA399 — Dossier de passage : workflow ou outil d’IA gouvernable",
+        "section": "UCKK-IA399 — Dossier de passage : workflow ou outil de Production IA",
         "completeness": "short_description"
       },
       "key": "uckk_comp_ia399",
-      "name": "Compétence — Dossier de passage : workflow ou outil d’IA gouvernable",
-      "shortname": "Dossier de passage : workflow ou outil d’IA gouvernable",
-      "fullname": "Compétence — Dossier de passage : workflow ou outil d’IA gouvernable",
+      "name": "Compétence — Dossier de passage : workflow ou outil de Production IA",
+      "shortname": "Dossier de passage : workflow ou outil de Production IA",
+      "fullname": "Compétence — Dossier de passage : workflow ou outil de Production IA",
       "parent_idnumber": "UCKK-COMP-IA-SYNTHESIS",
       "visible": 0,
       "descriptionformat": 1,

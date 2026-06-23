@@ -59,7 +59,7 @@
     {
       "voie_id": "voie_ia_gouvernable",
       "code": "IA",
-      "nom": "Voie de l’Intelligence artificielle gouvernable",
+      "nom": "Voie de la Production augmentée par l’IA",
       "file": "voie_ia_gouvernable.json",
       "course_prefix": "IA",
       "category_idnumber": "UCKK-IA",

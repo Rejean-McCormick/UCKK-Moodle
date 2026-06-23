@@ -237,7 +237,7 @@
       "component": "report_uckk",
       "capability": "report/uckk:viewall",
       "source": "ai_usage",
-      "description": "Rapport d’usage de l’IA gouvernable UCKK, incluant assistance, provenance, incertitude, validation humaine et absence de décision automatisée.",
+      "description": "Rapport d’usage de la Production IA UCKK, incluant assistance, provenance, incertitude, validation humaine et absence de décision automatisée.",
       "enabled": true,
       "metadata": {
         "family": "ai",

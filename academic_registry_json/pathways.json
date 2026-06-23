@@ -1071,7 +1071,7 @@
     {
       "id": "pathway:intelligence-artificielle-gouvernable-magie-operable-main",
       "program_id": "program:intelligence-artificielle-gouvernable-magie-operable",
-      "title": "Parcours principal — Intelligence artificielle gouvernable — Niveau de Puissance opératoire",
+      "title": "Parcours principal — Production augmentée par l’IA — Niveau de Puissance opératoire",
       "status": "active",
       "sequence_model": "ordered_courses",
       "prerequisite_pathway_refs": [
@@ -1080,7 +1080,7 @@
       "cycles": [
         {
           "id": "cycle:ia-noyau",
-          "title": "Noyau d’intelligence artificielle gouvernable",
+          "title": "Noyau de production augmentée par l’IA",
           "sequence": 1,
           "course_refs": [
             {
@@ -1144,8 +1144,8 @@
         "catalogue_section": "## 3. Liste officielle des cours et ateliers"
       },
       "key": "intelligence_artificielle_gouvernable_magie_operable_main",
-      "name": "Parcours principal — Intelligence artificielle gouvernable — Niveau de Puissance opératoire",
-      "fullname": "Parcours principal — Intelligence artificielle gouvernable — Niveau de Puissance opératoire",
+      "name": "Parcours principal — Production augmentée par l’IA — Niveau de Puissance opératoire",
+      "fullname": "Parcours principal — Production augmentée par l’IA — Niveau de Puissance opératoire",
       "shortname": "intelligence_artificielle_gouvernable_magie_operable_main",
       "program_code": "IA",
       "idnumber": "UCKK-PATH-IA-MAIN",
