@@ -47,7 +47,7 @@ final class programs {
             'eyebrow' => 'Bibliothèque publique vivante',
             'title' => 'Voies UCKK',
             'subtitle' => 'Parcours ouverts pour explorer, relier et pratiquer les savoirs du Grand Jeu social.',
-            'summary' => 'Les Voies UCKK organisent la diffusion du savoir en parcours lisibles : cours, repères, pratiques, archives, médiathèque, défis et assemblées. Elles offrent un cadre d’apprentissage familier, modernisé et ouvert.',
+            'summary' => 'Les Voies UCKK organisent la diffusion du savoir en parcours lisibles : cours, repères, pratiques, archives, médiathèque, défis et assemblées. Elles offrent un cadre d’apprentissage familier, modernisé et ouvert pour comprendre, produire, vérifier et agir avec méthode.',
             'sections' => [
                 [
                     'type' => 'role',
@@ -187,6 +187,7 @@ final class programs {
                 p.sortorder,
                 p.categoryid,
                 c.name AS categoryname,
+                c.idnumber AS categoryidnumber,
                 c.visible AS categoryvisible
               FROM {local_uckk_program} p
          LEFT JOIN {course_categories} c ON c.id = p.categoryid
@@ -203,11 +204,18 @@ final class programs {
             $fullname = trim((string)($record->fullname ?? ''));
             $programtype = trim((string)($record->programtype ?? ''));
             $categoryname = trim((string)($record->categoryname ?? ''));
+            $categoryidnumber = trim((string)($record->categoryidnumber ?? ''));
             $categoryvisible = (int)($record->categoryvisible ?? 0);
             $categoryid = (int)($record->categoryid ?? 0);
 
             $typelabel = self::program_type_label($programtype);
-            $title = $fullname !== '' ? $fullname : $shortname;
+            $publicidentity = self::public_program_identity($shortname, $fullname, $categoryname, $categoryidnumber);
+
+            if ($publicidentity !== null) {
+                $title = $publicidentity['title'];
+            } else {
+                $title = $fullname !== '' ? $fullname : $shortname;
+            }
 
             if ($title === '') {
                 continue;
@@ -215,18 +223,18 @@ final class programs {
 
             $bodyparts = [];
 
-            if ($shortname !== '') {
-                $bodyparts[] = 'Code : ' . $shortname . '.';
-            }
-
-            if ($typelabel !== '') {
-                $bodyparts[] = 'Type : ' . $typelabel . '.';
-            }
-
-            if ($categoryname !== '') {
-                $bodyparts[] = 'Espace d’apprentissage associé : ' . $categoryname . '.';
+            if ($publicidentity !== null && $publicidentity['body'] !== '') {
+                $bodyparts[] = $publicidentity['body'];
             } else {
-                $bodyparts[] = 'Aucun espace de cours associé.';
+                if ($typelabel !== '') {
+                    $bodyparts[] = 'Parcours : ' . $typelabel . '.';
+                }
+
+                if ($categoryname !== '') {
+                    $bodyparts[] = 'Cours et espaces d’apprentissage : ' . $categoryname . '.';
+                } else {
+                    $bodyparts[] = 'Les cours de cette voie seront reliés ici lorsqu’ils seront disponibles.';
+                }
             }
 
             $url = '';
@@ -234,20 +242,63 @@ final class programs {
 
             if ($categoryid > 0 && $categoryvisible === 1) {
                 $url = (new moodle_url('/course/index.php', ['categoryid' => $categoryid]))->out(false);
-                $actionlabel = 'Voir les cours ouverts';
+                $actionlabel = 'Accéder aux cours';
             }
 
             $cards[] = [
-                'eyebrow' => '',
+                'eyebrow' => $publicidentity['eyebrow'] ?? '',
                 'title' => $title,
                 'body' => implode(' ', $bodyparts),
                 'url' => $url,
                 'actionlabel' => $actionlabel,
-                'type' => self::clean_modifier($programtype),
+                'type' => $publicidentity['type'] ?? self::clean_modifier($programtype),
             ];
         }
 
         return $cards;
+    }
+
+    /**
+     * Public editorial overrides for program cards.
+     *
+     * This protects public pages from legacy technical labels while keeping
+     * existing Moodle, Atlas and database identifiers stable.
+     *
+     * @param string $shortname Program short name.
+     * @param string $fullname Program full name.
+     * @param string $categoryname Linked Moodle category name.
+     * @param string $categoryidnumber Linked Moodle category idnumber.
+     * @return array{eyebrow:string,title:string,body:string,type:string}|null
+     */
+    private static function public_program_identity(
+        string $shortname,
+        string $fullname,
+        string $categoryname,
+        string $categoryidnumber
+    ): ?array {
+        $uppercode = strtoupper(trim($shortname));
+        $uppercategory = strtoupper(trim($categoryidnumber));
+        $haystack = strtolower($shortname . ' ' . $fullname . ' ' . $categoryname . ' ' . $categoryidnumber);
+
+        $isia =
+            $uppercode === 'IA'
+            || $uppercategory === 'UCKK-IA'
+            || strpos($haystack, 'voie_ia_gouvernable') !== false
+            || strpos($haystack, 'ia-gouvernable') !== false
+            || strpos($haystack, 'intelligence artificielle gouvernable') !== false
+            || strpos($haystack, 'production augment') !== false
+            || strpos($haystack, 'production ia') !== false;
+
+        if ($isia) {
+            return [
+                'eyebrow' => 'Production IA',
+                'title' => 'Voie de la Production augmentée par l’IA',
+                'body' => 'Utiliser l’IA comme atelier de production pour écrire, concevoir, coder, documenter, créer des supports visuels, structurer des protocoles d’accompagnement et construire des outils vérifiables, sans déléguer la décision, la responsabilité ou le jugement humain.',
+                'type' => 'production-ia',
+            ];
+        }
+
+        return null;
     }
 
     /**

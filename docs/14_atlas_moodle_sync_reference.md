@@ -352,18 +352,71 @@ Aucune faculté ne donne permission par elle-même.
 
 # 8. Correspondance canonique des 10 facultés
 
-| Ordre | `voie_id`                                    | `faculty_id`                                    | `slug`                                  | `code` | `course_prefix` | `category_idnumber` | Hub       |
-| ----: | -------------------------------------------- | ----------------------------------------------- | --------------------------------------- | ------ | --------------- | ------------------- | --------- |
-|     1 | `voie_grand_jeu_social`                      | `faculty_grand_jeu_social`                      | `grand-jeu-social`                      | `GJS`  | `GJS`           | `UCKK-GJS`          | `GJS-HUB` |
-|     2 | `voie_economie`                              | `faculty_economie`                              | `economie`                              | `EC`   | `EC`            | `UCKK-EC`           | `EC-HUB`  |
-|     3 | `voie_ecologie`                              | `faculty_ecologie`                              | `ecologie`                              | `ECL`  | `ECL`           | `UCKK-ECL`          | `ECL-HUB` |
-|     4 | `voie_sciences_politiques`                   | `faculty_sciences_politiques`                   | `sciences-politiques`                   | `SP`   | `SP`            | `UCKK-SP`           | `SP-HUB`  |
-|     5 | `voie_linguistique_architecture_du_sens`     | `faculty_linguistique_architecture_du_sens`     | `linguistique-architecture-du-sens`     | `LI`   | `LI`            | `UCKK-LI`           | `LI-HUB`  |
-|     6 | `voie_metaphysique`                          | `faculty_metaphysique`                          | `metaphysique`                          | `ME`   | `ME`            | `UCKK-ME`           | `ME-HUB`  |
-|     7 | `voie_ia_gouvernable`                        | `faculty_ia_gouvernable`                        | `ia-gouvernable`                        | `IA`   | `IA`            | `UCKK-IA`           | `IA-HUB`  |
-|     8 | `voie_intervention_sociale_systemes_humains` | `faculty_intervention_sociale_systemes_humains` | `intervention-sociale-systemes-humains` | `IS`   | `IS`            | `UCKK-IS`           | `IS-HUB`  |
-|     9 | `voie_architecture_sociotechnique`           | `faculty_architecture_sociotechnique`           | `architecture-sociotechnique`           | `AS`   | `AS`            | `UCKK-AS`           | `AS-HUB`  |
-|    10 | `voie_ecosysteme_digital_koa`                | `faculty_ecosysteme_digital_koa`                | `ecosysteme-digital-koa`                | `KOA`  | `KOA`           | `UCKK-KOA`          | `KOA-HUB` |
+| Ordre | `voie_id`                                    | `faculty_id`                                    | `slug`                                  | Nom public recommandé                          | Nom court public        | `code` | `course_prefix` | `category_idnumber` | Hub       |
+| ----: | -------------------------------------------- | ----------------------------------------------- | --------------------------------------- | ---------------------------------------------- | ----------------------- | ------ | --------------- | ------------------- | --------- |
+|     1 | `voie_grand_jeu_social`                      | `faculty_grand_jeu_social`                      | `grand-jeu-social`                      | Voie du Grand Jeu social                       | Grand Jeu social        | `GJS`  | `GJS`           | `UCKK-GJS`          | `GJS-HUB` |
+|     2 | `voie_economie`                              | `faculty_economie`                              | `economie`                              | Voie d’Économie                                | Économie                | `EC`   | `EC`            | `UCKK-EC`           | `EC-HUB`  |
+|     3 | `voie_ecologie`                              | `faculty_ecologie`                              | `ecologie`                              | Voie d’Écologie                                | Écologie                | `ECL`  | `ECL`           | `UCKK-ECL`          | `ECL-HUB` |
+|     4 | `voie_sciences_politiques`                   | `faculty_sciences_politiques`                   | `sciences-politiques`                   | Voie des Sciences politiques                   | Sciences politiques     | `SP`   | `SP`            | `UCKK-SP`           | `SP-HUB`  |
+|     5 | `voie_linguistique_architecture_du_sens`     | `faculty_linguistique_architecture_du_sens`     | `linguistique-architecture-du-sens`     | Voie de la Linguistique et de l’architecture du sens | Linguistique et sens | `LI`   | `LI`            | `UCKK-LI`           | `LI-HUB`  |
+|     6 | `voie_metaphysique`                          | `faculty_metaphysique`                          | `metaphysique`                          | Voie de la Métaphysique                        | Métaphysique            | `ME`   | `ME`            | `UCKK-ME`           | `ME-HUB`  |
+|     7 | `voie_ia_gouvernable`                        | `faculty_ia_gouvernable`                        | `ia-gouvernable`                        | Voie de la Production augmentée par l’IA        | Production IA           | `IA`   | `IA`            | `UCKK-IA`           | `IA-HUB`  |
+|     8 | `voie_intervention_sociale_systemes_humains` | `faculty_intervention_sociale_systemes_humains` | `intervention-sociale-systemes-humains` | Voie de l’Intervention sociale et des systèmes humains | Intervention sociale | `IS`   | `IS`            | `UCKK-IS`           | `IS-HUB`  |
+|     9 | `voie_architecture_sociotechnique`           | `faculty_architecture_sociotechnique`           | `architecture-sociotechnique`           | Voie d’Architecture sociotechnique             | Architecture sociotechnique | `AS` | `AS`            | `UCKK-AS`           | `AS-HUB`  |
+|    10 | `voie_ecosysteme_digital_koa`                | `faculty_ecosysteme_digital_koa`                | `ecosysteme-digital-koa`                | Voie de l’Architecture de l’écosystème digital kOA | Écosystème digital kOA | `KOA`  | `KOA`           | `UCKK-KOA`          | `KOA-HUB` |
+
+## 8.1 Règle de compatibilité pour la voie IA
+
+Les identifiants techniques historiques de la voie IA restent stables afin de ne pas casser les manifests, le mapping Moodle, les catégories, les cours, les badges et les rapports de sync.
+
+```text
+voie_id = voie_ia_gouvernable
+faculty_id = faculty_ia_gouvernable
+slug = ia-gouvernable
+code = IA
+course_prefix = IA
+category_idnumber = UCKK-IA
+hub_course_idnumber = IA-HUB
+atlas_file = voie_ia_gouvernable.json
+faculty_file = ia-gouvernable.faculty.json
+```
+
+Le nom public et éditorial de cette voie n’est plus « IA gouvernable ».
+
+Utiliser :
+
+```text
+Nom public = Voie de la Production augmentée par l’IA
+Nom court principal = Production IA
+Nom court éditorial = Production augmentée
+Titre symbolique = Maître d’œuvre augmenté
+Domaine public = Production outillée
+```
+
+Règle éditoriale : l’IA est présentée comme un outil de production, de création, de recherche, d’écriture, de graphisme, de programmation, de documentation, d’accompagnement, de prototypage, de vérification et de construction. Elle ne doit jamais être présentée comme une autorité, une instance de contrôle ou un sujet auquel kOA délègue le jugement humain.
+
+Interdit dans les projections publiques :
+
+```text
+IA gouvernable comme nom public principal
+faire gouverner l’IA
+donner le contrôle à l’IA
+déléguer la décision à l’IA
+présenter l’IA comme autorité finale
+```
+
+Autorisé :
+
+```text
+Production augmentée par l’IA
+Production IA
+IA comme outil de construction
+IA comme atelier de travail
+responsabilité humaine
+validation humaine
+traces de travail
+preuves de vérification
+```
 
 ---
 
@@ -440,6 +493,9 @@ Exemple :
 ```text
 category.idnumber = UCKK-GJS
 category.name = Grand Jeu social
+
+category.idnumber = UCKK-IA
+category.name = Production IA
 ```
 
 ## 9.5 Convention hub course
@@ -472,7 +528,8 @@ annonces publiques;
 événements publics;
 ressources publiques;
 orientation générale;
-lien vers les cours de la Voie.
+lien vers les cours de la Voie;
+ateliers publics de production augmentée lorsque la voie concernée est Production IA.
 ```
 
 Interdit :
@@ -1828,6 +1885,19 @@ Si un objet Moodle ne peut pas être relié à un ID canonique UCKK,
 à un hash source,
 et à une action de dry-run,
 alors le sync ne doit pas le modifier.
+```
+
+Règle finale propre à la voie IA :
+
+```text
+Si une projection publique de la voie IA présente l’IA comme gouvernante, autorité finale ou instance de contrôle,
+elle doit être rejetée ou réécrite.
+
+La projection publique doit parler de Production augmentée par l’IA,
+de Production IA,
+de Maître d’œuvre augmenté,
+de responsabilité humaine,
+et de traces vérifiables de construction.
 ```
 
 Règle éditoriale finale :

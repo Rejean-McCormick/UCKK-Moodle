@@ -6,7 +6,7 @@
 // the Free Software Foundation, either version 3 of the License, or
 // any later version.
 //
-// UCKK-Moodle supports the technical course spaces of the
+// UCKK-Moodle adapts Moodle as the pedagogical campus of the
 // Univers-Cité King Klown.
 
 namespace local_uckk\local\public_pages;
@@ -17,7 +17,7 @@ defined('MOODLE_INTERNAL') || die();
  * Public courses page definition.
  *
  * This class owns only the static public courses page definition:
- * page layout, hero copy and institutional framing.
+ * page layout, hero copy and public editorial framing.
  *
  * The live course directory, filters, metadata, empty-state notice and course
  * cards are assembled by /local/uckk/courses.php.
@@ -39,25 +39,25 @@ final class courses {
         return [
             'layout' => 'standard',
             'typography' => 'institutional',
-            'eyebrow' => 'Entrer dans la bibliothèque',
-            'title' => 'Cours UCKK',
-            'subtitle' => 'Cours publics, ressources ouvertes et parcours de lecture du campus UCKK.',
-            'summary' => 'Les cours servent à diffuser immédiatement le savoir dans un cadre d’apprentissage familier, modernisé et accessible.',
+            'eyebrow' => 'Apprendre, pratiquer, produire',
+            'title' => 'Cours publics UCKK',
+            'subtitle' => 'Des portes d’entrée vers les Voies, les méthodes et les pratiques de l’Univers-Cité King Klown.',
+            'summary' => 'Les cours publics UCKK servent à comprendre le Grand Jeu social, à pratiquer des méthodes, à produire des artefacts et à relier les savoirs dans un cadre d’apprentissage ouvert, familier et modernisé.',
             'sections' => [
                 [
-                    'title' => 'Une porte d’accès au savoir',
-                    'body' => 'Chaque cours rassemble des ressources, activités, repères et pistes de travail pour explorer une question du Grand Jeu social.',
+                    'title' => 'Entrer dans une Voie',
+                    'body' => 'Chaque cours ouvre un accès concret à une Voie UCKK. Il présente une question, une méthode, un concept ou un artefact à explorer pour mieux lire les règles, les systèmes et les possibilités d’action du Grand Jeu social.',
                 ],
                 [
-                    'title' => 'Un cadre familier, modernisé',
-                    'body' => 'UCKK utilise la forme reconnaissable du cours pour organiser la lecture, la pratique, la discussion et la mémoire des apprentissages.',
+                    'title' => 'Transformer le savoir en pratique',
+                    'body' => 'Un cours UCKK n’est pas seulement un texte à consulter. Il invite à écrire, cartographier, coder, documenter, débattre, vérifier, créer, corriger et produire des traces de compréhension utilisables.',
                 ],
                 [
-                    'title' => 'Une bibliothèque vivante',
-                    'body' => 'Les cours ne sont pas pensés comme une barrière d’accès au savoir, mais comme des chemins publics pour consulter, comprendre et relier les connaissances.',
+                    'title' => 'Ouvrir les espaces disponibles',
+                    'body' => 'Quand un espace de cours est disponible, la carte du cours permet d’y accéder pour consulter les ressources, suivre les activités publiques ou rejoindre le cadre d’apprentissage prévu. Certains espaces peuvent demander une connexion selon leur usage.',
                 ],
             ],
-            'cardsheading' => 'Cours disponibles',
+            'cardsheading' => 'Accéder aux cours',
             'cards' => [],
         ];
     }

@@ -40,7 +40,7 @@ final class home {
             'eyebrow' => 'Bibliothèque publique vivante',
             'title' => 'Univers-Cité King Klown',
             'subtitle' => 'Comprendre le jeu. Jouer avec lucidité. Changer les règles.',
-            'summary' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle ouvre une bibliothèque publique vivante, organise des parcours de savoir et propose un cadre d’apprentissage familier, modernisé et accessible pour lire les systèmes, produire des preuves, discuter les idées et agir avec méthode.',
+            'summary' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle ouvre une bibliothèque publique vivante, organise des parcours de savoir et propose un cadre d’apprentissage familier, modernisé et accessible pour lire les systèmes, produire des preuves, créer des œuvres, construire des outils, discuter les idées et agir avec méthode.',
 
             'quicklinks' => [
                 [
@@ -74,8 +74,8 @@ final class home {
                     'url' => '/local/uckk/faculty.php?slug=metaphysique',
                 ],
                 [
-                    'label' => 'Voie de l’Intelligence artificielle gouvernable',
-                    'description' => 'Étudier l’IA comme outil de lecture, création, cartographie, simulation et accélération, jamais comme autorité finale.',
+                    'label' => 'Production IA',
+                    'description' => 'Utiliser l’IA de façon productive pour écrire, concevoir, coder, documenter, créer des images, structurer des outils et accompagner le travail humain.',
                     'url' => '/local/uckk/faculty.php?slug=ia-gouvernable',
                 ],
                 [
@@ -99,8 +99,8 @@ final class home {
                 [
                     'type' => 'positioning',
                     'eyebrow' => 'Position',
-                    'title' => 'Ouvrir le savoir avant de promettre des titres',
-                    'body' => 'La première fonction de l’UCKK est la diffusion immédiate du savoir. Elle ne place pas la connaissance derrière un mur d’accès : elle la rend consultable, navigable, discutable et praticable dans un cadre d’apprentissage structuré.',
+                    'title' => 'Ouvrir le savoir et organiser l’action',
+                    'body' => 'La première fonction de l’UCKK est la diffusion immédiate du savoir. Elle rend la connaissance consultable, navigable, discutable et praticable dans un cadre d’apprentissage structuré.',
                     'items' => [
                         'Rendre les connaissances publiques plus lisibles, reliées et utilisables.',
                         'Donner des repères pour comprendre les systèmes sociaux, techniques, politiques, économiques et symboliques.',
@@ -135,8 +135,8 @@ final class home {
                 [
                     'type' => 'boundary',
                     'eyebrow' => 'Note institutionnelle',
-                    'title' => 'Reconnaissance et horizon public',
-                    'body' => 'Il n’y a pas de projet à court terme d’offrir une certification formelle. Le but immédiat est d’ouvrir et d’organiser le savoir. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.',
+                    'title' => 'Reconnaissance UCKK',
+                    'body' => 'Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.',
                 ],
             ],
 

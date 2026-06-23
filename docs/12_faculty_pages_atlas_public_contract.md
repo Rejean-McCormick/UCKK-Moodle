@@ -316,7 +316,7 @@ Lorsqu’une IA doit décider quel champ, nom ou comportement appliquer :
 
 ## 6.2 Règle de non-réinterprétation
 
-Une IA ne doit pas renommer :
+Une IA ne doit pas renommer les identifiants techniques canoniques :
 
 ```text
 Voie → Faculty dans les JSON Atlas
@@ -326,6 +326,35 @@ Smart Vote → décision
 Konnaxion → Moodle
 Moodle category → Atlas concept
 Concept associé → cours Moodle
+voie_ia_gouvernable → voie_production_ia
+faculty_ia_gouvernable → faculty_production_ia
+ia-gouvernable → production-ia
+```
+
+Exception documentée :
+
+```text
+Les identifiants techniques de la Voie IA restent voie_ia_gouvernable, faculty_ia_gouvernable et ia-gouvernable pour compatibilité Atlas/Moodle.
+
+L’appellation publique canonique est :
+Voie de la Production augmentée par l’IA
+
+Le nom court public est :
+Production IA
+
+Le nom court éditorial possible est :
+Production augmentée
+
+Le titre symbolique public est :
+Maître d’œuvre augmenté
+```
+
+Règle éditoriale :
+
+```text
+Ne jamais présenter cette Voie comme une délégation du contrôle à l’IA.
+Ne jamais laisser croire que kOA donne autorité, décision ou responsabilité à l’IA.
+Présenter l’IA comme outil de production, de création, de documentation, de code, de graphisme, d’écriture, d’accompagnement et de construction responsable.
 ```
 
 ## 6.3 Règle de portée
@@ -363,18 +392,18 @@ accréditation publique
 
 ## 7.1 Tableau canonique
 
-| Ordre | `voie_id`                                    | `faculty_id`                                    | `slug`                                  | `code` | `course_prefix` | `category_idnumber` | `atlas_file`                                      | `faculty_file`                                       |
-| ----: | -------------------------------------------- | ----------------------------------------------- | --------------------------------------- | ------ | --------------- | ------------------- | ------------------------------------------------- | ---------------------------------------------------- |
-|     1 | `voie_grand_jeu_social`                      | `faculty_grand_jeu_social`                      | `grand-jeu-social`                      | `GJS`  | `GJS`           | `UCKK-GJS`          | `voie_grand_jeu_social.json`                      | `grand-jeu-social.faculty.json`                      |
-|     2 | `voie_economie`                              | `faculty_economie`                              | `economie`                              | `EC`   | `EC`            | `UCKK-EC`           | `voie_economie.json`                              | `economie.faculty.json`                              |
-|     3 | `voie_ecologie`                              | `faculty_ecologie`                              | `ecologie`                              | `ECL`  | `ECL`           | `UCKK-ECL`          | `voie_ecologie.json`                              | `ecologie.faculty.json`                              |
-|     4 | `voie_sciences_politiques`                   | `faculty_sciences_politiques`                   | `sciences-politiques`                   | `SP`   | `SP`            | `UCKK-SP`           | `voie_sciences_politiques.json`                   | `sciences-politiques.faculty.json`                   |
-|     5 | `voie_linguistique_architecture_du_sens`     | `faculty_linguistique_architecture_du_sens`     | `linguistique-architecture-du-sens`     | `LI`   | `LI`            | `UCKK-LI`           | `voie_linguistique_architecture_du_sens.json`     | `linguistique-architecture-du-sens.faculty.json`     |
-|     6 | `voie_metaphysique`                          | `faculty_metaphysique`                          | `metaphysique`                          | `ME`   | `ME`            | `UCKK-ME`           | `voie_metaphysique.json`                          | `metaphysique.faculty.json`                          |
-|     7 | `voie_ia_gouvernable`                        | `faculty_ia_gouvernable`                        | `ia-gouvernable`                        | `IA`   | `IA`            | `UCKK-IA`           | `voie_ia_gouvernable.json`                        | `ia-gouvernable.faculty.json`                        |
-|     8 | `voie_intervention_sociale_systemes_humains` | `faculty_intervention_sociale_systemes_humains` | `intervention-sociale-systemes-humains` | `IS`   | `IS`            | `UCKK-IS`           | `voie_intervention_sociale_systemes_humains.json` | `intervention-sociale-systemes-humains.faculty.json` |
-|     9 | `voie_architecture_sociotechnique`           | `faculty_architecture_sociotechnique`           | `architecture-sociotechnique`           | `AS`   | `AS`            | `UCKK-AS`           | `voie_architecture_sociotechnique.json`           | `architecture-sociotechnique.faculty.json`           |
-|    10 | `voie_ecosysteme_digital_koa`                | `faculty_ecosysteme_digital_koa`                | `ecosysteme-digital-koa`                | `KOA`  | `KOA`           | `UCKK-KOA`          | `voie_ecosysteme_digital_koa.json`                | `ecosysteme-digital-koa.faculty.json`                |
+| Ordre | `voie_id`                                    | Nom public canonique                              | Nom court public                         | Titre symbolique public                | `faculty_id`                                    | `slug`                                  | `code` | `course_prefix` | `category_idnumber` | `atlas_file`                                      | `faculty_file`                                       |
+| ----: | -------------------------------------------- | ------------------------------------------------- | ---------------------------------------- | -------------------------------------- | ----------------------------------------------- | --------------------------------------- | ------ | --------------- | ------------------- | ------------------------------------------------- | ---------------------------------------------------- |
+|     1 | `voie_grand_jeu_social`                      | Voie du Grand Jeu social                          | Grand Jeu social                         | Joueur lucide                          | `faculty_grand_jeu_social`                      | `grand-jeu-social`                      | `GJS`  | `GJS`           | `UCKK-GJS`          | `voie_grand_jeu_social.json`                      | `grand-jeu-social.faculty.json`                      |
+|     2 | `voie_economie`                              | Voie d’Économie                                   | Économie                                 | Architecte d’opportunités              | `faculty_economie`                              | `economie`                              | `EC`   | `EC`            | `UCKK-EC`           | `voie_economie.json`                              | `economie.faculty.json`                              |
+|     3 | `voie_ecologie`                              | Voie d’Écologie                                   | Écologie                                 | Gardien des systèmes vivants           | `faculty_ecologie`                              | `ecologie`                              | `ECL`  | `ECL`           | `UCKK-ECL`          | `voie_ecologie.json`                              | `ecologie.faculty.json`                              |
+|     4 | `voie_sciences_politiques`                   | Voie des Sciences politiques                      | Sciences politiques                      | Stratège civique                       | `faculty_sciences_politiques`                   | `sciences-politiques`                   | `SP`   | `SP`            | `UCKK-SP`           | `voie_sciences_politiques.json`                   | `sciences-politiques.faculty.json`                   |
+|     5 | `voie_linguistique_architecture_du_sens`     | Voie de la Linguistique et de l’architecture du sens | Linguistique et architecture du sens  | Architecte du sens                     | `faculty_linguistique_architecture_du_sens`     | `linguistique-architecture-du-sens`     | `LI`   | `LI`            | `UCKK-LI`           | `voie_linguistique_architecture_du_sens.json`     | `linguistique-architecture-du-sens.faculty.json`     |
+|     6 | `voie_metaphysique`                          | Voie de la Métaphysique                           | Métaphysique                             | Cartographe des structures invisibles  | `faculty_metaphysique`                          | `metaphysique`                          | `ME`   | `ME`            | `UCKK-ME`           | `voie_metaphysique.json`                          | `metaphysique.faculty.json`                          |
+|     7 | `voie_ia_gouvernable`                        | Voie de la Production augmentée par l’IA          | Production IA                            | Maître d’œuvre augmenté                | `faculty_ia_gouvernable`                        | `ia-gouvernable`                        | `IA`   | `IA`            | `UCKK-IA`           | `voie_ia_gouvernable.json`                        | `ia-gouvernable.faculty.json`                        |
+|     8 | `voie_intervention_sociale_systemes_humains` | Voie de l’Intervention sociale et des systèmes humains | Intervention sociale                 | Gardien de la dignité située           | `faculty_intervention_sociale_systemes_humains` | `intervention-sociale-systemes-humains` | `IS`   | `IS`            | `UCKK-IS`           | `voie_intervention_sociale_systemes_humains.json` | `intervention-sociale-systemes-humains.faculty.json` |
+|     9 | `voie_architecture_sociotechnique`           | Voie d’Architecture sociotechnique                | Architecture sociotechnique             | Architecte des systèmes d’action       | `faculty_architecture_sociotechnique`           | `architecture-sociotechnique`           | `AS`   | `AS`            | `UCKK-AS`           | `voie_architecture_sociotechnique.json`           | `architecture-sociotechnique.faculty.json`           |
+|    10 | `voie_ecosysteme_digital_koa`                | Voie de l’Architecture de l’écosystème digital kOA | Écosystème digital kOA                | Architecte de l’écosystème digital kOA | `faculty_ecosysteme_digital_koa`                | `ecosysteme-digital-koa`                | `KOA`  | `KOA`           | `UCKK-KOA`          | `voie_ecosysteme_digital_koa.json`                | `ecosysteme-digital-koa.faculty.json`                |
 
 ## 7.2 Interdictions de slugs
 
@@ -432,6 +461,69 @@ Utiliser :
 
 ```text
 voie_ecosysteme_digital_koa
+```
+
+## 7.4 Appellation publique de la Voie IA
+
+La Voie IA conserve ses identifiants techniques historiques pour éviter de casser les liens Atlas, Moodle, catégories, cours, badges et synchronisations.
+
+Identifiants techniques à conserver :
+
+```text
+voie_ia_gouvernable
+faculty_ia_gouvernable
+ia-gouvernable
+voie_ia_gouvernable.json
+ia-gouvernable.faculty.json
+IA
+UCKK-IA
+IA-HUB
+```
+
+Appellation publique canonique :
+
+```text
+Voie de la Production augmentée par l’IA
+```
+
+Nom court public :
+
+```text
+Production IA
+```
+
+Nom court éditorial possible :
+
+```text
+Production augmentée
+```
+
+Titre symbolique public :
+
+```text
+Maître d’œuvre augmenté
+```
+
+Domaine public recommandé :
+
+```text
+Production outillée
+```
+
+Formule publique :
+
+```text
+Utiliser l’IA pour écrire, concevoir, coder, documenter, créer, accompagner, vérifier et produire des œuvres, outils et systèmes utiles, sans déléguer le jugement humain.
+```
+
+Règles :
+
+```text
+Ne pas utiliser “IA gouvernable” comme nom public principal.
+Ne pas présenter cette Voie comme une voie de contrôle confié à l’IA.
+Ne pas écrire que kOA donne le contrôle à l’IA.
+Ne pas centrer la Voie sur la gouvernance de l’IA comme sujet abstrait.
+Présenter l’IA comme un outil de production responsable : livres, graphisme, code, documentation institutionnelle, accompagnement, prototypage, recherche, vérification et création.
 ```
 
 ---
@@ -1213,6 +1305,13 @@ KOA-HUB
 ```
 
 Le hub sert aux annonces publiques, événements et informations générales.
+
+Note :
+
+```text
+IA-HUB reste l’identifiant technique du hub Moodle.
+Son nom public doit suivre l’appellation “Production IA” ou “Production augmentée par l’IA”.
+```
 
 ---
 
@@ -2166,6 +2265,12 @@ $string['facultyrelations'] = 'Relations avec les autres Voies';
 $string['internalrecognitionnotice'] = 'Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.';
 $string['publicknowledgeframework'] = 'Bibliothèque publique et cadre d’apprentissage ouvert';
 $string['openknowledgeaccess'] = 'Accès public au savoir';
+$string['faculty_ai_public_name'] = 'Voie de la Production augmentée par l’IA';
+$string['faculty_ai_short_name'] = 'Production IA';
+$string['faculty_ai_editorial_short_name'] = 'Production augmentée';
+$string['faculty_ai_symbolic_title'] = 'Maître d’œuvre augmenté';
+$string['faculty_ai_domain'] = 'Production outillée';
+$string['faculty_ai_public_formula'] = 'Utiliser l’IA pour écrire, concevoir, coder, documenter, créer, accompagner, vérifier et produire des œuvres, outils et systèmes utiles, sans déléguer le jugement humain.';
 ```
 
 Règles :
@@ -2611,6 +2716,11 @@ Dynamic block ≠ static section
 Provider ≠ template
 Template ≠ permission layer
 Slug ≠ file path
+voie_ia_gouvernable = identifiant technique
+Voie de la Production augmentée par l’IA = nom public
+Production IA = nom court public
+Maître d’œuvre augmenté = titre symbolique public
+IA comme outil de production ≠ IA comme autorité
 ```
 
 ## 30.3 Règle de génération
@@ -2703,6 +2813,7 @@ Ne jamais présenter les Parchemins comme diplômes publics.
 Ne jamais confondre page de faculté et cours Moodle.
 Ne jamais utiliser un slug comme chemin de fichier.
 Ne jamais transformer les pages publiques en répétition défensive sur l’accréditation.
+Ne jamais présenter la Voie IA comme une délégation du contrôle à l’IA; la présenter comme une voie de production augmentée sous responsabilité humaine.
 ```
 
 Formule finale :

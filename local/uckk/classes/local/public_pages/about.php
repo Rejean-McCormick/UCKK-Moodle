@@ -39,19 +39,23 @@ final class about {
             'eyebrow' => 'Situer l’UCKK',
             'title' => 'À propos',
             'subtitle' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire consacré au Grand Jeu social.',
-            'summary' => 'Cette page présente l’identité publique de l’UCKK : une bibliothèque vivante, un cadre d’apprentissage ouvert et un lieu de diffusion du savoir.',
+            'summary' => 'UCKK ouvre une bibliothèque publique vivante, des Voies d’apprentissage, des cours, des archives et des espaces de pratique pour comprendre le jeu, agir avec lucidité et transformer les règles.',
             'sections' => [
                 [
                     'title' => 'Ce qu’est l’UCKK',
-                    'body' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire. Elle rassemble des Voies, des cours, des défis, des archives, une médiathèque, des Assemblées et des repères publics pour apprendre à comprendre le Grand Jeu social, agir avec lucidité et changer les règles.',
+                    'body' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire. Elle rassemble des Voies, des cours, des défis, des archives, une médiathèque, des Assemblées et des repères publics pour apprendre à lire le Grand Jeu social : ses règles, ses positions, ses récits, ses pouvoirs, ses preuves et ses possibilités de transformation.',
                 ],
                 [
                     'title' => 'Une bibliothèque publique vivante',
-                    'body' => 'La première fonction de l’UCKK est la diffusion immédiate du savoir. Les pages publiques ouvrent un accès aux connaissances, aux méthodes, aux références et aux parcours d’apprentissage sans transformer le savoir en privilège fermé. L’UCKK s’inscrit dans l’esprit kOA : rendre les outils de compréhension plus accessibles, plus praticables et plus partageables.',
+                    'body' => 'La première fonction de l’UCKK est la diffusion du savoir. Les pages publiques donnent accès à des connaissances, méthodes, références, cours et parcours d’apprentissage conçus pour être consultés, reliés, pratiqués et partagés. Dans l’esprit kOA, le savoir doit circuler : il doit aider à comprendre, à construire, à décider et à agir.',
+                ],
+                [
+                    'title' => 'Des Voies pour apprendre à agir',
+                    'body' => 'Les Voies UCKK organisent le savoir en parcours lisibles. Elles ne sont pas de simples catégories de cours : elles servent à apprendre une posture, une méthode et une capacité d’action. Grand Jeu social, économie, écologie, sciences politiques, architecture du sens, métaphysique, production augmentée par l’IA, intervention sociale, architecture sociotechnique et écosystème digital kOA forment ensemble un atlas pratique du monde social.',
                 ],
                 [
                     'title' => 'Un cadre d’apprentissage modernisé',
-                    'body' => 'L’UCKK utilise un cadre familier d’apprentissage — cours, voies, niveaux, exercices, archives et traces — en le modernisant pour servir la lecture critique des systèmes, la production de preuves, la mémoire collective et l’action située. Les parcours ne sont pas conçus comme une barrière d’accès, mais comme une manière d’organiser le savoir pour mieux s’y orienter.',
+                    'body' => 'UCKK utilise un cadre familier d’apprentissage — cours, voies, niveaux, exercices, archives, traces et projets — en le modernisant pour servir la lecture critique des systèmes, la production de preuves, la mémoire collective et l’action située. Les parcours servent à s’orienter dans le savoir, à pratiquer des méthodes et à construire des artefacts utiles.',
                 ],
                 [
                     'title' => 'Organisation',
@@ -71,6 +75,20 @@ final class about {
                     'type' => 'institution',
                 ],
                 [
+                    'title' => 'Voies',
+                    'body' => 'Des parcours publics pour apprendre à lire un domaine, pratiquer des méthodes, produire des artefacts et relier les savoirs entre eux.',
+                    'url' => '/local/uckk/programs.php',
+                    'actionlabel' => 'Explorer',
+                    'type' => 'pathways',
+                ],
+                [
+                    'title' => 'Cours publics',
+                    'body' => 'Des portes d’entrée vers les notions, méthodes, exercices et espaces d’apprentissage disponibles dans chaque Voie.',
+                    'url' => '/local/uckk/courses.php',
+                    'actionlabel' => 'Accéder',
+                    'type' => 'courses',
+                ],
+                [
                     'title' => 'Canon',
                     'body' => 'Un cadre de vocabulaire, de limites et de cohérence institutionnelle pour stabiliser l’identité, les règles et les repères UCKK.',
                     'type' => 'canon',
@@ -85,7 +103,7 @@ final class about {
             ],
             'notices' => [
                 [
-                    'body' => 'Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future. Il n’y a pas de projet à court terme d’offrir des certifications, diplômes ou titres formels.',
+                    'body' => 'Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.',
                     'type' => 'light',
                 ],
             ],

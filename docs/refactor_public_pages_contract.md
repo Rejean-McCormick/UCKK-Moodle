@@ -78,7 +78,9 @@ Orientation à éviter :
 - centrer les pages sur les limites légales d’accréditation ;
 - répéter les notices de non-certification sur chaque bloc ;
 - donner l’impression qu’une certification est un objectif à court terme ;
-- transformer les Parchemins, niveaux ou titres symboliques en promesses de reconnaissance externe.
+- transformer les Parchemins, niveaux ou titres symboliques en promesses de reconnaissance externe ;
+- présenter une Voie comme un pipeline Atlas/Moodle plutôt que comme une porte d’entrée vers le savoir ;
+- exposer au public les détails de préfixes techniques, de projection JSON, de sync ou de source interne.
 ```
 
 Formulation canonique à utiliser une seule fois lorsque nécessaire :
@@ -94,13 +96,45 @@ Règles de rédaction :
 - ne pas répéter “diplôme public accrédité”, “statut universitaire public accrédité” ou équivalents dans les FAQ, notices, sections et garde-fous ;
 - remplacer les formulations défensives par des formulations positives centrées sur l’accès au savoir ;
 - parler de Voies, parcours, cours publics, bibliothèque, archives, médiathèque, défis, assemblées et apprentissage ouvert ;
-- ne pas présenter une absence de certification comme le sujet principal des pages.
+- ne pas présenter une absence de certification comme le sujet principal des pages ;
+- écrire les sections de cours comme des portes d’accès : “Explorer les cours publics”, “Accéder aux cours”, “Ouvrir les cours disponibles” ;
+- garder les champs techniques dans les sources JSON, mais ne pas les transformer en prose publique.
 ```
 
 Phrase de positionnement recommandée :
 
 ```text
 UCKK n’est pas d’abord un système de certification. C’est une bibliothèque publique vivante et un campus ouvert pour diffuser, organiser et pratiquer le savoir dans un cadre d’apprentissage familier, modernisé et accessible.
+```
+
+Convention éditoriale IA :
+
+```text
+L’ancienne appellation publique “IA gouvernable” est remplacée par “Voie de la Production augmentée par l’IA”.
+Nom court recommandé : “Production IA”.
+Nom court éditorial possible : “Production augmentée”.
+Titre symbolique : “Maître d’œuvre augmenté”.
+Domaine public : “Production outillée”.
+```
+
+Règle de compatibilité technique :
+
+```text
+Les identifiants techniques existants restent stables tant que la migration complète n’est pas explicitement décidée :
+faculty_ia_gouvernable
+voie_ia_gouvernable
+ia-gouvernable
+voie_ia_gouvernable.json
+UCKK-IA
+IA-HUB
+```
+
+Règle de cadrage IA :
+
+```text
+kOA ne donne pas le contrôle à l’IA.
+La Voie Production augmentée par l’IA enseigne l’usage productif de l’IA comme atelier de construction : écrire, coder, documenter, concevoir, prototyper, illustrer, organiser, vérifier et accompagner.
+L’IA est un outil de production, pas une autorité, pas un décideur et pas une instance de gouvernance.
 ```
 
 ---
@@ -1108,10 +1142,19 @@ content/faculties/linguistique-architecture-du-sens.faculty.json
 content/faculties/metaphysique.faculty.json
 content/faculties/sciences-politiques.faculty.json
 
-academic_registry_json/programs.json        # si exposé publiquement
-academic_registry_json/badges.json          # si exposé publiquement
-academic_registry_json/courses.json         # si exposé publiquement
-academic_registry_json/course_templates.json # si exposé publiquement
+content/faculties/faculty_manifest.json        # si le nom public ou l’ordre de la Voie IA est exposé
+atlas/atlas_manifest.json                      # si le nom public ou le titre de la Voie IA y apparaît
+atlas/voies/voie_ia_gouvernable.json           # à corriger pour remplacer le cadrage public “IA gouvernable” par “Production augmentée par l’IA”
+
+academic_registry_json/categories.json         # si exposé publiquement
+academic_registry_json/programs.json           # si exposé publiquement
+academic_registry_json/badges.json             # si exposé publiquement
+academic_registry_json/courses.json            # si exposé publiquement
+academic_registry_json/course_templates.json   # si exposé publiquement
+
+docs/12_faculty_pages_atlas_public_contract.md # si la convention IA est aussi documentée côté Faculty/Atlas
+docs/13_faculty_json_authoring_guide.md        # si le guide auteur mentionne IA gouvernable
+docs/14_atlas_moodle_sync_reference.md         # si la référence de sync expose le nom public
 ```
 
 ---
@@ -1298,7 +1341,18 @@ Validation :
 8.5.3 Réduire les mentions d’accréditation à une seule formule canonique.
 8.5.4 Vérifier que les pages parlent d’abord de bibliothèque publique, diffusion du savoir et apprentissage ouvert.
 8.5.5 Vérifier qu’aucune FAQ ou notice ne transforme la non-certification en thème principal.
+8.5.6 Remplacer les formulations publiques de type “projeté depuis l’Atlas”, “dérivé de l’Atlas”, “préfixe Moodle” ou “Espaces Moodle associés” par des formulations orientées visiteur : “Explorer les cours publics”, “Accéder aux cours”, “Ouvrir les cours disponibles”.
+8.5.7 Renommer publiquement la Voie IA : “Voie de la Production augmentée par l’IA”, nom court “Production IA”, titre symbolique “Maître d’œuvre augmenté”.
+8.5.8 Conserver les identifiants techniques IA existants tant que la migration complète n’est pas décidée : faculty_ia_gouvernable, voie_ia_gouvernable, ia-gouvernable, voie_ia_gouvernable.json, UCKK-IA, IA-HUB.
+8.5.9 Recentrer le cadrage IA : l’IA sert à produire, écrire, coder, documenter, concevoir, prototyper, illustrer, vérifier et accompagner; elle ne gouverne pas, ne décide pas et ne reçoit pas l’autorité finale.
 ```
+
+Formulation publique recommandée pour la Voie IA :
+
+```text
+La Voie de la Production augmentée par l’IA apprend à utiliser l’intelligence artificielle comme atelier de production : écrire, coder, documenter, concevoir, prototyper, illustrer, organiser, vérifier et accompagner, sans déléguer le jugement humain ni l’autorité finale.
+```
+
 
 ### Lot 9 — CSS et langue
 
@@ -1482,4 +1536,10 @@ Il n’y a pas de projet à court terme d’offrir une certification, un diplôm
 
 DÉCISION 14
 Le savoir public UCKK ne doit pas être présenté comme un contenu derrière paywall.
+
+DÉCISION 15
+L’appellation publique de l’ancienne Voie IA gouvernable devient : “Voie de la Production augmentée par l’IA”. Le nom court public recommandé est “Production IA”. Le titre symbolique est “Maître d’œuvre augmenté”.
+
+DÉCISION 16
+L’IA est présentée comme outil de production et d’augmentation du travail humain. Elle ne doit pas être présentée comme instance de contrôle, autorité finale ou sujet de gouvernance autonome.
 ```

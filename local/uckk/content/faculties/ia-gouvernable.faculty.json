@@ -20,41 +20,42 @@
 },
 "identity": {
 "eyebrow": "Voie ouverte UCKK",
-"name": "Voie de l’Intelligence artificielle gouvernable",
-"short_name": "IA gouvernable",
-"title_symbolique": "Cartographe augmenté",
-"domain": "Intelligence outillée",
+"name": "Voie Construire avec l’IA",
+"short_name": "Construire avec l’IA",
+"title_symbolique": "Bâtisseur augmenté",
+"domain": "Construction outillée",
 "level": "Puissance opératoire",
-"faculty_role": "Voie consacrée à l’usage public, à l’évaluation critique et à la gouvernance responsable des systèmes d’intelligence artificielle.",
-"one_sentence": "Utiliser l’IA pour lire, créer, cartographier, simuler et accélérer sans déplacer l’autorité finale hors du jugement humain."
+"faculty_role": "Voie consacrée à l’usage de l’intelligence artificielle comme outil de construction, de recherche, de prototypage, de cartographie, de rédaction, de vérification et d’accélération du travail humain.",
+"one_sentence": "Utiliser l’IA pour construire plus vite, mieux documenter, mieux vérifier et mieux relier les idées, sans lui déléguer la décision, la responsabilité ou l’autorité finale."
 },
 "seo": {
-"title": "IA gouvernable — UCKK",
-"description": "La Voie de l’Intelligence artificielle gouvernable ouvre un parcours public pour apprendre à utiliser, vérifier, documenter et gouverner l’IA comme outil de puissance opératoire, sans confondre sortie, preuve, décision et responsabilité.",
+"title": "Construire avec l’IA — UCKK",
+"description": "La Voie Construire avec l’IA ouvre un parcours public pour utiliser l’intelligence artificielle comme outil de construction, de prototypage, de recherche, de cartographie, de rédaction, de vérification et de création responsable.",
 "keywords": [
 "UCKK",
-"IA gouvernable",
+"Construire avec l’IA",
 "intelligence artificielle",
-"gouvernance de l’IA",
-"auditabilité",
-"responsabilité humaine",
+"IA comme outil",
+"construction augmentée",
+"prototypage",
+"cartographie",
+"rédaction assistée",
 "vérification",
-"contestabilité",
-"cartographie augmentée",
+"responsabilité humaine",
 "Grand Jeu social"
 ]
 },
 "hero": {
-"title": "Voie de l’Intelligence artificielle gouvernable",
-"subtitle": "Utiliser l’IA comme outil, jamais comme autorité finale.",
-"summary": "Cette voie fait de l’IA un instrument de lecture, de création, de cartographie et de vérification. Elle apprend à travailler plus vite sans abandonner la preuve, le contexte, la délibération ni la responsabilité humaine.",
+"title": "Construire avec l’IA",
+"subtitle": "Utiliser l’IA comme outil de construction, jamais comme autorité.",
+"summary": "Cette voie fait partie de l’Univers-Cité King Klown : un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle apprend à utiliser l’IA pour chercher, structurer, écrire, coder, cartographier, prototyper, vérifier et construire, tout en gardant la décision, la responsabilité et le jugement du côté humain.",
 "primary_cta": {
-"label": "Accéder aux cours",
-"target": "#cours-moodle"
+"label": "Comprendre la voie",
+"target": "#programme"
 },
 "secondary_cta": {
-"label": "Explorer les Voies UCKK",
-"target": "/local/uckk/programs.php"
+"label": "Accéder aux cours",
+"target": "#cours-moodle"
 }
 },
 "navigation": [
@@ -87,32 +88,32 @@
 {
 "id": "presentation",
 "type": "text",
-"title": "Une voie pour rendre l’IA utile, vérifiable et gouvernable",
-"body": "La Voie de l’Intelligence artificielle gouvernable aborde l’IA comme une puissance d’assistance, de cartographie, de simulation et d’accélération. Elle apprend à distinguer sortie, hypothèse, preuve, décision et responsabilité, afin que l’IA reste un outil de lecture et d’action plutôt qu’une autorité de substitution."
+"title": "Une voie pour construire avec l’IA",
+"body": "La Voie Construire avec l’IA aborde l’intelligence artificielle comme un atelier outillé. Elle sert à accélérer la recherche, clarifier les idées, produire des brouillons, générer des prototypes, cartographier des systèmes, écrire du code, comparer des options et vérifier des hypothèses. L’IA n’y remplace pas le jugement humain : elle augmente la capacité de construire."
 },
 {
 "id": "programme",
 "type": "text",
-"title": "Parcours de la Voie",
-"body": "Le parcours aide à comprendre comment les systèmes d’IA produisent des réponses, où ils peuvent échouer, comment vérifier leurs sorties, comment documenter leurs limites et comment les intégrer dans des pratiques humaines responsables. Il relie l’usage concret des outils à la prudence, à l’auditabilité, à la contestabilité et à la gouvernance."
+"title": "Un parcours de construction augmentée",
+"body": "Cette voie organise un parcours public de méthode et de pratique. Elle apprend à formuler une intention, préparer un contexte, dialoguer avec un modèle, transformer une sortie en matériau de travail, vérifier les résultats, documenter les limites et intégrer l’IA dans un processus de construction responsable."
 },
 {
 "id": "cours",
 "type": "callout",
 "title": "Explorer les cours publics",
-"body": "Les cours publics sont les principales portes d’entrée dans cette voie. Ils permettent de découvrir les concepts, méthodes, exercices et artefacts d’apprentissage, puis d’ouvrir l’espace de cours correspondant lorsqu’il est disponible."
+"body": "Les cours publics sont les principales portes d’entrée dans cette voie. Ils permettent d’apprendre à utiliser l’IA pour chercher, structurer, écrire, coder, concevoir, corriger, comparer, documenter et prototyper, puis d’ouvrir l’espace de cours correspondant lorsqu’il est disponible."
 },
 {
 "id": "projet-final",
 "type": "text",
 "title": "Projet final",
-"body": "Le projet final consiste à concevoir, tester et documenter un usage d’IA gouvernable : objectif clair, contexte d’usage, risques identifiés, protocole de vérification, limites déclarées, traces conservées et responsabilité humaine explicitement située."
+"body": "Le projet final consiste à construire un objet utile avec l’IA : carte, outil, prototype, dossier, méthode, assistant, analyse, interface, parcours d’apprentissage ou système documentaire. Le résultat doit montrer l’intention humaine, les choix effectués, les vérifications réalisées, les limites reconnues et la manière dont l’IA a été utilisée sans devenir l’autorité finale."
 },
 {
 "id": "ethique",
 "type": "notice",
-"title": "Éthique de l’IA gouvernable",
-"body": "Une IA utile n’est pas seulement performante. Elle doit rester vérifiable, contestable, proportionnée, traçable et subordonnée à une responsabilité humaine identifiable."
+"title": "Responsabilité humaine",
+"body": "Une sortie d’IA n’est pas une preuve, une décision ou une vérité finale. Elle devient un matériau de travail seulement lorsqu’elle est située, vérifiée, corrigée, documentée et assumée par une personne ou une instance responsable."
 }
 ],
 "atlas_projection": {
@@ -143,7 +144,7 @@
 },
 "limit": 5,
 "visibility": "public",
-"empty_state": "Aucune annonce publique pour cette voie pour le moment."
+"empty_state": "Aucune annonce publique pour le moment."
 },
 {
 "id": "cours-moodle",
@@ -161,41 +162,46 @@
 "featured_blocks": [
 {
 "type": "principle",
-"title": "L’IA assiste, l’humain répond",
-"body": "Une sortie d’IA peut accélérer le travail intellectuel, mais elle ne remplace ni la preuve, ni la délibération, ni la responsabilité humaine."
+"title": "L’IA comme outil",
+"body": "L’IA sert à construire, explorer, reformuler, comparer, simuler, coder et documenter. Elle ne reçoit pas le contrôle du système, de la décision ou de la responsabilité."
 },
 {
 "type": "method",
-"title": "Vérifier avant d’agir",
-"body": "Toute sortie importante doit être relue, contextualisée, comparée à des sources ou à des traces, puis assumée par une personne ou une instance responsable."
+"title": "Passer de la sortie au matériau",
+"body": "Une réponse d’IA n’est qu’un point de départ. La méthode consiste à la relire, la tester, la corriger, la situer, la comparer et l’intégrer dans un travail humain vérifiable."
 },
 {
 "type": "ethics",
-"title": "Ne pas confondre fluidité et vérité",
-"body": "Une réponse claire, rapide ou convaincante peut rester fausse, incomplète ou mal située. La qualité d’un usage IA dépend de la vérification, du contexte et des limites déclarées."
+"title": "Ne pas déléguer l’autorité",
+"body": "kOA n’utilise pas l’IA pour remplacer le jugement humain. L’IA peut accélérer la construction, mais la responsabilité, la décision et l’interprétation demeurent humaines."
+},
+{
+"type": "principle",
+"title": "Construire des preuves de travail",
+"body": "Un bon usage de l’IA laisse des traces : intention, contexte, prompts, choix, corrections, vérifications, sources, limites et décisions humaines."
 }
 ],
 "faq": [
 {
+"question": "Cette voie apprend-elle à donner le contrôle à l’IA?",
+"answer": "Non. Cette voie apprend à utiliser l’IA comme outil de construction. Elle aide à chercher, écrire, coder, cartographier, prototyper et vérifier, sans déplacer l’autorité finale hors du jugement humain."
+},
+{
+"question": "Que peut-on construire avec l’IA?",
+"answer": "On peut construire des cartes, brouillons, analyses, prototypes, assistants, scripts, parcours d’apprentissage, systèmes documentaires, méthodes de vérification et outils de travail. Chaque production doit être relue, testée, corrigée et assumée humainement."
+},
+{
 "question": "Par où commencer?",
-"answer": "Commencez par la présentation de la voie, puis ouvrez les cours publics disponibles. Chaque cours sert de porte d’entrée vers une notion, une méthode ou un artefact d’apprentissage lié à l’IA gouvernable."
+"answer": "Commencez par les cours publics disponibles. Ils donnent des méthodes pour formuler une intention, préparer un contexte, interroger un modèle, transformer une sortie en matériau de travail et vérifier ce qui doit l’être."
 },
 {
-"question": "Cette Voie apprend-elle à remplacer le jugement humain par l’IA?",
-"answer": "Non. Elle apprend à utiliser l’IA comme outil d’assistance, de cartographie, de simulation et de vérification, tout en maintenant l’autorité finale du côté humain."
-},
-{
-"question": "Quels risques sont étudiés?",
-"answer": "La voie traite notamment des hallucinations, biais, erreurs de classification, fuites de données, manipulations, dépendances infrastructurelles, automatisations abusives et confusions entre imitation, compréhension, preuve et décision."
-},
-{
-"question": "Quel est le but immédiat de cette Voie?",
-"answer": "Le but immédiat est de diffuser des connaissances praticables sur l’IA gouvernable dans un cadre d’apprentissage ouvert : comprendre les outils, apprendre à les vérifier, documenter leurs limites et les utiliser sans déléguer la responsabilité humaine. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
+"question": "Que signifie Bâtisseur augmenté?",
+"answer": "C’est le titre symbolique associé à cette voie. Il désigne une posture d’apprentissage : savoir construire avec des outils d’IA tout en gardant la lucidité, la responsabilité et la capacité de vérification. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
 }
 ],
 "contact": {
 "label": "Contact",
-"body": "Pour suivre cette voie, commencez par les cours publics disponibles et consultez les annonces pour les nouvelles ressources, rencontres ou ouvertures d’espaces d’apprentissage.",
+"body": "Pour suivre cette voie, commencez par les cours disponibles, puis consultez les annonces publiques pour les nouvelles, rencontres et ouvertures d’espaces d’apprentissage.",
 "email": "",
 "cta": {
 "label": "Voir les annonces",
@@ -206,9 +212,9 @@
 "owner": "local_uckk",
 "editorial_status": "approved",
 "last_reviewed": null,
-"review_notes": "Note éditoriale interne : profil public recentré sur l’accès aux cours, la diffusion ouverte du savoir, la vérification des sorties IA et la responsabilité humaine.",
+"review_notes": "Note éditoriale interne : renommage public de la voie vers Construire avec l’IA. Les identifiants techniques faculty_ia_gouvernable, voie_ia_gouvernable et ia-gouvernable sont conservés pour compatibilité Atlas/Moodle. Ne pas afficher publiquement.",
 "public_claims_guardrails": [
-"Garder la note de reconnaissance unique et discrète; ne pas présenter une sortie IA comme preuve, décision ou autorité finale; ne pas afficher de progression, notes ou données privées d’étudiants."
+"Présenter l’IA comme outil de construction, jamais comme autorité finale, sujet de gouvernance autonome ou instance de contrôle."
 ]
 },
 "cache": {
