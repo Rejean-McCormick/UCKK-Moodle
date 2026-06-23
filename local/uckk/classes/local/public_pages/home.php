@@ -37,10 +37,10 @@ final class home {
             'layout' => 'wide',
             'typography' => 'display',
 
-            'eyebrow' => 'Établissement virtuel de puissance opératoire',
+            'eyebrow' => 'Bibliothèque publique vivante',
             'title' => 'Univers-Cité King Klown',
             'subtitle' => 'Comprendre le jeu. Jouer avec lucidité. Changer les règles.',
-            'summary' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle relie les Voies, les cours, les Défis, les Assemblées, l’Intégrité et le Registraire pour former des Joueurs lucides capables de lire les systèmes, produire des preuves et agir avec méthode.',
+            'summary' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire consacré au Grand Jeu social. Elle ouvre une bibliothèque publique vivante, organise des parcours de savoir et propose un cadre d’apprentissage familier, modernisé et accessible pour lire les systèmes, produire des preuves, discuter les idées et agir avec méthode.',
 
             'quicklinks' => [
                 [
@@ -99,25 +99,25 @@ final class home {
                 [
                     'type' => 'positioning',
                     'eyebrow' => 'Position',
-                    'title' => 'Former des Joueurs lucides',
-                    'body' => 'La société fonctionne déjà comme un jeu de règles, de récits, d’institutions, d’algorithmes, de statuts, de réputations, de preuves et de mémoires. L’Univers-Cité King Klown existe pour rendre ce jeu lisible et pour former des personnes capables d’y agir avec méthode, panache et intégrité.',
+                    'title' => 'Ouvrir le savoir avant de promettre des titres',
+                    'body' => 'La première fonction de l’UCKK est la diffusion immédiate du savoir. Elle ne place pas la connaissance derrière un mur d’accès : elle la rend consultable, navigable, discutable et praticable dans un cadre d’apprentissage structuré.',
                     'items' => [
-                        'Comprendre les règles visibles et invisibles qui organisent la vie collective.',
-                        'Jouer avec lucidité, sans naïveté, sans cynisme et sans perte d’intégrité.',
-                        'Changer les règles lorsque le jeu devient injuste, opaque ou destructeur.',
+                        'Rendre les connaissances publiques plus lisibles, reliées et utilisables.',
+                        'Donner des repères pour comprendre les systèmes sociaux, techniques, politiques, économiques et symboliques.',
+                        'Permettre à chacun d’entrer par une Voie, un cours, une archive, un média, un défi ou une assemblée.',
                     ],
                 ],
                 [
                     'type' => 'architecture',
                     'eyebrow' => 'Architecture',
-                    'title' => 'Un établissement virtuel de puissance opératoire',
-                    'body' => 'UCKK forme. kOA mobilise. Le kOA Digital Ecosystem opère. King Klown attire. L’Inquisiteur protège. Les Assemblées légitiment. Le Registraire se souvient.',
+                    'title' => 'Un cadre d’apprentissage familier, modernisé',
+                    'body' => 'L’UCKK reprend des formes connues — cours, parcours, ressources, activités, archives, discussions — et les modernise autour d’une logique plus ouverte : apprendre, relier, produire, vérifier, transmettre.',
                     'items' => [
-                        'Les Voies structurent les grands domaines de progression.',
-                        'Les cours organisent les notions, pratiques, ressources et activités.',
-                        'Les Défis transforment une question en action vérifiable.',
-                        'Les Assemblées donnent une forme collective à l’évaluation et à l’orientation.',
-                        'Le Registraire conserve les traces, preuves, décisions et leçons utiles.',
+                        'Les Voies organisent les grands domaines de savoir et d’action.',
+                        'Les cours offrent des points d’entrée structurés dans chaque domaine.',
+                        'Les Défis transforment une question en exercice, production ou preuve.',
+                        'Les Assemblées donnent une forme collective à la discussion, à l’orientation et à la correction.',
+                        'Le Registraire conserve les traces, preuves, décisions, versions et leçons utiles.',
                     ],
                 ],
                 [
@@ -134,9 +134,9 @@ final class home {
                 ],
                 [
                     'type' => 'boundary',
-                    'eyebrow' => 'Limite publique',
-                    'title' => 'Clarté institutionnelle',
-                    'body' => 'L’UCKK est un établissement virtuel émergent de puissance opératoire. Ses Niveaux, Parchemins UCKK, dossiers de passage, portfolios et reconnaissances internes ne doivent pas être présentés comme des diplômes publics accrédités, des grades universitaires ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.',
+                    'eyebrow' => 'Note institutionnelle',
+                    'title' => 'Reconnaissance et horizon public',
+                    'body' => 'Il n’y a pas de projet à court terme d’offrir une certification formelle. Le but immédiat est d’ouvrir et d’organiser le savoir. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.',
                 ],
             ],
 
@@ -144,21 +144,21 @@ final class home {
             'cards' => [
                 [
                     'title' => 'Voies',
-                    'body' => 'La cartographie générale des parcours qui relient domaines, cours, défis, preuves, Niveaux et Parchemins UCKK.',
+                    'body' => 'Les grands parcours de lecture du monde : domaines, notions, cours, défis, preuves, archives et pratiques.',
                     'url' => '/local/uckk/programs.php',
                     'actionlabel' => 'Voir les Voies',
                     'type' => 'programs',
                 ],
                 [
                     'title' => 'Cours',
-                    'body' => 'Les espaces où les cours, ressources, activités et repères de progression sont organisés.',
+                    'body' => 'Les espaces structurés pour explorer les notions, ressources, activités et repères de progression.',
                     'url' => '/local/uckk/courses.php',
                     'actionlabel' => 'Explorer les cours',
                     'type' => 'courses',
                 ],
                 [
                     'title' => 'Défis',
-                    'body' => 'Les épreuves publiques ou internes qui transforment une question en action, production, preuve et progression.',
+                    'body' => 'Les exercices publics ou internes qui transforment une question en action, production, preuve et apprentissage.',
                     'url' => '/local/uckk/challenges.php',
                     'actionlabel' => 'Voir les Défis',
                     'type' => 'challenges',
@@ -195,8 +195,8 @@ final class home {
 
             'notices' => [
                 [
-                    'title' => 'Reconnaissance interne',
-                    'body' => 'Les reconnaissances UCKK attestent une progression de compétence, de pratique, de recherche ou de contribution au sein de l’Univers-Cité King Klown. Elles ne remplacent pas des diplômes publics accrédités.',
+                    'title' => 'Bibliothèque ouverte',
+                    'body' => 'La connaissance doit circuler. L’UCKK organise des ressources, parcours, archives et scènes d’apprentissage pour rendre le savoir plus accessible, plus relié et plus praticable.',
                     'type' => 'institutional',
                 ],
                 [
@@ -217,7 +217,7 @@ final class home {
                 ],
                 [
                     'label' => 'Nature',
-                    'value' => 'Établissement virtuel de puissance opératoire',
+                    'value' => 'Bibliothèque publique vivante et établissement virtuel de puissance opératoire',
                 ],
                 [
                     'label' => 'Domaine',
@@ -230,8 +230,8 @@ final class home {
             ],
 
             'cta' => [
-                'title' => 'Entrer dans une Voie',
-                'body' => 'Commencer par une Voie fondatrice, puis relier les cours, les preuves, les Défis, les Assemblées et le Registraire.',
+                'title' => 'Entrer dans la bibliothèque vivante',
+                'body' => 'Commencer par une Voie fondatrice, explorer les cours, consulter les traces publiques et relier les idées au Grand Jeu social.',
                 'url' => '/local/uckk/faculty.php?slug=grand-jeu-social',
                 'label' => 'Commencer par le Grand Jeu social',
             ],

@@ -4,8 +4,8 @@
 **Composant :** `local_uckk`  
 **Portée :** Pages institutionnelles publiques UCKK dans Moodle  
 **Statut :** Référence d’implémentation  
-**Version :** 1.1.0  
-**Date :** 2026-06-08
+**Version :** 1.2.0  
+**Date :** 2026-06-22
 
 ---
 
@@ -30,7 +30,8 @@ Elles ne doivent pas ressembler à :
 - une landing page de startup;
 - une interface fantasy chaotique;
 - un patchwork de styles locaux;
-- une fausse institution accréditée.
+- une vitrine de certification;
+- un savoir placé derrière un paywall.
 
 Elles doivent exprimer :
 
@@ -40,6 +41,8 @@ Elles doivent exprimer :
 - la mémoire;
 - la preuve;
 - la méthode;
+- la diffusion ouverte du savoir;
+- la bibliothèque publique vivante;
 - le théâtre public responsable;
 - l’identité visuelle UCKK.
 
@@ -67,6 +70,8 @@ Il combine :
 - bordures fines;
 - hiérarchie documentaire;
 - symbolique sans excès fantasy.
+
+Le style doit servir une idée simple : UCKK ouvre une bibliothèque publique vivante et un cadre d’apprentissage modernisé. Le design ne doit pas suggérer un accès payant au savoir ni placer la question de la certification au centre de l’expérience publique.
 
 ---
 
@@ -774,7 +779,9 @@ Une page publique UCKK est acceptée si :
 - elle reste lisible sur mobile;
 - elle n’affiche pas de chaîne manquante;
 - elle ne casse pas Moodle;
-- elle ne prétend pas à une reconnaissance étatique;
+- elle présente l’UCKK comme bibliothèque publique vivante et cadre d’apprentissage ouvert;
+- elle ne vend pas une promesse de certification;
+- elle limite la reconnaissance interne à une notice sobre, si nécessaire;
 - elle demeure cohérente avec le canon UCKK.
 
 ---
@@ -821,6 +828,7 @@ pas de texte sur fond de même couleur
 cartes alignées
 titres cohérents
 notices sobres
+aucune répétition défensive sur l’accréditation
 mobile acceptable
 tableaux scrollables
 aucun motif héraldique visible sur smartphone
@@ -896,6 +904,7 @@ La priorité :
 ```text
 lisible
 institutionnel
+ouvert
 sobre
 cohérent
 canonique

@@ -6,7 +6,7 @@
 **Dépendance normative :** `docs/12_faculty_pages_atlas_public_contract.md`
 **Dépendance auteur :** `docs/13_faculty_json_authoring_guide.md`
 **Statut :** référence d’implémentation.
-**Version :** `UCKK-ATLAS-MOODLE-SYNC-REFERENCE-0.1`
+**Version :** `UCKK-ATLAS-MOODLE-SYNC-REFERENCE-0.2`
 **Feature canonique :** `uckk_atlas_moodle_sync`
 **Composant Moodle propriétaire :** `local_uckk`
 
@@ -14,11 +14,21 @@
 
 # 1. Objet
 
-Ce document définit comment `local_uckk` prépare, valide, compare et synchronise les informations publiques et pédagogiques issues des JSON Atlas et Faculty vers Moodle.
+Ce document définit comment `local_uckk` prépare, valide, compare et synchronise les informations publiques, pédagogiques et opérationnelles issues des JSON Atlas et Faculty vers Moodle.
 
 La synchronisation ne remplace pas les JSON.
 
 Elle produit ou met à jour uniquement des objets Moodle dérivés, contrôlés et traçables.
+
+La projection publique doit soutenir la fonction première de l’UCKK :
+
+```text
+ouvrir une bibliothèque publique vivante;
+rendre les connaissances accessibles;
+organiser des parcours de lecture et d’apprentissage;
+relier cours, Voies, médias, archives, défis et assemblées;
+préserver les traces utiles sans exposer de données privées.
+```
 
 Formule canonique :
 
@@ -30,7 +40,7 @@ Faculty JSON
 → vérité éditoriale publique de la faculté
 
 Moodle
-→ vérité opérationnelle des catégories, cours, annonces, événements, badges et accès
+→ vérité opérationnelle des catégories, cours, annonces, événements, badges, accès et espaces d’apprentissage
 
 local_uckk
 → lit, valide, normalise, compare, prépare, rapporte et applique les changements autorisés
@@ -52,7 +62,8 @@ faire un dry-run avant tout apply;
 journaliser uniquement ids, statuts, compteurs et hashes;
 ne jamais exposer de données privées;
 ne jamais supprimer du contenu Moodle non géré par UCKK sans règle explicite;
-ne jamais créer d’accréditation publique implicite.
+préserver la fonction publique de bibliothèque ouverte;
+éviter de transformer une reconnaissance interne en promesse externe.
 ```
 
 Elle ne doit pas :
@@ -67,7 +78,7 @@ publier des badges personnels;
 exposer des données privées;
 créer des rôles symboliques;
 déduire des permissions depuis un titre symbolique;
-confondre Parchemin UCKK et diplôme public accrédité.
+confondre publication publique du savoir et certification formelle.
 ```
 
 ---
@@ -510,12 +521,12 @@ uckk_concept_maitre_id
 uckk_concept_maitre_nom
 uckk_artefact_type
 uckk_artefact_nom
-uckk_parchemin
+uckk_reconnaissance_interne
 uckk_atlas_source_hash
 uckk_sync_status
 ```
 
-## 10.3 Badges / Parchemins
+## 10.3 Badges / reconnaissances internes
 
 Convention recommandée :
 
@@ -541,10 +552,10 @@ UCKK-BADGE-KOA-PO
 Règles :
 
 ```text
-Le badge est une reconnaissance interne UCKK.
-Le badge ne doit pas être présenté comme diplôme public.
+Le badge est un shell de reconnaissance interne UCKK.
 Le sync ne doit pas attribuer le badge à un utilisateur.
 Le sync peut créer le badge shell seulement si l’option est explicitement activée.
+Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.
 ```
 
 ---
@@ -888,6 +899,7 @@ Ne pas prendre possession d’une catégorie non UCKK sans validation humaine.
 Ne pas écraser une description manuelle si elle n’a pas été marquée gérée par UCKK.
 Ne pas utiliser category_id depuis JSON comme source principale.
 Préférer category_idnumber pour résolution stable.
+La description publique doit privilégier le savoir accessible, les parcours, les cours, les archives et l’apprentissage ouvert.
 ```
 
 ---
@@ -909,7 +921,6 @@ concept_maitre.concept_id
 concept_maitre.nom
 artefact_maitrise.type
 artefact_maitrise.nom
-parchemin
 atlas_source_hash
 ```
 
@@ -935,6 +946,7 @@ Ne pas supprimer activités existantes.
 Ne pas créer inscriptions.
 Ne pas modifier achèvements.
 Ne pas modifier notes.
+Le résumé public du cours doit rester orienté vers l’apprentissage, les ressources, les concepts, les pratiques et les traces utiles.
 ```
 
 ---
@@ -971,7 +983,9 @@ annonces;
 calendrier public;
 ressources publiques;
 orientation générale;
-liens vers les cours.
+liens vers les cours;
+liens vers la médiathèque;
+liens vers les archives publiques.
 ```
 
 Le hub ne doit pas porter :
@@ -986,7 +1000,7 @@ dossiers personnels.
 
 ---
 
-# 21. Règles de badges / Parchemins
+# 21. Règles de badges / reconnaissances internes
 
 ## 21.1 Badge shell
 
@@ -996,7 +1010,7 @@ Convention :
 
 ```text
 idnumber = UCKK-BADGE-{CODE}-PO
-name = Parchemin de Puissance opératoire — {identity.name}
+name = Reconnaissance interne — {identity.short_name}
 ```
 
 ## 21.2 Interdictions
@@ -1009,8 +1023,18 @@ révoquer un badge;
 publier une liste de détenteurs;
 exposer des preuves privées;
 déduire un achèvement depuis un JSON;
-présenter le badge comme diplôme public accrédité.
+présenter une reconnaissance interne comme une certification formelle externe.
 ```
+
+## 21.3 Formule publique unique
+
+Si une note de reconnaissance doit être affichée publiquement, utiliser une seule formule courte :
+
+```text
+Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.
+```
+
+Cette phrase ne doit pas devenir le thème principal d’une page publique.
 
 ---
 
@@ -1414,7 +1438,7 @@ Règles :
 Public page ≠ sync permission.
 Faculty editor ≠ Moodle admin.
 Symbolic title ≠ capability.
-Parchemin ≠ permission.
+Reconnaissance interne ≠ permission.
 ```
 
 ## 29.3 Données privées
@@ -1540,6 +1564,7 @@ Règle :
 ```text
 local_uckk ne doit pas injecter de logique de format de cours.
 format_uckk ne doit pas devenir source de vérité Atlas.
+format_uckk doit servir l’apprentissage, l’orientation, les ressources et les traces utiles.
 ```
 
 ---
@@ -1554,6 +1579,7 @@ Règle :
 theme_uckk ne contient pas de logique de sync.
 theme_uckk ne lit pas directement les JSON Atlas.
 theme_uckk ne valide pas les profiles Faculty.
+theme_uckk doit soutenir la lisibilité publique, pas remplacer la couche éditoriale.
 ```
 
 ---
@@ -1687,6 +1713,7 @@ php local/uckk/cli/sync_atlas.php --mode=dry_run --all --json
 [ ] Le mode apply a confirmation explicite.
 [ ] Le rapport ne contient pas de JSON brut.
 [ ] Le rapport ne contient pas de données privées.
+[ ] Les textes publics projetés restent orientés vers l’apprentissage ouvert, les ressources, les cours, les archives et la diffusion du savoir.
 ```
 
 ---
@@ -1753,18 +1780,23 @@ Autorisé :
 logger ids, status, counts, hashes.
 ```
 
-## 38.5 Confondre Parchemin et diplôme public
+## 38.5 Confondre reconnaissance interne et promesse externe
 
 Interdit :
 
 ```text
-Créer un badge Moodle intitulé diplôme public accrédité.
+présenter une reconnaissance interne comme une promesse formelle externe;
+faire porter la page publique par une notice défensive;
+répéter la limite institutionnelle dans chaque bloc visible.
 ```
 
 Autorisé :
 
 ```text
-Créer un badge shell de reconnaissance interne UCKK si activé.
+présenter les Voies comme parcours publics de savoir;
+présenter les cours comme espaces d’apprentissage;
+présenter les archives comme mémoire consultable;
+utiliser une seule note institutionnelle courte lorsque nécessaire.
 ```
 
 ---
@@ -1785,7 +1817,7 @@ apply avec capability;
 logs avec hashes;
 cache purgé après changement public;
 aucune donnée privée;
-aucune accréditation implicite.
+aucune promesse institutionnelle implicite.
 ```
 
 Règle finale :
@@ -1796,4 +1828,14 @@ Si un objet Moodle ne peut pas être relié à un ID canonique UCKK,
 à un hash source,
 et à une action de dry-run,
 alors le sync ne doit pas le modifier.
+```
+
+Règle éditoriale finale :
+
+```text
+Si une projection publique rend l’UCKK plus défensive que transmissive,
+elle doit être réécrite.
+
+La page publique doit d’abord ouvrir le savoir.
+La limite institutionnelle doit rester claire, courte et secondaire.
 ```

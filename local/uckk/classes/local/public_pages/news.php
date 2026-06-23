@@ -37,40 +37,49 @@ final class news {
             'layout' => 'standard',
             'typography' => 'institutional',
             'eyebrow' => 'Nouvelles et appels',
-            'title' => 'Actualités UCKK',
-            'subtitle' => 'Informations publiques, appels, jalons et annonces institutionnelles.',
-            'summary' => 'Les actualités présentent les informations publiques utiles au suivi de l’UCKK, de ses appels, de ses jalons et de ses corrections.',
+            'title' => 'Journal public UCKK',
+            'subtitle' => 'Annonces, publications, appels ouverts et jalons d’une bibliothèque vivante.',
+            'summary' => 'Le journal public suit l’évolution de l’UCKK : nouvelles publications, appels à contribution, ouvertures de parcours, enrichissements de la médiathèque, corrections et repères utiles pour comprendre ce qui change.',
             'sections' => [
                 [
                     'title' => 'Fonction',
-                    'body' => 'Les actualités servent à annoncer des jalons, appels, corrections, publications ou événements publics liés à l’UCKK.',
+                    'body' => 'Les nouvelles rendent visible le travail public de l’UCKK : diffuser le savoir, annoncer les ressources ouvertes, documenter les jalons et inviter à participer lorsque des contributions sont possibles.',
+                ],
+                [
+                    'title' => 'Ce qui est publié',
+                    'body' => 'On y trouve des annonces de cours, de Voies, d’archives, de médiathèque, d’assemblées, d’appels publics, de changements importants et de corrections utiles à la lecture du projet.',
                 ],
                 [
                     'title' => 'Sobriété',
-                    'body' => 'Une actualité publique doit rester claire, datée, vérifiable et limitée à ce qui peut être rendu public.',
+                    'body' => 'Chaque nouvelle doit rester claire, datée, vérifiable et orientée vers l’usage public : comprendre ce qui est disponible, ce qui évolue et comment y accéder.',
                 ],
             ],
             'cardsheading' => 'Repères d’actualité',
             'cards' => [
                 [
-                    'title' => 'Appels',
-                    'body' => 'Invitations publiques à participer, contribuer, consulter ou répondre à une demande ouverte.',
+                    'title' => 'Appels ouverts',
+                    'body' => 'Invitations à lire, contribuer, commenter, proposer, tester ou participer à une démarche publique.',
                     'type' => 'calls',
                 ],
                 [
                     'title' => 'Jalons',
-                    'body' => 'Moments importants du développement de l’établissement, de ses Voies, de ses outils ou de ses repères publics.',
+                    'body' => 'Moments importants dans le développement de l’UCKK, de ses Voies, de sa médiathèque, de ses archives ou de ses outils.',
                     'type' => 'milestones',
                 ],
                 [
+                    'title' => 'Publications',
+                    'body' => 'Mises en ligne de contenus, parcours, ressources, textes, supports ou repères destinés à la diffusion ouverte du savoir.',
+                    'type' => 'publications',
+                ],
+                [
                     'title' => 'Corrections',
-                    'body' => 'Informations sur les ajustements publics importants, les clarifications et les changements de version.',
+                    'body' => 'Clarifications, ajustements publics, corrections de contenu et changements de version utiles à la compréhension du projet.',
                     'type' => 'corrections',
                 ],
             ],
             'notices' => [
                 [
-                    'body' => 'Les actualités publiques ne doivent pas exposer de données personnelles, de dossiers privés ou de décisions internes non publiées.',
+                    'body' => 'Le journal public ne publie pas de données personnelles, de dossiers privés ni de décisions internes non destinées à la publication.',
                     'type' => 'light',
                 ],
             ],

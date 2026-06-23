@@ -39,22 +39,26 @@ final class archives {
         return [
             'layout' => 'standard',
             'typography' => 'institutional',
-            'eyebrow' => 'Registre public institutionnel',
+            'eyebrow' => 'Bibliothèque publique et mémoire institutionnelle',
             'title' => 'Registraire UCKK',
-            'subtitle' => 'Mémoire institutionnelle, preuves publiques, décisions et corrections.',
-            'summary' => 'Le registraire conserve les traces publiques utiles à la compréhension de l’UCKK, de ses décisions et de ses transformations.',
+            'subtitle' => 'Traces publiques, sources, décisions, corrections et repères de compréhension.',
+            'summary' => 'Le registraire rend accessibles les traces utiles à la mémoire vivante de l’UCKK. Il soutient la diffusion du savoir, la vérification publique et la compréhension des transformations institutionnelles.',
             'sections' => [
                 [
-                    'title' => 'Ce que le registraire conserve',
-                    'body' => 'Le registraire peut conserver des versions publiques du canon, des décisions, des modèles, des corrections, des appels, des productions publiques et des traces institutionnelles.',
+                    'title' => 'Une mémoire publique vivante',
+                    'body' => 'Le registraire n’est pas un simple dépôt de fichiers. Il organise les traces publiques qui permettent de comprendre l’évolution de l’UCKK, ses décisions, ses méthodes, ses corrections et ses productions.',
                 ],
                 [
-                    'title' => 'Ce que le registraire ne doit pas exposer',
-                    'body' => 'Il ne doit pas publier de données personnelles, de dossiers sensibles, de preuves privées ou d’informations réservées à des rôles autorisés.',
+                    'title' => 'Ce que le registraire conserve',
+                    'body' => 'Il peut conserver des versions publiques du canon, des décisions, des modèles, des appels, des productions, des corrections, des repères pédagogiques et des traces institutionnelles utiles à la compréhension commune.',
+                ],
+                [
+                    'title' => 'Ce qui demeure protégé',
+                    'body' => 'Les données personnelles, dossiers sensibles, preuves privées et informations réservées à des rôles autorisés ne sont pas exposés publiquement. Le registraire distingue ce qui peut être partagé de ce qui doit rester protégé.',
                 ],
                 [
                     'title' => 'Usage',
-                    'body' => 'Le registraire sert à comprendre, vérifier, relier et corriger. Il n’est pas un simple dépôt de fichiers.',
+                    'body' => 'Le registraire sert à lire, vérifier, relier, transmettre et corriger. Il fait partie de la bibliothèque publique de l’UCKK : un espace ouvert pour suivre le savoir, ses sources et ses transformations.',
                 ],
             ],
             'cardsheading' => 'Repères du registraire',
@@ -65,21 +69,26 @@ final class archives {
                     'type' => 'memory',
                 ],
                 [
-                    'title' => 'Preuves',
-                    'body' => 'Relier les preuves publiques à leur contexte.',
+                    'title' => 'Sources',
+                    'body' => 'Relier les contenus à leur provenance et à leur contexte.',
                     'type' => 'evidence',
                 ],
                 [
                     'title' => 'Corrections',
-                    'body' => 'Rendre les changements importants compréhensibles.',
+                    'body' => 'Rendre les changements importants visibles et compréhensibles.',
                     'type' => 'correction',
+                ],
+                [
+                    'title' => 'Transmission',
+                    'body' => 'Soutenir la diffusion ouverte du savoir UCKK.',
+                    'type' => 'knowledge',
                 ],
             ],
             'notices' => [
                 [
                     'title' => 'Registraire public',
-                    'body' => 'Les contenus visibles ici doivent respecter la confidentialité, les permissions, la provenance et les limites institutionnelles de l’UCKK.',
-                    'type' => 'warning',
+                    'body' => 'Les contenus visibles ici appartiennent à la mémoire publique de l’UCKK. Ils doivent rester lisibles, vérifiables, contextualisés et respectueux des permissions.',
+                    'type' => 'info',
                 ],
             ],
         ];

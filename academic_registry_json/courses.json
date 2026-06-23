@@ -1508,7 +1508,7 @@
         "id": "gjs",
         "title": "Voie du Grand Jeu social"
       },
-      "summary": "Étude systémique des institutions, plateformes, médias, concours, marchés, réseaux et mécanismes de reconnaissance.",
+      "summary": "Étude systémique des institutions, plateformes, médias, concours, marchés, réseaux et mécanismes de légitimation.",
       "learning_outcomes": [
         "identifier les acteurs",
         "repérer les règles visibles et invisibles",
@@ -1549,7 +1549,7 @@
         "enablecompletion": true
       },
       "ai_metadata": {
-        "summary_for_retrieval": "UCKK-GJS101 — Cartographie du Grand Jeu. Étude systémique des institutions, plateformes, médias, concours, marchés, réseaux et mécanismes de reconnaissance.",
+        "summary_for_retrieval": "UCKK-GJS101 — Cartographie du Grand Jeu. Étude systémique des institutions, plateformes, médias, concours, marchés, réseaux et mécanismes de légitimation.",
         "keywords": [
           "Cartographie",
           "Grand",
@@ -1627,7 +1627,7 @@
           }
         ],
         "ai_metadata": {
-          "summary_for_retrieval": "UCKK-GJS101 — Cartographie du Grand Jeu. Étude systémique des institutions, plateformes, médias, concours, marchés, réseaux et mécanismes de reconnaissance.",
+          "summary_for_retrieval": "UCKK-GJS101 — Cartographie du Grand Jeu. Étude systémique des institutions, plateformes, médias, concours, marchés, réseaux et mécanismes de légitimation.",
           "keywords": [
             "Cartographie",
             "Grand",
@@ -1663,7 +1663,7 @@
         "id": "gjs",
         "title": "Voie du Grand Jeu social"
       },
-      "summary": "Analyse des constituants du jeu social : argent, attention, statut, réputation, diplômes, lois, algorithmes, langage, preuves et médias.",
+      "summary": "Analyse des constituants du jeu social : argent, attention, statut, réputation, preuves de compétence, lois, algorithmes, langage et médias.",
       "learning_outcomes": [
         "décomposer un mécanisme social",
         "reconnaître les incitatifs",
@@ -1704,7 +1704,7 @@
         "enablecompletion": true
       },
       "ai_metadata": {
-        "summary_for_retrieval": "UCKK-GJS102 — Rouages de la société. Analyse des constituants du jeu social : argent, attention, statut, réputation, diplômes, lois, algorithmes, langage, preuves et médias.",
+        "summary_for_retrieval": "UCKK-GJS102 — Rouages de la société. Analyse des constituants du jeu social : argent, attention, statut, réputation, preuves de compétence, lois, algorithmes, langage et médias.",
         "keywords": [
           "Rouages",
           "société",
@@ -1783,7 +1783,7 @@
           }
         ],
         "ai_metadata": {
-          "summary_for_retrieval": "UCKK-GJS102 — Rouages de la société. Analyse des constituants du jeu social : argent, attention, statut, réputation, diplômes, lois, algorithmes, langage, preuves et médias.",
+          "summary_for_retrieval": "UCKK-GJS102 — Rouages de la société. Analyse des constituants du jeu social : argent, attention, statut, réputation, preuves de compétence, lois, algorithmes, langage et médias.",
           "keywords": [
             "Rouages",
             "société",
@@ -10578,8 +10578,8 @@
     {
       "id": "course:uckk-ec251",
       "code": "UCKK-EC251",
-      "title": "Éducation ouverte, certification et légitimité sociale",
-      "short_title": "Éducation ouverte, certification et légitimité sociale",
+      "title": "Éducation ouverte et légitimité sociale",
+      "short_title": "Éducation ouverte et légitimité sociale",
       "course_type": "cours_economie_de_leducation",
       "course_type_label": "Cours économie de l’éducation",
       "status": "active",
@@ -10589,12 +10589,12 @@
         "id": "ec",
         "title": "Voie de l’Économie — Niveau de Puissance opératoire"
       },
-      "summary": "Analyser la certification comme rareté sociale, barrière d’accès et mécanisme de légitimité.",
+      "summary": "Analyser l’éducation ouverte, les badges, les traces d’apprentissage et les mécanismes de légitimité comme moyens de rendre le savoir accessible sans le transformer en barrière.",
       "learning_outcomes": [
-        "distinguer savoir et certification",
+        "distinguer savoir, preuve d’apprentissage et statut",
         "analyser les coûts de légitimité",
-        "proposer des badges",
-        "éviter la monétisation abusive"
+        "concevoir des repères ouverts de progression",
+        "éviter la monétisation abusive du savoir"
       ],
       "assessment": [
         {
@@ -10620,7 +10620,7 @@
       ],
       "moodle": {
         "shortname": "UCKK-EC251",
-        "fullname": "Éducation ouverte, certification et légitimité sociale",
+        "fullname": "Éducation ouverte et légitimité sociale",
         "idnumber": "UCKK-EC251",
         "category_idnumber": "UCKK-EC",
         "category_path": "UCKK / Voies / Économie",
@@ -10630,15 +10630,16 @@
         "enablecompletion": true
       },
       "ai_metadata": {
-        "summary_for_retrieval": "UCKK-EC251 — Éducation ouverte, certification et légitimité sociale. Analyser la certification comme rareté sociale, barrière d’accès et mécanisme de légitimité.",
+        "summary_for_retrieval": "UCKK-EC251 — Éducation ouverte et légitimité sociale. Analyser l’éducation ouverte, les badges, les traces d’apprentissage et les mécanismes de légitimité comme moyens de rendre le savoir accessible sans le transformer en barrière.",
         "keywords": [
           "Éducation",
           "ouverte",
-          "certification",
           "légitimité",
           "sociale",
           "Économie",
-          "opérable"
+          "opérable",
+          "savoir",
+          "badges"
         ],
         "tags": [
           "uckk",
@@ -10656,7 +10657,7 @@
       },
       "key": "uckk_ec251",
       "shortname": "UCKK-EC251",
-      "fullname": "Éducation ouverte, certification et légitimité sociale",
+      "fullname": "Éducation ouverte et légitimité sociale",
       "idnumber": "UCKK-EC251",
       "category_idnumber": "UCKK-EC",
       "category_path": "UCKK / Voies / Économie",
@@ -10684,10 +10685,10 @@
           "title": "Voie de l’Économie — Niveau de Puissance opératoire"
         },
         "learning_outcomes": [
-          "distinguer savoir et certification",
+          "distinguer savoir, preuve d’apprentissage et statut",
           "analyser les coûts de légitimité",
-          "proposer des badges",
-          "éviter la monétisation abusive"
+          "concevoir des repères ouverts de progression",
+          "éviter la monétisation abusive du savoir"
         ],
         "assessment": [
           {
@@ -10712,15 +10713,16 @@
           }
         ],
         "ai_metadata": {
-          "summary_for_retrieval": "UCKK-EC251 — Éducation ouverte, certification et légitimité sociale. Analyser la certification comme rareté sociale, barrière d’accès et mécanisme de légitimité.",
+          "summary_for_retrieval": "UCKK-EC251 — Éducation ouverte et légitimité sociale. Analyser l’éducation ouverte, les badges, les traces d’apprentissage et les mécanismes de légitimité comme moyens de rendre le savoir accessible sans le transformer en barrière.",
           "keywords": [
             "Éducation",
             "ouverte",
-            "certification",
             "légitimité",
             "sociale",
             "Économie",
-            "opérable"
+            "opérable",
+            "savoir",
+            "badges"
           ],
           "tags": [
             "uckk",
@@ -16383,8 +16385,8 @@
     {
       "id": "course:uckk-is202",
       "code": "UCKK-IS202",
-      "title": "Éducation ouverte, certification et légitimité sociale",
-      "short_title": "Éducation ouverte, certification et légitimité sociale",
+      "title": "Éducation ouverte et mobilité sociale",
+      "short_title": "Éducation ouverte et mobilité sociale",
       "course_type": "cours_justice_educative",
       "course_type_label": "Cours justice éducative",
       "status": "active",
@@ -16394,11 +16396,11 @@
         "id": "is",
         "title": "Voie de l’Intervention sociale et des systèmes humains"
       },
-      "summary": "Analyser l’accès au savoir, la certification, la reconnaissance des compétences et les barrières institutionnelles.",
+      "summary": "Analyser l’accès au savoir, les traces d’apprentissage, la confiance sociale et les barrières institutionnelles qui limitent la mobilité.",
       "learning_outcomes": [
-        "repérer les barrières",
-        "proposer une reconnaissance alternative",
-        "distinguer compétence et titre",
+        "repérer les barrières d’accès au savoir",
+        "proposer des repères ouverts de progression",
+        "distinguer compétence, preuve d’apprentissage et titre",
         "soutenir la mobilité sociale"
       ],
       "assessment": [
@@ -16425,7 +16427,7 @@
       ],
       "moodle": {
         "shortname": "UCKK-IS202",
-        "fullname": "Éducation ouverte, certification et légitimité sociale",
+        "fullname": "Éducation ouverte et mobilité sociale",
         "idnumber": "UCKK-IS202",
         "category_idnumber": "UCKK-IS",
         "category_path": "UCKK / Voies / Intervention sociale et systèmes humains",
@@ -16435,17 +16437,17 @@
         "enablecompletion": true
       },
       "ai_metadata": {
-        "summary_for_retrieval": "UCKK-IS202 — Éducation ouverte, certification et légitimité sociale. Analyser l’accès au savoir, la certification, la reconnaissance des compétences et les barrières institutionnelles.",
+        "summary_for_retrieval": "UCKK-IS202 — Éducation ouverte et mobilité sociale. Analyser l’accès au savoir, les traces d’apprentissage, la confiance sociale et les barrières institutionnelles qui limitent la mobilité.",
         "keywords": [
           "Éducation",
           "ouverte",
-          "certification",
-          "légitimité",
+          "mobilité",
           "sociale",
           "Intervention",
           "systèmes",
           "humains",
-          "opérable"
+          "opérable",
+          "savoir"
         ],
         "tags": [
           "uckk",
@@ -16462,7 +16464,7 @@
       },
       "key": "uckk_is202",
       "shortname": "UCKK-IS202",
-      "fullname": "Éducation ouverte, certification et légitimité sociale",
+      "fullname": "Éducation ouverte et mobilité sociale",
       "idnumber": "UCKK-IS202",
       "category_idnumber": "UCKK-IS",
       "category_path": "UCKK / Voies / Intervention sociale et systèmes humains",
@@ -16490,9 +16492,9 @@
           "title": "Voie de l’Intervention sociale et des systèmes humains"
         },
         "learning_outcomes": [
-          "repérer les barrières",
-          "proposer une reconnaissance alternative",
-          "distinguer compétence et titre",
+          "repérer les barrières d’accès au savoir",
+          "proposer des repères ouverts de progression",
+          "distinguer compétence, preuve d’apprentissage et titre",
           "soutenir la mobilité sociale"
         ],
         "assessment": [
@@ -16518,17 +16520,17 @@
           }
         ],
         "ai_metadata": {
-          "summary_for_retrieval": "UCKK-IS202 — Éducation ouverte, certification et légitimité sociale. Analyser l’accès au savoir, la certification, la reconnaissance des compétences et les barrières institutionnelles.",
+          "summary_for_retrieval": "UCKK-IS202 — Éducation ouverte et mobilité sociale. Analyser l’accès au savoir, les traces d’apprentissage, la confiance sociale et les barrières institutionnelles qui limitent la mobilité.",
           "keywords": [
             "Éducation",
             "ouverte",
-            "certification",
-            "légitimité",
+            "mobilité",
             "sociale",
             "Intervention",
             "systèmes",
             "humains",
-            "opérable"
+            "opérable",
+            "savoir"
           ],
           "tags": [
             "uckk",

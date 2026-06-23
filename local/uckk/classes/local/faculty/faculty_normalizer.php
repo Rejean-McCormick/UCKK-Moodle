@@ -52,14 +52,14 @@ final class faculty_normalizer {
     /** Canonical Atlas schema expected by faculty profiles. */
     public const ATLAS_SCHEMA_VERSION = 'UCKK-ATLAS-0.2-draft';
 
-    /** Internal recognition notice required on public UCKK pages. */
+    /** Institutional recognition note for public UCKK pages. */
     public const INTERNAL_RECOGNITION_NOTICE =
-        'Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité.';
+        'Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.';
 
-    /** Anti-confusion notice required on public faculty pages. */
+    /** Public positioning note for faculty pages. */
     public const ANTI_CONFUSION_NOTICE =
-        'Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. '
-        . 'Elle ne prétend pas à un statut universitaire public accrédité.';
+        'Cette page présente une Voie UCKK comme parcours public de savoir dans l’Univers-Cité King Klown. '
+        . 'Elle sert à diffuser, organiser et pratiquer des connaissances dans un cadre d’apprentissage ouvert.';
 
     /** Source Atlas sync mode used by public profile reads. */
     public const SOURCE_ATLAS_SYNC_MODE_READ_ONLY = 'read_only';
@@ -684,9 +684,9 @@ final class faculty_normalizer {
         $guardrails = $this->string_list($governance['public_claims_guardrails'] ?? []);
         if (empty($guardrails)) {
             $guardrails = [
+                'Présenter la Voie comme un espace public de diffusion du savoir, de lecture critique et d’apprentissage ouvert.',
                 self::INTERNAL_RECOGNITION_NOTICE,
                 'Ne pas afficher de progression, notes ou données privées d’étudiants.',
-                'Ne pas présenter une Voie expérimentale comme officiellement reconnue.',
             ];
         }
 

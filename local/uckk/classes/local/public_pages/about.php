@@ -39,15 +39,19 @@ final class about {
             'eyebrow' => 'Situer l’UCKK',
             'title' => 'À propos',
             'subtitle' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire consacré au Grand Jeu social.',
-            'summary' => 'Cette page présente l’identité publique de l’UCKK, son rôle, ses limites et son organisation générale.',
+            'summary' => 'Cette page présente l’identité publique de l’UCKK : une bibliothèque vivante, un cadre d’apprentissage ouvert et un lieu de diffusion du savoir.',
             'sections' => [
                 [
                     'title' => 'Ce qu’est l’UCKK',
-                    'body' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire. Il rassemble des Voies, des cours, des défis, des preuves, des Assemblées, un Registraire, des portfolios et des formes de reconnaissance interne pour former des Joueurs capables de comprendre le Grand Jeu social, d’agir avec lucidité et de documenter leur progression.',
+                    'body' => 'L’Univers-Cité King Klown est un établissement virtuel de puissance opératoire. Elle rassemble des Voies, des cours, des défis, des archives, une médiathèque, des Assemblées et des repères publics pour apprendre à comprendre le Grand Jeu social, agir avec lucidité et changer les règles.',
                 ],
                 [
-                    'title' => 'Ce que l’UCKK n’est pas',
-                    'body' => 'L’UCKK n’est pas une université publique accréditée par l’État. Ses Niveaux, Parchemins UCKK, portfolios, dossiers de passage et reconnaissances internes ne doivent pas être présentés comme des diplômes publics accrédités, des grades universitaires ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.',
+                    'title' => 'Une bibliothèque publique vivante',
+                    'body' => 'La première fonction de l’UCKK est la diffusion immédiate du savoir. Les pages publiques ouvrent un accès aux connaissances, aux méthodes, aux références et aux parcours d’apprentissage sans transformer le savoir en privilège fermé. L’UCKK s’inscrit dans l’esprit kOA : rendre les outils de compréhension plus accessibles, plus praticables et plus partageables.',
+                ],
+                [
+                    'title' => 'Un cadre d’apprentissage modernisé',
+                    'body' => 'L’UCKK utilise un cadre familier d’apprentissage — cours, voies, niveaux, exercices, archives et traces — en le modernisant pour servir la lecture critique des systèmes, la production de preuves, la mémoire collective et l’action située. Les parcours ne sont pas conçus comme une barrière d’accès, mais comme une manière d’organiser le savoir pour mieux s’y orienter.',
                 ],
                 [
                     'title' => 'Organisation',
@@ -56,6 +60,11 @@ final class about {
             ],
             'cardsheading' => 'Repères institutionnels',
             'cards' => [
+                [
+                    'title' => 'Bibliothèque publique',
+                    'body' => 'Un accès ouvert aux cours, archives, ressources, cartes de lecture et repères utiles pour comprendre les systèmes et apprendre à agir.',
+                    'type' => 'library',
+                ],
                 [
                     'title' => 'Établissement',
                     'body' => 'Un établissement virtuel de puissance opératoire pour lire les systèmes, produire des preuves, agir avec méthode et transformer les règles du Grand Jeu social.',
@@ -76,7 +85,7 @@ final class about {
             ],
             'notices' => [
                 [
-                    'body' => 'Cette page est informative. Les règles de permissions, d’inscription, de validation et de reconnaissance restent gérées par les composants UCKK appropriés.',
+                    'body' => 'Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future. Il n’y a pas de projet à court terme d’offrir des certifications, diplômes ou titres formels.',
                     'type' => 'light',
                 ],
             ],

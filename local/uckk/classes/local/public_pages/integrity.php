@@ -30,46 +30,50 @@ final class integrity {
         return [
             'layout' => 'standard',
             'typography' => 'institutional',
-            'eyebrow' => 'Protéger la preuve et la dignité',
+            'eyebrow' => 'Protéger les personnes, les traces et le savoir',
             'title' => 'Intégrité UCKK',
-            'subtitle' => 'Règles publiques de prudence, preuve, visibilité et responsabilité.',
-            'summary' => 'L’intégrité protège les personnes, les preuves, les limites publiques et la cohérence institutionnelle.',
+            'subtitle' => 'Repères publics pour une bibliothèque ouverte, fiable et responsable.',
+            'summary' => 'L’intégrité UCKK protège la dignité des personnes, la provenance des traces, la lisibilité du savoir et la confiance nécessaire à une diffusion publique des connaissances.',
             'sections' => [
                 [
                     'title' => 'Principe',
-                    'body' => 'Une trace utile ne doit pas devenir une exposition abusive. Les données privées, sensibles ou non nécessaires restent protégées.',
+                    'body' => 'UCKK ouvre des connaissances au public sans transformer les personnes en objets d’exposition. Une trace utile doit rester proportionnée, contextualisée et respectueuse de celles et ceux qu’elle concerne.',
                 ],
                 [
-                    'title' => 'Visibilité',
-                    'body' => 'Ce qui est visible publiquement doit être intentionnel, utile, vérifiable et compatible avec les permissions Moodle.',
+                    'title' => 'Bibliothèque publique',
+                    'body' => 'Les pages publiques servent d’abord à rendre le savoir accessible : cours, archives, médiathèque, assemblées, défis et repères de lecture. Ce qui est publié doit aider à comprendre, apprendre, vérifier ou s’orienter.',
+                ],
+                [
+                    'title' => 'Preuve et provenance',
+                    'body' => 'Une information publique gagne en valeur lorsqu’elle indique son origine, son contexte et son niveau de validation. Les traces importantes doivent pouvoir être comprises sans exposer inutilement des données privées.',
                 ],
                 [
                     'title' => 'Corrections',
-                    'body' => 'Quand une erreur est trouvée, elle doit être corrigée sans effacer la possibilité de comprendre ce qui a changé lorsque la trace est institutionnellement utile.',
+                    'body' => 'Quand une erreur est trouvée, elle doit être corrigée clairement. Lorsque la trace est utile à la mémoire institutionnelle, la correction doit permettre de comprendre ce qui a changé sans amplifier inutilement l’erreur.',
                 ],
             ],
             'cardsheading' => 'Repères d’intégrité',
             'cards' => [
                 [
                     'title' => 'Confidentialité',
-                    'body' => 'Ne pas exposer les informations privées ou sensibles.',
+                    'body' => 'Protéger les informations privées, sensibles ou non nécessaires à la compréhension publique.',
                     'type' => 'privacy',
                 ],
                 [
                     'title' => 'Provenance',
-                    'body' => 'Conserver l’origine des traces importantes.',
+                    'body' => 'Conserver l’origine des traces importantes et rendre leur contexte lisible.',
                     'type' => 'provenance',
                 ],
                 [
-                    'title' => 'Limites',
-                    'body' => 'Éviter les promesses ou statuts non autorisés.',
+                    'title' => 'Justesse publique',
+                    'body' => 'Publier des contenus utiles, vérifiables, proportionnés et alignés avec la mission ouverte de l’UCKK.',
                     'type' => 'boundary',
                 ],
             ],
             'notices' => [
                 [
                     'title' => 'Règle publique',
-                    'body' => 'Les pages publiques doivent éviter les données personnelles, les dossiers privés et les statuts non validés.',
+                    'body' => 'Les pages publiques doivent favoriser l’accès au savoir sans exposer de données personnelles, de dossiers privés ou de traces non nécessaires.',
                     'type' => 'integrity',
                 ],
             ],

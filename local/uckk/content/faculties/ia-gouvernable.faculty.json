@@ -19,18 +19,18 @@
     "hub_course_idnumber": "IA-HUB"
   },
   "identity": {
-    "eyebrow": "Voie fondatrice UCKK",
+    "eyebrow": "Voie ouverte UCKK",
     "name": "Voie de l’Intelligence artificielle gouvernable",
     "short_name": "IA gouvernable",
     "title_symbolique": "Cartographe augmenté",
     "domain": "Intelligence outillée",
     "level": "Puissance opératoire",
-    "faculty_role": "Voie consacrée à l’usage, l’évaluation et la gouvernance responsable des systèmes d’intelligence artificielle.",
+    "faculty_role": "Voie consacrée à l’usage public, à l’évaluation critique et à la gouvernance responsable des systèmes d’intelligence artificielle.",
     "one_sentence": "Utiliser l’IA pour lire, créer, cartographier, simuler et accélérer sans déplacer l’autorité finale hors du jugement humain."
   },
   "seo": {
     "title": "Voie de l’Intelligence artificielle gouvernable — UCKK",
-    "description": "La Voie de l’Intelligence artificielle gouvernable forme des personnes capables d’utiliser, vérifier et gouverner l’IA comme outil de puissance opératoire, sans confusion entre sortie, preuve, décision et responsabilité.",
+    "description": "La Voie de l’Intelligence artificielle gouvernable ouvre un parcours public pour utiliser, vérifier et gouverner l’IA comme outil de puissance opératoire, sans confusion entre sortie, preuve, décision et responsabilité.",
     "keywords": [
       "UCKK",
       "IA gouvernable",
@@ -46,13 +46,13 @@
   "hero": {
     "title": "Voie de l’Intelligence artificielle gouvernable",
     "subtitle": "Utiliser l’IA comme outil, jamais comme autorité finale.",
-    "summary": "Cette faculté apprend à concevoir, utiliser, vérifier et gouverner des systèmes d’IA utiles, traçables, contestables, sécurisés et humainement supervisés.",
+    "summary": "Cette voie ouvre un parcours public pour comprendre, utiliser, vérifier et gouverner des systèmes d’IA utiles, traçables, contestables, sécurisés et humainement supervisés.",
     "primary_cta": {
       "label": "Explorer les cours",
       "target": "#cours"
     },
     "secondary_cta": {
-      "label": "Voir l’Atlas des Voies",
+      "label": "Voir les Voies UCKK",
       "target": "/local/uckk/programs.php"
     }
   },
@@ -62,7 +62,7 @@
       "target": "#presentation"
     },
     {
-      "label": "Programme",
+      "label": "Parcours",
       "target": "#programme"
     },
     {
@@ -82,8 +82,8 @@
     {
       "id": "presentation",
       "type": "text",
-      "title": "Une faculté pour rendre l’IA utile, vérifiable et gouvernable",
-      "body": "La Voie de l’Intelligence artificielle gouvernable aborde l’IA comme une puissance d’assistance, de cartographie, de simulation et d’accélération. Elle maintient une distinction stricte entre sortie, hypothèse, preuve, décision et responsabilité."
+      "title": "Une voie pour rendre l’IA utile, vérifiable et gouvernable",
+      "body": "La Voie de l’Intelligence artificielle gouvernable aborde l’IA comme une puissance d’assistance, de cartographie, de simulation et d’accélération. Elle apprend à distinguer sortie, hypothèse, preuve, décision et responsabilité, afin que l’IA reste un outil de lecture et d’action plutôt qu’une autorité de substitution."
     },
     {
       "id": "responsabilite",
@@ -94,8 +94,8 @@
     {
       "id": "usage-public",
       "type": "notice",
-      "title": "Usage public de cette faculté",
-      "body": "Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité."
+      "title": "Usage public de cette voie",
+      "body": "Cette page présente une voie ouverte de la bibliothèque publique UCKK. Elle sert à diffuser des savoirs, des repères et des pratiques dans un cadre d’apprentissage familier, modernisé et accessible."
     }
   ],
   "atlas_projection": {
@@ -118,7 +118,7 @@
     {
       "id": "annonces",
       "type": "announcements",
-      "title": "Annonces de la faculté",
+      "title": "Annonces de la voie",
       "source": {
         "provider": "moodle_forum",
         "course_idnumber": "IA-HUB",
@@ -131,14 +131,14 @@
     {
       "id": "cours-moodle",
       "type": "moodle_course_list",
-      "title": "Cours associés",
+      "title": "Cours ouverts associés",
       "source": {
         "provider": "moodle_category",
         "category_idnumber": "UCKK-IA"
       },
       "limit": 20,
       "visibility": "public",
-      "empty_state": "Les cours Moodle associés seront affichés ici lorsqu’ils seront disponibles."
+      "empty_state": "Les cours associés seront affichés ici lorsqu’ils seront disponibles."
     }
   ],
   "featured_blocks": [
@@ -154,8 +154,8 @@
     },
     {
       "type": "notice",
-      "title": "Reconnaissance interne",
-      "body": "Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités."
+      "title": "Note institutionnelle",
+      "body": "Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
     }
   ],
   "faq": [
@@ -168,8 +168,8 @@
       "answer": "Oui. Elle traite notamment des hallucinations, biais, erreurs de classification, fuites de données, manipulations, dépendances infrastructurelles et confusions entre imitation et compréhension."
     },
     {
-      "question": "Est-ce un diplôme reconnu?",
-      "answer": "Non. Il s’agit d’une reconnaissance interne UCKK, sauf reconnaissance officielle future."
+      "question": "Quel est le but immédiat de cette Voie?",
+      "answer": "Diffuser des connaissances praticables sur l’IA gouvernable dans un cadre d’apprentissage ouvert : comprendre les outils, apprendre à les vérifier, documenter leurs limites et les utiliser sans déléguer la responsabilité humaine."
     }
   ],
   "contact": {
@@ -187,7 +187,7 @@
     "last_reviewed": null,
     "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
     "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
+      "Ne pas transformer les repères UCKK en promesse de certification.",
       "Ne pas afficher de progression, notes ou données privées d’étudiants.",
       "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
       "Ne pas présenter une sortie IA comme preuve, décision ou autorité finale.",

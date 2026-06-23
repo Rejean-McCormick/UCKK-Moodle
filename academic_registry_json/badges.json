@@ -56,7 +56,7 @@
         "title": "Progression du tronc commun UCKK",
         "internal_title": "Aspirant UCKK — socle commun",
         "symbolic_title": "Joueur lucide en formation",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Socle commun UCKK — Joueur lucide en formation",
@@ -70,7 +70,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Tronc commun obligatoire. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Tronc commun obligatoire. Il repère une progression interne UCKK.",
         "tags": [
           "tronc-commun",
           "aspirance",
@@ -189,7 +189,7 @@
         "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK du Grand Jeu social",
         "symbolic_title": "Joueur lucide du Grand Jeu social",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire",
@@ -203,7 +203,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie du Grand Jeu social. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie du Grand Jeu social. Il repère une progression interne UCKK.",
         "tags": [
           "grand-jeu-social",
           "magie-operable",
@@ -339,7 +339,7 @@
         "title": "Parchemin de Puissance opératoire en Architecture de l’écosystème digital kOA",
         "internal_title": "Mage UCKK de l’Architecture de l’écosystème digital kOA",
         "symbolic_title": "Architecte kOA",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire en Architecture de l’écosystème digital kOA",
@@ -353,7 +353,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de l’Architecture de l’écosystème digital kOA. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Architecture de l’écosystème digital kOA. Il repère une progression interne UCKK.",
         "tags": [
           "koa",
           "ecosysteme-digital",
@@ -474,7 +474,7 @@
         "title": "Parchemin de Puissance opératoire en Architecture sociotechnique",
         "internal_title": "Mage UCKK en Architecture sociotechnique",
         "symbolic_title": "Architecte du Grand Jeu",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire en Architecture sociotechnique",
@@ -488,7 +488,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de l’Architecture sociotechnique. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Architecture sociotechnique. Il repère une progression interne UCKK.",
         "tags": [
           "architecture-sociotechnique",
           "systemes",
@@ -607,7 +607,7 @@
         "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK des Sciences politiques",
         "symbolic_title": "Stratège civique",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire",
@@ -621,7 +621,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie des Sciences politiques. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie des Sciences politiques. Il repère une progression interne UCKK.",
         "tags": [
           "sciences-politiques",
           "pouvoir",
@@ -738,7 +738,7 @@
         "title": "Parchemin de Puissance opératoire — Voie d’Économie",
         "internal_title": "Mage UCKK en Économie",
         "symbolic_title": "Architecte d’opportunités",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire — Voie d’Économie",
@@ -752,7 +752,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de l’Économie. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Économie. Il repère une progression interne UCKK.",
         "tags": [
           "economie",
           "ressources",
@@ -873,7 +873,7 @@
         "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK des systèmes vivants",
         "symbolic_title": "Gardien des systèmes vivants",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire",
@@ -887,7 +887,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de l’Écologie. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Écologie. Il repère une progression interne UCKK.",
         "tags": [
           "ecologie",
           "systemes-vivants",
@@ -1003,7 +1003,7 @@
         "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK des Structures invisibles",
         "symbolic_title": "Lecteur des structures invisibles",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire",
@@ -1017,7 +1017,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de la Métaphysique. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de la Métaphysique. Il repère une progression interne UCKK.",
         "tags": [
           "metaphysique",
           "structures-invisibles",
@@ -1134,7 +1134,7 @@
         "title": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
         "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
         "symbolic_title": "Cartographe augmenté",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire en Intelligence artificielle gouvernable",
@@ -1148,7 +1148,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de l’Intelligence artificielle gouvernable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Intelligence artificielle gouvernable. Il repère une progression interne UCKK.",
         "tags": [
           "ia",
           "machines-pensantes",
@@ -1264,7 +1264,7 @@
         "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK du Sens",
         "symbolic_title": "Architecte du sens",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire",
@@ -1278,7 +1278,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de la Linguistique et de l’architecture du sens. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de la Linguistique et de l’architecture du sens. Il repère une progression interne UCKK.",
         "tags": [
           "linguistique",
           "architecture-du-sens",
@@ -1393,7 +1393,7 @@
         "title": "Parchemin de Puissance opératoire",
         "internal_title": "Mage UCKK de l’Intervention sociale et des systèmes humains",
         "symbolic_title": "Intervenant du Grand Jeu humain",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Parchemin de Puissance opératoire",
@@ -1407,7 +1407,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie de l’Intervention sociale et des systèmes humains. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie de l’Intervention sociale et des systèmes humains. Il repère une progression interne UCKK.",
         "tags": [
           "intervention-sociale",
           "systemes-humains",
@@ -1523,7 +1523,7 @@
         "title": "Progression interne — Médias vivants et théâtre public responsable",
         "internal_title": null,
         "symbolic_title": "Praticien du théâtre public responsable",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future."
+        "public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future."
       },
       "moodle": {
         "name": "Progression interne — Médias vivants et théâtre public responsable",
@@ -1537,7 +1537,7 @@
         }
       },
       "ai_metadata": {
-        "summary_for_retrieval": "Badge interne associé à Voie secondaire des Médias vivants et du théâtre public responsable. Il atteste une progression interne UCKK et ne constitue pas un diplôme public accrédité.",
+        "summary_for_retrieval": "Badge interne associé à Voie secondaire des Médias vivants et du théâtre public responsable. Il repère une progression interne UCKK.",
         "tags": [
           "medias-vivants",
           "theatre-public",
@@ -1613,13 +1613,14 @@
     "owner": "local_uckk",
     "moodle_subsystem": "core_badges",
     "reconciliation_key": "idnumber",
-    "default_public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+    "default_public_status_notice": "Reconnaissance interne UCKK, sauf reconnaissance officielle future.",
     "generation_scope": "UCKK internal badges and Parchemin-related recognition badges for presets/badges.json",
     "validation_summary": {
       "item_count": 12,
       "program_completion_badge_count": 12,
       "ai_non_authority_rule": "AI outputs are assistive and never final authority.",
-      "public_accreditation_notice_present": true
+      "public_accreditation_notice_present": false,
+      "public_internal_recognition_notice_present": true
     },
     "standardization": {
       "changed_envelope": true,

@@ -30,7 +30,7 @@
   },
   "seo": {
     "title": "Voie d’Économie — UCKK",
-    "description": "La Voie d’Économie forme des personnes capables de lire les flux de valeur, les ressources, les marchés, les modèles économiques et les règles de redistribution.",
+    "description": "La Voie d’Économie propose une lecture publique des ressources, des flux de valeur, des marchés, du travail, des modèles économiques et des règles de redistribution.",
     "keywords": [
       "UCKK",
       "Économie",
@@ -39,15 +39,17 @@
       "marchés",
       "redistribution",
       "modèles économiques",
-      "Grand Jeu social"
+      "Grand Jeu social",
+      "bibliothèque publique",
+      "savoir ouvert"
     ]
   },
   "hero": {
     "title": "Voie d’Économie",
     "subtitle": "Lire les ressources, comprendre la valeur, concevoir des modèles viables.",
-    "summary": "Cette faculté apprend à analyser les règles économiques visibles et invisibles : flux, incitatifs, rareté, travail, rente, plateformes, subventions, philanthropie, extraction, redistribution et soutenabilité.",
+    "summary": "Cette Voie ouvre un parcours public pour comprendre les règles économiques visibles et invisibles : flux, incitatifs, rareté, travail, rente, plateformes, subventions, philanthropie, extraction, redistribution et soutenabilité.",
     "primary_cta": {
-      "label": "Explorer le programme",
+      "label": "Explorer la Voie",
       "target": "#programme"
     },
     "secondary_cta": {
@@ -61,7 +63,7 @@
       "target": "#presentation"
     },
     {
-      "label": "Programme",
+      "label": "Parcours public",
       "target": "#programme"
     },
     {
@@ -85,20 +87,20 @@
     {
       "id": "presentation",
       "type": "text",
-      "title": "Une faculté pour lire la valeur avant de la déplacer",
-      "body": "La Voie d’Économie étudie les ressources, les flux, les incitatifs, les marchés, le travail, la propriété, la dette, les plateformes, les subventions, la philanthropie et les mécanismes de redistribution comme des règles du Grand Jeu social."
+      "title": "Une Voie pour lire la valeur avant de la déplacer",
+      "body": "La Voie d’Économie fait partie de la bibliothèque publique UCKK. Elle aide à lire les ressources, les flux, les incitatifs, les marchés, le travail, la propriété, la dette, les plateformes, les subventions, la philanthropie et les mécanismes de redistribution comme des règles du Grand Jeu social."
     },
     {
       "id": "programme",
       "type": "text",
-      "title": "Programme public généré depuis l’Atlas",
-      "body": "Le programme détaillé de cette faculté est projeté depuis le JSON Atlas de la Voie d’Économie. Cette page décide ce qui est affiché publiquement, sans recopier les cours conceptuels ni leurs critères internes."
+      "title": "Un parcours public généré depuis l’Atlas",
+      "body": "Le parcours public de cette Voie est projeté depuis le JSON Atlas de la Voie d’Économie. La page sert à rendre le savoir lisible, navigable et accessible, sans transformer l’accès à la connaissance en barrière ou en promesse de statut."
     },
     {
       "id": "cours",
       "type": "callout",
       "title": "Cours publics associés",
-      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des cours Moodle visibles associés au préfixe EC."
+      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des espaces Moodle visibles associés au préfixe EC. Moodle fournit ici un cadre d’apprentissage familier, modernisé et structuré."
     },
     {
       "id": "projet-final",
@@ -109,8 +111,8 @@
     {
       "id": "ethique",
       "type": "notice",
-      "title": "Garde-fou public",
-      "body": "Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité."
+      "title": "Éthique économique publique",
+      "body": "Une proposition économique ne vaut pas seulement par son efficacité. Elle doit aussi rendre visibles ses coûts, ses dépendances, ses bénéficiaires, ses risques de capture et ses conditions de réparation."
     }
   ],
   "atlas_projection": {
@@ -133,7 +135,7 @@
     {
       "id": "annonces",
       "type": "announcements",
-      "title": "Annonces de la faculté",
+      "title": "Annonces de la Voie",
       "source": {
         "provider": "moodle_forum",
         "course_idnumber": "EC-HUB",
@@ -141,7 +143,7 @@
       },
       "limit": 5,
       "visibility": "public",
-      "empty_state": "Aucune annonce publique pour la faculté d’Économie pour le moment."
+      "empty_state": "Aucune annonce publique pour la Voie d’Économie pour le moment."
     },
     {
       "id": "evenements",
@@ -165,7 +167,7 @@
       },
       "limit": 10,
       "visibility": "public",
-      "empty_state": "Aucun cours Moodle public associé à cette faculté pour le moment."
+      "empty_state": "Aucun cours Moodle public associé à cette Voie pour le moment."
     }
   ],
   "featured_blocks": [
@@ -187,12 +189,16 @@
   ],
   "faq": [
     {
-      "question": "Cette faculté donne-t-elle un diplôme public en économie?",
-      "answer": "Non. Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires publics ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future."
+      "question": "À quoi sert la Voie d’Économie?",
+      "answer": "Elle sert à comprendre comment circulent les ressources, comment se fabriquent les incitatifs, comment se captent les valeurs et comment des modèles économiques peuvent devenir plus lisibles, responsables et soutenables."
     },
     {
       "question": "La page contient-elle toute la matière des cours EC?",
-      "answer": "Non. La page publique présente la faculté et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+      "answer": "Non. La page publique présente la Voie et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+    },
+    {
+      "question": "Cette Voie mène-t-elle à une certification?",
+      "answer": "Il n’y a pas de projet à court terme d’offrir une certification, un diplôme ou un titre formel. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
     },
     {
       "question": "Que signifie Architecte d’opportunités?",
@@ -214,10 +220,9 @@
     "last_reviewed": null,
     "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
     "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
+      "Présenter cette Voie comme un parcours public de savoir et d’apprentissage ouvert.",
       "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
-      "Ne pas transformer le titre symbolique Architecte d’opportunités en titre professionnel reconnu par l’État."
+      "Ne pas transformer le titre symbolique Architecte d’opportunités en titre professionnel."
     ]
   },
   "cache": {

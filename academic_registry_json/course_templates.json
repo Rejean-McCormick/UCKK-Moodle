@@ -8,7 +8,7 @@
       "key": "uckk_standard_course",
       "name": "UCKK standard course",
       "component": "format_uckk",
-      "description": "Default UCKK course structure using the canonical nine-section format.",
+      "description": "Default UCKK course structure using the canonical nine-section format for open learning, practice, traces and archive.",
       "defaults": {
         "format": "uckk",
         "numsections": 9,
@@ -19,7 +19,7 @@
           "showcanon": 1,
           "showevidenceflow": 1,
           "showintegritynotice": 1,
-          "showrecognitionnotice": 1
+          "showrecognitionnotice": 0
         }
       },
       "sections": [
@@ -39,7 +39,7 @@
           "number": 1,
           "key": "concepts",
           "name": "Concepts",
-          "summary": "Mots, modèles, distinctions et cartes conceptuelles à maîtriser.",
+          "summary": "Mots, modèles, distinctions et cartes conceptuelles à explorer.",
           "options": {
             "uckksectionkind": "concepts",
             "requiresproof": 0,
@@ -74,8 +74,8 @@
         {
           "number": 4,
           "key": "preuves",
-          "name": "Preuves",
-          "summary": "Production, dépôt, discussion et validation des preuves pédagogiques.",
+          "name": "Traces",
+          "summary": "Production, dépôt, discussion et révision de traces pédagogiques.",
           "options": {
             "uckksectionkind": "preuves",
             "requiresproof": 1,
@@ -110,8 +110,8 @@
         {
           "number": 7,
           "key": "evaluation",
-          "name": "Évaluation",
-          "summary": "Critères, rétroactions, compétences, badges et décisions pédagogiques.",
+          "name": "Révision",
+          "summary": "Critères, rétroactions, compétences, repères de progression et décisions pédagogiques.",
           "options": {
             "uckksectionkind": "evaluation",
             "requiresproof": 0,
@@ -123,7 +123,7 @@
           "number": 8,
           "key": "archive",
           "name": "Archive",
-          "summary": "Mémoire du cours : preuves, décisions, versions, corrections, Kristals et traces réutilisables.",
+          "summary": "Mémoire du cours : traces, décisions, versions, corrections, Kristals et éléments réutilisables.",
           "options": {
             "uckksectionkind": "archive",
             "requiresproof": 0,
@@ -138,7 +138,7 @@
           "component": "mod_uckkarchive",
           "section": "archive",
           "name": "Archive du cours",
-          "intro": "Mémoire du cours : preuves, décisions, versions, corrections, Kristals et traces réutilisables.",
+          "intro": "Mémoire du cours : traces, décisions, versions, corrections, Kristals et éléments réutilisables.",
           "required": true,
           "defaults": {
             "status": "active",
@@ -158,7 +158,8 @@
       "metadata": {
         "product": "UCKK-Moodle",
         "course_type": "standard",
-        "recognition": "internal",
+        "recognition": "none_short_term",
+        "public_knowledge_first": true,
         "source": "tool_uckkseed",
         "seeded_by": "tool_uckkseed",
         "source_preset": "course_templates",
@@ -169,7 +170,7 @@
       "key": "uckk_tronc_commun_course",
       "name": "UCKK tronc commun course",
       "component": "format_uckk",
-      "description": "Template for TC101–TC108 courses with full evidence, deliberation, portfolio and archive flow.",
+      "description": "Template for TC101–TC108 courses with open learning, evidence, deliberation, portfolio and archive flow.",
       "defaults": {
         "format": "uckk",
         "numsections": 9,
@@ -180,7 +181,7 @@
           "showcanon": 1,
           "showevidenceflow": 1,
           "showintegritynotice": 1,
-          "showrecognitionnotice": 1
+          "showrecognitionnotice": 0
         }
       },
       "sections": [
@@ -188,7 +189,7 @@
           "number": 0,
           "key": "orientation",
           "name": "Orientation",
-          "summary": "Entrée dans le cours, objectifs du tronc commun, règles de preuve et cadre de reconnaissance interne.",
+          "summary": "Entrée dans le cours, objectifs du tronc commun, règles de trace et cadre d’apprentissage ouvert.",
           "options": {
             "uckksectionkind": "orientation",
             "requiresproof": 0,
@@ -212,7 +213,7 @@
           "number": 2,
           "key": "canon",
           "name": "Matière canonique",
-          "summary": "Matière canonique du tronc commun et références obligatoires.",
+          "summary": "Matière canonique du tronc commun et références prioritaires.",
           "options": {
             "uckksectionkind": "canon",
             "requiresproof": 0,
@@ -235,8 +236,8 @@
         {
           "number": 4,
           "key": "preuves",
-          "name": "Preuves",
-          "summary": "Preuves du portfolio : carte système, journal IA, participation, audit, éthique et synthèse.",
+          "name": "Traces",
+          "summary": "Traces du portfolio : carte système, journal IA, participation, audit, éthique et synthèse.",
           "options": {
             "uckksectionkind": "preuves",
             "requiresproof": 1,
@@ -271,8 +272,8 @@
         {
           "number": 7,
           "key": "evaluation",
-          "name": "Évaluation",
-          "summary": "Évaluation par compétences, rétroaction humaine, badges internes et validation pédagogique.",
+          "name": "Révision",
+          "summary": "Révision par compétences, rétroaction humaine, repères de progression et décision pédagogique.",
           "options": {
             "uckksectionkind": "evaluation",
             "requiresproof": 0,
@@ -284,7 +285,7 @@
           "number": 8,
           "key": "archive",
           "name": "Archive",
-          "summary": "Archivage du portfolio, des preuves, des décisions et des Kristals du tronc commun.",
+          "summary": "Archivage du portfolio, des traces, des décisions et des Kristals du tronc commun.",
           "options": {
             "uckksectionkind": "archive",
             "requiresproof": 0,
@@ -298,8 +299,8 @@
           "key": "tronc_commun_default_challenge",
           "component": "mod_uckkchallenge",
           "section": "preuves",
-          "name": "Défi de preuve du tronc commun",
-          "intro": "Déposer une preuve structurée avec provenance, limites et lien aux compétences.",
+          "name": "Défi de trace du tronc commun",
+          "intro": "Déposer une trace structurée avec provenance, limites et lien aux compétences.",
           "required": true,
           "defaults": {
             "challengetype": "evidence",
@@ -317,7 +318,7 @@
           "component": "mod_uckkassembly",
           "section": "deliberation",
           "name": "Assemblée du tronc commun",
-          "intro": "Délibération collective sur les preuves, objections et décisions pédagogiques.",
+          "intro": "Délibération collective sur les traces, objections et décisions pédagogiques.",
           "required": true,
           "defaults": {
             "assemblytype": "savoirs",
@@ -331,7 +332,7 @@
           "component": "mod_uckkarchive",
           "section": "archive",
           "name": "Archive du tronc commun",
-          "intro": "Archive des preuves, décisions, versions, corrections, Kristals et liens de portfolio.",
+          "intro": "Archive des traces, décisions, versions, corrections, Kristals et liens de portfolio.",
           "required": true,
           "defaults": {
             "status": "active",
@@ -352,8 +353,9 @@
       "metadata": {
         "product": "UCKK-Moodle",
         "course_type": "tronc_commun",
-        "recognition": "internal",
+        "recognition": "none_short_term",
         "portfolio_required": true,
+        "public_knowledge_first": true,
         "source": "tool_uckkseed",
         "seeded_by": "tool_uckkseed",
         "source_preset": "course_templates",
@@ -364,7 +366,7 @@
       "key": "uckk_program_course",
       "name": "UCKK program course",
       "component": "format_uckk",
-      "description": "Template for UCKK Voie courses after the common core.",
+      "description": "Template for UCKK Voie courses after the common core, centered on open knowledge, practice, traces and archive.",
       "defaults": {
         "format": "uckk",
         "numsections": 9,
@@ -375,7 +377,7 @@
           "showcanon": 1,
           "showevidenceflow": 1,
           "showintegritynotice": 1,
-          "showrecognitionnotice": 1
+          "showrecognitionnotice": 0
         }
       },
       "sections": [
@@ -383,7 +385,7 @@
           "number": 0,
           "key": "orientation",
           "name": "Orientation",
-          "summary": "Orientation du cours, place dans le programme, compétences et règles de validation.",
+          "summary": "Orientation du cours, place dans le programme, compétences explorées et règles de travail.",
           "options": {
             "uckksectionkind": "orientation",
             "requiresproof": 0,
@@ -430,8 +432,8 @@
         {
           "number": 4,
           "key": "preuves",
-          "name": "Preuves",
-          "summary": "Preuves d’apprentissage, productions, dossiers, cartes, données ou artefacts.",
+          "name": "Traces",
+          "summary": "Traces d’apprentissage, productions, dossiers, cartes, données ou artefacts.",
           "options": {
             "uckksectionkind": "preuves",
             "requiresproof": 1,
@@ -466,8 +468,8 @@
         {
           "number": 7,
           "key": "evaluation",
-          "name": "Évaluation",
-          "summary": "Évaluation, compétences, rétroaction humaine, badges internes et archive des décisions.",
+          "name": "Révision",
+          "summary": "Révision, compétences, rétroaction humaine, repères de progression et archive des décisions.",
           "options": {
             "uckksectionkind": "evaluation",
             "requiresproof": 0,
@@ -479,7 +481,7 @@
           "number": 8,
           "key": "archive",
           "name": "Archive",
-          "summary": "Archive de cours : preuves, décisions, Kristals, révisions et export de traces.",
+          "summary": "Archive de cours : traces, décisions, Kristals, révisions et export de traces.",
           "options": {
             "uckksectionkind": "archive",
             "requiresproof": 0,
@@ -494,7 +496,7 @@
           "component": "mod_uckkchallenge",
           "section": "preuves",
           "name": "Défi de programme",
-          "intro": "Défi de production d’une preuve ou d’un artefact lié au programme.",
+          "intro": "Défi de production d’une trace ou d’un artefact lié au programme.",
           "required": true,
           "defaults": {
             "challengetype": "program",
@@ -512,7 +514,7 @@
           "component": "mod_uckkassembly",
           "section": "deliberation",
           "name": "Assemblée du cours",
-          "intro": "Assemblée de validation, objection, interprétation et décision.",
+          "intro": "Assemblée de révision, objection, interprétation et décision.",
           "required": true,
           "defaults": {
             "assemblytype": "savoirs",
@@ -526,7 +528,7 @@
           "component": "mod_uckkarchive",
           "section": "archive",
           "name": "Archive du cours",
-          "intro": "Archive des preuves, décisions, révisions, Kristals et traces exportables.",
+          "intro": "Archive des traces, décisions, révisions, Kristals et éléments exportables.",
           "required": true,
           "defaults": {
             "status": "active",
@@ -547,21 +549,20 @@
       "metadata": {
         "product": "UCKK-Moodle",
         "course_type": "voie_uckk",
-        "recognition": "internal",
+        "recognition": "none_short_term",
         "source": "tool_uckkseed",
         "seeded_by": "tool_uckkseed",
         "source_preset": "course_templates",
         "template_only": true,
         "niveau_vise": "Puissance opératoire",
-        "titre_interne": "Mage UCKK",
-        "parchemin_uckk": "Parchemin de Puissance opératoire"
+        "public_knowledge_first": true
       }
     },
     {
       "key": "uckk_mineure_course",
       "name": "UCKK voie d’initiation course",
       "component": "format_uckk",
-      "description": "Compact UCKK pathway template for an initiation-level Voie.",
+      "description": "Compact UCKK pathway template for an initiation-level Voie, centered on open discovery and practice.",
       "defaults": {
         "format": "uckk",
         "numsections": 9,
@@ -572,7 +573,7 @@
           "showcanon": 1,
           "showevidenceflow": 1,
           "showintegritynotice": 1,
-          "showrecognitionnotice": 1
+          "showrecognitionnotice": 0
         }
       },
       "sections": [
@@ -580,7 +581,7 @@
           "number": 0,
           "key": "orientation",
           "name": "Orientation",
-          "summary": "Orientation de la voie d’initiation, objectifs, attentes et compétences ciblées.",
+          "summary": "Orientation de la voie d’initiation, objectifs, attentes et compétences explorées.",
           "options": {
             "uckksectionkind": "orientation",
             "requiresproof": 0,
@@ -627,8 +628,8 @@
         {
           "number": 4,
           "key": "preuves",
-          "name": "Preuves",
-          "summary": "Preuves concentrées sur les compétences de la voie d’initiation.",
+          "name": "Traces",
+          "summary": "Traces concentrées sur les compétences de la voie d’initiation.",
           "options": {
             "uckksectionkind": "preuves",
             "requiresproof": 1,
@@ -640,7 +641,7 @@
           "number": 5,
           "key": "deliberation",
           "name": "Délibération",
-          "summary": "Discussion structurée et décisions pédagogiques liées aux preuves.",
+          "summary": "Discussion structurée et décisions pédagogiques liées aux traces.",
           "options": {
             "uckksectionkind": "deliberation",
             "requiresproof": 0,
@@ -663,8 +664,8 @@
         {
           "number": 7,
           "key": "evaluation",
-          "name": "Évaluation",
-          "summary": "Rétroaction, compétences et reconnaissance interne.",
+          "name": "Révision",
+          "summary": "Rétroaction, compétences et repères de progression.",
           "options": {
             "uckksectionkind": "evaluation",
             "requiresproof": 0,
@@ -676,7 +677,7 @@
           "number": 8,
           "key": "archive",
           "name": "Archive",
-          "summary": "Archivage minimal des preuves, décisions et Kristals.",
+          "summary": "Archivage minimal des traces, décisions et Kristals.",
           "options": {
             "uckksectionkind": "archive",
             "requiresproof": 0,
@@ -691,7 +692,7 @@
           "component": "mod_uckkchallenge",
           "section": "preuves",
           "name": "Défi de voie d’initiation",
-          "intro": "Preuve ciblée liée à une compétence de la voie d’initiation.",
+          "intro": "Trace ciblée liée à une compétence de la voie d’initiation.",
           "required": true,
           "defaults": {
             "challengetype": "evidence",
@@ -709,7 +710,7 @@
           "component": "mod_uckkarchive",
           "section": "archive",
           "name": "Archive de la voie d’initiation",
-          "intro": "Archive des preuves et décisions liées à la voie d’initiation.",
+          "intro": "Archive des traces et décisions liées à la voie d’initiation.",
           "required": true,
           "defaults": {
             "status": "active",
@@ -729,14 +730,13 @@
       "metadata": {
         "product": "UCKK-Moodle",
         "course_type": "voie_initiation",
-        "recognition": "internal",
+        "recognition": "none_short_term",
         "source": "tool_uckkseed",
         "seeded_by": "tool_uckkseed",
         "source_preset": "course_templates",
         "template_only": true,
         "niveau_vise": "Initiation",
-        "titre_interne": "Initié UCKK",
-        "parchemin_uckk": "Parchemin d’Initiation"
+        "public_knowledge_first": true
       }
     },
     {
@@ -754,7 +754,7 @@
           "showcanon": 1,
           "showevidenceflow": 1,
           "showintegritynotice": 1,
-          "showrecognitionnotice": 1
+          "showrecognitionnotice": 0
         }
       },
       "sections": [
@@ -809,8 +809,8 @@
         {
           "number": 4,
           "key": "preuves",
-          "name": "Preuves",
-          "summary": "Notes, traces, cartes, synthèses et preuves de participation.",
+          "name": "Traces",
+          "summary": "Notes, traces, cartes, synthèses et contributions de participation.",
           "options": {
             "uckksectionkind": "preuves",
             "requiresproof": 1,
@@ -845,8 +845,8 @@
         {
           "number": 7,
           "key": "evaluation",
-          "name": "Évaluation",
-          "summary": "Évaluation qualitative, compétences, rétroaction et reconnaissance interne.",
+          "name": "Révision",
+          "summary": "Révision qualitative, compétences, rétroaction et repères de progression.",
           "options": {
             "uckksectionkind": "evaluation",
             "requiresproof": 0,
@@ -873,7 +873,7 @@
           "component": "mod_uckkassembly",
           "section": "deliberation",
           "name": "Assemblée du séminaire",
-          "intro": "Délibération structurée autour des textes, preuves, objections et interprétations.",
+          "intro": "Délibération structurée autour des textes, traces, objections et interprétations.",
           "required": true,
           "defaults": {
             "assemblytype": "savoirs",
@@ -907,7 +907,8 @@
       "metadata": {
         "product": "UCKK-Moodle",
         "course_type": "seminaire",
-        "recognition": "internal",
+        "recognition": "none_short_term",
+        "public_knowledge_first": true,
         "source": "tool_uckkseed",
         "seeded_by": "tool_uckkseed",
         "source_preset": "course_templates",
@@ -918,7 +919,7 @@
       "key": "uckk_laboratoire_course",
       "name": "UCKK laboratory course",
       "component": "format_uckk",
-      "description": "Laboratory template for prototypes, experiments, data, proof, assembly review and archive records.",
+      "description": "Laboratory template for prototypes, experiments, data, traces, assembly review and archive records.",
       "defaults": {
         "format": "uckk",
         "numsections": 9,
@@ -929,7 +930,7 @@
           "showcanon": 1,
           "showevidenceflow": 1,
           "showintegritynotice": 1,
-          "showrecognitionnotice": 1
+          "showrecognitionnotice": 0
         }
       },
       "sections": [
@@ -937,7 +938,7 @@
           "number": 0,
           "key": "orientation",
           "name": "Orientation",
-          "summary": "Orientation du laboratoire, hypothèse, protocole, risques et règles de preuve.",
+          "summary": "Orientation du laboratoire, hypothèse, protocole, risques et règles de trace.",
           "options": {
             "uckksectionkind": "orientation",
             "requiresproof": 0,
@@ -984,8 +985,8 @@
         {
           "number": 4,
           "key": "preuves",
-          "name": "Preuves",
-          "summary": "Données, captures, journaux, résultats, observations et preuves du laboratoire.",
+          "name": "Traces",
+          "summary": "Données, captures, journaux, résultats, observations et traces du laboratoire.",
           "options": {
             "uckksectionkind": "preuves",
             "requiresproof": 1,
@@ -1020,8 +1021,8 @@
         {
           "number": 7,
           "key": "evaluation",
-          "name": "Évaluation",
-          "summary": "Évaluation humaine, validation des preuves, compétences et reconnaissance interne.",
+          "name": "Révision",
+          "summary": "Révision humaine, validation des traces, compétences et repères de progression.",
           "options": {
             "uckksectionkind": "evaluation",
             "requiresproof": 0,
@@ -1033,7 +1034,7 @@
           "number": 8,
           "key": "archive",
           "name": "Archive",
-          "summary": "Archive du laboratoire : prototypes, preuves, révisions, décisions et exports.",
+          "summary": "Archive du laboratoire : prototypes, traces, révisions, décisions et exports.",
           "options": {
             "uckksectionkind": "archive",
             "requiresproof": 0,
@@ -1048,7 +1049,7 @@
           "component": "mod_uckkchallenge",
           "section": "preuves",
           "name": "Défi de laboratoire",
-          "intro": "Déposer une preuve expérimentale avec provenance, limites, incertitude et contexte.",
+          "intro": "Déposer une trace expérimentale avec provenance, limites, incertitude et contexte.",
           "required": true,
           "defaults": {
             "challengetype": "laboratory",
@@ -1066,7 +1067,7 @@
           "component": "mod_uckkassembly",
           "section": "deliberation",
           "name": "Assemblée du laboratoire",
-          "intro": "Examen collectif des preuves, risques, objections, corrections et décisions.",
+          "intro": "Examen collectif des traces, risques, objections, corrections et décisions.",
           "required": true,
           "defaults": {
             "assemblytype": "batisseurs",
@@ -1080,7 +1081,7 @@
           "component": "mod_uckkarchive",
           "section": "archive",
           "name": "Archive du laboratoire",
-          "intro": "Archive complète des prototypes, preuves, décisions, versions et exports.",
+          "intro": "Archive complète des prototypes, traces, décisions, versions et exports.",
           "required": true,
           "defaults": {
             "status": "active",
@@ -1101,7 +1102,8 @@
       "metadata": {
         "product": "UCKK-Moodle",
         "course_type": "laboratoire",
-        "recognition": "internal",
+        "recognition": "none_short_term",
+        "public_knowledge_first": true,
         "source": "tool_uckkseed",
         "seeded_by": "tool_uckkseed",
         "source_preset": "course_templates",

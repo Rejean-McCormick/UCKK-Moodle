@@ -43,35 +43,39 @@ final class assemblies {
         return [
             'layout' => 'standard',
             'typography' => 'institutional',
-            'eyebrow' => 'Délibérer, vérifier, orienter',
+            'eyebrow' => 'Lire, délibérer, transmettre',
             'title' => 'Assemblées UCKK',
-            'subtitle' => 'Espaces de discussion, décision, orientation et mémoire collective.',
-            'summary' => 'Les assemblées organisent les moments où la cité-école discute, arbitre, documente et rend certaines décisions traçables.',
+            'subtitle' => 'Espaces publics de discussion, d’orientation et de mémoire collective.',
+            'summary' => 'Les assemblées rendent visibles les moments où une communauté apprend ensemble : poser des questions, confronter des lectures, formuler des orientations et conserver des traces utiles.',
             'sections' => [
                 [
-                    'title' => 'Rôle des assemblées',
-                    'body' => 'Une assemblée peut soutenir une délibération, une décision, une orientation pédagogique ou une vérification collective.',
+                    'title' => 'Un lieu de parole structurée',
+                    'body' => 'Une assemblée UCKK n’est pas seulement une réunion. C’est un cadre d’apprentissage collectif où les idées sont mises en discussion, les désaccords deviennent lisibles et les orientations peuvent être formulées avec méthode.',
                 ],
                 [
-                    'title' => 'Traces',
-                    'body' => 'Les traces publiques doivent rester sobres, vérifiables et compatibles avec les règles de confidentialité.',
+                    'title' => 'Délibérer pour mieux comprendre',
+                    'body' => 'Les assemblées servent à ralentir le jugement, organiser les contributions et rendre les choix plus intelligibles. Elles aident à comprendre le jeu social avant de prétendre en changer les règles.',
+                ],
+                [
+                    'title' => 'Mémoire publique',
+                    'body' => 'Lorsque des traces sont publiées, elles doivent rester sobres, vérifiables et respectueuses des règles de confidentialité. Leur rôle est de soutenir la transmission, pas d’exposer inutilement les personnes.',
                 ],
             ],
             'cardsheading' => 'Repères d’assemblée',
             'cards' => [
                 [
+                    'title' => 'Discussion',
+                    'body' => 'Ouvrir un sujet, recueillir des lectures et faire apparaître les questions importantes.',
+                    'type' => 'discussion',
+                ],
+                [
                     'title' => 'Délibération',
-                    'body' => 'Construire une décision à partir de contributions structurées.',
+                    'body' => 'Transformer des contributions dispersées en compréhension commune, objections claires et orientations possibles.',
                     'type' => 'deliberation',
                 ],
                 [
-                    'title' => 'Décision',
-                    'body' => 'Documenter les décisions sans exposer les informations privées.',
-                    'type' => 'decision',
-                ],
-                [
-                    'title' => 'Archive',
-                    'body' => 'Conserver les traces utiles à la mémoire institutionnelle.',
+                    'title' => 'Mémoire',
+                    'body' => 'Conserver les traces utiles à la bibliothèque publique, à l’apprentissage collectif et à la continuité institutionnelle.',
                     'url' => '/local/uckk/archives.php',
                     'actionlabel' => 'Voir les archives',
                     'type' => 'archive',
@@ -79,7 +83,7 @@ final class assemblies {
             ],
             'notices' => [
                 [
-                    'body' => 'Les assemblées publiques ne remplacent pas les espaces internes de gouvernance ou les permissions Moodle.',
+                    'body' => 'Les assemblées publiques soutiennent la discussion et la mémoire collective. Les décisions internes, permissions et espaces de gouvernance demeurent gérés dans les cadres prévus à cet effet.',
                     'type' => 'institutional',
                 ],
             ],

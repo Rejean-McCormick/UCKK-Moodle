@@ -126,24 +126,44 @@ faculty.php?slug=grand-jeu-social
 | Bloc dynamique           | Bloc dynamique public    | `dynamic_block`    |
 | Projection des cours     | Programme de faculté     | `atlas_projection` |
 
-## 3.3 Formules publiques obligatoires
+## 3.3 Orientation publique et note institutionnelle
 
-La notice institutionnelle canonique est :
+Les pages publiques UCKK doivent d’abord présenter l’Univers-Cité King Klown comme une bibliothèque publique vivante, un campus ouvert et un cadre d’apprentissage familier, modernisé et accessible.
+
+Le but immédiat n’est pas d’offrir des certifications, diplômes ou titres formels.
+
+Le but immédiat est :
 
 ```text
-Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires publics ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.
+diffuser le savoir
+rendre les parcours lisibles
+ouvrir les cours publics
+organiser les archives
+donner accès aux médiathèques
+situer les Voies dans le Grand Jeu social
+rendre les méthodes praticables
 ```
 
-La formule courte autorisée est :
+Formule publique principale :
 
 ```text
-Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité.
+UCKK est une bibliothèque publique vivante et un campus ouvert pour comprendre le Grand Jeu social, jouer avec lucidité et changer les règles.
 ```
 
-La formule anti-confusion est :
+Formule institutionnelle courte, à utiliser au maximum une fois par page lorsque nécessaire :
 
 ```text
-Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité.
+Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.
+```
+
+Règles :
+
+```text
+Ne pas centrer les pages publiques sur les limites d’accréditation.
+Ne pas répéter la note institutionnelle dans les sections, FAQ, notices et garde-fous.
+Ne pas transformer une page de Voie en avertissement juridique.
+Ne pas présenter UCKK comme une promesse de certification future.
+Présenter d’abord l’accès au savoir, les cours publics, les archives, les ressources et les méthodes.
 ```
 
 ---
@@ -273,7 +293,7 @@ Ces overrides doivent être rares, testés, et ne doivent jamais remplacer `*.fa
 | `mod_uckkarchive`    | peut servir plus tard aux Kristals, preuves et archives publiques filtrées                             |
 | `mod_uckkassembly`   | non requis pour les pages de facultés; utile seulement pour décisions et gouvernance                   |
 | `mod_uckkchallenge`  | non requis pour les pages de facultés; utile pour défis liés aux cours                                 |
-| `tool_uckkintegrity` | peut valider les guardrails publics et signaler les dérives                                            |
+| `tool_uckkintegrity` | peut valider les garde-fous publics et signaler les dérives                                            |
 
 ---
 
@@ -972,6 +992,7 @@ Règles :
 FAQ publique seulement.
 Ne pas répondre sur progression individuelle.
 Ne pas promettre accréditation.
+Ne pas transformer la FAQ en répétition des limites de reconnaissance.
 ```
 
 ## 9.16 `contact`
@@ -1020,6 +1041,15 @@ review
 approved
 needs_update
 archived
+```
+
+Règles :
+
+```text
+public_claims_guardrails est un champ de gouvernance éditoriale.
+Il peut rester vide si la page ne contient pas de risque public particulier.
+S’il est utilisé, il ne doit pas devenir une source de répétition publique.
+Préférer une seule note institutionnelle discrète lorsque nécessaire.
 ```
 
 ## 9.18 `cache`
@@ -1798,7 +1828,7 @@ annonces explicitement publiques
 événements explicitement publics
 cours visibles
 liens vers Moodle selon permissions
-notice institutionnelle
+note institutionnelle unique si nécessaire
 ```
 
 ## 17.3 Filtrage
@@ -1814,18 +1844,46 @@ Ne pas rendre Markdown sans filtration.
 Ne pas construire d’URL sans validation.
 ```
 
-## 17.4 Guardrails publics
+## 17.4 Retenue éditoriale publique
 
-Chaque page doit inclure au moins une notice institutionnelle si elle mentionne :
+Les pages publiques ne doivent pas répéter les limites de reconnaissance comme thème central.
+
+La règle éditoriale est :
 
 ```text
-Parchemin
-Niveau
-reconnaissance
-formation
-faculté
-programme
-puissance opératoire
+une page publique doit ouvrir le savoir avant de limiter les attentes
+```
+
+La note institutionnelle courte peut apparaître une seule fois lorsque le contexte l’exige :
+
+```text
+Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.
+```
+
+Cette note ne doit pas être dupliquée dans :
+
+```text
+la section héro
+les sections principales
+les blocs featured
+la FAQ
+les notices automatiques
+les garde-fous publics
+les cartes de cours
+```
+
+Sauf nécessité explicite, les pages doivent privilégier :
+
+```text
+bibliothèque publique
+diffusion immédiate du savoir
+cadre d’apprentissage ouvert
+cours publics
+archives
+médiathèque
+assemblées
+défis
+méthodes praticables
 ```
 
 ---
@@ -2099,13 +2157,15 @@ $string['faculty'] = 'Faculté';
 $string['faculties'] = 'Facultés';
 $string['facultyprofile'] = 'Profil public de faculté';
 $string['facultyatlasprogram'] = 'Programme de la Voie';
-$string['facultycourses'] = 'Cours de la faculté';
-$string['facultyannouncements'] = 'Annonces de la faculté';
-$string['facultyevents'] = 'Événements de la faculté';
+$string['facultycourses'] = 'Cours publics';
+$string['facultyannouncements'] = 'Annonces de la voie';
+$string['facultyevents'] = 'Événements publics';
 $string['facultyprojectfinal'] = 'Projet final';
 $string['facultyethicallimits'] = 'Limites éthiques';
 $string['facultyrelations'] = 'Relations avec les autres Voies';
-$string['internalrecognitionnotice'] = 'Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité.';
+$string['internalrecognitionnotice'] = 'Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.';
+$string['publicknowledgeframework'] = 'Bibliothèque publique et cadre d’apprentissage ouvert';
+$string['openknowledgeaccess'] = 'Accès public au savoir';
 ```
 
 Règles :
@@ -2114,6 +2174,7 @@ Règles :
 Ne pas hardcoder les labels publics dans PHP.
 Ne pas traduire les IDs.
 Ne pas traduire les slugs.
+Ne pas répéter la note de reconnaissance dans plusieurs chaînes publiques.
 ```
 
 ---
@@ -2207,7 +2268,9 @@ atlas_projection complete
 dynamic_blocks providers allowed
 featured_blocks types allowed
 faq valid
-governance guardrails present
+governance metadata valid
+public_claims_guardrails optional and non-repetitive when present
+credential-oriented wording limited to one quiet institutional note when necessary
 cache config valid
 ```
 
@@ -2316,7 +2379,7 @@ course_prefix
   },
   "seo": {
     "title": "Voie du Grand Jeu social — UCKK",
-    "description": "La Voie du Grand Jeu social forme des joueurs lucides capables de lire les systèmes sociaux et d’agir avec intégrité.",
+    "description": "La Voie du Grand Jeu social ouvre un cadre public d’apprentissage pour lire les systèmes sociaux, comprendre les règles du jeu et agir avec intégrité.",
     "keywords": [
       "UCKK",
       "Grand Jeu social",
@@ -2330,9 +2393,9 @@ course_prefix
   "hero": {
     "title": "Voie du Grand Jeu social",
     "subtitle": "Lire les systèmes, comprendre les règles du jeu, agir avec lucidité.",
-    "summary": "Cette faculté apprend à cartographier les règles visibles et invisibles, les positions, les pouvoirs, les récits, les preuves, les ressources et les points de transformation d’un système social.",
+    "summary": "Cette faculté ouvre une bibliothèque publique et un cadre d’apprentissage pour cartographier les règles visibles et invisibles, les positions, les pouvoirs, les récits, les preuves, les ressources et les points de transformation d’un système social.",
     "primary_cta": {
-      "label": "Explorer les cours",
+      "label": "Explorer les cours publics",
       "target": "#cours"
     },
     "secondary_cta": {
@@ -2427,8 +2490,8 @@ course_prefix
     },
     {
       "type": "notice",
-      "title": "Reconnaissance interne",
-      "body": "Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités."
+      "title": "Bibliothèque publique",
+      "body": "Le but immédiat de cette page est de rendre le savoir accessible dans un cadre d’apprentissage ouvert, familier et modernisé."
     }
   ],
   "faq": [
@@ -2437,8 +2500,8 @@ course_prefix
       "answer": "Elle peut servir de tronc de lecture commun, car elle fournit la grammaire générale du Grand Jeu social."
     },
     {
-      "question": "Est-ce un diplôme reconnu?",
-      "answer": "Non. Il s’agit d’une reconnaissance interne UCKK, sauf reconnaissance officielle future."
+      "question": "Quel est le but immédiat de cette Voie?",
+      "answer": "Le but immédiat est la diffusion publique du savoir dans un cadre d’apprentissage ouvert. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
     }
   ],
   "contact": {
@@ -2456,9 +2519,7 @@ course_prefix
     "last_reviewed": null,
     "review_notes": "",
     "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
-      "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue."
+      "Garder la note de reconnaissance unique, discrète et non centrale; ne pas transformer la page publique en avertissement répété sur les diplômes ou statuts."
     ]
   },
   "cache": {
@@ -2495,7 +2556,9 @@ moodle_mapper maps course ids correctly
 ```text
 anonymous user opens published faculty page
 anonymous user cannot open hidden faculty page
-anonymous user sees institutional notice
+anonymous user sees open public knowledge framing
+anonymous user does not see repeated credential/accreditation caveats
+institutional recognition note appears at most once when required
 anonymous user sees 10 courses from Atlas projection
 anonymous user does not see private completion status
 logged-in user sees allowed Moodle links
@@ -2575,7 +2638,7 @@ Vérifier les IDs.
 Vérifier les slugs.
 Vérifier les relations.
 Vérifier les provider names.
-Vérifier les public guardrails.
+Vérifier les règles de retenue éditoriale publique.
 ```
 
 ## 30.5 Règle de sortie
@@ -2614,7 +2677,8 @@ L’extension est complète lorsque les éléments suivants existent et sont coh
 [ ] tous les partials faculty_* existent
 [ ] les templates n’utilisent aucune variable non documentée
 [ ] les pages publiques affichent les 10 cours
-[ ] les pages publiques affichent la notice institutionnelle
+[ ] les pages publiques foregroundent la bibliothèque publique, les cours ouverts et la diffusion du savoir
+[ ] la note institutionnelle de reconnaissance apparaît au maximum une fois lorsque nécessaire
 [ ] les pages publiques n’affichent aucune donnée privée
 [ ] les blocs dynamiques échouent proprement si Moodle ne contient aucune annonce
 [ ] dry-run sync Moodle produit un rapport sans modifier la DB
@@ -2638,6 +2702,7 @@ Ne jamais inventer un champ non documenté.
 Ne jamais présenter les Parchemins comme diplômes publics.
 Ne jamais confondre page de faculté et cours Moodle.
 Ne jamais utiliser un slug comme chemin de fichier.
+Ne jamais transformer les pages publiques en répétition défensive sur l’accréditation.
 ```
 
 Formule finale :
@@ -2648,5 +2713,6 @@ Faculty Profile raconte.
 Moodle exécute.
 local_uckk relie.
 Mustache affiche.
+La page publique ouvre le savoir.
 L’IA ne renomme rien.
-
+```

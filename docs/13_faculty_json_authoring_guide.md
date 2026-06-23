@@ -22,6 +22,8 @@ local/uckk/content/faculties/*.faculty.json
 Ces fichiers ne sont pas les programmes pédagogiques complets.
 Ils sont les profils éditoriaux publics des facultés UCKK.
 
+Leur fonction principale est de présenter chaque Voie comme une porte d’entrée publique dans la bibliothèque vivante UCKK : un espace de lecture, d’orientation, de méthode et de pratique du savoir.
+
 Formule de travail :
 
 ```text
@@ -39,6 +41,7 @@ référencer son JSON Atlas;
 choisir quoi projeter depuis l’Atlas;
 définir la structure éditoriale de la page;
 configurer les blocs dynamiques publics;
+mettre en avant l’accès au savoir, la lisibilité et la pratique;
 respecter les guardrails publics UCKK;
 ne jamais exposer de données privées Moodle.
 ```
@@ -127,12 +130,12 @@ Pour créer ou modifier un profil de faculté :
 
 ```text
 1. Identifier la faculté dans le tableau canonique.
-2. Vérifier le `voie_id`, `faculty_id`, `slug`, `code`, `course_prefix`.
+2. Vérifier le voie_id, faculty_id, slug, code, course_prefix.
 3. Vérifier le fichier Atlas référencé.
 4. Remplir les champs top-level obligatoires.
-5. Rédiger `identity`, `seo`, `hero`, `sections`, `faq`, `contact`.
-6. Définir `atlas_projection` sans dupliquer les données Atlas.
-7. Configurer les `dynamic_blocks` seulement avec des providers autorisés.
+5. Rédiger identity, seo, hero, sections, faq, contact.
+6. Définir atlas_projection sans dupliquer les données Atlas.
+7. Configurer les dynamic_blocks seulement avec des providers autorisés.
 8. Ajouter les guardrails publics.
 9. Valider le JSON.
 10. Vérifier que les targets de navigation ne sont pas orphelines.
@@ -199,7 +202,8 @@ Les valeurs doivent être adaptées à chaque faculté canonique.
     "keywords": [
       "UCKK",
       "Voie",
-      "Grand Jeu social"
+      "Grand Jeu social",
+      "bibliothèque publique"
     ]
   },
   "hero": {
@@ -207,7 +211,7 @@ Les valeurs doivent être adaptées à chaque faculté canonique.
     "subtitle": "",
     "summary": "",
     "primary_cta": {
-      "label": "Explorer le programme",
+      "label": "Explorer la voie",
       "target": "#programme"
     },
     "secondary_cta": {
@@ -242,7 +246,13 @@ Les valeurs doivent être adaptées à chaque faculté canonique.
       "id": "presentation",
       "type": "text",
       "title": "Présentation",
-      "body": ""
+      "body": "Cette faculté présente une Voie UCKK comme parcours public de lecture, de méthode et de pratique dans la bibliothèque vivante de l’Univers-Cité King Klown."
+    },
+    {
+      "id": "clarte",
+      "type": "notice",
+      "title": "Clarté publique",
+      "body": "Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future. Il n’y a pas de projet à court terme d’offrir des certifications, diplômes ou titres formels."
     }
   ],
   "atlas_projection": {
@@ -278,15 +288,33 @@ Les valeurs doivent être adaptées à chaque faculté canonique.
   ],
   "featured_blocks": [
     {
-      "type": "notice",
-      "title": "Reconnaissance interne UCKK",
-      "body": "Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires publics ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future."
+      "type": "principle",
+      "title": "Voir le jeu avant de jouer",
+      "body": "Toute action responsable commence par la lecture des règles, des positions, des ressources, des récits et des preuves qui structurent une situation."
+    },
+    {
+      "type": "library",
+      "title": "Ouvrir l’accès au savoir",
+      "body": "Cette Voie fait partie d’une bibliothèque publique vivante : elle sert à rendre les outils de compréhension plus accessibles, plus partageables et plus praticables."
+    },
+    {
+      "type": "ethics",
+      "title": "Agir avec responsabilité",
+      "body": "La puissance opératoire visée doit rester lisible, contestable, responsable et compatible avec l’intégrité des personnes concernées."
     }
   ],
   "faq": [
     {
-      "question": "Cette Voie donne-t-elle un diplôme public accrédité ?",
-      "answer": "Non. Les Parchemins UCKK sont des reconnaissances internes et ne constituent pas des diplômes publics accrédités."
+      "question": "À quoi sert cette Voie?",
+      "answer": "Elle sert à apprendre à lire un domaine, à relier des savoirs, à pratiquer des méthodes et à produire des traces utiles dans le cadre de la bibliothèque publique UCKK."
+    },
+    {
+      "question": "La page contient-elle toute la matière des cours?",
+      "answer": "Non. La page publique présente la faculté et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+    },
+    {
+      "question": "Que signifie le titre symbolique associé à cette Voie?",
+      "answer": "C’est un repère narratif et pédagogique interne. Il aide à nommer une posture d’apprentissage ou de pratique sans constituer un titre professionnel reconnu par l’État."
     }
   ],
   "contact": {
@@ -304,9 +332,12 @@ Les valeurs doivent être adaptées à chaque faculté canonique.
     "last_reviewed": null,
     "review_notes": "",
     "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
+      "Présenter la Voie comme un parcours public de lecture, de méthode et de pratique.",
+      "Mettre en avant l’accès au savoir, la lisibilité et la diffusion publique.",
       "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue."
+      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
+      "Ne pas transformer un titre symbolique en titre professionnel reconnu par l’État.",
+      "Ne pas transformer l’accès au savoir en barrière ou en promesse de statut."
     ]
   },
   "cache": {
@@ -641,7 +672,8 @@ Bon exemple :
   "keywords": [
     "UCKK",
     "Voie",
-    "Grand Jeu social"
+    "Grand Jeu social",
+    "bibliothèque publique"
   ]
 }
 ```
@@ -700,7 +732,7 @@ Exemple valide :
 ```json
 {
   "primary_cta": {
-    "label": "Explorer le programme",
+    "label": "Explorer la voie",
     "target": "#programme"
   },
   "secondary_cta": {
@@ -812,13 +844,13 @@ Exemple :
     "id": "presentation",
     "type": "text",
     "title": "Présentation",
-    "body": "Cette faculté présente la Voie comme champ d’apprentissage interne UCKK."
+    "body": "Cette faculté présente une Voie comme parcours public de lecture, de méthode et de pratique dans la bibliothèque UCKK."
   },
   {
     "id": "principes",
     "type": "principle",
     "title": "Principe de travail",
-    "body": "Apprendre à lire, relier et agir sans confondre reconnaissance interne et statut public."
+    "body": "Apprendre à lire, relier, pratiquer et agir dans un cadre ouvert, vérifiable et responsable."
   }
 ]
 ```
@@ -1077,6 +1109,15 @@ stat
 method
 ethics
 cta
+library
+```
+
+Usage recommandé :
+
+```text
+Les featured_blocks servent à mettre en avant les principes publics de la Voie :
+lecture du monde, méthode, accès au savoir, éthique, pratique, orientation.
+Ils ne doivent pas devenir un espace de répétition des limites d’accréditation.
 ```
 
 Exemple recommandé :
@@ -1084,16 +1125,29 @@ Exemple recommandé :
 ```json
 [
   {
-    "type": "notice",
-    "title": "Reconnaissance interne",
-    "body": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité."
+    "type": "principle",
+    "title": "Voir le jeu avant de jouer",
+    "body": "Toute action responsable commence par la lecture des règles, des positions, des ressources, des récits et des preuves qui structurent une situation."
+  },
+  {
+    "type": "library",
+    "title": "Ouvrir l’accès au savoir",
+    "body": "Cette Voie fait partie d’une bibliothèque publique vivante : elle sert à rendre les outils de compréhension plus accessibles, plus partageables et plus praticables."
   },
   {
     "type": "ethics",
-    "title": "Garde-fou public",
-    "body": "Cette page ne présente aucune progression individuelle, note privée ou donnée personnelle."
+    "title": "Agir avec responsabilité",
+    "body": "La puissance opératoire visée doit rester lisible, contestable, responsable et compatible avec l’intégrité des personnes concernées."
   }
 ]
+```
+
+À éviter dans `featured_blocks` :
+
+```text
+un bloc principal intitulé Reconnaissance interne;
+une répétition de la formule diplôme/accréditation;
+une mise en scène défensive de ce que la Voie n’est pas.
 ```
 
 ---
@@ -1119,21 +1173,32 @@ Ne pas répondre sur progression individuelle.
 Ne pas promettre accréditation.
 Ne pas fournir de conseil légal, médical ou financier comme autorité UCKK.
 Ne pas présenter le Parchemin comme diplôme public.
+Ne pas transformer la FAQ en répétition des limites institutionnelles.
 ```
 
-Exemples :
+Exemples recommandés :
 
 ```json
 [
   {
-    "question": "Cette Voie donne-t-elle un diplôme public accrédité ?",
-    "answer": "Non. Les Parchemins UCKK sont des reconnaissances internes et ne constituent pas des diplômes publics accrédités."
+    "question": "À quoi sert cette Voie?",
+    "answer": "Elle sert à apprendre à lire un domaine, à relier des savoirs, à pratiquer des méthodes et à produire des traces utiles dans le cadre de la bibliothèque publique UCKK."
   },
   {
-    "question": "Les cours Moodle sont-ils visibles publiquement ?",
-    "answer": "La page peut présenter le programme public. L’accès aux espaces Moodle dépend des règles d’inscription et de visibilité configurées."
+    "question": "La page contient-elle toute la matière des cours?",
+    "answer": "Non. La page publique présente la faculté et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+  },
+  {
+    "question": "Que signifie le titre symbolique associé à cette Voie?",
+    "answer": "C’est un repère narratif et pédagogique interne. Il aide à nommer une posture d’apprentissage ou de pratique sans constituer un titre professionnel reconnu par l’État."
   }
 ]
+```
+
+La mention de reconnaissance doit apparaître au plus une fois par page publique, idéalement dans une notice sobre :
+
+```text
+Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future. Il n’y a pas de projet à court terme d’offrir des certifications, diplômes ou titres formels.
 ```
 
 ---
@@ -1206,11 +1271,16 @@ Guardrails recommandés :
 
 ```json
 [
-  "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
+  "Présenter la Voie comme un parcours public de lecture, de méthode et de pratique.",
+  "Mettre en avant l’accès au savoir, la lisibilité et la diffusion publique.",
   "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-  "Ne pas présenter une Voie expérimentale comme officiellement reconnue."
+  "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
+  "Ne pas transformer un titre symbolique en titre professionnel reconnu par l’État.",
+  "Ne pas transformer l’accès au savoir en barrière ou en promesse de statut."
 ]
 ```
+
+La limite institutionnelle sur les reconnaissances doit rester vraie, mais ne doit pas dominer le contenu public.
 
 ---
 
@@ -1242,6 +1312,9 @@ Chaque profil doit respecter ces règles :
 
 ```text
 Ton public, sobre, institutionnel.
+Priorité à la diffusion du savoir.
+Priorité à la bibliothèque publique vivante.
+Priorité à la lisibilité, à la méthode et à la pratique.
 Aucune promesse d’accréditation.
 Aucune promesse de reconnaissance gouvernementale.
 Aucune promesse professionnelle réglementée.
@@ -1255,12 +1328,16 @@ Formules autorisées :
 ```text
 Page de faculté UCKK.
 Voie UCKK.
-Reconnaissance interne UCKK.
+Parcours public de lecture, de méthode et de pratique.
+Bibliothèque publique vivante.
 Programme public de la Voie.
 Présentation publique de la faculté.
+Cadre d’apprentissage ouvert.
+Diffusion publique du savoir.
+Reconnaissance interne UCKK, sauf reconnaissance officielle future.
 ```
 
-Formules interdites :
+Formules à éviter comme thèmes principaux :
 
 ```text
 diplôme public accrédité;
@@ -1268,7 +1345,22 @@ université officiellement reconnue;
 grade universitaire d’État;
 certification professionnelle garantie;
 équivalence officielle;
-titre légalement reconnu.
+titre légalement reconnu;
+cette Voie ne donne pas de diplôme;
+cette faculté n’est pas accréditée.
+```
+
+Règle éditoriale :
+
+```text
+La limite de reconnaissance doit être dite une seule fois, sobrement.
+Elle ne doit pas devenir un bloc récurrent, une FAQ obligatoire ou le thème principal des pages publiques.
+```
+
+Formule canonique recommandée :
+
+```text
+Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future. Il n’y a pas de projet à court terme d’offrir des certifications, diplômes ou titres formels.
 ```
 
 ---
@@ -1435,7 +1527,8 @@ hub_course_idnumber cohérent.
     "keywords": [
       "UCKK",
       "Voie",
-      "Économie"
+      "Économie",
+      "bibliothèque publique"
     ]
   },
   "hero": {
@@ -1443,7 +1536,7 @@ hub_course_idnumber cohérent.
     "subtitle": "",
     "summary": "",
     "primary_cta": {
-      "label": "Explorer le programme",
+      "label": "Explorer la voie",
       "target": "#programme"
     },
     "secondary_cta": {
@@ -1474,7 +1567,7 @@ hub_course_idnumber cohérent.
       "id": "presentation",
       "type": "text",
       "title": "Présentation",
-      "body": ""
+      "body": "Cette faculté présente la Voie comme parcours public de lecture, de méthode et de pratique dans la bibliothèque UCKK."
     }
   ],
   "atlas_projection": {
@@ -1510,15 +1603,24 @@ hub_course_idnumber cohérent.
   ],
   "featured_blocks": [
     {
-      "type": "notice",
-      "title": "Reconnaissance interne UCKK",
-      "body": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité."
+      "type": "principle",
+      "title": "Lire les systèmes économiques",
+      "body": "Cette Voie aide à comprendre les ressources, les échanges, les dépendances, les incitatifs et les règles qui organisent la vie économique."
+    },
+    {
+      "type": "library",
+      "title": "Ouvrir l’accès au savoir économique",
+      "body": "La page publique sert à rendre les outils de compréhension économique plus accessibles, plus partageables et plus praticables."
     }
   ],
   "faq": [
     {
-      "question": "Cette Voie donne-t-elle un diplôme public accrédité ?",
-      "answer": "Non. Les Parchemins UCKK sont des reconnaissances internes et ne constituent pas des diplômes publics accrédités."
+      "question": "À quoi sert cette Voie?",
+      "answer": "Elle sert à apprendre à lire les systèmes économiques, à comprendre les ressources et les échanges, et à relier ces savoirs aux situations concrètes."
+    },
+    {
+      "question": "Les cours Moodle sont-ils visibles publiquement?",
+      "answer": "La page peut présenter le programme public. L’accès aux espaces Moodle dépend des règles d’inscription et de visibilité configurées."
     }
   ],
   "contact": {
@@ -1536,9 +1638,12 @@ hub_course_idnumber cohérent.
     "last_reviewed": null,
     "review_notes": "",
     "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
+      "Présenter la Voie comme un parcours public de lecture, de méthode et de pratique.",
+      "Mettre en avant l’accès au savoir, la lisibilité et la diffusion publique.",
       "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue."
+      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
+      "Ne pas transformer un titre symbolique en titre professionnel reconnu par l’État.",
+      "Ne pas transformer l’accès au savoir en barrière ou en promesse de statut."
     ]
   },
   "cache": {
@@ -1573,7 +1678,9 @@ Avant de committer un `*.faculty.json`, vérifier :
 [ ] dynamic_blocks[].source.provider est autorisé.
 [ ] atlas_projection ne duplique pas les cours.
 [ ] FAQ ne promet pas d’accréditation.
-[ ] featured_blocks contient une notice anti-confusion ou équivalent.
+[ ] Le profil met d’abord en avant l’accès au savoir, la méthode et la bibliothèque publique.
+[ ] La limite de reconnaissance apparaît au plus une fois dans le contenu public visible.
+[ ] featured_blocks ne sert pas à répéter les limites d’accréditation.
 [ ] governance.public_claims_guardrails est présent.
 [ ] Aucune donnée privée Moodle n’est exposée.
 [ ] Aucune variable non documentée n’est introduite.
@@ -1693,12 +1800,30 @@ Interdit :
 
 ```text
 Cette faculté délivre un diplôme reconnu.
+Cette Voie mène à une certification officielle.
+Ce parcours donne un titre professionnel reconnu par l’État.
+Cette faculté est une université accréditée.
 ```
 
-Autorisé :
+À éviter comme formulation récurrente :
 
 ```text
-Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité.
+Cette Voie ne donne pas de diplôme public accrédité.
+Les Parchemins ne constituent pas des diplômes publics accrédités.
+Cette faculté ne prétend pas à un statut universitaire public accrédité.
+```
+
+Autorisé, une seule fois par page publique visible :
+
+```text
+Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future. Il n’y a pas de projet à court terme d’offrir des certifications, diplômes ou titres formels.
+```
+
+Principe :
+
+```text
+La page publique ne doit pas être structurée autour de la peur de confusion.
+Elle doit être structurée autour de l’accès au savoir, de la clarté institutionnelle, de la méthode et de la pratique.
 ```
 
 ---
@@ -1747,6 +1872,7 @@ canonique dans ses IDs;
 public dans son ton;
 strict dans ses providers;
 sobre dans ses promesses;
+centré sur l’accès au savoir;
 aligné avec son Atlas;
 non dupliquant;
 validable par schéma;
@@ -1760,4 +1886,8 @@ La règle finale :
 ```text
 Si un champ, provider, type, slug, variable ou comportement n’est pas documenté dans DOC_12,
 il ne doit pas apparaître dans un profil Faculty JSON.
+
+Si une limite institutionnelle doit être rappelée,
+elle doit l’être une seule fois, sobrement,
+sans déplacer le centre éditorial de la page.
 ```

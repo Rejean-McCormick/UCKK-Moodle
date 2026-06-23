@@ -52,15 +52,14 @@ final class faculty_page_builder {
     /** Moodle component name. */
     public const COMPONENT = 'local_uckk';
 
-    /** Canonical institutional notice. */
-    public const NOTICE_INSTITUTIONAL =
-        'Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités, '
-        . 'des grades universitaires publics ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future.';
+    /** Canonical public knowledge notice. */
+    public const NOTICE_OPEN_KNOWLEDGE =
+        'Les Voies UCKK sont des parcours publics d’exploration, de lecture et de pratique du savoir. '
+        . 'Elles servent à rendre les connaissances accessibles dans un cadre d’apprentissage familier, modernisé et ouvert.';
 
-    /** Canonical anti-confusion notice. */
-    public const NOTICE_ANTI_CONFUSION =
-        'Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. '
-        . 'Elle ne prétend pas à un statut universitaire public accrédité.';
+    /** Canonical institutional scope notice. */
+    public const NOTICE_INSTITUTIONAL =
+        'Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.';
 
     /**
      * Faculty registry.
@@ -421,7 +420,7 @@ final class faculty_page_builder {
      * Build the project_final context.
      *
      * @param array<string, mixed> $atlas Atlas voie.
-     * @param array<string, bool> $projection Atlas projection flags.
+     * @param array<string, bool> $projection Projection flags.
      * @return array<string, mixed>
      */
     private function build_project_final(array $atlas, array $projection): array {
@@ -451,7 +450,7 @@ final class faculty_page_builder {
      * Build projected ethical limits.
      *
      * @param array<string, mixed> $atlas Atlas voie.
-     * @param array<string, bool> $projection Atlas projection flags.
+     * @param array<string, bool> $projection Projection flags.
      * @return array<int, string>
      */
     private function build_limits(array $atlas, array $projection): array {
@@ -466,7 +465,7 @@ final class faculty_page_builder {
      * Build projected inter-voie relations.
      *
      * @param array<string, mixed> $atlas Atlas voie.
-     * @param array<string, bool> $projection Atlas projection flags.
+     * @param array<string, bool> $projection Projection flags.
      * @return array<int, array<string, mixed>>
      */
     private function build_relations(array $atlas, array $projection): array {
@@ -589,42 +588,18 @@ final class faculty_page_builder {
      * @return array<int, array<string, string>>
      */
     private function build_notices(array $profile): array {
-        $notices = [
-            [
-                'type' => 'institutional',
-                'title' => 'Reconnaissance interne',
-                'body' => self::NOTICE_INSTITUTIONAL,
-            ],
+        return [
             [
                 'type' => 'light',
-                'title' => 'Statut public',
-                'body' => self::NOTICE_ANTI_CONFUSION,
+                'title' => 'Bibliothèque publique ouverte',
+                'body' => self::NOTICE_OPEN_KNOWLEDGE,
+            ],
+            [
+                'type' => 'institutional',
+                'title' => 'Note institutionnelle',
+                'body' => self::NOTICE_INSTITUTIONAL,
             ],
         ];
-
-        $guardrails = $profile['governance']['public_claims_guardrails'] ?? [];
-        $publicguardrails = [];
-
-        if (is_array($guardrails)) {
-            foreach ($guardrails as $guardrail) {
-                if (!is_string($guardrail) || trim($guardrail) === '') {
-                    continue;
-                }
-
-                $publicguardrails[] = trim($guardrail);
-            }
-        }
-
-        $publicguardrails = array_values(array_unique($publicguardrails));
-        if (!empty($publicguardrails)) {
-            $notices[] = [
-                'type' => 'integrity',
-                'title' => 'Garde-fous publics',
-                'body' => implode(' · ', $publicguardrails),
-            ];
-        }
-
-        return $notices;
     }
 
     /**

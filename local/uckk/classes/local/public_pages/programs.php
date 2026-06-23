@@ -44,39 +44,39 @@ final class programs {
         return self::with_program_cards([
             'layout' => 'wide',
             'typography' => 'institutional',
-            'eyebrow' => 'Cartographie des voies',
+            'eyebrow' => 'Bibliothèque publique vivante',
             'title' => 'Voies UCKK',
-            'subtitle' => 'Parcours publics, domaines d’action et structures de progression.',
-            'summary' => 'Les Voies UCKK organisent les parcours, les pratiques, les preuves et la progression des Joueurs dans le Grand Jeu social.',
+            'subtitle' => 'Parcours ouverts pour explorer, relier et pratiquer les savoirs du Grand Jeu social.',
+            'summary' => 'Les Voies UCKK organisent la diffusion du savoir en parcours lisibles : cours, repères, pratiques, archives, médiathèque, défis et assemblées. Elles offrent un cadre d’apprentissage familier, modernisé et ouvert.',
             'sections' => [
                 [
                     'type' => 'role',
                     'title' => 'Rôle des voies',
-                    'body' => 'Une voie aide à situer une progression au sein de l’UCKK. Elle relie des cours, des compétences, des défis, des preuves, des portfolios, des Assemblées et le Registraire.',
+                    'body' => 'Une voie aide à circuler dans la bibliothèque UCKK. Elle relie des cours, des notions, des lectures, des pratiques, des défis, des archives, des Assemblées et des repères de progression.',
                 ],
                 [
                     'type' => 'registry',
                     'eyebrow' => 'Répertoire public',
                     'title' => 'Voies actives',
-                    'body' => 'Les cartes ci-dessous sont générées depuis le registre UCKK des voies actives. Les éléments en brouillon, cachés ou archivés ne sont pas affichés publiquement.',
+                    'body' => 'Les cartes ci-dessous présentent les parcours actuellement ouverts au public. Les éléments en brouillon, cachés ou archivés ne sont pas affichés.',
                 ],
             ],
             'cards' => [],
             'notices' => [
                 [
-                    'body' => 'Les voies décrivent des structures internes de formation, de pratique et de reconnaissance. Elles ne constituent pas des diplômes publics accrédités.',
+                    'body' => 'Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.',
                     'type' => 'institutional',
                 ],
             ],
             'metadata' => [
-                ['label' => 'Source', 'value' => 'Registre UCKK des voies'],
-                ['label' => 'Filtre public', 'value' => 'Voies actives seulement'],
+                ['label' => 'Source', 'value' => 'Bibliothèque publique UCKK'],
+                ['label' => 'Filtre public', 'value' => 'Voies ouvertes seulement'],
             ],
             'cta' => [
                 'title' => 'Explorer les cours',
-                'body' => 'Les espaces de cours associés aux Voies regroupent les cours et repères de progression disponibles.',
+                'body' => 'Les espaces de cours associés aux Voies regroupent les savoirs, lectures, exercices et repères disponibles dans un cadre d’apprentissage familier et modernisé.',
                 'url' => '/local/uckk/courses.php',
-                'label' => 'Voir les cours associés',
+                'label' => 'Voir les cours ouverts',
             ],
         ]);
     }
@@ -126,7 +126,7 @@ final class programs {
                 'type' => 'registry',
                 'eyebrow' => 'Répertoire public',
                 'title' => 'Voies actives',
-                'body' => 'Ces cartes proviennent du registre UCKK des voies actives. Les éléments en brouillon ou non publiés ne sont pas affichés ici.',
+                'body' => 'Ces cartes présentent les voies actuellement ouvertes au public. Les éléments en brouillon ou non publiés ne sont pas affichés ici.',
                 'cards' => $cards,
             ];
         }
@@ -146,8 +146,8 @@ final class programs {
             }
 
             $definition['notices'][] = [
-                'title' => 'Aucune voie active',
-                'body' => 'Aucune voie active n’est actuellement disponible dans le registre public UCKK.',
+                'title' => 'Aucune voie ouverte',
+                'body' => 'Aucune voie ouverte n’est actuellement disponible dans la bibliothèque publique UCKK.',
                 'type' => 'warning',
             ];
         }
@@ -224,7 +224,7 @@ final class programs {
             }
 
             if ($categoryname !== '') {
-                $bodyparts[] = 'Espace de cours associé : ' . $categoryname . '.';
+                $bodyparts[] = 'Espace d’apprentissage associé : ' . $categoryname . '.';
             } else {
                 $bodyparts[] = 'Aucun espace de cours associé.';
             }
@@ -234,7 +234,7 @@ final class programs {
 
             if ($categoryid > 0 && $categoryvisible === 1) {
                 $url = (new moodle_url('/course/index.php', ['categoryid' => $categoryid]))->out(false);
-                $actionlabel = 'Voir les cours associés';
+                $actionlabel = 'Voir les cours ouverts';
             }
 
             $cards[] = [
@@ -263,7 +263,7 @@ final class programs {
             'voie_secondaire' => 'Voie secondaire',
             'baccalaureat' => 'Voie UCKK — Puissance opératoire',
             'baccalauréat' => 'Voie UCKK — Puissance opératoire',
-            'certificat' => 'Reconnaissance interne — Initiation',
+            'certificat' => 'Parcours d’initiation',
             'mineure' => 'Voie UCKK — Initiation',
             'seminaire' => 'Séminaire',
             'séminaire' => 'Séminaire',

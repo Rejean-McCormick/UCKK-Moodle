@@ -36,44 +36,53 @@ final class challenges {
         return [
             'layout' => 'standard',
             'typography' => 'institutional',
-            'eyebrow' => 'Mettre la puissance opératoire à l’épreuve',
+            'eyebrow' => 'Apprendre par la pratique',
             'title' => 'Défis UCKK',
-            'subtitle' => 'Épreuves d’action, traces, productions, preuves et révisions.',
-            'summary' => 'Les défis servent à transformer une question du Grand Jeu social en action observable, preuve vérifiable et progression documentée.',
+            'subtitle' => 'Des exercices publics pour mettre le savoir en action.',
+            'summary' => 'Les défis prolongent la bibliothèque publique UCKK : ils invitent à comprendre, essayer, produire, documenter et réviser dans un cadre d’apprentissage familier, modernisé et ouvert.',
             'sections' => [
                 [
                     'title' => 'Pourquoi des défis',
-                    'body' => 'Un défi met une intention à l’épreuve du réel. Il peut demander une production, une preuve, une réflexion située, une correction ou une validation selon les règles du contexte.',
+                    'body' => 'Un défi transforme une question en pratique. Il permet de passer de la lecture à l’action, de l’idée à la trace, de l’intuition à une production observable. Le but n’est pas de fermer l’accès au savoir, mais d’aider chacun à l’éprouver, le manipuler et le rendre partageable.',
                 ],
                 [
                     'title' => 'Cycle général',
-                    'body' => 'Un défi peut être proposé, accepté, réalisé, soumis, révisé, validé, contesté ou inscrit au Registraire lorsque sa trace doit rester vérifiable.',
+                    'body' => 'Chaque défi peut être lu comme une petite scène d’apprentissage : on comprend la consigne, on agit, on produit une trace, puis on révise ce qui mérite d’être clarifié, corrigé ou conservé.',
                     'items' => [
-                        'Comprendre la consigne.',
-                        'Produire une trace.',
-                        'Soumettre une preuve.',
-                        'Recevoir une révision.',
-                        'Conserver ce qui doit rester vérifiable.',
+                        'Lire la consigne et le contexte.',
+                        'Explorer les ressources ouvertes.',
+                        'Produire une trace ou une réponse.',
+                        'Recevoir une révision ou une orientation.',
+                        'Conserver ce qui peut enrichir la mémoire commune.',
                     ],
+                ],
+                [
+                    'title' => 'Un cadre ouvert, pas une barrière',
+                    'body' => 'Les défis ne sont pas un paywall de connaissance. Ils servent à rendre l’apprentissage plus concret, plus lisible et plus actif, sans remplacer l’accès libre aux cours, archives, médias et repères publics.',
                 ],
             ],
             'cardsheading' => 'Repères pour les défis',
             'cards' => [
                 [
                     'title' => 'Défis publics',
-                    'body' => 'Présentation des défis visibles sans exposer les données privées, les dossiers internes ou les preuves restreintes.',
+                    'body' => 'Des propositions visibles qui invitent à explorer un thème, formuler une réponse, produire une trace ou tester une idée sans exposer de données privées.',
                     'type' => 'public',
                 ],
                 [
+                    'title' => 'Traces et productions',
+                    'body' => 'Une trace peut être un texte, une carte, une lecture commentée, une observation, une ressource, une synthèse, une correction ou une proposition de méthode.',
+                    'type' => 'trace',
+                ],
+                [
                     'title' => 'Révision',
-                    'body' => 'Les validations, corrections et contestations suivent les permissions, les rôles autorisés et les règles d’intégrité UCKK.',
+                    'body' => 'La révision sert à améliorer la clarté, la qualité et la responsabilité des productions. Elle peut orienter, corriger, questionner ou proposer une meilleure formulation.',
                     'type' => 'review',
                 ],
             ],
             'notices' => [
                 [
-                    'title' => 'Protection des preuves',
-                    'body' => 'Les preuves privées ne doivent pas être exposées dans les pages publiques.',
+                    'title' => 'Protection des traces privées',
+                    'body' => 'Les preuves privées, dossiers internes, données sensibles et éléments restreints ne doivent pas être exposés dans les pages publiques.',
                     'type' => 'warning',
                 ],
             ],

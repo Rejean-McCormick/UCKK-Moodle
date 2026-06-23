@@ -60,11 +60,11 @@ final class mediatheque {
             'layout' => 'wide',
             'typography' => 'institutional',
 
-            'eyebrow' => 'Catalogue public',
+            'eyebrow' => 'Bibliothèque publique',
             'title' => 'Médiathèque UCKK',
-            'subtitle' => 'Explorer les médias, collections, références externes et passages documentés.',
-            'summary' => 'Le catalogue donne accès aux contenus publics autorisés : vidéos, sons, images, documents, collections, références externes et extraits contextualisés. Les résultats sont filtrés selon les droits, les avis de contenu, la visibilité et les protocoles culturels.',
-            'cardsheading' => 'Parcourir',
+            'subtitle' => 'Explorer les médias, collections, références et passages documentés de l’Univers-Cité King Klown.',
+            'summary' => 'La Médiathèque est une porte d’entrée publique vers les savoirs, traces, œuvres, documents, sons, images, vidéos et références qui nourrissent l’UCKK. Elle rend les contenus consultables sans paywall, dans un cadre d’apprentissage familier, modernisé et ouvert.',
+            'cardsheading' => 'Entrer dans la bibliothèque',
 
             'has_mediatheque_explorer' => true,
             'mediatheque_explorer_id' => self::EXPLORER_ID,
@@ -106,7 +106,7 @@ final class mediatheque {
             'quicklinks' => [
                 [
                     'label' => 'Rechercher',
-                    'description' => 'Trouver des médias publics, collections accessibles, références externes et passages documentés.',
+                    'description' => 'Trouver des médias publics, collections ouvertes, références externes et passages documentés.',
                     'url' => '/local/uckk/mediatheque.php',
                 ],
             ],
@@ -115,49 +115,49 @@ final class mediatheque {
                 [
                     'type' => 'orientation',
                     'eyebrow' => 'Exploration',
-                    'title' => 'Naviguer dans les contenus publics',
-                    'body' => 'L’explorateur permet de chercher, filtrer et ouvrir les fiches publiques sans exposer les fichiers originaux, les brouillons, les notes internes ni les métadonnées privées.',
+                    'title' => 'Une bibliothèque vivante de savoirs publics',
+                    'body' => 'L’explorateur permet de chercher, filtrer et parcourir les contenus rendus publics par l’UCKK : médias, documents, références, collections et fragments contextualisés. La Médiathèque soutient la diffusion immédiate du savoir et l’apprentissage autonome.',
                     'items' => [
-                        'Recherche par texte, format, source, collection et mot-clé.',
-                        'Affichage limité aux contenus publiables.',
-                        'Respect des droits, avis de contenu et protocoles culturels.',
+                        'Recherche par texte, format, source, collection, langue et mot-clé.',
+                        'Parcours libre dans les contenus publics accessibles.',
+                        'Repérage de documents, médias et passages utiles aux cours, voies, archives et assemblées.',
                     ],
                 ],
                 [
                     'type' => 'boundary',
-                    'eyebrow' => 'Responsabilité',
-                    'title' => 'Ce qui reste protégé',
-                    'body' => 'Les médias restreints, brouillons, notes internes, protocoles culturels privés, fichiers originaux non autorisés et métadonnées sensibles restent contrôlés par le moteur média institutionnel.',
+                    'eyebrow' => 'Cadre de consultation',
+                    'title' => 'Un accès ouvert, avec respect des droits',
+                    'body' => 'La Médiathèque ouvre ce qui peut être partagé publiquement. Certains contenus peuvent rester limités lorsque des droits, avis de contenu, permissions ou protocoles culturels l’exigent.',
                 ],
             ],
 
             'cards' => [
                 [
-                    'title' => 'Médias',
-                    'body' => 'Voir les vidéos, sons, images, documents et références publiques filtrées.',
+                    'title' => 'Médias publics',
+                    'body' => 'Voir les vidéos, sons, images, documents et références accessibles dans la bibliothèque publique.',
                     'type' => 'media',
                 ],
                 [
                     'title' => 'Collections',
-                    'body' => 'Explorer les regroupements publics sans dupliquer le moteur média institutionnel.',
+                    'body' => 'Explorer des regroupements de contenus liés aux cours, voies, thèmes, archives et recherches UCKK.',
                     'type' => 'collection',
                 ],
                 [
                     'title' => 'Passages documentés',
-                    'body' => 'Accéder à des moments, pages ou segments lorsque leur exposition publique est autorisée.',
+                    'body' => 'Accéder à des moments, pages, extraits ou segments qui éclairent une idée, une controverse ou un apprentissage.',
                     'type' => 'marker',
                 ],
             ],
 
             'notices' => [
                 [
-                    'title' => 'Données et politiques',
-                    'body' => 'Cette page est une surface publique de local_uckk. Les médias, droits, avis de contenu, protocoles culturels et règles de visibilité sont filtrés par le moteur média institutionnel.',
+                    'title' => 'Bibliothèque ouverte',
+                    'body' => 'La Médiathèque participe à la mission publique de l’UCKK : rendre les savoirs accessibles, partageables et praticables dans un environnement d’apprentissage ouvert.',
                     'type' => 'institutional',
                 ],
                 [
-                    'title' => 'Accès responsable',
-                    'body' => 'Certains contenus peuvent être masqués, résumés ou limités selon les droits, les avis de contenu, les protocoles culturels et les permissions disponibles.',
+                    'title' => 'Consultation responsable',
+                    'body' => 'Les résultats affichés respectent les droits, les avis de contenu, les permissions et les protocoles culturels définis par le moteur média institutionnel.',
                     'type' => 'light',
                 ],
             ],
@@ -168,8 +168,8 @@ final class mediatheque {
                     'value' => 'local_uckk',
                 ],
                 [
-                    'label' => 'Données et politiques',
-                    'value' => 'Moteur média institutionnel',
+                    'label' => 'Bibliothèque',
+                    'value' => 'Médiathèque UCKK',
                 ],
                 [
                     'label' => 'Service',
@@ -182,8 +182,8 @@ final class mediatheque {
             ],
 
             'cta' => [
-                'title' => 'Explorer les contenus publics',
-                'body' => 'Lance une recherche ou applique un filtre pour explorer les contenus publics selon le format, la source, la collection, les droits et les avis disponibles.',
+                'title' => 'Explorer la Médiathèque',
+                'body' => 'Lance une recherche ou applique un filtre pour parcourir les contenus publics par format, source, collection, langue ou mot-clé.',
                 'url' => '/local/uckk/mediatheque.php',
                 'label' => 'Ouvrir la recherche',
             ],

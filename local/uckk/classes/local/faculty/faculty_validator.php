@@ -23,7 +23,7 @@
  * - section, dynamic block and featured block types;
  * - allowed dynamic providers;
  * - Atlas projection completeness;
- * - governance guardrails;
+ * - governance metadata and public editorial restraint;
  * - cache configuration;
  * - optional Atlas cross-file consistency.
  *
@@ -940,22 +940,31 @@ final class faculty_validator {
 
         $this->require_string($governance, 'review_notes', $result, 'governance.review_notes', true);
 
-        if (!array_key_exists('public_claims_guardrails', $governance)
-                || !is_array($governance['public_claims_guardrails'])) {
-            $this->add_error($result, 'governance.public_claims_guardrails', 'public_claims_guardrails must be an array.');
-            return;
-        }
-
-        if (count($governance['public_claims_guardrails']) === 0) {
-            $this->add_error($result, 'governance.public_claims_guardrails', 'At least one public guardrail is required.');
-        }
-
-        foreach ($governance['public_claims_guardrails'] as $index => $guardrail) {
-            if (!is_string($guardrail) || trim($guardrail) === '') {
+        if (array_key_exists('public_claims_guardrails', $governance)) {
+            if (!is_array($governance['public_claims_guardrails'])) {
                 $this->add_error(
                     $result,
-                    'governance.public_claims_guardrails.' . $index,
-                    'Guardrail must be a non-empty string.'
+                    'governance.public_claims_guardrails',
+                    'public_claims_guardrails must be an array when present.'
+                );
+                return;
+            }
+
+            foreach ($governance['public_claims_guardrails'] as $index => $guardrail) {
+                if (!is_string($guardrail) || trim($guardrail) === '') {
+                    $this->add_error(
+                        $result,
+                        'governance.public_claims_guardrails.' . $index,
+                        'Guardrail must be a non-empty string.'
+                    );
+                }
+            }
+
+            if (count($governance['public_claims_guardrails']) > 1) {
+                $this->add_warning(
+                    $result,
+                    'governance.public_claims_guardrails',
+                    'Public credential guardrails should not be repeated. Prefer one quiet institutional note only.'
                 );
             }
         }
@@ -1505,7 +1514,11 @@ final class faculty_validator {
     }
 
     /**
-     * Warn on public accreditation-risk claims.
+     * Warn on credential-oriented public claims.
+     *
+     * Public pages should frame UCKK as an open public knowledge library and
+     * familiar learning framework. Credential limits may appear as one quiet
+     * institutional note, but should not become repeated public positioning.
      *
      * @param mixed $value Text.
      * @param string $field Field.
@@ -1520,19 +1533,32 @@ final class faculty_validator {
         $riskterms = [
             'université accréditée',
             'diplôme public',
+            'diplôme accrédité',
             'grade universitaire',
             'titre professionnel reconnu',
+            'certification officielle',
+            'reconnaissance officielle',
         ];
+
+        $hits = [];
 
         foreach ($riskterms as $term) {
             if (strpos($lower, $term) !== false) {
-                $this->add_warning(
-                    $result,
-                    $field,
-                    'Public claim may create accreditation confusion: ' . $term
-                );
+                $hits[] = $term;
             }
         }
+
+        if ($hits === []) {
+            return;
+        }
+
+        $this->add_warning(
+            $result,
+            $field,
+            'Credential-oriented wording should remain exceptional and quiet. '
+                . 'UCKK public pages should foreground open knowledge diffusion, not diploma or accreditation limits. '
+                . 'Detected: ' . implode(', ', $hits)
+        );
     }
 
     /**
@@ -1704,4 +1730,3 @@ final class faculty_validator {
         return $result;
     }
 }
-

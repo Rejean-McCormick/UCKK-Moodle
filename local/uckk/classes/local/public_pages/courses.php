@@ -39,12 +39,25 @@ final class courses {
         return [
             'layout' => 'standard',
             'typography' => 'institutional',
-            'eyebrow' => 'Explorer les cours',
+            'eyebrow' => 'Entrer dans la bibliothèque',
             'title' => 'Cours UCKK',
-            'subtitle' => 'Cours publics, Voies associées et preuves de progression.',
-            'summary' => 'Les cours structurent les activités, ressources et repères de progression de l’UCKK.',
-            'sections' => [],
-            'cardsheading' => '',
+            'subtitle' => 'Cours publics, ressources ouvertes et parcours de lecture du campus UCKK.',
+            'summary' => 'Les cours servent à diffuser immédiatement le savoir dans un cadre d’apprentissage familier, modernisé et accessible.',
+            'sections' => [
+                [
+                    'title' => 'Une porte d’accès au savoir',
+                    'body' => 'Chaque cours rassemble des ressources, activités, repères et pistes de travail pour explorer une question du Grand Jeu social.',
+                ],
+                [
+                    'title' => 'Un cadre familier, modernisé',
+                    'body' => 'UCKK utilise la forme reconnaissable du cours pour organiser la lecture, la pratique, la discussion et la mémoire des apprentissages.',
+                ],
+                [
+                    'title' => 'Une bibliothèque vivante',
+                    'body' => 'Les cours ne sont pas pensés comme une barrière d’accès au savoir, mais comme des chemins publics pour consulter, comprendre et relier les connaissances.',
+                ],
+            ],
+            'cardsheading' => 'Cours disponibles',
             'cards' => [],
         ];
     }

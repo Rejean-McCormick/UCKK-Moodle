@@ -25,12 +25,12 @@
     "title_symbolique": "Architecte des systèmes d’action",
     "domain": "Systèmes humains-techniques",
     "level": "Puissance opératoire",
-    "faculty_role": "Voie qui apprend à concevoir, cartographier, gouverner et améliorer des systèmes combinant humains, technologies, institutions, données, règles, rôles et workflows.",
+    "faculty_role": "Voie qui apprend à lire, concevoir, cartographier et améliorer des systèmes combinant humains, technologies, institutions, données, règles, rôles et workflows.",
     "one_sentence": "Transformer des configurations humaines, techniques et institutionnelles confuses en systèmes lisibles, gouvernables, exécutables, vérifiables et révisables."
   },
   "seo": {
     "title": "Voie d’Architecture sociotechnique — UCKK",
-    "description": "La Voie d’Architecture sociotechnique forme des personnes capables de concevoir des systèmes d’action reliant humains, technologies, rôles, données, décisions, preuves, workflows et mémoire institutionnelle.",
+    "description": "La Voie d’Architecture sociotechnique rend publics des repères, méthodes et parcours pour comprendre et concevoir des systèmes d’action reliant humains, technologies, rôles, données, décisions, preuves, workflows et mémoire institutionnelle.",
     "keywords": [
       "UCKK",
       "Architecture sociotechnique",
@@ -40,13 +40,15 @@
       "auditabilité",
       "rôles",
       "données",
-      "systèmes d’action"
+      "systèmes d’action",
+      "bibliothèque publique",
+      "diffusion du savoir"
     ]
   },
   "hero": {
     "title": "Voie d’Architecture sociotechnique",
     "subtitle": "Concevoir des systèmes d’action lisibles, gouvernables, vérifiables et révisables.",
-    "summary": "Cette faculté apprend à transformer le désordre informationnel et organisationnel en architectures d’action : rôles, responsabilités, flux, interfaces, permissions, preuves, décisions, mémoire et mécanismes de révision.",
+    "summary": "Cette voie ouvre un cadre d’apprentissage public pour comprendre comment les organisations, les outils, les règles, les rôles, les données et les décisions s’assemblent en systèmes d’action. Elle transforme le savoir sociotechnique en repères accessibles, praticables et révisables.",
     "primary_cta": {
       "label": "Explorer le programme",
       "target": "#programme"
@@ -86,32 +88,32 @@
     {
       "id": "presentation",
       "type": "text",
-      "title": "Une faculté pour concevoir des systèmes d’action gouvernables",
-      "body": "La Voie d’Architecture sociotechnique étudie les assemblages d’humains, d’outils, de règles, de données, de rôles, de plateformes et de workflows. Elle vise des systèmes capables d’agir sans devenir opaques, captifs ou irresponsables."
+      "title": "Une voie pour lire et concevoir les systèmes d’action",
+      "body": "La Voie d’Architecture sociotechnique étudie les assemblages d’humains, d’outils, de règles, de données, de rôles, de plateformes et de workflows. Elle aide à rendre ces systèmes plus lisibles, plus responsables et plus faciles à réviser."
     },
     {
       "id": "programme",
       "type": "text",
-      "title": "Programme public généré depuis l’Atlas",
-      "body": "Le programme détaillé de cette faculté est projeté depuis le JSON Atlas Voie d’Architecture sociotechnique. Cette page décide ce qui est affiché publiquement, sans recopier les cours conceptuels ni leurs critères internes."
+      "title": "Un parcours public dans une bibliothèque vivante",
+      "body": "Le programme public est projeté depuis l’Atlas UCKK. Il sert de carte de lecture : il présente les grandes notions, les seuils de progression, les cours associés et les repères utiles pour entrer dans la matière sans transformer l’accès au savoir en paywall."
     },
     {
       "id": "cours",
       "type": "callout",
       "title": "Cours publics associés",
-      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des cours Moodle visibles associés au préfixe AS."
+      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des espaces Moodle visibles associés au préfixe AS."
     },
     {
       "id": "projet-final",
       "type": "text",
       "title": "Projet final",
-      "body": "Le projet final attendu consiste à concevoir ou refondre un système d’action sociotechnique : cartographie des acteurs et flux, architecture des responsabilités, workflow gouverné, preuves, auditabilité, risques de capture et mécanismes de révision."
+      "body": "Le projet final attendu consiste à concevoir ou refondre un système d’action sociotechnique : cartographie des acteurs et des flux, architecture des responsabilités, workflow gouverné, preuves, auditabilité, risques de capture et mécanismes de révision."
     },
     {
       "id": "ethique",
       "type": "notice",
-      "title": "Garde-fou public",
-      "body": "Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité."
+      "title": "Responsabilité sociotechnique",
+      "body": "Une architecture d’action ne doit pas seulement fonctionner. Elle doit rester compréhensible, contestable, révisable et subordonnée à une responsabilité humaine claire."
     }
   ],
   "atlas_projection": {
@@ -134,7 +136,7 @@
     {
       "id": "annonces",
       "type": "announcements",
-      "title": "Annonces de la faculté",
+      "title": "Annonces de la voie",
       "source": {
         "provider": "moodle_forum",
         "course_idnumber": "AS-HUB",
@@ -142,7 +144,7 @@
       },
       "limit": 5,
       "visibility": "public",
-      "empty_state": "Aucune annonce publique pour la faculté d’Architecture sociotechnique pour le moment."
+      "empty_state": "Aucune annonce publique pour la Voie d’Architecture sociotechnique pour le moment."
     },
     {
       "id": "evenements",
@@ -166,14 +168,14 @@
       },
       "limit": 10,
       "visibility": "public",
-      "empty_state": "Aucun cours Moodle public associé à cette faculté pour le moment."
+      "empty_state": "Aucun cours Moodle public associé à cette voie pour le moment."
     }
   ],
   "featured_blocks": [
     {
       "type": "principle",
       "title": "Rendre l’action gouvernable",
-      "body": "Un système sociotechnique responsable doit rendre visibles ses rôles, ses permissions, ses dépendances, ses décisions, ses preuves et ses voies de révision."
+      "body": "Un système sociotechnique responsable rend visibles ses rôles, ses permissions, ses dépendances, ses décisions, ses preuves et ses voies de révision."
     },
     {
       "type": "method",
@@ -184,16 +186,25 @@
       "type": "ethics",
       "title": "Prévenir la capture par le système",
       "body": "Une architecture d’action doit rester réversible, auditable et subordonnée à une responsabilité humaine claire, sans enfermer les personnes dans une infrastructure opaque."
+    },
+    {
+      "type": "knowledge",
+      "title": "Ouvrir le savoir sociotechnique",
+      "body": "La voie participe à la bibliothèque publique UCKK : rendre les concepts, méthodes et cartes d’action accessibles avant toute logique de sélection, de fermeture ou de certification."
     }
   ],
   "faq": [
     {
-      "question": "Cette faculté donne-t-elle un diplôme public en Architecture sociotechnique?",
-      "answer": "Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires publics ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future."
+      "question": "Cette voie est-elle ouverte au public?",
+      "answer": "Oui. La page publique sert d’entrée dans une bibliothèque vivante : elle rend accessibles les repères, concepts, cours visibles et méthodes de base pour comprendre l’architecture sociotechnique."
     },
     {
       "question": "La page contient-elle toute la matière des cours AS?",
-      "answer": "Non. La page publique présente la faculté et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+      "answer": "Non. La page publique présente la voie et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+    },
+    {
+      "question": "Y a-t-il une certification à court terme?",
+      "answer": "Non. L’objectif immédiat est la diffusion publique du savoir dans un cadre d’apprentissage familier, modernisé et ouvert. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
     },
     {
       "question": "Que signifie Architecte des systèmes d’action?",
@@ -202,7 +213,7 @@
   ],
   "contact": {
     "label": "Contact",
-    "body": "Pour toute question sur cette Voie, consultez les annonces publiques ou les espaces Moodle associés.",
+    "body": "Pour toute question sur cette voie, consultez les annonces publiques ou les espaces Moodle associés.",
     "email": "",
     "cta": {
       "label": "Voir les annonces",
@@ -215,10 +226,10 @@
     "last_reviewed": null,
     "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
     "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
+      "Présenter cette voie comme un espace public de savoir, de méthode et d’apprentissage.",
       "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
-      "Ne pas transformer le titre symbolique Architecte des systèmes d’action en titre professionnel reconnu par l’État."
+      "Ne pas transformer le titre symbolique Architecte des systèmes d’action en titre professionnel.",
+      "Ne pas recentrer la page publique sur les limites institutionnelles plutôt que sur la diffusion du savoir."
     ]
   },
   "cache": {

@@ -30,7 +30,7 @@
   },
   "seo": {
     "title": "Voie de la Métaphysique — UCKK",
-    "description": "La Voie de la Métaphysique forme des personnes capables de distinguer faits, symboles, hypothèses, croyances, projections et structures opérantes avec rigueur, prudence et responsabilité.",
+    "description": "La Voie de la Métaphysique propose un parcours public de savoir pour distinguer faits, symboles, hypothèses, croyances, projections et structures opérantes avec rigueur, prudence et responsabilité.",
     "keywords": [
       "UCKK",
       "Métaphysique",
@@ -40,15 +40,17 @@
       "conscience",
       "liberté",
       "symboles",
-      "interprétation"
+      "interprétation",
+      "bibliothèque publique",
+      "apprentissage ouvert"
     ]
   },
   "hero": {
     "title": "Voie de la Métaphysique",
     "subtitle": "Lire les structures invisibles, distinguer les plans, interpréter sans dogmatiser.",
-    "summary": "Cette faculté aborde la vérité, le sens, la conscience, la liberté, l’ordre, le chaos, les mythes, les signes et les symboles comme des structures opérantes à examiner avec méthode et garde-fous.",
+    "summary": "Cette Voie ouvre un parcours public dans la bibliothèque vivante UCKK : vérité, sens, conscience, liberté, ordre, chaos, mythes, signes et symboles y sont étudiés comme des structures opérantes à lire avec méthode.",
     "primary_cta": {
-      "label": "Explorer le programme",
+      "label": "Explorer le parcours",
       "target": "#programme"
     },
     "secondary_cta": {
@@ -86,20 +88,20 @@
     {
       "id": "presentation",
       "type": "text",
-      "title": "Une faculté pour interpréter sans capturer le réel",
-      "body": "La Voie de la Métaphysique étudie les structures invisibles qui organisent les récits, les croyances, les catégories, les expériences et les formes de pouvoir symbolique. Elle exige une méthode prudente : distinguer, nommer, comparer, douter, contextualiser."
+      "title": "Une voie pour interpréter sans capturer le réel",
+      "body": "La Voie de la Métaphysique étudie les structures invisibles qui organisent les récits, les croyances, les catégories, les expériences et les formes de pouvoir symbolique. Elle propose une méthode prudente : distinguer, nommer, comparer, douter, contextualiser."
     },
     {
       "id": "programme",
       "type": "text",
-      "title": "Programme public généré depuis l’Atlas",
-      "body": "Le programme détaillé de cette faculté est projeté depuis le JSON Atlas Voie de la Métaphysique. Cette page décide ce qui est affiché publiquement, sans recopier les cours conceptuels ni leurs critères internes."
+      "title": "Un parcours public dans la bibliothèque UCKK",
+      "body": "Le programme de cette Voie est projeté depuis l’Atlas UCKK afin de rendre lisibles ses repères, ses questions, ses concepts et ses cours publics. La page sert d’entrée ouverte vers le savoir, dans un cadre d’apprentissage familier et modernisé."
     },
     {
       "id": "cours",
       "type": "callout",
       "title": "Cours publics associés",
-      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des cours Moodle visibles associés au préfixe ME."
+      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des espaces Moodle visibles associés au préfixe ME."
     },
     {
       "id": "projet-final",
@@ -110,8 +112,8 @@
     {
       "id": "ethique",
       "type": "notice",
-      "title": "Garde-fou public",
-      "body": "Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité."
+      "title": "Garde-fou d’interprétation",
+      "body": "La méthode métaphysique UCKK demande de rendre visibles ses sources, ses limites et ses hypothèses. Elle cherche à ouvrir la compréhension, non à imposer une vérité totale, une autorité occulte ou une croyance fermée."
     }
   ],
   "atlas_projection": {
@@ -134,7 +136,7 @@
     {
       "id": "annonces",
       "type": "announcements",
-      "title": "Annonces de la faculté",
+      "title": "Annonces de la Voie",
       "source": {
         "provider": "moodle_forum",
         "course_idnumber": "ME-HUB",
@@ -142,7 +144,7 @@
       },
       "limit": 5,
       "visibility": "public",
-      "empty_state": "Aucune annonce publique pour la faculté de Métaphysique pour le moment."
+      "empty_state": "Aucune annonce publique pour la Voie de la Métaphysique pour le moment."
     },
     {
       "id": "evenements",
@@ -166,7 +168,7 @@
       },
       "limit": 10,
       "visibility": "public",
-      "empty_state": "Aucun cours Moodle public associé à cette faculté pour le moment."
+      "empty_state": "Aucun cours Moodle public associé à cette Voie pour le moment."
     }
   ],
   "featured_blocks": [
@@ -188,12 +190,12 @@
   ],
   "faq": [
     {
-      "question": "Cette faculté donne-t-elle un diplôme public en Métaphysique?",
-      "answer": "Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires publics ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future."
+      "question": "Cette Voie sert-elle d’abord à certifier?",
+      "answer": "Non. Son but immédiat est la diffusion publique du savoir dans un cadre d’apprentissage ouvert, familier et modernisé. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
     },
     {
       "question": "La page contient-elle toute la matière des cours ME?",
-      "answer": "Non. La page publique présente la faculté et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+      "answer": "Non. La page publique présente la Voie et projette certains repères de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
     },
     {
       "question": "Que signifie Cartographe des structures invisibles?",
@@ -215,10 +217,10 @@
     "last_reviewed": null,
     "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
     "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
+      "Présenter la Voie comme un espace public de diffusion du savoir, de lecture critique et d’apprentissage ouvert.",
       "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
-      "Ne pas transformer le titre symbolique Cartographe des structures invisibles en titre professionnel reconnu par l’État."
+      "Ne pas transformer le titre symbolique Cartographe des structures invisibles en titre professionnel.",
+      "Ne pas transformer une hypothèse métaphysique, symbolique ou herméneutique en vérité imposée."
     ]
   },
   "cache": {

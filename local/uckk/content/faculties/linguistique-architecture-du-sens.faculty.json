@@ -1,229 +1,231 @@
 {
-  "schema_version": "UCKK-FACULTY-0.1",
-  "faculty_id": "faculty_linguistique_architecture_du_sens",
-  "voie_id": "voie_linguistique_architecture_du_sens",
-  "slug": "linguistique-architecture-du-sens",
-  "status": "published",
-  "visibility": "public",
-  "source_atlas": {
-    "file": "voie_linguistique_architecture_du_sens.json",
-    "schema_version_expected": "UCKK-ATLAS-0.2-draft",
-    "sync_mode": "read_only"
-  },
-  "moodle": {
-    "category_id": null,
-    "category_idnumber": "UCKK-LI",
-    "course_prefix": "LI",
-    "public_course_listing": true,
-    "enrolment_visibility": "public_info_only",
-    "hub_course_idnumber": "LI-HUB"
-  },
-  "identity": {
-    "eyebrow": "Voie fondatrice UCKK",
-    "name": "Voie de la Linguistique et de l’architecture du sens",
-    "short_name": "Linguistique et architecture du sens",
-    "title_symbolique": "Architecte du sens",
-    "domain": "Sens",
-    "level": "Puissance opératoire",
-    "faculty_role": "Voie qui apprend à lire, structurer, traduire, auditer et gouverner les mots, concepts, récits, catégories et graphes qui organisent le monde social.",
-    "one_sentence": "Comprendre les langues, signes, concepts, catégories, récits, traductions, graphes et pouvoirs symboliques comme infrastructures du Grand Jeu social."
-  },
-  "seo": {
-    "title": "Voie de la Linguistique et de l’architecture du sens — UCKK",
-    "description": "La Voie de la Linguistique et de l’architecture du sens forme des personnes capables de lire, structurer, traduire, auditer et gouverner les mots, concepts, récits, catégories et graphes qui organisent le monde social.",
-    "keywords": [
-      "UCKK",
-      "Linguistique",
-      "architecture du sens",
-      "langage",
-      "concepts",
-      "récits",
-      "catégories",
-      "graphes",
-      "sémantique",
-      "pouvoir symbolique"
-    ]
-  },
-  "hero": {
-    "title": "Voie de la Linguistique et de l’architecture du sens",
-    "subtitle": "Lire les mots, structurer les concepts, gouverner les architectures de sens.",
-    "summary": "Cette faculté apprend à comprendre les langues comme infrastructures du monde social : mots, signes, concepts, traductions, catégories, récits, dictionnaires, preuves, graphes, ambiguïtés et pouvoir symbolique.",
-    "primary_cta": {
-      "label": "Explorer le programme",
-      "target": "#programme"
-    },
-    "secondary_cta": {
-      "label": "Voir les cours publics",
-      "target": "#cours"
-    }
-  },
-  "navigation": [
-    {
-      "label": "Présentation",
-      "target": "#presentation"
-    },
-    {
-      "label": "Programme",
-      "target": "#programme"
-    },
-    {
-      "label": "Cours",
-      "target": "#cours"
-    },
-    {
-      "label": "Projet final",
-      "target": "#projet-final"
-    },
-    {
-      "label": "Éthique",
-      "target": "#ethique"
-    },
-    {
-      "label": "Annonces",
-      "target": "#annonces"
-    }
-  ],
-  "sections": [
-    {
-      "id": "presentation",
-      "type": "text",
-      "title": "Une faculté pour rendre le sens lisible",
-      "body": "La Voie de la Linguistique et de l’architecture du sens étudie le langage, les signes, les mots, les récits, les catégories, les dictionnaires, les ontologies, les graphes de connaissance et les pouvoirs symboliques qui organisent les mondes sociaux."
-    },
-    {
-      "id": "programme",
-      "type": "text",
-      "title": "Programme public généré depuis l’Atlas",
-      "body": "Le programme détaillé de cette faculté est projeté depuis le JSON Atlas de la Voie de la Linguistique et de l’architecture du sens. Cette page décide ce qui est affiché publiquement, sans recopier les cours conceptuels ni leurs critères internes."
-    },
-    {
-      "id": "cours",
-      "type": "callout",
-      "title": "Cours publics associés",
-      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des cours Moodle visibles associés au préfixe LI."
-    },
-    {
-      "id": "projet-final",
-      "type": "text",
-      "title": "Projet final",
-      "body": "Le projet final attendu consiste à produire une architecture de sens claire, traçable, traduisible et contestable : dictionnaire, carte conceptuelle, graphe sémantique, protocole de traduction, audit de récit ou dispositif de gouvernance des catégories."
-    },
-    {
-      "id": "ethique",
-      "type": "notice",
-      "title": "Garde-fou public",
-      "body": "Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité."
-    }
-  ],
-  "atlas_projection": {
-    "show_definition_courte": true,
-    "show_angle_fondamental": true,
-    "show_competence_centrale": true,
-    "show_seuils_progression": true,
-    "show_courses": true,
-    "show_course_codes": true,
-    "show_concept_maitre": true,
-    "show_concepts_associes": false,
-    "show_artefacts": true,
-    "show_criteres_passage": false,
-    "show_projet_final": true,
-    "show_limites_ethiques": true,
-    "show_relations_intervoies": true,
-    "show_tags": false
-  },
-  "dynamic_blocks": [
-    {
-      "id": "annonces",
-      "type": "announcements",
-      "title": "Annonces de la faculté",
-      "source": {
-        "provider": "moodle_forum",
-        "course_idnumber": "LI-HUB",
-        "forum_name": "Annonces"
-      },
-      "limit": 5,
-      "visibility": "public",
-      "empty_state": "Aucune annonce publique pour la faculté de Linguistique et d’architecture du sens pour le moment."
-    },
-    {
-      "id": "evenements",
-      "type": "events",
-      "title": "Événements publics",
-      "source": {
-        "provider": "moodle_calendar",
-        "category_idnumber": "UCKK-LI"
-      },
-      "limit": 5,
-      "visibility": "public",
-      "empty_state": "Aucun événement public annoncé pour le moment."
-    },
-    {
-      "id": "cours-moodle",
-      "type": "moodle_course_list",
-      "title": "Espaces Moodle associés",
-      "source": {
-        "provider": "moodle_category",
-        "category_idnumber": "UCKK-LI"
-      },
-      "limit": 10,
-      "visibility": "public",
-      "empty_state": "Aucun cours Moodle public associé à cette faculté pour le moment."
-    }
-  ],
-  "featured_blocks": [
-    {
-      "type": "principle",
-      "title": "Le sens doit rester traçable",
-      "body": "Une architecture de sens responsable doit rendre visibles ses mots, ses catégories, ses définitions, ses sources, ses ambiguïtés et ses conditions de traduction."
-    },
-    {
-      "type": "method",
-      "title": "Cartographier les mots avant de décider",
-      "body": "La méthode centrale consiste à identifier les termes, récits, catégories, relations, exclusions et glissements de sens avant de bâtir un dictionnaire, un graphe ou une règle commune."
-    },
-    {
-      "type": "ethics",
-      "title": "Ne pas capturer le langage",
-      "body": "Gouverner le sens ne doit pas servir à imposer une langue unique, effacer les contextes, manipuler les récits ou rendre certaines expériences impossibles à nommer."
-    }
-  ],
-  "faq": [
-    {
-      "question": "Cette faculté donne-t-elle un diplôme public en linguistique?",
-      "answer": "Non. Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires publics ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future."
-    },
-    {
-      "question": "La page contient-elle toute la matière des cours LI?",
-      "answer": "Non. La page publique présente la faculté et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
-    },
-    {
-      "question": "Que signifie Architecte du sens?",
-      "answer": "C’est le titre symbolique interne associé à la Voie de la Linguistique et de l’architecture du sens. Il désigne la capacité à structurer, clarifier, traduire, auditer et gouverner des systèmes de signification."
-    }
-  ],
-  "contact": {
-    "label": "Contact",
-    "body": "Pour toute question sur cette Voie, consultez les annonces publiques ou les espaces Moodle associés.",
-    "email": "",
-    "cta": {
-      "label": "Voir les annonces",
-      "target": "#annonces"
-    }
-  },
-  "governance": {
-    "owner": "local_uckk",
-    "editorial_status": "approved",
-    "last_reviewed": null,
-    "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
-    "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
-      "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
-      "Ne pas transformer le titre symbolique Architecte du sens en titre professionnel reconnu par l’État."
-    ]
-  },
-  "cache": {
-    "enabled": true,
-    "ttl_seconds": 3600
-  }
+"schema_version": "UCKK-FACULTY-0.1",
+"faculty_id": "faculty_linguistique_architecture_du_sens",
+"voie_id": "voie_linguistique_architecture_du_sens",
+"slug": "linguistique-architecture-du-sens",
+"status": "published",
+"visibility": "public",
+"source_atlas": {
+"file": "voie_linguistique_architecture_du_sens.json",
+"schema_version_expected": "UCKK-ATLAS-0.2-draft",
+"sync_mode": "read_only"
+},
+"moodle": {
+"category_id": null,
+"category_idnumber": "UCKK-LI",
+"course_prefix": "LI",
+"public_course_listing": true,
+"enrolment_visibility": "public_info_only",
+"hub_course_idnumber": "LI-HUB"
+},
+"identity": {
+"eyebrow": "Voie fondatrice UCKK",
+"name": "Voie de la Linguistique et de l’architecture du sens",
+"short_name": "Linguistique et architecture du sens",
+"title_symbolique": "Architecte du sens",
+"domain": "Sens",
+"level": "Puissance opératoire",
+"faculty_role": "Voie qui rend lisibles les mots, concepts, récits, catégories, traductions et graphes qui organisent le monde social.",
+"one_sentence": "Explorer les langues, signes, concepts, catégories, récits, traductions, graphes et pouvoirs symboliques comme infrastructures du Grand Jeu social."
+},
+"seo": {
+"title": "Voie de la Linguistique et de l’architecture du sens — UCKK",
+"description": "La Voie de la Linguistique et de l’architecture du sens ouvre un parcours public pour lire, structurer, traduire, auditer et gouverner les mots, concepts, récits, catégories et graphes qui organisent le monde social.",
+"keywords": [
+"UCKK",
+"Linguistique",
+"architecture du sens",
+"langage",
+"concepts",
+"récits",
+"catégories",
+"graphes",
+"sémantique",
+"pouvoir symbolique",
+"bibliothèque publique",
+"savoir ouvert"
+]
+},
+"hero": {
+"title": "Voie de la Linguistique et de l’architecture du sens",
+"subtitle": "Lire les mots, structurer les concepts, rendre les architectures de sens praticables.",
+"summary": "Cette Voie fait partie de la bibliothèque publique UCKK. Elle propose un cadre d’apprentissage ouvert pour comprendre les langues comme infrastructures du monde social : mots, signes, concepts, traductions, catégories, récits, dictionnaires, preuves, graphes, ambiguïtés et pouvoir symbolique.",
+"primary_cta": {
+"label": "Explorer le programme",
+"target": "#programme"
+},
+"secondary_cta": {
+"label": "Voir les cours publics",
+"target": "#cours"
+}
+},
+"navigation": [
+{
+"label": "Présentation",
+"target": "#presentation"
+},
+{
+"label": "Programme",
+"target": "#programme"
+},
+{
+"label": "Cours",
+"target": "#cours"
+},
+{
+"label": "Projet final",
+"target": "#projet-final"
+},
+{
+"label": "Éthique",
+"target": "#ethique"
+},
+{
+"label": "Annonces",
+"target": "#annonces"
+}
+],
+"sections": [
+{
+"id": "presentation",
+"type": "text",
+"title": "Une Voie pour rendre le sens lisible",
+"body": "La Voie de la Linguistique et de l’architecture du sens étudie le langage, les signes, les mots, les récits, les catégories, les dictionnaires, les ontologies, les graphes de connaissance et les pouvoirs symboliques qui organisent les mondes sociaux. Elle sert à rendre ces structures visibles, discutables et transformables."
+},
+{
+"id": "programme",
+"type": "text",
+"title": "Un parcours public dans la bibliothèque UCKK",
+"body": "Le programme détaillé de cette Voie est projeté depuis l’Atlas UCKK. La page publique en présente les repères utiles pour lire, explorer et pratiquer le domaine, sans fermer l’accès au savoir derrière une logique de certification."
+},
+{
+"id": "cours",
+"type": "callout",
+"title": "Cours publics associés",
+"body": "Les cours publics associés au préfixe LI servent de portes d’entrée vers les notions, méthodes, cartes et artefacts de la Voie. Ils prolongent la bibliothèque UCKK dans un cadre d’apprentissage familier, modernisé et accessible."
+},
+{
+"id": "projet-final",
+"type": "text",
+"title": "Projet final",
+"body": "Le projet final attendu consiste à produire une architecture de sens claire, traçable, traduisible et contestable : dictionnaire, carte conceptuelle, graphe sémantique, protocole de traduction, audit de récit ou dispositif de gouvernance des catégories."
+},
+{
+"id": "ethique",
+"type": "notice",
+"title": "Éthique du sens",
+"body": "Structurer le sens n’autorise pas à capturer le langage. La Voie insiste sur la traçabilité des définitions, la pluralité des contextes, la lisibilité des catégories et la possibilité de contester les récits dominants."
+}
+],
+"atlas_projection": {
+"show_definition_courte": true,
+"show_angle_fondamental": true,
+"show_competence_centrale": true,
+"show_seuils_progression": true,
+"show_courses": true,
+"show_course_codes": true,
+"show_concept_maitre": true,
+"show_concepts_associes": false,
+"show_artefacts": true,
+"show_criteres_passage": false,
+"show_projet_final": true,
+"show_limites_ethiques": true,
+"show_relations_intervoies": true,
+"show_tags": false
+},
+"dynamic_blocks": [
+{
+"id": "annonces",
+"type": "announcements",
+"title": "Annonces de la Voie",
+"source": {
+"provider": "moodle_forum",
+"course_idnumber": "LI-HUB",
+"forum_name": "Annonces"
+},
+"limit": 5,
+"visibility": "public",
+"empty_state": "Aucune annonce publique pour la Voie de la Linguistique et de l’architecture du sens pour le moment."
+},
+{
+"id": "evenements",
+"type": "events",
+"title": "Événements publics",
+"source": {
+"provider": "moodle_calendar",
+"category_idnumber": "UCKK-LI"
+},
+"limit": 5,
+"visibility": "public",
+"empty_state": "Aucun événement public annoncé pour le moment."
+},
+{
+"id": "cours-moodle",
+"type": "moodle_course_list",
+"title": "Espaces Moodle associés",
+"source": {
+"provider": "moodle_category",
+"category_idnumber": "UCKK-LI"
+},
+"limit": 10,
+"visibility": "public",
+"empty_state": "Aucun cours Moodle public associé à cette Voie pour le moment."
+}
+],
+"featured_blocks": [
+{
+"type": "principle",
+"title": "Le sens doit rester traçable",
+"body": "Une architecture de sens responsable rend visibles ses mots, ses catégories, ses définitions, ses sources, ses ambiguïtés et ses conditions de traduction."
+},
+{
+"type": "method",
+"title": "Cartographier les mots avant de décider",
+"body": "La méthode centrale consiste à identifier les termes, récits, catégories, relations, exclusions et glissements de sens avant de bâtir un dictionnaire, un graphe ou une règle commune."
+},
+{
+"type": "ethics",
+"title": "Ne pas capturer le langage",
+"body": "Gouverner le sens ne doit pas servir à imposer une langue unique, effacer les contextes, manipuler les récits ou rendre certaines expériences impossibles à nommer."
+}
+],
+"faq": [
+{
+"question": "À quoi sert cette Voie?",
+"answer": "Elle sert à comprendre comment les mots, catégories, récits, traductions et graphes structurent les décisions, les institutions, les conflits et les formes de pouvoir dans le Grand Jeu social."
+},
+{
+"question": "La page contient-elle toute la matière des cours LI?",
+"answer": "Non. La page publique présente la Voie et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+},
+{
+"question": "Que signifie Architecte du sens?",
+"answer": "C’est le titre symbolique interne associé à la Voie de la Linguistique et de l’architecture du sens. Il désigne la capacité à structurer, clarifier, traduire, auditer et gouverner des systèmes de signification."
+}
+],
+"contact": {
+"label": "Contact",
+"body": "Pour toute question sur cette Voie, consultez les annonces publiques ou les espaces Moodle associés.",
+"email": "",
+"cta": {
+"label": "Voir les annonces",
+"target": "#annonces"
+}
+},
+"governance": {
+"owner": "local_uckk",
+"editorial_status": "approved",
+"last_reviewed": null,
+"review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
+"public_claims_guardrails": [
+"Ne pas afficher de progression, notes ou données privées d’étudiants.",
+"Ne pas exposer de dossiers internes, preuves restreintes ou validations privées.",
+"Ne pas transformer le titre symbolique Architecte du sens en titre professionnel.",
+"Maintenir l’axe public : bibliothèque ouverte, diffusion du savoir, apprentissage praticable."
+]
+},
+"cache": {
+"enabled": true,
+"ttl_seconds": 3600
+}
 }

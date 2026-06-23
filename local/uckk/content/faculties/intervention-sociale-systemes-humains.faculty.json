@@ -26,11 +26,11 @@
     "domain": "Lien humain",
     "level": "Puissance opératoire",
     "faculty_role": "Voie consacrée à la lecture des situations humaines complexes, à la protection de la dignité, à la réparation des liens et à l’amélioration prudente des systèmes d’aide.",
-    "one_sentence": "Lire les personnes, familles, groupes et institutions dans leurs contextes relationnels, matériels, symboliques et systémiques afin d’agir sans domination ni substitution aux professions réglementées."
+    "one_sentence": "Lire les personnes, familles, groupes et institutions dans leurs contextes relationnels, matériels, symboliques et systémiques afin d’agir avec prudence, sans domination ni substitution aux responsabilités professionnelles existantes."
   },
   "seo": {
     "title": "Voie de l’Intervention sociale et des systèmes humains — UCKK",
-    "description": "La Voie de l’Intervention sociale et des systèmes humains forme à la lecture systémique des situations humaines, à la protection de la dignité, à la réparation des liens et à l’amélioration responsable des systèmes d’aide.",
+    "description": "La Voie de l’Intervention sociale et des systèmes humains ouvre un parcours public de savoirs sur la dignité, les liens, la vulnérabilité, les systèmes d’aide et la lecture éthique des situations humaines.",
     "keywords": [
       "UCKK",
       "intervention sociale",
@@ -47,7 +47,7 @@
   "hero": {
     "title": "Voie de l’Intervention sociale et des systèmes humains",
     "subtitle": "Lire les situations humaines sans réduire les personnes à leurs problèmes.",
-    "summary": "Cette faculté apprend à comprendre les humains dans leurs systèmes de vie, d’aide, de contrainte et de sens, afin de protéger la dignité, réparer les liens et produire des réponses responsables, documentées et contestables.",
+    "summary": "Cette faculté ouvre des savoirs, méthodes et repères pour comprendre les humains dans leurs systèmes de vie, d’aide, de contrainte et de sens. Elle vise une lecture responsable des situations, attentive à la dignité, aux liens, aux preuves et aux effets réels des interventions.",
     "primary_cta": {
       "label": "Explorer les cours",
       "target": "#cours"
@@ -88,19 +88,19 @@
       "id": "presentation",
       "type": "text",
       "title": "Une faculté pour lire les humains dans leurs systèmes",
-      "body": "La Voie de l’Intervention sociale et des systèmes humains forme à comprendre une personne, une famille, un groupe ou une communauté dans ses contextes relationnels, matériels, institutionnels et symboliques. Elle vise des réponses prudentes, traçables et respectueuses de la dignité."
+      "body": "La Voie de l’Intervention sociale et des systèmes humains propose une bibliothèque publique de situations, concepts, méthodes et repères pour comprendre une personne, une famille, un groupe ou une communauté dans ses contextes relationnels, matériels, institutionnels et symboliques."
     },
     {
       "id": "ethique-intervention",
       "type": "principle",
       "title": "Principe d’intervention non dominatrice",
-      "body": "Toute intervention doit respecter le consentement, la confidentialité, le rythme des personnes, les limites professionnelles et la distinction entre soutien, accompagnement, diagnostic réglementé et décision institutionnelle."
+      "body": "Toute intervention doit respecter le consentement, la confidentialité, le rythme des personnes, la complexité des situations, les limites professionnelles et la différence entre soutien, accompagnement, diagnostic, décision institutionnelle et contrôle."
     },
     {
       "id": "usage-public",
       "type": "notice",
       "title": "Usage public de cette faculté",
-      "body": "Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité."
+      "body": "Cette page sert d’entrée publique vers les savoirs, cours, repères et méthodes de la Voie. Elle rend lisible un champ d’apprentissage sans fermer l’accès au savoir derrière une promesse de certification."
     }
   ],
   "atlas_projection": {
@@ -155,26 +155,26 @@
     {
       "type": "ethics",
       "title": "Garde-fou éthique",
-      "body": "Ne pas se substituer aux professions réglementées, ne pas forcer la parole, ne pas exposer les personnes vulnérables et ne pas transformer l’aide en contrôle."
+      "body": "Ne pas forcer la parole, ne pas exposer les personnes vulnérables, ne pas transformer l’aide en contrôle et ne pas se substituer aux professions réglementées."
     },
     {
-      "type": "notice",
-      "title": "Reconnaissance interne",
-      "body": "Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités."
+      "type": "knowledge",
+      "title": "Bibliothèque vivante",
+      "body": "La Voie rassemble des ressources pour comprendre, relier, documenter et discuter les situations humaines avec méthode, prudence et dignité."
     }
   ],
   "faq": [
     {
-      "question": "Cette Voie forme-t-elle à une profession réglementée?",
-      "answer": "Non. Elle forme à une lecture systémique, éthique et institutionnelle des situations humaines. Elle ne remplace pas les formations, autorisations ou responsabilités propres aux professions réglementées."
+      "question": "Comment utiliser cette Voie?",
+      "answer": "Comme une carte d’apprentissage publique : pour lire les situations humaines, consulter des ressources, suivre des cours, relier des concepts et documenter une progression."
     },
     {
       "question": "Cette Voie traite-t-elle de vulnérabilité, exclusion, trauma et pauvreté?",
-      "answer": "Oui. Elle aborde ces réalités comme des situations situées dans des relations, institutions, contraintes matérielles, récits et systèmes d’aide."
+      "answer": "Oui. Elle aborde ces réalités comme des situations situées dans des relations, institutions, contraintes matérielles, récits, histoires personnelles et systèmes d’aide."
     },
     {
-      "question": "Est-ce un diplôme reconnu?",
-      "answer": "Non. Il s’agit d’une reconnaissance interne UCKK, sauf reconnaissance officielle future."
+      "question": "Cette Voie remplace-t-elle une formation ou une autorisation professionnelle?",
+      "answer": "Non. Elle soutient la compréhension, la réflexion éthique et la lecture systémique. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
     }
   ],
   "contact": {
@@ -192,11 +192,10 @@
     "last_reviewed": null,
     "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
     "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
       "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
       "Ne pas se substituer aux professions réglementées de l’intervention sociale, de la psychologie, de la santé, du droit ou de la protection.",
-      "Ne pas publier de cas, récits, données ou situations permettant d’identifier une personne vulnérable."
+      "Ne pas publier de cas, récits, données ou situations permettant d’identifier une personne vulnérable.",
+      "Ne pas transformer l’aide, l’accompagnement ou la lecture systémique en diagnostic, contrôle ou décision institutionnelle non autorisée."
     ]
   },
   "cache": {

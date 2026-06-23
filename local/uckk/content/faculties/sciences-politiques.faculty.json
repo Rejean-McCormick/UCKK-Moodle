@@ -25,15 +25,16 @@
     "title_symbolique": "Stratège civique",
     "domain": "Pouvoir et gouvernance civique",
     "level": "Puissance opératoire",
-    "faculty_role": "Voie qui apprend à comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social.",
-    "one_sentence": "Comprendre les institutions, médias, plateformes, réseaux, assemblées, votes, récits de légitimité et contre-pouvoirs comme règles politiques du Grand Jeu social."
+    "faculty_role": "Voie qui apprend à lire, comprendre, critiquer et transformer les mécanismes du pouvoir dans le Grand Jeu social.",
+    "one_sentence": "Une voie ouverte pour comprendre les institutions, médias, plateformes, réseaux, assemblées, votes, récits de légitimité et contre-pouvoirs comme règles politiques du Grand Jeu social."
   },
   "seo": {
-    "title": "Voie des Sciences politiques — UCKK",
-    "description": "La Voie des Sciences politiques forme des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir, de la gouvernance civique, des assemblées, des votes et des contre-pouvoirs.",
+    "title": "Sciences politiques — UCKK",
+    "description": "La Voie des Sciences politiques ouvre un cadre public d’apprentissage pour comprendre le pouvoir, la gouvernance civique, les assemblées, les votes, les institutions, les médias, les plateformes et les contre-pouvoirs.",
     "keywords": [
       "UCKK",
       "Sciences politiques",
+      "bibliothèque publique",
       "pouvoir",
       "gouvernance",
       "institutions",
@@ -46,9 +47,9 @@
   "hero": {
     "title": "Voie des Sciences politiques",
     "subtitle": "Lire le pouvoir, organiser la décision, protéger les contre-pouvoirs.",
-    "summary": "Cette faculté apprend à analyser les mécanismes politiques visibles et invisibles : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité, réforme des règles et contre-pouvoirs.",
+    "summary": "Cette voie ouvre une bibliothèque publique et un cadre d’apprentissage pour comprendre les mécanismes politiques visibles et invisibles : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité, réforme des règles et contre-pouvoirs.",
     "primary_cta": {
-      "label": "Explorer le programme",
+      "label": "Explorer la voie",
       "target": "#programme"
     },
     "secondary_cta": {
@@ -86,20 +87,20 @@
     {
       "id": "presentation",
       "type": "text",
-      "title": "Une faculté pour comprendre les règles du pouvoir",
-      "body": "La Voie des Sciences politiques étudie les institutions, les assemblées, les médias, les plateformes, les réseaux, le code, les votes, les récits de légitimité, les contre-pouvoirs et les formes de réforme des règles collectives."
+      "title": "Une voie pour comprendre les règles du pouvoir",
+      "body": "La Voie des Sciences politiques rassemble des repères publics pour lire les institutions, les assemblées, les médias, les plateformes, les réseaux, le code, les votes, les récits de légitimité, les contre-pouvoirs et les formes de réforme des règles collectives."
     },
     {
       "id": "programme",
       "type": "text",
-      "title": "Programme public généré depuis l’Atlas",
-      "body": "Le programme détaillé de cette faculté est projeté depuis le JSON Atlas de la Voie des Sciences politiques. Cette page décide ce qui est affiché publiquement, sans recopier les cours conceptuels ni leurs critères internes."
+      "title": "Un programme ouvert depuis l’Atlas",
+      "body": "Le programme de cette voie est projeté depuis l’Atlas UCKK. La page publique sert à rendre le parcours lisible : concepts, seuils de progression, cours publics, artefacts et relations avec les autres voies."
     },
     {
       "id": "cours",
       "type": "callout",
       "title": "Cours publics associés",
-      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des cours Moodle visibles associés au préfixe SP."
+      "body": "La liste des cours, leurs codes, leurs concepts-maîtres et leurs artefacts publics sont dérivés de l’Atlas et des espaces Moodle visibles associés au préfixe SP."
     },
     {
       "id": "projet-final",
@@ -110,8 +111,8 @@
     {
       "id": "ethique",
       "type": "notice",
-      "title": "Garde-fou public",
-      "body": "Cette page présente une Voie UCKK comme faculté interne de l’Univers-Cité King Klown. Elle ne prétend pas à un statut universitaire public accrédité."
+      "title": "Éthique publique",
+      "body": "La lecture du pouvoir doit rester contestable, située et responsable. Une analyse politique utile ne sert pas seulement à gagner une position : elle aide à comprendre les règles, à rendre les décisions lisibles et à protéger les contre-pouvoirs."
     }
   ],
   "atlas_projection": {
@@ -134,7 +135,7 @@
     {
       "id": "annonces",
       "type": "announcements",
-      "title": "Annonces de la faculté",
+      "title": "Annonces de la voie",
       "source": {
         "provider": "moodle_forum",
         "course_idnumber": "SP-HUB",
@@ -142,7 +143,7 @@
       },
       "limit": 5,
       "visibility": "public",
-      "empty_state": "Aucune annonce publique pour la faculté des Sciences politiques pour le moment."
+      "empty_state": "Aucune annonce publique pour la Voie des Sciences politiques pour le moment."
     },
     {
       "id": "evenements",
@@ -166,7 +167,7 @@
       },
       "limit": 10,
       "visibility": "public",
-      "empty_state": "Aucun cours Moodle public associé à cette faculté pour le moment."
+      "empty_state": "Aucun cours Moodle public associé à cette voie pour le moment."
     }
   ],
   "featured_blocks": [
@@ -188,12 +189,12 @@
   ],
   "faq": [
     {
-      "question": "Cette faculté donne-t-elle un diplôme public en sciences politiques?",
-      "answer": "Non. Les Parchemins UCKK sont des reconnaissances internes. Ils ne constituent pas des diplômes publics accrédités, des grades universitaires publics ou des titres professionnels reconnus par l’État, sauf reconnaissance officielle future."
+      "question": "Quel est le but immédiat de cette voie?",
+      "answer": "Le but immédiat est la diffusion publique du savoir dans un cadre d’apprentissage familier, modernisé et ouvert. Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future."
     },
     {
       "question": "La page contient-elle toute la matière des cours SP?",
-      "answer": "Non. La page publique présente la faculté et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
+      "answer": "Non. La page publique présente la voie et projette certains éléments de l’Atlas. Les contenus détaillés, activités, validations et espaces de travail restent dans Moodle selon leurs règles d’accès."
     },
     {
       "question": "Que signifie Stratège civique?",
@@ -202,7 +203,7 @@
   ],
   "contact": {
     "label": "Contact",
-    "body": "Pour toute question sur cette Voie, consultez les annonces publiques ou les espaces Moodle associés.",
+    "body": "Pour toute question sur cette voie, consultez les annonces publiques ou les espaces Moodle associés.",
     "email": "",
     "cta": {
       "label": "Voir les annonces",
@@ -213,12 +214,9 @@
     "owner": "local_uckk",
     "editorial_status": "approved",
     "last_reviewed": null,
-    "review_notes": "Note éditoriale interne : profil public validé pour la projection Faculty/Atlas; ne pas afficher publiquement.",
+    "review_notes": "Note éditoriale interne : profil public recentré sur la diffusion ouverte du savoir, la bibliothèque publique UCKK et la projection Faculty/Atlas.",
     "public_claims_guardrails": [
-      "Ne pas présenter les Parchemins UCKK comme diplômes publics accrédités.",
-      "Ne pas afficher de progression, notes ou données privées d’étudiants.",
-      "Ne pas présenter une Voie expérimentale comme officiellement reconnue.",
-      "Ne pas transformer le titre symbolique Stratège civique en titre professionnel reconnu par l’État."
+      "Garder la note de reconnaissance unique, discrète et non centrale; ne pas transformer la page publique en avertissement répété sur les diplômes ou statuts."
     ]
   },
   "cache": {

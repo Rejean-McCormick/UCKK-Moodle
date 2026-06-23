@@ -20,14 +20,12 @@
       },
       "recognition": {
         "type": "internal_progression",
-        "title": "Progression du tronc commun UCKK",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Aspirant UCKK — socle commun",
         "symbolic_title": "Joueur lucide en formation"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Niveau visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
+      "summary": "Base commune de la bibliothèque vivante UCKK. Le tronc commun rend accessibles les repères, langages, méthodes et gestes de lecture nécessaires pour entrer dans les Voies, comprendre le Grand Jeu social et apprendre dans un cadre familier, modernisé et ouvert.",
       "moodle": {
         "category_idnumber": "UCKK-TC",
         "category_path": "UCKK / Tronc commun",
@@ -52,7 +50,7 @@
       "category_idnumber": "UCKK-TC",
       "category_path": "UCKK / Tronc commun",
       "visible": 1,
-      "description": "Base pédagogique partagée par toutes les personnes en cheminement dans l’Univers-Cité King Klown, peu importe leur Voie, leur Domaine ou leur Niveau visé. Le tronc commun forme un langage, une méthode et une culture commune avant l’approfondissement dans une Voie.",
+      "description": "Base commune de la bibliothèque vivante UCKK. Le tronc commun rend accessibles les repères, langages, méthodes et gestes de lecture nécessaires pour entrer dans les Voies, comprendre le Grand Jeu social et apprendre dans un cadre familier, modernisé et ouvert.",
       "category": "UCKK-TC",
       "visibility": "institution",
       "sortorder": 10,
@@ -77,14 +75,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK du Grand Jeu social",
         "symbolic_title": "Joueur lucide du Grand Jeu social"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie transversale principale de l’Univers-Cité King Klown. Elle forme des personnes capables de lire la société comme un système composé de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.",
+      "summary": "Voie transversale principale de l’Univers-Cité King Klown. Elle rend publics des outils pour lire la société comme un système de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.",
       "moodle": {
         "category_idnumber": "UCKK-GJS",
         "category_path": "UCKK / Voies / Grand Jeu social",
@@ -109,7 +105,7 @@
       "category_idnumber": "UCKK-GJS",
       "category_path": "UCKK / Voies / Grand Jeu social",
       "visible": 1,
-      "description": "Voie transversale principale de l’Univers-Cité King Klown. Elle forme des personnes capables de lire la société comme un système composé de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.",
+      "description": "Voie transversale principale de l’Univers-Cité King Klown. Elle rend publics des outils pour lire la société comme un système de règles, institutions, récits, pouvoirs, langages, technologies, ressources, symboles, preuves et mécanismes invisibles.",
       "category": "UCKK-GJS",
       "visibility": "institution",
       "sortorder": 20,
@@ -134,14 +130,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK de l’Architecture de l’écosystème digital kOA",
         "symbolic_title": "Architecte kOA"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie formant des architectes sociotechniques capables de comprendre, documenter, opérer, adapter, auditer et déployer l’écosystème digital kOA comme infrastructure de connaissance, de délibération, de décision, d’exécution et de mémoire.",
+      "summary": "Voie consacrée à l’écosystème digital kOA comme infrastructure ouverte de connaissance, de délibération, de décision, d’exécution et de mémoire. Elle rend lisibles les modules, usages, dépendances et principes qui soutiennent la diffusion du savoir UCKK.",
       "moodle": {
         "category_idnumber": "UCKK-KOA",
         "category_path": "UCKK / Voies / Architecture de l’écosystème digital kOA",
@@ -167,7 +161,7 @@
       "category_idnumber": "UCKK-KOA",
       "category_path": "UCKK / Voies / Architecture de l’écosystème digital kOA",
       "visible": 1,
-      "description": "Voie formant des architectes sociotechniques capables de comprendre, documenter, opérer, adapter, auditer et déployer l’écosystème digital kOA comme infrastructure de connaissance, de délibération, de décision, d’exécution et de mémoire.",
+      "description": "Voie consacrée à l’écosystème digital kOA comme infrastructure ouverte de connaissance, de délibération, de décision, d’exécution et de mémoire. Elle rend lisibles les modules, usages, dépendances et principes qui soutiennent la diffusion du savoir UCKK.",
       "category": "UCKK-KOA",
       "visibility": "institution",
       "sortorder": 30,
@@ -192,14 +186,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK en Architecture sociotechnique",
         "symbolic_title": "Architecte du Grand Jeu"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie fondatrice qui forme des personnes capables de comprendre, concevoir, déployer et auditer des systèmes combinant humains, technologies, institutions, données, règles, rôles, plateformes, workflows, décisions et boucles de mémoire.",
+      "summary": "Voie fondatrice qui rend accessibles des méthodes pour comprendre, concevoir, documenter et réviser des systèmes combinant humains, technologies, institutions, données, règles, rôles, plateformes, workflows, décisions et mémoire.",
       "moodle": {
         "category_idnumber": "UCKK-AS",
         "category_path": "UCKK / Voies / Architecture sociotechnique",
@@ -225,7 +217,7 @@
       "category_idnumber": "UCKK-AS",
       "category_path": "UCKK / Voies / Architecture sociotechnique",
       "visible": 1,
-      "description": "Voie fondatrice qui forme des personnes capables de comprendre, concevoir, déployer et auditer des systèmes combinant humains, technologies, institutions, données, règles, rôles, plateformes, workflows, décisions et boucles de mémoire.",
+      "description": "Voie fondatrice qui rend accessibles des méthodes pour comprendre, concevoir, documenter et réviser des systèmes combinant humains, technologies, institutions, données, règles, rôles, plateformes, workflows, décisions et mémoire.",
       "category": "UCKK-AS",
       "visibility": "institution",
       "sortorder": 40,
@@ -250,14 +242,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK des Sciences politiques",
         "symbolic_title": "Stratège civique"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie formant des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.",
+      "summary": "Voie qui ouvre des repères pour comprendre, analyser, critiquer et transformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.",
       "moodle": {
         "category_idnumber": "UCKK-SP",
         "category_path": "UCKK / Voies / Sciences politiques",
@@ -283,7 +273,7 @@
       "category_idnumber": "UCKK-SP",
       "category_path": "UCKK / Voies / Sciences politiques",
       "visible": 1,
-      "description": "Voie formant des personnes capables de comprendre, analyser, critiquer et réformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.",
+      "description": "Voie qui ouvre des repères pour comprendre, analyser, critiquer et transformer les mécanismes du pouvoir dans le Grand Jeu social : institutions, médias, plateformes, réseaux, code, assemblées, votes, récits de légitimité et contre-pouvoirs.",
       "category": "UCKK-SP",
       "visibility": "institution",
       "sortorder": 50,
@@ -308,14 +298,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK en Économie",
         "symbolic_title": "Architecte d’opportunités"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie formant des Aspirants capables de lire l’économie comme une architecture de règles, ressources, flux, incitatifs, intermédiaires, dépendances, capture et opportunités, afin de concevoir des modèles viables et des systèmes plus justes de circulation de la valeur.",
+      "summary": "Voie qui rend l’économie lisible comme architecture de règles, ressources, flux, incitatifs, intermédiaires, dépendances, capture et opportunités. Elle propose des cartes et méthodes pour penser la circulation de la valeur.",
       "moodle": {
         "category_idnumber": "UCKK-EC",
         "category_path": "UCKK / Voies / Économie",
@@ -341,7 +329,7 @@
       "category_idnumber": "UCKK-EC",
       "category_path": "UCKK / Voies / Économie",
       "visible": 1,
-      "description": "Voie formant des Aspirants capables de lire l’économie comme une architecture de règles, ressources, flux, incitatifs, intermédiaires, dépendances, capture et opportunités, afin de concevoir des modèles viables et des systèmes plus justes de circulation de la valeur.",
+      "description": "Voie qui rend l’économie lisible comme architecture de règles, ressources, flux, incitatifs, intermédiaires, dépendances, capture et opportunités. Elle propose des cartes et méthodes pour penser la circulation de la valeur.",
       "category": "UCKK-EC",
       "visibility": "institution",
       "sortorder": 60,
@@ -366,14 +354,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK des systèmes vivants",
         "symbolic_title": "Gardien des systèmes vivants"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie formant des personnes capables de comprendre les systèmes vivants, les territoires, les ressources, les interdépendances matérielles, les crises environnementales et les liens entre société et environnement.",
+      "summary": "Voie qui rend accessibles des repères pour comprendre les systèmes vivants, les territoires, les ressources, les interdépendances matérielles, les crises environnementales et les liens entre société et environnement.",
       "moodle": {
         "category_idnumber": "UCKK-ECO",
         "category_path": "UCKK / Voies / Écologie",
@@ -399,7 +385,7 @@
       "category_idnumber": "UCKK-ECO",
       "category_path": "UCKK / Voies / Écologie",
       "visible": 1,
-      "description": "Voie formant des personnes capables de comprendre les systèmes vivants, les territoires, les ressources, les interdépendances matérielles, les crises environnementales et les liens entre société et environnement.",
+      "description": "Voie qui rend accessibles des repères pour comprendre les systèmes vivants, les territoires, les ressources, les interdépendances matérielles, les crises environnementales et les liens entre société et environnement.",
       "category": "UCKK-ECO",
       "visibility": "institution",
       "sortorder": 70,
@@ -424,14 +410,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK des Structures invisibles",
         "symbolic_title": "Lecteur des structures invisibles"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie formant des personnes capables d’étudier les structures invisibles qui organisent notre rapport au réel : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage, croyance, récit et symboles.",
+      "summary": "Voie qui ouvre des cartes pour étudier les structures invisibles qui organisent notre rapport au réel : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage, croyance, récit et symboles.",
       "moodle": {
         "category_idnumber": "UCKK-ME",
         "category_path": "UCKK / Voies / Métaphysique",
@@ -457,7 +441,7 @@
       "category_idnumber": "UCKK-ME",
       "category_path": "UCKK / Voies / Métaphysique",
       "visible": 1,
-      "description": "Voie formant des personnes capables d’étudier les structures invisibles qui organisent notre rapport au réel : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage, croyance, récit et symboles.",
+      "description": "Voie qui ouvre des cartes pour étudier les structures invisibles qui organisent notre rapport au réel : vérité, sens, conscience, liberté, pouvoir, destin, ordre, chaos, langage, croyance, récit et symboles.",
       "category": "UCKK-ME",
       "visibility": "institution",
       "sortorder": 80,
@@ -482,14 +466,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK de l’Intelligence artificielle gouvernable",
         "symbolic_title": "Cartographe augmenté"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie formant des Aspirants capables d’utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans jamais lui déléguer l’autorité finale.",
+      "summary": "Voie qui rend publics des repères pour utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans lui déléguer l’autorité finale.",
       "moodle": {
         "category_idnumber": "UCKK-IA",
         "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
@@ -515,7 +497,7 @@
       "category_idnumber": "UCKK-IA",
       "category_path": "UCKK / Voies / Intelligence artificielle gouvernable",
       "visible": 1,
-      "description": "Voie formant des Aspirants capables d’utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans jamais lui déléguer l’autorité finale.",
+      "description": "Voie qui rend publics des repères pour utiliser l’intelligence artificielle comme outil de lecture, création, cartographie, simulation, critique et accélération, sans lui déléguer l’autorité finale.",
       "category": "UCKK-IA",
       "visibility": "institution",
       "sortorder": 90,
@@ -540,14 +522,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK du Sens",
         "symbolic_title": "Architecte du sens"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie formant des personnes capables de comprendre les langues comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes, réputation et pouvoir symbolique.",
+      "summary": "Voie qui rend les langues lisibles comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes, réputation et pouvoir symbolique.",
       "moodle": {
         "category_idnumber": "UCKK-LI",
         "category_path": "UCKK / Voies / Linguistique et architecture du sens",
@@ -573,7 +553,7 @@
       "category_idnumber": "UCKK-LI",
       "category_path": "UCKK / Voies / Linguistique et architecture du sens",
       "visible": 1,
-      "description": "Voie formant des personnes capables de comprendre les langues comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes, réputation et pouvoir symbolique.",
+      "description": "Voie qui rend les langues lisibles comme infrastructures du monde social : mots, concepts, traductions, catégories, récits, identités, dictionnaires, preuves, graphes, réputation et pouvoir symbolique.",
       "category": "UCKK-LI",
       "visibility": "institution",
       "sortorder": 100,
@@ -598,14 +578,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "internal_title": "Mage UCKK de l’Intervention sociale et des systèmes humains",
         "symbolic_title": "Intervenant du Grand Jeu humain"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie formant des personnes capables de comprendre les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, famille, communauté, institutions, aide, dignité et réparation.",
+      "summary": "Voie qui rend accessibles des repères pour comprendre les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, famille, communauté, institutions, aide, dignité et réparation.",
       "moodle": {
         "category_idnumber": "UCKK-IS",
         "category_path": "UCKK / Voies / Intervention sociale et systèmes humains",
@@ -631,7 +609,7 @@
       "category_idnumber": "UCKK-IS",
       "category_path": "UCKK / Voies / Intervention sociale et systèmes humains",
       "visible": 1,
-      "description": "Voie formant des personnes capables de comprendre les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, famille, communauté, institutions, aide, dignité et réparation.",
+      "description": "Voie qui rend accessibles des repères pour comprendre les humains dans les systèmes : vulnérabilité, exclusion, trauma, pauvreté, famille, communauté, institutions, aide, dignité et réparation.",
       "category": "UCKK-IS",
       "visibility": "institution",
       "sortorder": 110,
@@ -656,14 +634,12 @@
       },
       "recognition": {
         "type": "parchemin_uckk",
-        "title": "Parchemin de Puissance opératoire",
-        "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+        "title": "Repère interne de progression UCKK",
         "symbolic_title": "Praticien du théâtre public responsable",
         "internal_title": "Mage UCKK des Médias vivants et du théâtre public responsable"
       },
       "status": "active",
-      "public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
-      "summary": "Voie centrée sur le théâtre public, la satire responsable, les récits symboliques, la mobilisation multi-corridor et les interventions publiques capables de rendre les systèmes lisibles sans humilier ni manipuler.",
+      "summary": "Voie qui rend accessibles des méthodes pour le théâtre public, la satire responsable, les récits symboliques, la mobilisation multi-corridor et les interventions publiques capables de rendre les systèmes lisibles sans humilier ni manipuler.",
       "moodle": {
         "category_idnumber": "UCKK-MV",
         "category_path": "UCKK / Voies / Médias vivants et théâtre public responsable",
@@ -690,7 +666,7 @@
       "category_idnumber": "UCKK-MV",
       "category_path": "UCKK / Voies / Médias vivants et théâtre public responsable",
       "visible": 1,
-      "description": "Voie centrée sur le théâtre public, la satire responsable, les récits symboliques, la mobilisation multi-corridor et les interventions publiques capables de rendre les systèmes lisibles sans humilier ni manipuler.",
+      "description": "Voie qui rend accessibles des méthodes pour le théâtre public, la satire responsable, les récits symboliques, la mobilisation multi-corridor et les interventions publiques capables de rendre les systèmes lisibles sans humilier ni manipuler.",
       "category": "UCKK-MV",
       "visibility": "institution",
       "sortorder": 120,
@@ -711,7 +687,7 @@
       "name": "Univers-Cité King Klown",
       "international_name": "King Klown Univers-City"
     },
-    "default_public_status_notice": "Reconnaissance interne UCKK; ne constitue pas un diplôme public accrédité, un grade universitaire ou un titre professionnel reconnu par l’État, sauf reconnaissance officielle future.",
+    "default_public_status_notice": "Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.",
     "standardization": {
       "changed_envelope": true,
       "added_item_aliases": [
@@ -732,7 +708,9 @@
         "Public Voie titles do not include Niveau or Palier labels.",
         "Visible labels use Puissance opératoire instead of Magie opérable.",
         "GJS, SP, ME, LI and MV are active public Voies.",
-        "MV is normalized as a Voie UCKK, not a secondary public label."
+        "MV is normalized as a Voie UCKK, not a secondary public label.",
+        "Public program summaries emphasize open knowledge diffusion, not certification.",
+        "The institutional recognition caveat is centralized once in metadata.default_public_status_notice."
       ]
     }
   }

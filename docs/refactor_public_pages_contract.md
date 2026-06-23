@@ -1,9 +1,9 @@
 # Refactor public pages — contrat d’exécution
 
-**Projet :** UCKK-Moodle  
-**Composant Moodle :** `local_uckk`  
-**Portée :** pages publiques institutionnelles `local/uckk`  
-**Règle de travail :** documentation d’abord, puis code fichier par fichier.  
+**Projet :** UCKK-Moodle
+**Composant Moodle :** `local_uckk`
+**Portée :** pages publiques institutionnelles `local/uckk`
+**Règle de travail :** documentation d’abord, puis code fichier par fichier.
 **Statut :** contrat à valider avant modification du code.
 
 ---
@@ -48,8 +48,59 @@ Ce refactor ne doit pas :
 - créer une nouvelle API AJAX ;
 - déplacer la logique média de mod_uckkarchive vers local_uckk ;
 - transformer les reconnaissances UCKK en diplômes publics accrédités ;
+- centrer les pages publiques sur les limites légales de diplôme, d’accréditation ou de reconnaissance externe ;
+- présenter une offre de certification comme objectif à court terme ;
 - refaire tout styles.css ;
 - refactoriser canon.php, pathways.php ou les pages admin.
+```
+
+---
+
+## 2.1 Contrat éditorial des pages publiques
+
+Les pages publiques UCKK doivent présenter l’Univers-Cité King Klown comme une bibliothèque publique vivante, un cadre d’apprentissage ouvert et un espace de diffusion du savoir.
+
+Orientation principale :
+
+```text
+- diffusion immédiate du savoir ;
+- bibliothèque publique ouverte ;
+- cadre d’apprentissage familier, modernisé ;
+- parcours de lecture, de pratique et d’orientation ;
+- accès public aux repères, cours, archives, médiathèque, assemblées et défis ;
+- aucune logique de paywall pour accéder au savoir public.
+```
+
+Orientation à éviter :
+
+```text
+- présenter UCKK comme une offre de diplôme ;
+- centrer les pages sur les limites légales d’accréditation ;
+- répéter les notices de non-certification sur chaque bloc ;
+- donner l’impression qu’une certification est un objectif à court terme ;
+- transformer les Parchemins, niveaux ou titres symboliques en promesses de reconnaissance externe.
+```
+
+Formulation canonique à utiliser une seule fois lorsque nécessaire :
+
+```text
+Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.
+```
+
+Règles de rédaction :
+
+```text
+- dire la limite de reconnaissance une seule fois par surface publique majeure ;
+- ne pas répéter “diplôme public accrédité”, “statut universitaire public accrédité” ou équivalents dans les FAQ, notices, sections et garde-fous ;
+- remplacer les formulations défensives par des formulations positives centrées sur l’accès au savoir ;
+- parler de Voies, parcours, cours publics, bibliothèque, archives, médiathèque, défis, assemblées et apprentissage ouvert ;
+- ne pas présenter une absence de certification comme le sujet principal des pages.
+```
+
+Phrase de positionnement recommandée :
+
+```text
+UCKK n’est pas d’abord un système de certification. C’est une bibliothèque publique vivante et un campus ouvert pour diffuser, organiser et pratiquer le savoir dans un cadre d’apprentissage familier, modernisé et accessible.
 ```
 
 ---
@@ -71,20 +122,20 @@ Si un fichier crée une ambiguïté de variable, on arrête le codage et on met 
 
 ## 4. Variables globales fixes
 
-| Variable | Valeur fixe |
-|---|---|
-| `COMPONENT` | `local_uckk` |
-| `PLUGIN_ROOT` | `local/uckk` |
-| `PUBLIC_ROUTE_ROOT` | `/local/uckk/` |
-| `PUBLIC_PAGE_REGISTRY_CLASS` | `local_uckk\local\public_pages` |
-| `PUBLIC_PAGE_RENDERABLE_CLASS` | `local_uckk\output\public_page` |
-| `PUBLIC_PAGE_TEMPLATE` | `local_uckk/public_page` |
-| `PUBLIC_PAGE_LAYOUT` | `local_uckk_public` |
-| `PUBLIC_CSS` | `/local/uckk/styles.css` |
-| `PUBLIC_PAGE_TYPE` | `public` |
-| `PUBLIC_IS_PUBLIC` | `true` |
-| `DESIGN_VERSION` | `2026-layout-v2` |
-| `FONT_STRATEGY` | `libre-baskerville-primary-eb-garamond-accent` |
+| Variable                       | Valeur fixe                                    |
+| ------------------------------ | ---------------------------------------------- |
+| `COMPONENT`                    | `local_uckk`                                   |
+| `PLUGIN_ROOT`                  | `local/uckk`                                   |
+| `PUBLIC_ROUTE_ROOT`            | `/local/uckk/`                                 |
+| `PUBLIC_PAGE_REGISTRY_CLASS`   | `local_uckk\local\public_pages`                |
+| `PUBLIC_PAGE_RENDERABLE_CLASS` | `local_uckk\output\public_page`                |
+| `PUBLIC_PAGE_TEMPLATE`         | `local_uckk/public_page`                       |
+| `PUBLIC_PAGE_LAYOUT`           | `local_uckk_public`                            |
+| `PUBLIC_CSS`                   | `/local/uckk/styles.css`                       |
+| `PUBLIC_PAGE_TYPE`             | `public`                                       |
+| `PUBLIC_IS_PUBLIC`             | `true`                                         |
+| `DESIGN_VERSION`               | `2026-layout-v2`                               |
+| `FONT_STRATEGY`                | `libre-baskerville-primary-eb-garamond-accent` |
 
 ---
 
@@ -124,19 +175,19 @@ CAMPUS_PUBLIC_REFACTOR_STATUS = out_of_scope_batch_1
 
 ## 6. Routes publiques fixes
 
-| Slug | Route | Contrôleur |
-|---|---|---|
-| `home` | `/local/uckk/index.php` | `index.php` |
-| `about` | `/local/uckk/about.php` | `about.php` |
-| `programs` | `/local/uckk/programs.php` | `programs.php` |
-| `courses` | `/local/uckk/courses.php` | `courses.php` |
-| `challenges` | `/local/uckk/challenges.php` | `challenges.php` |
-| `assemblies` | `/local/uckk/assemblies.php` | `assemblies.php` |
-| `integrity` | `/local/uckk/integrity.php` | `integrity.php` |
-| `archives` | `/local/uckk/archives.php` | `archives.php` |
+| Slug          | Route                         | Contrôleur        |
+| ------------- | ----------------------------- | ----------------- |
+| `home`        | `/local/uckk/index.php`       | `index.php`       |
+| `about`       | `/local/uckk/about.php`       | `about.php`       |
+| `programs`    | `/local/uckk/programs.php`    | `programs.php`    |
+| `courses`     | `/local/uckk/courses.php`     | `courses.php`     |
+| `challenges`  | `/local/uckk/challenges.php`  | `challenges.php`  |
+| `assemblies`  | `/local/uckk/assemblies.php`  | `assemblies.php`  |
+| `integrity`   | `/local/uckk/integrity.php`   | `integrity.php`   |
+| `archives`    | `/local/uckk/archives.php`    | `archives.php`    |
 | `mediatheque` | `/local/uckk/mediatheque.php` | `mediatheque.php` |
-| `news` | `/local/uckk/news.php` | `news.php` |
-| `contact` | `/local/uckk/contact.php` | `contact.php` |
+| `news`        | `/local/uckk/news.php`        | `news.php`        |
+| `contact`     | `/local/uckk/contact.php`     | `contact.php`     |
 
 ---
 
@@ -503,17 +554,17 @@ Dossier :
 templates/public/
 ```
 
-| Fichier | Nom Moodle | Responsabilité |
-|---|---|---|
-| `nav.mustache` | `local_uckk/public/nav` | Navigation publique |
-| `hero.mustache` | `local_uckk/public/hero` | Eyebrow, titre, sous-titre, résumé, boundary notice si rendu |
-| `quicklinks.mustache` | `local_uckk/public/quicklinks` | Repères rapides |
-| `sections.mustache` | `local_uckk/public/sections` | Boucle des sections de page |
-| `cards.mustache` | `local_uckk/public/cards` | Cartes de page génériques |
-| `aside.mustache` | `local_uckk/public/aside` | Colonne latérale ; rend uniquement metadata et CTA |
-| `metadata.mustache` | `local_uckk/public/metadata` | Liste metadata |
-| `cta.mustache` | `local_uckk/public/cta` | Bloc CTA |
-| `prompt_groups.mustache` | `local_uckk/public/prompt_groups` | Groupes d’invites réutilisables |
+| Fichier                  | Nom Moodle                        | Responsabilité                                               |
+| ------------------------ | --------------------------------- | ------------------------------------------------------------ |
+| `nav.mustache`           | `local_uckk/public/nav`           | Navigation publique                                          |
+| `hero.mustache`          | `local_uckk/public/hero`          | Eyebrow, titre, sous-titre, résumé, boundary notice si rendu |
+| `quicklinks.mustache`    | `local_uckk/public/quicklinks`    | Repères rapides                                              |
+| `sections.mustache`      | `local_uckk/public/sections`      | Boucle des sections de page                                  |
+| `cards.mustache`         | `local_uckk/public/cards`         | Cartes de page génériques                                    |
+| `aside.mustache`         | `local_uckk/public/aside`         | Colonne latérale ; rend uniquement metadata et CTA           |
+| `metadata.mustache`      | `local_uckk/public/metadata`      | Liste metadata                                               |
+| `cta.mustache`           | `local_uckk/public/cta`           | Bloc CTA                                                     |
+| `prompt_groups.mustache` | `local_uckk/public/prompt_groups` | Groupes d’invites réutilisables                              |
 
 Note contractuelle : `notices` et `hasnotices` existent dans le contexte exporté par `public_page.php`, mais l’état courant documenté ne crée pas de partial `public/notices.mustache` et ne rend pas les notices dans l’aside. `aside.mustache` rend uniquement les sous-partials `metadata` et `cta`.
 
@@ -525,10 +576,10 @@ Dossier :
 templates/pages/
 ```
 
-| Fichier | Nom Moodle | Responsabilité |
-|---|---|---|
-| `home_feature.mustache` | `local_uckk/pages/home_feature` | Bloc spécifique Accueil, si activé |
-| `mediatheque_explorer.mustache` | `local_uckk/pages/mediatheque_explorer` | Explorateur Médiathèque public |
+| Fichier                         | Nom Moodle                              | Responsabilité                     |
+| ------------------------------- | --------------------------------------- | ---------------------------------- |
+| `home_feature.mustache`         | `local_uckk/pages/home_feature`         | Bloc spécifique Accueil, si activé |
+| `mediatheque_explorer.mustache` | `local_uckk/pages/mediatheque_explorer` | Explorateur Médiathèque public     |
 
 Migration :
 
@@ -739,6 +790,8 @@ light
 ```
 
 Règle de rendu : dans l’état courant, aucune partial `templates/public/notices.mustache` n’est créée et aucune inclusion `local_uckk/public/notices` n’est attendue. Les notices restent dans le contrat de données pour compatibilité avec `public_page.php`, mais leur non-rendu est intentionnellement documenté.
+
+Règle éditoriale : les notices ne doivent pas servir à répéter partout les limites d’accréditation. Si une notice institutionnelle est rendue publiquement, elle doit privilégier la mission d’ouverture, de transmission et de diffusion du savoir. La limite de reconnaissance doit rester condensée dans la formule canonique unique.
 
 ### 15.6 `metadata[]`
 
@@ -1039,6 +1092,26 @@ mediatheque.php
 styles.css
 lang/fr/local_uckk.php       # seulement si nouvelles chaînes
 lang/en/local_uckk.php       # seulement si nouvelles chaînes
+
+classes/local/faculty/faculty_normalizer.php
+classes/local/faculty/faculty_page_builder.php
+classes/local/faculty/faculty_validator.php
+
+content/faculties/architecture-sociotechnique.faculty.json
+content/faculties/ecologie.faculty.json
+content/faculties/economie.faculty.json
+content/faculties/ecosysteme-digital-koa.faculty.json
+content/faculties/grand-jeu-social.faculty.json
+content/faculties/ia-gouvernable.faculty.json
+content/faculties/intervention-sociale-systemes-humains.faculty.json
+content/faculties/linguistique-architecture-du-sens.faculty.json
+content/faculties/metaphysique.faculty.json
+content/faculties/sciences-politiques.faculty.json
+
+academic_registry_json/programs.json        # si exposé publiquement
+academic_registry_json/badges.json          # si exposé publiquement
+academic_registry_json/courses.json         # si exposé publiquement
+academic_registry_json/course_templates.json # si exposé publiquement
 ```
 
 ---
@@ -1217,6 +1290,16 @@ Validation :
 - aucun HTML fallback modifié sauf nécessité.
 ```
 
+### Lot 8.5 — Refonte éditoriale des contenus publics
+
+```text
+8.5.1 Réécrire les définitions textuelles des pages publiques.
+8.5.2 Réécrire les profils publics de facultés.
+8.5.3 Réduire les mentions d’accréditation à une seule formule canonique.
+8.5.4 Vérifier que les pages parlent d’abord de bibliothèque publique, diffusion du savoir et apprentissage ouvert.
+8.5.5 Vérifier qu’aucune FAQ ou notice ne transforme la non-certification en thème principal.
+```
+
 ### Lot 9 — CSS et langue
 
 ```text
@@ -1299,7 +1382,11 @@ Le refactor est invalide si :
 - public_page.mustache contient encore les gros blocs de rendu après le lot 4 ;
 - styles.css est réécrit avant stabilisation du HTML ;
 - campus.php est modifié sans lot séparé ;
-- une variable Mustache non documentée est ajoutée.
+- une variable Mustache non documentée est ajoutée ;
+- une page publique répète plusieurs fois les limites de diplôme ou d’accréditation ;
+- une page donne l’impression qu’une certification est prévue à court terme ;
+- une page présente le savoir public comme contenu derrière paywall ;
+- une page parle davantage de non-accréditation que de diffusion du savoir.
 ```
 
 ---
@@ -1317,6 +1404,8 @@ Le refactor est terminé quand :
 - classes/local/public_pages.php est réduit à un routeur/agrégateur ;
 - classes/output/public_page.php exporte toutes les variables documentées ;
 - les 11 pages publiques du lot principal fonctionnent après purge caches ;
+- les pages publiques présentent UCKK comme bibliothèque publique vivante et cadre d’apprentissage ouvert ;
+- les limites de reconnaissance sont condensées dans la formule canonique unique lorsque nécessaire ;
 - git diff --check ne signale rien ;
 - les fichiers PHP modifiés passent php -l.
 ```
@@ -1333,6 +1422,7 @@ Commit 2 — Split public page Mustache into partials
 Commit 3 — Split public page definitions by slug
 Commit 4 — Wire public page registry to page definition classes
 Commit 5 — Finalize public page rendering context and CSS cleanup
+Commit 6 — Align public editorial content with open knowledge positioning
 ```
 
 Ne pas mélanger :
@@ -1342,6 +1432,7 @@ Ne pas mélanger :
 - split PHP ;
 - nettoyage CSS ;
 - ajout de contenu ;
+- refonte éditoriale des facultés ;
 - migration campus.
 ```
 
@@ -1379,4 +1470,16 @@ Les notices exportées restent dans le contrat de données, mais l’état coura
 
 DÉCISION 10
 Toute nouvelle variable doit être ajoutée à ce contrat avant d’être utilisée.
+
+DÉCISION 11
+Les pages publiques UCKK sont d’abord des surfaces de diffusion du savoir, non des surfaces de certification.
+
+DÉCISION 12
+La limite de reconnaissance est formulée une seule fois avec la phrase canonique : “Les éventuelles reconnaissances UCKK demeurent internes, sauf reconnaissance officielle future.”
+
+DÉCISION 13
+Il n’y a pas de projet à court terme d’offrir une certification, un diplôme ou une reconnaissance formelle externe.
+
+DÉCISION 14
+Le savoir public UCKK ne doit pas être présenté comme un contenu derrière paywall.
 ```
