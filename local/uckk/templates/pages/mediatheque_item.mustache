@@ -1,7 +1,6 @@
 {{!
 This file is part of UCKK-Moodle.
 
-```
 @template local_uckk/pages/mediatheque_item
 
 Public catalogue detail partial for one Médiathèque item.
@@ -15,7 +14,6 @@ Public display rule:
 - the "Détails" toggle shows secondary public-facing information;
 - internal identifiers, raw MIME values, technical source labels, raw status,
   raw visibility and validation/debug metadata are not rendered here.
-```
 
 }}
 
@@ -30,7 +28,6 @@ Public display rule:
         </a>
     </div>
 
-```
 {{#has_mediatheque_item_error}}
     <div class="local-uckk-public-notice local-uckk-public-notice--warning" role="alert">
         <h2 class="local-uckk-public-notice__title">
@@ -310,6 +307,5 @@ Public display rule:
         </article>
     {{/mediatheque_item}}
 {{/has_mediatheque_item}}
-```
 
 </section>
