@@ -41,6 +41,12 @@ const DEFAULT_STATE = {
     perpage: 12,
 };
 
+const DEFAULT_COURSE_CARD_CLASSES = [
+    'local-uckk-public-card',
+    'local-uckk-public-card--course',
+    'local-uckk-course-card',
+].join(' ');
+
 const URL_STATE_KEYS = [
     'q',
     'category',
@@ -58,6 +64,26 @@ const toString = value => {
     }
 
     return String(value);
+};
+
+const cleanClassToken = token => {
+    return toString(token).replace(/[^a-zA-Z0-9_-]/g, '');
+};
+
+const mergeClassLists = (...classLists) => {
+    const classes = [];
+
+    classLists.forEach(classList => {
+        toString(classList).split(/\s+/).forEach(token => {
+            const clean = cleanClassToken(token);
+
+            if (clean !== '' && !classes.includes(clean)) {
+                classes.push(clean);
+            }
+        });
+    });
+
+    return classes.join(' ');
 };
 
 const toPositiveInteger = (value, fallback) => {
@@ -327,12 +353,23 @@ const normalizeCourse = course => {
         || ''
     ).trim();
 
+    const classes = mergeClassLists(
+        safe.classes
+        || safe.cardclasses
+        || safe.card_classes
+        || ''
+    );
+
     return {
-        title: toString(safe.title || safe.fullname || shortname || ''),
-        url: toString(safe.url || ''),
-        summary: toString(safe.summary || safe.body || ''),
+        title: toString(safe.title || safe.fullname || shortname || '').trim(),
+        url: toString(safe.url || '').trim(),
+        summary: toString(safe.summary || safe.body || '').trim(),
         shortname,
         category,
+        classes,
+        voieId: toString(safe.voie_id || safe.voieid || '').trim(),
+        voieSlug: toString(safe.voie_slug || safe.voieslug || safe.slug_voie || '').trim(),
+        categoryIdNumber: toString(safe.categoryidnumber || safe.category_idnumber || '').trim(),
     };
 };
 
@@ -379,7 +416,27 @@ const createCourseCard = rawCourse => {
     const course = normalizeCourse(rawCourse);
 
     const card = document.createElement('article');
-    card.className = 'local-uckk-public-card local-uckk-public-card--course local-uckk-course-card';
+    card.className = mergeClassLists(DEFAULT_COURSE_CARD_CLASSES, course.classes);
+
+    if (course.shortname !== '') {
+        card.dataset.courseShortname = course.shortname;
+    }
+
+    if (course.category !== '') {
+        card.dataset.courseCategory = course.category;
+    }
+
+    if (course.categoryIdNumber !== '') {
+        card.dataset.categoryIdnumber = course.categoryIdNumber;
+    }
+
+    if (course.voieId !== '') {
+        card.dataset.voieId = course.voieId;
+    }
+
+    if (course.voieSlug !== '') {
+        card.dataset.voieSlug = course.voieSlug;
+    }
 
     const content = document.createElement('div');
     content.className = 'local-uckk-public-card__content';

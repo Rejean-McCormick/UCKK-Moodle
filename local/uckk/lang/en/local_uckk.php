@@ -958,6 +958,8 @@ $string['mediatheque_title'] = 'UCKK Médiathèque';
 $string['mediatheque_eyebrow'] = 'Public archives';
 $string['mediatheque_summary'] = 'Explore public media, collections, external works, and documented passages from the UCKK archive.';
 $string['mediatheque_search_placeholder'] = 'Search the Médiathèque';
+$string['catalogue_result_count_one'] = '{$a} public result';
+$string['catalogue_result_count_many'] = '{$a} public results';
 $string['mediatheque_result_count_one'] = '{$a} public result';
 $string['mediatheque_result_count_many'] = '{$a} public results';
 

@@ -854,6 +854,7 @@ final class public_page implements renderable, templatable {
                 $type !== '' ? 'local-uckk-public-card--' . $type : null,
                 $url !== '' ? 'local-uckk-public-card--linked' : 'local-uckk-public-card--static',
                 $index === 0 ? 'local-uckk-public-card--first' : null,
+                self::clean_class_list($card['classes'] ?? ''),
             ]);
 
             $out[] = $obj;
@@ -1029,6 +1030,7 @@ final class public_page implements renderable, templatable {
                 $type !== '' ? 'local-uckk-public-card--' . $type : null,
                 $url !== '' ? 'local-uckk-public-card--linked' : 'local-uckk-public-card--static',
                 $index === 0 ? 'local-uckk-public-card--first' : null,
+                self::clean_class_list($data['classes'] ?? ''),
             ]);
 
             $out[] = $obj;
@@ -1453,6 +1455,44 @@ final class public_page implements renderable, templatable {
     }
 
     /**
+     * Clean a whitespace-separated CSS class list.
+     *
+     * This preserves trusted card-level visual hooks prepared by upstream page
+     * builders while still normalising each token before it reaches Mustache.
+     *
+     * @param mixed $classes Class list as string or array of strings.
+     * @return string
+     */
+    private static function clean_class_list($classes): string {
+        $parts = [];
+
+        if (is_scalar($classes)) {
+            $parts = preg_split('/\s+/', trim((string)$classes)) ?: [];
+        } else if (is_array($classes)) {
+            foreach ($classes as $class) {
+                if (!is_scalar($class)) {
+                    continue;
+                }
+
+                $tokens = preg_split('/\s+/', trim((string)$class)) ?: [];
+                $parts = array_merge($parts, $tokens);
+            }
+        }
+
+        $clean = [];
+
+        foreach ($parts as $part) {
+            $part = self::clean_modifier($part);
+
+            if ($part !== '') {
+                $clean[$part] = true;
+            }
+        }
+
+        return implode(' ', array_keys($clean));
+    }
+
+    /**
      * Clean notice type.
      *
      * @param mixed $type Notice type.
@@ -1491,12 +1531,20 @@ final class public_page implements renderable, templatable {
 
             $class = trim($class);
 
-            if ($class !== '') {
-                $out[] = $class;
+            if ($class === '') {
+                continue;
+            }
+
+            foreach (preg_split('/\s+/', $class) ?: [] as $part) {
+                $part = trim($part);
+
+                if ($part !== '') {
+                    $out[$part] = true;
+                }
             }
         }
 
-        return implode(' ', $out);
+        return implode(' ', array_keys($out));
     }
 
     /**

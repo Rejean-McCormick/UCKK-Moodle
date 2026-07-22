@@ -2321,6 +2321,268 @@ body:has(.local-uckk-public-page) [role="main"] {
 }
 
 /* ==========================================================================
+   ZOMBIE DISABLED — Public Voie card signatures
+   --------------------------------------------------------------------------
+   Conserved for possible resurrection, but intentionally inactive.
+   To reactivate, remove the surrounding @media not all wrapper.
+   ========================================================================== */
+
+@media not all {
+/* ==========================================================================
+   Public Voie card signatures
+   ========================================================================== */
+
+/*
+ * Visual signatures for navigation objects only:
+ * - public cards that link to Faculty / Voie pages;
+ * - public course cards in the course explorer.
+ *
+ * This layer intentionally does not target .local-uckk-faculty or the Faculty
+ * page shell. Faculty page visual signatures are owned elsewhere.
+ */
+
+.local-uckk-voie-card,
+.local-uckk-faculty-link-card,
+.local-uckk-course-card--voie {
+    --uckk-voie-accent: var(--uckk-petrol);
+    --uckk-voie-accent-dark: var(--uckk-petrol-dark);
+    --uckk-voie-accent-soft: rgba(30, 104, 100, 0.12);
+    --uckk-voie-symbol: "◆";
+    --uckk-voie-pattern:
+        linear-gradient(135deg, rgba(30, 104, 100, 0.055) 0 1px, transparent 1px 14px);
+    --uckk-voie-pattern-size: 24px 24px;
+}
+
+/* Grand Jeu social — règles visibles/invisibles, plateau, lucidité. */
+.local-uckk-voie-card--grand-jeu-social,
+.local-uckk-course-card--voie-grand-jeu-social,
+.local-uckk-public-card--voie-grand-jeu-social {
+    --uckk-voie-accent: #8f2f2f;
+    --uckk-voie-accent-dark: #5b1d1d;
+    --uckk-voie-accent-soft: rgba(143, 47, 47, 0.12);
+    --uckk-voie-symbol: "♟";
+    --uckk-voie-pattern:
+        repeating-linear-gradient(
+            45deg,
+            rgba(143, 47, 47, 0.10) 0 8px,
+            transparent 8px 16px
+        );
+    --uckk-voie-pattern-size: 32px 32px;
+}
+
+/* Économie — flux, valeur, ressources, circulation. */
+.local-uckk-voie-card--economie,
+.local-uckk-course-card--voie-economie,
+.local-uckk-public-card--voie-economie {
+    --uckk-voie-accent: #b9782f;
+    --uckk-voie-accent-dark: #714515;
+    --uckk-voie-accent-soft: rgba(185, 120, 47, 0.14);
+    --uckk-voie-symbol: "◇";
+    --uckk-voie-pattern:
+        radial-gradient(circle at 8px 8px, rgba(185, 120, 47, 0.14) 0 2px, transparent 3px);
+    --uckk-voie-pattern-size: 24px 24px;
+}
+
+/* Écologie — systèmes vivants, interdépendance, territoire. */
+.local-uckk-voie-card--ecologie,
+.local-uckk-course-card--voie-ecologie,
+.local-uckk-public-card--voie-ecologie {
+    --uckk-voie-accent: #4f7f45;
+    --uckk-voie-accent-dark: #2f5729;
+    --uckk-voie-accent-soft: rgba(79, 127, 69, 0.14);
+    --uckk-voie-symbol: "✦";
+    --uckk-voie-pattern:
+        linear-gradient(90deg, rgba(79, 127, 69, 0.11) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(79, 127, 69, 0.06) 1px, transparent 1px);
+    --uckk-voie-pattern-size: 28px 28px;
+}
+
+/* Sciences politiques — pouvoir, légitimité, décision collective. */
+.local-uckk-voie-card--sciences-politiques,
+.local-uckk-course-card--voie-sciences-politiques,
+.local-uckk-public-card--voie-sciences-politiques {
+    --uckk-voie-accent: #345f8f;
+    --uckk-voie-accent-dark: #213f61;
+    --uckk-voie-accent-soft: rgba(52, 95, 143, 0.13);
+    --uckk-voie-symbol: "§";
+    --uckk-voie-pattern:
+        repeating-linear-gradient(
+            90deg,
+            rgba(52, 95, 143, 0.10) 0 2px,
+            transparent 2px 18px
+        );
+    --uckk-voie-pattern-size: 36px 36px;
+}
+
+/* Linguistique et architecture du sens — signes, concepts, traduction. */
+.local-uckk-voie-card--linguistique-architecture-du-sens,
+.local-uckk-course-card--voie-linguistique-architecture-du-sens,
+.local-uckk-public-card--voie-linguistique-architecture-du-sens {
+    --uckk-voie-accent: #4d4f92;
+    --uckk-voie-accent-dark: #303260;
+    --uckk-voie-accent-soft: rgba(77, 79, 146, 0.13);
+    --uckk-voie-symbol: "¶";
+    --uckk-voie-pattern:
+        repeating-linear-gradient(
+            0deg,
+            rgba(77, 79, 146, 0.08) 0 1px,
+            transparent 1px 12px
+        );
+    --uckk-voie-pattern-size: 24px 24px;
+}
+
+/* Métaphysique — seuils, structures invisibles, profondeur. */
+.local-uckk-voie-card--metaphysique,
+.local-uckk-course-card--voie-metaphysique,
+.local-uckk-public-card--voie-metaphysique {
+    --uckk-voie-accent: #6b3f85;
+    --uckk-voie-accent-dark: #422452;
+    --uckk-voie-accent-soft: rgba(107, 63, 133, 0.13);
+    --uckk-voie-symbol: "◎";
+    --uckk-voie-pattern:
+        radial-gradient(circle, rgba(107, 63, 133, 0.12) 0 1px, transparent 2px);
+    --uckk-voie-pattern-size: 22px 22px;
+}
+
+/* IA gouvernable — outil encadré, responsabilité humaine. */
+.local-uckk-voie-card--ia-gouvernable,
+.local-uckk-course-card--voie-ia-gouvernable,
+.local-uckk-public-card--voie-ia-gouvernable {
+    --uckk-voie-accent: #3e6f9f;
+    --uckk-voie-accent-dark: #244866;
+    --uckk-voie-accent-soft: rgba(62, 111, 159, 0.14);
+    --uckk-voie-symbol: "⌬";
+    --uckk-voie-pattern:
+        linear-gradient(rgba(62, 111, 159, 0.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(62, 111, 159, 0.10) 1px, transparent 1px);
+    --uckk-voie-pattern-size: 20px 20px;
+}
+
+/* Intervention sociale — soin, dignité, réparation, systèmes humains. */
+.local-uckk-voie-card--intervention-sociale-systemes-humains,
+.local-uckk-course-card--voie-intervention-sociale-systemes-humains,
+.local-uckk-public-card--voie-intervention-sociale-systemes-humains {
+    --uckk-voie-accent: #a65f55;
+    --uckk-voie-accent-dark: #69372f;
+    --uckk-voie-accent-soft: rgba(166, 95, 85, 0.14);
+    --uckk-voie-symbol: "◯";
+    --uckk-voie-pattern:
+        repeating-linear-gradient(
+            135deg,
+            rgba(166, 95, 85, 0.08) 0 2px,
+            transparent 2px 14px
+        );
+    --uckk-voie-pattern-size: 28px 28px;
+}
+
+/* Architecture sociotechnique — charpente, systèmes, médiations. */
+.local-uckk-voie-card--architecture-sociotechnique,
+.local-uckk-course-card--voie-architecture-sociotechnique,
+.local-uckk-public-card--voie-architecture-sociotechnique {
+    --uckk-voie-accent: #8f5a2f;
+    --uckk-voie-accent-dark: #543217;
+    --uckk-voie-accent-soft: rgba(143, 90, 47, 0.14);
+    --uckk-voie-symbol: "⬡";
+    --uckk-voie-pattern:
+        linear-gradient(30deg, rgba(143, 90, 47, 0.10) 12%, transparent 12.5%, transparent 87%, rgba(143, 90, 47, 0.10) 87.5%),
+        linear-gradient(150deg, rgba(143, 90, 47, 0.10) 12%, transparent 12.5%, transparent 87%, rgba(143, 90, 47, 0.10) 87.5%);
+    --uckk-voie-pattern-size: 32px 32px;
+}
+
+/* Écosystème digital kOA — réseau, infrastructure, modules. */
+.local-uckk-voie-card--ecosysteme-digital-koa,
+.local-uckk-course-card--voie-ecosysteme-digital-koa,
+.local-uckk-public-card--voie-ecosysteme-digital-koa {
+    --uckk-voie-accent: #1f7f8f;
+    --uckk-voie-accent-dark: #12515d;
+    --uckk-voie-accent-soft: rgba(31, 127, 143, 0.14);
+    --uckk-voie-symbol: "⌘";
+    --uckk-voie-pattern:
+        radial-gradient(circle at 4px 4px, rgba(31, 127, 143, 0.16) 0 2px, transparent 3px),
+        linear-gradient(90deg, rgba(31, 127, 143, 0.07) 1px, transparent 1px);
+    --uckk-voie-pattern-size: 26px 26px;
+}
+
+.local-uckk-voie-card,
+.local-uckk-faculty-link-card,
+.local-uckk-course-card--voie {
+    position: relative;
+    padding-right: clamp(3.25rem, 4.5vw, 4.25rem);
+    border-top: 4px solid var(--uckk-voie-accent);
+    background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.96), rgba(246, 240, 223, 0.88)),
+        var(--uckk-voie-pattern);
+    background-size: auto, var(--uckk-voie-pattern-size);
+}
+
+.local-uckk-voie-card:hover,
+.local-uckk-faculty-link-card:hover,
+.local-uckk-course-card--voie:hover {
+    border-color: rgba(185, 144, 69, 0.48);
+    border-top-color: var(--uckk-voie-accent-dark);
+}
+
+.local-uckk-voie-card::before,
+.local-uckk-faculty-link-card::before,
+.local-uckk-course-card--voie::before {
+    content: var(--uckk-voie-symbol);
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--uckk-voie-accent);
+    border-radius: var(--uckk-radius-pill);
+    background: rgba(255, 250, 240, 0.92);
+    color: var(--uckk-voie-accent-dark);
+    font-family: var(--uckk-font-serif);
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.local-uckk-voie-card .local-uckk-public-card__eyebrow,
+.local-uckk-faculty-link-card .local-uckk-public-card__eyebrow,
+.local-uckk-course-card--voie .local-uckk-public-card__eyebrow {
+    border-color: var(--uckk-voie-accent);
+    background: var(--uckk-voie-accent-soft);
+    color: var(--uckk-voie-accent-dark);
+}
+
+.local-uckk-voie-card .local-uckk-public-card__title,
+.local-uckk-faculty-link-card .local-uckk-public-card__title,
+.local-uckk-course-card--voie .local-uckk-public-card__title {
+    color: var(--uckk-voie-accent-dark);
+}
+
+.local-uckk-voie-card .local-uckk-public-card__title a,
+.local-uckk-faculty-link-card .local-uckk-public-card__title a,
+.local-uckk-course-card--voie .local-uckk-public-card__title a {
+    text-decoration-color: var(--uckk-voie-accent);
+}
+
+@media print {
+    .local-uckk-voie-card,
+    .local-uckk-faculty-link-card,
+    .local-uckk-course-card--voie {
+        border-top-color: #999999;
+        background: #ffffff;
+        box-shadow: none;
+    }
+
+    .local-uckk-voie-card::before,
+    .local-uckk-faculty-link-card::before,
+    .local-uckk-course-card--voie::before {
+        display: none;
+    }
+}
+}
+
+/* END ZOMBIE DISABLED — Public Voie card signatures */
+/* ==========================================================================
    Public Faculty pages
    ========================================================================== */
 
@@ -2353,9 +2615,10 @@ body:has(.local-uckk-public-page) [role="main"] {
     gap: var(--uckk-space-4);
     padding: clamp(1rem, 2vw, 1.35rem);
     border: 1px solid rgba(23, 35, 33, 0.14);
+    border-top: 3px solid var(--uckk-gold);
     border-radius: var(--uckk-radius);
     background:
-        linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(246, 240, 223, 0.90));
+        linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(246, 240, 223, 0.91));
     box-shadow: var(--uckk-shadow-soft);
 }
 
@@ -2398,6 +2661,7 @@ body:has(.local-uckk-public-page) [role="main"] {
     min-width: 4rem;
     background: linear-gradient(90deg, rgba(185, 144, 69, 0.62), transparent);
 }
+
 
 .local-uckk-faculty-section__summary {
     max-width: 60rem;
@@ -2668,7 +2932,7 @@ body:has(.local-uckk-public-page) [role="main"] {
     min-height: 100%;
     padding: clamp(1rem, 1.7vw, 1.25rem);
     border: 1px solid rgba(23, 35, 33, 0.15);
-    border-top: 4px solid var(--uckk-petrol);
+    border-top: 4px solid var(--uckk-gold);
     border-radius: var(--uckk-radius-small);
     background:
         linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(246, 240, 223, 0.92));
@@ -2677,7 +2941,7 @@ body:has(.local-uckk-public-page) [role="main"] {
 
 .local-uckk-faculty-course-card:hover {
     border-color: rgba(185, 144, 69, 0.48);
-    border-top-color: var(--uckk-gold);
+    border-top-color: var(--uckk-gold-dark);
     box-shadow: var(--uckk-shadow);
     transform: translateY(-1px);
 }
@@ -2701,10 +2965,10 @@ body:has(.local-uckk-public-page) [role="main"] {
     min-height: 1.68rem;
     margin: 0;
     padding: 0.22rem 0.52rem;
-    border: 1px solid rgba(30, 104, 100, 0.22);
+    border: 1px solid rgba(185, 144, 69, 0.46);
     border-radius: var(--uckk-radius-pill);
-    background: var(--uckk-petrol-wash);
-    color: var(--uckk-petrol-dark);
+    background: var(--uckk-gold-wash);
+    color: var(--uckk-gold-dark);
     font-size: 0.72rem;
     font-weight: 900;
     letter-spacing: 0.055em;
@@ -3010,3 +3274,141 @@ body:has(.local-uckk-public-page) [role="main"] {
         box-shadow: none;
     }
 }
+/* ==========================================================================
+   ZOMBIE DISABLED — visual signature compatibility patch
+   --------------------------------------------------------------------------
+   Conserved for possible resurrection, but intentionally inactive.
+   To reactivate, remove the surrounding @media not all wrapper.
+   ========================================================================== */
+
+@media not all {
+/* ==========================================================================
+   UCKK visual signature compatibility patch
+   ========================================================================== */
+
+/*
+ * Programs page currently emits:
+ * .local-uckk-public-card--voie_uckk
+ *
+ * It does not yet emit per-Voie classes such as:
+ * .local-uckk-voie-card--ecologie
+ *
+ * This generic rule makes those program cards visibly distinct anyway.
+ */
+.local-uckk-public-card--voie_uckk {
+    --uckk-voie-accent: #8f5a2f;
+    --uckk-voie-accent-dark: #543217;
+    --uckk-voie-accent-soft: rgba(143, 90, 47, 0.14);
+    --uckk-voie-symbol: "◆";
+    --uckk-voie-pattern:
+        linear-gradient(135deg, rgba(143, 90, 47, 0.10) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(143, 90, 47, 0.08) 25%, transparent 25%);
+    --uckk-voie-pattern-size: 28px 28px;
+
+    position: relative;
+    padding-right: clamp(3.25rem, 4.5vw, 4.25rem);
+    border-top: 4px solid var(--uckk-voie-accent);
+    background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.96), rgba(246, 240, 223, 0.88)),
+        var(--uckk-voie-pattern);
+    background-size: auto, var(--uckk-voie-pattern-size);
+}
+
+.local-uckk-public-card--voie_uckk::before {
+    content: var(--uckk-voie-symbol);
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--uckk-voie-accent);
+    border-radius: var(--uckk-radius-pill);
+    background: rgba(255, 250, 240, 0.92);
+    color: var(--uckk-voie-accent-dark);
+    font-family: var(--uckk-font-serif);
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.local-uckk-public-card--voie_uckk .local-uckk-public-card__eyebrow {
+    border-color: var(--uckk-voie-accent);
+    background: var(--uckk-voie-accent-soft);
+    color: var(--uckk-voie-accent-dark);
+}
+
+.local-uckk-public-card--voie_uckk .local-uckk-public-card__title,
+.local-uckk-public-card--voie_uckk .local-uckk-public-card__title a {
+    color: var(--uckk-voie-accent-dark);
+    text-decoration-color: var(--uckk-voie-accent);
+}
+
+/*
+ * Course page compatibility.
+ *
+ * Some course cards have no resolved Voie class. Give every course card a
+ * visible course signature, then let specific .local-uckk-course-card--voie-*
+ * classes override the variables when present.
+ */
+.local-uckk-course-card {
+    --uckk-voie-accent: #1e6864;
+    --uckk-voie-accent-dark: #123f3d;
+    --uckk-voie-accent-soft: rgba(30, 104, 100, 0.14);
+    --uckk-voie-symbol: "◈";
+    --uckk-voie-pattern:
+        linear-gradient(90deg, rgba(30, 104, 100, 0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(30, 104, 100, 0.06) 1px, transparent 1px);
+    --uckk-voie-pattern-size: 24px 24px;
+
+    position: relative;
+    padding-right: clamp(3.25rem, 4.5vw, 4.25rem);
+    border-top: 4px solid var(--uckk-voie-accent);
+    background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.96), rgba(246, 240, 223, 0.88)),
+        var(--uckk-voie-pattern);
+    background-size: auto, var(--uckk-voie-pattern-size);
+}
+
+.local-uckk-course-card::before {
+    content: var(--uckk-voie-symbol);
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--uckk-voie-accent);
+    border-radius: var(--uckk-radius-pill);
+    background: rgba(255, 250, 240, 0.92);
+    color: var(--uckk-voie-accent-dark);
+    font-family: var(--uckk-font-serif);
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+/*
+ * Match the actual rendered course markup:
+ * .local-uckk-public-card__title
+ * .local-uckk-public-card__eyebrow
+ */
+.local-uckk-course-card .local-uckk-public-card__eyebrow,
+.local-uckk-course-card .local-uckk-course-card__meta-line {
+    border-color: var(--uckk-voie-accent);
+    background: var(--uckk-voie-accent-soft);
+    color: var(--uckk-voie-accent-dark);
+}
+
+.local-uckk-course-card .local-uckk-public-card__title,
+.local-uckk-course-card .local-uckk-public-card__title a {
+    color: var(--uckk-voie-accent-dark);
+    text-decoration-color: var(--uckk-voie-accent);
+}
+}
+
+/* END ZOMBIE DISABLED — visual signature compatibility patch */

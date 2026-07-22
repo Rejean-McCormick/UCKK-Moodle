@@ -53,7 +53,7 @@ const getRoot = config => {
  * Scroll to one editor panel.
  *
  * @param {HTMLElement} root Editor root.
- * @param {String} targetId Panel id.
+ * @param {string} targetId Panel id.
  */
 const jumpToPanel = (root, targetId) => {
     const panel = root.querySelector(`#${CSS.escape(targetId)}`);
@@ -112,12 +112,19 @@ const bindDirtyState = root => {
         return;
     }
 
+    const watchedFields = [
+        SELECTORS.title,
+        SELECTORS.status,
+        SELECTORS.visibility,
+        SELECTORS.audience,
+    ].join(', ');
+
     form.addEventListener('change', () => {
         root.classList.add('is-dirty');
     });
 
     form.addEventListener('input', event => {
-        if (event.target && event.target.matches(`${SELECTORS.title}, ${SELECTORS.status}, ${SELECTORS.visibility}, ${SELECTORS.audience}`)) {
+        if (event.target && event.target.matches(watchedFields)) {
             root.classList.add('is-dirty');
         }
     });

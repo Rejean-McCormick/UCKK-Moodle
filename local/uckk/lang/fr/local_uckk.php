@@ -984,6 +984,10 @@ $string['mediatheque_explorer_error'] = 'Les contenus publics n’ont pas pu êt
 $string['mediatheque_explorer_empty'] = 'Aucun contenu public ne correspond aux filtres actuels.';
 $string['mediatheque_explorer_results'] = 'Résultats';
 $string['mediatheque_explorer_result_count_suffix'] = 'résultat(s)';
+$string['catalogue_result_count_one'] = '{$a} résultat public';
+$string['catalogue_result_count_many'] = '{$a} résultats publics';
+$string['mediatheque_result_count_one'] = '{$a} résultat public';
+$string['mediatheque_result_count_many'] = '{$a} résultats publics';
 $string['mediatheque_explorer_load_more'] = 'Charger plus de résultats';
 
 $string['mediatheque_search_label'] = 'Rechercher dans les contenus publics';

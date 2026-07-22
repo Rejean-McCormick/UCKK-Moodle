@@ -27,6 +27,7 @@
  * * reads public request filters;
  * * reads visible Moodle courses matching UCKK public course conventions;
  * * builds course cards, category filters and sort options;
+ * * keeps the experimental card-only visual Voie signature layer disabled;
  * * injects the public courses intro section;
  * * prepares the course explorer context for Mustache and AMD;
  * * adds course-page metadata and CTA content;
@@ -48,13 +49,18 @@
 
 require_once(__DIR__ . '/../../config.php');
 
+/**
+ * Zombie switch for the experimental visual Voie signature layer.
+ *
+ * Keep the resolver/helper code in this controller so the work can be revived
+ * later, but do not activate its visual classes or data by default.
+ */
+const LOCAL_UCKK_PUBLIC_COURSES_ENABLE_VISUAL_SIGNATURES = false;
+
 $slug = 'courses';
 $context = context_system::instance();
 
 \local_uckk\local\public_pages::setup_page($slug, $context);
-
-// Explicit guard: setup_page() normally loads this stylesheet.
-$PAGE->requires->css(new moodle_url('/local/uckk/styles.css'));
 
 $explorerstate = local_uckk_public_courses_request_state();
 
@@ -266,6 +272,16 @@ function local_uckk_public_courses_get_cards(): array {
         $categoryidnumber = local_uckk_public_courses_safe_param_text((string)($record->categoryidnumber ?? ''));
         $categorylabel = local_uckk_public_courses_public_category_label($categoryname, $categoryidnumber);
         $categorykey = local_uckk_public_courses_slug($categorylabel !== '' ? $categorylabel : $categoryidnumber);
+        $courseidnumber = local_uckk_public_courses_safe_param_text((string)($record->idnumber ?? ''));
+        $signature = local_uckk_public_courses_visual_signatures_enabled()
+            ? local_uckk_public_courses_voie_signature(
+                $categoryidnumber,
+                $shortname,
+                $courseidnumber,
+                $fullname,
+                $categoryname
+            )
+            : local_uckk_public_courses_empty_voie_signature();
 
         $summary = local_uckk_public_courses_plain_summary($record);
 
@@ -274,11 +290,26 @@ function local_uckk_public_courses_get_cards(): array {
         }
 
         $title = $fullname !== '' ? $fullname : $shortname;
-        $searchtext = local_uckk_public_courses_safe_param_text(trim($title . ' ' . $shortname . ' ' . $categorylabel . ' ' . $summary));
+        $searchtext = local_uckk_public_courses_safe_param_text(trim(
+            $title . ' '
+            . $shortname . ' '
+            . $courseidnumber . ' '
+            . $categorylabel . ' '
+            . ($signature['label'] ?? '') . ' '
+            . ($signature['code'] ?? '') . ' '
+            . ($signature['slug'] ?? '') . ' '
+            . $summary
+        ));
 
         $cards[] = [
             'id' => $courseid,
-            'classes' => 'local-uckk-public-card local-uckk-public-card--course local-uckk-course-card',
+            'classes' => local_uckk_public_courses_card_classes([
+                'local-uckk-public-card',
+                'local-uckk-public-card--course',
+                'local-uckk-public-card--linked',
+                'local-uckk-course-card',
+                ...local_uckk_public_courses_voie_card_classes($signature, 'course'),
+            ]),
             'eyebrow' => $categorylabel,
             'category' => $categorylabel,
             'categorylabel' => $categorylabel,
@@ -293,6 +324,15 @@ function local_uckk_public_courses_get_cards(): array {
             'type' => 'course',
             'shortname' => $shortname,
             'code' => $shortname,
+            'courseidnumber' => $courseidnumber,
+            'voie_id' => (string)($signature['voie_id'] ?? ''),
+            'voieid' => (string)($signature['voie_id'] ?? ''),
+            'voie_code' => (string)($signature['code'] ?? ''),
+            'voiecode' => (string)($signature['code'] ?? ''),
+            'voie_slug' => (string)($signature['slug'] ?? ''),
+            'voieslug' => (string)($signature['slug'] ?? ''),
+            'voie_label' => (string)($signature['label'] ?? ''),
+            'voielabel' => (string)($signature['label'] ?? ''),
             'sorttitle' => \core_text::strtolower($title),
             'sortcategory' => \core_text::strtolower($categorylabel),
             'searchtext' => \core_text::strtolower($searchtext),
@@ -468,6 +508,276 @@ function local_uckk_public_courses_sort_options(string $active): array {
     }
 
     return $sortoptions;
+}
+
+/**
+ * Whether the experimental visual Voie signature layer is active.
+ *
+ * @return bool
+ */
+function local_uckk_public_courses_visual_signatures_enabled(): bool {
+    return LOCAL_UCKK_PUBLIC_COURSES_ENABLE_VISUAL_SIGNATURES;
+}
+
+/**
+ * Empty visual Voie signature.
+ *
+ * @return array{code: string, slug: string, voie_id: string, label: string}
+ */
+function local_uckk_public_courses_empty_voie_signature(): array {
+    return [
+        'code' => '',
+        'slug' => '',
+        'voie_id' => '',
+        'label' => '',
+    ];
+}
+
+/**
+ * Return canonical visual signatures for UCKK Voies.
+ *
+ * These signatures are intentionally card-only. They add CSS hooks to public
+ * course cards, but they do not style or mutate faculty pages themselves.
+ *
+ * @return array<string, array{slug: string, voie_id: string, label: string}>
+ */
+function local_uckk_public_courses_voie_signature_map(): array {
+    return [
+        'GJS' => [
+            'slug' => 'grand-jeu-social',
+            'voie_id' => 'voie_grand_jeu_social',
+            'label' => 'Grand Jeu social',
+        ],
+        'ECL' => [
+            'slug' => 'ecologie',
+            'voie_id' => 'voie_ecologie',
+            'label' => 'Écologie',
+        ],
+        'EC' => [
+            'slug' => 'economie',
+            'voie_id' => 'voie_economie',
+            'label' => 'Économie',
+        ],
+        'SP' => [
+            'slug' => 'sciences-politiques',
+            'voie_id' => 'voie_sciences_politiques',
+            'label' => 'Sciences politiques',
+        ],
+        'LI' => [
+            'slug' => 'linguistique-architecture-du-sens',
+            'voie_id' => 'voie_linguistique_architecture_du_sens',
+            'label' => 'Linguistique & architecture du sens',
+        ],
+        'ME' => [
+            'slug' => 'metaphysique',
+            'voie_id' => 'voie_metaphysique',
+            'label' => 'Métaphysique',
+        ],
+        'IA' => [
+            'slug' => 'ia-gouvernable',
+            'voie_id' => 'voie_ia_gouvernable',
+            'label' => 'IA gouvernable',
+        ],
+        'IS' => [
+            'slug' => 'intervention-sociale-systemes-humains',
+            'voie_id' => 'voie_intervention_sociale_systemes_humains',
+            'label' => 'Intervention sociale & systèmes humains',
+        ],
+        'AS' => [
+            'slug' => 'architecture-sociotechnique',
+            'voie_id' => 'voie_architecture_sociotechnique',
+            'label' => 'Architecture sociotechnique',
+        ],
+        'KOA' => [
+            'slug' => 'ecosysteme-digital-koa',
+            'voie_id' => 'voie_ecosysteme_digital_koa',
+            'label' => 'Architecture du kOA Digital Ecosystem',
+        ],
+    ];
+}
+
+/**
+ * Resolve a Voie visual signature from course/category identifiers.
+ *
+ * @param string $categoryidnumber Moodle category idnumber.
+ * @param string $shortname Moodle course shortname.
+ * @param string $courseidnumber Moodle course idnumber.
+ * @param string $fullname Moodle course fullname.
+ * @param string $categoryname Moodle category name.
+ * @return array{code: string, slug: string, voie_id: string, label: string}
+ */
+function local_uckk_public_courses_voie_signature(
+    string $categoryidnumber,
+    string $shortname,
+    string $courseidnumber,
+    string $fullname,
+    string $categoryname
+): array {
+    $map = local_uckk_public_courses_voie_signature_map();
+    $code = local_uckk_public_courses_voie_code_from_identifiers(
+        $categoryidnumber,
+        $shortname,
+        $courseidnumber,
+        $fullname,
+        $categoryname
+    );
+
+    if ($code !== '' && isset($map[$code])) {
+        return [
+            'code' => $code,
+            'slug' => $map[$code]['slug'],
+            'voie_id' => $map[$code]['voie_id'],
+            'label' => $map[$code]['label'],
+        ];
+    }
+
+    return local_uckk_public_courses_empty_voie_signature();
+}
+
+/**
+ * Resolve a Voie code from course/category identifiers.
+ *
+ * @param string $categoryidnumber Moodle category idnumber.
+ * @param string $shortname Moodle course shortname.
+ * @param string $courseidnumber Moodle course idnumber.
+ * @param string $fullname Moodle course fullname.
+ * @param string $categoryname Moodle category name.
+ * @return string Canonical Voie code, or empty string.
+ */
+function local_uckk_public_courses_voie_code_from_identifiers(
+    string $categoryidnumber,
+    string $shortname,
+    string $courseidnumber,
+    string $fullname,
+    string $categoryname
+): string {
+    $codes = array_keys(local_uckk_public_courses_voie_signature_map());
+
+    foreach ([$categoryidnumber, $shortname, $courseidnumber] as $value) {
+        $code = local_uckk_public_courses_voie_code_from_machine_string($value, $codes);
+
+        if ($code !== '') {
+            return $code;
+        }
+    }
+
+    $slugtext = local_uckk_public_courses_slug(trim($fullname . ' ' . $categoryname));
+
+    foreach (local_uckk_public_courses_voie_signature_map() as $code => $signature) {
+        if ($slugtext !== '' && strpos($slugtext, $signature['slug']) !== false) {
+            return $code;
+        }
+    }
+
+    return '';
+}
+
+/**
+ * Resolve a Voie code from an identifier-like string.
+ *
+ * @param string $value Identifier-like value.
+ * @param array<int, string> $codes Allowed Voie codes.
+ * @return string Canonical Voie code, or empty string.
+ */
+function local_uckk_public_courses_voie_code_from_machine_string(string $value, array $codes): string {
+    $value = strtoupper(trim(local_uckk_public_courses_safe_utf8($value)));
+
+    if ($value === '') {
+        return '';
+    }
+
+    $value = preg_replace('/[^A-Z0-9_-]+/', '-', $value) ?: '';
+    $value = preg_replace('/^UCKK[-_]?/', '', $value) ?: $value;
+
+    foreach ($codes as $code) {
+        if (preg_match('/^' . preg_quote($code, '/') . '(?:$|[-_0-9])/', $value)) {
+            return $code;
+        }
+    }
+
+    return '';
+}
+
+/**
+ * Build visual Voie classes for a public card.
+ *
+ * @param array{code: string, slug: string, voie_id: string, label: string} $signature Voie signature.
+ * @param string $kind Card kind, usually course or faculty.
+ * @return array<int, string>
+ */
+function local_uckk_public_courses_voie_card_classes(array $signature, string $kind): array {
+    $slug = (string)($signature['slug'] ?? '');
+
+    if ($slug === '') {
+        return [];
+    }
+
+    $kind = local_uckk_public_courses_clean_css_class($kind);
+    $kind = $kind !== '' ? $kind : 'card';
+
+    return [
+        'local-uckk-voie-card',
+        'local-uckk-voie-card--' . $slug,
+        'local-uckk-public-card--voie',
+        'local-uckk-public-card--voie-' . $slug,
+        'local-uckk-' . $kind . '-card--voie',
+        'local-uckk-' . $kind . '-card--voie-' . $slug,
+    ];
+}
+
+/**
+ * Build a safe class attribute value.
+ *
+ * @param array<int, mixed> $classes Class list.
+ * @return string
+ */
+function local_uckk_public_courses_card_classes(array $classes): string {
+    $clean = [];
+
+    foreach ($classes as $class) {
+        if (is_array($class)) {
+            foreach ($class as $nestedclass) {
+                $nestedclass = local_uckk_public_courses_clean_css_class((string)$nestedclass);
+
+                if ($nestedclass !== '') {
+                    $clean[$nestedclass] = true;
+                }
+            }
+
+            continue;
+        }
+
+        $class = local_uckk_public_courses_clean_css_class((string)$class);
+
+        if ($class !== '') {
+            $clean[$class] = true;
+        }
+    }
+
+    return implode(' ', array_keys($clean));
+}
+
+/**
+ * Clean a CSS class name.
+ *
+ * @param string $class Raw class name.
+ * @return string
+ */
+function local_uckk_public_courses_clean_css_class(string $class): string {
+    $class = trim(local_uckk_public_courses_safe_utf8($class));
+
+    if ($class === '') {
+        return '';
+    }
+
+    $class = preg_replace('/[^A-Za-z0-9_-]/', '-', $class) ?: '';
+    $class = trim($class, '-_');
+
+    if ($class === '') {
+        return '';
+    }
+
+    return $class;
 }
 
 /**

@@ -37,6 +37,14 @@ final class public_pages {
     /** Component name. */
     private const COMPONENT = 'local_uckk';
 
+    /**
+     * Experimental visual signatures switch.
+     *
+     * Keep the Voie signature code available for later, but do not activate it
+     * on public cards while the visual layer is under review.
+     */
+    private const ENABLE_VISUAL_SIGNATURES = false;
+
     /** Public page slugs. */
     private const KEY_HOME = 'home';
     private const KEY_ABOUT = 'about';
@@ -58,7 +66,7 @@ final class public_pages {
      * @return void
      */
     public static function setup_page(string $slug, ?context $context = null): void {
-        global $PAGE;
+        global $CFG, $PAGE;
 
         $slug = self::clean_slug($slug);
         $context = $context ?? context_system::instance();
@@ -70,7 +78,10 @@ final class public_pages {
         $PAGE->set_title(self::page_title($slug));
         $PAGE->set_heading(self::site_heading());
         $PAGE->set_cacheable(true);
-        $PAGE->requires->css(new moodle_url('/local/uckk/styles.css'));
+
+        $csspath = $CFG->dirroot . '/local/uckk/styles.css';
+        $cssrev = file_exists($csspath) ? filemtime($csspath) : time();
+        $PAGE->requires->css(new moodle_url('/local/uckk/styles.css', ['v' => $cssrev]));
 
         self::setup_breadcrumb($slug);
     }
@@ -1122,10 +1133,206 @@ final class public_pages {
                 'url' => $url,
                 'actionlabel' => $actionlabel,
                 'type' => self::clean_modifier($programtype),
+                'classes' => self::visual_signatures_enabled()
+                    ? self::program_card_classes(
+                        $programtype,
+                        $shortname,
+                        $fullname,
+                        $categoryname
+                    )
+                    : '',
             ];
         }
 
         return $cards;
+    }
+
+    /**
+     * Whether experimental Voie visual signatures are enabled.
+     *
+     * @return bool
+     */
+    private static function visual_signatures_enabled(): bool {
+        return self::ENABLE_VISUAL_SIGNATURES;
+    }
+
+    /**
+     * CSS classes for public program cards.
+     *
+     * @param string $programtype Program type.
+     * @param string $shortname Program shortname.
+     * @param string $fullname Program fullname.
+     * @param string $categoryname Linked Moodle category name.
+     * @return string
+     */
+    private static function program_card_classes(
+        string $programtype,
+        string $shortname,
+        string $fullname,
+        string $categoryname
+    ): string {
+        $type = self::clean_modifier($programtype);
+
+        if ($type !== 'voie_uckk' && $type !== 'voie-secondaire' && strpos($type, 'voie') === false) {
+            return '';
+        }
+
+        $classes = [
+            'local-uckk-voie-card',
+            'local-uckk-public-card--voie',
+        ];
+
+        $slug = self::resolve_voie_slug($shortname, $fullname, $categoryname);
+
+        if ($slug !== '') {
+            $classes[] = 'local-uckk-voie-card--' . $slug;
+            $classes[] = 'local-uckk-public-card--voie-' . $slug;
+        }
+
+        return implode(' ', array_values(array_unique($classes)));
+    }
+
+    /**
+     * Resolve a canonical Voie slug from existing public program/category labels.
+     *
+     * @param string $shortname Program shortname.
+     * @param string $fullname Program fullname.
+     * @param string $categoryname Linked Moodle category name.
+     * @return string
+     */
+    private static function resolve_voie_slug(string $shortname, string $fullname, string $categoryname): string {
+        $haystack = self::normalized_search_text(
+            implode(' ', [
+                $shortname,
+                $fullname,
+                $categoryname,
+            ])
+        );
+
+        foreach (self::voie_slug_patterns() as $slug => $patterns) {
+            foreach ($patterns as $pattern) {
+                $needle = self::normalized_search_text($pattern);
+
+                if ($needle !== '' && strpos($haystack, $needle) !== false) {
+                    return $slug;
+                }
+            }
+        }
+
+        $fallback = self::clean_modifier($fullname !== '' ? $fullname : ($shortname !== '' ? $shortname : $categoryname));
+
+        return $fallback;
+    }
+
+    /**
+     * Canonical Voie slug detection patterns.
+     *
+     * @return array<string, array<int, string>>
+     */
+    private static function voie_slug_patterns(): array {
+        return [
+            'grand-jeu-social' => [
+                'grand jeu social',
+                'grand-jeu-social',
+                'gjs',
+            ],
+            'economie' => [
+                'economie',
+                'économie',
+            ],
+            'ecologie' => [
+                'ecologie',
+                'écologie',
+            ],
+            'sciences-politiques' => [
+                'sciences politiques',
+                'science politique',
+                'politique',
+            ],
+            'linguistique-architecture-du-sens' => [
+                'linguistique architecture du sens',
+                'architecture du sens',
+                'linguistique',
+            ],
+            'metaphysique' => [
+                'metaphysique',
+                'métaphysique',
+            ],
+            'ia-gouvernable' => [
+                'ia gouvernable',
+                'intelligence artificielle gouvernable',
+                'production augmentee par ia',
+                'production augmentée par l ia',
+                'production augmentee par l ia',
+            ],
+            'intervention-sociale-systemes-humains' => [
+                'intervention sociale systemes humains',
+                'intervention sociale systèmes humains',
+                'systemes humains',
+                'systèmes humains',
+            ],
+            'architecture-sociotechnique' => [
+                'architecture sociotechnique',
+                'sociotechnique',
+            ],
+            'ecosysteme-digital-koa' => [
+                'ecosysteme digital koa',
+                'écosystème digital koa',
+                'koa digital ecosystem',
+                'digital koa',
+            ],
+        ];
+    }
+
+    /**
+     * Normalize a label for robust Voie matching.
+     *
+     * @param string $value Raw value.
+     * @return string
+     */
+    private static function normalized_search_text(string $value): string {
+        $value = strtolower(trim($value));
+
+        $value = strtr($value, [
+            'à' => 'a',
+            'â' => 'a',
+            'ä' => 'a',
+            'á' => 'a',
+            'ã' => 'a',
+            'å' => 'a',
+            'ç' => 'c',
+            'è' => 'e',
+            'é' => 'e',
+            'ê' => 'e',
+            'ë' => 'e',
+            'ì' => 'i',
+            'í' => 'i',
+            'î' => 'i',
+            'ï' => 'i',
+            'ñ' => 'n',
+            'ò' => 'o',
+            'ó' => 'o',
+            'ô' => 'o',
+            'ö' => 'o',
+            'õ' => 'o',
+            'ù' => 'u',
+            'ú' => 'u',
+            'û' => 'u',
+            'ü' => 'u',
+            'ý' => 'y',
+            'ÿ' => 'y',
+            'œ' => 'oe',
+            'æ' => 'ae',
+            '’' => ' ',
+            '\'' => ' ',
+            '-' => ' ',
+            '_' => ' ',
+        ]);
+
+        $value = preg_replace('/[^a-z0-9]+/', ' ', $value) ?? '';
+        $value = preg_replace('/\s+/', ' ', $value) ?? '';
+
+        return trim($value);
     }
 
     /**

@@ -36,8 +36,10 @@ const SELECTORS = {
     status: '[data-region="mediatheque-status"]',
     empty: '[data-region="mediatheque-empty"]',
     count: '[data-region="mediatheque-count"]',
+    facets: '[data-region="mediatheque-facets"]',
     loadMore: '[data-action="mediatheque-load-more"]',
     reset: '[data-action="mediatheque-reset"]',
+    filterButton: '[data-action="mediatheque-filter"]',
     input: 'input, select, textarea',
 };
 
@@ -136,6 +138,43 @@ const parseJson = (value, fallback) => {
 };
 
 /**
+ * Normalise Moodle initial state into this module's flat UI state.
+ *
+ * Moodle page renderers pass query as `query` and filters as a nested `filters`
+ * object. The explorer uses a flat state with `q`, `mediatype`, `tag`, etc.
+ *
+ * @param {Object} raw Initial state payload.
+ * @returns {Object}
+ */
+const normaliseInitialState = raw => {
+    const state = {};
+
+    if (!raw || typeof raw !== 'object') {
+        return state;
+    }
+
+    Object.keys(DEFAULT_STATE).forEach(key => {
+        if (Object.prototype.hasOwnProperty.call(raw, key)) {
+            state[key] = raw[key];
+        }
+    });
+
+    if (typeof raw.query !== 'undefined' && typeof state.q === 'undefined') {
+        state.q = raw.query;
+    }
+
+    if (raw.filters && typeof raw.filters === 'object') {
+        FILTER_KEYS.forEach(key => {
+            if (Object.prototype.hasOwnProperty.call(raw.filters, key)) {
+                state[key] = raw.filters[key];
+            }
+        });
+    }
+
+    return state;
+};
+
+/**
  * Debounce helper.
  *
  * @param {Function} callback Callback.
@@ -169,7 +208,7 @@ const getMethod = root => root.dataset.method || DEFAULT_METHOD;
  * @returns {Object}
  */
 const getBaseState = root => {
-    const state = Object.assign({}, DEFAULT_STATE, parseJson(root.dataset.initialState, {}));
+    const state = Object.assign({}, DEFAULT_STATE, normaliseInitialState(parseJson(root.dataset.initialState, {})));
 
     if (typeof root.dataset.cmid !== 'undefined') {
         state.cmid = root.dataset.cmid;
@@ -231,7 +270,15 @@ const writeState = (root, state) => {
     }
 
     Object.keys(state).forEach(key => {
-        const field = form.elements[key];
+        let field = form.elements[key];
+
+        if (!field && Object.prototype.hasOwnProperty.call(DEFAULT_STATE, key)) {
+            field = document.createElement('input');
+            field.type = 'hidden';
+            field.name = key;
+            field.dataset.keepEnabled = '1';
+            form.appendChild(field);
+        }
 
         if (!field) {
             return;
@@ -239,6 +286,8 @@ const writeState = (root, state) => {
 
         field.value = state[key] === null || typeof state[key] === 'undefined' ? '' : String(state[key]);
     });
+
+    updateFilterButtons(root, state);
 };
 
 /**
@@ -337,6 +386,10 @@ const setLoading = (root, loading) => {
     if (loadMore) {
         loadMore.disabled = loading;
     }
+
+    root.querySelectorAll(SELECTORS.filterButton).forEach(button => {
+        button.disabled = loading && button.dataset.keepEnabled !== '1';
+    });
 };
 
 /**
@@ -371,6 +424,30 @@ const setCount = (root, pagination = {}) => {
 };
 
 /**
+ * Check whether Moodle returned a missing string placeholder.
+ *
+ * @param {*} value Raw string value.
+ * @returns {boolean}
+ */
+const isMissingStringPlaceholder = value => /^\[\[[^\]]+\]\]$/.test(String(value || '').trim());
+
+/**
+ * Get a Moodle string and treat [[missing_identifier]] as a failed lookup.
+ *
+ * @param {string} key String identifier.
+ * @param {*} arg String argument.
+ * @returns {Promise<string>}
+ */
+const getSafeString = async(key, arg) => {
+    try {
+        const value = await getString(key, COMPONENT, arg);
+        return isMissingStringPlaceholder(value) ? '' : value;
+    } catch (error) {
+        return '';
+    }
+};
+
+/**
  * Get a catalogue result-count message.
  *
  * Prefer catalogue_* string identifiers for the public wording. Fall back to
@@ -382,17 +459,11 @@ const setCount = (root, pagination = {}) => {
 const getResultCountMessage = async total => {
     const catalogueKey = total === 1 ? 'catalogue_result_count_one' : 'catalogue_result_count_many';
     const legacyKey = total === 1 ? 'mediatheque_result_count_one' : 'mediatheque_result_count_many';
-    const fallback = `${total} résultat(s)`;
+    const fallback = total === 1 ? `${total} résultat` : `${total} résultats`;
 
-    try {
-        return await getString(catalogueKey, COMPONENT, total);
-    } catch (catalogueError) {
-        try {
-            return await getString(legacyKey, COMPONENT, total);
-        } catch (legacyError) {
-            return fallback;
-        }
-    }
+    return await getSafeString(catalogueKey, total) ||
+        await getSafeString(legacyKey, total) ||
+        fallback;
 };
 
 /**
@@ -410,21 +481,167 @@ const renderFallbackCard = item => {
     const type = item.objecttype || item.mediatype || '';
     const detailUrl = item.detailurl || '#';
 
-    const escape = value => {
-        const span = document.createElement('span');
-        span.textContent = String(value || '');
-        return span.innerHTML;
-    };
-
     return [
         '<article class="local-uckk-mediatheque-card">',
         '<div class="local-uckk-mediatheque-card__body">',
-        type ? `<p class="local-uckk-mediatheque-card__eyebrow">${escape(type)}</p>` : '',
-        `<h3 class="local-uckk-mediatheque-card__title"><a href="${escape(detailUrl)}">${escape(title)}</a></h3>`,
-        summary ? `<p class="local-uckk-mediatheque-card__summary">${escape(summary)}</p>` : '',
+        type ? `<p class="local-uckk-mediatheque-card__eyebrow">${escapeHtml(type)}</p>` : '',
+        `<h3 class="local-uckk-mediatheque-card__title"><a href="${escapeHtml(detailUrl)}">${escapeHtml(title)}</a></h3>`,
+        summary ? `<p class="local-uckk-mediatheque-card__summary">${escapeHtml(summary)}</p>` : '',
         '</div>',
         '</article>',
     ].join('');
+};
+
+/**
+ * Escape arbitrary text for safe HTML rendering.
+ *
+ * @param {*} value Raw value.
+ * @returns {string}
+ */
+const escapeHtml = value => {
+    const span = document.createElement('span');
+    span.textContent = String(value || '');
+    return span.innerHTML;
+};
+
+/**
+ * Build a flat state object from service-applied filters.
+ *
+ * @param {Object} response Service response.
+ * @returns {Object}
+ */
+const getAppliedStateFromResponse = response => {
+    const filters = response && response.filters && typeof response.filters === 'object' ? response.filters : {};
+    const state = {};
+
+    if (typeof filters.q !== 'undefined') {
+        state.q = filters.q;
+    } else if (typeof filters.query !== 'undefined') {
+        state.q = filters.query;
+    }
+
+    FILTER_KEYS.forEach(key => {
+        if (Object.prototype.hasOwnProperty.call(filters, key)) {
+            state[key] = filters[key];
+        }
+    });
+
+    ['sort', 'page', 'perpage'].forEach(key => {
+        if (Object.prototype.hasOwnProperty.call(filters, key)) {
+            state[key] = filters[key];
+        }
+    });
+
+    return state;
+};
+
+/**
+ * Get the default/clear value for a filter key.
+ *
+ * @param {string} key Filter key.
+ * @returns {string}
+ */
+const getDefaultFilterValue = key => String(DEFAULT_STATE[key] || '');
+
+/**
+ * Normalise a facet item from the canonical service DTO.
+ *
+ * @param {Object} item Facet item.
+ * @returns {Object}
+ */
+const normaliseFacetItem = item => ({
+    value: String(item && typeof item.value !== 'undefined' ? item.value : ''),
+    label: String(item && typeof item.label !== 'undefined' ? item.label : item && item.value ? item.value : ''),
+    count: toNonNegativeInt(item && item.count, 0),
+    active: !!(item && item.active),
+});
+
+/**
+ * Update active state for filter buttons already in the DOM.
+ *
+ * @param {HTMLElement} root Root element.
+ * @param {Object} state Current state.
+ */
+const updateFilterButtons = (root, state = readState(root)) => {
+    root.querySelectorAll(SELECTORS.filterButton).forEach(button => {
+        const key = button.dataset.filter || '';
+
+        if (!FILTER_KEYS.includes(key)) {
+            return;
+        }
+
+        const value = String(typeof button.dataset.value !== 'undefined' ? button.dataset.value : getDefaultFilterValue(key));
+        const current = String(typeof state[key] !== 'undefined' ? state[key] : getDefaultFilterValue(key));
+        const active = current === value;
+
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+};
+
+/**
+ * Render canonical service facets as filter buttons.
+ *
+ * Expected service shape:
+ * facets[] = {key, label, items: [{value, label, count, active}]}
+ *
+ * @param {HTMLElement} root Root element.
+ * @param {Array} facets Facet DTOs.
+ * @param {Object} state Current state.
+ */
+const renderFacets = (root, facets = [], state = readState(root)) => {
+    const container = root.querySelector(SELECTORS.facets);
+
+    if (!container) {
+        return;
+    }
+
+    if (!Array.isArray(facets) || facets.length === 0) {
+        container.innerHTML = '';
+        container.hidden = true;
+        return;
+    }
+
+    const html = facets.map(facet => {
+        const key = String(facet && facet.key ? facet.key : '');
+
+        if (!FILTER_KEYS.includes(key) || !Array.isArray(facet.items) || facet.items.length === 0) {
+            return '';
+        }
+
+        const label = String(facet.label || key);
+        const defaultValue = getDefaultFilterValue(key);
+        const current = String(typeof state[key] !== 'undefined' ? state[key] : defaultValue);
+        const items = facet.items.map(normaliseFacetItem).filter(item => item.value !== defaultValue);
+        const allActive = current === defaultValue;
+
+        const buttons = [
+            `<button type="button" class="local-uckk-mediatheque-filter__button${allActive ? ' is-active' : ''}" ` +
+                `data-action="mediatheque-filter" data-filter="${escapeHtml(key)}" ` +
+                `data-value="${escapeHtml(defaultValue)}" aria-pressed="${allActive ? 'true' : 'false'}">` +
+                'Tous</button>',
+        ].concat(items.map(item => {
+            const active = item.active || current === item.value;
+            const count = item.count > 0 ? ` <span class="local-uckk-mediatheque-filter__count">${item.count}</span>` : '';
+
+            return `<button type="button" class="local-uckk-mediatheque-filter__button${active ? ' is-active' : ''}" ` +
+                `data-action="mediatheque-filter" data-filter="${escapeHtml(key)}" ` +
+                `data-value="${escapeHtml(item.value)}" aria-pressed="${active ? 'true' : 'false'}">` +
+                `${escapeHtml(item.label)}${count}</button>`;
+        }));
+
+        return [
+            '<section class="local-uckk-mediatheque-filter" data-filter-group="' + escapeHtml(key) + '">',
+            '<h3 class="local-uckk-mediatheque-filter__title">' + escapeHtml(label) + '</h3>',
+            '<div class="local-uckk-mediatheque-filter__buttons">',
+            buttons.join(''),
+            '</div>',
+            '</section>',
+        ].join('');
+    }).join('');
+
+    container.innerHTML = html;
+    container.hidden = html.trim() === '';
 };
 
 /**
@@ -461,13 +678,21 @@ const getResultsHtml = response => {
  * @param {HTMLElement} root Root element.
  * @param {Object} response Service response.
  * @param {boolean} append Whether to append instead of replace.
+ * @param {Object} state Current state.
  */
-const applyResponse = async(root, response, append) => {
+const applyResponse = async(root, response, append, state = readState(root)) => {
     const results = root.querySelector(SELECTORS.results);
     const empty = root.querySelector(SELECTORS.empty);
     const pagination = response.pagination || {};
     const html = getResultsHtml(response);
     const isEmpty = !html;
+    const appliedState = Object.assign({}, state, getAppliedStateFromResponse(response));
+
+    writeState(root, appliedState);
+
+    if (!append) {
+        renderFacets(root, response.facets || [], appliedState);
+    }
 
     if (results) {
         if (append) {
@@ -490,7 +715,7 @@ const applyResponse = async(root, response, append) => {
         loadMore.dataset.nextPage = String(toPositiveInt(pagination.page, 1) + 1);
     }
 
-    if (response.statusmessage) {
+    if (response.statusmessage && !isMissingStringPlaceholder(response.statusmessage)) {
         setStatus(root, response.statusmessage);
     } else {
         const total = toNonNegativeInt(pagination.total, 0);
@@ -528,7 +753,7 @@ const search = async(root, overrides = {}, append = false) => {
             args: buildServiceArgs(state),
         }])[0];
 
-        await applyResponse(root, response || {}, append);
+        await applyResponse(root, response || {}, append, state);
     } catch (error) {
         Notification.exception(error);
     } finally {
@@ -585,6 +810,27 @@ const bindEvents = root => {
         if (loadMore) {
             event.preventDefault();
             search(root, {page: toPositiveInt(loadMore.dataset.nextPage, 1)}, true);
+            return;
+        }
+
+        const filterButton = event.target.closest(SELECTORS.filterButton);
+        if (filterButton) {
+            event.preventDefault();
+
+            const key = filterButton.dataset.filter || '';
+
+            if (!FILTER_KEYS.includes(key)) {
+                return;
+            }
+
+            const state = readState(root);
+            state[key] = String(typeof filterButton.dataset.value !== 'undefined' ?
+                filterButton.dataset.value :
+                getDefaultFilterValue(key));
+            state.page = 1;
+
+            writeState(root, state);
+            search(root, state, false);
             return;
         }
 

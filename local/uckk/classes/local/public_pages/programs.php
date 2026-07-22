@@ -245,17 +245,206 @@ final class programs {
                 $actionlabel = 'Accéder aux cours';
             }
 
+            $type = $publicidentity['type'] ?? self::clean_modifier($programtype);
+            $signature = self::voie_visual_signature($shortname, $fullname, $categoryname, $categoryidnumber);
+
             $cards[] = [
                 'eyebrow' => $publicidentity['eyebrow'] ?? '',
                 'title' => $title,
                 'body' => implode(' ', $bodyparts),
                 'url' => $url,
                 'actionlabel' => $actionlabel,
-                'type' => $publicidentity['type'] ?? self::clean_modifier($programtype),
+                'type' => $type,
+                'classes' => self::program_card_classes($type, $signature),
             ];
         }
 
         return $cards;
+    }
+
+    /**
+     * Canonical visual signatures for public Voie cards.
+     *
+     * The values are intentionally CSS-oriented only: they do not grant permissions,
+     * change faculty pages, or mutate Atlas / Moodle records.
+     */
+    private const VOIE_VISUAL_SIGNATURES = [
+        'GJS' => [
+            'slug' => 'grand-jeu-social',
+            'voie_id' => 'voie_grand_jeu_social',
+        ],
+        'EC' => [
+            'slug' => 'economie',
+            'voie_id' => 'voie_economie',
+        ],
+        'ECL' => [
+            'slug' => 'ecologie',
+            'voie_id' => 'voie_ecologie',
+        ],
+        'SP' => [
+            'slug' => 'sciences-politiques',
+            'voie_id' => 'voie_sciences_politiques',
+        ],
+        'LI' => [
+            'slug' => 'linguistique-architecture-du-sens',
+            'voie_id' => 'voie_linguistique_architecture_du_sens',
+        ],
+        'ME' => [
+            'slug' => 'metaphysique',
+            'voie_id' => 'voie_metaphysique',
+        ],
+        'IA' => [
+            'slug' => 'ia-gouvernable',
+            'voie_id' => 'voie_ia_gouvernable',
+        ],
+        'IS' => [
+            'slug' => 'intervention-sociale-systemes-humains',
+            'voie_id' => 'voie_intervention_sociale_systemes_humains',
+        ],
+        'AS' => [
+            'slug' => 'architecture-sociotechnique',
+            'voie_id' => 'voie_architecture_sociotechnique',
+        ],
+        'KOA' => [
+            'slug' => 'ecosysteme-digital-koa',
+            'voie_id' => 'voie_ecosysteme_digital_koa',
+        ],
+    ];
+
+    /**
+     * Build the CSS class list for a public program / faculty-link card.
+     *
+     * @param string $type Public card type.
+     * @param array{slug:string,voie_id:string,code:string} $signature Visual signature.
+     * @return string
+     */
+    private static function program_card_classes(string $type, array $signature): string {
+        $classes = [
+            'local-uckk-public-card',
+            'local-uckk-public-card--program',
+            'local-uckk-faculty-link-card',
+            'local-uckk-voie-card',
+        ];
+
+        $type = self::clean_modifier($type);
+        if ($type !== '') {
+            $classes[] = 'local-uckk-public-card--' . $type;
+        }
+
+        $slug = self::clean_modifier($signature['slug'] ?? '');
+        if ($slug !== '') {
+            $classes[] = 'local-uckk-voie-card--' . $slug;
+            $classes[] = 'local-uckk-public-card--voie-' . $slug;
+            $classes[] = 'local-uckk-faculty-link-card--' . $slug;
+        } else {
+            $classes[] = 'local-uckk-voie-card--unknown';
+        }
+
+        return implode(' ', array_values(array_unique(array_filter($classes))));
+    }
+
+    /**
+     * Resolve a public Voie visual signature from stable existing identifiers.
+     *
+     * @param string $shortname Program short name.
+     * @param string $fullname Program full name.
+     * @param string $categoryname Linked Moodle category name.
+     * @param string $categoryidnumber Linked Moodle category idnumber.
+     * @return array{slug:string,voie_id:string,code:string}
+     */
+    private static function voie_visual_signature(
+        string $shortname,
+        string $fullname,
+        string $categoryname,
+        string $categoryidnumber
+    ): array {
+        $code = self::voie_code_from_identifiers($shortname, $fullname, $categoryname, $categoryidnumber);
+
+        if ($code !== '' && isset(self::VOIE_VISUAL_SIGNATURES[$code])) {
+            return self::VOIE_VISUAL_SIGNATURES[$code] + ['code' => $code];
+        }
+
+        return [
+            'slug' => '',
+            'voie_id' => '',
+            'code' => '',
+        ];
+    }
+
+    /**
+     * Resolve a Voie code from program/category identifiers.
+     *
+     * ECL must be checked before EC to avoid classifying Écologie as Économie.
+     *
+     * @param string $shortname Program short name.
+     * @param string $fullname Program full name.
+     * @param string $categoryname Linked Moodle category name.
+     * @param string $categoryidnumber Linked Moodle category idnumber.
+     * @return string
+     */
+    private static function voie_code_from_identifiers(
+        string $shortname,
+        string $fullname,
+        string $categoryname,
+        string $categoryidnumber
+    ): string {
+        $categoryidnumber = strtoupper(trim($categoryidnumber));
+        if (preg_match('/^UCKK-(GJS|ECL|EC|SP|LI|ME|IA|IS|AS|KOA)$/', $categoryidnumber, $matches)) {
+            return $matches[1];
+        }
+
+        $shortname = strtoupper(trim($shortname));
+        if (isset(self::VOIE_VISUAL_SIGNATURES[$shortname])) {
+            return $shortname;
+        }
+
+        $haystack = strtolower($shortname . ' ' . $fullname . ' ' . $categoryname . ' ' . $categoryidnumber);
+
+        $needles = [
+            'GJS' => ['voie_grand_jeu_social', 'grand-jeu-social', 'grand jeu social', 'uckk-gjs'],
+            'ECL' => ['voie_ecologie', 'ecologie', 'écologie', 'uckk-ecl'],
+            'EC' => ['voie_economie', 'economie', 'économie', 'uckk-ec'],
+            'SP' => ['voie_sciences_politiques', 'sciences-politiques', 'sciences politiques', 'uckk-sp'],
+            'LI' => [
+                'voie_linguistique_architecture_du_sens',
+                'linguistique-architecture-du-sens',
+                'linguistique architecture du sens',
+                'uckk-li',
+            ],
+            'ME' => ['voie_metaphysique', 'metaphysique', 'métaphysique', 'uckk-me'],
+            'IA' => ['voie_ia_gouvernable', 'ia-gouvernable', 'production augment', 'production ia', 'uckk-ia'],
+            'IS' => [
+                'voie_intervention_sociale_systemes_humains',
+                'intervention-sociale-systemes-humains',
+                'intervention sociale',
+                'systèmes humains',
+                'systemes humains',
+                'uckk-is',
+            ],
+            'AS' => [
+                'voie_architecture_sociotechnique',
+                'architecture-sociotechnique',
+                'architecture sociotechnique',
+                'uckk-as',
+            ],
+            'KOA' => [
+                'voie_ecosysteme_digital_koa',
+                'ecosysteme-digital-koa',
+                'écosystème digital koa',
+                'ecosysteme digital koa',
+                'uckk-koa',
+            ],
+        ];
+
+        foreach ($needles as $code => $values) {
+            foreach ($values as $needle) {
+                if (strpos($haystack, $needle) !== false) {
+                    return $code;
+                }
+            }
+        }
+
+        return '';
     }
 
     /**

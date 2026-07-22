@@ -108,6 +108,7 @@ const stringValue = value => {
     if (value === null || value === undefined) {
         return '';
     }
+
     return String(value).trim();
 };
 
@@ -181,15 +182,6 @@ const call = (methodname, args = {}) => {
  * @returns {HTMLElement|null}
  */
 const find = (root, selector) => root.querySelector(selector);
-
-/**
- * Find all matching elements inside root.
- *
- * @param {HTMLElement} root Root node.
- * @param {string} selector Selector.
- * @returns {HTMLElement[]}
- */
-const findAll = (root, selector) => Array.from(root.querySelectorAll(selector));
 
 /**
  * Set a status message.

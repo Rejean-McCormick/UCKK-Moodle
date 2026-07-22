@@ -61,6 +61,53 @@ final class search_public_courses extends external_api {
     /** Sort by public category label. */
     private const SORT_CATEGORY = 'category';
 
+    /** Base classes for public course result cards. */
+    private const COURSE_CARD_BASE_CLASSES = 'local-uckk-public-card local-uckk-public-card--course local-uckk-public-card--linked local-uckk-course-card local-uckk-course-card--voie';
+
+    /** Canonical visual signatures for UCKK Voies keyed by course/category code. */
+    private const VOIE_SIGNATURES = [
+        'GJS' => [
+            'voie_id' => 'voie_grand_jeu_social',
+            'slug' => 'grand-jeu-social',
+        ],
+        'EC' => [
+            'voie_id' => 'voie_economie',
+            'slug' => 'economie',
+        ],
+        'ECL' => [
+            'voie_id' => 'voie_ecologie',
+            'slug' => 'ecologie',
+        ],
+        'SP' => [
+            'voie_id' => 'voie_sciences_politiques',
+            'slug' => 'sciences-politiques',
+        ],
+        'LI' => [
+            'voie_id' => 'voie_linguistique_architecture_du_sens',
+            'slug' => 'linguistique-architecture-du-sens',
+        ],
+        'ME' => [
+            'voie_id' => 'voie_metaphysique',
+            'slug' => 'metaphysique',
+        ],
+        'IA' => [
+            'voie_id' => 'voie_ia_gouvernable',
+            'slug' => 'ia-gouvernable',
+        ],
+        'IS' => [
+            'voie_id' => 'voie_intervention_sociale_systemes_humains',
+            'slug' => 'intervention-sociale-systemes-humains',
+        ],
+        'AS' => [
+            'voie_id' => 'voie_architecture_sociotechnique',
+            'slug' => 'architecture-sociotechnique',
+        ],
+        'KOA' => [
+            'voie_id' => 'voie_ecosysteme_digital_koa',
+            'slug' => 'ecosysteme-digital-koa',
+        ],
+    ];
+
     /**
      * Define parameters.
      *
@@ -201,6 +248,9 @@ final class search_public_courses extends external_api {
             'categorylabel' => new external_value(PARAM_TEXT, 'Public category label'),
             'categoryname' => new external_value(PARAM_TEXT, 'Original Moodle category name'),
             'categoryidnumber' => new external_value(PARAM_TEXT, 'Original Moodle category idnumber'),
+            'voieid' => new external_value(PARAM_TEXT, 'Canonical UCKK Voie id'),
+            'voieslug' => new external_value(PARAM_TEXT, 'Canonical UCKK Voie visual slug'),
+            'classes' => new external_value(PARAM_TEXT, 'CSS classes for public course card rendering'),
             'type' => new external_value(PARAM_TEXT, 'Result type'),
             'metadata' => new external_multiple_structure($metadatastructure),
         ]);
@@ -365,6 +415,8 @@ final class search_public_courses extends external_api {
         $categoryname = self::safe_param_text((string)($record->categoryname ?? ''));
         $categoryidnumber = self::safe_param_text((string)($record->categoryidnumber ?? ''));
         $categorylabel = self::public_category_label($categoryname, $categoryidnumber);
+        $signature = self::course_voie_signature($record, $shortname, $fullname, $categoryname, $categoryidnumber);
+        $classes = self::course_card_classes($signature);
 
         $summary = self::plain_summary($record);
 
@@ -383,6 +435,9 @@ final class search_public_courses extends external_api {
             'categorylabel' => $categorylabel,
             'categoryname' => $categoryname,
             'categoryidnumber' => $categoryidnumber,
+            'voieid' => $signature['voie_id'],
+            'voieslug' => $signature['slug'],
+            'classes' => $classes,
             'type' => 'course',
             'metadata' => [
                 [
@@ -512,6 +567,116 @@ final class search_public_courses extends external_api {
             trim((string)($record->categoryname ?? '')),
             trim((string)($record->categoryidnumber ?? ''))
         );
+    }
+
+    /**
+     * Return the visual signature associated with a course record.
+     *
+     * The signature is derived from stable public identifiers already present
+     * in Moodle course/category records. It does not require custom fields,
+     * hidden enrolment data, grades, completion data or Faculty page data.
+     *
+     * @param stdClass $record Course record.
+     * @param string $shortname Safe course shortname.
+     * @param string $fullname Safe course fullname.
+     * @param string $categoryname Safe category name.
+     * @param string $categoryidnumber Safe category idnumber.
+     * @return array{code: string, voie_id: string, slug: string}
+     */
+    private static function course_voie_signature(
+        stdClass $record,
+        string $shortname,
+        string $fullname,
+        string $categoryname,
+        string $categoryidnumber
+    ): array {
+        $sources = [
+            $categoryidnumber,
+            (string)($record->idnumber ?? ''),
+            $shortname,
+            $fullname,
+            $categoryname,
+        ];
+
+        $code = self::voie_code_from_identifiers($sources);
+
+        if ($code === '' || !isset(self::VOIE_SIGNATURES[$code])) {
+            return [
+                'code' => '',
+                'voie_id' => '',
+                'slug' => '',
+            ];
+        }
+
+        return [
+            'code' => $code,
+            'voie_id' => self::VOIE_SIGNATURES[$code]['voie_id'],
+            'slug' => self::VOIE_SIGNATURES[$code]['slug'],
+        ];
+    }
+
+    /**
+     * Derive a Voie code from course/category identifiers.
+     *
+     * @param array<int, string> $sources Candidate source strings.
+     * @return string
+     */
+    private static function voie_code_from_identifiers(array $sources): string {
+        $codes = array_keys(self::VOIE_SIGNATURES);
+
+        // Prefer longer codes first so ECL cannot be confused with EC.
+        usort($codes, static function(string $left, string $right): int {
+            return strlen($right) <=> strlen($left);
+        });
+
+        foreach ($sources as $source) {
+            $value = strtoupper(self::safe_utf8($source));
+
+            if ($value === '') {
+                continue;
+            }
+
+            $value = preg_replace('/[^A-Z0-9_-]+/', ' ', $value) ?: '';
+            $tokens = preg_split('/\s+/', trim($value)) ?: [];
+
+            foreach ($tokens as $token) {
+                $token = trim($token);
+
+                if ($token === '') {
+                    continue;
+                }
+
+                foreach ($codes as $code) {
+                    if (preg_match('/^(?:UCKK[-_])?' . preg_quote($code, '/') . '(?:$|[-_0-9])/', $token)) {
+                        return $code;
+                    }
+                }
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Build safe CSS classes for a public course card.
+     *
+     * @param array{code: string, voie_id: string, slug: string} $signature Visual signature.
+     * @return string
+     */
+    private static function course_card_classes(array $signature): string {
+        $classes = preg_split('/\s+/', self::COURSE_CARD_BASE_CLASSES) ?: [];
+        $slug = self::normalise_key((string)($signature['slug'] ?? ''));
+
+        if ($slug !== '') {
+            $classes[] = 'local-uckk-public-card--voie-' . $slug;
+            $classes[] = 'local-uckk-course-card--voie-' . $slug;
+        } else {
+            $classes[] = 'local-uckk-course-card--voie-unknown';
+        }
+
+        return implode(' ', array_values(array_unique(array_filter($classes, static function(string $class): bool {
+            return $class !== '' && clean_param($class, PARAM_ALPHANUMEXT) === $class;
+        }))));
     }
 
     /**
