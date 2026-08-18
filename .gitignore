@@ -20,4 +20,5 @@ desktop.ini
 *.patch
 *.rej
 *.tmp
-*.temp
+*.temp
+GitSink.bat
